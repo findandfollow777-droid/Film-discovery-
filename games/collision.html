@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collision Course - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/collision.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop" id="gameBackdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../index.html" class="back-link">← Back to Orbit</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">COLLISION</div>
+      <span class="logo-suffix">Course</span>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">📊</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- DAILY INFO -->
+    <div class="daily-info">
+      <div class="daily-badge">
+        <span class="badge-icon">💥</span>
+        <span class="badge-text">Daily Collision</span>
+      </div>
+      <div class="daily-number">Course #<span id="puzzleNumber">1</span></div>
+    </div>
+    
+    <!-- THE TWO ENTITIES -->
+    <section class="entities-section">
+      <div class="entity entity-a" id="entityA">
+        <div class="entity-photo-wrap">
+          <img class="entity-photo" id="entityAPhoto" src="" alt="">
+        </div>
+        <div class="entity-name" id="entityAName">Loading...</div>
+        <div class="entity-type" id="entityAType">Actor</div>
+      </div>
+      
+      <div class="collision-zone">
+        <div class="collision-icon">💥</div>
+        <div class="collision-label">COLLISION ZONE</div>
+      </div>
+      
+      <div class="entity entity-b" id="entityB">
+        <div class="entity-photo-wrap">
+          <img class="entity-photo" id="entityBPhoto" src="" alt="">
+        </div>
+        <div class="entity-name" id="entityBName">Loading...</div>
+        <div class="entity-type" id="entityBType">Actor</div>
+      </div>
+    </section>
+    
+    <!-- VENN SCOREBOARD -->
+    <section class="venn-scoreboard">
+      <div class="venn-zone zone-a">
+        <div class="zone-count" id="zoneACount">0</div>
+        <div class="zone-label">Solo</div>
+      </div>
+      <div class="venn-zone zone-collision">
+        <div class="zone-count" id="zoneCollisionCount">0</div>
+        <div class="zone-label">Both!</div>
+        <div class="zone-multiplier">×5</div>
+      </div>
+      <div class="venn-zone zone-b">
+        <div class="zone-count" id="zoneBCount">0</div>
+        <div class="zone-label">Solo</div>
+      </div>
+    </section>
+    
+    <!-- TIMER & SCORE -->
+    <section class="game-status">
+      <div class="timer-display">
+        <span class="timer-icon">⏱️</span>
+        <span class="timer-value" id="timerValue">3:00</span>
+      </div>
+      <div class="score-display">
+        <span class="score-label">Score</span>
+        <span class="score-value" id="scoreValue">0</span>
+      </div>
+      <button class="start-btn" id="startBtn">Start Game</button>
+    </section>
+    
+    <!-- GUESS INPUT (hidden until game starts) -->
+    <section class="guess-section" id="guessSection" hidden>
+      <div class="guess-input-wrap">
+        <input 
+          type="text" 
+          class="guess-input" 
+          id="guessInput" 
+          placeholder="Type a movie title..."
+          autocomplete="off"
+        >
+      </div>
+      <div class="search-results" id="searchResults" hidden></div>
+    </section>
+    
+    <!-- FOUND MOVIES LIST -->
+    <section class="found-section">
+      <div class="found-columns">
+        <div class="found-column column-a">
+          <h4 class="column-title" id="columnATitle">Actor A Films</h4>
+          <div class="found-list" id="foundListA"></div>
+        </div>
+        <div class="found-column column-collision">
+          <h4 class="column-title">🔥 Collisions</h4>
+          <div class="found-list" id="foundListCollision"></div>
+        </div>
+        <div class="found-column column-b">
+          <h4 class="column-title" id="columnBTitle">Actor B Films</h4>
+          <div class="found-list" id="foundListB"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- GAME OVER SECTION -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon">🏁</div>
+        <h2 class="result-title">Time's Up!</h2>
+        <div class="final-score">
+          <span class="final-label">Final Score</span>
+          <span class="final-value" id="finalScore">0</span>
+        </div>
+        
+        <div class="result-breakdown">
+          <div class="breakdown-row">
+            <span class="breakdown-label" id="breakdownALabel">Actor A Solo</span>
+            <span class="breakdown-value" id="breakdownAValue">0</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-label" id="breakdownBLabel">Actor B Solo</span>
+            <span class="breakdown-value" id="breakdownBValue">0</span>
+          </div>
+          <div class="breakdown-row collision-row">
+            <span class="breakdown-label">Collisions (×5)</span>
+            <span class="breakdown-value" id="breakdownCollisionValue">0</span>
+          </div>
+        </div>
+        
+        <div class="share-section">
+          <button class="share-btn" id="shareBtn">
+            <span>📋</span> Share Result
+          </button>
+        </div>
+        
+        <div class="next-puzzle">
+          <span class="next-label">Next Collision in</span>
+          <span class="next-timer" id="nextTimer">--:--:--</span>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Two Entities</strong>
+            <p>You're given two actors (or an actor + director). Name movies featuring either one!</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Race the Clock</strong>
+            <p>You have 3 minutes. Type fast and think faster!</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Find Collisions</strong>
+            <p>Movies with BOTH entities score 5× points. These are rare gold!</p>
+          </div>
+        </div>
+        
+        <div class="scoring-info">
+          <h4>Scoring</h4>
+          <div class="score-row">
+            <span class="score-type">Solo Film</span>
+            <span class="score-pts">1 point</span>
+          </div>
+          <div class="score-row collision">
+            <span class="score-type">💥 Collision</span>
+            <span class="score-pts">5 points</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statAvgScore">0</span>
+          <span class="stat-label">Avg Score</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statBestScore">0</span>
+          <span class="stat-label">Best</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statCollisions">0</span>
+          <span class="stat-label">Collisions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- COLLISION ANIMATION -->
+  <div class="collision-burst" id="collisionBurst" hidden>
+    <div class="burst-ring"></div>
+    <div class="burst-text">COLLISION!</div>
+  </div>
+  
+  <script src="../js/collision.js"></script>
+</body>
+</html>

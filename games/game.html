@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit Game - Daily Cinematic Deduction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/game.css">
+  <link rel="stylesheet" href="../css/moviecube.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop" id="gameBackdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- ANAMORPHIC LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  <div class="lens-flare lens-flare-3"></div>
+  
+  <!-- FLOATING PARTICLES -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../index.html" class="back-link">← Back to Orbit</a>
+    
+    <!-- ORBIT LOGO - Identical to Index -->
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">ORBIT</div>
+      <span class="logo-suffix">The Game</span>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">📊</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- DAILY INFO -->
+    <div class="daily-info">
+      <div class="daily-badge">
+        <span class="badge-icon">✦</span>
+        <span class="badge-text">Daily Challenge</span>
+      </div>
+      <div class="daily-number">Orbit #<span id="puzzleNumber">1</span></div>
+      <div class="daily-date" id="dailyDate"></div>
+    </div>
+    
+    <!-- THE CONSTELLATION (5 ACTORS) -->
+    <section class="constellation-section">
+      <!-- Constellation Logo -->
+      <div class="constellation-header">
+        <div class="constellation-logo">
+          <div class="const-ring const-ring-1"></div>
+          <div class="const-ring const-ring-2"></div>
+          <div class="const-ring const-ring-3"></div>
+          <div class="const-star">★</div>
+        </div>
+        <div class="constellation-title-group">
+          <h2 class="constellation-title">The Constellation</h2>
+          <p class="constellation-hint">These 5 stars align in today's mystery film</p>
+        </div>
+      </div>
+      
+      <div class="constellation-grid" id="constellationGrid">
+        <!-- Actor cards will be injected here -->
+        <div class="actor-card loading" data-position="0">
+          <div class="actor-photo-wrap"><div class="actor-photo skeleton"></div></div>
+          <div class="actor-name skeleton-text"></div>
+          <div class="actor-indicator"></div>
+        </div>
+        <div class="actor-card loading" data-position="1">
+          <div class="actor-photo-wrap"><div class="actor-photo skeleton"></div></div>
+          <div class="actor-name skeleton-text"></div>
+          <div class="actor-indicator"></div>
+        </div>
+        <div class="actor-card loading" data-position="2">
+          <div class="actor-photo-wrap"><div class="actor-photo skeleton"></div></div>
+          <div class="actor-name skeleton-text"></div>
+          <div class="actor-indicator"></div>
+        </div>
+        <div class="actor-card loading" data-position="3">
+          <div class="actor-photo-wrap"><div class="actor-photo skeleton"></div></div>
+          <div class="actor-name skeleton-text"></div>
+          <div class="actor-indicator"></div>
+        </div>
+        <div class="actor-card loading" data-position="4">
+          <div class="actor-photo-wrap"><div class="actor-photo skeleton"></div></div>
+          <div class="actor-name skeleton-text"></div>
+          <div class="actor-indicator"></div>
+        </div>
+      </div>
+      
+      <!-- Connecting lines between stars -->
+      <svg class="constellation-lines" viewBox="0 0 600 100" preserveAspectRatio="none">
+        <path class="const-line" d="M60,50 L180,50 L300,50 L420,50 L540,50" />
+        <path class="const-line accent" d="M60,50 Q120,20 180,50 Q240,80 300,50 Q360,20 420,50 Q480,80 540,50" />
+      </svg>
+    </section>
+    
+    <!-- GUESS INPUT -->
+    <section class="guess-section" id="guessSection">
+      <div class="guess-input-wrap">
+        <div class="input-glow"></div>
+        <input 
+          type="text" 
+          class="guess-input" 
+          id="guessInput" 
+          placeholder="Search for a movie..."
+          autocomplete="off"
+        >
+        <button class="guess-btn" id="guessBtn">
+          <span class="btn-text">Launch</span>
+          <span class="btn-icon">🚀</span>
+        </button>
+      </div>
+      
+      <!-- Search Results Dropdown -->
+      <div class="search-results" id="searchResults" hidden></div>
+      
+      <div class="guess-info">
+        <div class="attempts-display">
+          <span class="attempt-dot active"></span>
+          <span class="attempt-dot"></span>
+          <span class="attempt-dot"></span>
+          <span class="attempt-dot"></span>
+          <span class="attempt-dot"></span>
+          <span class="attempt-dot"></span>
+        </div>
+        <span class="attempts-text">Attempt <span id="attemptNum">1</span> of 6</span>
+      </div>
+    </section>
+    
+    <!-- GUESS HISTORY -->
+    <section class="history-section" id="historySection">
+      <h3 class="history-title">
+        <span class="history-icon">🛸</span>
+        Flight Log
+      </h3>
+      <div class="guess-history" id="guessHistory">
+        <!-- Guess results will appear here -->
+      </div>
+    </section>
+    
+    <!-- GAME RESULT (hidden until game ends) -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon" id="resultIcon">🌟</div>
+        <h2 class="result-title" id="resultTitle">Supernova!</h2>
+        <p class="result-subtitle" id="resultSubtitle">You found the film in 3 attempts</p>
+        
+        <div class="target-reveal" id="targetReveal">
+          <div class="reveal-glow"></div>
+          <img class="target-poster" id="targetPoster" src="" alt="">
+          <div class="target-info">
+            <h3 class="target-title" id="targetTitle"></h3>
+            <p class="target-year" id="targetYear"></p>
+            <div class="target-badges" id="targetBadges"></div>
+          </div>
+          <span class="explore-hint">Explore Timeline →</span>
+        </div>
+        
+        <div class="share-section">
+          <button class="share-btn" id="shareBtn">
+            <span>📋</span> Share Result
+          </button>
+          <div class="share-preview" id="sharePreview"></div>
+        </div>
+        
+        <div class="next-puzzle">
+          <span class="next-label">Next Orbit in</span>
+          <span class="next-timer" id="nextTimer">--:--:--</span>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content stats-modal">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Mission Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Missions</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statWinPct">0%</span>
+          <span class="stat-label">Success Rate</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statStreak">0</span>
+          <span class="stat-label">Current Streak</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statMaxStreak">0</span>
+          <span class="stat-label">Best Streak</span>
+        </div>
+      </div>
+      
+      <h3 class="distribution-title">Guess Distribution</h3>
+      <div class="distribution-chart" id="distributionChart"></div>
+      
+      <div class="prestige-stats">
+        <h3 class="prestige-title">🏆 Prestige Discoveries</h3>
+        <div class="prestige-count">
+          <span id="prestigeCount">0</span> award-winning films identified
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content help-modal">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>The Constellation</strong>
+            <p>Five actors are shown. They all appear together in one mystery movie.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Make Your Guess</strong>
+            <p>Search for a movie you think contains these actors.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Check Your Orbit</strong>
+            <p>See which specific actors from the constellation appear in your guess. Matching actors light up!</p>
+          </div>
+        </div>
+        
+        <div class="orbit-levels">
+          <h4>Orbit Levels</h4>
+          <div class="level-row">
+            <span class="level-badge supernova">5/5</span>
+            <span class="level-name">Supernova</span>
+            <span class="level-desc">Perfect match! You win!</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge high-orbit">4/5</span>
+            <span class="level-name">High Orbit</span>
+            <span class="level-desc">So close!</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge mid-orbit">3/5</span>
+            <span class="level-name">Mid Orbit</span>
+            <span class="level-desc">Getting warmer</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge low-orbit">2/5</span>
+            <span class="level-name">Low Orbit</span>
+            <span class="level-desc">On the right track</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge distant">1/5</span>
+            <span class="level-name">Distant</span>
+            <span class="level-desc">Keep searching</span>
+          </div>
+          <div class="level-row">
+            <span class="level-badge void">0/5</span>
+            <span class="level-name">The Void</span>
+            <span class="level-desc">No matches</span>
+          </div>
+        </div>
+        
+        <div class="prestige-info">
+          <h4>🏆 Prestige Layer</h4>
+          <p>Guess a movie that won a major award (Oscar, Cannes, BAFTA, Venice, Berlin) and earn a Prestige badge—even if it's not the answer!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- PRESTIGE NOTIFICATION -->
+  <div class="prestige-notification" id="prestigeNotification" hidden>
+    <div class="prestige-content">
+      <span class="prestige-icon">🏆</span>
+      <span class="prestige-text">Prestige Discovery!</span>
+      <span class="prestige-award" id="prestigeAward"></span>
+    </div>
+  </div>
+  
+  <!-- SUPERNOVA ANIMATION OVERLAY -->
+  <div class="supernova-overlay" id="supernovaOverlay" hidden>
+    <div class="supernova-burst"></div>
+    <div class="supernova-rays"></div>
+    <div class="supernova-text">SUPERNOVA!</div>
+  </div>
+  
+  <script src="../js/puzzles.js"></script>
+  <script src="../js/awards.js"></script>
+  <script src="../js/moviecube.js"></script>
+  <script src="../js/game.js"></script>
+</body>
+</html>

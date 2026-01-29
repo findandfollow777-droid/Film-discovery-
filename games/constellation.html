@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Constellation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/constellation.css">
+  <link rel="stylesheet" href="../css/swipe-memory.css">
+</head>
+<body>
+  <!-- SPACE BACKGROUND -->
+  <div class="space-bg"></div>
+  <div class="stars-field"></div>
+  <div class="nebula-glow"></div>
+
+  <!-- HEADER -->
+  <header class="constellation-header">
+    <a href="results.html" class="back-btn">
+      ← Back to Results
+    </a>
+    <div class="header-title">
+      <span class="title-icon">✦</span>
+      <h1>Constellation View</h1>
+    </div>
+    <div class="header-hint">
+      Movies orbit by similarity • Click any to explore • Double-click to make new anchor
+    </div>
+  </header>
+
+  <!-- ORBITAL VISUALIZATION -->
+  <div class="orbital-container" id="orbitalContainer">
+    <!-- Orbital rings (visual guides) -->
+    <div class="orbital-ring ring-1"></div>
+    <div class="orbital-ring ring-2"></div>
+    <div class="orbital-ring ring-3"></div>
+    <div class="orbital-ring ring-4"></div>
+    
+    <!-- Anchor star (center) -->
+    <div class="anchor-star" id="anchorStar">
+      <img class="anchor-poster" id="anchorPoster" src="" alt="">
+      <div class="anchor-glow"></div>
+      <div class="anchor-label" id="anchorLabel">Loading...</div>
+    </div>
+    
+    <!-- Expand Universe Button (shown when < 10 movies) -->
+    <div class="expand-universe" id="expandUniverse" hidden>
+      <button class="expand-btn" id="expandBtn">
+        <span class="expand-icon">✨</span>
+        <span class="expand-text">Expand Universe</span>
+      </button>
+      <p class="expand-hint">Add similar films based on genre & themes</p>
+    </div>
+    
+    <!-- Orbiting movies will be injected here -->
+    <div class="orbiting-movies" id="orbitingMovies"></div>
+  </div>
+
+  <!-- MOVIE INFO PANEL (slides in when movie selected) -->
+  <div class="info-panel" id="infoPanel">
+    <button class="info-close" id="infoClose">✕</button>
+    <div class="info-content">
+      <img class="info-poster" id="infoPoster" src="" alt="">
+      <div class="info-details">
+        <h2 class="info-title" id="infoTitle"></h2>
+        <div class="info-meta">
+          <span class="info-year" id="infoYear"></span>
+          <span class="info-rating">⭐ <span id="infoRating"></span></span>
+          <span class="info-similarity" id="infoSimilarity"></span>
+        </div>
+        <p class="info-overview" id="infoOverview"></p>
+        <div class="info-actions">
+          <button class="make-anchor-btn" id="makeAnchorBtn" onclick="handleMakeAnchorClick()">
+            <span>✦</span> Make This the Anchor
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMILARITY LEGEND -->
+  <div class="similarity-legend">
+    <div class="legend-title">Orbital Distance</div>
+    <div class="legend-scale">
+      <span class="legend-close">● Very Similar</span>
+      <span class="legend-far">○ Less Similar</span>
+    </div>
+  </div>
+
+  <script src="../js/swipe-memory.js"></script>
+  <script src="../js/constellation.js"></script>
+</body>
+</html>

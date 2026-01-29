@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Orbit – Stellar Territories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/venn.css">
+  <link rel="stylesheet" href="../css/moviecube.css">
+</head>
+<body>
+  <!-- BACKGROUNDS -->
+  <div class="space-bg"></div>
+  <div class="stars-field"></div>
+  <div class="nebula-glow"></div>
+
+  <!-- HEADER -->
+  <header class="venn-header">
+    <a href="timeline.html" class="back-btn">← Timeline View</a>
+    
+    <div class="header-center">
+      <h1 class="venn-title"><span>Stellar</span> Territories</h1>
+      <p class="venn-subtitle" id="vennSubtitle">Loading...</p>
+    </div>
+    
+    <div class="convergence-count">
+      <span class="count-num" id="convergenceCount">0</span>
+      <span class="count-label">Crossings</span>
+    </div>
+  </header>
+
+  <!-- CONTROLS -->
+  <div class="venn-controls">
+    <div class="controls-left">
+      <span class="control-label">Filter</span>
+      <div class="sort-buttons">
+        <button class="sort-btn active" data-sort="chronology">📅 Chronology</button>
+        <button class="sort-btn" data-sort="rating">⭐ Rating</button>
+        <button class="sort-btn" data-sort="boxoffice">💰 Box Office</button>
+      </div>
+      <button class="reverse-btn" id="reverseBtn">⇅ Reverse</button>
+    </div>
+    <div class="controls-right">
+      <select class="filter-select" id="roleFilter" title="Filter by role type">
+        <option value="all">All Roles</option>
+      </select>
+      <select class="filter-select" id="billingFilter" title="Filter by billing order">
+        <option value="all">All Billing</option>
+        <option value="lead">Top Billed</option>
+        <option value="colead">Co-Lead</option>
+        <option value="supporting">Major Supporting</option>
+      </select>
+      <label class="checkbox-filter">
+        <input type="checkbox" id="excludeSelf">
+        <span>Exclude Self</span>
+      </label>
+      <label class="checkbox-filter" title="Exclude documentaries and TV movies">
+        <input type="checkbox" id="featureFilmsOnly">
+        <span>Features Only</span>
+      </label>
+      <select class="filter-select" id="decadeFilter">
+        <option value="all">All Decades</option>
+      </select>
+      <select class="filter-select" id="yearFilter">
+        <option value="all">All Years</option>
+      </select>
+      <select class="filter-select" id="ratingFilter">
+        <option value="all">All Ratings</option>
+        <option value="8">8+ Excellent</option>
+        <option value="7">7+ Great</option>
+        <option value="6">6+ Good</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ZOOM CONTROLS -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoomIn">+</button>
+    <span class="zoom-level" id="zoomLevel">100%</span>
+    <button class="zoom-btn" id="zoomOut">−</button>
+    <button class="zoom-btn" id="zoomReset" style="font-size: 14px;">⟲</button>
+  </div>
+
+  <!-- MAIN VIEWPORT -->
+  <div class="venn-viewport" id="vennViewport">
+    <div class="venn-world" id="vennWorld">
+      <!-- Nebula glows rendered here (behind everything) -->
+      <div id="nebulaLayer"></div>
+      <!-- Movie cards rendered here -->
+      <div id="moviesLayer"></div>
+      <!-- Actor names rendered here (in front of movies) -->
+      <div id="actorsLayer"></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="venn-legend" id="vennLegend"></div>
+
+  <!-- MINIMAP -->
+  <div class="mini-map" id="miniMap">
+    <canvas class="mini-map-canvas" id="miniMapCanvas"></canvas>
+    <div class="mini-viewport" id="miniViewport"></div>
+  </div>
+
+  <!-- PERSON BIO PANEL (right side) -->
+  <div class="bio-panel-right" id="bioPanelRight">
+    <div class="bio-panel-tab-right" id="bioPanelTabRight" title="Person Bios">
+      <span class="bio-tab-icon">👥</span>
+    </div>
+    <div class="bio-panel-content-right" id="bioPanelContentRight">
+      <button class="bio-close-right" id="bioCloseRight">✕</button>
+      
+      <!-- Person Selector -->
+      <div class="bio-person-tabs" id="bioPersonTabs">
+        <!-- Rendered dynamically -->
+      </div>
+      
+      <!-- Bio Content -->
+      <div class="bio-quick-stats">
+        <div class="bio-quick-stat films">
+          <span class="stat-value" id="bioFilmCount">0</span>
+          <span class="stat-label">Films</span>
+        </div>
+        <div class="bio-quick-stat rating">
+          <span class="stat-value" id="bioAvgRating">–</span>
+          <span class="stat-label">Avg</span>
+        </div>
+        <div class="bio-quick-stat career">
+          <span class="stat-value" id="bioCareerSpan">–</span>
+          <span class="stat-label">Career</span>
+        </div>
+      </div>
+      
+      <div class="bio-header">
+        <img class="bio-photo" id="bioPhoto" src="" alt="">
+        <div class="bio-header-info">
+          <h2 class="bio-name" id="bioName">Select a person</h2>
+          <div class="bio-role" id="bioRole"></div>
+          <div class="bio-dates" id="bioDates"></div>
+          <div class="bio-debut" id="bioDebut"></div>
+        </div>
+      </div>
+      
+      <div class="bio-memorial" id="bioMemorial" hidden>
+        <span class="memorial-icon">🕯️</span>
+        <span class="memorial-text">In Memoriam</span>
+      </div>
+      
+      <div class="bio-details">
+        <div class="bio-birthplace" id="bioBirthplace"></div>
+        <div class="bio-text" id="bioText"></div>
+      </div>
+      
+      <div class="bio-genre-section">
+        <h3 class="bio-section-title">Genre Breakdown</h3>
+        <div class="genre-pie-container">
+          <svg class="genre-pie" id="genrePie" viewBox="0 0 200 200"></svg>
+          <div class="genre-pie-tooltip" id="genreTooltip"></div>
+        </div>
+        <div class="genre-legend" id="genreLegend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO PANEL -->-legend" id="genreLegend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO PANEL -->
+  <aside class="info-panel" id="infoPanel" hidden>
+    <button class="info-close" id="infoClose">✕</button>
+    <img class="info-poster" id="infoPoster" src="" alt="">
+    <div class="info-content">
+      <h2 class="info-title" id="infoTitle"></h2>
+      <div class="info-meta">
+        <span class="info-year" id="infoYear"></span>
+        <span class="info-rating" id="infoRating"></span>
+      </div>
+      <div class="info-people" id="infoPeople"></div>
+      <p class="info-synopsis" id="infoSynopsis"></p>
+      <button class="info-details-btn" id="infoDetailsBtn">🎬 View Full Details</button>
+    </div>
+  </aside>
+
+  <!-- 3D MOVIE POPUP -->
+  <div class="popup-overlay" id="popupOverlay" hidden>
+    <div class="popup-container">
+      <button class="popup-close" id="popupClose">✕</button>
+      <div class="flip-wrapper">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-side side-1">
+            <img class="popup-poster" id="popupPoster" src="" alt="">
+            <div class="poster-glow"></div>
+            <div class="flip-hint">Click to flip →</div>
+          </div>
+          <div class="flip-side side-2">
+            <div class="popup-info">
+              <h2 class="popup-title" id="popupTitle"></h2>
+              <div class="popup-meta">
+                <span class="meta-year" id="popupYear"></span>
+                <span class="meta-rating">⭐ <span id="popupRating"></span></span>
+                <span class="meta-runtime" id="popupRuntime"></span>
+              </div>
+              <div class="popup-box-office" id="popupBoxOffice"></div>
+              <p class="popup-synopsis" id="popupSynopsis"></p>
+              <div class="popup-actions">
+                <button class="popup-btn trailer-btn" id="trailerBtn">▶ Trailer</button>
+                <button class="popup-btn anchor-btn" id="anchorBtn">✦ Anchor Film</button>
+              </div>
+            </div>
+            <div class="flip-hint">Click to flip →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAILER MODAL -->
+  <div class="trailer-overlay" id="trailerOverlay" hidden>
+    <div class="trailer-modal">
+      <button class="trailer-close" id="trailerClose">✕</button>
+      <div class="trailer-container" id="trailerContainer"></div>
+    </div>
+  </div>
+
+  <script src="../js/moviecube.js"></script>
+  <script src="../js/venn.js"></script>
+</body>
+</html>

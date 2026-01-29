@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Cinematic Discovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="background-layer"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- ANAMORPHIC LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+
+  <!-- HYPERSPACE TRANSITION -->
+  <div id="hyperspaceOverlay" class="hyperspace" hidden>
+    <div class="stars"></div>
+  </div>
+
+  <div class="app-shell">
+    <!-- CINEMATIC HEADER -->
+    <header class="orbit-header">
+      <div class="orbit-logo">
+        <div class="orbit-logo-mark">
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+        </div>
+        <div class="orbit-logo-text">ORBIT</div>
+      </div>
+      <p class="orbit-tagline">Discover cinema through the intersection of infinite possibilities</p>
+      <nav class="orbit-nav">
+        <a href="games/timeline.html" class="nav-link">🎬 Timelines</a>
+        <a href="games/results.html" class="nav-link">🌌 Discover</a>
+        <a href="games/game.html" class="nav-link nav-game">🎮 Daily Game</a>
+      </nav>
+    </header>
+
+    <main class="orbit-main">
+      <!-- MAIN SEARCH & CRITERIA CARD -->
+      <section class="orbit-card" id="mainCard">
+        <header class="orbit-card-header">
+          <h1 class="orbit-card-title">Build your orbit</h1>
+          <p class="orbit-card-subtitle">
+            Select criteria to shape your cinematic universe.
+          </p>
+        </header>
+
+        <!-- MULTI-TYPE SEARCH -->
+        <div class="search-container">
+          <div class="search-type-selector">
+            <select id="searchType" class="search-type-dropdown">
+              <option value="movie">🎬 Movies</option>
+              <option value="person">🎭 People</option>
+              <option value="company">🏛️ Studios</option>
+            </select>
+          </div>
+          <input id="searchInput" type="text" placeholder="Quick Search" />
+          <div id="searchDropdown" class="search-dropdown"></div>
+        </div>
+
+        <!-- GRID OF SECTION CARDS (10 SECTIONS) -->
+        <div class="sections-grid">
+          
+          <!-- 1. PEOPLE -->
+          <button class="section-card" data-section="people">
+            <div class="section-icon">🎭</div>
+            <div class="section-text">
+              <h2>People</h2>
+              <p>Actors, directors, writers</p>
+            </div>
+          </button>
+
+          <!-- 2. GENRES -->
+          <button class="section-card" data-section="genres">
+            <div class="section-icon">🎬</div>
+            <div class="section-text">
+              <h2>Genres</h2>
+              <p>Action, drama, horror & more</p>
+            </div>
+          </button>
+
+          <!-- 3. SETTING -->
+          <button class="section-card" data-section="setting">
+            <div class="section-icon">🌍</div>
+            <div class="section-text">
+              <h2>Setting</h2>
+              <p>Era, time period, decade</p>
+            </div>
+          </button>
+
+          <!-- 4. DATE & RUNTIME -->
+          <button class="section-card" data-section="dateRuntime">
+            <div class="section-icon">⏱️</div>
+            <div class="section-text">
+              <h2>Date & runtime</h2>
+              <p>Year, decade, length</p>
+            </div>
+          </button>
+
+          <!-- 5. RATINGS -->
+          <button class="section-card" data-section="ratings">
+            <div class="section-icon">⭐</div>
+            <div class="section-text">
+              <h2>Ratings</h2>
+              <p>Score, reliability, quality</p>
+            </div>
+          </button>
+
+          <!-- 6. REGION & LANGUAGE -->
+          <button class="section-card" data-section="regionLanguage">
+            <div class="section-icon">📍</div>
+            <div class="section-text">
+              <h2>Region & language</h2>
+              <p>Origin, language</p>
+            </div>
+          </button>
+
+          <!-- 7. PRODUCTION & BOX OFFICE (COMBINED) -->
+          <button class="section-card" data-section="production">
+            <div class="section-icon">🏛️</div>
+            <div class="section-text">
+              <h2>Production & Box Office</h2>
+              <p>Studios, budget, revenue</p>
+            </div>
+          </button>
+
+          <!-- 8. WATCH PROVIDERS -->
+          <button class="section-card" data-section="watch">
+            <div class="section-icon">📺</div>
+            <div class="section-text">
+              <h2>Watch providers</h2>
+              <p>Streaming & availability</p>
+            </div>
+          </button>
+
+          <!-- 9. SUITABILITY -->
+          <button class="section-card" data-section="suitability">
+            <div class="section-icon">🔞</div>
+            <div class="section-text">
+              <h2>Suitability</h2>
+              <p>Age rating, content</p>
+            </div>
+          </button>
+
+          <!-- 10. LAUNCH ORBIT (SPECIAL CARD - NOW WIDER) -->
+          <button class="section-card launch-card" id="launchCard" disabled>
+            <div class="launch-icon">🚀</div>
+            <div class="section-text">
+              <h2>Launch Orbit Search</h2>
+              <p>Discover your movies</p>
+            </div>
+            <div class="launch-glow"></div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- ORBIT PANEL (ACTIVE FILTERS) -->
+      <aside class="orbit-panel" id="orbitPanel">
+        <header class="orbit-panel-header">
+          <div class="orbit-panel-title">
+            <span class="orbit-panel-icon">🪐</span>
+            <span>Your orbit</span>
+          </div>
+          <button class="orbit-panel-toggle" id="orbitPanelToggle">⯈</button>
+        </header>
+        <div class="orbit-panel-body" id="orbitFiltersEmpty">
+          <p class="orbit-panel-empty">
+            No criteria selected yet. Build your orbit by selecting filters.
+          </p>
+        </div>
+        <div class="orbit-panel-body" id="orbitFilters" hidden>
+          <!-- Filter chips injected here -->
+        </div>
+        <div class="orbit-panel-actions" id="orbitPanelActions" hidden>
+          <button class="btn-clear-all" id="clearAllButton">
+            Clear all
+          </button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- FOCUS CARD OVERLAY -->
+  <div class="focus-overlay" id="focusOverlay" hidden>
+    <div class="focus-card" id="focusCard">
+      <header class="focus-card-header">
+        <h2 class="focus-card-title" id="focusTitle">Section</h2>
+        <button class="focus-close" id="focusCloseButton">✕</button>
+      </header>
+      <div class="focus-card-content" id="focusContent">
+        <!-- Dynamic controls injected here -->
+      </div>
+      <footer class="focus-card-footer">
+        <button class="btn-primary" id="addToSearchButton">
+          Add to orbit
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journeys - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/journeys.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../arcade.html" class="back-link">← Back to Arcade</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">JOURNEYS</div>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">📊</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- DAILY INFO -->
+    <div class="daily-info">
+      <div class="daily-badge">
+        <span class="badge-icon">🛤️</span>
+        <span class="badge-text">Daily Journey</span>
+      </div>
+      <div class="daily-number">Journey #<span id="puzzleNumber">1</span></div>
+    </div>
+    
+    <!-- THE CHALLENGE -->
+    <section class="journey-challenge">
+      <div class="endpoint start-point">
+        <div class="endpoint-photo-wrap">
+          <img class="endpoint-photo" id="startPhoto" src="" alt="">
+        </div>
+        <div class="endpoint-name" id="startName">Loading...</div>
+        <div class="endpoint-label">START</div>
+      </div>
+      
+      <div class="journey-path">
+        <div class="path-line"></div>
+        <div class="path-steps" id="pathSteps">
+          <!-- Steps will be added here -->
+        </div>
+        <div class="path-line"></div>
+      </div>
+      
+      <div class="endpoint end-point">
+        <div class="endpoint-photo-wrap">
+          <img class="endpoint-photo" id="endPhoto" src="" alt="">
+        </div>
+        <div class="endpoint-name" id="endName">Loading...</div>
+        <div class="endpoint-label">END</div>
+      </div>
+    </section>
+    
+    <!-- PAR INFO -->
+    <section class="par-section">
+      <div class="par-display">
+        <span class="par-label">Par</span>
+        <span class="par-value" id="parValue">3</span>
+      </div>
+      <div class="steps-display">
+        <span class="steps-label">Your Steps</span>
+        <span class="steps-value" id="stepsValue">0</span>
+      </div>
+    </section>
+    
+    <!-- CURRENT CHAIN -->
+    <section class="chain-section" id="chainSection">
+      <h3 class="chain-title">Your Chain</h3>
+      <div class="chain-display" id="chainDisplay">
+        <div class="chain-node start-node">
+          <img class="chain-photo" id="chainStartPhoto" src="" alt="">
+          <span class="chain-name" id="chainStartName">Start</span>
+        </div>
+        <!-- Chain links added dynamically -->
+      </div>
+    </section>
+    
+    <!-- INPUT SECTION -->
+    <section class="input-section" id="inputSection">
+      <div class="input-toggle">
+        <button class="toggle-btn active" data-type="movie" id="movieToggle">🎬 Movie</button>
+        <button class="toggle-btn" data-type="actor" id="actorToggle">🎭 Actor</button>
+      </div>
+      
+      <div class="search-wrap">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput" 
+          placeholder="Search for a movie..."
+          autocomplete="off"
+        >
+        <div class="search-results" id="searchResults" hidden></div>
+      </div>
+      
+      <p class="input-hint" id="inputHint">Find a movie that connects to <span id="currentActorName">the starting actor</span></p>
+    </section>
+    
+    <!-- ACTION BUTTONS -->
+    <section class="action-section">
+      <button class="action-btn undo-btn" id="undoBtn" disabled>↩ Undo</button>
+      <button class="action-btn reset-btn" id="resetBtn">🔄 Reset</button>
+    </section>
+    
+    <!-- GAME OVER SECTION -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon" id="resultIcon">🎉</div>
+        <h2 class="result-title" id="resultTitle">Journey Complete!</h2>
+        
+        <div class="result-score">
+          <div class="score-comparison">
+            <div class="your-score">
+              <span class="score-num" id="yourSteps">3</span>
+              <span class="score-text">Your Steps</span>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="par-score">
+              <span class="score-num" id="parSteps">3</span>
+              <span class="score-text">Par</span>
+            </div>
+          </div>
+          <div class="score-verdict" id="scoreVerdict">On Par! 🎯</div>
+        </div>
+        
+        <div class="final-chain" id="finalChain">
+          <!-- Final chain display -->
+        </div>
+        
+        <div class="share-section">
+          <button class="share-btn" id="shareBtn">
+            <span>📋</span> Share Result
+          </button>
+        </div>
+        
+        <div class="next-puzzle">
+          <span class="next-label">Next Journey in</span>
+          <span class="next-timer" id="nextTimer">--:--:--</span>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Connect Two Actors</strong>
+            <p>Build a chain from the START actor to the END actor through shared films.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Alternate Movies & Actors</strong>
+            <p>Each step alternates: Movie → Actor → Movie → Actor until you reach the end.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Beat the Par</strong>
+            <p>Try to complete the journey in as few steps as possible. Can you beat par?</p>
+          </div>
+        </div>
+        
+        <div class="example-chain">
+          <h4>Example</h4>
+          <div class="example-flow">
+            <span class="ex-actor">Tom Hanks</span>
+            <span class="ex-arrow">→</span>
+            <span class="ex-movie">Forrest Gump</span>
+            <span class="ex-arrow">→</span>
+            <span class="ex-actor">Gary Sinise</span>
+            <span class="ex-arrow">→</span>
+            <span class="ex-movie">Apollo 13</span>
+            <span class="ex-arrow">→</span>
+            <span class="ex-actor">Kevin Bacon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statSolved">0</span>
+          <span class="stat-label">Solved</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statAvgSteps">0</span>
+          <span class="stat-label">Avg Steps</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statUnderPar">0</span>
+          <span class="stat-label">Under Par</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/journeys.js"></script>
+</body>
+</html>

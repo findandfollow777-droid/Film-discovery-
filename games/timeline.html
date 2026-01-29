@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit – Sacred Timeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/timeline.css">
+  <link rel="stylesheet" href="../css/moviecube.css">
+</head>
+<body>
+  <!-- CINEMATIC BACKGROUNDS -->
+  <div class="space-bg"></div>
+  <div class="stars-field"></div>
+  <div class="nebula-glow"></div>
+  <div class="film-grain"></div>
+
+  <!-- HEADER -->
+  <header class="timeline-header">
+    <div class="back-links">
+      <a href="../index.html" class="back-btn">← Back to Orbit</a>
+      <a href="results.html" class="back-btn back-to-results" id="backToResults" hidden>← Back to Results</a>
+    </div>
+    
+    <div class="header-center">
+      <div class="header-emblem">⧗</div>
+      <div class="header-text">
+        <h1 class="timeline-title" id="timelineTitle">Sacred Timeline</h1>
+        <p class="timeline-subtitle" id="timelineSubtitle">Loading...</p>
+      </div>
+    </div>
+    
+    <div class="header-actions">
+      <button class="action-btn add-person-btn" id="addPersonBtn">+ Add Orbit</button>
+      <button class="action-btn venn-btn" id="vennBtn" hidden>⊕ Venn View</button>
+      <button class="action-btn bio-btn" id="bioBtn" hidden title="View Biography">👤 Bio</button>
+      <div class="film-count">
+        <span class="count-num" id="movieCount">0</span>
+        <span class="count-label">Films</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTROLS -->
+  <div class="controls-bar">
+    <div class="controls-left">
+      <span class="control-label">Order</span>
+      <div class="sort-buttons">
+        <button class="sort-btn active" data-sort="chronology">📅 Chronology</button>
+        <button class="sort-btn" data-sort="rating">⭐ Rating</button>
+        <button class="sort-btn" data-sort="boxoffice">💰 Box Office</button>
+      </div>
+      <button class="reverse-btn" id="reverseBtn">⇅ Reverse</button>
+    </div>
+    <div class="controls-right">
+      <select class="filter-select" id="roleFilter" title="Filter by role type">
+        <option value="all">All Roles</option>
+      </select>
+      <select class="filter-select" id="billingFilter" title="Filter by billing order">
+        <option value="all">All Billing</option>
+        <option value="lead">Top Billed</option>
+        <option value="colead">Co-Lead</option>
+        <option value="supporting">Major Supporting</option>
+      </select>
+      <label class="checkbox-filter">
+        <input type="checkbox" id="excludeSelf">
+        <span>Exclude Self</span>
+      </label>
+      <label class="checkbox-filter" title="Exclude documentaries and TV movies">
+        <input type="checkbox" id="featureFilmsOnly">
+        <span>Features Only</span>
+      </label>
+      <select class="filter-select" id="decadeFilter">
+        <option value="all">All Decades</option>
+      </select>
+      <select class="filter-select" id="yearFilter">
+        <option value="all">All Years</option>
+      </select>
+      <select class="filter-select" id="ratingFilter">
+        <option value="all">All Ratings</option>
+        <option value="8">8+ Excellent</option>
+        <option value="7">7+ Great</option>
+        <option value="6">6+ Good</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- UPCOMING FILMS SECTION (unreleased) -->
+  <div class="upcoming-section" id="upcomingSection" hidden>
+    <h3 class="upcoming-title">🎬 Coming Soon</h3>
+    <div class="upcoming-track" id="upcomingTrack"></div>
+  </div>
+
+  <!-- ORBIT LABELS (multi-person sidebar) -->
+  <div class="orbit-labels" id="orbitLabels" hidden></div>
+
+  <!-- TIMELINE VIEWPORT -->
+  <div class="timeline-viewport" id="timelineViewport">
+    <!-- Sacred Line SVG - inside viewport to scroll with content -->
+    <svg class="sacred-svg" id="sacredSvg">
+      <defs>
+        <!-- Softer, more spacey gradient colors -->
+        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4a9eff" />
+          <stop offset="50%" stop-color="#c9a227" />
+          <stop offset="100%" stop-color="#d65db1" />
+        </linearGradient>
+        <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#d65db1" />
+          <stop offset="50%" stop-color="#4ed8aa" />
+          <stop offset="100%" stop-color="#4a9eff" />
+        </linearGradient>
+        <linearGradient id="lineGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4ed8aa" />
+          <stop offset="50%" stop-color="#d65db1" />
+          <stop offset="100%" stop-color="#c9a227" />
+        </linearGradient>
+        <linearGradient id="lineGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#c9a227" />
+          <stop offset="50%" stop-color="#4a9eff" />
+          <stop offset="100%" stop-color="#4ed8aa" />
+        </linearGradient>
+        <!-- More subtle, atmospheric glow filter -->
+        <filter id="sacredGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="10" result="blur1"/>
+          <feGaussianBlur stdDeviation="20" result="blur2"/>
+          <feGaussianBlur stdDeviation="3" result="blur3"/>
+          <feMerge>
+            <feMergeNode in="blur2"/>
+            <feMergeNode in="blur1"/>
+            <feMergeNode in="blur3"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <g id="sacredLines"></g>
+    </svg>
+    
+    <div class="timeline-track" id="timelineTrack"></div>
+    <div class="multi-tracks" id="multiTracks" hidden></div>
+  </div>
+
+  <!-- MINI-MAP (multi-actor only) -->
+  <div class="timeline-minimap" id="timelineMinimap" hidden>
+    <canvas class="minimap-canvas" id="minimapCanvas"></canvas>
+    <div class="minimap-viewport" id="minimapViewport"></div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="empty-icon">🎬</div>
+    <h3>Timeline Empty</h3>
+    <p>No films found.</p>
+    <a href="../index.html" class="empty-btn">Return to Orbit</a>
+  </div>
+
+  <!-- PERSON BIO PANEL -->
+  <div class="bio-panel" id="bioPanel">
+    <div class="bio-panel-content" id="bioPanelContent">
+      <button class="bio-close" id="bioClose">✕</button>
+      
+      <!-- Person Selector (for multi-person mode) -->
+      <div class="bio-person-selector" id="bioPersonSelector" hidden>
+        <div class="bio-person-tabs" id="bioPersonTabs">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      
+      <!-- Quick Stats -->
+      <div class="bio-quick-stats">
+        <div class="bio-quick-stat films">
+          <span class="stat-value" id="bioFilmCount">0</span>
+          <span class="stat-label">Films</span>
+        </div>
+        <div class="bio-quick-stat rating">
+          <span class="stat-value" id="bioAvgRating">–</span>
+          <span class="stat-label">Avg Rating</span>
+        </div>
+        <div class="bio-quick-stat career">
+          <span class="stat-value" id="bioCareerSpan">–</span>
+          <span class="stat-label">Career</span>
+        </div>
+      </div>
+      
+      <div class="bio-header">
+        <img class="bio-photo" id="bioPhoto" src="" alt="">
+        <div class="bio-header-info">
+          <h2 class="bio-name" id="bioName">Loading...</h2>
+          <div class="bio-role" id="bioRole"></div>
+          <div class="bio-dates" id="bioDates"></div>
+          <div class="bio-debut" id="bioDebut"></div>
+        </div>
+      </div>
+      <div class="bio-memorial" id="bioMemorial" hidden>
+        <span class="memorial-icon">🕯️</span>
+        <span class="memorial-text">In Memoriam</span>
+      </div>
+      <div class="bio-details">
+        <div class="bio-birthplace" id="bioBirthplace"></div>
+        <div class="bio-text" id="bioText"></div>
+      </div>
+      
+      <!-- Visualization Tabs -->
+      <div class="bio-viz-tabs" id="bioVizTabs">
+        <button class="bio-viz-tab active" data-viz="genres">🥧 Genres</button>
+        <button class="bio-viz-tab" data-viz="collabs">🤝 Collabs</button>
+        <button class="bio-viz-tab" data-viz="activity">📈 Activity</button>
+      </div>
+      
+      <!-- Genre Pie Chart -->
+      <div class="bio-viz-panel" id="vizGenres">
+        <div class="genre-pie-container">
+          <svg class="genre-pie" id="genrePie" viewBox="0 0 200 200"></svg>
+          <div class="genre-pie-tooltip" id="genreTooltip"></div>
+        </div>
+        <div class="genre-legend" id="genreLegend"></div>
+      </div>
+      
+      <!-- Collaborators Panel -->
+      <div class="bio-viz-panel" id="vizCollabs" hidden>
+        <div class="collabs-list" id="collabsList">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      
+      <!-- Activity Panel -->
+      <div class="bio-viz-panel" id="vizActivity" hidden>
+        <div class="activity-chart" id="activityChart">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD PERSON MODAL -->
+  <div class="modal-overlay" id="addPersonModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h2 class="modal-title">Add Orbital Path</h2>
+      <p class="modal-subtitle">Search for an actor or director</p>
+      <div class="search-container">
+        <input type="text" class="modal-search" id="personSearch" placeholder="Search actors, directors...">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <div class="current-orbits">
+        <h4>Current Orbits</h4>
+        <div class="orbit-chips" id="orbitChips"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel-btn" id="modalCancel">Cancel</button>
+        <button class="modal-btn confirm-btn" id="modalConfirm">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOVIE POPUP -->
+  <div class="popup-overlay" id="popupOverlay" hidden>
+    <div class="popup-container">
+      <button class="popup-close" id="popupClose">✕</button>
+      <div class="flip-wrapper">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-side side-1">
+            <img class="popup-poster" id="popupPoster" src="" alt="">
+            <div class="poster-glow"></div>
+            <div class="flip-hint">Click to flip →</div>
+          </div>
+          <div class="flip-side side-2">
+            <div class="popup-info">
+              <h2 class="popup-title" id="popupTitle"></h2>
+              <div class="popup-meta">
+                <span class="meta-year" id="popupYear"></span>
+                <span class="meta-rating">⭐ <span id="popupRating"></span></span>
+                <span class="meta-runtime" id="popupRuntime"></span>
+              </div>
+              <div class="popup-box-office" id="popupBoxOffice"></div>
+              <div class="popup-people" id="popupPeople"></div>
+              <p class="popup-synopsis" id="popupSynopsis"></p>
+              <div class="popup-actions">
+                <button class="popup-btn trailer-btn" id="trailerBtn">▶ Trailer</button>
+                <button class="popup-btn anchor-btn" id="anchorBtn">✦ Anchor Film</button>
+              </div>
+            </div>
+            <div class="flip-hint">Click to flip →</div>
+          </div>
+          <div class="flip-side side-3">
+            <div class="trivia-section">
+              <h3 class="trivia-header">🎬 Movie Trivia</h3>
+              <div class="trivia-questions" id="triviaQuestions"></div>
+            </div>
+            <div class="flip-hint">Click to flip →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAILER MODAL -->
+  <div class="trailer-overlay" id="trailerOverlay" hidden>
+    <div class="trailer-modal">
+      <button class="trailer-close" id="trailerClose">✕</button>
+      <div class="trailer-container" id="trailerContainer"></div>
+    </div>
+  </div>
+
+  <script src="../js/moviecube.js"></script>
+  <script src="../js/timeline.js"></script>
+</body>
+</html>

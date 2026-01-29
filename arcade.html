@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games Arcade - Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/arcade.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="arcade-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  <div class="lens-flare lens-flare-3"></div>
+  
+  <!-- FLOATING PARTICLES -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- HEADER -->
+  <header class="arcade-header">
+    <a href="index.html" class="back-link">← Back to Orbit</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">ARCADE</div>
+    </div>
+    
+    <div class="header-stats">
+      <div class="stat-pill">
+        <span class="stat-icon">🔥</span>
+        <span class="stat-value" id="totalStreak">0</span>
+        <span class="stat-label">Day Streak</span>
+      </div>
+    </div>
+  </header>
+  
+  <!-- MAIN ARCADE AREA -->
+  <main class="arcade-main">
+    
+    <!-- HERO SECTION -->
+    <section class="arcade-hero">
+      <h1 class="hero-title">Games Arcade</h1>
+      <p class="hero-subtitle">Test your cinema knowledge with daily challenges</p>
+    </section>
+    
+    <!-- DAILY GAMES SECTION -->
+    <section class="games-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-icon">📅</span>
+          Daily Challenges
+        </h2>
+        <p class="section-desc">Fresh puzzles every day. Same puzzle for everyone.</p>
+      </div>
+      
+      <div class="games-grid">
+        
+        <!-- CONSTELLATION -->
+        <a href="games/game.html" class="game-card" data-game="constellation">
+          <div class="game-card-glow"></div>
+          <div class="game-icon">⭐</div>
+          <div class="game-info">
+            <h3 class="game-title">Constellation</h3>
+            <p class="game-desc">Guess the movie from 5 actor photos</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">🎯 6 attempts</span>
+            <span class="meta-item">⏱️ ~3 min</span>
+          </div>
+          <div class="game-status" id="constellationStatus"></div>
+        </a>
+        
+        <!-- COLLISION COURSE -->
+        <a href="games/collision.html" class="game-card" data-game="collision">
+          <div class="game-card-glow collision-glow"></div>
+          <div class="game-icon">💥</div>
+          <div class="game-info">
+            <h3 class="game-title">Collision Course</h3>
+            <p class="game-desc">Name movies featuring two actors</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">⏱️ 3 minutes</span>
+            <span class="meta-item">🎯 Speed recall</span>
+          </div>
+          <div class="game-status" id="collisionStatus"></div>
+        </a>
+        
+        <!-- TRIPLE COLLISION -->
+        <a href="games/triple-collision.html" class="game-card" data-game="triple">
+          <div class="game-card-glow triple-glow"></div>
+          <div class="game-icon">🔺</div>
+          <div class="game-info">
+            <h3 class="game-title">Triple Collision</h3>
+            <p class="game-desc">Three entities, seven scoring zones</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">⏱️ 4 minutes</span>
+            <span class="meta-item">🎯 Venn mastery</span>
+          </div>
+          <div class="game-status" id="tripleStatus"></div>
+        </a>
+        
+        <!-- JOURNEYS -->
+        <a href="games/journeys.html" class="game-card" data-game="journeys">
+          <div class="game-card-glow journeys-glow"></div>
+          <div class="game-icon">🛤️</div>
+          <div class="game-info">
+            <h3 class="game-title">Journeys</h3>
+            <p class="game-desc">Connect two actors through shared films</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">🎯 Find the path</span>
+            <span class="meta-item">📊 Par system</span>
+          </div>
+          <div class="game-status" id="journeysStatus"></div>
+        </a>
+        
+        <!-- CONNECTIONS -->
+        <a href="games/connections.html" class="game-card" data-game="connections">
+          <div class="game-card-glow connections-glow"></div>
+          <div class="game-icon">🔗</div>
+          <div class="game-info">
+            <h3 class="game-title">Connections</h3>
+            <p class="game-desc">Find what four movies have in common</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">🎯 4 guesses</span>
+            <span class="meta-item">🧩 Logic puzzle</span>
+          </div>
+          <div class="game-status" id="connectionsStatus"></div>
+        </a>
+        
+        <!-- SCREENSHOT SPEED -->
+        <a href="games/screenshot.html" class="game-card" data-game="screenshot">
+          <div class="game-card-glow screenshot-glow"></div>
+          <div class="game-icon">📸</div>
+          <div class="game-info">
+            <h3 class="game-title">Screenshot Speed</h3>
+            <p class="game-desc">Identify movies from stills</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">⏱️ Timed rounds</span>
+            <span class="meta-item">🎯 Visual recall</span>
+          </div>
+          <div class="game-status" id="screenshotStatus"></div>
+        </a>
+        
+      </div>
+    </section>
+    
+    <!-- CHALLENGE GAMES SECTION -->
+    <section class="games-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-icon">🏆</span>
+          Challenge Mode
+        </h2>
+        <p class="section-desc">Test your expertise with unlimited play.</p>
+      </div>
+      
+      <div class="games-grid">
+        
+        <!-- MASTERMIND -->
+        <a href="games/mastermind.html" class="game-card" data-game="mastermind">
+          <div class="game-card-glow mastermind-glow"></div>
+          <div class="game-icon">🧠</div>
+          <div class="game-info">
+            <h3 class="game-title">Mastermind</h3>
+            <p class="game-desc">60-second specialist subject blitz</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">⏱️ 60 seconds</span>
+            <span class="meta-item">🎯 Your expertise</span>
+          </div>
+          <div class="game-badge">UNLIMITED</div>
+        </a>
+        
+        <!-- ALTERNATE UNIVERSE -->
+        <a href="games/alternate.html" class="game-card" data-game="alternate">
+          <div class="game-card-glow alternate-glow"></div>
+          <div class="game-icon">🌀</div>
+          <div class="game-info">
+            <h3 class="game-title">Alternate Universe</h3>
+            <p class="game-desc">Weekly "what if" casting discussions</p>
+          </div>
+          <div class="game-meta">
+            <span class="meta-item">💬 Community</span>
+            <span class="meta-item">🗳️ Vote & debate</span>
+          </div>
+          <div class="game-badge weekly">WEEKLY</div>
+        </a>
+        
+      </div>
+    </section>
+    
+    <!-- STATS OVERVIEW -->
+    <section class="stats-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-icon">📊</span>
+          Your Stats
+        </h2>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-value" id="gamesPlayed">0</div>
+          <div class="stat-card-label">Games Played</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" id="totalScore">0</div>
+          <div class="stat-card-label">Total Points</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" id="winRate">0%</div>
+          <div class="stat-card-label">Win Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" id="bestStreak">0</div>
+          <div class="stat-card-label">Best Streak</div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- FOOTER -->
+  <footer class="arcade-footer">
+    <p>New puzzles drop at midnight local time</p>
+  </footer>
+  
+  <script src="js/arcade.js"></script>
+</body>
+</html>

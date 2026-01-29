@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/results.css">
+  <link rel="stylesheet" href="../css/swipe-memory.css">
+</head>
+<body>
+  <!-- CINEMATIC BACKGROUND -->
+  <div class="background-layer"></div>
+  <div class="stars-layer"></div>
+  <div class="vignette"></div>
+
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo-link">
+          <div class="mini-logo">
+            <div class="mini-ring"></div>
+            <span>ORBIT</span>
+          </div>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="../index.html" class="nav-item">
+          <span class="nav-icon">🔍</span>
+          <span>New Search</span>
+        </a>
+        <div class="nav-item active">
+          <span class="nav-icon">🎬</span>
+          <span>Results</span>
+        </div>
+      </nav>
+      
+      <!-- SEARCH WITHIN RESULTS -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Find Movie</h3>
+        <div class="results-search-container">
+          <input type="text" id="resultsSearchInput" class="results-search-input" placeholder="Search your results...">
+          <div id="resultsSearchDropdown" class="results-search-dropdown"></div>
+        </div>
+      </div>
+      
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Sort By</h3>
+        <div class="sort-options">
+          <button class="sort-option active" data-sort="chronology">
+            📅 Chronology
+          </button>
+          <button class="sort-option" data-sort="rating">
+            ⭐ Rating
+          </button>
+          <button class="sort-option" data-sort="boxoffice">
+            💰 Box Office
+          </button>
+          <button class="sort-option" data-sort="foryou">
+            💜 For You
+          </button>
+          <button class="sort-option sort-random" data-sort="random">
+            🎲 Random
+          </button>
+        </div>
+        <button class="reverse-btn" id="reverseBtn" title="Reverse sort order">
+          ↕️ Reverse Order
+        </button>
+      </div>
+      
+      <!-- GRAVITATIONAL VIBE SLIDERS -->
+      <div class="sidebar-section vibe-section">
+        <h3 class="sidebar-section-title">Gravitational Pull</h3>
+        <p class="vibe-hint">Tune what drifts into your orbit</p>
+        
+        <div class="vibe-slider-group">
+          <div class="vibe-labels">
+            <span>Light</span>
+            <span>Dark</span>
+          </div>
+          <input type="range" class="vibe-slider" id="vibeMood" min="0" max="100" value="50">
+        </div>
+        
+        <div class="vibe-slider-group">
+          <div class="vibe-labels">
+            <span>Slow Burn</span>
+            <span>Intense</span>
+          </div>
+          <input type="range" class="vibe-slider" id="vibePace" min="0" max="100" value="50">
+        </div>
+        
+        <div class="vibe-slider-group">
+          <div class="vibe-labels">
+            <span>Familiar</span>
+            <span>Challenge Me</span>
+          </div>
+          <input type="range" class="vibe-slider" id="vibeFamiliarity" min="0" max="100" value="50">
+        </div>
+        
+        <div class="vibe-slider-group">
+          <div class="vibe-labels">
+            <span>Escapism</span>
+            <span>Make Me Think</span>
+          </div>
+          <input type="range" class="vibe-slider" id="vibeDepth" min="0" max="100" value="50">
+        </div>
+        
+        <button class="vibe-reset" id="vibeReset">↺ Reset Gravity</button>
+      </div>
+      
+      <!-- STREAMING FILTER -->
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Streaming</h3>
+        <div class="streaming-filter">
+          <select class="streaming-country" id="streamingCountry">
+            <option value="">Select Country...</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="ES">Spain</option>
+            <option value="IT">Italy</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="IN">India</option>
+            <option value="NL">Netherlands</option>
+            <option value="SE">Sweden</option>
+            <option value="NO">Norway</option>
+            <option value="DK">Denmark</option>
+            <option value="FI">Finland</option>
+            <option value="NZ">New Zealand</option>
+            <option value="IE">Ireland</option>
+            <option value="ZA">South Africa</option>
+            <option value="AR">Argentina</option>
+            <option value="CL">Chile</option>
+            <option value="CO">Colombia</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="AT">Austria</option>
+            <option value="CH">Switzerland</option>
+            <option value="BE">Belgium</option>
+            <option value="SG">Singapore</option>
+          </select>
+          <div class="streaming-providers" id="streamingProviders"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Active Filters</h3>
+        <div class="active-filters" id="activeFilters">
+          <p class="no-filters">Loading filters...</p>
+        </div>
+      </div>
+      
+      <div class="sidebar-footer">
+        <div class="results-count">
+          <span class="count-number" id="resultsCount">0</span>
+          <span class="count-label">movies found</span>
+        </div>
+        <div class="page-info" id="pageInfo">Page 1 of 1</div>
+      </div>
+    </aside>
+
+    <!-- PERSON BIO PANEL (slides out when available) -->
+    <div class="bio-panel" id="bioPanel" hidden>
+      <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
+        <span class="bio-tab-icon">👤</span>
+      </div>
+      <div class="bio-panel-content" id="bioPanelContent">
+        <button class="bio-close" id="bioClose">✕</button>
+        <div class="bio-header">
+          <img class="bio-photo" id="bioPhoto" src="" alt="">
+          <div class="bio-header-info">
+            <h2 class="bio-name" id="bioName">Loading...</h2>
+            <div class="bio-role" id="bioRole"></div>
+            <div class="bio-dates" id="bioDates"></div>
+          </div>
+        </div>
+        <div class="bio-memorial" id="bioMemorial" hidden>
+          <span class="memorial-icon">🕯️</span>
+          <span class="memorial-text">In Memoriam</span>
+        </div>
+        <div class="bio-details">
+          <div class="bio-birthplace" id="bioBirthplace"></div>
+          <div class="bio-text" id="bioText"></div>
+        </div>
+        <div class="bio-stats" id="bioStats">
+          <div class="bio-stat">
+            <span class="stat-value" id="bioFilmCount">0</span>
+            <span class="stat-label">Films</span>
+          </div>
+          <div class="bio-stat">
+            <span class="stat-value" id="bioPopularity">0</span>
+            <span class="stat-label">Popularity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <header class="results-header">
+        <h1 class="results-title" id="resultsTitle">Your Orbit Results</h1>
+        <p class="results-subtitle" id="resultsSubtitle">Discovering your cinematic universe...</p>
+      </header>
+      
+      <!-- MOVIE GRID -->
+      <div class="movies-grid" id="moviesGrid">
+        <!-- Movies injected here -->
+      </div>
+      
+      <!-- PAGINATION -->
+      <div class="pagination" id="pagination">
+        <button class="page-btn" id="prevPage" disabled>
+          ← Previous
+        </button>
+        <div class="page-numbers" id="pageNumbers"></div>
+        <button class="page-btn" id="nextPage">
+          Next →
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- MOVIE POPUP OVERLAY - 3D CUBE -->
+  <div class="movie-popup-overlay" id="moviePopupOverlay" hidden>
+    <div class="movie-popup" id="moviePopup">
+      <button class="popup-close" id="popupClose">✕</button>
+      
+      <!-- CUBE NAVIGATION - 4 faces (Similar moved below) -->
+      <div class="cube-nav">
+        <button class="cube-nav-btn active" data-face="1">🎬 Poster</button>
+        <button class="cube-nav-btn" data-face="2">📝 Info</button>
+        <button class="cube-nav-btn" data-face="3">👥 Cast</button>
+        <button class="cube-nav-btn" data-face="4">📊 Stats</button>
+        <button class="cube-nav-btn" data-face="5">🧠 Trivia</button>
+      </div>
+      
+      <div class="cube-scene">
+        <div class="cube" id="movieCube">
+          <!-- FACE 1: POSTER -->
+          <div class="cube-face face-front" data-face="1">
+            <div class="poster-showcase">
+              <img class="popup-poster-large" id="popupPosterLarge" src="" alt="">
+            </div>
+          </div>
+          
+          <!-- FACE 2: SYNOPSIS & INFO -->
+          <div class="cube-face face-right" data-face="2">
+            <div class="popup-details">
+              <h2 class="popup-title" id="popupTitle"></h2>
+              <div class="popup-meta">
+                <span class="popup-year" id="popupYear"></span>
+                <span class="popup-rating">⭐ <span id="popupRating"></span></span>
+                <span class="popup-runtime" id="popupRuntime"></span>
+              </div>
+              <p class="popup-synopsis" id="popupSynopsis"></p>
+              <div class="popup-genres" id="popupGenres"></div>
+              <div class="where-to-watch" id="whereToWatch"></div>
+            </div>
+          </div>
+
+          <!-- FACE 3: CAST & CREW -->
+          <div class="cube-face face-back" data-face="3">
+            <div class="cast-section">
+              <h3 class="section-title">🎬 Director</h3>
+              <div class="director-info" id="directorInfo"></div>
+              <h3 class="section-title">👥 Top Cast</h3>
+              <div class="cast-grid" id="castGrid"></div>
+              <button class="all-cast-btn" id="allCastBtn">View All Cast →</button>
+            </div>
+          </div>
+          
+          <!-- FACE 4: STATS -->
+          <div class="cube-face face-left" data-face="4">
+            <div class="stats-section">
+              <h3 class="section-title">📊 Statistics</h3>
+              <div class="stats-grid" id="statsGrid">
+                <div class="stat-item">
+                  <span class="stat-label">Runtime</span>
+                  <span class="stat-value" id="statRuntime">--</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Budget</span>
+                  <span class="stat-value" id="statBudget">--</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Revenue</span>
+                  <span class="stat-value" id="statRevenue">--</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Popularity</span>
+                  <span class="stat-value" id="statPopularity">--</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Reviews</span>
+                  <span class="stat-value" id="statVotes">--</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Original Language</span>
+                  <span class="stat-value" id="statLanguage">--</span>
+                </div>
+              </div>
+              <div class="production-companies" id="productionCompanies"></div>
+            </div>
+          </div>
+
+        </div>
+        <!-- TRIVIA OVERLAY - flat, outside 3D cube -->
+        <div class="cube-trivia-overlay" id="cubeTriviaOverlay">
+          <div class="cube-trivia-section" id="cubeTriviaSection">
+            <h3 class="section-title">🧠 Movie Trivia</h3>
+            <div class="cube-trivia-progress" id="cubeTriviaProgress"></div>
+            <div class="cube-trivia-question" id="cubeTriviaQuestion"></div>
+            <div class="cube-trivia-options" id="cubeTriviaOptions"></div>
+            <div class="cube-trivia-score" id="cubeTriviaScore"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ACTION BUTTONS - Below cube for reliable clicks -->
+      <div class="popup-actions-bar">
+        <button class="anchor-btn-primary" id="anchorBtn">
+          <span class="anchor-icon">✦</span> Make Anchor Film
+        </button>
+        <div class="secondary-actions">
+          <button class="action-btn-secondary" id="playTrailerBtn">
+            <span class="play-icon">▶</span> Trailer
+          </button>
+          <button class="action-btn-secondary" id="similarToggleBtn">
+            <span class="similar-icon">🎯</span> Similar Movies
+            <span class="toggle-arrow" id="similarArrow">▼</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- SIMILAR MOVIES PANEL - Expandable -->
+      <div class="similar-panel" id="similarPanel" hidden>
+        <div class="similar-panel-grid" id="similarPanelGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL CAST MODAL -->
+  <div class="all-cast-overlay" id="allCastOverlay" hidden>
+    <div class="all-cast-modal">
+      <button class="modal-close" id="allCastClose">✕</button>
+      <h2 class="modal-title">Full Cast</h2>
+      <div class="all-cast-timeline" id="allCastTimeline"></div>
+    </div>
+  </div>
+
+  <!-- TRAILER POPUP -->
+  <div class="trailer-overlay" id="trailerOverlay" hidden>
+    <div class="trailer-popup">
+      <button class="trailer-close" id="trailerClose">✕</button>
+      <button class="trailer-fullscreen" id="trailerFullscreen">⛶</button>
+      <div class="trailer-container" id="trailerContainer"></div>
+    </div>
+  </div>
+
+  <!-- SWIPE HINT (for first-time users) -->
+  <div class="swipe-hint" id="swipeHint">
+    <button class="swipe-hint-action dislike" id="swipeDislikeBtn" title="Dislike current movie">
+      <span class="swipe-hint-arrow">←</span> Not tonight
+    </button>
+    <span style="color: #444;">|</span>
+    <button class="swipe-hint-action like" id="swipeLikeBtn" title="Like current movie">
+      Love it <span class="swipe-hint-arrow">→</span>
+    </button>
+    <button class="swipe-hint-dismiss" id="swipeHintDismiss">Got it</button>
+  </div>
+
+  <script src="../js/swipe-memory.js"></script>
+  <script src="../js/results.js"></script>
+</body>
+</html>

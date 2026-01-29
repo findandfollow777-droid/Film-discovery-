@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connections - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/connections.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../arcade.html" class="back-link">← Back to Arcade</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">CONNECTIONS</div>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">📊</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- DAILY INFO -->
+    <div class="daily-info">
+      <div class="daily-badge">
+        <span class="badge-icon">🔗</span>
+        <span class="badge-text">Daily Connection</span>
+      </div>
+      <div class="daily-number">Puzzle #<span id="puzzleNumber">1</span></div>
+    </div>
+    
+    <!-- MISTAKES REMAINING -->
+    <div class="mistakes-display">
+      <span class="mistakes-label">Mistakes remaining:</span>
+      <div class="mistakes-dots" id="mistakesDots">
+        <span class="mistake-dot"></span>
+        <span class="mistake-dot"></span>
+        <span class="mistake-dot"></span>
+        <span class="mistake-dot"></span>
+      </div>
+    </div>
+    
+    <!-- SOLVED GROUPS -->
+    <section class="solved-groups" id="solvedGroups">
+      <!-- Solved groups appear here -->
+    </section>
+    
+    <!-- MOVIE GRID -->
+    <section class="movie-grid" id="movieGrid">
+      <!-- 16 movie tiles (4 groups of 4) -->
+    </section>
+    
+    <!-- ACTION BUTTONS -->
+    <section class="action-buttons">
+      <button class="action-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+      <button class="action-btn deselect-btn" id="deselectBtn" disabled>Deselect All</button>
+      <button class="action-btn submit-btn" id="submitBtn" disabled>Submit</button>
+    </section>
+    
+    <!-- GAME OVER SECTION -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon" id="resultIcon">🎉</div>
+        <h2 class="result-title" id="resultTitle">Puzzle Complete!</h2>
+        
+        <div class="result-groups" id="resultGroups">
+          <!-- All groups shown with answers -->
+        </div>
+        
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="stat-num" id="mistakesMade">0</span>
+            <span class="stat-text">Mistakes</span>
+          </div>
+        </div>
+        
+        <div class="share-section">
+          <button class="share-btn" id="shareBtn">
+            <span>📋</span> Share Result
+          </button>
+        </div>
+        
+        <div class="next-puzzle">
+          <span class="next-label">Next puzzle in</span>
+          <span class="next-timer" id="nextTimer">--:--:--</span>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Find the Connection</strong>
+            <p>16 movies are shown. Find groups of 4 that share something in common.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Select & Submit</strong>
+            <p>Tap 4 movies you think belong together, then submit your guess.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Watch Your Mistakes</strong>
+            <p>You only get 4 mistakes. After that, the puzzle is over!</p>
+          </div>
+        </div>
+        
+        <div class="difficulty-info">
+          <h4>Difficulty Colors</h4>
+          <div class="diff-row yellow">🟨 Straightforward</div>
+          <div class="diff-row green">🟩 Moderate</div>
+          <div class="diff-row blue">🟦 Tricky</div>
+          <div class="diff-row purple">🟪 Devious</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statWon">0</span>
+          <span class="stat-label">Won</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statPerfect">0</span>
+          <span class="stat-label">Perfect</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statStreak">0</span>
+          <span class="stat-label">Streak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTIFICATION -->
+  <div class="notification" id="notification" hidden>
+    <span class="notification-text" id="notificationText"></span>
+  </div>
+  
+  <script src="../js/connections.js"></script>
+</body>
+</html>

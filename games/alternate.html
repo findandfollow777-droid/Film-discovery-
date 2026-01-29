@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alternate Universe - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/alternate.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- PORTAL EFFECT -->
+  <div class="portal-ring portal-1"></div>
+  <div class="portal-ring portal-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../arcade.html" class="back-link">← Back to Arcade</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">ALTERNATE</div>
+      <span class="logo-suffix">Universe</span>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="helpBtn" title="How It Works">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- WEEKLY BADGE -->
+    <div class="weekly-info">
+      <div class="weekly-badge">
+        <span class="badge-icon">🌀</span>
+        <span class="badge-text">Weekly Scenario</span>
+      </div>
+      <div class="weekly-number">Week #<span id="weekNumber">1</span></div>
+    </div>
+    
+    <!-- THE SCENARIO -->
+    <section class="scenario-section">
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <span class="scenario-label">What If...</span>
+        </div>
+        <h1 class="scenario-title" id="scenarioTitle">Loading scenario...</h1>
+        <p class="scenario-context" id="scenarioContext"></p>
+        
+        <div class="original-info" id="originalInfo">
+          <div class="original-label">In Our Universe</div>
+          <div class="original-cast" id="originalCast"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- VOTING OPTIONS -->
+    <section class="voting-section">
+      <h2 class="voting-title">Who Would You Cast?</h2>
+      
+      <div class="options-grid" id="optionsGrid">
+        <!-- Options loaded dynamically -->
+      </div>
+      
+      <!-- Custom suggestion -->
+      <div class="custom-option">
+        <span class="custom-label">Have a better idea?</span>
+        <div class="custom-input-wrap">
+          <input 
+            type="text" 
+            class="custom-input" 
+            id="customInput" 
+            placeholder="Suggest an actor..."
+            autocomplete="off"
+          >
+          <button class="custom-submit" id="customSubmit">+</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- COMMUNITY RESULTS -->
+    <section class="results-section" id="resultsSection">
+      <h2 class="results-title">
+        <span class="results-icon">📊</span>
+        Community Results
+      </h2>
+      
+      <div class="results-chart" id="resultsChart">
+        <!-- Results bars loaded dynamically -->
+      </div>
+      
+      <div class="total-votes">
+        <span id="totalVotes">0</span> votes this week
+      </div>
+    </section>
+    
+    <!-- DISCUSSION -->
+    <section class="discussion-section">
+      <h2 class="discussion-title">
+        <span class="discussion-icon">💬</span>
+        Hot Takes
+      </h2>
+      
+      <div class="discussion-list" id="discussionList">
+        <!-- Sample discussion items -->
+      </div>
+      
+      <div class="add-comment">
+        <input 
+          type="text" 
+          class="comment-input" 
+          id="commentInput" 
+          placeholder="Share your hot take..."
+        >
+        <button class="comment-submit" id="commentSubmit">Post</button>
+      </div>
+    </section>
+    
+    <!-- NEXT SCENARIO COUNTDOWN -->
+    <section class="countdown-section">
+      <div class="countdown-label">Next Alternate Universe in</div>
+      <div class="countdown-timer" id="countdownTimer">--:--:--:--</div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How It Works</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Weekly "What If" Scenarios</strong>
+            <p>Every week, we imagine an alternate universe where a classic role was cast differently.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Cast Your Vote</strong>
+            <p>Pick from our suggestions or propose your own dream casting.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Join the Discussion</strong>
+            <p>Share your hot takes and see what others think!</p>
+          </div>
+        </div>
+        
+        <div class="help-note">
+          <p>🌀 New scenario every Monday at midnight</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- VOTE CONFIRMATION -->
+  <div class="vote-toast" id="voteToast" hidden>
+    <span class="toast-icon">✓</span>
+    <span class="toast-text">Vote recorded!</span>
+  </div>
+  
+  <script src="../js/alternate.js"></script>
+</body>
+</html>

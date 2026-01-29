@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastermind - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/mastermind.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../arcade.html" class="back-link">&#8592; Back to Arcade</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">MASTERMIND</div>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">&#x1F4CA;</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">&#x2753;</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- GAME INTRO / TOPIC SELECTION -->
+    <section class="intro-section" id="introSection">
+      <div class="intro-content">
+        <div class="intro-icon">&#x1F9E0;</div>
+        <h1 class="intro-title">Choose Your Specialty</h1>
+        <p class="intro-desc">60 seconds. One topic. How many can you answer?</p>
+        
+        <div class="topic-grid">
+          <button class="topic-card" data-topic="directors">
+            <span class="topic-icon">&#x1F3AC;</span>
+            <span class="topic-name">Directors</span>
+            <span class="topic-desc">Who directed what?</span>
+          </button>
+          
+          <button class="topic-card" data-topic="oscars">
+            <span class="topic-icon">&#x1F3C6;</span>
+            <span class="topic-name">Oscar Winners</span>
+            <span class="topic-desc">Academy Award trivia</span>
+          </button>
+          
+          <button class="topic-card" data-topic="quotes">
+            <span class="topic-icon">&#x1F4AC;</span>
+            <span class="topic-name">Movie Quotes</span>
+            <span class="topic-desc">Name that film</span>
+          </button>
+          
+          <button class="topic-card" data-topic="years">
+            <span class="topic-icon">&#x1F4C5;</span>
+            <span class="topic-name">Release Years</span>
+            <span class="topic-desc">When did it come out?</span>
+          </button>
+          
+          <button class="topic-card" data-topic="actors">
+            <span class="topic-icon">&#x1F3AD;</span>
+            <span class="topic-name">Actor Roles</span>
+            <span class="topic-desc">Who played whom?</span>
+          </button>
+          
+          <button class="topic-card" data-topic="taglines">
+            <span class="topic-icon">&#x1F4DD;</span>
+            <span class="topic-name">Taglines</span>
+            <span class="topic-desc">Complete the slogan</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- COUNTDOWN BEFORE START -->
+    <section class="countdown-section" id="countdownSection" hidden>
+      <div class="countdown-content">
+        <div class="selected-topic">
+          <span class="topic-icon-large" id="selectedTopicIcon">&#x1F3AC;</span>
+          <h2 id="selectedTopicName">Directors</h2>
+        </div>
+        <div class="countdown-number" id="countdownNumber">3</div>
+        <p class="countdown-text">Get Ready!</p>
+      </div>
+    </section>
+    
+    <!-- ACTIVE GAME -->
+    <section class="game-section" id="gameSection" hidden>
+      
+      <!-- Timer Bar -->
+      <div class="timer-bar">
+        <div class="timer-fill" id="timerFill"></div>
+      </div>
+      
+      <!-- Score & Timer -->
+      <div class="game-stats">
+        <div class="stat-box">
+          <span class="stat-icon">&#x23F1;</span>
+          <span class="stat-value" id="timeRemaining">60</span>
+        </div>
+        <div class="stat-box score-box">
+          <span class="stat-icon">&#x1F3AF;</span>
+          <span class="stat-value" id="currentScore">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">&#x1F4CA;</span>
+          <span class="stat-value"><span id="correctCount">0</span>/<span id="totalCount">0</span></span>
+        </div>
+      </div>
+      
+      <!-- Question Card -->
+      <div class="question-card" id="questionCard">
+        <div class="question-number">Question <span id="questionNum">1</span></div>
+        <div class="question-text" id="questionText">Loading question...</div>
+      </div>
+      
+      <!-- Answer Options -->
+      <div class="answers-grid" id="answersGrid">
+        <button class="answer-btn" data-index="0"></button>
+        <button class="answer-btn" data-index="1"></button>
+        <button class="answer-btn" data-index="2"></button>
+        <button class="answer-btn" data-index="3"></button>
+      </div>
+      
+      <!-- Pass Button -->
+      <button class="pass-btn" id="passBtn">Pass &#x2192;</button>
+      
+    </section>
+    
+    <!-- RESULT SECTION -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon" id="resultIcon">&#x1F3C6;</div>
+        <h2 class="result-title">Time's Up!</h2>
+        
+        <div class="result-topic">
+          <span id="resultTopicIcon">&#x1F3AC;</span>
+          <span id="resultTopicName">Directors</span>
+        </div>
+        
+        <div class="result-score">
+          <div class="score-circle">
+            <span class="score-num" id="finalScore">0</span>
+            <span class="score-label">POINTS</span>
+          </div>
+        </div>
+        
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="result-stat-value" id="resultCorrect">0</span>
+            <span class="result-stat-label">Correct</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="resultWrong">0</span>
+            <span class="result-stat-label">Wrong</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-value" id="resultPassed">0</span>
+            <span class="result-stat-label">Passed</span>
+          </div>
+        </div>
+        
+        <div class="result-verdict" id="resultVerdict">Cinema Mastermind! &#x1F3C6;</div>
+        
+        <div class="result-actions">
+          <button class="play-again-btn" id="playAgainBtn">&#x1F3AC; Play Again</button>
+          <button class="share-btn" id="shareBtn">&#x1F4CB; Share</button>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">&#x2715;</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Pick Your Topic</strong>
+            <p>Choose a category you're confident in.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>60 Second Blitz</strong>
+            <p>Answer as many questions as you can before time runs out.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>Pass If Stuck</strong>
+            <p>Don't know? Pass and move on - no penalty!</p>
+          </div>
+        </div>
+        
+        <div class="scoring-info">
+          <h4>Scoring</h4>
+          <div class="score-row">
+            <span class="score-type correct">&#x2713; Correct Answer</span>
+            <span class="score-pts correct">+10 points</span>
+          </div>
+          <div class="score-row wrong">
+            <span class="score-type">&#x2717; Wrong Answer</span>
+            <span class="score-pts">-5 points</span>
+          </div>
+          <div class="score-row">
+            <span class="score-type">&#x2192; Pass</span>
+            <span class="score-pts">0 points</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="statsClose">&#x2715;</button>
+      <h2 class="modal-title">Your Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Games</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statBestScore">0</span>
+          <span class="stat-label">Best Score</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statAvgScore">0</span>
+          <span class="stat-label">Avg Score</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statAccuracy">0%</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+      </div>
+      
+      <div class="topic-stats">
+        <h4>Best by Topic</h4>
+        <div class="topic-stat-list" id="topicStatList"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/mastermind.js"></script>
+</body>
+</html>

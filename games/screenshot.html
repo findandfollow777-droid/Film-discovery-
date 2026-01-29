@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screenshot Speed - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/screenshot.css">
+</head>
+<body>
+  
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="../arcade.html" class="back-link">← Back to Arcade</a>
+    
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">SCREENSHOT</div>
+      <span class="logo-suffix">Speed</span>
+    </div>
+    
+    <div class="header-actions">
+      <button class="icon-btn" id="statsBtn" title="Statistics">📊</button>
+      <button class="icon-btn" id="helpBtn" title="How to Play">❓</button>
+    </div>
+  </header>
+  
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+    
+    <!-- DAILY INFO -->
+    <div class="daily-info">
+      <div class="daily-badge">
+        <span class="badge-icon">📸</span>
+        <span class="badge-text">Daily Screenshot</span>
+      </div>
+      <div class="daily-number">Round #<span id="puzzleNumber">1</span></div>
+    </div>
+    
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+      <div class="progress-dots" id="progressDots">
+        <!-- 5 round indicators -->
+      </div>
+    </div>
+    
+    <!-- ROUND INFO -->
+    <div class="round-info">
+      <span class="round-label">Round <span id="currentRound">1</span>/5</span>
+      <span class="score-label">Score: <span id="currentScore">0</span></span>
+    </div>
+    
+    <!-- SCREENSHOT DISPLAY -->
+    <section class="screenshot-section">
+      <div class="screenshot-frame" id="screenshotFrame">
+        <div class="blur-overlay" id="blurOverlay"></div>
+        <img class="screenshot-img" id="screenshotImg" src="" alt="Movie Screenshot">
+        <div class="reveal-timer" id="revealTimer">
+          <div class="timer-bar" id="timerBar"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- GUESS INPUT -->
+    <section class="guess-section" id="guessSection">
+      <div class="guess-input-wrap">
+        <input 
+          type="text" 
+          class="guess-input" 
+          id="guessInput" 
+          placeholder="Type the movie title..."
+          autocomplete="off"
+        >
+      </div>
+      <div class="search-results" id="searchResults" hidden></div>
+    </section>
+    
+    <!-- SKIP BUTTON -->
+    <div class="skip-section">
+      <button class="skip-btn" id="skipBtn">Skip (0 pts)</button>
+    </div>
+    
+    <!-- ROUND RESULT -->
+    <section class="round-result" id="roundResult" hidden>
+      <div class="result-feedback" id="resultFeedback">
+        <span class="feedback-icon" id="feedbackIcon">✓</span>
+        <span class="feedback-text" id="feedbackText">Correct!</span>
+      </div>
+      <div class="result-answer">
+        <span class="answer-label">The answer was:</span>
+        <span class="answer-title" id="answerTitle">Movie Title</span>
+      </div>
+      <div class="result-points">
+        <span class="points-earned" id="pointsEarned">+100</span>
+      </div>
+      <button class="next-btn" id="nextBtn">Next Round</button>
+    </section>
+    
+    <!-- GAME OVER SECTION -->
+    <section class="result-section" id="resultSection" hidden>
+      <div class="result-content">
+        <div class="result-icon" id="resultIcon">🎬</div>
+        <h2 class="result-title">Round Complete!</h2>
+        
+        <div class="final-score">
+          <span class="final-label">Final Score</span>
+          <span class="final-value" id="finalScore">0</span>
+        </div>
+        
+        <div class="score-breakdown" id="scoreBreakdown">
+          <!-- Per-round breakdown -->
+        </div>
+        
+        <div class="share-section">
+          <button class="share-btn" id="shareBtn">
+            <span>📋</span> Share Result
+          </button>
+        </div>
+        
+        <div class="next-puzzle">
+          <span class="next-label">Next screenshots in</span>
+          <span class="next-timer" id="nextTimer">--:--:--</span>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      
+      <div class="help-content">
+        <div class="help-step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>Watch the Reveal</strong>
+            <p>A movie screenshot gradually reveals itself. The faster you guess, the more points!</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>Type Your Guess</strong>
+            <p>Search and select the movie you think it is.</p>
+          </div>
+        </div>
+        
+        <div class="help-step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>5 Rounds</strong>
+            <p>Complete all 5 rounds for a final score. Skip if you don't know.</p>
+          </div>
+        </div>
+        
+        <div class="scoring-info">
+          <h4>Scoring</h4>
+          <div class="score-row">
+            <span class="score-type">Early guess (0-25%)</span>
+            <span class="score-pts">100 pts</span>
+          </div>
+          <div class="score-row">
+            <span class="score-type">Mid guess (25-50%)</span>
+            <span class="score-pts">75 pts</span>
+          </div>
+          <div class="score-row">
+            <span class="score-type">Late guess (50-75%)</span>
+            <span class="score-pts">50 pts</span>
+          </div>
+          <div class="score-row">
+            <span class="score-type">Final guess (75-100%)</span>
+            <span class="score-pts">25 pts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Statistics</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-value" id="statPlayed">0</span>
+          <span class="stat-label">Played</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statAvgScore">0</span>
+          <span class="stat-label">Avg Score</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statBestScore">0</span>
+          <span class="stat-label">Best</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="statPerfect">0</span>
+          <span class="stat-label">5/5 Rounds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/screenshot.js"></script>
+</body>
+</html>
