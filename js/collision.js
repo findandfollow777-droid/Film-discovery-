@@ -320,6 +320,48 @@ function endGame() {
   
   // Start countdown to next puzzle
   startNextPuzzleCountdown();
+
+  // Enable post-game clickable links
+  enablePostGameLinks();
+}
+
+function enablePostGameLinks() {
+  document.querySelector('.game-main').classList.add('game-over');
+
+  // Make entity avatars clickable → timeline
+  ['entityA', 'entityB'].forEach(key => {
+    const entity = gameState[key];
+    const el = document.getElementById(key === 'entityA' ? 'entityA' : 'entityB');
+    if (el && entity) {
+      const hint = document.createElement('div');
+      hint.className = 'explore-hint';
+      hint.textContent = '→ TIMELINE';
+      el.appendChild(hint);
+      el.addEventListener('click', () => {
+        window.location.href = `timeline.html?id=${entity.id}&name=${encodeURIComponent(entity.name)}`;
+      });
+    }
+  });
+
+  // Make found movie items clickable → results page
+  const allFound = [
+    ...gameState.foundA,
+    ...gameState.foundB,
+    ...gameState.foundCollisions
+  ];
+
+  document.querySelectorAll('.found-item').forEach(item => {
+    const title = item.textContent.trim();
+    const movie = allFound.find(m => m.title === title);
+    if (movie) {
+      item.classList.add('clickable-movie');
+      item.addEventListener('click', () => {
+        localStorage.setItem("singleMovie", JSON.stringify({ id: movie.id, title: movie.title }));
+        localStorage.setItem("resultsMode", "single");
+        window.location.href = 'results.html';
+      });
+    }
+  });
 }
 
 // ============================================

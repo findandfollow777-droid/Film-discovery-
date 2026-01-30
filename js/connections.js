@@ -552,6 +552,62 @@ function showResult() {
   `).join("");
   
   startNextPuzzleCountdown();
+
+  // Enable post-game clickable links
+  enablePostGameLinks();
+}
+
+function enablePostGameLinks() {
+  // Make movie titles in result groups clickable
+  document.querySelectorAll('.result-group-movies').forEach(el => {
+    const movies = el.textContent.split(', ').map(t => t.trim());
+    el.classList.add('clickable-movies');
+    el.innerHTML = movies.map(title =>
+      `<span class="result-movie-link" data-title="${title.replace(/"/g, '&quot;')}">${title}</span>`
+    ).join(', ');
+  });
+
+  document.querySelectorAll('.result-movie-link').forEach(link => {
+    link.addEventListener('click', async () => {
+      const title = link.dataset.title;
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=dd1b9aebd0769bc49a68b7853b6f4266&query=${encodeURIComponent(title)}`
+        );
+        const data = await res.json();
+        if (data.results && data.results.length > 0) {
+          const movie = data.results[0];
+          localStorage.setItem("singleMovie", JSON.stringify({ id: movie.id, title: movie.title }));
+          localStorage.setItem("resultsMode", "single");
+          window.location.href = 'results.html';
+        }
+      } catch (err) {
+        console.error("Error searching movie:", err);
+      }
+    });
+  });
+
+  // Make movie tiles on the game board clickable after game over
+  document.querySelectorAll('.movie-tile').forEach(tile => {
+    tile.classList.add('clickable-movie');
+    const title = tile.textContent.trim();
+    tile.addEventListener('click', async () => {
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=dd1b9aebd0769bc49a68b7853b6f4266&query=${encodeURIComponent(title)}`
+        );
+        const data = await res.json();
+        if (data.results && data.results.length > 0) {
+          const movie = data.results[0];
+          localStorage.setItem("singleMovie", JSON.stringify({ id: movie.id, title: movie.title }));
+          localStorage.setItem("resultsMode", "single");
+          window.location.href = 'results.html';
+        }
+      } catch (err) {
+        console.error("Error searching movie:", err);
+      }
+    });
+  });
 }
 
 // ============================================

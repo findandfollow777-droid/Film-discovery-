@@ -774,6 +774,36 @@ html, body {
 }
 
 /* ============================================
+   POST-GAME CLICKABLE LINKS
+============================================ */
+
+.result-group-movies.clickable-movies {
+  cursor: default;
+}
+
+.result-movie-link {
+  cursor: pointer;
+  transition: color 0.2s;
+  display: inline;
+}
+
+.result-movie-link:hover {
+  color: var(--accent-cyan);
+  text-decoration: underline;
+}
+
+.movie-tile.clickable-movie {
+  cursor: pointer;
+}
+
+.movie-tile.clickable-movie:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  transform: scale(1.05);
+  transition: all 0.2s;
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 

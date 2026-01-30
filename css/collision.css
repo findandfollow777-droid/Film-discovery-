@@ -967,6 +967,52 @@ html, body {
 }
 
 /* ============================================
+   POST-GAME CLICKABLE LINKS
+============================================ */
+
+.game-over .entity {
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.game-over .entity:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.game-over .entity:hover .entity-photo-wrap {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+}
+
+.game-over .entity:hover .entity-name {
+  color: var(--accent-gold);
+}
+
+.game-over .entity .explore-hint {
+  font-family: var(--font-display);
+  font-size: 8px;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: 4px;
+}
+
+.game-over .entity:hover .explore-hint {
+  opacity: 1;
+}
+
+.found-item.clickable-movie {
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, color 0.2s;
+}
+
+.found-item.clickable-movie:hover {
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--accent-cyan);
+  transform: translateX(3px);
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 

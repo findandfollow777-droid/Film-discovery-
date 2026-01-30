@@ -344,6 +344,55 @@ function updateResults() {
   }).join("");
   
   totalVotes.textContent = communityData.totalVotes;
+
+  // Enable clickable links after voting
+  if (gameState.hasVoted) {
+    enablePostGameLinks();
+  }
+}
+
+function enablePostGameLinks() {
+  // Make option cards clickable → timeline
+  document.querySelectorAll('.option-card').forEach(card => {
+    const actorId = card.dataset.id;
+    const actorName = card.dataset.name;
+    if (actorId && actorName) {
+      card.style.position = 'relative';
+      // Add hint if not already present
+      if (!card.querySelector('.explore-hint')) {
+        const hint = document.createElement('div');
+        hint.className = 'explore-hint';
+        hint.textContent = '→ TIMELINE';
+        card.appendChild(hint);
+      }
+      // Remove old vote handler by adding a new overlay
+      if (!card.querySelector('.clickable-overlay')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'clickable-overlay';
+        overlay.addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = `timeline.html?id=${actorId}&name=${encodeURIComponent(actorName)}`;
+        });
+        card.appendChild(overlay);
+        card.classList.add('voted');
+      }
+    }
+  });
+
+  // Make result bar names clickable → timeline
+  document.querySelectorAll('.result-bar').forEach(bar => {
+    const nameEl = bar.querySelector('.result-name');
+    if (!nameEl) return;
+    const name = nameEl.textContent.trim();
+    // Find matching option by name
+    const option = gameState.scenario.options.find(o => o.name === name);
+    if (option) {
+      bar.classList.add('clickable-actor');
+      bar.addEventListener('click', () => {
+        window.location.href = `timeline.html?id=${option.id}&name=${encodeURIComponent(option.name)}`;
+      });
+    }
+  });
 }
 
 // ============================================

@@ -894,6 +894,50 @@ html, body {
 }
 
 /* ============================================
+   POST-GAME CLICKABLE LINKS
+============================================ */
+
+.option-card.voted .clickable-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.option-card.voted:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.option-card .explore-hint {
+  font-family: var(--font-display, 'Orbitron', monospace);
+  font-size: 8px;
+  color: var(--accent-gold, #ffd700);
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: 4px;
+}
+
+.option-card.voted:hover .explore-hint {
+  opacity: 1;
+}
+
+.result-bar.clickable-actor {
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.result-bar.clickable-actor:hover {
+  background: rgba(255, 215, 0, 0.05);
+  transform: translateX(3px);
+}
+
+.result-bar.clickable-actor:hover .result-name {
+  color: var(--accent-gold, #ffd700);
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 

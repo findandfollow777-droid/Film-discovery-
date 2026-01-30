@@ -871,6 +871,24 @@ html, body {
 }
 
 /* ============================================
+   POST-GAME CLICKABLE LINKS
+============================================ */
+
+.breakdown-item.clickable-movie {
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.breakdown-item.clickable-movie:hover {
+  background: rgba(0, 217, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.breakdown-item.clickable-movie:hover .breakdown-movie {
+  color: var(--accent-cyan);
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 

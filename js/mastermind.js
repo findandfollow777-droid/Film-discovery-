@@ -535,6 +535,8 @@ function showResult() {
     verdictEl.textContent = "Keep Watching! 📺";
     iconEl.textContent = "📺";
   }
+
+  // Mastermind shows only aggregate scores - no individual movie/actor links needed
 }
 
 function resetGame() {

@@ -523,6 +523,24 @@ function showResult() {
   `).join("");
   
   startNextPuzzleCountdown();
+
+  // Enable post-game clickable links
+  enablePostGameLinks();
+}
+
+function enablePostGameLinks() {
+  // Make breakdown items (movie titles) clickable → results page
+  document.querySelectorAll('.breakdown-item').forEach((item, i) => {
+    const movie = gameState.movies[i];
+    if (movie) {
+      item.classList.add('clickable-movie');
+      item.addEventListener('click', () => {
+        localStorage.setItem("singleMovie", JSON.stringify({ id: movie.id, title: movie.title }));
+        localStorage.setItem("resultsMode", "single");
+        window.location.href = 'results.html';
+      });
+    }
+  });
 }
 
 // ============================================

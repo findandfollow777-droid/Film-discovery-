@@ -52,54 +52,22 @@
       <div class="daily-number">Journey #<span id="puzzleNumber">1</span></div>
     </div>
     
-    <!-- THE CHALLENGE -->
-    <section class="journey-challenge">
-      <div class="endpoint start-point">
-        <div class="endpoint-photo-wrap">
-          <img class="endpoint-photo" id="startPhoto" src="" alt="">
-        </div>
-        <div class="endpoint-name" id="startName">Loading...</div>
-        <div class="endpoint-label">START</div>
+    <!-- SCORE BAR -->
+    <section class="score-bar">
+      <div class="score-hex">
+        <span class="score-hex-label">Par</span>
+        <span class="score-hex-value" id="parValue">3</span>
       </div>
-      
-      <div class="journey-path">
-        <div class="path-line"></div>
-        <div class="path-steps" id="pathSteps">
-          <!-- Steps will be added here -->
-        </div>
-        <div class="path-line"></div>
-      </div>
-      
-      <div class="endpoint end-point">
-        <div class="endpoint-photo-wrap">
-          <img class="endpoint-photo" id="endPhoto" src="" alt="">
-        </div>
-        <div class="endpoint-name" id="endName">Loading...</div>
-        <div class="endpoint-label">END</div>
+      <div class="score-hex score-hex-active">
+        <span class="score-hex-label">Steps</span>
+        <span class="score-hex-value" id="stepsValue">0</span>
       </div>
     </section>
-    
-    <!-- PAR INFO -->
-    <section class="par-section">
-      <div class="par-display">
-        <span class="par-label">Par</span>
-        <span class="par-value" id="parValue">3</span>
-      </div>
-      <div class="steps-display">
-        <span class="steps-label">Your Steps</span>
-        <span class="steps-value" id="stepsValue">0</span>
-      </div>
-    </section>
-    
-    <!-- CURRENT CHAIN -->
-    <section class="chain-section" id="chainSection">
-      <h3 class="chain-title">Your Chain</h3>
+
+    <!-- CHAIN — HERO ELEMENT -->
+    <section class="chain-hero" id="chainSection">
       <div class="chain-display" id="chainDisplay">
-        <div class="chain-node start-node">
-          <img class="chain-photo" id="chainStartPhoto" src="" alt="">
-          <span class="chain-name" id="chainStartName">Start</span>
-        </div>
-        <!-- Chain links added dynamically -->
+        <!-- Chain rendered dynamically by renderChain() -->
       </div>
     </section>
     

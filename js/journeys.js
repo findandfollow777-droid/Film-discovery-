@@ -53,9 +53,8 @@ let gameState = {
 let filmographyCache = {};
 
 // DOM Elements
-let startPhoto, startName, endPhoto, endName;
 let parValue, stepsValue;
-let chainDisplay, chainStartPhoto, chainStartName;
+let chainDisplay;
 let searchInput, searchResults;
 let inputHint, currentActorName;
 let undoBtn, resetBtn;
@@ -72,27 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function cacheElements() {
-  startPhoto = document.getElementById("startPhoto");
-  startName = document.getElementById("startName");
-  endPhoto = document.getElementById("endPhoto");
-  endName = document.getElementById("endName");
-  
   parValue = document.getElementById("parValue");
   stepsValue = document.getElementById("stepsValue");
-  
+
   chainDisplay = document.getElementById("chainDisplay");
-  chainStartPhoto = document.getElementById("chainStartPhoto");
-  chainStartName = document.getElementById("chainStartName");
-  
+
   searchInput = document.getElementById("searchInput");
   searchResults = document.getElementById("searchResults");
-  
+
   inputHint = document.getElementById("inputHint");
   currentActorName = document.getElementById("currentActorName");
-  
+
   undoBtn = document.getElementById("undoBtn");
   resetBtn = document.getElementById("resetBtn");
-  
+
   resultSection = document.getElementById("resultSection");
 }
 
@@ -205,54 +197,42 @@ async function loadDailyPuzzle() {
 }
 
 async function loadEndpointPhotos() {
-  // Always set names first (even if API fails)
-  if (gameState.startActor) {
-    startName.textContent = gameState.startActor.name;
-    chainStartName.textContent = gameState.startActor.name;
-  }
-  if (gameState.endActor) {
-    endName.textContent = gameState.endActor.name;
-  }
-  
-  // Load start actor photo
+  const placeholder = (color) =>
+    `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='185' viewBox='0 0 185 185'%3E%3Crect fill='%23111827' width='185' height='185'/%3E%3Ctext x='92' y='100' text-anchor='middle' fill='${encodeURIComponent(color)}' font-size='48'%3E%3F%3C/text%3E%3C/svg%3E`;
+
+  // Load start actor photo into chain data
   if (gameState.startActor && gameState.startActor.id) {
     try {
-      const startRes = await fetch(
+      const res = await fetch(
         `https://api.themoviedb.org/3/person/${gameState.startActor.id}?api_key=${TMDB_API_KEY}`
       );
-      const startData = await startRes.json();
-      if (startData.profile_path) {
-        const photoUrl = `${TMDB_IMG}w185${startData.profile_path}`;
-        startPhoto.src = photoUrl;
-        chainStartPhoto.src = photoUrl;
-        if (gameState.chain[0]) {
-          gameState.chain[0].photo = photoUrl;
-        }
-      } else {
-        // No profile photo - use placeholder
-        startPhoto.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='278' viewBox='0 0 185 278'%3E%3Crect fill='%231a1a2e' width='185' height='278'/%3E%3Ctext x='92' y='139' text-anchor='middle' fill='%2300d9ff' font-size='48'%3E%3F%3C/text%3E%3C/svg%3E";
-        chainStartPhoto.src = startPhoto.src;
+      const data = await res.json();
+      const photo = data.profile_path
+        ? `${TMDB_IMG}w185${data.profile_path}`
+        : placeholder('#00d9ff');
+      gameState.startActor.photo = photo;
+      if (gameState.chain[0]) {
+        gameState.chain[0].photo = photo;
       }
     } catch (err) {
-      console.error("Error loading start actor:", err);
+      console.error("Error loading start actor photo:", err);
+      gameState.startActor.photo = placeholder('#00d9ff');
     }
   }
-  
+
   // Load end actor photo
   if (gameState.endActor && gameState.endActor.id) {
     try {
-      const endRes = await fetch(
+      const res = await fetch(
         `https://api.themoviedb.org/3/person/${gameState.endActor.id}?api_key=${TMDB_API_KEY}`
       );
-      const endData = await endRes.json();
-      if (endData.profile_path) {
-        endPhoto.src = `${TMDB_IMG}w185${endData.profile_path}`;
-      } else {
-        // No profile photo - use placeholder
-        endPhoto.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='278' viewBox='0 0 185 278'%3E%3Crect fill='%231a1a2e' width='185' height='278'/%3E%3Ctext x='92' y='139' text-anchor='middle' fill='%23ffd700' font-size='48'%3E%3F%3C/text%3E%3C/svg%3E";
-      }
+      const data = await res.json();
+      gameState.endActor.photo = data.profile_path
+        ? `${TMDB_IMG}w185${data.profile_path}`
+        : placeholder('#ffd700');
     } catch (err) {
-      console.error("Error loading end actor:", err);
+      console.error("Error loading end actor photo:", err);
+      gameState.endActor.photo = placeholder('#ffd700');
     }
   }
 }
@@ -298,14 +278,12 @@ function setSearchType(type) {
 
 function updateInputHint() {
   const lastItem = gameState.chain[gameState.chain.length - 1];
-  
+
   if (lastItem.type === 'actor') {
     currentActorName.textContent = lastItem.name;
     inputHint.innerHTML = `Find a movie featuring <span id="currentActorName">${lastItem.name}</span>`;
-    setSearchType('movie');
   } else {
     inputHint.innerHTML = `Find an actor from <span id="currentActorName">${lastItem.name}</span>`;
-    setSearchType('actor');
   }
 }
 
@@ -491,38 +469,93 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
 
 function renderChain() {
   console.log("Rendering chain:", gameState.chain);
-  
-  let html = `
-    <div class="chain-node start-node">
-      <img class="chain-photo" src="${gameState.chain[0].photo || ''}" alt="">
-      <span class="chain-name">${gameState.chain[0].name}</span>
-    </div>
-  `;
-  
-  for (let i = 1; i < gameState.chain.length; i++) {
+
+  let delay = 0;
+  const isComplete = gameState.completed ||
+    (gameState.chain.length > 1 &&
+     gameState.chain[gameState.chain.length - 1].type === 'actor' &&
+     gameState.chain[gameState.chain.length - 1].id === gameState.endActor.id);
+
+  // Build chain nodes
+  let html = '';
+
+  for (let i = 0; i < gameState.chain.length; i++) {
     const item = gameState.chain[i];
-    
-    html += `<span class="chain-arrow">&#8594;</span>`;
-    
+
+    // Connector between nodes (not before first)
+    if (i > 0) {
+      html += `<div class="hex-connector" style="--warp-delay:${delay}"><div class="connector-energy"></div></div>`;
+      delay++;
+    }
+
+    const isStart = i === 0;
+    const isEnd = item.type === 'actor' && item.id === gameState.endActor.id && i > 0;
+
     if (item.type === 'movie') {
       html += `
-        <div class="chain-connector">
-          <span class="connector-icon">&#x1F3AC;</span>
-          <span class="connector-title">${item.name}</span>
-        </div>
-      `;
-    } else {
-      const isEnd = item.id === gameState.endActor.id;
+        <div class="hex-node hex-movie warp-in" style="--warp-delay:${delay}">
+          <div class="hex-border"><div class="hex-shape">
+            <span class="hex-icon">&#x1F3AC;</span>
+          </div></div>
+          <span class="hex-label">${item.name}</span>
+          <span class="hex-type-label">FILM</span>
+        </div>`;
+    } else if (isEnd) {
+      // End actor reached — render as goal
       html += `
-        <div class="chain-node ${isEnd ? 'end-node' : ''}">
-          <img class="chain-photo" src="${item.photo || ''}" alt="">
-          <span class="chain-name">${item.name}</span>
-        </div>
-      `;
+        <div class="hex-node hex-goal reached warp-in" style="--warp-delay:${delay}">
+          <div class="hex-border"><div class="hex-shape">
+            <img class="hex-photo" src="${item.photo || gameState.endActor.photo || ''}" alt="">
+          </div></div>
+          <span class="hex-label">${item.name}</span>
+          <span class="hex-type-label">GOAL ✦</span>
+        </div>`;
+    } else if (isStart) {
+      html += `
+        <div class="hex-node hex-actor start-node warp-in" style="--warp-delay:${delay}">
+          <div class="hex-border"><div class="hex-shape">
+            <img class="hex-photo" src="${item.photo || ''}" alt="">
+          </div></div>
+          <span class="hex-label">${item.name}</span>
+          <span class="hex-type-label">START</span>
+        </div>`;
+    } else {
+      html += `
+        <div class="hex-node hex-actor hex-intermediate warp-in" style="--warp-delay:${delay}">
+          <div class="hex-border"><div class="hex-shape">
+            <img class="hex-photo" src="${item.photo || ''}" alt="">
+          </div></div>
+          <span class="hex-label">${item.name}</span>
+          <span class="hex-type-label">ACTOR</span>
+        </div>`;
     }
+    delay++;
   }
-  
+
+  // If not complete, show the goal beacon at the end (separated by dots)
+  if (!isComplete && gameState.endActor) {
+    html += `
+      <div class="hex-gap">
+        <span class="hex-gap-dot"></span>
+        <span class="hex-gap-dot"></span>
+        <span class="hex-gap-dot"></span>
+      </div>
+      <div class="hex-node hex-goal warp-in" style="--warp-delay:${delay}">
+        <div class="hex-border"><div class="hex-shape">
+          <img class="hex-photo" src="${gameState.endActor.photo || ''}" alt="">
+        </div></div>
+        <span class="hex-label">${gameState.endActor.name}</span>
+        <span class="hex-type-label">GOAL</span>
+      </div>`;
+  }
+
   chainDisplay.innerHTML = html;
+
+  if (isComplete) {
+    chainDisplay.classList.add('journey-complete');
+  } else {
+    chainDisplay.classList.remove('journey-complete');
+  }
 }
 
 function updateUI() {
@@ -617,10 +650,67 @@ function showResult() {
   const finalChain = document.getElementById("finalChain");
   finalChain.innerHTML = gameState.chain.map((item, i) => {
     const arrow = i > 0 ? '<span class="final-chain-arrow">→</span>' : '';
-    return `${arrow}<span class="final-chain-item">${item.name}</span>`;
+    let cls = 'final-chain-item';
+    if (item.type === 'movie') {
+      cls += ' final-movie';
+    } else if (i === 0 || item.id === gameState.endActor.id) {
+      cls += ' final-actor';
+    } else {
+      cls += ' final-intermediate';
+    }
+    return `${arrow}<span class="${cls}">${item.name}</span>`;
   }).join("");
   
   startNextPuzzleCountdown();
+
+  // Enable post-game clickable links
+  enablePostGameLinks();
+}
+
+function enablePostGameLinks() {
+  // Make final chain items clickable
+  document.querySelectorAll('.final-chain-item').forEach((item, i) => {
+    const chainItem = gameState.chain[i];
+    if (!chainItem) return;
+
+    if (chainItem.type === 'actor') {
+      item.classList.add('clickable-actor');
+      item.addEventListener('click', () => {
+        window.location.href = `timeline.html?id=${chainItem.id}&name=${encodeURIComponent(chainItem.name)}`;
+      });
+    } else if (chainItem.type === 'movie') {
+      item.classList.add('clickable-movie');
+      item.addEventListener('click', () => {
+        localStorage.setItem("singleMovie", JSON.stringify({ id: chainItem.id, title: chainItem.name }));
+        localStorage.setItem("resultsMode", "single");
+        window.location.href = 'results.html';
+      });
+    }
+  });
+
+  // Make hex nodes in chain display clickable too
+  document.querySelectorAll('.chain-display .hex-node').forEach(node => {
+    // Determine which chain item this corresponds to
+    const hexNodes = [...document.querySelectorAll('.chain-display .hex-node')];
+    const idx = hexNodes.indexOf(node);
+    // Map hex index to chain index (skip goal beacon if not reached)
+    const chainItem = gameState.chain[idx];
+    if (!chainItem) return;
+
+    if (chainItem.type === 'actor') {
+      node.classList.add('clickable-actor');
+      node.addEventListener('click', () => {
+        window.location.href = `timeline.html?id=${chainItem.id}&name=${encodeURIComponent(chainItem.name)}`;
+      });
+    } else if (chainItem.type === 'movie') {
+      node.classList.add('clickable-movie');
+      node.addEventListener('click', () => {
+        localStorage.setItem("singleMovie", JSON.stringify({ id: chainItem.id, title: chainItem.name }));
+        localStorage.setItem("resultsMode", "single");
+        window.location.href = 'results.html';
+      });
+    }
+  });
 }
 
 // ============================================
