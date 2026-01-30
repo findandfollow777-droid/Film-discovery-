@@ -33,8 +33,8 @@ const DAILY_PAIRS = [
   
   // Week 3 - Modern pairs
   { a: { id: 1136406, name: "Tom Holland", type: "Actor" }, b: { id: 505710, name: "Zendaya", type: "Actor" } },
-  { a: { id: 73457, name: "Chris Pratt", type: "Actor" }, b: { id: 103, name: "Chris Hemsworth", type: "Actor" } },
-  { a: { id: 74568, name: "Chris Evans", type: "Actor" }, b: { id: 1245, name: "Scarlett Johansson", type: "Actor" } },
+  { a: { id: 73457, name: "Chris Pratt", type: "Actor" }, b: { id: 74568, name: "Chris Hemsworth", type: "Actor" } },
+  { a: { id: 16828, name: "Chris Evans", type: "Actor" }, b: { id: 1245, name: "Scarlett Johansson", type: "Actor" } },
   { a: { id: 17419, name: "Bill Murray", type: "Actor" }, b: { id: 380, name: "Robert Downey Jr.", type: "Actor" } },
   { a: { id: 2963, name: "Jack Nicholson", type: "Actor" }, b: { id: 192, name: "Morgan Freeman", type: "Actor" } },
   { a: { id: 3, name: "Harrison Ford", type: "Actor" }, b: { id: 2, name: "Mark Hamill", type: "Actor" } },
@@ -194,7 +194,7 @@ async function loadDailyPuzzle() {
     }
   });
   
-  console.log(`Loaded puzzle: ${puzzle.a.name} Ã— ${puzzle.b.name}`);
+  console.log(`Loaded puzzle: ${puzzle.a.name} × ${puzzle.b.name}`);
   console.log(`Entity A movies: ${gameState.entityAMovies.size}`);
   console.log(`Entity B movies: ${gameState.entityBMovies.size}`);
   console.log(`Collisions: ${gameState.collisionMovies.size}`);
@@ -311,9 +311,9 @@ function endGame() {
   finalScore.textContent = gameState.score;
   document.getElementById("breakdownALabel").textContent = `${gameState.entityA.name} Solo`;
   document.getElementById("breakdownBLabel").textContent = `${gameState.entityB.name} Solo`;
-  document.getElementById("breakdownAValue").textContent = `${gameState.foundA.length} Ã— 1 = ${gameState.foundA.length}`;
-  document.getElementById("breakdownBValue").textContent = `${gameState.foundB.length} Ã— 1 = ${gameState.foundB.length}`;
-  document.getElementById("breakdownCollisionValue").textContent = `${gameState.foundCollisions.length} Ã— 5 = ${gameState.foundCollisions.length * 5}`;
+  document.getElementById("breakdownAValue").textContent = `${gameState.foundA.length} × 1 = ${gameState.foundA.length}`;
+  document.getElementById("breakdownBValue").textContent = `${gameState.foundB.length} × 1 = ${gameState.foundB.length}`;
+  document.getElementById("breakdownCollisionValue").textContent = `${gameState.foundCollisions.length} × 5 = ${gameState.foundCollisions.length * 5}`;
   
   // Update stats
   saveStats();
@@ -473,21 +473,21 @@ function loadStats() {
 // ============================================
 
 function shareResult() {
-  const text = `ðŸŽ¬ Collision Course #${gameState.puzzleNumber}
+  const text = `🎬 Collision Course #${gameState.puzzleNumber}
 
-${gameState.entityA.name} Ã— ${gameState.entityB.name}
+${gameState.entityA.name} × ${gameState.entityB.name}
 
 Score: ${gameState.score} pts
-ðŸŽ¯ Solo: ${gameState.foundA.length + gameState.foundB.length}
-ðŸ’¥ Collisions: ${gameState.foundCollisions.length}
+🎯 Solo: ${gameState.foundA.length + gameState.foundB.length}
+💥 Collisions: ${gameState.foundCollisions.length}
 
 Play at orbit-game.com`;
 
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById("shareBtn");
-    btn.innerHTML = "<span>âœ“</span> Copied!";
+    btn.innerHTML = "<span>✓</span> Copied!";
     setTimeout(() => {
-      btn.innerHTML = "<span>ðŸ“‹</span> Share Result";
+      btn.innerHTML = "<span>📋</span> Share Result";
     }, 2000);
   });
 }

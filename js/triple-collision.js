@@ -18,7 +18,7 @@ const DAILY_TRIPLES = [
   { 
     a: { id: 287, name: "Brad Pitt", type: "Actor" }, 
     b: { id: 1461, name: "George Clooney", type: "Actor" },
-    c: { id: 7467, name: "Steven Soderbergh", type: "Director" }
+    c: { id: 1884, name: "Steven Soderbergh", type: "Director" }
   },
   { 
     a: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" }, 
@@ -37,7 +37,7 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 31, name: "Tom Hanks", type: "Actor" }, 
-    b: { id: 4495, name: "Leonardo DiCaprio", type: "Actor" },
+    b: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" },
     c: { id: 24, name: "Steven Spielberg", type: "Director" }
   },
   { 
@@ -53,7 +53,7 @@ const DAILY_TRIPLES = [
   
   // Week 2 - Modern pairings
   { 
-    a: { id: 74568, name: "Chris Evans", type: "Actor" }, 
+    a: { id: 16828, name: "Chris Evans", type: "Actor" }, 
     b: { id: 1245, name: "Scarlett Johansson", type: "Actor" },
     c: { id: 19272, name: "Joe Russo", type: "Director" }
   },
@@ -84,7 +84,7 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 380, name: "Robert Downey Jr.", type: "Actor" }, 
-    b: { id: 71580, name: "Chris Hemsworth", type: "Actor" },
+    b: { id: 74568, name: "Chris Hemsworth", type: "Actor" },
     c: { id: 19271, name: "Anthony Russo", type: "Director" }
   },
   
@@ -105,8 +105,8 @@ const DAILY_TRIPLES = [
     c: { id: 1032, name: "Martin Scorsese", type: "Director" }
   },
   { 
-    a: { id: 192, name: "Morgan Freeman", type: "Actor" }, 
-    b: { id: 2176, name: "Brad Pitt", type: "Actor" },
+    a: { id: 192, name: "Morgan Freeman", type: "Actor" },
+    b: { id: 287, name: "Brad Pitt", type: "Actor" },
     c: { id: 7467, name: "David Fincher", type: "Director" }
   },
   { 
@@ -115,13 +115,13 @@ const DAILY_TRIPLES = [
     c: { id: 7467, name: "David Fincher", type: "Director" }
   },
   { 
-    a: { id: 738, name: "Sean Connery", type: "Actor" }, 
-    b: { id: 4566, name: "Harrison Ford", type: "Actor" },
+    a: { id: 738, name: "Sean Connery", type: "Actor" },
+    b: { id: 3, name: "Harrison Ford", type: "Actor" },
     c: { id: 24, name: "Steven Spielberg", type: "Director" }
   },
   { 
-    a: { id: 2, name: "Mark Hamill", type: "Actor" }, 
-    b: { id: 2, name: "Harrison Ford", type: "Actor" },
+    a: { id: 2, name: "Mark Hamill", type: "Actor" },
+    b: { id: 3, name: "Harrison Ford", type: "Actor" },
     c: { id: 1, name: "George Lucas", type: "Director" }
   }
 ];

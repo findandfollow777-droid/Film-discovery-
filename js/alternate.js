@@ -59,7 +59,7 @@ const WEEKLY_SCENARIOS = [
     options: [
       { id: 2963, name: "Nicolas Cage", known: "Face/Off" },
       { id: 6968, name: "Hugh Jackman", known: "X-Men" },
-      { id: 880, name: "Ben Affleck", known: "Batman v Superman" },
+      { id: 1979, name: "Ben Affleck", known: "Batman v Superman" },
       { id: 73968, name: "Henry Cavill", known: "Man of Steel" }
     ]
   },
