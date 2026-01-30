@@ -28,7 +28,7 @@ const DAILY_JOURNEYS = [
   
   // Week 3 - Challenging paths
   { start: { id: 17052, name: "Adrien Brody" }, end: { id: 2, name: "Mark Hamill" }, par: 4 },
-  { start: { id: 1920, name: "Meg Ryan" }, end: { id: 8691, name: "Zoe Saldana" }, par: 4 },
+  { start: { id: 5344, name: "Meg Ryan" }, end: { id: 8691, name: "Zoe Saldana" }, par: 4 },
   { start: { id: 738, name: "Sean Connery" }, end: { id: 380, name: "Robert Downey Jr." }, par: 3 },
   { start: { id: 3084, name: "Marlon Brando" }, end: { id: 500, name: "Tom Cruise" }, par: 3 },
   { start: { id: 1937, name: "Joe Pesci" }, end: { id: 73457, name: "Chris Pratt" }, par: 4 },
