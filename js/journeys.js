@@ -604,13 +604,20 @@ function undoStep() {
 }
 
 function resetGame() {
-  if (gameState.completed) return;
-  
+  // Hide result overlay if showing
+  if (gameState.completed) {
+    resultSection.hidden = true;
+    gameState.completed = false;
+  }
+
   // Reset to just start actor
-  gameState.chain = [gameState.chain[0]];
+  gameState.chain = [{ type: 'actor', id: gameState.startActor.id, name: gameState.startActor.name, photo: gameState.startActor.photo }];
   gameState.currentActor = gameState.startActor;
   gameState.steps = 0;
-  
+  gameState.searchType = 'movie';
+
+  chainDisplay.classList.remove('journey-complete');
+  setSearchType('movie');
   renderChain();
   updateUI();
   saveTodayState();
