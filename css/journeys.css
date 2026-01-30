@@ -311,39 +311,25 @@ html, body {
 .chain-hero {
   margin-bottom: 30px;
   padding: 30px 15px;
-  background: rgba(10, 14, 26, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  min-height: 160px;
+  min-height: 180px;
+  /* Full honeycomb background */
+  background-color: rgba(10, 14, 26, 0.5);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0L56 16.5V49.5L28 66L0 49.5V16.5Z' fill='none' stroke='%231a2744' stroke-width='0.5'/%3E%3Cpath d='M28 31L56 47.5V80.5L28 97L0 80.5V47.5Z' fill='none' stroke='%231a2744' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 56px 97px;
 }
 
-/* Cosmic hex grid background on left and right */
-.chain-hero::before,
-.chain-hero::after {
+/* Fade honeycomb toward center for depth */
+.chain-hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 120px;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(10,14,26,0.85) 30%, rgba(10,14,26,0.3) 100%);
   pointer-events: none;
-  opacity: 0.06;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 0 L56 16.67 L56 50 L28 66.67 L0 50 L0 16.67 Z' fill='none' stroke='%2300d9ff' stroke-width='1'/%3E%3Cpath d='M28 33.33 L56 50 L56 83.33 L28 100 L0 83.33 L0 50 Z' fill='none' stroke='%2300d9ff' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: 56px 100px;
-}
-
-.chain-hero::before {
-  left: 0;
-  mask-image: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
-}
-
-.chain-hero::after {
-  right: 0;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
+  z-index: 0;
 }
 
 .chain-display {
@@ -352,10 +338,21 @@ html, body {
   gap: 0;
   overflow-x: auto;
   padding: 10px 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
   position: relative;
   z-index: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20,184,166,0.3) transparent;
+}
+
+.chain-display::-webkit-scrollbar {
+  height: 4px;
+}
+
+.chain-display::-webkit-scrollbar-thumb {
+  background: rgba(20,184,166,0.3);
+  border-radius: 2px;
 }
 
 .chain-display.journey-complete {
@@ -403,6 +400,37 @@ html, body {
   display: block;
 }
 
+/* Endpoint hexes: larger */
+.hex-node.start-node .hex-border,
+.hex-node.hex-goal .hex-border {
+  width: 100px;
+  height: 100px;
+}
+.hex-node.start-node .hex-shape,
+.hex-node.hex-goal .hex-shape {
+  width: 90px;
+  height: 90px;
+}
+.hex-node.start-node .hex-label,
+.hex-node.hex-goal .hex-label {
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 110px;
+  color: var(--film-white);
+}
+
+/* Path hexes: smaller */
+.hex-node.hex-intermediate .hex-border,
+.hex-node.hex-movie .hex-border {
+  width: 70px;
+  height: 70px;
+}
+.hex-node.hex-intermediate .hex-shape,
+.hex-node.hex-movie .hex-shape {
+  width: 62px;
+  height: 62px;
+}
+
 .hex-icon {
   position: absolute;
   inset: 0;
@@ -433,9 +461,9 @@ html, body {
 
 /* --- Energy connector between touching hexes --- */
 .hex-connector {
-  width: 20px;
+  width: 16px;
   align-self: center;
-  margin-top: -12px; /* vertically center with hex border */
+  margin-top: -12px;
   height: 6px;
   position: relative;
   z-index: 2;
@@ -1141,6 +1169,75 @@ html, body {
 }
 
 /* ============================================
+   MOVIE GALLERY (Post-Game)
+============================================ */
+
+.movie-gallery {
+  margin-top: -10px;
+  margin-bottom: 30px;
+  padding: 20px 15px;
+  background: rgba(10, 14, 26, 0.5);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+}
+
+.movie-gallery-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.movie-gallery-grid {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.movie-gallery-card {
+  flex-shrink: 0;
+  width: 90px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.movie-gallery-card:hover {
+  transform: scale(1.08);
+}
+
+.movie-gallery-poster {
+  width: 90px;
+  height: 135px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  background: var(--nebula-dark);
+}
+
+.movie-gallery-card:hover .movie-gallery-poster {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.movie-gallery-name {
+  font-size: 10px;
+  color: var(--muted-silver);
+  margin-top: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 
@@ -1168,27 +1265,35 @@ html, body {
 
   .chain-hero {
     padding: 20px 8px;
-    min-height: 130px;
-  }
-
-  .chain-hero::before,
-  .chain-hero::after {
-    width: 60px;
+    min-height: 140px;
   }
 
   .chain-display {
-    justify-content: flex-start;
     padding: 10px 10px;
   }
 
-  .hex-border {
-    width: 62px;
-    height: 62px;
+  /* Endpoints on mobile */
+  .hex-node.start-node .hex-border,
+  .hex-node.hex-goal .hex-border {
+    width: 80px;
+    height: 80px;
+  }
+  .hex-node.start-node .hex-shape,
+  .hex-node.hex-goal .hex-shape {
+    width: 72px;
+    height: 72px;
   }
 
-  .hex-shape {
+  /* Path nodes on mobile */
+  .hex-node.hex-intermediate .hex-border,
+  .hex-node.hex-movie .hex-border {
     width: 55px;
     height: 55px;
+  }
+  .hex-node.hex-intermediate .hex-shape,
+  .hex-node.hex-movie .hex-shape {
+    width: 48px;
+    height: 48px;
   }
 
   .hex-label {
@@ -1201,11 +1306,23 @@ html, body {
   }
 
   .hex-connector {
-    width: 12px;
+    width: 10px;
   }
 
   .hex-gap {
-    width: 20px;
+    width: 16px;
+  }
+
+  .movie-gallery-card {
+    width: 75px;
+  }
+  .movie-gallery-poster {
+    width: 75px;
+    height: 112px;
+  }
+  .movie-gallery-name {
+    max-width: 75px;
+    font-size: 9px;
   }
 
   .score-comparison {

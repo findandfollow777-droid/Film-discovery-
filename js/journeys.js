@@ -556,6 +556,60 @@ function renderChain() {
   } else {
     chainDisplay.classList.remove('journey-complete');
   }
+
+  // Auto-scroll to show the latest node
+  chainDisplay.scrollLeft = chainDisplay.scrollWidth;
+}
+
+function renderMovieGallery() {
+  const gallery = document.getElementById('movieGallery');
+  const grid = document.getElementById('movieGalleryGrid');
+
+  if (!gameState.completed) {
+    gallery.hidden = true;
+    return;
+  }
+
+  const movies = gameState.chain.filter(item => item.type === 'movie');
+  if (movies.length === 0) {
+    gallery.hidden = true;
+    return;
+  }
+
+  grid.innerHTML = movies.map(movie => `
+    <div class="movie-gallery-card" data-movie-id="${movie.id}" data-movie-title="${(movie.name || '').replace(/"/g, '&quot;')}">
+      <img class="movie-gallery-poster" src="" alt="${movie.name}" data-movie-id="${movie.id}">
+      <div class="movie-gallery-name">${movie.name}</div>
+    </div>
+  `).join('');
+
+  gallery.hidden = false;
+
+  // Fetch posters asynchronously
+  movies.forEach(async (movie) => {
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}`
+      );
+      const data = await res.json();
+      const posterUrl = data.poster_path ? `${TMDB_IMG}w185${data.poster_path}` : '';
+      const img = grid.querySelector(`img[data-movie-id="${movie.id}"]`);
+      if (img && posterUrl) img.src = posterUrl;
+    } catch (err) {
+      console.error('Error loading poster for', movie.name, err);
+    }
+  });
+
+  // Click handlers → results.html
+  grid.querySelectorAll('.movie-gallery-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = parseInt(card.dataset.movieId);
+      const title = card.dataset.movieTitle;
+      localStorage.setItem("singleMovie", JSON.stringify({ id, title }));
+      localStorage.setItem("resultsMode", "single");
+      window.location.href = 'results.html';
+    });
+  });
 }
 
 function updateUI() {
@@ -604,11 +658,12 @@ function undoStep() {
 }
 
 function resetGame() {
-  // Hide result overlay if showing
+  // Hide result overlay and gallery if showing
   if (gameState.completed) {
     resultSection.hidden = true;
     gameState.completed = false;
   }
+  document.getElementById('movieGallery').hidden = true;
 
   // Reset to just start actor
   gameState.chain = [{ type: 'actor', id: gameState.startActor.id, name: gameState.startActor.name, photo: gameState.startActor.photo }];
@@ -668,6 +723,7 @@ function showResult() {
     return `${arrow}<span class="${cls}">${item.name}</span>`;
   }).join("");
   
+  renderMovieGallery();
   startNextPuzzleCountdown();
 
   // Enable post-game clickable links
