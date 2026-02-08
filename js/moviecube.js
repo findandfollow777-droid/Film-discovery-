@@ -7,10 +7,10 @@
 (function() {
   // Read API key at runtime
   function getApiKey() {
-    return (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : "dd1b9aebd0769bc49a68b7853b6f4266";
+    return TMDB_API_KEY;
   }
   function getImgBase() {
-    return (typeof TMDB_IMG !== 'undefined') ? TMDB_IMG : "https://image.tmdb.org/t/p/";
+    return TMDB_IMG;
   }
 
   const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect fill='%23374151' width='50' height='50'/%3E%3Ccircle cx='25' cy='18' r='10' fill='%236B7280'/%3E%3Cellipse cx='25' cy='45' rx='18' ry='15' fill='%236B7280'/%3E%3C/svg%3E";
@@ -38,7 +38,8 @@
   let cubeStatRuntime, cubeStatBudget, cubeStatRevenue, cubeStatPopularity, cubeStatVotes, cubeStatLanguage;
   let cubeProductionCompanies;
   let cubeTrailerBtn, cubeAnchorBtn, cubeSimilarBtn, cubeSimilarOverlay;
-  
+  let cubeShortlistBtn;
+
   // DOM refs - Trailer modal
   let cubeTrailerOverlay, cubeTrailerContainer;
   
@@ -89,6 +90,7 @@
     cubeAnchorBtn = document.getElementById("cubeAnchorBtn");
     cubeSimilarBtn = document.getElementById("cubeSimilarBtn");
     cubeSimilarOverlay = document.getElementById("cubeSimilarOverlay");
+    cubeShortlistBtn = document.getElementById("shortlist-btn");
     
     // Trailer modal
     cubeTrailerOverlay = document.getElementById("cubeTrailerOverlay");
@@ -115,6 +117,7 @@
             <button class="cube-nav-btn" data-face="3">👥 Cast</button>
             <button class="cube-nav-btn" data-face="4">📊 Stats</button>
             <button class="cube-nav-btn" data-face="5">🧠 Trivia</button>
+            <button class="cube-nav-btn" data-face="6" title="Nebula Impressions">✦ Nebula</button>
           </div>
           
           <!-- 3D CUBE SCENE -->
@@ -203,6 +206,60 @@
                 <div class="cube-trivia-score" id="cubeTriviaScore"></div>
               </div>
             </div>
+
+            <!-- NEBULA OVERLAY - flat, outside 3D cube -->
+            <div class="cube-nebula-overlay" id="cubeNebulaOverlay">
+              <div class="cube-face cube-face-nebula" data-face="6">
+                <!-- Header -->
+                <div class="nebula-header">
+                  <span class="nebula-title">NEBULA IMPRESSIONS</span>
+                  <span class="nebula-source-badge" id="nebula-source-badge">✦ Orbit Impressions</span>
+                </div>
+
+                <!-- Threshold progress bar -->
+                <div class="nebula-threshold-bar">
+                  <div class="nebula-threshold-fill" id="nebula-threshold-fill"></div>
+                  <span class="nebula-threshold-text" id="nebula-threshold-text">0 / 50 reviews</span>
+                </div>
+
+                <!-- Nebula cloud area -->
+                <div class="nebula-cloud" id="nebula-cloud">
+                  <!-- Gas clouds (background) -->
+                  <div class="nebula-gas gas-1"></div>
+                  <div class="nebula-gas gas-2"></div>
+                  <div class="nebula-gas gas-3"></div>
+                  <div class="nebula-gas gas-4"></div>
+
+                  <!-- Dust particles -->
+                  <div class="nebula-dust" id="nebula-dust"></div>
+
+                  <!-- Movie title (center) -->
+                  <div class="nebula-movie-title" id="nebula-movie-title"></div>
+
+                  <!-- Floating words container -->
+                  <div class="nebula-words" id="nebula-words"></div>
+                </div>
+
+                <!-- User input strip -->
+                <div class="nebula-input-strip">
+                  <div class="nebula-word-slots">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="1">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="2">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="3">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="4">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="5">
+                  </div>
+                  <button class="nebula-submit-btn" id="nebula-submit-btn" disabled>
+                    LAUNCH INTO NEBULA ✦
+                  </button>
+                </div>
+
+                <!-- Review feed -->
+                <div class="nebula-review-feed" id="nebula-review-feed">
+                  <!-- Reviews will be populated here -->
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- ACTION BUTTONS -->
@@ -216,6 +273,10 @@
               </button>
               <button class="action-btn-secondary" id="cubeSimilarBtn">
                 <span class="similar-icon">🎯</span> Similar Movies
+              </button>
+              <button class="shortlist-btn not-added" id="shortlist-btn" title="Add to Shortlist">
+                <span class="shortlist-icon">☆</span>
+                <span class="shortlist-label">Shortlist</span>
               </button>
             </div>
           </div>
@@ -265,12 +326,15 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         // Close in order: trailer > similar > all cast > main popup
+        // If on nebula/trivia face, go back to face 1
         if (cubeTrailerOverlay && !cubeTrailerOverlay.hidden) {
           closeTrailer();
         } else if (cubeSimilarOverlay && !cubeSimilarOverlay.hidden) {
           closeSimilarPanel();
         } else if (cubeAllCastOverlay && !cubeAllCastOverlay.hidden) {
           closeAllCast();
+        } else if (currentFace === 5 || currentFace === 6) {
+          rotateCube(1); // Go back to poster face
         } else if (cubeOverlay && !cubeOverlay.hidden) {
           closeMovieCube();
         }
@@ -304,7 +368,10 @@
     
     // Similar movies toggle
     cubeSimilarBtn?.addEventListener("click", openSimilarPanel);
-    
+
+    // Shortlist button
+    cubeShortlistBtn?.addEventListener("click", handleShortlistClick);
+
     // Similar close
     document.getElementById("cubeSimilarClose")?.addEventListener("click", closeSimilarPanel);
     cubeSimilarOverlay?.addEventListener("click", (e) => {
@@ -430,6 +497,7 @@
       populateSimilarPanel();
       populateTriviaFace();
       populateWhereToWatch(cubeMovieData.id);
+      updateShortlistButton();
 
       cubeOverlay.hidden = false;
       document.body.style.overflow = "hidden";
@@ -444,18 +512,39 @@
       cubeOverlay.hidden = true;
       document.body.style.overflow = "";
     }
+    // Stop nebula physics if running
+    stopNebulaPhysics();
     cubeMovieData = null;
   }
 
   function rotateCube(faceNum) {
+    const prevFace = currentFace;
     currentFace = faceNum;
-    // For faces 1-4, rotate the 3D cube. For face 5, keep cube at face 1 and show flat overlay.
+
+    // For faces 1-4, rotate the 3D cube. For faces 5-6, keep cube at face 1 and show flat overlay.
     if (cube) cube.dataset.face = faceNum <= 4 ? faceNum.toString() : "1";
 
     // Toggle trivia overlay
     const triviaOverlay = document.getElementById("cubeTriviaOverlay");
     if (triviaOverlay) {
       triviaOverlay.classList.toggle("active", faceNum === 5);
+    }
+
+    // Toggle nebula overlay
+    const nebulaOverlay = document.getElementById("cubeNebulaOverlay");
+    if (nebulaOverlay) {
+      nebulaOverlay.classList.toggle("active", faceNum === 6);
+    }
+
+    // Handle nebula face navigation
+    if (faceNum === 6 && prevFace !== 6) {
+      // Navigating TO nebula face
+      if (cubeMovieData) {
+        loadNebulaFace(cubeMovieData.id, cubeMovieData.title);
+      }
+    } else if (prevFace === 6 && faceNum !== 6) {
+      // Navigating AWAY from nebula face
+      stopNebulaPhysics();
     }
 
     // Update active nav button
@@ -1100,10 +1189,621 @@
   }
 
   // ============================================
+  // NEBULA DATA CHECKS
+  // ============================================
+
+  // Nebula service module (loaded dynamically)
+  let nebulaService = null;
+
+  // Load nebula service module
+  async function loadNebulaService() {
+    if (!nebulaService) {
+      try {
+        // Try dynamic import first
+        nebulaService = await import('../nebula-service.js');
+      } catch (error) {
+        console.warn('Dynamic import failed, checking for global nebula service:', error);
+        // Fallback: check if loaded as script tag (functions on window)
+        if (window.getMergedNebulaData && window.getTopWords && window.saveUserReview) {
+          nebulaService = {
+            getMergedNebulaData: window.getMergedNebulaData,
+            getTopWords: window.getTopWords,
+            saveUserReview: window.saveUserReview,
+            getUserReviews: window.getUserReviews,
+            calculateWordFrequencies: window.calculateWordFrequencies,
+            clearUserReviews: window.clearUserReviews
+          };
+        } else {
+          console.error('Nebula service not available');
+        }
+      }
+    }
+    return nebulaService;
+  }
+
+  // Cache nebula index in memory
+  let nebulaIndexCache = null;
+  let nebulaIndexFetchTime = null;
+  const NEBULA_INDEX_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  // Resolve nebula-data path relative to project root (pages in games/ need ../ prefix)
+  const _nebulaDataPath = location.pathname.includes('/games/') ? '../nebula-data' : 'nebula-data';
+
+  /**
+   * Check if nebula data is available for a movie
+   * @param {number|string} movieId - The TMDB movie ID
+   * @returns {Promise<boolean>} True if nebula data exists for this movie
+   */
+  async function checkNebulaAvailable(movieId) {
+    try {
+      // Check if we have a valid cached index
+      const now = Date.now();
+      if (nebulaIndexCache && nebulaIndexFetchTime && (now - nebulaIndexFetchTime < NEBULA_INDEX_CACHE_DURATION)) {
+        // Use cached index
+        return nebulaIndexCache.movies && nebulaIndexCache.movies.hasOwnProperty(String(movieId));
+      }
+
+      // Fetch the nebula index
+      const response = await fetch(`${_nebulaDataPath}/index.json`);
+
+      if (!response.ok) {
+        console.warn('Nebula index not found');
+        return false;
+      }
+
+      const index = await response.json();
+
+      // Cache the index
+      nebulaIndexCache = index;
+      nebulaIndexFetchTime = now;
+
+      // Check if movieId exists in the index
+      return index.movies && index.movies.hasOwnProperty(String(movieId));
+
+    } catch (error) {
+      console.error('Error checking nebula availability:', error);
+      return false;
+    }
+  }
+
+  // ============================================
+  // NEBULA FACE - RENDERING & PHYSICS
+  // ============================================
+
+  // Nebula state
+  let nebulaData = null;
+  let nebulaWords = [];
+  let nebulaPhysicsRunning = false;
+  let nebulaAnimationFrame = null;
+
+  /**
+   * Load and display the nebula face
+   * @param {number|string} movieId - The TMDB movie ID
+   * @param {string} movieTitle - The movie title
+   */
+  async function loadNebulaFace(movieId, movieTitle) {
+    const service = await loadNebulaService();
+    if (!service) {
+      showNebulaError('Nebula service not available');
+      return;
+    }
+
+    try {
+      // Get merged nebula data (AI + user reviews)
+      const data = await service.getMergedNebulaData(movieId);
+
+      if (!data) {
+        showNebulaError('Nebula data not available for this movie');
+        return;
+      }
+
+      nebulaData = data;
+      renderNebula(data);
+      initNebulaInput(movieId);
+
+    } catch (error) {
+      console.error('Error loading nebula face:', error);
+      showNebulaError('Failed to load nebula data');
+    }
+  }
+
+  /**
+   * Show error message in nebula cloud
+   */
+  function showNebulaError(message) {
+    const cloudEl = document.getElementById('nebula-cloud');
+    if (cloudEl) {
+      cloudEl.innerHTML = `
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #8892a6;">
+          <p style="font-size: 14px; margin: 0;">${message}</p>
+        </div>
+      `;
+    }
+  }
+
+  /**
+   * Render the nebula visualization
+   * @param {Object} data - Merged nebula data
+   */
+  function renderNebula(data) {
+    // Update movie title
+    const titleEl = document.getElementById('nebula-movie-title');
+    if (titleEl) {
+      titleEl.textContent = data.title.toUpperCase();
+    }
+
+    // Update source badge
+    updateSourceBadge(data.userReviewCount, data.communityThreshold);
+
+    // Update threshold bar
+    updateThresholdBar(data.userReviewCount, data.communityThreshold);
+
+    // Render dust particles
+    renderDustParticles();
+
+    // Get top 30 words (service should be loaded by now)
+    if (!nebulaService) {
+      console.error('Nebula service not loaded');
+      return;
+    }
+
+    const topWords = nebulaService.getTopWords(data.wordFrequency, 30);
+
+    // Render floating words
+    renderFloatingWords(topWords, data.reviews);
+
+    // Render review feed
+    renderReviewFeed(data.reviews);
+
+    // Start physics animation
+    startNebulaPhysics();
+  }
+
+  /**
+   * Update source badge based on user review count
+   */
+  function updateSourceBadge(userCount, threshold) {
+    const badgeEl = document.getElementById('nebula-source-badge');
+    if (!badgeEl) return;
+
+    badgeEl.className = 'nebula-source-badge';
+
+    if (userCount === 0) {
+      badgeEl.textContent = '✦ Orbit Impressions';
+      // Default purple style
+    } else if (userCount < threshold) {
+      const percentage = Math.round((userCount / threshold) * 100);
+      badgeEl.textContent = `◐ ${percentage}% Community`;
+      badgeEl.classList.add('mixed');
+    } else {
+      badgeEl.textContent = '★ Community Voices';
+      badgeEl.classList.add('community');
+    }
+  }
+
+  /**
+   * Update threshold progress bar
+   */
+  function updateThresholdBar(userCount, threshold) {
+    const fillEl = document.getElementById('nebula-threshold-fill');
+    const textEl = document.getElementById('nebula-threshold-text');
+
+    if (fillEl) {
+      const percentage = Math.min(100, (userCount / threshold) * 100);
+      fillEl.style.width = `${percentage}%`;
+    }
+
+    if (textEl) {
+      textEl.textContent = `${userCount} / ${threshold} reviews`;
+    }
+  }
+
+  /**
+   * Render dust particles
+   */
+  function renderDustParticles() {
+    const dustEl = document.getElementById('nebula-dust');
+    if (!dustEl) return;
+
+    dustEl.innerHTML = '';
+
+    // Create 40 dust particles at random positions
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'nebula-dust-particle';
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animationDelay = `${Math.random() * 3}s`;
+      dustEl.appendChild(particle);
+    }
+  }
+
+  /**
+   * Render floating words with physics
+   */
+  function renderFloatingWords(topWords, reviews) {
+    const wordsEl = document.getElementById('nebula-words');
+    if (!wordsEl) return;
+
+    wordsEl.innerHTML = '';
+    nebulaWords = [];
+
+    // Get container dimensions
+    const cloudEl = document.getElementById('nebula-cloud');
+    if (!cloudEl) return;
+
+    const rect = cloudEl.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    // Determine frequency tiers (quintiles)
+    const counts = topWords.map(w => w[1]);
+    const maxCount = Math.max(...counts);
+    const minCount = Math.min(...counts);
+    const range = maxCount - minCount;
+
+    // Distribute words in a grid pattern for initial positions
+    const cols = 6;
+    const rows = Math.ceil(topWords.length / cols);
+    const cellWidth = width / cols;
+    const cellHeight = height / rows;
+
+    topWords.forEach(([word, count], index) => {
+      // Calculate brightness tier (1-5)
+      const normalizedCount = range > 0 ? (count - minCount) / range : 0.5;
+      let tier = Math.ceil(normalizedCount * 5);
+      if (tier === 0) tier = 1;
+
+      // Determine if word is from user review
+      const isUserWord = reviews.some(r =>
+        r.source === 'user' && r.text.toLowerCase().includes(word.toLowerCase())
+      );
+
+      // Create word element
+      const wordEl = document.createElement('div');
+      wordEl.className = `nebula-word brightness-${tier}`;
+      if (isUserWord) wordEl.classList.add('user-word');
+      wordEl.textContent = word;
+      wordEl.dataset.word = word;
+
+      // Grid position with random offset
+      const col = index % cols;
+      const row = Math.floor(index / cols);
+      const x = col * cellWidth + cellWidth / 2 + (Math.random() - 0.5) * cellWidth * 0.5;
+      const y = row * cellHeight + cellHeight / 2 + (Math.random() - 0.5) * cellHeight * 0.5;
+
+      // Random velocity
+      const vx = (Math.random() - 0.5) * 0.5;
+      const vy = (Math.random() - 0.5) * 0.5;
+
+      wordsEl.appendChild(wordEl);
+
+      // Store word physics state
+      nebulaWords.push({
+        el: wordEl,
+        x, y, vx, vy,
+        width: 0, height: 0 // Will be measured after render
+      });
+    });
+
+    // Measure word dimensions after rendering
+    setTimeout(() => {
+      nebulaWords.forEach(word => {
+        const rect = word.el.getBoundingClientRect();
+        word.width = rect.width;
+        word.height = rect.height;
+        word.el.style.left = `${word.x}px`;
+        word.el.style.top = `${word.y}px`;
+      });
+    }, 0);
+  }
+
+  /**
+   * Render review feed
+   */
+  function renderReviewFeed(reviews) {
+    const feedEl = document.getElementById('nebula-review-feed');
+    if (!feedEl) return;
+
+    feedEl.innerHTML = '';
+
+    // Sort reviews: user first, then AI
+    const sortedReviews = [...reviews].sort((a, b) => {
+      if (a.source === 'user' && b.source !== 'user') return -1;
+      if (a.source !== 'user' && b.source === 'user') return 1;
+      return 0;
+    });
+
+    sortedReviews.forEach(review => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'nebula-review-item';
+
+      const sourceIcon = review.source === 'user' ? '☉' : '✦';
+      const sourceClass = review.source === 'user' ? 'user' : '';
+
+      itemEl.innerHTML = `
+        <span class="nebula-review-source ${sourceClass}">${sourceIcon}</span>
+        <span class="nebula-review-text ${sourceClass}">${review.text}</span>
+      `;
+
+      feedEl.appendChild(itemEl);
+    });
+  }
+
+  /**
+   * Initialize nebula input handlers
+   */
+  function initNebulaInput(movieId) {
+    const inputs = document.querySelectorAll('.nebula-word-input');
+    const submitBtn = document.getElementById('nebula-submit-btn');
+
+    if (!submitBtn) return;
+
+    // Check if all inputs have values
+    function checkInputs() {
+      const values = Array.from(inputs).map(input => input.value.trim());
+      const allFilled = values.every(v => v.length > 0);
+      submitBtn.disabled = !allFilled;
+    }
+
+    // Add input listeners
+    inputs.forEach(input => {
+      input.addEventListener('input', checkInputs);
+    });
+
+    // Submit handler
+    submitBtn.addEventListener('click', async () => {
+      const words = Array.from(inputs).map(input => input.value.trim());
+      const reviewText = words.join(' ');
+
+      const service = await loadNebulaService();
+      if (!service) return;
+
+      const result = service.saveUserReview(movieId, reviewText);
+
+      if (result.success) {
+        // Clear inputs
+        inputs.forEach(input => input.value = '');
+        submitBtn.disabled = true;
+
+        // Reload nebula with updated data
+        const movieTitle = nebulaData ? nebulaData.title : '';
+        loadNebulaFace(movieId, movieTitle);
+      } else {
+        alert(result.error || 'Failed to save review');
+      }
+    });
+  }
+
+  /**
+   * Start nebula physics animation
+   */
+  function startNebulaPhysics() {
+    if (nebulaPhysicsRunning) return;
+
+    nebulaPhysicsRunning = true;
+
+    const cloudEl = document.getElementById('nebula-cloud');
+    if (!cloudEl) return;
+
+    function animate() {
+      if (!nebulaPhysicsRunning) return;
+
+      const rect = cloudEl.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      // Update each word
+      nebulaWords.forEach(word => {
+        // Update position
+        word.x += word.vx;
+        word.y += word.vy;
+
+        // Bounce off walls
+        if (word.x <= 0 || word.x + word.width >= width) {
+          word.vx *= -1;
+          word.x = Math.max(0, Math.min(width - word.width, word.x));
+        }
+        if (word.y <= 0 || word.y + word.height >= height) {
+          word.vy *= -1;
+          word.y = Math.max(0, Math.min(height - word.height, word.y));
+        }
+
+        // Apply position
+        word.el.style.left = `${word.x}px`;
+        word.el.style.top = `${word.y}px`;
+      });
+
+      // Simple collision detection (optional, can be expensive)
+      for (let i = 0; i < nebulaWords.length; i++) {
+        for (let j = i + 1; j < nebulaWords.length; j++) {
+          const w1 = nebulaWords[i];
+          const w2 = nebulaWords[j];
+
+          // Check overlap
+          if (
+            w1.x < w2.x + w2.width &&
+            w1.x + w1.width > w2.x &&
+            w1.y < w2.y + w2.height &&
+            w1.y + w1.height > w2.y
+          ) {
+            // Simple bounce: swap velocities
+            const tempVx = w1.vx;
+            const tempVy = w1.vy;
+            w1.vx = w2.vx;
+            w1.vy = w2.vy;
+            w2.vx = tempVx;
+            w2.vy = tempVy;
+
+            // Separate them slightly
+            const dx = (w1.x + w1.width / 2) - (w2.x + w2.width / 2);
+            const dy = (w1.y + w1.height / 2) - (w2.y + w2.height / 2);
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+            const nx = dx / dist;
+            const ny = dy / dist;
+
+            w1.x += nx * 2;
+            w1.y += ny * 2;
+            w2.x -= nx * 2;
+            w2.y -= ny * 2;
+          }
+        }
+      }
+
+      nebulaAnimationFrame = requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  /**
+   * Stop nebula physics animation
+   */
+  function stopNebulaPhysics() {
+    nebulaPhysicsRunning = false;
+    if (nebulaAnimationFrame) {
+      cancelAnimationFrame(nebulaAnimationFrame);
+      nebulaAnimationFrame = null;
+    }
+  }
+
+  // ============================================
+  // SHORTLIST FUNCTIONS
+  // ============================================
+
+  /**
+   * Load shortlist service functions (from global window scope)
+   */
+  function getShortlistFunctions() {
+    return {
+      getShortlist: window.getShortlist,
+      addToShortlist: window.addToShortlist,
+      removeFromShortlist: window.removeFromShortlist,
+      isInShortlist: window.isInShortlist,
+      getShortlistCount: window.getShortlistCount
+    };
+  }
+
+  /**
+   * Update shortlist button state based on current movie and shortlist status
+   */
+  function updateShortlistButton() {
+    if (!cubeShortlistBtn || !cubeMovieData) return;
+
+    const shortlistFns = getShortlistFunctions();
+    if (!shortlistFns.isInShortlist || !shortlistFns.getShortlistCount) {
+      // Shortlist service not loaded, hide button
+      cubeShortlistBtn.style.display = 'none';
+      return;
+    }
+
+    cubeShortlistBtn.style.display = 'flex';
+
+    const movieId = cubeMovieData.id;
+    const isAdded = shortlistFns.isInShortlist(movieId);
+    const count = shortlistFns.getShortlistCount();
+    const isFull = count >= 5;
+
+    // Reset classes
+    cubeShortlistBtn.className = 'shortlist-btn';
+
+    const iconSpan = cubeShortlistBtn.querySelector('.shortlist-icon');
+    const labelSpan = cubeShortlistBtn.querySelector('.shortlist-label');
+
+    if (isAdded) {
+      // Movie IS in shortlist
+      cubeShortlistBtn.classList.add('added');
+      cubeShortlistBtn.disabled = false;
+      cubeShortlistBtn.title = 'Remove from Shortlist';
+      if (iconSpan) iconSpan.textContent = '★';
+      if (labelSpan) labelSpan.textContent = 'Shortlisted';
+    } else if (isFull) {
+      // Shortlist is FULL and movie not in it
+      cubeShortlistBtn.classList.add('disabled');
+      cubeShortlistBtn.disabled = true;
+      cubeShortlistBtn.title = 'Remove a movie to add more';
+      if (iconSpan) iconSpan.textContent = '☆';
+      if (labelSpan) labelSpan.textContent = `Full (${count}/5)`;
+    } else {
+      // Movie NOT in shortlist, and shortlist not full
+      cubeShortlistBtn.classList.add('not-added');
+      cubeShortlistBtn.disabled = false;
+      cubeShortlistBtn.title = 'Add to Shortlist';
+      if (iconSpan) iconSpan.textContent = '☆';
+      if (labelSpan) labelSpan.textContent = 'Shortlist';
+    }
+  }
+
+  /**
+   * Handle shortlist button click
+   */
+  function handleShortlistClick() {
+    if (!cubeMovieData) return;
+
+    const shortlistFns = getShortlistFunctions();
+    if (!shortlistFns.addToShortlist || !shortlistFns.removeFromShortlist || !shortlistFns.isInShortlist) {
+      console.warn('Shortlist service not loaded');
+      return;
+    }
+
+    const movieId = cubeMovieData.id;
+    const isAdded = shortlistFns.isInShortlist(movieId);
+
+    if (isAdded) {
+      // Remove from shortlist
+      const result = shortlistFns.removeFromShortlist(movieId);
+      if (result.success) {
+        // Brief visual feedback
+        flashShortlistButton('removed');
+      }
+    } else {
+      // Add to shortlist
+      const movieData = {
+        id: cubeMovieData.id,
+        title: cubeMovieData.title || 'Unknown',
+        year: cubeMovieData.release_date ? new Date(cubeMovieData.release_date).getFullYear() : null,
+        poster: cubeMovieData.poster_path || null
+      };
+
+      const result = shortlistFns.addToShortlist(movieData);
+      if (result.success) {
+        // Brief visual feedback
+        flashShortlistButton('added');
+      } else {
+        // Show error (e.g., list full)
+        console.warn('Failed to add to shortlist:', result.error);
+      }
+    }
+
+    // Update button state
+    updateShortlistButton();
+
+    // Update floating badge if it exists
+    if (typeof window.updateShortlistBadge === 'function') {
+      window.updateShortlistBadge();
+    }
+  }
+
+  /**
+   * Flash button with brief animation for feedback
+   */
+  function flashShortlistButton(action) {
+    if (!cubeShortlistBtn) return;
+
+    // Add flash class
+    cubeShortlistBtn.classList.add('shortlist-flash');
+
+    // Remove after animation
+    setTimeout(() => {
+      cubeShortlistBtn.classList.remove('shortlist-flash');
+    }, 300);
+  }
+
+  // ============================================
   // EXPORTS
   // ============================================
   window.initMovieCube = initMovieCube;
   window.openMovieCube = openMovieCube;
   window.closeMovieCube = closeMovieCube;
+  window.checkNebulaAvailable = checkNebulaAvailable;
 
 })();
