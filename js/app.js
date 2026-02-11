@@ -1107,21 +1107,30 @@ function applySettingsFilters(movies, filters, settingsData) {
   const settingsFilters = filters.filter(f => SETTINGS_SECTIONS.includes(f.section));
   if (settingsFilters.length === 0) return movies;
 
+  // Separate location filters (OR logic) from other filters (AND logic)
+  const locationFilters = settingsFilters.filter(f => f.value?.type === "location");
+  const otherFilters = settingsFilters.filter(f => f.value?.type !== "location");
+
   return movies.filter(movie => {
     const settings = settingsData.movies[String(movie.id)];
     if (!settings) return false; // movie not in dataset — exclude when settings filters active
 
-    for (const filter of settingsFilters) {
+    // Location filters: movie must match ANY selected location (OR)
+    if (locationFilters.length > 0) {
+      const primary = settings.location?.primary || [];
+      const country = settings.location?.country || [];
+      const allLocs = [...primary, ...country].map(s => s.toLowerCase());
+      const matchesAny = locationFilters.some(f =>
+        allLocs.some(l => l.includes(f.value.name.toLowerCase()))
+      );
+      if (!matchesAny) return false;
+    }
+
+    // All other filters: AND logic (movie must match every filter)
+    for (const filter of otherFilters) {
       if (!filter.value) continue;
 
       switch (filter.value.type) {
-        case "location": {
-          const primary = settings.location?.primary || [];
-          const country = settings.location?.country || [];
-          const allLocs = [...primary, ...country].map(s => s.toLowerCase());
-          if (!allLocs.some(l => l.includes(filter.value.name.toLowerCase()))) return false;
-          break;
-        }
 
         case "time_decade": {
           const movieDecades = settings.time_period?.decades || [];
@@ -1793,8 +1802,7 @@ function buildBasedOnContent(root) {
     { label: "Short Story", value: "short_story" },
     { label: "Stage Play", value: "play" },
     { label: "Comic / Graphic Novel", value: "comic" },
-    { label: "Video Game", value: "video_game" },
-    { label: "Mythology / Folklore", value: "mythology" }
+    { label: "Video Game", value: "video_game" }
   ];
   sourceTypes.forEach(s => {
     const chip = makeChip(s.label, "basedOn", { type: "based_on", value: s.value });
@@ -1808,9 +1816,7 @@ function buildBasedOnContent(root) {
   franchiseGroup.className = "chip-group";
   const franchiseTypes = [
     { label: "Sequel", value: "sequel" },
-    { label: "Prequel", value: "prequel" },
-    { label: "Remake / Reboot", value: "remake" },
-    { label: "Spin-off", value: "spin-off" }
+    { label: "Prequel", value: "prequel" }
   ];
   franchiseTypes.forEach(f => {
     const chip = makeChip(f.label, "basedOn", { type: "based_on", value: f.value });
