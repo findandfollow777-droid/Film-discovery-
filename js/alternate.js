@@ -3,9 +3,6 @@
 // Orbit Games Suite - Weekly Casting Discussions
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TMDB_IMG = "https://image.tmdb.org/t/p/";
-
 // Weekly scenarios - curated "what if" casting questions
 const WEEKLY_SCENARIOS = [
   {
@@ -59,7 +56,7 @@ const WEEKLY_SCENARIOS = [
     options: [
       { id: 2963, name: "Nicolas Cage", known: "Face/Off" },
       { id: 6968, name: "Hugh Jackman", known: "X-Men" },
-      { id: 1979, name: "Ben Affleck", known: "Batman v Superman" },
+      { id: 880, name: "Ben Affleck", known: "Batman v Superman" },
       { id: 73968, name: "Henry Cavill", known: "Man of Steel" }
     ]
   },
@@ -82,7 +79,7 @@ const WEEKLY_SCENARIOS = [
       { id: 738, name: "Sean Connery", known: "James Bond" },
       { id: 1758, name: "Anthony Hopkins", known: "Silence of the Lambs" },
       { id: 3392, name: "Michael Caine", known: "The Dark Knight" },
-      { id: 2176, name: "Kevin Spacey", known: "The Usual Suspects" }
+      { id: 1979, name: "Kevin Spacey", known: "The Usual Suspects" }
     ]
   },
   {

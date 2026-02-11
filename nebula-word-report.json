@@ -1,0 +1,259 @@
+{
+  "totalMovies": 501,
+  "totalReviews": 10000,
+  "totalUniqueWords": 5585,
+  "averageUniqueWordsPerMovie": 79,
+  "mostCommonWords": [
+    {
+      "word": "perfectly",
+      "count": 350,
+      "inMovies": 299
+    },
+    {
+      "word": "emotional",
+      "count": 350,
+      "inMovies": 272
+    },
+    {
+      "word": "storytelling",
+      "count": 282,
+      "inMovies": 250
+    },
+    {
+      "word": "delivers",
+      "count": 266,
+      "inMovies": 244
+    },
+    {
+      "word": "masterpiece",
+      "count": 260,
+      "inMovies": 253
+    },
+    {
+      "word": "left",
+      "count": 231,
+      "inMovies": 221
+    },
+    {
+      "word": "action",
+      "count": 222,
+      "inMovies": 142
+    },
+    {
+      "word": "performance",
+      "count": 220,
+      "inMovies": 197
+    },
+    {
+      "word": "throughout",
+      "count": 218,
+      "inMovies": 203
+    },
+    {
+      "word": "perfect",
+      "count": 216,
+      "inMovies": 204
+    },
+    {
+      "word": "stunning",
+      "count": 216,
+      "inMovies": 193
+    },
+    {
+      "word": "emotionally",
+      "count": 209,
+      "inMovies": 178
+    },
+    {
+      "word": "pure",
+      "count": 209,
+      "inMovies": 180
+    },
+    {
+      "word": "experience",
+      "count": 204,
+      "inMovies": 178
+    },
+    {
+      "word": "surprisingly",
+      "count": 196,
+      "inMovies": 161
+    },
+    {
+      "word": "visual",
+      "count": 185,
+      "inMovies": 171
+    },
+    {
+      "word": "genuinely",
+      "count": 184,
+      "inMovies": 168
+    },
+    {
+      "word": "beautifully",
+      "count": 173,
+      "inMovies": 158
+    },
+    {
+      "word": "cinematography",
+      "count": 166,
+      "inMovies": 162
+    },
+    {
+      "word": "comedy",
+      "count": 162,
+      "inMovies": 91
+    },
+    {
+      "word": "finest",
+      "count": 158,
+      "inMovies": 157
+    },
+    {
+      "word": "done",
+      "count": 152,
+      "inMovies": 146
+    },
+    {
+      "word": "executed",
+      "count": 152,
+      "inMovies": 145
+    },
+    {
+      "word": "crafted",
+      "count": 150,
+      "inMovies": 140
+    },
+    {
+      "word": "cinematic",
+      "count": 145,
+      "inMovies": 134
+    },
+    {
+      "word": "yet",
+      "count": 144,
+      "inMovies": 133
+    },
+    {
+      "word": "perfection",
+      "count": 143,
+      "inMovies": 130
+    },
+    {
+      "word": "blend",
+      "count": 143,
+      "inMovies": 142
+    },
+    {
+      "word": "viewing",
+      "count": 141,
+      "inMovies": 123
+    },
+    {
+      "word": "sequences",
+      "count": 140,
+      "inMovies": 129
+    },
+    {
+      "word": "heart",
+      "count": 139,
+      "inMovies": 130
+    },
+    {
+      "word": "adventure",
+      "count": 139,
+      "inMovies": 93
+    },
+    {
+      "word": "horror",
+      "count": 136,
+      "inMovies": 65
+    },
+    {
+      "word": "cinema",
+      "count": 132,
+      "inMovies": 118
+    },
+    {
+      "word": "visually",
+      "count": 130,
+      "inMovies": 125
+    },
+    {
+      "word": "brilliantly",
+      "count": 129,
+      "inMovies": 126
+    },
+    {
+      "word": "genuine",
+      "count": 127,
+      "inMovies": 123
+    },
+    {
+      "word": "right",
+      "count": 125,
+      "inMovies": 121
+    },
+    {
+      "word": "depth",
+      "count": 125,
+      "inMovies": 124
+    },
+    {
+      "word": "deserves",
+      "count": 125,
+      "inMovies": 123
+    },
+    {
+      "word": "family",
+      "count": 124,
+      "inMovies": 95
+    },
+    {
+      "word": "elevates",
+      "count": 124,
+      "inMovies": 124
+    },
+    {
+      "word": "magic",
+      "count": 119,
+      "inMovies": 99
+    },
+    {
+      "word": "meets",
+      "count": 119,
+      "inMovies": 107
+    },
+    {
+      "word": "entertainment",
+      "count": 119,
+      "inMovies": 111
+    },
+    {
+      "word": "classic",
+      "count": 118,
+      "inMovies": 111
+    },
+    {
+      "word": "haunting",
+      "count": 118,
+      "inMovies": 113
+    },
+    {
+      "word": "animation",
+      "count": 118,
+      "inMovies": 76
+    },
+    {
+      "word": "humor",
+      "count": 118,
+      "inMovies": 103
+    },
+    {
+      "word": "never",
+      "count": 118,
+      "inMovies": 104
+    }
+  ],
+  "generatedAt": "2026-02-07T10:59:04.718Z"
+}

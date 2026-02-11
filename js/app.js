@@ -3,8 +3,6 @@
    Complete Application Logic
 ============================================= */
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-
 // =============================================
 // GENRE & KEYWORD MAPPINGS
 // =============================================
@@ -31,26 +29,26 @@ const GENRE_MAP = {
   "Western": 37
 };
 
-const GENRE_EMOJIS = {
-  "Action": "💥",
-  "Adventure": "🗺️",
-  "Animation": "🎨",
-  "Comedy": "😂",
-  "Crime": "🔪",
-  "Documentary": "📽️",
-  "Drama": "🎭",
-  "Family": "👨‍👩‍👧‍👦",
-  "Fantasy": "🐉",
-  "History": "📜",
-  "Horror": "👻",
-  "Music": "🎵",
-  "Mystery": "🔍",
-  "Romance": "💕",
-  "Science Fiction": "🚀",
-  "Thriller": "😱",
-  "TV Movie": "📺",
-  "War": "⚔️",
-  "Western": "🤠"
+const GENRE_SVGS = {
+  "Action": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L8 8M13 3L10 3M13 3L13 6"/><path d="M3 13L8 8M3 13L6 13M3 13L3 10"/></svg>`,
+  "Adventure": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L10 6H14L11 9L12 14L8 11L4 14L5 9L2 6H6Z"/></svg>`,
+  "Animation": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="6" cy="8" r="4"/><circle cx="11" cy="7" r="3" opacity="0.6"/></svg>`,
+  "Comedy": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M5.5 6.5V6"/><path d="M10.5 6.5V6"/><path d="M5.5 10Q8 12.5 10.5 10"/></svg>`,
+  "Crime": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="6" r="2"/><line x1="8" y1="8" x2="8" y2="14"/><line x1="5" y1="10" x2="11" y2="10"/></svg>`,
+  "Documentary": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="8" y1="12" x2="8" y2="14"/></svg>`,
+  "Drama": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3Q5 2 6 4Q7 2 8 3"/><path d="M4 5V5.5"/><path d="M7 5V5.5"/><path d="M4.5 7Q5.5 6 6.5 7"/><path d="M9 9Q11 8 12 10Q13 8 14 9"/><path d="M10 11V11.5"/><path d="M13 11V11.5"/><path d="M10.5 13Q11.5 14 12.5 13"/></svg>`,
+  "Family": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="8" cy="10" r="1.5"/><path d="M5 7V9Q5 11 8 11.5"/><path d="M11 7V9Q11 11 8 11.5"/></svg>`,
+  "Fantasy": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L9 5L12 4L10 7L14 8L10 9L12 12L9 11L8 14L7 11L4 12L6 9L2 8L6 7L4 4L7 5Z"/></svg>`,
+  "History": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14V6L8 3L13 6V14"/><line x1="3" y1="14" x2="13" y2="14"/><rect x="6" y="9" width="4" height="5" rx="0.5"/><line x1="8" y1="6" x2="8" y2="8"/></svg>`,
+  "Horror": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="5"/><path d="M6 6V7"/><path d="M10 6V7"/><path d="M6 9.5Q8 11 10 9.5"/><path d="M5 2Q6 4 8 4Q10 4 11 2"/></svg>`,
+  "Music": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V4L13 2V10"/><circle cx="4" cy="12" r="2"/><circle cx="11" cy="10" r="2"/></svg>`,
+  "Mystery": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>`,
+  "Romance": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14Q1 8 4 4Q6 2 8 5Q10 2 12 4Q15 8 8 14Z"/></svg>`,
+  "Science Fiction": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><ellipse cx="8" cy="8" rx="7" ry="3" transform="rotate(-30 8 8)"/></svg>`,
+  "Thriller": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2V5"/><path d="M8 11V14"/><path d="M2 8H5"/><path d="M11 8H14"/><circle cx="8" cy="8" r="2"/></svg>`,
+  "TV Movie": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="8" rx="1"/><line x1="6" y1="13" x2="10" y2="13"/><line x1="8" y1="11" x2="8" y2="13"/></svg>`,
+  "War": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14L4 6L8 3L12 6L12 14"/><path d="M2 14H14"/><path d="M8 6V9"/><path d="M6.5 7.5H9.5"/></svg>`,
+  "Western": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="12" rx="6" ry="2"/><path d="M4 12Q3 8 8 4Q13 8 12 12"/><line x1="3" y1="10" x2="13" y2="10"/></svg>`
 };
 
 const KEYWORD_MAP = {
@@ -78,46 +76,6 @@ const KEYWORD_MAP = {
 };
 
 // SETTING KEYWORDS - For movies SET IN a time period (not release date)
-const SETTING_KEYWORD_MAP = {
-  // Decades (when movie is SET, not released)
-  decades: {
-    1900: 291078,  // 1900s
-    1910: 291079,  // 1910s
-    1920: 12377,   // 1920s / roaring twenties
-    1930: 291081,  // 1930s
-    1940: 291082,  // 1940s
-    1950: 9673,    // 1950s
-    1960: 10916,   // 1960s
-    1970: 11953,   // 1970s
-    1980: 13065,   // 1980s
-    1990: 168426,  // 1990s
-    2000: 259648,  // 2000s
-    2010: 287213,  // 2010s
-    2020: 322276   // 2020s
-  },
-  // Centuries
-  centuries: {
-    2000: 315058,  // 21st century
-    1900: 165710,  // 20th century
-    1800: 207928,  // 19th century
-    1700: 160279,  // 18th century
-    1600: 261893,  // 17th century
-    1500: 272153,  // 16th century
-    0: 162861      // ancient (using ancient greece as proxy)
-  },
-  // Time periods / eras
-  timePeriods: {
-    "Ancient": [5049, 162861],      // ancient rome, ancient greece
-    "Medieval": [161257],            // medieval
-    "Renaissance": [272153],         // 16th century (renaissance era)
-    "Victorian": [252596],           // victorian era
-    "Modern Day": [315058],          // 21st century / contemporary
-    "Near Future": [4565],           // dystopia (near future often dystopian)
-    "Far Future": [4379],            // space travel / far future
-    "Post-Apocalyptic": [4458]       // post-apocalyptic future
-  }
-};
-
 const state = {
   filters: [],
   genreLogic: "or"
@@ -128,7 +86,7 @@ const searchType = document.getElementById("searchType");
 const searchDropdown = document.getElementById("searchDropdown");
 
 // Move dropdown to body to fix positioning (backdrop-filter on parent breaks position:fixed)
-document.body.appendChild(searchDropdown);
+if (searchDropdown) document.body.appendChild(searchDropdown);
 
 const focusOverlay = document.getElementById("focusOverlay");
 const focusTitle = document.getElementById("focusTitle");
@@ -145,39 +103,62 @@ const clearAllButton = document.getElementById("clearAllButton");
 
 let searchDebounceTimer;
 
-searchInput.addEventListener('input', () => {
+const SEARCH_PLACEHOLDERS = {
+  movie: "Search movies...",
+  actor: "Search actors...",
+  crew: "Search directors, writers, producers...",
+};
+
+const CREW_DEPARTMENTS = ["Directing", "Writing", "Production", "Camera", "Editing", "Sound", "Art", "Costume & Make-Up"];
+
+if (searchType) searchType.addEventListener('change', () => {
+  if (searchInput) {
+    searchInput.placeholder = SEARCH_PLACEHOLDERS[searchType.value] || "Search...";
+    searchInput.value = '';
+    hideSearchDropdown();
+    searchInput.focus();
+  }
+});
+
+if (searchInput) searchInput.addEventListener('input', () => {
   clearTimeout(searchDebounceTimer);
   const query = searchInput.value.trim();
   const type = searchType.value;
-  
-  if (query.length > 2) {
+
+  if (query.length >= 2) {
     searchDebounceTimer = setTimeout(() => fetchSearchResults(query, type), 300);
   } else {
     hideSearchDropdown();
   }
 });
 
+if (searchInput) searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideSearchDropdown();
+});
+
 async function fetchSearchResults(query, type) {
-  let endpoint = "";
-  
+  let endpoint;
   switch(type) {
-    case "movie":
-      endpoint = `/search/movie`;
-      break;
-    case "person":
-      endpoint = `/search/person`;
-      break;
-    case "company":
-      endpoint = `/search/company`;
-      break;
+    case "movie": endpoint = "/search/movie"; break;
+    case "actor": case "crew": endpoint = "/search/person"; break;
+    default: return;
   }
-  
+
   const url = `https://api.themoviedb.org/3${endpoint}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
-  
+
   try {
     const response = await fetch(url);
+    if (!response.ok) return;
     const data = await response.json();
-    renderSearchDropdown(data.results.slice(0, 6), type);
+    let results = data.results || [];
+
+    if (type === "actor") {
+      results = results.filter(p => p.known_for_department === "Acting");
+    } else if (type === "crew") {
+      results = results.filter(p => CREW_DEPARTMENTS.includes(p.known_for_department));
+    }
+
+    renderSearchDropdown(results.slice(0, 8), type);
   } catch (err) {
     console.error("Search error:", err);
   }
@@ -210,41 +191,46 @@ function renderSearchDropdown(results, type) {
   searchDropdown.style.borderTopRightRadius = '0';
   
   searchDropdown.innerHTML = results.map(item => {
-    let icon, title, meta, image;
-    
+    let icon, title, subtitle, image, imgClass, rating;
+
     switch(type) {
       case "movie":
-        icon = "🎬";
-        title = item.title;
-        meta = item.release_date ? item.release_date.split('-')[0] : 'N/A';
-        image = item.poster_path ? `https://image.tmdb.org/t/p/w92${item.poster_path}` : 'https://placehold.co/45x68?text=No+Image';
+        icon = "🎬"; title = item.title;
+        subtitle = item.release_date ? item.release_date.split('-')[0] : '';
+        image = item.poster_path ? `https://image.tmdb.org/t/p/w92${item.poster_path}` : '';
+        imgClass = "poster"; rating = item.vote_average;
         break;
-      case "person":
-        icon = "🎭";
-        title = item.name;
-        meta = item.known_for_department || 'Unknown';
-        image = item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : 'https://placehold.co/45x68?text=No+Image';
+      case "actor":
+        icon = "🎭"; title = item.name;
+        subtitle = (item.known_for || []).map(k => k.title || k.name).slice(0, 2).join(", ") || "Actor";
+        image = item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
+        imgClass = "profile"; rating = null;
         break;
-      case "company":
-        icon = "🏛️";
-        title = item.name;
-        meta = item.origin_country || '';
-        image = item.logo_path ? `https://image.tmdb.org/t/p/w92${item.logo_path}` : 'https://placehold.co/45x68?text=No+Logo';
+      case "crew":
+        icon = "🎥"; title = item.name;
+        subtitle = item.known_for_department || "Crew";
+        image = item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
+        imgClass = "profile"; rating = null;
         break;
     }
-    
+
+    const ratingHtml = rating && rating > 0 ? `<span class="rating-badge">★ ${rating.toFixed(1)}</span>` : '';
+    const imgHtml = image
+      ? `<img src="${image}" alt="${title}" class="dropdown-img ${imgClass}" onerror="this.style.display='none'">`
+      : `<div class="dropdown-img ${imgClass} dropdown-img-placeholder"></div>`;
+
     return `
-      <div class="dropdown-item" data-id="${item.id}" data-type="${type}">
-        <img src="${image}" alt="${title}" onerror="this.src='https://placehold.co/45x68?text=?'">
+      <div class="dropdown-item" data-id="${item.id}" data-type="${type}" data-title="${title.replace(/"/g, '&quot;')}">
+        ${imgHtml}
         <div class="dropdown-info">
-          <div class="movie-title">${icon} ${title}</div>
-          <div class="movie-meta">${meta}</div>
+          <div class="dropdown-title"><span class="type-icon">${icon}</span>${title}${ratingHtml}</div>
+          <div class="dropdown-subtitle">${subtitle}</div>
         </div>
       </div>
     `;
   }).join('');
   
-  document.querySelectorAll('.dropdown-item').forEach(item => {
+  searchDropdown.querySelectorAll('.dropdown-item').forEach(item => {
     item.addEventListener('click', () => handleSearchItemClick(item));
   });
 }
@@ -252,70 +238,64 @@ function renderSearchDropdown(results, type) {
 async function handleSearchItemClick(item) {
   const id = item.dataset.id;
   const type = item.dataset.type;
-  
+  const title = item.dataset.title || '';
+
+  hideSearchDropdown();
+
   // Show hyperspace transition
   const hyperspace = document.getElementById('hyperspaceOverlay');
-  hyperspace.hidden = false;
-  
-  // Clear previous multi-person state - this is a fresh search
+  if (hyperspace) hyperspace.hidden = false;
+
+  // Clear previous search state so results.html doesn't show stale filters
   localStorage.removeItem("vennPeople");
-  
-  // For movies, check if it has a collection
+  localStorage.removeItem("orbitFilters");
+  localStorage.removeItem("movies");
+  localStorage.removeItem("orbitBaseQuery");
+
   if (type === "movie") {
     try {
       const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`);
+      if (!movieRes.ok) throw new Error(`TMDB ${movieRes.status}`);
       const movie = await movieRes.json();
-      
+
       if (movie.belongs_to_collection) {
-        // Has collection - go to Timeline to show all films in collection
         localStorage.setItem("timelineMovieId", id);
         localStorage.setItem("timelineType", "movie");
-        setTimeout(() => {
-          window.location.href = 'games/timeline.html';
-        }, 600);
+        setTimeout(() => { window.location.href = 'games/timeline.html'; }, 600);
       } else {
-        // No collection - go to Results page with this single movie prominently displayed
         localStorage.setItem("singleMovie", JSON.stringify(movie));
         localStorage.setItem("resultsMode", "single");
-        setTimeout(() => {
-          window.location.href = 'games/results.html';
-        }, 600);
+        setTimeout(() => { window.location.href = 'games/results.html'; }, 600);
       }
     } catch (err) {
-      console.error("Movie check error:", err);
-      // Fallback to timeline
       localStorage.setItem("timelineMovieId", id);
       localStorage.setItem("timelineType", "movie");
-      setTimeout(() => {
-        window.location.href = 'games/timeline.html';
-      }, 600);
+      setTimeout(() => { window.location.href = 'games/timeline.html'; }, 600);
     }
-  } else {
-    // Person or company - go to Timeline
+  } else if (type === "actor" || type === "crew") {
     localStorage.setItem("timelineMovieId", id);
-    localStorage.setItem("timelineType", type);
-    
-    setTimeout(() => {
-      window.location.href = 'games/timeline.html';
-    }, 800);
+    localStorage.setItem("timelineType", "person");
+    setTimeout(() => { window.location.href = 'games/timeline.html'; }, 600);
   }
 }
 
 function hideSearchDropdown() {
+  if (!searchDropdown) return;
   searchDropdown.style.display = 'none';
   searchDropdown.innerHTML = '';
-  searchInput.classList.remove('dropdown-open');
+  if (searchInput) searchInput.classList.remove('dropdown-open');
 }
 
 document.addEventListener('click', (e) => {
-  if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target) && !searchType.contains(e.target)) {
+  if (searchInput && searchDropdown && searchType &&
+      !searchInput.contains(e.target) && !searchDropdown.contains(e.target) && !searchType.contains(e.target)) {
     hideSearchDropdown();
   }
 });
 
 // Reposition dropdown on scroll/resize to keep it attached
 window.addEventListener('scroll', () => {
-  if (searchDropdown.style.display === 'block') {
+  if (searchDropdown && searchDropdown.style.display === 'block' && searchInput) {
     const rect = searchInput.getBoundingClientRect();
     searchDropdown.style.top = `${rect.bottom}px`;
     searchDropdown.style.left = `${rect.left}px`;
@@ -323,7 +303,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 window.addEventListener('resize', () => {
-  if (searchDropdown.style.display === 'block') {
+  if (searchDropdown && searchDropdown.style.display === 'block' && searchInput) {
     const rect = searchInput.getBoundingClientRect();
     searchDropdown.style.top = `${rect.bottom}px`;
     searchDropdown.style.left = `${rect.left}px`;
@@ -334,13 +314,13 @@ window.addEventListener('resize', () => {
 const sectionDefinitions = {
   people: { title: "People", builder: buildPeopleContent },
   genres: { title: "Genres", builder: buildGenresContent },
-  setting: { title: "Setting", builder: buildSettingContent },
-  dateRuntime: { title: "Date & Runtime", builder: buildDateRuntimeContent },
-  ratings: { title: "Ratings", builder: buildRatingsContent },
+  timeEra: { title: "Time & Era", builder: buildTimeEraContent },
+  ratingsContent: { title: "Ratings & Content", builder: buildRatingsContentSection },
   regionLanguage: { title: "Region & Language", builder: buildRegionLanguageContent },
   production: { title: "Production & Box Office", builder: buildProductionContent },
   watch: { title: "Watch Providers", builder: buildWatchContent },
-  suitability: { title: "Suitability", builder: buildSuitabilityContent }
+  universes: { title: "Universes", builder: buildUniversesContent },
+  awards: { title: "Awards", builder: buildAwardsContent }
 };
 
 let currentSectionKey = null;
@@ -402,6 +382,10 @@ function updateUIFromState() {
     renderFilterChips();
   }
   
+  // Toggle arcade button visibility
+  const arcadeBtn = document.getElementById('arcadeButton');
+  if (arcadeBtn) arcadeBtn.classList.toggle('hidden', hasFilters);
+
   const sectionsWithFilters = new Set(state.filters.map((f) => f.section));
   document.querySelectorAll(".section-card:not(.launch-card)").forEach((card) => {
     if (sectionsWithFilters.has(card.dataset.section)) {
@@ -447,107 +431,233 @@ clearAllButton.onclick = () => {
 
 launchCard.addEventListener("click", async () => {
   if (launchCard.disabled) return;
-  
+
   try {
-    const queryParams = buildTMDBQueryFromFilters(state.filters);
-    
-    // Check if language filter is set - the filter extraction now handles the English Only toggle
-    const hasLanguageFilter = state.filters.some(f => f.section === "regionLanguage" && f.value?.type === "language");
-    // If no language filter is present, it means English Only is OFF and no language selected - search all languages
-    const languageParam = hasLanguageFilter ? '' : '';
-    
-    // Quick preview check - see if results will be capped
-    const previewUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}${languageParam}&page=1`;
-    const previewResponse = await fetch(previewUrl);
-    const previewData = await previewResponse.json();
-    
-    const MAX_PAGES = 25; // 500 movies cap
-    const totalAvailable = previewData.total_pages || 0;
-    const totalMovies = previewData.total_results || 0;
-    
-    console.log(`Preview: ${totalMovies} movies across ${totalAvailable} pages`);
-    
-    // Warn if results will be capped (more than 500)
-    if (totalAvailable > MAX_PAGES) {
-      const proceed = confirm(
-        `Your search found ~${totalMovies.toLocaleString()} movies!\n\n` +
-        `We'll show the top 500 results.\n\n` +
-        `💡 Tip: Add more filters (genre, year, person) for more refined results.\n\n` +
-        `Continue anyway?`
-      );
-      if (!proceed) return;
-    }
-    
-    // Show hyperspace
-    const hyperspace = document.getElementById('hyperspaceOverlay');
-    hyperspace.hidden = false;
-    
-    // Fetch pages with a reasonable cap (500 movies max)
-    const allMovies = [];
-    let currentPage = 1;
-    
-    console.log("Fetching results...");
-    
-    // Use preview data for first page
-    if (previewData.results && previewData.results.length > 0) {
-      allMovies.push(...previewData.results);
-      const pagesToFetch = Math.min(totalAvailable, MAX_PAGES);
-      console.log(`Page 1: ${previewData.results.length} movies (fetching ${pagesToFetch} of ${totalAvailable} pages)`);
-      
-      // Fetch remaining pages up to cap
-      for (currentPage = 2; currentPage <= pagesToFetch; currentPage++) {
-        const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}${languageParam}&page=${currentPage}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) break;
-        
-        const data = await response.json();
-        
-        if (data.results && data.results.length > 0) {
-          allMovies.push(...data.results);
-          console.log(`Page ${currentPage}: ${data.results.length} movies (total: ${allMovies.length})`);
-        } else {
-          break;
+    // Check for universe filters
+    const universeFilters = state.filters.filter(f => f.section === "universes");
+    const collectionIds = [];
+    universeFilters.forEach(f => {
+      if (f.value && f.value.collections) {
+        collectionIds.push(...f.value.collections);
+      }
+    });
+
+    if (collectionIds.length > 0) {
+      // UNIVERSE MODE: fetch from collections
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      const allMovies = [];
+      const seenIds = new Set();
+
+      for (const colId of collectionIds) {
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/collection/${colId}?api_key=${TMDB_API_KEY}`);
+          if (!res.ok) continue;
+          const data = await res.json();
+          if (data.parts) {
+            data.parts.forEach(movie => {
+              if (!seenIds.has(movie.id)) {
+                seenIds.add(movie.id);
+                allMovies.push(movie);
+              }
+            });
+          }
+        } catch (err) {
+          console.error(`Failed to fetch collection ${colId}:`, err);
         }
       }
-    }
-    
-    console.log(`Total movies fetched: ${allMovies.length}`);
-    
-    // Show note in results if capped
-    const wasCapped = totalAvailable > MAX_PAGES;
-    if (wasCapped) {
-      localStorage.setItem("resultsCapped", "true");
-      localStorage.setItem("totalAvailable", totalMovies.toString());
-    } else {
+
+      // Apply client-side filters
+      const nonUniverseFilters = state.filters.filter(f => f.section !== "universes");
+      let filtered = allMovies;
+
+      nonUniverseFilters.forEach(f => {
+        if (!f.value) return;
+        if (f.value.type === "genre") {
+          const genreId = GENRE_MAP[f.value.name];
+          if (genreId) filtered = filtered.filter(m => m.genre_ids?.includes(genreId));
+        } else if (f.value.type === "rating") {
+          filtered = filtered.filter(m => {
+            const avg = m.vote_average || 0;
+            return avg >= (f.value.min || 0) && avg <= (f.value.max || 10);
+          });
+        } else if (f.value.type === "year") {
+          filtered = filtered.filter(m => {
+            const year = m.release_date ? parseInt(m.release_date.split('-')[0]) : 0;
+            return year === f.value.year;
+          });
+        } else if (f.value.type === "decade" && f.value.subType === "release") {
+          filtered = filtered.filter(m => {
+            const year = m.release_date ? parseInt(m.release_date.split('-')[0]) : 0;
+            return year >= f.value.decade && year <= f.value.decade + 9;
+          });
+        } else if (f.value.type === "runtime" && f.value.min != null) {
+          filtered = filtered.filter(m => {
+            const rt = m.runtime || 0;
+            return rt >= f.value.min && rt <= (f.value.max || 999);
+          });
+        }
+      });
+
+      // Post-filter by awards
+      filtered = filterByAwards(filtered, state.filters);
+
+      if (filtered.length === 0) {
+        hyperspace.hidden = true;
+        alert("No movies found matching your criteria in the selected universe(s).");
+        return;
+      }
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(filtered);
+
+      localStorage.setItem("movies", JSON.stringify(filtered));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
       localStorage.removeItem("resultsCapped");
       localStorage.removeItem("totalAvailable");
+
+      setTimeout(() => {
+        window.location.href = "games/results.html";
+      }, 500);
+    } else if (hasAwardsOnlyFilters(state.filters)) {
+      // AWARDS MODE: query directly from local AWARDS_DATABASE
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      const matchingIds = getAwardsMatchingIds(state.filters);
+      if (matchingIds.length === 0) {
+        hyperspace.hidden = true;
+        alert("No award-winning movies found matching your criteria.");
+        return;
+      }
+
+      // Fetch movie details from TMDB in batches
+      let allMovies = [];
+      const BATCH_SIZE = 8;
+      for (let i = 0; i < matchingIds.length; i += BATCH_SIZE) {
+        const batch = matchingIds.slice(i, i + BATCH_SIZE);
+        const results = await Promise.all(batch.map(id =>
+          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        ));
+        results.forEach(m => { if (m && m.id) allMovies.push(m); });
+      }
+
+      // Convert full movie objects to discover-like format (add genre_ids)
+      allMovies = allMovies.map(m => ({
+        ...m,
+        genre_ids: m.genre_ids || (m.genres ? m.genres.map(g => g.id) : [])
+      }));
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(allMovies);
+
+      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
+      localStorage.removeItem("resultsCapped");
+      localStorage.removeItem("totalAvailable");
+
+      setTimeout(() => {
+        window.location.href = "games/results.html";
+      }, 500);
+
+    } else {
+      // NORMAL DISCOVER MODE
+      const queryParams = buildTMDBQueryFromFilters(state.filters);
+
+      const previewUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}&page=1`;
+      const previewResponse = await fetch(previewUrl);
+      if (!previewResponse.ok) {
+        alert("Search failed — please try again.");
+        return;
+      }
+      const previewData = await previewResponse.json();
+
+      const MAX_PAGES = 25;
+      const totalAvailable = previewData.total_pages || 0;
+      const totalMovies = previewData.total_results || 0;
+
+      console.log(`Preview: ${totalMovies} movies across ${totalAvailable} pages`);
+
+      if (totalAvailable > MAX_PAGES) {
+        const proceed = confirm(
+          `Your search found ~${totalMovies.toLocaleString()} movies!\n\n` +
+          `We'll show the top 500 results.\n\n` +
+          `Tip: Add more filters (genre, year, person) for more refined results.\n\n` +
+          `Continue anyway?`
+        );
+        if (!proceed) return;
+      }
+
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      let allMovies = [];
+      let currentPage = 1;
+
+      if (previewData.results && previewData.results.length > 0) {
+        allMovies.push(...previewData.results);
+        const pagesToFetch = Math.min(totalAvailable, MAX_PAGES);
+
+        for (currentPage = 2; currentPage <= pagesToFetch; currentPage++) {
+          const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}&page=${currentPage}`;
+          const response = await fetch(url);
+          if (!response.ok) break;
+          const data = await response.json();
+          if (data.results && data.results.length > 0) {
+            allMovies.push(...data.results);
+          } else {
+            break;
+          }
+        }
+      }
+
+      const wasCapped = totalAvailable > MAX_PAGES;
+      if (wasCapped) {
+        localStorage.setItem("resultsCapped", "true");
+        localStorage.setItem("totalAvailable", totalMovies.toString());
+      } else {
+        localStorage.removeItem("resultsCapped");
+        localStorage.removeItem("totalAvailable");
+      }
+
+      // Post-filter by awards
+      allMovies = filterByAwards(allMovies, state.filters);
+
+      if (allMovies.length === 0) {
+        hyperspace.hidden = true;
+        alert("No movies found matching your criteria.");
+        return;
+      }
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(allMovies);
+
+      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
+      const baseParams = new URLSearchParams(queryParams);
+      baseParams.delete("with_watch_providers");
+      baseParams.delete("watch_region");
+      localStorage.setItem("orbitBaseQuery", baseParams.toString());
+
+      setTimeout(() => {
+        window.location.href = "games/results.html";
+      }, 500);
     }
-    
-    if (allMovies.length === 0) {
-      hyperspace.hidden = true;
-      alert("No movies found matching your criteria.");
-      return;
-    }
-    
-    const selectedGenres = getSelectedGenres(state.filters);
-    const genresToUse = selectedGenres.length >= 2 
-      ? selectedGenres.slice(0, 3)
-      : getTopGenresFromMovies(allMovies);
-    
-    localStorage.setItem("movies", JSON.stringify(allMovies));
-    localStorage.setItem("genres", JSON.stringify(genresToUse));
-    localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
-    // Save base query (strip watch provider params so results page can re-add them)
-    const baseParams = new URLSearchParams(queryParams);
-    baseParams.delete("with_watch_providers");
-    baseParams.delete("watch_region");
-    localStorage.setItem("orbitBaseQuery", baseParams.toString());
-    
-    // Navigate to results page
-    setTimeout(() => {
-      window.location.href = "games/results.html";
-    }, 500);
   } catch (err) {
     const hyperspace = document.getElementById('hyperspaceOverlay');
     hyperspace.hidden = true;
@@ -556,13 +666,109 @@ launchCard.addEventListener("click", async () => {
   }
 });
 
+function hasAwardsOnlyFilters(filters) {
+  const hasAwards = filters.some(f => f.section === "awards" && f.value);
+  if (!hasAwards) return false;
+  if (typeof AWARDS_DATABASE === "undefined") return false;
+  // Check if any non-awards filter would meaningfully constrain a TMDB discover query
+  const hasTMDBFilters = filters.some(f => {
+    if (!f.value) return false;
+    return f.section === "people" || f.section === "genres" || f.section === "timeEra" ||
+           f.section === "ratingsContent" || f.section === "regionLanguage" || f.section === "production";
+  });
+  return !hasTMDBFilters;
+}
+
+function getAwardsMatchingIds(filters) {
+  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
+  const levels = [];
+  const festivals = [];
+  const categories = [];
+  let yearFrom = null;
+  let yearTo = null;
+
+  awardFilters.forEach(f => {
+    if (f.value.type === "award-level") levels.push(f.value.level);
+    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
+    else if (f.value.type === "award-category") categories.push(f.value.category);
+    else if (f.value.type === "award-year-range") {
+      yearFrom = f.value.from;
+      yearTo = f.value.to;
+    }
+  });
+
+  const matchingIds = [];
+  for (const [id, entry] of Object.entries(AWARDS_DATABASE)) {
+    if (!entry.awards || entry.awards.length === 0) continue;
+    const match = entry.awards.some(award => {
+      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
+      if (categories.length > 0 && categories.indexOf(award.category) === -1) return false;
+      if (levels.length === 1) {
+        if (levels[0] === "winner" && !award.won) return false;
+        if (levels[0] === "nominee" && award.won) return false;
+      }
+      if (yearFrom !== null && award.year < yearFrom) return false;
+      if (yearTo !== null && award.year > yearTo) return false;
+      return true;
+    });
+    if (match) matchingIds.push(parseInt(id));
+  }
+  return matchingIds;
+}
+
+function filterByAwards(movies, filters) {
+  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
+  if (awardFilters.length === 0) return movies;
+  if (typeof AWARDS_DATABASE === "undefined") return movies;
+
+  const levels = [];
+  const festivals = [];
+  const categories = [];
+  let yearFrom = null;
+  let yearTo = null;
+
+  awardFilters.forEach(function(f) {
+    if (f.value.type === "award-level") levels.push(f.value.level);
+    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
+    else if (f.value.type === "award-category") categories.push(f.value.category);
+    else if (f.value.type === "award-year-range") {
+      yearFrom = f.value.from;
+      yearTo = f.value.to;
+    }
+  });
+
+  return movies.filter(function(movie) {
+    const entry = AWARDS_DATABASE[movie.id];
+    if (!entry || !entry.awards || entry.awards.length === 0) return false;
+
+    return entry.awards.some(function(award) {
+      // Festival filter (OR within group)
+      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
+      // Category filter (OR within group)
+      if (categories.length > 0 && categories.indexOf(award.category) === -1) return false;
+      // Level filter
+      if (levels.length === 1) {
+        if (levels[0] === "winner" && !award.won) return false;
+        if (levels[0] === "nominee" && award.won) return false;
+      }
+      // Year range filter
+      if (yearFrom !== null && award.year < yearFrom) return false;
+      if (yearTo !== null && award.year > yearTo) return false;
+      return true;
+    });
+  });
+}
+
 function buildTMDBQueryFromFilters(filters) {
   const params = new URLSearchParams();
   
   params.append("sort_by", "popularity.desc");
   params.append("include_adult", "false");
   params.append("include_video", "false");
-  
+
+  // Accumulate keywords separately to avoid separator conflicts
+  const genreKeywordIds = [];   // AND — joined with ","
+
   filters.forEach(filter => {
     if (!filter.value) return;
     
@@ -581,64 +787,59 @@ function buildTMDBQueryFromFilters(filters) {
         if (filter.value.type === "genre") {
           const genreId = GENRE_MAP[filter.value.name];
           if (genreId) {
+            const genreSep = state.genreLogic === "or" ? "|" : ",";
             const existing = params.get("with_genres");
-            params.set("with_genres", existing ? `${existing},${genreId}` : genreId);
+            params.set("with_genres", existing ? `${existing}${genreSep}${genreId}` : String(genreId));
           }
         } else if (filter.value.type === "keyword") {
           const keywordId = KEYWORD_MAP[filter.value.name];
           if (keywordId) {
-            const existing = params.get("with_keywords");
-            params.set("with_keywords", existing ? `${existing},${keywordId}` : keywordId);
+            genreKeywordIds.push(keywordId);
           }
         }
         break;
         
-      case "setting":
-        // Use keywords for setting (when movie is SET, not released)
-        if (filter.value.type === "decade") {
-          const keywordId = SETTING_KEYWORD_MAP.decades[filter.value.decade];
-          if (keywordId) {
-            const existing = params.get("with_keywords");
-            params.set("with_keywords", existing ? `${existing}|${keywordId}` : keywordId);
+      case "timeEra":
+          // Release date & runtime — clear conflicting date params on each set
+          if (filter.value.type === "year") {
+            params.delete("primary_release_date.gte");
+            params.delete("primary_release_date.lte");
+            params.set("primary_release_year", filter.value.year);
+          } else if (filter.value.type === "decade") {
+            params.delete("primary_release_year");
+            const start = filter.value.decade;
+            const end = start + 9;
+            params.set("primary_release_date.gte", `${start}-01-01`);
+            params.set("primary_release_date.lte", `${end}-12-31`);
+          } else if (filter.value.type === "dateRange") {
+            params.delete("primary_release_year");
+            if (filter.value.start) params.set("primary_release_date.gte", filter.value.start);
+            if (filter.value.end) params.set("primary_release_date.lte", filter.value.end);
+          } else if (filter.value.type === "runtime") {
+            if (filter.value.min) params.set("with_runtime.gte", filter.value.min);
+            if (filter.value.max) params.set("with_runtime.lte", filter.value.max);
           }
-        } else if (filter.value.type === "century") {
-          const keywordId = SETTING_KEYWORD_MAP.centuries[filter.value.century];
-          if (keywordId) {
-            const existing = params.get("with_keywords");
-            params.set("with_keywords", existing ? `${existing}|${keywordId}` : keywordId);
-          }
-        } else if (filter.value.type === "timePeriod") {
-          const keywordIds = SETTING_KEYWORD_MAP.timePeriods[filter.value.name];
-          if (keywordIds && keywordIds.length > 0) {
-            const existing = params.get("with_keywords");
-            // Join multiple keywords with | (OR) for broader results
-            const keywordsStr = keywordIds.join("|");
-            params.set("with_keywords", existing ? `${existing}|${keywordsStr}` : keywordsStr);
-          }
-        }
         break;
-        
-      case "dateRuntime":
-        if (filter.value.type === "year") {
-          params.set("primary_release_year", filter.value.year);
-        } else if (filter.value.type === "decade") {
-          const start = filter.value.decade;
-          const end = start + 9;
-          params.set("primary_release_date.gte", `${start}-01-01`);
-          params.set("primary_release_date.lte", `${end}-12-31`);
-        } else if (filter.value.type === "runtime") {
-          if (filter.value.min) params.set("with_runtime.gte", filter.value.min);
-          if (filter.value.max) params.set("with_runtime.lte", filter.value.max);
-        }
-        break;
-        
-      case "ratings":
+
+      case "ratingsContent":
         if (filter.value.type === "rating") {
           if (filter.value.min !== undefined) params.set("vote_average.gte", filter.value.min);
           if (filter.value.max !== undefined) params.set("vote_average.lte", filter.value.max);
         } else if (filter.value.type === "votes") {
           params.set("vote_count.gte", filter.value.min);
+        } else if (filter.value.type === "certification") {
+          const existing = params.get("certification");
+          params.set("certification", existing ? `${existing}|${filter.value.rating}` : filter.value.rating);
+          params.set("certification_country", "US");
         }
+        break;
+
+      case "universes":
+        // Collection IDs stored as _collections - handled in launch flow
+        break;
+
+      case "awards":
+        // No-op placeholder
         break;
         
       case "regionLanguage":
@@ -667,14 +868,11 @@ function buildTMDBQueryFromFilters(filters) {
         }
         break;
         
-      case "suitability":
-        if (filter.value.type === "certification") {
-          params.set("certification", filter.value.rating);
-          params.set("certification_country", "US");
-        }
-        break;
     }
   });
+
+  // Merge accumulated genre keywords (AND)
+  if (genreKeywordIds.length > 0) params.set("with_keywords", genreKeywordIds.join(","));
 
   // Inject saved watch providers from Region settings (if not already set by a filter)
   if (!params.has("with_watch_providers")) {
@@ -875,6 +1073,7 @@ function buildPeopleContent(root) {
     
     try {
       const response = await fetch(url);
+      if (!response.ok) return;
       const data = await response.json();
       renderPeopleDropdown(data.results.slice(0, 8), dropdown, input, selectedPeople, selectedContainer, role);
     } catch (err) {
@@ -1062,8 +1261,9 @@ function buildGenresContent(root) {
   const genreGroup = document.createElement("div");
   genreGroup.className = "chip-group";
   genres.forEach(g => {
-    const emoji = GENRE_EMOJIS[g] || "🎬";
-    const chip = makeChip(`${emoji} ${g}`, "genres", { type: "genre", name: g });
+    const svg = GENRE_SVGS[g] || "";
+    const chip = makeChip(g, "genres", { type: "genre", name: g });
+    if (svg) chip.innerHTML = `<span class="genre-glyph">${svg}</span> ${g}`;
     chip.id = `genre-${g.replace(/\s+/g, '-')}`;
     genreGroup.appendChild(chip);
   });
@@ -1096,108 +1296,15 @@ function buildGenresContent(root) {
 }
 
 // =============================================
-// 3. SETTING SECTION
+// 3. TIME & ERA SECTION (release date + runtime)
 // =============================================
 
-function buildSettingContent(root) {
-  // Create groups for mutual exclusivity tracking
-  const decadeGroup = document.createElement("div");
-  decadeGroup.className = "chip-group";
-  decadeGroup.dataset.settingGroup = "decade";
-  
-  const centuryGroup = document.createElement("div");
-  centuryGroup.className = "chip-group";
-  centuryGroup.dataset.settingGroup = "century";
-  
-  const periodGroup = document.createElement("div");
-  periodGroup.className = "chip-group";
-  periodGroup.dataset.settingGroup = "period";
-  
-  // Function to handle mutual exclusivity
-  function handleSettingSelection(clickedGroup) {
-    const allGroups = [decadeGroup, centuryGroup, periodGroup];
-    allGroups.forEach(group => {
-      if (group !== clickedGroup) {
-        // Deselect all chips in other groups
-        group.querySelectorAll('.chip.active').forEach(chip => {
-          chip.classList.remove('active');
-        });
-        // Remove disabled state when selection is cleared
-        group.classList.remove('setting-disabled');
-      }
-    });
-    
-    // Check if clicked group has any active selections
-    const hasActiveInClicked = clickedGroup.querySelectorAll('.chip.active').length > 0;
-    
-    // Disable/enable other groups based on selection
-    allGroups.forEach(group => {
-      if (group !== clickedGroup) {
-        if (hasActiveInClicked) {
-          group.classList.add('setting-disabled');
-        } else {
-          group.classList.remove('setting-disabled');
-        }
-      }
-    });
-  }
-  
-  // DECADES (1900s - 2020s)
-  root.appendChild(makeSectionLabel("Decades (when movie is set)"));
-  const decades = [1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-  decades.forEach(d => {
-    const chip = makeChip(`${d}s`, "setting", { type: "decade", decade: d });
-    chip.id = `setting-decade-${d}`;
-    chip.addEventListener('click', () => {
-      setTimeout(() => handleSettingSelection(decadeGroup), 10);
-    });
-    decadeGroup.appendChild(chip);
-  });
-  root.appendChild(decadeGroup);
-  
-  // CENTURIES (2000s, 1900s, 1800s, etc.)
-  root.appendChild(makeSectionLabel("Centuries"));
-  const centuries = [
-    { label: "21st (2000s)", value: 2000 },
-    { label: "20th (1900s)", value: 1900 },
-    { label: "19th (1800s)", value: 1800 },
-    { label: "18th (1700s)", value: 1700 },
-    { label: "17th (1600s)", value: 1600 },
-    { label: "16th (1500s)", value: 1500 },
-    { label: "Earlier", value: 0 }
-  ];
-  centuries.forEach(c => {
-    const chip = makeChip(c.label, "setting", { type: "century", century: c.value, label: c.label });
-    chip.id = `setting-century-${c.value}`;
-    chip.addEventListener('click', () => {
-      setTimeout(() => handleSettingSelection(centuryGroup), 10);
-    });
-    centuryGroup.appendChild(chip);
-  });
-  root.appendChild(centuryGroup);
-  
-  // TIME PERIODS (story setting)
-  root.appendChild(makeSectionLabel("Time Period (story setting)"));
-  const periods = [
-    "Ancient", "Medieval", "Renaissance", "Victorian",
-    "Modern Day", "Near Future", "Far Future", "Post-Apocalyptic"
-  ];
-  periods.forEach(p => {
-    const chip = makeChip(p, "setting", { type: "timePeriod", name: p, keywordId: 0 });
-    chip.id = `period-${p.replace(/\s+/g, '-')}`;
-    chip.addEventListener('click', () => {
-      setTimeout(() => handleSettingSelection(periodGroup), 10);
-    });
-    periodGroup.appendChild(chip);
-  });
-  root.appendChild(periodGroup);
-}
+function buildTimeEraContent(root) {
+  const releaseHeader = document.createElement("div");
+  releaseHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
+  releaseHeader.textContent = "Release Date & Runtime";
+  root.appendChild(releaseHeader);
 
-// =============================================
-// 4. DATE & RUNTIME SECTION
-// =============================================
-
-function buildDateRuntimeContent(root) {
   root.appendChild(makeSectionLabel("Specific Year"));
   const yearRow = document.createElement("div");
   yearRow.className = "input-row";
@@ -1209,49 +1316,48 @@ function buildDateRuntimeContent(root) {
   yearInput.max = "2030";
   yearRow.appendChild(yearInput);
   root.appendChild(yearRow);
-  
-  root.appendChild(makeSectionLabel("Decades (when movie was made)"));
-  const decades = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-  const decadeGroup = document.createElement("div");
-  decadeGroup.className = "chip-group";
-  decades.forEach(d => {
-    const chip = makeChip(`${d}s`, "dateRuntime", { type: "decade", decade: d });
+
+  root.appendChild(makeSectionLabel("Decades (when movie was released)"));
+  const releaseDecades = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+  const relDecadeGroup = document.createElement("div");
+  relDecadeGroup.className = "chip-group";
+  releaseDecades.forEach(d => {
+    const chip = makeChip(`${d}s`, "timeEra", { type: "decade", decade: d, subType: "release" });
     chip.id = `date-decade-${d}`;
-    decadeGroup.appendChild(chip);
+    relDecadeGroup.appendChild(chip);
   });
-  root.appendChild(decadeGroup);
-  
+  root.appendChild(relDecadeGroup);
+
   const quickGroup = document.createElement("div");
   quickGroup.className = "chip-group";
   quickGroup.style.marginTop = "12px";
-  
-  const newRelease = makeChip("New Releases (6 months)", "dateRuntime", { 
+  const newRelease = makeChip("New Releases (6 months)", "timeEra", {
     type: "dateRange",
+    subType: "release",
     start: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     end: new Date().toISOString().split('T')[0]
   });
-  const classic = makeChip("Classic (Pre-1980)", "dateRuntime", {
+  const classic = makeChip("Classic (Pre-1980)", "timeEra", {
     type: "dateRange",
+    subType: "release",
     start: "1900-01-01",
     end: "1979-12-31"
   });
   quickGroup.appendChild(newRelease);
   quickGroup.appendChild(classic);
   root.appendChild(quickGroup);
-  
+
   root.appendChild(makeSectionLabel("Runtime (minutes)"));
-  
   const runtimeRow = document.createElement("div");
   runtimeRow.className = "input-row";
   runtimeRow.style.flexDirection = "column";
   runtimeRow.style.gap = "12px";
-  
+
   const minRow = document.createElement("div");
   minRow.style.display = "flex";
   minRow.style.gap = "12px";
   minRow.style.width = "100%";
   minRow.style.alignItems = "center";
-  
   const minLabel = document.createElement("span");
   minLabel.textContent = "Min:";
   minLabel.style.minWidth = "40px";
@@ -1265,26 +1371,23 @@ function buildDateRuntimeContent(root) {
   const minValue = document.createElement("span");
   minValue.textContent = "0";
   minValue.id = "runtimeMinValue";
-  
   minSlider.addEventListener("input", () => {
     minValue.textContent = minSlider.value;
-    const maxSlider = document.getElementById("runtimeMax");
-    if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
-      maxSlider.value = minSlider.value;
+    const maxSl = document.getElementById("runtimeMax");
+    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
+      maxSl.value = minSlider.value;
       document.getElementById("runtimeMaxValue").textContent = minSlider.value;
     }
   });
-  
   minRow.appendChild(minLabel);
   minRow.appendChild(minSlider);
   minRow.appendChild(minValue);
-  
+
   const maxRow = document.createElement("div");
   maxRow.style.display = "flex";
   maxRow.style.gap = "12px";
   maxRow.style.width = "100%";
   maxRow.style.alignItems = "center";
-  
   const maxLabel = document.createElement("span");
   maxLabel.textContent = "Max:";
   maxLabel.style.minWidth = "40px";
@@ -1298,24 +1401,22 @@ function buildDateRuntimeContent(root) {
   const maxValue = document.createElement("span");
   maxValue.textContent = "300";
   maxValue.id = "runtimeMaxValue";
-  
   maxSlider.addEventListener("input", () => {
     maxValue.textContent = maxSlider.value;
-    const minSlider = document.getElementById("runtimeMin");
-    if (parseInt(maxSlider.value) < parseInt(minSlider.value)) {
-      minSlider.value = maxSlider.value;
+    const minSl = document.getElementById("runtimeMin");
+    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
+      minSl.value = maxSlider.value;
       document.getElementById("runtimeMinValue").textContent = maxSlider.value;
     }
   });
-  
   maxRow.appendChild(maxLabel);
   maxRow.appendChild(maxSlider);
   maxRow.appendChild(maxValue);
-  
+
   runtimeRow.appendChild(minRow);
   runtimeRow.appendChild(maxRow);
   root.appendChild(runtimeRow);
-  
+
   const runtimeQuick = document.createElement("div");
   runtimeQuick.className = "chip-group";
   runtimeQuick.style.marginTop = "12px";
@@ -1325,8 +1426,9 @@ function buildDateRuntimeContent(root) {
     { label: "Long (2h+)", min: 120, max: 300 },
     { label: "Epic (3h+)", min: 180, max: 300 }
   ].forEach(preset => {
-    const chip = makeChip(preset.label, "dateRuntime", {
+    const chip = makeChip(preset.label, "timeEra", {
       type: "runtime",
+      subType: "release",
       min: preset.min,
       max: preset.max
     });
@@ -1342,23 +1444,27 @@ function buildDateRuntimeContent(root) {
 }
 
 // =============================================
-// 5. RATINGS SECTION
+// 4. RATINGS & CONTENT SECTION (merged ratings + suitability)
 // =============================================
 
-function buildRatingsContent(root) {
+function buildRatingsContentSection(root) {
+  // --- RATINGS HALF ---
+  const ratingsHeader = document.createElement("div");
+  ratingsHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
+  ratingsHeader.textContent = "Ratings & Votes";
+  root.appendChild(ratingsHeader);
+
   root.appendChild(makeSectionLabel("Quality Score Range (0-10)"));
-  
   const ratingRow = document.createElement("div");
   ratingRow.className = "input-row";
   ratingRow.style.flexDirection = "column";
   ratingRow.style.gap = "12px";
-  
+
   const minRow = document.createElement("div");
   minRow.style.display = "flex";
   minRow.style.gap = "12px";
   minRow.style.width = "100%";
   minRow.style.alignItems = "center";
-  
   const minLabel = document.createElement("span");
   minLabel.textContent = "Min:";
   minLabel.style.minWidth = "40px";
@@ -1373,26 +1479,23 @@ function buildRatingsContent(root) {
   const minValue = document.createElement("span");
   minValue.textContent = "0.0";
   minValue.id = "ratingMinValue";
-  
   minSlider.addEventListener("input", () => {
     minValue.textContent = parseFloat(minSlider.value).toFixed(1);
-    const maxSlider = document.getElementById("ratingMax");
-    if (parseFloat(minSlider.value) > parseFloat(maxSlider.value)) {
-      maxSlider.value = minSlider.value;
+    const maxSl = document.getElementById("ratingMax");
+    if (parseFloat(minSlider.value) > parseFloat(maxSl.value)) {
+      maxSl.value = minSlider.value;
       document.getElementById("ratingMaxValue").textContent = parseFloat(minSlider.value).toFixed(1);
     }
   });
-  
   minRow.appendChild(minLabel);
   minRow.appendChild(minSlider);
   minRow.appendChild(minValue);
-  
+
   const maxRow = document.createElement("div");
   maxRow.style.display = "flex";
   maxRow.style.gap = "12px";
   maxRow.style.width = "100%";
   maxRow.style.alignItems = "center";
-  
   const maxLabel = document.createElement("span");
   maxLabel.textContent = "Max:";
   maxLabel.style.minWidth = "40px";
@@ -1407,24 +1510,22 @@ function buildRatingsContent(root) {
   const maxValue = document.createElement("span");
   maxValue.textContent = "10.0";
   maxValue.id = "ratingMaxValue";
-  
   maxSlider.addEventListener("input", () => {
     maxValue.textContent = parseFloat(maxSlider.value).toFixed(1);
-    const minSlider = document.getElementById("ratingMin");
-    if (parseFloat(maxSlider.value) < parseFloat(minSlider.value)) {
-      minSlider.value = maxSlider.value;
+    const minSl = document.getElementById("ratingMin");
+    if (parseFloat(maxSlider.value) < parseFloat(minSl.value)) {
+      minSl.value = maxSlider.value;
       document.getElementById("ratingMinValue").textContent = parseFloat(maxSlider.value).toFixed(1);
     }
   });
-  
   maxRow.appendChild(maxLabel);
   maxRow.appendChild(maxSlider);
   maxRow.appendChild(maxValue);
-  
+
   ratingRow.appendChild(minRow);
   ratingRow.appendChild(maxRow);
   root.appendChild(ratingRow);
-  
+
   const ratingQuick = document.createElement("div");
   ratingQuick.className = "chip-group";
   ratingQuick.style.marginTop = "12px";
@@ -1433,7 +1534,7 @@ function buildRatingsContent(root) {
     { label: "Hidden Gems (6.5-7.5)", min: 6.5, max: 7.5 },
     { label: "Cult Classics (<6.0)", min: 0, max: 6.0 }
   ].forEach(preset => {
-    const chip = makeChip(preset.label, "ratings", {
+    const chip = makeChip(preset.label, "ratingsContent", {
       type: "rating",
       min: preset.min,
       max: preset.max
@@ -1447,7 +1548,7 @@ function buildRatingsContent(root) {
     ratingQuick.appendChild(chip);
   });
   root.appendChild(ratingQuick);
-  
+
   root.appendChild(makeSectionLabel("Minimum Votes (reliability)"));
   const voteGroup = document.createElement("div");
   voteGroup.className = "chip-group";
@@ -1457,11 +1558,41 @@ function buildRatingsContent(root) {
     { label: "5,000+", votes: 5000 },
     { label: "10,000+", votes: 10000 }
   ].forEach(v => {
-    const chip = makeChip(v.label, "ratings", { type: "votes", min: v.votes });
+    const chip = makeChip(v.label, "ratingsContent", { type: "votes", min: v.votes });
     chip.id = `votes-${v.votes}`;
     voteGroup.appendChild(chip);
   });
   root.appendChild(voteGroup);
+
+  // --- DIVIDER ---
+  const divider = document.createElement("hr");
+  divider.style.cssText = "border: none; border-top: 1px solid rgba(0, 217, 255, 0.15); margin: 24px 0;";
+  root.appendChild(divider);
+
+  // --- SUITABILITY HALF ---
+  const suitHeader = document.createElement("div");
+  suitHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
+  suitHeader.textContent = "Content Rating";
+  root.appendChild(suitHeader);
+
+  root.appendChild(makeSectionLabel("Age Rating / Certification"));
+  const ratings = ["G", "PG", "PG-13", "R", "NC-17", "Unrated"];
+  const ratingGroup = document.createElement("div");
+  ratingGroup.className = "chip-group";
+  ratings.forEach(r => {
+    const chip = makeChip(r, "ratingsContent", { type: "certification", rating: r });
+    chip.id = `cert-${r.replace('-', '')}`;
+    ratingGroup.appendChild(chip);
+  });
+  root.appendChild(ratingGroup);
+
+  const note = document.createElement("p");
+  note.style.fontSize = "12px";
+  note.style.color = "var(--muted-silver)";
+  note.style.marginTop = "12px";
+  note.style.fontStyle = "italic";
+  note.textContent = "Note: Ratings are US certifications. Other regions may have different classifications.";
+  root.appendChild(note);
 }
 
 // =============================================
@@ -1920,7 +2051,7 @@ function buildProductionContent(root) {
   
   const studioRow = document.createElement("div");
   studioRow.className = "input-row";
-  studioRow.style.marginTop = "16px";
+  studioRow.style.cssText = "margin-top: 16px; position: relative;";
   const studioInput = document.createElement("input");
   studioInput.type = "text";
   studioInput.id = "studioInput";
@@ -1928,14 +2059,55 @@ function buildProductionContent(root) {
   studioInput.autocomplete = "off";
   studioRow.appendChild(studioInput);
   root.appendChild(studioRow);
-  
-  const studioSearchNote = document.createElement("p");
-  studioSearchNote.style.fontSize = "12px";
-  studioSearchNote.style.color = "var(--muted-silver)";
-  studioSearchNote.style.marginTop = "8px";
-  studioSearchNote.style.fontStyle = "italic";
-  studioSearchNote.textContent = "Note: Studio search autocomplete coming soon. Use preset chips for now.";
-  root.appendChild(studioSearchNote);
+
+  const studioDropdown = document.createElement("div");
+  studioDropdown.className = "search-dropdown";
+  studioDropdown.style.cssText = "position: absolute; z-index: 1000; display: none; background: var(--deep-space); border: 1px solid rgba(0,217,255,0.2); border-radius: 8px; max-height: 200px; overflow-y: auto;";
+  studioRow.appendChild(studioDropdown);
+
+  let studioDebounce = null;
+  studioInput.addEventListener("input", () => {
+    clearTimeout(studioDebounce);
+    const query = studioInput.value.trim();
+    if (query.length < 2) { studioDropdown.style.display = "none"; return; }
+    studioDebounce = setTimeout(async () => {
+      try {
+        const res = await fetch(`https://api.themoviedb.org/3/search/company?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const results = (data.results || []).slice(0, 8);
+        if (results.length === 0) { studioDropdown.style.display = "none"; return; }
+        studioDropdown.innerHTML = "";
+        studioDropdown.style.display = "block";
+        studioDropdown.style.width = `${studioInput.offsetWidth}px`;
+        results.forEach(company => {
+          const item = document.createElement("div");
+          item.className = "dropdown-item";
+          item.style.cssText = "padding: 8px 12px; cursor: pointer; font-size: 13px; color: var(--film-white);";
+          item.textContent = company.name;
+          item.addEventListener("mouseenter", () => { item.style.background = "rgba(0,217,255,0.1)"; });
+          item.addEventListener("mouseleave", () => { item.style.background = "transparent"; });
+          item.addEventListener("click", () => {
+            const chipId = `studio-${company.name.replace(/\s+/g, '-')}`;
+            if (!document.getElementById(chipId)) {
+              const chip = makeChip(`🏛️ ${company.name}`, "production", { type: "company", id: company.id, name: company.name });
+              chip.id = chipId;
+              studioGroup.appendChild(chip);
+            }
+            studioInput.value = "";
+            studioDropdown.style.display = "none";
+          });
+          studioDropdown.appendChild(item);
+        });
+      } catch (err) {
+        console.error("Studio search error:", err);
+      }
+    }, 300);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!studioRow.contains(e.target)) studioDropdown.style.display = "none";
+  });
   
   root.appendChild(makeSectionLabel("Box Office (Worldwide Gross)"));
   
@@ -1966,18 +2138,23 @@ function buildProductionContent(root) {
   
   minSlider.addEventListener("input", () => {
     minValue.textContent = `$${minSlider.value}M`;
+    const maxSl = document.getElementById("boxOfficeMax");
+    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
+      maxSl.value = minSlider.value;
+      document.getElementById("boxOfficeMaxValue").textContent = `$${minSlider.value}M${minSlider.value === "2000" ? "+" : ""}`;
+    }
   });
-  
+
   minRow.appendChild(minLabel);
   minRow.appendChild(minSlider);
   minRow.appendChild(minValue);
-  
+
   const maxRow = document.createElement("div");
   maxRow.style.display = "flex";
   maxRow.style.gap = "12px";
   maxRow.style.width = "100%";
   maxRow.style.alignItems = "center";
-  
+
   const maxLabel = document.createElement("span");
   maxLabel.textContent = "Max:";
   maxLabel.style.minWidth = "40px";
@@ -1991,9 +2168,14 @@ function buildProductionContent(root) {
   const maxValue = document.createElement("span");
   maxValue.textContent = "$2000M+";
   maxValue.id = "boxOfficeMaxValue";
-  
+
   maxSlider.addEventListener("input", () => {
     maxValue.textContent = `$${maxSlider.value}M${maxSlider.value === "2000" ? "+" : ""}`;
+    const minSl = document.getElementById("boxOfficeMin");
+    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
+      minSl.value = maxSlider.value;
+      document.getElementById("boxOfficeMinValue").textContent = `$${maxSlider.value}M`;
+    }
   });
   
   maxRow.appendChild(maxLabel);
@@ -2119,7 +2301,7 @@ function buildWatchContent(root) {
     providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Loading providers...</span>';
 
     fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${TMDB_API_KEY}&watch_region=${country}`)
-      .then(res => res.json())
+      .then(res => { if (!res.ok) throw new Error(`TMDB ${res.status}`); return res.json(); })
       .then(data => {
         allProviderData = (data.results || []).slice(0, 25);
         providerContainer.innerHTML = "";
@@ -2163,36 +2345,394 @@ function buildWatchContent(root) {
   }
 }
 
-function detectCountryFromBrowser() {
-  const lang = navigator.language || navigator.userLanguage || "en-US";
-  const parts = lang.split("-");
-  return parts.length > 1 ? parts[1].toUpperCase() : "US";
+// =============================================
+// 8. UNIVERSES SECTION
+// =============================================
+
+function buildUniversesContent(root) {
+  root.appendChild(makeSectionLabel("Search Collections"));
+
+  const desc = document.createElement("p");
+  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 12px;";
+  desc.textContent = "Search TMDB for any movie collection or franchise.";
+  root.appendChild(desc);
+
+  const searchContainer = document.createElement("div");
+  searchContainer.style.position = "relative";
+  const searchRow = document.createElement("div");
+  searchRow.className = "input-row";
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.id = "universeSearchInput";
+  searchInput.placeholder = "Search collections (e.g., Lord of the Rings)";
+  searchInput.autocomplete = "off";
+  searchRow.appendChild(searchInput);
+  searchContainer.appendChild(searchRow);
+  root.appendChild(searchContainer);
+
+  let universeDropdown = document.getElementById("universeDropdownGlobal");
+  if (!universeDropdown) {
+    universeDropdown = document.createElement("div");
+    universeDropdown.id = "universeDropdownGlobal";
+    universeDropdown.style.cssText = `
+      display: none;
+      position: fixed;
+      max-height: 300px;
+      width: 500px;
+      overflow-y: auto;
+      background: rgba(10, 14, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+    `;
+    document.body.appendChild(universeDropdown);
+  }
+
+  let selectedCollections = [];
+  let universeDebounceTimer;
+
+  const selectedContainer = document.createElement("div");
+  selectedContainer.id = "selectedUniverseContainer";
+  selectedContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
+  root.appendChild(selectedContainer);
+
+  searchInput.addEventListener('input', () => {
+    clearTimeout(universeDebounceTimer);
+    const query = searchInput.value.trim();
+    if (query.length > 1) {
+      universeDebounceTimer = setTimeout(async () => {
+        const rect = searchInput.getBoundingClientRect();
+        universeDropdown.style.top = `${rect.bottom + 4}px`;
+        universeDropdown.style.left = `${rect.left}px`;
+        universeDropdown.style.width = `${Math.max(rect.width, 400)}px`;
+
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/search/collection?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
+          if (!res.ok) return;
+          const data = await res.json();
+          renderUniverseDropdown(data.results?.slice(0, 8) || []);
+        } catch (err) {
+          console.error("Collection search error:", err);
+        }
+      }, 300);
+    } else {
+      universeDropdown.style.display = 'none';
+    }
+  });
+
+  function renderUniverseDropdown(collections) {
+    if (collections.length === 0) {
+      universeDropdown.style.display = 'none';
+      return;
+    }
+    universeDropdown.style.display = 'block';
+    universeDropdown.innerHTML = collections.map(c => `
+      <div class="universe-dropdown-item" data-id="${c.id}" data-name="${c.name}" style="
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(120, 190, 255, 0.1);
+        transition: background 0.15s ease;
+      " onmouseover="this.style.background='rgba(111, 210, 255, 0.1)'" onmouseout="this.style.background='transparent'">
+        <img src="${c.poster_path ? 'https://image.tmdb.org/t/p/w45' + c.poster_path : 'https://placehold.co/45x68?text=?'}"
+          style="width: 35px; height: 52px; object-fit: cover; border-radius: 4px; flex-shrink: 0;"
+          onerror="this.src='https://placehold.co/35x52?text=?'" />
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 14px; font-weight: 500; color: var(--film-white);">${c.name}</div>
+        </div>
+      </div>
+    `).join('');
+
+    universeDropdown.querySelectorAll('.universe-dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = parseInt(item.dataset.id);
+        const name = item.dataset.name;
+        if (selectedCollections.some(s => s.id === id)) return;
+        addCollectionChip({ id, name, type: "collection" });
+        searchInput.value = '';
+        universeDropdown.style.display = 'none';
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !universeDropdown.contains(e.target)) {
+        universeDropdown.style.display = 'none';
+      }
+    }, { once: true });
+  }
+
+  function addCollectionChip(collection) {
+    selectedCollections.push(collection);
+    const chip = document.createElement("div");
+    chip.className = "selected-universe-chip";
+    chip.dataset.collectionId = collection.id;
+    chip.dataset.collectionName = collection.name;
+    chip.dataset.collectionType = collection.type;
+    chip.style.cssText = `
+      background: rgba(111, 210, 255, 0.15);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 999px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--film-white);
+    `;
+    chip.innerHTML = `
+      <span>${collection.name}</span>
+      <button style="
+        background: transparent;
+        border: none;
+        color: var(--muted-silver);
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0 4px;
+        transition: color 0.15s;
+      " onmouseover="this.style.color='var(--danger-red)'" onmouseout="this.style.color='var(--muted-silver)'">✕</button>
+    `;
+    chip.querySelector('button').addEventListener('click', () => {
+      selectedCollections = selectedCollections.filter(c => c.id !== collection.id);
+      chip.remove();
+    });
+    selectedContainer.appendChild(chip);
+  }
+
+  // --- CURATED UNIVERSES ---
+  root.appendChild(makeSectionLabel("Popular Universes"));
+  const curatedGroup = document.createElement("div");
+  curatedGroup.className = "chip-group";
+
+  const curated = [
+    { name: "MCU", ids: [131295] },
+    { name: "DCEU", ids: [948485] },
+    { name: "Star Wars", ids: [10] },
+    { name: "Harry Potter", ids: [1241] },
+    { name: "James Bond", ids: [645] },
+    { name: "Fast & Furious", ids: [9485] },
+    { name: "Mission Impossible", ids: [87359] },
+    { name: "Jurassic Park", ids: [328] },
+    { name: "MonsterVerse", ids: [535313] }
+  ];
+
+  curated.forEach(u => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip";
+    chip.textContent = u.name;
+    chip.dataset.value = JSON.stringify({ type: "universe", name: u.name, collections: u.ids });
+    chip.addEventListener("click", () => {
+      chip.classList.toggle("active");
+    });
+    curatedGroup.appendChild(chip);
+  });
+  root.appendChild(curatedGroup);
+
+  // Close dropdown on focus card close
+  const closeButton = document.getElementById('focusCloseButton');
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      universeDropdown.style.display = 'none';
+    });
+  }
 }
 
 // =============================================
-// 9. SUITABILITY SECTION
+// 9. AWARDS SECTION (placeholder)
 // =============================================
 
-function buildSuitabilityContent(root) {
-  root.appendChild(makeSectionLabel("Age Rating / Certification"));
-  
-  const ratings = ["G", "PG", "PG-13", "R", "NC-17", "Unrated"];
-  const ratingGroup = document.createElement("div");
-  ratingGroup.className = "chip-group";
-  ratings.forEach(r => {
-    const chip = makeChip(r, "suitability", { type: "certification", rating: r });
-    chip.id = `cert-${r.replace('-', '')}`;
-    ratingGroup.appendChild(chip);
+function buildAwardsContent(root) {
+  // --- Recognition level ---
+  root.appendChild(makeSectionLabel("Recognition"));
+  const levelGroup = document.createElement("div");
+  levelGroup.className = "chip-group";
+  levelGroup.appendChild(makeChip("Winner", "awards", { type: "award-level", level: "winner" }));
+  levelGroup.appendChild(makeChip("Nominee", "awards", { type: "award-level", level: "nominee" }));
+  root.appendChild(levelGroup);
+
+  // --- Festival ---
+  root.appendChild(makeSectionLabel("Festival"));
+  const festivalGroup = document.createElement("div");
+  festivalGroup.className = "chip-group";
+  const festivals = [
+    { label: "\uD83C\uDFC6 Oscar", value: "Oscar" },
+    { label: "\uD83C\uDF34 Cannes", value: "Cannes" },
+    { label: "\uD83C\uDFAD BAFTA", value: "BAFTA" },
+    { label: "\uD83E\uDD81 Venice", value: "Venice" },
+    { label: "\uD83D\uDC3B Berlin", value: "Berlin" },
+    { label: "\uD83C\uDF0D Golden Globe", value: "Golden Globe" }
+  ];
+  festivals.forEach(function(f) {
+    festivalGroup.appendChild(makeChip(f.label, "awards", { type: "award-festival", festival: f.value }));
   });
-  root.appendChild(ratingGroup);
-  
-  const note = document.createElement("p");
-  note.style.fontSize = "12px";
-  note.style.color = "var(--muted-silver)";
-  note.style.marginTop = "12px";
-  note.style.fontStyle = "italic";
-  note.textContent = "Note: Ratings are US certifications. Other regions may have different classifications.";
-  root.appendChild(note);
+  root.appendChild(festivalGroup);
+
+  // --- Category ---
+  root.appendChild(makeSectionLabel("Category"));
+  const catGroup = document.createElement("div");
+  catGroup.className = "chip-group";
+  const categories = [
+    "Best Picture", "Best Film", "Best Director", "Best Actor", "Best Actress",
+    "Best Drama", "Best Comedy/Musical",
+    "Palme d'Or", "Grand Prix", "Jury Prize",
+    "Golden Lion", "Silver Lion (Grand Jury)", "Silver Lion (Director)",
+    "Golden Bear", "Silver Bear (Grand Jury)", "Silver Bear (Director)"
+  ];
+  categories.forEach(function(cat) {
+    catGroup.appendChild(makeChip(cat, "awards", { type: "award-category", category: cat }));
+  });
+  root.appendChild(catGroup);
+
+  // --- Specific Year ---
+  root.appendChild(makeSectionLabel("Specific Year"));
+  const awardSpecificRow = document.createElement("div");
+  awardSpecificRow.className = "input-row";
+  const awardYearInput = document.createElement("input");
+  awardYearInput.type = "number";
+  awardYearInput.id = "awardYearInput";
+  awardYearInput.placeholder = "e.g. 2024";
+  awardYearInput.min = "1950";
+  awardYearInput.max = "2030";
+  awardSpecificRow.appendChild(awardYearInput);
+  root.appendChild(awardSpecificRow);
+
+  // --- Award Year Range ---
+  root.appendChild(makeSectionLabel("Year Range"));
+
+  const awardYearRow = document.createElement("div");
+  awardYearRow.className = "input-row";
+  awardYearRow.style.flexDirection = "column";
+  awardYearRow.style.gap = "12px";
+
+  const awardFromRow = document.createElement("div");
+  awardFromRow.style.cssText = "display:flex;gap:12px;width:100%;align-items:center;";
+  const fromLabel = document.createElement("span");
+  fromLabel.textContent = "From:";
+  fromLabel.style.minWidth = "40px";
+  const fromSlider = document.createElement("input");
+  fromSlider.type = "range";
+  fromSlider.id = "awardYearFrom";
+  fromSlider.min = "1950";
+  fromSlider.max = "2025";
+  fromSlider.value = "1950";
+  fromSlider.style.flex = "1";
+  const fromValue = document.createElement("span");
+  fromValue.textContent = "1950";
+  fromValue.id = "awardYearFromValue";
+  fromValue.style.minWidth = "36px";
+  fromValue.style.textAlign = "right";
+  awardFromRow.appendChild(fromLabel);
+  awardFromRow.appendChild(fromSlider);
+  awardFromRow.appendChild(fromValue);
+
+  const awardToRow = document.createElement("div");
+  awardToRow.style.cssText = "display:flex;gap:12px;width:100%;align-items:center;";
+  const toLabel = document.createElement("span");
+  toLabel.textContent = "To:";
+  toLabel.style.minWidth = "40px";
+  const toSlider = document.createElement("input");
+  toSlider.type = "range";
+  toSlider.id = "awardYearTo";
+  toSlider.min = "1950";
+  toSlider.max = "2025";
+  toSlider.value = "2025";
+  toSlider.style.flex = "1";
+  const toValue = document.createElement("span");
+  toValue.textContent = "2025";
+  toValue.id = "awardYearToValue";
+  toValue.style.minWidth = "36px";
+  toValue.style.textAlign = "right";
+  awardToRow.appendChild(toLabel);
+  awardToRow.appendChild(toSlider);
+  awardToRow.appendChild(toValue);
+
+  awardYearRow.appendChild(awardFromRow);
+  awardYearRow.appendChild(awardToRow);
+  root.appendChild(awardYearRow);
+
+  // Decade quick-select chips
+  root.appendChild(makeSectionLabel("Quick Decade"));
+  const awardDecadeGroup = document.createElement("div");
+  awardDecadeGroup.className = "chip-group";
+  awardDecadeGroup.id = "awardDecadeGroup";
+  [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020].forEach(function(d) {
+    const chip = makeChip(d + "s", "awards", { type: "award-decade", decade: d });
+    chip.addEventListener("click", function() {
+      // Deactivate other decade chips (single-select)
+      awardDecadeGroup.querySelectorAll(".chip").forEach(function(c) {
+        if (c !== chip) c.classList.remove("active");
+      });
+      // If active, snap sliders to this decade and clear specific year
+      if (chip.classList.contains("active")) {
+        fromSlider.value = d;
+        toSlider.value = d + 9;
+        fromValue.textContent = d;
+        toValue.textContent = d + 9;
+        awardYearInput.value = "";
+      } else {
+        // Deselected — reset sliders to full range
+        fromSlider.value = 1950;
+        toSlider.value = 2025;
+        fromValue.textContent = "1950";
+        toValue.textContent = "2025";
+      }
+    });
+    awardDecadeGroup.appendChild(chip);
+  });
+  root.appendChild(awardDecadeGroup);
+
+  // Slider interaction clears decade chips
+  function onSliderInput() {
+    var from = parseInt(fromSlider.value);
+    var to = parseInt(toSlider.value);
+    if (from > to) {
+      toSlider.value = from;
+      to = from;
+    }
+    fromValue.textContent = from;
+    toValue.textContent = to;
+    // Clear decade selection when user manually drags
+    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) {
+      c.classList.remove("active");
+    });
+  }
+  fromSlider.addEventListener("input", function() {
+    var from = parseInt(fromSlider.value);
+    var to = parseInt(toSlider.value);
+    if (from > to) { toSlider.value = from; toValue.textContent = from; }
+    fromValue.textContent = from;
+    awardYearInput.value = "";
+    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
+  });
+  toSlider.addEventListener("input", function() {
+    var from = parseInt(fromSlider.value);
+    var to = parseInt(toSlider.value);
+    if (to < from) { fromSlider.value = to; fromValue.textContent = to; }
+    toValue.textContent = to;
+    awardYearInput.value = "";
+    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
+  });
+
+  // Specific year input clears sliders and decade chips
+  awardYearInput.addEventListener("input", function() {
+    var yr = parseInt(awardYearInput.value);
+    if (yr >= 1950 && yr <= 2030) {
+      fromSlider.value = yr;
+      toSlider.value = yr;
+      fromValue.textContent = yr;
+      toValue.textContent = yr;
+    } else {
+      fromSlider.value = 1950;
+      toSlider.value = 2025;
+      fromValue.textContent = "1950";
+      toValue.textContent = "2025";
+    }
+    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
+  });
 }
 
 // =============================================
@@ -2210,7 +2750,6 @@ function collectLabelsForSection(sectionKey) {
         let roleLabel = "";
         if (role === "cast") roleLabel = " (Actor)";
         else if (role === "crew") roleLabel = " (Behind Camera)";
-        
         return {
           label: chip.dataset.personName + roleLabel,
           value: {
@@ -2221,68 +2760,61 @@ function collectLabelsForSection(sectionKey) {
           }
         };
       });
-      
+
     case "genres":
-      const genreChips = document.querySelectorAll('.chip.active');
+      const genreChips = document.querySelectorAll('#focusContent .chip.active');
       return Array.from(genreChips).map(chip => {
         const value = JSON.parse(chip.dataset.value);
         return { label: chip.textContent, value };
       });
-      
-    case "setting":
-      const settingChips = document.querySelectorAll('#focusContent .chip.active');
-      return Array.from(settingChips).map(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        let label = chip.textContent;
-        if (value.type === "decade") {
-          label = `Set in ${value.decade}s`;
-        } else if (value.type === "century") {
-          label = `Set in ${value.label || value.century + 's'}`;
-        } else if (value.type === "timePeriod") {
-          label = `${value.name} Era`;
-        }
-        return { label, value };
-      });
-      
-    case "dateRuntime":
+
+    case "timeEra":
+      // Year input
       const yearInput = document.getElementById("yearInput");
       if (yearInput && yearInput.value) {
         results.push({
           label: `Year: ${yearInput.value}`,
-          value: { type: "year", year: parseInt(yearInput.value) }
+          value: { type: "year", year: parseInt(yearInput.value), subType: "release" }
         });
       }
-      
-      const decadeChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+
+      // Release decade chips + dateRange + runtime chips
+      const releaseChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
-          return val.type === "decade";
+          return val.subType === "release";
         });
-      
-      decadeChips.forEach(chip => {
+      releaseChips.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: `Made in ${value.decade}s`,
-          value
-        });
+        let label = chip.textContent;
+        if (value.type === "decade") label = `Released ${value.decade}s`;
+        else if (value.type === "dateRange") label = chip.textContent;
+        else if (value.type === "runtime") label = chip.textContent;
+        results.push({ label, value });
       });
-      
+
+      // Runtime sliders
       const runtimeMin = document.getElementById("runtimeMin");
       const runtimeMax = document.getElementById("runtimeMax");
       if (runtimeMin && runtimeMax) {
         const min = parseInt(runtimeMin.value);
         const max = parseInt(runtimeMax.value);
         if (min > 0 || max < 300) {
-          results.push({
-            label: `Runtime: ${min}-${max} min`,
-            value: { type: "runtime", min, max }
-          });
+          // Don't add if a runtime chip already selected
+          const hasRuntimeChip = results.some(r => r.value.type === "runtime");
+          if (!hasRuntimeChip) {
+            results.push({
+              label: `Runtime: ${min}-${max} min`,
+              value: { type: "runtime", subType: "release", min, max }
+            });
+          }
         }
       }
-      
+
       return results;
-      
-    case "ratings":
+
+    case "ratingsContent":
+      // Rating sliders
       const ratingMin = document.getElementById("ratingMin");
       const ratingMax = document.getElementById("ratingMax");
       if (ratingMin && ratingMax) {
@@ -2295,13 +2827,13 @@ function collectLabelsForSection(sectionKey) {
           });
         }
       }
-      
+
+      // Vote chips
       const voteChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "votes";
         });
-      
       voteChips.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
         results.push({
@@ -2309,9 +2841,23 @@ function collectLabelsForSection(sectionKey) {
           value
         });
       });
-      
+
+      // Certification chips
+      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+        .filter(chip => {
+          const val = JSON.parse(chip.dataset.value);
+          return val.type === "certification";
+        });
+      certChips.forEach(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        results.push({
+          label: `Rated ${value.rating}`,
+          value
+        });
+      });
+
       return results;
-      
+
     case "regionLanguage":
       const regionContainer = document.getElementById("selectedRegionContainer");
       if (regionContainer && regionContainer.children.length > 0) {
@@ -2325,19 +2871,16 @@ function collectLabelsForSection(sectionKey) {
           });
         }
       }
-      
-      // Check English Only toggle first
+
       const englishToggle = document.getElementById("englishOnlyToggle");
       const langContainer = document.getElementById("selectedLanguageContainer");
-      
+
       if (englishToggle && englishToggle.checked) {
-        // English Only is ON - use English
         results.push({
           label: `Language: English`,
           value: { type: "language", code: "en", name: "English" }
         });
       } else if (langContainer && langContainer.children.length > 0) {
-        // English Only is OFF - use selected language
         const langChip = langContainer.querySelector('[data-lang-code]');
         const langText = langContainer.querySelector('span')?.textContent;
         if (langChip && langText) {
@@ -2348,25 +2891,20 @@ function collectLabelsForSection(sectionKey) {
           });
         }
       }
-      // If English Only is OFF and no language selected, don't add any language filter (all languages)
-      
+
       return results;
-      
+
     case "production":
       const studioChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "company";
         });
-      
       studioChips.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: chip.textContent,
-          value
-        });
+        results.push({ label: chip.textContent, value });
       });
-      
+
       const boxOfficeMin = document.getElementById("boxOfficeMin");
       const boxOfficeMax = document.getElementById("boxOfficeMax");
       if (boxOfficeMin && boxOfficeMax) {
@@ -2379,9 +2917,8 @@ function collectLabelsForSection(sectionKey) {
           });
         }
       }
-      
       return results;
-      
+
     case "watch":
       const watchChips = document.querySelectorAll('#watchProviderChips .chip.active');
       return Array.from(watchChips).map(chip => {
@@ -2390,17 +2927,55 @@ function collectLabelsForSection(sectionKey) {
           return { label: val.name, value: val };
         } catch { return null; }
       }).filter(Boolean);
-      
-    case "suitability":
-      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active'));
-      return certChips.map(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        return {
-          label: `Rated ${value.rating}`,
-          value
-        };
+
+    case "universes":
+      const universeResults = [];
+      // Search-selected collections
+      const universeChips = document.querySelectorAll('.selected-universe-chip');
+      universeChips.forEach(chip => {
+        universeResults.push({
+          label: chip.dataset.collectionName,
+          value: { type: "collection", name: chip.dataset.collectionName, collections: [parseInt(chip.dataset.collectionId)] }
+        });
       });
-      
+      // Curated universe chips
+      const curatedChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+        .filter(chip => {
+          try {
+            const val = JSON.parse(chip.dataset.value);
+            return val.type === "universe";
+          } catch { return false; }
+        });
+      curatedChips.forEach(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        universeResults.push({ label: value.name, value });
+      });
+      return universeResults;
+
+    case "awards":
+      const awardResults = [];
+      const awardChips = document.querySelectorAll('#focusContent .chip.active');
+      awardChips.forEach(function(chip) {
+        const value = JSON.parse(chip.dataset.value);
+        // Skip decade chips — the slider values are what we collect
+        if (value.type === "award-decade") return;
+        awardResults.push({ label: chip.textContent.trim(), value: value });
+      });
+      // Year range from sliders (only add if not at defaults)
+      const awardFrom = document.getElementById("awardYearFrom");
+      const awardTo = document.getElementById("awardYearTo");
+      if (awardFrom && awardTo) {
+        const from = parseInt(awardFrom.value);
+        const to = parseInt(awardTo.value);
+        if (from > 1950 || to < 2025) {
+          awardResults.push({
+            label: from === to ? "Year: " + from : "Years: " + from + "\u2013" + to,
+            value: { type: "award-year-range", from: from, to: to }
+          });
+        }
+      }
+      return awardResults;
+
     default:
       return [];
   }

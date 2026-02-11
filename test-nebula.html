@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebula Face Test</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/moviecube.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Barlow', sans-serif;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+      color: #f0f4f8;
+      min-height: 100vh;
+    }
+
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Orbitron', monospace;
+      text-align: center;
+      color: #00d9ff;
+      margin-bottom: 30px;
+    }
+
+    .test-controls {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .test-section {
+      margin-bottom: 20px;
+    }
+
+    .test-section h3 {
+      font-family: 'Orbitron', monospace;
+      color: #00d9ff;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .movie-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .movie-card:hover {
+      background: rgba(0, 217, 255, 0.1);
+      border-color: #00d9ff;
+      transform: translateY(-2px);
+    }
+
+    .movie-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #f0f4f8;
+    }
+
+    .movie-id {
+      font-size: 12px;
+      color: #8892a6;
+      margin-bottom: 5px;
+    }
+
+    .movie-stats {
+      font-size: 11px;
+      color: #a855f7;
+    }
+
+    .test-info {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .test-info h4 {
+      margin-top: 0;
+      color: #a855f7;
+      font-family: 'Orbitron', monospace;
+      font-size: 12px;
+    }
+
+    .test-info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      padding: 5px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .checklist li::before {
+      content: '☐';
+      position: absolute;
+      left: 0;
+      color: #00d9ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🌌 Nebula Face Testing</h1>
+
+    <div class="test-controls">
+      <div class="test-section">
+        <h3>Test Movies (with Nebula Data)</h3>
+        <div class="movie-grid" id="movieGrid">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="test-info">
+        <h4>Testing Checklist</h4>
+        <ul class="checklist">
+          <li>Gas clouds animate smoothly in background</li>
+          <li>Dust particles twinkle at varying rates</li>
+          <li>Movie title displays centered</li>
+          <li>Words float and bounce off walls and each other</li>
+          <li>Source badge shows "✦ Orbit Impressions" (for AI-only)</li>
+          <li>Threshold bar is at 0% initially</li>
+          <li>Review feed shows all AI reviews with ✦ icons</li>
+          <li>Input fields enable submit button when all 5 filled</li>
+          <li>Submit adds review and reloads nebula</li>
+          <li>New review appears at top with ☉ icon</li>
+          <li>Threshold updates to "1 / 50"</li>
+          <li>User words appear in white, not purple</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TMDB Config -->
+  <script>
+    // Replace with your TMDB API key
+    const TMDB_API_KEY = 'YOUR_API_KEY_HERE';
+    const TMDB_IMG = 'https://image.tmdb.org/t/p/';
+  </script>
+
+  <!-- Load nebula service as module -->
+  <script type="module">
+    // Make nebula service available globally for the IIFE to use
+    import * as nebulaService from './nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+
+    // Load nebula index and display test movies
+    async function loadTestMovies() {
+      try {
+        const response = await fetch('nebula-data/index.json');
+        const index = await response.json();
+
+        // Get first 12 movies for testing
+        const movieIds = Object.keys(index.movies).slice(0, 12);
+        const grid = document.getElementById('movieGrid');
+
+        movieIds.forEach(movieId => {
+          const movie = index.movies[movieId];
+          const card = document.createElement('div');
+          card.className = 'movie-card';
+          card.innerHTML = `
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-id">ID: ${movieId}</div>
+            <div class="movie-stats">${movie.reviewCount} reviews • "${movie.topWord}"</div>
+          `;
+          card.onclick = () => openMovieCube(parseInt(movieId));
+          grid.appendChild(card);
+        });
+
+        console.log(`✅ Loaded ${index.totalMovies} movies with nebula data`);
+      } catch (error) {
+        console.error('Error loading test movies:', error);
+      }
+    }
+
+    loadTestMovies();
+  </script>
+
+  <!-- Movie Cube -->
+  <script src="js/shortlist-service.js"></script>
+  <script src="js/moviecube.js"></script>
+
+  <!-- Initialize Movie Cube -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initMovieCube();
+      console.log('✅ Movie Cube initialized');
+    });
+  </script>
+</body>
+</html>

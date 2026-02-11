@@ -28,6 +28,10 @@
   let triviaScore = 0;
   let triviaAnswered = false;
 
+  // Pages like venn.html, timeline.html, results.html live in games/
+  // When moviecube is loaded from a root page, prefix navigation with "games/"
+  const _gamesPrefix = location.pathname.includes('/games/') ? '' : 'games/';
+
   // Venn compare state
   let vennCompareMode = false;
   let vennSelectedActors = [];
@@ -39,6 +43,7 @@
   let cubeProductionCompanies;
   let cubeTrailerBtn, cubeAnchorBtn, cubeSimilarBtn, cubeSimilarOverlay;
   let cubeShortlistBtn;
+  let cubeAwards;
 
   // DOM refs - Trailer modal
   let cubeTrailerOverlay, cubeTrailerContainer;
@@ -91,7 +96,8 @@
     cubeSimilarBtn = document.getElementById("cubeSimilarBtn");
     cubeSimilarOverlay = document.getElementById("cubeSimilarOverlay");
     cubeShortlistBtn = document.getElementById("shortlist-btn");
-    
+    cubeAwards = document.getElementById("cubePopupAwards");
+
     // Trailer modal
     cubeTrailerOverlay = document.getElementById("cubeTrailerOverlay");
     cubeTrailerContainer = document.getElementById("cubeTrailerContainer");
@@ -140,6 +146,7 @@
                     <span class="popup-rating">⭐ <span id="cubePopupRating"></span></span>
                     <span class="popup-runtime" id="cubePopupRuntime"></span>
                   </div>
+                  <div class="cube-award-badges" id="cubePopupAwards"></div>
                   <p class="popup-synopsis" id="cubePopupSynopsis"></p>
                   <div class="popup-genres" id="cubePopupGenres"></div>
                   <div class="where-to-watch" id="cubeWhereToWatch"></div>
@@ -209,7 +216,7 @@
 
             <!-- NEBULA OVERLAY - flat, outside 3D cube -->
             <div class="cube-nebula-overlay" id="cubeNebulaOverlay">
-              <div class="cube-face cube-face-nebula" data-face="6">
+              <div class="cube-face-nebula" data-face="6">
                 <!-- Header -->
                 <div class="nebula-header">
                   <span class="nebula-title">NEBULA IMPRESSIONS</span>
@@ -242,12 +249,13 @@
 
                 <!-- User input strip -->
                 <div class="nebula-input-strip">
+                  <label class="nebula-input-label">Write your 5-word impression:</label>
                   <div class="nebula-word-slots">
-                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="1">
-                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="2">
-                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="3">
-                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="4">
-                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="word" data-slot="5">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="..." data-slot="1">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="..." data-slot="2">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="..." data-slot="3">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="..." data-slot="4">
+                    <input type="text" class="nebula-word-input" maxlength="15" placeholder="..." data-slot="5">
                   </div>
                   <button class="nebula-submit-btn" id="nebula-submit-btn" disabled>
                     LAUNCH INTO NEBULA ✦
@@ -362,7 +370,7 @@
           anchor: cubeMovieData.id, 
           title: cubeMovieData.title 
         });
-        window.location.href = `results.html?${params}`;
+        window.location.href = `${_gamesPrefix}results.html?${params}`;
       }
     });
     
@@ -571,9 +579,16 @@
     if (cubeSynopsis) cubeSynopsis.textContent = cubeMovieData.overview || "No synopsis available.";
     
     if (cubeGenres && cubeMovieData.genres) {
-      cubeGenres.innerHTML = cubeMovieData.genres.map(g => 
+      cubeGenres.innerHTML = cubeMovieData.genres.map(g =>
         `<span class="genre-tag">${g.name}</span>`
       ).join("");
+    }
+
+    // Award badges
+    if (cubeAwards) {
+      const html = typeof getAwardBadgesHTML === 'function' ? getAwardBadgesHTML(cubeMovieData.id) : '';
+      cubeAwards.innerHTML = html;
+      cubeAwards.style.display = html ? 'flex' : 'none';
     }
   }
 
@@ -704,7 +719,7 @@
     if (onPersonClick) {
       onPersonClick(id, name);
     } else {
-      window.location.href = `timeline.html?id=${id}&name=${encodeURIComponent(name)}`;
+      window.location.href = `${_gamesPrefix}timeline.html?id=${id}&name=${encodeURIComponent(name)}`;
     }
   }
 
@@ -1185,7 +1200,7 @@
       name: a.name
     }));
     localStorage.setItem("vennPeople", JSON.stringify(vennPeople));
-    window.location.href = "venn.html";
+    window.location.href = `${_gamesPrefix}venn.html`;
   }
 
   // ============================================
@@ -1292,8 +1307,14 @@
       const data = await service.getMergedNebulaData(movieId);
 
       if (!data) {
-        showNebulaError('Nebula data not available for this movie');
+        showNebulaError('No impressions yet — be the first!');
+        initNebulaInput(movieId);
         return;
+      }
+
+      // Use cube movie title as fallback when AI data has no title
+      if (!data.title && movieTitle) {
+        data.title = movieTitle;
       }
 
       nebulaData = data;
@@ -1307,16 +1328,36 @@
   }
 
   /**
+   * Restore the nebula-cloud inner structure (gas clouds, dust, title, words).
+   * Called before every render to undo any prior showNebulaError clobbering.
+   */
+  function restoreCloudStructure() {
+    const cloudEl = document.getElementById('nebula-cloud');
+    if (!cloudEl) return;
+    cloudEl.innerHTML = `
+      <div class="nebula-gas gas-1"></div>
+      <div class="nebula-gas gas-2"></div>
+      <div class="nebula-gas gas-3"></div>
+      <div class="nebula-gas gas-4"></div>
+      <div class="nebula-dust" id="nebula-dust"></div>
+      <div class="nebula-movie-title" id="nebula-movie-title"></div>
+      <div class="nebula-words" id="nebula-words"></div>
+    `;
+  }
+
+  /**
    * Show error message in nebula cloud
    */
   function showNebulaError(message) {
+    restoreCloudStructure();
     const cloudEl = document.getElementById('nebula-cloud');
     if (cloudEl) {
-      cloudEl.innerHTML = `
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #8892a6;">
-          <p style="font-size: 14px; margin: 0;">${message}</p>
-        </div>
-      `;
+      // Overlay the error on top of the (now-empty) cloud
+      const msgEl = document.createElement('div');
+      msgEl.className = 'nebula-error-msg';
+      msgEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#8892a6;z-index:5;';
+      msgEl.innerHTML = `<p style="font-size:14px;margin:0;">${message}</p>`;
+      cloudEl.appendChild(msgEl);
     }
   }
 
@@ -1325,10 +1366,13 @@
    * @param {Object} data - Merged nebula data
    */
   function renderNebula(data) {
+    // Rebuild cloud children in case a prior error clobbered them
+    restoreCloudStructure();
+
     // Update movie title
     const titleEl = document.getElementById('nebula-movie-title');
     if (titleEl) {
-      titleEl.textContent = data.title.toUpperCase();
+      titleEl.textContent = data.title ? data.title.toUpperCase() : '';
     }
 
     // Update source badge
@@ -1426,6 +1470,8 @@
 
     wordsEl.innerHTML = '';
     nebulaWords = [];
+
+    if (!topWords || topWords.length === 0) return;
 
     // Get container dimensions
     const cloudEl = document.getElementById('nebula-cloud');
@@ -1538,21 +1584,40 @@
 
     if (!submitBtn) return;
 
-    // Check if all inputs have values
+    // Check if all inputs have single-word values
     function checkInputs() {
       const values = Array.from(inputs).map(input => input.value.trim());
       const allFilled = values.every(v => v.length > 0);
       submitBtn.disabled = !allFilled;
     }
 
-    // Add input listeners
-    inputs.forEach(input => {
-      input.addEventListener('input', checkInputs);
+    // Add input listeners — block spaces, strip on paste, auto-advance
+    inputs.forEach((input, idx) => {
+      // Block space key
+      input.addEventListener('keydown', (e) => {
+        if (e.key === ' ') {
+          e.preventDefault();
+          // Flash a subtle error hint
+          input.classList.add('nebula-input-error');
+          setTimeout(() => input.classList.remove('nebula-input-error'), 600);
+        }
+      });
+
+      // Strip spaces on paste / any input (catches autocomplete, paste, etc.)
+      input.addEventListener('input', () => {
+        const stripped = input.value.replace(/\s+/g, '');
+        if (stripped !== input.value) {
+          input.value = stripped;
+          input.classList.add('nebula-input-error');
+          setTimeout(() => input.classList.remove('nebula-input-error'), 600);
+        }
+        checkInputs();
+      });
     });
 
     // Submit handler
     submitBtn.addEventListener('click', async () => {
-      const words = Array.from(inputs).map(input => input.value.trim());
+      const words = Array.from(inputs).map(input => input.value.trim().replace(/\s+/g, ''));
       const reviewText = words.join(' ');
 
       const service = await loadNebulaService();
@@ -1701,7 +1766,6 @@
     const movieId = cubeMovieData.id;
     const isAdded = shortlistFns.isInShortlist(movieId);
     const count = shortlistFns.getShortlistCount();
-    const isFull = count >= 5;
 
     // Reset classes
     cubeShortlistBtn.className = 'shortlist-btn';
@@ -1715,21 +1779,14 @@
       cubeShortlistBtn.disabled = false;
       cubeShortlistBtn.title = 'Remove from Shortlist';
       if (iconSpan) iconSpan.textContent = '★';
-      if (labelSpan) labelSpan.textContent = 'Shortlisted';
-    } else if (isFull) {
-      // Shortlist is FULL and movie not in it
-      cubeShortlistBtn.classList.add('disabled');
-      cubeShortlistBtn.disabled = true;
-      cubeShortlistBtn.title = 'Remove a movie to add more';
-      if (iconSpan) iconSpan.textContent = '☆';
-      if (labelSpan) labelSpan.textContent = `Full (${count}/5)`;
+      if (labelSpan) labelSpan.textContent = `Shortlisted (${count})`;
     } else {
-      // Movie NOT in shortlist, and shortlist not full
+      // Movie NOT in shortlist
       cubeShortlistBtn.classList.add('not-added');
       cubeShortlistBtn.disabled = false;
       cubeShortlistBtn.title = 'Add to Shortlist';
       if (iconSpan) iconSpan.textContent = '☆';
-      if (labelSpan) labelSpan.textContent = 'Shortlist';
+      if (labelSpan) labelSpan.textContent = count > 0 ? `Shortlist (${count})` : 'Shortlist';
     }
   }
 

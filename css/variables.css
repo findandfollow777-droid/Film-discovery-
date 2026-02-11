@@ -1,0 +1,42 @@
+/* ============================================
+   ORBIT - Shared Design Tokens
+============================================ */
+
+:root {
+  /* Backgrounds */
+  --space-black: #000000;
+  --deep-void: #0a0e17;
+  --nebula-dark: #111827;
+  --cosmic-blue: #1e293b;
+
+  /* Accent Colors */
+  --accent-cyan: #00d9ff;
+  --accent-gold: #ffd700;
+
+  /* Status Colors */
+  --success-green: #10b981;
+  --danger-red: #ef4444;
+
+  /* Text Colors */
+  --film-white: #f1f5f9;
+  --muted-silver: #94a3b8;
+  --ghost-gray: #64748b;
+
+  /* Typography */
+  --font-display: 'Orbitron', monospace;
+  --font-body: 'Barlow', sans-serif;
+}
+
+/* ============================================
+   SHARED - Back Link
+============================================ */
+.back-link {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.3s, color 0.3s;
+}
+.back-link:hover { opacity: 1; color: var(--film-white); }

@@ -409,15 +409,32 @@ const SwipeMemory = (function() {
   }
   
   // ============================================
+  function getLikedIds() {
+    return Object.keys(memory.liked).map(Number);
+  }
+
+  function setPreference(movieId, preference, movieData) {
+    const data = movieData || { id: movieId };
+    if (preference === "like") {
+      recordLike(movieId, data);
+    } else {
+      recordDislike(movieId, data);
+    }
+    updateGenreAffinities(data.genre_ids || (data.genres || []).map(g => g.id) || [], preference === "like");
+    saveMemory();
+  }
+
   // PUBLIC API
   // ============================================
-  
+
   return {
     init,
     enableSwipe,
     isLiked,
     isDisliked,
     getPreference,
+    getLikedIds,
+    setPreference,
     getLikedMovies,
     getDislikedMovies,
     getGenreAffinities,

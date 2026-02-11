@@ -1,0 +1,142 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+0,Robert Aramayo,2026,BAFTA,Best Actor,false,I Swear
+0,Timothée Chalamet,2026,BAFTA,Best Actor,false,Marty Supreme
+0,Leonardo DiCaprio,2026,BAFTA,Best Actor,false,One Battle After Another
+0,Ethan Hawke,2026,BAFTA,Best Actor,false,Blue Moon
+0,Michael B. Jordan,2026,BAFTA,Best Actor,false,Sinners
+0,Jesse Plemons,2026,BAFTA,Best Actor,false,Bugonia
+0,Adrien Brody,2025,BAFTA,Best Actor,true,The Brutalist
+0,Timothée Chalamet,2025,BAFTA,Best Actor,false,A Complete Unknown
+0,Colman Domingo,2025,BAFTA,Best Actor,false,Sing Sing
+0,Ralph Fiennes,2025,BAFTA,Best Actor,false,Conclave
+0,Hugh Grant,2025,BAFTA,Best Actor,false,Heretic
+0,Sebastian Stan,2025,BAFTA,Best Actor,false,The Apprentice
+0,Cillian Murphy,2024,BAFTA,Best Actor,true,Oppenheimer
+0,Bradley Cooper,2024,BAFTA,Best Actor,false,Maestro
+0,Colman Domingo,2024,BAFTA,Best Actor,false,Rustin
+0,Paul Giamatti,2024,BAFTA,Best Actor,false,The Holdovers
+0,Barry Keoghan,2024,BAFTA,Best Actor,false,Saltburn
+0,Teo Yoo,2024,BAFTA,Best Actor,false,Past Lives
+0,Austin Butler,2023,BAFTA,Best Actor,true,Elvis
+0,Colin Farrell,2023,BAFTA,Best Actor,false,The Banshees of Inisherin
+0,Brendan Fraser,2023,BAFTA,Best Actor,false,The Whale
+0,Daryl McCormack,2023,BAFTA,Best Actor,false,Good Luck to You Leo Grande
+0,Paul Mescal,2023,BAFTA,Best Actor,false,Aftersun
+0,Bill Nighy,2023,BAFTA,Best Actor,false,Living
+0,Will Smith,2022,BAFTA,Best Actor,true,King Richard
+0,Adeel Akhtar,2022,BAFTA,Best Actor,false,Ali & Ava
+0,Mahershala Ali,2022,BAFTA,Best Actor,false,Swan Song
+0,Benedict Cumberbatch,2022,BAFTA,Best Actor,false,The Power of the Dog
+0,Leonardo DiCaprio,2022,BAFTA,Best Actor,false,Don't Look Up
+0,Stephen Graham,2022,BAFTA,Best Actor,false,Boiling Point
+0,Anthony Hopkins,2021,BAFTA,Best Actor,true,The Father
+0,Riz Ahmed,2021,BAFTA,Best Actor,false,Sound of Metal
+0,Chadwick Boseman,2021,BAFTA,Best Actor,false,Ma Rainey's Black Bottom
+0,Adarsh Gourav,2021,BAFTA,Best Actor,false,The White Tiger
+0,Mads Mikkelsen,2021,BAFTA,Best Actor,false,Another Round
+0,Tahar Rahim,2021,BAFTA,Best Actor,false,The Mauritanian
+0,Joaquin Phoenix,2020,BAFTA,Best Actor,true,Joker
+0,Leonardo DiCaprio,2020,BAFTA,Best Actor,false,Once Upon a Time in Hollywood
+0,Adam Driver,2020,BAFTA,Best Actor,false,Marriage Story
+0,Taron Egerton,2020,BAFTA,Best Actor,false,Rocketman
+0,Jonathan Pryce,2020,BAFTA,Best Actor,false,The Two Popes
+0,Rami Malek,2019,BAFTA,Best Actor,true,Bohemian Rhapsody
+0,Christian Bale,2019,BAFTA,Best Actor,false,Vice
+0,Steve Coogan,2019,BAFTA,Best Actor,false,Stan & Ollie
+0,Bradley Cooper,2019,BAFTA,Best Actor,false,A Star Is Born
+0,Viggo Mortensen,2019,BAFTA,Best Actor,false,Green Book
+0,Gary Oldman,2018,BAFTA,Best Actor,true,Darkest Hour
+0,Jamie Bell,2018,BAFTA,Best Actor,false,Film Stars Don't Die in Liverpool
+0,Timothée Chalamet,2018,BAFTA,Best Actor,false,Call Me by Your Name
+0,Daniel Day-Lewis,2018,BAFTA,Best Actor,false,Phantom Thread
+0,Daniel Kaluuya,2018,BAFTA,Best Actor,false,Get Out
+0,Casey Affleck,2017,BAFTA,Best Actor,true,Manchester by the Sea
+0,Andrew Garfield,2017,BAFTA,Best Actor,false,Hacksaw Ridge
+0,Ryan Gosling,2017,BAFTA,Best Actor,false,La La Land
+0,Jake Gyllenhaal,2017,BAFTA,Best Actor,false,Nocturnal Animals
+0,Viggo Mortensen,2017,BAFTA,Best Actor,false,Captain Fantastic
+0,Leonardo DiCaprio,2016,BAFTA,Best Actor,true,The Revenant
+0,Bryan Cranston,2016,BAFTA,Best Actor,false,Trumbo
+0,Matt Damon,2016,BAFTA,Best Actor,false,The Martian
+0,Michael Fassbender,2016,BAFTA,Best Actor,false,Steve Jobs
+0,Eddie Redmayne,2016,BAFTA,Best Actor,false,The Danish Girl
+0,Eddie Redmayne,2015,BAFTA,Best Actor,true,The Theory of Everything
+0,Benedict Cumberbatch,2015,BAFTA,Best Actor,false,The Imitation Game
+0,Ralph Fiennes,2015,BAFTA,Best Actor,false,The Grand Budapest Hotel
+0,Jake Gyllenhaal,2015,BAFTA,Best Actor,false,Nightcrawler
+0,Michael Keaton,2015,BAFTA,Best Actor,false,Birdman
+0,Chiwetel Ejiofor,2014,BAFTA,Best Actor,true,12 Years a Slave
+0,Christian Bale,2014,BAFTA,Best Actor,false,American Hustle
+0,Bruce Dern,2014,BAFTA,Best Actor,false,Nebraska
+0,Leonardo DiCaprio,2014,BAFTA,Best Actor,false,The Wolf of Wall Street
+0,Tom Hanks,2014,BAFTA,Best Actor,false,Captain Phillips
+0,Daniel Day-Lewis,2013,BAFTA,Best Actor,true,Lincoln
+0,Ben Affleck,2013,BAFTA,Best Actor,false,Argo
+0,Bradley Cooper,2013,BAFTA,Best Actor,false,Silver Linings Playbook
+0,Hugh Jackman,2013,BAFTA,Best Actor,false,Les Misérables
+0,Joaquin Phoenix,2013,BAFTA,Best Actor,false,The Master
+0,Jean Dujardin,2012,BAFTA,Best Actor,true,The Artist
+0,George Clooney,2012,BAFTA,Best Actor,false,The Descendants
+0,Michael Fassbender,2012,BAFTA,Best Actor,false,Shame
+0,Gary Oldman,2012,BAFTA,Best Actor,false,Tinker Tailor Soldier Spy
+0,Brad Pitt,2012,BAFTA,Best Actor,false,Moneyball
+0,Colin Firth,2011,BAFTA,Best Actor,true,The King's Speech
+0,Javier Bardem,2011,BAFTA,Best Actor,false,Biutiful
+0,Jeff Bridges,2011,BAFTA,Best Actor,false,True Grit
+0,Jesse Eisenberg,2011,BAFTA,Best Actor,false,The Social Network
+0,James Franco,2011,BAFTA,Best Actor,false,127 Hours
+0,Colin Firth,2010,BAFTA,Best Actor,true,A Single Man
+0,Jeff Bridges,2010,BAFTA,Best Actor,false,Crazy Heart
+0,George Clooney,2010,BAFTA,Best Actor,false,Up in the Air
+0,Jeremy Renner,2010,BAFTA,Best Actor,false,The Hurt Locker
+0,Andy Serkis,2010,BAFTA,Best Actor,false,Sex & Drugs & Rock & Roll
+0,Mickey Rourke,2009,BAFTA,Best Actor,true,The Wrestler
+0,Frank Langella,2009,BAFTA,Best Actor,false,Frost/Nixon
+0,Dev Patel,2009,BAFTA,Best Actor,false,Slumdog Millionaire
+0,Sean Penn,2009,BAFTA,Best Actor,false,Milk
+0,Brad Pitt,2009,BAFTA,Best Actor,false,The Curious Case of Benjamin Button
+0,Daniel Day-Lewis,2008,BAFTA,Best Actor,true,There Will Be Blood
+0,George Clooney,2008,BAFTA,Best Actor,false,Michael Clayton
+0,James McAvoy,2008,BAFTA,Best Actor,false,Atonement
+0,Viggo Mortensen,2008,BAFTA,Best Actor,false,Eastern Promises
+0,Ulrich Mühe,2008,BAFTA,Best Actor,false,The Lives of Others
+0,Forest Whitaker,2007,BAFTA,Best Actor,true,The Last King of Scotland
+0,Daniel Craig,2007,BAFTA,Best Actor,false,Casino Royale
+0,Leonardo DiCaprio,2007,BAFTA,Best Actor,false,The Departed
+0,Richard Griffiths,2007,BAFTA,Best Actor,false,The History Boys
+0,Peter O'Toole,2007,BAFTA,Best Actor,false,Venus
+0,Philip Seymour Hoffman,2006,BAFTA,Best Actor,true,Capote
+0,Ralph Fiennes,2006,BAFTA,Best Actor,false,The Constant Gardener
+0,Heath Ledger,2006,BAFTA,Best Actor,false,Brokeback Mountain
+0,Joaquin Phoenix,2006,BAFTA,Best Actor,false,Walk the Line
+0,David Strathairn,2006,BAFTA,Best Actor,false,Good Night and Good Luck
+0,Jamie Foxx,2005,BAFTA,Best Actor,true,Ray
+0,Jim Carrey,2005,BAFTA,Best Actor,false,Eternal Sunshine of the Spotless Mind
+0,Leonardo DiCaprio,2005,BAFTA,Best Actor,false,The Aviator
+0,Johnny Depp,2005,BAFTA,Best Actor,false,Finding Neverland
+0,Gael García Bernal,2005,BAFTA,Best Actor,false,The Motorcycle Diaries
+0,Bill Murray,2004,BAFTA,Best Actor,true,Lost in Translation
+0,Benicio del Toro,2004,BAFTA,Best Actor,false,21 Grams
+0,Johnny Depp,2004,BAFTA,Best Actor,false,Pirates of the Caribbean: The Curse of the Black Pearl
+0,Jude Law,2004,BAFTA,Best Actor,false,Cold Mountain
+0,Sean Penn,2004,BAFTA,Best Actor,false,21 Grams
+0,Daniel Day-Lewis,2003,BAFTA,Best Actor,true,Gangs of New York
+0,Adrien Brody,2003,BAFTA,Best Actor,false,The Pianist
+0,Nicolas Cage,2003,BAFTA,Best Actor,false,Adaptation
+0,Michael Caine,2003,BAFTA,Best Actor,false,The Quiet American
+0,Jack Nicholson,2003,BAFTA,Best Actor,false,About Schmidt
+0,Russell Crowe,2002,BAFTA,Best Actor,true,A Beautiful Mind
+0,Jim Broadbent,2002,BAFTA,Best Actor,false,Iris
+0,Ian McKellen,2002,BAFTA,Best Actor,false,The Lord of the Rings: The Fellowship of the Ring
+0,Kevin Spacey,2002,BAFTA,Best Actor,false,The Shipping News
+0,Tom Wilkinson,2002,BAFTA,Best Actor,false,In the Bedroom
+0,Jamie Bell,2001,BAFTA,Best Actor,true,Billy Elliot
+0,Russell Crowe,2001,BAFTA,Best Actor,false,Gladiator
+0,Michael Douglas,2001,BAFTA,Best Actor,false,Wonder Boys
+0,Tom Hanks,2001,BAFTA,Best Actor,false,Cast Away
+0,Geoffrey Rush,2001,BAFTA,Best Actor,false,Quills
+0,Kevin Spacey,2000,BAFTA,Best Actor,true,American Beauty
+0,Jim Broadbent,2000,BAFTA,Best Actor,false,Topsy-Turvy
+0,Russell Crowe,2000,BAFTA,Best Actor,false,The Insider
+0,Ralph Fiennes,2000,BAFTA,Best Actor,false,The End of the Affair
+0,Om Puri,2000,BAFTA,Best Actor,false,East Is East

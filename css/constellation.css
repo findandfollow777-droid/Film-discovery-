@@ -1,23 +1,18 @@
+@import url('variables.css');
 /* ============================================
    ORBIT CONSTELLATION PAGE
    Anchor Film Visualization
 ============================================ */
 
 :root {
-  --space-black: #000000;
   --deep-void: #0a0e1a;
   --cosmic-blue: #0f1729;
   --nebula-purple: #1a1432;
-  --accent-cyan: #00d9ff;
-  --accent-gold: #ffd700;
   --accent-orange: #ff6b35;
   --accent-green: #00ff88;
   --film-white: #f0f4f8;
   --muted-silver: #8892a6;
   --danger-red: #ff4757;
-  
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -99,7 +94,7 @@ html, body {
   background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
 }
 
-.back-btn {
+.back-link {
   padding: 10px 20px;
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid rgba(0, 217, 255, 0.3);
@@ -111,7 +106,7 @@ html, body {
   transition: var(--transition-smooth);
 }
 
-.back-btn:hover {
+.back-link:hover {
   background: rgba(0, 217, 255, 0.2);
   border-color: var(--accent-cyan);
 }

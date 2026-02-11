@@ -1,0 +1,139 @@
+/* ============================================
+   FLOATING SHORTLIST BADGE
+   Site-wide indicator for shortlist count
+============================================ */
+
+.shortlist-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: rgba(10, 14, 26, 0.95);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 30px;
+  color: #ffd700;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.shortlist-badge:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.shortlist-badge.hidden {
+  display: none;
+}
+
+/* Ready state - when 2+ movies (can compare) */
+.shortlist-badge.ready {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(0, 217, 255, 0.1));
+  border-color: rgba(255, 215, 0, 0.6);
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+.shortlist-badge.ready:hover {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 217, 255, 0.15));
+}
+
+.badge-count {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+.badge-icon {
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+.badge-label {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffd700;
+}
+
+/* Pulse animation for ready state */
+@keyframes badge-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 215, 0, 0);
+  }
+}
+
+/* Tooltip */
+.badge-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  padding: 8px 14px;
+  background: rgba(10, 14, 26, 0.95);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 6px;
+  color: #ffd700;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.badge-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shortlist-badge {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.75rem;
+  }
+
+  .badge-count {
+    font-size: 1rem;
+  }
+
+  .badge-icon {
+    font-size: 0.9rem;
+  }
+
+  .badge-label {
+    display: none; /* Hide label on mobile to save space */
+  }
+}
+
+@media (max-width: 480px) {
+  .shortlist-badge {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .badge-count {
+    font-size: 0.9rem;
+  }
+
+  .badge-icon {
+    font-size: 0.85rem;
+  }
+}

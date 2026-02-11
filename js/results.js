@@ -1,10 +1,8 @@
 /* ============================================
    ORBIT RESULTS PAGE - JavaScript
-   Grid display, search, sorting, pagination, popup, trivia
+   Grid display, search, sorting, pagination
 ============================================ */
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TRIVIA_API_URL = "https://opentdb.com/api.php?amount=3&category=11&type=multiple";
 const MOVIES_PER_PAGE = 100; // 10x10 grid
 
 let allMovies = [];
@@ -13,8 +11,41 @@ let currentPage = 1;
 let totalPages = 1;
 let currentSort = "chronology";
 let isReversed = false;
-let currentMovieData = null;
-let currentFlipSide = 1;
+
+// Media type awareness (movie, tv, or both)
+let currentMediaType = "movie";
+
+function getMediaTypeLabel(plural) {
+  if (currentMediaType === "tv") return plural ? "TV shows" : "TV show";
+  if (currentMediaType === "both") return plural ? "movies & TV shows" : "result";
+  return plural ? "movies" : "movie";
+}
+
+function getApiPrefix(item) {
+  // For individual items, check their media_type; fallback to currentMediaType
+  const mt = item?.media_type || currentMediaType;
+  return mt === "tv" ? "tv" : "movie";
+}
+
+function applyMediaTypeLabels() {
+  // Update sidebar labels based on media type
+  const label = getMediaTypeLabel(true);
+  const countLabel = document.querySelector(".count-label");
+  if (countLabel) countLabel.textContent = `${label} found`;
+
+  const findTitle = document.querySelector('.sidebar-section-title');
+  if (findTitle && findTitle.textContent === "Find Movie") {
+    findTitle.textContent = currentMediaType === "tv" ? "Find Show" : currentMediaType === "both" ? "Find Title" : "Find Movie";
+  }
+
+  // Update "New Search" link to go back to the right page
+  const newSearchLink = document.querySelector('a.nav-item[href="../index.html"]');
+  if (newSearchLink) {
+    if (currentMediaType === "tv") newSearchLink.href = "../tv.html";
+    else if (currentMediaType === "both") newSearchLink.href = "../both.html";
+  }
+
+}
 
 // Streaming filter state (read from localStorage, set on index page)
 
@@ -88,19 +119,9 @@ const GENRE_VIBES = {
 let moviesGrid, resultsCount, resultsSubtitle, pageInfo, activeFilters;
 let prevPageBtn, nextPageBtn, pageNumbers, reverseBtn;
 let resultsSearchInput, resultsSearchDropdown;
-let moviePopupOverlay, popupClose, movieCube, popupPosterLarge;
-let popupTitle, popupYear, popupRating, popupRuntime, popupSynopsis, popupGenres;
-let directorInfo, castGrid, allCastBtn, allCastOverlay, allCastClose, allCastTimeline;
-let trailerEmbed, playTrailerBtn;
-let statRuntime, statBudget, statRevenue, statPopularity, statVotes, statLanguage, productionCompanies;
-let similarGrid, anchorBtn;
-let trailerOverlay, trailerClose, trailerFullscreen, trailerContainer;
-let whereToWatch;
 
 // Vibe slider elements
 let vibeMood, vibePace, vibeFamiliarity, vibeDepth, vibeReset;
-
-let currentCubeFace = 1;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", init);
@@ -120,50 +141,16 @@ function init() {
     
     resultsSearchInput = document.getElementById("resultsSearchInput");
     resultsSearchDropdown = document.getElementById("resultsSearchDropdown");
-    
-    // 3D Cube elements
-    moviePopupOverlay = document.getElementById("moviePopupOverlay");
-    popupClose = document.getElementById("popupClose");
-    movieCube = document.getElementById("movieCube");
-    popupPosterLarge = document.getElementById("popupPosterLarge");
-    popupTitle = document.getElementById("popupTitle");
-    popupYear = document.getElementById("popupYear");
-    popupRating = document.getElementById("popupRating");
-    popupRuntime = document.getElementById("popupRuntime");
-    popupSynopsis = document.getElementById("popupSynopsis");
-    popupGenres = document.getElementById("popupGenres");
-    whereToWatch = document.getElementById("whereToWatch");
 
-    // Cast face elements
-    directorInfo = document.getElementById("directorInfo");
-    castGrid = document.getElementById("castGrid");
-    allCastBtn = document.getElementById("allCastBtn");
-    allCastOverlay = document.getElementById("allCastOverlay");
-    allCastClose = document.getElementById("allCastClose");
-    allCastTimeline = document.getElementById("allCastTimeline");
-    
-    // Trailer face elements
-    trailerEmbed = document.getElementById("trailerEmbed");
-    playTrailerBtn = document.getElementById("playTrailerBtn");
-    
-    // Stats face elements
-    statRuntime = document.getElementById("statRuntime");
-    statBudget = document.getElementById("statBudget");
-    statRevenue = document.getElementById("statRevenue");
-    statPopularity = document.getElementById("statPopularity");
-    statVotes = document.getElementById("statVotes");
-    statLanguage = document.getElementById("statLanguage");
-    productionCompanies = document.getElementById("productionCompanies");
-    
-    // Similar face elements
-    similarGrid = document.getElementById("similarGrid");
-    anchorBtn = document.getElementById("anchorBtn");
-    
-    trailerOverlay = document.getElementById("trailerOverlay");
-    trailerClose = document.getElementById("trailerClose");
-    trailerFullscreen = document.getElementById("trailerFullscreen");
-    trailerContainer = document.getElementById("trailerContainer");
-    
+    // Shared movie cube component
+    initMovieCube({
+      onAnchorClick: (movie) => {
+        localStorage.setItem("anchorMovie", JSON.stringify(movie));
+        localStorage.setItem("constellationMovies", JSON.stringify(allMovies));
+        window.location.href = "constellation.html";
+      }
+    });
+
     // Vibe slider elements
     vibeMood = document.getElementById("vibeMood");
     vibePace = document.getElementById("vibePace");
@@ -223,12 +210,19 @@ function init() {
       }
     }
     
+    // Detect media type
+    const storedMediaType = localStorage.getItem("mediaType");
+    if (storedMediaType === "tv" || storedMediaType === "both") {
+      currentMediaType = storedMediaType;
+    }
+    applyMediaTypeLabels();
+
     // Load movies from localStorage (normal mode)
     const moviesData = localStorage.getItem("movies");
     const filtersData = localStorage.getItem("orbitFilters");
     
     if (!moviesData) {
-      showEmptyState("No movies found. Return to Orbit to search.");
+      showEmptyState("No results found. Return to Orbit to search.");
       setupEventListeners();
       return;
     }
@@ -297,7 +291,7 @@ function processMovies() {
 
   // Update count
   if (resultsCount) resultsCount.textContent = allMovies.length;
-  if (resultsSubtitle) resultsSubtitle.textContent = `Found ${allMovies.length} movies matching your criteria`;
+  if (resultsSubtitle) resultsSubtitle.textContent = `Found ${allMovies.length} ${getMediaTypeLabel(true)} matching your criteria`;
 
   // Sort and paginate
   sortMovies();
@@ -556,6 +550,9 @@ function renderPage() {
     // Truncate title for display
     const displayTitle = movie.title.length > 25 ? movie.title.substring(0, 22) + "..." : movie.title;
 
+    // Award badges
+    const awardBadges = typeof getAwardBadgesHTML === 'function' ? getAwardBadgesHTML(movie.id) : '';
+
     return `
       <div class="movie-card"
            data-movie-id="${movie.id}"
@@ -571,6 +568,7 @@ function renderPage() {
         <div class="movie-poster-wrap">
           <img class="movie-poster" src="${posterUrl}" alt="${movie.title}"
                onerror="this.src='https://placehold.co/150x225?text=No+Poster'">
+          ${year ? `<span class="movie-year-badge">${year}</span>` : ''}
         </div>
         <div class="movie-info">
           <div class="movie-title">${displayTitle}</div>
@@ -578,6 +576,7 @@ function renderPage() {
             <span class="movie-year">${year}</span>
             ${rating ? `<span class="movie-rating">⭐ ${rating}</span>` : ''}
           </div>
+          ${awardBadges ? `<div class="movie-awards">${awardBadges}</div>` : ''}
         </div>
       </div>
     `;
@@ -592,7 +591,7 @@ function renderPage() {
     card.addEventListener("click", (e) => {
       // Don't open popup if we just finished swiping
       if (!card.classList.contains('swiping-left') && !card.classList.contains('swiping-right')) {
-        openMoviePopup(card.dataset.movieId);
+        openMovieCube(card.dataset.movieId);
       }
     });
     
@@ -872,254 +871,15 @@ function selectSearchResult(movieId) {
       
       // Open popup after highlight effect
       setTimeout(() => {
-        openMoviePopup(movieId);
+        openMovieCube(movieId);
         card.classList.remove("highlighted");
       }, 800);
     }
   }, 100);
 }
 
-// ============================================
-// MOVIE POPUP
-// ============================================
+// goToPersonTimeline is used by bio panel and moviecube onPersonClick
 
-async function openMoviePopup(movieId) {
-  if (!movieCube || !moviePopupOverlay) return;
-  
-  currentCubeFace = 1;
-  if (movieCube) movieCube.dataset.face = "1";
-  updateCubeNavButtons(1);
-  
-  try {
-    // Fetch full movie details with credits and similar
-    const [movieRes, creditsRes, similarRes, videosRes] = await Promise.all([
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}`),
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${TMDB_API_KEY}`),
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${TMDB_API_KEY}`),
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_API_KEY}`)
-    ]);
-    
-    currentMovieData = await movieRes.json();
-    const credits = await creditsRes.json();
-    const similar = await similarRes.json();
-    const videos = await videosRes.json();
-    
-    // Store additional data
-    currentMovieData.credits = credits;
-    currentMovieData.similar = similar.results || [];
-    currentMovieData.videos = videos.results || [];
-    
-    // FACE 1: Poster
-    if (popupPosterLarge) {
-      popupPosterLarge.src = `https://image.tmdb.org/t/p/w780${currentMovieData.poster_path}`;
-    }
-    
-    // FACE 2: Synopsis & Info
-    if (popupTitle) popupTitle.textContent = currentMovieData.title;
-    if (popupYear) popupYear.textContent = currentMovieData.release_date ? currentMovieData.release_date.split("-")[0] : "Unknown";
-    if (popupRating) popupRating.textContent = currentMovieData.vote_average ? currentMovieData.vote_average.toFixed(1) : "N/A";
-    if (popupRuntime) popupRuntime.textContent = currentMovieData.runtime ? `${currentMovieData.runtime} min` : "";
-    if (popupSynopsis) popupSynopsis.textContent = currentMovieData.overview || "No synopsis available.";
-    
-    // Genres
-    if (popupGenres && currentMovieData.genres) {
-      popupGenres.innerHTML = currentMovieData.genres.map(g => 
-        `<span class="genre-tag">${g.name}</span>`
-      ).join('');
-    }
-    
-    // Where to Watch
-    populateWhereToWatch(currentMovieData.id);
-
-    // FACE 3: Cast & Crew
-    loadCastInfo(credits);
-    
-    // FACE 4: Stats
-    loadStats(currentMovieData);
-    
-    // Similar Films panel
-    loadSimilarFilms(similar.results || []);
-
-    // FACE 5: Trivia
-    populateTriviaFace();
-
-    moviePopupOverlay.hidden = false;
-    document.body.style.overflow = "hidden";
-  } catch (err) {
-    console.error("Error opening popup:", err);
-  }
-}
-
-function loadCastInfo(credits) {
-  // Default avatar SVG as data URI
-  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect fill='%23374151' width='50' height='50'/%3E%3Ccircle cx='25' cy='18' r='10' fill='%236B7280'/%3E%3Cellipse cx='25' cy='45' rx='18' ry='15' fill='%236B7280'/%3E%3C/svg%3E";
-  
-  // Director
-  if (directorInfo) {
-    const director = credits.crew?.find(c => c.job === "Director");
-    if (director) {
-      const dirPhoto = director.profile_path 
-        ? `https://image.tmdb.org/t/p/w92${director.profile_path}`
-        : DEFAULT_AVATAR;
-      directorInfo.innerHTML = `
-        <img class="director-photo" src="${dirPhoto}" alt="${director.name}" onerror="this.src='${DEFAULT_AVATAR}'">
-        <span class="director-name">${director.name}</span>
-      `;
-      directorInfo.style.cursor = 'pointer';
-      directorInfo.onclick = () => goToPersonTimeline(director.id, director.name);
-    } else {
-      directorInfo.innerHTML = '<span class="director-name">Unknown Director</span>';
-    }
-  }
-  
-  // Top 10 cast
-  if (castGrid) {
-    const DEFAULT_AVATAR_ESC = DEFAULT_AVATAR.replace(/'/g, "\\'");
-    const cast = (credits.cast || []).slice(0, 10);
-    castGrid.innerHTML = cast.map(person => {
-      const photo = person.profile_path 
-        ? `https://image.tmdb.org/t/p/w92${person.profile_path}`
-        : DEFAULT_AVATAR;
-      return `
-        <div class="cast-member" onclick="goToPersonTimeline(${person.id}, '${escapeQuotes(person.name)}')">
-          <img class="cast-photo" src="${photo}" alt="${person.name}" onerror="this.src='${DEFAULT_AVATAR_ESC}'">
-          <div class="cast-name">${person.name.split(' ')[0]}</div>
-        </div>
-      `;
-    }).join('');
-  }
-}
-
-function getWatchCountry() {
-  const saved = localStorage.getItem("watchCountry");
-  if (saved) return saved;
-  const lang = navigator.language || navigator.userLanguage || "en-US";
-  const parts = lang.split("-");
-  return parts.length > 1 ? parts[1].toUpperCase() : "US";
-}
-
-async function populateWhereToWatch(movieId) {
-  if (!whereToWatch) return;
-  whereToWatch.innerHTML = '<div class="watch-loading">Loading streaming info...</div>';
-
-  try {
-    const region = getWatchCountry();
-    const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${TMDB_API_KEY}`);
-    const data = await res.json();
-    const regionData = data.results?.[region];
-
-    if (!regionData) {
-      whereToWatch.innerHTML = `
-        <div class="watch-section">
-          <h4 class="watch-title">📡 Where to Watch <span class="watch-region">(${region})</span></h4>
-          <p class="watch-none">Not currently streaming</p>
-        </div>`;
-      return;
-    }
-
-    const providers = [];
-    const seen = new Set();
-    ['flatrate', 'rent', 'buy'].forEach(type => {
-      (regionData[type] || []).forEach(p => {
-        if (!seen.has(p.provider_id)) {
-          seen.add(p.provider_id);
-          providers.push({ id: p.provider_id, name: p.provider_name, logo: p.logo_path, type });
-        }
-      });
-    });
-
-    if (providers.length === 0) {
-      whereToWatch.innerHTML = `
-        <div class="watch-section">
-          <h4 class="watch-title">📡 Where to Watch <span class="watch-region">(${region})</span></h4>
-          <p class="watch-none">Not currently streaming</p>
-        </div>`;
-      return;
-    }
-
-    const logoBase = "https://image.tmdb.org/t/p/w45";
-    let subscribedIds = new Set();
-    try {
-      JSON.parse(localStorage.getItem("watchProviders") || "[]").forEach(p => subscribedIds.add(p.id));
-    } catch {}
-
-    whereToWatch.innerHTML = `
-      <div class="watch-section">
-        <h4 class="watch-title">📡 Where to Watch <span class="watch-region">(${region})</span></h4>
-        <div class="watch-providers">
-          ${providers.slice(0, 8).map(p => {
-            const subscribed = subscribedIds.size > 0 && subscribedIds.has(p.id) ? " watch-subscribed" : "";
-            return `
-            <div class="watch-provider${subscribed}" title="${p.name}">
-              <img class="watch-logo" src="${logoBase}${p.logo}" alt="${p.name}" onerror="this.style.display='none'">
-              <span class="watch-name">${p.name}</span>
-            </div>`;
-          }).join("")}
-        </div>
-      </div>`;
-  } catch (e) {
-    console.error("Watch providers error:", e);
-    whereToWatch.innerHTML = '';
-  }
-}
-
-function loadStats(movie) {
-  if (statRuntime) statRuntime.textContent = movie.runtime ? `${movie.runtime} min` : '--';
-  if (statBudget) statBudget.textContent = movie.budget ? `$${(movie.budget / 1000000).toFixed(1)}M` : '--';
-  if (statRevenue) statRevenue.textContent = movie.revenue ? `$${(movie.revenue / 1000000).toFixed(1)}M` : '--';
-  if (statPopularity) statPopularity.textContent = movie.popularity ? movie.popularity.toFixed(0) : '--';
-  if (statVotes) statVotes.textContent = movie.vote_count ? movie.vote_count.toLocaleString() : '--';
-  if (statLanguage) statLanguage.textContent = movie.original_language?.toUpperCase() || '--';
-  
-  // Production companies
-  if (productionCompanies && movie.production_companies) {
-    productionCompanies.innerHTML = movie.production_companies
-      .filter(c => c.logo_path)
-      .slice(0, 4)
-      .map(c => `<img class="company-logo" src="https://image.tmdb.org/t/p/w92${c.logo_path}" alt="${c.name}" title="${c.name}">`)
-      .join('');
-  }
-}
-
-function loadSimilarFilms(films) {
-  const similarPanelGrid = document.getElementById('similarPanelGrid');
-  if (!similarPanelGrid) return;
-  
-  // Default poster placeholder
-  const DEFAULT_POSTER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='150' viewBox='0 0 100 150'%3E%3Crect fill='%23374151' width='100' height='150'/%3E%3Ctext x='50' y='75' font-family='Arial' font-size='12' fill='%236B7280' text-anchor='middle'%3E?%3C/text%3E%3C/svg%3E";
-  
-  similarPanelGrid.innerHTML = films.slice(0, 9).map(movie => {
-    const poster = movie.poster_path 
-      ? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
-      : DEFAULT_POSTER;
-    return `
-      <div class="similar-panel-item" data-movie-id="${movie.id}">
-        <img class="similar-panel-poster" src="${poster}" alt="${movie.title}">
-        <div class="similar-panel-title">${movie.title}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function toggleSimilarPanel() {
-  const panel = document.getElementById('similarPanel');
-  const arrow = document.getElementById('similarArrow');
-  
-  if (panel) {
-    panel.hidden = !panel.hidden;
-    if (arrow) {
-      arrow.classList.toggle('expanded', !panel.hidden);
-    }
-  }
-}
-
-function openSimilarMoviePopup(movieId) {
-  // Close current popup briefly, then open the similar movie's popup
-  closeMoviePopup();
-  setTimeout(() => {
-    openMoviePopup(movieId);
-  }, 150);
-}
 
 function goToPersonTimeline(personId, personName) {
   // Store return path for "Back to Results"
@@ -1128,432 +888,6 @@ function goToPersonTimeline(personId, personName) {
   localStorage.setItem("timelineType", "person");
   localStorage.removeItem("vennPeople");
   window.location.href = 'timeline.html';
-}
-
-function closeMoviePopup() {
-  if (moviePopupOverlay) moviePopupOverlay.hidden = true;
-  document.body.style.overflow = "";
-  currentMovieData = null;
-  
-  // Reset similar panel
-  const panel = document.getElementById('similarPanel');
-  const arrow = document.getElementById('similarArrow');
-  if (panel) panel.hidden = true;
-  if (arrow) arrow.classList.remove('expanded');
-}
-
-function rotateCube(faceNum) {
-  if (!movieCube) return;
-
-  currentCubeFace = faceNum;
-  // For faces 1-4, rotate the 3D cube. For face 5, keep cube at face 1 and show flat overlay.
-  movieCube.dataset.face = faceNum <= 4 ? faceNum.toString() : "1";
-
-  // Toggle trivia overlay
-  const triviaOverlay = document.getElementById("cubeTriviaOverlay");
-  if (triviaOverlay) {
-    triviaOverlay.classList.toggle("active", faceNum === 5);
-  }
-
-  updateCubeNavButtons(faceNum);
-}
-
-function updateCubeNavButtons(activeFace) {
-  document.querySelectorAll('.cube-nav-btn').forEach(btn => {
-    btn.classList.toggle('active', parseInt(btn.dataset.face) === activeFace);
-  });
-}
-
-function loadTrailer() {
-  if (!currentMovieData?.videos || !trailerContainer) {
-    alert("No trailer data available");
-    return;
-  }
-  
-  const trailer = currentMovieData.videos.find(v => 
-    v.type === "Trailer" && v.site === "YouTube"
-  ) || currentMovieData.videos.find(v => v.site === "YouTube");
-  
-  if (trailer) {
-    trailerContainer.innerHTML = `
-      <iframe 
-        src="https://www.youtube.com/embed/${trailer.key}?autoplay=1" 
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-    `;
-    if (trailerOverlay) trailerOverlay.hidden = false;
-  } else {
-    alert("No trailer available for this movie.");
-  }
-}
-
-function showAllCast() {
-  if (!allCastOverlay || !allCastTimeline || !currentMovieData?.credits?.cast) return;
-  
-  const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%23374151' width='60' height='60'/%3E%3Ccircle cx='30' cy='22' r='12' fill='%236B7280'/%3E%3Cellipse cx='30' cy='54' rx='22' ry='18' fill='%236B7280'/%3E%3C/svg%3E";
-  const cast = currentMovieData.credits.cast;
-  
-  allCastTimeline.innerHTML = cast.map(person => {
-    const photo = person.profile_path 
-      ? `https://image.tmdb.org/t/p/w92${person.profile_path}`
-      : DEFAULT_AVATAR;
-    return `
-      <div class="all-cast-member" onclick="goToPersonTimeline(${person.id}, '${escapeQuotes(person.name)}')">
-        <img class="all-cast-photo" src="${photo}" alt="${person.name}" onerror="this.src='${DEFAULT_AVATAR}'">
-        <div class="all-cast-name">${person.name}</div>
-        <div class="all-cast-character">${person.character || ''}</div>
-      </div>
-    `;
-  }).join('');
-  
-  allCastOverlay.hidden = false;
-}
-
-function closeAllCast() {
-  if (allCastOverlay) allCastOverlay.hidden = true;
-}
-
-// ============================================
-// TRIVIA
-// ============================================
-
-async function loadTrivia() {
-  if (!triviaQuestions) return;
-  
-  triviaQuestions.innerHTML = '<div class="trivia-loading">Loading trivia...</div>';
-  
-  try {
-    const res = await fetch(TRIVIA_API_URL);
-    const data = await res.json();
-    
-    if (data.results && data.results.length > 0) {
-      renderTrivia(data.results);
-    } else {
-      triviaQuestions.innerHTML = '<div class="trivia-loading">No trivia available.</div>';
-    }
-  } catch (err) {
-    console.error("Trivia load error:", err);
-    triviaQuestions.innerHTML = '<div class="trivia-loading">Failed to load trivia.</div>';
-  }
-}
-
-function renderTrivia(questions) {
-  if (!triviaQuestions) return;
-  
-  triviaQuestions.innerHTML = questions.map((q, index) => {
-    const question = decodeHTML(q.question);
-    const correct = decodeHTML(q.correct_answer);
-    const incorrect = q.incorrect_answers.map(a => decodeHTML(a));
-    const options = shuffleArrayCopy([correct, ...incorrect]);
-    
-    return `
-      <div class="trivia-item" data-correct="${correct}">
-        <div class="trivia-question">${index + 1}. ${question}</div>
-        <div class="trivia-options">
-          ${options.map(opt => `
-            <div class="trivia-option" data-answer="${opt}" onclick="checkAnswer(this, '${escapeQuotes(correct)}')">${opt}</div>
-          `).join("")}
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function shuffleArrayCopy(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function checkAnswer(element, correct) {
-  const selected = element.dataset.answer;
-  const parent = element.closest(".trivia-item");
-  const options = parent.querySelectorAll(".trivia-option");
-  
-  options.forEach(opt => {
-    opt.style.pointerEvents = "none";
-    if (opt.dataset.answer === correct) {
-      opt.classList.add("correct");
-    }
-  });
-  
-  if (selected !== correct) {
-    element.classList.add("wrong");
-  }
-}
-
-function decodeHTML(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-}
-
-function escapeQuotes(str) {
-  return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
-// ============================================
-// TRIVIA
-// ============================================
-
-let triviaQuestions = [];
-let triviaIndex = 0;
-let triviaScore = 0;
-let triviaAnswered = false;
-
-function getTriviaCache(movieId) {
-  try {
-    const data = JSON.parse(localStorage.getItem(`cube_trivia_${movieId}`));
-    if (data && data.questions && data.questions.length === 3) return data;
-  } catch (e) {}
-  return null;
-}
-
-function setTriviaCache(movieId, questions) {
-  try {
-    localStorage.setItem(`cube_trivia_${movieId}`, JSON.stringify({ questions, ts: Date.now() }));
-  } catch (e) {}
-}
-
-function generateTriviaQuestions(movie) {
-  const m = movie;
-  const pool = [];
-
-  if (m.budget && m.budget > 0) {
-    const correct = `$${(m.budget / 1000000).toFixed(0)}M`;
-    const base = m.budget / 1000000;
-    const wrongs = [`$${Math.max(1, Math.round(base * 0.4))}M`, `$${Math.round(base * 1.8)}M`, `$${Math.round(base * 3.2)}M`].filter(w => w !== correct);
-    pool.push({ q: `What was the budget of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3) });
-  }
-
-  if (m.revenue && m.revenue > 0) {
-    const rev = m.revenue / 1000000;
-    const correct = rev >= 1000 ? `$${(rev / 1000).toFixed(1)}B` : `$${rev.toFixed(0)}M`;
-    const variants = [rev * 0.3, rev * 0.6, rev * 2.5].map(v => v >= 1000 ? `$${(v / 1000).toFixed(1)}B` : `$${Math.round(v)}M`).filter(w => w !== correct);
-    pool.push({ q: `How much did "${m.title}" earn at the box office?`, correct, wrongs: variants.slice(0, 3) });
-  }
-
-  if (m.runtime) {
-    const correct = `${m.runtime} minutes`;
-    const wrongs = [`${m.runtime + 23} minutes`, `${Math.max(60, m.runtime - 31)} minutes`, `${m.runtime + 47} minutes`].filter(w => w !== correct);
-    pool.push({ q: `What is the runtime of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3) });
-  }
-
-  if (m.tagline && m.tagline.length > 5) {
-    const correct = m.tagline;
-    const fakeTaglines = ["Every story has a beginning.", "The truth will set you free.", "Nothing is what it seems.", "One moment changes everything.", "Beyond the impossible."].filter(t => t !== correct);
-    for (let i = fakeTaglines.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [fakeTaglines[i], fakeTaglines[j]] = [fakeTaglines[j], fakeTaglines[i]]; }
-    pool.push({ q: `What is the tagline of "${m.title}"?`, correct, wrongs: fakeTaglines.slice(0, 3) });
-  }
-
-  if (m.original_language) {
-    const langMap = { en: "English", fr: "French", es: "Spanish", de: "German", ja: "Japanese", ko: "Korean", it: "Italian", pt: "Portuguese", zh: "Chinese", hi: "Hindi", ru: "Russian", ar: "Arabic", sv: "Swedish", da: "Danish", nl: "Dutch", pl: "Polish", th: "Thai" };
-    const correct = langMap[m.original_language] || m.original_language.toUpperCase();
-    const others = Object.values(langMap).filter(l => l !== correct);
-    for (let i = others.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [others[i], others[j]] = [others[j], others[i]]; }
-    pool.push({ q: `What is the original language of "${m.title}"?`, correct, wrongs: others.slice(0, 3) });
-  }
-
-  if (m.release_date) {
-    const year = parseInt(m.release_date.split("-")[0]);
-    const correct = `${year}`;
-    const wrongs = [`${year - 2}`, `${year + 1}`, `${year - 4}`].filter(w => w !== correct);
-    pool.push({ q: `What year was "${m.title}" released?`, correct, wrongs: wrongs.slice(0, 3) });
-  }
-
-  if (m.production_countries && m.production_countries.length > 0) {
-    const correct = m.production_countries[0].name;
-    const fakeCountries = ["United States of America", "United Kingdom", "France", "Germany", "Japan", "South Korea", "Canada", "Australia", "India", "Italy"].filter(c => c !== correct);
-    for (let i = fakeCountries.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [fakeCountries[i], fakeCountries[j]] = [fakeCountries[j], fakeCountries[i]]; }
-    pool.push({ q: `Which country produced "${m.title}"?`, correct, wrongs: fakeCountries.slice(0, 3) });
-  }
-
-  if (m.credits && m.credits.crew) {
-    const director = m.credits.crew.find(c => c.job === "Director");
-    if (director) {
-      const correct = director.name;
-      const fallbackNames = ["Steven Spielberg", "Christopher Nolan", "Martin Scorsese", "Denis Villeneuve", "Ridley Scott", "James Cameron", "Quentin Tarantino"].filter(n => n !== correct);
-      for (let i = fallbackNames.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [fallbackNames[i], fallbackNames[j]] = [fallbackNames[j], fallbackNames[i]]; }
-      pool.push({ q: `Who directed "${m.title}"?`, correct, wrongs: fallbackNames.slice(0, 3) });
-    }
-
-    const composer = m.credits.crew.find(c => c.job === "Original Music Composer" || c.job === "Music");
-    if (composer) {
-      const correct = composer.name;
-      const fallbackComposers = ["Hans Zimmer", "John Williams", "Danny Elfman", "Howard Shore", "Alexandre Desplat", "Ludwig Göransson", "Michael Giacchino"].filter(n => n !== correct);
-      for (let i = fallbackComposers.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [fallbackComposers[i], fallbackComposers[j]] = [fallbackComposers[j], fallbackComposers[i]]; }
-      pool.push({ q: `Who composed the music for "${m.title}"?`, correct, wrongs: fallbackComposers.slice(0, 3) });
-    }
-  }
-
-  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
-
-  const questions = [];
-  for (const item of pool.slice(0, 3)) {
-    const options = [item.correct, ...item.wrongs.slice(0, 3)];
-    for (let i = options.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [options[i], options[j]] = [options[j], options[i]]; }
-    questions.push({ question: item.q, options, correctAnswer: item.correct });
-  }
-  return questions;
-}
-
-function populateTriviaFace() {
-  if (!currentMovieData) return;
-
-  const cached = getTriviaCache(currentMovieData.id);
-  if (cached) {
-    triviaQuestions = cached.questions;
-  } else {
-    triviaQuestions = generateTriviaQuestions(currentMovieData);
-    if (triviaQuestions.length > 0) setTriviaCache(currentMovieData.id, triviaQuestions);
-  }
-
-  triviaIndex = 0;
-  triviaScore = 0;
-  triviaAnswered = false;
-
-  if (triviaQuestions.length === 0) {
-    const section = document.getElementById("cubeTriviaSection");
-    if (section) section.innerHTML = '<h3 class="section-title">🧠 Movie Trivia</h3><p style="color: var(--muted-silver); text-align: center; margin-top: 40px;">Not enough data to generate trivia for this movie.</p>';
-    return;
-  }
-  renderTriviaQuestion();
-}
-
-function renderTriviaQuestion() {
-  const progressEl = document.getElementById("cubeTriviaProgress");
-  const questionEl = document.getElementById("cubeTriviaQuestion");
-  const optionsEl = document.getElementById("cubeTriviaOptions");
-  const scoreEl = document.getElementById("cubeTriviaScore");
-  if (!progressEl || !questionEl || !optionsEl || !scoreEl) return;
-
-  progressEl.innerHTML = triviaQuestions.map((_, i) => {
-    let cls = "cube-trivia-dot";
-    if (i === triviaIndex) cls += " active";
-    return `<span class="${cls}" data-idx="${i}"></span>`;
-  }).join("");
-
-  const q = triviaQuestions[triviaIndex];
-  questionEl.textContent = q.question;
-  optionsEl.innerHTML = q.options.map((opt, i) => `<button class="cube-trivia-option" data-idx="${i}">${opt}</button>`).join("");
-  scoreEl.textContent = `Score: ${triviaScore} / ${triviaQuestions.length}`;
-  triviaAnswered = false;
-}
-
-function handleTriviaAnswer(btn) {
-  if (triviaAnswered) return;
-  triviaAnswered = true;
-
-  const q = triviaQuestions[triviaIndex];
-  const selected = btn.textContent;
-  const isCorrect = selected === q.correctAnswer;
-
-  document.getElementById("cubeTriviaOptions").querySelectorAll(".cube-trivia-option").forEach(b => {
-    b.classList.add("cube-trivia-answered");
-    if (b.textContent === q.correctAnswer) b.classList.add("cube-trivia-correct");
-  });
-
-  if (isCorrect) {
-    triviaScore++;
-    btn.classList.add("cube-trivia-correct");
-  } else {
-    btn.classList.add("cube-trivia-wrong");
-  }
-
-  const dots = document.querySelectorAll("#cubeTriviaProgress .cube-trivia-dot");
-  if (dots[triviaIndex]) {
-    dots[triviaIndex].classList.remove("active");
-    dots[triviaIndex].classList.add(isCorrect ? "correct" : "wrong");
-  }
-
-  const scoreEl = document.getElementById("cubeTriviaScore");
-  if (scoreEl) scoreEl.textContent = `Score: ${triviaScore} / ${triviaQuestions.length}`;
-
-  setTimeout(() => {
-    triviaIndex++;
-    if (triviaIndex < triviaQuestions.length) {
-      renderTriviaQuestion();
-    } else {
-      showTriviaResult();
-    }
-  }, 1200);
-}
-
-function showTriviaResult() {
-  const section = document.getElementById("cubeTriviaSection");
-  if (!section) return;
-
-  const emoji = triviaScore === 3 ? "🏆" : triviaScore === 2 ? "⭐" : triviaScore === 1 ? "👍" : "😅";
-  section.innerHTML = `
-    <div class="cube-trivia-final">
-      <h3 class="section-title">🧠 Trivia Complete!</h3>
-      <div class="cube-trivia-final-score">${emoji} ${triviaScore} / ${triviaQuestions.length}</div>
-      <div class="cube-trivia-final-label">${triviaScore === 3 ? "Perfect score!" : triviaScore === 2 ? "Well done!" : triviaScore === 1 ? "Not bad!" : "Better luck next time!"}</div>
-      <button class="cube-trivia-retry" id="cubeTriviaRetry">🔄 Play Again</button>
-    </div>
-  `;
-
-}
-
-// ============================================
-// TRAILER
-// ============================================
-
-async function openTrailer() {
-  if (!currentMovieData) return;
-  
-  try {
-    const videosRes = await fetch(`https://api.themoviedb.org/3/movie/${currentMovieData.id}/videos?api_key=${TMDB_API_KEY}`);
-    const videosData = await videosRes.json();
-    
-    const trailer = videosData.results?.find(v => 
-      v.type === "Trailer" && v.site === "YouTube"
-    ) || videosData.results?.find(v => v.site === "YouTube");
-    
-    if (trailer) {
-      showTrailer(trailer.key);
-      return;
-    }
-  } catch (err) {
-    console.error("Failed to fetch TMDB videos:", err);
-  }
-  
-  const searchQuery = encodeURIComponent(`${currentMovieData.title} ${currentMovieData.release_date?.split("-")[0] || ""} official trailer`);
-  window.open(`https://www.youtube.com/results?search_query=${searchQuery}`, "_blank");
-}
-
-function showTrailer(youtubeId) {
-  if (!trailerContainer || !trailerOverlay) return;
-  
-  trailerContainer.innerHTML = `
-    <iframe 
-      src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-      allowfullscreen>
-    </iframe>
-  `;
-  trailerOverlay.hidden = false;
-}
-
-function closeTrailer() {
-  if (trailerOverlay) trailerOverlay.hidden = true;
-  if (trailerContainer) trailerContainer.innerHTML = "";
-}
-
-function toggleFullscreen() {
-  if (!trailerContainer) return;
-  const iframe = trailerContainer.querySelector("iframe");
-  if (iframe) {
-    if (iframe.requestFullscreen) {
-      iframe.requestFullscreen();
-    } else if (iframe.webkitRequestFullscreen) {
-      iframe.webkitRequestFullscreen();
-    }
-  }
 }
 
 // ============================================
@@ -1649,134 +983,24 @@ function setupEventListeners() {
     }
   });
   
-  // Popup
-  popupClose?.addEventListener("click", closeMoviePopup);
-  moviePopupOverlay?.addEventListener("click", (e) => {
-    if (e.target === moviePopupOverlay) closeMoviePopup();
-  });
-  
-  // 3D Cube navigation
-  document.querySelectorAll('.cube-nav-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      rotateCube(parseInt(btn.dataset.face));
-    });
-  });
-  
-  // Action buttons and similar panel - event delegation
-  document.getElementById('moviePopup')?.addEventListener("click", (e) => {
-    // Trailer button
-    const trailerBtn = e.target.closest('#playTrailerBtn');
-    if (trailerBtn) {
-      e.stopPropagation();
-      loadTrailer();
-      return;
-    }
-    
-    // Anchor button
-    const anchorButton = e.target.closest('#anchorBtn, .anchor-btn-primary');
-    if (anchorButton) {
-      e.stopPropagation();
-      if (currentMovieData) {
-        localStorage.setItem("anchorMovie", JSON.stringify(currentMovieData));
-        localStorage.setItem("constellationMovies", JSON.stringify(allMovies));
-        window.location.href = "constellation.html";
-      } else {
-        alert("No movie data available");
-      }
-      return;
-    }
-    
-    // Similar toggle button
-    const similarToggle = e.target.closest('#similarToggleBtn');
-    if (similarToggle) {
-      e.stopPropagation();
-      toggleSimilarPanel();
-      return;
-    }
-    
-    // Similar panel item click
-    const similarItem = e.target.closest('.similar-panel-item');
-    if (similarItem) {
-      e.stopPropagation();
-      const movieId = parseInt(similarItem.dataset.movieId);
-      if (movieId) {
-        openSimilarMoviePopup(movieId);
-      }
-      return;
-    }
-  });
-  
-  // All cast button
-  allCastBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    showAllCast();
-  });
-  
-  // Close all cast modal
-  allCastClose?.addEventListener("click", closeAllCast);
-  allCastOverlay?.addEventListener("click", (e) => {
-    if (e.target === allCastOverlay) closeAllCast();
-  });
-  
-  trailerClose?.addEventListener("click", closeTrailer);
-  trailerFullscreen?.addEventListener("click", toggleFullscreen);
-  trailerOverlay?.addEventListener("click", (e) => {
-    if (e.target === trailerOverlay) closeTrailer();
-  });
-
-  // Trivia click delegation for reliable 3D click handling
-  document.addEventListener("click", (e) => {
-    const opt = e.target.closest("#moviePopupOverlay .cube-trivia-option");
-    if (opt) {
-      handleTriviaAnswer(opt);
-    }
-    const retry = e.target.closest("#moviePopupOverlay .cube-trivia-retry");
-    if (retry) {
-      if (currentMovieData) localStorage.removeItem(`cube_trivia_${currentMovieData.id}`);
-      const section = document.getElementById("cubeTriviaSection");
-      if (section) {
-        section.innerHTML = `
-          <h3 class="section-title">🧠 Movie Trivia</h3>
-          <div class="cube-trivia-progress" id="cubeTriviaProgress"></div>
-          <div class="cube-trivia-question" id="cubeTriviaQuestion"></div>
-          <div class="cube-trivia-options" id="cubeTriviaOptions"></div>
-          <div class="cube-trivia-score" id="cubeTriviaScore"></div>
-        `;
-        populateTriviaFace();
-      }
-    }
-  });
-  
-  // Keyboard
+  // Keyboard — ESC handled by moviecube.js internally; arrow keys for pagination
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      if (trailerOverlay && !trailerOverlay.hidden) {
-        closeTrailer();
-      } else if (moviePopupOverlay && !moviePopupOverlay.hidden) {
-        closeMoviePopup();
-      }
-    }
-    if (e.key === "ArrowLeft" && (!moviePopupOverlay || moviePopupOverlay.hidden)) {
+    const cubeOverlay = document.getElementById("movieCubeOverlay");
+    const cubeOpen = cubeOverlay && !cubeOverlay.hidden;
+    if (e.key === "ArrowLeft" && !cubeOpen) {
       if (currentPage > 1) {
         currentPage--;
         renderPage();
         if (moviesGrid) moviesGrid.scrollTop = 0;
       }
     }
-    if (e.key === "ArrowRight" && (!moviePopupOverlay || moviePopupOverlay.hidden)) {
+    if (e.key === "ArrowRight" && !cubeOpen) {
       if (currentPage < totalPages) {
         currentPage++;
         renderPage();
         if (moviesGrid) moviesGrid.scrollTop = 0;
       }
     }
-  });
-  
-  // Landing Zone button
-  document.getElementById("landingZoneBtn")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.setItem("landingZoneMovies", JSON.stringify(sortedMovies));
-    window.location.href = "landingzone.html";
   });
   
   // Swipe hint dismiss
@@ -1869,9 +1093,8 @@ function triggerSwipeOnFirstCard(direction) {
 }
 
 // Expose functions to window for inline onclick handlers
-window.openSimilarMoviePopup = openSimilarMoviePopup;
 window.goToPersonTimeline = goToPersonTimeline;
-window.openMoviePopup = openMoviePopup;
+window.openMoviePopup = openMovieCube;
 
 // ============================================
 // PERSON BIO PANEL (#4, #5, #6)

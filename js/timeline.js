@@ -3,17 +3,10 @@
    Full viewport, dramatic staircase, pulsing lines
 ============================================ */
 
-// Use existing constants if available, otherwise define
-if (typeof TMDB_API_KEY === 'undefined') {
-  var TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-}
-if (typeof TMDB_IMG === 'undefined') {
-  var TMDB_IMG = "https://image.tmdb.org/t/p/";
-}
-
 // State
 let people = [];
 let allMovies = [];
+let allTvShows = [];
 let filteredMovies = [];
 let currentSort = "chronology";
 let isReversed = false;
@@ -21,6 +14,8 @@ let currentMovieData = null;
 let currentFlipSide = 1;
 let searchTimeout = null;
 let lastChronoSorted = []; // Store for redrawing sacred line
+let currentMediaMode = 'movies'; // 'movies', 'tv', 'both'
+let showGuestAppearances = false; // Exclude guest appearances by default
 
 // Randomized gradient for this session
 let currentGradientId = "lineGrad" + (Math.floor(Math.random() * 4) + 1);
@@ -56,12 +51,8 @@ function init() {
       await addPerson(parseInt(personId));
     },
     onAnchorClick: (movie) => {
-      // Go to results with this as anchor
-      const params = new URLSearchParams({
-        anchor: movie.id,
-        title: movie.title
-      });
-      window.location.href = `results.html?${params}`;
+      localStorage.setItem("anchorMovie", JSON.stringify(movie));
+      window.location.href = "constellation.html";
     }
   });
   
@@ -116,6 +107,18 @@ async function loadFromUrlSearch(query, type) {
       } else {
         showEmpty(`No results found for "${query}"`);
       }
+    } else if (type === 'tv') {
+      const res = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
+      const data = await res.json();
+
+      if (data.results && data.results.length > 0) {
+        const show = data.results[0];
+        localStorage.setItem("timelineMovieId", show.id);
+        localStorage.setItem("timelineType", "tv");
+        await loadTVShowTimeline(show.id);
+      } else {
+        showEmpty(`No results found for "${query}"`);
+      }
     }
   } catch (err) {
     console.error("URL search error:", err);
@@ -139,6 +142,7 @@ function cacheElements() {
   billingFilter = document.getElementById("billingFilter");
   roleFilter = document.getElementById("roleFilter");
   excludeSelfCheckbox = document.getElementById("excludeSelf");
+  if (excludeSelfCheckbox) excludeSelfCheckbox.checked = true; // Default to checked
   featureFilmsOnly = document.getElementById("featureFilmsOnly");
   upcomingSection = document.getElementById("upcomingSection");
   upcomingTrack = document.getElementById("upcomingTrack");
@@ -193,15 +197,26 @@ async function loadInitialData() {
       if (storedPeople && storedPeople.length > 0) {
         people = storedPeople;
         allMovies = people.flatMap(p => p.movies || []);
+        allTvShows = people.flatMap(p => p.tvShows || []);
         
         if (people.length === 1) {
           timelineTitle.textContent = people[0].name;
-          timelineSubtitle.textContent = `${people[0].role || 'Filmography'} • ${people[0].movies?.length || 0} Films`;
+          const mc = (people[0].movies || []).length;
+          const tc = (people[0].tvShows || []).length;
+          const parts = [];
+          if (mc) parts.push(`${mc} Films`);
+          if (tc) parts.push(`${tc} Shows`);
+          timelineSubtitle.textContent = `${people[0].role || 'Filmography'} • ${parts.join(' • ') || '0 titles'}`;
+          if (vennBtn) vennBtn.hidden = true;
+          if (bioBtn) bioBtn.hidden = false;
         } else {
-          timelineTitle.textContent = "Shared Timeline";
+          timelineTitle.textContent = "Gravitational Crossings";
           timelineSubtitle.textContent = people.map(p => p.name).join(" × ");
+          if (vennBtn) vennBtn.hidden = false;
+          if (bioBtn) bioBtn.hidden = true;
         }
-        
+
+        updateMediaModeToggleVisibility();
         processAndRender();
         return;
       }
@@ -220,8 +235,8 @@ async function loadInitialData() {
       await loadPersonTimeline(timelineId);
     } else if (timelineType === "movie") {
       await loadMovieTimeline(timelineId);
-    } else if (timelineType === "company") {
-      await loadCompanyTimeline(timelineId);
+    } else if (timelineType === "tv") {
+      await loadTVShowTimeline(timelineId);
     }
   } catch (err) {
     console.error("Load error:", err);
@@ -236,33 +251,48 @@ async function loadPersonTimeline(personId) {
   const personRes = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
   const person = await personRes.json();
   
-  // Fetch ALL credits (no page limit from TMDB)
-  const creditsRes = await fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`);
+  // Fetch movie and TV credits in parallel
+  const [creditsRes, tvCreditsRes] = await Promise.all([
+    fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`),
+    fetch(`https://api.themoviedb.org/3/person/${personId}/tv_credits?api_key=${TMDB_API_KEY}`)
+  ]);
   const credits = await creditsRes.json();
-  
+  const tvCredits = await tvCreditsRes.json();
+
   // Process credits with job tracking
   const { movies, primaryRole, availableRoles } = processCreditsWithJobs(credits);
-  
+  const basicTvShows = processTvCredits(tvCredits);
+  const tvShows = await enrichTvShows(basicTvShows);
+
   people = [{
     id: person.id,
     name: person.name,
     role: primaryRole,
     availableRoles: availableRoles,
     profile: person.profile_path,
-    movies: movies
+    movies: movies,
+    tvShows: tvShows
   }];
-  
+
   allMovies = movies;
-  
+  allTvShows = tvShows;
+
   timelineTitle.textContent = person.name;
-  timelineSubtitle.textContent = `${primaryRole} • ${movies.length} Films`;
-  
+  const totalCount = movies.length + tvShows.length;
+  const countParts = [];
+  if (movies.length) countParts.push(`${movies.length} Films`);
+  if (tvShows.length) countParts.push(`${tvShows.length} Shows`);
+  timelineSubtitle.textContent = `${primaryRole} • ${countParts.join(' • ') || '0 titles'}`;
+
   // Show bio button for single person view
   if (bioBtn) bioBtn.hidden = false;
-  
+
   // Update role filter visibility based on available roles
   updateRoleFilterOptions();
-  
+
+  // Update media mode toggle and count label
+  updateMediaModeToggleVisibility();
+
   processAndRender();
 }
 
@@ -277,6 +307,116 @@ function categorizeJob(job) {
   if (j === 'composer' || j === 'original music composer') return 'music';
   if (j === 'editor') return 'editing';
   return 'other_crew';
+}
+
+// Process TV credits into a deduplicated list of shows (simplified - one tile per show)
+function processTvCredits(tvCredits) {
+  const showsMap = new Map();
+
+  (tvCredits.cast || []).forEach(credit => {
+    const showId = credit.id;
+    if (!showsMap.has(showId)) {
+      showsMap.set(showId, {
+        id: showId,
+        name: credit.name,
+        poster_path: credit.poster_path,
+        first_air_date: credit.first_air_date,
+        vote_average: credit.vote_average,
+        character: credit.character,
+        episode_count: credit.episode_count || 0,
+        media_type: 'tv',
+        roles: ['acting']
+      });
+    } else {
+      // Same show, different role - add episode counts and combine characters
+      const existing = showsMap.get(showId);
+      existing.episode_count += credit.episode_count || 0;
+      if (credit.character && existing.character && !existing.character.includes(credit.character)) {
+        existing.character += `, ${credit.character}`;
+      } else if (credit.character && !existing.character) {
+        existing.character = credit.character;
+      }
+    }
+  });
+
+  (tvCredits.crew || []).forEach(credit => {
+    const showId = credit.id;
+    const role = categorizeJob(credit.job);
+    if (!showsMap.has(showId)) {
+      showsMap.set(showId, {
+        id: showId,
+        name: credit.name,
+        poster_path: credit.poster_path,
+        first_air_date: credit.first_air_date,
+        vote_average: credit.vote_average,
+        episode_count: credit.episode_count,
+        media_type: 'tv',
+        roles: role ? [role] : []
+      });
+    } else {
+      const existing = showsMap.get(showId);
+      if (role && !existing.roles.includes(role)) existing.roles.push(role);
+      existing.episode_count = Math.max(existing.episode_count || 0, credit.episode_count || 0);
+    }
+  });
+
+  // Normalize fields so TV shows work in the movie pipeline
+  return Array.from(showsMap.values()).map(show => ({
+    ...show,
+    title: show.name,
+    release_date: show.first_air_date,
+    // TV shows use roles array instead of jobCategories
+    jobCategories: show.roles
+  }));
+}
+
+// Enrich TV shows with total episode count and year range for display
+async function enrichTvShows(tvShows) {
+  const shows = tvShows.filter(s => s.first_air_date);
+
+  // Fetch all show details in parallel (batched to avoid rate limits)
+  const BATCH_SIZE = 8;
+  const enriched = [];
+
+  for (let i = 0; i < shows.length; i += BATCH_SIZE) {
+    const batch = shows.slice(i, i + BATCH_SIZE);
+    const results = await Promise.all(batch.map(async (show) => {
+      try {
+        const res = await fetch(`https://api.themoviedb.org/3/tv/${show.id}?api_key=${TMDB_API_KEY}`);
+        const details = await res.json();
+
+        const totalEpisodes = details.number_of_episodes || 1;
+        const actorEpisodes = show.episode_count || 0;
+        const isMainCast = actorEpisodes >= (totalEpisodes * 0.25);
+
+        const startYear = show.first_air_date ? parseInt(show.first_air_date.substring(0, 4)) : null;
+        const endYear = details.last_air_date ? parseInt(details.last_air_date.substring(0, 4)) : startYear;
+        const yearRange = startYear
+          ? (endYear && endYear !== startYear ? `${startYear}-${endYear}` : `${startYear}`)
+          : 'TBA';
+
+        return {
+          ...show,
+          totalEpisodes,
+          isMainCast,
+          yearRange,
+          lastAirDate: details.last_air_date,
+          status: details.status
+        };
+      } catch (err) {
+        const startYear = show.first_air_date ? parseInt(show.first_air_date.substring(0, 4)) : null;
+        return {
+          ...show,
+          totalEpisodes: 1,
+          isMainCast: true,
+          yearRange: startYear ? `${startYear}` : 'TBA'
+        };
+      }
+    }));
+    enriched.push(...results);
+  }
+
+  return enriched;
 }
 
 // Process credits to track jobs per movie
@@ -428,6 +568,12 @@ function updateRoleFilterOptions() {
     roleFilter.style.display = '';
   }
   
+  // Show "Exclude Self" only in multi-person mode
+  const excludeSelfLabel = excludeSelfCheckbox?.closest('label');
+  if (excludeSelfLabel) {
+    excludeSelfLabel.style.display = people.length > 1 ? '' : 'none';
+  }
+
   // For multi-person, show indicator of who each filter applies to
   updateFilterLabels();
 }
@@ -469,74 +615,190 @@ async function loadMovieTimeline(movieId) {
     movies = collection.parts || [];
     timelineSubtitle.textContent = collection.name;
   } else {
-    const simRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${TMDB_API_KEY}`);
-    const similar = await simRes.json();
-    movies = [movie, ...(similar.results || []).slice(0, 19)];
-    timelineSubtitle.textContent = "Related Films";
+    // Standalone movie - show only this movie, no recommendations
+    movies = [movie];
+    timelineSubtitle.textContent = "Standalone Film";
   }
   
   allMovies = movies.filter(m => m.poster_path);
   people = [];
-  
+
+  processAndRender();
+  applyMovieModeUI(movie.belongs_to_collection ? movie.belongs_to_collection.name : null);
+}
+
+// ============================================
+// MOVIE MODE UI
+// ============================================
+
+const TMDB_GENRE_MAP = {
+  28:'Action',12:'Adventure',16:'Animation',35:'Comedy',80:'Crime',
+  99:'Documentary',18:'Drama',10751:'Family',14:'Fantasy',36:'History',
+  27:'Horror',10402:'Music',9648:'Mystery',10749:'Romance',878:'Sci-Fi',
+  10770:'TV Movie',53:'Thriller',10752:'War',37:'Western'
+};
+
+function applyMovieModeUI(collectionName) {
+  if (people.length > 0) return; // only in movie mode
+
+  // Hide person-specific controls
+  if (roleFilter) roleFilter.style.display = 'none';
+  if (billingFilter) billingFilter.style.display = 'none';
+  if (addPersonBtn) addPersonBtn.style.display = 'none';
+  if (vennBtn) vennBtn.style.display = 'none';
+  if (bioBtn) bioBtn.style.display = 'none';
+
+  const excludeLabel = excludeSelfCheckbox?.closest('label');
+  if (excludeLabel) excludeLabel.style.display = 'none';
+
+  const guestFilter = document.getElementById('guestAppearancesFilter');
+  if (guestFilter) guestFilter.style.display = 'none';
+
+  const featuresLabel = featureFilmsOnly?.closest('label');
+  if (featuresLabel) featuresLabel.style.display = 'none';
+
+  const mediaModeToggle = document.getElementById('mediaModeToggle');
+  if (mediaModeToggle) mediaModeToggle.style.display = 'none';
+
+  // Build genre filter from collection movies
+  const genreIds = new Set();
+  allMovies.forEach(m => {
+    (m.genre_ids || []).forEach(g => genreIds.add(g));
+  });
+
+  if (genreIds.size > 0) {
+    const controlsRight = document.querySelector('.controls-right');
+    if (controlsRight && !document.getElementById('genreFilter')) {
+      const sel = document.createElement('select');
+      sel.id = 'genreFilter';
+      sel.className = 'filter-select';
+      sel.title = 'Filter by genre';
+      let opts = '<option value="all">All Genres</option>';
+      [...genreIds].sort((a, b) => (TMDB_GENRE_MAP[a] || '').localeCompare(TMDB_GENRE_MAP[b] || '')).forEach(gid => {
+        const name = TMDB_GENRE_MAP[gid] || `Genre ${gid}`;
+        opts += `<option value="${gid}">${name}</option>`;
+      });
+      sel.innerHTML = opts;
+      sel.addEventListener('change', () => applyFiltersAndSort());
+      controlsRight.prepend(sel);
+    }
+  }
+
+  // Show collection badge
+  if (collectionName) {
+    const controlsLeft = document.querySelector('.controls-left');
+    if (controlsLeft && !controlsLeft.querySelector('.collection-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'collection-badge';
+      badge.textContent = collectionName;
+      controlsLeft.appendChild(badge);
+    }
+  }
+}
+
+async function loadTVShowTimeline(tvId) {
+  const tvRes = await fetch(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${TMDB_API_KEY}`);
+  const tvShow = await tvRes.json();
+
+  timelineTitle.textContent = tvShow.name;
+
+  const seasons = (tvShow.seasons || []).filter(s => s.season_number > 0); // exclude specials
+  const totalEpisodes = seasons.reduce((sum, s) => sum + (s.episode_count || 0), 0);
+
+  timelineSubtitle.textContent = `${seasons.length} Seasons · ${totalEpisodes} Episodes`;
+
+  // Map seasons to card-compatible objects (same shape as movie objects)
+  allMovies = seasons
+    .filter(s => s.poster_path)
+    .map(s => ({
+      id: s.id,
+      title: `Season ${s.season_number}`,
+      poster_path: s.poster_path,
+      release_date: s.air_date,
+      vote_average: s.vote_average || tvShow.vote_average,
+      popularity: tvShow.popularity,
+      overview: s.overview,
+      episode_count: s.episode_count
+    }));
+
+  people = [];
   processAndRender();
 }
 
-async function loadCompanyTimeline(companyId) {
-  const compRes = await fetch(`https://api.themoviedb.org/3/company/${companyId}?api_key=${TMDB_API_KEY}`);
-  const company = await compRes.json();
-  
-  const movRes = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_companies=${companyId}&sort_by=popularity.desc`);
-  const data = await movRes.json();
-  
-  timelineTitle.textContent = company.name;
-  timelineSubtitle.textContent = "Studio Productions";
-  
-  allMovies = (data.results || []).filter(m => m.poster_path);
-  people = [];
-  
-  processAndRender();
-}
+
 
 // ============================================
 // MULTI-PERSON SUPPORT
 // ============================================
+
+let addPersonBusy = false;      // guard against concurrent adds
+const addPersonInFlight = new Set(); // track in-flight person IDs
 
 async function addPerson(personId) {
   if (people.length >= 4) {
     alert("Maximum 4 orbital paths allowed.");
     return;
   }
-  
-  if (people.find(p => p.id === personId)) {
-    alert("Already in timeline.");
-    return;
+
+  if (people.find(p => p.id === personId) || addPersonInFlight.has(personId)) {
+    return; // already added or currently loading
   }
-  
-  const personRes = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
-  const person = await personRes.json();
-  
-  const creditsRes = await fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`);
-  const credits = await creditsRes.json();
-  
-  // Process credits with job tracking
-  const { movies, primaryRole, availableRoles } = processCreditsWithJobs(credits);
-  
-  people.push({
-    id: person.id,
-    name: person.name,
-    role: primaryRole,
-    availableRoles: availableRoles,
-    profile: person.profile_path,
-    movies: movies
-  });
-  
-  // Update vennPeople when adding to ensure navigation preserves all actors
-  localStorage.setItem("vennPeople", JSON.stringify(people));
-  
-  // Update role filter options for combined people
-  updateRoleFilterOptions();
-  
-  updateMultiMode();
+
+  if (addPersonBusy) return; // one add at a time
+  addPersonBusy = true;
+  addPersonInFlight.add(personId);
+
+  // Show loading indicator in the modal
+  if (searchResults) {
+    searchResults.innerHTML = '<div class="search-loading">Loading filmography\u2026</div>';
+  }
+
+  try {
+    const personRes = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
+    const person = await personRes.json();
+
+    const [creditsRes, tvCreditsRes] = await Promise.all([
+      fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`),
+      fetch(`https://api.themoviedb.org/3/person/${personId}/tv_credits?api_key=${TMDB_API_KEY}`)
+    ]);
+    const credits = await creditsRes.json();
+    const tvCredits = await tvCreditsRes.json();
+
+    // Process credits with job tracking
+    const { movies, primaryRole, availableRoles } = processCreditsWithJobs(credits);
+    const basicTvShows = processTvCredits(tvCredits);
+    const tvShows = await enrichTvShows(basicTvShows);
+
+    // Final duplicate check (in case user navigated away and back)
+    if (people.find(p => p.id === personId)) return;
+
+    people.push({
+      id: person.id,
+      name: person.name,
+      role: primaryRole,
+      availableRoles: availableRoles,
+      profile: person.profile_path,
+      movies: movies,
+      tvShows: tvShows
+    });
+
+    // Update global movie and TV arrays for multi-person mode
+    allMovies = people.flatMap(p => p.movies || []);
+    allTvShows = people.flatMap(p => p.tvShows || []);
+
+    // Update vennPeople when adding to ensure navigation preserves all actors
+    localStorage.setItem("vennPeople", JSON.stringify(people));
+
+    // Update role filter options for combined people
+    updateRoleFilterOptions();
+
+    updateMultiMode();
+  } catch (err) {
+    console.error("Add person error:", err);
+  } finally {
+    addPersonBusy = false;
+    addPersonInFlight.delete(personId);
+  }
 }
 
 function removePerson(personId) {
@@ -545,6 +807,8 @@ function removePerson(personId) {
     showEmpty("Add people to view their orbital paths.");
     return;
   }
+
+  updateRoleFilterOptions();
   updateMultiMode();
 }
 
@@ -556,11 +820,21 @@ function updateMultiMode() {
     if (bioBtn) bioBtn.hidden = true; // Hide bio in multi-person mode
   } else if (people.length === 1) {
     timelineTitle.textContent = people[0].name;
-    timelineSubtitle.textContent = `${people[0].role} • ${people[0].movies.length} Films`;
+    const mc = (people[0].movies || []).length;
+    const tc = (people[0].tvShows || []).length;
+    const parts = [];
+    if (mc) parts.push(`${mc} Films`);
+    if (tc) parts.push(`${tc} Shows`);
+    timelineSubtitle.textContent = `${people[0].role} • ${parts.join(' • ') || '0 titles'}`;
     if (vennBtn) vennBtn.hidden = true;
-    if (bioBtn) bioBtn.hidden = false; // Show bio in single-person mode
+    if (bioBtn) bioBtn.hidden = false;
     allMovies = people[0].movies;
+    allTvShows = people[0].tvShows || [];
   }
+
+  // Update media mode toggle and count label
+  updateMediaModeToggleVisibility();
+
   processAndRender();
 }
 
@@ -569,19 +843,62 @@ function updateMultiMode() {
 // ============================================
 
 function processAndRender() {
-  // Build filters from source movies
+  // Build filters from source items (movies + TV shows)
   let allYears = new Set();
   let allDecades = new Set();
-  const sourceMovies = people.length > 0 
-    ? people.flatMap(p => p.movies)
-    : allMovies;
-  
+
+  // Apply media mode filter so dropdowns only show relevant decades/years
+  let sourceMovies;
+  if (people.length > 0) {
+    sourceMovies = people.flatMap(p => {
+      if (currentMediaMode === 'movies') return p.movies || [];
+      if (currentMediaMode === 'tv') return p.tvShows || [];
+      return [...(p.movies || []), ...(p.tvShows || [])];
+    });
+  } else {
+    sourceMovies = [...allMovies, ...allTvShows];
+  }
+
+  // Apply the same content filters used by the timeline so dropdowns
+  // only show decades/years where the actor has visible credits.
+  // (Excludes: unreleased, self-roles, guest appearances, non-features,
+  //  billing filter, role filter — but NOT date/decade/year/rating filters.)
+  const today = new Date();
+  const excludeSelf = excludeSelfCheckbox?.checked || false;
+  const featuresOnly = featureFilmsOnly?.checked || false;
+  const billingVal = billingFilter?.value || "all";
+  const roleVal = roleFilter?.value || "all";
+  const NON_FEATURE_GENRES = [99, 10770];
+
   sourceMovies.forEach(m => {
     const y = getYear(m);
-    if (y) {
-      allYears.add(y);
-      allDecades.add(Math.floor(y / 10) * 10);
+    if (!y) return;
+    // Exclude unreleased
+    const date = m.release_date || m.first_air_date;
+    if (date && new Date(date) > today) return;
+    // Exclude features-only filter
+    if (featuresOnly && (m.genre_ids || []).some(g => NON_FEATURE_GENRES.includes(g))) return;
+    // Exclude self-roles
+    if (excludeSelf) {
+      const char = (m.character || '').toLowerCase();
+      if (char.includes('himself') || char.includes('herself') ||
+          char.includes('themselves') || char === 'self' ||
+          char.includes('(self)') || char.includes('(himself)') || char.includes('(herself)')) return;
     }
+    // Exclude guest appearances
+    if (!showGuestAppearances && m.media_type === 'tv' && m.isMainCast === false) return;
+    // Billing filter
+    if (billingVal !== "all" && m.jobCategories?.includes('acting')) {
+      const order = m.billing_order ?? m.order ?? 999;
+      if (billingVal === "lead" && order !== 0) return;
+      if (billingVal === "colead" && (order < 0 || order > 2)) return;
+      if (billingVal === "supporting" && (order < 0 || order > 5)) return;
+    }
+    // Role filter
+    if (roleVal !== "all" && !(m.jobCategories?.includes(roleVal))) return;
+
+    allYears.add(y);
+    allDecades.add(Math.floor(y / 10) * 10);
   });
   
   // Populate decade filter
@@ -599,6 +916,7 @@ function processAndRender() {
   }
   
   applyFiltersAndSort();
+  updateMediaModeToggleVisibility();
 }
 
 function applyFiltersAndSort() {
@@ -616,10 +934,11 @@ function applyFiltersAndSort() {
   // 99 = Documentary, 10770 = TV Movie
   const NON_FEATURE_GENRES = [99, 10770];
   
-  // Helper to check if movie is unreleased
+  // Helper to check if movie/show is unreleased
   const isUnreleased = (m) => {
-    if (!m.release_date) return true;
-    return new Date(m.release_date) > today;
+    const date = m.release_date || m.first_air_date;
+    if (!date) return true;
+    return new Date(date) > today;
   };
   
   // Helper to check if non-feature (documentary or TV movie)
@@ -631,9 +950,17 @@ function applyFiltersAndSort() {
   // Helper to check if playing self
   const isSelf = (m) => {
     const char = (m.character || '').toLowerCase();
-    return char.includes('himself') || char.includes('herself') || 
+    return char.includes('himself') || char.includes('herself') ||
            char.includes('themselves') || char === 'self' ||
            char.includes('(self)') || char.includes('(himself)') || char.includes('(herself)');
+  };
+
+  // Helper to check if TV show is a guest appearance (not main cast)
+  const isGuestAppearance = (m) => {
+    // Only applies to TV shows
+    if (m.media_type !== 'tv') return false;
+    // If isMainCast is explicitly false, it's a guest appearance
+    return m.isMainCast === false;
   };
   
   // Helper to check billing order (for acting roles)
@@ -657,16 +984,29 @@ function applyFiltersAndSort() {
     return m.jobCategories?.includes(roleVal) || false;
   };
   
+  // Genre filter (movie mode)
+  const genreFilter2 = document.getElementById('genreFilter');
+  const genreVal = genreFilter2?.value || 'all';
+
   const filterFn = (m) => {
     // Exclude unreleased from main timeline
     if (isUnreleased(m)) return false;
-    
+
     // Features only filter (exclude documentaries and TV movies)
     if (featuresOnly && isNonFeature(m)) return false;
-    
+
+    // Genre filter (movie mode)
+    if (genreVal !== 'all') {
+      const genres = m.genre_ids || [];
+      if (!genres.includes(parseInt(genreVal))) return false;
+    }
+
     // Self exclusion filter
     if (excludeSelf && isSelf(m)) return false;
-    
+
+    // Guest appearances filter (for TV shows)
+    if (!showGuestAppearances && isGuestAppearance(m)) return false;
+
     // Billing filter (for actors)
     if (!passesBillingFilter(m)) return false;
     
@@ -685,47 +1025,73 @@ function applyFiltersAndSort() {
   };
   
   if (people.length <= 1) {
-    // Single person mode
-    const sourceMovies = people.length === 1 ? people[0].movies : allMovies;
-    
-    // Separate unreleased movies (also apply features filter)
-    const unreleasedMovies = sourceMovies.filter(m => 
-      isUnreleased(m) && 
-      passesBillingFilter(m) && 
+    // Single person mode (movies + TV shows) with media mode filtering
+    let sourceItems;
+    if (people.length === 1) {
+      const personMovies = people[0].movies || [];
+      const personTvShows = people[0].tvShows || [];
+
+      // Apply media mode filter (simplified - one tile per TV show)
+      if (currentMediaMode === 'movies') {
+        sourceItems = personMovies;
+      } else if (currentMediaMode === 'tv') {
+        sourceItems = personTvShows;
+      } else {
+        sourceItems = [...personMovies, ...personTvShows];
+      }
+    } else {
+      sourceItems = [...allMovies, ...allTvShows];
+    }
+
+    // Separate unreleased items (also apply features filter)
+    const unreleasedMovies = sourceItems.filter(m =>
+      isUnreleased(m) &&
+      passesBillingFilter(m) &&
       (!excludeSelf || !isSelf(m)) &&
       (!featuresOnly || !isNonFeature(m))
     );
     renderUpcoming(unreleasedMovies);
-    
-    filteredMovies = sourceMovies.filter(filterFn);
+
+    filteredMovies = sourceItems.filter(filterFn);
     sortMovies(filteredMovies);
     renderSingleTimeline();
   } else {
     // Multi-person mode - collect unreleased from all people
     let allUnreleased = [];
-    
+
     people.forEach(person => {
-      const unreleased = person.movies.filter(m => 
-        isUnreleased(m) && 
-        passesBillingFilter(m) && 
+      // Apply media mode filter in multi-person mode too
+      let personItems;
+      if (currentMediaMode === 'movies') {
+        personItems = person.movies || [];
+      } else if (currentMediaMode === 'tv') {
+        personItems = person.tvShows || [];
+      } else {
+        personItems = [...(person.movies || []), ...(person.tvShows || [])];
+      }
+
+      const unreleased = personItems.filter(m =>
+        isUnreleased(m) &&
+        passesBillingFilter(m) &&
         (!excludeSelf || !isSelf(m)) &&
         (!featuresOnly || !isNonFeature(m))
       );
       allUnreleased.push(...unreleased);
-      
-      person.filteredMovies = person.movies.filter(filterFn);
+
+      person.filteredMovies = personItems.filter(filterFn);
       sortMovies(person.filteredMovies);
     });
-    
-    // Dedupe unreleased
-    const seenIds = new Set();
+
+    // Dedupe unreleased by media_type + id
+    const seenKeys = new Set();
     allUnreleased = allUnreleased.filter(m => {
-      if (seenIds.has(m.id)) return false;
-      seenIds.add(m.id);
+      const key = `${m.media_type || 'movie'}-${m.id}`;
+      if (seenKeys.has(key)) return false;
+      seenKeys.add(key);
       return true;
     });
     renderUpcoming(allUnreleased);
-    
+
     renderMultiTimeline();
   }
 }
@@ -767,7 +1133,6 @@ function renderUpcoming(movies) {
     });
   });
 }
-
 function sortMovies(arr) {
   const sortFn = getSortFunction();
   arr.sort(sortFn);
@@ -821,15 +1186,29 @@ function renderSingleTimeline() {
     Array.from(timelineTrack.children).forEach(child => {
       if (child !== sacredSvg) child.remove();
     });
+    // Reset SVG dimensions to prevent stale width inflating scrollWidth
+    if (sacredSvg) {
+      sacredSvg.setAttribute("width", 0);
+      sacredSvg.setAttribute("height", 0);
+      sacredSvg.style.width = "0px";
+      sacredSvg.style.height = "0px";
+    }
     clearSacredLine();
     return;
   }
-  
+
   hideEmpty();
   // Clear timelineTrack but preserve SVG
   Array.from(timelineTrack.children).forEach(child => {
     if (child !== sacredSvg) child.remove();
   });
+  // Reset SVG dimensions to prevent stale width inflating scrollWidth
+  if (sacredSvg) {
+    sacredSvg.setAttribute("width", 0);
+    sacredSvg.setAttribute("height", 0);
+    sacredSvg.style.width = "0px";
+    sacredSvg.style.height = "0px";
+  }
   
   // Get viewport dimensions
   const vpWidth = timelineViewport.offsetWidth;
@@ -926,9 +1305,52 @@ function renderSingleTimeline() {
     
     timelineTrack.appendChild(card);
   });
-  
+
+
+  // Clamp scroll position so viewport doesn't show excess space
+  const maxScroll = Math.max(0, totalWidth - vpWidth);
+  if (timelineViewport.scrollLeft > maxScroll) {
+    timelineViewport.scrollLeft = maxScroll;
+  }
+
   // Draw sacred line after cards render
   setTimeout(() => drawSacredLine(chronoSorted), 100);
+
+  // Update timeline width to fit content
+  updateTimelineWidth();
+}
+
+// Update timeline container width to fit actual content
+function updateTimelineWidth() {
+  const container = timelineTrack;
+  if (!container) return;
+
+  const tiles = container.querySelectorAll('.timeline-card');
+
+  if (tiles.length === 0) {
+    container.style.width = '100%';
+    return;
+  }
+
+  // Find the rightmost edge of all tiles
+  let maxRight = 0;
+  tiles.forEach(tile => {
+    const left = parseFloat(tile.style.left) || 0;
+    const width = tile.offsetWidth || 140;
+    const tileRight = left + width;
+
+    if (tileRight > maxRight) {
+      maxRight = tileRight;
+    }
+  });
+
+  // Add padding
+  const padding = 100;
+  const newWidth = maxRight + padding;
+
+  // Set width - minimum of viewport width
+  const viewportWidth = timelineViewport?.offsetWidth || window.innerWidth;
+  container.style.width = `${Math.max(newWidth, viewportWidth)}px`;
 }
 
 function getValueRange(movies) {
@@ -979,17 +1401,31 @@ function renderMultiTimeline() {
     Array.from(multiTracks.children).forEach(child => {
       if (child !== sacredSvg) child.remove();
     });
+    // Reset SVG dimensions to prevent stale width inflating scrollWidth
+    if (sacredSvg) {
+      sacredSvg.setAttribute("width", 0);
+      sacredSvg.setAttribute("height", 0);
+      sacredSvg.style.width = "0px";
+      sacredSvg.style.height = "0px";
+    }
     orbitLabels.innerHTML = "";
     clearSacredLine();
     return;
   }
-  
+
   hideEmpty();
-  
+
   // Clear multiTracks but preserve SVG
   Array.from(multiTracks.children).forEach(child => {
     if (child !== sacredSvg) child.remove();
   });
+  // Reset SVG dimensions to prevent stale width inflating scrollWidth
+  if (sacredSvg) {
+    sacredSvg.setAttribute("width", 0);
+    sacredSvg.setAttribute("height", 0);
+    sacredSvg.style.width = "0px";
+    sacredSvg.style.height = "0px";
+  }
   
   // Render orbit labels (left sidebar)
   orbitLabels.innerHTML = people.map((person, i) => `
@@ -997,18 +1433,19 @@ function renderMultiTimeline() {
       <button class="remove-orbit" onclick="removePerson(${person.id})">✕</button>
       <div class="orbit-label-name">${person.name}</div>
       <div class="orbit-label-role">${person.role}</div>
-      <div class="orbit-label-count">${(person.filteredMovies || []).length} films</div>
+      <div class="orbit-label-count">${(person.filteredMovies || []).length} titles</div>
     </div>
   `).join('');
   
-  // Build unified timeline with convergences
+  // Build unified timeline with convergences (key by type+id to avoid collisions)
   const moviePeopleMap = new Map();
   people.forEach((person, pIndex) => {
     (person.filteredMovies || []).forEach(movie => {
-      if (!moviePeopleMap.has(movie.id)) {
-        moviePeopleMap.set(movie.id, { movie, personIndices: [] });
+      const key = `${movie.media_type || 'movie'}-${movie.id}`;
+      if (!moviePeopleMap.has(key)) {
+        moviePeopleMap.set(key, { movie, personIndices: [] });
       }
-      moviePeopleMap.get(movie.id).personIndices.push(pIndex);
+      moviePeopleMap.get(key).personIndices.push(pIndex);
     });
   });
   
@@ -1108,6 +1545,13 @@ function renderMultiTimeline() {
     }
   });
   
+  // Clamp scroll position so viewport doesn't show excess space
+  const vpWidth = timelineViewport.offsetWidth;
+  const maxScroll = Math.max(0, totalWidth - vpWidth);
+  if (timelineViewport.scrollLeft > maxScroll) {
+    timelineViewport.scrollLeft = maxScroll;
+  }
+
   // Draw sacred lines with convergence
   setTimeout(() => drawMultiSacredLines(trackPaths, totalWidth, vpHeight), 100);
 
@@ -1142,75 +1586,127 @@ function getValueRangeMulti(entries) {
 
 function createMovieCard(movie, width, height, orbitIndex = 0) {
   const card = document.createElement("div");
-  card.className = `timeline-card orbit-${orbitIndex + 1}`;
+  const isTv = movie.media_type === 'tv';
+
+  let cardClass = `timeline-card orbit-${orbitIndex + 1}`;
+  if (isTv) {
+    cardClass += ' tv-card tv-show';
+  }
+
+  card.className = cardClass;
   card.dataset.movieId = movie.id;
+  if (isTv) {
+    card.dataset.mediaType = 'tv';
+  }
   card.style.width = `${width}px`;
   card.style.height = `${height}px`;
-  
-  const year = getYear(movie);
+
   const rating = movie.vote_average?.toFixed(1) || "N/A";
-  
+  const title = movie.title || movie.name;
+
+  // For TV shows, use yearRange if available, otherwise just the year
+  const yearDisplay = isTv && movie.yearRange ? movie.yearRange : (getYear(movie) || '');
+
+  // TV badge
+  const tvBadge = isTv ? '<div class="tv-badge">TV</div>' : '';
+
+  // TV hover info - shows episode count and main cast/guest status
+  let tvHoverInfo = '';
+  if (isTv && movie.episode_count) {
+    const episodeText = `${movie.episode_count} episode${movie.episode_count !== 1 ? 's' : ''}`;
+    const castStatus = movie.isMainCast ? 'Main Cast' : 'Guest';
+    const castClass = movie.isMainCast ? 'main-cast' : 'guest';
+    tvHoverInfo = `
+      <div class="tv-hover-info">
+        <span class="hover-episodes">${episodeText}</span>
+        <span class="hover-status ${castClass}">${castStatus}</span>
+      </div>
+    `;
+  }
+
   // Show value based on current sort
   let valueDisplay = '';
   if (currentSort === "boxoffice") {
     valueDisplay = `<div class="card-value">💰 ${formatPopularity(movie.popularity)}</div>`;
   }
-  
+
+  // Use w342 for better image quality
+  const posterSize = 'w342';
+
   card.innerHTML = `
     <div class="card-glow"></div>
     <div class="card-inner">
-      <button class="card-delete" onclick="event.stopPropagation(); deleteMovie(${movie.id})">✕</button>
-      <img class="card-poster" src="${TMDB_IMG}w300${movie.poster_path}" alt="${movie.title}" loading="lazy"
+      <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
+      ${tvBadge}
+      <img class="card-poster" src="${TMDB_IMG}${posterSize}${movie.poster_path}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${Math.round(width)}x${Math.round(height)}?text=?'">
     </div>
     <div class="card-node"></div>
+    ${tvHoverInfo}
     <div class="card-meta">
       <div class="card-meta-row">
         <div class="card-rating">⭐ ${rating}</div>
-        <div class="card-year">${year || ''}</div>
+        <div class="card-year">${yearDisplay}</div>
       </div>
       ${valueDisplay}
-      <div class="card-title">${movie.title}</div>
+      <div class="card-title">${title}</div>
     </div>
   `;
-  
-  card.addEventListener("click", () => openMovieCube(movie.id));
+
+  if (isTv) {
+    // For TV shows, clicking navigates to TV show page
+    card.addEventListener("click", () => {
+      window.location.href = `series.html?id=${movie.id}`;
+    });
+  } else {
+    card.addEventListener("click", () => openMovieCube(movie.id));
+  }
   return card;
 }
 
 function createConvergenceCardFull(movie, personIndices, width, height) {
   const card = document.createElement("div");
-  card.className = `convergence-card full-size people-${personIndices.length}`;
+  const isTv = movie.media_type === 'tv';
+  card.className = `convergence-card full-size people-${personIndices.length}${isTv ? ' tv-card' : ''}`;
   card.dataset.movieId = movie.id;
+  if (isTv) card.dataset.mediaType = 'tv';
   card.style.width = `${width}px`;
   card.style.height = `${height}px`;
-  
+
   const year = getYear(movie);
   const rating = movie.vote_average?.toFixed(1) || "N/A";
-  const names = personIndices.map(i => people[i].name.split(' ')[0]).join(" + ");
-  
+  const title = movie.title || movie.name;
+  const tvBadge = isTv ? `<div class="card-tv-badge">TV</div>` : '';
+
   // Build color dots for involved people
   const orbitColors = ['#4a9eff', '#d65db1', '#4ed8aa', '#c9a227'];
-  const dots = personIndices.map(i => 
+  const dots = personIndices.map(i =>
     `<span class="convergence-dot" style="background: ${orbitColors[i % 4]}"></span>`
   ).join('');
-  
+
   card.innerHTML = `
     <div class="convergence-glow"></div>
     <div class="card-inner">
-      <button class="card-delete" onclick="event.stopPropagation(); deleteMovie(${movie.id})">✕</button>
-      <img class="card-poster" src="${TMDB_IMG}w300${movie.poster_path}" alt="${movie.title}" loading="lazy"
+      <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
+      ${tvBadge}
+      <img class="card-poster" src="${TMDB_IMG}w300${movie.poster_path}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${width}x${height}?text=?'">
       <div class="card-overlay">
         <div class="card-rating">⭐ ${rating}</div>
         <div class="card-year">${year || ''}</div>
-        <div class="card-title">${movie.title}</div>
+        <div class="card-title">${title}</div>
       </div>
     </div>
     <div class="convergence-badge">${dots}</div>
   `;
-  
-  card.addEventListener("click", () => openMovieCube(movie.id));
+
+  if (isTv) {
+    card.addEventListener("click", () => {
+      window.location.href = `series.html?id=${movie.id}`;
+    });
+  } else {
+    card.addEventListener("click", () => openMovieCube(movie.id));
+  }
   return card;
 }
 
@@ -1225,21 +1721,21 @@ function createConvergenceCard(movie, personIndices, width, height) {
 
 function drawSacredLine(chronoMovies) {
   if (!sacredLines || !timelineTrack) return;
-  
+
   // Use passed array or fallback to stored
   const movies = chronoMovies || lastChronoSorted;
   if (!movies || movies.length < 2) return;
-  
+
   const cards = timelineTrack.querySelectorAll(".timeline-card");
   if (cards.length < 2) return;
-  
-  // Size SVG to match track size
-  const trackWidth = timelineTrack.scrollWidth || timelineTrack.offsetWidth;
+
+  // Size SVG to match track's explicitly-set CSS width (not scrollWidth which can be inflated by stale children)
+  const trackWidth = parseInt(timelineTrack.style.width) || timelineTrack.offsetWidth;
   const trackHeight = timelineTrack.offsetHeight;
-  
+
   if (trackWidth < 100 || trackHeight < 100) return;
-  
-  // Collect points FIRST before clearing
+
+  // Collect points FIRST before clearing - connect through card centers/nodes
   const points = [];
   movies.forEach(movie => {
     const card = timelineTrack.querySelector(`[data-movie-id="${movie.id}"]`);
@@ -1248,99 +1744,137 @@ function drawSacredLine(chronoMovies) {
       const top = parseFloat(card.style.top) || 0;
       const width = card.offsetWidth || 100;
       const height = card.offsetHeight || 150;
-      
+
       if (left > 0 || top > 0) {
+        // Connect through the node at bottom of card
         points.push({
           x: left + width / 2,
-          y: top + height * 0.15 + 20
+          y: top + height + 8 // Position at the card node
         });
       }
     }
   });
-  
+
   // Only proceed if we have enough points
   if (points.length < 2) return;
-  
+
   // NOW safe to clear and redraw
   sacredSvg.setAttribute("width", trackWidth);
   sacredSvg.setAttribute("height", trackHeight);
   sacredSvg.style.width = `${trackWidth}px`;
   sacredSvg.style.height = `${trackHeight}px`;
-  
-  // Build path
-  const pathD = buildSmoothPath(points);
-  
-  // Create SVG gradient for the sacred line
-  let defs = sacredSvg.querySelector("defs");
-  if (!defs) {
-    defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    sacredSvg.prepend(defs);
-  }
 
-  // Gradient from cyan to gold
-  let grad = defs.querySelector("#sacredLineGrad");
-  if (!grad) {
-    grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
-    grad.id = "sacredLineGrad";
-    grad.setAttribute("gradientUnits", "userSpaceOnUse");
-    const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
-    stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#00d9ff");
-    const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
-    stop2.setAttribute("offset", "50%");
-    stop2.setAttribute("stop-color", "#a855f7");
-    const stop3 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
-    stop3.setAttribute("offset", "100%");
-    stop3.setAttribute("stop-color", "#ffd700");
-    grad.append(stop1, stop2, stop3);
-    defs.appendChild(grad);
-  }
-  // Update gradient coordinates to span the path
-  if (points.length >= 2) {
-    grad.setAttribute("x1", points[0].x);
-    grad.setAttribute("y1", points[0].y);
-    grad.setAttribute("x2", points[points.length - 1].x);
-    grad.setAttribute("y2", points[points.length - 1].y);
-  }
+  // Build organic flowing path with gentle waves
+  const pathD = buildOrganicPath(points);
 
-  // Outer glow layer
-  const glowPath2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  glowPath2.setAttribute("d", pathD);
-  glowPath2.setAttribute("fill", "none");
-  glowPath2.setAttribute("stroke", "url(#sacredLineGrad)");
-  glowPath2.setAttribute("stroke-width", "24");
-  glowPath2.setAttribute("stroke-linecap", "round");
-  glowPath2.setAttribute("opacity", "0.15");
+  // Clear first
+  sacredLines.innerHTML = "";
 
-  // Inner glow layer
-  const glowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  glowPath.setAttribute("d", pathD);
-  glowPath.setAttribute("fill", "none");
-  glowPath.setAttribute("stroke", "url(#sacredLineGrad)");
-  glowPath.setAttribute("stroke-width", "12");
-  glowPath.setAttribute("stroke-linecap", "round");
-  glowPath.setAttribute("opacity", "0.3");
+  // Outer diffuse glow - very soft
+  const outerGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  outerGlow.setAttribute("d", pathD);
+  outerGlow.setAttribute("class", "sacred-line-glow");
+  outerGlow.setAttribute("stroke", "url(#cosmicGradient)");
+  outerGlow.setAttribute("stroke-width", "20");
+  outerGlow.style.filter = "blur(8px)";
 
+  // Middle glow layer
+  const midGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  midGlow.setAttribute("d", pathD);
+  midGlow.setAttribute("class", "sacred-line-glow");
+  midGlow.setAttribute("stroke", "url(#cosmicGradient)");
+  midGlow.setAttribute("stroke-width", "10");
+  midGlow.style.filter = "blur(4px)";
+  midGlow.style.opacity = "0.25";
+
+  // Main cosmic line
   const mainPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
   mainPath.setAttribute("d", pathD);
-  mainPath.setAttribute("fill", "none");
-  mainPath.setAttribute("stroke", "url(#sacredLineGrad)");
-  mainPath.setAttribute("stroke-width", "3");
-  mainPath.setAttribute("stroke-linecap", "round");
-  mainPath.setAttribute("opacity", "0.9");
-  mainPath.style.animation = "linePulse 4s ease-in-out infinite";
+  mainPath.setAttribute("class", "sacred-line-main");
+  mainPath.setAttribute("stroke", "url(#cosmicGradient)");
 
-  // Clear and add
-  sacredLines.innerHTML = "";
-  sacredLines.appendChild(glowPath2);
-  sacredLines.appendChild(glowPath);
+  // Inner bright core
+  const corePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  corePath.setAttribute("d", pathD);
+  corePath.setAttribute("class", "sacred-line-core");
+
+  // Add layers in order (back to front)
+  sacredLines.appendChild(outerGlow);
+  sacredLines.appendChild(midGlow);
   sacredLines.appendChild(mainPath);
+  sacredLines.appendChild(corePath);
+
+  // Add subtle particles along the line for cosmic effect
+  addCosmicParticles(points);
+}
+
+// Build organic flowing path with natural curves
+function buildOrganicPath(points) {
+  if (points.length < 2) return "";
+
+  let d = `M ${points[0].x} ${points[0].y}`;
+
+  for (let i = 1; i < points.length; i++) {
+    const prev = points[i - 1];
+    const curr = points[i];
+    const dx = curr.x - prev.x;
+    const dy = curr.y - prev.y;
+
+    // More organic tension for flowing curves
+    const tension = 0.4;
+
+    // Add subtle vertical wave for organic feel
+    const waveAmplitude = Math.min(15, Math.abs(dx) * 0.02);
+    const waveOffset = (i % 2 === 0 ? 1 : -1) * waveAmplitude;
+
+    const cp1x = prev.x + dx * tension;
+    const cp1y = prev.y + waveOffset;
+    const cp2x = curr.x - dx * tension;
+    const cp2y = curr.y - waveOffset;
+
+    d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${curr.x} ${curr.y}`;
+  }
+
+  return d;
+}
+
+// Add cosmic particles along the path
+function addCosmicParticles(points) {
+  if (!sacredLines || points.length < 2) return;
+
+  // Add particles at intervals along the line
+  const numParticles = Math.min(points.length * 2, 15);
+
+  for (let i = 0; i < numParticles; i++) {
+    const t = i / (numParticles - 1);
+    const idx = Math.floor(t * (points.length - 1));
+    const nextIdx = Math.min(idx + 1, points.length - 1);
+    const localT = (t * (points.length - 1)) - idx;
+
+    // Interpolate position
+    const x = points[idx].x + (points[nextIdx].x - points[idx].x) * localT;
+    const y = points[idx].y + (points[nextIdx].y - points[idx].y) * localT;
+
+    // Add slight random offset for organic feel
+    const offsetX = (Math.random() - 0.5) * 6;
+    const offsetY = (Math.random() - 0.5) * 6;
+
+    const particle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    particle.setAttribute("cx", x + offsetX);
+    particle.setAttribute("cy", y + offsetY);
+    particle.setAttribute("r", 1.5 + Math.random() * 1.5);
+    particle.setAttribute("class", "sacred-particle");
+    particle.style.animationDelay = `${Math.random() * 3}s`;
+    particle.style.opacity = 0.3 + Math.random() * 0.4;
+
+    sacredLines.appendChild(particle);
+  }
 }
 
 function drawMultiSacredLines(trackPaths, totalWidth, totalHeight) {
   if (!sacredLines || !sacredSvg) return;
   sacredLines.innerHTML = "";
-  
+
   // Size SVG to match the scrollable content
   if (totalWidth && totalHeight) {
     sacredSvg.setAttribute("width", totalWidth);
@@ -1348,41 +1882,62 @@ function drawMultiSacredLines(trackPaths, totalWidth, totalHeight) {
     sacredSvg.style.width = `${totalWidth}px`;
     sacredSvg.style.height = `${totalHeight}px`;
   }
-  
+
   const gradients = ['lineGrad1', 'lineGrad2', 'lineGrad3', 'lineGrad4'];
-  
+
   trackPaths.forEach((points, pIndex) => {
     if (points.length < 2) return;
-    
+
     // Sort by slot (chronological, or reversed)
     points.sort((a, b) => a.slot - b.slot);
-    
-    const pathD = buildSmoothPath(points);
-    
-    // Orbit colors for each person
-    const orbitColors = ['#4a9eff', '#d65db1', '#4ed8aa', '#c9a227'];
-    const color = orbitColors[pIndex % 4];
-    
-    // Glow - subtle, spacey
-    const glow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    glow.setAttribute("d", pathD);
-    glow.setAttribute("fill", "none");
-    glow.setAttribute("stroke", color);
-    glow.setAttribute("stroke-width", "16");
-    glow.setAttribute("stroke-linecap", "round");
-    glow.setAttribute("opacity", "0.3");
-    
-    // Main
+
+    // Use organic path for flowing curves
+    const pathD = buildOrganicPath(points);
+    const gradId = gradients[pIndex % 4];
+
+    // Outer diffuse glow
+    const outerGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    outerGlow.setAttribute("d", pathD);
+    outerGlow.setAttribute("fill", "none");
+    outerGlow.setAttribute("stroke", `url(#${gradId})`);
+    outerGlow.setAttribute("stroke-width", "16");
+    outerGlow.setAttribute("stroke-linecap", "round");
+    outerGlow.setAttribute("opacity", "0.15");
+    outerGlow.style.filter = "blur(6px)";
+
+    // Inner glow
+    const innerGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    innerGlow.setAttribute("d", pathD);
+    innerGlow.setAttribute("fill", "none");
+    innerGlow.setAttribute("stroke", `url(#${gradId})`);
+    innerGlow.setAttribute("stroke-width", "8");
+    innerGlow.setAttribute("stroke-linecap", "round");
+    innerGlow.setAttribute("opacity", "0.25");
+    innerGlow.style.filter = "blur(3px)";
+
+    // Main cosmic line
     const main = document.createElementNS("http://www.w3.org/2000/svg", "path");
     main.setAttribute("d", pathD);
     main.setAttribute("fill", "none");
-    main.setAttribute("stroke", color);
-    main.setAttribute("stroke-width", "3");
+    main.setAttribute("stroke", `url(#${gradId})`);
+    main.setAttribute("stroke-width", "2.5");
     main.setAttribute("stroke-linecap", "round");
-    main.setAttribute("opacity", "0.9");
-    
-    sacredLines.appendChild(glow);
+    main.setAttribute("opacity", "0.7");
+    main.setAttribute("class", "sacred-line-main");
+
+    // Bright core
+    const core = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    core.setAttribute("d", pathD);
+    core.setAttribute("fill", "none");
+    core.setAttribute("stroke", "rgba(255,255,255,0.5)");
+    core.setAttribute("stroke-width", "1");
+    core.setAttribute("stroke-linecap", "round");
+    core.setAttribute("opacity", "0.6");
+
+    sacredLines.appendChild(outerGlow);
+    sacredLines.appendChild(innerGlow);
     sacredLines.appendChild(main);
+    sacredLines.appendChild(core);
   });
 }
 
@@ -1420,6 +1975,13 @@ function estimatePathLength(points) {
 
 function clearSacredLine() {
   if (sacredLines) sacredLines.innerHTML = "";
+  // Zero out SVG dimensions so it doesn't inflate scrollWidth
+  if (sacredSvg) {
+    sacredSvg.setAttribute("width", 0);
+    sacredSvg.setAttribute("height", 0);
+    sacredSvg.style.width = "0px";
+    sacredSvg.style.height = "0px";
+  }
 }
 
 // ============================================
@@ -1731,10 +2293,14 @@ async function searchPeople(query) {
     
     searchResults.querySelectorAll(".search-result").forEach(el => {
       el.addEventListener("click", async () => {
-        await addPerson(parseInt(el.dataset.id));
-        renderOrbitChips();
-        searchResults.innerHTML = "";
+        if (addPersonBusy) return; // ignore clicks while loading
+        const id = parseInt(el.dataset.id);
+        // Immediate visual feedback — highlight selected, clear others
+        el.classList.add("selected");
         personSearch.value = "";
+        await addPerson(id);
+        renderOrbitChips();
+        if (searchResults) searchResults.innerHTML = "";
       });
     });
   } catch (err) {
@@ -1765,7 +2331,12 @@ function renderOrbitChips() {
 
 function openVennView() {
   if (people.length < 2) return;
-  localStorage.setItem("vennPeople", JSON.stringify(people));
+  // Venn only works with movies, so filter out TV shows
+  const moviesOnlyPeople = people.map(person => ({
+    ...person,
+    tvShows: [] // Exclude TV shows from Venn
+  }));
+  localStorage.setItem("vennPeople", JSON.stringify(moviesOnlyPeople));
   window.location.href = "venn.html";
 }
 
@@ -1791,16 +2362,31 @@ function formatPopularity(pop) {
   return pop.toFixed(1);
 }
 
-function deleteMovie(movieId) {
+function deleteItem(itemId, mediaType) {
   if (people.length > 0) {
-    people.forEach(p => { p.movies = p.movies.filter(m => m.id !== movieId); });
+    people.forEach(p => {
+      if (mediaType === 'tv') {
+        p.tvShows = (p.tvShows || []).filter(m => m.id !== itemId);
+      } else {
+        p.movies = p.movies.filter(m => m.id !== itemId);
+      }
+    });
+    allTvShows = people.flatMap(p => p.tvShows || []);
     updateMultiMode();
   } else {
-    allMovies = allMovies.filter(m => m.id !== movieId);
+    if (mediaType === 'tv') {
+      allTvShows = allTvShows.filter(m => m.id !== itemId);
+    } else {
+      allMovies = allMovies.filter(m => m.id !== itemId);
+    }
     processAndRender();
   }
 }
 
+// Keep backward compat for any old references
+function deleteMovie(movieId) { deleteItem(movieId, 'movie'); }
+
+window.deleteItem = deleteItem;
 window.deleteMovie = deleteMovie;
 window.removePerson = removePerson;
 
@@ -1872,7 +2458,14 @@ function setupEventListeners() {
   roleFilter?.addEventListener("change", applyFiltersAndSort);
   excludeSelfCheckbox?.addEventListener("change", applyFiltersAndSort);
   featureFilmsOnly?.addEventListener("change", applyFiltersAndSort);
-  
+
+  // Guest appearances checkbox
+  const guestAppearancesCheckbox = document.getElementById('showGuestAppearances');
+  guestAppearancesCheckbox?.addEventListener('change', (e) => {
+    showGuestAppearances = e.target.checked;
+    applyFiltersAndSort();
+  });
+
   // Modal
   addPersonBtn?.addEventListener("click", openAddPersonModal);
   modalClose?.addEventListener("click", closeAddPersonModal);
@@ -1889,9 +2482,28 @@ function setupEventListeners() {
   
   // Bio toggle
   bioBtn?.addEventListener("click", toggleBioPanel);
-  
+
+  // Media Mode Toggle (Movies/TV/Both)
+  const mediaModeToggle = document.getElementById('mediaModeToggle');
+  if (mediaModeToggle) {
+    mediaModeToggle.querySelectorAll('.media-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        mediaModeToggle.querySelectorAll('.media-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMediaMode = btn.dataset.mode;
+        localStorage.setItem('timelineMediaMode', currentMediaMode);
+
+        // Update count label and guest filter visibility
+        updateMediaModeToggleVisibility();
+
+        applyFiltersAndSort();
+      });
+    });
+  }
+
   // Mini-map scroll sync + interaction
   timelineViewport?.addEventListener("scroll", updateMinimap);
+
   setupMinimapInteraction();
 
   // Sacred line persistence - check periodically
@@ -2145,7 +2757,31 @@ async function loadPersonBio(personId, personIdx = 0) {
     
     if (bioText) {
       const bio = person.biography || "No biography available.";
-      bioText.textContent = bio.length > 400 ? bio.substring(0, 400) + "..." : bio;
+      const needsTruncation = bio.length > 400;
+
+      // Set initial truncated text
+      bioText.textContent = needsTruncation ? bio.substring(0, 400) + "..." : bio;
+
+      // Remove any existing read-more button (from previous person render)
+      const existingBtn = bioText.parentElement?.querySelector('.bio-read-more');
+      if (existingBtn) existingBtn.remove();
+
+      // Add read more / read less toggle if needed
+      if (needsTruncation) {
+        const readMoreBtn = document.createElement('button');
+        readMoreBtn.className = 'bio-read-more';
+        readMoreBtn.textContent = 'Read more';
+        let expanded = false;
+
+        readMoreBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          expanded = !expanded;
+          bioText.textContent = expanded ? bio : bio.substring(0, 400) + "...";
+          readMoreBtn.textContent = expanded ? 'Read less' : 'Read more';
+        });
+
+        bioText.after(readMoreBtn);
+      }
     }
     
     // Get movies for THIS person (use personIdx to get correct person's movies)
@@ -2500,7 +3136,7 @@ function renderGenrePie(movies) {
         fill="${color}"
         data-genre="${genre}"
         data-percent="${percentage.toFixed(1)}"
-        data-count="${count}"
+        data-count="${Math.round(count)}"
       />
     `;
     
@@ -2529,12 +3165,13 @@ function renderGenrePie(movies) {
     slice.addEventListener('mouseenter', (e) => {
       const genre = slice.dataset.genre;
       const percent = slice.dataset.percent;
-      const count = slice.dataset.count;
-      
+      const count = parseFloat(slice.dataset.count);
+      const displayCount = Math.round(count);
+
       tooltip.innerHTML = `
         <span class="tooltip-genre">${genre}</span>
         <span class="tooltip-percent">${percent}%</span>
-        <span class="tooltip-count">${count} film${count > 1 ? 's' : ''}</span>
+        <span class="tooltip-count">${displayCount} film${displayCount !== 1 ? 's' : ''}</span>
       `;
       tooltip.classList.add('visible');
     });
@@ -2626,3 +3263,42 @@ function closeBioPanel() {
 
 // Initialize bio panel after main init (wait for people array)
 setTimeout(initBioPanel, 1500);
+
+// ============================================
+// UNIFIED MEDIA MODE TOGGLE VISIBILITY
+// ============================================
+
+function updateMediaModeToggleVisibility() {
+  const mediaModeToggle = document.getElementById('mediaModeToggle');
+  const countLabel = document.getElementById('countLabel');
+  const guestAppearancesFilter = document.getElementById('guestAppearancesFilter');
+
+  // Show media mode toggle for person timelines
+  const isPersonTimeline = people.length > 0;
+
+  if (mediaModeToggle) mediaModeToggle.hidden = !isPersonTimeline;
+
+  // Show guest appearances filter only when viewing TV or Both modes
+  const showGuestFilter = isPersonTimeline && (currentMediaMode === 'tv' || currentMediaMode === 'both');
+  if (guestAppearancesFilter) guestAppearancesFilter.hidden = !showGuestFilter;
+
+  // Update count label based on mode
+  if (countLabel) {
+    if (currentMediaMode === 'both') {
+      countLabel.textContent = 'Titles';
+    } else if (currentMediaMode === 'movies') {
+      countLabel.textContent = 'Films';
+    } else {
+      countLabel.textContent = 'Shows';
+    }
+  }
+
+  // Initialize active state from localStorage
+  if (mediaModeToggle && isPersonTimeline) {
+    const savedMode = localStorage.getItem('timelineMediaMode') || 'movies';
+    currentMediaMode = savedMode;
+    mediaModeToggle.querySelectorAll('.media-mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === savedMode);
+    });
+  }
+}

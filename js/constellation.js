@@ -3,8 +3,6 @@
    Anchor Film Orbital Visualization
 ============================================ */
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-
 // Genre similarity weights and mood mappings
 const GENRE_VIBES = {
   mood: {

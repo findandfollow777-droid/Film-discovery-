@@ -1,29 +1,15 @@
+@import url('variables.css');
 /* ============================================
    ALTERNATE UNIVERSE - Game Styles
    Orbit Games Suite - Weekly Casting Discussions
 ============================================ */
 
 :root {
-  --space-black: #000000;
-  --deep-void: #0a0e17;
-  --nebula-dark: #111827;
-  --cosmic-blue: #1e293b;
-  --accent-cyan: #00d9ff;
-  --accent-gold: #ffd700;
   --alternate-violet: #8b5cf6;
   --alternate-pink: #ec4899;
   --alternate-fuchsia: #d946ef;
-  --success-green: #10b981;
-  --film-white: #f1f5f9;
-  --muted-silver: #94a3b8;
-  --ghost-gray: #64748b;
-  
   --gradient-alternate: linear-gradient(135deg, var(--alternate-violet), var(--alternate-pink));
   --gradient-portal: conic-gradient(from 0deg, var(--alternate-violet), var(--alternate-pink), var(--alternate-fuchsia), var(--alternate-violet));
-  
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
-  
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -140,17 +126,6 @@ html, body {
   top: 0;
   z-index: 100;
 }
-
-.back-link {
-  color: var(--alternate-violet);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.8;
-  transition: var(--transition-smooth);
-}
-
-.back-link:hover { opacity: 1; color: var(--film-white); }
 
 .orbit-logo {
   display: flex;

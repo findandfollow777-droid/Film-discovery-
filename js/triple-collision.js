@@ -3,9 +3,6 @@
 // Orbit Games Suite - 3-Entity Venn Game
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TMDB_IMG = "https://image.tmdb.org/t/p/";
-
 // Game configuration
 const GAME_DURATION = 240; // 4 minutes in seconds
 const POINTS_SOLO = 1;
@@ -42,7 +39,7 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 1892, name: "Matt Damon", type: "Actor" }, 
-    b: { id: 1979, name: "Ben Affleck", type: "Actor" },
+    b: { id: 880, name: "Ben Affleck", type: "Actor" },
     c: { id: 525, name: "Christopher Nolan", type: "Director" }
   },
   { 
@@ -95,7 +92,7 @@ const DAILY_TRIPLES = [
     c: { id: 1776, name: "Francis Ford Coppola", type: "Director" }
   },
   { 
-    a: { id: 2963, name: "Jack Nicholson", type: "Actor" }, 
+    a: { id: 514, name: "Jack Nicholson", type: "Actor" },
     b: { id: 6952, name: "Shelley Duvall", type: "Actor" },
     c: { id: 240, name: "Stanley Kubrick", type: "Director" }
   },
@@ -110,7 +107,7 @@ const DAILY_TRIPLES = [
     c: { id: 7467, name: "David Fincher", type: "Director" }
   },
   { 
-    a: { id: 4724, name: "Kevin Spacey", type: "Actor" }, 
+    a: { id: 1979, name: "Kevin Spacey", type: "Actor" }, 
     b: { id: 516, name: "Gwyneth Paltrow", type: "Actor" },
     c: { id: 7467, name: "David Fincher", type: "Director" }
   },
@@ -756,6 +753,26 @@ function startNextPuzzleCountdown() {
 // ============================================
 // UTILITIES
 // ============================================
+
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      btn.remove();
+    });
+    const gameStatus = document.querySelector('.game-status');
+    gameStatus.appendChild(btn);
+  }
+});
 
 function debounce(fn, delay) {
   let timeout;

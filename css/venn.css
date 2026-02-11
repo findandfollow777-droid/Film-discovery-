@@ -1,3 +1,4 @@
+@import url('variables.css');
 /* ============================================
    ORBIT - STELLAR TERRITORIES
    Organic Nebula Design - No Hard Circles
@@ -7,22 +8,15 @@
   --space-black: #000;
   --deep-void: #03060c;
   --cosmic-blue: #0a1020;
-  
   --orbit-1: #00d9ff;
   --orbit-2: #ff006e;
   --orbit-3: #00ff88;
   --orbit-4: #ffd700;
-  
   --film-white: #f0f4f8;
   --muted-silver: #8892a6;
-  --accent-gold: #ffd700;
   --convergence-glow: #a855f7;
-  
   --header-height: 60px;
   --controls-height: 45px;
-  
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
 }
 
 [hidden] { display: none !important; }
@@ -209,7 +203,7 @@ html, body {
   z-index: 100;
 }
 
-.back-btn {
+.back-link {
   padding: 8px 16px;
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid rgba(0, 217, 255, 0.3);
@@ -220,12 +214,12 @@ html, body {
   transition: all 0.3s;
 }
 
-.back-btn:hover {
+.back-link:hover {
   background: rgba(0, 217, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
 }
 
-.header-center { text-align: center; }
+.header-center { text-align: center; flex: 1; }
 
 .venn-title {
   font-family: var(--font-display);
@@ -316,6 +310,8 @@ html, body {
   color: var(--convergence-glow);
   background: rgba(168, 85, 247, 0.1);
 }
+
+.sort-btn svg, .reverse-btn svg { flex-shrink: 0; vertical-align: -2px; margin-right: 4px; }
 
 .reverse-btn {
   padding: 6px 12px;

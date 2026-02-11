@@ -3,8 +3,6 @@
 // Daily Cinematic Deduction Game
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TMDB_IMG = "https://image.tmdb.org/t/p/";
 const MAX_ATTEMPTS = 6;
 
 // Game state
@@ -46,9 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateToTimeline('person', personName);
       },
       onAnchorClick: (movie) => {
-        // Navigate to Constellation game with this movie
-        const params = new URLSearchParams({ anchor: movie.id, title: movie.title });
-        window.location.href = `constellation.html?${params}`;
+        localStorage.setItem("anchorMovie", JSON.stringify(movie));
+        window.location.href = "constellation.html";
       }
     });
   }
@@ -855,6 +852,28 @@ function closeHelpModal() {
 // ============================================
 // UTILITIES
 // ============================================
+
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  // Show a "View Results" button if not already present
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      btn.remove();
+    });
+    // Insert after the history section
+    const historySection = document.getElementById('historySection');
+    historySection.parentNode.insertBefore(btn, historySection.nextSibling);
+  }
+});
 
 function showError(message) {
   // Simple error display

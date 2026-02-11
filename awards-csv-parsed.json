@@ -1,0 +1,1878 @@
+[
+  {
+    "title": "Ben-Hur",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "Anatomy of a Murder",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Face",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Nun's Story",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Sapphire",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Some Like It Hot",
+    "year": 1959,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Room at the Top",
+    "year": 1958,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "Cat on a Hot Tin Roof",
+    "year": 1958,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Defiant Ones",
+    "year": 1958,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Ice Cold in Alex",
+    "year": 1958,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Indiscreet",
+    "year": 1958,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Bridge on the River Kwai",
+    "year": 1957,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "12 Angry Men",
+    "year": 1957,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "3:10 to Yuma",
+    "year": 1957,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Bachelor Party",
+    "year": 1957,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Paths of Glory",
+    "year": 1957,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Gervaise",
+    "year": 1956,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "Baby Doll",
+    "year": 1956,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Battle of the River Plate",
+    "year": 1956,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Killing",
+    "year": 1956,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Man Who Never Was",
+    "year": 1956,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Richard III",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "Bad Day at Black Rock",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Carmen Jones",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Dam Busters",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "East of Eden",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Ladykillers",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Seven Samurai",
+    "year": 1955,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Wages of Fear",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "The Caine Mutiny",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Hobson's Choice",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "How to Marry a Millionaire",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Rear Window",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Seven Brides for Seven Brothers",
+    "year": 1954,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Forbidden Games",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "The Bad and the Beautiful",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Come Back Little Sheba",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Cruel Sea",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "From Here to Eternity",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Genevieve",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Julius Caesar",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Roman Holiday",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Shane",
+    "year": 1953,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Sound Barrier",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "The African Queen",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Angels One Five",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Boy Kumasenu",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Carrie",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Casque d'Or",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Cry the Beloved Country",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Death of a Salesman",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Limelight",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Mandy",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Miracle in Milan",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Los Olvidados",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Pat and Mike",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Quiet Man",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Rashomon",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The River",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Singin' in the Rain",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "A Streetcar Named Desire",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Viva Zapata!",
+    "year": 1952,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "La Ronde",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "An American in Paris",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Browning Version",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Detective Story",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Fourteen Hours",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Lavender Hill Mob",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Magic Box",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Man in the White Suit",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "A Walk in the Sun",
+    "year": 1951,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "All About Eve",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": true
+  },
+  {
+    "title": "The Asphalt Jungle",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Beauty and the Beast",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "The Men",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "On the Town",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Orpheus",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Sunset Boulevard",
+    "year": 1950,
+    "festival": "BAFTA",
+    "category": "Best Film",
+    "won": false
+  },
+  {
+    "title": "Anne of the Thousand Days",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Butch Cassidy and the Sundance Kid",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Midnight Cowboy",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Prime of Miss Jean Brodie",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "They Shoot Horses Don't They?",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Secret of Santa Vittoria",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Cactus Flower",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Goodbye Columbus",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Hello Dolly!",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Paint Your Wagon",
+    "year": 1969,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Lion in Winter",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Charly",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Fixer",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Heart Is a Lonely Hunter",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Shoes of the Fisherman",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Oliver!",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Finian's Rainbow",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Funny Girl",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Odd Couple",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Yours Mine and Ours",
+    "year": 1968,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "In the Heat of the Night",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Bonnie and Clyde",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Far from the Madding Crowd",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Guess Who's Coming to Dinner",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "In Cold Blood",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Graduate",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Camelot",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Doctor Dolittle",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Taming of the Shrew",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Thoroughly Modern Millie",
+    "year": 1967,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "A Man for All Seasons",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Born Free",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Professionals",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Sand Pebbles",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Who's Afraid of Virginia Woolf?",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Russians Are Coming the Russians Are Coming",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Alfie",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Georgy Girl",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Gambit",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "A Funny Thing Happened on the Way to the Forum",
+    "year": 1966,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Doctor Zhivago",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "The Collector",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Flight of the Phoenix",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "A Patch of Blue",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Ship of Fools",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Sound of Music",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Cat Ballou",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Great Race",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Those Magnificent Men in Their Flying Machines",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "A Thousand Clowns",
+    "year": 1965,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Becket",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "The Chalk Garden",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Dear Heart",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Night of the Iguana",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Zorba the Greek",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "My Fair Lady",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Father Goose",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Mary Poppins",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Unsinkable Molly Brown",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The World of Henry Orient",
+    "year": 1964,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Cardinal",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "America America",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Captain Newman M.D.",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Caretakers",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Cleopatra",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Lilies of the Field",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Hud",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Tom Jones",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Bye Bye Birdie",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Irma la Douce",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "It's a Mad Mad Mad Mad World",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "A Ticklish Affair",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Under the Yum Yum Tree",
+    "year": 1963,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Lawrence of Arabia",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "The Chapman Report",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Days of Wine and Roses",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Freud",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Hemingway's Adventures of a Young Man",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Lisa",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Longest Day",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Miracle Worker",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Mutiny on the Bounty",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Music Man",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Billy Rose's Jumbo",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Boys' Night Out",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Gypsy",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "That Touch of Mink",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Wonderful World of the Brothers Grimm",
+    "year": 1962,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Guns of Navarone",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "El Cid",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Fanny",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Judgment at Nuremberg",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Splendor in the Grass",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "A Majority of One",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Breakfast at Tiffany's",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "One Two Three",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Parent Trap",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Pocketful of Miracles",
+    "year": 1961,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Spartacus",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Elmer Gantry",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Inherit the Wind",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Sons and Lovers",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Sunrise at Campobello",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Apartment",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "The Facts of Life",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Grass Is Greener",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "It Started in Naples",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Our Man in Havana",
+    "year": 1960,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Ben-Hur",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Anatomy of a Murder",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Diary of Anne Frank",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Nun's Story",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "On the Beach",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Some Like It Hot",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "But Not for Me",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Operation Petticoat",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Pillow Talk",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Who Was That Lady?",
+    "year": 1959,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Defiant Ones",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Cat on a Hot Tin Roof",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Home Before Dark",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "I Want to Live!",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Separate Tables",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Auntie Mame",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Bell Book and Candle",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Indiscreet",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Me and the Colonel",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Perfect Furlough",
+    "year": 1958,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Bridge on the River Kwai",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "12 Angry Men",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Peyton Place",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Sayonara",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Wild Is the Wind",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Les Girls",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Don't Go Near the Water",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Love in the Afternoon",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Pal Joey",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Silk Stockings",
+    "year": 1957,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "Around the World in 80 Days",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Giant",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "Lust for Life",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The Rainmaker",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "War and Peace",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": false
+  },
+  {
+    "title": "The King and I",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Bus Stop",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Opposite Sex",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Solid Gold Cadillac",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "The Teahouse of the August Moon",
+    "year": 1956,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": false
+  },
+  {
+    "title": "East of Eden",
+    "year": 1955,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Guys and Dolls",
+    "year": 1955,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "On the Waterfront",
+    "year": 1954,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "Carmen Jones",
+    "year": 1954,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "The Robe",
+    "year": 1953,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "The Greatest Show on Earth",
+    "year": 1952,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "With a Song in My Heart",
+    "year": 1952,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "A Place in the Sun",
+    "year": 1951,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "An American in Paris",
+    "year": 1951,
+    "festival": "Golden Globe",
+    "category": "Best Comedy/Musical",
+    "won": true
+  },
+  {
+    "title": "Sunset Boulevard",
+    "year": 1950,
+    "festival": "Golden Globe",
+    "category": "Best Drama",
+    "won": true
+  },
+  {
+    "title": "sex lies and videotape",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "Do the Right Thing",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Cinema Paradiso",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Mystery Train",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Sweetie",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Time of the Gypsies",
+    "year": 1989,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Pelle the Conqueror",
+    "year": 1988,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "Bird",
+    "year": 1988,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "A World Apart",
+    "year": 1988,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Drowning by Numbers",
+    "year": 1988,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Short Film About Killing",
+    "year": 1988,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Under the Sun of Satan",
+    "year": 1987,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "Wings of Desire",
+    "year": 1987,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "The Glass Menagerie",
+    "year": 1987,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Barfly",
+    "year": 1987,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Shinran: Path to Purity",
+    "year": 1987,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "The Mission",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "The Sacrifice",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Down by Law",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "After Hours",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Mona Lisa",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Runaway Train",
+    "year": 1986,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "When Father Was Away on Business",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "Birdy",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Pale Rider",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Kiss of the Spider Woman",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Mask",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "The Purple Rose of Cairo",
+    "year": 1985,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Paris Texas",
+    "year": 1984,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": true
+  },
+  {
+    "title": "Under the Volcano",
+    "year": 1984,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  },
+  {
+    "title": "Voyage to Cythera",
+    "year": 1984,
+    "festival": "Cannes",
+    "category": "Palme d'Or",
+    "won": false
+  }
+]

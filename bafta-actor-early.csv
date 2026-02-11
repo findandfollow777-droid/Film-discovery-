@@ -1,0 +1,223 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+0,Jack Lemmon,1979,BAFTA,Best Actor,true,The China Syndrome
+0,Woody Allen,1979,BAFTA,Best Actor,false,Manhattan
+0,Robert De Niro,1979,BAFTA,Best Actor,false,The Deer Hunter
+0,Martin Sheen,1979,BAFTA,Best Actor,false,Apocalypse Now
+0,Richard Dreyfuss,1978,BAFTA,Best Actor,true,The Goodbye Girl
+0,Anthony Hopkins,1978,BAFTA,Best Actor,false,Magic
+0,Brad Davis,1978,BAFTA,Best Actor,false,Midnight Express
+0,Peter Ustinov,1978,BAFTA,Best Actor,false,Death on the Nile
+0,Peter Finch,1977,BAFTA,Best Actor,true,Network
+0,William Holden,1977,BAFTA,Best Actor,false,Network
+0,Sylvester Stallone,1977,BAFTA,Best Actor,false,Rocky
+0,Paul Newman,1977,BAFTA,Best Actor,false,Slap Shot
+0,Jack Nicholson,1976,BAFTA,Best Actor,true,One Flew Over the Cuckoo's Nest
+0,Robert De Niro,1976,BAFTA,Best Actor,false,Taxi Driver
+0,Dustin Hoffman,1976,BAFTA,Best Actor,false,All the President's Men
+0,Walter Matthau,1976,BAFTA,Best Actor,false,The Bad News Bears
+0,Al Pacino,1975,BAFTA,Best Actor,true,The Godfather Part II
+0,Richard Dreyfuss,1975,BAFTA,Best Actor,false,Jaws
+0,Gene Hackman,1975,BAFTA,Best Actor,false,French Connection II
+0,Dustin Hoffman,1975,BAFTA,Best Actor,false,Lenny
+0,Jack Nicholson,1974,BAFTA,Best Actor,true,Chinatown
+0,Albert Finney,1974,BAFTA,Best Actor,false,Murder on the Orient Express
+0,Gene Hackman,1974,BAFTA,Best Actor,false,The Conversation
+0,Al Pacino,1974,BAFTA,Best Actor,false,Serpico
+0,Walter Matthau,1973,BAFTA,Best Actor,true,Pete 'n' Tillie
+0,Marlon Brando,1973,BAFTA,Best Actor,false,Last Tango in Paris
+0,Laurence Olivier,1973,BAFTA,Best Actor,false,Sleuth
+0,Donald Sutherland,1973,BAFTA,Best Actor,false,Steelyard Blues
+0,Gene Hackman,1972,BAFTA,Best Actor,true,The French Connection
+0,Marlon Brando,1972,BAFTA,Best Actor,false,The Nightcomers
+0,George C. Scott,1972,BAFTA,Best Actor,false,The Hospital
+0,Robert Shaw,1972,BAFTA,Best Actor,false,Young Winston
+0,Peter Finch,1971,BAFTA,Best Actor,true,Sunday Bloody Sunday
+0,Dirk Bogarde,1971,BAFTA,Best Actor,false,Death in Venice
+0,Albert Finney,1971,BAFTA,Best Actor,false,Gumshoe
+0,Dustin Hoffman,1971,BAFTA,Best Actor,false,Little Big Man
+0,Robert Redford,1970,BAFTA,Best Actor,true,Butch Cassidy and the Sundance Kid
+0,Elliott Gould,1970,BAFTA,Best Actor,false,MASH
+0,Paul Newman,1970,BAFTA,Best Actor,false,Butch Cassidy and the Sundance Kid
+0,George C. Scott,1970,BAFTA,Best Actor,false,Patton
+0,Dustin Hoffman,1969,BAFTA,Best Actor,true,Midnight Cowboy
+0,Alan Bates,1969,BAFTA,Best Actor,false,Women in Love
+0,Walter Matthau,1969,BAFTA,Best Actor,false,The Secret Life of an American Wife
+0,Nicol Williamson,1969,BAFTA,Best Actor,false,Inadmissible Evidence
+0,Spencer Tracy,1968,BAFTA,Best Actor,true,Guess Who's Coming to Dinner
+0,Trevor Howard,1968,BAFTA,Best Actor,false,The Charge of the Light Brigade
+0,Ron Moody,1968,BAFTA,Best Actor,false,Oliver!
+0,Nicol Williamson,1968,BAFTA,Best Actor,false,The Bofors Gun
+0,Paul Scofield,1967,BAFTA,Best Actor,true,A Man for All Seasons
+0,Dirk Bogarde,1967,BAFTA,Best Actor,false,Accident
+0,Richard Burton,1967,BAFTA,Best Actor,false,The Taming of the Shrew
+0,James Mason,1967,BAFTA,Best Actor,false,The Deadly Affair
+0,Rod Steiger,1967,BAFTA,Best Actor,true,In the Heat of the Night
+0,Warren Beatty,1967,BAFTA,Best Actor,false,Bonnie and Clyde
+0,Orson Welles,1967,BAFTA,Best Actor,false,Chimes at Midnight
+0,Sidney Poitier,1967,BAFTA,Best Actor,false,In the Heat of the Night
+0,Richard Burton,1966,BAFTA,Best Actor,true,The Spy Who Came in from the Cold
+0,Michael Caine,1966,BAFTA,Best Actor,false,Alfie
+0,Ralph Richardson,1966,BAFTA,Best Actor,false,Doctor Zhivago
+0,David Warner,1966,BAFTA,Best Actor,false,Morgan: A Suitable Case for Treatment
+0,Rod Steiger,1966,BAFTA,Best Actor,true,The Pawnbroker
+0,Jean-Paul Belmondo,1966,BAFTA,Best Actor,false,Pierrot le Fou
+0,Sidney Poitier,1966,BAFTA,Best Actor,false,A Patch of Blue
+0,Oskar Werner,1966,BAFTA,Best Actor,false,The Spy Who Came in from the Cold
+0,Dirk Bogarde,1965,BAFTA,Best Actor,true,Darling
+0,Harry Andrews,1965,BAFTA,Best Actor,false,The Hill
+0,Rex Harrison,1965,BAFTA,Best Actor,false,My Fair Lady
+0,Anthony Quinn,1965,BAFTA,Best Actor,false,Zorba the Greek
+0,Lee Marvin,1965,BAFTA,Best Actor,true,Cat Ballou
+0,Jack Lemmon,1965,BAFTA,Best Actor,false,Good Neighbor Sam
+0,Anthony Quinn,1965,BAFTA,Best Actor,false,Zorba the Greek
+0,Oskar Werner,1965,BAFTA,Best Actor,false,Ship of Fools
+0,Richard Attenborough,1964,BAFTA,Best Actor,true,Guns at Batasi
+0,Tom Courtenay,1964,BAFTA,Best Actor,false,King & Country
+0,Peter O'Toole,1964,BAFTA,Best Actor,false,Becket
+0,Peter Sellers,1964,BAFTA,Best Actor,false,Dr. Strangelove
+0,Marcello Mastroianni,1964,BAFTA,Best Actor,true,Yesterday, Today and Tomorrow
+0,Cary Grant,1964,BAFTA,Best Actor,false,Charade
+0,Sterling Hayden,1964,BAFTA,Best Actor,false,Dr. Strangelove
+0,Sidney Poitier,1964,BAFTA,Best Actor,false,Lilies of the Field
+0,Dirk Bogarde,1963,BAFTA,Best Actor,true,The Servant
+0,Tom Courtenay,1963,BAFTA,Best Actor,false,Billy Liar
+0,Albert Finney,1963,BAFTA,Best Actor,false,Tom Jones
+0,Richard Harris,1963,BAFTA,Best Actor,false,This Sporting Life
+0,Marcello Mastroianni,1963,BAFTA,Best Actor,true,Divorce Italian Style
+0,Franco Citti,1963,BAFTA,Best Actor,false,Accattone
+0,Howard Keel,1963,BAFTA,Best Actor,false,The Day of the Triffids
+0,Jack Lemmon,1963,BAFTA,Best Actor,false,Days of Wine and Roses
+0,Paul Newman,1963,BAFTA,Best Actor,false,Hud
+0,Gregory Peck,1963,BAFTA,Best Actor,false,To Kill a Mockingbird
+0,Tom Courtenay,1962,BAFTA,Best Actor,true,The Loneliness of the Long Distance Runner
+0,Richard Attenborough,1962,BAFTA,Best Actor,false,The Dock Brief
+0,Peter O'Toole,1962,BAFTA,Best Actor,false,Lawrence of Arabia
+0,Laurence Olivier,1962,BAFTA,Best Actor,false,Term of Trial
+0,Burt Lancaster,1962,BAFTA,Best Actor,true,Birdman of Alcatraz
+0,Jean-Paul Belmondo,1962,BAFTA,Best Actor,false,Léon Morin, Priest
+0,Kirk Douglas,1962,BAFTA,Best Actor,false,Lonely Are the Brave
+0,George Hamilton,1962,BAFTA,Best Actor,false,Light in the Piazza
+0,Charles Laughton,1962,BAFTA,Best Actor,false,Advise & Consent
+0,Anthony Quinn,1962,BAFTA,Best Actor,false,Lawrence of Arabia
+0,Robert Ryan,1962,BAFTA,Best Actor,false,Billy Budd
+0,Georges Wilson,1962,BAFTA,Best Actor,false,The Long Absence
+0,Peter Finch,1961,BAFTA,Best Actor,true,No Love for Johnnie
+0,Dirk Bogarde,1961,BAFTA,Best Actor,false,Victim
+0,Paul Newman,1961,BAFTA,Best Actor,true,The Hustler
+0,Montgomery Clift,1961,BAFTA,Best Actor,false,Judgment at Nuremberg
+0,Vladimir Ivashov,1961,BAFTA,Best Actor,false,Ballad of a Soldier
+0,Philippe Leroy,1961,BAFTA,Best Actor,false,The Night Watch
+0,Sidney Poitier,1961,BAFTA,Best Actor,false,A Raisin in the Sun
+0,Maximilian Schell,1961,BAFTA,Best Actor,false,Judgment at Nuremberg
+0,Alberto Sordi,1961,BAFTA,Best Actor,false,The Best of Enemies
+0,Peter Finch,1960,BAFTA,Best Actor,true,The Trials of Oscar Wilde
+0,Richard Attenborough,1960,BAFTA,Best Actor,false,The Angry Silence
+0,Albert Finney,1960,BAFTA,Best Actor,false,Saturday Night and Sunday Morning
+0,John Fraser,1960,BAFTA,Best Actor,false,The Trials of Oscar Wilde
+0,Alec Guinness,1960,BAFTA,Best Actor,false,Tunes of Glory
+0,John Mills,1960,BAFTA,Best Actor,false,Tunes of Glory
+0,Laurence Olivier,1960,BAFTA,Best Actor,false,The Entertainer
+0,Jack Lemmon,1960,BAFTA,Best Actor,true,The Apartment
+0,George Hamilton,1960,BAFTA,Best Actor,false,Crime and Punishment U.S.A.
+0,Burt Lancaster,1960,BAFTA,Best Actor,false,Elmer Gantry
+0,Fredric March,1960,BAFTA,Best Actor,false,Inherit the Wind
+0,Yves Montand,1960,BAFTA,Best Actor,false,Let's Make Love
+0,Spencer Tracy,1960,BAFTA,Best Actor,false,Inherit the Wind
+0,Peter Sellers,1959,BAFTA,Best Actor,true,I'm All Right Jack
+0,Stanley Baker,1959,BAFTA,Best Actor,false,Yesterday's Enemy
+0,Richard Burton,1959,BAFTA,Best Actor,false,Look Back in Anger
+0,Peter Finch,1959,BAFTA,Best Actor,false,The Nun's Story
+0,Laurence Harvey,1959,BAFTA,Best Actor,false,Expresso Bongo
+0,Gordon Jackson,1959,BAFTA,Best Actor,false,Yesterday's Enemy
+0,Laurence Olivier,1959,BAFTA,Best Actor,false,The Devil's Disciple
+0,Jack Lemmon,1959,BAFTA,Best Actor,true,Some Like It Hot
+0,Zbigniew Cybulski,1959,BAFTA,Best Actor,false,Ashes and Diamonds
+0,Jean Desailly,1959,BAFTA,Best Actor,false,Maigret Sets a Trap
+0,Jean Gabin,1959,BAFTA,Best Actor,false,Maigret Sets a Trap
+0,Takashi Shimura,1959,BAFTA,Best Actor,false,Living
+0,James Stewart,1959,BAFTA,Best Actor,false,Anatomy of a Murder
+0,Trevor Howard,1958,BAFTA,Best Actor,true,The Key
+0,Michael Craig,1958,BAFTA,Best Actor,false,Sea of Sand
+0,Laurence Harvey,1958,BAFTA,Best Actor,false,Room at the Top
+0,I.S. Johar,1958,BAFTA,Best Actor,false,Harry Black
+0,Anthony Quayle,1958,BAFTA,Best Actor,false,Ice Cold in Alex
+0,Michael Redgrave,1958,BAFTA,Best Actor,false,The Quiet American
+0,Donald Wolfit,1958,BAFTA,Best Actor,false,Room at the Top
+0,Sidney Poitier,1958,BAFTA,Best Actor,true,The Defiant Ones
+0,Marlon Brando,1958,BAFTA,Best Actor,false,The Young Lions
+0,Tony Curtis,1958,BAFTA,Best Actor,false,The Defiant Ones
+0,Glenn Ford,1958,BAFTA,Best Actor,false,The Sheepman
+0,Curd Jürgens,1958,BAFTA,Best Actor,false,The Enemy Below
+0,Charles Laughton,1958,BAFTA,Best Actor,false,Witness for the Prosecution
+0,Paul Newman,1958,BAFTA,Best Actor,false,Cat on a Hot Tin Roof
+0,Victor Sjöström,1958,BAFTA,Best Actor,false,Wild Strawberries
+0,Spencer Tracy,1958,BAFTA,Best Actor,false,The Last Hurrah
+0,Alec Guinness,1957,BAFTA,Best Actor,true,The Bridge on the River Kwai
+0,Peter Finch,1957,BAFTA,Best Actor,false,Windom's Way
+0,Trevor Howard,1957,BAFTA,Best Actor,false,Manuela
+0,Laurence Olivier,1957,BAFTA,Best Actor,false,The Prince and the Showgirl
+0,Michael Redgrave,1957,BAFTA,Best Actor,false,Time Without Pity
+0,Henry Fonda,1957,BAFTA,Best Actor,true,12 Angry Men
+0,Richard Basehart,1957,BAFTA,Best Actor,false,Time Limit
+0,Pierre Brasseur,1957,BAFTA,Best Actor,false,Porte des Lilas
+0,Tony Curtis,1957,BAFTA,Best Actor,false,Sweet Smell of Success
+0,Jean Gabin,1957,BAFTA,Best Actor,false,La Traversée de Paris
+0,Robert Mitchum,1957,BAFTA,Best Actor,false,Heaven Knows, Mr. Allison
+0,Sidney Poitier,1957,BAFTA,Best Actor,false,Edge of the City
+0,Ed Wynn,1957,BAFTA,Best Actor,false,The Great Man
+0,Peter Finch,1956,BAFTA,Best Actor,true,A Town Like Alice
+0,Jack Hawkins,1956,BAFTA,Best Actor,false,The Long Arm
+0,Kenneth More,1956,BAFTA,Best Actor,false,Reach for the Sky
+0,François Périer,1956,BAFTA,Best Actor,true,Gervaise
+0,Gunnar Björnstrand,1956,BAFTA,Best Actor,false,Smiles of a Summer Night
+0,James Dean,1956,BAFTA,Best Actor,false,Rebel Without a Cause
+0,Pierre Fresnay,1956,BAFTA,Best Actor,false,The Defrocked One
+0,William Holden,1956,BAFTA,Best Actor,false,Picnic
+0,Karl Malden,1956,BAFTA,Best Actor,false,Baby Doll
+0,Frank Sinatra,1956,BAFTA,Best Actor,false,The Man with the Golden Arm
+0,Spencer Tracy,1956,BAFTA,Best Actor,false,The Mountain
+0,Laurence Olivier,1955,BAFTA,Best Actor,true,Richard III
+0,Alfie Bass,1955,BAFTA,Best Actor,false,The Bespoke Overcoat
+0,Alec Guinness,1955,BAFTA,Best Actor,false,The Prisoner
+0,Jack Hawkins,1955,BAFTA,Best Actor,false,The Prisoner
+0,Kenneth More,1955,BAFTA,Best Actor,false,The Deep Blue Sea
+0,Michael Redgrave,1955,BAFTA,Best Actor,false,The Night My Number Came Up
+0,Ernest Borgnine,1955,BAFTA,Best Actor,true,Marty
+0,James Dean,1955,BAFTA,Best Actor,false,East of Eden
+0,Jack Lemmon,1955,BAFTA,Best Actor,false,Mister Roberts
+0,Toshiro Mifune,1955,BAFTA,Best Actor,false,Seven Samurai
+0,Takashi Shimura,1955,BAFTA,Best Actor,false,Seven Samurai
+0,Frank Sinatra,1955,BAFTA,Best Actor,false,Not as a Stranger
+0,Kenneth More,1954,BAFTA,Best Actor,true,Doctor in the House
+0,Maurice Denham,1954,BAFTA,Best Actor,false,The Purple Plain
+0,Robert Donat,1954,BAFTA,Best Actor,false,Lease of Life
+0,John Mills,1954,BAFTA,Best Actor,false,Hobson's Choice
+0,David Niven,1954,BAFTA,Best Actor,false,Carrington V.C.
+0,Donald Wolfit,1954,BAFTA,Best Actor,false,Svengali
+0,Marlon Brando,1954,BAFTA,Best Actor,true,On the Waterfront
+0,Neville Brand,1954,BAFTA,Best Actor,false,Riot in Cell Block 11
+0,José Ferrer,1954,BAFTA,Best Actor,false,The Caine Mutiny
+0,Fredric March,1954,BAFTA,Best Actor,false,Executive Suite
+0,James Stewart,1954,BAFTA,Best Actor,false,The Glenn Miller Story
+0,John Gielgud,1953,BAFTA,Best Actor,true,Julius Caesar
+0,Jack Hawkins,1953,BAFTA,Best Actor,false,The Cruel Sea
+0,Trevor Howard,1953,BAFTA,Best Actor,false,The Heart of the Matter
+0,Duncan Macrae,1953,BAFTA,Best Actor,false,The Kidnappers
+0,Kenneth More,1953,BAFTA,Best Actor,false,Genevieve
+0,Marlon Brando,1953,BAFTA,Best Actor,true,Julius Caesar
+0,Eddie Albert,1953,BAFTA,Best Actor,false,Roman Holiday
+0,Van Heflin,1953,BAFTA,Best Actor,false,Shane
+0,Claude Laydu,1953,BAFTA,Best Actor,false,Diary of a Country Priest
+0,Marcel Mouloudji,1953,BAFTA,Best Actor,false,We Are All Murderers
+0,Gregory Peck,1953,BAFTA,Best Actor,false,Roman Holiday
+0,Spencer Tracy,1953,BAFTA,Best Actor,false,The Actress
+0,Ralph Richardson,1952,BAFTA,Best Actor,true,The Sound Barrier
+0,Jack Hawkins,1952,BAFTA,Best Actor,false,Mandy
+0,James Hayter,1952,BAFTA,Best Actor,false,The Pickwick Papers
+0,Laurence Olivier,1952,BAFTA,Best Actor,false,Carrie
+0,Nigel Patrick,1952,BAFTA,Best Actor,false,The Sound Barrier
+0,Marlon Brando,1952,BAFTA,Best Actor,true,Viva Zapata!
+0,Humphrey Bogart,1952,BAFTA,Best Actor,false,The African Queen
+0,Pierre Fresnay,1952,BAFTA,Best Actor,false,God Needs Men
+0,Francesco Golisano,1952,BAFTA,Best Actor,false,Miracle in Milan
+0,Fredric March,1952,BAFTA,Best Actor,false,Death of a Salesman

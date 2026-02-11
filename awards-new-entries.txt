@@ -1,0 +1,232 @@
+
+    // ── BAFTA (new years) ──
+    // BAFTA > Best Film
+    // BAFTA["Best Film"][1959]
+    // winner: M("Ben-Hur", 665, "/m4WQ1dBIrEIHZNCoAjdpxwSKWyH.jpg")
+    // nominees: M("Anatomy of a Murder", 93, "/b2G1QSAwtBv9luhEwErIgSRaU92.jpg"), M("The Face", 29453, "/46DEYkr96MxzUmdwgmj2U7gWokZ.jpg"), M("The Nun's Story", 27029, "/4vNWFhPyjTehPpZsvTnTywwXSiF.jpg"), M("Sapphire", 64291, "/hwfJUilhZ6iSuosizjpLYNaFfgV.jpg"), M("Some Like It Hot", 239, "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg")
+    // BAFTA["Best Film"][1958]
+    // winner: M("Room at the Top", 43103, "/uuyruoqh7oBtjwN1mJyOF04CPjO.jpg")
+    // nominees: M("Cat on a Hot Tin Roof", 261, "/5djZZECgqDGuSI1INmrdAcGRBb0.jpg"), M("The Defiant Ones", 11414, "/tGGNyImEXgedDjrCORbC9cTJp0X.jpg"), M("Ice Cold in Alex", 16284, "/lkqTxSL9JwyyXDu5yeOoj5mzsVc.jpg"), M("Indiscreet", 22874, "/sv4ao2ceHx2Ii1I2SsAmCqr7k6K.jpg")
+    // BAFTA["Best Film"][1957]
+    // winner: M("The Bridge on the River Kwai", 826, "/7paXMt2e3Tr5dLmEZOGgFEn2Vo7.jpg")
+    // nominees: M("12 Angry Men", 389, "/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg"), M("3:10 to Yuma", 14168, "/emYeJVZrpl2WfndJlhbls1e7lzQ.jpg"), M("The Bachelor Party", 185263, "/to8xodOCvR57xDOS8rojBTwqGa5.jpg"), M("Paths of Glory", 975, "/p7OHwomA8UOhe3EhckF2IetBTh9.jpg")
+    // BAFTA["Best Film"][1956]
+    // winner: M("Gervaise", 52726, "/njux1vvBuiwR4UJ6FCpYoar9buO.jpg")
+    // nominees: M("Baby Doll", 40478, "/1Wj0H6HA7xCy8kWYWOTytqwOqWk.jpg"), M("The Battle of the River Plate", 17591, "/pCkNI9LVDkH5z6PzwQUbutQcm3U.jpg"), M("The Killing", 247, "/A6VzUPcADZGYdGHlVdWvpMNDF5d.jpg"), M("The Man Who Never Was", 43791, "/ajb6naQi07fPhyJQ9DxkrGNU4Sw.jpg")
+    // BAFTA["Best Film"][1955]
+    // winner: M("Richard III", 43323, "/3zp2Kg5bvlFkKmWiQLmuWQAIEgG.jpg")
+    // nominees: M("Bad Day at Black Rock", 14554, "/8EnhHjU0DyCckmZRtn46s3WXeEf.jpg"), M("Carmen Jones", 51044, "/5Vo4NeE7dlXBUaikbGnUOmUNHJ3.jpg"), M("The Dam Busters", 13210, "/cU2HgieUMHvCzN0PC66vk75mB61.jpg"), M("East of Eden", 220, "/xv1MZVIop0SQqwLUymgE5eb2LFl.jpg"), M("The Ladykillers", 5506, "/9LJ6ZV59Q92LAJAbmb7xm9dUBGU.jpg"), M("Seven Samurai", 346, "/lOMGc8bnSwQhS4XyE1S99uH8NXf.jpg")
+    // BAFTA["Best Film"][1954]
+    // winner: M("The Wages of Fear", 204, "/dZyZSosIlWcpQkV0f7pXcrV2TQV.jpg")
+    // nominees: M("The Caine Mutiny", 10178, "/vuO4Z3wOWVlhq35MS9asZeT9rVp.jpg"), M("Hobson's Choice", 16410, "/kbP7EgoiOw2bIypai50JWRsqP7p.jpg"), M("How to Marry a Millionaire", 10297, "/dFwefYyEOOZaWVn15xGY6CbYYJ2.jpg"), M("Rear Window", 567, "/ILVF0eJxHMddjxeQhswFtpMtqx.jpg"), M("Seven Brides for Seven Brothers", 16563, "/8Z4W2oRQKkmt7lhqNPROcNru9yJ.jpg")
+    // BAFTA["Best Film"][1953]
+    // winner: M("Forbidden Games", 5000, "/nby91GNVXQAv1NmKvqlpEEdhcMQ.jpg")
+    // nominees: M("The Bad and the Beautiful", 32499, "/ajAXzTiPkL7JxeCRw5lQBqrKNGx.jpg"), M("Come Back Little Sheba", 84214, "/3hg3c6TVFVGuoqmHi0Yw25qvpRu.jpg"), M("The Cruel Sea", 16914, "/kmMGoeLx7rntdbqKZFp6bmT8ZCW.jpg"), M("From Here to Eternity", 11426, "/xO1LHnh9aQlQFFq1DxyQrOTia1S.jpg"), M("Genevieve", 43346, "/fO5PtTc7GGgxDfD6ndM009gGWhE.jpg"), M("Julius Caesar", 18019, "/2nzpmJ9MIdd5TKXJd53KgKdZ6eT.jpg"), M("Roman Holiday", 804, "/8lI9dmz1RH20FAqltkGelY1v4BE.jpg"), M("Shane", 3110, "/svr5ADpjXTCOQv8hmuJnB7I14Qv.jpg")
+    // BAFTA["Best Film"][1952]
+    // winner: M("The Sound Barrier", 51619, "/cExgxdISr0gEvVr74mmpEL4yLh4.jpg")
+    // nominees: M("The African Queen", 488, "/2Ypg0KhQfFYWILelvHGtSHHR0dk.jpg"), M("Angels One Five", 41312, "/r1bBcmopZPDieHtBhuQcUkZ0TpJ.jpg"), M("The Boy Kumasenu", 269325, "/42flAoBpyh6fdsIRDvoQYdFkpYs.jpg"), M("Carrie", 43358, "/hif1GraUbvlocgqtrwYMaybsGcJ.jpg"), M("Casque d'Or", 68822, "/c7VHPq0FxlvDiwMCvb8VOxeg8ub.jpg"), M("Cry the Beloved Country", 173893, "/8inNsImz4yRfjGUkBzO6urIBM5A.jpg"), M("Death of a Salesman", 104394, "/xnyRkG1LMQX0NUpROq61GiKW7eJ.jpg"), M("Limelight", 28971, "/tDD11x3ZWCXXXwdpbGEU9uU4kh1.jpg"), M("Mandy", 47026, "/8bwWXoxCjCUDJN6hKPCtUWUzPux.jpg"), M("Miracle in Milan", 43379, "/zMEYCBO2OBHR09aW9IwjOR3R3A5.jpg"), M("Los Olvidados", 800, "/cDCvmYoyqFg4CuSMtGMvCpfOIEw.jpg"), M("Pat and Mike", 33575, "/6hSJWY1ygsOVAtPEz9Nb5q5FeyA.jpg"), M("The Quiet Man", 3109, "/u3B1hVKHE56yBRoxF3Nk9uxHdYN.jpg"), M("Rashomon", 548, "/vL7Xw04nFMHwnvXRFCmYYAzMUvY.jpg"), M("The River", 45218, "/rC1k4xkffb5sdQlktiP2TyiBxT2.jpg"), M("Singin' in the Rain", 872, "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg"), M("A Streetcar Named Desire", 702, "/aicdlO5vt7z2ARm279eGzJeYCLQ.jpg"), M("Viva Zapata!", 1810, "/vfarxn9ddiaZpRDml8FGhB46Qrc.jpg")
+    // BAFTA["Best Film"][1951]
+    // winner: M("La Ronde", 50030, "/jMcF0XAD66n1abW1ZZhtrD0AsKN.jpg")
+    // nominees: M("An American in Paris", 2769, "/lyDXkvG53ldz6Cf7dbjJl7TaoP5.jpg"), M("The Browning Version", 39946, "/fRlXkYgQc6QfwYMAlv2neKhRswl.jpg"), M("Detective Story", 20853, "/hMbAiGIrfhhp0XNB4mdgfgtSDdK.jpg"), M("Fourteen Hours", 54139, "/kS1Rhn5YfNDS2gT0UNRCPPYVV8J.jpg"), M("The Lavender Hill Mob", 32961, "/u4mZyim3CwXHu0zVhXjfK8fqoN7.jpg"), M("The Magic Box", 80596, "/kRtukdvDz3tkyhSC8GzGOkQhAb0.jpg"), M("The Man in the White Suit", 32568, "/laTLoNZB7Ar3ZDoQmspBDVa5mbC.jpg"), M("A Walk in the Sun", 43488, "/uHZX36Ls2rtfMZqX1mmhmbV92R8.jpg")
+    // BAFTA["Best Film"][1950]
+    // winner: M("All About Eve", 705, "/blBzZaatPWVuWpXEnPscMA4Xp6m.jpg")
+    // nominees: M("The Asphalt Jungle", 16958, "/8xsUnT0P2fJWQv9jGDhs3i9Zx2l.jpg"), M("Beauty and the Beast", 648, "/iYSe3yrkma0e1B0wWPXgr8w5sDN.jpg"), M("The Men", 1882, "/88hG50Z7EMxKdsKOBc5o2yOpPB5.jpg"), M("On the Town", 31516, "/lEU8QQmIayAtPZrCDf2czQgTjQ1.jpg"), M("Orpheus", 4558, "/wcUmMtipWBBx7lpsfpPsUM4Snh1.jpg"), M("Sunset Boulevard", 599, "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg")
+
+
+    // ── Golden Globe (new years) ──
+    // GoldenGlobe > Best Drama
+    // GoldenGlobe["Best Drama"][1969]
+    // winner: M("Anne of the Thousand Days", 22522, "/u2p5SspAs1GqeuHXNXywryU3k37.jpg")
+    // nominees: M("Butch Cassidy and the Sundance Kid", 642, "/gFmmykF1Ym3OGzENo50nZQaD1dx.jpg"), M("Midnight Cowboy", 3116, "/ckklq45UxUkwgHve9xItXqXr06r.jpg"), M("The Prime of Miss Jean Brodie", 5179, "/lEZdKL17yneFK4dbbWPKcbkRbqM.jpg"), M("They Shoot Horses Don't They?", 28145, "/7wVLBgriOQpT5RrufAFCdCSUp7M.jpg")
+    // GoldenGlobe["Best Drama"][1968]
+    // winner: M("The Lion in Winter", 18988, "/yMgJnZADJObzfjA70ygXJkjnrFX.jpg")
+    // nominees: M("Charly", 29146, "/uxGt80D4hxEEwGwdOJ5tdVvjXEC.jpg"), M("The Fixer", 87267, "/pLcke8F7THAxtEHtN8Tg6IaZ9if.jpg"), M("The Heart Is a Lonely Hunter", 22176, "/vOznrQ5x8IAnsY0P3T7Jz9EEGP7.jpg"), M("The Shoes of the Fisherman", 17665, "/m9HqMSaDz7Peo0ufCaBUP8gG5gf.jpg")
+    // GoldenGlobe["Best Drama"][1967]
+    // winner: M("In the Heat of the Night", 10633, "/qFpfALhprXmOAbA5upTNupZw8rq.jpg")
+    // nominees: M("Bonnie and Clyde", 475, "/sCSQFK9kMsprT4jgWqgw82dT6WI.jpg"), M("Far from the Madding Crowd", 3469, "/2cCHnpaf5JTRlgO07uulEdUpFkb.jpg"), M("Guess Who's Coming to Dinner", 1879, "/fkHeYWahNbhxhuLefaAg553lYo5.jpg"), M("In Cold Blood", 18900, "/f4zGKntOVVJUk9X0wCcw1DJPdQe.jpg")
+    // GoldenGlobe["Best Drama"][1966]
+    // winner: M("A Man for All Seasons", 874, "/kcwcqMitcnRO1SySlX1HKVn7yUV.jpg")
+    // nominees: M("Born Free", 15347, "/xI5BkObQm7UtYEFTw7ZmiDGF7gT.jpg"), M("The Professionals", 22383, "/sH4Clw7QrtH23xl9o4sOpHNkRIz.jpg"), M("The Sand Pebbles", 5923, "/muZyCXWoayEtwVkxc0ql48X1h6L.jpg"), M("Who's Afraid of Virginia Woolf?", 396, "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg")
+    // GoldenGlobe["Best Drama"][1965]
+    // winner: M("Doctor Zhivago", 907, "/r0Iv2BiCFYDnzc6uU1q3AJ56igT.jpg")
+    // nominees: M("The Collector", 42740, "/iMiih5FGHwpUCAaJAIkYKl5Hffi.jpg"), M("The Flight of the Phoenix", 10243, "/zrzLl7NWdjwGhVE7bqpOAxMVtF.jpg"), M("A Patch of Blue", 33364, "/9eFULnzgoLpO7lvg6FMutGRuNFg.jpg"), M("Ship of Fools", 30080, "/2LOe4Hu6Gxw6k76hLWhS8JVVILa.jpg")
+    // GoldenGlobe["Best Drama"][1964]
+    // winner: M("Becket", 15421, "/swWmxVbq0pXv4wwsc2O803PiXR7.jpg")
+    // nominees: M("The Chalk Garden", 66022, "/IXGqj9MoPFbaoBcUkUZf97XHlx.jpg"), M("Dear Heart", 101226, "/8rRzxfPsztNhgac81KJk3tphCME.jpg"), M("The Night of the Iguana", 14703, "/3HY8MSeoj4s0uSWGW135Jlh7eSI.jpg"), M("Zorba the Greek", 10604, "/jAYOY38TRDprIgu7vgES0FFJJSl.jpg")
+    // GoldenGlobe["Best Drama"][1963]
+    // winner: M("The Cardinal", 3010, "/y23FoRE97IH9bHFo2OBP5IkKnLq.jpg")
+    // nominees: M("America America", 47249, "/76RffKrNPrfA4TWYkx5wIIOzOlV.jpg"), M("Captain Newman M.D.", 33728, "/ovXBWbk3YjOZB5cmiTvdNaDYGKu.jpg"), M("The Caretakers", 85640, "/4sSpMxxCLtAyJiOC4zJtKIsySIw.jpg"), M("Cleopatra", 8095, "/bj7rUGUewofA9cpHt1h36gvDFfy.jpg"), M("Lilies of the Field", 38805, "/gYoVx2m8NP2hTWnEpwNeROIWrQ4.jpg"), M("Hud", 24748, "/A168bF52vmAIGkC2Qafj7M2EmaE.jpg")
+    // GoldenGlobe["Best Drama"][1962]
+    // winner: M("Lawrence of Arabia", 947, "/AiAm0EtDvyGqNpVoieRw4u65vD1.jpg")
+    // nominees: M("The Chapman Report", 118955, "/xHlkaDldivwkL9H8qOmb2zyXqNo.jpg"), M("Days of Wine and Roses", 32488, "/cRVl1BR3x3P2NqUv61eveJNJ0ip.jpg"), M("Freud", 35806, "/2cguhv8jwEaiwF8pB5xo3RzfXlO.jpg"), M("Hemingway's Adventures of a Young Man", 111683, "/8IqWKVSHCmBWICtyrluWPN0TfrN.jpg"), M("Lisa", 109667, "/jujTT52xmggRVwdWvSD2DPqUI1O.jpg"), M("The Longest Day", 9289, "/5zmvEofdIlgXrQl9A7e5IOzlnFU.jpg"), M("The Miracle Worker", 1162, "/3dI6UVM5W1sz3MU9gNK5nVDcAyQ.jpg"), M("Mutiny on the Bounty", 11085, "/caxk06SANEacvycZFiApv1LA6Kl.jpg"), M("To Kill a Mockingbird", 595, "/gZycFUMLx2110dzK3nBNai7gfpM.jpg")
+    // GoldenGlobe["Best Drama"][1961]
+    // winner: M("The Guns of Navarone", 10911, "/j6VSFnm20GlkUi8yb7hM5Qfc1fA.jpg")
+    // nominees: M("El Cid", 16638, "/a6DY3LDlXFUDuXm47zXTOfiisxP.jpg"), M("Fanny", 84050, "/8hEQpSE3D9rsMw37N30T9EZwLoa.jpg"), M("Judgment at Nuremberg", 821, "/b6vYatvui1EXeFYfpDX4rcbueuP.jpg"), M("Splendor in the Grass", 28569, "/n6Kw8Ui93SMhrk1MupCFwUg04vq.jpg")
+    // GoldenGlobe["Best Drama"][1960]
+    // winner: M("Spartacus", 967, "/r0Fgg1GyZgzokaiw2HFQv3oPaL2.jpg")
+    // nominees: M("Elmer Gantry", 22013, "/5vd031r08rrfSMqtB9UarwqCUOz.jpg"), M("Inherit the Wind", 1908, "/7oaHcF0gCOt2lKaT2zajhajP0Zo.jpg"), M("Sons and Lovers", 53939, "/7BDlr8XivWmNcDsb5ygnhs8CWiR.jpg"), M("Sunrise at Campobello", 72354, "/y9cJA6rz0cEcPmehvc1Rr1GvvCO.jpg")
+    // GoldenGlobe["Best Drama"][1959]
+    // winner: M("Ben-Hur", 665, "/m4WQ1dBIrEIHZNCoAjdpxwSKWyH.jpg")
+    // nominees: M("Anatomy of a Murder", 93, "/b2G1QSAwtBv9luhEwErIgSRaU92.jpg"), M("The Diary of Anne Frank", 2576, "/i7kUdUAF9eTxQG7GdR6lKUK96En.jpg"), M("The Nun's Story", 27029, "/4vNWFhPyjTehPpZsvTnTywwXSiF.jpg"), M("On the Beach", 35412, "/lTDuj5zalrI0fpQel7UfPHTexTK.jpg")
+    // GoldenGlobe["Best Drama"][1958]
+    // winner: M("The Defiant Ones", 11414, "/tGGNyImEXgedDjrCORbC9cTJp0X.jpg")
+    // nominees: M("Cat on a Hot Tin Roof", 261, "/5djZZECgqDGuSI1INmrdAcGRBb0.jpg"), M("Home Before Dark", 121250, "/ArL6JE6E2YltKRWKmBpuqb6Rt3b.jpg"), M("I Want to Live!", 28577, "/cQoSMLJFPV3d8Mi8iPwwtNto370.jpg"), M("Separate Tables", 43136, "/y8exawP0Je3MXVIS3olpJ2fu07.jpg")
+    // GoldenGlobe["Best Drama"][1957]
+    // winner: M("The Bridge on the River Kwai", 826, "/7paXMt2e3Tr5dLmEZOGgFEn2Vo7.jpg")
+    // nominees: M("12 Angry Men", 389, "/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg"), M("Peyton Place", 43236, "/pSANpoBLMbejWTtiKz630eSaDpi.jpg"), M("Sayonara", 40885, "/xSXJDamf9vSb1qOiBhOMjB2soDE.jpg"), M("Wild Is the Wind", 93528, "/7vnKOkyrvJ77uLlGk5hzXyqyAfQ.jpg")
+    // GoldenGlobe["Best Drama"][1956]
+    // winner: M("Around the World in 80 Days", 2897, "/kk6Rrwh0toMz9tjuUHdS4O3v2Rk.jpg")
+    // nominees: M("Giant", 1712, "/wXGmfJkU83daBsqp9R8LeWguIZd.jpg"), M("Lust for Life", 29592, "/rlK3LG3W41eF3N1tk0SEM7Dln2x.jpg"), M("The Rainmaker", 43542, "/3E2dmfh3e2LOKq0psiNXAGwtZGl.jpg"), M("War and Peace", 11706, "/f3a1MyH12PSl3LFDahnooGy6mv8.jpg")
+    // GoldenGlobe["Best Drama"][1955]
+    // winner: M("East of Eden", 220, "/xv1MZVIop0SQqwLUymgE5eb2LFl.jpg")
+    // GoldenGlobe["Best Drama"][1954]
+    // winner: M("On the Waterfront", 654, "/v1RtJ1qR4v9nrnfoBVBl6hjTW9.jpg")
+    // GoldenGlobe["Best Drama"][1953]
+    // winner: M("The Robe", 29912, "/qFYZNGzftIM8dqGMJBToGraAFJp.jpg")
+    // GoldenGlobe["Best Drama"][1952]
+    // winner: M("The Greatest Show on Earth", 27191, "/cKI0yGPRh1IlvRKKJRoMZruior8.jpg")
+    // GoldenGlobe["Best Drama"][1951]
+    // winner: M("A Place in the Sun", 25673, "/3tKYbChwIRYCwFrMUDBkbZyDIoN.jpg")
+    // GoldenGlobe["Best Drama"][1950]
+    // winner: M("Sunset Boulevard", 599, "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg")
+
+    // GoldenGlobe > Best Comedy/Musical
+    // GoldenGlobe["Best Comedy/Musical"][1969]
+    // winner: M("The Secret of Santa Vittoria", 30298, "/uX4xHo8GptvEbkch6i7OpWiM1L0.jpg")
+    // nominees: M("Cactus Flower", 28289, "/oabi6jdkxP3KHMNywKn6nQeDzQZ.jpg"), M("Goodbye Columbus", 42604, "/yEfA6HiXipVZdHvxiagV6MxuDNS.jpg"), M("Hello Dolly!", 14030, "/aPZOt9BR3gnk1RyX924ySq81S4P.jpg"), M("Paint Your Wagon", 20391, "/fwnYGuba3ZSM2bXwBZZs4DqqKTl.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1968]
+    // winner: M("Oliver!", 17917, "/1XJgoaOWKrqxkKeBKWLKSigqG8c.jpg")
+    // nominees: M("Finian's Rainbow", 42622, "/7vPJBLw9GL0FlJXXTgZqWnwMzK9.jpg"), M("Funny Girl", 16085, "/fg7tnjd4dBeIDvEO80CGq958CCt.jpg"), M("The Odd Couple", 11356, "/d3dKPpzEi7WfgmoMnMwWyQnd2ja.jpg"), M("Yours Mine and Ours", 27983, "/sL6uuFSapJNAGYcA4SrUHO5X4gs.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1967]
+    // winner: M("The Graduate", 37247, "/z1Z1tZMR66RxcNeHbwoEhYeqOlP.jpg")
+    // nominees: M("Camelot", 18978, "/1ohPMbfmQVg0Zzy9wkySm1w8Kr7.jpg"), M("Doctor Dolittle", 16081, "/rViuZo27U8wcZHGuRliv9LfmhjV.jpg"), M("The Taming of the Shrew", 25560, "/2LpU3kyg1PowiQoEHf7oUXOUmVa.jpg"), M("Thoroughly Modern Millie", 32489, "/ce8rBGFR0naGsp6mKy9CNKn9iSa.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1966]
+    // winner: M("The Russians Are Coming the Russians Are Coming", 31918, "/sgo7cQg6Zo0xuCgb8ckou0RX4Bj.jpg")
+    // nominees: M("Alfie", 15598, "/tPUqgfGMkZazRZ1UO41j2Fiib5C.jpg"), M("Georgy Girl", 42719, "/2v6ezHOqJM2HpSHiGWqLj0Mqs78.jpg"), M("Gambit", 28270, "/1MchaxoMtROoioSAwjLd5FEp6D.jpg"), M("A Funny Thing Happened on the Way to the Forum", 17768, "/h3S9DZMUZNsAqd8ZNBed7ttPWXk.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1965]
+    // winner: M("The Sound of Music", 15121, "/c6CrUZypAsBCaRWX0M3RVRDbhNS.jpg")
+    // nominees: M("Cat Ballou", 11694, "/3WJmB1F5z4mLwt84i1FuIrSYEe.jpg"), M("The Great Race", 11575, "/9rL8GWuFdO3fLXcNV9rZRHskoOn.jpg"), M("Those Magnificent Men in Their Flying Machines", 10338, "/wcGELNaQ8TbiMUpAnkKLl5g09OO.jpg"), M("A Thousand Clowns", 42731, "/tXPsmtVy3T5Whz20LwiscprCdCT.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1964]
+    // winner: M("My Fair Lady", 11113, "/bTXVc29lGSNclf94VIZ49W4gGKl.jpg")
+    // nominees: M("Father Goose", 30295, "/Tp4vSQef0qsI78M90SsZZLJzPE.jpg"), M("Mary Poppins", 433, "/pHyWpWn2pRIfhS3Arcn4SKtKKW4.jpg"), M("The Unsinkable Molly Brown", 42797, "/itmZdJShq5cbzeOqGsDKZiwGNci.jpg"), M("The World of Henry Orient", 19662, "/tMIRjDgsEj15RXEhMrgSqROUP7u.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1963]
+    // winner: M("Tom Jones", 5769, "/yKuZKLMhe74PJzaxYLh2s8h4P2P.jpg")
+    // nominees: M("Bye Bye Birdie", 25167, "/u3m2kU5aFj6V6cNYOd9a22Iia7O.jpg"), M("Irma la Douce", 2690, "/5TgL8ql6WwXWmX4EvBL4geJ7gx5.jpg"), M("It's a Mad Mad Mad Mad World", 11576, "/j4mWzOisSHFkaqIkq34l2mm8a5K.jpg"), M("A Ticklish Affair", 107231, "/tRjPKWfJCkCXf8oLNhmKA8D2U8q.jpg"), M("Under the Yum Yum Tree", 43750, "/20oQRYfHaSfGGCOKBEh1M1CpgCc.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1962]
+    // winner: M("The Music Man", 13671, "/4yo6qaqVF1IThXMapo4yW9BRWjV.jpg")
+    // nominees: M("Billy Rose's Jumbo", 42991, "/kmvuW4U5zjawlCNDqbJW5fMSOtl.jpg"), M("Boys' Night Out", 35057, "/4mcM4SB7OtGeGAXNAMEhNFve2pG.jpg"), M("Gypsy", 39391, "/qmeyhwe7pHJ30n6uLq8swyW1Juz.jpg"), M("That Touch of Mink", 12708, "/eEG29x9cljGKL2GPmRK9IByyL9e.jpg"), M("The Wonderful World of the Brothers Grimm", 28367, "/zElwCWdMG7A6xThgesRxNrgD2MP.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1961]
+    // winner: M("A Majority of One", 158800, "/xHrC85LCp80Bug08VqSjwUC5jLB.jpg")
+    // nominees: M("Breakfast at Tiffany's", 164, "/79xm4gXw4l7A5D0XukUOJRocFYQ.jpg"), M("One Two Three", 430, "/yWQE227ub1frfnjP5HZy0wLF0wu.jpg"), M("The Parent Trap", 19186, "/jaZFWy6ZAvQoMW2mo9xP5gx4URo.jpg"), M("Pocketful of Miracles", 248, "/xjXwcGJjT5tE22wazQUYH32HwU8.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1960]
+    // winner: M("The Apartment", 284, "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg")
+    // nominees: M("The Facts of Life", 39219, "/jgduHeBEmpCdzHKo9wteKj8WO8l.jpg"), M("The Grass Is Greener", 25767, "/3peOV81MRImLDX8bnGUHOJSB0lN.jpg"), M("It Started in Naples", 38151, "/cqgViygbWqqGJs1AOPKRcKEj4rg.jpg"), M("Our Man in Havana", 25495, "/6R6zIKywC8rNo6fT1YBDeEAUmEb.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1959]
+    // winner: M("Some Like It Hot", 239, "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg")
+    // nominees: M("But Not for Me", 121234, "/onoMReVeUaBnZF1DUCVmidTlxRn.jpg"), M("Operation Petticoat", 9660, "/pIsm8JvpFZidVxKexv5UgoCjwpZ.jpg"), M("Pillow Talk", 4952, "/ugvyj5nl9QmTYuaGUTefVYBDePE.jpg"), M("Who Was That Lady?", 105406, "/aRf7LnZD6zOTHbM4gpVXDmWibpU.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1958]
+    // winner: M("Auntie Mame", 16347, "/uH810rwkYEbUaV6IlwTaAExbXUm.jpg")
+    // nominees: M("Bell Book and Candle", 2006, "/z3MLtVFPT2wIkKCBSE2yBgDmeXI.jpg"), M("Indiscreet", 22874, "/sv4ao2ceHx2Ii1I2SsAmCqr7k6K.jpg"), M("Me and the Colonel", 114060, "/i9Dz3TbEhc9v4w08IapLtIFjdeu.jpg"), M("The Perfect Furlough", 225943, "/yrbtmgxifaVcM8C63UhaiubpzJ6.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1957]
+    // winner: M("Les Girls", 43232, "/78ot7b75r5yWKt0rW9XjXqH7GY1.jpg")
+    // nominees: M("Don't Go Near the Water", 109441, "/zxs6jZIyWWOsANrwol8YhxxKeCR.jpg"), M("Love in the Afternoon", 18299, "/jCHVviBhRQ7OkJFQfziO2N2ZJmh.jpg"), M("Pal Joey", 33734, "/5vWaDXDBxEv9ahwF8aSigbC0ADy.jpg"), M("Silk Stockings", 43239, "/kuV34rCOrcDt6Ii3149AlJs9bpM.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1956]
+    // winner: M("The King and I", 16520, "/wUfaP0lLaMpZzp5CrHyII5Vd7cp.jpg")
+    // nominees: M("Bus Stop", 24010, "/oXZiz5zIyynjQMJMBbXijS4434z.jpg"), M("The Opposite Sex", 43311, "/piXpVWU67Y9XXJKSHAlP95vd3EG.jpg"), M("The Solid Gold Cadillac", 78331, "/ennpt6fPoCQSzULMr6oK1CXtIx2.jpg"), M("The Teahouse of the August Moon", 43313, "/v2G1Vh14X9NslrHR9zGlGoV1i4M.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1955]
+    // winner: M("Guys and Dolls", 4825, "/mrSM6laJJLBVdMdWfeNRa1innnk.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1954]
+    // winner: M("Carmen Jones", 51044, "/5Vo4NeE7dlXBUaikbGnUOmUNHJ3.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1952]
+    // winner: M("With a Song in My Heart", 65787, "/KePfsUc63Z9J0xEKxwydlzNOkP.jpg")
+    // GoldenGlobe["Best Comedy/Musical"][1951]
+    // winner: M("An American in Paris", 2769, "/lyDXkvG53ldz6Cf7dbjJl7TaoP5.jpg")
+
+
+    // ── Cannes (new years) ──
+    // Cannes > Palme d'Or
+    // Cannes["Palme d'Or"][1989]
+    // winner: M("sex lies and videotape", 1412, "/pj1uKm07svgXZDHbYE8AzRfNHcu.jpg")
+    // nominees: M("Do the Right Thing", 925, "/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg"), M("Cinema Paradiso", 11216, "/gCI2AeMV4IHSewhJkzsur5MEp6R.jpg"), M("Mystery Train", 11305, "/f11xq7dBGhz9UDc3dabldAGeXVH.jpg"), M("Sweetie", 65015, "/25lpQtxNWXzOimnXmbwF0Y0GYej.jpg"), M("Time of the Gypsies", 20123, "/av6K9MX0jNNFAH6NZVrVV2DMAOA.jpg")
+    // Cannes["Palme d'Or"][1988]
+    // winner: M("Pelle the Conqueror", 11174, "/oSsu4khg459yTR1sw4qjEC4LO5J.jpg")
+    // nominees: M("Bird", 24679, "/rTCp6M98RQAxRl0x0guU9GlH7HS.jpg"), M("A World Apart", 41949, "/rLo4PwbuT3C7k2VxAGbMQU1aINp.jpg"), M("Drowning by Numbers", 27362, "/bOqbSwGyfLo0PeaTKIwHi7EqCSe.jpg"), M("Short Film About Killing", 10754, "/k7sk4yNdoXY7iwp1M9QTZuBDiJS.jpg")
+    // Cannes["Palme d'Or"][1987]
+    // winner: M("Under the Sun of Satan", 31300, "/aBnO3FLBY00Do29B4i7F54I492D.jpg")
+    // nominees: M("Wings of Desire", 144, "/iZQs2vUeCzvS1KfZJ6uYNCGJBBV.jpg"), M("The Glass Menagerie", 52780, "/zF02disLmOSyb3BSS4c50MC7xNo.jpg"), M("Barfly", 10937, "/uAsAVy7yoMZ2r5ZBQQXw4PKX3JY.jpg"), M("Shinran: Path to Purity", 198454, "/bWxK8mEtNfPfP1BcZTnEzpOEO9F.jpg")
+    // Cannes["Palme d'Or"][1986]
+    // winner: M("The Mission", 11416, "/6K9cG6LOOtySZF4D4xBu1MApC1N.jpg")
+    // nominees: M("The Sacrifice", 355652, "/dMfMmT4uZoZSYyi0vzgGnuIXZp8.jpg"), M("Down by Law", 1554, "/4IyxoUQ7BB5kcSd7gASe2dTyWu7.jpg"), M("After Hours", 10843, "/eamOBurHBu0MIxohTIVcfxmZ6Z7.jpg"), M("Mona Lisa", 10002, "/geBGfbhkgKHld8rM9XuLfzPGZ6I.jpg"), M("Runaway Train", 11893, "/A9pf9KjhqCGthu6PKAKE5E1qRNn.jpg")
+    // Cannes["Palme d'Or"][1985]
+    // winner: M("When Father Was Away on Business", 21042, "/jhTu6UwP32jPwiBccGAkZq0yqvV.jpg")
+    // nominees: M("Birdy", 11296, "/weIn0Huxx4SQU8PB5ZggzA4PLIE.jpg"), M("Pale Rider", 8879, "/kpAN5WnDEVWYzMDPkXHTbrDQuak.jpg"), M("Kiss of the Spider Woman", 11703, "/lbrn4gOjYKrLrINn3uUJRlV2NZO.jpg"), M("Mask", 11177, "/dBYzEETDHNyt12VCD5owVW6bpEC.jpg"), M("The Purple Rose of Cairo", 10849, "/ccsint43E44B7NGceEhVimD93Yt.jpg")
+    // Cannes["Palme d'Or"][1984]
+    // winner: M("Paris Texas", 655, "/sP27Qm4THyRZyHjHYMfIDtJP6YE.jpg")
+    // nominees: M("Under the Volcano", 41089, "/414VrLFf8gffMUNTGm0zlg2UuHh.jpg"), M("Voyage to Cythera", 47792, "/nAcvV1WnZ7xk5gvvSOt2eyhGdjz.jpg")
+
+
+
+// === COPY-PASTE CODE BLOCKS ===
+
+    // BAFTA > Best Film
+      1959: { winner: M("Ben-Hur", 665, "/m4WQ1dBIrEIHZNCoAjdpxwSKWyH.jpg"), nominees: [M("Anatomy of a Murder", 93, "/b2G1QSAwtBv9luhEwErIgSRaU92.jpg"), M("The Face", 29453, "/46DEYkr96MxzUmdwgmj2U7gWokZ.jpg"), M("The Nun's Story", 27029, "/4vNWFhPyjTehPpZsvTnTywwXSiF.jpg"), M("Sapphire", 64291, "/hwfJUilhZ6iSuosizjpLYNaFfgV.jpg"), M("Some Like It Hot", 239, "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg")] },
+      1958: { winner: M("Room at the Top", 43103, "/uuyruoqh7oBtjwN1mJyOF04CPjO.jpg"), nominees: [M("Cat on a Hot Tin Roof", 261, "/5djZZECgqDGuSI1INmrdAcGRBb0.jpg"), M("The Defiant Ones", 11414, "/tGGNyImEXgedDjrCORbC9cTJp0X.jpg"), M("Ice Cold in Alex", 16284, "/lkqTxSL9JwyyXDu5yeOoj5mzsVc.jpg"), M("Indiscreet", 22874, "/sv4ao2ceHx2Ii1I2SsAmCqr7k6K.jpg")] },
+      1957: { winner: M("The Bridge on the River Kwai", 826, "/7paXMt2e3Tr5dLmEZOGgFEn2Vo7.jpg"), nominees: [M("12 Angry Men", 389, "/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg"), M("3:10 to Yuma", 14168, "/emYeJVZrpl2WfndJlhbls1e7lzQ.jpg"), M("The Bachelor Party", 185263, "/to8xodOCvR57xDOS8rojBTwqGa5.jpg"), M("Paths of Glory", 975, "/p7OHwomA8UOhe3EhckF2IetBTh9.jpg")] },
+      1956: { winner: M("Gervaise", 52726, "/njux1vvBuiwR4UJ6FCpYoar9buO.jpg"), nominees: [M("Baby Doll", 40478, "/1Wj0H6HA7xCy8kWYWOTytqwOqWk.jpg"), M("The Battle of the River Plate", 17591, "/pCkNI9LVDkH5z6PzwQUbutQcm3U.jpg"), M("The Killing", 247, "/A6VzUPcADZGYdGHlVdWvpMNDF5d.jpg"), M("The Man Who Never Was", 43791, "/ajb6naQi07fPhyJQ9DxkrGNU4Sw.jpg")] },
+      1955: { winner: M("Richard III", 43323, "/3zp2Kg5bvlFkKmWiQLmuWQAIEgG.jpg"), nominees: [M("Bad Day at Black Rock", 14554, "/8EnhHjU0DyCckmZRtn46s3WXeEf.jpg"), M("Carmen Jones", 51044, "/5Vo4NeE7dlXBUaikbGnUOmUNHJ3.jpg"), M("The Dam Busters", 13210, "/cU2HgieUMHvCzN0PC66vk75mB61.jpg"), M("East of Eden", 220, "/xv1MZVIop0SQqwLUymgE5eb2LFl.jpg"), M("The Ladykillers", 5506, "/9LJ6ZV59Q92LAJAbmb7xm9dUBGU.jpg"), M("Seven Samurai", 346, "/lOMGc8bnSwQhS4XyE1S99uH8NXf.jpg")] },
+      1954: { winner: M("The Wages of Fear", 204, "/dZyZSosIlWcpQkV0f7pXcrV2TQV.jpg"), nominees: [M("The Caine Mutiny", 10178, "/vuO4Z3wOWVlhq35MS9asZeT9rVp.jpg"), M("Hobson's Choice", 16410, "/kbP7EgoiOw2bIypai50JWRsqP7p.jpg"), M("How to Marry a Millionaire", 10297, "/dFwefYyEOOZaWVn15xGY6CbYYJ2.jpg"), M("Rear Window", 567, "/ILVF0eJxHMddjxeQhswFtpMtqx.jpg"), M("Seven Brides for Seven Brothers", 16563, "/8Z4W2oRQKkmt7lhqNPROcNru9yJ.jpg")] },
+      1953: { winner: M("Forbidden Games", 5000, "/nby91GNVXQAv1NmKvqlpEEdhcMQ.jpg"), nominees: [M("The Bad and the Beautiful", 32499, "/ajAXzTiPkL7JxeCRw5lQBqrKNGx.jpg"), M("Come Back Little Sheba", 84214, "/3hg3c6TVFVGuoqmHi0Yw25qvpRu.jpg"), M("The Cruel Sea", 16914, "/kmMGoeLx7rntdbqKZFp6bmT8ZCW.jpg"), M("From Here to Eternity", 11426, "/xO1LHnh9aQlQFFq1DxyQrOTia1S.jpg"), M("Genevieve", 43346, "/fO5PtTc7GGgxDfD6ndM009gGWhE.jpg"), M("Julius Caesar", 18019, "/2nzpmJ9MIdd5TKXJd53KgKdZ6eT.jpg"), M("Roman Holiday", 804, "/8lI9dmz1RH20FAqltkGelY1v4BE.jpg"), M("Shane", 3110, "/svr5ADpjXTCOQv8hmuJnB7I14Qv.jpg")] },
+      1952: { winner: M("The Sound Barrier", 51619, "/cExgxdISr0gEvVr74mmpEL4yLh4.jpg"), nominees: [M("The African Queen", 488, "/2Ypg0KhQfFYWILelvHGtSHHR0dk.jpg"), M("Angels One Five", 41312, "/r1bBcmopZPDieHtBhuQcUkZ0TpJ.jpg"), M("The Boy Kumasenu", 269325, "/42flAoBpyh6fdsIRDvoQYdFkpYs.jpg"), M("Carrie", 43358, "/hif1GraUbvlocgqtrwYMaybsGcJ.jpg"), M("Casque d'Or", 68822, "/c7VHPq0FxlvDiwMCvb8VOxeg8ub.jpg"), M("Cry the Beloved Country", 173893, "/8inNsImz4yRfjGUkBzO6urIBM5A.jpg"), M("Death of a Salesman", 104394, "/xnyRkG1LMQX0NUpROq61GiKW7eJ.jpg"), M("Limelight", 28971, "/tDD11x3ZWCXXXwdpbGEU9uU4kh1.jpg"), M("Mandy", 47026, "/8bwWXoxCjCUDJN6hKPCtUWUzPux.jpg"), M("Miracle in Milan", 43379, "/zMEYCBO2OBHR09aW9IwjOR3R3A5.jpg"), M("Los Olvidados", 800, "/cDCvmYoyqFg4CuSMtGMvCpfOIEw.jpg"), M("Pat and Mike", 33575, "/6hSJWY1ygsOVAtPEz9Nb5q5FeyA.jpg"), M("The Quiet Man", 3109, "/u3B1hVKHE56yBRoxF3Nk9uxHdYN.jpg"), M("Rashomon", 548, "/vL7Xw04nFMHwnvXRFCmYYAzMUvY.jpg"), M("The River", 45218, "/rC1k4xkffb5sdQlktiP2TyiBxT2.jpg"), M("Singin' in the Rain", 872, "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg"), M("A Streetcar Named Desire", 702, "/aicdlO5vt7z2ARm279eGzJeYCLQ.jpg"), M("Viva Zapata!", 1810, "/vfarxn9ddiaZpRDml8FGhB46Qrc.jpg")] },
+      1951: { winner: M("La Ronde", 50030, "/jMcF0XAD66n1abW1ZZhtrD0AsKN.jpg"), nominees: [M("An American in Paris", 2769, "/lyDXkvG53ldz6Cf7dbjJl7TaoP5.jpg"), M("The Browning Version", 39946, "/fRlXkYgQc6QfwYMAlv2neKhRswl.jpg"), M("Detective Story", 20853, "/hMbAiGIrfhhp0XNB4mdgfgtSDdK.jpg"), M("Fourteen Hours", 54139, "/kS1Rhn5YfNDS2gT0UNRCPPYVV8J.jpg"), M("The Lavender Hill Mob", 32961, "/u4mZyim3CwXHu0zVhXjfK8fqoN7.jpg"), M("The Magic Box", 80596, "/kRtukdvDz3tkyhSC8GzGOkQhAb0.jpg"), M("The Man in the White Suit", 32568, "/laTLoNZB7Ar3ZDoQmspBDVa5mbC.jpg"), M("A Walk in the Sun", 43488, "/uHZX36Ls2rtfMZqX1mmhmbV92R8.jpg")] },
+      1950: { winner: M("All About Eve", 705, "/blBzZaatPWVuWpXEnPscMA4Xp6m.jpg"), nominees: [M("The Asphalt Jungle", 16958, "/8xsUnT0P2fJWQv9jGDhs3i9Zx2l.jpg"), M("Beauty and the Beast", 648, "/iYSe3yrkma0e1B0wWPXgr8w5sDN.jpg"), M("The Men", 1882, "/88hG50Z7EMxKdsKOBc5o2yOpPB5.jpg"), M("On the Town", 31516, "/lEU8QQmIayAtPZrCDf2czQgTjQ1.jpg"), M("Orpheus", 4558, "/wcUmMtipWBBx7lpsfpPsUM4Snh1.jpg"), M("Sunset Boulevard", 599, "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg")] },
+
+    // GoldenGlobe > Best Drama
+      1969: { winner: M("Anne of the Thousand Days", 22522, "/u2p5SspAs1GqeuHXNXywryU3k37.jpg"), nominees: [M("Butch Cassidy and the Sundance Kid", 642, "/gFmmykF1Ym3OGzENo50nZQaD1dx.jpg"), M("Midnight Cowboy", 3116, "/ckklq45UxUkwgHve9xItXqXr06r.jpg"), M("The Prime of Miss Jean Brodie", 5179, "/lEZdKL17yneFK4dbbWPKcbkRbqM.jpg"), M("They Shoot Horses Don't They?", 28145, "/7wVLBgriOQpT5RrufAFCdCSUp7M.jpg")] },
+      1968: { winner: M("The Lion in Winter", 18988, "/yMgJnZADJObzfjA70ygXJkjnrFX.jpg"), nominees: [M("Charly", 29146, "/uxGt80D4hxEEwGwdOJ5tdVvjXEC.jpg"), M("The Fixer", 87267, "/pLcke8F7THAxtEHtN8Tg6IaZ9if.jpg"), M("The Heart Is a Lonely Hunter", 22176, "/vOznrQ5x8IAnsY0P3T7Jz9EEGP7.jpg"), M("The Shoes of the Fisherman", 17665, "/m9HqMSaDz7Peo0ufCaBUP8gG5gf.jpg")] },
+      1967: { winner: M("In the Heat of the Night", 10633, "/qFpfALhprXmOAbA5upTNupZw8rq.jpg"), nominees: [M("Bonnie and Clyde", 475, "/sCSQFK9kMsprT4jgWqgw82dT6WI.jpg"), M("Far from the Madding Crowd", 3469, "/2cCHnpaf5JTRlgO07uulEdUpFkb.jpg"), M("Guess Who's Coming to Dinner", 1879, "/fkHeYWahNbhxhuLefaAg553lYo5.jpg"), M("In Cold Blood", 18900, "/f4zGKntOVVJUk9X0wCcw1DJPdQe.jpg")] },
+      1966: { winner: M("A Man for All Seasons", 874, "/kcwcqMitcnRO1SySlX1HKVn7yUV.jpg"), nominees: [M("Born Free", 15347, "/xI5BkObQm7UtYEFTw7ZmiDGF7gT.jpg"), M("The Professionals", 22383, "/sH4Clw7QrtH23xl9o4sOpHNkRIz.jpg"), M("The Sand Pebbles", 5923, "/muZyCXWoayEtwVkxc0ql48X1h6L.jpg"), M("Who's Afraid of Virginia Woolf?", 396, "/wF7ihB5V5gSm6zxjv3ZhHOpgREI.jpg")] },
+      1965: { winner: M("Doctor Zhivago", 907, "/r0Iv2BiCFYDnzc6uU1q3AJ56igT.jpg"), nominees: [M("The Collector", 42740, "/iMiih5FGHwpUCAaJAIkYKl5Hffi.jpg"), M("The Flight of the Phoenix", 10243, "/zrzLl7NWdjwGhVE7bqpOAxMVtF.jpg"), M("A Patch of Blue", 33364, "/9eFULnzgoLpO7lvg6FMutGRuNFg.jpg"), M("Ship of Fools", 30080, "/2LOe4Hu6Gxw6k76hLWhS8JVVILa.jpg")] },
+      1964: { winner: M("Becket", 15421, "/swWmxVbq0pXv4wwsc2O803PiXR7.jpg"), nominees: [M("The Chalk Garden", 66022, "/IXGqj9MoPFbaoBcUkUZf97XHlx.jpg"), M("Dear Heart", 101226, "/8rRzxfPsztNhgac81KJk3tphCME.jpg"), M("The Night of the Iguana", 14703, "/3HY8MSeoj4s0uSWGW135Jlh7eSI.jpg"), M("Zorba the Greek", 10604, "/jAYOY38TRDprIgu7vgES0FFJJSl.jpg")] },
+      1963: { winner: M("The Cardinal", 3010, "/y23FoRE97IH9bHFo2OBP5IkKnLq.jpg"), nominees: [M("America America", 47249, "/76RffKrNPrfA4TWYkx5wIIOzOlV.jpg"), M("Captain Newman M.D.", 33728, "/ovXBWbk3YjOZB5cmiTvdNaDYGKu.jpg"), M("The Caretakers", 85640, "/4sSpMxxCLtAyJiOC4zJtKIsySIw.jpg"), M("Cleopatra", 8095, "/bj7rUGUewofA9cpHt1h36gvDFfy.jpg"), M("Lilies of the Field", 38805, "/gYoVx2m8NP2hTWnEpwNeROIWrQ4.jpg"), M("Hud", 24748, "/A168bF52vmAIGkC2Qafj7M2EmaE.jpg")] },
+      1962: { winner: M("Lawrence of Arabia", 947, "/AiAm0EtDvyGqNpVoieRw4u65vD1.jpg"), nominees: [M("The Chapman Report", 118955, "/xHlkaDldivwkL9H8qOmb2zyXqNo.jpg"), M("Days of Wine and Roses", 32488, "/cRVl1BR3x3P2NqUv61eveJNJ0ip.jpg"), M("Freud", 35806, "/2cguhv8jwEaiwF8pB5xo3RzfXlO.jpg"), M("Hemingway's Adventures of a Young Man", 111683, "/8IqWKVSHCmBWICtyrluWPN0TfrN.jpg"), M("Lisa", 109667, "/jujTT52xmggRVwdWvSD2DPqUI1O.jpg"), M("The Longest Day", 9289, "/5zmvEofdIlgXrQl9A7e5IOzlnFU.jpg"), M("The Miracle Worker", 1162, "/3dI6UVM5W1sz3MU9gNK5nVDcAyQ.jpg"), M("Mutiny on the Bounty", 11085, "/caxk06SANEacvycZFiApv1LA6Kl.jpg"), M("To Kill a Mockingbird", 595, "/gZycFUMLx2110dzK3nBNai7gfpM.jpg")] },
+      1961: { winner: M("The Guns of Navarone", 10911, "/j6VSFnm20GlkUi8yb7hM5Qfc1fA.jpg"), nominees: [M("El Cid", 16638, "/a6DY3LDlXFUDuXm47zXTOfiisxP.jpg"), M("Fanny", 84050, "/8hEQpSE3D9rsMw37N30T9EZwLoa.jpg"), M("Judgment at Nuremberg", 821, "/b6vYatvui1EXeFYfpDX4rcbueuP.jpg"), M("Splendor in the Grass", 28569, "/n6Kw8Ui93SMhrk1MupCFwUg04vq.jpg")] },
+      1960: { winner: M("Spartacus", 967, "/r0Fgg1GyZgzokaiw2HFQv3oPaL2.jpg"), nominees: [M("Elmer Gantry", 22013, "/5vd031r08rrfSMqtB9UarwqCUOz.jpg"), M("Inherit the Wind", 1908, "/7oaHcF0gCOt2lKaT2zajhajP0Zo.jpg"), M("Sons and Lovers", 53939, "/7BDlr8XivWmNcDsb5ygnhs8CWiR.jpg"), M("Sunrise at Campobello", 72354, "/y9cJA6rz0cEcPmehvc1Rr1GvvCO.jpg")] },
+      1959: { winner: M("Ben-Hur", 665, "/m4WQ1dBIrEIHZNCoAjdpxwSKWyH.jpg"), nominees: [M("Anatomy of a Murder", 93, "/b2G1QSAwtBv9luhEwErIgSRaU92.jpg"), M("The Diary of Anne Frank", 2576, "/i7kUdUAF9eTxQG7GdR6lKUK96En.jpg"), M("The Nun's Story", 27029, "/4vNWFhPyjTehPpZsvTnTywwXSiF.jpg"), M("On the Beach", 35412, "/lTDuj5zalrI0fpQel7UfPHTexTK.jpg")] },
+      1958: { winner: M("The Defiant Ones", 11414, "/tGGNyImEXgedDjrCORbC9cTJp0X.jpg"), nominees: [M("Cat on a Hot Tin Roof", 261, "/5djZZECgqDGuSI1INmrdAcGRBb0.jpg"), M("Home Before Dark", 121250, "/ArL6JE6E2YltKRWKmBpuqb6Rt3b.jpg"), M("I Want to Live!", 28577, "/cQoSMLJFPV3d8Mi8iPwwtNto370.jpg"), M("Separate Tables", 43136, "/y8exawP0Je3MXVIS3olpJ2fu07.jpg")] },
+      1957: { winner: M("The Bridge on the River Kwai", 826, "/7paXMt2e3Tr5dLmEZOGgFEn2Vo7.jpg"), nominees: [M("12 Angry Men", 389, "/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg"), M("Peyton Place", 43236, "/pSANpoBLMbejWTtiKz630eSaDpi.jpg"), M("Sayonara", 40885, "/xSXJDamf9vSb1qOiBhOMjB2soDE.jpg"), M("Wild Is the Wind", 93528, "/7vnKOkyrvJ77uLlGk5hzXyqyAfQ.jpg")] },
+      1956: { winner: M("Around the World in 80 Days", 2897, "/kk6Rrwh0toMz9tjuUHdS4O3v2Rk.jpg"), nominees: [M("Giant", 1712, "/wXGmfJkU83daBsqp9R8LeWguIZd.jpg"), M("Lust for Life", 29592, "/rlK3LG3W41eF3N1tk0SEM7Dln2x.jpg"), M("The Rainmaker", 43542, "/3E2dmfh3e2LOKq0psiNXAGwtZGl.jpg"), M("War and Peace", 11706, "/f3a1MyH12PSl3LFDahnooGy6mv8.jpg")] },
+      1955: { winner: M("East of Eden", 220, "/xv1MZVIop0SQqwLUymgE5eb2LFl.jpg") },
+      1954: { winner: M("On the Waterfront", 654, "/v1RtJ1qR4v9nrnfoBVBl6hjTW9.jpg") },
+      1953: { winner: M("The Robe", 29912, "/qFYZNGzftIM8dqGMJBToGraAFJp.jpg") },
+      1952: { winner: M("The Greatest Show on Earth", 27191, "/cKI0yGPRh1IlvRKKJRoMZruior8.jpg") },
+      1951: { winner: M("A Place in the Sun", 25673, "/3tKYbChwIRYCwFrMUDBkbZyDIoN.jpg") },
+      1950: { winner: M("Sunset Boulevard", 599, "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg") },
+
+    // GoldenGlobe > Best Comedy/Musical
+      1969: { winner: M("The Secret of Santa Vittoria", 30298, "/uX4xHo8GptvEbkch6i7OpWiM1L0.jpg"), nominees: [M("Cactus Flower", 28289, "/oabi6jdkxP3KHMNywKn6nQeDzQZ.jpg"), M("Goodbye Columbus", 42604, "/yEfA6HiXipVZdHvxiagV6MxuDNS.jpg"), M("Hello Dolly!", 14030, "/aPZOt9BR3gnk1RyX924ySq81S4P.jpg"), M("Paint Your Wagon", 20391, "/fwnYGuba3ZSM2bXwBZZs4DqqKTl.jpg")] },
+      1968: { winner: M("Oliver!", 17917, "/1XJgoaOWKrqxkKeBKWLKSigqG8c.jpg"), nominees: [M("Finian's Rainbow", 42622, "/7vPJBLw9GL0FlJXXTgZqWnwMzK9.jpg"), M("Funny Girl", 16085, "/fg7tnjd4dBeIDvEO80CGq958CCt.jpg"), M("The Odd Couple", 11356, "/d3dKPpzEi7WfgmoMnMwWyQnd2ja.jpg"), M("Yours Mine and Ours", 27983, "/sL6uuFSapJNAGYcA4SrUHO5X4gs.jpg")] },
+      1967: { winner: M("The Graduate", 37247, "/z1Z1tZMR66RxcNeHbwoEhYeqOlP.jpg"), nominees: [M("Camelot", 18978, "/1ohPMbfmQVg0Zzy9wkySm1w8Kr7.jpg"), M("Doctor Dolittle", 16081, "/rViuZo27U8wcZHGuRliv9LfmhjV.jpg"), M("The Taming of the Shrew", 25560, "/2LpU3kyg1PowiQoEHf7oUXOUmVa.jpg"), M("Thoroughly Modern Millie", 32489, "/ce8rBGFR0naGsp6mKy9CNKn9iSa.jpg")] },
+      1966: { winner: M("The Russians Are Coming the Russians Are Coming", 31918, "/sgo7cQg6Zo0xuCgb8ckou0RX4Bj.jpg"), nominees: [M("Alfie", 15598, "/tPUqgfGMkZazRZ1UO41j2Fiib5C.jpg"), M("Georgy Girl", 42719, "/2v6ezHOqJM2HpSHiGWqLj0Mqs78.jpg"), M("Gambit", 28270, "/1MchaxoMtROoioSAwjLd5FEp6D.jpg"), M("A Funny Thing Happened on the Way to the Forum", 17768, "/h3S9DZMUZNsAqd8ZNBed7ttPWXk.jpg")] },
+      1965: { winner: M("The Sound of Music", 15121, "/c6CrUZypAsBCaRWX0M3RVRDbhNS.jpg"), nominees: [M("Cat Ballou", 11694, "/3WJmB1F5z4mLwt84i1FuIrSYEe.jpg"), M("The Great Race", 11575, "/9rL8GWuFdO3fLXcNV9rZRHskoOn.jpg"), M("Those Magnificent Men in Their Flying Machines", 10338, "/wcGELNaQ8TbiMUpAnkKLl5g09OO.jpg"), M("A Thousand Clowns", 42731, "/tXPsmtVy3T5Whz20LwiscprCdCT.jpg")] },
+      1964: { winner: M("My Fair Lady", 11113, "/bTXVc29lGSNclf94VIZ49W4gGKl.jpg"), nominees: [M("Father Goose", 30295, "/Tp4vSQef0qsI78M90SsZZLJzPE.jpg"), M("Mary Poppins", 433, "/pHyWpWn2pRIfhS3Arcn4SKtKKW4.jpg"), M("The Unsinkable Molly Brown", 42797, "/itmZdJShq5cbzeOqGsDKZiwGNci.jpg"), M("The World of Henry Orient", 19662, "/tMIRjDgsEj15RXEhMrgSqROUP7u.jpg")] },
+      1963: { winner: M("Tom Jones", 5769, "/yKuZKLMhe74PJzaxYLh2s8h4P2P.jpg"), nominees: [M("Bye Bye Birdie", 25167, "/u3m2kU5aFj6V6cNYOd9a22Iia7O.jpg"), M("Irma la Douce", 2690, "/5TgL8ql6WwXWmX4EvBL4geJ7gx5.jpg"), M("It's a Mad Mad Mad Mad World", 11576, "/j4mWzOisSHFkaqIkq34l2mm8a5K.jpg"), M("A Ticklish Affair", 107231, "/tRjPKWfJCkCXf8oLNhmKA8D2U8q.jpg"), M("Under the Yum Yum Tree", 43750, "/20oQRYfHaSfGGCOKBEh1M1CpgCc.jpg")] },
+      1962: { winner: M("The Music Man", 13671, "/4yo6qaqVF1IThXMapo4yW9BRWjV.jpg"), nominees: [M("Billy Rose's Jumbo", 42991, "/kmvuW4U5zjawlCNDqbJW5fMSOtl.jpg"), M("Boys' Night Out", 35057, "/4mcM4SB7OtGeGAXNAMEhNFve2pG.jpg"), M("Gypsy", 39391, "/qmeyhwe7pHJ30n6uLq8swyW1Juz.jpg"), M("That Touch of Mink", 12708, "/eEG29x9cljGKL2GPmRK9IByyL9e.jpg"), M("The Wonderful World of the Brothers Grimm", 28367, "/zElwCWdMG7A6xThgesRxNrgD2MP.jpg")] },
+      1961: { winner: M("A Majority of One", 158800, "/xHrC85LCp80Bug08VqSjwUC5jLB.jpg"), nominees: [M("Breakfast at Tiffany's", 164, "/79xm4gXw4l7A5D0XukUOJRocFYQ.jpg"), M("One Two Three", 430, "/yWQE227ub1frfnjP5HZy0wLF0wu.jpg"), M("The Parent Trap", 19186, "/jaZFWy6ZAvQoMW2mo9xP5gx4URo.jpg"), M("Pocketful of Miracles", 248, "/xjXwcGJjT5tE22wazQUYH32HwU8.jpg")] },
+      1960: { winner: M("The Apartment", 284, "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg"), nominees: [M("The Facts of Life", 39219, "/jgduHeBEmpCdzHKo9wteKj8WO8l.jpg"), M("The Grass Is Greener", 25767, "/3peOV81MRImLDX8bnGUHOJSB0lN.jpg"), M("It Started in Naples", 38151, "/cqgViygbWqqGJs1AOPKRcKEj4rg.jpg"), M("Our Man in Havana", 25495, "/6R6zIKywC8rNo6fT1YBDeEAUmEb.jpg")] },
+      1959: { winner: M("Some Like It Hot", 239, "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg"), nominees: [M("But Not for Me", 121234, "/onoMReVeUaBnZF1DUCVmidTlxRn.jpg"), M("Operation Petticoat", 9660, "/pIsm8JvpFZidVxKexv5UgoCjwpZ.jpg"), M("Pillow Talk", 4952, "/ugvyj5nl9QmTYuaGUTefVYBDePE.jpg"), M("Who Was That Lady?", 105406, "/aRf7LnZD6zOTHbM4gpVXDmWibpU.jpg")] },
+      1958: { winner: M("Auntie Mame", 16347, "/uH810rwkYEbUaV6IlwTaAExbXUm.jpg"), nominees: [M("Bell Book and Candle", 2006, "/z3MLtVFPT2wIkKCBSE2yBgDmeXI.jpg"), M("Indiscreet", 22874, "/sv4ao2ceHx2Ii1I2SsAmCqr7k6K.jpg"), M("Me and the Colonel", 114060, "/i9Dz3TbEhc9v4w08IapLtIFjdeu.jpg"), M("The Perfect Furlough", 225943, "/yrbtmgxifaVcM8C63UhaiubpzJ6.jpg")] },
+      1957: { winner: M("Les Girls", 43232, "/78ot7b75r5yWKt0rW9XjXqH7GY1.jpg"), nominees: [M("Don't Go Near the Water", 109441, "/zxs6jZIyWWOsANrwol8YhxxKeCR.jpg"), M("Love in the Afternoon", 18299, "/jCHVviBhRQ7OkJFQfziO2N2ZJmh.jpg"), M("Pal Joey", 33734, "/5vWaDXDBxEv9ahwF8aSigbC0ADy.jpg"), M("Silk Stockings", 43239, "/kuV34rCOrcDt6Ii3149AlJs9bpM.jpg")] },
+      1956: { winner: M("The King and I", 16520, "/wUfaP0lLaMpZzp5CrHyII5Vd7cp.jpg"), nominees: [M("Bus Stop", 24010, "/oXZiz5zIyynjQMJMBbXijS4434z.jpg"), M("The Opposite Sex", 43311, "/piXpVWU67Y9XXJKSHAlP95vd3EG.jpg"), M("The Solid Gold Cadillac", 78331, "/ennpt6fPoCQSzULMr6oK1CXtIx2.jpg"), M("The Teahouse of the August Moon", 43313, "/v2G1Vh14X9NslrHR9zGlGoV1i4M.jpg")] },
+      1955: { winner: M("Guys and Dolls", 4825, "/mrSM6laJJLBVdMdWfeNRa1innnk.jpg") },
+      1954: { winner: M("Carmen Jones", 51044, "/5Vo4NeE7dlXBUaikbGnUOmUNHJ3.jpg") },
+      1952: { winner: M("With a Song in My Heart", 65787, "/KePfsUc63Z9J0xEKxwydlzNOkP.jpg") },
+      1951: { winner: M("An American in Paris", 2769, "/lyDXkvG53ldz6Cf7dbjJl7TaoP5.jpg") },
+
+    // Cannes > Palme d'Or
+      1989: { winner: M("sex lies and videotape", 1412, "/pj1uKm07svgXZDHbYE8AzRfNHcu.jpg"), nominees: [M("Do the Right Thing", 925, "/63rmSDPahrH7C1gEFYzRuIBAN9W.jpg"), M("Cinema Paradiso", 11216, "/gCI2AeMV4IHSewhJkzsur5MEp6R.jpg"), M("Mystery Train", 11305, "/f11xq7dBGhz9UDc3dabldAGeXVH.jpg"), M("Sweetie", 65015, "/25lpQtxNWXzOimnXmbwF0Y0GYej.jpg"), M("Time of the Gypsies", 20123, "/av6K9MX0jNNFAH6NZVrVV2DMAOA.jpg")] },
+      1988: { winner: M("Pelle the Conqueror", 11174, "/oSsu4khg459yTR1sw4qjEC4LO5J.jpg"), nominees: [M("Bird", 24679, "/rTCp6M98RQAxRl0x0guU9GlH7HS.jpg"), M("A World Apart", 41949, "/rLo4PwbuT3C7k2VxAGbMQU1aINp.jpg"), M("Drowning by Numbers", 27362, "/bOqbSwGyfLo0PeaTKIwHi7EqCSe.jpg"), M("Short Film About Killing", 10754, "/k7sk4yNdoXY7iwp1M9QTZuBDiJS.jpg")] },
+      1987: { winner: M("Under the Sun of Satan", 31300, "/aBnO3FLBY00Do29B4i7F54I492D.jpg"), nominees: [M("Wings of Desire", 144, "/iZQs2vUeCzvS1KfZJ6uYNCGJBBV.jpg"), M("The Glass Menagerie", 52780, "/zF02disLmOSyb3BSS4c50MC7xNo.jpg"), M("Barfly", 10937, "/uAsAVy7yoMZ2r5ZBQQXw4PKX3JY.jpg"), M("Shinran: Path to Purity", 198454, "/bWxK8mEtNfPfP1BcZTnEzpOEO9F.jpg")] },
+      1986: { winner: M("The Mission", 11416, "/6K9cG6LOOtySZF4D4xBu1MApC1N.jpg"), nominees: [M("The Sacrifice", 355652, "/dMfMmT4uZoZSYyi0vzgGnuIXZp8.jpg"), M("Down by Law", 1554, "/4IyxoUQ7BB5kcSd7gASe2dTyWu7.jpg"), M("After Hours", 10843, "/eamOBurHBu0MIxohTIVcfxmZ6Z7.jpg"), M("Mona Lisa", 10002, "/geBGfbhkgKHld8rM9XuLfzPGZ6I.jpg"), M("Runaway Train", 11893, "/A9pf9KjhqCGthu6PKAKE5E1qRNn.jpg")] },
+      1985: { winner: M("When Father Was Away on Business", 21042, "/jhTu6UwP32jPwiBccGAkZq0yqvV.jpg"), nominees: [M("Birdy", 11296, "/weIn0Huxx4SQU8PB5ZggzA4PLIE.jpg"), M("Pale Rider", 8879, "/kpAN5WnDEVWYzMDPkXHTbrDQuak.jpg"), M("Kiss of the Spider Woman", 11703, "/lbrn4gOjYKrLrINn3uUJRlV2NZO.jpg"), M("Mask", 11177, "/dBYzEETDHNyt12VCD5owVW6bpEC.jpg"), M("The Purple Rose of Cairo", 10849, "/ccsint43E44B7NGceEhVimD93Yt.jpg")] },
+      1984: { winner: M("Paris Texas", 655, "/sP27Qm4THyRZyHjHYMfIDtJP6YE.jpg"), nominees: [M("Under the Volcano", 41089, "/414VrLFf8gffMUNTGm0zlg2UuHh.jpg"), M("Voyage to Cythera", 47792, "/nAcvV1WnZ7xk5gvvSOt2eyhGdjz.jpg")] },
+

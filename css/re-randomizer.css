@@ -1,0 +1,966 @@
+@import url('variables.css');
+/* ============================================
+   RE-RANDOMIZER - Warm Comfort Theme
+============================================ */
+
+:root {
+  /* Comfort Theme */
+  --comfort-primary: #ffb347;
+  --comfort-primary-rgb: 255, 179, 71;
+  --comfort-secondary: #ff9f1c;
+  --comfort-glow: rgba(255, 179, 71, 0.25);
+  --comfort-bg-tint: rgba(255, 179, 71, 0.04);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100vh;
+  background: var(--space-black);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+[hidden] { display: none !important; }
+
+/* ============================================
+   CINEMATIC BACKGROUND
+============================================ */
+
+.game-backdrop {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 20% 30%, rgba(50, 30, 10, 0.3) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(40, 25, 5, 0.4) 0%, transparent 50%),
+              radial-gradient(circle at center, #1a1008 0%, var(--deep-void) 40%, var(--space-black) 100%);
+  z-index: -3;
+}
+
+.backdrop-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(10,14,23,0.85) 40%, rgba(10,14,23,0.95) 100%);
+  z-index: -2;
+}
+
+.film-grain {
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.03; pointer-events: none; z-index: 1000;
+  mix-blend-mode: overlay;
+}
+
+.vignette {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none; z-index: -1;
+}
+
+.lens-flare {
+  position: fixed; width: 2px; height: 400px;
+  background: linear-gradient(180deg, transparent, var(--comfort-primary), transparent);
+  opacity: 0.06; filter: blur(1px); pointer-events: none; z-index: -1;
+  animation: flare-drift 15s ease-in-out infinite;
+}
+.lens-flare-1 { top: 5%; left: 10%; transform: rotate(-25deg); }
+.lens-flare-2 { top: 50%; right: 15%; transform: rotate(30deg); animation-delay: 5s;
+  background: linear-gradient(180deg, transparent, var(--accent-gold), transparent); }
+
+@keyframes flare-drift {
+  0%, 100% { opacity: 0.04; transform: translateY(0) rotate(-25deg); }
+  50% { opacity: 0.08; transform: translateY(-40px) rotate(-20deg); }
+}
+
+/* ============================================
+   HEADER - Comfort Theme
+============================================ */
+
+.game-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 30px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(30px) saturate(150%);
+  border-bottom: 1px solid rgba(255, 179, 71, 0.1);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.orbit-logo { display: flex; align-items: center; gap: 15px; }
+
+.orbit-logo-mark {
+  width: 44px; height: 44px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.comfort-theme .orbit-ring {
+  position: absolute; width: 100%; height: 100%; border-radius: 50%;
+  border: 2px solid var(--comfort-primary);
+  box-shadow: 0 0 20px var(--comfort-glow);
+  animation: orbit-rotate 20s linear infinite;
+}
+
+.comfort-theme .orbit-ring-2 {
+  width: 65%; height: 65%;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+  animation: orbit-rotate 15s linear infinite reverse;
+}
+
+.comfort-theme .orbit-core {
+  width: 10px; height: 10px; background: var(--comfort-primary); border-radius: 50%;
+  box-shadow: 0 0 15px var(--comfort-primary); z-index: 1;
+}
+
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.comfort-theme .orbit-logo-text {
+  font-family: var(--font-display); font-size: 18px; font-weight: 700;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--comfort-primary), var(--accent-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.comfort-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: rgba(255, 179, 71, 0.15);
+  border: 1px solid var(--comfort-primary);
+  color: var(--comfort-primary);
+  margin-left: 10px;
+}
+
+/* Nav Tabs */
+.randomizer-nav {
+  display: flex; gap: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px; padding: 4px;
+}
+
+.nav-tab {
+  padding: 8px 16px;
+  color: var(--ghost-gray);
+  text-decoration: none;
+  font-size: 13px; font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover { color: var(--muted-silver); }
+
+.comfort-theme .nav-tab.active {
+  background: rgba(255, 179, 71, 0.15);
+  color: var(--comfort-primary);
+}
+
+.header-actions { display: flex; gap: 12px; }
+
+.icon-btn-orbit {
+  position: relative; width: 40px; height: 40px;
+  background: transparent; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--comfort-primary); transition: all 0.3s ease;
+}
+.icon-btn-orbit:hover { transform: scale(1.1); }
+
+.icon-btn-orbit .ring-outer {
+  position: absolute; width: 100%; height: 100%; border-radius: 50%;
+  border: 1.5px solid rgba(255, 179, 71, 0.3);
+  animation: orbit-rotate 12s linear infinite;
+}
+.icon-btn-orbit .ring-inner {
+  position: absolute; width: 70%; height: 70%; border-radius: 50%;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  animation: orbit-rotate 8s linear infinite reverse;
+}
+.icon-symbol { position: relative; z-index: 2; }
+
+/* ============================================
+   MAIN
+============================================ */
+
+.game-main {
+  max-width: 800px; margin: 0 auto;
+  padding: 40px 20px 80px; position: relative; z-index: 10;
+}
+
+.section-label {
+  font-family: var(--font-display); font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; color: var(--comfort-primary); text-transform: uppercase;
+  text-align: center; margin-bottom: 20px;
+}
+
+/* ============================================
+   EMPTY STATE
+============================================ */
+
+.empty-comfort {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.empty-comfort h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--comfort-primary), var(--accent-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.empty-comfort p {
+  color: var(--muted-silver);
+  margin-bottom: 30px;
+}
+
+/* ============================================
+   COMFORT LIST
+============================================ */
+
+.comfort-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.comfort-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--comfort-bg-tint);
+  border: 1.5px solid rgba(255, 179, 71, 0.2);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.comfort-card:hover {
+  border-color: rgba(255, 179, 71, 0.5);
+  background: rgba(255, 179, 71, 0.08);
+  transform: translateY(-2px);
+}
+
+.comfort-poster {
+  width: 55px;
+  height: 82px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: var(--nebula-dark);
+}
+
+.comfort-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.comfort-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--film-white);
+  margin-bottom: 4px;
+}
+
+.comfort-seasons {
+  font-size: 12px;
+  color: var(--comfort-primary);
+  opacity: 0.8;
+}
+
+.comfort-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.comfort-edit,
+.comfort-remove {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ghost-gray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.comfort-edit:hover {
+  border-color: var(--comfort-primary);
+  color: var(--comfort-primary);
+}
+
+.comfort-remove:hover {
+  border-color: var(--danger-red);
+  color: var(--danger-red);
+}
+
+/* ============================================
+   ADD BUTTON
+============================================ */
+
+.add-comfort-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 14px 24px;
+  background: rgba(255, 179, 71, 0.1);
+  border: 2px dashed rgba(255, 179, 71, 0.4);
+  border-radius: 14px;
+  color: var(--comfort-primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-comfort-btn:hover {
+  background: rgba(255, 179, 71, 0.15);
+  border-color: var(--comfort-primary);
+  border-style: solid;
+}
+
+.add-comfort-btn.small {
+  max-width: 200px;
+  padding: 10px 18px;
+  font-size: 12px;
+}
+
+/* ============================================
+   MOOD CHIPS
+============================================ */
+
+.mood-section {
+  margin: 30px 0;
+}
+
+.mood-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.mood-chip {
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  color: var(--muted-silver);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mood-chip:hover {
+  border-color: rgba(255, 179, 71, 0.4);
+  color: var(--film-white);
+}
+
+.mood-chip.active {
+  background: rgba(255, 179, 71, 0.12);
+  border-color: var(--comfort-primary);
+  color: var(--comfort-primary);
+}
+
+/* ============================================
+   SPIN BUTTON - Warm
+============================================ */
+
+.comfort-spin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.15), rgba(255, 159, 28, 0.15));
+  border: 2px solid var(--comfort-primary);
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.comfort-spin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px var(--comfort-glow);
+}
+
+.spin-btn-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--comfort-primary);
+}
+
+.spin-btn-ring {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  border: 2px solid transparent;
+  border-top-color: var(--comfort-primary);
+  border-radius: 50%;
+  animation: orbit-rotate 3s linear infinite;
+  opacity: 0.3;
+}
+
+/* ============================================
+   SPINNER
+============================================ */
+
+.spinning-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.cosmic-spinner {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.spinner-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.spinner-ring-1 {
+  inset: 0;
+  border-top-color: var(--comfort-primary);
+  border-right-color: var(--comfort-primary);
+  animation: orbit-rotate 1s linear infinite;
+}
+
+.spinner-ring-2 {
+  inset: 15px;
+  border-top-color: var(--accent-gold);
+  border-left-color: var(--accent-gold);
+  animation: orbit-rotate 0.8s linear infinite reverse;
+}
+
+.spinner-ring-3 {
+  inset: 30px;
+  border-bottom-color: var(--comfort-secondary);
+  animation: orbit-rotate 0.6s linear infinite;
+}
+
+.spinner-core {
+  position: absolute;
+  inset: 40px;
+  background: var(--comfort-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--comfort-glow);
+}
+
+.spinner-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--comfort-primary);
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   EPISODE RESULT
+============================================ */
+
+.episode-result-card {
+  display: flex;
+  gap: 28px;
+  background: rgba(17, 24, 39, 0.9);
+  border: 2px solid rgba(255, 179, 71, 0.2);
+  border-radius: 20px;
+  padding: 28px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.episode-still-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.episode-still {
+  width: 340px;
+  height: 191px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.no-still-placeholder {
+  width: 340px;
+  height: 191px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nebula-dark);
+  border-radius: 12px;
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+.still-glow {
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(ellipse at center, var(--comfort-glow), transparent 70%);
+  border-radius: 20px;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.episode-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.show-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  background: var(--comfort-glow);
+  border: 1px solid var(--comfort-primary);
+  border-radius: 20px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--comfort-primary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.episode-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--film-white);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.episode-meta {
+  font-size: 14px;
+  color: var(--muted-silver);
+  margin-bottom: 10px;
+}
+
+.episode-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.episode-rating .rating-star {
+  color: var(--accent-gold);
+  font-size: 14px;
+}
+
+.episode-rating .rating-value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.episode-overview {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted-silver);
+  margin-bottom: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================
+   RESULT ACTIONS
+============================================ */
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 20px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1.5px solid;
+}
+
+.action-btn.primary {
+  background: rgba(255, 179, 71, 0.1);
+  border-color: var(--comfort-primary);
+  color: var(--comfort-primary);
+}
+
+.action-btn.primary:hover {
+  background: rgba(255, 179, 71, 0.2);
+  box-shadow: 0 0 15px var(--comfort-glow);
+}
+
+.action-btn.secondary {
+  background: rgba(255, 215, 0, 0.08);
+  border-color: rgba(255, 215, 0, 0.4);
+  color: var(--accent-gold);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--accent-gold);
+}
+
+.action-btn.tertiary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--muted-silver);
+}
+
+.action-btn.tertiary:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--film-white);
+}
+
+/* ============================================
+   MODALS
+============================================ */
+
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: var(--deep-void);
+  border: 1px solid rgba(255, 179, 71, 0.2);
+  border-radius: 20px; padding: 30px; max-width: 480px; width: 100%;
+  max-height: 80vh; overflow-y: auto; position: relative;
+}
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--muted-silver); font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+.modal-close:hover { background: rgba(255,255,255,0.1); color: var(--film-white); }
+
+.modal-title {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  letter-spacing: 2px; margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--comfort-primary), var(--accent-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.modal-subtitle {
+  color: var(--muted-silver);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Search Box */
+.search-box {
+  margin-bottom: 16px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--film-white);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: var(--comfort-primary);
+  box-shadow: 0 0 15px var(--comfort-glow);
+}
+
+.search-box input::placeholder {
+  color: var(--ghost-gray);
+}
+
+/* Search Results */
+.search-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+  background: rgba(255, 179, 71, 0.1);
+}
+
+.search-result-poster {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--nebula-dark);
+}
+
+.search-result-title {
+  font-weight: 600;
+  color: var(--film-white);
+  font-size: 14px;
+}
+
+.search-result-year {
+  font-size: 12px;
+  color: var(--ghost-gray);
+}
+
+.no-results {
+  text-align: center;
+  color: var(--ghost-gray);
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Season Grid */
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.season-chip {
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--muted-silver);
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.season-chip:hover {
+  border-color: rgba(255, 179, 71, 0.4);
+}
+
+.season-chip.active {
+  background: rgba(255, 179, 71, 0.12);
+  border-color: var(--comfort-primary);
+  color: var(--comfort-primary);
+}
+
+.season-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.select-all-btn,
+.deselect-all-btn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: var(--muted-silver);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-all-btn:hover,
+.deselect-all-btn:hover {
+  border-color: var(--comfort-primary);
+  color: var(--comfort-primary);
+}
+
+.save-seasons-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: rgba(255, 179, 71, 0.1);
+  border: 2px solid var(--comfort-primary);
+  border-radius: 12px;
+  color: var(--comfort-primary);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-seasons-btn:hover {
+  background: rgba(255, 179, 71, 0.2);
+  box-shadow: 0 0 20px var(--comfort-glow);
+}
+
+/* Help Steps */
+.help-step {
+  display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+}
+.step-number {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255, 179, 71, 0.1);
+  border: 1.5px solid var(--comfort-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 12px; font-weight: 700;
+  color: var(--comfort-primary);
+}
+.step-text strong { color: var(--film-white); font-size: 14px; }
+.step-text p { color: var(--ghost-gray); font-size: 13px; margin-top: 2px; }
+
+/* ============================================
+   STREAMING PROVIDERS
+============================================ */
+
+.streaming-providers {
+  margin-bottom: 16px;
+}
+
+.streaming-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ghost-gray);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.streaming-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.streaming-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.streaming-logo:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px var(--comfort-glow);
+  border-color: var(--comfort-primary);
+}
+
+.streaming-none {
+  font-size: 12px;
+  color: var(--ghost-gray);
+  font-style: italic;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width: 700px) {
+  .game-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .randomizer-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .episode-result-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .episode-still,
+  .no-still-placeholder {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  .result-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .orbit-logo-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .comfort-badge {
+    display: none;
+  }
+
+  .mood-chips {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mood-chip {
+    text-align: center;
+  }
+}

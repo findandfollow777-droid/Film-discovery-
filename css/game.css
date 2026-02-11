@@ -1,3 +1,4 @@
+@import url('variables.css');
 /* ============================================
    ORBIT GAME - Cosmic Cinematic Theme
    Matching Index Page Styling
@@ -5,28 +6,11 @@
 
 :root {
   /* Colors - Matching Index */
-  --space-black: #000000;
-  --deep-void: #0a0e17;
-  --nebula-dark: #111827;
-  --cosmic-blue: #1e293b;
-  --accent-cyan: #00d9ff;
-  --accent-gold: #ffd700;
   --prestige-purple: #a855f7;
-  --success-green: #10b981;
   --warning-orange: #f59e0b;
-  --danger-red: #ef4444;
-  --film-white: #f1f5f9;
-  --muted-silver: #94a3b8;
-  --ghost-gray: #64748b;
-  
   /* Gradients */
   --gradient-accent: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
   --gradient-cosmic: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(10,14,23,0.95) 100%);
-  
-  /* Typography - Same as Index */
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
-  
   /* Effects */
   --blur-backdrop: blur(30px) saturate(150%);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -170,21 +154,6 @@ html, body {
   position: sticky;
   top: 0;
   z-index: 100;
-}
-
-.back-link {
-  color: var(--accent-cyan);
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  opacity: 0.8;
-}
-
-.back-link:hover {
-  opacity: 1;
-  color: var(--film-white);
 }
 
 /* ORBIT LOGO - Matching Index */
@@ -1775,4 +1744,47 @@ html, body {
     padding-top: 15px;
     border-top: 1px solid rgba(255,255,255,0.05);
   }
+}
+
+/* Result Close & View Results Buttons */
+.result-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--film-white, #f1f5f9);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+}
+.result-close-btn:hover {
+  background: rgba(255, 71, 87, 0.3);
+  border-color: #ff4757;
+  color: #ff4757;
+}
+.view-results-btn {
+  padding: 10px 20px;
+  background: rgba(0, 217, 255, 0.15);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 25px;
+  color: #00d9ff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Barlow', sans-serif;
+  margin-top: 12px;
+}
+.view-results-btn:hover {
+  background: rgba(0, 217, 255, 0.25);
+  border-color: #00d9ff;
 }

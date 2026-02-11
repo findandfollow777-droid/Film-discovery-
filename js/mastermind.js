@@ -645,6 +645,28 @@ Play at orbit-game.com/arcade`;
 // UTILITIES
 // ============================================
 
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  document.getElementById('introSection').hidden = false;
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      document.getElementById('introSection').hidden = true;
+      btn.remove();
+    });
+    const introContent = document.querySelector('.intro-content');
+    introContent.appendChild(btn);
+  }
+});
+
 function shuffleArray(array) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {

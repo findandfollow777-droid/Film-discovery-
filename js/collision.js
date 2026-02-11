@@ -3,9 +3,6 @@
 // Orbit Games Suite
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TMDB_IMG = "https://image.tmdb.org/t/p/";
-
 // Game configuration
 const GAME_DURATION = 180; // 3 minutes in seconds
 const POINTS_SOLO = 1;
@@ -16,16 +13,16 @@ const DAILY_PAIRS = [
   // Week 1 - Classic Duos
   { a: { id: 287, name: "Brad Pitt", type: "Actor" }, b: { id: 1461, name: "George Clooney", type: "Actor" } },
   { a: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" }, b: { id: 3223, name: "Robert De Niro", type: "Actor" } },
-  { a: { id: 31, name: "Tom Hanks", type: "Actor" }, b: { id: 1920, name: "Meg Ryan", type: "Actor" } },
+  { a: { id: 31, name: "Tom Hanks", type: "Actor" }, b: { id: 5344, name: "Meg Ryan", type: "Actor" } },
   { a: { id: 1158, name: "Al Pacino", type: "Actor" }, b: { id: 3223, name: "Robert De Niro", type: "Actor" } },
-  { a: { id: 2888, name: "Will Smith", type: "Actor" }, b: { id: 2157, name: "Tommy Lee Jones", type: "Actor" } },
+  { a: { id: 2888, name: "Will Smith", type: "Actor" }, b: { id: 2176, name: "Tommy Lee Jones", type: "Actor" } },
   { a: { id: 500, name: "Tom Cruise", type: "Actor" }, b: { id: 192, name: "Morgan Freeman", type: "Actor" } },
-  { a: { id: 1892, name: "Matt Damon", type: "Actor" }, b: { id: 1979, name: "Ben Affleck", type: "Actor" } },
+  { a: { id: 1892, name: "Matt Damon", type: "Actor" }, b: { id: 880, name: "Ben Affleck", type: "Actor" } },
   
   // Week 2 - Actor + Director pairs
   { a: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" }, b: { id: 1032, name: "Martin Scorsese", type: "Director" } },
   { a: { id: 17419, name: "Bill Murray", type: "Actor" }, b: { id: 5655, name: "Wes Anderson", type: "Director" } },
-  { a: { id: 880, name: "Ben Stiller", type: "Actor" }, b: { id: 17051, name: "Owen Wilson", type: "Actor" } },
+  { a: { id: 7399, name: "Ben Stiller", type: "Actor" }, b: { id: 17051, name: "Owen Wilson", type: "Actor" } },
   { a: { id: 3223, name: "Robert De Niro", type: "Actor" }, b: { id: 1032, name: "Martin Scorsese", type: "Director" } },
   { a: { id: 85, name: "Johnny Depp", type: "Actor" }, b: { id: 510, name: "Tim Burton", type: "Director" } },
   { a: { id: 1245, name: "Scarlett Johansson", type: "Actor" }, b: { id: 5655, name: "Wes Anderson", type: "Director" } },
@@ -36,7 +33,7 @@ const DAILY_PAIRS = [
   { a: { id: 73457, name: "Chris Pratt", type: "Actor" }, b: { id: 74568, name: "Chris Hemsworth", type: "Actor" } },
   { a: { id: 16828, name: "Chris Evans", type: "Actor" }, b: { id: 1245, name: "Scarlett Johansson", type: "Actor" } },
   { a: { id: 17419, name: "Bill Murray", type: "Actor" }, b: { id: 380, name: "Robert Downey Jr.", type: "Actor" } },
-  { a: { id: 2963, name: "Jack Nicholson", type: "Actor" }, b: { id: 192, name: "Morgan Freeman", type: "Actor" } },
+  { a: { id: 514, name: "Jack Nicholson", type: "Actor" }, b: { id: 192, name: "Morgan Freeman", type: "Actor" } },
   { a: { id: 3, name: "Harrison Ford", type: "Actor" }, b: { id: 2, name: "Mark Hamill", type: "Actor" } },
   { a: { id: 31, name: "Tom Hanks", type: "Actor" }, b: { id: 192, name: "Morgan Freeman", type: "Actor" } }
 ];
@@ -562,6 +559,26 @@ function startNextPuzzleCountdown() {
 // ============================================
 // UTILITIES
 // ============================================
+
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      btn.remove();
+    });
+    const gameStatus = document.querySelector('.game-status');
+    gameStatus.appendChild(btn);
+  }
+});
 
 function debounce(fn, delay) {
   let timeout;

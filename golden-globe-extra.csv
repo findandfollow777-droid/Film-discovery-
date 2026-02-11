@@ -1,0 +1,966 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+0,James Cameron,2009,Golden Globe,Best Director,true,Avatar
+0,Kathryn Bigelow,2009,Golden Globe,Best Director,false,The Hurt Locker
+0,Clint Eastwood,2009,Golden Globe,Best Director,false,Invictus
+0,Jason Reitman,2009,Golden Globe,Best Director,false,Up in the Air
+0,Quentin Tarantino,2009,Golden Globe,Best Director,false,Inglourious Basterds
+0,Jeff Bridges,2009,Golden Globe,Best Actor (Drama),true,Crazy Heart
+0,George Clooney,2009,Golden Globe,Best Actor (Drama),false,Up in the Air
+0,Colin Firth,2009,Golden Globe,Best Actor (Drama),false,A Single Man
+0,Morgan Freeman,2009,Golden Globe,Best Actor (Drama),false,Invictus
+0,Tobey Maguire,2009,Golden Globe,Best Actor (Drama),false,Brothers
+0,Robert Downey Jr.,2009,Golden Globe,Best Actor (Comedy/Musical),true,Sherlock Holmes
+0,Matt Damon,2009,Golden Globe,Best Actor (Comedy/Musical),false,The Informant!
+0,Daniel Day-Lewis,2009,Golden Globe,Best Actor (Comedy/Musical),false,Nine
+0,Joseph Gordon-Levitt,2009,Golden Globe,Best Actor (Comedy/Musical),false,500 Days of Summer
+0,Michael Stuhlbarg,2009,Golden Globe,Best Actor (Comedy/Musical),false,A Serious Man
+0,Sandra Bullock,2009,Golden Globe,Best Actress (Drama),true,The Blind Side
+0,Emily Blunt,2009,Golden Globe,Best Actress (Drama),false,The Young Victoria
+0,Helen Mirren,2009,Golden Globe,Best Actress (Drama),false,The Last Station
+0,Carey Mulligan,2009,Golden Globe,Best Actress (Drama),false,An Education
+0,Gabourey Sidibe,2009,Golden Globe,Best Actress (Drama),false,Precious
+0,Meryl Streep,2009,Golden Globe,Best Actress (Comedy/Musical),true,Julie & Julia
+0,Sandra Bullock,2009,Golden Globe,Best Actress (Comedy/Musical),false,The Proposal
+0,Marion Cotillard,2009,Golden Globe,Best Actress (Comedy/Musical),false,Nine
+0,Julia Roberts,2009,Golden Globe,Best Actress (Comedy/Musical),false,Duplicity
+0,Meryl Streep,2009,Golden Globe,Best Actress (Comedy/Musical),false,It's Complicated
+0,Danny Boyle,2008,Golden Globe,Best Director,true,Slumdog Millionaire
+0,Stephen Daldry,2008,Golden Globe,Best Director,false,The Reader
+0,David Fincher,2008,Golden Globe,Best Director,false,The Curious Case of Benjamin Button
+0,Ron Howard,2008,Golden Globe,Best Director,false,Frost/Nixon
+0,Sam Mendes,2008,Golden Globe,Best Director,false,Revolutionary Road
+0,Mickey Rourke,2008,Golden Globe,Best Actor (Drama),true,The Wrestler
+0,Leonardo DiCaprio,2008,Golden Globe,Best Actor (Drama),false,Revolutionary Road
+0,Frank Langella,2008,Golden Globe,Best Actor (Drama),false,Frost/Nixon
+0,Brad Pitt,2008,Golden Globe,Best Actor (Drama),false,The Curious Case of Benjamin Button
+0,Sean Penn,2008,Golden Globe,Best Actor (Drama),false,Milk
+0,Colin Farrell,2008,Golden Globe,Best Actor (Comedy/Musical),true,In Bruges
+0,Javier Bardem,2008,Golden Globe,Best Actor (Comedy/Musical),false,Vicky Cristina Barcelona
+0,James Franco,2008,Golden Globe,Best Actor (Comedy/Musical),false,Pineapple Express
+0,Brendan Gleeson,2008,Golden Globe,Best Actor (Comedy/Musical),false,In Bruges
+0,Dustin Hoffman,2008,Golden Globe,Best Actor (Comedy/Musical),false,Last Chance Harvey
+0,Kate Winslet,2008,Golden Globe,Best Actress (Drama),true,Revolutionary Road
+0,Anne Hathaway,2008,Golden Globe,Best Actress (Drama),false,Rachel Getting Married
+0,Angelina Jolie,2008,Golden Globe,Best Actress (Drama),false,Changeling
+0,Kristin Scott Thomas,2008,Golden Globe,Best Actress (Drama),false,I've Loved You So Long
+0,Meryl Streep,2008,Golden Globe,Best Actress (Drama),false,Doubt
+0,Sally Hawkins,2008,Golden Globe,Best Actress (Comedy/Musical),true,Happy-Go-Lucky
+0,Rebecca Hall,2008,Golden Globe,Best Actress (Comedy/Musical),false,Vicky Cristina Barcelona
+0,Frances McDormand,2008,Golden Globe,Best Actress (Comedy/Musical),false,Burn After Reading
+0,Meryl Streep,2008,Golden Globe,Best Actress (Comedy/Musical),false,Mamma Mia!
+0,Emma Thompson,2008,Golden Globe,Best Actress (Comedy/Musical),false,Last Chance Harvey
+0,Julian Schnabel,2007,Golden Globe,Best Director,true,The Diving Bell and the Butterfly
+0,Tim Burton,2007,Golden Globe,Best Director,false,Sweeney Todd
+0,Joel Coen & Ethan Coen,2007,Golden Globe,Best Director,false,No Country for Old Men
+0,Ridley Scott,2007,Golden Globe,Best Director,false,American Gangster
+0,Joe Wright,2007,Golden Globe,Best Director,false,Atonement
+0,Daniel Day-Lewis,2007,Golden Globe,Best Actor (Drama),true,There Will Be Blood
+0,George Clooney,2007,Golden Globe,Best Actor (Drama),false,Michael Clayton
+0,James McAvoy,2007,Golden Globe,Best Actor (Drama),false,Atonement
+0,Viggo Mortensen,2007,Golden Globe,Best Actor (Drama),false,Eastern Promises
+0,Denzel Washington,2007,Golden Globe,Best Actor (Drama),false,American Gangster
+0,Johnny Depp,2007,Golden Globe,Best Actor (Comedy/Musical),true,Sweeney Todd
+0,Ryan Gosling,2007,Golden Globe,Best Actor (Comedy/Musical),false,Lars and the Real Girl
+0,Tom Hanks,2007,Golden Globe,Best Actor (Comedy/Musical),false,Charlie Wilson's War
+0,Philip Seymour Hoffman,2007,Golden Globe,Best Actor (Comedy/Musical),false,The Savages
+0,John C. Reilly,2007,Golden Globe,Best Actor (Comedy/Musical),false,Walk Hard: The Dewey Cox Story
+0,Julie Christie,2007,Golden Globe,Best Actress (Drama),true,Away from Her
+0,Cate Blanchett,2007,Golden Globe,Best Actress (Drama),false,Elizabeth: The Golden Age
+0,Jodie Foster,2007,Golden Globe,Best Actress (Drama),false,The Brave One
+0,Angelina Jolie,2007,Golden Globe,Best Actress (Drama),false,A Mighty Heart
+0,Keira Knightley,2007,Golden Globe,Best Actress (Drama),false,Atonement
+0,Marion Cotillard,2007,Golden Globe,Best Actress (Comedy/Musical),true,La Vie en Rose
+0,Amy Adams,2007,Golden Globe,Best Actress (Comedy/Musical),false,Enchanted
+0,Nikki Blonsky,2007,Golden Globe,Best Actress (Comedy/Musical),false,Hairspray
+0,Helena Bonham Carter,2007,Golden Globe,Best Actress (Comedy/Musical),false,Sweeney Todd
+0,Elliot Page,2007,Golden Globe,Best Actress (Comedy/Musical),false,Juno
+0,Martin Scorsese,2006,Golden Globe,Best Director,true,The Departed
+0,Clint Eastwood,2006,Golden Globe,Best Director,false,Flags of Our Fathers
+0,Clint Eastwood,2006,Golden Globe,Best Director,false,Letters from Iwo Jima
+0,Stephen Frears,2006,Golden Globe,Best Director,false,The Queen
+0,Alejandro G. Iñárritu,2006,Golden Globe,Best Director,false,Babel
+0,Forest Whitaker,2006,Golden Globe,Best Actor (Drama),true,The Last King of Scotland
+0,Leonardo DiCaprio,2006,Golden Globe,Best Actor (Drama),false,Blood Diamond
+0,Leonardo DiCaprio,2006,Golden Globe,Best Actor (Drama),false,The Departed
+0,Peter O'Toole,2006,Golden Globe,Best Actor (Drama),false,Venus
+0,Will Smith,2006,Golden Globe,Best Actor (Drama),false,The Pursuit of Happyness
+0,Sacha Baron Cohen,2006,Golden Globe,Best Actor (Comedy/Musical),true,Borat
+0,Johnny Depp,2006,Golden Globe,Best Actor (Comedy/Musical),false,Pirates of the Caribbean: Dead Man's Chest
+0,Aaron Eckhart,2006,Golden Globe,Best Actor (Comedy/Musical),false,Thank You for Smoking
+0,Chiwetel Ejiofor,2006,Golden Globe,Best Actor (Comedy/Musical),false,Kinky Boots
+0,Will Ferrell,2006,Golden Globe,Best Actor (Comedy/Musical),false,Stranger Than Fiction
+0,Helen Mirren,2006,Golden Globe,Best Actress (Drama),true,The Queen
+0,Penélope Cruz,2006,Golden Globe,Best Actress (Drama),false,Volver
+0,Judi Dench,2006,Golden Globe,Best Actress (Drama),false,Notes on a Scandal
+0,Maggie Gyllenhaal,2006,Golden Globe,Best Actress (Drama),false,Sherrybaby
+0,Kate Winslet,2006,Golden Globe,Best Actress (Drama),false,Little Children
+0,Meryl Streep,2006,Golden Globe,Best Actress (Comedy/Musical),true,The Devil Wears Prada
+0,Annette Bening,2006,Golden Globe,Best Actress (Comedy/Musical),false,Running with Scissors
+0,Toni Collette,2006,Golden Globe,Best Actress (Comedy/Musical),false,Little Miss Sunshine
+0,Beyoncé Knowles,2006,Golden Globe,Best Actress (Comedy/Musical),false,Dreamgirls
+0,Renée Zellweger,2006,Golden Globe,Best Actress (Comedy/Musical),false,Miss Potter
+0,Ang Lee,2005,Golden Globe,Best Director,true,Brokeback Mountain
+0,Woody Allen,2005,Golden Globe,Best Director,false,Match Point
+0,George Clooney,2005,Golden Globe,Best Director,false,Good Night and Good Luck
+0,Peter Jackson,2005,Golden Globe,Best Director,false,King Kong
+0,Fernando Meirelles,2005,Golden Globe,Best Director,false,The Constant Gardener
+0,Steven Spielberg,2005,Golden Globe,Best Director,false,Munich
+0,Philip Seymour Hoffman,2005,Golden Globe,Best Actor (Drama),true,Capote
+0,Russell Crowe,2005,Golden Globe,Best Actor (Drama),false,Cinderella Man
+0,Terrence Howard,2005,Golden Globe,Best Actor (Drama),false,Hustle & Flow
+0,Heath Ledger,2005,Golden Globe,Best Actor (Drama),false,Brokeback Mountain
+0,David Strathairn,2005,Golden Globe,Best Actor (Drama),false,Good Night and Good Luck
+0,Joaquin Phoenix,2005,Golden Globe,Best Actor (Comedy/Musical),true,Walk the Line
+0,Pierce Brosnan,2005,Golden Globe,Best Actor (Comedy/Musical),false,The Matador
+0,Jeff Daniels,2005,Golden Globe,Best Actor (Comedy/Musical),false,The Squid and the Whale
+0,Johnny Depp,2005,Golden Globe,Best Actor (Comedy/Musical),false,Charlie and the Chocolate Factory
+0,Cillian Murphy,2005,Golden Globe,Best Actor (Comedy/Musical),false,Breakfast on Pluto
+0,Felicity Huffman,2005,Golden Globe,Best Actress (Drama),true,Transamerica
+0,Maria Bello,2005,Golden Globe,Best Actress (Drama),false,A History of Violence
+0,Gwyneth Paltrow,2005,Golden Globe,Best Actress (Drama),false,Proof
+0,Charlize Theron,2005,Golden Globe,Best Actress (Drama),false,North Country
+0,Zhang Ziyi,2005,Golden Globe,Best Actress (Drama),false,Memoirs of a Geisha
+0,Reese Witherspoon,2005,Golden Globe,Best Actress (Comedy/Musical),true,Walk the Line
+0,Judi Dench,2005,Golden Globe,Best Actress (Comedy/Musical),false,Mrs. Henderson Presents
+0,Keira Knightley,2005,Golden Globe,Best Actress (Comedy/Musical),false,Pride & Prejudice
+0,Laura Linney,2005,Golden Globe,Best Actress (Comedy/Musical),false,The Squid and the Whale
+0,Sarah Jessica Parker,2005,Golden Globe,Best Actress (Comedy/Musical),false,The Family Stone
+0,Clint Eastwood,2004,Golden Globe,Best Director,true,Million Dollar Baby
+0,Marc Forster,2004,Golden Globe,Best Director,false,Finding Neverland
+0,Taylor Hackford,2004,Golden Globe,Best Director,false,Ray
+0,Alexander Payne,2004,Golden Globe,Best Director,false,Sideways
+0,Martin Scorsese,2004,Golden Globe,Best Director,false,The Aviator
+0,Leonardo DiCaprio,2004,Golden Globe,Best Actor (Drama),true,The Aviator
+0,Javier Bardem,2004,Golden Globe,Best Actor (Drama),false,The Sea Inside
+0,Don Cheadle,2004,Golden Globe,Best Actor (Drama),false,Hotel Rwanda
+0,Johnny Depp,2004,Golden Globe,Best Actor (Drama),false,Finding Neverland
+0,Liam Neeson,2004,Golden Globe,Best Actor (Drama),false,Kinsey
+0,Jamie Foxx,2004,Golden Globe,Best Actor (Comedy/Musical),true,Ray
+0,Jim Carrey,2004,Golden Globe,Best Actor (Comedy/Musical),false,Eternal Sunshine of the Spotless Mind
+0,Paul Giamatti,2004,Golden Globe,Best Actor (Comedy/Musical),false,Sideways
+0,Kevin Kline,2004,Golden Globe,Best Actor (Comedy/Musical),false,De-Lovely
+0,Kevin Spacey,2004,Golden Globe,Best Actor (Comedy/Musical),false,Beyond the Sea
+0,Hilary Swank,2004,Golden Globe,Best Actress (Drama),true,Million Dollar Baby
+0,Scarlett Johansson,2004,Golden Globe,Best Actress (Drama),false,A Love Song for Bobby Long
+0,Nicole Kidman,2004,Golden Globe,Best Actress (Drama),false,Birth
+0,Imelda Staunton,2004,Golden Globe,Best Actress (Drama),false,Vera Drake
+0,Uma Thurman,2004,Golden Globe,Best Actress (Drama),false,Kill Bill: Vol. 2
+0,Annette Bening,2004,Golden Globe,Best Actress (Comedy/Musical),true,Being Julia
+0,Ashley Judd,2004,Golden Globe,Best Actress (Comedy/Musical),false,De-Lovely
+0,Emmy Rossum,2004,Golden Globe,Best Actress (Comedy/Musical),false,The Phantom of the Opera
+0,Kate Winslet,2004,Golden Globe,Best Actress (Comedy/Musical),false,Eternal Sunshine of the Spotless Mind
+0,Renée Zellweger,2004,Golden Globe,Best Actress (Comedy/Musical),false,Bridget Jones: The Edge of Reason
+0,Peter Jackson,2003,Golden Globe,Best Director,true,The Lord of the Rings: The Return of the King
+0,Sofia Coppola,2003,Golden Globe,Best Director,false,Lost in Translation
+0,Clint Eastwood,2003,Golden Globe,Best Director,false,Mystic River
+0,Anthony Minghella,2003,Golden Globe,Best Director,false,Cold Mountain
+0,Peter Weir,2003,Golden Globe,Best Director,false,Master and Commander
+0,Sean Penn,2003,Golden Globe,Best Actor (Drama),true,Mystic River
+0,Russell Crowe,2003,Golden Globe,Best Actor (Drama),false,Master and Commander
+0,Tom Cruise,2003,Golden Globe,Best Actor (Drama),false,The Last Samurai
+0,Ben Kingsley,2003,Golden Globe,Best Actor (Drama),false,House of Sand and Fog
+0,Jude Law,2003,Golden Globe,Best Actor (Drama),false,Cold Mountain
+0,Bill Murray,2003,Golden Globe,Best Actor (Comedy/Musical),true,Lost in Translation
+0,Jack Black,2003,Golden Globe,Best Actor (Comedy/Musical),false,School of Rock
+0,Johnny Depp,2003,Golden Globe,Best Actor (Comedy/Musical),false,Pirates of the Caribbean: The Curse of the Black Pearl
+0,Jack Nicholson,2003,Golden Globe,Best Actor (Comedy/Musical),false,Something's Gotta Give
+0,Billy Bob Thornton,2003,Golden Globe,Best Actor (Comedy/Musical),false,Bad Santa
+0,Charlize Theron,2003,Golden Globe,Best Actress (Drama),true,Monster
+0,Cate Blanchett,2003,Golden Globe,Best Actress (Drama),false,Veronica Guerin
+0,Scarlett Johansson,2003,Golden Globe,Best Actress (Drama),false,Girl with a Pearl Earring
+0,Nicole Kidman,2003,Golden Globe,Best Actress (Drama),false,Cold Mountain
+0,Uma Thurman,2003,Golden Globe,Best Actress (Drama),false,Kill Bill: Vol. 1
+0,Evan Rachel Wood,2003,Golden Globe,Best Actress (Drama),false,Thirteen
+0,Diane Keaton,2003,Golden Globe,Best Actress (Comedy/Musical),true,Something's Gotta Give
+0,Jamie Lee Curtis,2003,Golden Globe,Best Actress (Comedy/Musical),false,Freaky Friday
+0,Scarlett Johansson,2003,Golden Globe,Best Actress (Comedy/Musical),false,Lost in Translation
+0,Diane Lane,2003,Golden Globe,Best Actress (Comedy/Musical),false,Under the Tuscan Sun
+0,Helen Mirren,2003,Golden Globe,Best Actress (Comedy/Musical),false,Calendar Girls
+0,Martin Scorsese,2002,Golden Globe,Best Director,true,Gangs of New York
+0,Pedro Almodóvar,2002,Golden Globe,Best Director,false,Talk to Her
+0,Stephen Daldry,2002,Golden Globe,Best Director,false,The Hours
+0,Peter Jackson,2002,Golden Globe,Best Director,false,The Lord of the Rings: The Two Towers
+0,Rob Marshall,2002,Golden Globe,Best Director,false,Chicago
+0,Alexander Payne,2002,Golden Globe,Best Director,false,About Schmidt
+0,Jack Nicholson,2002,Golden Globe,Best Actor (Drama),true,About Schmidt
+0,Adrien Brody,2002,Golden Globe,Best Actor (Drama),false,The Pianist
+0,Michael Caine,2002,Golden Globe,Best Actor (Drama),false,The Quiet American
+0,Daniel Day-Lewis,2002,Golden Globe,Best Actor (Drama),false,Gangs of New York
+0,Leonardo DiCaprio,2002,Golden Globe,Best Actor (Drama),false,Catch Me If You Can
+0,Richard Gere,2002,Golden Globe,Best Actor (Comedy/Musical),true,Chicago
+0,Nicolas Cage,2002,Golden Globe,Best Actor (Comedy/Musical),false,Adaptation
+0,Kieran Culkin,2002,Golden Globe,Best Actor (Comedy/Musical),false,Igby Goes Down
+0,Hugh Grant,2002,Golden Globe,Best Actor (Comedy/Musical),false,About a Boy
+0,Adam Sandler,2002,Golden Globe,Best Actor (Comedy/Musical),false,Punch-Drunk Love
+0,Nicole Kidman,2002,Golden Globe,Best Actress (Drama),true,The Hours
+0,Salma Hayek,2002,Golden Globe,Best Actress (Drama),false,Frida
+0,Diane Lane,2002,Golden Globe,Best Actress (Drama),false,Unfaithful
+0,Julianne Moore,2002,Golden Globe,Best Actress (Drama),false,Far from Heaven
+0,Meryl Streep,2002,Golden Globe,Best Actress (Drama),false,The Hours
+0,Renée Zellweger,2002,Golden Globe,Best Actress (Comedy/Musical),true,Chicago
+0,Maggie Gyllenhaal,2002,Golden Globe,Best Actress (Comedy/Musical),false,Secretary
+0,Goldie Hawn,2002,Golden Globe,Best Actress (Comedy/Musical),false,The Banger Sisters
+0,Nia Vardalos,2002,Golden Globe,Best Actress (Comedy/Musical),false,My Big Fat Greek Wedding
+0,Catherine Zeta-Jones,2002,Golden Globe,Best Actress (Comedy/Musical),false,Chicago
+0,Robert Altman,2001,Golden Globe,Best Director,true,Gosford Park
+0,Ron Howard,2001,Golden Globe,Best Director,false,A Beautiful Mind
+0,Peter Jackson,2001,Golden Globe,Best Director,false,The Lord of the Rings: The Fellowship of the Ring
+0,Baz Luhrmann,2001,Golden Globe,Best Director,false,Moulin Rouge!
+0,David Lynch,2001,Golden Globe,Best Director,false,Mulholland Drive
+0,Steven Spielberg,2001,Golden Globe,Best Director,false,A.I. Artificial Intelligence
+0,Russell Crowe,2001,Golden Globe,Best Actor (Drama),true,A Beautiful Mind
+0,Will Smith,2001,Golden Globe,Best Actor (Drama),false,Ali
+0,Kevin Spacey,2001,Golden Globe,Best Actor (Drama),false,The Shipping News
+0,Billy Bob Thornton,2001,Golden Globe,Best Actor (Drama),false,The Man Who Wasn't There
+0,Denzel Washington,2001,Golden Globe,Best Actor (Drama),false,Training Day
+0,Gene Hackman,2001,Golden Globe,Best Actor (Comedy/Musical),true,The Royal Tenenbaums
+0,Hugh Jackman,2001,Golden Globe,Best Actor (Comedy/Musical),false,Kate & Leopold
+0,Ewan McGregor,2001,Golden Globe,Best Actor (Comedy/Musical),false,Moulin Rouge!
+0,John Cameron Mitchell,2001,Golden Globe,Best Actor (Comedy/Musical),false,Hedwig and the Angry Inch
+0,Billy Bob Thornton,2001,Golden Globe,Best Actor (Comedy/Musical),false,Bandits
+0,Sissy Spacek,2001,Golden Globe,Best Actress (Drama),true,In the Bedroom
+0,Halle Berry,2001,Golden Globe,Best Actress (Drama),false,Monster's Ball
+0,Judi Dench,2001,Golden Globe,Best Actress (Drama),false,Iris
+0,Nicole Kidman,2001,Golden Globe,Best Actress (Drama),false,The Others
+0,Tilda Swinton,2001,Golden Globe,Best Actress (Drama),false,The Deep End
+0,Nicole Kidman,2001,Golden Globe,Best Actress (Comedy/Musical),true,Moulin Rouge!
+0,Thora Birch,2001,Golden Globe,Best Actress (Comedy/Musical),false,Ghost World
+0,Cate Blanchett,2001,Golden Globe,Best Actress (Comedy/Musical),false,Bandits
+0,Reese Witherspoon,2001,Golden Globe,Best Actress (Comedy/Musical),false,Legally Blonde
+0,Renée Zellweger,2001,Golden Globe,Best Actress (Comedy/Musical),false,Bridget Jones's Diary
+0,Ang Lee,2000,Golden Globe,Best Director,true,Crouching Tiger Hidden Dragon
+0,Ridley Scott,2000,Golden Globe,Best Director,false,Gladiator
+0,Steven Soderbergh,2000,Golden Globe,Best Director,false,Erin Brockovich
+0,Steven Soderbergh,2000,Golden Globe,Best Director,false,Traffic
+0,Istvan Szabo,2000,Golden Globe,Best Director,false,Sunshine
+0,Tom Hanks,2000,Golden Globe,Best Actor (Drama),true,Cast Away
+0,Javier Bardem,2000,Golden Globe,Best Actor (Drama),false,Before Night Falls
+0,Russell Crowe,2000,Golden Globe,Best Actor (Drama),false,Gladiator
+0,Michael Douglas,2000,Golden Globe,Best Actor (Drama),false,Wonder Boys
+0,Geoffrey Rush,2000,Golden Globe,Best Actor (Drama),false,Quills
+0,George Clooney,2000,Golden Globe,Best Actor (Comedy/Musical),true,O Brother Where Art Thou?
+0,Jim Carrey,2000,Golden Globe,Best Actor (Comedy/Musical),false,How the Grinch Stole Christmas
+0,John Cusack,2000,Golden Globe,Best Actor (Comedy/Musical),false,High Fidelity
+0,Robert De Niro,2000,Golden Globe,Best Actor (Comedy/Musical),false,Meet the Parents
+0,Mel Gibson,2000,Golden Globe,Best Actor (Comedy/Musical),false,What Women Want
+0,Julia Roberts,2000,Golden Globe,Best Actress (Drama),true,Erin Brockovich
+0,Joan Allen,2000,Golden Globe,Best Actress (Drama),false,The Contender
+0,Björk,2000,Golden Globe,Best Actress (Drama),false,Dancer in the Dark
+0,Ellen Burstyn,2000,Golden Globe,Best Actress (Drama),false,Requiem for a Dream
+0,Laura Linney,2000,Golden Globe,Best Actress (Drama),false,You Can Count On Me
+0,Renée Zellweger,2000,Golden Globe,Best Actress (Comedy/Musical),true,Nurse Betty
+0,Juliette Binoche,2000,Golden Globe,Best Actress (Comedy/Musical),false,Chocolat
+0,Brenda Blethyn,2000,Golden Globe,Best Actress (Comedy/Musical),false,Saving Grace
+0,Sandra Bullock,2000,Golden Globe,Best Actress (Comedy/Musical),false,Miss Congeniality
+0,Tracey Ullman,2000,Golden Globe,Best Actress (Comedy/Musical),false,Small Time Crooks
+0,Sam Mendes,1999,Golden Globe,Best Director,true,American Beauty
+0,Norman Jewison,1999,Golden Globe,Best Director,false,The Hurricane
+0,Neil Jordan,1999,Golden Globe,Best Director,false,The End of the Affair
+0,Michael Mann,1999,Golden Globe,Best Director,false,The Insider
+0,Anthony Minghella,1999,Golden Globe,Best Director,false,The Talented Mr. Ripley
+0,Denzel Washington,1999,Golden Globe,Best Actor (Drama),true,The Hurricane
+0,Russell Crowe,1999,Golden Globe,Best Actor (Drama),false,The Insider
+0,Matt Damon,1999,Golden Globe,Best Actor (Drama),false,The Talented Mr. Ripley
+0,Richard Farnsworth,1999,Golden Globe,Best Actor (Drama),false,The Straight Story
+0,Oliver Stone,1989,Golden Globe,Best Director,true,Born on the Fourth of July
+0,Spike Lee,1989,Golden Globe,Best Director,false,Do the Right Thing
+0,Rob Reiner,1989,Golden Globe,Best Director,false,When Harry Met Sally...
+0,Peter Weir,1989,Golden Globe,Best Director,false,Dead Poets Society
+0,Edward Zwick,1989,Golden Globe,Best Director,false,Glory
+0,Tom Cruise,1989,Golden Globe,Best Actor (Drama),true,Born on the Fourth of July
+0,Daniel Day-Lewis,1989,Golden Globe,Best Actor (Drama),false,My Left Foot
+0,Jack Lemmon,1989,Golden Globe,Best Actor (Drama),false,Dad
+0,Al Pacino,1989,Golden Globe,Best Actor (Drama),false,Sea of Love
+0,Robin Williams,1989,Golden Globe,Best Actor (Drama),false,Dead Poets Society
+0,Morgan Freeman,1989,Golden Globe,Best Actor (Comedy/Musical),true,Driving Miss Daisy
+0,Billy Crystal,1989,Golden Globe,Best Actor (Comedy/Musical),false,When Harry Met Sally...
+0,Michael Douglas,1989,Golden Globe,Best Actor (Comedy/Musical),false,The War of the Roses
+0,Steve Martin,1989,Golden Globe,Best Actor (Comedy/Musical),false,Parenthood
+0,Jack Nicholson,1989,Golden Globe,Best Actor (Comedy/Musical),false,Batman
+0,Michelle Pfeiffer,1989,Golden Globe,Best Actress (Drama),true,The Fabulous Baker Boys
+0,Sally Field,1989,Golden Globe,Best Actress (Drama),false,Steel Magnolias
+0,Jessica Lange,1989,Golden Globe,Best Actress (Drama),false,Music Box
+0,Andie MacDowell,1989,Golden Globe,Best Actress (Drama),false,sex lies and videotape
+0,Liv Ullmann,1989,Golden Globe,Best Actress (Drama),false,The Rose Garden
+0,Jessica Tandy,1989,Golden Globe,Best Actress (Comedy/Musical),true,Driving Miss Daisy
+0,Pauline Collins,1989,Golden Globe,Best Actress (Comedy/Musical),false,Shirley Valentine
+0,Meg Ryan,1989,Golden Globe,Best Actress (Comedy/Musical),false,When Harry Met Sally...
+0,Meryl Streep,1989,Golden Globe,Best Actress (Comedy/Musical),false,She-Devil
+0,Kathleen Turner,1989,Golden Globe,Best Actress (Comedy/Musical),false,The War of the Roses
+0,Clint Eastwood,1988,Golden Globe,Best Director,true,Bird
+0,Barry Levinson,1988,Golden Globe,Best Director,false,Rain Man
+0,Sidney Lumet,1988,Golden Globe,Best Director,false,Running on Empty
+0,Mike Nichols,1988,Golden Globe,Best Director,false,Working Girl
+0,Alan Parker,1988,Golden Globe,Best Director,false,Mississippi Burning
+0,Fred Schepisi,1988,Golden Globe,Best Director,false,A Cry in the Dark
+0,Dustin Hoffman,1988,Golden Globe,Best Actor (Drama),true,Rain Man
+0,Gene Hackman,1988,Golden Globe,Best Actor (Drama),false,Mississippi Burning
+0,Tom Hulce,1988,Golden Globe,Best Actor (Drama),false,Dominick and Eugene
+0,Edward James Olmos,1988,Golden Globe,Best Actor (Drama),false,Stand and Deliver
+0,Forest Whitaker,1988,Golden Globe,Best Actor (Drama),false,Bird
+0,Tom Hanks,1988,Golden Globe,Best Actor (Comedy/Musical),true,Big
+0,Michael Caine,1988,Golden Globe,Best Actor (Comedy/Musical),false,Dirty Rotten Scoundrels
+0,John Cleese,1988,Golden Globe,Best Actor (Comedy/Musical),false,A Fish Called Wanda
+0,Robert De Niro,1988,Golden Globe,Best Actor (Comedy/Musical),false,Midnight Run
+0,Bob Hoskins,1988,Golden Globe,Best Actor (Comedy/Musical),false,Who Framed Roger Rabbit
+0,Jodie Foster,1988,Golden Globe,Best Actress (Drama),true,The Accused
+0,Shirley MacLaine,1988,Golden Globe,Best Actress (Drama),false,Madame Sousatzka
+0,Sigourney Weaver,1988,Golden Globe,Best Actress (Drama),false,Gorillas in the Mist
+0,Meryl Streep,1988,Golden Globe,Best Actress (Drama),false,A Cry in the Dark
+0,Christine Lahti,1988,Golden Globe,Best Actress (Drama),false,Running on Empty
+0,Melanie Griffith,1988,Golden Globe,Best Actress (Comedy/Musical),true,Working Girl
+0,Jamie Lee Curtis,1988,Golden Globe,Best Actress (Comedy/Musical),false,A Fish Called Wanda
+0,Amy Irving,1988,Golden Globe,Best Actress (Comedy/Musical),false,Crossing Delancey
+0,Michelle Pfeiffer,1988,Golden Globe,Best Actress (Comedy/Musical),false,Married to the Mob
+0,Susan Sarandon,1988,Golden Globe,Best Actress (Comedy/Musical),false,Bull Durham
+0,Bernardo Bertolucci,1987,Golden Globe,Best Director,true,The Last Emperor
+0,Richard Attenborough,1987,Golden Globe,Best Director,false,Cry Freedom
+0,John Boorman,1987,Golden Globe,Best Director,false,Hope and Glory
+0,James L. Brooks,1987,Golden Globe,Best Director,false,Broadcast News
+0,Adrian Lyne,1987,Golden Globe,Best Director,false,Fatal Attraction
+0,Michael Douglas,1987,Golden Globe,Best Actor (Drama),true,Wall Street
+0,John Lone,1987,Golden Globe,Best Actor (Drama),false,The Last Emperor
+0,Jack Nicholson,1987,Golden Globe,Best Actor (Drama),false,Ironweed
+0,Nick Nolte,1987,Golden Globe,Best Actor (Drama),false,Weeds
+0,Denzel Washington,1987,Golden Globe,Best Actor (Drama),false,Cry Freedom
+0,Robin Williams,1987,Golden Globe,Best Actor (Comedy/Musical),true,Good Morning Vietnam
+0,Nicolas Cage,1987,Golden Globe,Best Actor (Comedy/Musical),false,Moonstruck
+0,Danny DeVito,1987,Golden Globe,Best Actor (Comedy/Musical),false,Throw Momma from the Train
+0,William Hurt,1987,Golden Globe,Best Actor (Comedy/Musical),false,Broadcast News
+0,Steve Martin,1987,Golden Globe,Best Actor (Comedy/Musical),false,Roxanne
+0,Patrick Swayze,1987,Golden Globe,Best Actor (Comedy/Musical),false,Dirty Dancing
+0,Sally Kirkland,1987,Golden Globe,Best Actress (Drama),true,Anna
+0,Rachel Chagall,1987,Golden Globe,Best Actress (Drama),false,Gaby: A True Story
+0,Glenn Close,1987,Golden Globe,Best Actress (Drama),false,Fatal Attraction
+0,Faye Dunaway,1987,Golden Globe,Best Actress (Drama),false,Barfly
+0,Barbra Streisand,1987,Golden Globe,Best Actress (Drama),false,Nuts
+0,Cher,1987,Golden Globe,Best Actress (Comedy/Musical),true,Moonstruck
+0,Jennifer Grey,1987,Golden Globe,Best Actress (Comedy/Musical),false,Dirty Dancing
+0,Holly Hunter,1987,Golden Globe,Best Actress (Comedy/Musical),false,Broadcast News
+0,Diane Keaton,1987,Golden Globe,Best Actress (Comedy/Musical),false,Baby Boom
+0,Bette Midler,1987,Golden Globe,Best Actress (Comedy/Musical),false,Outrageous Fortune
+0,Oliver Stone,1986,Golden Globe,Best Director,true,Platoon
+0,Woody Allen,1986,Golden Globe,Best Director,false,Hannah and Her Sisters
+0,James Ivory,1986,Golden Globe,Best Director,false,A Room with a View
+0,Roland Joffé,1986,Golden Globe,Best Director,false,The Mission
+0,Rob Reiner,1986,Golden Globe,Best Director,false,Stand by Me
+0,Bob Hoskins,1986,Golden Globe,Best Actor (Drama),true,Mona Lisa
+0,Harrison Ford,1986,Golden Globe,Best Actor (Drama),false,The Mosquito Coast
+0,Dexter Gordon,1986,Golden Globe,Best Actor (Drama),false,Round Midnight
+0,William Hurt,1986,Golden Globe,Best Actor (Drama),false,Children of a Lesser God
+0,Jeremy Irons,1986,Golden Globe,Best Actor (Drama),false,The Mission
+0,Paul Newman,1986,Golden Globe,Best Actor (Drama),false,The Color of Money
+0,Paul Hogan,1986,Golden Globe,Best Actor (Comedy/Musical),true,Crocodile Dundee
+0,Matthew Broderick,1986,Golden Globe,Best Actor (Comedy/Musical),false,Ferris Bueller's Day Off
+0,Jeff Daniels,1986,Golden Globe,Best Actor (Comedy/Musical),false,Something Wild
+0,Danny DeVito,1986,Golden Globe,Best Actor (Comedy/Musical),false,Ruthless People
+0,Jack Lemmon,1986,Golden Globe,Best Actor (Comedy/Musical),false,That's Life!
+0,Marlee Matlin,1986,Golden Globe,Best Actress (Drama),true,Children of a Lesser God
+0,Julie Andrews,1986,Golden Globe,Best Actress (Drama),false,Duet for One
+0,Anne Bancroft,1986,Golden Globe,Best Actress (Drama),false,'night Mother
+0,Farrah Fawcett,1986,Golden Globe,Best Actress (Drama),false,Extremities
+0,Sigourney Weaver,1986,Golden Globe,Best Actress (Drama),false,Aliens
+0,Sissy Spacek,1986,Golden Globe,Best Actress (Comedy/Musical),true,Crimes of the Heart
+0,Julie Andrews,1986,Golden Globe,Best Actress (Comedy/Musical),false,That's Life!
+0,Melanie Griffith,1986,Golden Globe,Best Actress (Comedy/Musical),false,Something Wild
+0,Bette Midler,1986,Golden Globe,Best Actress (Comedy/Musical),false,Down and Out in Beverly Hills
+0,Kathleen Turner,1986,Golden Globe,Best Actress (Comedy/Musical),false,Peggy Sue Got Married
+0,John Huston,1985,Golden Globe,Best Director,true,Prizzi's Honor
+0,Richard Attenborough,1985,Golden Globe,Best Director,false,A Chorus Line
+0,Sydney Pollack,1985,Golden Globe,Best Director,false,Out of Africa
+0,Steven Spielberg,1985,Golden Globe,Best Director,false,The Color Purple
+0,Peter Weir,1985,Golden Globe,Best Director,false,Witness
+0,Jon Voight,1985,Golden Globe,Best Actor (Drama),true,Runaway Train
+0,Harrison Ford,1985,Golden Globe,Best Actor (Drama),false,Witness
+0,Gene Hackman,1985,Golden Globe,Best Actor (Drama),false,Twice in a Lifetime
+0,William Hurt,1985,Golden Globe,Best Actor (Drama),false,Kiss of the Spider Woman
+0,Raul Julia,1985,Golden Globe,Best Actor (Drama),false,Kiss of the Spider Woman
+0,Jack Nicholson,1985,Golden Globe,Best Actor (Comedy/Musical),true,Prizzi's Honor
+0,Jeff Daniels,1985,Golden Globe,Best Actor (Comedy/Musical),false,The Purple Rose of Cairo
+0,Griffin Dunne,1985,Golden Globe,Best Actor (Comedy/Musical),false,After Hours
+0,Michael J. Fox,1985,Golden Globe,Best Actor (Comedy/Musical),false,Back to the Future
+0,James Garner,1985,Golden Globe,Best Actor (Comedy/Musical),false,Murphy's Romance
+0,Whoopi Goldberg,1985,Golden Globe,Best Actress (Drama),true,The Color Purple
+0,Anne Bancroft,1985,Golden Globe,Best Actress (Drama),false,Agnes of God
+0,Cher,1985,Golden Globe,Best Actress (Drama),false,Mask
+0,Geraldine Page,1985,Golden Globe,Best Actress (Drama),false,The Trip to Bountiful
+0,Meryl Streep,1985,Golden Globe,Best Actress (Drama),false,Out of Africa
+0,Kathleen Turner,1985,Golden Globe,Best Actress (Comedy/Musical),true,Prizzi's Honor
+0,Rosanna Arquette,1985,Golden Globe,Best Actress (Comedy/Musical),false,Desperately Seeking Susan
+0,Glenn Close,1985,Golden Globe,Best Actress (Comedy/Musical),false,Maxie
+0,Mia Farrow,1985,Golden Globe,Best Actress (Comedy/Musical),false,The Purple Rose of Cairo
+0,Sally Field,1985,Golden Globe,Best Actress (Comedy/Musical),false,Murphy's Romance
+0,Miloš Forman,1984,Golden Globe,Best Director,true,Amadeus
+0,Francis Ford Coppola,1984,Golden Globe,Best Director,false,The Cotton Club
+0,Roland Joffé,1984,Golden Globe,Best Director,false,The Killing Fields
+0,David Lean,1984,Golden Globe,Best Director,false,A Passage to India
+0,Sergio Leone,1984,Golden Globe,Best Director,false,Once Upon a Time in America
+0,F. Murray Abraham,1984,Golden Globe,Best Actor (Drama),true,Amadeus
+0,Jeff Bridges,1984,Golden Globe,Best Actor (Drama),false,Starman
+0,Albert Finney,1984,Golden Globe,Best Actor (Drama),false,Under the Volcano
+0,Tom Hulce,1984,Golden Globe,Best Actor (Drama),false,Amadeus
+0,Sam Waterston,1984,Golden Globe,Best Actor (Drama),false,The Killing Fields
+0,Dudley Moore,1984,Golden Globe,Best Actor (Comedy/Musical),true,Micki + Maude
+0,Steve Martin,1984,Golden Globe,Best Actor (Comedy/Musical),false,All of Me
+0,Eddie Murphy,1984,Golden Globe,Best Actor (Comedy/Musical),false,Beverly Hills Cop
+0,Bill Murray,1984,Golden Globe,Best Actor (Comedy/Musical),false,Ghostbusters
+0,Robin Williams,1984,Golden Globe,Best Actor (Comedy/Musical),false,Moscow on the Hudson
+0,Sally Field,1984,Golden Globe,Best Actress (Drama),true,Places in the Heart
+0,Diane Keaton,1984,Golden Globe,Best Actress (Drama),false,Mrs. Soffel
+0,Jessica Lange,1984,Golden Globe,Best Actress (Drama),false,Country
+0,Vanessa Redgrave,1984,Golden Globe,Best Actress (Drama),false,The Bostonians
+0,Sissy Spacek,1984,Golden Globe,Best Actress (Drama),false,The River
+0,Kathleen Turner,1984,Golden Globe,Best Actress (Comedy/Musical),true,Romancing the Stone
+0,Anne Bancroft,1984,Golden Globe,Best Actress (Comedy/Musical),false,Garbo Talks
+0,Mia Farrow,1984,Golden Globe,Best Actress (Comedy/Musical),false,Broadway Danny Rose
+0,Shelley Long,1984,Golden Globe,Best Actress (Comedy/Musical),false,Irreconcilable Differences
+0,Lily Tomlin,1984,Golden Globe,Best Actress (Comedy/Musical),false,All of Me
+0,Barbra Streisand,1983,Golden Globe,Best Director,true,Yentl
+0,Bruce Beresford,1983,Golden Globe,Best Director,false,Tender Mercies
+0,Ingmar Bergman,1983,Golden Globe,Best Director,false,Fanny and Alexander
+0,James L. Brooks,1983,Golden Globe,Best Director,false,Terms of Endearment
+0,Mike Nichols,1983,Golden Globe,Best Director,false,Silkwood
+0,Peter Yates,1983,Golden Globe,Best Director,false,The Dresser
+0,Tom Courtenay,1983,Golden Globe,Best Actor (Drama),true,The Dresser
+0,Robert Duvall,1983,Golden Globe,Best Actor (Drama),true,Tender Mercies
+0,Tom Conti,1983,Golden Globe,Best Actor (Drama),false,Reuben Reuben
+0,Richard Farnsworth,1983,Golden Globe,Best Actor (Drama),false,The Grey Fox
+0,Albert Finney,1983,Golden Globe,Best Actor (Drama),false,The Dresser
+0,Al Pacino,1983,Golden Globe,Best Actor (Drama),false,Scarface
+0,Eric Roberts,1983,Golden Globe,Best Actor (Drama),false,Star 80
+0,Michael Caine,1983,Golden Globe,Best Actor (Comedy/Musical),true,Educating Rita
+0,Woody Allen,1983,Golden Globe,Best Actor (Comedy/Musical),false,Zelig
+0,Tom Cruise,1983,Golden Globe,Best Actor (Comedy/Musical),false,Risky Business
+0,Eddie Murphy,1983,Golden Globe,Best Actor (Comedy/Musical),false,Trading Places
+0,Mandy Patinkin,1983,Golden Globe,Best Actor (Comedy/Musical),false,Yentl
+0,Shirley MacLaine,1983,Golden Globe,Best Actress (Drama),true,Terms of Endearment
+0,Jane Alexander,1983,Golden Globe,Best Actress (Drama),false,Testament
+0,Bonnie Bedelia,1983,Golden Globe,Best Actress (Drama),false,Heart Like a Wheel
+0,Meryl Streep,1983,Golden Globe,Best Actress (Drama),false,Silkwood
+0,Debra Winger,1983,Golden Globe,Best Actress (Drama),false,Terms of Endearment
+0,Julie Walters,1983,Golden Globe,Best Actress (Comedy/Musical),true,Educating Rita
+0,Anne Bancroft,1983,Golden Globe,Best Actress (Comedy/Musical),false,To Be or Not to Be
+0,Jennifer Beals,1983,Golden Globe,Best Actress (Comedy/Musical),false,Flashdance
+0,Linda Ronstadt,1983,Golden Globe,Best Actress (Comedy/Musical),false,The Pirates of Penzance
+0,Barbra Streisand,1983,Golden Globe,Best Actress (Comedy/Musical),false,Yentl
+0,Richard Attenborough,1982,Golden Globe,Best Director,true,Gandhi
+0,Costa-Gavras,1982,Golden Globe,Best Director,false,Missing
+0,Sidney Lumet,1982,Golden Globe,Best Director,false,The Verdict
+0,Sydney Pollack,1982,Golden Globe,Best Director,false,Tootsie
+0,Steven Spielberg,1982,Golden Globe,Best Director,false,E.T. the Extra-Terrestrial
+0,Ben Kingsley,1982,Golden Globe,Best Actor (Drama),true,Gandhi
+0,Albert Finney,1982,Golden Globe,Best Actor (Drama),false,Shoot the Moon
+0,Richard Gere,1982,Golden Globe,Best Actor (Drama),false,An Officer and a Gentleman
+0,Jack Lemmon,1982,Golden Globe,Best Actor (Drama),false,Missing
+0,Paul Newman,1982,Golden Globe,Best Actor (Drama),false,The Verdict
+0,Dustin Hoffman,1982,Golden Globe,Best Actor (Comedy/Musical),true,Tootsie
+0,Peter O'Toole,1982,Golden Globe,Best Actor (Comedy/Musical),false,My Favorite Year
+0,Al Pacino,1982,Golden Globe,Best Actor (Comedy/Musical),false,Author! Author!
+0,Robert Preston,1982,Golden Globe,Best Actor (Comedy/Musical),false,Victor/Victoria
+0,Henry Winkler,1982,Golden Globe,Best Actor (Comedy/Musical),false,Night Shift
+0,Meryl Streep,1982,Golden Globe,Best Actress (Drama),true,Sophie's Choice
+0,Diane Keaton,1982,Golden Globe,Best Actress (Drama),false,Shoot the Moon
+0,Jessica Lange,1982,Golden Globe,Best Actress (Drama),false,Frances
+0,Sissy Spacek,1982,Golden Globe,Best Actress (Drama),false,Missing
+0,Debra Winger,1982,Golden Globe,Best Actress (Drama),false,An Officer and a Gentleman
+0,Julie Andrews,1982,Golden Globe,Best Actress (Comedy/Musical),true,Victor/Victoria
+0,Carol Burnett,1982,Golden Globe,Best Actress (Comedy/Musical),false,Annie
+0,Sally Field,1982,Golden Globe,Best Actress (Comedy/Musical),false,Kiss Me Goodbye
+0,Goldie Hawn,1982,Golden Globe,Best Actress (Comedy/Musical),false,Best Friends
+0,Dolly Parton,1982,Golden Globe,Best Actress (Comedy/Musical),false,The Best Little Whorehouse in Texas
+0,Aileen Quinn,1982,Golden Globe,Best Actress (Comedy/Musical),false,Annie
+0,Warren Beatty,1981,Golden Globe,Best Director,true,Reds
+0,Miloš Forman,1981,Golden Globe,Best Director,false,Ragtime
+0,Sidney Lumet,1981,Golden Globe,Best Director,false,Prince of the City
+0,Louis Malle,1981,Golden Globe,Best Director,false,Atlantic City
+0,Mark Rydell,1981,Golden Globe,Best Director,false,On Golden Pond
+0,Steven Spielberg,1981,Golden Globe,Best Director,false,Raiders of the Lost Ark
+0,Henry Fonda,1981,Golden Globe,Best Actor (Drama),true,On Golden Pond
+0,Warren Beatty,1981,Golden Globe,Best Actor (Drama),false,Reds
+0,Timothy Hutton,1981,Golden Globe,Best Actor (Drama),false,Taps
+0,Burt Lancaster,1981,Golden Globe,Best Actor (Drama),false,Atlantic City
+0,Treat Williams,1981,Golden Globe,Best Actor (Drama),false,Prince of the City
+0,Dudley Moore,1981,Golden Globe,Best Actor (Comedy/Musical),true,Arthur
+0,Alan Alda,1981,Golden Globe,Best Actor (Comedy/Musical),false,The Four Seasons
+0,George Hamilton,1981,Golden Globe,Best Actor (Comedy/Musical),false,Zorro the Gay Blade
+0,Steve Martin,1981,Golden Globe,Best Actor (Comedy/Musical),false,Pennies from Heaven
+0,Walter Matthau,1981,Golden Globe,Best Actor (Comedy/Musical),false,First Monday in October
+0,Meryl Streep,1981,Golden Globe,Best Actress (Drama),true,The French Lieutenant's Woman
+0,Sally Field,1981,Golden Globe,Best Actress (Drama),false,Absence of Malice
+0,Katharine Hepburn,1981,Golden Globe,Best Actress (Drama),false,On Golden Pond
+0,Diane Keaton,1981,Golden Globe,Best Actress (Drama),false,Reds
+0,Sissy Spacek,1981,Golden Globe,Best Actress (Drama),false,Raggedy Man
+0,Bernadette Peters,1981,Golden Globe,Best Actress (Comedy/Musical),true,Pennies from Heaven
+0,Blair Brown,1981,Golden Globe,Best Actress (Comedy/Musical),false,Continental Divide
+0,Carol Burnett,1981,Golden Globe,Best Actress (Comedy/Musical),false,The Four Seasons
+0,Jill Clayburgh,1981,Golden Globe,Best Actress (Comedy/Musical),false,First Monday in October
+0,Liza Minnelli,1981,Golden Globe,Best Actress (Comedy/Musical),false,Arthur
+0,Robert Redford,1980,Golden Globe,Best Director,true,Ordinary People
+0,David Lynch,1980,Golden Globe,Best Director,false,The Elephant Man
+0,Roman Polanski,1980,Golden Globe,Best Director,false,Tess
+0,Richard Rush,1980,Golden Globe,Best Director,false,The Stunt Man
+0,Martin Scorsese,1980,Golden Globe,Best Director,false,Raging Bull
+0,Robert De Niro,1980,Golden Globe,Best Actor (Drama),true,Raging Bull
+0,John Hurt,1980,Golden Globe,Best Actor (Drama),false,The Elephant Man
+0,Jack Lemmon,1980,Golden Globe,Best Actor (Drama),false,Tribute
+0,Peter O'Toole,1980,Golden Globe,Best Actor (Drama),false,The Stunt Man
+0,Donald Sutherland,1980,Golden Globe,Best Actor (Drama),false,Ordinary People
+0,Ray Sharkey,1980,Golden Globe,Best Actor (Comedy/Musical),true,The Idolmaker
+0,Neil Diamond,1980,Golden Globe,Best Actor (Comedy/Musical),false,The Jazz Singer
+0,Tommy Lee Jones,1980,Golden Globe,Best Actor (Comedy/Musical),false,Coal Miner's Daughter
+0,Paul Le Mat,1980,Golden Globe,Best Actor (Comedy/Musical),false,Melvin and Howard
+0,Walter Matthau,1980,Golden Globe,Best Actor (Comedy/Musical),false,Hopscotch
+0,Mary Tyler Moore,1980,Golden Globe,Best Actress (Drama),true,Ordinary People
+0,Ellen Burstyn,1980,Golden Globe,Best Actress (Drama),false,Resurrection
+0,Nastassja Kinski,1980,Golden Globe,Best Actress (Drama),false,Tess
+0,Deborah Raffin,1980,Golden Globe,Best Actress (Drama),false,Touched by Love
+0,Gena Rowlands,1980,Golden Globe,Best Actress (Drama),false,Gloria
+0,Sissy Spacek,1980,Golden Globe,Best Actress (Comedy/Musical),true,Coal Miner's Daughter
+0,Irene Cara,1980,Golden Globe,Best Actress (Comedy/Musical),false,Fame
+0,Goldie Hawn,1980,Golden Globe,Best Actress (Comedy/Musical),false,Private Benjamin
+0,Bette Midler,1980,Golden Globe,Best Actress (Comedy/Musical),false,Divine Madness
+0,Dolly Parton,1980,Golden Globe,Best Actress (Comedy/Musical),false,9 to 5
+0,Francis Ford Coppola,1979,Golden Globe,Best Director,true,Apocalypse Now
+0,Hal Ashby,1979,Golden Globe,Best Director,false,Being There
+0,Robert Benton,1979,Golden Globe,Best Director,false,Kramer vs. Kramer
+0,James Bridges,1979,Golden Globe,Best Director,false,The China Syndrome
+0,Peter Yates,1979,Golden Globe,Best Director,false,Breaking Away
+0,Dustin Hoffman,1979,Golden Globe,Best Actor (Drama),true,Kramer vs. Kramer
+0,Jack Lemmon,1979,Golden Globe,Best Actor (Drama),false,The China Syndrome
+0,Al Pacino,1979,Golden Globe,Best Actor (Drama),false,...And Justice for All
+0,Jon Voight,1979,Golden Globe,Best Actor (Drama),false,The Champ
+0,James Woods,1979,Golden Globe,Best Actor (Drama),false,The Onion Field
+0,Peter Sellers,1979,Golden Globe,Best Actor (Comedy/Musical),true,Being There
+0,George Hamilton,1979,Golden Globe,Best Actor (Comedy/Musical),false,Love at First Bite
+0,Dudley Moore,1979,Golden Globe,Best Actor (Comedy/Musical),false,10
+0,Burt Reynolds,1979,Golden Globe,Best Actor (Comedy/Musical),false,Starting Over
+0,Roy Scheider,1979,Golden Globe,Best Actor (Comedy/Musical),false,All That Jazz
+0,Sally Field,1979,Golden Globe,Best Actress (Drama),true,Norma Rae
+0,Jill Clayburgh,1979,Golden Globe,Best Actress (Drama),false,La Luna
+0,Lisa Eichhorn,1979,Golden Globe,Best Actress (Drama),false,Yanks
+0,Jane Fonda,1979,Golden Globe,Best Actress (Drama),false,The China Syndrome
+0,Marsha Mason,1979,Golden Globe,Best Actress (Drama),false,Promises in the Dark
+0,Bette Midler,1979,Golden Globe,Best Actress (Comedy/Musical),true,The Rose
+0,Julie Andrews,1979,Golden Globe,Best Actress (Comedy/Musical),false,10
+0,Jill Clayburgh,1979,Golden Globe,Best Actress (Comedy/Musical),false,Starting Over
+0,Shirley MacLaine,1979,Golden Globe,Best Actress (Comedy/Musical),false,Being There
+0,Marsha Mason,1979,Golden Globe,Best Actress (Comedy/Musical),false,Chapter Two
+0,Michael Cimino,1978,Golden Globe,Best Director,true,The Deer Hunter
+0,Woody Allen,1978,Golden Globe,Best Director,false,Interiors
+0,Hal Ashby,1978,Golden Globe,Best Director,false,Coming Home
+0,Terrence Malick,1978,Golden Globe,Best Director,false,Days of Heaven
+0,Paul Mazursky,1978,Golden Globe,Best Director,false,An Unmarried Woman
+0,Alan Parker,1978,Golden Globe,Best Director,false,Midnight Express
+0,Jon Voight,1978,Golden Globe,Best Actor (Drama),true,Coming Home
+0,Brad Davis,1978,Golden Globe,Best Actor (Drama),false,Midnight Express
+0,Robert De Niro,1978,Golden Globe,Best Actor (Drama),false,The Deer Hunter
+0,Anthony Hopkins,1978,Golden Globe,Best Actor (Drama),false,Magic
+0,Gregory Peck,1978,Golden Globe,Best Actor (Drama),false,The Boys from Brazil
+0,Warren Beatty,1978,Golden Globe,Best Actor (Comedy/Musical),true,Heaven Can Wait
+0,Alan Alda,1978,Golden Globe,Best Actor (Comedy/Musical),false,Same Time Next Year
+0,Gary Busey,1978,Golden Globe,Best Actor (Comedy/Musical),false,The Buddy Holly Story
+0,Chevy Chase,1978,Golden Globe,Best Actor (Comedy/Musical),false,Foul Play
+0,George C. Scott,1978,Golden Globe,Best Actor (Comedy/Musical),false,Movie Movie
+0,John Travolta,1978,Golden Globe,Best Actor (Comedy/Musical),false,Grease
+0,Jane Fonda,1978,Golden Globe,Best Actress (Drama),true,Coming Home
+0,Ingrid Bergman,1978,Golden Globe,Best Actress (Drama),false,Autumn Sonata
+0,Jill Clayburgh,1978,Golden Globe,Best Actress (Drama),false,An Unmarried Woman
+0,Glenda Jackson,1978,Golden Globe,Best Actress (Drama),false,Stevie
+0,Geraldine Page,1978,Golden Globe,Best Actress (Drama),false,Interiors
+0,Ellen Burstyn,1978,Golden Globe,Best Actress (Comedy/Musical),true,Same Time Next Year
+0,Jacqueline Bisset,1978,Golden Globe,Best Actress (Comedy/Musical),false,Who Is Killing the Great Chefs of Europe?
+0,Goldie Hawn,1978,Golden Globe,Best Actress (Comedy/Musical),false,Foul Play
+0,Maggie Smith,1978,Golden Globe,Best Actress (Comedy/Musical),false,California Suite
+0,Olivia Newton-John,1978,Golden Globe,Best Actress (Comedy/Musical),false,Grease
+0,Herbert Ross,1977,Golden Globe,Best Director,true,The Turning Point
+0,Woody Allen,1977,Golden Globe,Best Director,false,Annie Hall
+0,George Lucas,1977,Golden Globe,Best Director,false,Star Wars
+0,Steven Spielberg,1977,Golden Globe,Best Director,false,Close Encounters of the Third Kind
+0,Fred Zinnemann,1977,Golden Globe,Best Director,false,Julia
+0,Richard Burton,1977,Golden Globe,Best Actor (Drama),true,Equus
+0,Marcello Mastroianni,1977,Golden Globe,Best Actor (Drama),false,A Special Day
+0,Al Pacino,1977,Golden Globe,Best Actor (Drama),false,Bobby Deerfield
+0,Gregory Peck,1977,Golden Globe,Best Actor (Drama),false,MacArthur
+0,Henry Winkler,1977,Golden Globe,Best Actor (Drama),false,Heroes
+0,Richard Dreyfuss,1977,Golden Globe,Best Actor (Comedy/Musical),true,The Goodbye Girl
+0,Woody Allen,1977,Golden Globe,Best Actor (Comedy/Musical),false,Annie Hall
+0,Mel Brooks,1977,Golden Globe,Best Actor (Comedy/Musical),false,High Anxiety
+0,Robert De Niro,1977,Golden Globe,Best Actor (Comedy/Musical),false,New York New York
+0,John Travolta,1977,Golden Globe,Best Actor (Comedy/Musical),false,Saturday Night Fever
+0,Jane Fonda,1977,Golden Globe,Best Actress (Drama),true,Julia
+0,Anne Bancroft,1977,Golden Globe,Best Actress (Drama),false,The Turning Point
+0,Diane Keaton,1977,Golden Globe,Best Actress (Drama),false,Looking for Mr. Goodbar
+0,Kathleen Quinlan,1977,Golden Globe,Best Actress (Drama),false,I Never Promised You a Rose Garden
+0,Gena Rowlands,1977,Golden Globe,Best Actress (Drama),false,Opening Night
+0,Diane Keaton,1977,Golden Globe,Best Actress (Comedy/Musical),true,Annie Hall
+0,Anne Bancroft,1977,Golden Globe,Best Actress (Comedy/Musical),false,High Anxiety
+0,Marsha Mason,1977,Golden Globe,Best Actress (Comedy/Musical),false,The Goodbye Girl
+0,Liza Minnelli,1977,Golden Globe,Best Actress (Comedy/Musical),false,New York New York
+0,Lily Tomlin,1977,Golden Globe,Best Actress (Comedy/Musical),false,The Late Show
+0,Sidney Lumet,1976,Golden Globe,Best Director,true,Network
+0,Hal Ashby,1976,Golden Globe,Best Director,false,Bound for Glory
+0,John G. Avildsen,1976,Golden Globe,Best Director,false,Rocky
+0,Alan J. Pakula,1976,Golden Globe,Best Director,false,All the President's Men
+0,John Schlesinger,1976,Golden Globe,Best Director,false,Marathon Man
+0,Peter Finch,1976,Golden Globe,Best Actor (Drama),true,Network
+0,David Carradine,1976,Golden Globe,Best Actor (Drama),false,Bound for Glory
+0,Robert De Niro,1976,Golden Globe,Best Actor (Drama),false,Taxi Driver
+0,Dustin Hoffman,1976,Golden Globe,Best Actor (Drama),false,Marathon Man
+0,Sylvester Stallone,1976,Golden Globe,Best Actor (Drama),false,Rocky
+0,Charles Jarrott,1969,Golden Globe,Best Director,true,Anne of the Thousand Days
+0,Gene Kelly,1969,Golden Globe,Best Director,false,Hello Dolly!
+0,Stanley Kramer,1969,Golden Globe,Best Director,false,The Secret of Santa Vittoria
+0,Sydney Pollack,1969,Golden Globe,Best Director,false,They Shoot Horses Don't They?
+0,John Schlesinger,1969,Golden Globe,Best Director,false,Midnight Cowboy
+0,John Wayne,1969,Golden Globe,Best Actor (Drama),true,True Grit
+0,Alan Arkin,1969,Golden Globe,Best Actor (Drama),false,Popi
+0,Richard Burton,1969,Golden Globe,Best Actor (Drama),false,Anne of the Thousand Days
+0,Dustin Hoffman,1969,Golden Globe,Best Actor (Drama),false,Midnight Cowboy
+0,Jon Voight,1969,Golden Globe,Best Actor (Drama),false,Midnight Cowboy
+0,Peter O'Toole,1969,Golden Globe,Best Actor (Comedy/Musical),true,Goodbye Mr. Chips
+0,Dustin Hoffman,1969,Golden Globe,Best Actor (Comedy/Musical),false,John and Mary
+0,Lee Marvin,1969,Golden Globe,Best Actor (Comedy/Musical),false,Paint Your Wagon
+0,Steve McQueen,1969,Golden Globe,Best Actor (Comedy/Musical),false,The Reivers
+0,Anthony Quinn,1969,Golden Globe,Best Actor (Comedy/Musical),false,The Secret of Santa Vittoria
+0,Geneviève Bujold,1969,Golden Globe,Best Actress (Drama),true,Anne of the Thousand Days
+0,Jane Fonda,1969,Golden Globe,Best Actress (Drama),false,They Shoot Horses Don't They?
+0,Liza Minnelli,1969,Golden Globe,Best Actress (Drama),false,The Sterile Cuckoo
+0,Jean Simmons,1969,Golden Globe,Best Actress (Drama),false,The Happy Ending
+0,Maggie Smith,1969,Golden Globe,Best Actress (Drama),false,The Prime of Miss Jean Brodie
+0,Patty Duke,1969,Golden Globe,Best Actress (Comedy/Musical),true,Me Natalie
+0,Ingrid Bergman,1969,Golden Globe,Best Actress (Comedy/Musical),false,Cactus Flower
+0,Dyan Cannon,1969,Golden Globe,Best Actress (Comedy/Musical),false,Bob & Carol & Ted & Alice
+0,Kim Darby,1969,Golden Globe,Best Actress (Comedy/Musical),false,Generation
+0,Mia Farrow,1969,Golden Globe,Best Actress (Comedy/Musical),false,John and Mary
+0,Shirley MacLaine,1969,Golden Globe,Best Actress (Comedy/Musical),false,Sweet Charity
+0,Barbra Streisand,1969,Golden Globe,Best Actress (Comedy/Musical),false,Hello Dolly!
+0,Anna Magnani,1969,Golden Globe,Best Actress (Comedy/Musical),false,The Secret of Santa Vittoria
+0,Paul Newman,1968,Golden Globe,Best Director,true,Rachel Rachel
+0,Anthony Harvey,1968,Golden Globe,Best Director,false,The Lion in Winter
+0,Carol Reed,1968,Golden Globe,Best Director,false,Oliver!
+0,William Wyler,1968,Golden Globe,Best Director,false,Funny Girl
+0,Franco Zeffirelli,1968,Golden Globe,Best Director,false,Romeo and Juliet
+0,Peter O'Toole,1968,Golden Globe,Best Actor (Drama),true,The Lion in Winter
+0,Alan Arkin,1968,Golden Globe,Best Actor (Drama),false,The Heart Is a Lonely Hunter
+0,Alan Bates,1968,Golden Globe,Best Actor (Drama),false,The Fixer
+0,Tony Curtis,1968,Golden Globe,Best Actor (Drama),false,The Boston Strangler
+0,Cliff Robertson,1968,Golden Globe,Best Actor (Drama),false,Charly
+0,Ron Moody,1968,Golden Globe,Best Actor (Comedy/Musical),true,Oliver!
+0,Fred Astaire,1968,Golden Globe,Best Actor (Comedy/Musical),false,Finian's Rainbow
+0,Jack Lemmon,1968,Golden Globe,Best Actor (Comedy/Musical),false,The Odd Couple
+0,Walter Matthau,1968,Golden Globe,Best Actor (Comedy/Musical),false,The Odd Couple
+0,Zero Mostel,1968,Golden Globe,Best Actor (Comedy/Musical),false,The Producers
+0,Joanne Woodward,1968,Golden Globe,Best Actress (Drama),true,Rachel Rachel
+0,Mia Farrow,1968,Golden Globe,Best Actress (Drama),false,Rosemary's Baby
+0,Katharine Hepburn,1968,Golden Globe,Best Actress (Drama),false,The Lion in Winter
+0,Vanessa Redgrave,1968,Golden Globe,Best Actress (Drama),false,Isadora
+0,Beryl Reid,1968,Golden Globe,Best Actress (Drama),false,The Killing of Sister George
+0,Barbra Streisand,1968,Golden Globe,Best Actress (Comedy/Musical),true,Funny Girl
+0,Julie Andrews,1968,Golden Globe,Best Actress (Comedy/Musical),false,Star!
+0,Lucille Ball,1968,Golden Globe,Best Actress (Comedy/Musical),false,Yours Mine and Ours
+0,Petula Clark,1968,Golden Globe,Best Actress (Comedy/Musical),false,Finian's Rainbow
+0,Gina Lollobrigida,1968,Golden Globe,Best Actress (Comedy/Musical),false,Buona Sera Mrs. Campbell
+0,Mike Nichols,1967,Golden Globe,Best Director,true,The Graduate
+0,Norman Jewison,1967,Golden Globe,Best Director,false,In the Heat of the Night
+0,Stanley Kramer,1967,Golden Globe,Best Director,false,Guess Who's Coming to Dinner
+0,Arthur Penn,1967,Golden Globe,Best Director,false,Bonnie and Clyde
+0,Mark Rydell,1967,Golden Globe,Best Director,false,The Fox
+0,Rod Steiger,1967,Golden Globe,Best Actor (Drama),true,In the Heat of the Night
+0,Alan Bates,1967,Golden Globe,Best Actor (Drama),false,Far from the Madding Crowd
+0,Warren Beatty,1967,Golden Globe,Best Actor (Drama),false,Bonnie and Clyde
+0,Paul Newman,1967,Golden Globe,Best Actor (Drama),false,Cool Hand Luke
+0,Sidney Poitier,1967,Golden Globe,Best Actor (Drama),false,In the Heat of the Night
+0,Spencer Tracy,1967,Golden Globe,Best Actor (Drama),false,Guess Who's Coming to Dinner
+0,Richard Harris,1967,Golden Globe,Best Actor (Comedy/Musical),true,Camelot
+0,Richard Burton,1967,Golden Globe,Best Actor (Comedy/Musical),false,The Taming of the Shrew
+0,Rex Harrison,1967,Golden Globe,Best Actor (Comedy/Musical),false,Doctor Dolittle
+0,Dustin Hoffman,1967,Golden Globe,Best Actor (Comedy/Musical),false,The Graduate
+0,Ugo Tognazzi,1967,Golden Globe,Best Actor (Comedy/Musical),false,The Climax
+0,Edith Evans,1967,Golden Globe,Best Actress (Drama),true,The Whisperers
+0,Faye Dunaway,1967,Golden Globe,Best Actress (Drama),false,Bonnie and Clyde
+0,Audrey Hepburn,1967,Golden Globe,Best Actress (Drama),false,Wait Until Dark
+0,Katharine Hepburn,1967,Golden Globe,Best Actress (Drama),false,Guess Who's Coming to Dinner
+0,Anne Heywood,1967,Golden Globe,Best Actress (Drama),false,The Fox
+0,Anne Bancroft,1967,Golden Globe,Best Actress (Comedy/Musical),true,The Graduate
+0,Julie Andrews,1967,Golden Globe,Best Actress (Comedy/Musical),false,Thoroughly Modern Millie
+0,Audrey Hepburn,1967,Golden Globe,Best Actress (Comedy/Musical),false,Two for the Road
+0,Shirley MacLaine,1967,Golden Globe,Best Actress (Comedy/Musical),false,Woman Times Seven
+0,Vanessa Redgrave,1967,Golden Globe,Best Actress (Comedy/Musical),false,Camelot
+0,Fred Zinnemann,1966,Golden Globe,Best Director,true,A Man for All Seasons
+0,Lewis Gilbert,1966,Golden Globe,Best Director,false,Alfie
+0,Claude Lelouch,1966,Golden Globe,Best Director,false,A Man and a Woman
+0,Mike Nichols,1966,Golden Globe,Best Director,false,Who's Afraid of Virginia Woolf?
+0,Robert Wise,1966,Golden Globe,Best Director,false,The Sand Pebbles
+0,Paul Scofield,1966,Golden Globe,Best Actor (Drama),true,A Man for All Seasons
+0,Richard Burton,1966,Golden Globe,Best Actor (Drama),false,Who's Afraid of Virginia Woolf?
+0,Michael Caine,1966,Golden Globe,Best Actor (Drama),false,Alfie
+0,Steve McQueen,1966,Golden Globe,Best Actor (Drama),false,The Sand Pebbles
+0,Max von Sydow,1966,Golden Globe,Best Actor (Drama),false,Hawaii
+0,Alan Arkin,1966,Golden Globe,Best Actor (Comedy/Musical),true,The Russians Are Coming the Russians Are Coming
+0,Alan Bates,1966,Golden Globe,Best Actor (Comedy/Musical),false,Georgy Girl
+0,Michael Caine,1966,Golden Globe,Best Actor (Comedy/Musical),false,Gambit
+0,Lionel Jeffries,1966,Golden Globe,Best Actor (Comedy/Musical),false,The Spy with a Cold Nose
+0,Walter Matthau,1966,Golden Globe,Best Actor (Comedy/Musical),false,The Fortune Cookie
+0,Anouk Aimée,1966,Golden Globe,Best Actress (Drama),true,A Man and a Woman
+0,Ida Kaminska,1966,Golden Globe,Best Actress (Drama),false,The Shop on Main Street
+0,Virginia McKenna,1966,Golden Globe,Best Actress (Drama),false,Born Free
+0,Elizabeth Taylor,1966,Golden Globe,Best Actress (Drama),false,Who's Afraid of Virginia Woolf?
+0,Natalie Wood,1966,Golden Globe,Best Actress (Drama),false,This Property Is Condemned
+0,Lynn Redgrave,1966,Golden Globe,Best Actress (Comedy/Musical),true,Georgy Girl
+0,Jane Fonda,1966,Golden Globe,Best Actress (Comedy/Musical),false,Any Wednesday
+0,Elizabeth Hartman,1966,Golden Globe,Best Actress (Comedy/Musical),false,You're a Big Boy Now
+0,Shirley MacLaine,1966,Golden Globe,Best Actress (Comedy/Musical),false,Gambit
+0,Vanessa Redgrave,1966,Golden Globe,Best Actress (Comedy/Musical),false,Morgan!
+0,David Lean,1965,Golden Globe,Best Director,true,Doctor Zhivago
+0,Guy Green,1965,Golden Globe,Best Director,false,A Patch of Blue
+0,John Schlesinger,1965,Golden Globe,Best Director,false,Darling
+0,Robert Wise,1965,Golden Globe,Best Director,false,The Sound of Music
+0,William Wyler,1965,Golden Globe,Best Director,false,The Collector
+0,Omar Sharif,1965,Golden Globe,Best Actor (Drama),true,Doctor Zhivago
+0,Rex Harrison,1965,Golden Globe,Best Actor (Drama),false,The Agony and the Ecstasy
+0,Sidney Poitier,1965,Golden Globe,Best Actor (Drama),false,A Patch of Blue
+0,Rod Steiger,1965,Golden Globe,Best Actor (Drama),false,The Pawnbroker
+0,Oskar Werner,1965,Golden Globe,Best Actor (Drama),false,Ship of Fools
+0,Lee Marvin,1965,Golden Globe,Best Actor (Comedy/Musical),true,Cat Ballou
+0,Jack Lemmon,1965,Golden Globe,Best Actor (Comedy/Musical),false,The Great Race
+0,Jerry Lewis,1965,Golden Globe,Best Actor (Comedy/Musical),false,Boeing Boeing
+0,Jason Robards,1965,Golden Globe,Best Actor (Comedy/Musical),false,A Thousand Clowns
+0,Alberto Sordi,1965,Golden Globe,Best Actor (Comedy/Musical),false,Those Magnificent Men in Their Flying Machines
+0,Samantha Eggar,1965,Golden Globe,Best Actress (Drama),true,The Collector
+0,Julie Christie,1965,Golden Globe,Best Actress (Drama),false,Darling
+0,Elizabeth Hartman,1965,Golden Globe,Best Actress (Drama),false,A Patch of Blue
+0,Simone Signoret,1965,Golden Globe,Best Actress (Drama),false,Ship of Fools
+0,Maggie Smith,1965,Golden Globe,Best Actress (Drama),false,Othello
+0,Julie Andrews,1965,Golden Globe,Best Actress (Comedy/Musical),true,The Sound of Music
+0,Jane Fonda,1965,Golden Globe,Best Actress (Comedy/Musical),false,Cat Ballou
+0,Barbara Harris,1965,Golden Globe,Best Actress (Comedy/Musical),false,A Thousand Clowns
+0,Rita Tushingham,1965,Golden Globe,Best Actress (Comedy/Musical),false,The Knack ...and How to Get It
+0,Natalie Wood,1965,Golden Globe,Best Actress (Comedy/Musical),false,Inside Daisy Clover
+0,George Cukor,1964,Golden Globe,Best Director,true,My Fair Lady
+0,Michael Cacoyannis,1964,Golden Globe,Best Director,false,Zorba the Greek
+0,John Frankenheimer,1964,Golden Globe,Best Director,false,Seven Days in May
+0,Peter Glenville,1964,Golden Globe,Best Director,false,Becket
+0,John Huston,1964,Golden Globe,Best Director,false,The Night of the Iguana
+0,Peter O'Toole,1964,Golden Globe,Best Actor (Drama),true,Becket
+0,Richard Burton,1964,Golden Globe,Best Actor (Drama),false,Becket
+0,Anthony Franciosa,1964,Golden Globe,Best Actor (Drama),false,Rio Conchos
+0,Fredric March,1964,Golden Globe,Best Actor (Drama),false,Seven Days in May
+0,Anthony Quinn,1964,Golden Globe,Best Actor (Drama),false,Zorba the Greek
+0,Rex Harrison,1964,Golden Globe,Best Actor (Comedy/Musical),true,My Fair Lady
+0,Marcello Mastroianni,1964,Golden Globe,Best Actor (Comedy/Musical),false,Marriage Italian Style
+0,Peter Sellers,1964,Golden Globe,Best Actor (Comedy/Musical),false,The Pink Panther
+0,Peter Ustinov,1964,Golden Globe,Best Actor (Comedy/Musical),false,Topkapi
+0,Dick Van Dyke,1964,Golden Globe,Best Actor (Comedy/Musical),false,Mary Poppins
+0,Anne Bancroft,1964,Golden Globe,Best Actress (Drama),true,The Pumpkin Eater
+0,Ava Gardner,1964,Golden Globe,Best Actress (Drama),false,The Night of the Iguana
+0,Rita Hayworth,1964,Golden Globe,Best Actress (Drama),false,Circus World
+0,Geraldine Page,1964,Golden Globe,Best Actress (Drama),false,Dear Heart
+0,Jean Seberg,1964,Golden Globe,Best Actress (Drama),false,Lilith
+0,Julie Andrews,1964,Golden Globe,Best Actress (Comedy/Musical),true,Mary Poppins
+0,Audrey Hepburn,1964,Golden Globe,Best Actress (Comedy/Musical),false,My Fair Lady
+0,Sophia Loren,1964,Golden Globe,Best Actress (Comedy/Musical),false,Marriage Italian Style
+0,Melina Mercouri,1964,Golden Globe,Best Actress (Comedy/Musical),false,Topkapi
+0,Debbie Reynolds,1964,Golden Globe,Best Actress (Comedy/Musical),false,The Unsinkable Molly Brown
+0,Elia Kazan,1963,Golden Globe,Best Director,true,America America
+0,Hall Bartlett,1963,Golden Globe,Best Director,false,The Caretakers
+0,George Englund,1963,Golden Globe,Best Director,false,The Ugly American
+0,Joseph L. Mankiewicz,1963,Golden Globe,Best Director,false,Cleopatra
+0,Otto Preminger,1963,Golden Globe,Best Director,false,The Cardinal
+0,Tony Richardson,1963,Golden Globe,Best Director,false,Tom Jones
+0,Martin Ritt,1963,Golden Globe,Best Director,false,Hud
+0,Robert Wise,1963,Golden Globe,Best Director,false,The Haunting
+0,Sidney Poitier,1963,Golden Globe,Best Actor (Drama),true,Lilies of the Field
+0,Marlon Brando,1963,Golden Globe,Best Actor (Drama),false,The Ugly American
+0,Stathis Giallelis,1963,Golden Globe,Best Actor (Drama),false,America America
+0,Rex Harrison,1963,Golden Globe,Best Actor (Drama),false,Cleopatra
+0,Paul Newman,1963,Golden Globe,Best Actor (Drama),false,Hud
+0,Gregory Peck,1963,Golden Globe,Best Actor (Drama),false,Captain Newman M.D.
+0,Tom Tryon,1963,Golden Globe,Best Actor (Drama),false,The Cardinal
+0,Alberto Sordi,1963,Golden Globe,Best Actor (Comedy/Musical),true,To Bed or Not to Bed
+0,Albert Finney,1963,Golden Globe,Best Actor (Comedy/Musical),false,Tom Jones
+0,James Garner,1963,Golden Globe,Best Actor (Comedy/Musical),false,The Wheeler Dealers
+0,Cary Grant,1963,Golden Globe,Best Actor (Comedy/Musical),false,Charade
+0,Jack Lemmon,1963,Golden Globe,Best Actor (Comedy/Musical),false,Irma la Douce
+0,Frank Sinatra,1963,Golden Globe,Best Actor (Comedy/Musical),false,Come Blow Your Horn
+0,Terry-Thomas,1963,Golden Globe,Best Actor (Comedy/Musical),false,The Mouse on the Moon
+0,Jonathan Winters,1963,Golden Globe,Best Actor (Comedy/Musical),false,It's a Mad Mad Mad Mad World
+0,Leslie Caron,1963,Golden Globe,Best Actress (Drama),true,The L-Shaped Room
+0,Polly Bergen,1963,Golden Globe,Best Actress (Drama),false,The Caretakers
+0,Geraldine Page,1963,Golden Globe,Best Actress (Drama),false,Toys in the Attic
+0,Rachel Roberts,1963,Golden Globe,Best Actress (Drama),false,This Sporting Life
+0,Romy Schneider,1963,Golden Globe,Best Actress (Drama),false,The Cardinal
+0,Alida Valli,1963,Golden Globe,Best Actress (Drama),false,The Paper Man
+0,Marina Vlady,1963,Golden Globe,Best Actress (Drama),false,The Conjugal Bed
+0,Natalie Wood,1963,Golden Globe,Best Actress (Drama),false,Love with the Proper Stranger
+0,Shirley MacLaine,1963,Golden Globe,Best Actress (Comedy/Musical),true,Irma la Douce
+0,Ann-Margret,1963,Golden Globe,Best Actress (Comedy/Musical),false,Bye Bye Birdie
+0,Doris Day,1963,Golden Globe,Best Actress (Comedy/Musical),false,Move Over Darling
+0,Audrey Hepburn,1963,Golden Globe,Best Actress (Comedy/Musical),false,Charade
+0,Hayley Mills,1963,Golden Globe,Best Actress (Comedy/Musical),false,Summer Magic
+0,Molly Picon,1963,Golden Globe,Best Actress (Comedy/Musical),false,Come Blow Your Horn
+0,Jill St. John,1963,Golden Globe,Best Actress (Comedy/Musical),false,Come Blow Your Horn
+0,Joanne Woodward,1963,Golden Globe,Best Actress (Comedy/Musical),false,A New Kind of Love
+0,David Lean,1962,Golden Globe,Best Director,true,Lawrence of Arabia
+0,George Cukor,1962,Golden Globe,Best Director,false,The Chapman Report
+0,Morton DaCosta,1962,Golden Globe,Best Director,false,The Music Man
+0,Blake Edwards,1962,Golden Globe,Best Director,false,Days of Wine and Roses
+0,John Frankenheimer,1962,Golden Globe,Best Director,false,The Manchurian Candidate
+0,John Huston,1962,Golden Globe,Best Director,false,Freud
+0,Stanley Kubrick,1962,Golden Globe,Best Director,false,Lolita
+0,Mervyn LeRoy,1962,Golden Globe,Best Director,false,Gypsy
+0,Robert Mulligan,1962,Golden Globe,Best Director,false,To Kill a Mockingbird
+0,Martin Ritt,1962,Golden Globe,Best Director,false,Hemingway's Adventures of a Young Man
+0,Ismael Rodríguez,1962,Golden Globe,Best Director,false,The Iron Brothers
+0,Gregory Peck,1962,Golden Globe,Best Actor (Drama),true,To Kill a Mockingbird
+0,Bobby Darin,1962,Golden Globe,Best Actor (Drama),false,Pressure Point
+0,Jackie Gleason,1962,Golden Globe,Best Actor (Drama),false,Gigot
+0,Laurence Harvey,1962,Golden Globe,Best Actor (Drama),false,The Wonderful World of the Brothers Grimm
+0,Burt Lancaster,1962,Golden Globe,Best Actor (Drama),false,Birdman of Alcatraz
+0,Jack Lemmon,1962,Golden Globe,Best Actor (Drama),false,Days of Wine and Roses
+0,James Mason,1962,Golden Globe,Best Actor (Drama),false,Lolita
+0,Paul Newman,1962,Golden Globe,Best Actor (Drama),false,Sweet Bird of Youth
+0,Peter O'Toole,1962,Golden Globe,Best Actor (Drama),false,Lawrence of Arabia
+0,Anthony Quinn,1962,Golden Globe,Best Actor (Drama),false,Lawrence of Arabia
+0,Marcello Mastroianni,1962,Golden Globe,Best Actor (Comedy/Musical),true,Divorce Italian Style
+0,Stephen Boyd,1962,Golden Globe,Best Actor (Comedy/Musical),false,Billy Rose's Jumbo
+0,Jimmy Durante,1962,Golden Globe,Best Actor (Comedy/Musical),false,Billy Rose's Jumbo
+0,Cary Grant,1962,Golden Globe,Best Actor (Comedy/Musical),false,That Touch of Mink
+0,Charlton Heston,1962,Golden Globe,Best Actor (Comedy/Musical),false,The Pigeon That Took Rome
+0,Karl Malden,1962,Golden Globe,Best Actor (Comedy/Musical),false,Gypsy
+0,Robert Preston,1962,Golden Globe,Best Actor (Comedy/Musical),false,The Music Man
+0,Alberto Sordi,1962,Golden Globe,Best Actor (Comedy/Musical),false,The Best of Enemies
+0,James Stewart,1962,Golden Globe,Best Actor (Comedy/Musical),false,Mr. Hobbs Takes a Vacation
+0,Geraldine Page,1962,Golden Globe,Best Actress (Drama),true,Sweet Bird of Youth
+0,Anne Bancroft,1962,Golden Globe,Best Actress (Drama),false,The Miracle Worker
+0,Bette Davis,1962,Golden Globe,Best Actress (Drama),false,What Ever Happened to Baby Jane?
+0,Katharine Hepburn,1962,Golden Globe,Best Actress (Drama),false,Long Day's Journey Into Night
+0,Glynis Johns,1962,Golden Globe,Best Actress (Drama),false,The Chapman Report
+0,Melina Mercouri,1962,Golden Globe,Best Actress (Drama),false,Phaedra
+0,Lee Remick,1962,Golden Globe,Best Actress (Drama),false,Days of Wine and Roses
+0,Susan Strasberg,1962,Golden Globe,Best Actress (Drama),false,Hemingway's Adventures of a Young Man
+0,Shelley Winters,1962,Golden Globe,Best Actress (Drama),false,Lolita
+0,Susannah York,1962,Golden Globe,Best Actress (Drama),false,Freud
+0,Rosalind Russell,1962,Golden Globe,Best Actress (Comedy/Musical),true,Gypsy
+0,Doris Day,1962,Golden Globe,Best Actress (Comedy/Musical),false,Billy Rose's Jumbo
+0,Jane Fonda,1962,Golden Globe,Best Actress (Comedy/Musical),false,Period of Adjustment
+0,Shirley Jones,1962,Golden Globe,Best Actress (Comedy/Musical),false,The Music Man
+0,Natalie Wood,1962,Golden Globe,Best Actress (Comedy/Musical),false,Gypsy
+0,Stanley Kramer,1961,Golden Globe,Best Director,true,Judgment at Nuremberg
+0,Anthony Mann,1961,Golden Globe,Best Director,false,El Cid
+0,J. Lee Thompson,1961,Golden Globe,Best Director,false,The Guns of Navarone
+0,Jerome Robbins & Robert Wise,1961,Golden Globe,Best Director,false,West Side Story
+0,William Wyler,1961,Golden Globe,Best Director,false,The Children's Hour
+0,Maximilian Schell,1961,Golden Globe,Best Actor (Drama),true,Judgment at Nuremberg
+0,Warren Beatty,1961,Golden Globe,Best Actor (Drama),false,Splendor in the Grass
+0,Maurice Chevalier,1961,Golden Globe,Best Actor (Drama),false,Fanny
+0,Paul Newman,1961,Golden Globe,Best Actor (Drama),false,The Hustler
+0,Sidney Poitier,1961,Golden Globe,Best Actor (Drama),false,A Raisin in the Sun
+0,Glenn Ford,1961,Golden Globe,Best Actor (Comedy/Musical),true,Pocketful of Miracles
+0,Fred Astaire,1961,Golden Globe,Best Actor (Comedy/Musical),false,The Pleasure of His Company
+0,Richard Beymer,1961,Golden Globe,Best Actor (Comedy/Musical),false,West Side Story
+0,Bob Hope,1961,Golden Globe,Best Actor (Comedy/Musical),false,Bachelor in Paradise
+0,Fred MacMurray,1961,Golden Globe,Best Actor (Comedy/Musical),false,The Absent-Minded Professor
+0,Geraldine Page,1961,Golden Globe,Best Actress (Drama),true,Summer and Smoke
+0,Leslie Caron,1961,Golden Globe,Best Actress (Drama),false,Fanny
+0,Shirley MacLaine,1961,Golden Globe,Best Actress (Drama),false,The Children's Hour
+0,Claudia McNeil,1961,Golden Globe,Best Actress (Drama),false,A Raisin in the Sun
+0,Natalie Wood,1961,Golden Globe,Best Actress (Drama),false,Splendor in the Grass
+0,Rosalind Russell,1961,Golden Globe,Best Actress (Comedy/Musical),true,A Majority of One
+0,Bette Davis,1961,Golden Globe,Best Actress (Comedy/Musical),false,Pocketful of Miracles
+0,Audrey Hepburn,1961,Golden Globe,Best Actress (Comedy/Musical),false,Breakfast at Tiffany's
+0,Hayley Mills,1961,Golden Globe,Best Actress (Comedy/Musical),false,The Parent Trap
+0,Miyoshi Umeki,1961,Golden Globe,Best Actress (Comedy/Musical),false,Flower Drum Song
+0,Jack Cardiff,1960,Golden Globe,Best Director,true,Sons and Lovers
+0,Richard Brooks,1960,Golden Globe,Best Director,false,Elmer Gantry
+0,Stanley Kubrick,1960,Golden Globe,Best Director,false,Spartacus
+0,Billy Wilder,1960,Golden Globe,Best Director,false,The Apartment
+0,Fred Zinnemann,1960,Golden Globe,Best Director,false,The Sundowners
+0,Burt Lancaster,1960,Golden Globe,Best Actor (Drama),true,Elmer Gantry
+0,Trevor Howard,1960,Golden Globe,Best Actor (Drama),false,Sons and Lovers
+0,Laurence Olivier,1960,Golden Globe,Best Actor (Drama),false,Spartacus
+0,Dean Stockwell,1960,Golden Globe,Best Actor (Drama),false,Sons and Lovers
+0,Spencer Tracy,1960,Golden Globe,Best Actor (Drama),false,Inherit the Wind
+0,Jack Lemmon,1960,Golden Globe,Best Actor (Comedy/Musical),true,The Apartment
+0,Dirk Bogarde,1960,Golden Globe,Best Actor (Comedy/Musical),false,Song Without End
+0,Cantinflas,1960,Golden Globe,Best Actor (Comedy/Musical),false,Pepe
+0,Cary Grant,1960,Golden Globe,Best Actor (Comedy/Musical),false,The Grass Is Greener
+0,Bob Hope,1960,Golden Globe,Best Actor (Comedy/Musical),false,The Facts of Life
+0,Greer Garson,1960,Golden Globe,Best Actress (Drama),true,Sunrise at Campobello
+0,Doris Day,1960,Golden Globe,Best Actress (Drama),false,Midnight Lace
+0,Nancy Kwan,1960,Golden Globe,Best Actress (Drama),false,The World of Suzie Wong
+0,Jean Simmons,1960,Golden Globe,Best Actress (Drama),false,Elmer Gantry
+0,Elizabeth Taylor,1960,Golden Globe,Best Actress (Drama),false,BUtterfield 8
+0,Shirley MacLaine,1960,Golden Globe,Best Actress (Comedy/Musical),true,The Apartment
+0,Lucille Ball,1960,Golden Globe,Best Actress (Comedy/Musical),false,The Facts of Life
+0,Capucine,1960,Golden Globe,Best Actress (Comedy/Musical),false,Song Without End
+0,Judy Holliday,1960,Golden Globe,Best Actress (Comedy/Musical),false,Bells Are Ringing
+0,Sophia Loren,1960,Golden Globe,Best Actress (Comedy/Musical),false,It Started in Naples
+0,William Wyler,1959,Golden Globe,Best Director,true,Ben-Hur
+0,Stanley Kramer,1959,Golden Globe,Best Director,false,On the Beach
+0,Otto Preminger,1959,Golden Globe,Best Director,false,Anatomy of a Murder
+0,George Stevens,1959,Golden Globe,Best Director,false,The Diary of Anne Frank
+0,Fred Zinnemann,1959,Golden Globe,Best Director,false,The Nun's Story
+0,Anthony Franciosa,1959,Golden Globe,Best Actor (Drama),true,Career
+0,Richard Burton,1959,Golden Globe,Best Actor (Drama),false,Look Back in Anger
+0,Charlton Heston,1959,Golden Globe,Best Actor (Drama),false,Ben-Hur
+0,Fredric March,1959,Golden Globe,Best Actor (Drama),false,Middle of the Night
+0,Joseph Schildkraut,1959,Golden Globe,Best Actor (Drama),false,The Diary of Anne Frank
+0,Jack Lemmon,1959,Golden Globe,Best Actor (Comedy/Musical),true,Some Like It Hot
+0,Clark Gable,1959,Golden Globe,Best Actor (Comedy/Musical),false,But Not for Me
+0,Cary Grant,1959,Golden Globe,Best Actor (Comedy/Musical),false,Operation Petticoat
+0,Dean Martin,1959,Golden Globe,Best Actor (Comedy/Musical),false,Who Was That Lady?
+0,Sidney Poitier,1959,Golden Globe,Best Actor (Comedy/Musical),false,Porgy and Bess
+0,Elizabeth Taylor,1959,Golden Globe,Best Actress (Drama),true,Suddenly Last Summer
+0,Audrey Hepburn,1959,Golden Globe,Best Actress (Drama),false,The Nun's Story
+0,Katharine Hepburn,1959,Golden Globe,Best Actress (Drama),false,Suddenly Last Summer
+0,Lee Remick,1959,Golden Globe,Best Actress (Drama),false,Anatomy of a Murder
+0,Simone Signoret,1959,Golden Globe,Best Actress (Drama),false,Room at the Top
+0,Marilyn Monroe,1959,Golden Globe,Best Actress (Comedy/Musical),true,Some Like It Hot
+0,Dorothy Dandridge,1959,Golden Globe,Best Actress (Comedy/Musical),false,Porgy and Bess
+0,Doris Day,1959,Golden Globe,Best Actress (Comedy/Musical),false,Pillow Talk
+0,Shirley MacLaine,1959,Golden Globe,Best Actress (Comedy/Musical),false,Ask Any Girl
+0,Lilli Palmer,1959,Golden Globe,Best Actress (Comedy/Musical),false,But Not for Me
+0,Vincente Minnelli,1958,Golden Globe,Best Director,true,Gigi
+0,Richard Brooks,1958,Golden Globe,Best Director,false,Cat on a Hot Tin Roof
+0,Stanley Kramer,1958,Golden Globe,Best Director,false,The Defiant Ones
+0,Delbert Mann,1958,Golden Globe,Best Director,false,Separate Tables
+0,Robert Wise,1958,Golden Globe,Best Director,false,I Want to Live!
+0,David Niven,1958,Golden Globe,Best Actor (Drama),true,Separate Tables
+0,Tony Curtis,1958,Golden Globe,Best Actor (Drama),false,The Defiant Ones
+0,Robert Donat,1958,Golden Globe,Best Actor (Drama),false,The Inn of the Sixth Happiness
+0,Sidney Poitier,1958,Golden Globe,Best Actor (Drama),false,The Defiant Ones
+0,Spencer Tracy,1958,Golden Globe,Best Actor (Drama),false,The Old Man and the Sea
+0,Danny Kaye,1958,Golden Globe,Best Actor (Comedy/Musical),true,Me and the Colonel
+0,Maurice Chevalier,1958,Golden Globe,Best Actor (Comedy/Musical),false,Gigi
+0,Clark Gable,1958,Golden Globe,Best Actor (Comedy/Musical),false,Teacher's Pet
+0,Cary Grant,1958,Golden Globe,Best Actor (Comedy/Musical),false,Indiscreet
+0,Louis Jourdan,1958,Golden Globe,Best Actor (Comedy/Musical),false,Gigi
+0,Susan Hayward,1958,Golden Globe,Best Actress (Drama),true,I Want to Live!
+0,Ingrid Bergman,1958,Golden Globe,Best Actress (Drama),false,The Inn of the Sixth Happiness
+0,Deborah Kerr,1958,Golden Globe,Best Actress (Drama),false,Separate Tables
+0,Shirley MacLaine,1958,Golden Globe,Best Actress (Drama),false,Some Came Running
+0,Jean Simmons,1958,Golden Globe,Best Actress (Drama),false,Home Before Dark
+0,Rosalind Russell,1958,Golden Globe,Best Actress (Comedy/Musical),true,Auntie Mame
+0,Ingrid Bergman,1958,Golden Globe,Best Actress (Comedy/Musical),false,Indiscreet
+0,Leslie Caron,1958,Golden Globe,Best Actress (Comedy/Musical),false,Gigi
+0,Doris Day,1958,Golden Globe,Best Actress (Comedy/Musical),false,The Tunnel of Love
+0,Mitzi Gaynor,1958,Golden Globe,Best Actress (Comedy/Musical),false,South Pacific
+0,David Lean,1957,Golden Globe,Best Director,true,The Bridge on the River Kwai
+0,Joshua Logan,1957,Golden Globe,Best Director,false,Sayonara
+0,Sidney Lumet,1957,Golden Globe,Best Director,false,12 Angry Men
+0,Billy Wilder,1957,Golden Globe,Best Director,false,Witness for the Prosecution
+0,Fred Zinnemann,1957,Golden Globe,Best Director,false,A Hatful of Rain
+0,Alec Guinness,1957,Golden Globe,Best Actor (Drama),true,The Bridge on the River Kwai
+0,Marlon Brando,1957,Golden Globe,Best Actor (Drama),false,Sayonara
+0,Henry Fonda,1957,Golden Globe,Best Actor (Drama),false,12 Angry Men
+0,Anthony Franciosa,1957,Golden Globe,Best Actor (Drama),false,A Hatful of Rain
+0,Charles Laughton,1957,Golden Globe,Best Actor (Drama),false,Witness for the Prosecution
+0,Frank Sinatra,1957,Golden Globe,Best Actor (Comedy/Musical),true,Pal Joey
+0,Maurice Chevalier,1957,Golden Globe,Best Actor (Comedy/Musical),false,Love in the Afternoon
+0,Glenn Ford,1957,Golden Globe,Best Actor (Comedy/Musical),false,Don't Go Near the Water
+0,David Niven,1957,Golden Globe,Best Actor (Comedy/Musical),false,My Man Godfrey
+0,Tony Randall,1957,Golden Globe,Best Actor (Comedy/Musical),false,Will Success Spoil Rock Hunter?
+0,Joanne Woodward,1957,Golden Globe,Best Actress (Drama),true,The Three Faces of Eve
+0,Marlene Dietrich,1957,Golden Globe,Best Actress (Drama),false,Witness for the Prosecution
+0,Deborah Kerr,1957,Golden Globe,Best Actress (Drama),false,Heaven Knows, Mr. Allison
+0,Anna Magnani,1957,Golden Globe,Best Actress (Drama),false,Wild Is the Wind

@@ -1,39 +1,26 @@
+@import url('variables.css');
 /* ============================================
    ORBIT - CINEMATIC MOVIE DISCOVERY
    Design: Space Cinema / Anamorphic / Film Noir
 ============================================ */
 
 :root {
-  /* Cinematic Color Palette */
-  --space-black: #000000;
-  --deep-void: #0a0e1a;
-  --cosmic-blue: #0f1729;
+  /* Extended palette (additions to variables.css) */
   --nebula-purple: #1a1432;
-  --accent-cyan: #00d9ff;
-  --accent-gold: #ffd700;
   --accent-orange: #ff6b35;
-  --film-white: #f0f4f8;
-  --muted-silver: #8892a6;
-  --danger-red: #ff4757;
-  
+  --accent-rgb: 0, 217, 255;
+  --accent-gold-rgb: 255, 215, 0;
   /* Gradients */
-  --gradient-cosmic: linear-gradient(135deg, #0f1729 0%, #1a1432 50%, #0a0e1a 100%);
+  --gradient-cosmic: linear-gradient(135deg, var(--cosmic-blue) 0%, var(--nebula-purple) 50%, var(--deep-void) 100%);
   --gradient-accent: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
   --gradient-launch: linear-gradient(135deg, #00d9ff 0%, #ffd700 50%, #ff6b35 100%);
-  
   /* Effects */
   --blur-glass: blur(20px) saturate(180%);
   --shadow-dramatic: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 217, 255, 0.1);
   --shadow-neon: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 217, 255, 0.3);
-  
   /* Spacing */
   --radius-card: 16px;
   --radius-pill: 999px;
-  
-  /* Typography */
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
-  
   /* Transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -52,7 +39,7 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  background: var(--space-black);
+  background: var(--deep-void);
   color: var(--film-white);
   font-family: var(--font-body);
   font-size: 16px;
@@ -70,7 +57,7 @@ html, body {
   inset: 0;
   background: radial-gradient(ellipse at 20% 30%, rgba(26, 20, 50, 0.4) 0%, transparent 50%),
               radial-gradient(ellipse at 80% 70%, rgba(15, 23, 41, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at center, var(--cosmic-blue) 0%, var(--deep-void) 40%, var(--space-black) 100%);
+              radial-gradient(circle at center, var(--cosmic-blue) 0%, var(--deep-void) 40%, var(--deep-void) 100%);
   z-index: -3;
 }
 
@@ -221,6 +208,88 @@ html, body {
   text-align: center;
   margin-bottom: 48px;
   animation: header-entrance 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* ============================================
+   HOME BUTTON (fixed top-left)
+============================================ */
+
+.home-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(10, 14, 26, 0.8);
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.home-button:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.4);
+  transform: scale(1.05);
+}
+
+.home-icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+.home-icon .outer-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  animation: orbit-rotate 8s linear infinite;
+}
+
+.home-icon .inner-ring {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 2px solid var(--accent-gold);
+  border-radius: 50%;
+  animation: orbit-rotate 5s linear infinite reverse;
+}
+
+.home-icon .center-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: var(--film-white);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+/* ============================================
+   HEADER ROW (title + mode toggle inline)
+============================================ */
+
+.orbit-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 24px;
+  animation: header-entrance 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.orbit-header-center {
+  flex: 1;
+  min-width: 0;
 }
 
 @keyframes header-entrance {
@@ -477,20 +546,90 @@ html, body {
   background: rgba(0, 217, 255, 0.1);
 }
 
-.dropdown-item img {
-  width: 45px;
-  height: 68px;
+/* Dropdown images */
+.dropdown-img {
+  flex-shrink: 0;
   object-fit: cover;
+  background: rgba(15, 23, 41, 0.8);
+}
+
+.dropdown-img.poster {
+  width: 46px;
+  height: 69px;
   border-radius: 6px;
   border: 1px solid rgba(0, 217, 255, 0.2);
-  flex-shrink: 0;
+}
+
+.dropdown-img.profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 217, 255, 0.3);
+}
+
+.dropdown-img.company {
+  width: 80px;
+  height: 45px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px;
+}
+
+.dropdown-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dropdown-info {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
+.dropdown-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--film-white);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-subtitle {
+  font-size: 13px;
+  color: var(--muted-silver);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.type-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Legacy class compat */
 .movie-title {
   font-size: 15px;
   font-weight: 500;
@@ -509,7 +648,7 @@ html, body {
 
 .sections-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -540,6 +679,8 @@ html, body {
 .section-card:nth-child(8) { animation-delay: 0.4s; }
 .section-card:nth-child(9) { animation-delay: 0.45s; }
 .section-card:nth-child(10) { animation-delay: 0.5s; }
+.section-card:nth-child(11) { animation-delay: 0.55s; }
+.section-card:nth-child(12) { animation-delay: 0.6s; }
 
 @keyframes card-entrance {
   from {
@@ -625,13 +766,13 @@ html, body {
 ============================================ */
 
 .launch-card {
-  /* Span 3 columns to align with the 3 cards above */
   grid-column: span 3;
   background: var(--gradient-launch);
   border: 2px solid var(--accent-gold);
   position: relative;
   overflow: hidden;
   justify-content: center;
+  min-height: 80px;
 }
 
 .launch-card::before {
@@ -691,20 +832,127 @@ html, body {
    ORBIT PANEL (SIDEBAR)
 ============================================ */
 
-.orbit-panel {
+/* ============================================
+   SIDEBAR CONTAINER (panel + arcade button)
+============================================ */
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 40px;
+  animation: panel-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+}
+
+.orbit-panel {
+  width: 100%;
   background: rgba(10, 14, 26, 0.8);
   backdrop-filter: var(--blur-glass);
   border: 1px solid rgba(0, 217, 255, 0.15);
   border-radius: var(--radius-card);
   padding: 24px;
   box-shadow: var(--shadow-dramatic);
-  flex-shrink: 0;
-  max-height: calc(100vh - 240px);
+  max-height: calc(100vh - 340px);
   overflow-y: auto;
-  position: sticky;
-  top: 40px;
-  animation: panel-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+}
+
+/* ============================================
+   ARCADE BUTTON
+============================================ */
+
+.arcade-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.08) 0%, rgba(var(--accent-rgb), 0.15) 100%);
+  border: 2px solid rgba(var(--accent-rgb), 0.4);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  color: var(--film-white);
+}
+
+.arcade-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-cyan) 50%, transparent 100%);
+}
+
+.arcade-button:hover {
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.15) 0%, rgba(var(--accent-rgb), 0.25) 100%);
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 40px rgba(var(--accent-rgb), 0.3),
+    0 0 60px rgba(var(--accent-rgb), 0.15);
+}
+
+.arcade-button.hidden {
+  display: none;
+}
+
+.arcade-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 2px solid rgba(var(--accent-rgb), 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent-cyan);
+}
+
+.arcade-icon svg {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.arcade-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.arcade-text h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
+}
+
+.arcade-text p {
+  font-size: 13px;
+  color: var(--muted-silver);
+  margin: 6px 0 0;
+}
+
+.arcade-arrow {
+  margin-left: auto;
+  font-size: 24px;
+  color: var(--accent-cyan);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.arcade-button:hover .arcade-arrow {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 @keyframes panel-entrance {
@@ -719,7 +967,6 @@ html, body {
 }
 
 .orbit-panel.collapsed {
-  width: 80px;
   padding: 16px;
 }
 
@@ -1044,16 +1291,6 @@ html, body {
   gap: 10px;
 }
 
-/* Disabled state for mutually exclusive setting groups */
-.chip-group.setting-disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.chip-group.setting-disabled .chip {
-  cursor: not-allowed;
-}
-
 .chip {
   padding: 10px 18px;
   background: rgba(15, 23, 41, 0.6);
@@ -1079,6 +1316,22 @@ html, body {
   border-color: var(--accent-cyan);
   font-weight: 600;
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+}
+
+.genre-glyph {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.genre-glyph svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.chip.active .genre-glyph svg {
+  stroke: var(--space-black);
 }
 
 .input-row {
@@ -1182,26 +1435,57 @@ html, body {
     flex-direction: column;
   }
 
-  .orbit-panel {
+  .sidebar-container {
     width: 100%;
     position: relative;
     top: 0;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .orbit-panel {
+    flex: 1;
+    width: auto;
     max-height: none;
+  }
+
+  .arcade-button {
+    flex: 1;
   }
 
   .orbit-panel.collapsed {
     width: 100%;
   }
-  
-  /* Launch card stays full width on tablet */
+
+  /* Launch card on tablet */
   .launch-card {
     grid-column: span 2;
   }
+
 }
 
 @media (max-width: 768px) {
   .app-shell {
     padding: 20px 16px;
+  }
+
+  .orbit-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-left: 0;
+    padding-top: 70px;
+  }
+
+  .home-button {
+    top: 16px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .sidebar-container {
+    flex-direction: column;
   }
 
   .orbit-logo-text {
@@ -1328,30 +1612,6 @@ html, body {
   border-color: var(--accent-cyan);
   color: var(--accent-cyan);
   transform: translateY(-2px);
-}
-
-.nav-link.nav-game {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
-  border-color: rgba(255, 215, 0, 0.4);
-  color: #ffd700;
-}
-
-.nav-link.nav-game:hover {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
-  border-color: #ffd700;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-}
-
-.nav-region {
-  background: rgba(0, 217, 255, 0.1);
-  border-color: rgba(0, 217, 255, 0.3);
-  cursor: pointer;
-}
-
-.nav-region:hover {
-  background: rgba(0, 217, 255, 0.2);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.25);
 }
 
 /* ============================================
@@ -1547,3 +1807,465 @@ html, body {
   transform: translateY(-1px);
   box-shadow: 0 5px 20px rgba(0, 217, 255, 0.3);
 }
+
+/* ============================================
+   ORBIT ICON SYSTEM
+============================================ */
+
+/* Base container */
+.orbit-icon {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Outer ring - cyan with glow */
+.ring-outer {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.1);
+  transition: var(--transition-smooth);
+}
+
+/* Inner ring - gold, 60% size */
+.ring-inner {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+  transition: var(--transition-smooth);
+}
+
+/* Core symbol */
+.icon-core {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover: scale + intensify glow */
+.section-card:hover .orbit-icon,
+.game-card:hover .orbit-icon {
+  transform: scale(1.1);
+}
+
+.section-card:hover .ring-outer,
+.game-card:hover .ring-outer {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), inset 0 0 12px rgba(0, 217, 255, 0.2);
+  border-color: var(--accent-cyan);
+}
+
+.section-card:hover .ring-inner,
+.game-card:hover .ring-inner {
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.4);
+}
+
+/* --- ICON VARIATIONS --- */
+
+/* People: two dots side by side */
+.icon-people .icon-core::before,
+.icon-people .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.icon-people .icon-core::before {
+  left: 1px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px rgba(0, 217, 255, 0.5);
+}
+.icon-people .icon-core::after {
+  right: 1px;
+  background: var(--accent-gold);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* Genres: film frame rectangle with sprocket marks */
+.icon-genres .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 2px;
+}
+.icon-genres .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--accent-cyan) 0px, var(--accent-cyan) 2px,
+    transparent 2px, transparent 5px
+  );
+}
+
+/* Setting: dashed outer ring with globe inside */
+.icon-setting .ring-outer {
+  border-style: dashed;
+}
+.icon-setting .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: 50%;
+}
+.icon-setting .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 1.5px;
+  background: var(--accent-cyan);
+  transform: translateY(-50%);
+}
+
+/* DateTime: clock face with hands */
+.icon-datetime .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: 50%;
+}
+.icon-datetime .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.5px;
+  height: 7px;
+  background: var(--accent-gold);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(-45deg);
+  box-shadow: 4px 2px 0 0 var(--accent-cyan);
+}
+
+/* Ratings: gold star */
+.icon-ratings .icon-core::before {
+  content: '★';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent-gold);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Region: location pin rotated 45deg */
+.icon-region .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50% 50% 50% 0;
+  transform: translateX(-50%) rotate(-45deg);
+}
+.icon-region .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+/* Production: two column bars of different heights */
+.icon-production .icon-core::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  width: 5px;
+  height: 12px;
+  background: var(--accent-cyan);
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(0, 217, 255, 0.3);
+}
+.icon-production .icon-core::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  width: 5px;
+  height: 8px;
+  background: var(--accent-gold);
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+}
+
+/* Watch: play triangle */
+.icon-watch .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid var(--accent-cyan);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  filter: drop-shadow(0 0 4px rgba(0, 217, 255, 0.4));
+}
+
+/* Launch: upward arrow, gold and orange rings */
+.icon-launch .ring-outer {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3), inset 0 0 8px rgba(255, 215, 0, 0.1);
+}
+.icon-launch .ring-inner {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.3);
+}
+.icon-launch .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid var(--accent-gold);
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+.icon-launch .icon-core::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 6px;
+  background: var(--accent-orange);
+  border-radius: 0 0 2px 2px;
+}
+
+/* Planet: gradient filled circle for orbit panel */
+.icon-planet .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--gradient-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+/* Universes: concentric arcs */
+.icon-universes .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: 50%;
+}
+.icon-universes .icon-core::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1.5px dashed var(--accent-gold);
+  border-radius: 50%;
+}
+
+/* Awards: trophy */
+.icon-awards .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 9px;
+  border: 2px solid var(--accent-gold);
+  border-radius: 0 0 50% 50%;
+  border-top: none;
+}
+.icon-awards .icon-core::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 5px;
+  background: var(--accent-gold);
+  border-radius: 0 0 1px 1px;
+}
+
+/* --- NAV ICON (mini 24x24) --- */
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 217, 255, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.mini-core {
+  position: relative;
+  z-index: 1;
+  font-size: 10px;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.nav-link:hover .mini-ring {
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+  border-color: var(--film-white);
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.1);
+}
+
+/* Hide old section-icon class */
+.section-icon {
+  display: none !important;
+}
+
+/* Arcade nav link */
+.nav-link.nav-arcade {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 217, 255, 0.2));
+  border-color: rgba(168, 85, 247, 0.4);
+  color: #a855f7;
+}
+
+.nav-link.nav-arcade:hover {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(0, 217, 255, 0.3));
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.nav-link.nav-arcade .mini-ring {
+  border-color: #a855f7;
+}
+
+/* ============================================
+   ORBIT ICON BUTTONS (Help & Stats)
+============================================ */
+
+.icon-btn-orbit {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 41, 0.6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn-orbit:hover {
+  background: rgba(15, 23, 41, 0.9);
+  transform: scale(1.1);
+}
+
+.icon-btn-orbit .ring-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--accent-cyan, #00d9ff);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.icon-btn-orbit:hover .ring-outer {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+  opacity: 1;
+}
+
+.icon-btn-orbit .ring-inner {
+  position: absolute;
+  width: 65%;
+  height: 65%;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-gold, #ffd700);
+  opacity: 0.5;
+}
+
+.icon-btn-orbit .icon-symbol {
+  position: relative;
+  z-index: 2;
+  color: var(--film-white, #f0f4f8);
+  font-family: var(--font-display, 'Orbitron', monospace);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Help Icon - Question Mark */
+.icon-help .icon-symbol::before {
+  content: '?';
+}
+
+/* Stats Icon - Bar Graph */
+.icon-stats .icon-symbol {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.icon-stats .bar {
+  width: 4px;
+  background: var(--film-white, #f0f4f8);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.icon-stats .bar-1 { height: 6px; }
+.icon-stats .bar-2 { height: 12px; }
+.icon-stats .bar-3 { height: 9px; }
+
+.icon-btn-orbit:hover .icon-stats .bar {
+  background: var(--accent-cyan, #00d9ff);
+}
+
+.icon-btn-orbit:hover .icon-stats .bar-1 { height: 8px; }
+.icon-btn-orbit:hover .icon-stats .bar-2 { height: 14px; }
+.icon-btn-orbit:hover .icon-stats .bar-3 { height: 11px; }
+
+/* END OF STYLES */

@@ -217,14 +217,14 @@ export async function getMergedNebulaData(movieId) {
   // Get user reviews
   const userReviews = getUserReviews(movieId);
 
-  // If no AI data exists, return null
-  if (!aiData) return null;
+  // If no AI data AND no user reviews, truly nothing to show
+  if (!aiData && userReviews.length === 0) return null;
 
   // Merge reviews with source flags
   const mergedReviews = [];
 
   // Add AI reviews
-  if (aiData.reviews) {
+  if (aiData && aiData.reviews) {
     aiData.reviews.forEach(reviewText => {
       mergedReviews.push({
         text: reviewText,
@@ -249,16 +249,15 @@ export async function getMergedNebulaData(movieId) {
   const wordFrequency = calculateWordFrequencies(allReviewTexts);
 
   // Calculate threshold progress
-  const totalReviews = mergedReviews.length;
   const communityThreshold = 50;
   const hasReachedThreshold = userReviews.length >= communityThreshold;
 
   return {
-    movieId: aiData.movieId,
-    title: aiData.title,
+    movieId: aiData ? aiData.movieId : movieId,
+    title: aiData ? aiData.title : '',
     reviews: mergedReviews,
     wordFrequency,
-    aiReviewCount: aiData.reviews ? aiData.reviews.length : 0,
+    aiReviewCount: aiData && aiData.reviews ? aiData.reviews.length : 0,
     userReviewCount: userReviews.length,
     communityThreshold,
     hasReachedThreshold

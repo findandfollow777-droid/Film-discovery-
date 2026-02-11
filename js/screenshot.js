@@ -3,9 +3,6 @@
 // Orbit Games Suite - Visual Movie Recognition
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-const TMDB_IMG = "https://image.tmdb.org/t/p/";
-
 // Game configuration
 const ROUNDS_PER_GAME = 5;
 const POINTS_PER_ROUND = [100, 80, 60, 40, 20]; // Points decrease as blur decreases
@@ -646,6 +643,26 @@ function startNextPuzzleCountdown() {
 // ============================================
 // UTILITIES
 // ============================================
+
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      btn.remove();
+    });
+    const skipSection = document.querySelector('.skip-section');
+    skipSection.appendChild(btn);
+  }
+});
 
 function debounce(fn, delay) {
   let timeout;

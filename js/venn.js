@@ -3,13 +3,6 @@
    Organic layout with actor names as focal points
 ============================================ */
 
-// Use existing constants if available, otherwise define
-if (typeof TMDB_API_KEY === 'undefined') {
-  var TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-}
-if (typeof TMDB_IMG === 'undefined') {
-  var TMDB_IMG = "https://image.tmdb.org/t/p/";
-}
 const MOVIES_PER_PERSON = 35;
 
 // State
@@ -84,12 +77,8 @@ async function init() {
       window.location.href = `timeline.html?id=${personId}&name=${encodeURIComponent(personName)}`;
     },
     onAnchorClick: (movie) => {
-      // Go to results with this as anchor
-      const params = new URLSearchParams({
-        anchor: movie.id,
-        title: movie.title
-      });
-      window.location.href = `results.html?${params}`;
+      localStorage.setItem("anchorMovie", JSON.stringify(movie));
+      window.location.href = "constellation.html";
     }
   });
 

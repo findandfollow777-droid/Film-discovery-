@@ -1,3 +1,4 @@
+@import url('variables.css');
 /* ============================================
    ORBIT - SACRED TIMELINE
    Full viewport, no scroll, dramatic visualization
@@ -7,21 +8,15 @@
   --space-black: #000;
   --deep-void: #0a0e1a;
   --cosmic-blue: #0f1729;
-  
   --orbit-1: #00d9ff;
   --orbit-2: #ff006e;
   --orbit-3: #00ff88;
   --orbit-4: #ffd700;
-  
   --film-white: #f0f4f8;
   --muted-silver: #8892a6;
   --danger-red: #ff4757;
-  
   --header-height: 60px;
   --controls-height: 45px;
-  
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Barlow', sans-serif;
 }
 
 [hidden] { display: none !important; }
@@ -92,15 +87,15 @@ html, body {
 }
 
 /* ============================================
-   SACRED SVG LINE
+   SACRED SVG LINE - COSMIC ORGANIC FLOW
 ============================================ */
 
 .sacred-svg {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
   pointer-events: none;
+  z-index: 5;
   overflow: visible;
 }
 
@@ -110,24 +105,64 @@ html, body {
   stroke-linejoin: round;
 }
 
-/* Glowing constellation line effect */
-.sacred-svg path {
-  filter: drop-shadow(0 0 4px currentColor);
+/* Main cosmic line - ethereal glow effect */
+.sacred-line-main {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.7;
+  filter: url(#cosmicGlow);
+  animation: cosmicPulse 8s ease-in-out infinite;
 }
 
-/* Pulsing animation for the sacred line */
-@keyframes linePulse {
-  0%, 100% { opacity: 0.8; stroke-width: 4; }
-  50% { opacity: 1; stroke-width: 5; }
+/* Outer glow layer */
+.sacred-line-glow {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.15;
+  filter: blur(4px);
 }
 
-@keyframes lineGlowPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.5; }
+/* Inner bright core */
+.sacred-line-core {
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+  stroke: rgba(255, 255, 255, 0.6);
 }
 
-@keyframes drawLine {
-  to { stroke-dashoffset: 0; }
+/* Cosmic pulse animation - subtle breathing */
+@keyframes cosmicPulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: url(#cosmicGlow);
+  }
+  50% {
+    opacity: 0.8;
+    filter: url(#cosmicGlowBright);
+  }
+}
+
+/* Flowing energy animation along the line */
+@keyframes cosmicFlow {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Particle shimmer effect */
+.sacred-particle {
+  fill: rgba(255, 255, 255, 0.8);
+  animation: particleShimmer 3s ease-in-out infinite;
+}
+
+@keyframes particleShimmer {
+  0%, 100% { opacity: 0.3; r: 1.5; }
+  50% { opacity: 0.8; r: 2.5; }
 }
 
 /* ============================================
@@ -156,6 +191,7 @@ html, body {
   gap: 6px;
 }
 
+.back-link,
 .back-btn {
   padding: 6px 14px;
   background: rgba(0, 217, 255, 0.1);
@@ -168,6 +204,7 @@ html, body {
   transition: all 0.2s;
 }
 
+.back-link:hover,
 .back-btn:hover {
   background: var(--orbit-1);
   color: var(--space-black);
@@ -340,6 +377,27 @@ html, body {
 .reverse-btn:hover, .reverse-btn.active {
   border-color: var(--orbit-2);
   color: var(--orbit-2);
+}
+
+.sort-btn svg, .reverse-btn svg {
+  flex-shrink: 0;
+  vertical-align: -2px;
+  margin-right: 3px;
+}
+
+/* Movie mode: collection badge */
+.collection-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 215, 0, 0.08);
+  white-space: nowrap;
+  margin-left: 8px;
 }
 
 .filter-select {
@@ -653,10 +711,11 @@ html, body {
 }
 
 .card-inner {
+  position: relative;
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   background: var(--cosmic-blue);
   border: 2px solid rgba(0, 217, 255, 0.3);
   box-shadow:
@@ -833,8 +892,115 @@ html, body {
   transition: opacity 0.2s;
 }
 
-.timeline-card:hover .card-delete {
+.timeline-card:hover .card-delete,
+.convergence-card:hover .card-delete {
   opacity: 1;
+}
+
+/* TV Badge */
+.card-tv-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  background: rgba(138, 43, 226, 0.9);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* TV card accent - amber theme */
+.timeline-card.tv-card .card-inner,
+.timeline-card.tv-show .card-inner {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.timeline-card.tv-card:hover .card-inner,
+.timeline-card.tv-show:hover .card-inner {
+  border-color: var(--accent-gold, #ffd700);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.timeline-card.tv-card .card-glow,
+.timeline-card.tv-show .card-glow {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.15), transparent 70%);
+}
+
+.timeline-card.tv-card .card-node,
+.timeline-card.tv-show .card-node {
+  background: #ffd700;
+  border-color: #ffeb3b;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* TV Badge */
+.tv-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 215, 0, 0.9);
+  color: #000;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* TV Hover Info - appears above tile on hover */
+.tv-hover-info {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.timeline-card.tv-show:hover .tv-hover-info {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hover-episodes {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  color: var(--accent-gold, #ffd700);
+}
+
+.hover-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.hover-status.main-cast {
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--accent-gold, #ffd700);
+}
+
+.hover-status.guest {
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--muted-silver, #94a3b8);
 }
 
 .card-node {
@@ -1150,6 +1316,25 @@ html, body {
 .search-result-known {
   font-size: 10px;
   color: var(--muted-silver);
+}
+
+.search-result.selected {
+  background: rgba(0, 217, 255, 0.15);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.search-loading {
+  padding: 16px;
+  text-align: center;
+  color: var(--accent-cyan, #00d9ff);
+  font-size: 13px;
+  animation: pulse-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-loading {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 .current-orbits h4 {
@@ -1752,6 +1937,25 @@ html, body {
   opacity: 0.9;
 }
 
+.bio-read-more {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent-cyan, #00d9ff);
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.bio-read-more:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 /* ============================================
    GENRE PIE CHART
 ============================================ */
@@ -2098,4 +2302,420 @@ html, body {
   font-size: 10px;
   color: #8892a6;
   text-transform: uppercase;
+}
+
+/* ============================================
+   MEDIA MODE TOGGLE (Both/Movies/TV)
+============================================ */
+
+.media-mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.media-mode-btn {
+  padding: 6px 16px;
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--muted-silver);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.media-mode-btn:hover {
+  color: var(--film-white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.media-mode-btn.active {
+  color: var(--orbit-1);
+  background: rgba(0, 217, 255, 0.15);
+}
+
+.media-mode-btn.active[data-mode="tv"] {
+  color: var(--orbit-4);
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.media-mode-btn.active[data-mode="both"] {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(255, 215, 0, 0.15));
+  color: var(--film-white);
+}
+
+/* DNA Button */
+.dna-btn {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #a855f7;
+}
+
+.dna-btn:hover {
+  background: #a855f7;
+  color: var(--space-black);
+}
+
+/* ============================================
+   TV SEASON CARDS - AMBER THEME
+============================================ */
+
+.timeline-card.tv-season .card-inner {
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.timeline-card.tv-season:hover .card-inner {
+  border-color: var(--orbit-4);
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
+}
+
+.timeline-card.tv-season .card-glow {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+}
+
+.timeline-card.tv-season .season-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 215, 0, 0.95);
+  color: #000;
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.timeline-card.tv-season .card-node {
+  background: var(--orbit-4);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* TV Page Link Icon */
+.tv-page-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 6px;
+  color: var(--orbit-4);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  text-decoration: none;
+}
+
+.timeline-card.tv-season:hover .tv-page-link {
+  opacity: 1;
+}
+
+.tv-page-link:hover {
+  background: rgba(255, 215, 0, 0.25);
+  border-color: var(--orbit-4);
+}
+
+/* Guest appearances - dashed border, slightly dimmed */
+.timeline-card.tv-season.guest-appearance {
+  opacity: 0.65;
+}
+
+.timeline-card.tv-season.guest-appearance .card-inner {
+  border-style: dashed;
+}
+
+.timeline-card.tv-season.guest-appearance:hover {
+  opacity: 1;
+}
+
+/* Expanded card with episode grid */
+.timeline-card.expanded {
+  z-index: 100;
+}
+
+.timeline-card.loading .card-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   CAREER DNA POPUP
+============================================ */
+
+.career-dna-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.career-dna-overlay[hidden] {
+  display: none;
+}
+
+.career-dna-popup {
+  background: linear-gradient(145deg, rgba(15, 20, 35, 0.98), rgba(10, 14, 26, 0.98));
+  border: 2px solid rgba(0, 217, 255, 0.35);
+  border-radius: 20px;
+  padding: 36px;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6),
+              0 0 40px rgba(0, 217, 255, 0.1);
+}
+
+.career-dna-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted-silver);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.career-dna-close:hover {
+  color: var(--film-white);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.career-dna-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  color: var(--orbit-1);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 0.15em;
+}
+
+.career-dna-bar {
+  display: flex;
+  height: 36px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dna-film-portion {
+  background: linear-gradient(90deg, #00b8d9, var(--orbit-1));
+  transition: width 0.6s ease;
+}
+
+.dna-tv-portion {
+  background: linear-gradient(90deg, #cc9900, var(--orbit-4));
+  transition: width 0.6s ease;
+}
+
+.career-dna-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 28px;
+}
+
+.dna-stat {
+  text-align: center;
+}
+
+.dna-stat-value {
+  display: block;
+  font-family: 'Orbitron', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dna-stat:first-child .dna-stat-value {
+  color: var(--orbit-1);
+}
+
+.dna-stat:last-child .dna-stat-value {
+  color: var(--orbit-4);
+}
+
+.dna-stat-label {
+  font-size: 12px;
+  color: var(--muted-silver);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 4px;
+}
+
+.career-dna-details {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted-silver);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.career-dna-details p {
+  margin: 10px 0;
+}
+
+.career-dna-details strong {
+  color: var(--film-white);
+}
+
+/* ============================================
+   EPISODE GRID DROPDOWN
+============================================ */
+
+.episode-grid-dropdown {
+  position: fixed;
+  background: rgba(10, 14, 26, 0.98);
+  border: 2px solid rgba(255, 215, 0, 0.35);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 420px;
+  max-width: 520px;
+  z-index: 2000;
+  animation: dropdownSlide 0.25s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.episode-grid-dropdown[hidden] {
+  display: none;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.episode-grid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.episode-grid-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 14px;
+  color: var(--orbit-4);
+  letter-spacing: 0.03em;
+}
+
+.episode-count-badge {
+  padding: 4px 10px;
+  background: rgba(0, 217, 255, 0.15);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--orbit-1);
+  font-weight: 500;
+}
+
+.episode-grid-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--orbit-4);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.episode-grid-link:hover {
+  background: rgba(255, 215, 0, 0.25);
+  border-color: var(--orbit-4);
+  transform: scale(1.05);
+}
+
+/* Episode grid - 5 per row */
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.episode-tile {
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: default;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.episode-tile:hover {
+  background: rgba(255, 215, 0, 0.18);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.episode-number {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orbit-4);
+  margin-bottom: 4px;
+}
+
+.episode-date {
+  font-size: 11px;
+  color: var(--muted-silver);
+}
+
+.episode-name {
+  font-size: 10px;
+  color: var(--film-white);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
