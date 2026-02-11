@@ -592,7 +592,6 @@ function renderPage() {
         <div class="movie-poster-wrap">
           <img class="movie-poster" src="${posterUrl}" alt="${movie.title}"
                onerror="this.src='https://placehold.co/150x225?text=No+Poster'">
-          ${year ? `<span class="movie-year-badge">${year}</span>` : ''}
         </div>
         <div class="movie-info">
           <div class="movie-title">${displayTitle}</div>
