@@ -44,7 +44,7 @@ const WEEKLY_SCENARIOS = [
     original: { actor: "Harrison Ford", role: "Han Solo", movie: "Star Wars (1977)" },
     options: [
       { id: 1158, name: "Al Pacino", known: "The Godfather" },
-      { id: 3223, name: "Robert De Niro", known: "Taxi Driver" },
+      { id: 380, name: "Robert De Niro", known: "Taxi Driver" },
       { id: 4483, name: "Dustin Hoffman", known: "The Graduate" },
       { id: 6856, name: "Kurt Russell", known: "Escape from New York" }
     ]
@@ -66,8 +66,8 @@ const WEEKLY_SCENARIOS = [
     original: { actor: "Keanu Reeves", role: "Neo", movie: "The Matrix (1999)" },
     options: [
       { id: 18277, name: "Sandra Bullock", known: "Speed" },
-      { id: 112, name: "Sigourney Weaver", known: "Alien" },
-      { id: 3380, name: "Demi Moore", known: "G.I. Jane" },
+      { id: 10205, name: "Sigourney Weaver", known: "Alien" },
+      { id: 3416, name: "Demi Moore", known: "G.I. Jane" },
       { id: 8944, name: "Jamie Lee Curtis", known: "True Lies" }
     ]
   },
@@ -77,8 +77,8 @@ const WEEKLY_SCENARIOS = [
     original: { actor: "Ian McKellen", role: "Gandalf", movie: "LOTR: Fellowship (2001)" },
     options: [
       { id: 738, name: "Sean Connery", known: "James Bond" },
-      { id: 1758, name: "Anthony Hopkins", known: "Silence of the Lambs" },
-      { id: 3392, name: "Michael Caine", known: "The Dark Knight" },
+      { id: 4173, name: "Anthony Hopkins", known: "Silence of the Lambs" },
+      { id: 3895, name: "Michael Caine", known: "The Dark Knight" },
       { id: 1979, name: "Kevin Spacey", known: "The Usual Suspects" }
     ]
   },
@@ -87,10 +87,10 @@ const WEEKLY_SCENARIOS = [
     context: "The role of Vivian was offered to multiple actresses including Molly Ringwald before Julia Roberts made it iconic.",
     original: { actor: "Julia Roberts", role: "Vivian Ward", movie: "Pretty Woman (1990)" },
     options: [
-      { id: 5588, name: "Molly Ringwald", known: "Sixteen Candles" },
+      { id: 21625, name: "Molly Ringwald", known: "Sixteen Candles" },
       { id: 18277, name: "Sandra Bullock", known: "Speed" },
       { id: 5064, name: "Meryl Streep", known: "Sophie's Choice" },
-      { id: 3380, name: "Demi Moore", known: "Ghost" }
+      { id: 3416, name: "Demi Moore", known: "Ghost" }
     ]
   }
 ];

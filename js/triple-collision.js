@@ -19,23 +19,23 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" }, 
-    b: { id: 3223, name: "Robert De Niro", type: "Actor" },
+    b: { id: 380, name: "Robert De Niro", type: "Actor" },
     c: { id: 1032, name: "Martin Scorsese", type: "Director" }
   },
   { 
     a: { id: 85, name: "Johnny Depp", type: "Actor" }, 
-    b: { id: 34847, name: "Helena Bonham Carter", type: "Actor" },
+    b: { id: 1283, name: "Helena Bonham Carter", type: "Actor" },
     c: { id: 510, name: "Tim Burton", type: "Director" }
   },
   { 
-    a: { id: 17419, name: "Bill Murray", type: "Actor" }, 
-    b: { id: 17052, name: "Adrien Brody", type: "Actor" },
+    a: { id: 1532, name: "Bill Murray", type: "Actor" }, 
+    b: { id: 3490, name: "Adrien Brody", type: "Actor" },
     c: { id: 5655, name: "Wes Anderson", type: "Director" }
   },
   { 
     a: { id: 31, name: "Tom Hanks", type: "Actor" }, 
     b: { id: 6193, name: "Leonardo DiCaprio", type: "Actor" },
-    c: { id: 24, name: "Steven Spielberg", type: "Director" }
+    c: { id: 488, name: "Steven Spielberg", type: "Director" }
   },
   { 
     a: { id: 1892, name: "Matt Damon", type: "Actor" }, 
@@ -44,7 +44,7 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 500, name: "Tom Cruise", type: "Actor" }, 
-    b: { id: 2524, name: "Nicole Kidman", type: "Actor" },
+    b: { id: 2227, name: "Nicole Kidman", type: "Actor" },
     c: { id: 240, name: "Stanley Kubrick", type: "Director" }
   },
   
@@ -57,30 +57,30 @@ const DAILY_TRIPLES = [
   { 
     a: { id: 73457, name: "Chris Pratt", type: "Actor" }, 
     b: { id: 8691, name: "Zoe Saldana", type: "Actor" },
-    c: { id: 88675, name: "James Gunn", type: "Director" }
+    c: { id: 15218, name: "James Gunn", type: "Director" }
   },
   { 
     a: { id: 1136406, name: "Tom Holland", type: "Actor" }, 
     b: { id: 505710, name: "Zendaya", type: "Actor" },
-    c: { id: 77965, name: "Jon Watts", type: "Director" }
+    c: { id: 1293994, name: "Jon Watts", type: "Director" }
   },
   { 
-    a: { id: 17881, name: "Ryan Gosling", type: "Actor" }, 
-    b: { id: 224513, name: "Emma Stone", type: "Actor" },
+    a: { id: 30614, name: "Ryan Gosling", type: "Actor" }, 
+    b: { id: 54693, name: "Emma Stone", type: "Actor" },
     c: { id: 136495, name: "Damien Chazelle", type: "Director" }
   },
   { 
     a: { id: 3894, name: "Christian Bale", type: "Actor" }, 
-    b: { id: 17288, name: "Amy Adams", type: "Actor" },
-    c: { id: 30614, name: "Adam McKay", type: "Director" }
+    b: { id: 9273, name: "Amy Adams", type: "Actor" },
+    c: { id: 55710, name: "Adam McKay", type: "Director" }
   },
   { 
-    a: { id: 1357546, name: "Timothée Chalamet", type: "Actor" }, 
-    b: { id: 1267329, name: "Florence Pugh", type: "Actor" },
-    c: { id: 138, name: "Greta Gerwig", type: "Director" }
+    a: { id: 1190668, name: "Timothée Chalamet", type: "Actor" }, 
+    b: { id: 1373737, name: "Florence Pugh", type: "Actor" },
+    c: { id: 45400, name: "Greta Gerwig", type: "Director" }
   },
   { 
-    a: { id: 380, name: "Robert Downey Jr.", type: "Actor" }, 
+    a: { id: 3223, name: "Robert Downey Jr.", type: "Actor" }, 
     b: { id: 74568, name: "Chris Hemsworth", type: "Actor" },
     c: { id: 19271, name: "Anthony Russo", type: "Director" }
   },
@@ -93,12 +93,12 @@ const DAILY_TRIPLES = [
   },
   { 
     a: { id: 514, name: "Jack Nicholson", type: "Actor" },
-    b: { id: 6952, name: "Shelley Duvall", type: "Actor" },
+    b: { id: 10409, name: "Shelley Duvall", type: "Actor" },
     c: { id: 240, name: "Stanley Kubrick", type: "Director" }
   },
   { 
-    a: { id: 3223, name: "Robert De Niro", type: "Actor" }, 
-    b: { id: 1937, name: "Joe Pesci", type: "Actor" },
+    a: { id: 380, name: "Robert De Niro", type: "Actor" }, 
+    b: { id: 4517, name: "Joe Pesci", type: "Actor" },
     c: { id: 1032, name: "Martin Scorsese", type: "Director" }
   },
   { 
@@ -114,7 +114,7 @@ const DAILY_TRIPLES = [
   { 
     a: { id: 738, name: "Sean Connery", type: "Actor" },
     b: { id: 3, name: "Harrison Ford", type: "Actor" },
-    c: { id: 24, name: "Steven Spielberg", type: "Director" }
+    c: { id: 488, name: "Steven Spielberg", type: "Director" }
   },
   { 
     a: { id: 2, name: "Mark Hamill", type: "Actor" },

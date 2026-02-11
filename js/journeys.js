@@ -9,29 +9,29 @@ const DAILY_JOURNEYS = [
   // Week 1 - Classic connections
   { start: { id: 31, name: "Tom Hanks" }, end: { id: 4724, name: "Kevin Bacon" }, par: 2 },
   { start: { id: 6193, name: "Leonardo DiCaprio" }, end: { id: 192, name: "Morgan Freeman" }, par: 3 },
-  { start: { id: 1245, name: "Scarlett Johansson" }, end: { id: 3223, name: "Robert De Niro" }, par: 3 },
+  { start: { id: 1245, name: "Scarlett Johansson" }, end: { id: 380, name: "Robert De Niro" }, par: 3 },
   { start: { id: 287, name: "Brad Pitt" }, end: { id: 514, name: "Jack Nicholson" }, par: 2 },
-  { start: { id: 500, name: "Tom Cruise" }, end: { id: 17419, name: "Bill Murray" }, par: 3 },
+  { start: { id: 500, name: "Tom Cruise" }, end: { id: 1532, name: "Bill Murray" }, par: 3 },
   { start: { id: 1892, name: "Matt Damon" }, end: { id: 85, name: "Johnny Depp" }, par: 3 },
-  { start: { id: 380, name: "Robert Downey Jr." }, end: { id: 2888, name: "Will Smith" }, par: 3 },
+  { start: { id: 3223, name: "Robert Downey Jr." }, end: { id: 2888, name: "Will Smith" }, par: 3 },
 
   // Week 2 - Modern stars
   { start: { id: 1136406, name: "Tom Holland" }, end: { id: 16828, name: "Chris Evans" }, par: 2 },
-  { start: { id: 17881, name: "Ryan Gosling" }, end: { id: 3894, name: "Christian Bale" }, par: 3 },
-  { start: { id: 1357546, name: "Timothée Chalamet" }, end: { id: 6193, name: "Leonardo DiCaprio" }, par: 3 },
-  { start: { id: 224513, name: "Emma Stone" }, end: { id: 1245, name: "Scarlett Johansson" }, par: 3 },
+  { start: { id: 30614, name: "Ryan Gosling" }, end: { id: 3894, name: "Christian Bale" }, par: 3 },
+  { start: { id: 1190668, name: "Timothée Chalamet" }, end: { id: 6193, name: "Leonardo DiCaprio" }, par: 3 },
+  { start: { id: 54693, name: "Emma Stone" }, end: { id: 1245, name: "Scarlett Johansson" }, par: 3 },
   { start: { id: 73457, name: "Chris Pratt" }, end: { id: 31, name: "Tom Hanks" }, par: 3 },
-  { start: { id: 505710, name: "Zendaya" }, end: { id: 17288, name: "Amy Adams" }, par: 4 },
+  { start: { id: 505710, name: "Zendaya" }, end: { id: 9273, name: "Amy Adams" }, par: 4 },
   { start: { id: 74568, name: "Chris Hemsworth" }, end: { id: 287, name: "Brad Pitt" }, par: 3 },
 
   // Week 3 - Challenging paths
-  { start: { id: 17052, name: "Adrien Brody" }, end: { id: 2, name: "Mark Hamill" }, par: 4 },
-  { start: { id: 5344, name: "Meg Ryan" }, end: { id: 8691, name: "Zoe Saldana" }, par: 4 }, // Fixed ID
-  { start: { id: 738, name: "Sean Connery" }, end: { id: 380, name: "Robert Downey Jr." }, par: 3 },
+  { start: { id: 3490, name: "Adrien Brody" }, end: { id: 2, name: "Mark Hamill" }, par: 4 },
+  { start: { id: 5344, name: "Meg Ryan" }, end: { id: 8691, name: "Zoe Saldaña" }, par: 4 }, // Fixed ID
+  { start: { id: 738, name: "Sean Connery" }, end: { id: 3223, name: "Robert Downey Jr." }, par: 3 },
   { start: { id: 3084, name: "Marlon Brando" }, end: { id: 500, name: "Tom Cruise" }, par: 3 },
-  { start: { id: 1937, name: "Joe Pesci" }, end: { id: 73457, name: "Chris Pratt" }, par: 4 },
-  { start: { id: 6952, name: "Shelley Duvall" }, end: { id: 1357546, name: "Timothée Chalamet" }, par: 5 },
-  { start: { id: 2176, name: "Tommy Lee Jones" }, end: { id: 224513, name: "Emma Stone" }, par: 4 }
+  { start: { id: 4517, name: "Joe Pesci" }, end: { id: 73457, name: "Chris Pratt" }, par: 4 },
+  { start: { id: 10409, name: "Shelley Duvall" }, end: { id: 1190668, name: "Timothée Chalamet" }, par: 5 },
+  { start: { id: 2176, name: "Tommy Lee Jones" }, end: { id: 54693, name: "Emma Stone" }, par: 4 }
 ];
 
 // Game state

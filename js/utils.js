@@ -108,8 +108,8 @@ async function resolvePersonId(id, expectedName) {
     );
     const person = await res.json();
 
-    if (person.name &&
-        person.name.toLowerCase().trim() === expectedName.toLowerCase().trim()) {
+    const normalize = s => s.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (person.name && normalize(person.name) === normalize(expectedName)) {
       return { id, person };
     }
 
@@ -124,7 +124,7 @@ async function resolvePersonId(id, expectedName) {
 
     if (searchData.results && searchData.results.length > 0) {
       const exactMatch = searchData.results.find(
-        r => r.name.toLowerCase().trim() === expectedName.toLowerCase().trim()
+        r => normalize(r.name) === normalize(expectedName)
       );
       const match = exactMatch || searchData.results[0];
       const correctRes = await fetch(
