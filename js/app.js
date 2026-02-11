@@ -735,7 +735,8 @@ launchCard.addEventListener("click", async () => {
 
       console.log(`Preview: ${totalMovies} movies across ${totalAvailable} pages`);
 
-      if (totalAvailable > MAX_PAGES) {
+      const hasSettingsFiltersEarly = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
+      if (totalAvailable > MAX_PAGES && !hasSettingsFiltersEarly) {
         const proceed = confirm(
           `Your search found ~${totalMovies.toLocaleString()} movies!\n\n` +
           `We'll show the top 500 results.\n\n` +
