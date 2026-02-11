@@ -681,6 +681,8 @@ html, body {
 .section-card:nth-child(10) { animation-delay: 0.5s; }
 .section-card:nth-child(11) { animation-delay: 0.55s; }
 .section-card:nth-child(12) { animation-delay: 0.6s; }
+.section-card:nth-child(13) { animation-delay: 0.65s; }
+.section-card:nth-child(14) { animation-delay: 0.7s; }
 
 @keyframes card-entrance {
   from {
@@ -2066,6 +2068,103 @@ html, body {
   height: 6px;
   background: var(--accent-orange);
   border-radius: 0 0 2px 2px;
+}
+
+/* Themes: prism / diamond shape */
+.icon-themes .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--accent-cyan);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+}
+.icon-themes .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* Setting: Where — globe / crosshair */
+.icon-where .icon-core::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 217, 255, 0.4);
+}
+.icon-where .icon-core::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--accent-gold);
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+/* Setting: When — clock hands */
+.icon-when .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 2px;
+  height: 8px;
+  background: var(--accent-cyan);
+  transform: translateX(-50%);
+  box-shadow: 0 0 4px rgba(0, 217, 255, 0.5);
+}
+.icon-when .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 2px;
+  background: var(--accent-gold);
+  transform-origin: left center;
+  transform: translateY(-50%) rotate(-30deg);
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+/* Based On: open book */
+.icon-basedon .icon-core::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 7px;
+  height: 14px;
+  border: 1.5px solid var(--accent-cyan);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 0 4px rgba(0, 217, 255, 0.3);
+}
+.icon-basedon .icon-core::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  width: 7px;
+  height: 14px;
+  border: 1.5px solid var(--accent-gold);
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
 }
 
 /* Planet: gradient filled circle for orbit panel */

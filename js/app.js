@@ -75,7 +75,42 @@ const KEYWORD_MAP = {
   "Mind-bending": 818
 };
 
-// SETTING KEYWORDS - For movies SET IN a time period (not release date)
+// =============================================
+// SETTINGS DATA (orbit-movie-settings.json)
+// =============================================
+
+let _settingsDataCache = null;
+let _settingsDataLoading = false;
+let _settingsDataCallbacks = [];
+
+async function getSettingsData() {
+  if (_settingsDataCache) return _settingsDataCache;
+
+  if (_settingsDataLoading) {
+    return new Promise(resolve => _settingsDataCallbacks.push(resolve));
+  }
+
+  _settingsDataLoading = true;
+  try {
+    const response = await fetch('orbit-movie-settings.json');
+    _settingsDataCache = await response.json();
+    _settingsDataCallbacks.forEach(cb => cb(_settingsDataCache));
+    _settingsDataCallbacks = [];
+    console.log(`[Orbit] Settings data loaded: ${Object.keys(_settingsDataCache.movies).length} movies`);
+    return _settingsDataCache;
+  } catch (e) {
+    console.warn('[Orbit] Settings data unavailable:', e.message);
+    _settingsDataCallbacks.forEach(cb => cb(null));
+    _settingsDataCallbacks = [];
+    return null;
+  } finally {
+    _settingsDataLoading = false;
+  }
+}
+
+// Pre-load when page opens (non-blocking)
+getSettingsData();
+
 const state = {
   filters: [],
   genreLogic: "or"
@@ -314,7 +349,11 @@ window.addEventListener('resize', () => {
 const sectionDefinitions = {
   people: { title: "People", builder: buildPeopleContent },
   genres: { title: "Genres", builder: buildGenresContent },
-  timeEra: { title: "Time & Era", builder: buildTimeEraContent },
+  themes: { title: "Themes", builder: buildThemesContent },
+  settingWhere: { title: "Setting: Where", builder: buildSettingWhereContent },
+  settingWhen: { title: "Setting: When", builder: buildSettingWhenContent },
+  basedOn: { title: "Based On", builder: buildBasedOnContent },
+  timeEra: { title: "Release Date & Runtime", builder: buildTimeEraContent },
   ratingsContent: { title: "Ratings & Content", builder: buildRatingsContentSection },
   regionLanguage: { title: "Region & Language", builder: buildRegionLanguageContent },
   production: { title: "Production & Box Office", builder: buildProductionContent },
@@ -494,7 +533,8 @@ launchCard.addEventListener("click", async () => {
           });
         } else if (f.value.type === "runtime" && f.value.min != null) {
           filtered = filtered.filter(m => {
-            const rt = m.runtime || 0;
+            const rt = m.runtime;
+            if (rt == null) return true; // no runtime data available, don't exclude
             return rt >= f.value.min && rt <= (f.value.max || 999);
           });
         }
@@ -502,6 +542,12 @@ launchCard.addEventListener("click", async () => {
 
       // Post-filter by awards
       filtered = filterByAwards(filtered, state.filters);
+
+      // Apply settings-based post-filtering
+      const settingsData = await getSettingsData();
+      if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section))) {
+        filtered = applySettingsFilters(filtered, state.filters, settingsData);
+      }
 
       if (filtered.length === 0) {
         hyperspace.hidden = true;
@@ -555,6 +601,18 @@ launchCard.addEventListener("click", async () => {
         genre_ids: m.genre_ids || (m.genres ? m.genres.map(g => g.id) : [])
       }));
 
+      // Apply settings-based post-filtering if any settings filters are active
+      const settingsData = await getSettingsData();
+      if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section)) && settingsData) {
+        allMovies = applySettingsFilters(allMovies, state.filters, settingsData);
+        console.log(`[Orbit] Awards + settings post-filter: → ${allMovies.length} movies`);
+        if (allMovies.length === 0) {
+          hyperspace.hidden = true;
+          alert("No award-winning movies match your settings filters. Try removing some filters.");
+          return;
+        }
+      }
+
       const selectedGenres = getSelectedGenres(state.filters);
       const genresToUse = selectedGenres.length >= 2
         ? selectedGenres.slice(0, 3)
@@ -566,6 +624,94 @@ launchCard.addEventListener("click", async () => {
       localStorage.setItem("mediaType", "movie");
       localStorage.removeItem("resultsCapped");
       localStorage.removeItem("totalAvailable");
+
+      setTimeout(() => {
+        window.location.href = "games/results.html";
+      }, 500);
+
+    } else if (hasOnlySettingsFilters(state.filters)) {
+      // SETTINGS-ONLY MODE: filter from local settings data, then batch-fetch from TMDB
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      const settingsData = await getSettingsData();
+      const seedData = await getSeedData();
+      if (!settingsData || !seedData) {
+        hyperspace.hidden = true;
+        alert("Settings data unavailable. Try adding a genre or person filter alongside your selections.");
+        return;
+      }
+
+      // Build minimal objects for filtering (we only need id + genre_ids for pre-filter)
+      const allSettingsIds = Object.keys(settingsData.movies);
+      const candidateMovies = allSettingsIds
+        .map(id => {
+          const seed = seedData.movies[id];
+          if (!seed) return null;
+          return {
+            id: seed.id || parseInt(id),
+            title: seed.title,
+            genre_ids: seed.genres || [],
+            vote_average: seed.vote_average || 0,
+            popularity: seed.popularity || 0
+          };
+        })
+        .filter(Boolean);
+
+      let filtered = applySettingsFilters(candidateMovies, state.filters, settingsData);
+      console.log(`[Orbit] Settings-only filter: ${candidateMovies.length} → ${filtered.length} movies`);
+
+      // Post-filter by awards if present
+      filtered = filterByAwards(filtered, state.filters);
+
+      if (filtered.length === 0) {
+        hyperspace.hidden = true;
+        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        return;
+      }
+
+      // Cap at 500 and sort by popularity to fetch the most relevant
+      filtered.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+      const MAX_SETTINGS_RESULTS = 500;
+      const matchingIds = filtered.slice(0, MAX_SETTINGS_RESULTS).map(m => m.id);
+
+      // Batch-fetch full movie objects from TMDB (same pattern as awards mode)
+      let allMovies = [];
+      const BATCH_SIZE = 8;
+      for (let i = 0; i < matchingIds.length; i += BATCH_SIZE) {
+        const batch = matchingIds.slice(i, i + BATCH_SIZE);
+        const results = await Promise.all(batch.map(id =>
+          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        ));
+        results.forEach(m => { if (m && m.id) allMovies.push(m); });
+      }
+
+      // Convert to discover-like format
+      allMovies = allMovies.map(m => ({
+        ...m,
+        genre_ids: m.genre_ids || (m.genres ? m.genres.map(g => g.id) : [])
+      }));
+
+      if (allMovies.length === 0) {
+        hyperspace.hidden = true;
+        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        return;
+      }
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(allMovies);
+
+      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
+      localStorage.removeItem("resultsCapped");
+      localStorage.removeItem("totalAvailable");
+      localStorage.removeItem("orbitBaseQuery");
 
       setTimeout(() => {
         window.location.href = "games/results.html";
@@ -634,18 +780,27 @@ launchCard.addEventListener("click", async () => {
       // Post-filter by awards
       allMovies = filterByAwards(allMovies, state.filters);
 
-      if (allMovies.length === 0) {
-        hyperspace.hidden = true;
-        alert("No movies found matching your criteria.");
-        return;
+      // Apply settings-based post-filtering (location, time period, themes, based-on)
+      const settingsData = await getSettingsData();
+      const hasSettingsFilters = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
+      let finalMovies = allMovies;
+      if (hasSettingsFilters && settingsData) {
+        finalMovies = applySettingsFilters(allMovies, state.filters, settingsData);
+        console.log(`[Orbit] Post-filter: ${allMovies.length} → ${finalMovies.length} movies`);
+
+        if (finalMovies.length === 0) {
+          hyperspace.hidden = true;
+          alert("No movies found matching your criteria. Try removing some settings filters (location, era, themes) for broader results.");
+          return;
+        }
       }
 
       const selectedGenres = getSelectedGenres(state.filters);
       const genresToUse = selectedGenres.length >= 2
         ? selectedGenres.slice(0, 3)
-        : getTopGenresFromMovies(allMovies);
+        : getTopGenresFromMovies(finalMovies);
 
-      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("movies", JSON.stringify(finalMovies));
       localStorage.setItem("genres", JSON.stringify(genresToUse));
       localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
       localStorage.setItem("mediaType", "movie");
@@ -834,6 +989,13 @@ function buildTMDBQueryFromFilters(filters) {
         }
         break;
 
+      case "themes":
+      case "settingWhere":
+      case "settingWhen":
+      case "basedOn":
+        // Handled by client-side post-filtering, not TMDB API params
+        break;
+
       case "universes":
         // Collection IDs stored as _collections - handled in launch flow
         break;
@@ -863,7 +1025,7 @@ function buildTMDBQueryFromFilters(filters) {
       case "watch":
         if (filter.value.type === "provider" && filter.value.id) {
           const existing = params.get("with_watch_providers");
-          params.set("with_watch_providers", existing ? `${existing},${filter.value.id}` : filter.value.id);
+          params.set("with_watch_providers", existing ? `${existing}|${filter.value.id}` : filter.value.id);
           if (filter.value.region) params.set("watch_region", filter.value.region);
         }
         break;
@@ -912,6 +1074,106 @@ function getTopGenresFromMovies(movies) {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3)
     .map(([id]) => parseInt(id));
+}
+
+// =============================================
+// SETTINGS POST-FILTER
+// =============================================
+
+const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen", "basedOn"];
+
+function hasOnlySettingsFilters(filters) {
+  return filters.length > 0 && filters.every(f => SETTINGS_SECTIONS.includes(f.section));
+}
+
+let _seedDataCache = null;
+
+async function getSeedData() {
+  if (_seedDataCache) return _seedDataCache;
+  try {
+    const response = await fetch('orbit-settings-seed.json');
+    _seedDataCache = await response.json();
+    return _seedDataCache;
+  } catch (e) {
+    console.warn('[Orbit] Seed data unavailable:', e.message);
+    return null;
+  }
+}
+
+function applySettingsFilters(movies, filters, settingsData) {
+  if (!settingsData) return movies;
+
+  const settingsFilters = filters.filter(f => SETTINGS_SECTIONS.includes(f.section));
+  if (settingsFilters.length === 0) return movies;
+
+  return movies.filter(movie => {
+    const settings = settingsData.movies[String(movie.id)];
+    if (!settings) return false; // movie not in dataset — exclude when settings filters active
+
+    for (const filter of settingsFilters) {
+      if (!filter.value) continue;
+
+      switch (filter.value.type) {
+        case "location": {
+          const primary = settings.location?.primary || [];
+          const country = settings.location?.country || [];
+          const allLocs = [...primary, ...country].map(s => s.toLowerCase());
+          if (!allLocs.some(l => l.includes(filter.value.name.toLowerCase()))) return false;
+          break;
+        }
+
+        case "time_decade": {
+          const movieDecades = settings.time_period?.decades || [];
+          const movieEras = settings.time_period?.era_labels || [];
+          const directMatch = movieDecades.includes(filter.value.value);
+          const eraMatch = movieEras.some(era => {
+            const eraDecades = typeof getDecadesForEra === 'function' ? getDecadesForEra(era) : [];
+            return eraDecades.includes(filter.value.value);
+          });
+          if (!directMatch && !eraMatch) return false;
+          break;
+        }
+
+        case "time_era": {
+          const eraLabels = settings.time_period?.era_labels || [];
+          const directMatch = eraLabels.includes(filter.value.value);
+          const decadeOverlap = (
+            settings.time_period?.setting_type === "historical" &&
+            (settings.time_period?.decades || []).some(d => {
+              const eraDecades = typeof getDecadesForEra === 'function' ? getDecadesForEra(filter.value.value) : [];
+              return eraDecades.includes(d);
+            })
+          );
+          if (!directMatch && !decadeOverlap) return false;
+          break;
+        }
+
+        case "time_special": {
+          const val = filter.value.value;
+          // "ancient" and "medieval" are era labels, not setting_types
+          if (val === "ancient" || val === "medieval") {
+            const eraLabels = (settings.time_period?.era_labels || []).map(e => e.toLowerCase());
+            if (!eraLabels.includes(val)) return false;
+          } else {
+            if (settings.time_period?.setting_type !== val) return false;
+          }
+          break;
+        }
+
+        case "based_on": {
+          if (settings.based_on?.type !== filter.value.value) return false;
+          break;
+        }
+
+        case "theme": {
+          const normalised = settings.themes_normalised || [];
+          if (!normalised.includes(filter.value.name)) return false;
+          break;
+        }
+      }
+    }
+    return true;
+  });
 }
 
 // =============================================
@@ -1296,15 +1558,271 @@ function buildGenresContent(root) {
 }
 
 // =============================================
-// 3. TIME & ERA SECTION (release date + runtime)
+// 3. THEMES SECTION
+// =============================================
+
+function buildThemesContent(root) {
+  const desc = document.createElement("p");
+  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
+  desc.textContent = "Select one or more themes. Films are matched by their normalised theme categories.";
+  root.appendChild(desc);
+
+  // THEME_GROUPS from theme-taxonomy.js: { "Relationships": ["Family", "Love & Romance", ...], ... }
+  for (const [groupName, categories] of Object.entries(THEME_GROUPS)) {
+    root.appendChild(makeSectionLabel(groupName));
+    const chipGroup = document.createElement("div");
+    chipGroup.className = "chip-group";
+
+    categories.forEach(cat => {
+      const chip = makeChip(cat, "themes", { type: "theme", name: cat });
+      chipGroup.appendChild(chip);
+    });
+
+    root.appendChild(chipGroup);
+  }
+}
+
+// =============================================
+// 4. SETTING: WHERE SECTION
+// =============================================
+
+function buildSettingWhereContent(root) {
+  const desc = document.createElement("p");
+  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
+  desc.textContent = "Search for a city, country, or region, or pick from popular locations below.";
+  root.appendChild(desc);
+
+  // Search input with autocomplete
+  const searchRow = document.createElement("div");
+  searchRow.className = "input-row";
+  searchRow.style.position = "relative";
+
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.id = "locationSearchInput";
+  searchInput.placeholder = "Search cities, countries, regions...";
+  searchInput.autocomplete = "off";
+  searchRow.appendChild(searchInput);
+
+  const dropdownEl = document.createElement("div");
+  dropdownEl.id = "locationDropdown";
+  dropdownEl.style.cssText = "display:none; position:absolute; top:100%; left:0; right:0; z-index:100; max-height:200px; overflow-y:auto; background:rgba(10,14,26,0.98); border:1px solid rgba(0,217,255,0.25); border-radius:8px; margin-top:4px;";
+  searchRow.appendChild(dropdownEl);
+  root.appendChild(searchRow);
+
+  // Container for search-selected locations
+  const selectedContainer = document.createElement("div");
+  selectedContainer.id = "selectedLocationContainer";
+  selectedContainer.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; min-height:0;";
+  root.appendChild(selectedContainer);
+
+  // Build autocomplete from settings data
+  getSettingsData().then(data => {
+    if (!data) return;
+
+    const allLocations = new Set();
+    for (const movie of Object.values(data.movies)) {
+      if (movie.location?.primary) movie.location.primary.forEach(l => allLocations.add(l));
+      if (movie.location?.country) movie.location.country.forEach(l => allLocations.add(l));
+    }
+    const locationList = Array.from(allLocations).sort();
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query.length < 2) { dropdownEl.style.display = "none"; return; }
+
+      const matches = locationList.filter(l => l.toLowerCase().includes(query)).slice(0, 15);
+      if (matches.length === 0) { dropdownEl.style.display = "none"; return; }
+
+      dropdownEl.innerHTML = "";
+      matches.forEach(loc => {
+        const item = document.createElement("div");
+        item.style.cssText = "padding:8px 12px; cursor:pointer; font-size:14px; color:var(--film-white); border-bottom:1px solid rgba(0,217,255,0.1);";
+        item.textContent = loc;
+        item.addEventListener("mouseenter", () => item.style.background = "rgba(0,217,255,0.1)");
+        item.addEventListener("mouseleave", () => item.style.background = "none");
+        item.addEventListener("click", () => {
+          addLocationChip(loc, selectedContainer);
+          searchInput.value = "";
+          dropdownEl.style.display = "none";
+        });
+        dropdownEl.appendChild(item);
+      });
+      dropdownEl.style.display = "block";
+    });
+  });
+
+  function addLocationChip(locationName, container) {
+    if (container.querySelector(`[data-location="${locationName}"]`)) return;
+
+    const chip = document.createElement("div");
+    chip.dataset.location = locationName;
+    chip.style.cssText = "display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:rgba(0,217,255,0.15); border:1px solid rgba(0,217,255,0.3); border-radius:999px; font-size:13px; color:var(--accent-cyan);";
+    chip.innerHTML = `<span>${locationName}</span>`;
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "\u2715";
+    removeBtn.style.cssText = "background:none; border:none; color:var(--danger-red); cursor:pointer; font-size:11px; padding:0 2px;";
+    removeBtn.addEventListener("click", () => chip.remove());
+    chip.appendChild(removeBtn);
+    container.appendChild(chip);
+  }
+
+  // Popular location chips
+  root.appendChild(makeSectionLabel("Popular Locations"));
+  const popularGroup = document.createElement("div");
+  popularGroup.className = "chip-group";
+  const popularLocations = [
+    "New York", "Los Angeles", "London", "Paris", "Tokyo", "Rome",
+    "Berlin", "Chicago", "San Francisco", "Hong Kong", "Moscow", "Sydney"
+  ];
+  popularLocations.forEach(loc => {
+    const chip = makeChip(loc, "settingWhere", { type: "location", name: loc });
+    popularGroup.appendChild(chip);
+  });
+  root.appendChild(popularGroup);
+
+  // Region chips
+  root.appendChild(makeSectionLabel("Regions"));
+  const regionGroup = document.createElement("div");
+  regionGroup.className = "chip-group";
+  const regions = [
+    "Western Europe", "East Asia", "Middle East", "Latin America",
+    "Sub-Saharan Africa", "Southeast Asia", "Scandinavia", "Caribbean"
+  ];
+  regions.forEach(r => {
+    const chip = makeChip(r, "settingWhere", { type: "location", name: r });
+    regionGroup.appendChild(chip);
+  });
+  root.appendChild(regionGroup);
+
+  // Special location chips
+  root.appendChild(makeSectionLabel("Special"));
+  const specialGroup = document.createElement("div");
+  specialGroup.className = "chip-group";
+  const specials = ["Fictional / Fantasy World", "Space", "At Sea", "Small Town America", "The Road / Traveling"];
+  specials.forEach(s => {
+    const chip = makeChip(s, "settingWhere", { type: "location", name: s });
+    specialGroup.appendChild(chip);
+  });
+  root.appendChild(specialGroup);
+}
+
+// =============================================
+// 5. SETTING: WHEN SECTION
+// =============================================
+
+function buildSettingWhenContent(root) {
+  const desc = document.createElement("p");
+  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
+  desc.textContent = "Not when it was released \u2014 when the story takes place. Decades cross-reference with named eras.";
+  root.appendChild(desc);
+
+  // Decade chips
+  root.appendChild(makeSectionLabel("Decades"));
+  const decadeGroup = document.createElement("div");
+  decadeGroup.className = "chip-group";
+  const decades = ["1920s", "1930s", "1940s", "1950s", "1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"];
+  decades.forEach(d => {
+    const chip = makeChip(d, "settingWhen", { type: "time_decade", value: d });
+    decadeGroup.appendChild(chip);
+  });
+  root.appendChild(decadeGroup);
+
+  // Named era chips — curated order (most recognisable first)
+  root.appendChild(makeSectionLabel("Named Eras"));
+  const eraGroup = document.createElement("div");
+  eraGroup.className = "chip-group";
+
+  const eraOrder = [
+    "World War II", "World War I", "Cold War", "Vietnam Era",
+    "Civil Rights", "Roaring Twenties", "Great Depression", "Prohibition",
+    "Space Race", "Victorian", "Edwardian", "Colonial Era",
+    "Industrial Revolution", "American Civil War", "French Revolution",
+    "American Revolution", "The Troubles", "Fall of the Berlin Wall",
+    "Apartheid", "Cultural Revolution", "Post-War", "Korean War",
+    "Holocaust", "Watergate"
+  ];
+
+  eraOrder.forEach(era => {
+    if (typeof ERA_DECADE_MAP !== 'undefined' && ERA_DECADE_MAP[era]) {
+      const chip = makeChip(era, "settingWhen", { type: "time_era", value: era });
+      eraGroup.appendChild(chip);
+    }
+  });
+  root.appendChild(eraGroup);
+
+  // Special time settings
+  root.appendChild(makeSectionLabel("Special"));
+  const specialGroup = document.createElement("div");
+  specialGroup.className = "chip-group";
+  const specialTimes = [
+    { label: "Near Future", value: "near_future" },
+    { label: "Far Future", value: "far_future" },
+    { label: "Timeless / Unspecified", value: "timeless" },
+    { label: "Multi-Era / Spanning", value: "multi_era" },
+    { label: "Ancient (Pre-Medieval)", value: "ancient" },
+    { label: "Medieval", value: "medieval" }
+  ];
+  specialTimes.forEach(s => {
+    const chip = makeChip(s.label, "settingWhen", { type: "time_special", value: s.value });
+    specialGroup.appendChild(chip);
+  });
+  root.appendChild(specialGroup);
+
+  // Info note
+  const note = document.createElement("p");
+  note.style.cssText = "font-size: 11px; color: var(--ghost-gray); margin-top: 12px; font-style: italic;";
+  note.textContent = 'Decade chips also match films tagged with eras that overlap that decade. Selecting "1940s" includes WWII films even if they span 1939\u20131945.';
+  root.appendChild(note);
+}
+
+// =============================================
+// 6. BASED ON SECTION
+// =============================================
+
+function buildBasedOnContent(root) {
+  // Source type chips
+  root.appendChild(makeSectionLabel("Source Type"));
+  const sourceGroup = document.createElement("div");
+  sourceGroup.className = "chip-group";
+  const sourceTypes = [
+    { label: "Original Screenplay", value: "original" },
+    { label: "True Story / Real Events", value: "true_story" },
+    { label: "Novel / Book", value: "novel" },
+    { label: "Short Story", value: "short_story" },
+    { label: "Stage Play", value: "play" },
+    { label: "Comic / Graphic Novel", value: "comic" },
+    { label: "Video Game", value: "video_game" },
+    { label: "Mythology / Folklore", value: "mythology" }
+  ];
+  sourceTypes.forEach(s => {
+    const chip = makeChip(s.label, "basedOn", { type: "based_on", value: s.value });
+    sourceGroup.appendChild(chip);
+  });
+  root.appendChild(sourceGroup);
+
+  // Franchise status chips
+  root.appendChild(makeSectionLabel("Franchise Status"));
+  const franchiseGroup = document.createElement("div");
+  franchiseGroup.className = "chip-group";
+  const franchiseTypes = [
+    { label: "Sequel", value: "sequel" },
+    { label: "Prequel", value: "prequel" },
+    { label: "Remake / Reboot", value: "remake" },
+    { label: "Spin-off", value: "spin-off" }
+  ];
+  franchiseTypes.forEach(f => {
+    const chip = makeChip(f.label, "basedOn", { type: "based_on", value: f.value });
+    franchiseGroup.appendChild(chip);
+  });
+  root.appendChild(franchiseGroup);
+}
+
+// =============================================
+// 7. RELEASE DATE & RUNTIME SECTION
 // =============================================
 
 function buildTimeEraContent(root) {
-  const releaseHeader = document.createElement("div");
-  releaseHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
-  releaseHeader.textContent = "Release Date & Runtime";
-  root.appendChild(releaseHeader);
-
   root.appendChild(makeSectionLabel("Specific Year"));
   const yearRow = document.createElement("div");
   yearRow.className = "input-row";
@@ -2951,6 +3469,66 @@ function collectLabelsForSection(sectionKey) {
         universeResults.push({ label: value.name, value });
       });
       return universeResults;
+
+    case "themes":
+      const themeChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+        .filter(chip => {
+          try { return JSON.parse(chip.dataset.value).type === "theme"; } catch { return false; }
+        });
+      return themeChips.map(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        return { label: `Theme: ${value.name}`, value };
+      });
+
+    case "settingWhere":
+      const locationResults = [];
+      // Search-selected locations (chips in the selectedLocationContainer)
+      const locationChips = document.querySelectorAll('#selectedLocationContainer [data-location]');
+      locationChips.forEach(chip => {
+        const loc = chip.dataset.location;
+        locationResults.push({
+          label: `Set in: ${loc}`,
+          value: { type: "location", name: loc }
+        });
+      });
+      // Chip-selected locations (popular/region/special chips)
+      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+        .filter(chip => {
+          try { return JSON.parse(chip.dataset.value).type === "location"; } catch { return false; }
+        });
+      locChipsActive.forEach(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        // Avoid duplicates if same location was also search-selected
+        if (!locationResults.some(r => r.value.name === value.name)) {
+          locationResults.push({ label: `Set in: ${value.name}`, value });
+        }
+      });
+      return locationResults;
+
+    case "settingWhen":
+      const whenResults = [];
+      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active'));
+      whenChips.forEach(chip => {
+        try {
+          const value = JSON.parse(chip.dataset.value);
+          let label = chip.textContent;
+          if (value.type === "time_decade") label = `Set in ${value.value}`;
+          else if (value.type === "time_era") label = `Era: ${value.value}`;
+          // time_special uses the chip text as-is
+          whenResults.push({ label, value });
+        } catch {}
+      });
+      return whenResults;
+
+    case "basedOn":
+      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+        .filter(chip => {
+          try { return JSON.parse(chip.dataset.value).type === "based_on"; } catch { return false; }
+        });
+      return basedOnChips.map(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        return { label: chip.textContent, value };
+      });
 
     case "awards":
       const awardResults = [];
