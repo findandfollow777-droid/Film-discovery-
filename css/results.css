@@ -344,6 +344,19 @@ html, body {
   font-weight: 600;
 }
 
+.sort-awards {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.sort-awards:hover {
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.sort-awards.active {
+  background: #ffd700;
+  color: var(--space-black);
+}
+
 .sort-random {
   border-color: rgba(255, 107, 53, 0.3);
 }
@@ -974,6 +987,42 @@ html, body {
   color: #c0c0c0;
   border-color: rgba(192, 192, 192, 0.3);
   background: rgba(192, 192, 192, 0.1);
+}
+
+/* Award counts (shown on tiles in awards sort mode) */
+.movie-award-counts {
+  display: flex;
+  gap: 6px;
+  margin-top: 3px;
+  align-items: center;
+}
+
+.award-count-wins,
+.award-count-noms {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.award-count-wins {
+  color: #ffd700;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+.award-count-wins::before {
+  content: "🏆 ";
+  font-size: 10px;
+}
+
+.award-count-noms {
+  color: #c0c0c0;
+  text-shadow: 0 0 6px rgba(192, 192, 192, 0.3);
+}
+
+.award-count-noms::before {
+  content: "✦ ";
+  font-size: 9px;
 }
 
 .movie-delete {

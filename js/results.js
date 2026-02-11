@@ -344,6 +344,20 @@ function sortMovies() {
         });
       }
       break;
+    case "awards":
+      sortedMovies.sort((a, b) => {
+        const awardsA = typeof getMovieAwards === 'function' ? getMovieAwards(a.id) : null;
+        const awardsB = typeof getMovieAwards === 'function' ? getMovieAwards(b.id) : null;
+        const winsA = awardsA ? awardsA.filter(aw => aw.won).length : 0;
+        const winsB = awardsB ? awardsB.filter(aw => aw.won).length : 0;
+        const nomsA = awardsA ? awardsA.filter(aw => !aw.won).length : 0;
+        const nomsB = awardsB ? awardsB.filter(aw => !aw.won).length : 0;
+        // Primary: total awards (wins weighted x2), secondary: wins count
+        const scoreA = winsA * 2 + nomsA;
+        const scoreB = winsB * 2 + nomsB;
+        return scoreB - scoreA || winsB - winsA;
+      });
+      break;
     case "random":
       shuffleArray(sortedMovies);
       break;
@@ -550,8 +564,18 @@ function renderPage() {
     // Truncate title for display
     const displayTitle = movie.title.length > 25 ? movie.title.substring(0, 22) + "..." : movie.title;
 
-    // Award badges
-    const awardBadges = typeof getAwardBadgesHTML === 'function' ? getAwardBadgesHTML(movie.id) : '';
+    // Award counts for awards sort mode
+    let awardCountsHTML = '';
+    if (currentSort === 'awards' && typeof getMovieAwards === 'function') {
+      const awards = getMovieAwards(movie.id);
+      if (awards) {
+        const wins = awards.filter(a => a.won).length;
+        const noms = awards.filter(a => !a.won).length;
+        if (wins || noms) {
+          awardCountsHTML = `<div class="movie-award-counts">${wins ? `<span class="award-count-wins">${wins}</span>` : ''}${noms ? `<span class="award-count-noms">${noms}</span>` : ''}</div>`;
+        }
+      }
+    }
 
     return `
       <div class="movie-card"
@@ -576,7 +600,7 @@ function renderPage() {
             <span class="movie-year">${year}</span>
             ${rating ? `<span class="movie-rating">⭐ ${rating}</span>` : ''}
           </div>
-          ${awardBadges ? `<div class="movie-awards">${awardBadges}</div>` : ''}
+          ${awardCountsHTML}
         </div>
       </div>
     `;
