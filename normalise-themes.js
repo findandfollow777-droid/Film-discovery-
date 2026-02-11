@@ -3,7 +3,7 @@
 // ORBIT Discovery Dimensions — Phase 4
 // Theme Taxonomy & Normalisation
 // Usage:
-//   node normalise-themes.js              # Run normalisation + print report
+//   node normalise-themes.js              # Run normalisation + print frequency report
 //   node normalise-themes.js --report     # Print frequency report only (no changes)
 // ============================================
 
@@ -26,8 +26,7 @@ function main() {
   let moviesSkipped = 0;       // no raw themes at all
 
   for (const [id, movie] of Object.entries(movies)) {
-    // Use themes_raw if a previous normalisation stored the originals there
-    const rawThemes = movie.themes_raw || movie.themes || [];
+    const rawThemes = movie.themes || [];
 
     if (rawThemes.length === 0) {
       moviesSkipped++;
@@ -47,69 +46,72 @@ function main() {
       normalisedFreq[cat] = (normalisedFreq[cat] || 0) + 1;
     }
 
-    // Count unmapped
+    // Track unmapped
     for (const raw of unmapped) {
       allUnmapped[raw] = (allUnmapped[raw] || 0) + 1;
     }
 
-    // Write back to movie object (unless report-only)
+    // Write back — store normalised in NEW field, keep themes as-is
     if (!reportOnly) {
-      movie.themes_raw = rawThemes;
-      movie.themes = normalised;
+      movie.themes_normalised = normalised;
+      // movie.themes stays as the raw values (never overwrite)
     }
 
     moviesProcessed++;
   }
 
-  // === REPORT ===
-  console.log(`\n[Phase 4] Theme Normalisation Report`);
-  console.log(`  Movies processed: ${moviesProcessed}`);
-  console.log(`  Movies skipped (no themes): ${moviesSkipped}`);
-  console.log(`  Taxonomy categories: ${Object.keys(THEME_TAXONOMY).length}`);
-
-  // Normalised category frequency
-  console.log(`\n=== NORMALISED CATEGORY FREQUENCY ===`);
-  const sortedCats = Object.entries(normalisedFreq).sort((a, b) => b[1] - a[1]);
-  for (const [cat, count] of sortedCats) {
-    const pct = ((count / moviesProcessed) * 100).toFixed(1);
-    console.log(`  ${cat}: ${count} (${pct}%)`);
-  }
-
-  // Unmapped themes (top 50)
-  const sortedUnmapped = Object.entries(allUnmapped).sort((a, b) => b[1] - a[1]);
-  const unmappedTotal = sortedUnmapped.reduce((sum, [, c]) => sum + c, 0);
-  const rawTotal = Object.values(rawFreq).reduce((sum, c) => sum + c, 0);
-  const mappedPct = (((rawTotal - unmappedTotal) / rawTotal) * 100).toFixed(1);
-
-  console.log(`\n=== MAPPING COVERAGE ===`);
-  console.log(`  Raw theme instances: ${rawTotal}`);
-  console.log(`  Mapped: ${rawTotal - unmappedTotal} (${mappedPct}%)`);
-  console.log(`  Unmapped: ${unmappedTotal} (${(100 - parseFloat(mappedPct)).toFixed(1)}%)`);
-  console.log(`  Unique unmapped strings: ${sortedUnmapped.length}`);
-
-  console.log(`\n=== TOP 50 UNMAPPED THEMES ===`);
-  for (const [raw, count] of sortedUnmapped.slice(0, 50)) {
-    console.log(`  "${raw}": ${count}`);
-  }
-
-  // By group
-  console.log(`\n=== COVERAGE BY GROUP ===`);
-  for (const [group, categories] of Object.entries(THEME_GROUPS)) {
-    const groupTotal = categories.reduce((sum, cat) => sum + (normalisedFreq[cat] || 0), 0);
-    console.log(`  ${group}: ${groupTotal} movies`);
-    for (const cat of categories) {
-      console.log(`    ${cat}: ${normalisedFreq[cat] || 0}`);
-    }
-  }
-
-  // Save if not report-only
+  // Save
   if (!reportOnly) {
     data.meta.generated = new Date().toISOString();
     data.meta.themes_normalised = true;
     fs.writeFileSync(SETTINGS_FILE, JSON.stringify(data, null, 2));
-    console.log(`\n[Phase 4] Saved normalised themes to ${SETTINGS_FILE}`);
+    console.log(`\n[Phase 4] Normalisation complete.`);
+    console.log(`  Movies processed: ${moviesProcessed}`);
+    console.log(`  Movies skipped (no themes): ${moviesSkipped}`);
+  }
+
+  // ─── FREQUENCY REPORT ───
+
+  console.log(`\n═══ NORMALISED THEME FREQUENCY ═══\n`);
+
+  // Sort by frequency descending
+  const sortedNormalised = Object.entries(normalisedFreq)
+    .sort((a, b) => b[1] - a[1]);
+
+  for (const [cat, count] of sortedNormalised) {
+    const pct = ((count / moviesProcessed) * 100).toFixed(1);
+    console.log(`  ${cat.padEnd(22)} ${String(count).padStart(5)}  (${pct}%)`);
+  }
+
+  // ─── UNMAPPED THEMES ───
+
+  const sortedUnmapped = Object.entries(allUnmapped)
+    .sort((a, b) => b[1] - a[1]);
+
+  if (sortedUnmapped.length > 0) {
+    console.log(`\n═══ UNMAPPED RAW THEMES (top 40) ═══`);
+    console.log(`These raw themes didn't match any taxonomy category.\n`);
+
+    for (const [raw, count] of sortedUnmapped.slice(0, 40)) {
+      console.log(`  ${raw.padEnd(30)} ${String(count).padStart(5)}`);
+    }
+
+    console.log(`\n  Total unique unmapped: ${sortedUnmapped.length}`);
+    console.log(`  Total unmapped occurrences: ${sortedUnmapped.reduce((sum, [_, c]) => sum + c, 0)}`);
   } else {
-    console.log(`\n[Phase 4] Report only — no changes written.`);
+    console.log(`\n  All raw themes mapped successfully.`);
+  }
+
+  // ─── TOP RAW THEMES ───
+
+  console.log(`\n═══ TOP 30 RAW THEMES ═══\n`);
+  const sortedRaw = Object.entries(rawFreq)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 30);
+
+  for (const [raw, count] of sortedRaw) {
+    const mapped = normaliseThemes([raw]).normalised[0] || "UNMAPPED";
+    console.log(`  ${raw.padEnd(28)} ${String(count).padStart(5)}  -> ${mapped}`);
   }
 }
 
