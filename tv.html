@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Orbit – Cinematic Discovery</title>
+  <title>Orbit – TV Discovery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/shortlist-badge.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="movie-mode">
+<body class="tv-mode">
   <!-- CINEMATIC BACKGROUND LAYERS -->
   <div class="background-layer"></div>
   <div class="film-grain"></div>
   <div class="vignette"></div>
-  
+
   <!-- ANAMORPHIC LENS FLARES -->
   <div class="lens-flare lens-flare-1"></div>
   <div class="lens-flare lens-flare-2"></div>
@@ -44,7 +43,7 @@
         </div>
         <div class="orbit-logo-text">ORBIT</div>
       </div>
-      <p class="orbit-tagline">Discover cinema through the intersection of infinite possibilities</p>
+      <p class="orbit-tagline">Discover television through the intersection of infinite possibilities</p>
     </header>
 
     <main class="orbit-main">
@@ -53,7 +52,7 @@
         <header class="orbit-header-row">
           <div class="orbit-header-center">
             <h1 class="orbit-card-title">Build your orbit</h1>
-            <p class="orbit-card-subtitle">Select criteria to shape your cinematic universe.</p>
+            <p class="orbit-card-subtitle">Select criteria to shape your television universe.</p>
           </div>
         </header>
 
@@ -69,7 +68,7 @@
             </div>
             <div class="section-text">
               <h2>People</h2>
-              <p>Actors, directors, writers</p>
+              <p>Actors, creators, showrunners</p>
             </div>
           </button>
 
@@ -82,24 +81,37 @@
             </div>
             <div class="section-text">
               <h2>Genres</h2>
-              <p>Action, drama, horror & more</p>
+              <p>Drama, comedy, sci-fi & more</p>
             </div>
           </button>
 
-          <!-- 3. TIME & ERA -->
-          <button class="section-card" data-section="timeEra">
+          <!-- 3. NETWORKS -->
+          <button class="section-card" data-section="networks">
+            <div class="orbit-icon icon-production">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Networks</h2>
+              <p>HBO, Netflix, BBC & more</p>
+            </div>
+          </button>
+
+          <!-- 4. TIME & AIRING -->
+          <button class="section-card" data-section="timeAiring">
             <div class="orbit-icon icon-datetime">
               <div class="ring-outer"></div>
               <div class="ring-inner"></div>
               <div class="icon-core"></div>
             </div>
             <div class="section-text">
-              <h2>Time & Era</h2>
-              <p>Setting, release date, runtime</p>
+              <h2>Time & Airing</h2>
+              <p>Air dates, decades, eras</p>
             </div>
           </button>
 
-          <!-- 4. RATINGS & CONTENT -->
+          <!-- 5. RATINGS & CONTENT -->
           <button class="section-card" data-section="ratingsContent">
             <div class="orbit-icon icon-ratings">
               <div class="ring-outer"></div>
@@ -108,11 +120,11 @@
             </div>
             <div class="section-text">
               <h2>Ratings & Content</h2>
-              <p>Score, votes, age rating</p>
+              <p>Score, votes, content rating</p>
             </div>
           </button>
 
-          <!-- 5. REGION & LANGUAGE -->
+          <!-- 6. REGION & LANGUAGE -->
           <button class="section-card" data-section="regionLanguage">
             <div class="orbit-icon icon-region">
               <div class="ring-outer"></div>
@@ -120,21 +132,8 @@
               <div class="icon-core"></div>
             </div>
             <div class="section-text">
-              <h2>Region & language</h2>
+              <h2>Region & Language</h2>
               <p>Origin, language</p>
-            </div>
-          </button>
-
-          <!-- 6. PRODUCTION & BOX OFFICE -->
-          <button class="section-card" data-section="production">
-            <div class="orbit-icon icon-production">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Production & Box Office</h2>
-              <p>Studios, budget, revenue</p>
             </div>
           </button>
 
@@ -146,25 +145,38 @@
               <div class="icon-core"></div>
             </div>
             <div class="section-text">
-              <h2>Watch providers</h2>
+              <h2>Watch Providers</h2>
               <p>Streaming & availability</p>
             </div>
           </button>
 
-          <!-- 8. UNIVERSES -->
-          <button class="section-card" data-section="universes">
+          <!-- 8. STATUS -->
+          <button class="section-card" data-section="status">
             <div class="orbit-icon icon-universes">
               <div class="ring-outer"></div>
               <div class="ring-inner"></div>
               <div class="icon-core"></div>
             </div>
             <div class="section-text">
-              <h2>Universes</h2>
-              <p>Collections & franchises</p>
+              <h2>Status</h2>
+              <p>Returning, ended, cancelled</p>
             </div>
           </button>
 
-          <!-- 9. AWARDS -->
+          <!-- 9. TIME COMMITMENT -->
+          <button class="section-card" data-section="timeCommitment">
+            <div class="orbit-icon icon-datetime">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Time Commitment</h2>
+              <p>Quick watch to epic binge</p>
+            </div>
+          </button>
+
+          <!-- 10. AWARDS -->
           <button class="section-card" data-section="awards">
             <div class="orbit-icon icon-awards">
               <div class="ring-outer"></div>
@@ -173,11 +185,11 @@
             </div>
             <div class="section-text">
               <h2>Awards</h2>
-              <p>Oscar, Golden Globe & more</p>
+              <p>Emmy, Golden Globe & more</p>
             </div>
           </button>
 
-          <!-- 10. LAUNCH ORBIT -->
+          <!-- 11. LAUNCH ORBIT -->
           <button class="section-card launch-card" id="launchCard" disabled>
             <div class="orbit-icon icon-launch">
               <div class="ring-outer"></div>
@@ -186,7 +198,7 @@
             </div>
             <div class="section-text">
               <h2>Launch Orbit Search</h2>
-              <p>Discover your movies</p>
+              <p>Discover your TV shows</p>
             </div>
             <div class="launch-glow"></div>
           </button>
@@ -221,21 +233,26 @@
 
         <a href="arcade.html" class="arcade-button" id="arcadeButton">
           <div class="arcade-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <!-- Galaga bee ship -->
-              <rect x="14" y="2" width="4" height="4"/>
-              <rect x="12" y="6" width="8" height="4"/>
-              <rect x="10" y="10" width="12" height="4"/>
-              <rect x="4" y="8" width="6" height="8"/>
-              <rect x="22" y="8" width="6" height="8"/>
-              <rect x="2" y="12" width="4" height="6"/>
-              <rect x="26" y="12" width="4" height="6"/>
-              <rect x="8" y="14" width="4" height="10"/>
-              <rect x="20" y="14" width="4" height="10"/>
-              <rect x="12" y="14" width="8" height="6"/>
-              <rect x="14" y="20" width="4" height="8"/>
-              <rect x="6" y="24" width="4" height="4"/>
-              <rect x="22" y="24" width="4" height="4"/>
+            <svg width="32" height="28" viewBox="0 0 11 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <!-- Classic Space Invader -->
+              <rect x="2" y="0" width="1" height="1"/>
+              <rect x="8" y="0" width="1" height="1"/>
+              <rect x="3" y="1" width="1" height="1"/>
+              <rect x="7" y="1" width="1" height="1"/>
+              <rect x="2" y="2" width="7" height="1"/>
+              <rect x="1" y="3" width="2" height="1"/>
+              <rect x="4" y="3" width="3" height="1"/>
+              <rect x="8" y="3" width="2" height="1"/>
+              <rect x="0" y="4" width="11" height="1"/>
+              <rect x="0" y="5" width="1" height="1"/>
+              <rect x="2" y="5" width="7" height="1"/>
+              <rect x="10" y="5" width="1" height="1"/>
+              <rect x="0" y="6" width="1" height="1"/>
+              <rect x="2" y="6" width="1" height="1"/>
+              <rect x="8" y="6" width="1" height="1"/>
+              <rect x="10" y="6" width="1" height="1"/>
+              <rect x="3" y="7" width="2" height="1"/>
+              <rect x="6" y="7" width="2" height="1"/>
             </svg>
           </div>
           <div class="arcade-text">
@@ -268,9 +285,6 @@
 
   <script src="config.js"></script>
   <script src="js/utils.js"></script>
-  <script src="js/awards.js"></script>
-  <script src="js/shortlist-service.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/shortlist-badge.js"></script>
+  <script src="js/tv.js"></script>
 </body>
 </html>

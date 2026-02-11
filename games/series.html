@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT - TV Series</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/series.css">
+</head>
+<body class="tv-mode">
+
+  <!-- CINEMATIC BACKGROUND -->
+  <div class="series-backdrop" id="seriesBackdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- HEADER -->
+  <header class="series-header">
+    <div class="header-left">
+      <a href="../landing.html" class="back-link" id="backNav">← Home</a>
+      <a href="#" class="back-btn back-to-timeline" id="backToTimeline" hidden>← Back to Timeline</a>
+    </div>
+
+    <div class="header-right">
+      <button class="action-btn timeline-btn" id="showOnTimelineBtn" title="View on Timeline">
+        <span class="btn-icon">⧗</span>
+        <span class="btn-text">Timeline</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="series-hero" id="seriesHero">
+    <div class="hero-content">
+      <div class="hero-poster">
+        <img id="heroPoster" src="" alt="">
+      </div>
+      <div class="hero-info">
+        <h1 class="series-title" id="seriesTitle">Loading...</h1>
+        <div class="series-meta">
+          <span class="meta-years" id="seriesYears"></span>
+          <span class="meta-separator">•</span>
+          <span class="meta-rating">★ <span id="seriesRating"></span></span>
+          <span class="meta-separator">•</span>
+          <span class="meta-seasons" id="seriesSeasonCount"></span>
+          <span class="meta-separator">•</span>
+          <span class="meta-status" id="seriesStatus"></span>
+        </div>
+        <div class="series-genres" id="seriesGenres"></div>
+        <div class="series-network" id="seriesNetwork"></div>
+        <p class="series-overview" id="seriesOverview"></p>
+        <div class="series-commitment" id="seriesCommitment"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAST CONSTELLATION -->
+  <section class="cast-constellation" id="castConstellation">
+    <div class="constellation-header">
+      <h2 class="section-title">Cast Constellation</h2>
+      <div class="cast-filter">
+        <button class="cast-filter-btn active" data-filter="main">Main Cast</button>
+        <button class="cast-filter-btn" data-filter="recurring">+ Recurring</button>
+        <button class="cast-filter-btn" data-filter="all">All Cast</button>
+      </div>
+    </div>
+    <div class="constellation-hint" id="constellationHint">
+      Hover over seasons to see who appeared
+    </div>
+    <div class="cast-avatars" id="castAvatars"></div>
+  </section>
+
+  <!-- SEASON CAROUSEL (Planetary Rings) -->
+  <section class="season-carousel-section">
+    <div class="carousel-container">
+      <button class="carousel-arrow carousel-prev" id="seasonPrev" aria-label="Previous season">
+        <span class="arrow-ring"></span>
+        <span class="arrow-icon">‹</span>
+      </button>
+
+      <div class="planetary-rings" id="planetaryRings">
+        <div class="rings-track" id="ringsTrack"></div>
+        <div class="rings-glow"></div>
+      </div>
+
+      <button class="carousel-arrow carousel-next" id="seasonNext" aria-label="Next season">
+        <span class="arrow-ring"></span>
+        <span class="arrow-icon">›</span>
+      </button>
+    </div>
+
+    <div class="season-indicator" id="seasonIndicator"></div>
+  </section>
+
+  <!-- SELECTED SEASON INFO -->
+  <section class="season-detail" id="seasonDetail">
+    <div class="season-cube-container">
+      <div class="show-cube" id="showCube">
+        <div class="cube-face cube-face-1">
+          <img class="season-poster" id="seasonPoster" src="" alt="">
+          <div class="season-badge" id="seasonBadge">Season 1</div>
+        </div>
+        <div class="cube-face cube-face-2">
+          <div class="season-stats">
+            <div class="stat-item">
+              <span class="stat-value" id="seasonEpisodeCount">0</span>
+              <span class="stat-label">Episodes</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="seasonRuntime">0h</span>
+              <span class="stat-label">Total Runtime</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="seasonAvgRating">0.0</span>
+              <span class="stat-label">Avg Rating</span>
+            </div>
+          </div>
+          <p class="season-overview" id="seasonOverview"></p>
+          <div class="season-air-dates" id="seasonAirDates"></div>
+        </div>
+        <div class="cube-face cube-face-3">
+          <h3>Season Cast</h3>
+          <div class="season-cast-grid" id="seasonCastGrid"></div>
+        </div>
+      </div>
+      <div class="cube-controls">
+        <button class="cube-rotate-btn active" data-face="1">Poster</button>
+        <button class="cube-rotate-btn" data-face="2">Details</button>
+        <button class="cube-rotate-btn" data-face="3">Cast</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPISODES SECTION -->
+  <section class="episodes-section" id="episodesSection">
+    <div class="episodes-header">
+      <h2 class="section-title">Episodes</h2>
+      <div class="episodes-controls">
+        <!-- Actor filter (shows when coming from timeline) -->
+        <div class="actor-filter" id="actorFilter" hidden>
+          <span class="filter-label">Showing:</span>
+          <button class="filter-toggle active" data-show="all">All Episodes</button>
+          <button class="filter-toggle" data-show="actor" id="actorFilterBtn">
+            <img class="filter-actor-img" id="filterActorImg" src="" alt="">
+            <span id="filterActorName">Actor</span>'s Episodes
+          </button>
+        </div>
+
+        <!-- View toggle -->
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="grid" title="Grid View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button class="view-btn" data-view="list" title="List View">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="4" width="18" height="4"/><rect x="3" y="10" width="18" height="4"/>
+              <rect x="3" y="16" width="18" height="4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="episodes-grid" id="episodesGrid"></div>
+  </section>
+
+  <!-- EPISODE DETAIL MODAL -->
+  <div class="episode-modal-overlay" id="episodeModal" hidden>
+    <div class="episode-modal">
+      <button class="modal-close" id="episodeModalClose">✕</button>
+      <div class="modal-still">
+        <img id="modalStill" src="" alt="">
+      </div>
+      <div class="modal-content">
+        <div class="modal-episode-num" id="modalEpisodeNum"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-meta">
+          <span id="modalAirDate"></span>
+          <span class="meta-separator">•</span>
+          <span id="modalRuntime"></span>
+          <span class="meta-separator">•</span>
+          <span>★ <span id="modalRating"></span></span>
+        </div>
+        <p class="modal-overview" id="modalOverview"></p>
+        <div class="modal-credits">
+          <div class="modal-crew" id="modalCrew"></div>
+          <div class="modal-guests" id="modalGuests"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPANDED CAST MODAL -->
+  <div class="cast-modal-overlay" id="castModal" hidden>
+    <div class="cast-modal">
+      <button class="modal-close" id="castModalClose">✕</button>
+      <h2 class="modal-title">Full Cast & Crew</h2>
+      <div class="cast-modal-grid" id="castModalGrid"></div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/series.js"></script>
+</body>
+</html>

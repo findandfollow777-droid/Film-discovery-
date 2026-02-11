@@ -3,8 +3,6 @@
 // Orbit Games Suite - Find the Common Thread
 // ============================================
 
-const TMDB_API_KEY = "dd1b9aebd0769bc49a68b7853b6f4266";
-
 // Daily puzzles - 4 groups of 4 movies each
 // Difficulty: yellow (easiest) → green → blue → purple (hardest)
 const DAILY_PUZZLES = [
@@ -572,7 +570,7 @@ function enablePostGameLinks() {
       const title = link.dataset.title;
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=dd1b9aebd0769bc49a68b7853b6f4266&query=${encodeURIComponent(title)}`
+          `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
         );
         const data = await res.json();
         if (data.results && data.results.length > 0) {
@@ -594,7 +592,7 @@ function enablePostGameLinks() {
     tile.addEventListener('click', async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=dd1b9aebd0769bc49a68b7853b6f4266&query=${encodeURIComponent(title)}`
+          `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
         );
         const data = await res.json();
         if (data.results && data.results.length > 0) {
@@ -747,6 +745,26 @@ function startNextPuzzleCountdown() {
 // ============================================
 // UTILITIES
 // ============================================
+
+// ============================================
+// RESULT CLOSE / VIEW RESULTS
+// ============================================
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultSection').hidden = true;
+  if (!document.getElementById('viewResultsBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'viewResultsBtn';
+    btn.className = 'view-results-btn';
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', () => {
+      document.getElementById('resultSection').hidden = false;
+      btn.remove();
+    });
+    const actionBtns = document.querySelector('.action-buttons');
+    actionBtns.appendChild(btn);
+  }
+});
 
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {

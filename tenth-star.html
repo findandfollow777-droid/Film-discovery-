@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenth Star - Orbit Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tenth-star.css">
+  <link rel="stylesheet" href="css/moviecube.css">
+</head>
+<body>
+
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="arcade.html" class="back-link" id="backNav">← Back to Arcade</a>
+
+    <div class="orbit-logo">
+      <div class="orbit-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <div class="orbit-logo-text">TENTH</div>
+      <span class="logo-suffix">Star</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn-orbit icon-stats" id="statsBtn" title="Statistics">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <svg class="icon-symbol" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="4" y="14" width="4" height="8"/><rect x="10" y="8" width="4" height="14"/><rect x="16" y="4" width="4" height="18"/></svg>
+      </button>
+      <button class="icon-btn-orbit icon-help" id="helpBtn" title="How to Play">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <svg class="icon-symbol" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 4c-2.2 0-4 1.8-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.2-1.8-4-4-4z"/><circle cx="12" cy="19" r="1.5"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- CATEGORY HEADER (revealed post-game) -->
+  <div class="category-reveal" id="categoryReveal" hidden>
+    <span class="category-label" id="categoryLabel"></span>
+    <span class="category-hidden" id="categoryHidden"></span>
+  </div>
+
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+
+    <!-- LEFT: TILE GRID -->
+    <section class="tile-section">
+      <div class="tile-grid" id="tileGrid">
+        <!-- 9 tiles rendered by JS -->
+      </div>
+
+      <!-- TENTH STAR HERO (post-game) -->
+      <div class="hero-poster" id="heroPoster" hidden>
+        <div class="hero-poster-inner">
+          <div class="hero-poster-front">
+            <div class="hero-star-symbol">★</div>
+            <span class="hero-label">THE TENTH STAR</span>
+          </div>
+          <div class="hero-poster-back">
+            <img id="heroPosterImg" src="" alt="">
+            <div class="hero-title-overlay" id="heroTitleOverlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="postgame-hint" id="postgameHint" hidden>Tap any poster to open its Movie Cube</p>
+    </section>
+
+    <!-- RIGHT: CLUE & GUESS PANEL -->
+    <section class="clue-section" id="clueSection">
+
+      <!-- ROUND INDICATOR -->
+      <div class="round-indicator">
+        <span class="round-label">Round</span>
+        <span class="round-number" id="roundNumber">1</span>
+        <span class="round-total">/ 9</span>
+      </div>
+
+      <!-- STATUS MESSAGE -->
+      <div class="status-message" id="statusMessage">Name the missing movie from this Top 10 list</div>
+
+      <!-- CURRENT CLUE -->
+      <div class="clue-card" id="clueCard">
+        <div class="clue-difficulty">
+          <span class="diff-label">Difficulty</span>
+          <div class="diff-dots" id="diffDots"></div>
+        </div>
+        <p class="clue-text" id="clueText"></p>
+      </div>
+
+      <!-- GUESS INPUT -->
+      <div class="guess-area" id="guessArea">
+        <div class="guess-input-wrap">
+          <input type="text" id="guessInput" class="guess-input" placeholder="Type a movie title..." autocomplete="off">
+          <button class="guess-submit" id="guessSubmit">GUESS</button>
+          <div class="autocomplete-dropdown" id="autocompleteDropdown" hidden></div>
+        </div>
+        <div class="guess-feedback" id="guessFeedback" hidden></div>
+      </div>
+
+      <!-- PICK TILE PROMPT -->
+      <div class="pick-tile-prompt" id="pickTilePrompt" hidden>
+        <p>Wrong guess! Pick a tile to reveal a clue.</p>
+      </div>
+
+      <!-- RETRY PROMPT -->
+      <div class="retry-prompt" id="retryPrompt" hidden>
+        <p>You can retry tile <span id="retryTileNum"></span> with an easier question!</p>
+        <button class="retry-btn" id="retryBtn">RETRY TILE</button>
+        <button class="skip-retry-btn" id="skipRetryBtn">SKIP</button>
+      </div>
+
+      <!-- PREVIOUS CLUES -->
+      <div class="prev-clues" id="prevClues">
+        <h4 class="prev-clues-title">Previous Clues</h4>
+        <ul class="prev-clues-list" id="prevCluesList"></ul>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- TILE QUESTION MODAL -->
+  <div class="modal-overlay" id="tileQuestionModal" hidden>
+    <div class="modal-content tile-question-card">
+      <div class="question-format-tag" id="questionFormatTag"></div>
+      <p class="question-text" id="questionText"></p>
+      <div class="question-options" id="questionOptions"></div>
+      <div class="question-result" id="questionResult" hidden>
+        <p class="result-text" id="resultText"></p>
+        <button class="continue-btn" id="continueBtn">CONTINUE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HELP MODAL -->
+  <div class="modal-overlay" id="helpModal" hidden>
+    <div class="modal-content help-modal-content">
+      <button class="modal-close" id="helpClose">✕</button>
+      <h2 class="modal-title">How to Play</h2>
+      <div class="help-body">
+        <p>A <strong>Top 10</strong> list is missing its <strong>10th movie</strong>. Your job: figure out which movie it is.</p>
+        <ol>
+          <li>Read the clue and <strong>guess the missing movie</strong>.</li>
+          <li>Wrong guess? <strong>Pick a face-down tile</strong> from the 3×3 grid.</li>
+          <li>Answer the tile's trivia question to <strong>reveal its movie poster</strong>.</li>
+          <li>Get a wrong answer? You can <strong>retry once</strong> next round with an easier question.</li>
+          <li>Each round gives you a <strong>new, easier clue</strong> about the missing movie.</li>
+          <li>After round 9, you get <strong>one final guess</strong> with the easiest clue.</li>
+        </ol>
+        <div class="help-scoring">
+          <h3>Scoring</h3>
+          <p>★★★★★ = Round 1 | ★★★★ = Round 2-3 | ★★★ = Round 4-5 | ★★ = Round 6-7 | ★ = Round 8-9+</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS MODAL -->
+  <div class="modal-overlay" id="statsModal" hidden>
+    <div class="modal-content stats-modal-content">
+      <button class="modal-close" id="statsClose">✕</button>
+      <h2 class="modal-title">Your Stats</h2>
+      <div class="stats-body">
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-val" id="statPlayed">0</div><div class="stat-lbl">Played</div></div>
+          <div class="stat-box"><div class="stat-val" id="statWon">0</div><div class="stat-lbl">Won</div></div>
+          <div class="stat-box"><div class="stat-val" id="statWinPct">0%</div><div class="stat-lbl">Win %</div></div>
+          <div class="stat-box"><div class="stat-val" id="statStreak">0</div><div class="stat-lbl">Streak</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIN/LOSS OVERLAY -->
+  <div class="result-overlay" id="resultOverlay" hidden>
+    <div class="result-card">
+      <div class="result-star-burst" id="resultStarBurst"></div>
+      <div class="result-emoji" id="resultEmoji"></div>
+      <h2 class="result-title" id="resultTitle"></h2>
+      <p class="result-movie" id="resultMovie"></p>
+      <div class="result-stars" id="resultStars"></div>
+      <div class="result-stats-row">
+        <div class="result-stat"><span class="rs-val" id="rsRound">-</span><span class="rs-lbl">Round</span></div>
+        <div class="result-stat"><span class="rs-val" id="rsTiles">-</span><span class="rs-lbl">Tiles Flipped</span></div>
+        <div class="result-stat"><span class="rs-val" id="rsAccuracy">-</span><span class="rs-lbl">Tile Accuracy</span></div>
+      </div>
+      <div class="result-actions">
+        <button class="result-btn share-btn" id="shareBtn">SHARE</button>
+        <button class="result-btn board-btn" id="viewBoardBtn">VIEW BOARD</button>
+      </div>
+      <div class="share-toast" id="shareToast" hidden>Copied to clipboard!</div>
+    </div>
+  </div>
+
+  <!-- ARCHIVE BROWSER -->
+  <div class="archive-overlay" id="archiveOverlay" hidden>
+    <div class="archive-card">
+      <h2 class="archive-title">Puzzle Archive</h2>
+      <p class="archive-desc">Play previous puzzles from the archive.</p>
+      <div class="archive-list" id="archiveList"></div>
+      <button class="archive-close-btn" id="archiveCloseBtn">CLOSE</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/moviecube.js"></script>
+  <script src="tenth-star-puzzles.js"></script>
+  <script src="js/tenth-star.js"></script>
+</body>
+</html>

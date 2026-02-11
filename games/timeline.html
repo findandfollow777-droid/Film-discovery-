@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/timeline.css">
   <link rel="stylesheet" href="../css/moviecube.css">
+  <link rel="stylesheet" href="../css/shortlist-badge.css">
 </head>
 <body>
   <!-- CINEMATIC BACKGROUNDS -->
@@ -20,10 +21,10 @@
   <!-- HEADER -->
   <header class="timeline-header">
     <div class="back-links">
-      <a href="../index.html" class="back-btn">← Back to Orbit</a>
+      <a href="../landing.html" class="back-link">← Back</a>
       <a href="results.html" class="back-btn back-to-results" id="backToResults" hidden>← Back to Results</a>
     </div>
-    
+
     <div class="header-center">
       <div class="header-emblem">⧗</div>
       <div class="header-text">
@@ -31,14 +32,19 @@
         <p class="timeline-subtitle" id="timelineSubtitle">Loading...</p>
       </div>
     </div>
-    
+
     <div class="header-actions">
-      <button class="action-btn add-person-btn" id="addPersonBtn">+ Add Orbit</button>
+      <button class="action-btn add-person-btn" id="addPersonBtn">+ Add Person</button>
       <button class="action-btn venn-btn" id="vennBtn" hidden>⊕ Venn View</button>
       <button class="action-btn bio-btn" id="bioBtn" hidden title="View Biography">👤 Bio</button>
+      <div class="media-mode-toggle" id="mediaModeToggle" hidden>
+        <button class="media-mode-btn active" data-mode="movies">Movies</button>
+        <button class="media-mode-btn" data-mode="tv">TV</button>
+        <button class="media-mode-btn" data-mode="both">Both</button>
+      </div>
       <div class="film-count">
         <span class="count-num" id="movieCount">0</span>
-        <span class="count-label">Films</span>
+        <span class="count-label" id="countLabel">Films</span>
       </div>
     </div>
   </header>
@@ -48,11 +54,11 @@
     <div class="controls-left">
       <span class="control-label">Order</span>
       <div class="sort-buttons">
-        <button class="sort-btn active" data-sort="chronology">📅 Chronology</button>
-        <button class="sort-btn" data-sort="rating">⭐ Rating</button>
-        <button class="sort-btn" data-sort="boxoffice">💰 Box Office</button>
+        <button class="sort-btn active" data-sort="chronology"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="14" y2="4"/><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="12" x2="14" y2="12"/><circle cx="5" cy="4" r="1.5" fill="currentColor"/><circle cx="9" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg> Chronology</button>
+        <button class="sort-btn" data-sort="rating"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M8 1.5 L9.8 5.8 L14.5 6.2 L11 9.3 L12 14 L8 11.5 L4 14 L5 9.3 L1.5 6.2 L6.2 5.8 Z"/></svg> Rating</button>
+        <button class="sort-btn" data-sort="boxoffice"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2 L8 14"/><path d="M5 4.5 Q5 3 8 3 Q11 3 11 5 Q11 7 8 7 Q5 7 5 9 Q5 11 8 11 Q11 11 11 9.5"/><line x1="6" y1="2" x2="10" y2="2"/><line x1="6" y1="14" x2="10" y2="14"/></svg> Box Office</button>
       </div>
-      <button class="reverse-btn" id="reverseBtn">⇅ Reverse</button>
+      <button class="reverse-btn" id="reverseBtn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L5 4 M3 6 L5 4 L7 6"/><path d="M11 4 L11 12 M9 10 L11 12 L13 10"/></svg> Reverse</button>
     </div>
     <div class="controls-right">
       <select class="filter-select" id="roleFilter" title="Filter by role type">
@@ -71,6 +77,10 @@
       <label class="checkbox-filter" title="Exclude documentaries and TV movies">
         <input type="checkbox" id="featureFilmsOnly">
         <span>Features Only</span>
+      </label>
+      <label class="checkbox-filter" id="guestAppearancesFilter" title="Include guest TV appearances (award shows, interviews, etc.)" hidden>
+        <input type="checkbox" id="showGuestAppearances">
+        <span>Inc. Guests</span>
       </label>
       <select class="filter-select" id="decadeFilter">
         <option value="all">All Decades</option>
@@ -101,36 +111,59 @@
     <!-- Sacred Line SVG - inside viewport to scroll with content -->
     <svg class="sacred-svg" id="sacredSvg">
       <defs>
-        <!-- Softer, more spacey gradient colors -->
+        <!-- Cosmic gradient - ethereal color flow -->
+        <linearGradient id="cosmicGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00d9ff" stop-opacity="0.8">
+            <animate attributeName="stop-color" values="#00d9ff;#d65db1;#ffd700;#4ed8aa;#00d9ff" dur="12s" repeatCount="indefinite"/>
+          </stop>
+          <stop offset="25%" stop-color="#d65db1" stop-opacity="0.9">
+            <animate attributeName="stop-color" values="#d65db1;#ffd700;#4ed8aa;#00d9ff;#d65db1" dur="12s" repeatCount="indefinite"/>
+          </stop>
+          <stop offset="50%" stop-color="#ffd700" stop-opacity="0.85">
+            <animate attributeName="stop-color" values="#ffd700;#4ed8aa;#00d9ff;#d65db1;#ffd700" dur="12s" repeatCount="indefinite"/>
+          </stop>
+          <stop offset="75%" stop-color="#4ed8aa" stop-opacity="0.9">
+            <animate attributeName="stop-color" values="#4ed8aa;#00d9ff;#d65db1;#ffd700;#4ed8aa" dur="12s" repeatCount="indefinite"/>
+          </stop>
+          <stop offset="100%" stop-color="#00d9ff" stop-opacity="0.8">
+            <animate attributeName="stop-color" values="#00d9ff;#d65db1;#ffd700;#4ed8aa;#00d9ff" dur="12s" repeatCount="indefinite"/>
+          </stop>
+        </linearGradient>
+
+        <!-- Multi-person gradients -->
         <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#4a9eff" />
-          <stop offset="50%" stop-color="#c9a227" />
-          <stop offset="100%" stop-color="#d65db1" />
+          <stop offset="0%" stop-color="#00d9ff" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#4a9eff" stop-opacity="0.7"/>
         </linearGradient>
         <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#d65db1" />
-          <stop offset="50%" stop-color="#4ed8aa" />
-          <stop offset="100%" stop-color="#4a9eff" />
+          <stop offset="0%" stop-color="#d65db1" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#ff006e" stop-opacity="0.7"/>
         </linearGradient>
         <linearGradient id="lineGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#4ed8aa" />
-          <stop offset="50%" stop-color="#d65db1" />
-          <stop offset="100%" stop-color="#c9a227" />
+          <stop offset="0%" stop-color="#4ed8aa" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#00ff88" stop-opacity="0.7"/>
         </linearGradient>
         <linearGradient id="lineGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#c9a227" />
-          <stop offset="50%" stop-color="#4a9eff" />
-          <stop offset="100%" stop-color="#4ed8aa" />
+          <stop offset="0%" stop-color="#ffd700" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#c9a227" stop-opacity="0.7"/>
         </linearGradient>
-        <!-- More subtle, atmospheric glow filter -->
-        <filter id="sacredGlow" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="10" result="blur1"/>
-          <feGaussianBlur stdDeviation="20" result="blur2"/>
-          <feGaussianBlur stdDeviation="3" result="blur3"/>
+
+        <!-- Cosmic glow filter - soft ethereal -->
+        <filter id="cosmicGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+          <feColorMatrix in="blur" type="saturate" values="1.2" result="saturated"/>
           <feMerge>
-            <feMergeNode in="blur2"/>
-            <feMergeNode in="blur1"/>
-            <feMergeNode in="blur3"/>
+            <feMergeNode in="saturated"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+
+        <!-- Brighter glow for pulse animation -->
+        <filter id="cosmicGlowBright" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+          <feColorMatrix in="blur" type="saturate" values="1.5" result="saturated"/>
+          <feMerge>
+            <feMergeNode in="saturated"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
@@ -153,7 +186,7 @@
     <div class="empty-icon">🎬</div>
     <h3>Timeline Empty</h3>
     <p>No films found.</p>
-    <a href="../index.html" class="empty-btn">Return to Orbit</a>
+    <a href="../landing.html" class="empty-btn">Return to ORBIT</a>
   </div>
 
   <!-- PERSON BIO PANEL -->
@@ -238,14 +271,14 @@
   <div class="modal-overlay" id="addPersonModal" hidden>
     <div class="modal-content">
       <button class="modal-close" id="modalClose">✕</button>
-      <h2 class="modal-title">Add Orbital Path</h2>
-      <p class="modal-subtitle">Search for an actor or director</p>
+      <h2 class="modal-title">Add to Timeline</h2>
+      <p class="modal-subtitle">Search for an actor or director to compare</p>
       <div class="search-container">
         <input type="text" class="modal-search" id="personSearch" placeholder="Search actors, directors...">
         <div class="search-results" id="searchResults"></div>
       </div>
       <div class="current-orbits">
-        <h4>Current Orbits</h4>
+        <h4>On This Timeline</h4>
         <div class="orbit-chips" id="orbitChips"></div>
       </div>
       <div class="modal-actions">
@@ -304,7 +337,11 @@
     </div>
   </div>
 
+  <script src="../config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/shortlist-service.js"></script>
   <script src="../js/moviecube.js"></script>
   <script src="../js/timeline.js"></script>
+  <script src="../js/shortlist-badge.js"></script>
 </body>
 </html>

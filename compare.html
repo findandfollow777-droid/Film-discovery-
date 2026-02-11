@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbit – Shortlist Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/compare.css">
+</head>
+<body>
+  <!-- CINEMATIC BACKGROUND -->
+  <div class="compare-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <div class="compare-app">
+
+    <!-- HEADER -->
+    <header class="compare-header">
+      <a href="landing.html" class="back-link" id="backNav">← Back to ORBIT</a>
+      <h1 class="compare-title">SHORTLIST COMPARISON</h1>
+      <button class="clear-all-btn" id="clearAllBtn" title="Clear entire shortlist">
+        Clear All
+      </button>
+    </header>
+
+    <!-- SHORTLIST SECTION -->
+    <section class="shortlist-section" id="shortlistSection">
+      <div class="shortlist-bar">
+        <span class="shortlist-heading">Your Shortlist</span>
+        <span class="selection-counter" id="selectionCounter">0 / 5 selected for comparison</span>
+      </div>
+      <div class="shortlist-grid" id="shortlistGrid">
+        <!-- Movie cards injected here -->
+      </div>
+      <div class="shortlist-actions">
+        <button class="compare-btn" id="compareBtn" disabled>
+          <span class="compare-btn-icon">⚡</span>
+          <span class="compare-btn-text">Compare Selected</span>
+        </button>
+        <span class="compare-hint" id="compareHint">Select 2–5 movies to compare</span>
+      </div>
+    </section>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon">☆</div>
+      <h2>Your shortlist is empty</h2>
+      <p>Add movies from any movie popup using the ☆ Shortlist button.</p>
+      <a href="index.html" class="empty-cta">← Back to Orbit</a>
+    </div>
+
+    <!-- COMPARISON AREA (hidden until Compare is clicked) -->
+    <section class="comparison-section" id="comparisonSection" hidden>
+
+      <!-- SELECTED LEGEND -->
+      <div class="selected-legend" id="selectedLegend"></div>
+
+      <!-- TABS -->
+      <nav class="compare-tabs" id="compareTabs">
+        <button class="compare-tab active" data-panel="orbital">🪐 Orbital Rings</button>
+        <button class="compare-tab" data-panel="constellation">✦ Constellation</button>
+        <button class="compare-tab" data-panel="timeline">📅 Timeline</button>
+        <button class="compare-tab" data-panel="radar">📊 Radar</button>
+        <button class="compare-tab" data-panel="nebula">🌌 Word Nebula</button>
+        <button class="compare-tab" data-panel="awards">🏆 Awards</button>
+      </nav>
+
+      <!-- PANELS -->
+      <div class="compare-panels">
+        <div class="compare-panel active" id="panel-orbital">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">🪐</span>
+            <h3>Orbital Rings</h3>
+            <p>Concentric rings showing shared genres, cast, and crew overlaps between selected movies.</p>
+          </div>
+        </div>
+        <div class="compare-panel" id="panel-constellation">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">✦</span>
+            <h3>Constellation Map</h3>
+            <p>Network graph connecting movies through shared actors, directors, and themes.</p>
+          </div>
+        </div>
+        <div class="compare-panel" id="panel-timeline">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">📅</span>
+            <h3>Timeline</h3>
+            <p>Chronological view of selected movies across release years.</p>
+          </div>
+        </div>
+        <div class="compare-panel" id="panel-radar">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">📊</span>
+            <h3>Radar Chart</h3>
+            <p>Multi-axis comparison of rating, popularity, budget, revenue, and runtime.</p>
+          </div>
+        </div>
+        <div class="compare-panel" id="panel-nebula">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">🌌</span>
+            <h3>Word Nebula</h3>
+            <p>Combined word cloud from Nebula impressions across all selected movies.</p>
+          </div>
+        </div>
+        <div class="compare-panel" id="panel-awards">
+          <div class="panel-placeholder">
+            <span class="placeholder-icon">🏆</span>
+            <h3>Awards</h3>
+            <p>Side-by-side comparison of awards and nominations from major film festivals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Max selection toast -->
+  <div class="max-toast" id="maxToast" hidden>Max 5 movies for comparison</div>
+
+  <script src="config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/shortlist-service.js"></script>
+  <script src="js/awards-data.js"></script>
+  <script src="js/compare.js"></script>
+</body>
+</html>

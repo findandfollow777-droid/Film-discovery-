@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT – Awards Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/awards-browse.css">
+  <link rel="stylesheet" href="css/moviecube.css">
+  <link rel="stylesheet" href="css/shortlist-badge.css">
+</head>
+<body>
+
+  <!-- CINEMATIC BACKGROUND -->
+  <div class="awards-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+
+  <!-- HEADER -->
+  <header class="awards-header">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a class="back-link" id="backNav" href="landing.html">&larr; Back</a>
+      <div class="orbit-logo">
+        <div class="orbit-logo-mark">
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+          <div class="orbit-core"></div>
+        </div>
+        <span class="orbit-logo-text">ORBIT</span>
+        <span class="logo-suffix">Awards Archive</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn-orbit" id="guideBtn" title="Guide">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <span class="icon-symbol">?</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- FESTIVAL TABS -->
+  <nav class="festival-tabs" id="festivalTabs">
+    <!-- JS-populated -->
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <div class="awards-layout">
+
+    <!-- CATEGORY SIDEBAR -->
+    <aside class="category-sidebar" id="categorySidebar">
+      <div class="sidebar-title">CATEGORIES</div>
+      <!-- JS-populated -->
+    </aside>
+
+    <!-- RESULTS AREA -->
+    <div class="results-area" id="resultsArea">
+      <!-- DECADE BAR -->
+      <div class="decade-bar" id="decadeBar"></div>
+      <!-- YEAR PILLS -->
+      <div class="year-pills" id="yearPills">
+        <!-- JS-populated -->
+      </div>
+
+      <!-- RESULTS GRID (grouped by year) -->
+      <div id="resultsContainer">
+        <div class="results-loading">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Loading awards data...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INFO PANEL (slide-in from right) -->
+  <div class="info-panel-overlay" id="infoPanelOverlay" hidden></div>
+  <div class="info-panel" id="infoPanel">
+    <button class="info-panel-close" id="infoPanelClose">&times;</button>
+    <div class="info-panel-content" id="infoPanelContent">
+      <!-- JS-populated -->
+    </div>
+  </div>
+
+  <!-- GUIDE MODAL -->
+  <div class="modal-overlay" id="guideModal" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="guideModalClose">&times;</button>
+      <h2 class="modal-title">AWARDS ARCHIVE</h2>
+      <div class="guide-body">
+        <p>Browse award-winning and nominated films from the world's most prestigious film festivals and ceremonies.</p>
+        <ul>
+          <li><strong>Festival Tabs</strong> — Switch between Oscar, Cannes, Venice, Berlin, BAFTA, and Golden Globe. Tap the <strong>ⓘ</strong> button on any tab for festival details.</li>
+          <li><strong>Categories</strong> — Filter by award category in the sidebar. Each festival has its own set of categories.</li>
+          <li><strong>Year Pills</strong> — Jump to a specific year or browse all years at once.</li>
+          <li><strong>Movie Tiles</strong> — Gold badge = Winner, Silver badge = Nominee. Click any tile to see full movie details.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script type="module">
+    import * as nebulaService from './nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+  </script>
+  <script src="config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/awards-data.js"></script>
+  <script src="js/shortlist-service.js"></script>
+  <script src="js/moviecube.js"></script>
+  <script src="js/awards-browse.js"></script>
+  <script src="js/shortlist-badge.js"></script>
+</body>
+</html>

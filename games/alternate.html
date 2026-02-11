@@ -23,7 +23,7 @@
   
   <!-- HEADER -->
   <header class="game-header">
-    <a href="../arcade.html" class="back-link">← Back to Arcade</a>
+    <a href="../arcade.html" class="back-link" id="backNav">← Back to Arcade</a>
     
     <div class="orbit-logo">
       <div class="orbit-logo-mark">
@@ -36,7 +36,11 @@
     </div>
     
     <div class="header-actions">
-      <button class="icon-btn" id="helpBtn" title="How It Works">❓</button>
+      <button class="icon-btn-orbit icon-help" id="helpBtn" title="How It Works">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <svg class="icon-symbol" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 4c-2.2 0-4 1.8-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.2-1.8-4-4-4z"/><circle cx="12" cy="19" r="1.5"/></svg>
+      </button>
     </div>
   </header>
   
@@ -182,6 +186,8 @@
     <span class="toast-text">Vote recorded!</span>
   </div>
   
+  <script src="../config.js"></script>
+  <script src="../js/utils.js"></script>
   <script src="../js/alternate.js"></script>
 </body>
 </html>
