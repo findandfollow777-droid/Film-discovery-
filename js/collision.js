@@ -207,19 +207,16 @@ async function loadEntityData(entity, side) {
   typeEl.textContent = entity.type;
   
   try {
-    // Fetch person details for photo
-    const personRes = await fetch(
-      `https://api.themoviedb.org/3/person/${entity.id}?api_key=${TMDB_API_KEY}`
-    );
-    const person = await personRes.json();
-    
-    if (person.profile_path) {
+    // Fetch person details with name validation
+    const { id: personId, person } = await resolvePersonId(entity.id, entity.name);
+
+    if (person && person.profile_path) {
       photoEl.src = `${TMDB_IMG}w185${person.profile_path}`;
     }
-    
-    // Fetch filmography
+
+    // Fetch filmography using validated ID
     const creditsRes = await fetch(
-      `https://api.themoviedb.org/3/person/${entity.id}/movie_credits?api_key=${TMDB_API_KEY}`
+      `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`
     );
     const credits = await creditsRes.json();
     

@@ -1336,8 +1336,8 @@ function initVennBioPanels() {
 
 async function loadVennPersonBio(person) {
   try {
-    const res = await fetch(`https://api.themoviedb.org/3/person/${person.id}?api_key=${TMDB_API_KEY}`);
-    const personData = await res.json();
+    const { id: resolvedId, person: personData } = await resolvePersonId(person.id, person.name);
+    if (!personData) throw new Error("Could not resolve person");
     
     const bioPhoto = document.getElementById("bioPhoto");
     const bioName = document.getElementById("bioName");

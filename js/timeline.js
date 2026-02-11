@@ -2706,8 +2706,15 @@ function setupVizTabs() {
 async function loadPersonBio(personId, personIdx = 0) {
   console.log("loadPersonBio called with ID:", personId, "idx:", personIdx);
   try {
-    const res = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
-    const person = await res.json();
+    const expectedName = people[personIdx] ? people[personIdx].name : null;
+    let person;
+    if (expectedName) {
+      const resolved = await resolvePersonId(personId, expectedName);
+      person = resolved.person;
+    } else {
+      const res = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
+      person = await res.json();
+    }
     console.log("Person data loaded:", person.name);
     
     const bioPhoto = document.getElementById("bioPhoto");

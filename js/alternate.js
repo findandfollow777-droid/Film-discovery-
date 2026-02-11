@@ -209,22 +209,19 @@ async function loadWeeklyScenario() {
 }
 
 async function loadOptions(options) {
-  // Fetch photos for all options
+  // Fetch photos for all options with name validation
   const optionsWithPhotos = await Promise.all(options.map(async (opt) => {
     try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/person/${opt.id}?api_key=${TMDB_API_KEY}`
-      );
-      const person = await res.json();
+      const { person } = await resolvePersonId(opt.id, opt.name);
       return {
         ...opt,
-        photo: person.profile_path ? `${TMDB_IMG}w185${person.profile_path}` : ""
+        photo: person && person.profile_path ? `${TMDB_IMG}w185${person.profile_path}` : ""
       };
     } catch {
       return { ...opt, photo: "" };
     }
   }));
-  
+
   renderOptions(optionsWithPhotos);
 }
 

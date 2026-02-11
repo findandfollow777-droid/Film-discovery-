@@ -98,6 +98,50 @@ trackNavigation();
 document.addEventListener('DOMContentLoaded', initBackNav);
 
 // ============================================
+// PERSON ID RESOLUTION - Name-Validated Fetch
+// ============================================
+
+async function resolvePersonId(id, expectedName) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/person/${id}?api_key=${TMDB_API_KEY}`
+    );
+    const person = await res.json();
+
+    if (person.name &&
+        person.name.toLowerCase().trim() === expectedName.toLowerCase().trim()) {
+      return { id, person };
+    }
+
+    // Name mismatch — search for the correct person
+    console.warn(
+      `Person ID ${id} returned "${person.name}" instead of "${expectedName}". Searching…`
+    );
+    const searchRes = await fetch(
+      `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(expectedName)}`
+    );
+    const searchData = await searchRes.json();
+
+    if (searchData.results && searchData.results.length > 0) {
+      const exactMatch = searchData.results.find(
+        r => r.name.toLowerCase().trim() === expectedName.toLowerCase().trim()
+      );
+      const match = exactMatch || searchData.results[0];
+      const correctRes = await fetch(
+        `https://api.themoviedb.org/3/person/${match.id}?api_key=${TMDB_API_KEY}`
+      );
+      const correctPerson = await correctRes.json();
+      return { id: match.id, person: correctPerson };
+    }
+
+    return { id, person };
+  } catch (err) {
+    console.error(`Error resolving person "${expectedName}":`, err);
+    return { id, person: null };
+  }
+}
+
+// ============================================
 // STREAMING PROVIDERS - Shared Helper
 // ============================================
 

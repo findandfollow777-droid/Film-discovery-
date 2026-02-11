@@ -240,14 +240,13 @@ async function loadActorPhotos() {
   // Load start actor photo
   if (gameState.startActor && gameState.startActor.id) {
     try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/person/${gameState.startActor.id}?api_key=${TMDB_API_KEY}`
+      const { id: resolvedId, person: data } = await resolvePersonId(
+        gameState.startActor.id, gameState.startActor.name
       );
-      const data = await res.json();
-      gameState.startActor.photo = data.profile_path
+      gameState.startActor.id = resolvedId;
+      gameState.startActor.photo = data && data.profile_path
         ? `${TMDB_IMG}w185${data.profile_path}`
         : placeholder('#00d9ff');
-      // Update chain's first item
       if (gameState.chain[0] && gameState.chain[0].isStart) {
         gameState.chain[0].photo = gameState.startActor.photo;
       }
@@ -260,14 +259,13 @@ async function loadActorPhotos() {
   // Load end actor photo
   if (gameState.endActor && gameState.endActor.id) {
     try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/person/${gameState.endActor.id}?api_key=${TMDB_API_KEY}`
+      const { id: resolvedId, person: data } = await resolvePersonId(
+        gameState.endActor.id, gameState.endActor.name
       );
-      const data = await res.json();
-      gameState.endActor.photo = data.profile_path
+      gameState.endActor.id = resolvedId;
+      gameState.endActor.photo = data && data.profile_path
         ? `${TMDB_IMG}w185${data.profile_path}`
         : placeholder('#ffd700');
-      // Update chain's goal item if present
       const goalItem = gameState.chain.find(item => item.isGoal);
       if (goalItem) goalItem.photo = gameState.endActor.photo;
     } catch (err) {
@@ -280,11 +278,11 @@ async function loadActorPhotos() {
   for (const item of gameState.chain) {
     if (item.type === 'actor' && !item.photo) {
       try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/person/${item.id}?api_key=${TMDB_API_KEY}`
+        const { id: resolvedId, person: data } = await resolvePersonId(
+          item.id, item.name
         );
-        const data = await res.json();
-        item.photo = data.profile_path
+        item.id = resolvedId;
+        item.photo = data && data.profile_path
           ? `${TMDB_IMG}w185${data.profile_path}`
           : placeholder('#a855f7');
       } catch (err) {
