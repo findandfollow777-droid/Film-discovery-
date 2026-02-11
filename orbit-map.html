@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit Map — Discover Films by Location</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="orbit-map.css">
+  <link rel="stylesheet" href="css/moviecube.css">
+</head>
+<body>
+  <!-- Film grain overlay -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- Header -->
+  <header class="map-header">
+    <a href="index.html" class="back-link">← Back to Orbit</a>
+    <h1 class="map-title">ORBIT MAP</h1>
+    <p class="map-subtitle">Explore cinema by location</p>
+  </header>
+
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Location panel (slides up when marker clicked) -->
+  <div id="locationPanel" class="location-panel hidden">
+    <div class="panel-header">
+      <h2 id="panelLocationName"></h2>
+      <span id="panelMovieCount" class="panel-count"></span>
+      <button id="panelClose" class="panel-close">✕</button>
+    </div>
+    <div id="panelMovieGrid" class="panel-movie-grid"></div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="map-stats">
+    <span id="statsText"></span>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/moviecube.js"></script>
+  <script src="orbit-map.js"></script>
+</body>
+</html>
