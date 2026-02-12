@@ -87,6 +87,12 @@ function applyMediaTypeLabels() {
     findTitle.textContent = currentMediaType === "tv" ? "Find Show" : currentMediaType === "both" ? "Find Title" : "Find Movie";
   }
 
+  // Update search placeholder
+  const searchInput = document.getElementById("resultsSearchInput");
+  if (searchInput) {
+    searchInput.placeholder = currentMediaType === "tv" ? "Search shows..." : currentMediaType === "both" ? "Search titles..." : "Search results...";
+  }
+
   // Update "New Search" link to go back to the right page
   const newSearchLink = document.querySelector('a.nav-item[href="../index.html"]');
   if (newSearchLink) {
@@ -856,7 +862,7 @@ function updatePaginationUI() {
         if (!isNaN(page)) {
           currentPage = page;
           renderPage();
-          if (moviesGrid) moviesGrid.scrollTop = 0;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       });
     });
@@ -1094,7 +1100,7 @@ function setupEventListeners() {
     if (currentPage > 1) {
       currentPage--;
       renderPage();
-      if (moviesGrid) moviesGrid.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
   
@@ -1102,7 +1108,7 @@ function setupEventListeners() {
     if (currentPage < totalPages) {
       currentPage++;
       renderPage();
-      if (moviesGrid) moviesGrid.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
   
@@ -1114,14 +1120,14 @@ function setupEventListeners() {
       if (currentPage > 1) {
         currentPage--;
         renderPage();
-        if (moviesGrid) moviesGrid.scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
     if (e.key === "ArrowRight" && !cubeOpen) {
       if (currentPage < totalPages) {
         currentPage++;
         renderPage();
-        if (moviesGrid) moviesGrid.scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
   });
@@ -1156,6 +1162,25 @@ function setupEventListeners() {
     triggerSwipeOnFirstCard("left");
   });
   
+  // Drawer toggle (controls panel)
+  const drawerToggle = document.getElementById('drawerToggle');
+  const controlsDrawer = document.getElementById('controlsDrawer');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  const drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    controlsDrawer?.classList.add('open');
+    drawerBackdrop?.classList.add('visible');
+  }
+  function closeDrawer() {
+    controlsDrawer?.classList.remove('open');
+    drawerBackdrop?.classList.remove('visible');
+  }
+
+  drawerToggle?.addEventListener('click', openDrawer);
+  drawerClose?.addEventListener('click', closeDrawer);
+  drawerBackdrop?.addEventListener('click', closeDrawer);
+
   // Auto-hide hint after first swipe
   document.addEventListener("swipe-recorded", () => {
     if (swipeHint && !swipeHint.classList.contains("hidden")) {
