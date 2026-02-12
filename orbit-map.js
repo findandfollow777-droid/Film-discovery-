@@ -166,12 +166,19 @@ async function loadPostersForPanel(movies) {
     await Promise.all(batch.map(async (movie) => {
       const posterPath = await fetchPosterPath(movie.id);
       // Update DOM if card exists
-      const img = document.querySelector(`.panel-movie-card[data-id="${movie.id}"] img`);
-      const placeholder = document.querySelector(`.panel-movie-card[data-id="${movie.id}"] .no-poster`);
-      if (posterPath && img) {
-        img.src = `${TMDB_IMAGE_BASE}w185${posterPath}`;
-        img.hidden = false;
-        if (placeholder) placeholder.classList.add('hidden');
+      const card = document.querySelector(`.panel-movie-card[data-id="${movie.id}"]`);
+      if (posterPath && card) {
+        const placeholder = card.querySelector('.no-poster');
+        // Insert img before the placeholder
+        if (placeholder && !card.querySelector('img')) {
+          const img = document.createElement('img');
+          img.src = `${TMDB_IMAGE_BASE}w185${posterPath}`;
+          img.alt = movie.title;
+          img.loading = 'lazy';
+          img.onerror = function() { this.style.display = 'none'; placeholder.style.display = 'flex'; };
+          card.insertBefore(img, placeholder);
+          placeholder.style.display = 'none';
+        }
       }
     }));
   }
@@ -343,6 +350,7 @@ function setupDecadeSlider() {
     span.style.minWidth = '0';
     span.style.flex = '1';
     span.style.textAlign = 'center';
+    if (item.value === 'future') span.style.marginLeft = '12px';
     if (i === 0) span.classList.add('active');
     span.addEventListener('click', () => {
       slider.value = i;
@@ -375,8 +383,11 @@ let currentPanelSort = 'popular';
 function setupPanel() {
   document.getElementById('panelClose').addEventListener('click', closePanel);
   document.getElementById('panelViewAll').addEventListener('click', () => {
-    if (currentPanelLabel) {
-      localStorage.setItem('orbit_map_location', currentPanelLabel);
+    if (currentPanelLabel && currentPanelLocData) {
+      localStorage.setItem('orbit_map_results', JSON.stringify({
+        label: currentPanelLabel,
+        movieIds: currentPanelLocData.movies.map(m => m.id)
+      }));
       window.location.href = 'index.html';
     }
   });
@@ -457,18 +468,26 @@ function renderPanelMovies(movies) {
     const cached = posterCache[movie.id];
     const hasPoster = cached && cached !== null;
 
-    card.innerHTML = `
-      <img src="${hasPoster ? TMDB_IMAGE_BASE + 'w185' + cached : ''}"
-           alt="${movie.title}"
-           loading="lazy"
-           ${!hasPoster ? 'hidden' : ''}
-           onerror="this.hidden=true; this.nextElementSibling.classList.remove('hidden');">
-      <div class="no-poster ${hasPoster ? 'hidden' : ''}">🎬</div>
-      <div class="card-info">
-        <div class="card-title">${movie.title}</div>
-        <div class="card-year">${movie.year || ''}</div>
-      </div>
-    `;
+    if (hasPoster) {
+      card.innerHTML = `
+        <img src="${TMDB_IMAGE_BASE}w185${cached}"
+             alt="${movie.title}" loading="lazy"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="no-poster" style="display:none">🎬</div>
+        <div class="card-info">
+          <div class="card-title">${movie.title}</div>
+          <div class="card-year">${movie.year || ''}</div>
+        </div>
+      `;
+    } else {
+      card.innerHTML = `
+        <div class="no-poster">🎬</div>
+        <div class="card-info">
+          <div class="card-title">${movie.title}</div>
+          <div class="card-year">${movie.year || ''}</div>
+        </div>
+      `;
+    }
 
     grid.appendChild(card);
   });
