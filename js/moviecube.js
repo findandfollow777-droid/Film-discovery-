@@ -55,9 +55,10 @@
     _movieSettingsLoading = true;
     try {
       const response = await fetch('orbit-movie-settings.json');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       _movieSettingsData = await response.json();
     } catch (e) {
-      console.warn('[MovieCube] Settings data not available');
+      console.warn('[MovieCube] Settings data not available:', e.message);
       _movieSettingsData = null;
     }
     _movieSettingsLoading = false;
@@ -128,7 +129,6 @@
   let cubeProductionCompanies;
   let cubeTrailerBtn, cubeAnchorBtn, cubeSimilarBtn, cubeSimilarOverlay;
   let cubeShortlistBtn;
-  let cubeAwards;
 
   // DOM refs - Trailer modal
   let cubeTrailerOverlay, cubeTrailerContainer;
@@ -181,7 +181,7 @@
     cubeSimilarBtn = document.getElementById("cubeSimilarBtn");
     cubeSimilarOverlay = document.getElementById("cubeSimilarOverlay");
     cubeShortlistBtn = document.getElementById("shortlist-btn");
-    cubeAwards = document.getElementById("cubePopupAwards");
+    // cubeAwards removed — awards now on Face 7
 
     // Trailer modal
     cubeTrailerOverlay = document.getElementById("cubeTrailerOverlay");
@@ -209,6 +209,7 @@
             <button class="cube-nav-btn" data-face="4">📊 Stats</button>
             <button class="cube-nav-btn" data-face="5">🧠 Trivia</button>
             <button class="cube-nav-btn" data-face="6" title="Nebula Impressions">✦ Nebula</button>
+            <button class="cube-nav-btn cube-awards-nav" data-face="7" id="cubeAwardsNav" style="display:none">🏆 Awards</button>
           </div>
           
           <!-- 3D CUBE SCENE -->
@@ -231,11 +232,10 @@
                     <span class="popup-rating">⭐ <span id="cubePopupRating"></span></span>
                     <span class="popup-runtime" id="cubePopupRuntime"></span>
                   </div>
-                  <div class="cube-award-badges" id="cubePopupAwards"></div>
                   <p class="popup-synopsis" id="cubePopupSynopsis"></p>
                   <div class="popup-genres" id="cubePopupGenres"></div>
-                  <div class="where-to-watch" id="cubeWhereToWatch"></div>
                   <div class="cube-dimensions" id="cubeDimensions"></div>
+                  <div class="where-to-watch" id="cubeWhereToWatch"></div>
                 </div>
               </div>
 
@@ -355,6 +355,14 @@
               </div>
             </div>
           </div>
+
+          <!-- AWARDS OVERLAY - flat, outside 3D cube -->
+            <div class="cube-awards-overlay" id="cubeAwardsOverlay">
+              <div class="awards-face-content">
+                <h3 class="awards-face-title">Awards & Nominations</h3>
+                <div class="awards-face-list" id="cubeAwardsFaceList"></div>
+              </div>
+            </div>
 
           <!-- ACTION BUTTONS -->
           <div class="popup-actions-bar">
@@ -605,7 +613,7 @@
     const prevFace = currentFace;
     currentFace = faceNum;
 
-    // For faces 1-4, rotate the 3D cube. For faces 5-6, keep cube at face 1 and show flat overlay.
+    // For faces 1-4, rotate the 3D cube. For faces 5-7, keep cube at face 1 and show flat overlay.
     if (cube) cube.dataset.face = faceNum <= 4 ? faceNum.toString() : "1";
 
     // Toggle trivia overlay
@@ -620,14 +628,18 @@
       nebulaOverlay.classList.toggle("active", faceNum === 6);
     }
 
+    // Toggle awards overlay
+    const awardsOverlay = document.getElementById("cubeAwardsOverlay");
+    if (awardsOverlay) {
+      awardsOverlay.classList.toggle("active", faceNum === 7);
+    }
+
     // Handle nebula face navigation
     if (faceNum === 6 && prevFace !== 6) {
-      // Navigating TO nebula face
       if (cubeMovieData) {
         loadNebulaFace(cubeMovieData.id, cubeMovieData.title);
       }
     } else if (prevFace === 6 && faceNum !== 6) {
-      // Navigating AWAY from nebula face
       stopNebulaPhysics();
     }
 
@@ -660,15 +672,11 @@
       ).join("");
     }
 
-    // Award badges
-    if (cubeAwards) {
-      const html = typeof getAwardBadgesHTML === 'function' ? getAwardBadgesHTML(cubeMovieData.id) : '';
-      cubeAwards.innerHTML = html;
-      cubeAwards.style.display = html ? 'flex' : 'none';
-    }
-
     // Discovery Dimensions
     populateDimensions(cubeMovieData.id);
+
+    // Awards face — show nav button only if movie has awards
+    populateAwardsFace(cubeMovieData.id);
   }
 
   // ============================================
@@ -697,10 +705,8 @@
     container.innerHTML = '';
 
     const id = String(movieId);
-    console.log('[MovieCube] populateDimensions called for ID:', id);
 
     const settings = await getMovieSettings();
-    console.log('[MovieCube] Settings data loaded:', !!settings, 'Movie found:', !!settings?.movies?.[id]);
     if (!settings?.movies?.[id]) return;
 
     const movie = settings.movies[id];
@@ -734,13 +740,15 @@
       chips.push({ icon: createTimeSVG(), items: timeParts, type: 'time' });
     }
 
-    // Themes
-    if (movie.themes?.length > 0) {
-      chips.push({ icon: createThemeSVG(), items: movie.themes.slice(0, 3), type: 'theme' });
+    // Themes — prefer normalised names
+    const themeList = movie.themes_normalised?.length > 0 ? movie.themes_normalised : movie.themes;
+    if (themeList?.length > 0) {
+      chips.push({ icon: createThemeSVG(), items: themeList.slice(0, 3), type: 'theme' });
     }
 
-    // Based on
-    if (movie.based_on && movie.based_on !== 'original') {
+    // Based on — data is an object { type, detail, source }
+    const basedOnType = typeof movie.based_on === 'object' ? movie.based_on?.type : movie.based_on;
+    if (basedOnType && basedOnType !== 'original') {
       const basedOnLabels = {
         'novel': 'Based on Novel', 'true_story': 'True Story',
         'sequel': 'Sequel', 'prequel': 'Prequel',
@@ -748,7 +756,7 @@
         'video_game': 'Based on Video Game', 'short_story': 'Based on Short Story',
         'remake': 'Remake', 'spin-off': 'Spin-off'
       };
-      chips.push({ icon: createBasedOnSVG(), items: [basedOnLabels[movie.based_on] || movie.based_on], type: 'based-on' });
+      chips.push({ icon: createBasedOnSVG(), items: [basedOnLabels[basedOnType] || basedOnType], type: 'based-on' });
     }
 
     if (chips.length === 0) return;
@@ -761,6 +769,56 @@
         <span class="dimension-text">${chip.items.join(' \u00B7 ')}</span>
       `;
       container.appendChild(row);
+    });
+  }
+
+  // ============================================
+  // AWARDS FACE (Face 7)
+  // ============================================
+
+  function populateAwardsFace(movieId) {
+    const navBtn = document.getElementById('cubeAwardsNav');
+    const list = document.getElementById('cubeAwardsFaceList');
+    if (!list) return;
+    list.innerHTML = '';
+
+    const awards = typeof getMovieAwards === 'function' ? getMovieAwards(movieId) : null;
+    if (navBtn) navBtn.style.display = awards && awards.length > 0 ? '' : 'none';
+    if (!awards || awards.length === 0) return;
+
+    // Group by festival
+    const byFestival = {};
+    awards.forEach(a => {
+      if (!byFestival[a.festival]) byFestival[a.festival] = [];
+      byFestival[a.festival].push(a);
+    });
+
+    Object.entries(byFestival).forEach(([festival, items]) => {
+      const group = document.createElement('div');
+      group.className = 'awards-festival-group';
+
+      const svg = typeof AWARD_SVGS !== 'undefined' && AWARD_SVGS[festival]
+        ? `<svg class="awards-festival-icon" viewBox="0 0 24 24" width="18" height="18">${AWARD_SVGS[festival]}</svg>`
+        : '';
+      const header = document.createElement('div');
+      header.className = 'awards-festival-header';
+      header.innerHTML = `${svg}<span class="awards-festival-name">${festival}</span>`;
+      group.appendChild(header);
+
+      items.forEach(award => {
+        const row = document.createElement('div');
+        row.className = `awards-entry ${award.won ? 'awards-won' : 'awards-nom'}`;
+        const status = award.won ? 'Won' : 'Nominated';
+        const person = award.person ? ` — ${award.person}` : '';
+        row.innerHTML = `
+          <span class="awards-status">${status}</span>
+          <span class="awards-category">${award.category || ''}${person}</span>
+          <span class="awards-year">${award.year || ''}</span>
+        `;
+        group.appendChild(row);
+      });
+
+      list.appendChild(group);
     });
   }
 

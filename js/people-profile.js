@@ -105,6 +105,19 @@
       renderFilmography();
       $('ppShowAll').classList.add('hidden');
     });
+
+    // Share button
+    $('ppShareBtn')?.addEventListener('click', shareProfile);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        // Let moviecube handle its own escape first
+        const cubeOverlay = document.getElementById('movieCubeOverlay');
+        if (cubeOverlay && !cubeOverlay.hidden) return;
+        window.location.href = 'people-library.html';
+      }
+    });
   }
 
   // ── Data Loading ──
@@ -394,29 +407,31 @@
     renderCareerDNA();
     renderConnections();
     renderAwards();
+    renderNebula();
+    renderDidYouKnow();
     renderFilmography();
+    initScrollReveal();
   }
 
   function renderHero() {
     const p = profileData.person;
 
     // Photo
-    $('ppSkeletonPhoto')?.classList.add('hidden');
     const photo = $('ppPhoto');
     photo.src = p.profile_path ? `${TMDB_IMG}w185${p.profile_path}` : DEFAULT_AVATAR;
     photo.alt = p.name;
     photo.onerror = function() { this.src = DEFAULT_AVATAR; };
-    photo.classList.remove('hidden');
+    fadeOutSkeleton($('ppSkeletonPhoto'), photo);
 
     // Name
-    $('ppSkeletonName')?.classList.add('hidden');
     const nameEl = $('ppName');
     nameEl.textContent = p.name;
-    nameEl.classList.remove('hidden');
+    fadeOutSkeleton($('ppSkeletonName'), nameEl);
 
-    // Bookmark
+    // Bookmark + Share
     const bmBtn = $('ppBookmarkBtn');
     bmBtn.classList.remove('hidden');
+    $('ppShareBtn')?.classList.remove('hidden');
     if (window.OrbitEncounters) {
       const encountered = window.OrbitEncounters.getEncountered();
       const entry = encountered[String(personId)];
@@ -426,7 +441,6 @@
     }
 
     // Department + lifespan
-    $('ppSkeletonMeta')?.classList.add('hidden');
     const meta = $('ppMeta');
     const dept = $('ppDepartment');
     const deptName = p.known_for_department || 'Unknown';
@@ -444,10 +458,9 @@
     }
     if (p.deathday) parts.push(`Died ${formatDate(p.deathday)}`);
     lifespan.textContent = parts.join(' · ');
-    meta.classList.remove('hidden');
+    fadeOutSkeleton($('ppSkeletonMeta'), meta);
 
     // Career summary
-    $('ppSkeletonSummary')?.classList.add('hidden');
     const summary = $('ppCareerSummary');
     const span = profileData.careerSpan;
     const creditCount = profileData.totalCredits;
@@ -455,7 +468,7 @@
     if (span.years > 0) summaryParts.push(`${span.years}-year career (${span.from}–${span.to})`);
     summaryParts.push(`${creditCount} credits`);
     summary.textContent = summaryParts.join(' · ');
-    summary.classList.remove('hidden');
+    fadeOutSkeleton($('ppSkeletonSummary'), summary);
 
     // Awards summary
     const awardsSummary = $('ppAwardsSummary');
@@ -549,7 +562,7 @@
         : DEFAULT_AVATAR;
       return `
         <a href="people-profile.html?id=${c.id}" class="pp-collab-card">
-          <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}"
+          <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}" loading="lazy"
                onerror="this.src='${DEFAULT_AVATAR}'">
           <span class="pp-collab-name">${esc(c.name)}</span>
           <span class="pp-collab-count">${c.count} shared films</span>
@@ -685,6 +698,17 @@
 
   // ── Helpers ──
 
+  function fadeOutSkeleton(skeletonEl, contentEl) {
+    if (skeletonEl) skeletonEl.classList.add('hidden');
+    if (!contentEl) return;
+    contentEl.style.opacity = '0';
+    contentEl.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      contentEl.style.transition = 'opacity 0.2s ease';
+      contentEl.style.opacity = '1';
+    });
+  }
+
   function showError(msg) {
     $('ppContent')?.classList.add('hidden');
     const errEl = $('ppError');
@@ -721,6 +745,189 @@
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
+  }
+
+  // ── Nebula Consensus ──
+
+  async function renderNebula() {
+    const section = $('ppNebula');
+    if (!section) return;
+
+    const films = profileData.filmography;
+    if (!films || films.length === 0) return;
+
+    // Fetch nebula seed data to find which films have reviews
+    let nebulaIds;
+    try {
+      const res = await fetch('nebula-seed-movies.json');
+      if (!res.ok) return;
+      const seed = await res.json();
+      nebulaIds = new Set((seed.movies || []).map(m => m.id));
+    } catch { return; }
+
+    // Cross-reference
+    const nebulaFilms = films.filter(f => nebulaIds.has(f.id) && f.vote_average > 0);
+    if (nebulaFilms.length === 0) return;
+
+    // Calculate stats
+    const totalRated = nebulaFilms.length;
+    const avgRating = nebulaFilms.reduce((sum, f) => sum + f.vote_average, 0) / totalRated;
+    const sorted = [...nebulaFilms].sort((a, b) => b.vote_average - a.vote_average);
+    const highest = sorted[0];
+    const lowest = sorted[sorted.length - 1];
+
+    // Summary
+    $('ppNebulaSummary').textContent = `Across ${totalRated} of their ${films.length} films with Nebula reviews:`;
+
+    // Star rating (out of 5, mapped from 0-10 scale)
+    const starRating = avgRating / 2;
+    $('ppNebulaStars').innerHTML = buildStarsSVG(starRating) +
+      `<span class="pp-nebula-avg">${avgRating.toFixed(1)}/10</span>`;
+
+    // Highlight cards
+    let cardsHtml = '';
+    if (highest) {
+      const hPoster = highest.poster_path ? `${TMDB_IMG}w92${highest.poster_path}` : '';
+      cardsHtml += `
+        <div class="pp-nebula-card praised">
+          ${hPoster ? `<img class="pp-nebula-card-poster" src="${hPoster}" alt="" loading="lazy">` : ''}
+          <div class="pp-nebula-card-info">
+            <div class="pp-nebula-card-label">Most Praised</div>
+            <div class="pp-nebula-card-title" title="${esc(highest.title)}">${esc(highest.title)}</div>
+            <div class="pp-nebula-card-rating">${highest.vote_average.toFixed(1)}/10</div>
+          </div>
+        </div>`;
+    }
+    if (lowest && lowest.id !== highest.id) {
+      const lPoster = lowest.poster_path ? `${TMDB_IMG}w92${lowest.poster_path}` : '';
+      cardsHtml += `
+        <div class="pp-nebula-card divisive">
+          ${lPoster ? `<img class="pp-nebula-card-poster" src="${lPoster}" alt="" loading="lazy">` : ''}
+          <div class="pp-nebula-card-info">
+            <div class="pp-nebula-card-label">Most Divisive</div>
+            <div class="pp-nebula-card-title" title="${esc(lowest.title)}">${esc(lowest.title)}</div>
+            <div class="pp-nebula-card-rating">${lowest.vote_average.toFixed(1)}/10</div>
+          </div>
+        </div>`;
+    }
+    $('ppNebulaCards').innerHTML = cardsHtml;
+    section.classList.remove('hidden');
+  }
+
+  function buildStarsSVG(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      const fill = rating >= i ? 1 : (rating >= i - 0.5 ? 0.5 : 0);
+      if (fill === 1) {
+        html += `<svg width="20" height="20" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#ffd700" stroke="#ffd700" stroke-width="1"/></svg>`;
+      } else if (fill === 0.5) {
+        html += `<svg width="20" height="20" viewBox="0 0 24 24">
+          <defs><linearGradient id="half${i}"><stop offset="50%" stop-color="#ffd700"/><stop offset="50%" stop-color="transparent"/></linearGradient></defs>
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#half${i})" stroke="#ffd700" stroke-width="1"/>
+        </svg>`;
+      } else {
+        html += `<svg width="20" height="20" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="#64748b" stroke-width="1"/></svg>`;
+      }
+    }
+    return html;
+  }
+
+  // ── Did You Know? ──
+
+  function renderDidYouKnow() {
+    const section = $('ppDidYouKnow');
+    if (!section) return;
+
+    const bio = profileData.person.biography;
+    if (!bio || bio.length < 50) return;
+
+    const facts = [];
+
+    // Birth name
+    const birthMatch = bio.match(/(?:born|birth name)\s+([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){1,4})/i);
+    if (birthMatch && birthMatch[1] !== profileData.person.name) {
+      facts.push(`Born as ${birthMatch[1]}.`);
+    }
+
+    // Career start / debut
+    const debutMatch = bio.match(/(?:first role|debut|began|started)\s+(?:in|as|with|their|his|her)\s+([^.]{10,60})\./i);
+    if (debutMatch) {
+      const sentence = debutMatch[0].charAt(0).toUpperCase() + debutMatch[0].slice(1);
+      facts.push(sentence.endsWith('.') ? sentence : sentence + '.');
+    }
+
+    // First distinctive sentence of the bio
+    const sentences = bio.split(/(?<=[.!?])\s+/);
+    if (sentences.length > 0 && facts.length < 3) {
+      const first = sentences[0].trim();
+      if (first.length > 20 && first.length < 200) {
+        // Avoid if it just says "X is an actor"
+        if (!/^[A-Z][a-z]+ (?:is|was) (?:an?|the) (?:American|British|actor|actress|director)/i.test(first)) {
+          facts.push(first);
+        } else if (sentences.length > 1) {
+          const second = sentences[1].trim();
+          if (second.length > 20 && second.length < 200) {
+            facts.push(second);
+          }
+        }
+      }
+    }
+
+    if (facts.length === 0) return;
+
+    $('ppDykList').innerHTML = facts.slice(0, 3).map(f => `<li>${esc(f)}</li>`).join('');
+    section.classList.remove('hidden');
+  }
+
+  // ── Share Profile ──
+
+  function shareProfile() {
+    const url = `${window.location.origin}${window.location.pathname}?id=${personId}`;
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('Profile link copied!');
+    }).catch(() => {
+      // Fallback
+      const input = document.createElement('input');
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      showToast('Profile link copied!');
+    });
+  }
+
+  function showToast(msg) {
+    const toast = $('ppToast');
+    if (!toast) return;
+    $('ppToastMsg').textContent = msg;
+    toast.classList.remove('hidden');
+    requestAnimationFrame(() => toast.classList.add('show'));
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.classList.add('hidden'), 300);
+    }, 2000);
+  }
+
+  // ── Scroll Reveal ──
+
+  function initScrollReveal() {
+    const sections = document.querySelectorAll('#ppFootprint, #ppDna, #ppConnections, #ppAwards, #ppNebula, #ppDidYouKnow, #ppFilmography');
+    sections.forEach((el, i) => {
+      el.classList.add('pp-reveal');
+      el.style.transitionDelay = `${i * 0.08}s`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(el => observer.observe(el));
   }
 
 })();

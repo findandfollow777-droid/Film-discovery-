@@ -54,6 +54,12 @@
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
           </button>
+          <button id="ppShareBtn" class="pp-share-btn hidden" title="Share profile link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
         </div>
         <div class="pp-skeleton pp-skeleton-meta" id="ppSkeletonMeta"></div>
         <div id="ppMeta" class="pp-hero-meta hidden">
@@ -122,6 +128,26 @@
       <div id="ppAwardsList" class="pp-awards-list"></div>
     </section>
 
+    <!-- NEBULA CONSENSUS -->
+    <section id="ppNebula" class="pp-section pp-nebula hidden">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="8" opacity="0.3"/><circle cx="12" cy="12" r="4" opacity="0.6"/><circle cx="12" cy="12" r="1.5"/><path d="M12 4v-2M12 22v-2M4 12H2M22 12h-2" opacity="0.3"/></svg>
+        Nebula Consensus
+      </h2>
+      <p id="ppNebulaSummary" class="pp-nebula-summary"></p>
+      <div id="ppNebulaStars" class="pp-nebula-stars"></div>
+      <div id="ppNebulaCards" class="pp-nebula-cards"></div>
+    </section>
+
+    <!-- DID YOU KNOW? -->
+    <section id="ppDidYouKnow" class="pp-section pp-dyk hidden">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+        Did You Know?
+      </h2>
+      <ul id="ppDykList" class="pp-dyk-list"></ul>
+    </section>
+
     <!-- FILMOGRAPHY -->
     <section id="ppFilmography" class="pp-section">
       <div class="pp-filmo-header">
@@ -153,7 +179,17 @@
 
   </main>
 
+  <!-- TOAST -->
+  <div id="ppToast" class="pp-toast hidden">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="ppToastMsg">Profile link copied!</span>
+  </div>
+
   <!-- SCRIPTS -->
+  <script type="module">
+    import * as nebulaService from './nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+  </script>
   <script src="config.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/awards.js"></script>

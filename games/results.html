@@ -13,120 +13,114 @@
   <link rel="stylesheet" href="../css/shortlist-badge.css">
 </head>
 <body>
-  <!-- CINEMATIC BACKGROUND -->
-  <div class="background-layer"></div>
-  <div class="stars-layer"></div>
+  <!-- CINEMATIC OVERLAYS -->
+  <div class="film-grain"></div>
   <div class="vignette"></div>
 
-  <div class="app-container">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <a href="../landing.html" class="logo-link" id="backNav">
-          <div class="mini-logo">
-            <div class="mini-ring"></div>
-            <span>ORBIT</span>
-          </div>
-        </a>
+  <!-- STICKY TOP BAR -->
+  <nav class="results-top-bar">
+    <a href="../landing.html" class="back-link" id="backNav">&larr; Back to Orbit</a>
+    <div class="top-bar-brand">
+      <div class="mini-logo">
+        <div class="mini-ring"></div>
+        <span>ORBIT</span>
       </div>
-      
-      <nav class="sidebar-nav">
-        <a href="../index.html" class="nav-item">
-          <span class="nav-icon">🔍</span>
-          <span>New Search</span>
-        </a>
-        <div class="nav-item active">
-          <span class="nav-icon">🎬</span>
-          <span>Results</span>
-        </div>
-        <a href="../arcade.html" class="nav-item nav-arcade">
-          <div class="nav-icon">
-            <div class="mini-ring"></div>
-            <span class="mini-core">&#x2B21;</span>
-          </div>
-          <span>Arcade</span>
-        </a>
-      </nav>
-      
-      <!-- SEARCH WITHIN RESULTS -->
-      <div class="sidebar-section">
-        <h3 class="sidebar-section-title">Find Movie</h3>
-        <div class="results-search-container">
-          <input type="text" id="resultsSearchInput" class="results-search-input" placeholder="Search your results...">
-          <div id="resultsSearchDropdown" class="results-search-dropdown"></div>
-        </div>
+    </div>
+    <div class="top-bar-actions">
+      <div class="results-count-pill">
+        <span class="count-number" id="resultsCount">0</span>
+        <span class="count-label">movies found</span>
       </div>
-      
-      <div class="sidebar-section">
-        <h3 class="sidebar-section-title">Sort By</h3>
+      <button class="drawer-toggle" id="drawerToggle" title="Controls &amp; Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOLBAR -->
+  <div class="results-toolbar">
+    <div class="toolbar-inner">
+      <div class="toolbar-search results-search-container">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted-silver)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="resultsSearchInput" class="results-search-input" placeholder="Search results...">
+        <div id="resultsSearchDropdown" class="results-search-dropdown"></div>
+      </div>
+
+      <div class="toolbar-sort">
         <div class="sort-options">
-          <button class="sort-option active" data-sort="chronology">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="4" x2="14" y2="4"/><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="12" x2="14" y2="12"/><circle cx="5" cy="4" r="1.5" fill="currentColor"/><circle cx="9" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg> Chronology
-          </button>
-          <button class="sort-option" data-sort="rating">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M8 1.5 L9.8 5.8 L14.5 6.2 L11 9.3 L12 14 L8 11.5 L4 14 L5 9.3 L1.5 6.2 L6.2 5.8 Z"/></svg> Rating
-          </button>
-          <button class="sort-option" data-sort="boxoffice">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2 L8 14"/><path d="M5 4.5 Q5 3 8 3 Q11 3 11 5 Q11 7 8 7 Q5 7 5 9 Q5 11 8 11 Q11 11 11 9.5"/><line x1="6" y1="2" x2="10" y2="2"/><line x1="6" y1="14" x2="10" y2="14"/></svg> Box Office
-          </button>
-          <button class="sort-option" data-sort="foryou">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14 Q1 8 4 4 Q6 2 8 5 Q10 2 12 4 Q15 8 8 14Z"/></svg> For You
-          </button>
-          <button class="sort-option sort-awards" data-sort="awards">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5l2 4 4.5.5-3.3 3 1 4.5L8 11l-4.2 2.5 1-4.5L1.5 6l4.5-.5z"/></svg> Awards
-          </button>
-          <button class="sort-option sort-random" data-sort="random">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 5 Q2 2 5 4 L11 12 Q14 14 14 11"/><path d="M2 11 Q2 14 5 12 L11 4 Q14 2 14 5"/><path d="M12 3 L14 5 L12 7"/><path d="M12 9 L14 11 L12 13"/></svg> Random
-          </button>
+          <button class="sort-option active" data-sort="chronology">Chronology</button>
+          <button class="sort-option" data-sort="rating">Rating</button>
+          <button class="sort-option" data-sort="boxoffice">Box Office</button>
+          <button class="sort-option" data-sort="foryou">For You</button>
+          <button class="sort-option sort-awards" data-sort="awards">Awards</button>
+          <button class="sort-option sort-random" data-sort="random">Random</button>
         </div>
         <button class="reverse-btn" id="reverseBtn" title="Reverse sort order">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L5 4 M3 6 L5 4 L7 6"/><path d="M11 4 L11 12 M9 10 L11 12 L13 10"/></svg> Reverse Order
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L5 4 M3 6 L5 4 L7 6"/><path d="M11 4 L11 12 M9 10 L11 12 L13 10"/></svg>
         </button>
       </div>
-      
-      <!-- GRAVITATIONAL VIBE SLIDERS -->
-      <div class="sidebar-section vibe-section">
-        <h3 class="sidebar-section-title">Gravitational Pull</h3>
+
+      <div class="toolbar-filters">
+        <div class="active-filters" id="activeFilters">
+          <p class="no-filters">Loading filters...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER BACKDROP -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- CONTROLS DRAWER -->
+  <aside class="controls-drawer" id="controlsDrawer">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Controls</h2>
+      <button class="drawer-close" id="drawerClose">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <!-- Navigate -->
+      <div class="drawer-section">
+        <h3 class="drawer-section-title sidebar-section-title">Navigate</h3>
+        <nav class="drawer-nav">
+          <a href="../index.html" class="drawer-nav-item nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            New Search
+          </a>
+          <a href="../arcade.html" class="drawer-nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/></svg>
+            Arcade
+          </a>
+        </nav>
+      </div>
+
+      <!-- Gravitational Pull -->
+      <div class="drawer-section vibe-section">
+        <h3 class="drawer-section-title">Gravitational Pull</h3>
         <p class="vibe-hint">Tune what drifts into your orbit</p>
-        
         <div class="vibe-slider-group">
-          <div class="vibe-labels">
-            <span>Light</span>
-            <span>Dark</span>
-          </div>
+          <div class="vibe-labels"><span>Light</span><span>Dark</span></div>
           <input type="range" class="vibe-slider" id="vibeMood" min="0" max="100" value="50">
         </div>
-        
         <div class="vibe-slider-group">
-          <div class="vibe-labels">
-            <span>Slow Burn</span>
-            <span>Intense</span>
-          </div>
+          <div class="vibe-labels"><span>Slow Burn</span><span>Intense</span></div>
           <input type="range" class="vibe-slider" id="vibePace" min="0" max="100" value="50">
         </div>
-        
         <div class="vibe-slider-group">
-          <div class="vibe-labels">
-            <span>Familiar</span>
-            <span>Challenge Me</span>
-          </div>
+          <div class="vibe-labels"><span>Familiar</span><span>Challenge Me</span></div>
           <input type="range" class="vibe-slider" id="vibeFamiliarity" min="0" max="100" value="50">
         </div>
-        
         <div class="vibe-slider-group">
-          <div class="vibe-labels">
-            <span>Escapism</span>
-            <span>Make Me Think</span>
-          </div>
+          <div class="vibe-labels"><span>Escapism</span><span>Make Me Think</span></div>
           <input type="range" class="vibe-slider" id="vibeDepth" min="0" max="100" value="50">
         </div>
-        
-        <button class="vibe-reset" id="vibeReset">↺ Reset Gravity</button>
+        <button class="vibe-reset" id="vibeReset">&#8634; Reset Gravity</button>
       </div>
-      
-      <!-- STREAMING FILTER -->
-      <div class="sidebar-section">
-        <h3 class="sidebar-section-title">Streaming</h3>
+
+      <!-- Streaming -->
+      <div class="drawer-section sidebar-section">
+        <h3 class="drawer-section-title">Streaming</h3>
         <div class="streaming-filter">
           <select class="streaming-country" id="streamingCountry">
             <option value="">Select Country...</option>
@@ -165,91 +159,75 @@
         </div>
       </div>
 
-      <div class="sidebar-section">
-        <h3 class="sidebar-section-title">Active Filters</h3>
-        <div class="active-filters" id="activeFilters">
-          <p class="no-filters">Loading filters...</p>
-        </div>
-      </div>
-      
-      <div class="sidebar-footer">
-        <div class="results-count">
-          <span class="count-number" id="resultsCount">0</span>
-          <span class="count-label">movies found</span>
-        </div>
+      <!-- Page Info -->
+      <div class="drawer-section drawer-page-info">
         <div class="page-info" id="pageInfo">Page 1 of 1</div>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <!-- PERSON BIO PANEL (slides out when available) -->
-    <div class="bio-panel" id="bioPanel" hidden>
-      <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
-        <span class="bio-tab-icon">👤</span>
+  <!-- PERSON BIO PANEL -->
+  <div class="bio-panel" id="bioPanel" hidden>
+    <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
+      <span class="bio-tab-icon">&#128100;</span>
+    </div>
+    <div class="bio-panel-content" id="bioPanelContent">
+      <button class="bio-close" id="bioClose">&#10005;</button>
+      <div class="bio-header">
+        <img class="bio-photo" id="bioPhoto" src="" alt="">
+        <div class="bio-header-info">
+          <h2 class="bio-name" id="bioName">Loading...</h2>
+          <div class="bio-role" id="bioRole"></div>
+          <div class="bio-dates" id="bioDates"></div>
+        </div>
       </div>
-      <div class="bio-panel-content" id="bioPanelContent">
-        <button class="bio-close" id="bioClose">✕</button>
-        <div class="bio-header">
-          <img class="bio-photo" id="bioPhoto" src="" alt="">
-          <div class="bio-header-info">
-            <h2 class="bio-name" id="bioName">Loading...</h2>
-            <div class="bio-role" id="bioRole"></div>
-            <div class="bio-dates" id="bioDates"></div>
-          </div>
+      <div class="bio-memorial" id="bioMemorial" hidden>
+        <span class="memorial-icon">&#128367;&#65039;</span>
+        <span class="memorial-text">In Memoriam</span>
+      </div>
+      <div class="bio-details">
+        <div class="bio-birthplace" id="bioBirthplace"></div>
+        <div class="bio-text" id="bioText"></div>
+      </div>
+      <div class="bio-stats" id="bioStats">
+        <div class="bio-stat">
+          <span class="stat-value" id="bioFilmCount">0</span>
+          <span class="stat-label">Films</span>
         </div>
-        <div class="bio-memorial" id="bioMemorial" hidden>
-          <span class="memorial-icon">🕯️</span>
-          <span class="memorial-text">In Memoriam</span>
-        </div>
-        <div class="bio-details">
-          <div class="bio-birthplace" id="bioBirthplace"></div>
-          <div class="bio-text" id="bioText"></div>
-        </div>
-        <div class="bio-stats" id="bioStats">
-          <div class="bio-stat">
-            <span class="stat-value" id="bioFilmCount">0</span>
-            <span class="stat-label">Films</span>
-          </div>
-          <div class="bio-stat">
-            <span class="stat-value" id="bioPopularity">0</span>
-            <span class="stat-label">Popularity</span>
-          </div>
+        <div class="bio-stat">
+          <span class="stat-value" id="bioPopularity">0</span>
+          <span class="stat-label">Popularity</span>
         </div>
       </div>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-      <header class="results-header">
-        <h1 class="results-title" id="resultsTitle">Your Orbit Results</h1>
-        <p class="results-subtitle" id="resultsSubtitle">Discovering your cinematic universe...</p>
-      </header>
-      
-      <!-- MOVIE GRID -->
-      <div class="movies-grid" id="moviesGrid">
-        <!-- Movies injected here -->
-      </div>
-      
-      <!-- PAGINATION -->
-      <div class="pagination" id="pagination">
-        <button class="page-btn" id="prevPage" disabled>
-          ← Previous
-        </button>
-        <div class="page-numbers" id="pageNumbers"></div>
-        <button class="page-btn" id="nextPage">
-          Next →
-        </button>
-      </div>
-    </main>
   </div>
 
-  <!-- SWIPE HINT (for first-time users) -->
+  <!-- MAIN CONTENT -->
+  <main class="results-main">
+    <header class="results-header">
+      <h1 class="results-title" id="resultsTitle">Your Orbit Results</h1>
+      <p class="results-subtitle" id="resultsSubtitle">Discovering your cinematic universe...</p>
+    </header>
+
+    <!-- MOVIE GRID -->
+    <div class="movies-grid" id="moviesGrid"></div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination">
+      <button class="page-btn" id="prevPage" disabled>&larr; Previous</button>
+      <div class="page-numbers" id="pageNumbers"></div>
+      <button class="page-btn" id="nextPage">Next &rarr;</button>
+    </div>
+  </main>
+
+  <!-- SWIPE HINT -->
   <div class="swipe-hint" id="swipeHint">
     <button class="swipe-hint-action dislike" id="swipeDislikeBtn" title="Dislike current movie">
-      <span class="swipe-hint-arrow">←</span> Not tonight
+      <span class="swipe-hint-arrow">&larr;</span> Not tonight
     </button>
     <span style="color: #444;">|</span>
     <button class="swipe-hint-action like" id="swipeLikeBtn" title="Like current movie">
-      Love it <span class="swipe-hint-arrow">→</span>
+      Love it <span class="swipe-hint-arrow">&rarr;</span>
     </button>
     <button class="swipe-hint-dismiss" id="swipeHintDismiss">Got it</button>
   </div>

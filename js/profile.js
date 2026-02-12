@@ -52,17 +52,6 @@ const GAME_REGISTRY = [
     href: "games/mastermind.html",
     glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12z"/></svg>',
     extract: (s) => ({ played: s.played || 0, wins: 0, points: s.totalScore || 0, extra: s.bestScore ? `Best score: ${s.bestScore}` : null })
-  },
-  {
-    key: "orbit_trivia_stats", name: "Movie Trivia", color: "#00d9ff",
-    href: null,
-    glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="currentColor">?</text></svg>',
-    extract: (s) => ({
-      played: s.moviesQuizzed || 0,
-      wins: s.perfectRounds || 0,
-      points: s.totalCorrect || 0,
-      extra: s.bestStreak ? `Best streak: ${s.bestStreak}` : (s.totalAnswered > 0 ? `${Math.round((s.totalCorrect / s.totalAnswered) * 100)}% accuracy` : null)
-    })
   }
 ];
 
@@ -77,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCountries();
   setupProviderCollapse();
   loadOverview();
+  renderTriviaCard();
   loadGameBreakdown();
   loadTasteProfile();
   setupShortlistSection();
@@ -577,7 +567,11 @@ function loadOverview() {
   const colStats = getStored("collision_stats");
   if (colStats) bestStreak = Math.max(bestStreak, colStats.bestStreak || 0);
   const trivStats = getStored("orbit_trivia_stats");
-  if (trivStats) bestStreak = Math.max(bestStreak, trivStats.bestStreak || 0);
+  if (trivStats) {
+    bestStreak = Math.max(bestStreak, trivStats.bestStreak || 0);
+    totalGames += trivStats.moviesQuizzed || 0;
+    totalPoints += trivStats.totalCorrect || 0;
+  }
 
   const dayStreak = cStats ? (cStats.currentStreak || 0) : 0;
 
@@ -587,6 +581,29 @@ function loadOverview() {
   document.getElementById("totalPoints").textContent = formatNum(totalPoints);
   document.getElementById("bestStreak").textContent = bestStreak;
   document.getElementById("dayStreak").textContent = dayStreak;
+}
+
+// ============================================
+// TRIVIA FEATURED CARD
+// ============================================
+
+function renderTriviaCard() {
+  const container = document.getElementById("triviaFeaturedCard");
+  if (!container) return;
+
+  const stats = getStored("orbit_trivia_stats");
+  if (!stats || stats.totalAnswered === 0) {
+    container.querySelector(".trivia-stats-grid").innerHTML =
+      '<div class="trivia-empty">Play Movie Trivia from any movie popup to track your stats here.</div>';
+    return;
+  }
+
+  const accuracy = Math.round((stats.totalCorrect / stats.totalAnswered) * 100);
+  document.getElementById("triviaAccuracy").textContent = accuracy + "%";
+  document.getElementById("triviaCurrentStreak").textContent = stats.currentStreak || 0;
+  document.getElementById("triviaBestStreak").textContent = stats.bestStreak || 0;
+  document.getElementById("triviaMoviesQuizzed").textContent = stats.moviesQuizzed || 0;
+  document.getElementById("triviaPerfectRounds").textContent = stats.perfectRounds || 0;
 }
 
 // ============================================
@@ -695,6 +712,7 @@ function setupDangerZone() {
     localStorage.removeItem("orbit_user_providers");
     localStorage.removeItem("orbit_preferences_scope");
     localStorage.removeItem("orbit_providers_expanded");
+    localStorage.removeItem("orbit_trivia_stats");
 
     location.reload();
   });
