@@ -77,25 +77,53 @@ body {
   margin-top: 4px;
 }
 
-/* ── My Orbit Toggle (hidden for Phase D) ── */
+/* ── My Orbit Toggle ── */
 
-.pl-toggle-wrap { display: none; }
+.pl-toggle-wrap {
+  display: inline-flex;
+  position: relative;
+  background: rgba(0,217,255,0.06);
+  border: 1px solid rgba(0,217,255,0.12);
+  border-radius: 24px;
+  padding: 3px;
+  margin: 12px auto 0;
+}
+
+.pl-toggle-slider {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  background: var(--accent-cyan);
+  border-radius: 20px;
+  transition: left 0.3s ease;
+  z-index: 0;
+  box-shadow: 0 0 12px rgba(0,217,255,0.3);
+}
+
+.pl-toggle-wrap[data-active="orbit"] .pl-toggle-slider {
+  left: 50%;
+}
 
 .pl-toggle-btn {
-  padding: 6px 18px;
+  position: relative;
+  z-index: 1;
+  padding: 6px 20px;
+  min-width: 90px;
+  text-align: center;
+  border: none;
   border-radius: 20px;
-  border: 1px solid rgba(0,217,255,0.3);
   background: transparent;
   color: var(--muted-silver);
   font-family: var(--font-body);
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.3s;
 }
+
 .pl-toggle-btn.active {
-  background: rgba(0,217,255,0.15);
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
+  color: #fff;
 }
 
 /* ── Search Bar ── */
@@ -802,6 +830,189 @@ body {
   color: var(--ghost-gray);
 }
 
+/* ── My Orbit Panel ── */
+
+.pl-orbit-panel {
+  max-width: 900px;
+  margin: 16px auto 0;
+  padding: 0 24px;
+}
+
+.pl-discovery-map {
+  margin-bottom: 16px;
+}
+
+.pl-map-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0,217,255,0.1);
+}
+
+.pl-map-canvas {
+  display: block;
+  width: 100%;
+}
+
+.pl-map-tooltip {
+  position: absolute;
+  background: rgba(10,14,26,0.95);
+  border: 1px solid var(--accent-cyan);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.pl-map-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,14,23,0.5);
+}
+
+.pl-map-overlay-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--muted-silver);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pl-map-note {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--ghost-gray);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* ── Gap Analysis ── */
+
+.pl-gap-analysis {
+  margin-bottom: 16px;
+}
+
+.pl-gap-header {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+}
+
+.pl-gap-card {
+  background: rgba(10,14,26,0.8);
+  border: 1px solid rgba(255,215,0,0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pl-gap-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--film-white);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.pl-gap-explore {
+  background: none;
+  border: 1px solid rgba(255,215,0,0.3);
+  color: var(--accent-gold);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 4px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.pl-gap-explore:hover {
+  background: rgba(255,215,0,0.1);
+  border-color: var(--accent-gold);
+}
+
+/* ── Orbit Stats Bar ── */
+
+.pl-orbit-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.pl-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pl-stat-item {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--muted-silver);
+}
+
+.pl-stat-item strong {
+  color: var(--film-white);
+}
+
+.pl-stat-bar {
+  display: flex;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  width: 120px;
+  background: rgba(30,41,59,0.5);
+}
+
+.pl-stat-bar-seg {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+}
+
+/* ── Orbit Encouraging Message ── */
+
+.pl-orbit-encourage {
+  max-width: 900px;
+  margin: 16px auto 0;
+  padding: 16px 24px;
+  text-align: center;
+  background: rgba(0,217,255,0.04);
+  border: 1px solid rgba(0,217,255,0.1);
+  border-radius: 10px;
+}
+
+.pl-orbit-encourage-title {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--film-white);
+  margin-bottom: 4px;
+}
+
+.pl-orbit-encourage-text {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--muted-silver);
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 900px) {
@@ -882,5 +1093,30 @@ body {
   .pl-mode-banner {
     padding: 8px 16px;
     font-size: 0.8rem;
+  }
+
+  .pl-orbit-panel {
+    padding: 0 16px;
+  }
+
+  .pl-gap-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pl-orbit-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pl-orbit-encourage {
+    margin: 12px 16px 0;
+    padding: 12px 16px;
+  }
+
+  .pl-toggle-btn {
+    min-width: 80px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
   }
 }

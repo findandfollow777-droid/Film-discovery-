@@ -20,7 +20,7 @@
 
   <!-- BACK NAV -->
   <nav class="pp-back-nav">
-    <a href="people-library.html" class="back-link">&larr; Back to Stellar Catalog</a>
+    <a id="ppBackLink" href="people-library.html" class="back-link">&larr; Back to Stellar Catalog</a>
   </nav>
 
   <!-- ERROR STATE (hidden by default) -->
@@ -81,6 +81,7 @@
       <div class="pp-footprint-body">
         <p id="ppEncounterText" class="pp-encounter-text"></p>
         <div id="ppSourceBadges" class="pp-source-badges"></div>
+        <p id="ppFirstDiscovered" class="pp-first-discovered hidden"></p>
         <div class="pp-progress-wrap">
           <div class="pp-progress-label" id="ppProgressLabel"></div>
           <div class="pp-progress-bar">
@@ -116,6 +117,10 @@
         <div class="pp-skeleton pp-skeleton-collab"></div>
         <div class="pp-skeleton pp-skeleton-collab"></div>
         <div class="pp-skeleton pp-skeleton-collab"></div>
+      </div>
+      <div class="pp-nav-actions" id="ppNavActions">
+        <a href="#" class="orbit-btn orbit-btn-outline" id="exploreOrbitBtn">Explore Their Circle &#8250;</a>
+        <a href="#" class="orbit-btn orbit-btn-outline" id="viewTimelineBtn">View Full Timeline &#8250;</a>
       </div>
     </section>
 

@@ -85,6 +85,20 @@
     53: '#f97316'     // Thriller
   };
 
+  // ── Discovery Map constants ──
+  var MAP_GENRES = ['Drama', 'Romance', 'History', 'Action', 'Adventure', 'Thriller', 'Crime', 'Comedy', 'Animation', 'Fantasy', 'Sci-Fi', 'Horror'];
+  var MAP_DECADES = ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s'];
+
+  var SOURCE_COLORS = {
+    'stellar-catalog': '#00d9ff',
+    'constellation': '#ffd700',
+    'collision': '#f97316',
+    'moviecube': '#06b6d4',
+    'timeline': '#a855f7',
+    'screenshot': '#fbbf24',
+    'sequel-shot': '#8b5cf6'
+  };
+
   // ── State ──
   let state = {
     currentPage:    1,
@@ -101,7 +115,10 @@
     searchQuery:       '',
     isLoading:         false,
     collectionMode:    null,  // null or collection id string
-    circleMode:        null   // null or director name string
+    circleMode:        null,  // null or director name string
+    orbitMode:         false,
+    orbitPeople:       [],    // all orbit people (unfiltered)
+    bookmarkedOnly:    false
   };
 
   // ── DOM Refs ──
@@ -133,7 +150,21 @@
       directorSelect:  $('plDirectorSelect'),
       modeBanner:      $('plModeBanner'),
       modeBannerText:  $('plModeBannerText'),
-      modeBannerClear: $('plModeBannerClear')
+      modeBannerClear: $('plModeBannerClear'),
+      // D1: My Orbit
+      toggleWrap:      $('plToggleWrap'),
+      title:           document.querySelector('.pl-title'),
+      subtitle:        document.querySelector('.pl-subtitle'),
+      orbitPanel:      $('plOrbitPanel'),
+      mapCanvas:       $('plMapCanvas'),
+      mapTooltip:      $('plMapTooltip'),
+      mapOverlay:      $('plMapOverlay'),
+      gapAnalysis:     $('plGapAnalysis'),
+      orbitStats:      $('plOrbitStats'),
+      bookmarkGroup:   $('plBookmarkGroup'),
+      bookmarkChip:    $('plBookmarkChip'),
+      orbitEncourage:  $('plOrbitEncourage'),
+      filters:         $('plFilters')
     };
   }
 
@@ -162,6 +193,9 @@
     populateDirectorSelect();
     bindExclusives();
     bindModeBanner();
+    bindToggle();
+    bindBookmarkChip();
+    bindMapInteraction();
     // Expand exclusives on desktop by default
     if (window.innerWidth > 650) {
       dom.exclusives.classList.add('expanded');
@@ -265,7 +299,10 @@
   function applyFilters(people) {
     people = filterByDepartment(people, state.activeFilters.department);
     people = filterByAwards(people, state.activeFilters.awards);
-    if (state.isSearchMode && state.activeFilters.era) {
+    if (state.orbitMode && state.bookmarkedOnly) {
+      people = people.filter(function (p) { return p.bookmarked; });
+    }
+    if ((state.isSearchMode || state.orbitMode) && state.activeFilters.era) {
       people = filterByEra(people, state.activeFilters.era);
     }
     return people;
@@ -287,7 +324,17 @@
   function filterByEra(people, decade) {
     var decadeNum = parseInt(decade, 10);
     if (isNaN(decadeNum)) return people;
+    var profileCache = state.orbitMode ? getProfileCache() : null;
     return people.filter(function (p) {
+      // In orbit mode, check profile cache for active_decades
+      if (profileCache) {
+        var cached = profileCache[p.id];
+        if (cached && cached.derived && cached.derived.active_decades) {
+          return cached.derived.active_decades.some(function (d) {
+            return parseInt(d, 10) === decadeNum;
+          });
+        }
+      }
       var knownFor = p.known_for || [];
       return knownFor.some(function (item) {
         var rd = item.release_date || item.first_air_date || '';
@@ -308,6 +355,16 @@
     if (key === 'prolific') {
       return people.slice().sort(function (a, b) {
         return (b.known_for || []).length - (a.known_for || []).length;
+      });
+    }
+    if (key === 'encounters') {
+      return people.slice().sort(function (a, b) {
+        return (b.encounter_count || 0) - (a.encounter_count || 0);
+      });
+    }
+    if (key === 'recent') {
+      return people.slice().sort(function (a, b) {
+        return (b.first_encountered || '').localeCompare(a.first_encountered || '');
       });
     }
     // popularity: keep API order
@@ -334,8 +391,8 @@
     } else {
       dom.grid.classList.remove('hidden');
       dom.empty.classList.add('hidden');
-      // Hide load more in collection/circle mode
-      if (state.collectionMode || state.circleMode) {
+      // Hide load more in collection/circle/orbit mode
+      if (state.collectionMode || state.circleMode || state.orbitMode) {
         dom.loadMoreWrap.classList.add('hidden');
       } else if (state.currentPage < state.totalPages) {
         dom.loadMoreWrap.classList.remove('hidden');
@@ -464,6 +521,11 @@
 
   // ── Result Summary ──
   function updateResultSummary() {
+    if (state.orbitMode) {
+      dom.resultSummary.textContent = state.currentResults.length + ' people in your orbit';
+      dom.resultSummary.classList.remove('hidden');
+      return;
+    }
     var parts = [];
     if (state.collectionMode || state.circleMode) {
       // Summary handled by mode banner
@@ -495,7 +557,10 @@
     var textEl  = dom.empty.querySelector('.pl-empty-text');
     if (!titleEl || !textEl) return;
 
-    if (state.isSearchMode) {
+    if (state.orbitMode) {
+      titleEl.textContent = 'No people match this filter';
+      textEl.textContent = 'Try adjusting your filters or removing the Bookmarked filter.';
+    } else if (state.isSearchMode) {
       titleEl.textContent = "No results for '" + state.searchQuery + "'";
       textEl.textContent = 'Check the spelling or try a different name.';
     } else if (state.activeFilters.awards.length > 0) {
@@ -550,6 +615,11 @@
       // Show/hide clear button
       dom.searchClear.classList.toggle('hidden', val.length === 0);
 
+      if (state.orbitMode) {
+        timer = setTimeout(function () { filterOrbitByName(val); }, 200);
+        return;
+      }
+
       if (val.length >= 2) {
         timer = setTimeout(function () { searchPeople(val, 1); }, SEARCH_DEBOUNCE);
       } else if (val.length === 0) {
@@ -560,9 +630,25 @@
     dom.searchClear.addEventListener('click', function () {
       dom.searchInput.value = '';
       dom.searchClear.classList.add('hidden');
-      exitSearchMode();
+      if (state.orbitMode) {
+        filterOrbitByName('');
+      } else {
+        exitSearchMode();
+      }
       dom.searchInput.focus();
     });
+  }
+
+  function filterOrbitByName(query) {
+    if (!query) {
+      state.rawPages = state.orbitPeople.slice();
+    } else {
+      var q = query.toLowerCase();
+      state.rawPages = state.orbitPeople.filter(function (p) {
+        return (p.name || '').toLowerCase().indexOf(q) !== -1;
+      });
+    }
+    rebuildFilteredResults();
   }
 
   function exitSearchMode() {
@@ -589,7 +675,7 @@
       state.activeFilters.department = chip.dataset.dept;
 
       // Reset and re-fetch/re-filter
-      if (state.isSearchMode) {
+      if (state.orbitMode || state.isSearchMode) {
         rebuildFilteredResults();
       } else {
         state.currentPage = 1;
@@ -693,6 +779,7 @@
         }, 'stellar-catalog');
       }
 
+      sessionStorage.setItem('orbit_profile_referrer', window.location.href);
       window.location.href = 'people-profile.html?id=' + personId;
     });
   }
@@ -893,6 +980,613 @@
       if (eraActive) eraActive.classList.remove('active');
       fetchPopularPeople(1);
     }
+  }
+
+  // ── My Orbit Toggle ──
+
+  function bindToggle() {
+    dom.toggleWrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('.pl-toggle-btn');
+      if (!btn) return;
+      var mode = btn.dataset.mode;
+      if (mode === 'orbit' && !state.orbitMode) {
+        enterOrbitMode();
+      } else if (mode === 'all' && state.orbitMode) {
+        exitOrbitMode();
+      }
+    });
+  }
+
+  function enterOrbitMode() {
+    state.orbitMode = true;
+
+    // Update toggle
+    dom.toggleWrap.dataset.active = 'orbit';
+    dom.toggleWrap.querySelectorAll('.pl-toggle-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.mode === 'orbit');
+    });
+
+    // Update header
+    dom.title.textContent = 'MY ORBIT';
+    var stats = window.OrbitEncounters ? window.OrbitEncounters.getEncounterStats() : { total_people: 0, total_encounters: 0 };
+    dom.subtitle.textContent = stats.total_people + ' people discovered across ' + stats.total_encounters + ' encounters';
+
+    // Show orbit sections, hide browse-only sections
+    dom.orbitPanel.classList.remove('hidden');
+    dom.exclusives.classList.add('hidden');
+    dom.modeBanner.classList.add('hidden');
+    dom.bookmarkGroup.classList.remove('hidden');
+
+    // Add orbit sort options
+    addOrbitSortOptions();
+    state.activeFilters.sort = 'encounters';
+    dom.sortSelect.value = 'encounters';
+
+    // Reset bookmarked filter
+    state.bookmarkedOnly = false;
+    dom.bookmarkChip.classList.remove('active');
+
+    // Enable era chips in orbit mode
+    enableEraChips(true);
+
+    // Clear any search state
+    dom.searchInput.value = '';
+    dom.searchClear.classList.add('hidden');
+    dom.searchBanner.classList.add('hidden');
+
+    // Exit any special mode
+    state.collectionMode = null;
+    state.circleMode = null;
+    state.isSearchMode = false;
+    state.searchQuery = '';
+
+    // Load orbit people
+    loadOrbitPeople();
+  }
+
+  function exitOrbitMode() {
+    state.orbitMode = false;
+    state.orbitPeople = [];
+    state.bookmarkedOnly = false;
+
+    // Update toggle
+    dom.toggleWrap.dataset.active = 'all';
+    dom.toggleWrap.querySelectorAll('.pl-toggle-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.mode === 'all');
+    });
+
+    // Restore header
+    dom.title.textContent = 'STELLAR CATALOG';
+    dom.subtitle.textContent = 'Discover the people behind the movies';
+
+    // Hide orbit sections, show browse sections
+    dom.orbitPanel.classList.add('hidden');
+    dom.orbitEncourage.classList.add('hidden');
+    dom.exclusives.classList.remove('hidden');
+    dom.bookmarkGroup.classList.add('hidden');
+
+    // Remove orbit sort options
+    removeOrbitSortOptions();
+    state.activeFilters.sort = 'popularity';
+    dom.sortSelect.value = 'popularity';
+
+    // Disable era chips (back to browse default)
+    enableEraChips(false);
+    state.activeFilters.era = null;
+    var eraActive = dom.eraChips.querySelector('.pl-chip.active');
+    if (eraActive) eraActive.classList.remove('active');
+
+    // Expand exclusives on desktop
+    if (window.innerWidth > 650) {
+      dom.exclusives.classList.add('expanded');
+    }
+
+    // Clear search
+    dom.searchInput.value = '';
+    dom.searchClear.classList.add('hidden');
+    dom.searchBanner.classList.add('hidden');
+
+    // Re-fetch popular people
+    state.rawPages = [];
+    state.currentPage = 1;
+    fetchPopularPeople(1);
+  }
+
+  function addOrbitSortOptions() {
+    var opt1 = document.createElement('option');
+    opt1.value = 'encounters';
+    opt1.textContent = 'Most Encountered';
+    opt1.className = 'pl-orbit-sort-opt';
+
+    var opt2 = document.createElement('option');
+    opt2.value = 'recent';
+    opt2.textContent = 'Recently Discovered';
+    opt2.className = 'pl-orbit-sort-opt';
+
+    dom.sortSelect.insertBefore(opt2, dom.sortSelect.firstChild);
+    dom.sortSelect.insertBefore(opt1, dom.sortSelect.firstChild);
+  }
+
+  function removeOrbitSortOptions() {
+    dom.sortSelect.querySelectorAll('.pl-orbit-sort-opt').forEach(function (o) { o.remove(); });
+  }
+
+  function bindBookmarkChip() {
+    dom.bookmarkChip.addEventListener('click', function () {
+      state.bookmarkedOnly = !state.bookmarkedOnly;
+      dom.bookmarkChip.classList.toggle('active', state.bookmarkedOnly);
+      rebuildFilteredResults();
+    });
+  }
+
+  // ── Orbit People Loading ──
+
+  function loadOrbitPeople() {
+    if (!window.OrbitEncounters) {
+      state.rawPages = [];
+      state.currentResults = [];
+      state.orbitPeople = [];
+      renderGrid();
+      return;
+    }
+
+    var encountered = window.OrbitEncounters.getEncountered();
+    var people = [];
+
+    Object.keys(encountered).forEach(function (id) {
+      var p = encountered[id];
+      people.push({
+        id: parseInt(id, 10),
+        name: p.name,
+        profile_path: p.profile_path,
+        known_for_department: p.known_for,
+        known_for: [],
+        popularity: p.encounter_count || 0,
+        encounter_count: p.encounter_count || 0,
+        sources: p.sources || [],
+        bookmarked: !!p.bookmarked,
+        first_encountered: p.first_encountered || '',
+        last_encountered: p.last_encountered || ''
+      });
+    });
+
+    state.rawPages = people;
+    state.orbitPeople = people;
+
+    // Encouraging message for sparse orbit
+    if (people.length < 5) {
+      dom.orbitEncourage.classList.remove('hidden');
+    } else {
+      dom.orbitEncourage.classList.add('hidden');
+    }
+
+    rebuildFilteredResults();
+    showState('results');
+
+    // Render map, gap analysis, and stats after panel is visible
+    setTimeout(function () {
+      renderDiscoveryMap(people);
+      renderGapAnalysis(people);
+      renderOrbitStats(people);
+    }, 50);
+  }
+
+  // ── Discovery Map (Canvas) ──
+
+  function renderDiscoveryMap(people) {
+    var canvas = dom.mapCanvas;
+    var container = canvas.parentElement;
+    var width = container.clientWidth;
+    if (width === 0) return;
+    var height = window.innerWidth <= 650 ? 200 : 300;
+
+    // Retina support
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    // Background
+    ctx.fillStyle = '#0a0e17';
+    ctx.fillRect(0, 0, width, height);
+
+    // Layout
+    var padLeft = 45;
+    var padRight = 15;
+    var padTop = 15;
+    var padBottom = 30;
+    var plotW = width - padLeft - padRight;
+    var plotH = height - padTop - padBottom;
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(0,217,255,0.05)';
+    ctx.lineWidth = 1;
+
+    var genreCount = MAP_GENRES.length;
+    for (var i = 0; i <= genreCount; i++) {
+      var gx = padLeft + (plotW * i / genreCount);
+      ctx.beginPath();
+      ctx.moveTo(gx, padTop);
+      ctx.lineTo(gx, padTop + plotH);
+      ctx.stroke();
+    }
+
+    var decadeCount = MAP_DECADES.length;
+    for (var j = 0; j <= decadeCount; j++) {
+      var gy = padTop + (plotH * j / decadeCount);
+      ctx.beginPath();
+      ctx.moveTo(padLeft, gy);
+      ctx.lineTo(padLeft + plotW, gy);
+      ctx.stroke();
+    }
+
+    // Genre labels (bottom)
+    ctx.fillStyle = 'rgba(100,116,139,0.65)';
+    ctx.font = (width < 500 ? '8' : '10') + 'px Barlow, sans-serif';
+    ctx.textAlign = 'center';
+    MAP_GENRES.forEach(function (genre, idx) {
+      var lx = padLeft + (plotW * (idx + 0.5) / genreCount);
+      var label = width < 500 ? genre.substring(0, 3) : genre;
+      ctx.fillText(label, lx, height - 5);
+    });
+
+    // Decade labels (left)
+    ctx.textAlign = 'right';
+    ctx.font = '9px Barlow, sans-serif';
+    MAP_DECADES.forEach(function (decade, idx) {
+      var ly = padTop + (plotH * (idx + 0.5) / decadeCount);
+      ctx.fillText(decade, padLeft - 6, ly + 3);
+    });
+
+    // Empty state (< 5 people)
+    if (people.length < 5) {
+      dom.mapOverlay.classList.remove('hidden');
+      var placeholders = [
+        { x: 0.2, y: 0.3 }, { x: 0.5, y: 0.6 },
+        { x: 0.7, y: 0.4 }, { x: 0.4, y: 0.8 }
+      ];
+      placeholders.forEach(function (pt) {
+        ctx.beginPath();
+        ctx.arc(padLeft + pt.x * plotW, padTop + pt.y * plotH, 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(100,116,139,0.2)';
+        ctx.fill();
+      });
+      canvas._dots = [];
+      return;
+    } else {
+      dom.mapOverlay.classList.add('hidden');
+    }
+
+    // Get profile cache for positioning
+    var profileCache = getProfileCache();
+
+    // Calculate dot positions
+    var dots = [];
+    people.forEach(function (person) {
+      var pos = getPersonMapPosition(person, profileCache, plotW, plotH, padLeft, padTop, genreCount, decadeCount);
+      var size = Math.min(6 + 2 * (person.encounter_count || 1), 16);
+      dots.push({
+        x: pos.x,
+        y: pos.y,
+        size: size,
+        name: person.name,
+        id: person.id
+      });
+    });
+
+    // Store dots for hover/click interaction
+    canvas._dots = dots;
+
+    // Draw dots with glow
+    dots.forEach(function (dot) {
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,217,255,0.5)';
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(dot.x, dot.y, dot.size / 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,217,255,0.7)';
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  function getPersonMapPosition(person, profileCache, plotW, plotH, padLeft, padTop, genreCount, decadeCount) {
+    var cached = profileCache[person.id];
+    var genreIdx = -1;
+    var decadeIdx = -1;
+
+    if (cached && cached.derived) {
+      // Use cached genre_concentration
+      if (cached.derived.genre_concentration) {
+        var topGenre = '';
+        var topCount = 0;
+        var gc = cached.derived.genre_concentration;
+        for (var g in gc) {
+          if (gc.hasOwnProperty(g) && gc[g] > topCount) {
+            topCount = gc[g];
+            topGenre = g;
+          }
+        }
+        genreIdx = MAP_GENRES.indexOf(topGenre);
+      }
+
+      // Use cached active_decades
+      if (cached.derived.active_decades && cached.derived.active_decades.length > 0) {
+        var decades = cached.derived.active_decades;
+        var midDecade = decades[Math.floor(decades.length / 2)];
+        decadeIdx = MAP_DECADES.indexOf(midDecade);
+      }
+    }
+
+    // Fallback: seeded random based on person id
+    if (genreIdx === -1) {
+      var seed = person.id % 100 / 100;
+      var dept = person.known_for_department || 'Acting';
+      if (dept === 'Directing') {
+        genreIdx = Math.floor(seed * 5) + 2;
+      } else if (dept === 'Writing') {
+        genreIdx = Math.floor(seed * 4);
+      } else {
+        genreIdx = Math.floor(seed * genreCount);
+      }
+    }
+
+    if (decadeIdx === -1) {
+      var seed2 = (person.id * 7) % 100 / 100;
+      decadeIdx = Math.floor(seed2 * 0.4 * decadeCount + decadeCount * 0.4);
+      decadeIdx = Math.min(decadeIdx, decadeCount - 1);
+    }
+
+    // Jitter to prevent overlap
+    var jitterX = ((person.id * 13) % 20 - 10) / 20 * (plotW / genreCount * 0.7);
+    var jitterY = ((person.id * 17) % 20 - 10) / 20 * (plotH / decadeCount * 0.7);
+
+    var x = padLeft + (plotW * (genreIdx + 0.5) / genreCount) + jitterX;
+    var y = padTop + (plotH * (decadeIdx + 0.5) / decadeCount) + jitterY;
+
+    // Clamp within bounds
+    x = Math.max(padLeft + 5, Math.min(padLeft + plotW - 5, x));
+    y = Math.max(padTop + 5, Math.min(padTop + plotH - 5, y));
+
+    return { x: x, y: y };
+  }
+
+  function bindMapInteraction() {
+    var canvas = dom.mapCanvas;
+
+    canvas.addEventListener('mousemove', function (e) {
+      var dots = canvas._dots;
+      if (!dots || dots.length === 0) return;
+
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left;
+      var my = e.clientY - rect.top;
+
+      var found = null;
+      for (var i = dots.length - 1; i >= 0; i--) {
+        var d = dots[i];
+        var dx = mx - d.x;
+        var dy = my - d.y;
+        if (Math.sqrt(dx * dx + dy * dy) < Math.max(d.size, 10)) {
+          found = d;
+          break;
+        }
+      }
+
+      if (found) {
+        canvas.style.cursor = 'pointer';
+        dom.mapTooltip.textContent = found.name;
+        dom.mapTooltip.style.left = Math.min(found.x, canvas.clientWidth - 100) + 'px';
+        dom.mapTooltip.style.top = (found.y - 24) + 'px';
+        dom.mapTooltip.classList.remove('hidden');
+      } else {
+        canvas.style.cursor = '';
+        dom.mapTooltip.classList.add('hidden');
+      }
+    });
+
+    canvas.addEventListener('mouseleave', function () {
+      dom.mapTooltip.classList.add('hidden');
+      canvas.style.cursor = '';
+    });
+
+    canvas.addEventListener('click', function (e) {
+      var dots = canvas._dots;
+      if (!dots || dots.length === 0) return;
+
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left;
+      var my = e.clientY - rect.top;
+
+      for (var i = dots.length - 1; i >= 0; i--) {
+        var d = dots[i];
+        var dx = mx - d.x;
+        var dy = my - d.y;
+        if (Math.sqrt(dx * dx + dy * dy) < Math.max(d.size, 10)) {
+          window.location.href = 'people-profile.html?id=' + d.id;
+          return;
+        }
+      }
+    });
+  }
+
+  // ── Gap Analysis Engine ──
+
+  function analyzeGaps(encounteredPeople) {
+    var profileCache = getProfileCache();
+    var genreCounts = {};
+    var eraCounts = {};
+    var deptCounts = {};
+
+    encounteredPeople.forEach(function (person) {
+      var dept = person.known_for_department || 'Unknown';
+      deptCounts[dept] = (deptCounts[dept] || 0) + 1;
+
+      var cached = profileCache[person.id];
+      if (cached && cached.derived) {
+        if (cached.derived.genre_concentration) {
+          for (var genre in cached.derived.genre_concentration) {
+            if (cached.derived.genre_concentration.hasOwnProperty(genre)) {
+              genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+            }
+          }
+        }
+        if (cached.derived.active_decades) {
+          cached.derived.active_decades.forEach(function (decade) {
+            eraCounts[decade] = (eraCounts[decade] || 0) + 1;
+          });
+        }
+      }
+    });
+
+    var suggestions = [];
+
+    // Genre gaps
+    var allGenres = ['Drama', 'Comedy', 'Action', 'Horror', 'Sci-Fi', 'Thriller', 'Romance', 'Animation'];
+    var weakGenres = allGenres.filter(function (g) { return (genreCounts[g] || 0) < 3; });
+    if (weakGenres.length > 0) {
+      suggestions.push({
+        text: 'Your orbit is light on ' + weakGenres.slice(0, 2).join(' and ') + ' \u2014 explore these genres to broaden your constellation.',
+        filters: { genre: weakGenres[0] }
+      });
+    }
+
+    // Department gaps
+    if (!deptCounts['Directing'] || deptCounts['Directing'] < 3) {
+      suggestions.push({
+        text: "You've met many actors but few directors. The minds behind the camera are worth discovering.",
+        filters: { department: 'Directing' }
+      });
+    }
+
+    // Era gaps
+    var decades = ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s'];
+    var weakDecades = decades.filter(function (d) { return (eraCounts[d] || 0) < 2; });
+    if (weakDecades.length > 0 && weakDecades.length < 6) {
+      var oldDecades = weakDecades.filter(function (d) { return parseInt(d, 10) < 1990; });
+      if (oldDecades.length > 0) {
+        suggestions.push({
+          text: "Classic cinema awaits \u2014 you haven't explored much from the " + oldDecades[0] + ". Legends are waiting.",
+          filters: { era: oldDecades[0] }
+        });
+      }
+    }
+
+    return suggestions.slice(0, 3);
+  }
+
+  function renderGapAnalysis(people) {
+    var panel = dom.gapAnalysis;
+
+    if (people.length < 10) {
+      var hasCachedProfiles = false;
+      var profileCache = getProfileCache();
+      people.forEach(function (p) {
+        if (profileCache[p.id]) hasCachedProfiles = true;
+      });
+      if (!hasCachedProfiles) {
+        panel.innerHTML = '<div class="pl-gap-header">ORBIT INSIGHTS</div>' +
+          '<div class="pl-gap-card"><p class="pl-gap-text">Keep exploring to unlock personalized recommendations.</p></div>';
+        return;
+      }
+    }
+
+    var suggestions = analyzeGaps(people);
+
+    if (suggestions.length === 0) {
+      panel.innerHTML = '<div class="pl-gap-header">ORBIT INSIGHTS</div>' +
+        '<div class="pl-gap-card"><p class="pl-gap-text">Your orbit is impressively well-rounded! Keep discovering.</p></div>';
+      return;
+    }
+
+    var html = '<div class="pl-gap-header">ORBIT INSIGHTS</div>';
+    suggestions.forEach(function (s) {
+      html += '<div class="pl-gap-card">' +
+        '<p class="pl-gap-text">' + esc(s.text) + '</p>' +
+        '<button class="pl-gap-explore" data-dept="' + esc(s.filters.department || '') + '" data-era="' + esc(s.filters.era || '') + '">Explore \u203A</button>' +
+      '</div>';
+    });
+    panel.innerHTML = html;
+
+    // Bind explore buttons — switch to All People with suggested filter
+    panel.querySelectorAll('.pl-gap-explore').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dept = btn.dataset.dept;
+        exitOrbitMode();
+        if (dept) {
+          var chip = dom.deptChips.querySelector('[data-dept="' + dept + '"]');
+          if (chip) chip.click();
+        }
+      });
+    });
+  }
+
+  // ── Collection Stats Summary ──
+
+  function renderOrbitStats(people) {
+    if (people.length === 0) {
+      dom.orbitStats.innerHTML = '';
+      return;
+    }
+
+    var stats = window.OrbitEncounters ? window.OrbitEncounters.getEncounterStats() : null;
+    if (!stats) return;
+
+    // Source breakdown bars
+    var totalEnc = stats.total_encounters || 1;
+    var sourceBars = '';
+    var breakdown = stats.sources_breakdown || {};
+    for (var src in breakdown) {
+      if (breakdown.hasOwnProperty(src)) {
+        var count = breakdown[src];
+        var pct = Math.max((count / totalEnc) * 100, 3);
+        var color = SOURCE_COLORS[src] || '#64748b';
+        sourceBars += '<span class="pl-stat-bar-seg" style="width:' + pct + '%;background:' + color + '" title="' + esc(src) + ': ' + count + '"></span>';
+      }
+    }
+
+    // Most explored
+    var mostExplored = '';
+    if (stats.top_encountered && stats.top_encountered.length > 0) {
+      var top = stats.top_encountered[0];
+      mostExplored = '<span class="pl-stat-item">Most explored: <strong>' + esc(top.name) + '</strong> (' + top.count + ' encounters)</span>';
+    }
+
+    // Latest discovery
+    var latest = '';
+    var sortedByRecent = people.slice().sort(function (a, b) {
+      return (b.first_encountered || '').localeCompare(a.first_encountered || '');
+    });
+    if (sortedByRecent.length > 0) {
+      var latestPerson = sortedByRecent[0];
+      var dateStr = '';
+      if (latestPerson.first_encountered) {
+        dateStr = ' (' + new Date(latestPerson.first_encountered).toLocaleDateString() + ')';
+      }
+      latest = '<span class="pl-stat-item">Latest discovery: <strong>' + esc(latestPerson.name) + '</strong>' + dateStr + '</span>';
+    }
+
+    dom.orbitStats.innerHTML =
+      '<div class="pl-stat-row">' +
+        '<span class="pl-stat-item">Discovered via:</span>' +
+        '<div class="pl-stat-bar">' + sourceBars + '</div>' +
+      '</div>' +
+      '<div class="pl-stat-row">' +
+        mostExplored +
+        latest +
+      '</div>';
+  }
+
+  // ── Profile Cache Helper ──
+
+  function getProfileCache() {
+    try {
+      return JSON.parse(localStorage.getItem('orbit_people_profiles') || '{}');
+    } catch (e) { return {}; }
   }
 
   // ── Session Cache ──

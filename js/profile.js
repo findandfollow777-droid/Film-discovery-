@@ -52,6 +52,12 @@ const GAME_REGISTRY = [
     href: "games/mastermind.html",
     glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12z"/></svg>',
     extract: (s) => ({ played: s.played || 0, wins: 0, points: s.totalScore || 0, extra: s.bestScore ? `Best score: ${s.bestScore}` : null })
+  },
+  {
+    key: "orbit_trivia_stats", name: "Movie Trivia", color: "#00d9ff",
+    href: null,
+    glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="currentColor">?</text></svg>',
+    extract: (s) => ({ played: s.moviesQuizzed || 0, wins: s.perfectRounds || 0, points: s.totalCorrect || 0, extra: s.bestStreak ? `Best streak: ${s.bestStreak}` : (s.totalAnswered > 0 ? `${Math.round((s.totalCorrect / s.totalAnswered) * 100)}% accuracy` : null) })
   }
 ];
 

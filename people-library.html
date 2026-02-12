@@ -24,8 +24,9 @@
     <h1 class="pl-title">STELLAR CATALOG</h1>
     <p class="pl-subtitle">Discover the people behind the movies</p>
 
-    <!-- MY ORBIT TOGGLE (hidden for Phase D) -->
-    <div class="pl-toggle-wrap" id="plToggleWrap">
+    <!-- MY ORBIT TOGGLE -->
+    <div class="pl-toggle-wrap" id="plToggleWrap" data-active="all">
+      <span class="pl-toggle-slider"></span>
       <button class="pl-toggle-btn active" data-mode="all">All People</button>
       <button class="pl-toggle-btn" data-mode="orbit">My Orbit</button>
     </div>
@@ -41,6 +42,22 @@
     <button id="plSearchClear" class="pl-search-clear hidden">&times;</button>
   </div>
   <div id="plSearchBanner" class="pl-search-banner hidden"></div>
+
+  <!-- MY ORBIT PANEL (shown only in orbit mode) -->
+  <div id="plOrbitPanel" class="pl-orbit-panel hidden">
+    <div class="pl-discovery-map">
+      <div class="pl-map-wrap">
+        <canvas id="plMapCanvas" class="pl-map-canvas"></canvas>
+        <div id="plMapTooltip" class="pl-map-tooltip hidden"></div>
+        <div id="plMapOverlay" class="pl-map-overlay hidden">
+          <p class="pl-map-overlay-title">Your constellation is forming...</p>
+        </div>
+      </div>
+      <p class="pl-map-note">Visit profiles to refine your orbit map</p>
+    </div>
+    <div class="pl-gap-analysis" id="plGapAnalysis"></div>
+    <div class="pl-orbit-stats" id="plOrbitStats"></div>
+  </div>
 
   <!-- FILTER BAR -->
   <div class="pl-filters" id="plFilters">
@@ -85,6 +102,14 @@
       <span class="pl-filter-tip" title="Awards filter highlights confirmed matches. Visit profiles for complete awards history.">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ghost-gray)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="var(--ghost-gray)"/></svg>
       </span>
+    </div>
+
+    <!-- Bookmarked (My Orbit only) -->
+    <div class="pl-filter-group hidden" id="plBookmarkGroup">
+      <span class="pl-filter-label">Filter</span>
+      <div class="pl-filter-chips">
+        <button class="pl-chip" id="plBookmarkChip">Bookmarked Only</button>
+      </div>
     </div>
 
     <!-- Sort -->
@@ -134,6 +159,12 @@
 
   <!-- RESULT SUMMARY -->
   <div id="plResultSummary" class="pl-result-summary hidden"></div>
+
+  <!-- MY ORBIT ENCOURAGING MESSAGE -->
+  <div id="plOrbitEncourage" class="pl-orbit-encourage hidden">
+    <p class="pl-orbit-encourage-title">Your orbit is just beginning! Keep exploring ORBIT to discover more people.</p>
+    <p class="pl-orbit-encourage-text">Play games in the Arcade, browse timelines, and explore Moviecubes to grow your collection.</p>
+  </div>
 
   <!-- MAIN CONTENT -->
   <main class="pl-main">

@@ -53,6 +53,7 @@
     }
 
     initMovieCubeComponent();
+    setupBackNav();
     setupEventListeners();
     loadProfile();
   }
@@ -108,6 +109,19 @@
 
     // Share button
     $('ppShareBtn')?.addEventListener('click', shareProfile);
+
+    // Navigation buttons
+    $('exploreOrbitBtn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = `people-library.html?circle=${personId}`;
+    });
+
+    $('viewTimelineBtn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.setItem('timelineMovieId', personId);
+      localStorage.setItem('timelineType', 'person');
+      window.location.href = 'actor-timeline.html';
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -485,6 +499,21 @@
     }
   }
 
+  const SOURCE_META = {
+    constellation: { color: '#ffd700', label: 'Constellation' },
+    collision: { color: '#ff6b35', label: 'Collision Course' },
+    triple_collision: { color: '#a855f7', label: 'Triple Collision' },
+    timeline: { color: '#10b981', label: 'Timeline' },
+    actor_timeline: { color: '#14b8a6', label: 'Actor Timeline' },
+    moviecube: { color: '#00d9ff', label: 'Moviecube' },
+    venn: { color: '#3b82f6', label: 'Venn Diagram' },
+    search: { color: '#64748b', label: 'Search' },
+    profile: { color: '#94a3b8', label: 'Profile' },
+    'stellar-catalog': { color: '#00d9ff', label: 'Stellar Catalog' },
+    'sequel-shot': { color: '#8b5cf6', label: 'Sequel Shot' },
+    screenshot: { color: '#fbbf24', label: 'Screenshot' }
+  };
+
   function renderFootprint() {
     if (!window.OrbitEncounters || !window.OrbitEncounters.isEncountered(personId)) return;
 
@@ -493,29 +522,33 @@
     const entry = encountered[String(personId)];
     if (!entry) return;
 
-    // Encounter text
-    $('ppEncounterText').innerHTML = `Encountered <strong>${entry.encounter_count}</strong> time${entry.encounter_count !== 1 ? 's' : ''} via:`;
+    // Encounter count with sparkle
+    const sparkle = entry.encounter_count > 10 ? ' <span class="pp-sparkle">&#10024;</span>' : '';
+    $('ppEncounterText').innerHTML = `Encountered <strong>${entry.encounter_count}</strong> time${entry.encounter_count !== 1 ? 's' : ''}${sparkle}`;
 
-    // Source badges
+    // Source badges with game colors
     const badgesEl = $('ppSourceBadges');
-    const sourceLabels = {
-      constellation: 'Constellation', collision: 'Collision', triple_collision: 'Triple Collision',
-      moviecube: 'Moviecube', timeline: 'Timeline', actor_timeline: 'Actor Timeline',
-      venn: 'Stellar Territories', search: 'Search', profile: 'Profile'
-    };
     badgesEl.innerHTML = entry.sources
-      .map(s => `<span class="pp-source-badge ${s}">${sourceLabels[s] || s}</span>`)
+      .map(s => {
+        const meta = SOURCE_META[s] || { color: '#64748b', label: s };
+        return `<span class="pp-source-badge-v2" style="border-left-color:${meta.color}">${esc(meta.label)}</span>`;
+      })
       .join('');
 
-    // Films explored progress
-    const totalFilms = profileData.filmography.length;
-    if (totalFilms > 0) {
-      // Count how many of this person's films the user has encountered through moviecube
-      // We don't have per-film encounter data, so show total films count as reference
-      const progressLabel = $('ppProgressLabel');
-      progressLabel.textContent = `${totalFilms} films in their filmography`;
-      $('ppProgressFill').style.width = '0%'; // No per-film tracking yet
+    // First discovered line
+    const firstLine = $('ppFirstDiscovered');
+    if (firstLine && entry.first_encountered) {
+      const firstSource = entry.sources[0] || '';
+      const sourceLabel = (SOURCE_META[firstSource] || {}).label || firstSource;
+      const dateStr = new Date(entry.first_encountered).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      firstLine.textContent = `First discovered on ${dateStr} via ${sourceLabel}`;
+      firstLine.classList.remove('hidden');
     }
+
+    // Filmography prompt
+    const progressLabel = $('ppProgressLabel');
+    progressLabel.textContent = 'Explore their filmography below to discover more';
+    $('ppProgressFill').style.width = '0%';
 
     section.classList.remove('hidden');
   }
