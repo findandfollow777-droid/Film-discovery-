@@ -36,6 +36,34 @@
   //           lastPlayedAt: ISO string }
   const TRIVIA_STATS_KEY = "orbit_trivia_stats";
 
+  // Settings data for Discovery Dimensions
+  let _movieSettingsData = null;
+  let _movieSettingsLoading = false;
+
+  async function getMovieSettings() {
+    if (_movieSettingsData) return _movieSettingsData;
+    if (_movieSettingsLoading) {
+      return new Promise(resolve => {
+        const check = setInterval(() => {
+          if (_movieSettingsData || !_movieSettingsLoading) {
+            clearInterval(check);
+            resolve(_movieSettingsData);
+          }
+        }, 100);
+      });
+    }
+    _movieSettingsLoading = true;
+    try {
+      const response = await fetch('orbit-movie-settings.json');
+      _movieSettingsData = await response.json();
+    } catch (e) {
+      console.warn('[MovieCube] Settings data not available');
+      _movieSettingsData = null;
+    }
+    _movieSettingsLoading = false;
+    return _movieSettingsData;
+  }
+
   function getTriviaStats() {
     try {
       const raw = localStorage.getItem(TRIVIA_STATS_KEY);
@@ -207,9 +235,10 @@
                   <p class="popup-synopsis" id="cubePopupSynopsis"></p>
                   <div class="popup-genres" id="cubePopupGenres"></div>
                   <div class="where-to-watch" id="cubeWhereToWatch"></div>
+                  <div class="cube-dimensions" id="cubeDimensions"></div>
                 </div>
               </div>
-              
+
               <!-- FACE 3: CAST -->
               <div class="cube-face face-back" data-face="3">
                 <div class="cast-section">
@@ -637,6 +666,98 @@
       cubeAwards.innerHTML = html;
       cubeAwards.style.display = html ? 'flex' : 'none';
     }
+
+    // Discovery Dimensions
+    populateDimensions(cubeMovieData.id);
+  }
+
+  // ============================================
+  // DISCOVERY DIMENSIONS (Settings metadata)
+  // ============================================
+
+  function createLocationSVG() {
+    return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+  }
+
+  function createTimeSVG() {
+    return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+  }
+
+  function createThemeSVG() {
+    return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+  }
+
+  function createBasedOnSVG() {
+    return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+  }
+
+  async function populateDimensions(movieId) {
+    const container = document.getElementById('cubeDimensions');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const settings = await getMovieSettings();
+    if (!settings?.movies?.[movieId]) return;
+
+    const movie = settings.movies[movieId];
+    const chips = [];
+
+    // Location
+    if (movie.location?.coordinates?.length > 0) {
+      const locations = movie.location.coordinates
+        .slice(0, 3)
+        .map(c => c.label)
+        .filter(Boolean);
+      if (locations.length > 0) {
+        chips.push({ icon: createLocationSVG(), items: locations, type: 'location' });
+      }
+    }
+
+    // Time period
+    const timeParts = [];
+    if (movie.time_period?.era_labels?.length > 0) {
+      timeParts.push(...movie.time_period.era_labels.slice(0, 2));
+    }
+    if (movie.time_period?.decades?.length > 0 && timeParts.length === 0) {
+      timeParts.push(...movie.time_period.decades.slice(0, 2));
+    }
+    if (movie.time_period?.setting_type === 'near_future') {
+      timeParts.push('Near Future');
+    } else if (movie.time_period?.setting_type === 'far_future') {
+      timeParts.push('Far Future');
+    }
+    if (timeParts.length > 0) {
+      chips.push({ icon: createTimeSVG(), items: timeParts, type: 'time' });
+    }
+
+    // Themes
+    if (movie.themes?.length > 0) {
+      chips.push({ icon: createThemeSVG(), items: movie.themes.slice(0, 3), type: 'theme' });
+    }
+
+    // Based on
+    if (movie.based_on && movie.based_on !== 'original') {
+      const basedOnLabels = {
+        'novel': 'Based on Novel', 'true_story': 'True Story',
+        'sequel': 'Sequel', 'prequel': 'Prequel',
+        'comic': 'Based on Comic', 'play': 'Based on Play',
+        'video_game': 'Based on Video Game', 'short_story': 'Based on Short Story',
+        'remake': 'Remake', 'spin-off': 'Spin-off'
+      };
+      chips.push({ icon: createBasedOnSVG(), items: [basedOnLabels[movie.based_on] || movie.based_on], type: 'based-on' });
+    }
+
+    if (chips.length === 0) return;
+
+    chips.forEach(chip => {
+      const row = document.createElement('div');
+      row.className = `dimension-row dimension-${chip.type}`;
+      row.innerHTML = `
+        <span class="dimension-icon">${chip.icon}</span>
+        <span class="dimension-text">${chip.items.join(' \u00B7 ')}</span>
+      `;
+      container.appendChild(row);
+    });
   }
 
   function getWatchCountry() {
