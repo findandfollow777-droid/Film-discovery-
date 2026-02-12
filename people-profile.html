@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/people-profile.css">
+  <link rel="stylesheet" href="css/moviecube.css">
+  <link rel="stylesheet" href="css/shortlist-badge.css">
+</head>
+<body>
+
+  <!-- CINEMATIC OVERLAYS -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- BACK NAV -->
+  <nav class="pp-back-nav">
+    <a href="people-library.html" class="back-link">&larr; Back to Stellar Catalog</a>
+  </nav>
+
+  <!-- ERROR STATE (hidden by default) -->
+  <div id="ppError" class="pp-error hidden">
+    <div class="pp-error-icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <circle cx="12" cy="16" r="0.5" fill="var(--accent-cyan)"/>
+      </svg>
+    </div>
+    <p id="ppErrorMsg">Unable to load profile.</p>
+    <button id="ppRetryBtn" class="pp-retry-btn">Try Again</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="ppContent" class="pp-content">
+
+    <!-- HERO SECTION -->
+    <section class="pp-hero" id="ppHero">
+      <div class="pp-hero-photo-wrap">
+        <div class="pp-skeleton pp-skeleton-photo" id="ppSkeletonPhoto"></div>
+        <img id="ppPhoto" class="pp-hero-photo hidden" src="" alt="">
+      </div>
+      <div class="pp-hero-info">
+        <div class="pp-hero-top-row">
+          <div class="pp-skeleton pp-skeleton-name" id="ppSkeletonName"></div>
+          <h1 id="ppName" class="pp-hero-name hidden"></h1>
+          <button id="ppBookmarkBtn" class="pp-bookmark-btn hidden" title="Bookmark this person">
+            <svg id="ppBookmarkIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </button>
+        </div>
+        <div class="pp-skeleton pp-skeleton-meta" id="ppSkeletonMeta"></div>
+        <div id="ppMeta" class="pp-hero-meta hidden">
+          <span id="ppDepartment" class="pp-dept-pill"></span>
+          <span id="ppLifespan" class="pp-lifespan"></span>
+        </div>
+        <div class="pp-skeleton pp-skeleton-summary" id="ppSkeletonSummary"></div>
+        <p id="ppCareerSummary" class="pp-career-summary hidden"></p>
+        <div id="ppAwardsSummary" class="pp-awards-summary hidden"></div>
+      </div>
+    </section>
+
+    <!-- ORBIT FOOTPRINT (conditional) -->
+    <section id="ppFootprint" class="pp-section pp-footprint hidden">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        Orbit Footprint
+      </h2>
+      <div class="pp-footprint-body">
+        <p id="ppEncounterText" class="pp-encounter-text"></p>
+        <div id="ppSourceBadges" class="pp-source-badges"></div>
+        <div class="pp-progress-wrap">
+          <div class="pp-progress-label" id="ppProgressLabel"></div>
+          <div class="pp-progress-bar">
+            <div class="pp-progress-fill" id="ppProgressFill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAREER DNA -->
+    <section id="ppDna" class="pp-section">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10" opacity="0.4"/><circle cx="12" cy="12" r="6" opacity="0.6"/><circle cx="12" cy="12" r="2"/></svg>
+        Career DNA
+      </h2>
+      <div id="ppDnaBars" class="pp-dna-bars">
+        <div class="pp-skeleton pp-skeleton-bar"></div>
+        <div class="pp-skeleton pp-skeleton-bar"></div>
+        <div class="pp-skeleton pp-skeleton-bar"></div>
+        <div class="pp-skeleton pp-skeleton-bar"></div>
+        <div class="pp-skeleton pp-skeleton-bar"></div>
+      </div>
+    </section>
+
+    <!-- ORBIT CONNECTIONS -->
+    <section id="ppConnections" class="pp-section">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="19" cy="7" r="3"/><path d="M21 21v-1a3 3 0 0 0-2-2.83"/></svg>
+        Orbit Connections
+      </h2>
+      <div id="ppCollabs" class="pp-collabs">
+        <div class="pp-skeleton pp-skeleton-collab"></div>
+        <div class="pp-skeleton pp-skeleton-collab"></div>
+        <div class="pp-skeleton pp-skeleton-collab"></div>
+        <div class="pp-skeleton pp-skeleton-collab"></div>
+      </div>
+    </section>
+
+    <!-- AWARDS SHELF -->
+    <section id="ppAwards" class="pp-section hidden">
+      <h2 class="pp-section-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M12 14v4"/><path d="M8 22h8"/></svg>
+        Awards Shelf
+      </h2>
+      <div id="ppAwardsList" class="pp-awards-list"></div>
+    </section>
+
+    <!-- FILMOGRAPHY -->
+    <section id="ppFilmography" class="pp-section">
+      <div class="pp-filmo-header">
+        <h2 class="pp-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg>
+          Filmography
+        </h2>
+        <div id="ppFilmoSort" class="pp-filmo-sort hidden">
+          <button class="pp-sort-btn active" data-sort="year">By Year</button>
+          <button class="pp-sort-btn" data-sort="popularity">By Popularity</button>
+          <button class="pp-sort-btn" data-sort="rating">By Rating</button>
+        </div>
+      </div>
+      <div id="ppFilmoGrid" class="pp-filmo-grid">
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+        <div class="pp-skeleton pp-skeleton-poster"></div>
+      </div>
+      <div class="pp-filmo-actions hidden" id="ppFilmoActions">
+        <button id="ppShowAll" class="pp-show-all-btn hidden">Show All Films</button>
+        <a id="ppTimelineLink" class="pp-timeline-link" href="#">View Full Timeline &rsaquo;</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/awards.js"></script>
+  <script src="js/shortlist-service.js"></script>
+  <script src="js/encounter-service.js"></script>
+  <script src="js/moviecube.js"></script>
+  <script src="js/people-profile.js"></script>
+  <script src="js/shortlist-badge.js"></script>
+</body>
+</html>
