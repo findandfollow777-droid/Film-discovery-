@@ -21,7 +21,23 @@
     <a href="index.html" class="back-link">← Back to Orbit</a>
     <h1 class="map-title">ORBIT MAP</h1>
     <p class="map-subtitle">Explore cinema by location</p>
+    <div class="map-search-wrapper">
+      <input type="text" id="mapSearch" class="map-search"
+             placeholder="Search locations..." autocomplete="off">
+      <div id="mapSearchResults" class="map-search-results hidden"></div>
+    </div>
   </header>
+
+  <!-- Decade Slider -->
+  <div class="decade-slider-bar">
+    <button id="sliderToggle" class="slider-toggle" title="Filter by decade">
+      &#9203; <span id="sliderLabel">All Eras</span>
+    </button>
+    <div id="sliderContainer" class="slider-container hidden">
+      <input type="range" id="decadeSlider" min="0" max="13" value="0" step="1">
+      <div id="decadeLabels" class="decade-labels"></div>
+    </div>
+  </div>
 
   <!-- Map container -->
   <div id="map"></div>
@@ -31,7 +47,8 @@
     <div class="panel-header">
       <h2 id="panelLocationName"></h2>
       <span id="panelMovieCount" class="panel-count"></span>
-      <button id="panelClose" class="panel-close">✕</button>
+      <button id="panelViewAll" class="panel-view-all">View All &#8594;</button>
+      <button id="panelClose" class="panel-close">&#10005;</button>
     </div>
     <div id="panelMovieGrid" class="panel-movie-grid"></div>
   </div>

@@ -13,6 +13,29 @@ let locationIndex = {};  // { "New York": { lat, lng, movies: [{id, title, year,
 // Poster cache: movieId -> poster_path (fetched on demand from TMDB)
 const posterCache = {};
 
+// Decade filter state
+let allMarkers = []; // { marker, label }
+let currentDecade = 'all';
+let currentPanelLabel = '';
+let currentPanelLocData = null;
+
+const SLIDER_VALUES = [
+  { label: 'All', value: 'all' },
+  { label: 'Pre-1920', value: 'pre-1920' },
+  { label: '1920s', value: '1920s' },
+  { label: '1930s', value: '1930s' },
+  { label: '1940s', value: '1940s' },
+  { label: '1950s', value: '1950s' },
+  { label: '1960s', value: '1960s' },
+  { label: '1970s', value: '1970s' },
+  { label: '1980s', value: '1980s' },
+  { label: '1990s', value: '1990s' },
+  { label: '2000s', value: '2000s' },
+  { label: '2010s', value: '2010s' },
+  { label: '2020s', value: '2020s' },
+  { label: 'Future', value: 'future' },
+];
+
 // ================================================
 // INIT
 // ================================================
@@ -61,8 +84,10 @@ async function initMap() {
   // 4. Plot markers
   plotMarkers();
 
-  // 5. Set up panel
+  // 5. Set up panel, slider, search
   setupPanel();
+  setupDecadeSlider();
+  setupMapSearch();
 
   // 6. Init MovieCube
   if (typeof initMovieCube === 'function') {
@@ -70,12 +95,7 @@ async function initMap() {
   }
 
   // 7. Update stats
-  const locationCount = Object.keys(locationIndex).length;
-  const movieCount = new Set(
-    Object.values(locationIndex).flatMap(loc => loc.movies.map(m => m.id))
-  ).size;
-  document.getElementById('statsText').textContent =
-    `${movieCount.toLocaleString()} films across ${locationCount.toLocaleString()} locations`;
+  updateStats();
 }
 
 // ================================================
@@ -97,7 +117,8 @@ function buildLocationIndex() {
       vote_average: seed?.vote_average || 0,
       popularity: seed?.popularity || 0,
       decades: movie.time_period?.decades || [],
-      setting_type: movie.time_period?.setting_type || null
+      setting_type: movie.time_period?.setting_type || null,
+      era_labels: movie.time_period?.era_labels || []
     };
 
     movie.location.coordinates.forEach(coord => {
@@ -160,6 +181,21 @@ async function loadPostersForPanel(movies) {
 // PLOT MARKERS
 // ================================================
 
+function createMarkerIcon(count) {
+  let sizeClass = 'single';
+  let iconSize = [14, 14];
+  if (count >= 20) { sizeClass = 'large'; iconSize = [40, 40]; }
+  else if (count >= 5) { sizeClass = 'medium'; iconSize = [30, 30]; }
+  else if (count >= 2) { sizeClass = 'small'; iconSize = [22, 22]; }
+
+  return L.divIcon({
+    html: count > 1 ? `<span>${count}</span>` : '',
+    className: `orbit-marker ${sizeClass}`,
+    iconSize: iconSize,
+    iconAnchor: [iconSize[0] / 2, iconSize[1] / 2]
+  });
+}
+
 function plotMarkers() {
   markerClusterGroup = L.markerClusterGroup({
     maxClusterRadius: 40,
@@ -180,21 +216,10 @@ function plotMarkers() {
     }
   });
 
+  allMarkers = [];
+
   for (const [label, locData] of Object.entries(locationIndex)) {
-    const count = locData.movies.length;
-
-    let sizeClass = 'single';
-    let iconSize = [14, 14];
-    if (count >= 20) { sizeClass = 'large'; iconSize = [40, 40]; }
-    else if (count >= 5) { sizeClass = 'medium'; iconSize = [30, 30]; }
-    else if (count >= 2) { sizeClass = 'small'; iconSize = [22, 22]; }
-
-    const icon = L.divIcon({
-      html: count > 1 ? `<span>${count}</span>` : '',
-      className: `orbit-marker ${sizeClass}`,
-      iconSize: iconSize,
-      iconAnchor: [iconSize[0] / 2, iconSize[1] / 2]
-    });
+    const icon = createMarkerIcon(locData.movies.length);
 
     const marker = L.marker([locData.lat, locData.lng], { icon })
       .bindTooltip(label, {
@@ -203,12 +228,142 @@ function plotMarkers() {
         offset: [0, -10]
       });
 
-    marker.on('click', () => openLocationPanel(label, locData));
+    marker.on('click', () => {
+      const movies = getFilteredMovies(label);
+      openLocationPanel(label, { ...locData, movies });
+    });
 
+    allMarkers.push({ marker, label });
     markerClusterGroup.addLayer(marker);
   }
 
   map.addLayer(markerClusterGroup);
+}
+
+// ================================================
+// DECADE FILTERING
+// ================================================
+
+function getFilteredMovies(label) {
+  const locData = locationIndex[label];
+  if (!locData) return [];
+  if (currentDecade === 'all') return locData.movies;
+
+  if (currentDecade === 'future') {
+    return locData.movies.filter(m =>
+      m.setting_type === 'near_future' || m.setting_type === 'far_future'
+    );
+  }
+
+  if (currentDecade === 'pre-1920') {
+    return locData.movies.filter(m =>
+      m.decades.some(d => {
+        const num = parseInt(d);
+        return !isNaN(num) && num < 1920;
+      }) || ['Ancient', 'Medieval', 'Renaissance'].some(era =>
+        m.era_labels?.includes(era)
+      )
+    );
+  }
+
+  return locData.movies.filter(m => m.decades.includes(currentDecade));
+}
+
+function filterByDecade(decade) {
+  currentDecade = decade;
+  markerClusterGroup.clearLayers();
+
+  for (const { marker, label } of allMarkers) {
+    const filteredMovies = getFilteredMovies(label);
+
+    if (filteredMovies.length > 0) {
+      marker.setIcon(createMarkerIcon(filteredMovies.length));
+      markerClusterGroup.addLayer(marker);
+    }
+  }
+
+  updateStats();
+
+  // Update slider label
+  const labelText = decade === 'all' ? 'All Eras' : SLIDER_VALUES.find(v => v.value === decade)?.label || decade;
+  document.getElementById('sliderLabel').textContent = labelText;
+
+  // Update decade label highlights
+  document.querySelectorAll('.decade-labels span').forEach(span => {
+    span.classList.toggle('active', span.dataset.value === decade);
+  });
+
+  // If panel is open, re-render with filtered movies
+  if (currentPanelLabel && !document.getElementById('locationPanel').classList.contains('hidden')) {
+    const movies = getFilteredMovies(currentPanelLabel);
+    if (movies.length > 0) {
+      openLocationPanel(currentPanelLabel, { ...locationIndex[currentPanelLabel], movies });
+    } else {
+      closePanel();
+    }
+  }
+}
+
+function updateStats() {
+  const visibleLocations = new Set();
+  const visibleMovies = new Set();
+
+  for (const { label } of allMarkers) {
+    const movies = getFilteredMovies(label);
+    if (movies.length > 0) {
+      visibleLocations.add(label);
+      movies.forEach(m => visibleMovies.add(m.id));
+    }
+  }
+
+  const suffix = currentDecade !== 'all' ? ` (${SLIDER_VALUES.find(v => v.value === currentDecade)?.label || currentDecade})` : '';
+  document.getElementById('statsText').textContent =
+    `${visibleMovies.size.toLocaleString()} films across ${visibleLocations.size.toLocaleString()} locations${suffix}`;
+}
+
+// ================================================
+// DECADE SLIDER SETUP
+// ================================================
+
+function setupDecadeSlider() {
+  const toggle = document.getElementById('sliderToggle');
+  const container = document.getElementById('sliderContainer');
+  const slider = document.getElementById('decadeSlider');
+  const labelsDiv = document.getElementById('decadeLabels');
+
+  // Set slider max to match values
+  slider.max = SLIDER_VALUES.length - 1;
+
+  // Build decade labels — show every other to avoid crowding
+  const showLabels = [0, 2, 4, 6, 8, 10, 12, 13]; // All, 1920s, 1940s, 1960s, 1980s, 2000s, 2020s, Future
+  SLIDER_VALUES.forEach((item, i) => {
+    const span = document.createElement('span');
+    span.dataset.value = item.value;
+    span.textContent = showLabels.includes(i) ? item.label : '';
+    span.style.minWidth = '0';
+    span.style.flex = '1';
+    span.style.textAlign = 'center';
+    if (i === 0) span.classList.add('active');
+    span.addEventListener('click', () => {
+      slider.value = i;
+      filterByDecade(item.value);
+      toggle.classList.toggle('active', item.value !== 'all');
+    });
+    labelsDiv.appendChild(span);
+  });
+
+  // Toggle visibility
+  toggle.addEventListener('click', () => {
+    container.classList.toggle('hidden');
+  });
+
+  // Slider input
+  slider.addEventListener('input', () => {
+    const idx = parseInt(slider.value);
+    const item = SLIDER_VALUES[idx];
+    filterByDecade(item.value);
+    toggle.classList.toggle('active', item.value !== 'all');
+  });
 }
 
 // ================================================
@@ -219,6 +374,12 @@ let currentPanelSort = 'popular';
 
 function setupPanel() {
   document.getElementById('panelClose').addEventListener('click', closePanel);
+  document.getElementById('panelViewAll').addEventListener('click', () => {
+    if (currentPanelLabel) {
+      localStorage.setItem('orbit_map_location', currentPanelLabel);
+      window.location.href = 'index.html';
+    }
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closePanel();
@@ -228,6 +389,9 @@ function setupPanel() {
 }
 
 function openLocationPanel(label, locData) {
+  currentPanelLabel = label;
+  currentPanelLocData = locData;
+
   const panel = document.getElementById('locationPanel');
   document.getElementById('panelLocationName').textContent = label;
   document.getElementById('panelMovieCount').textContent =
@@ -276,7 +440,6 @@ function renderPanelMovies(movies) {
   } else if (currentPanelSort === 'rating') {
     sorted.sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0));
   } else {
-    // Popular: sort by popularity descending
     sorted.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
   }
 
@@ -308,6 +471,59 @@ function renderPanelMovies(movies) {
     `;
 
     grid.appendChild(card);
+  });
+}
+
+// ================================================
+// MAP SEARCH
+// ================================================
+
+function setupMapSearch() {
+  const input = document.getElementById('mapSearch');
+  const results = document.getElementById('mapSearchResults');
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    if (query.length < 2) {
+      results.classList.add('hidden');
+      return;
+    }
+
+    const matches = Object.entries(locationIndex)
+      .filter(([label]) => label.toLowerCase().includes(query))
+      .sort((a, b) => b[1].movies.length - a[1].movies.length)
+      .slice(0, 10);
+
+    if (matches.length === 0) {
+      results.classList.add('hidden');
+      return;
+    }
+
+    results.innerHTML = '';
+    matches.forEach(([label, locData]) => {
+      const div = document.createElement('div');
+      div.className = 'map-search-result';
+      div.innerHTML = `
+        <span>${label}</span>
+        <span class="result-count">${locData.movies.length}</span>
+      `;
+      div.addEventListener('click', () => {
+        map.flyTo([locData.lat, locData.lng], 10, { duration: 1.2 });
+        const movies = getFilteredMovies(label);
+        openLocationPanel(label, { ...locData, movies });
+        input.value = '';
+        results.classList.add('hidden');
+      });
+      results.appendChild(div);
+    });
+    results.classList.remove('hidden');
+  });
+
+  // Close search results when clicking elsewhere
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.map-search-wrapper')) {
+      results.classList.add('hidden');
+    }
   });
 }
 
