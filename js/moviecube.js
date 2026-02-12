@@ -696,10 +696,14 @@
     if (!container) return;
     container.innerHTML = '';
 
-    const settings = await getMovieSettings();
-    if (!settings?.movies?.[movieId]) return;
+    const id = String(movieId);
+    console.log('[MovieCube] populateDimensions called for ID:', id);
 
-    const movie = settings.movies[movieId];
+    const settings = await getMovieSettings();
+    console.log('[MovieCube] Settings data loaded:', !!settings, 'Movie found:', !!settings?.movies?.[id]);
+    if (!settings?.movies?.[id]) return;
+
+    const movie = settings.movies[id];
     const chips = [];
 
     // Location
