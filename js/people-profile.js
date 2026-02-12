@@ -67,6 +67,27 @@
     return null;
   }
 
+  function setupBackNav() {
+    const backLink = $('ppBackLink');
+    if (!backLink) return;
+    const referrer = sessionStorage.getItem('orbit_profile_referrer') || '';
+    if (referrer.includes('people-library.html')) {
+      backLink.textContent = '\u2190 Back to Stellar Catalog';
+      backLink.href = 'people-library.html';
+    } else if (referrer.includes('actor-timeline.html')) {
+      backLink.textContent = '\u2190 Back to Timeline';
+      backLink.href = '#';
+      backLink.addEventListener('click', (e) => { e.preventDefault(); history.back(); });
+    } else if (referrer) {
+      backLink.textContent = '\u2190 Back';
+      backLink.href = '#';
+      backLink.addEventListener('click', (e) => { e.preventDefault(); history.back(); });
+    } else {
+      backLink.textContent = '\u2190 Stellar Catalog';
+      backLink.href = 'people-library.html';
+    }
+  }
+
   function initMovieCubeComponent() {
     if (typeof initMovieCube === 'function') {
       initMovieCube({
