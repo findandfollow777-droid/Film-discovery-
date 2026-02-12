@@ -2844,3 +2844,21 @@ html, body {
 .cube-trivia-retry:hover {
   background: rgba(0, 217, 255, 0.3);
 }
+
+/* Settings dimension badges on movie cards */
+.settings-badge {
+  font-size: 9px;
+  color: #94a3b8;
+  padding: 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.3px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.movie-card:hover .settings-badge {
+  opacity: 1;
+  color: #00d9ff;
+}

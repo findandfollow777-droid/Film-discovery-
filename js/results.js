@@ -12,6 +12,55 @@ let totalPages = 1;
 let currentSort = "chronology";
 let isReversed = false;
 
+// Settings data for location/era badges
+let settingsData = null;
+
+async function loadSettingsData() {
+  if (settingsData) return settingsData;
+  try {
+    const response = await fetch('orbit-movie-settings.json');
+    settingsData = await response.json();
+    return settingsData;
+  } catch (e) {
+    console.warn('[Results] Settings data not available, badges disabled');
+    return null;
+  }
+}
+
+function addSettingsBadges() {
+  if (!settingsData?.movies) return;
+
+  document.querySelectorAll('.movie-card').forEach(card => {
+    const movieId = card.dataset.movieId;
+    const movieSettings = settingsData.movies[movieId];
+    if (!movieSettings) return;
+    if (card.querySelector('.settings-badge')) return; // already has badge
+
+    const parts = [];
+
+    if (movieSettings.location?.coordinates?.length > 0) {
+      parts.push(movieSettings.location.coordinates[0].label);
+    }
+
+    if (movieSettings.time_period?.era_labels?.length > 0) {
+      parts.push(movieSettings.time_period.era_labels[0]);
+    } else if (movieSettings.time_period?.decades?.length > 0) {
+      parts.push(movieSettings.time_period.decades[0]);
+    }
+
+    if (parts.length === 0) return;
+
+    const badge = document.createElement('div');
+    badge.className = 'settings-badge';
+    badge.textContent = parts.join(' \u00B7 ');
+
+    const movieInfo = card.querySelector('.movie-info');
+    if (movieInfo) {
+      movieInfo.appendChild(badge);
+    }
+  });
+}
+
 // Media type awareness (movie, tv, or both)
 let currentMediaType = "movie";
 
@@ -126,7 +175,7 @@ let vibeMood, vibePace, vibeFamiliarity, vibeDepth, vibeReset;
 // Initialize
 document.addEventListener("DOMContentLoaded", init);
 
-function init() {
+async function init() {
   try {
     // Get all DOM elements
     moviesGrid = document.getElementById("moviesGrid");
@@ -209,7 +258,52 @@ function init() {
         localStorage.removeItem("singleMovie");
       }
     }
-    
+
+    // Check for Orbit Map location results
+    const mapResultsData = localStorage.getItem('orbit_map_results');
+    if (mapResultsData) {
+      try {
+        const { label, movieIds } = JSON.parse(mapResultsData);
+        localStorage.removeItem('orbit_map_results');
+
+        const resultsTitle = document.getElementById("resultsTitle");
+        const resultsSubtitleEl = document.getElementById("resultsSubtitle");
+        const resultsCountEl = document.getElementById("resultsCount");
+
+        if (resultsTitle) resultsTitle.textContent = label;
+        if (resultsCountEl) resultsCountEl.textContent = movieIds.length.toString();
+        if (resultsSubtitleEl) resultsSubtitleEl.textContent = `Films set in ${label}`;
+
+        // Fetch movie details from TMDB in batches
+        const BATCH_SIZE = 8;
+        const fetchedMovies = [];
+
+        for (let i = 0; i < movieIds.length; i += BATCH_SIZE) {
+          const batch = movieIds.slice(i, i + BATCH_SIZE);
+          const results = await Promise.allSettled(
+            batch.map(id =>
+              fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+                .then(r => r.json())
+            )
+          );
+          results.forEach(r => {
+            if (r.status === 'fulfilled' && r.value && r.value.id) {
+              fetchedMovies.push(r.value);
+            }
+          });
+        }
+
+        allMovies = fetchedMovies;
+        processMovies();
+        setupEventListeners();
+        loadSettingsData().then(data => { if (data) addSettingsBadges(); });
+        return;
+      } catch (e) {
+        console.error('[Results] Failed to load map results:', e);
+        localStorage.removeItem('orbit_map_results');
+      }
+    }
+
     // Detect media type
     const storedMediaType = localStorage.getItem("mediaType");
     if (storedMediaType === "tv" || storedMediaType === "both") {
@@ -261,7 +355,10 @@ function init() {
     // Process and display
     processMovies();
     setupEventListeners();
-    
+
+    // Load settings data in background for badges
+    loadSettingsData().then(data => { if (data) addSettingsBadges(); });
+
     console.log("Results page initialized with", allMovies.length, "movies");
     
   } catch (error) {
@@ -629,6 +726,9 @@ function renderPage() {
   
   // Update pagination UI
   updatePaginationUI();
+
+  // Re-apply settings badges after page render
+  if (settingsData) addSettingsBadges();
 }
 
 // ============================================
