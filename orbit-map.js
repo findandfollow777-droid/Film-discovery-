@@ -25,14 +25,17 @@ async function initMap() {
     minZoom: 2,
     maxZoom: 16,
     zoomControl: true,
-    attributionControl: true
+    attributionControl: true,
+    maxBounds: [[-85, -180], [85, 180]],
+    maxBoundsViscosity: 1.0
   });
 
   // Dark tiles from CartoDB
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
     maxZoom: 18,
-    subdomains: 'abcd'
+    subdomains: 'abcd',
+    noWrap: true
   }).addTo(map);
 
   // Move zoom control to bottom-right
@@ -188,7 +191,8 @@ function plotMarkers() {
     const icon = L.divIcon({
       html: count > 1 ? `${count}` : '',
       className: `orbit-marker ${sizeClass}`,
-      iconSize: iconSize
+      iconSize: iconSize,
+      iconAnchor: [iconSize[0] / 2, iconSize[1] / 2]
     });
 
     const marker = L.marker([locData.lat, locData.lng], { icon })
