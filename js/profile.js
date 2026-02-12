@@ -52,6 +52,17 @@ const GAME_REGISTRY = [
     href: "games/mastermind.html",
     glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12z"/></svg>',
     extract: (s) => ({ played: s.played || 0, wins: 0, points: s.totalScore || 0, extra: s.bestScore ? `Best score: ${s.bestScore}` : null })
+  },
+  {
+    key: "orbit_trivia_stats", name: "Movie Trivia", color: "#00d9ff",
+    href: null,
+    glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="bold" fill="currentColor">?</text></svg>',
+    extract: (s) => ({
+      played: s.moviesQuizzed || 0,
+      wins: s.perfectRounds || 0,
+      points: s.totalCorrect || 0,
+      extra: s.bestStreak ? `Best streak: ${s.bestStreak}` : (s.totalAnswered > 0 ? `${Math.round((s.totalCorrect / s.totalAnswered) * 100)}% accuracy` : null)
+    })
   }
 ];
 
@@ -565,6 +576,8 @@ function loadOverview() {
   if (cStats) bestStreak = Math.max(bestStreak, cStats.maxStreak || 0);
   const colStats = getStored("collision_stats");
   if (colStats) bestStreak = Math.max(bestStreak, colStats.bestStreak || 0);
+  const trivStats = getStored("orbit_trivia_stats");
+  if (trivStats) bestStreak = Math.max(bestStreak, trivStats.bestStreak || 0);
 
   const dayStreak = cStats ? (cStats.currentStreak || 0) : 0;
 
@@ -587,9 +600,9 @@ function loadGameBreakdown() {
     const raw = localStorage.getItem(game.key);
     const stats = raw ? game.extract(JSON.parse(raw)) : { played: 0, wins: 0, points: 0, extra: null };
 
-    const row = document.createElement("a");
+    const row = document.createElement(game.href ? "a" : "div");
     row.className = "breakdown-row";
-    row.href = game.href;
+    if (game.href) row.href = game.href;
     row.innerHTML = `
       <div class="orbit-icon" style="--card-accent:${game.color}">
         <div class="orbit-ring-outer"></div>

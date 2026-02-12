@@ -27,6 +27,63 @@
   let triviaIndex = 0;
   let triviaScore = 0;
   let triviaAnswered = false;
+  let triviaSessionResults = [];
+
+  // orbit_trivia_stats — Persistent trivia performance tracking
+  // Format: { totalAnswered, totalCorrect, currentStreak, bestStreak,
+  //           perfectRounds, moviesQuizzed, moviesCompleted: [tmdb_ids],
+  //           byCategory: { production: {answered,correct}, crew: {answered,correct}, ... },
+  //           lastPlayedAt: ISO string }
+  const TRIVIA_STATS_KEY = "orbit_trivia_stats";
+
+  function getTriviaStats() {
+    try {
+      const raw = localStorage.getItem(TRIVIA_STATS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { totalAnswered: 0, totalCorrect: 0, currentStreak: 0, bestStreak: 0,
+      perfectRounds: 0, moviesQuizzed: 0, moviesCompleted: [], byCategory: {},
+      lastPlayedAt: null };
+  }
+
+  function saveTriviaStats(stats) {
+    localStorage.setItem(TRIVIA_STATS_KEY, JSON.stringify(stats));
+  }
+
+  function recordTriviaAnswer(category, isCorrect) {
+    const stats = getTriviaStats();
+    stats.totalAnswered++;
+    if (isCorrect) {
+      stats.totalCorrect++;
+      stats.currentStreak++;
+      if (stats.currentStreak > stats.bestStreak) stats.bestStreak = stats.currentStreak;
+    } else {
+      stats.currentStreak = 0;
+    }
+    if (!stats.byCategory[category]) stats.byCategory[category] = { answered: 0, correct: 0 };
+    stats.byCategory[category].answered++;
+    if (isCorrect) stats.byCategory[category].correct++;
+    stats.lastPlayedAt = new Date().toISOString();
+    saveTriviaStats(stats);
+    return stats;
+  }
+
+  function recordTriviaRoundComplete(movieId, score, total) {
+    const stats = getTriviaStats();
+    if (score === total) stats.perfectRounds++;
+    if (!stats.moviesCompleted.includes(movieId)) {
+      stats.moviesCompleted.push(movieId);
+      stats.moviesQuizzed = stats.moviesCompleted.length;
+    }
+    saveTriviaStats(stats);
+    return stats;
+  }
+
+  function getTriviaAccuracy() {
+    const stats = getTriviaStats();
+    if (stats.totalAnswered === 0) return 0;
+    return Math.round((stats.totalCorrect / stats.totalAnswered) * 100);
+  }
 
   // Pages like venn.html, timeline.html, results.html live in games/
   // When moviecube is loaded from a root page, prefix navigation with "games/"
@@ -425,17 +482,7 @@
       const retry = e.target.closest("#movieCubeOverlay .cube-trivia-retry");
       if (retry) {
         if (cubeMovieData) localStorage.removeItem(`cube_trivia_${cubeMovieData.id}`);
-        const section = document.getElementById("cubeTriviaSection");
-        if (section) {
-          section.innerHTML = `
-            <h3 class="section-title">🧠 Movie Trivia</h3>
-            <div class="cube-trivia-progress" id="cubeTriviaProgress"></div>
-            <div class="cube-trivia-question" id="cubeTriviaQuestion"></div>
-            <div class="cube-trivia-options" id="cubeTriviaOptions"></div>
-            <div class="cube-trivia-score" id="cubeTriviaScore"></div>
-          `;
-          populateTriviaFace();
-        }
+        populateTriviaFace();
       }
     });
 
@@ -936,7 +983,7 @@
         `$${Math.round(base * 1.8)}M`,
         `$${Math.round(base * 3.2)}M`
       ].filter(w => w !== correct);
-      pool.push({ q: `What was the budget of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3) });
+      pool.push({ q: `What was the budget of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3), category: "production" });
     }
 
     // Revenue question
@@ -946,7 +993,7 @@
       const variants = [rev * 0.3, rev * 0.6, rev * 2.5].map(v =>
         v >= 1000 ? `$${(v / 1000).toFixed(1)}B` : `$${Math.round(v)}M`
       ).filter(w => w !== correct);
-      pool.push({ q: `How much did "${m.title}" earn at the box office?`, correct, wrongs: variants.slice(0, 3) });
+      pool.push({ q: `How much did "${m.title}" earn at the box office?`, correct, wrongs: variants.slice(0, 3), category: "production" });
     }
 
     // Runtime question
@@ -957,7 +1004,7 @@
         `${Math.max(60, m.runtime - 31)} minutes`,
         `${m.runtime + 47} minutes`
       ].filter(w => w !== correct);
-      pool.push({ q: `What is the runtime of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3) });
+      pool.push({ q: `What is the runtime of "${m.title}"?`, correct, wrongs: wrongs.slice(0, 3), category: "production" });
     }
 
     // Tagline question
@@ -975,7 +1022,7 @@
         const j = Math.floor(Math.random() * (i + 1));
         [fakeTaglines[i], fakeTaglines[j]] = [fakeTaglines[j], fakeTaglines[i]];
       }
-      pool.push({ q: `What is the tagline of "${m.title}"?`, correct, wrongs: fakeTaglines.slice(0, 3) });
+      pool.push({ q: `What is the tagline of "${m.title}"?`, correct, wrongs: fakeTaglines.slice(0, 3), category: "tagline" });
     }
 
     // Original language question
@@ -987,7 +1034,7 @@
         const j = Math.floor(Math.random() * (i + 1));
         [others[i], others[j]] = [others[j], others[i]];
       }
-      pool.push({ q: `What is the original language of "${m.title}"?`, correct, wrongs: others.slice(0, 3) });
+      pool.push({ q: `What is the original language of "${m.title}"?`, correct, wrongs: others.slice(0, 3), category: "production" });
     }
 
     // Release year question
@@ -995,7 +1042,7 @@
       const year = parseInt(m.release_date.split("-")[0]);
       const correct = `${year}`;
       const wrongs = [`${year - 2}`, `${year + 1}`, `${year - 4}`].filter(w => w !== correct);
-      pool.push({ q: `What year was "${m.title}" released?`, correct, wrongs: wrongs.slice(0, 3) });
+      pool.push({ q: `What year was "${m.title}" released?`, correct, wrongs: wrongs.slice(0, 3), category: "timeline" });
     }
 
     // Production country question
@@ -1006,7 +1053,7 @@
         const j = Math.floor(Math.random() * (i + 1));
         [fakeCountries[i], fakeCountries[j]] = [fakeCountries[j], fakeCountries[i]];
       }
-      pool.push({ q: `Which country produced "${m.title}"?`, correct, wrongs: fakeCountries.slice(0, 3) });
+      pool.push({ q: `Which country produced "${m.title}"?`, correct, wrongs: fakeCountries.slice(0, 3), category: "production" });
     }
 
     // Director question (from credits)
@@ -1024,7 +1071,7 @@
           const j = Math.floor(Math.random() * (i + 1));
           [wrongPool[i], wrongPool[j]] = [wrongPool[j], wrongPool[i]];
         }
-        pool.push({ q: `Who directed "${m.title}"?`, correct, wrongs: wrongPool.slice(0, 3) });
+        pool.push({ q: `Who directed "${m.title}"?`, correct, wrongs: wrongPool.slice(0, 3), category: "crew" });
       }
     }
 
@@ -1039,7 +1086,7 @@
           const j = Math.floor(Math.random() * (i + 1));
           [fallbackComposers[i], fallbackComposers[j]] = [fallbackComposers[j], fallbackComposers[i]];
         }
-        pool.push({ q: `Who composed the music for "${m.title}"?`, correct, wrongs: fallbackComposers.slice(0, 3) });
+        pool.push({ q: `Who composed the music for "${m.title}"?`, correct, wrongs: fallbackComposers.slice(0, 3), category: "crew" });
       }
     }
 
@@ -1057,7 +1104,7 @@
         const j = Math.floor(Math.random() * (i + 1));
         [options[i], options[j]] = [options[j], options[i]];
       }
-      questions.push({ question: item.q, options, correctAnswer: item.correct });
+      questions.push({ question: item.q, options, correctAnswer: item.correct, category: item.category || "general" });
     }
 
     return questions;
@@ -1079,12 +1126,42 @@
     triviaIndex = 0;
     triviaScore = 0;
     triviaAnswered = false;
+    triviaSessionResults = [];
+
+    const section = document.getElementById("cubeTriviaSection");
+    if (!section) return;
 
     if (triviaQuestions.length === 0) {
-      const section = document.getElementById("cubeTriviaSection");
-      if (section) section.innerHTML = '<h3 class="section-title">🧠 Movie Trivia</h3><p style="color: var(--muted-silver); text-align: center; margin-top: 40px;">Not enough data to generate trivia for this movie.</p>';
+      section.innerHTML = '<h3 class="section-title">Movie Trivia</h3><p style="color: var(--muted-silver); text-align: center; margin-top: 40px;">Not enough data to generate trivia for this movie.</p>';
       return;
     }
+
+    const stats = getTriviaStats();
+    const accuracy = getTriviaAccuracy();
+    const alreadyCompleted = stats.moviesCompleted.includes(cubeMovieData.id);
+
+    section.innerHTML = `
+      <h3 class="section-title">Movie Trivia</h3>
+      <div class="cube-trivia-stats-bar" id="cubeTriviaStatsBar">
+        <div class="trivia-stat-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+          <span>${accuracy}%</span>
+        </div>
+        <div class="trivia-stat-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>${stats.currentStreak}</span>
+        </div>
+        <div class="trivia-stat-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>${stats.moviesQuizzed}</span>
+        </div>
+      </div>
+      ${alreadyCompleted ? '<div class="cube-trivia-completed-badge">Completed — play again?</div>' : ''}
+      <div class="cube-trivia-progress" id="cubeTriviaProgress"></div>
+      <div class="cube-trivia-question" id="cubeTriviaQuestion"></div>
+      <div class="cube-trivia-options" id="cubeTriviaOptions"></div>
+      <div class="cube-trivia-score" id="cubeTriviaScore"></div>
+    `;
 
     renderTriviaQuestion();
   }
@@ -1138,6 +1215,17 @@
       btn.classList.add("cube-trivia-wrong");
     }
 
+    // Record stats
+    const category = q.category || "general";
+    triviaSessionResults.push({ category, isCorrect });
+    const updatedStats = recordTriviaAnswer(category, isCorrect);
+    const statsBar = document.getElementById("cubeTriviaStatsBar");
+    if (statsBar) {
+      const pills = statsBar.querySelectorAll(".trivia-stat-pill span");
+      if (pills[0]) pills[0].textContent = getTriviaAccuracy() + "%";
+      if (pills[1]) pills[1].textContent = updatedStats.currentStreak;
+    }
+
     // Update progress dot
     const dots = document.querySelectorAll("#cubeTriviaProgress .cube-trivia-dot");
     if (dots[triviaIndex]) {
@@ -1164,17 +1252,45 @@
     const section = document.getElementById("cubeTriviaSection");
     if (!section) return;
 
-    const emoji = triviaScore === 3 ? "🏆" : triviaScore === 2 ? "⭐" : triviaScore === 1 ? "👍" : "😅";
+    const total = triviaQuestions.length;
+    const stats = recordTriviaRoundComplete(cubeMovieData.id, triviaScore, total);
+    const accuracy = stats.totalAnswered > 0 ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100) : 0;
+    const perfect = triviaScore === total;
+    const label = perfect ? "Perfect score!" : triviaScore >= total * 0.66 ? "Well done!" : triviaScore >= total * 0.33 ? "Not bad!" : "Better luck next time!";
+
+    const catMap = { production: "Production", crew: "Crew", tagline: "Tagline", timeline: "Timeline", general: "General" };
+    const catAgg = {};
+    for (const r of triviaSessionResults) {
+      if (!catAgg[r.category]) catAgg[r.category] = { correct: 0, total: 0 };
+      catAgg[r.category].total++;
+      if (r.isCorrect) catAgg[r.category].correct++;
+    }
+    const catRows = Object.entries(catAgg).map(([cat, data]) => {
+      const pct = Math.round((data.correct / data.total) * 100);
+      const color = pct === 100 ? "#00ff88" : pct >= 50 ? "var(--accent-cyan)" : "var(--danger-red)";
+      return `<div class="trivia-cat-row">
+        <span class="trivia-cat-name">${catMap[cat] || cat}</span>
+        <span class="trivia-cat-score" style="color:${color}">${data.correct}/${data.total}</span>
+      </div>`;
+    }).join("");
 
     section.innerHTML = `
       <div class="cube-trivia-final">
-        <h3 class="section-title">🧠 Trivia Complete!</h3>
-        <div class="cube-trivia-final-score">${emoji} ${triviaScore} / ${triviaQuestions.length}</div>
-        <div class="cube-trivia-final-label">${triviaScore === 3 ? "Perfect score!" : triviaScore === 2 ? "Well done!" : triviaScore === 1 ? "Not bad!" : "Better luck next time!"}</div>
-        <button class="cube-trivia-retry" id="cubeTriviaRetry">🔄 Play Again</button>
+        <h3 class="section-title">Trivia Complete!</h3>
+        <div class="cube-trivia-final-score">${triviaScore} / ${total}</div>
+        <div class="cube-trivia-final-label">${label}</div>
+        ${perfect ? '<div class="trivia-perfect-badge">★ PERFECT</div>' : ''}
+        <div class="trivia-session-cats">${catRows}</div>
+        <div class="trivia-lifetime-summary">
+          <div class="trivia-lifetime-row"><span>Lifetime Accuracy</span><span class="trivia-lifetime-val">${accuracy}%</span></div>
+          <div class="trivia-lifetime-row"><span>Answer Streak</span><span class="trivia-lifetime-val">${stats.currentStreak}</span></div>
+          <div class="trivia-lifetime-row"><span>Best Streak</span><span class="trivia-lifetime-val">${stats.bestStreak}</span></div>
+          <div class="trivia-lifetime-row"><span>Movies Quizzed</span><span class="trivia-lifetime-val">${stats.moviesQuizzed}</span></div>
+          <div class="trivia-lifetime-row"><span>Perfect Rounds</span><span class="trivia-lifetime-val">${stats.perfectRounds}</span></div>
+        </div>
+        <button class="cube-trivia-retry">Play Again</button>
       </div>
     `;
-
   }
 
   // ============================================
