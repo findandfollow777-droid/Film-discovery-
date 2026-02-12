@@ -172,9 +172,10 @@ function plotMarkers() {
       else if (count > 10) size = 'medium';
 
       return L.divIcon({
-        html: `<div>${count}</div>`,
+        html: `<div><span>${count}</span></div>`,
         className: `marker-cluster marker-cluster-${size}`,
-        iconSize: L.point(40, 40)
+        iconSize: L.point(40, 40),
+        iconAnchor: L.point(20, 20)
       });
     }
   });
@@ -189,7 +190,7 @@ function plotMarkers() {
     else if (count >= 2) { sizeClass = 'small'; iconSize = [22, 22]; }
 
     const icon = L.divIcon({
-      html: count > 1 ? `${count}` : '',
+      html: count > 1 ? `<span>${count}</span>` : '',
       className: `orbit-marker ${sizeClass}`,
       iconSize: iconSize,
       iconAnchor: [iconSize[0] / 2, iconSize[1] / 2]
