@@ -214,12 +214,22 @@ async function loadEntityData(entity, side) {
       photoEl.src = `${TMDB_IMG}w185${person.profile_path}`;
     }
 
+    // Log encounter
+    if (window.OrbitEncounters && person) {
+      window.OrbitEncounters.logEncounter({
+        id: personId,
+        name: entity.name,
+        profile_path: person.profile_path,
+        known_for_department: entity.type === 'Director' ? 'Directing' : 'Acting'
+      }, 'collision');
+    }
+
     // Fetch filmography using validated ID
     const creditsRes = await fetch(
       `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`
     );
     const credits = await creditsRes.json();
-    
+
     // Get appropriate movies based on entity type
     let movies = [];
     

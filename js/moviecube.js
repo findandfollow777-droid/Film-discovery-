@@ -703,6 +703,31 @@
           </div>
         `;
       }).join("");
+
+      // Log encountered cast
+      if (window.OrbitEncounters) {
+        cast.forEach(actor => {
+          window.OrbitEncounters.logEncounter({
+            id: actor.id,
+            name: actor.name,
+            profile_path: actor.profile_path,
+            known_for_department: 'Acting'
+          }, 'moviecube');
+        });
+      }
+    }
+
+    // Log encountered director
+    if (window.OrbitEncounters) {
+      const director = credits.crew?.find(c => c.job === "Director");
+      if (director) {
+        window.OrbitEncounters.logEncounter({
+          id: director.id,
+          name: director.name,
+          profile_path: director.profile_path,
+          known_for_department: 'Directing'
+        }, 'moviecube');
+      }
     }
   }
 
@@ -714,6 +739,16 @@
     if (vennCompareMode) {
       toggleVennActorSelection(el);
       return;
+    }
+
+    // Log encounter on click
+    if (window.OrbitEncounters && id && name) {
+      window.OrbitEncounters.logEncounter({
+        id: parseInt(id),
+        name: name,
+        profile_path: null,
+        known_for_department: null
+      }, 'moviecube');
     }
 
     if (onPersonClick) {

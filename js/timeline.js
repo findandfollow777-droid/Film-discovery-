@@ -250,7 +250,17 @@ async function loadPersonTimeline(personId) {
   
   const personRes = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
   const person = await personRes.json();
-  
+
+  // Log encounter
+  if (window.OrbitEncounters && person) {
+    window.OrbitEncounters.logEncounter({
+      id: person.id,
+      name: person.name,
+      profile_path: person.profile_path,
+      known_for_department: person.known_for_department
+    }, 'timeline');
+  }
+
   // Fetch movie and TV credits in parallel
   const [creditsRes, tvCreditsRes] = await Promise.all([
     fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`),
@@ -756,6 +766,16 @@ async function addPerson(personId) {
   try {
     const personRes = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`);
     const person = await personRes.json();
+
+    // Log encounter
+    if (window.OrbitEncounters && person) {
+      window.OrbitEncounters.logEncounter({
+        id: person.id,
+        name: person.name,
+        profile_path: person.profile_path,
+        known_for_department: person.known_for_department
+      }, 'timeline');
+    }
 
     const [creditsRes, tvCreditsRes] = await Promise.all([
       fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`),

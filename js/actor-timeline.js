@@ -133,6 +133,16 @@ async function loadActorData(personId) {
   const movieData = await movieRes.json();
   const tvData = await tvRes.json();
 
+  // Log encounter
+  if (window.OrbitEncounters && actorData) {
+    window.OrbitEncounters.logEncounter({
+      id: actorData.id,
+      name: actorData.name,
+      profile_path: actorData.profile_path,
+      known_for_department: actorData.known_for_department
+    }, 'actor_timeline');
+  }
+
   movieCredits = processMovieCredits(movieData);
   const basicTv = processTvCredits(tvData);
   tvShowsRaw = basicTv;

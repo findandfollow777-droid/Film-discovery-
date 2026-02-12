@@ -213,6 +213,18 @@ function displayConstellation(cast) {
       </div>
     `;
   }).join("");
+
+  // Log encountered actors
+  if (window.OrbitEncounters) {
+    cast.forEach(actor => {
+      window.OrbitEncounters.logEncounter({
+        id: actor.id,
+        name: actor.name,
+        profile_path: actor.profile_path,
+        known_for_department: 'Acting'
+      }, 'constellation');
+    });
+  }
 }
 
 // ============================================

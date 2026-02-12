@@ -69,6 +69,18 @@ async function init() {
   // Fetch movies for any people that don't have them (e.g. from MovieCube Compare Actors)
   await ensurePeopleHaveMovies();
 
+  // Log encountered people
+  if (window.OrbitEncounters) {
+    people.forEach(p => {
+      window.OrbitEncounters.logEncounter({
+        id: p.id,
+        name: p.name,
+        profile_path: p.profile || p.profile_path || null,
+        known_for_department: p.role || null
+      }, 'venn');
+    });
+  }
+
   // Initialize the shared movie cube component
   initMovieCube({
     onPersonClick: (personId, personName) => {
