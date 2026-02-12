@@ -263,6 +263,71 @@ body {
 .pp-source-badge.search { background: #94a3b8; }
 .pp-source-badge.profile { background: #64748b; color: #fff; }
 
+/* D2: Colored source badges v2 */
+.pp-source-badge-v2 {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--film-white);
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid #64748b;
+  border-radius: 0 8px 8px 0;
+  letter-spacing: 0.3px;
+}
+
+.pp-first-discovered {
+  font-size: 12px;
+  color: var(--ghost-gray);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+@keyframes sparkle-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.pp-sparkle {
+  display: inline-block;
+  animation: sparkle-pulse 1.5s ease-in-out infinite;
+  margin-left: 4px;
+}
+
+/* D2: Navigation action buttons */
+.pp-nav-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.orbit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.orbit-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(0,217,255,0.3);
+  color: var(--accent-cyan);
+}
+
+.orbit-btn-outline:hover {
+  background: rgba(0,217,255,0.1);
+  border-color: var(--accent-cyan);
+}
+
 .pp-progress-wrap { margin-top: 4px; }
 
 .pp-progress-label {
