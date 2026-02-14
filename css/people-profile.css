@@ -947,4 +947,7 @@ body {
   .pp-section { padding: 18px 16px; }
 
   .pp-nebula-cards { grid-template-columns: 1fr; }
+
+  .pp-nav-actions { flex-direction: column; }
+  .pp-nav-actions .orbit-btn { text-align: center; justify-content: center; }
 }

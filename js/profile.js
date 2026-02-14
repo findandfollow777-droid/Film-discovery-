@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadOverview();
   renderTriviaCard();
   loadGameBreakdown();
+  renderPeopleOrbit();
   loadTasteProfile();
   setupShortlistSection();
   setupDangerZone();
@@ -642,6 +643,84 @@ function loadGameBreakdown() {
     `;
     container.appendChild(row);
   }
+}
+
+// ============================================
+// PEOPLE ORBIT
+// ============================================
+
+function renderPeopleOrbit() {
+  const section = document.getElementById("peopleOrbitSection");
+  const container = document.getElementById("peopleOrbitContent");
+  if (!section || !container) return;
+
+  const stats = window.OrbitEncounters ? window.OrbitEncounters.getEncounterStats() : null;
+
+  if (!stats || stats.total_people === 0) {
+    section.hidden = false;
+    container.innerHTML = '<div class="orbit-empty">' +
+      '<p>Your orbit is empty! Start discovering people by playing games, exploring timelines, and opening Moviecubes.</p>' +
+      '<a href="people-library.html" class="orbit-explore-link">Visit the Stellar Catalog &rsaquo;</a>' +
+    '</div>';
+    return;
+  }
+
+  section.hidden = false;
+
+  // Source breakdown bar
+  const totalEnc = stats.total_encounters || 1;
+  const breakdown = stats.sources_breakdown || {};
+  const SOURCE_COLORS = {
+    'stellar-catalog': '#00d9ff', constellation: '#ffd700', collision: '#f97316',
+    triple_collision: '#a855f7', moviecube: '#06b6d4', timeline: '#10b981',
+    actor_timeline: '#14b8a6', venn: '#3b82f6', search: '#64748b',
+    profile: '#94a3b8', screenshot: '#fbbf24', 'sequel-shot': '#8b5cf6'
+  };
+
+  let sourceBars = '';
+  for (const src in breakdown) {
+    if (breakdown.hasOwnProperty(src)) {
+      const count = breakdown[src];
+      const pct = Math.max((count / totalEnc) * 100, 3);
+      const color = SOURCE_COLORS[src] || '#64748b';
+      const label = src.replace(/[_-]/g, ' ');
+      sourceBars += '<span class="orbit-bar-seg" style="width:' + pct + '%;background:' + color + '" title="' + label + ': ' + count + '"></span>';
+    }
+  }
+
+  // Top 3 most encountered people
+  const encountered = window.OrbitEncounters.getEncountered();
+  const topPeople = Object.entries(encountered)
+    .sort((a, b) => (b[1].encounter_count || 0) - (a[1].encounter_count || 0))
+    .slice(0, 3);
+
+  let topHtml = '';
+  topPeople.forEach(function ([id, person]) {
+    const photo = person.profile_path
+      ? TMDB_IMG + 'w92' + person.profile_path
+      : '';
+    const name = (person.name || '').replace(/"/g, '&quot;');
+    topHtml += '<div class="orbit-top-person">' +
+      (photo ? '<img class="orbit-top-photo" src="' + photo + '" alt="' + name + '">' : '<div class="orbit-top-photo orbit-top-no-photo"></div>') +
+      '<div class="orbit-top-name">' + (person.name || '?') + '</div>' +
+      '<div class="orbit-top-count">' + (person.encounter_count || 0) + ' enc.</div>' +
+    '</div>';
+  });
+
+  container.innerHTML =
+    '<div class="orbit-stats-row">' +
+      '<div class="orbit-stat-block">' +
+        '<div class="orbit-stat-number orbit-stat-cyan">' + stats.total_people + '</div>' +
+        '<div class="orbit-stat-label">people discovered</div>' +
+      '</div>' +
+      '<div class="orbit-stat-block">' +
+        '<div class="orbit-stat-number orbit-stat-gold">' + stats.total_encounters + '</div>' +
+        '<div class="orbit-stat-label">total encounters</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="orbit-source-bar">' + sourceBars + '</div>' +
+    (topHtml ? '<div class="orbit-top-row">' + topHtml + '</div>' : '') +
+    '<a href="people-library.html?mode=orbit" class="orbit-explore-link">Explore Your Orbit &rsaquo;</a>';
 }
 
 // ============================================

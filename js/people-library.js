@@ -200,6 +200,30 @@
     if (window.innerWidth > 650) {
       dom.exclusives.classList.add('expanded');
     }
+
+    // URL parameter handling
+    var params = new URLSearchParams(window.location.search);
+
+    if (params.get('mode') === 'orbit') {
+      enterOrbitMode();
+      return;
+    }
+
+    if (params.get('circle')) {
+      loadCircleFromPerson(params.get('circle'));
+      return;
+    }
+
+    if (params.get('department')) {
+      var dept = params.get('department');
+      var chip = dom.deptChips.querySelector('[data-dept="' + dept + '"]');
+      if (chip) {
+        dom.deptChips.querySelectorAll('.pl-chip').forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        state.activeFilters.department = dept;
+      }
+    }
+
     fetchPopularPeople(1);
   }
 
@@ -979,6 +1003,86 @@
       var eraActive = dom.eraChips.querySelector('.pl-chip.active');
       if (eraActive) eraActive.classList.remove('active');
       fetchPopularPeople(1);
+    }
+  }
+
+  // ── Circle From Person (URL param) ──
+
+  async function loadCircleFromPerson(personId) {
+    exitSpecialMode(true);
+    state.circleMode = 'person_' + personId;
+    state.rawPages = [];
+    state.currentResults = [];
+
+    showState('loading');
+
+    try {
+      // Fetch person details
+      var personUrl = TMDB_BASE + '/person/' + personId + '?api_key=' + TMDB_API_KEY;
+      var personResp = await fetch(personUrl);
+      if (!personResp.ok) throw new Error('Person fetch failed');
+      var personData = await personResp.json();
+      var personName = personData.name || 'Unknown';
+
+      // Show banner
+      dom.modeBannerText.textContent = personName + "'s Circle";
+      dom.modeBanner.classList.remove('hidden');
+      dom.searchBanner.classList.add('hidden');
+
+      // Fetch movie credits
+      var creditsUrl = TMDB_BASE + '/person/' + personId + '/movie_credits?api_key=' + TMDB_API_KEY;
+      var creditsResp = await fetch(creditsUrl);
+      if (!creditsResp.ok) throw new Error('Credits fetch failed');
+      var creditsData = await creditsResp.json();
+
+      // Get top 3 popular movies
+      var allCredits = (creditsData.cast || []).concat(creditsData.crew || []);
+      allCredits.sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); });
+      var topMovies = allCredits.slice(0, 3);
+
+      // Fetch credits for each top movie to find collaborators
+      var collaboratorCounts = {};
+      for (var i = 0; i < topMovies.length; i++) {
+        var movie = topMovies[i];
+        try {
+          var movieCreditsUrl = TMDB_BASE + '/movie/' + movie.id + '/credits?api_key=' + TMDB_API_KEY;
+          var mcResp = await fetch(movieCreditsUrl);
+          if (!mcResp.ok) continue;
+          var mcData = await mcResp.json();
+          var castAndCrew = (mcData.cast || []).slice(0, 10).concat(
+            (mcData.crew || []).filter(function (c) {
+              return c.job === 'Director' || c.job === 'Writer' || c.job === 'Producer' || c.job === 'Screenplay';
+            })
+          );
+          castAndCrew.forEach(function (person) {
+            if (String(person.id) === String(personId)) return;
+            if (!collaboratorCounts[person.id]) {
+              collaboratorCounts[person.id] = { id: person.id, count: 0 };
+            }
+            collaboratorCounts[person.id].count++;
+          });
+        } catch (e) { /* skip */ }
+
+        // Small delay to avoid rate limiting
+        if (i < topMovies.length - 1) {
+          await new Promise(function (r) { setTimeout(r, 200); });
+        }
+      }
+
+      // Sort by collaboration count, take top 20
+      var collabIds = Object.values(collaboratorCounts)
+        .sort(function (a, b) { return b.count - a.count; })
+        .slice(0, 20)
+        .map(function (c) { return c.id; });
+
+      // Include the person themselves at the top
+      collabIds.unshift(parseInt(personId, 10));
+
+      await batchFetchPeople(collabIds);
+    } catch (err) {
+      console.error('Failed to load circle for person:', err);
+      showState('error');
+      state.isLoading = false;
     }
   }
 
