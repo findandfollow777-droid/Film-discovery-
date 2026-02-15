@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/people-profile.css">
+  <link rel="stylesheet" href="css/orbit-glyphs.css">
   <link rel="stylesheet" href="css/moviecube.css">
   <link rel="stylesheet" href="css/shortlist-badge.css">
 </head>
@@ -184,6 +185,16 @@
     </section>
 
   </main>
+
+  <!-- AWARDS MODAL -->
+  <div id="ppAwardsModal" class="pp-awards-modal hidden">
+    <div class="pp-awards-modal-backdrop"></div>
+    <div class="pp-awards-modal-panel">
+      <button class="pp-awards-modal-close" id="ppAwardsModalClose">&times;</button>
+      <h3 class="pp-awards-modal-title">All Awards</h3>
+      <div class="pp-awards-modal-body" id="ppAwardsModalBody"></div>
+    </div>
+  </div>
 
   <!-- TOAST -->
   <div id="ppToast" class="pp-toast hidden">

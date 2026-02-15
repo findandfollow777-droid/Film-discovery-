@@ -1,5 +1,5 @@
 /* ============================================
-   ORBIT - Stellar Catalog Observatory
+   ORBIT - The Observatory
    Browsable, filterable people discovery
 ============================================ */
 (function () {
@@ -98,8 +98,8 @@
     },
     {
       id: 'international-auteurs',
-      title: 'International Auteurs',
-      description: 'Visionary directors from around the world',
+      title: 'World Cinema Directors',
+      description: 'Visionary directors from around the globe',
       icon: '\uD83C\uDF0D',
       color: '#a855f7',
       personIds: [21684, 1614, 578, 4762, 2636, 1032, 5602, 3556, 2854, 7624, 10831, 12889, 1884, 7180, 60413, 68811, 17419, 1377, 5655, 2395]
@@ -417,7 +417,7 @@
     if (state.orbitMode && state.bookmarkedOnly) {
       people = people.filter(function (p) { return p.bookmarked; });
     }
-    if ((state.isSearchMode || state.orbitMode) && state.activeFilters.era) {
+    if (state.activeFilters.era) {
       people = filterByEra(people, state.activeFilters.era);
     }
     if (state.activeFilters.genre) {
@@ -434,9 +434,18 @@
   }
 
   function filterByAwards(people, festivals) {
-    // Awards filter highlights confirmed matches rather than excluding.
-    // All people pass through; the gold badge in renderPersonCard indicates matches.
-    return people;
+    if (!festivals || festivals.length === 0) return people;
+    return people.filter(function (person) {
+      var knownFor = person.known_for || [];
+      return knownFor.some(function (item) {
+        if (!awardsMovieIds.has(item.id)) return false;
+        var entry = awardsByMovie[item.id];
+        if (!entry || !entry.awards) return false;
+        return entry.awards.some(function (award) {
+          return festivals.indexOf(award.festival) !== -1;
+        });
+      });
+    });
   }
 
   function filterByEra(people, decade) {
@@ -565,7 +574,9 @@
     var titles = movies.concat(shows).slice(0, 2).map(function (k) {
       return esc(k.title || k.name || '');
     });
-    var knownForText = titles.length ? 'Known for: ' + titles.join(', ') : '';
+    var knownForText = titles.length
+      ? 'Known for: ' + titles.join(', ')
+      : (deptInfo ? deptInfo.label : '');
 
     // Awards count
     var awardCount = 0;
@@ -691,7 +702,8 @@
       parts.push('Showing popular ' + deptLabel);
     }
     if (state.activeFilters.awards.length > 0) {
-      parts.push(state.activeFilters.awards.join(', ') + ' filter active');
+      var totalBeforeAwards = filterByDepartment([...state.rawPages], state.activeFilters.department).length;
+      parts.push('Showing ' + state.currentResults.length + ' of ' + totalBeforeAwards + ' with ' + state.activeFilters.awards.join('/') + ' awards');
     }
     if (state.activeFilters.era) {
       parts.push(state.activeFilters.era + 's era');
@@ -713,8 +725,8 @@
       titleEl.textContent = "No results for '" + state.searchQuery + "'";
       textEl.textContent = 'Check the spelling or try a different name.';
     } else if (state.activeFilters.awards.length > 0) {
-      titleEl.textContent = 'No confirmed award matches in current results';
-      textEl.textContent = 'Awards data is verified when you visit individual profiles.';
+      titleEl.textContent = 'No confirmed matches in current results';
+      textEl.textContent = 'Try loading more people or searching by name.';
     } else {
       titleEl.textContent = 'No people found';
       textEl.textContent = 'Try a different filter combination.';
@@ -837,7 +849,7 @@
   function bindEraChips() {
     dom.eraChips.addEventListener('click', function (e) {
       var chip = e.target.closest('.pl-chip');
-      if (!chip || chip.classList.contains('pl-chip-disabled')) return;
+      if (!chip) return;
 
       // Toggle: deactivate others, toggle clicked
       var wasActive = chip.classList.contains('active');
@@ -853,16 +865,12 @@
   }
 
   function enableEraChips(enabled) {
-    dom.eraChips.querySelectorAll('.pl-chip').forEach(function (chip) {
-      if (enabled) {
-        chip.classList.remove('pl-chip-disabled');
-        chip.title = '';
-      } else {
-        chip.classList.add('pl-chip-disabled');
+    // Era chips are always interactive; when disabled flag is passed, just clear selection
+    if (!enabled) {
+      dom.eraChips.querySelectorAll('.pl-chip.active').forEach(function (chip) {
         chip.classList.remove('active');
-        chip.title = 'Era filter works best with search';
-      }
-    });
+      });
+    }
   }
 
   function bindAwardsChips() {
@@ -1001,6 +1009,12 @@
     dom.modeBanner.classList.remove('hidden');
     dom.searchBanner.classList.add('hidden');
 
+    // Reset department filter to show all people in collection
+    state.activeFilters.department = 'All';
+    dom.deptChips.querySelectorAll('.pl-chip').forEach(function (c) {
+      c.classList.toggle('active', c.dataset.dept === 'All');
+    });
+
     showState('loading');
     await batchFetchPeople(collection.personIds);
   }
@@ -1015,6 +1029,12 @@
     dom.modeBannerText.textContent = name + "'s Circle";
     dom.modeBanner.classList.remove('hidden');
     dom.searchBanner.classList.add('hidden');
+
+    // Reset department filter to show director + all collaborators
+    state.activeFilters.department = 'All';
+    dom.deptChips.querySelectorAll('.pl-chip').forEach(function (c) {
+      c.classList.toggle('active', c.dataset.dept === 'All');
+    });
 
     // Fetch director + collaborators
     var allIds = [circle.directorId].concat(circle.collaborators);
@@ -1057,40 +1077,44 @@
           popularity: person.popularity || 0,
           known_for: []
         };
-        // Build known_for from combined_credits (top 3 by popularity)
-        if (person.combined_credits && person.combined_credits.cast) {
-          normalized.known_for = person.combined_credits.cast
-            .sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); })
-            .slice(0, 3)
-            .map(function (c) {
-              return {
-                id: c.id,
-                title: c.title || c.name,
-                name: c.name || c.title,
-                media_type: c.media_type || 'movie',
-                genre_ids: c.genre_ids || [],
-                release_date: c.release_date || c.first_air_date || '',
-                first_air_date: c.first_air_date || ''
-              };
-            });
+        // Build known_for from combined_credits based on department
+        var dept = person.known_for_department || '';
+        var credits = person.combined_credits || {};
+        var items = [];
+
+        if (dept === 'Directing' && credits.crew) {
+          items = credits.crew.filter(function (c) { return c.job === 'Director'; });
+        } else if (dept === 'Writing' && credits.crew) {
+          items = credits.crew.filter(function (c) {
+            return c.job === 'Writer' || c.job === 'Screenplay' || c.job === 'Story' || c.department === 'Writing';
+          });
+        } else if (dept === 'Production' && credits.crew) {
+          items = credits.crew.filter(function (c) {
+            return c.job === 'Producer' || c.job === 'Executive Producer' || c.department === 'Production';
+          });
+        } else if (credits.cast) {
+          items = credits.cast;
         }
-        // Also check crew credits for directors
-        if (normalized.known_for.length === 0 && person.combined_credits && person.combined_credits.crew) {
-          normalized.known_for = person.combined_credits.crew
-            .sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); })
-            .slice(0, 3)
-            .map(function (c) {
-              return {
-                id: c.id,
-                title: c.title || c.name,
-                name: c.name || c.title,
-                media_type: c.media_type || 'movie',
-                genre_ids: c.genre_ids || [],
-                release_date: c.release_date || c.first_air_date || '',
-                first_air_date: c.first_air_date || ''
-              };
-            });
+
+        // Fallback to any available credits
+        if (items.length === 0) {
+          items = credits.cast || credits.crew || [];
         }
+
+        normalized.known_for = items
+          .sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); })
+          .slice(0, 3)
+          .map(function (c) {
+            return {
+              id: c.id,
+              title: c.title || c.name,
+              name: c.name || c.title,
+              media_type: c.media_type || 'movie',
+              genre_ids: c.genre_ids || [],
+              release_date: c.release_date || c.first_air_date || '',
+              first_air_date: c.first_air_date || ''
+            };
+          });
         results.push(normalized);
       });
 
@@ -1291,8 +1315,8 @@
     });
 
     // Restore header
-    dom.title.textContent = 'STELLAR CATALOG';
-    dom.subtitle.textContent = 'Discover the people behind the movies';
+    dom.title.textContent = 'THE OBSERVATORY';
+    dom.subtitle.textContent = 'View the stars';
 
     // Hide orbit sections, show browse sections
     dom.orbitPanel.classList.add('hidden');

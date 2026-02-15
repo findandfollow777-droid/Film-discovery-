@@ -705,6 +705,15 @@
     }).join('');
   }
 
+  const FESTIVAL_GLYPH = {
+    'Oscar': 'og-oscar',
+    'BAFTA': 'og-bafta',
+    'Cannes': 'og-palm',
+    'Venice': 'og-lion',
+    'Berlin': 'og-bear',
+    'Golden Globe': 'og-globe'
+  };
+
   function renderAwards() {
     const section = $('ppAwards');
     const list = $('ppAwardsList');
@@ -712,31 +721,70 @@
 
     if (!awards || awards.length === 0) return;
 
-    // Group by festival
-    const groups = {};
-    awards.forEach(a => {
-      if (!groups[a.festival]) groups[a.festival] = [];
-      groups[a.festival].push(a);
+    // Trophy row — one glyph per award
+    let trophyHtml = '<div class="pp-trophy-row">';
+    awards.forEach((a, i) => {
+      const glyphClass = FESTIVAL_GLYPH[a.festival] || 'og-trophy';
+      const nomClass = a.won ? '' : ' og-nominee';
+      const tooltip = `${a.festival} · ${a.category} · ${a.year} — ${a.filmTitle} (${a.won ? 'Won' : 'Nominated'})`;
+      trophyHtml += `<span class="pp-trophy-glyph" data-award-idx="${i}" title="">` +
+        `<span class="og og-lg ${glyphClass}${nomClass}"></span>` +
+        `<span class="pp-trophy-tooltip">${esc(tooltip)}</span>` +
+        `</span>`;
     });
+    trophyHtml += '</div>';
 
-    let html = '';
-    Object.entries(groups).forEach(([festival, entries]) => {
-      html += `<div class="pp-award-group-header">${esc(festival)}</div>`;
-      entries.forEach(a => {
-        html += `
-          <div class="pp-award-entry">
-            <span class="pp-award-trophy ${a.won ? 'won' : 'nominated'}">${a.won ? '&#9733;' : '&#9734;'}</span>
-            <div class="pp-award-details">
-              <div class="pp-award-cat">${esc(a.category)} <span class="award-year">${a.year}</span></div>
-              <div class="pp-award-film">${esc(a.filmTitle)}</div>
-            </div>
-          </div>
-        `;
-      });
-    });
+    // "View All Awards" button
+    trophyHtml += '<button class="pp-view-all-awards" id="ppViewAllAwards">View All Awards &#8250;</button>';
 
-    list.innerHTML = html;
+    list.innerHTML = trophyHtml;
     section.classList.remove('hidden');
+
+    // Bind modal opener
+    $('ppViewAllAwards')?.addEventListener('click', () => openAwardsModal(awards));
+  }
+
+  function openAwardsModal(awards) {
+    const modal = $('ppAwardsModal');
+    const body = $('ppAwardsModalBody');
+    if (!modal || !body) return;
+
+    // Build table sorted by year descending
+    const sorted = [...awards].sort((a, b) => b.year - a.year);
+    let html = '<table class="pp-awards-table"><thead><tr>' +
+      '<th>Festival</th><th>Category</th><th>Film</th><th>Year</th><th>Result</th>' +
+      '</tr></thead><tbody>';
+
+    sorted.forEach(a => {
+      const glyphClass = FESTIVAL_GLYPH[a.festival] || 'og-trophy';
+      const resultClass = a.won ? 'pp-award-won' : 'pp-award-nom';
+      html += `<tr class="${resultClass}">` +
+        `<td><span class="og og-sm ${glyphClass}${a.won ? '' : ' og-nominee'}"></span> ${esc(a.festival)}</td>` +
+        `<td>${esc(a.category)}</td>` +
+        `<td>${esc(a.filmTitle)}</td>` +
+        `<td>${a.year}</td>` +
+        `<td>${a.won ? 'Won' : 'Nominated'}</td>` +
+        `</tr>`;
+    });
+
+    html += '</tbody></table>';
+    body.innerHTML = html;
+    modal.classList.remove('hidden');
+
+    // Close handlers
+    const escHandler = (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+        e.stopPropagation();
+      }
+    };
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      document.removeEventListener('keydown', escHandler, true);
+    };
+    $('ppAwardsModalClose').onclick = closeModal;
+    modal.querySelector('.pp-awards-modal-backdrop').onclick = closeModal;
+    document.addEventListener('keydown', escHandler, true);
   }
 
   function renderFilmography() {
