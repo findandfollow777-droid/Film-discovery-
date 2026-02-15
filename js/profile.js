@@ -660,7 +660,7 @@ function renderPeopleOrbit() {
     section.hidden = false;
     container.innerHTML = '<div class="orbit-empty">' +
       '<p>Your orbit is empty! Start discovering people by playing games, exploring timelines, and opening Moviecubes.</p>' +
-      '<a href="people-library.html" class="orbit-explore-link">Visit the Stellar Catalog &rsaquo;</a>' +
+      '<a href="people-library.html" class="orbit-explore-link">Visit The Observatory &rsaquo;</a>' +
     '</div>';
     return;
   }
