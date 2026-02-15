@@ -48,7 +48,7 @@
   function init() {
     personId = getPersonId();
     if (!personId) {
-      showError("This person doesn't exist in our database.");
+      showError("This person doesn't exist in our database.", true);
       return;
     }
 
@@ -139,7 +139,7 @@
 
     $('viewTimelineBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
-      localStorage.setItem('timelineMovieId', personId);
+      localStorage.setItem('timelineMovieId', String(personId));
       localStorage.setItem('timelineType', 'person');
       window.location.href = 'actor-timeline.html';
     });
@@ -173,7 +173,7 @@
 
       if (!personRes.ok) {
         if (personRes.status === 404) {
-          showError("This person doesn't exist in our database.");
+          showError("This person doesn't exist in our database.", true);
         } else {
           showError("Unable to load profile. Please try again.");
         }
@@ -185,7 +185,7 @@
 
       // Derive data
       const filmography = buildFilmography(credits);
-      const genreBreakdown = computeGenreBreakdown(credits.cast || []);
+      const genreBreakdown = computeGenreBreakdown(credits, person.known_for_department);
       const careerSpan = computeCareerSpan(filmography);
       const awards = findAwards(filmography, person.name, person.known_for_department, person.gender);
 
@@ -267,11 +267,32 @@
     return films;
   }
 
-  function computeGenreBreakdown(castCredits) {
+  function computeGenreBreakdown(credits, knownForDept) {
+    // Filter credits by primary department so directors count directing
+    // credits, actors count acting credits, etc.
+    let relevantCredits;
+    switch (knownForDept) {
+      case 'Acting':
+        relevantCredits = credits.cast || [];
+        break;
+      case 'Directing':
+        relevantCredits = (credits.crew || []).filter(c => c.job === 'Director');
+        break;
+      case 'Writing':
+        relevantCredits = (credits.crew || []).filter(c => c.department === 'Writing');
+        break;
+      case 'Production':
+        relevantCredits = (credits.crew || []).filter(c => c.department === 'Production');
+        break;
+      default:
+        relevantCredits = (credits.cast || []).length > 0 ? credits.cast : (credits.crew || []);
+        break;
+    }
+
     const counts = {};
     let total = 0;
 
-    castCredits.forEach(m => {
+    relevantCredits.forEach(m => {
       (m.genre_ids || []).forEach(gid => {
         const name = GENRE_MAP[gid];
         if (!name) return;
@@ -774,7 +795,7 @@
     link.href = '#';
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      localStorage.setItem('timelineMovieId', personId);
+      localStorage.setItem('timelineMovieId', String(personId));
       localStorage.setItem('timelineType', 'person');
       window.location.href = 'actor-timeline.html';
     });
@@ -821,15 +842,17 @@
     });
   }
 
-  function showError(msg) {
+  function showError(msg, notFound) {
     $('ppContent')?.classList.add('hidden');
-    const errEl = $('ppError');
-    $('ppErrorMsg').textContent = msg;
-    errEl.classList.remove('hidden');
+    // Hide any visible skeleton loaders
+    document.querySelectorAll('.pp-skeleton').forEach(s => s.classList.add('hidden'));
 
-    // Hide retry for "not found" type errors
-    if (msg.includes("doesn't exist")) {
-      $('ppRetryBtn').classList.add('hidden');
+    $('ppErrorMsg').textContent = msg;
+    $('ppError').classList.remove('hidden');
+
+    if (notFound) {
+      $('ppRetryBtn')?.classList.add('hidden');
+      $('ppErrorBack')?.classList.remove('hidden');
     }
   }
 
@@ -946,6 +969,20 @@
 
   // ── Did You Know? ──
 
+  const OBVIOUS_FACT_RE = /\b(?:is|was)\s+(?:an?\s+)?(?:American|British|Australian|Canadian|French|German|Italian|Spanish|Irish|Scottish|Swedish|Danish|Norwegian|Indian|Japanese|Korean|Chinese|Mexican|Brazilian|South African|New Zealand|Austrian|Belgian|Dutch|Swiss|Polish|Russian|Czech|Hungarian|Finnish|Israeli|Iranian|Turkish|Greek|Egyptian|Nigerian|Ghanaian|Kenyan|Argentine|Colombian|Chilean|Venezuelan|Peruvian|Cuban|Puerto Rican|Filipino|Thai|Vietnamese|Malaysian|Indonesian|Singaporean|Taiwanese|Hong Kong|English|Welsh)?\s*(?:actor|actress|director|producer|screenwriter|writer|filmmaker|cinematographer|editor|composer|singer|musician|model|comedian|entertainer|television|film)\b/i;
+
+  function isObviousFact(text) {
+    return OBVIOUS_FACT_RE.test(text);
+  }
+
+  function truncateFact(text) {
+    if (text.length <= 150) return text;
+    const cut = text.slice(0, 150);
+    const lastPeriod = cut.lastIndexOf('.');
+    if (lastPeriod > 60) return cut.slice(0, lastPeriod + 1);
+    return cut.replace(/\s+\S*$/, '') + '…';
+  }
+
   function renderDidYouKnow() {
     const section = $('ppDidYouKnow');
     if (!section) return;
@@ -954,34 +991,57 @@
     if (!bio || bio.length < 50) return;
 
     const facts = [];
+    const seen = new Set();
+
+    function addFact(text) {
+      if (!text || facts.length >= 3) return;
+      const clean = text.trim();
+      if (clean.length < 20) return;
+      if (isObviousFact(clean)) return;
+      const key = clean.toLowerCase().slice(0, 40);
+      if (seen.has(key)) return;
+      seen.add(key);
+      facts.push(truncateFact(clean));
+    }
 
     // Birth name
-    const birthMatch = bio.match(/(?:born|birth name)\s+([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){1,4})/i);
-    if (birthMatch && birthMatch[1] !== profileData.person.name) {
-      facts.push(`Born as ${birthMatch[1]}.`);
+    const birthMatch = bio.match(/(?:born|née?|birth name)\s+([A-Z][a-zA-Z\u00C0-\u024F]+(?:\s+[A-Z][a-zA-Z\u00C0-\u024F]+){1,5})/i);
+    if (birthMatch && birthMatch[1].trim() !== profileData.person.name) {
+      addFact(`Born as ${birthMatch[1].trim()}.`);
     }
 
-    // Career start / debut
-    const debutMatch = bio.match(/(?:first role|debut|began|started)\s+(?:in|as|with|their|his|her)\s+([^.]{10,60})\./i);
-    if (debutMatch) {
-      const sentence = debutMatch[0].charAt(0).toUpperCase() + debutMatch[0].slice(1);
-      facts.push(sentence.endsWith('.') ? sentence : sentence + '.');
+    // Split biography into sentences
+    const sentences = bio.split(/(?<=[.!?])\s+/).filter(s => s.length >= 20);
+
+    // Career origin facts
+    for (const s of sentences) {
+      if (facts.length >= 3) break;
+      if (/\b(?:first role|debut|began (?:his|her|their)|started (?:his|her|their)|breakthrough)\b/i.test(s)) {
+        addFact(s);
+      }
     }
 
-    // First distinctive sentence of the bio
-    const sentences = bio.split(/(?<=[.!?])\s+/);
-    if (sentences.length > 0 && facts.length < 3) {
-      const first = sentences[0].trim();
-      if (first.length > 20 && first.length < 200) {
-        // Avoid if it just says "X is an actor"
-        if (!/^[A-Z][a-z]+ (?:is|was) (?:an?|the) (?:American|British|actor|actress|director)/i.test(first)) {
-          facts.push(first);
-        } else if (sentences.length > 1) {
-          const second = sentences[1].trim();
-          if (second.length > 20 && second.length < 200) {
-            facts.push(second);
-          }
-        }
+    // Award/accolade facts
+    for (const s of sentences) {
+      if (facts.length >= 3) break;
+      if (/\b(?:Academy Award|Oscar|Emmy|Grammy|Tony|Golden Globe|BAFTA|Palme|César|Cannes|Venice|Berlin|Pulitzer)\b/i.test(s)) {
+        addFact(s);
+      }
+    }
+
+    // Family/personal facts
+    for (const s of sentences) {
+      if (facts.length >= 3) break;
+      if (/\b(?:married|children|son of|daughter of|brother of|sister of|father|mother)\b/i.test(s)) {
+        addFact(s);
+      }
+    }
+
+    // Distinctive non-obvious sentences from the bio
+    for (const s of sentences) {
+      if (facts.length >= 3) break;
+      if (s.length >= 20 && s.length <= 200) {
+        addFact(s);
       }
     }
 
