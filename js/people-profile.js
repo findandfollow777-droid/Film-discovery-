@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  const CACHE_KEY = 'orbit_people_profiles';
+  const CACHE_KEY = 'orbit_people_profiles_v2';
   const CACHE_MAX = 100;
   const CACHE_DAYS = 30;
   const INITIAL_FILMS = 20;
@@ -72,7 +72,7 @@
     if (!backLink) return;
     const referrer = sessionStorage.getItem('orbit_profile_referrer') || '';
     if (referrer.includes('people-library.html')) {
-      backLink.textContent = '\u2190 Back to Stellar Catalog';
+      backLink.textContent = '\u2190 Back to The Observatory';
       backLink.href = 'people-library.html';
     } else if (referrer.includes('actor-timeline.html')) {
       backLink.textContent = '\u2190 Back to Timeline';
@@ -83,7 +83,7 @@
       backLink.href = '#';
       backLink.addEventListener('click', (e) => { e.preventDefault(); history.back(); });
     } else {
-      backLink.textContent = '\u2190 Stellar Catalog';
+      backLink.textContent = '\u2190 The Observatory';
       backLink.href = 'people-library.html';
     }
   }
@@ -187,7 +187,7 @@
       const filmography = buildFilmography(credits);
       const genreBreakdown = computeGenreBreakdown(credits.cast || []);
       const careerSpan = computeCareerSpan(filmography);
-      const awards = findAwards(filmography);
+      const awards = findAwards(filmography, person.name, person.known_for_department, person.gender);
 
       // Fetch collaborators (top 3 popular movies)
       const collaborators = await findCollaborators(filmography, personId);
@@ -214,11 +214,12 @@
   function buildFilmography(credits) {
     const seen = new Set();
     const films = [];
+    const filmMap = {};
 
     (credits.cast || []).forEach(m => {
       if (!m.id || seen.has(m.id)) return;
       seen.add(m.id);
-      films.push({
+      const film = {
         id: m.id,
         title: m.title,
         poster_path: m.poster_path,
@@ -228,20 +229,25 @@
         popularity: m.popularity || 0,
         genre_ids: m.genre_ids || [],
         role: m.character || null,
-        type: 'cast'
-      });
+        type: 'cast',
+        crewJobs: []
+      };
+      films.push(film);
+      filmMap[m.id] = film;
     });
 
     (credits.crew || []).forEach(m => {
       if (!m.id) return;
       if (seen.has(m.id)) {
-        // Add crew role to existing entry
-        const existing = films.find(f => f.id === m.id);
-        if (existing && !existing.role) existing.role = m.job;
+        const existing = filmMap[m.id];
+        if (existing) {
+          if (!existing.role) existing.role = m.job;
+          if (m.job) existing.crewJobs.push(m.job);
+        }
         return;
       }
       seen.add(m.id);
-      films.push({
+      const film = {
         id: m.id,
         title: m.title,
         poster_path: m.poster_path,
@@ -251,8 +257,11 @@
         popularity: m.popularity || 0,
         genre_ids: m.genre_ids || [],
         role: m.job || null,
-        type: 'crew'
-      });
+        type: 'crew',
+        crewJobs: m.job ? [m.job] : []
+      };
+      films.push(film);
+      filmMap[m.id] = film;
     });
 
     return films;
@@ -311,23 +320,72 @@
     return { years: latest - earliest, from: earliest, to: latest };
   }
 
-  function findAwards(filmography) {
+  // ── Award Filtering ──
+
+  const PERSON_AWARD_CATEGORIES = new Set([
+    'Best Actor', 'Best Actress', 'Best Director',
+    'Silver Bear (Director)', 'Silver Lion (Director)'
+  ]);
+
+  const ACTING_CATEGORIES = new Set(['Best Actor', 'Best Actress']);
+
+  const DIRECTING_CATEGORIES = new Set([
+    'Best Director', 'Silver Bear (Director)', 'Silver Lion (Director)'
+  ]);
+
+  function namesMatch(awardPerson, profileName) {
+    if (!awardPerson || !profileName) return false;
+    return awardPerson.trim().toLowerCase() === profileName.trim().toLowerCase();
+  }
+
+  function shouldIncludeAward(award, personName, knownForDept, personGender, roles) {
+    const category = award.category;
+
+    // Film-level categories → always include for anyone in the film
+    if (!PERSON_AWARD_CATEGORIES.has(category)) return true;
+
+    // Person-specific category with person field → name match only
+    if (award.person) return namesMatch(award.person, personName);
+
+    // Person-specific category without person field (Oscar entries) → role-based inference
+    if (ACTING_CATEGORIES.has(category)) {
+      if (!roles.isCast || knownForDept !== 'Acting') return false;
+      if (category === 'Best Actor') return personGender === 2;
+      if (category === 'Best Actress') return personGender === 1;
+      return false;
+    }
+
+    if (DIRECTING_CATEGORIES.has(category)) {
+      return roles.crewJobs.some(job => job === 'Director');
+    }
+
+    return false;
+  }
+
+  function findAwards(filmography, personName, knownForDept, personGender) {
     if (!window.AWARDS_DATABASE) return [];
 
     const awards = [];
     filmography.forEach(film => {
       const entry = window.AWARDS_DATABASE[film.id];
       if (!entry) return;
+
+      const roles = {
+        isCast: film.type === 'cast',
+        crewJobs: film.crewJobs || []
+      };
+
       entry.awards.forEach(award => {
-        awards.push({
-          ...award,
-          filmTitle: entry.title,
-          filmId: film.id
-        });
+        if (shouldIncludeAward(award, personName, knownForDept, personGender, roles)) {
+          awards.push({
+            ...award,
+            filmTitle: entry.title,
+            filmId: film.id
+          });
+        }
       });
     });
 
-    // Sort by year descending
     awards.sort((a, b) => b.year - a.year);
     return awards;
   }
@@ -530,7 +588,7 @@
     venn: { color: '#3b82f6', label: 'Venn Diagram' },
     search: { color: '#64748b', label: 'Search' },
     profile: { color: '#94a3b8', label: 'Profile' },
-    'stellar-catalog': { color: '#00d9ff', label: 'Stellar Catalog' },
+    'stellar-catalog': { color: '#00d9ff', label: 'The Observatory' },
     'sequel-shot': { color: '#8b5cf6', label: 'Sequel Shot' },
     screenshot: { color: '#fbbf24', label: 'Screenshot' }
   };
