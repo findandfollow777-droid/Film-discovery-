@@ -403,14 +403,14 @@ function populateFilters(movies) {
   // Populate role filter based on available job categories
   if (roleFilter) {
     const roleLabels = {
-      'acting': '🎭 Acting',
-      'directing': '🎬 Directing',
-      'producing': '🎥 Producing',
-      'writing': '✍️ Writing',
-      'cinematography': '📷 Cinematography',
-      'music': '🎵 Music',
-      'editing': '✂️ Editing',
-      'other_crew': '🎞️ Other Crew'
+      'acting': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg> Acting',
+      'directing': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Directing',
+      'producing': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Producing',
+      'writing': '<span class="og og-writing"></span> Writing',
+      'cinematography': '<span class="og og-camera"></span> Cinematography',
+      'music': '<span class="og og-music"></span> Music',
+      'editing': '<span class="og og-scissors"></span> Editing',
+      'other_crew': '<span class="og og-film"></span> Other Crew'
     };
     
     let options = '<option value="all">All Roles</option>';
@@ -931,7 +931,7 @@ function createMovieCard(movie, personIndices, width, height, x, y, isConvergenc
         <div class="movie-title">${movie.title}</div>
         ${year ? `<div class="movie-year">${year}</div>` : ''}
       </div>
-      ${rating ? `<div class="movie-rating">⭐ ${rating}</div>` : ''}
+      ${rating ? `<div class="movie-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</div>` : ''}
     </div>
   `;
   
@@ -978,7 +978,7 @@ function showInfo(movie, personIndices) {
   infoPoster.src = `${TMDB_IMG}w342${movie.poster_path}`;
   infoTitle.textContent = movie.title;
   infoYear.textContent = movie.release_date ? movie.release_date.split("-")[0] : "";
-  infoRating.textContent = movie.vote_average ? `⭐ ${movie.vote_average.toFixed(1)}` : "";
+  infoRating.innerHTML = movie.vote_average ? `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${movie.vote_average.toFixed(1)}` : "";
   infoSynopsis.textContent = movie.overview || "No synopsis available.";
   
   infoPeople.innerHTML = personIndices.map(i => 
@@ -1623,7 +1623,7 @@ async function openMoviePopup(movieId) {
     popupSynopsis.textContent = movie.overview || "No synopsis available.";
     
     if (popupBoxOffice && movie.revenue) {
-      popupBoxOffice.textContent = `💰 $${(movie.revenue / 1000000).toFixed(0)}M`;
+      popupBoxOffice.innerHTML = `<span class="og og-revenue"></span> $${(movie.revenue / 1000000).toFixed(0)}M`;
       popupBoxOffice.hidden = false;
     } else if (popupBoxOffice) {
       popupBoxOffice.hidden = true;

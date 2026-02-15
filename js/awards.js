@@ -18077,12 +18077,12 @@ const AWARDS_DATABASE = {
 
 // Award emoji mappings
 const AWARD_EMOJIS = {
-  "Oscar": "🏆",
-  "Cannes": "🌴",
-  "BAFTA": "🎭",
-  "Venice": "🦁",
-  "Berlin": "🐻",
-  "Golden Globe": "🌍"
+  "Oscar": '<span class="og og-trophy"></span>',
+  "Cannes": '<span class="og og-palm"></span>',
+  "BAFTA": '<span class="og og-film"></span>',
+  "Venice": '<span class="og og-lion"></span>',
+  "Berlin": '<span class="og og-bear"></span>',
+  "Golden Globe": '<span class="og og-globe"></span>'
 };
 
 // Award SVG icon paths (viewBox 0 0 24 24)
@@ -18109,7 +18109,7 @@ function hasPrestigeAward(movieId) {
 }
 
 function formatAward(award) {
-  const emoji = AWARD_EMOJIS[award.festival] || "🏆";
+  const emoji = AWARD_EMOJIS[award.festival] || '<span class="og og-trophy"></span>';
   let text = emoji + " " + award.festival + " " + award.year;
   if (award.person) text += " (" + award.person + ")";
   return text;
@@ -18119,7 +18119,7 @@ function getAwardBadgesHTML(movieId) {
   const awards = getMovieAwards(movieId);
   if (!awards) return "";
   return awards.map(function(award) {
-    const emoji = AWARD_EMOJIS[award.festival] || "🏆";
+    const emoji = AWARD_EMOJIS[award.festival] || '<span class="og og-trophy"></span>';
     const wonClass = award.won ? "award-badge-won" : "award-badge-nom";
     let label = emoji + " " + award.festival + " " + award.year;
     if (award.person) label += " (" + award.person + ")";

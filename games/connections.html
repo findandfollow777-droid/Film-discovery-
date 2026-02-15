@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/connections.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
   
@@ -54,7 +55,7 @@
     <!-- DAILY INFO -->
     <div class="daily-info">
       <div class="daily-badge">
-        <span class="badge-icon">🔗</span>
+        <span class="badge-icon"><span class="og og-link"></span></span>
         <span class="badge-text">Daily Connection</span>
       </div>
       <div class="daily-number">Puzzle #<span id="puzzleNumber">1</span></div>
@@ -83,7 +84,7 @@
     
     <!-- ACTION BUTTONS -->
     <section class="action-buttons">
-      <button class="action-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+      <button class="action-btn shuffle-btn" id="shuffleBtn"><span class="og og-shuffle"></span> Shuffle</button>
       <button class="action-btn deselect-btn" id="deselectBtn" disabled>Deselect All</button>
       <button class="action-btn submit-btn" id="submitBtn" disabled>Submit</button>
     </section>
@@ -92,7 +93,7 @@
     <section class="result-section" id="resultSection" hidden>
       <button class="result-close-btn" id="resultCloseBtn">&#x2715;</button>
       <div class="result-content">
-        <div class="result-icon" id="resultIcon">🎉</div>
+        <div class="result-icon" id="resultIcon"><span class="og og-party og-lg"></span></div>
         <h2 class="result-title" id="resultTitle">Puzzle Complete!</h2>
         
         <div class="result-groups" id="resultGroups">
@@ -108,7 +109,7 @@
         
         <div class="share-section">
           <button class="share-btn" id="shareBtn">
-            <span>📋</span> Share Result
+            <span class="og og-clipboard"></span> Share Result
           </button>
         </div>
         
@@ -154,10 +155,10 @@
         
         <div class="difficulty-info">
           <h4>Difficulty Colors</h4>
-          <div class="diff-row yellow">🟨 Straightforward</div>
-          <div class="diff-row green">🟩 Moderate</div>
-          <div class="diff-row blue">🟦 Tricky</div>
-          <div class="diff-row purple">🟪 Devious</div>
+          <div class="diff-row yellow"><span class="og og-sq-yellow"></span> Straightforward</div>
+          <div class="diff-row green"><span class="og og-sq-green"></span> Moderate</div>
+          <div class="diff-row blue"><span class="og og-sq-blue"></span> Tricky</div>
+          <div class="diff-row purple"><span class="og og-sq-purple"></span> Devious</div>
         </div>
       </div>
     </div>

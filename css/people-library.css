@@ -518,6 +518,28 @@ body {
   justify-content: center;
 }
 
+/* Memorial styling for recently deceased */
+.pl-card-photo--memorial {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 0 12px rgba(148, 163, 184, 0.1);
+}
+
+.pl-card--memorial .pl-card-name {
+  color: var(--muted-silver);
+  font-style: italic;
+}
+
+.pl-card--memorial .pl-card-photo {
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.pl-card--memorial:hover .pl-card-photo--memorial {
+  filter: grayscale(60%);
+  opacity: 0.85;
+}
+
 .pl-card-name {
   font-family: var(--font-display);
   font-size: 0.85rem;
@@ -1013,6 +1035,104 @@ body {
   color: var(--muted-silver);
 }
 
+/* ── First-Visit Welcome Overlay ── */
+
+.pl-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.pl-welcome-overlay.hidden {
+  display: none;
+}
+
+.pl-welcome-card {
+  background: linear-gradient(135deg, #111827 0%, #1a2332 100%);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 560px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 217, 255, 0.1);
+}
+
+.pl-welcome-icon {
+  color: var(--accent-cyan);
+  margin-bottom: 20px;
+}
+
+.pl-welcome-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.pl-welcome-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.pl-welcome-text strong {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.pl-welcome-features {
+  margin: 24px 0;
+  text-align: left;
+}
+
+.pl-welcome-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--muted-silver);
+  line-height: 1.4;
+}
+
+.feature-bullet {
+  color: var(--accent-cyan);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.pl-welcome-btn {
+  background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+  color: #0a0e1a;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+
+.pl-welcome-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 900px) {
@@ -1118,5 +1238,27 @@ body {
     min-width: 80px;
     padding: 6px 16px;
     font-size: 0.75rem;
+  }
+
+  .pl-welcome-card {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+
+  .pl-welcome-title {
+    font-size: 1.3rem;
+  }
+
+  .pl-welcome-text {
+    font-size: 0.9rem;
+  }
+
+  .pl-welcome-feature {
+    font-size: 0.85rem;
+  }
+
+  .pl-welcome-btn {
+    padding: 12px 32px;
+    font-size: 0.9rem;
   }
 }

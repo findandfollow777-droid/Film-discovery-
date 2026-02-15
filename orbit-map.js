@@ -388,7 +388,7 @@ function setupPanel() {
         label: currentPanelLabel,
         movieIds: currentPanelLocData.movies.map(m => m.id)
       }));
-      window.location.href = 'index.html';
+      window.location.href = 'games/results.html';
     }
   });
 
@@ -473,7 +473,7 @@ function renderPanelMovies(movies) {
         <img src="${TMDB_IMAGE_BASE}w185${cached}"
              alt="${movie.title}" loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="no-poster" style="display:none">🎬</div>
+        <div class="no-poster" style="display:none"><svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>
         <div class="card-info">
           <div class="card-title">${movie.title}</div>
           <div class="card-year">${movie.year || ''}</div>
@@ -481,7 +481,7 @@ function renderPanelMovies(movies) {
       `;
     } else {
       card.innerHTML = `
-        <div class="no-poster">🎬</div>
+        <div class="no-poster"><svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>
         <div class="card-info">
           <div class="card-title">${movie.title}</div>
           <div class="card-year">${movie.year || ''}</div>

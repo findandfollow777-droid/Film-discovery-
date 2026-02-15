@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/compare.css">
+  <link rel="stylesheet" href="css/orbit-glyphs.css">
 </head>
 <body>
   <!-- CINEMATIC BACKGROUND -->
@@ -38,7 +39,7 @@
       </div>
       <div class="shortlist-actions">
         <button class="compare-btn" id="compareBtn" disabled>
-          <span class="compare-btn-icon">⚡</span>
+          <span class="compare-btn-icon"><span class="og og-sparkle"></span></span>
           <span class="compare-btn-text">Compare Selected</span>
         </button>
         <span class="compare-hint" id="compareHint">Select 2–5 movies to compare</span>
@@ -61,19 +62,19 @@
 
       <!-- TABS -->
       <nav class="compare-tabs" id="compareTabs">
-        <button class="compare-tab active" data-panel="orbital">🪐 Orbital Rings</button>
+        <button class="compare-tab active" data-panel="orbital"><span class="og og-planet"></span> Orbital Rings</button>
         <button class="compare-tab" data-panel="constellation">✦ Constellation</button>
-        <button class="compare-tab" data-panel="timeline">📅 Timeline</button>
-        <button class="compare-tab" data-panel="radar">📊 Radar</button>
-        <button class="compare-tab" data-panel="nebula">🌌 Word Nebula</button>
-        <button class="compare-tab" data-panel="awards">🏆 Awards</button>
+        <button class="compare-tab" data-panel="timeline"><span class="og og-calendar"></span> Timeline</button>
+        <button class="compare-tab" data-panel="radar"><span class="og og-stats"></span> Radar</button>
+        <button class="compare-tab" data-panel="nebula"><span class="og og-galaxy"></span> Word Nebula</button>
+        <button class="compare-tab" data-panel="awards"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg> Awards</button>
       </nav>
 
       <!-- PANELS -->
       <div class="compare-panels">
         <div class="compare-panel active" id="panel-orbital">
           <div class="panel-placeholder">
-            <span class="placeholder-icon">🪐</span>
+            <span class="placeholder-icon"><span class="og og-planet og-lg"></span></span>
             <h3>Orbital Rings</h3>
             <p>Concentric rings showing shared genres, cast, and crew overlaps between selected movies.</p>
           </div>
@@ -87,28 +88,28 @@
         </div>
         <div class="compare-panel" id="panel-timeline">
           <div class="panel-placeholder">
-            <span class="placeholder-icon">📅</span>
+            <span class="placeholder-icon"><span class="og og-calendar og-lg"></span></span>
             <h3>Timeline</h3>
             <p>Chronological view of selected movies across release years.</p>
           </div>
         </div>
         <div class="compare-panel" id="panel-radar">
           <div class="panel-placeholder">
-            <span class="placeholder-icon">📊</span>
+            <span class="placeholder-icon"><span class="og og-stats og-lg"></span></span>
             <h3>Radar Chart</h3>
             <p>Multi-axis comparison of rating, popularity, budget, revenue, and runtime.</p>
           </div>
         </div>
         <div class="compare-panel" id="panel-nebula">
           <div class="panel-placeholder">
-            <span class="placeholder-icon">🌌</span>
+            <span class="placeholder-icon"><span class="og og-galaxy og-lg"></span></span>
             <h3>Word Nebula</h3>
             <p>Combined word cloud from Nebula impressions across all selected movies.</p>
           </div>
         </div>
         <div class="compare-panel" id="panel-awards">
           <div class="panel-placeholder">
-            <span class="placeholder-icon">🏆</span>
+            <span class="placeholder-icon"><svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg></span>
             <h3>Awards</h3>
             <p>Side-by-side comparison of awards and nominations from major film festivals.</p>
           </div>

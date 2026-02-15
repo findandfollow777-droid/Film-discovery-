@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/journeys.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
 
@@ -73,8 +74,8 @@
     <!-- CONTROLS -->
     <section class="controls-section" id="inputSection">
       <div class="input-toggle">
-        <button class="toggle-btn active" id="movieToggle">🎬 Movie</button>
-        <button class="toggle-btn" id="actorToggle">🎭 Actor</button>
+        <button class="toggle-btn active" id="movieToggle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Movie</button>
+        <button class="toggle-btn" id="actorToggle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg> Actor</button>
       </div>
       <div class="search-wrap">
         <input type="text" class="search-input" id="searchInput" placeholder="Search for a movie..." autocomplete="off">
@@ -83,7 +84,7 @@
       <p class="input-hint" id="inputHint">Find a movie featuring <span id="currentActorName">the starting actor</span></p>
       <div class="action-buttons">
         <button class="action-btn undo-btn" id="undoBtn" disabled>↩ Undo</button>
-        <button class="action-btn reset-btn" id="resetBtn">🔄 Reset</button>
+        <button class="action-btn reset-btn" id="resetBtn"><span class="og og-reset"></span> Reset</button>
       </div>
     </section>
 
@@ -124,7 +125,7 @@
 
       <div class="celebration-actions">
         <button class="cel-btn review-btn" id="reviewBtn">Review Journey</button>
-        <button class="cel-btn share-btn" id="shareBtn"><span>📋</span> Share</button>
+        <button class="cel-btn share-btn" id="shareBtn"><span><span class="og og-clipboard"></span></span> Share</button>
       </div>
     </div>
   </section>

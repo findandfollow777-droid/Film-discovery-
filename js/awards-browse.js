@@ -229,7 +229,7 @@
   function renderResults() {
     if (typeof AWARDS_BROWSE_DATABASE === "undefined") {
       resultsContainer.innerHTML = `<div class="results-empty">
-        <div class="empty-icon">🎬</div>
+        <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>
         <h3>Data Not Available</h3>
         <p>Awards data could not be loaded.</p>
       </div>`;
@@ -268,7 +268,7 @@
 
     if (entries.length === 0) {
       resultsContainer.innerHTML = `<div class="results-empty">
-        <div class="empty-icon">🏆</div>
+        <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg></div>
         <h3>No Results</h3>
         <p>No awards found for the selected filters. Try broadening your selection.</p>
       </div>`;
@@ -330,8 +330,8 @@
         html += `<div class="${tileClass}" data-tmdb-id="${m.tmdb_id}">
           <div class="award-tile-poster">
             ${posterSrc
-              ? `<img src="${posterSrc}" alt="${escapeAttr(m.title)}" loading="lazy" onerror="this.outerHTML='<div class=\\'no-poster\\'>🎬</div>'">`
-              : `<div class="no-poster">🎬</div>`}
+              ? `<img src="${posterSrc}" alt="${escapeAttr(m.title)}" loading="lazy" onerror="this.outerHTML='<div class=\\'no-poster\\'><svg viewBox=\\'0 0 24 24\\' width=\\'32\\' height=\\'32\\' fill=\\'currentColor\\'><path d=\\'M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z\\'/></svg></div>'">`
+              : `<div class="no-poster"><svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>`}
             <div class="${badgeClass}">${badgeHtml}</div>
           </div>
           <div class="award-tile-info">

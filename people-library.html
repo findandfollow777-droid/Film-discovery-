@@ -212,6 +212,40 @@
 
   </main>
 
+  <!-- FIRST VISIT WELCOME OVERLAY -->
+  <div id="plWelcomeOverlay" class="pl-welcome-overlay hidden">
+    <div class="pl-welcome-card">
+      <div class="pl-welcome-icon">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M19 21v-1.5c0-2-1.6-3.5-3.5-3.5h-7C6.6 16 5 17.5 5 19.5V21"/>
+          <circle cx="5" cy="9" r="2" opacity="0.5"/>
+          <circle cx="19" cy="9" r="2" opacity="0.5"/>
+        </svg>
+      </div>
+      <h2 class="pl-welcome-title">WELCOME TO THE STELLAR CATALOG</h2>
+      <p class="pl-welcome-text">
+        Discover the people behind cinema. Browse actors, directors, writers, and producers.
+        Build your personal constellation in <strong>My Orbit</strong> mode to track the talent you've encountered.
+      </p>
+      <div class="pl-welcome-features">
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>Search and filter by department, era, or awards</span>
+        </div>
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>Explore curated collections and director circles</span>
+        </div>
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>View detailed profiles with filmography timelines</span>
+        </div>
+      </div>
+      <button id="plWelcomeBtn" class="pl-welcome-btn">Get Started</button>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="config.js"></script>
   <script src="js/utils.js"></script>

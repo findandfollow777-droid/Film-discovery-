@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/constellation.css">
   <link rel="stylesheet" href="../css/swipe-memory.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
   <!-- SPACE BACKGROUND -->
@@ -46,7 +47,7 @@
     <!-- Expand Universe Button (shown when < 10 movies) -->
     <div class="expand-universe" id="expandUniverse" hidden>
       <button class="expand-btn" id="expandBtn">
-        <span class="expand-icon">✨</span>
+        <span class="expand-icon"><span class="og og-sparkle"></span></span>
         <span class="expand-text">Expand Universe</span>
       </button>
       <p class="expand-hint">Add similar films based on genre & themes</p>
@@ -65,7 +66,7 @@
         <h2 class="info-title" id="infoTitle"></h2>
         <div class="info-meta">
           <span class="info-year" id="infoYear"></span>
-          <span class="info-rating">⭐ <span id="infoRating"></span></span>
+          <span class="info-rating"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> <span id="infoRating"></span></span>
           <span class="info-similarity" id="infoSimilarity"></span>
         </div>
         <p class="info-overview" id="infoOverview"></p>

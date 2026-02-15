@@ -529,12 +529,12 @@ function showResultSection(won) {
   const targetBadges = document.getElementById("targetBadges");
   
   if (won) {
-    resultIcon.textContent = "🌟";
+    resultIcon.innerHTML = '<svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg>';
     resultTitle.textContent = "Supernova!";
     resultTitle.classList.remove("lost");
     resultSubtitle.textContent = `You found the film in ${gameState.attempts} attempt${gameState.attempts > 1 ? 's' : ''}!`;
   } else {
-    resultIcon.textContent = "💫";
+    resultIcon.innerHTML = '<svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg>';
     resultTitle.textContent = "Lost in Space";
     resultTitle.classList.add("lost");
     resultSubtitle.textContent = "The mystery film was:";

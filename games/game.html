@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../css/game.css">
   <link rel="stylesheet" href="../css/moviecube.css">
   <link rel="stylesheet" href="../css/shortlist-badge.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
   
@@ -134,7 +135,7 @@
         >
         <button class="guess-btn" id="guessBtn">
           <span class="btn-text">Launch</span>
-          <span class="btn-icon">🚀</span>
+          <span class="btn-icon"><span class="og og-rocket"></span></span>
         </button>
       </div>
       
@@ -157,7 +158,7 @@
     <!-- GUESS HISTORY -->
     <section class="history-section" id="historySection">
       <h3 class="history-title">
-        <span class="history-icon">🛸</span>
+        <span class="history-icon"><span class="og og-ufo"></span></span>
         Flight Log
       </h3>
       <div class="guess-history" id="guessHistory">
@@ -169,7 +170,7 @@
     <section class="result-section" id="resultSection" hidden>
       <button class="result-close-btn" id="resultCloseBtn">&#x2715;</button>
       <div class="result-content">
-        <div class="result-icon" id="resultIcon">🌟</div>
+        <div class="result-icon" id="resultIcon"><span class="og og-star og-lg"></span></div>
         <h2 class="result-title" id="resultTitle">Supernova!</h2>
         <p class="result-subtitle" id="resultSubtitle">You found the film in 3 attempts</p>
         
@@ -186,7 +187,7 @@
         
         <div class="share-section">
           <button class="share-btn" id="shareBtn">
-            <span>📋</span> Share Result
+            <span class="og og-clipboard"></span> Share Result
           </button>
           <div class="share-preview" id="sharePreview"></div>
         </div>
@@ -229,7 +230,7 @@
       <div class="distribution-chart" id="distributionChart"></div>
       
       <div class="prestige-stats">
-        <h3 class="prestige-title">🏆 Prestige Discoveries</h3>
+        <h3 class="prestige-title"><span class="og og-trophy"></span> Prestige Discoveries</h3>
         <div class="prestige-count">
           <span id="prestigeCount">0</span> award-winning films identified
         </div>
@@ -303,7 +304,7 @@
         </div>
         
         <div class="prestige-info">
-          <h4>🏆 Prestige Layer</h4>
+          <h4><span class="og og-trophy"></span> Prestige Layer</h4>
           <p>Guess a movie that won a major award (Oscar, Cannes, BAFTA, Venice, Berlin) and earn a Prestige badge—even if it's not the answer!</p>
         </div>
       </div>
@@ -313,7 +314,7 @@
   <!-- PRESTIGE NOTIFICATION -->
   <div class="prestige-notification" id="prestigeNotification" hidden>
     <div class="prestige-content">
-      <span class="prestige-icon">🏆</span>
+      <span class="prestige-icon"><span class="og og-trophy"></span></span>
       <span class="prestige-text">Prestige Discovery!</span>
       <span class="prestige-award" id="prestigeAward"></span>
     </div>

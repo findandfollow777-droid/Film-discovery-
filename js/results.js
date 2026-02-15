@@ -700,7 +700,7 @@ function renderPage() {
           <div class="movie-title">${displayTitle}</div>
           <div class="movie-meta">
             <span class="movie-year">${year}</span>
-            ${rating ? `<span class="movie-rating">⭐ ${rating}</span>` : ''}
+            ${rating ? `<span class="movie-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</span>` : ''}
           </div>
           ${awardCountsHTML}
         </div>
@@ -788,11 +788,11 @@ function showHoverTooltip(card, e) {
     <div class="tooltip-title">${title}</div>
     <div class="tooltip-meta">
       ${year ? `<span class="tooltip-year">${year}</span>` : ''}
-      ${rating ? `<span class="tooltip-rating">⭐ ${rating}</span>` : ''}
+      ${rating ? `<span class="tooltip-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</span>` : ''}
       ${runtime ? `<span class="tooltip-runtime">${runtime}</span>` : ''}
     </div>
     ${genres ? `<div class="tooltip-genres">${genres}</div>` : ''}
-    ${revenue ? `<div class="tooltip-revenue">💰 ${revenue}</div>` : ''}
+    ${revenue ? `<div class="tooltip-revenue"><span class="og og-revenue"></span> ${revenue}</div>` : ''}
   `;
   
   // Position and show
@@ -873,7 +873,7 @@ function showEmptyState(message) {
   if (moviesGrid) {
     moviesGrid.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state-icon">🎬</div>
+        <div class="empty-state-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>
         <div class="empty-state-text">${message}</div>
       </div>
     `;
@@ -885,7 +885,7 @@ function showCappedBanner(totalAvailable) {
   const banner = document.createElement('div');
   banner.className = 'capped-banner';
   banner.innerHTML = `
-    <span class="capped-icon">⚠️</span>
+    <span class="capped-icon"><span class="og og-target"></span></span>
     <span class="capped-text">Showing 500 of ~${parseInt(totalAvailable).toLocaleString()} results. <a href="../index.html">Add more filters</a> for refined results.</span>
     <button class="capped-close" onclick="this.parentElement.remove()">✕</button>
   `;

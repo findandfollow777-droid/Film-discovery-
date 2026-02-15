@@ -1083,7 +1083,7 @@ Play at orbit-game.com/journeys`;
     const btn = document.getElementById("shareBtn");
     btn.innerHTML = "<span>✓</span> Copied!";
     setTimeout(() => {
-      btn.innerHTML = "<span>📋</span> Share";
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share';
     }, 2000);
   });
 }

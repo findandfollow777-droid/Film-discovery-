@@ -533,7 +533,7 @@ Play at orbit-game.com`;
     const btn = document.getElementById("shareBtn");
     btn.innerHTML = "<span>✓</span> Copied!";
     setTimeout(() => {
-      btn.innerHTML = "<span>📋</span> Share Result";
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
     }, 2000);
   });
 }

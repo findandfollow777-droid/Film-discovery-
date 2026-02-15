@@ -541,14 +541,14 @@ function updateRoleFilterOptions() {
   
   // Build role filter options
   const roleLabels = {
-    'acting': '🎭 Acting',
-    'directing': '🎬 Directing',
-    'producing': '🎥 Producing',
-    'writing': '✍️ Writing',
-    'cinematography': '📷 Cinematography',
-    'music': '🎵 Music',
-    'editing': '✂️ Editing',
-    'other_crew': '🎞️ Other Crew'
+    'acting': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg> Acting',
+    'directing': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Directing',
+    'producing': '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Producing',
+    'writing': '<span class="og og-writing"></span> Writing',
+    'cinematography': '<span class="og og-camera"></span> Cinematography',
+    'music': '<span class="og og-music"></span> Music',
+    'editing': '<span class="og og-scissors"></span> Editing',
+    'other_crew': '<span class="og og-film"></span> Other Crew'
   };
   
   let options = '<option value="all">All Roles</option>';
@@ -1140,7 +1140,7 @@ function renderUpcoming(movies) {
         <img src="${posterUrl}" alt="${movie.title}">
         <div class="upcoming-info">
           <div class="title">${movie.title}</div>
-          <div class="date">📅 ${releaseDate}</div>
+          <div class="date"><span class="og og-calendar"></span> ${releaseDate}</div>
         </div>
       </div>
     `;
@@ -1665,7 +1665,7 @@ function createMovieCard(movie, width, height, orbitIndex = 0) {
     ${tvHoverInfo}
     <div class="card-meta">
       <div class="card-meta-row">
-        <div class="card-rating">⭐ ${rating}</div>
+        <div class="card-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</div>
         <div class="card-year">${yearDisplay}</div>
       </div>
       ${valueDisplay}
@@ -1712,7 +1712,7 @@ function createConvergenceCardFull(movie, personIndices, width, height) {
       <img class="card-poster" src="${TMDB_IMG}w300${movie.poster_path}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${width}x${height}?text=?'">
       <div class="card-overlay">
-        <div class="card-rating">⭐ ${rating}</div>
+        <div class="card-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</div>
         <div class="card-year">${year || ''}</div>
         <div class="card-title">${title}</div>
       </div>

@@ -463,7 +463,7 @@ function renderComments() {
       <p class="discussion-text">${comment.text}</p>
       <div class="discussion-actions">
         <button class="discussion-action like-btn" data-id="${comment.id}">
-          ❤️ ${comment.likes}
+          <span class="og og-fire"></span> ${comment.likes}
         </button>
         <button class="discussion-action">Reply</button>
       </div>

@@ -496,17 +496,17 @@ function showResult() {
   const iconEl = document.getElementById("resultIcon");
   
   if (percentage >= 80) {
-    verdictEl.textContent = "Expert Eye! 🏆";
-    iconEl.textContent = "🏆";
+    verdictEl.innerHTML = 'Expert Eye! <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-left:4px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg>';
+    iconEl.innerHTML = '<svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg>';
   } else if (percentage >= 60) {
-    verdictEl.textContent = "Sharp Vision! 👁️";
-    iconEl.textContent = "👁️";
+    verdictEl.innerHTML = 'Sharp Vision! <span class="og og-eye"></span>';
+    iconEl.innerHTML = '<span class="og og-eye og-lg"></span>';
   } else if (percentage >= 40) {
-    verdictEl.textContent = "Good Recognition! 👍";
+    verdictEl.innerHTML = 'Good Recognition! <span class="og og-thumbsup"></span>';
     iconEl.textContent = "👍";
   } else {
-    verdictEl.textContent = "Keep Watching! 🎬";
-    iconEl.textContent = "🎬";
+    verdictEl.innerHTML = 'Keep Watching! <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-left:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
+    iconEl.innerHTML = '<svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
   }
   
   // Round breakdown
@@ -610,7 +610,7 @@ Play at orbit-game.com/arcade`;
     const btn = document.getElementById("shareBtn");
     btn.innerHTML = "<span>✓</span> Copied!";
     setTimeout(() => {
-      btn.innerHTML = "<span>📋</span> Share Result";
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
     }, 2000);
   });
 }

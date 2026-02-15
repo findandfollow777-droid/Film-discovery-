@@ -434,6 +434,8 @@ html, body {
 .game-mastermind { --card-accent: #818cf8; --card-glow: rgba(129, 140, 248, 0.4); }
 .game-alternate { --card-accent: #14b8a6; --card-glow: rgba(20, 184, 166, 0.4); }
 .game-tenth-star { --card-accent: #ffd700; --card-glow: rgba(255, 215, 0, 0.4); }
+.game-stellar { --game-accent: #00d9ff; }
+.stellar-glow { background: radial-gradient(circle, rgba(0,217,255,0.15), transparent 70%); }
 
 /* ============================================
    ORBIT ICON COMPONENT (Game Cards)

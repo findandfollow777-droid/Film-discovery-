@@ -123,6 +123,22 @@
       <p>Stats, history &amp; preferences</p>
     </a>
 
+    <!-- 5.5. Stellar Catalog -->
+    <a href="people-library.html" class="landing-tile">
+      <div class="orbit-icon-container">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <svg class="orbit-glyph" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M19 21v-1.5c0-2-1.6-3.5-3.5-3.5h-7C6.6 16 5 17.5 5 19.5V21"/>
+          <circle cx="5" cy="9" r="2" opacity="0.5"/>
+          <circle cx="19" cy="9" r="2" opacity="0.5"/>
+        </svg>
+      </div>
+      <h2>STELLAR CATALOG</h2>
+      <p>Discover the people of cinema</p>
+    </a>
+
     <!-- 6. Arcade -->
     <a href="arcade.html" class="landing-tile">
       <div class="orbit-icon-container">
@@ -267,15 +283,18 @@
         let icon, title, subtitle, image, imgClass, rating;
         switch(type) {
           case 'movie':
-            icon='🎬'; title=item.title; subtitle=item.release_date ? item.release_date.split('-')[0] : '';
+            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
+            title=item.title; subtitle=item.release_date ? item.release_date.split('-')[0] : '';
             image=item.poster_path ? `https://image.tmdb.org/t/p/w92${item.poster_path}` : '';
             imgClass='poster'; rating=item.vote_average; break;
           case 'actor':
-            icon='🎭'; title=item.name; subtitle=(item.known_for||[]).map(k=>k.title||k.name).slice(0,2).join(', ')||'Actor';
+            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg>';
+            title=item.name; subtitle=(item.known_for||[]).map(k=>k.title||k.name).slice(0,2).join(', ')||'Actor';
             image=item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
             imgClass='profile'; rating=null; break;
           case 'crew':
-            icon='🎥'; title=item.name; subtitle=item.known_for_department||'Crew';
+            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
+            title=item.name; subtitle=item.known_for_department||'Crew';
             image=item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
             imgClass='profile'; rating=null; break;
         }

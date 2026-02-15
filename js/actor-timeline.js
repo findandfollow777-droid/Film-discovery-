@@ -341,6 +341,13 @@ function updateHeader() {
     photo.src = `${TMDB_IMG}w185${actorData.profile_path}`;
     photo.classList.add('visible');
   }
+
+  // Add profile link
+  const personId = localStorage.getItem('timelineMovieId');
+  if (personId) {
+    const profileLink = document.getElementById('actorProfileLink');
+    profileLink.innerHTML = `<a href="people-profile.html?id=${personId}" class="orbit-profile-link">View Full Profile &#8250;</a>`;
+  }
 }
 
 // ── Time Scale ──
@@ -378,8 +385,8 @@ function renderCareerDNA() {
   const mPct = Math.round(mc / total * 100);
 
   document.getElementById('dnaBar').style.setProperty('--split', `${mPct}%`);
-  document.getElementById('dnaMovieLabel').textContent = `🎬 ${mc} Films (${mPct}%)`;
-  document.getElementById('dnaTvLabel').textContent = `📺 ${tvShowCount} Shows (${100 - mPct}%)`;
+  document.getElementById('dnaMovieLabel').innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> ${mc} Films (${mPct}%)`;
+  document.getElementById('dnaTvLabel').innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> ${tvShowCount} Shows (${100 - mPct}%)`;
 }
 
 // ── Unified Track ──
@@ -674,8 +681,8 @@ function openCareerDNA() {
   document.getElementById('dnaPopupTv').style.width = `${tPct}%`;
 
   document.getElementById('dnaPopupLegend').innerHTML = `
-    <span class="legend-item film-legend">🎬 ${mPct}% Film (${mc} credits)</span>
-    <span class="legend-item tv-legend">📺 ${tPct}% TV (${tvShowCount} shows, ${mainRoleSeasons} seasons)</span>
+    <span class="legend-item film-legend"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> ${mPct}% Film (${mc} credits)</span>
+    <span class="legend-item tv-legend"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> ${tPct}% TV (${tvShowCount} shows, ${mainRoleSeasons} seasons)</span>
   `;
 
   // Compute stats

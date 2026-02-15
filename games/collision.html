@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/collision.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
   
@@ -55,7 +56,7 @@
     <!-- DAILY INFO -->
     <div class="daily-info">
       <div class="daily-badge">
-        <span class="badge-icon">💥</span>
+        <span class="badge-icon"><span class="og og-explosion"></span></span>
         <span class="badge-text">Daily Collision</span>
       </div>
       <div class="daily-number">Course #<span id="puzzleNumber">1</span></div>
@@ -72,7 +73,7 @@
       </div>
       
       <div class="collision-zone">
-        <div class="collision-icon">💥</div>
+        <div class="collision-icon"><span class="og og-explosion og-lg"></span></div>
         <div class="collision-label">COLLISION ZONE</div>
       </div>
       
@@ -105,7 +106,7 @@
     <!-- TIMER & SCORE -->
     <section class="game-status">
       <div class="timer-display">
-        <span class="timer-icon">⏱️</span>
+        <span class="timer-icon"><span class="og og-timer"></span></span>
         <span class="timer-value" id="timerValue">3:00</span>
       </div>
       <div class="score-display">
@@ -137,7 +138,7 @@
           <div class="found-list" id="foundListA"></div>
         </div>
         <div class="found-column column-collision">
-          <h4 class="column-title">🔥 Collisions</h4>
+          <h4 class="column-title"><span class="og og-fire"></span> Collisions</h4>
           <div class="found-list" id="foundListCollision"></div>
         </div>
         <div class="found-column column-b">
@@ -151,7 +152,7 @@
     <section class="result-section" id="resultSection" hidden>
       <button class="result-close-btn" id="resultCloseBtn">&#x2715;</button>
       <div class="result-content">
-        <div class="result-icon">🏁</div>
+        <div class="result-icon"><span class="og og-flag og-lg"></span></div>
         <h2 class="result-title">Time's Up!</h2>
         <div class="final-score">
           <span class="final-label">Final Score</span>
@@ -175,7 +176,7 @@
         
         <div class="share-section">
           <button class="share-btn" id="shareBtn">
-            <span>📋</span> Share Result
+            <span class="og og-clipboard"></span> Share Result
           </button>
         </div>
         
@@ -226,7 +227,7 @@
             <span class="score-pts">1 point</span>
           </div>
           <div class="score-row collision">
-            <span class="score-type">💥 Collision</span>
+            <span class="score-type"><span class="og og-explosion"></span> Collision</span>
             <span class="score-pts">5 points</span>
           </div>
         </div>

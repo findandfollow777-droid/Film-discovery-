@@ -526,10 +526,10 @@ function showResult() {
   const resultTitle = document.getElementById("resultTitle");
   
   if (gameState.won) {
-    resultIcon.textContent = gameState.mistakes === 0 ? "🏆" : "🎉";
+    resultIcon.innerHTML = gameState.mistakes === 0 ? '<svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg>' : '<span class="og og-party og-lg"></span>';
     resultTitle.textContent = gameState.mistakes === 0 ? "Perfect!" : "Puzzle Complete!";
   } else {
-    resultIcon.textContent = "😔";
+    resultIcon.innerHTML = '<span class="og og-sad og-lg"></span>';
     resultTitle.textContent = "Better Luck Tomorrow!";
   }
   
@@ -712,7 +712,7 @@ Play at orbit-game.com/arcade`;
     const btn = document.getElementById("shareBtn");
     btn.innerHTML = "<span>✓</span> Copied!";
     setTimeout(() => {
-      btn.innerHTML = "<span>📋</span> Share Result";
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
     }, 2000);
   });
 }

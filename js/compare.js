@@ -1462,7 +1462,7 @@
     var count = sorted.length;
     var years = sorted.map(function(m) { return parseInt(m.year) || 0; }).filter(function(y) { return y > 1800; });
     if (years.length === 0) {
-      panel.innerHTML = '<div class="panel-placeholder"><span class="placeholder-icon">📅</span>' +
+      panel.innerHTML = '<div class="panel-placeholder"><span class="placeholder-icon"><span class="og og-calendar og-lg"></span></span>' +
         '<h3>No Release Dates</h3><p>Selected movies have no release year data.</p></div>';
       return;
     }
@@ -2166,7 +2166,7 @@
 
     if (!anyHasAwards) {
       html = '<div class="awards-empty-state">';
-      html += '<div class="awards-empty-icon">🏆</div>';
+      html += '<div class="awards-empty-icon"><span class="og og-trophy og-lg"></span></div>';
       html += '<h3>No Award Records</h3>';
       html += '<p>None of the selected movies have awards or nominations in the archive.</p>';
       html += '</div>';

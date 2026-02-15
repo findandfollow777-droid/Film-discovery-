@@ -230,19 +230,22 @@ function renderSearchDropdown(results, type) {
 
     switch(type) {
       case "movie":
-        icon = "🎬"; title = item.title;
+        icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
+        title = item.title;
         subtitle = item.release_date ? item.release_date.split('-')[0] : '';
         image = item.poster_path ? `https://image.tmdb.org/t/p/w92${item.poster_path}` : '';
         imgClass = "poster"; rating = item.vote_average;
         break;
       case "actor":
-        icon = "🎭"; title = item.name;
+        icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg>';
+        title = item.name;
         subtitle = (item.known_for || []).map(k => k.title || k.name).slice(0, 2).join(", ") || "Actor";
         image = item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
         imgClass = "profile"; rating = null;
         break;
       case "crew":
-        icon = "🎥"; title = item.name;
+        icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
+        title = item.name;
         subtitle = item.known_for_department || "Crew";
         image = item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
         imgClass = "profile"; rating = null;

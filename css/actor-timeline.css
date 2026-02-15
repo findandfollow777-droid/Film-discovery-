@@ -514,6 +514,22 @@ body {
   color: var(--at-white);
 }
 
+/* ── Profile Link ── */
+.orbit-profile-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #00d9ff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.orbit-profile-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   :root {

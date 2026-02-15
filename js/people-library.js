@@ -20,6 +20,71 @@
     Production: { css: 'production', label: 'Producer' }
   };
 
+  // ── Recently Deceased (Past 12 Months) ──
+  // Updated periodically - people who passed within the last year
+  // Format: { id: TMDB_ID, date: 'YYYY-MM-DD' }
+  const RECENTLY_DECEASED = [
+    // 2025
+    { id: 112117, date: '2025-02-14' }, // Carlos Diegues
+    { id: 193, date: '2025-02-18' },    // Gene Hackman
+    { id: 49961, date: '2025-02-26' },  // Michelle Trachtenberg
+    { id: 79381, date: '2025-03-25' },  // Donald Crombie
+    { id: 5576, date: '2025-04-01' },   // Val Kilmer
+    { id: 87558, date: '2025-04-04' },  // Manoj Kumar
+    { id: 18070, date: '2025-04-08' },  // Nicky Katt
+    { id: 66606, date: '2025-05-20' },  // George Wendt
+    { id: 55428, date: '2025-05-30' },  // Loretta Swit
+    { id: 1166, date: '2025-06-01' },   // Harris Yulin
+    { id: 104421, date: '2025-06-24' }, // Bobby Sherman
+    { id: 9217, date: '2025-06-26' },   // Lalo Schifrin
+    { id: 20402, date: '2025-07-02' },  // Julian McMahon
+    { id: 147, date: '2025-07-03' },    // Michael Madsen
+    { id: 1244929, date: '2025-07-17' }, // Alan Bergman
+    { id: 40259, date: '2025-07-20' },  // Malcolm-Jamal Warner
+    { id: 3610257, date: '2025-08-11' }, // Danielle Spencer
+    { id: 28641, date: '2025-08-17' },  // Terence Stamp
+    { id: 223844, date: '2025-08-28' }, // Mike de Leon
+    { id: 6804, date: '2025-09-01' },   // Graham Greene
+    { id: 4959, date: '2025-09-23' },   // Claudia Cardinale
+    { id: 190391, date: '2025-10-03' }, // Patricia Routledge
+    { id: 3092, date: '2025-10-11' },   // Diane Keaton
+    { id: 46780, date: '2025-10-15' },  // Samantha Eggar
+    { id: 5240, date: '2025-10-16' },   // Klaus Doldinger
+    { id: 13997, date: '2025-10-23' },  // June Lockhart
+    { id: 2723, date: '2025-10-30' },   // Adam Greenberg
+    { id: 6587, date: '2025-11-03' },   // Diane Ladd
+    { id: 12134, date: '2025-11-15' },  // Sally Kirkland
+    { id: 85655, date: '2025-11-24' },  // Dharmendra
+    { id: 4135, date: '2025-12-01' },   // Robert Redford
+    { id: 3783, date: '2025-12-10' },   // Brigitte Bardot
+    { id: 3026, date: '2025-12-14' },   // Rob Reiner
+    { id: 33848, date: '2025-12-16' },  // Gil Gerard
+    { id: 28906, date: '2025-12-20' },  // Richard Chamberlain
+    { id: 14836, date: '2025-12-31' },  // Jon Korkes
+    // 2026 (Jan-Feb)
+    { id: 17121, date: '2026-01-01' },  // Ahn Sung-ki
+    { id: 85637, date: '2026-01-01' },  // Béla Tarr
+    { id: 15411, date: '2026-01-01' },  // T.K. Carter
+    { id: 1215063, date: '2026-01-05' }, // Tom Cherones
+    { id: 151502, date: '2026-01-16' }, // Bruce Bilson
+    { id: 15812, date: '2026-01-17' },  // Roger Allers
+    { id: 11514, date: '2026-01-30' },  // Catherine O'Hara
+    { id: 19210, date: '2026-02-11' },  // James Van Der Beek
+    { id: 4971, date: '2026-02-12' }    // Bud Cort
+  ];
+
+  // Helper: Check if person died in past 12 months
+  function isRecentlyDeceased(personId) {
+    const entry = RECENTLY_DECEASED.find(function(d) { return d.id === personId; });
+    if (!entry) return false;
+
+    const deathDate = new Date(entry.date);
+    const now = new Date();
+    const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+
+    return deathDate >= oneYearAgo && deathDate <= now;
+  }
+
   // ── Featured Collections ──
   // Note: Person IDs are best-known TMDB IDs; some may need manual verification
   const FEATURED_COLLECTIONS = [
@@ -164,7 +229,10 @@
       bookmarkGroup:   $('plBookmarkGroup'),
       bookmarkChip:    $('plBookmarkChip'),
       orbitEncourage:  $('plOrbitEncourage'),
-      filters:         $('plFilters')
+      filters:         $('plFilters'),
+      // First-visit welcome overlay
+      welcomeOverlay:  $('plWelcomeOverlay'),
+      welcomeBtn:      $('plWelcomeBtn')
     };
   }
 
@@ -177,10 +245,26 @@
     awardsMovieIds = new Set(Object.keys(awardsByMovie).map(Number));
   }
 
+  // ── First-visit welcome overlay ──
+  function checkFirstVisit() {
+    const hasVisited = localStorage.getItem('orbit_stellar_catalog_intro_seen');
+    if (!hasVisited && dom.welcomeOverlay) {
+      dom.welcomeOverlay.classList.remove('hidden');
+    }
+  }
+
+  function dismissWelcome() {
+    localStorage.setItem('orbit_stellar_catalog_intro_seen', 'true');
+    if (dom.welcomeOverlay) {
+      dom.welcomeOverlay.classList.add('hidden');
+    }
+  }
+
   // ── Init ──
   function init() {
     cacheDom();
     initAwardsLookup();
+    checkFirstVisit();
     bindSearchInput();
     bindDeptChips();
     bindEraChips();
@@ -189,6 +273,7 @@
     bindLoadMore();
     bindRetry();
     bindGridClicks();
+    bindWelcome();
     renderCollectionCards();
     populateDirectorSelect();
     bindExclusives();
@@ -222,6 +307,12 @@
         chip.classList.add('active');
         state.activeFilters.department = dept;
       }
+    }
+
+    if (params.get('genre')) {
+      var genreName = params.get('genre');
+      // Store genre filter for gap analysis (applied during results rendering)
+      state.activeFilters.genre = genreName;
     }
 
     fetchPopularPeople(1);
@@ -329,6 +420,9 @@
     if ((state.isSearchMode || state.orbitMode) && state.activeFilters.era) {
       people = filterByEra(people, state.activeFilters.era);
     }
+    if (state.activeFilters.genre) {
+      people = filterByGenre(people, state.activeFilters.genre);
+    }
     return people;
   }
 
@@ -365,6 +459,27 @@
         if (!rd) return false;
         var year = parseInt(rd.substring(0, 4), 10);
         return year >= decadeNum && year < decadeNum + 10;
+      });
+    });
+  }
+
+  function filterByGenre(people, genreName) {
+    if (!genreName) return people;
+    // Genre ID mapping (inverse of GENRE_MAP for lookup)
+    var GENRE_IDS = {
+      'Action': 28, 'Adventure': 12, 'Animation': 16, 'Comedy': 35,
+      'Crime': 80, 'Documentary': 99, 'Drama': 18, 'Family': 10751,
+      'Fantasy': 14, 'History': 36, 'Horror': 27, 'Music': 10402,
+      'Mystery': 9648, 'Romance': 10749, 'Sci-Fi': 878, 'Thriller': 53,
+      'War': 10752, 'Western': 37
+    };
+    var genreId = GENRE_IDS[genreName];
+    if (!genreId) return people;
+
+    return people.filter(function (p) {
+      var knownFor = p.known_for || [];
+      return knownFor.some(function (item) {
+        return (item.genre_ids || []).includes(genreId);
       });
     });
   }
@@ -437,6 +552,12 @@
       ? TMDB_IMG + 'w185' + person.profile_path
       : '';
 
+    // Check if recently deceased
+    var isMemorial = isRecentlyDeceased(id);
+    if (isMemorial) {
+      name = 'Remembering ' + name;
+    }
+
     // Known-for titles (prefer movies, max 2)
     var knownFor = (person.known_for || []);
     var movies = knownFor.filter(function (k) { return k.media_type === 'movie'; });
@@ -496,8 +617,9 @@
 
     // Photo HTML
     var photoHtml;
+    var photoClass = 'pl-card-photo' + (isMemorial ? ' pl-card-photo--memorial' : '');
     if (photoUrl) {
-      photoHtml = '<img class="pl-card-photo" src="' + photoUrl + '" alt="' + name + '" loading="lazy">';
+      photoHtml = '<img class="' + photoClass + '" src="' + photoUrl + '" alt="' + name + '" loading="lazy">';
     } else {
       photoHtml = '<div class="pl-card-fallback"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--ghost-gray)" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></div>';
     }
@@ -530,6 +652,9 @@
       cardClasses += ' pl-card--encountered';
     } else {
       cardClasses += ' pl-card--unencountered';
+    }
+    if (isMemorial) {
+      cardClasses += ' pl-card--memorial';
     }
 
     return '<div class="' + cardClasses + '" data-person-id="' + id + '" data-person-name="' + name + '" data-person-photo="' + esc(person.profile_path || '') + '" data-person-dept="' + esc(dept) + '">' +
@@ -806,6 +931,12 @@
       sessionStorage.setItem('orbit_profile_referrer', window.location.href);
       window.location.href = 'people-profile.html?id=' + personId;
     });
+  }
+
+  function bindWelcome() {
+    if (dom.welcomeBtn) {
+      dom.welcomeBtn.addEventListener('click', dismissWelcome);
+    }
   }
 
   // ── ORBIT Exclusives ──

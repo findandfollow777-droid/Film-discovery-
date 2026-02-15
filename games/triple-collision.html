@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/triple-collision.css">
+  <link rel="stylesheet" href="../css/orbit-glyphs.css">
 </head>
 <body>
   
@@ -57,7 +58,7 @@
     <!-- DAILY INFO -->
     <div class="daily-info">
       <div class="daily-badge">
-        <span class="badge-icon">🔺</span>
+        <span class="badge-icon"><span class="og og-triangle"></span></span>
         <span class="badge-text">Daily Triple</span>
       </div>
       <div class="daily-number">Course #<span id="puzzleNumber">1</span></div>
@@ -134,7 +135,7 @@
     <!-- TIMER & SCORE -->
     <section class="game-status">
       <div class="timer-display">
-        <span class="timer-icon">⏱️</span>
+        <span class="timer-icon"><span class="og og-timer"></span></span>
         <span class="timer-value" id="timerValue">4:00</span>
       </div>
       <div class="score-display">
@@ -173,7 +174,7 @@
     <section class="result-section" id="resultSection" hidden>
       <button class="result-close-btn" id="resultCloseBtn">&#x2715;</button>
       <div class="result-content">
-        <div class="result-icon">🔺</div>
+        <div class="result-icon"><span class="og og-triangle"></span></div>
         <h2 class="result-title">Time's Up!</h2>
         <div class="final-score">
           <span class="final-label">Final Score</span>
@@ -190,14 +191,14 @@
             <span class="breakdown-value" id="breakdownDouble">0</span>
           </div>
           <div class="breakdown-row triple-row">
-            <span class="breakdown-label">🔺 Triple Collision (×10)</span>
+            <span class="breakdown-label"><span class="og og-triangle"></span> Triple Collision (×10)</span>
             <span class="breakdown-value" id="breakdownTriple">0</span>
           </div>
         </div>
         
         <div class="share-section">
           <button class="share-btn" id="shareBtn">
-            <span>📋</span> Share Result
+            <span><span class="og og-clipboard"></span></span> Share Result
           </button>
         </div>
         
@@ -252,7 +253,7 @@
             <span class="score-pts">3 points</span>
           </div>
           <div class="score-row triple">
-            <span class="score-type">🔺 Triple (all 3)</span>
+            <span class="score-type"><span class="og og-triangle"></span> Triple (all 3)</span>
             <span class="score-pts">10 points</span>
           </div>
         </div>
@@ -296,7 +297,7 @@
   <div class="collision-burst triple-burst" id="tripleBurst" hidden>
     <div class="burst-ring"></div>
     <div class="burst-ring burst-ring-2"></div>
-    <div class="burst-text">🔺 TRIPLE!</div>
+    <div class="burst-text"><span class="og og-triangle"></span> TRIPLE!</div>
   </div>
   
   <script src="../config.js"></script>

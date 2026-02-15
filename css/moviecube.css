@@ -179,38 +179,58 @@
 .cube[data-face="1"] .face-front,
 .cube[data-face="2"] .face-right,
 .cube[data-face="3"] .face-back,
-.cube[data-face="4"] .face-left {
+.cube[data-face="4"] .face-left,
+.cube[data-face="5"] .face-trivia,
+.cube[data-face="6"] .face-nebula,
+.cube[data-face="7"] .face-awards {
   pointer-events: auto;
+}
+
+/* Face swapping: Info and Trivia share 90° position */
+.cube[data-face="2"] .face-trivia,
+.cube[data-face="5"] .face-right {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Face swapping: Stats and Nebula share -90° position */
+.cube[data-face="4"] .face-nebula,
+.cube[data-face="6"] .face-left {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Face swapping: Cast and Awards share 180° position */
+.cube[data-face="3"] .face-awards,
+.cube[data-face="7"] .face-back {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .face-front  { transform: rotateY(0deg) translateZ(260px); }
 .face-right  { transform: rotateY(90deg) translateZ(260px); }
 .face-back   { transform: rotateY(180deg) translateZ(260px); }
 .face-left   { transform: rotateY(-90deg) translateZ(260px); }
+.face-trivia { transform: rotateY(90deg) translateZ(260px); }
+.face-nebula { transform: rotateY(-90deg) translateZ(260px); }
+.face-awards { transform: rotateY(180deg) translateZ(260px); }
 
 .cube[data-face="1"] { transform: translateZ(-260px) rotateY(0deg); }
 .cube[data-face="2"] { transform: translateZ(-260px) rotateY(-90deg); }
 .cube[data-face="3"] { transform: translateZ(-260px) rotateY(-180deg); }
 .cube[data-face="4"] { transform: translateZ(-260px) rotateY(90deg); }
+.cube[data-face="5"] { transform: translateZ(-260px) rotateY(-90deg); }
+.cube[data-face="6"] { transform: translateZ(-260px) rotateY(90deg); }
+.cube[data-face="7"] { transform: translateZ(-260px) rotateY(-180deg); }
 
-/* Trivia overlay - flat panel outside the 3D cube */
-.cube-trivia-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  border-radius: 14px;
+/* ============================================
+   FACE 5: TRIVIA
+============================================ */
+
+.face-trivia {
   background: rgba(10, 14, 26, 0.98);
   border: 2px solid rgba(0, 217, 255, 0.25);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
   overflow: hidden;
-}
-
-.cube-trivia-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 /* ============================================
@@ -503,6 +523,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Subtle profile link star icon */
+.mc-profile-link {
+  margin-left: 4px;
+  color: #00d9ff;
+  font-size: 10px;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.cast-member:hover .mc-profile-link,
+.director-clickable:hover .mc-profile-link {
+  opacity: 0.6;
+}
+
+.mc-profile-link:hover {
+  opacity: 1 !important;
+  text-decoration: none;
 }
 
 /* ============================================
@@ -1155,11 +1196,17 @@
   .face-right  { transform: rotateY(90deg) translateZ(200px); }
   .face-back   { transform: rotateY(180deg) translateZ(200px); }
   .face-left   { transform: rotateY(-90deg) translateZ(200px); }
+  .face-trivia { transform: rotateY(90deg) translateZ(200px); }
+  .face-nebula { transform: rotateY(-90deg) translateZ(200px); }
+  .face-awards { transform: rotateY(180deg) translateZ(200px); }
 
   .cube[data-face="1"] { transform: translateZ(-200px) rotateY(0deg); }
   .cube[data-face="2"] { transform: translateZ(-200px) rotateY(-90deg); }
   .cube[data-face="3"] { transform: translateZ(-200px) rotateY(-180deg); }
   .cube[data-face="4"] { transform: translateZ(-200px) rotateY(90deg); }
+  .cube[data-face="5"] { transform: translateZ(-200px) rotateY(-90deg); }
+  .cube[data-face="6"] { transform: translateZ(-200px) rotateY(90deg); }
+  .cube[data-face="7"] { transform: translateZ(-200px) rotateY(-180deg); }
   
   .cast-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1460,31 +1507,15 @@
    FACE 6: NEBULA IMPRESSIONS
 ============================================ */
 
-/* Nebula overlay - flat panel outside the 3D cube */
-.cube-nebula-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  border-radius: 14px;
-  background: rgba(10, 14, 26, 0.98);
-  border: 2px solid rgba(0, 217, 255, 0.25);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  overflow: hidden;
-}
+/* ============================================
+   FACE 6: NEBULA
+============================================ */
 
-.cube-nebula-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Nebula Face Layout - Three Sections */
-.cube-face-nebula {
+.face-nebula {
   display: flex;
   flex-direction: column;
   background: radial-gradient(ellipse at center, #0a1628 0%, #050810 100%);
+  border: 2px solid rgba(0, 217, 255, 0.25);
   overflow: hidden;
   height: 100%;
 }
@@ -1893,44 +1924,87 @@
    FACE 7: AWARDS
 ============================================ */
 
-.cube-awards-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: radial-gradient(ellipse at center, #0a1628 0%, #050810 100%);
-  border-radius: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+.face-awards {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 14, 26, 0.98) 0%,
+    rgba(30, 20, 10, 0.98) 50%,
+    rgba(10, 14, 26, 0.98) 100%
+  );
+}
+
+.awards-section {
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 215, 0, 0.3) transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
 }
 
-.cube-awards-overlay::-webkit-scrollbar {
+.awards-section::-webkit-scrollbar {
   width: 4px;
 }
 
-.cube-awards-overlay::-webkit-scrollbar-thumb {
+.awards-section::-webkit-scrollbar-thumb {
   background: rgba(255, 215, 0, 0.3);
   border-radius: 2px;
 }
 
-.cube-awards-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+.awards-face-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.awards-face-content {
-  padding: 24px;
+.awards-face-header {
+  text-align: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.awards-header-glyph {
+  font-size: 32px;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
 }
 
 .awards-face-title {
   font-family: 'Orbitron', monospace;
-  font-size: 16px;
+  font-size: 13px;
   color: #ffd700;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.awards-movie-name {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 0;
+}
+
+.awards-summary {
+  text-align: center;
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  padding: 4px 16px;
+  background: rgba(255, 215, 0, 0.05);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.awards-list {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .awards-festival-group {
@@ -1949,6 +2023,8 @@
 .awards-festival-icon {
   color: #ffd700;
   flex-shrink: 0;
+  font-size: 16px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
 }
 
 .awards-festival-name {
@@ -1965,6 +2041,13 @@
   padding: 4px 0;
   font-size: 12px;
   color: #94a3b8;
+}
+
+.award-details {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
 }
 
 .awards-entry.awards-won {
@@ -1999,4 +2082,173 @@
   color: #64748b;
   font-size: 11px;
   flex-shrink: 0;
+}
+
+/* Minimal layout for 1-2 awards */
+.awards-minimal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.awards-minimal .awards-festival-group {
+  width: 100%;
+  max-width: 280px;
+}
+
+.awards-minimal .awards-festival-header {
+  justify-content: center;
+  border-bottom-color: rgba(255, 215, 0, 0.25);
+}
+
+.awards-minimal .award-entry {
+  padding: 16px 24px;
+  text-align: center;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.awards-minimal .award-glyph {
+  width: 48px;
+  height: 48px;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+}
+
+.awards-minimal .award-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.awards-minimal .awards-category {
+  font-size: 14px;
+  white-space: normal;
+  text-align: center;
+}
+
+.awards-minimal .awards-status {
+  min-width: auto;
+}
+
+/* Compact mode for 1-3 awards (no festival headers) */
+.awards-compact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.award-entry-compact {
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: rgba(255, 215, 0, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.2s ease;
+}
+
+.award-entry-compact.won {
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.06);
+}
+
+.award-entry-compact:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.award-compact-glyph {
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wins: bright, glowing, prominent */
+.award-entry-compact.won .award-compact-glyph {
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.8))
+          drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+  transform: scale(1.1);
+}
+
+/* Nominations: subtle, dimmed */
+.award-entry-compact.nominated .award-compact-glyph {
+  opacity: 0.4;
+  filter: grayscale(0.5);
+}
+
+.award-compact-festival {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  color: #ffd700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.award-compact-category {
+  font-size: 14px;
+  color: #f1f5f9;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.award-compact-meta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.award-compact-year {
+  color: #64748b;
+}
+
+.award-compact-result {
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+}
+
+.award-entry-compact.won .award-compact-result {
+  color: #ffd700;
+}
+
+.award-entry-compact.nominated .award-compact-result {
+  color: #94a3b8;
+}
+
+/* SVG award glyphs */
+.award-compact-glyph svg,
+.award-glyph svg,
+.awards-festival-icon svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Nav button SVG alignment */
+#cubeAwardsNav svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* Header glyph SVG */
+.awards-header-glyph svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
 }
