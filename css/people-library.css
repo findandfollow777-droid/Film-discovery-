@@ -236,9 +236,10 @@ body {
   color: var(--film-white);
 }
 .pl-chip.active {
-  background: rgba(0,217,255,0.15);
+  background: rgba(0,217,255,0.2);
   color: var(--accent-cyan);
-  border-color: rgba(0,217,255,0.4);
+  border-color: rgba(0,217,255,0.6);
+  box-shadow: 0 0 8px rgba(0,217,255,0.2);
 }
 .pl-chip-disabled {
   opacity: 0.4;
@@ -472,7 +473,7 @@ body {
 
 .pl-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -492,6 +493,8 @@ body {
   align-items: center;
   gap: 8px;
   min-height: 280px;
+  min-width: 0;
+  overflow: hidden;
 }
 .pl-card:hover {
   border-color: rgba(0,217,255,0.4);
@@ -1138,7 +1141,7 @@ body {
 
 @media (max-width: 900px) {
   .pl-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

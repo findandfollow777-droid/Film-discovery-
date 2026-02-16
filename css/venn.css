@@ -583,13 +583,14 @@ html, body {
 .venn-movie {
   position: absolute;
   cursor: pointer;
+  scale: 1;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 10; /* Low - actor names at 100 will be above */
 }
 
 .venn-movie:hover {
   z-index: 90; /* Still below actor names (100) */
-  transform: scale(1.15) !important;
+  scale: 1.55;
 }
 
 .venn-movie.dimmed {

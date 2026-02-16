@@ -62,7 +62,18 @@ function init() {
     backToResults.hidden = false;
     localStorage.removeItem("returnToResults"); // Clear after showing
   }
-  
+
+  // Show "Back to Profile" link if coming from Stellar Catalog profile
+  const returnToProfileId = localStorage.getItem('returnToProfile');
+  if (returnToProfileId) {
+    localStorage.removeItem('returnToProfile');
+    if (backToResults) {
+      backToResults.hidden = false;
+      backToResults.href = '../people-profile.html?id=' + returnToProfileId;
+      backToResults.textContent = '\u2190 Back to Profile';
+    }
+  }
+
   // Check for URL parameters (from game or direct link)
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get('search');

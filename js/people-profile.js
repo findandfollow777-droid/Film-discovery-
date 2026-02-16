@@ -67,6 +67,18 @@
     return null;
   }
 
+  function navigateToSacredTimeline(id, name) {
+    // Clear stale vennPeople so Sacred Timeline doesn't restore old session
+    localStorage.removeItem('vennPeople');
+    localStorage.setItem('timelineMovieId', String(id));
+    localStorage.setItem('timelineType', 'person');
+    localStorage.setItem('timelineMediaMode', 'both');
+    localStorage.setItem('returnToProfile', String(id));
+    // Pass URL params so Sacred Timeline uses loadFromUrlSearch (bypasses stale localStorage)
+    var encodedName = encodeURIComponent(name || '');
+    window.location.href = 'games/timeline.html?type=person&search=' + encodedName;
+  }
+
   function setupBackNav() {
     const backLink = $('ppBackLink');
     if (!backLink) return;
@@ -74,7 +86,7 @@
     if (referrer.includes('people-library.html')) {
       backLink.textContent = '\u2190 Back to The Observatory';
       backLink.href = 'people-library.html';
-    } else if (referrer.includes('actor-timeline.html')) {
+    } else if (referrer.includes('timeline.html')) {
       backLink.textContent = '\u2190 Back to Timeline';
       backLink.href = '#';
       backLink.addEventListener('click', (e) => { e.preventDefault(); history.back(); });
@@ -139,9 +151,7 @@
 
     $('viewTimelineBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
-      localStorage.setItem('timelineMovieId', String(personId));
-      localStorage.setItem('timelineType', 'person');
-      window.location.href = 'actor-timeline.html';
+      navigateToSacredTimeline(personId, profileData?.person?.name);
     });
 
     // Keyboard navigation
@@ -843,9 +853,7 @@
     link.href = '#';
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      localStorage.setItem('timelineMovieId', String(personId));
-      localStorage.setItem('timelineType', 'person');
-      window.location.href = 'actor-timeline.html';
+      navigateToSacredTimeline(personId, profileData?.person?.name);
     });
 
     // Poster click → open Moviecube

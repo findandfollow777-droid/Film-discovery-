@@ -315,7 +315,42 @@
       state.activeFilters.genre = genreName;
     }
 
-    fetchPopularPeople(1);
+    loadInitialPages();
+  }
+
+  // ── Fetch: Initial Browse (multiple pages for better filter coverage) ──
+  var INITIAL_BROWSE_PAGES = 3;
+
+  async function loadInitialPages() {
+    if (state.isLoading) return;
+    state.isLoading = true;
+    showState('loading');
+    state.rawPages = [];
+    state.currentResults = [];
+
+    for (var page = 1; page <= INITIAL_BROWSE_PAGES; page++) {
+      try {
+        var cacheKey = 'orbit_library_browse_page_' + page;
+        var data = getCachedPage(cacheKey);
+        if (!data) {
+          var url = TMDB_BASE + '/person/popular?api_key=' + TMDB_API_KEY + '&page=' + page;
+          var resp = await fetch(url);
+          if (!resp.ok) throw new Error('TMDB ' + resp.status);
+          data = await resp.json();
+          setCachedPage(cacheKey, data);
+        }
+        state.totalPages = Math.min(data.total_pages || 1, 500);
+        state.currentPage = page;
+        state.rawPages.push(...(data.results || []));
+      } catch (err) {
+        console.error('Failed to load page ' + page + ':', err);
+        if (page === 1) { showState('error'); state.isLoading = false; return; }
+      }
+    }
+
+    rebuildFilteredResults();
+    showState('results');
+    state.isLoading = false;
   }
 
   // ── Fetch: Popular People ──
@@ -409,6 +444,21 @@
     people = applySorting(people);
     state.currentResults = people;
     renderGrid();
+    // Auto-load more if filters reduced results too much
+    setTimeout(checkAutoLoadMore, 100);
+  }
+
+  function checkAutoLoadMore() {
+    // Only auto-load in default browse mode
+    if (state.isSearchMode || state.orbitMode || state.collectionMode || state.circleMode) return;
+    if (state.isLoading) return;
+    if (state.currentPage >= state.totalPages || state.currentPage >= 8) return;
+    // If any filter is active and results are too few, load more
+    var hasActiveFilter = state.activeFilters.era || state.activeFilters.awards.length > 0 ||
+                          (state.activeFilters.department && state.activeFilters.department !== 'Acting');
+    if (hasActiveFilter && state.currentResults.length < 6 && state.rawPages.length > 0) {
+      fetchPopularPeople(state.currentPage + 1);
+    }
   }
 
   function applyFilters(people) {
@@ -724,6 +774,9 @@
     } else if (state.isSearchMode) {
       titleEl.textContent = "No results for '" + state.searchQuery + "'";
       textEl.textContent = 'Check the spelling or try a different name.';
+    } else if (state.activeFilters.era) {
+      titleEl.textContent = 'No people found for the ' + state.activeFilters.era + 's';
+      textEl.textContent = 'Try loading more people or selecting a different era.';
     } else if (state.activeFilters.awards.length > 0) {
       titleEl.textContent = 'No confirmed matches in current results';
       textEl.textContent = 'Try loading more people or searching by name.';
@@ -823,7 +876,7 @@
     state.activeFilters.era = null;
     var eraActive = dom.eraChips.querySelector('.pl-chip.active');
     if (eraActive) eraActive.classList.remove('active');
-    fetchPopularPeople(1);
+    loadInitialPages();
   }
 
   function bindDeptChips() {
@@ -1101,6 +1154,16 @@
           items = credits.cast || credits.crew || [];
         }
 
+        // Prefer movies over TV — talk shows have inflated TMDB popularity
+        var movieItems = items.filter(function (c) { return c.media_type === 'movie'; });
+        if (movieItems.length >= 3) {
+          items = movieItems;
+        } else if (movieItems.length > 0) {
+          // Mix: movies first, then fill with remaining items
+          var tvItems = items.filter(function (c) { return c.media_type !== 'movie'; });
+          items = movieItems.concat(tvItems);
+        }
+
         normalized.known_for = items
           .sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); })
           .slice(0, 3)
@@ -1157,7 +1220,7 @@
       state.activeFilters.era = null;
       var eraActive = dom.eraChips.querySelector('.pl-chip.active');
       if (eraActive) eraActive.classList.remove('active');
-      fetchPopularPeople(1);
+      loadInitialPages();
     }
   }
 
@@ -1348,7 +1411,7 @@
     // Re-fetch popular people
     state.rawPages = [];
     state.currentPage = 1;
-    fetchPopularPeople(1);
+    loadInitialPages();
   }
 
   function addOrbitSortOptions() {
