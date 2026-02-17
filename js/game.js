@@ -122,7 +122,7 @@ function getDailyPuzzleNumber() {
   // Use the function from puzzles.js if available, otherwise calculate
   if (typeof window.getDailyPuzzleNumber === 'function') {
     // puzzles.js is loaded, but we're in game.js scope
-    const launchDate = new Date("2025-01-01");
+    const launchDate = new Date("2026-02-16");
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const diffTime = today - launchDate;

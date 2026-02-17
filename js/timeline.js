@@ -102,6 +102,20 @@ async function loadFromUrlSearch(query, type) {
         localStorage.setItem("timelineMovieId", person.id);
         localStorage.setItem("timelineType", "person");
         await loadPersonTimeline(person.id);
+
+        // Load additional people from profile page shared timeline
+        const pendingPeople = localStorage.getItem('timelinePendingPeople');
+        if (pendingPeople) {
+          localStorage.removeItem('timelinePendingPeople');
+          try {
+            const pendingIds = JSON.parse(pendingPeople);
+            for (const pid of pendingIds) {
+              await addPerson(parseInt(pid));
+            }
+          } catch (e) {
+            console.error('Failed to load pending people:', e);
+          }
+        }
       } else {
         showEmpty(`No results found for "${query}"`);
       }

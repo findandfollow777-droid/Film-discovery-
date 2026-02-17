@@ -479,7 +479,7 @@ const DAILY_PUZZLES = [
 
 // Get today's puzzle movie ID
 function getDailyPuzzleMovieId() {
-  const launchDate = new Date("2025-01-01");
+  const launchDate = new Date("2026-02-16");
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   
@@ -494,7 +494,7 @@ function getDailyPuzzleMovieId() {
 
 // Get puzzle number (for display)
 function getDailyPuzzleNumber() {
-  const launchDate = new Date("2025-01-01");
+  const launchDate = new Date("2026-02-16");
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   

@@ -267,7 +267,7 @@ function setupEventListeners() {
 // ============================================
 
 function getDailyPuzzleIndex() {
-  const launchDate = new Date("2025-01-01");
+  const launchDate = new Date("2026-02-16");
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const dayNumber = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));

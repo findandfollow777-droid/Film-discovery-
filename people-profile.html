@@ -121,6 +121,10 @@
         <div class="pp-skeleton pp-skeleton-collab"></div>
       </div>
       <div class="pp-nav-actions" id="ppNavActions">
+        <button class="orbit-btn orbit-btn-outline hidden" id="sharedTimelineBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Shared Timeline &#8250;
+        </button>
         <a href="#" class="orbit-btn orbit-btn-outline" id="exploreOrbitBtn">Explore Their Circle &#8250;</a>
         <a href="#" class="orbit-btn orbit-btn-outline" id="viewTimelineBtn">View Full Timeline &#8250;</a>
       </div>
@@ -200,6 +204,25 @@
   <div id="ppToast" class="pp-toast hidden">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
     <span id="ppToastMsg">Profile link copied!</span>
+  </div>
+
+  <!-- SELECTION BAR -->
+  <div id="ppSelectionBar" class="pp-selection-bar hidden">
+    <div class="pp-selection-bar-inner">
+      <div class="pp-selection-bar-people">
+        <div class="pp-selection-chip locked" id="ppSelectionSelf">
+          <img class="pp-selection-chip-photo" src="" alt="">
+          <span class="pp-selection-chip-name"></span>
+        </div>
+        <div id="ppSelectionChips"></div>
+      </div>
+      <div class="pp-selection-bar-actions">
+        <span class="pp-selection-count" id="ppSelectionCount">1/4</span>
+        <button class="orbit-btn orbit-btn-cyan" id="ppSelectionLaunch" disabled>Shared Timeline</button>
+        <button class="orbit-btn orbit-btn-outline" id="ppSelectionVenn" disabled>Stellar Territories</button>
+        <button class="orbit-btn orbit-btn-ghost" id="ppSelectionCancel">Cancel</button>
+      </div>
+    </div>
   </div>
 
   <!-- SCRIPTS -->

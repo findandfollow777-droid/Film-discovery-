@@ -337,6 +337,15 @@ body {
   background: rgba(0,217,255,0.1);
   border-color: var(--accent-cyan);
 }
+.orbit-btn-outline.active {
+  background: rgba(0,217,255,0.15);
+  border-color: var(--accent-cyan);
+  color: var(--film-white);
+}
+.orbit-btn-outline:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 .pp-progress-wrap { margin-top: 4px; }
 
@@ -441,6 +450,7 @@ body {
 }
 
 .pp-collab-card {
+  position: relative;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -500,6 +510,236 @@ body {
   color: var(--ghost-gray);
   font-style: italic;
   padding: 8px 0;
+}
+
+/* ── Collaborator Tooltips ── */
+
+.pp-collab-card {
+  position: relative;
+}
+
+.pp-collab-tooltip {
+  position: fixed;
+  transform: translateX(-50%) translateY(-100%);
+  background: rgba(10, 14, 23, 0.98);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1100;
+  min-width: 160px;
+  max-width: 260px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.pp-collab-tooltip.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pp-collab-tooltip-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-cyan);
+  margin-bottom: 6px;
+}
+
+.pp-collab-tooltip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pp-collab-tooltip-list li {
+  padding: 2px 0;
+  color: var(--muted-silver);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pp-collab-tooltip-more {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* tooltip-link removed — tooltip is now body-level, no interactive links inside */
+
+/* ── Selection Mode ── */
+
+.pp-collab-card .pp-collab-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.pp-collab-card.selectable .pp-collab-check {
+  display: flex;
+}
+
+.pp-collab-card.selectable {
+  border-style: dashed;
+  border-color: rgba(0, 217, 255, 0.2);
+}
+
+.pp-collab-card.selected {
+  border-style: solid;
+  border-color: var(--accent-cyan);
+  background: rgba(0, 217, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.15);
+}
+
+.pp-collab-card.selected .pp-collab-check {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+/* ── Selection Bar ── */
+
+.pp-selection-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 217, 255, 0.2);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.pp-selection-bar.visible {
+  transform: translateY(0);
+}
+
+.pp-selection-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pp-selection-bar-people {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pp-selection-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+}
+
+.pp-selection-chip.locked {
+  border-color: rgba(0, 217, 255, 0.3);
+  opacity: 0.7;
+}
+
+.pp-selection-chip-photo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pp-selection-chip .pp-chip-remove {
+  background: none;
+  border: none;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 2px;
+  line-height: 1;
+}
+.pp-selection-chip .pp-chip-remove:hover {
+  color: var(--film-white);
+}
+
+.pp-selection-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.pp-selection-count {
+  font-size: 12px;
+  color: var(--ghost-gray);
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+}
+
+.orbit-btn-cyan {
+  background: var(--accent-cyan);
+  color: var(--deep-void, #0a0e1a);
+  border: none;
+  font-weight: 600;
+  padding: 8px 20px;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.orbit-btn-cyan:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 0 16px rgba(0, 217, 255, 0.3);
+}
+.orbit-btn-cyan:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: none;
+}
+
+.orbit-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--muted-silver);
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.orbit-btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--film-white);
 }
 
 /* ── Awards Shelf — Trophy Row ── */
@@ -1074,6 +1314,26 @@ body {
     max-width: 220px;
     left: 0;
     transform: none;
+  }
+
+  .pp-collab-tooltip {
+    white-space: normal;
+    max-width: 200px;
+  }
+
+  .pp-selection-bar-inner {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .pp-selection-bar-people {
+    justify-content: center;
+  }
+
+  .pp-selection-bar-actions {
+    width: 100%;
+    justify-content: center;
   }
 
   .pp-awards-modal-panel {

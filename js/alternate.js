@@ -173,7 +173,7 @@ function setupEventListeners() {
 // ============================================
 
 function getWeekNumber() {
-  const launchDate = new Date("2025-01-06"); // First Monday of 2025
+  const launchDate = new Date("2026-02-04"); // Reset to third week
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const weekNum = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24 * 7));

@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  const CACHE_KEY = 'orbit_people_profiles_v2';
+  const CACHE_KEY = 'orbit_people_profiles_v3';
   const CACHE_MAX = 100;
   const CACHE_DAYS = 30;
   const INITIAL_FILMS = 20;
@@ -36,6 +36,17 @@
   let allFilms = [];
   let currentSort = 'year';
   let showingAll = false;
+
+  // Tooltip state
+  let collabTooltipTimer = null;
+  let activeCollabTooltip = null;
+  let collabFilmMapRef = {};
+  let tooltipsBound = false;
+  const isTouchDevice = matchMedia('(hover: none)').matches;
+
+  // Selection mode state
+  let selectionMode = false;
+  let selectedCollaborators = new Map(); // id → { id, name, profile_path }
 
   // ── DOM Cache ──
 
@@ -154,12 +165,25 @@
       navigateToSacredTimeline(personId, profileData?.person?.name);
     });
 
+    // Shared Timeline / Stellar Territories selection mode
+    $('sharedTimelineBtn')?.addEventListener('click', () => enterSelectionMode());
+    $('ppSelectionLaunch')?.addEventListener('click', () => launchSharedTimeline());
+    $('ppSelectionVenn')?.addEventListener('click', () => launchStellarTerritories());
+    $('ppSelectionCancel')?.addEventListener('click', () => exitSelectionMode());
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         // Let moviecube handle its own escape first
         const cubeOverlay = document.getElementById('movieCubeOverlay');
         if (cubeOverlay && !cubeOverlay.hidden) return;
+
+        // Exit selection mode if active
+        if (selectionMode) {
+          exitSelectionMode();
+          return;
+        }
+
         window.location.href = 'people-library.html';
       }
     });
@@ -440,7 +464,9 @@
         )
       );
 
-      results.forEach(credits => {
+      results.forEach((credits, filmIdx) => {
+        const film = topFilms[filmIdx];
+        const filmYear = film.release_date ? film.release_date.substring(0, 4) : '';
         const seen = new Set();
         [...(credits.cast || []).slice(0, 15), ...(credits.crew || []).filter(c => c.job === 'Director')].forEach(p => {
           if (!p.id || p.id === excludeId || seen.has(p.id)) return;
@@ -451,10 +477,14 @@
               name: p.name,
               profile_path: p.profile_path,
               department: p.known_for_department || (p.job === 'Director' ? 'Directing' : 'Acting'),
-              count: 0
+              sharedFilms: []
             };
           }
-          personCounts[p.id].count++;
+          personCounts[p.id].sharedFilms.push({
+            id: film.id,
+            title: film.title,
+            year: filmYear
+          });
         });
       });
     } catch (err) {
@@ -464,6 +494,7 @@
 
     // Return people who appear in 2+ of the top 3 movies
     return Object.values(personCounts)
+      .map(p => ({ ...p, count: p.sharedFilms.length }))
       .filter(p => p.count >= 2)
       .sort((a, b) => b.count - a.count)
       .slice(0, 8);
@@ -698,17 +729,30 @@
     const container = $('ppCollabs');
     const collabs = profileData.collaborators;
 
+    // Show/hide shared timeline button
+    $('sharedTimelineBtn')?.classList.toggle('hidden', !collabs || collabs.length === 0);
+
     if (!collabs || collabs.length === 0) {
       container.innerHTML = '<p class="pp-collabs-empty">This person charts their own orbit — no frequent collaborators found.</p>';
       return;
     }
 
+    if (selectionMode) {
+      renderConnectionsSelectable(container, collabs);
+      return;
+    }
+
+    // Store shared films data for tooltip access (module-level ref)
+    collabFilmMapRef = {};
+    collabs.forEach(c => { collabFilmMapRef[c.id] = c.sharedFilms || []; });
+
     container.innerHTML = collabs.map(c => {
       const photo = c.profile_path
         ? `${TMDB_IMG}w92${c.profile_path}`
         : DEFAULT_AVATAR;
+
       return `
-        <a href="people-profile.html?id=${c.id}" class="pp-collab-card">
+        <a href="people-profile.html?id=${c.id}" class="pp-collab-card" data-person-id="${c.id}">
           <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}" loading="lazy"
                onerror="this.src='${DEFAULT_AVATAR}'">
           <span class="pp-collab-name">${esc(c.name)}</span>
@@ -717,6 +761,356 @@
         </a>
       `;
     }).join('');
+
+    bindCollabTooltips();
+  }
+
+  function renderConnectionsSelectable(container, collabs) {
+    container.innerHTML = collabs.map(c => {
+      const photo = c.profile_path
+        ? `${TMDB_IMG}w92${c.profile_path}`
+        : DEFAULT_AVATAR;
+      const isSelected = selectedCollaborators.has(c.id);
+      return `
+        <div class="pp-collab-card selectable${isSelected ? ' selected' : ''}" data-person-id="${c.id}">
+          <div class="pp-collab-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0a0e1a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}" loading="lazy"
+               onerror="this.src='${DEFAULT_AVATAR}'">
+          <span class="pp-collab-name">${esc(c.name)}</span>
+          <span class="pp-collab-count">${c.count} shared films</span>
+          <span class="pp-collab-dept">${esc(c.department || '')}</span>
+        </div>
+      `;
+    }).join('');
+
+    // Bind selection click handlers
+    container.querySelectorAll('.pp-collab-card.selectable').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = parseInt(card.dataset.personId);
+        const collab = collabs.find(c => c.id === id);
+        if (!collab) return;
+        toggleSelection(id, collab, card);
+      });
+    });
+  }
+
+  function getOrCreateTooltip() {
+    let tip = document.getElementById('ppCollabTooltip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'ppCollabTooltip';
+      tip.className = 'pp-collab-tooltip';
+      document.body.appendChild(tip);
+    }
+    return tip;
+  }
+
+  function showFloatingTooltip(card, films) {
+    const tip = getOrCreateTooltip();
+
+    let html = '';
+    if (films && films.length > 0) {
+      const shown = films.slice(0, 6);
+      const remaining = films.length - shown.length;
+      html = `<div class="pp-collab-tooltip-title">Shared Films</div>
+        <ul class="pp-collab-tooltip-list">
+          ${shown.map(f => `<li>${esc(f.title)}${f.year ? ` (${f.year})` : ''}</li>`).join('')}
+        </ul>
+        ${remaining > 0 ? `<div class="pp-collab-tooltip-more">and ${remaining} more...</div>` : ''}`;
+    } else {
+      const count = card.querySelector('.pp-collab-count')?.textContent || '';
+      html = `<div class="pp-collab-tooltip-title">${esc(count)}</div>`;
+    }
+    tip.innerHTML = html;
+
+    // Position above the card using fixed coordinates
+    const rect = card.getBoundingClientRect();
+    tip.style.left = (rect.left + rect.width / 2) + 'px';
+    tip.style.top = (rect.top - 10) + 'px';
+    tip.classList.add('visible');
+    activeCollabTooltip = tip;
+  }
+
+  function hideFloatingTooltip() {
+    const tip = document.getElementById('ppCollabTooltip');
+    if (tip) {
+      tip.classList.remove('visible');
+    }
+    activeCollabTooltip = null;
+  }
+
+  function bindCollabTooltips() {
+    if (tooltipsBound) return;
+    tooltipsBound = true;
+
+    const container = $('ppCollabs');
+    if (!container) return;
+
+    if (isTouchDevice) {
+      // Mobile: first tap shows tooltip, second tap navigates
+      container.addEventListener('click', (e) => {
+        if (selectionMode) return;
+        const card = e.target.closest('.pp-collab-card[data-person-id]');
+        if (!card) return;
+
+        const tip = document.getElementById('ppCollabTooltip');
+        if (tip && tip.classList.contains('visible') && tip._cardId === card.dataset.personId) {
+          // Second tap — allow navigation
+          return;
+        }
+        // First tap — show tooltip, prevent navigation
+        e.preventDefault();
+        e.stopPropagation();
+        hideFloatingTooltip();
+        const pid = parseInt(card.dataset.personId);
+        const films = collabFilmMapRef[pid] || [];
+        showFloatingTooltip(card, films);
+        const tipEl = document.getElementById('ppCollabTooltip');
+        if (tipEl) tipEl._cardId = card.dataset.personId;
+      });
+
+      // Dismiss on outside tap
+      document.addEventListener('click', (e) => {
+        if (activeCollabTooltip && !e.target.closest('.pp-collab-card') && !e.target.closest('#ppCollabTooltip')) {
+          hideFloatingTooltip();
+        }
+      });
+      return;
+    }
+
+    // Desktop: hover with delay
+    container.addEventListener('mouseenter', (e) => {
+      if (selectionMode) return;
+      const card = e.target.closest('.pp-collab-card[data-person-id]');
+      if (!card) return;
+      clearTimeout(collabTooltipTimer);
+      collabTooltipTimer = setTimeout(() => {
+        const pid = parseInt(card.dataset.personId);
+        const films = collabFilmMapRef[pid] || [];
+        showFloatingTooltip(card, films);
+      }, 300);
+    }, true);
+
+    container.addEventListener('mouseleave', (e) => {
+      if (selectionMode) return;
+      const card = e.target.closest('.pp-collab-card[data-person-id]');
+      if (!card) return;
+      clearTimeout(collabTooltipTimer);
+      collabTooltipTimer = setTimeout(() => {
+        hideFloatingTooltip();
+      }, 200);
+    }, true);
+  }
+
+  // ── Selection Mode ──
+
+  function enterSelectionMode() {
+    selectionMode = true;
+    selectedCollaborators.clear();
+
+    // Dismiss any active tooltip
+    if (activeCollabTooltip) {
+      activeCollabTooltip.classList.remove('visible');
+      activeCollabTooltip = null;
+    }
+    clearTimeout(collabTooltipTimer);
+
+    // Highlight the trigger button
+    $('sharedTimelineBtn')?.classList.add('active');
+
+    // Re-render cards in selection mode
+    renderConnections();
+
+    // Show selection bar
+    showSelectionBar();
+  }
+
+  function exitSelectionMode() {
+    selectionMode = false;
+    selectedCollaborators.clear();
+
+    // Unhighlight button
+    $('sharedTimelineBtn')?.classList.remove('active');
+
+    // Re-render normal cards
+    renderConnections();
+
+    // Hide selection bar
+    const bar = $('ppSelectionBar');
+    bar.classList.remove('visible');
+    setTimeout(() => bar.classList.add('hidden'), 300);
+  }
+
+  function toggleSelection(id, collab, cardEl) {
+    if (selectedCollaborators.has(id)) {
+      selectedCollaborators.delete(id);
+      cardEl.classList.remove('selected');
+    } else {
+      // Cap at 3 (+ profile person = 4 total)
+      if (selectedCollaborators.size >= 3) {
+        showToast('Maximum 4 people for timeline');
+        return;
+      }
+      selectedCollaborators.set(id, {
+        id: collab.id,
+        name: collab.name,
+        profile_path: collab.profile_path,
+        department: collab.department
+      });
+      cardEl.classList.add('selected');
+    }
+
+    updateSelectionChips();
+    updateSelectionCount();
+  }
+
+  function showSelectionBar() {
+    const bar = $('ppSelectionBar');
+    const selfChip = $('ppSelectionSelf');
+    const p = profileData.person;
+
+    // Populate profile person (locked)
+    const selfPhoto = selfChip.querySelector('.pp-selection-chip-photo');
+    selfPhoto.src = p.profile_path ? `${TMDB_IMG}w92${p.profile_path}` : DEFAULT_AVATAR;
+    selfPhoto.alt = p.name;
+    selfChip.querySelector('.pp-selection-chip-name').textContent = p.name;
+
+    // Clear dynamic chips
+    $('ppSelectionChips').innerHTML = '';
+
+    updateSelectionCount();
+
+    bar.classList.remove('hidden');
+    requestAnimationFrame(() => bar.classList.add('visible'));
+  }
+
+  function updateSelectionChips() {
+    const container = $('ppSelectionChips');
+    container.innerHTML = '';
+
+    selectedCollaborators.forEach((collab, id) => {
+      const photo = collab.profile_path ? `${TMDB_IMG}w92${collab.profile_path}` : DEFAULT_AVATAR;
+      const chip = document.createElement('div');
+      chip.className = 'pp-selection-chip';
+      chip.innerHTML = `
+        <img class="pp-selection-chip-photo" src="${photo}" alt="${esc(collab.name)}"
+             onerror="this.src='${DEFAULT_AVATAR}'">
+        <span class="pp-selection-chip-name">${esc(collab.name)}</span>
+        <button class="pp-chip-remove" title="Remove">&times;</button>
+      `;
+      chip.querySelector('.pp-chip-remove').addEventListener('click', () => {
+        selectedCollaborators.delete(id);
+        // Update the card visual
+        const card = document.querySelector(`.pp-collab-card[data-person-id="${id}"]`);
+        if (card) card.classList.remove('selected');
+        updateSelectionChips();
+        updateSelectionCount();
+      });
+      container.appendChild(chip);
+    });
+  }
+
+  function updateSelectionCount() {
+    const total = selectedCollaborators.size + 1; // +1 for profile person
+    $('ppSelectionCount').textContent = `${total}/4`;
+    const hasSelection = selectedCollaborators.size > 0;
+    $('ppSelectionLaunch').disabled = !hasSelection;
+    const vennBtn = $('ppSelectionVenn');
+    if (vennBtn) vennBtn.disabled = !hasSelection;
+  }
+
+  function launchSharedTimeline() {
+    const selectedIds = Array.from(selectedCollaborators.keys());
+    if (selectedIds.length === 0) return;
+
+    // Store collaborator IDs for timeline to pick up after initial load
+    localStorage.setItem('timelinePendingPeople', JSON.stringify(selectedIds));
+
+    // Navigate using existing mechanism for the profile person
+    navigateToSacredTimeline(personId, profileData?.person?.name);
+  }
+
+  async function launchStellarTerritories() {
+    const selectedIds = Array.from(selectedCollaborators.keys());
+    if (selectedIds.length === 0) return;
+
+    // Show loading state
+    const vennBtn = $('ppSelectionVenn');
+    const launchBtn = $('ppSelectionLaunch');
+    vennBtn.disabled = true;
+    launchBtn.disabled = true;
+    vennBtn.textContent = 'Preparing...';
+
+    try {
+      // Build current profile person entry
+      const person = profileData.person;
+      const currentEntry = {
+        id: person.id,
+        name: person.name,
+        role: person.known_for_department === 'Directing' ? 'Director' : 'Actor',
+        profile: person.profile_path,
+        movies: (profileData.filmography || []).slice(0, 35).map(f => ({
+          id: f.id, title: f.title, poster_path: f.poster_path,
+          release_date: f.release_date, vote_average: f.vote_average,
+          vote_count: f.vote_count || 0, popularity: f.popularity || 0,
+          overview: '', genre_ids: f.genre_ids || [],
+          character: f.role || ''
+        }))
+      };
+
+      // Fetch movie credits for selected collaborators
+      const collabEntries = await Promise.all(
+        selectedIds.map(async (collabId) => {
+          const collab = selectedCollaborators.get(collabId);
+          if (!collab) return null;
+          try {
+            const res = await fetch(
+              `https://api.themoviedb.org/3/person/${collabId}/movie_credits?api_key=${TMDB_API_KEY}`
+            );
+            const credits = await res.json();
+            const movieMap = new Map();
+            (credits.cast || []).forEach(m => {
+              if (!movieMap.has(m.id)) {
+                movieMap.set(m.id, {
+                  id: m.id, title: m.title, poster_path: m.poster_path,
+                  release_date: m.release_date, vote_average: m.vote_average,
+                  vote_count: m.vote_count, popularity: m.popularity,
+                  overview: m.overview || '', genre_ids: m.genre_ids || [],
+                  character: m.character || ''
+                });
+              }
+            });
+            // Limit to top 35 by popularity
+            const movies = Array.from(movieMap.values())
+              .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
+              .slice(0, 35);
+            const role = collab.department === 'Directing' ? 'Director' :
+                         collab.department === 'Writing' ? 'Writer' : 'Actor';
+            return {
+              id: collab.id, name: collab.name,
+              role,
+              profile: collab.profile_path,
+              movies
+            };
+          } catch (err) {
+            console.error(`Failed to fetch credits for ${collab.name}:`, err);
+            return { id: collab.id, name: collab.name, role: 'Actor', profile: collab.profile_path, movies: [] };
+          }
+        })
+      );
+
+      const vennPeople = [currentEntry, ...collabEntries.filter(Boolean)];
+      localStorage.setItem('vennPeople', JSON.stringify(vennPeople));
+      window.location.href = 'games/venn.html';
+
+    } catch (err) {
+      console.error('Stellar Territories launch error:', err);
+      showToast('Failed to prepare data. Please try again.');
+      vennBtn.textContent = 'Stellar Territories';
+      updateSelectionCount();
+    }
   }
 
   const FESTIVAL_GLYPH = {

@@ -154,7 +154,7 @@ function initGame() {
 // ============================================
 
 function getDailyPuzzleNumber() {
-  const launch = new Date("2025-01-01");
+  const launch = new Date("2026-02-16");
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return Math.floor((today - launch) / (1000 * 60 * 60 * 24)) + 1;
