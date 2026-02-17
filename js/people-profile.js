@@ -314,10 +314,10 @@
     if (total === 0) return [];
 
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const top5 = sorted.slice(0, 5);
-    const otherCount = sorted.slice(5).reduce((sum, [, c]) => sum + c, 0);
+    const topGenres = sorted.slice(0, 8);
+    const otherCount = sorted.slice(8).reduce((sum, [, c]) => sum + c, 0);
 
-    const result = top5.map(([name, count]) => ({
+    const result = topGenres.map(([name, count]) => ({
       name,
       count,
       pct: Math.round(count / total * 100),
@@ -672,15 +672,19 @@
       return;
     }
 
-    bars.innerHTML = genres.map(g => `
+    const maxPct = genres[0].pct;
+    bars.innerHTML = genres.map(g => {
+      const relativeWidth = maxPct > 0 ? Math.round((g.pct / maxPct) * 100) : 100;
+      return `
       <div class="pp-dna-row">
         <span class="pp-dna-label">${g.name}</span>
         <div class="pp-dna-bar-track">
-          <div class="pp-dna-bar-fill pp-genre-${g.cssClass}" data-width="${g.pct}"></div>
+          <div class="pp-dna-bar-fill pp-genre-${g.cssClass}" data-width="${relativeWidth}"></div>
         </div>
         <span class="pp-dna-pct">${g.pct}%</span>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Animate bars in
     requestAnimationFrame(() => {
