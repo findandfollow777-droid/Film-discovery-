@@ -2535,6 +2535,45 @@ function setupEventListeners() {
   // Mini-map scroll sync + interaction
   timelineViewport?.addEventListener("scroll", updateMinimap);
 
+  // ── Mouse wheel & trackpad → horizontal scroll ──
+  if (timelineViewport) {
+    timelineViewport.addEventListener("wheel", (e) => {
+      // Trackpad horizontal swipe: let native overflow-x handle it
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      // Mouse wheel vertical: convert to horizontal scroll
+      if (e.deltaY === 0) return;
+      e.preventDefault();
+      timelineViewport.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    // ── Touch swipe with momentum ──
+    let touchStartX = 0, touchStartScroll = 0, touchVelocity = 0, lastTouchX = 0, lastTouchTime = 0;
+
+    timelineViewport.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartScroll = timelineViewport.scrollLeft;
+      touchVelocity = 0;
+      lastTouchX = touchStartX;
+      lastTouchTime = Date.now();
+    }, { passive: true });
+
+    timelineViewport.addEventListener("touchmove", (e) => {
+      const touchX = e.touches[0].clientX;
+      const now = Date.now();
+      const dt = now - lastTouchTime;
+      if (dt > 0) touchVelocity = (lastTouchX - touchX) / dt;
+      lastTouchX = touchX;
+      lastTouchTime = now;
+      timelineViewport.scrollLeft = touchStartScroll + (touchStartX - touchX);
+    }, { passive: true });
+
+    timelineViewport.addEventListener("touchend", () => {
+      // Apply momentum
+      const momentum = touchVelocity * 300;
+      timelineViewport.scrollBy({ left: momentum, behavior: "smooth" });
+    }, { passive: true });
+  }
+
   setupMinimapInteraction();
 
   // Sacred line persistence - check periodically

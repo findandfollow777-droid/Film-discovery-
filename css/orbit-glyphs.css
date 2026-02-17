@@ -402,3 +402,8 @@
 .og-star {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 10L58 38L88 38L64 56L72 84L50 66L28 84L36 56L12 38L42 38Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
+
+/* ⭐ Rising Star (star within star within star) */
+.og-rising-star {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 4L59 34L92 34L66 54L75 86L50 66L25 86L34 54L8 34L41 34Z' stroke='%2306b6d4' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 22L56 40L76 40L60 52L66 70L50 58L34 70L40 52L24 40L44 40Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 36L53 46L62 46L55 52L57 62L50 56L43 62L45 52L38 46L47 46Z' stroke='%23ffd700' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
