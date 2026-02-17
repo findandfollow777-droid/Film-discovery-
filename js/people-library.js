@@ -92,7 +92,7 @@
       id: 'oscar-legends',
       title: 'Oscar Legends',
       description: 'The most decorated names in cinema',
-      icon: '\uD83C\uDFC6',
+      icon: '<span class="og og-oscar"></span>',
       color: '#ffd700',
       personIds: [1245, 2, 3084, 5064, 1204, 10297, 6193, 1038, 500, 5292, 12835, 2888, 1892, 18997, 934, 776, 192, 2524, 4756, 1231]
     },
@@ -100,7 +100,7 @@
       id: 'international-auteurs',
       title: 'World Cinema Directors',
       description: 'Visionary directors from around the globe',
-      icon: '\uD83C\uDF0D',
+      icon: '<span class="og og-globe"></span>',
       color: '#a855f7',
       personIds: [21684, 1614, 578, 4762, 2636, 1032, 5602, 3556, 2854, 7624, 10831, 12889, 1884, 7180, 60413, 68811, 17419, 1377, 5655, 2395]
     },
@@ -108,7 +108,7 @@
       id: 'character-actors',
       title: 'Character Actor Legends',
       description: 'The unsung heroes who make every film better',
-      icon: '\uD83C\uDFAD',
+      icon: '<span class="og og-bafta"></span>',
       color: '#10b981',
       personIds: [4135, 3977, 7399, 5293, 17305, 2231, 4566, 1233, 585, 17419, 17882, 8986, 4783, 934, 11701, 6968, 5176, 17276, 15152, 2176]
     },
@@ -116,7 +116,7 @@
       id: 'rising-stars',
       title: 'Rising Stars',
       description: 'The next generation of cinema talent',
-      icon: '\uD83C\uDF1F',
+      icon: '<span class="og og-rising-star"></span>',
       color: '#06b6d4',
       personIds: [1373737, 1267329, 974169, 1640658, 2359841, 115440, 1750919, 2786960, 1252036, 1196507, 234352, 1397778, 2292028, 2112247, 570296, 1245, 1402785, 3194176, 3234818, 2576535]
     }
@@ -154,6 +154,16 @@
   var MAP_GENRES = ['Drama', 'Romance', 'History', 'Action', 'Adventure', 'Thriller', 'Crime', 'Comedy', 'Animation', 'Fantasy', 'Sci-Fi', 'Horror'];
   var MAP_DECADES = ['1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s', '2020s'];
 
+  var GENRE_NAME_COLORS = {
+    'Drama': '#3b82f6', 'Action': '#ef4444', 'Comedy': '#fbbf24',
+    'Horror': '#8b5cf6', 'Sci-Fi': '#06b6d4', 'Thriller': '#f97316',
+    'Romance': '#ec4899', 'Animation': '#10b981', 'Crime': '#a855f7',
+    'Adventure': '#22c55e', 'Fantasy': '#6366f1', 'Documentary': '#78716c',
+    'Music': '#e879f9', 'War': '#737373', 'History': '#b45309',
+    'Western': '#a16207', 'Family': '#f472b6', 'Mystery': '#7c3aed',
+    'Other': '#64748b'
+  };
+
   var SOURCE_COLORS = {
     'stellar-catalog': '#00d9ff',
     'constellation': '#ffd700',
@@ -183,7 +193,11 @@
     circleMode:        null,  // null or director name string
     orbitMode:         false,
     orbitPeople:       [],    // all orbit people (unfiltered)
-    bookmarkedOnly:    false
+    bookmarkedOnly:    false,
+    findAllMode:       false,
+    findAllLoading:    false,
+    findAllPages:      0,
+    curatedSnapshot:   null
   };
 
   // ── DOM Refs ──
@@ -224,12 +238,16 @@
       mapCanvas:       $('plMapCanvas'),
       mapTooltip:      $('plMapTooltip'),
       mapOverlay:      $('plMapOverlay'),
+      genrePie:        $('plGenrePie'),
       gapAnalysis:     $('plGapAnalysis'),
       orbitStats:      $('plOrbitStats'),
       bookmarkGroup:   $('plBookmarkGroup'),
       bookmarkChip:    $('plBookmarkChip'),
       orbitEncourage:  $('plOrbitEncourage'),
       filters:         $('plFilters'),
+      // Find All
+      findAllGroup:    $('plFindAllGroup'),
+      findAllBtn:      $('plFindAllBtn'),
       // First-visit welcome overlay
       welcomeOverlay:  $('plWelcomeOverlay'),
       welcomeBtn:      $('plWelcomeBtn')
@@ -281,6 +299,7 @@
     bindToggle();
     bindBookmarkChip();
     bindMapInteraction();
+    bindFindAll();
     // Expand exclusives on desktop by default
     if (window.innerWidth > 650) {
       dom.exclusives.classList.add('expanded');
@@ -398,6 +417,7 @@
     state.isLoading = true;
 
     page = page || 1;
+    if (state.findAllMode) deactivateFindAll();
     state.isSearchMode = true;
     state.searchQuery = query;
 
@@ -437,6 +457,223 @@
     }
   }
 
+  // ── Find All: Deep Browse ──
+
+  var FINDALL_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> ';
+
+  async function activateFindAll() {
+    if (state.findAllMode || state.findAllLoading) return;
+
+    state.curatedSnapshot = state.rawPages.slice();
+    state.findAllMode = true;
+    state.findAllLoading = true;
+    dom.findAllBtn.classList.add('active', 'loading');
+    dom.findAllBtn.innerHTML = FINDALL_SVG + 'Loading\u2026';
+
+    updateResultSummary();
+
+    var startPage = state.currentPage + 1;
+    var endPage = 25;
+    var BATCH_SIZE = 5;
+    var BATCH_DELAY = 1200;
+
+    for (var p = startPage; p <= endPage; p += BATCH_SIZE) {
+      if (!state.findAllMode) break;
+
+      var batch = [];
+      for (var b = p; b < p + BATCH_SIZE && b <= endPage; b++) {
+        batch.push(b);
+      }
+
+      var promises = batch.map(function (page) {
+        var cacheKey = 'orbit_library_browse_page_' + page;
+        var cached = getCachedPage(cacheKey);
+        if (cached) return Promise.resolve(cached);
+
+        var url = TMDB_BASE + '/person/popular?api_key=' + TMDB_API_KEY + '&page=' + page;
+        return fetch(url).then(function (resp) {
+          if (resp.status === 429) throw new Error('rate_limited');
+          if (!resp.ok) return null;
+          return resp.json();
+        }).then(function (data) {
+          if (data) setCachedPage(cacheKey, data);
+          return data;
+        }).catch(function (err) {
+          if (err.message === 'rate_limited') throw err;
+          return null;
+        });
+      });
+
+      try {
+        var results = await Promise.all(promises);
+        results.forEach(function (data) {
+          if (data && data.results) {
+            state.rawPages.push.apply(state.rawPages, data.results);
+          }
+        });
+        state.currentPage = batch[batch.length - 1];
+        state.findAllPages = state.currentPage;
+      } catch (err) {
+        if (err.message === 'rate_limited') {
+          await new Promise(function (r) { setTimeout(r, 3000); });
+          p -= BATCH_SIZE;
+          continue;
+        }
+      }
+
+      rebuildFilteredResults();
+
+      if (state.findAllMode && p + BATCH_SIZE <= endPage) {
+        await new Promise(function (r) { setTimeout(r, BATCH_DELAY); });
+      }
+    }
+
+    state.findAllLoading = false;
+    if (state.findAllMode) {
+      dom.findAllBtn.classList.remove('loading');
+      dom.findAllBtn.innerHTML = FINDALL_SVG + 'Find All \u2713';
+      rebuildFilteredResults();
+
+      // Start awards roster build after pagination completes
+      buildAwardsRoster().then(function (roster) {
+        if (state.findAllMode && roster) {
+          mergeAwardsRoster(roster);
+        }
+      });
+    }
+  }
+
+  function deactivateFindAll() {
+    state.findAllMode = false;
+    state.findAllLoading = false;
+    if (state.curatedSnapshot) {
+      state.rawPages = state.curatedSnapshot;
+      state.curatedSnapshot = null;
+    }
+    state.currentPage = INITIAL_BROWSE_PAGES;
+    state.findAllPages = 0;
+    dom.findAllBtn.classList.remove('active', 'loading');
+    dom.findAllBtn.innerHTML = FINDALL_SVG + 'Find All';
+    rebuildFilteredResults();
+  }
+
+  // ── Awards Roster Builder ──
+
+  function getAwardsMoviesByImportance() {
+    if (!awardsByMovie) return [];
+    var movies = [];
+    for (var movieId in awardsByMovie) {
+      if (!awardsByMovie.hasOwnProperty(movieId)) continue;
+      var entry = awardsByMovie[movieId];
+      var festivals = {};
+      (entry.awards || []).forEach(function (a) { festivals[a.festival] = true; });
+      movies.push({
+        id: Number(movieId),
+        title: entry.title,
+        awardCount: entry.awards ? entry.awards.length : 0,
+        festivals: Object.keys(festivals)
+      });
+    }
+    return movies.sort(function (a, b) { return b.awardCount - a.awardCount; });
+  }
+
+  async function buildAwardsRoster() {
+    var movies = getAwardsMoviesByImportance().slice(0, 100);
+    if (movies.length === 0) return null;
+
+    var roster = {};
+    var BATCH = 5;
+    var DELAY = 1500;
+
+    for (var i = 0; i < movies.length; i += BATCH) {
+      if (!state.findAllMode) break;
+
+      var batch = movies.slice(i, i + BATCH);
+      var promises = batch.map(function (movie) {
+        var cacheKey = 'orbit_movie_credits_' + movie.id;
+        var cached = getCachedPage(cacheKey);
+        if (cached) return Promise.resolve({ movie: movie, credits: cached });
+
+        var url = TMDB_BASE + '/movie/' + movie.id + '/credits?api_key=' + TMDB_API_KEY;
+        return fetch(url).then(function (r) {
+          if (!r.ok) return null;
+          return r.json();
+        }).then(function (credits) {
+          if (credits) setCachedPage(cacheKey, credits);
+          return { movie: movie, credits: credits };
+        }).catch(function () { return null; });
+      });
+
+      var results = await Promise.all(promises);
+      results.forEach(function (result) {
+        if (!result || !result.credits) return;
+        var credits = result.credits;
+        var movie = result.movie;
+
+        var topCast = (credits.cast || []).slice(0, 3);
+        var directors = (credits.crew || []).filter(function (c) { return c.job === 'Director'; });
+        var people = topCast.concat(directors);
+
+        people.forEach(function (person) {
+          if (!person.id) return;
+          if (roster[person.id]) {
+            roster[person.id]._awardMovies.push(movie.id);
+            movie.festivals.forEach(function (f) {
+              if (roster[person.id]._awardFestivals.indexOf(f) === -1) {
+                roster[person.id]._awardFestivals.push(f);
+              }
+            });
+            return;
+          }
+          roster[person.id] = {
+            id: person.id,
+            name: person.name,
+            profile_path: person.profile_path,
+            known_for_department: person.known_for_department ||
+              (directors.some(function (d) { return d.id === person.id; }) ? 'Directing' : 'Acting'),
+            popularity: person.popularity || 0,
+            known_for: [],
+            _awardRoster: true,
+            _awardMovies: [movie.id],
+            _awardFestivals: movie.festivals.slice()
+          };
+        });
+      });
+
+      if (i + BATCH < movies.length) {
+        await new Promise(function (r) { setTimeout(r, DELAY); });
+      }
+    }
+
+    return roster;
+  }
+
+  function mergeAwardsRoster(roster) {
+    var existingIds = {};
+    state.rawPages.forEach(function (p) { existingIds[p.id] = true; });
+    var newPeople = [];
+
+    for (var id in roster) {
+      if (!roster.hasOwnProperty(id)) continue;
+      var numId = Number(id);
+      if (existingIds[numId]) {
+        state.rawPages.forEach(function (p) {
+          if (p.id === numId) {
+            p._awardRoster = true;
+            p._awardFestivals = roster[id]._awardFestivals;
+          }
+        });
+      } else {
+        newPeople.push(roster[id]);
+      }
+    }
+
+    if (newPeople.length > 0) {
+      state.rawPages.push.apply(state.rawPages, newPeople);
+      rebuildFilteredResults();
+    }
+  }
+
   // ── Filter + Sort pipeline ──
   function rebuildFilteredResults() {
     let people = [...state.rawPages];
@@ -450,7 +687,7 @@
 
   function checkAutoLoadMore() {
     // Only auto-load in default browse mode
-    if (state.isSearchMode || state.orbitMode || state.collectionMode || state.circleMode) return;
+    if (state.isSearchMode || state.orbitMode || state.collectionMode || state.circleMode || state.findAllMode) return;
     if (state.isLoading) return;
     if (state.currentPage >= state.totalPages || state.currentPage >= 8) return;
     // If any filter is active and results are too few, load more
@@ -486,6 +723,12 @@
   function filterByAwards(people, festivals) {
     if (!festivals || festivals.length === 0) return people;
     return people.filter(function (person) {
+      // Award roster people: check directly tagged festivals
+      if (person._awardRoster && person._awardFestivals) {
+        if (person._awardFestivals.some(function (f) { return festivals.indexOf(f) !== -1; })) {
+          return true;
+        }
+      }
       var knownFor = person.known_for || [];
       return knownFor.some(function (item) {
         if (!awardsMovieIds.has(item.id)) return false;
@@ -503,12 +746,14 @@
     if (isNaN(decadeNum)) return people;
     var profileCache = state.orbitMode ? getProfileCache() : null;
     return people.filter(function (p) {
-      // In orbit mode, check profile cache for active_decades
+      // In orbit mode, check profile cache filmography for decade presence
       if (profileCache) {
-        var cached = profileCache[p.id];
-        if (cached && cached.derived && cached.derived.active_decades) {
-          return cached.derived.active_decades.some(function (d) {
-            return parseInt(d, 10) === decadeNum;
+        var entry = profileCache[p.id];
+        if (entry && entry.data && entry.data.filmography) {
+          return entry.data.filmography.some(function (film) {
+            if (!film.release_date) return false;
+            var year = parseInt(film.release_date.substring(0, 4));
+            return year >= decadeNum && year < decadeNum + 10;
           });
         }
       }
@@ -589,9 +834,13 @@
     } else {
       dom.grid.classList.remove('hidden');
       dom.empty.classList.add('hidden');
-      // Hide load more in collection/circle/orbit mode
-      if (state.collectionMode || state.circleMode || state.orbitMode) {
+      // Hide load more in collection/circle/orbit mode or during Find All loading
+      if (state.collectionMode || state.circleMode || state.orbitMode || state.findAllLoading) {
         dom.loadMoreWrap.classList.add('hidden');
+      } else if (state.findAllMode && !state.findAllLoading && state.currentPage >= 25 && state.currentPage < state.totalPages) {
+        dom.loadMoreWrap.classList.remove('hidden');
+        dom.loadMoreBtn.textContent = 'Load Even More';
+        dom.loadMoreBtn.disabled = false;
       } else if (state.currentPage < state.totalPages) {
         dom.loadMoreWrap.classList.remove('hidden');
         updateLoadMoreBtn('ready');
@@ -698,7 +947,9 @@
     // Awards badge (top-right)
     var awardsHtml = '';
     if (awardCount > 0) {
-      awardsHtml = '<div class="pl-card-awards">\uD83C\uDFC6 \u00D7' + awardCount + '</div>';
+      awardsHtml = '<div class="pl-card-awards"><span class="og og-sm og-oscar"></span> \u00D7' + awardCount + '</div>';
+    } else if (person._awardRoster) {
+      awardsHtml = '<div class="pl-card-awards pl-card-awards--roster">\u2605</div>';
     }
 
     // Bookmarked star (top-left)
@@ -738,9 +989,14 @@
     }
     var parts = [];
     if (state.collectionMode || state.circleMode) {
-      // Summary handled by mode banner
       dom.resultSummary.classList.add('hidden');
       return;
+    } else if (state.findAllMode) {
+      if (state.findAllLoading) {
+        parts.push('Loading the full catalog\u2026 ' + state.rawPages.length + ' people fetched');
+      } else {
+        parts.push('Showing ' + state.currentResults.length + ' of ' + state.rawPages.length + ' people');
+      }
     } else if (state.isSearchMode) {
       parts.push("Showing results for '" + esc(state.searchQuery) + "'");
     } else {
@@ -758,7 +1014,18 @@
     if (state.activeFilters.era) {
       parts.push(state.activeFilters.era + 's era');
     }
-    dom.resultSummary.textContent = parts.join(' \u00B7 ');
+
+    // Build summary with optional "Back to curated" link
+    if (state.findAllMode) {
+      dom.resultSummary.innerHTML = esc(parts.join(' \u00B7 ')) +
+        ' <button class="pl-back-curated" id="plBackCurated">\u2190 Back to curated</button>';
+      var backBtn = dom.resultSummary.querySelector('#plBackCurated');
+      if (backBtn) {
+        backBtn.addEventListener('click', function () { deactivateFindAll(); });
+      }
+    } else {
+      dom.resultSummary.textContent = parts.join(' \u00B7 ');
+    }
     dom.resultSummary.classList.remove('hidden');
   }
 
@@ -889,7 +1156,7 @@
       state.activeFilters.department = chip.dataset.dept;
 
       // Reset and re-fetch/re-filter
-      if (state.orbitMode || state.isSearchMode) {
+      if (state.orbitMode || state.isSearchMode || state.findAllMode) {
         rebuildFilteredResults();
       } else {
         state.currentPage = 1;
@@ -953,11 +1220,92 @@
 
   function bindLoadMore() {
     dom.loadMoreBtn.addEventListener('click', function () {
+      if (state.findAllMode) {
+        // "Load Even More": extend Find All from page 26 to 50
+        loadEvenMore();
+        return;
+      }
       var nextPage = state.currentPage + 1;
       if (state.isSearchMode) {
         searchPeople(state.searchQuery, nextPage);
       } else {
         fetchPopularPeople(nextPage);
+      }
+    });
+  }
+
+  async function loadEvenMore() {
+    if (state.findAllLoading) return;
+    state.findAllLoading = true;
+    dom.loadMoreBtn.textContent = 'Loading\u2026';
+    dom.loadMoreBtn.disabled = true;
+
+    var startPage = state.currentPage + 1;
+    var endPage = Math.min(startPage + 24, 50);
+    var BATCH_SIZE = 5;
+    var BATCH_DELAY = 1200;
+
+    for (var p = startPage; p <= endPage; p += BATCH_SIZE) {
+      if (!state.findAllMode) break;
+
+      var batch = [];
+      for (var b = p; b < p + BATCH_SIZE && b <= endPage; b++) {
+        batch.push(b);
+      }
+
+      var promises = batch.map(function (page) {
+        var cacheKey = 'orbit_library_browse_page_' + page;
+        var cached = getCachedPage(cacheKey);
+        if (cached) return Promise.resolve(cached);
+
+        var url = TMDB_BASE + '/person/popular?api_key=' + TMDB_API_KEY + '&page=' + page;
+        return fetch(url).then(function (resp) {
+          if (resp.status === 429) throw new Error('rate_limited');
+          if (!resp.ok) return null;
+          return resp.json();
+        }).then(function (data) {
+          if (data) setCachedPage(cacheKey, data);
+          return data;
+        }).catch(function (err) {
+          if (err.message === 'rate_limited') throw err;
+          return null;
+        });
+      });
+
+      try {
+        var results = await Promise.all(promises);
+        results.forEach(function (data) {
+          if (data && data.results) {
+            state.rawPages.push.apply(state.rawPages, data.results);
+          }
+        });
+        state.currentPage = batch[batch.length - 1];
+      } catch (err) {
+        if (err.message === 'rate_limited') {
+          await new Promise(function (r) { setTimeout(r, 3000); });
+          p -= BATCH_SIZE;
+          continue;
+        }
+      }
+
+      rebuildFilteredResults();
+
+      if (state.findAllMode && p + BATCH_SIZE <= endPage) {
+        await new Promise(function (r) { setTimeout(r, BATCH_DELAY); });
+      }
+    }
+
+    state.findAllLoading = false;
+    rebuildFilteredResults();
+  }
+
+  function bindFindAll() {
+    if (!dom.findAllBtn) return;
+    dom.findAllBtn.addEventListener('click', function () {
+      if (state.findAllMode) {
+        deactivateFindAll();
+      } else {
+        activateFindAll();
       }
     });
   }
@@ -1338,6 +1686,7 @@
     dom.exclusives.classList.add('hidden');
     dom.modeBanner.classList.add('hidden');
     dom.bookmarkGroup.classList.remove('hidden');
+    if (dom.findAllGroup) dom.findAllGroup.classList.add('hidden');
 
     // Add orbit sort options
     addOrbitSortOptions();
@@ -1386,6 +1735,7 @@
     dom.orbitEncourage.classList.add('hidden');
     dom.exclusives.classList.remove('hidden');
     dom.bookmarkGroup.classList.add('hidden');
+    if (dom.findAllGroup) dom.findAllGroup.classList.remove('hidden');
 
     // Remove orbit sort options
     removeOrbitSortOptions();
@@ -1488,6 +1838,7 @@
     // Render map, gap analysis, and stats after panel is visible
     setTimeout(function () {
       renderDiscoveryMap(people);
+      renderOrbitGenrePie(people);
       renderGapAnalysis(people);
       renderOrbitStats(people);
     }, 50);
@@ -1616,31 +1967,43 @@
     });
   }
 
+  function getPeakDecade(filmography) {
+    var decadeCounts = {};
+    filmography.forEach(function (film) {
+      if (!film.release_date) return;
+      var year = parseInt(film.release_date.substring(0, 4));
+      if (!year || year < 1920) return;
+      var decade = Math.floor(year / 10) * 10 + 's';
+      decadeCounts[decade] = (decadeCounts[decade] || 0) + 1;
+    });
+    var peak = null;
+    var maxCount = 0;
+    for (var d in decadeCounts) {
+      if (decadeCounts.hasOwnProperty(d) && decadeCounts[d] > maxCount) {
+        maxCount = decadeCounts[d];
+        peak = d;
+      }
+    }
+    return peak;
+  }
+
   function getPersonMapPosition(person, profileCache, plotW, plotH, padLeft, padTop, genreCount, decadeCount) {
-    var cached = profileCache[person.id];
+    var entry = profileCache[person.id];
     var genreIdx = -1;
     var decadeIdx = -1;
 
-    if (cached && cached.derived) {
-      // Use cached genre_concentration
-      if (cached.derived.genre_concentration) {
-        var topGenre = '';
-        var topCount = 0;
-        var gc = cached.derived.genre_concentration;
-        for (var g in gc) {
-          if (gc.hasOwnProperty(g) && gc[g] > topCount) {
-            topCount = gc[g];
-            topGenre = g;
-          }
-        }
-        genreIdx = MAP_GENRES.indexOf(topGenre);
+    if (entry && entry.data) {
+      var data = entry.data;
+
+      // Use genreBreakdown for top genre (already sorted descending)
+      if (data.genreBreakdown && data.genreBreakdown.length > 0) {
+        genreIdx = MAP_GENRES.indexOf(data.genreBreakdown[0].name);
       }
 
-      // Use cached active_decades
-      if (cached.derived.active_decades && cached.derived.active_decades.length > 0) {
-        var decades = cached.derived.active_decades;
-        var midDecade = decades[Math.floor(decades.length / 2)];
-        decadeIdx = MAP_DECADES.indexOf(midDecade);
+      // Use filmography to compute peak decade
+      if (data.filmography && data.filmography.length > 0) {
+        var peak = getPeakDecade(data.filmography);
+        if (peak) decadeIdx = MAP_DECADES.indexOf(peak);
       }
     }
 
@@ -1736,6 +2099,89 @@
     });
   }
 
+  // ── Orbit Genre Pie Chart ──
+
+  function renderOrbitGenrePie(people) {
+    var panel = dom.genrePie;
+    if (!panel) return;
+
+    var profileCache = getProfileCache();
+    var genreCounts = {};
+    var totalWithGenre = 0;
+
+    people.forEach(function (person) {
+      var entry = profileCache[person.id];
+      if (entry && entry.data && entry.data.genreBreakdown && entry.data.genreBreakdown.length > 0) {
+        var topGenre = entry.data.genreBreakdown[0].name;
+        if (topGenre && topGenre !== 'Other') {
+          genreCounts[topGenre] = (genreCounts[topGenre] || 0) + 1;
+          totalWithGenre++;
+        }
+      }
+    });
+
+    // Minimum threshold: 5 people with genre data
+    if (totalWithGenre < 5) {
+      panel.innerHTML = '';
+      return;
+    }
+
+    // Sort descending, take top 6, group rest as Other
+    var sorted = Object.entries(genreCounts).sort(function (a, b) { return b[1] - a[1]; });
+    var top = sorted.slice(0, 6);
+    var otherCount = sorted.slice(6).reduce(function (sum, entry) { return sum + entry[1]; }, 0);
+    if (otherCount > 0) top.push(['Other', otherCount]);
+
+    // Build conic-gradient stops
+    var cumPct = 0;
+    var gradientStops = [];
+    var legendItems = [];
+
+    top.forEach(function (item) {
+      var genre = item[0];
+      var count = item[1];
+      var pct = Math.round((count / totalWithGenre) * 100);
+      var color = GENRE_NAME_COLORS[genre] || '#64748b';
+      var startPct = cumPct;
+      cumPct += pct;
+      gradientStops.push(color + ' ' + startPct + '% ' + cumPct + '%');
+      legendItems.push({ genre: genre, pct: pct, count: count, color: color });
+    });
+
+    // Adjust for rounding — ensure we reach 100%
+    if (cumPct < 100 && gradientStops.length > 0) {
+      var last = legendItems[legendItems.length - 1];
+      gradientStops[gradientStops.length - 1] = last.color + ' ' + (cumPct - last.pct) + '% 100%';
+    }
+
+    var gradientCSS = 'conic-gradient(' + gradientStops.join(', ') + ')';
+
+    var html = '<div class="pl-genre-pie-header">YOUR ORBIT GENRE DNA</div>';
+    html += '<div class="pl-genre-pie-content">';
+
+    // Donut
+    html += '<div class="pl-genre-donut-wrap">';
+    html += '<div class="pl-genre-donut" style="background: ' + gradientCSS + ';">';
+    html += '<div class="pl-genre-donut-hole">';
+    html += '<span class="pl-genre-donut-count">' + totalWithGenre + '</span>';
+    html += '<span class="pl-genre-donut-label">people</span>';
+    html += '</div></div></div>';
+
+    // Legend
+    html += '<div class="pl-genre-legend">';
+    legendItems.forEach(function (item) {
+      html += '<div class="pl-genre-legend-row">';
+      html += '<span class="pl-genre-legend-swatch" style="background:' + item.color + ';"></span>';
+      html += '<span class="pl-genre-legend-name">' + esc(item.genre) + '</span>';
+      html += '<span class="pl-genre-legend-pct">' + item.pct + '%</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    html += '</div>'; // close pl-genre-pie-content
+    panel.innerHTML = html;
+  }
+
   // ── Gap Analysis Engine ──
 
   function analyzeGaps(encounteredPeople) {
@@ -1748,19 +2194,30 @@
       var dept = person.known_for_department || 'Unknown';
       deptCounts[dept] = (deptCounts[dept] || 0) + 1;
 
-      var cached = profileCache[person.id];
-      if (cached && cached.derived) {
-        if (cached.derived.genre_concentration) {
-          for (var genre in cached.derived.genre_concentration) {
-            if (cached.derived.genre_concentration.hasOwnProperty(genre)) {
-              genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+      var entry = profileCache[person.id];
+      if (entry && entry.data) {
+        var data = entry.data;
+        if (data.genreBreakdown && data.genreBreakdown.length > 0) {
+          data.genreBreakdown.forEach(function (g) {
+            if (g.name !== 'Other') {
+              genreCounts[g.name] = (genreCounts[g.name] || 0) + 1;
+            }
+          });
+        }
+        if (data.filmography) {
+          var seenDecades = {};
+          data.filmography.forEach(function (film) {
+            if (!film.release_date) return;
+            var year = parseInt(film.release_date.substring(0, 4));
+            if (!year || year < 1920) return;
+            var decade = Math.floor(year / 10) * 10 + 's';
+            seenDecades[decade] = true;
+          });
+          for (var decade in seenDecades) {
+            if (seenDecades.hasOwnProperty(decade)) {
+              eraCounts[decade] = (eraCounts[decade] || 0) + 1;
             }
           }
-        }
-        if (cached.derived.active_decades) {
-          cached.derived.active_decades.forEach(function (decade) {
-            eraCounts[decade] = (eraCounts[decade] || 0) + 1;
-          });
         }
       }
     });
@@ -1907,7 +2364,7 @@
 
   function getProfileCache() {
     try {
-      return JSON.parse(localStorage.getItem('orbit_people_profiles') || '{}');
+      return JSON.parse(localStorage.getItem('orbit_people_profiles_v2') || '{}');
     } catch (e) { return {}; }
   }
 

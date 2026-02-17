@@ -259,6 +259,63 @@ body {
 }
 .pl-sort-select:focus { border-color: var(--accent-cyan); }
 
+/* ── Find All Button ── */
+
+.pl-findall-group {
+  display: flex;
+  align-items: flex-end;
+}
+
+.pl-findall-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.pl-findall-btn:hover {
+  background: rgba(0,217,255,0.1);
+}
+
+.pl-findall-btn.active {
+  background: rgba(0,217,255,0.15);
+  border-color: var(--accent-cyan);
+}
+
+.pl-findall-btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.pl-findall-btn svg {
+  flex-shrink: 0;
+}
+
+.pl-back-curated {
+  color: var(--accent-cyan);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  padding: 0;
+  margin-left: 8px;
+}
+
+.pl-back-curated:hover {
+  color: var(--film-white);
+}
+
 /* ── ORBIT Exclusives Panel ── */
 
 .pl-exclusives {
@@ -629,6 +686,11 @@ body {
   border-radius: 10px;
 }
 
+.pl-card-awards--roster {
+  font-size: 0.85rem;
+  padding: 2px 6px;
+}
+
 .pl-card-encounters {
   display: flex;
   gap: 4px;
@@ -919,6 +981,107 @@ body {
   color: var(--ghost-gray);
   text-align: right;
   margin-top: 4px;
+}
+
+/* ── Orbit Genre Pie ── */
+
+.pl-genre-pie-wrap {
+  margin-bottom: 16px;
+}
+
+.pl-genre-pie-header {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+}
+
+.pl-genre-pie-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(10,14,26,0.8);
+  border: 1px solid rgba(255,215,0,0.15);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.pl-genre-donut-wrap {
+  flex-shrink: 0;
+}
+
+.pl-genre-donut {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl-genre-donut-hole {
+  width: 100px;
+  height: 100px;
+  background: var(--deep-void, #0a0e17);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.pl-genre-donut-count {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1;
+}
+
+.pl-genre-donut-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--ghost-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pl-genre-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pl-genre-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pl-genre-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.pl-genre-legend-name {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--film-white);
+  flex: 1;
+}
+
+.pl-genre-legend-pct {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--muted-silver);
+  min-width: 32px;
+  text-align: right;
 }
 
 /* ── Gap Analysis ── */
@@ -1221,6 +1384,25 @@ body {
 
   .pl-orbit-panel {
     padding: 0 16px;
+  }
+
+  .pl-genre-pie-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pl-genre-donut {
+    width: 150px;
+    height: 150px;
+  }
+
+  .pl-genre-donut-hole {
+    width: 84px;
+    height: 84px;
+  }
+
+  .pl-genre-donut-count {
+    font-size: 1.2rem;
   }
 
   .pl-gap-card {
