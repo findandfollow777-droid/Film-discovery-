@@ -2464,7 +2464,7 @@
 
   function getProfileCache() {
     try {
-      return JSON.parse(localStorage.getItem('orbit_people_profiles_v2') || '{}');
+      return JSON.parse(localStorage.getItem('orbit_people_profiles_v3') || '{}');
     } catch (e) { return {}; }
   }
 
