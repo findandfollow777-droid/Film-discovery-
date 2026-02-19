@@ -45,7 +45,6 @@
   const isTouchDevice = matchMedia('(hover: none)').matches;
 
   // Selection mode state
-  let selectionMode = false;
   let selectedCollaborators = new Map(); // id → { id, name, profile_path }
 
   // ── DOM Cache ──
@@ -165,11 +164,10 @@
       navigateToSacredTimeline(personId, profileData?.person?.name);
     });
 
-    // Shared Timeline / Stellar Territories selection mode
-    $('sharedTimelineBtn')?.addEventListener('click', () => enterSelectionMode());
+    // Selection bar actions
     $('ppSelectionLaunch')?.addEventListener('click', () => launchSharedTimeline());
     $('ppSelectionVenn')?.addEventListener('click', () => launchStellarTerritories());
-    $('ppSelectionCancel')?.addEventListener('click', () => exitSelectionMode());
+    $('ppSelectionCancel')?.addEventListener('click', () => clearAllSelections());
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -178,9 +176,9 @@
         const cubeOverlay = document.getElementById('movieCubeOverlay');
         if (cubeOverlay && !cubeOverlay.hidden) return;
 
-        // Exit selection mode if active
-        if (selectionMode) {
-          exitSelectionMode();
+        // Clear selections if any
+        if (selectedCollaborators.size > 0) {
+          clearAllSelections();
           return;
         }
 
@@ -483,7 +481,8 @@
           personCounts[p.id].sharedFilms.push({
             id: film.id,
             title: film.title,
-            year: filmYear
+            year: filmYear,
+            poster_path: film.poster_path || null
           });
         });
       });
@@ -729,16 +728,8 @@
     const container = $('ppCollabs');
     const collabs = profileData.collaborators;
 
-    // Show/hide shared timeline button
-    $('sharedTimelineBtn')?.classList.toggle('hidden', !collabs || collabs.length === 0);
-
     if (!collabs || collabs.length === 0) {
       container.innerHTML = '<p class="pp-collabs-empty">This person charts their own orbit — no frequent collaborators found.</p>';
-      return;
-    }
-
-    if (selectionMode) {
-      renderConnectionsSelectable(container, collabs);
       return;
     }
 
@@ -750,29 +741,10 @@
       const photo = c.profile_path
         ? `${TMDB_IMG}w92${c.profile_path}`
         : DEFAULT_AVATAR;
-
-      return `
-        <a href="people-profile.html?id=${c.id}" class="pp-collab-card" data-person-id="${c.id}">
-          <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}" loading="lazy"
-               onerror="this.src='${DEFAULT_AVATAR}'">
-          <span class="pp-collab-name">${esc(c.name)}</span>
-          <span class="pp-collab-count">${c.count} shared films</span>
-          <span class="pp-collab-dept">${esc(c.department || '')}</span>
-        </a>
-      `;
-    }).join('');
-
-    bindCollabTooltips();
-  }
-
-  function renderConnectionsSelectable(container, collabs) {
-    container.innerHTML = collabs.map(c => {
-      const photo = c.profile_path
-        ? `${TMDB_IMG}w92${c.profile_path}`
-        : DEFAULT_AVATAR;
       const isSelected = selectedCollaborators.has(c.id);
+
       return `
-        <div class="pp-collab-card selectable${isSelected ? ' selected' : ''}" data-person-id="${c.id}">
+        <div class="pp-collab-card${isSelected ? ' selected' : ''}" data-person-id="${c.id}" data-name="${esc(c.name)}">
           <div class="pp-collab-check">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0a0e1a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
@@ -785,15 +757,7 @@
       `;
     }).join('');
 
-    // Bind selection click handlers
-    container.querySelectorAll('.pp-collab-card.selectable').forEach(card => {
-      card.addEventListener('click', () => {
-        const id = parseInt(card.dataset.personId);
-        const collab = collabs.find(c => c.id === id);
-        if (!collab) return;
-        toggleSelection(id, collab, card);
-      });
-    });
+    bindCollabTooltips();
   }
 
   function getOrCreateTooltip() {
@@ -809,27 +773,82 @@
 
   function showFloatingTooltip(card, films) {
     const tip = getOrCreateTooltip();
+    const collabName = card.dataset.name || card.querySelector('.pp-collab-name')?.textContent || '';
+    const profileName = profileData?.person?.name || '';
+    const collabId = card.dataset.personId;
 
     let html = '';
+    // Header
+    html += `<div class="pp-collab-tooltip-header">${esc(profileName)} &times; ${esc(collabName)}</div>`;
+
     if (films && films.length > 0) {
-      const shown = films.slice(0, 6);
+      const shown = films.slice(0, 8);
       const remaining = films.length - shown.length;
-      html = `<div class="pp-collab-tooltip-title">Shared Films</div>
-        <ul class="pp-collab-tooltip-list">
-          ${shown.map(f => `<li>${esc(f.title)}${f.year ? ` (${f.year})` : ''}</li>`).join('')}
-        </ul>
-        ${remaining > 0 ? `<div class="pp-collab-tooltip-more">and ${remaining} more...</div>` : ''}`;
+      html += '<div class="pp-collab-tooltip-movies">';
+      shown.forEach(f => {
+        const poster = f.poster_path
+          ? `${TMDB_IMG}w92${f.poster_path}`
+          : '';
+        const posterHtml = poster
+          ? `<img src="${poster}" alt="" loading="lazy" onerror="this.style.display='none'">`
+          : '<div class="pp-tooltip-no-poster"></div>';
+        html += `<div class="pp-collab-tooltip-movie" data-movie-id="${f.id}">
+          ${posterHtml}
+          <span>${esc(f.title)}${f.year ? ` (${f.year})` : ''}</span>
+        </div>`;
+      });
+      html += '</div>';
+      if (remaining > 0) {
+        html += `<div class="pp-collab-tooltip-more">+${remaining} more</div>`;
+      }
     } else {
       const count = card.querySelector('.pp-collab-count')?.textContent || '';
-      html = `<div class="pp-collab-tooltip-title">${esc(count)}</div>`;
+      html += `<div class="pp-collab-tooltip-fallback">${esc(count)}</div>`;
     }
+
+    // Actions
+    html += `<div class="pp-collab-tooltip-actions">
+      <a href="people-profile.html?id=${collabId}" class="pp-tooltip-profile-link">View Profile</a>
+      <button class="pp-tooltip-timeline-btn" data-collab-id="${collabId}">Shared Timeline &rarr;</button>
+    </div>`;
+
     tip.innerHTML = html;
 
-    // Position above the card using fixed coordinates
+    // Bind tooltip movie clicks → Moviecube
+    tip.querySelectorAll('.pp-collab-tooltip-movie[data-movie-id]').forEach(row => {
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const movieId = parseInt(row.dataset.movieId);
+        if (movieId && typeof openMovieCube === 'function') {
+          openMovieCube(movieId);
+          hideFloatingTooltip();
+        }
+      });
+    });
+
+    // Bind timeline action
+    const tlBtn = tip.querySelector('.pp-tooltip-timeline-btn');
+    if (tlBtn) {
+      tlBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigateToSacredTimeline(personId, profileName);
+      });
+    }
+
+    // Position above the card, flip below if near top
     const rect = card.getBoundingClientRect();
     tip.style.left = (rect.left + rect.width / 2) + 'px';
+    tip.style.transform = 'translateX(-50%) translateY(-100%)';
     tip.style.top = (rect.top - 10) + 'px';
+
+    // Show, then check if it overflows above viewport
     tip.classList.add('visible');
+    const tipRect = tip.getBoundingClientRect();
+    if (tipRect.top < 8) {
+      tip.style.top = (rect.bottom + 10) + 'px';
+      tip.style.transform = 'translateX(-50%)';
+    }
+
     activeCollabTooltip = tip;
   }
 
@@ -848,19 +867,24 @@
     const container = $('ppCollabs');
     if (!container) return;
 
-    if (isTouchDevice) {
-      // Mobile: first tap shows tooltip, second tap navigates
-      container.addEventListener('click', (e) => {
-        if (selectionMode) return;
-        const card = e.target.closest('.pp-collab-card[data-person-id]');
-        if (!card) return;
+    // Click-to-select (both desktop and mobile)
+    container.addEventListener('click', (e) => {
+      // Don't toggle selection if clicking inside the tooltip
+      if (e.target.closest('#ppCollabTooltip')) return;
+      const card = e.target.closest('.pp-collab-card[data-person-id]');
+      if (!card) return;
 
+      if (isTouchDevice) {
+        // Mobile: first tap shows tooltip, second tap toggles selection
         const tip = document.getElementById('ppCollabTooltip');
         if (tip && tip.classList.contains('visible') && tip._cardId === card.dataset.personId) {
-          // Second tap — allow navigation
+          // Second tap — toggle selection
+          const id = parseInt(card.dataset.personId);
+          const collab = (profileData.collaborators || []).find(c => c.id === id);
+          if (collab) toggleSelection(id, collab, card);
           return;
         }
-        // First tap — show tooltip, prevent navigation
+        // First tap — show tooltip
         e.preventDefault();
         e.stopPropagation();
         hideFloatingTooltip();
@@ -869,78 +893,66 @@
         showFloatingTooltip(card, films);
         const tipEl = document.getElementById('ppCollabTooltip');
         if (tipEl) tipEl._cardId = card.dataset.personId;
-      });
+      } else {
+        // Desktop: click toggles selection
+        const id = parseInt(card.dataset.personId);
+        const collab = (profileData.collaborators || []).find(c => c.id === id);
+        if (collab) toggleSelection(id, collab, card);
+      }
+    });
 
-      // Dismiss on outside tap
-      document.addEventListener('click', (e) => {
-        if (activeCollabTooltip && !e.target.closest('.pp-collab-card') && !e.target.closest('#ppCollabTooltip')) {
-          hideFloatingTooltip();
-        }
-      });
-      return;
-    }
-
-    // Desktop: hover with delay
-    container.addEventListener('mouseenter', (e) => {
-      if (selectionMode) return;
-      const card = e.target.closest('.pp-collab-card[data-person-id]');
-      if (!card) return;
-      clearTimeout(collabTooltipTimer);
-      collabTooltipTimer = setTimeout(() => {
-        const pid = parseInt(card.dataset.personId);
-        const films = collabFilmMapRef[pid] || [];
-        showFloatingTooltip(card, films);
-      }, 300);
-    }, true);
-
-    container.addEventListener('mouseleave', (e) => {
-      if (selectionMode) return;
-      const card = e.target.closest('.pp-collab-card[data-person-id]');
-      if (!card) return;
-      clearTimeout(collabTooltipTimer);
-      collabTooltipTimer = setTimeout(() => {
+    // Dismiss tooltip on outside tap/click
+    document.addEventListener('click', (e) => {
+      if (activeCollabTooltip && !e.target.closest('.pp-collab-card') && !e.target.closest('#ppCollabTooltip')) {
         hideFloatingTooltip();
-      }, 200);
-    }, true);
-  }
+      }
+    });
 
-  // ── Selection Mode ──
+    if (!isTouchDevice) {
+      // Desktop: hover with delay for tooltip
+      container.addEventListener('mouseenter', (e) => {
+        const card = e.target.closest('.pp-collab-card[data-person-id]');
+        if (!card) return;
+        clearTimeout(collabTooltipTimer);
+        collabTooltipTimer = setTimeout(() => {
+          const pid = parseInt(card.dataset.personId);
+          const films = collabFilmMapRef[pid] || [];
+          showFloatingTooltip(card, films);
+        }, 300);
+      }, true);
 
-  function enterSelectionMode() {
-    selectionMode = true;
-    selectedCollaborators.clear();
+      container.addEventListener('mouseleave', (e) => {
+        const card = e.target.closest('.pp-collab-card[data-person-id]');
+        if (!card) return;
+        clearTimeout(collabTooltipTimer);
+        collabTooltipTimer = setTimeout(() => {
+          // Don't hide if mouse moved into the tooltip
+          const tip = document.getElementById('ppCollabTooltip');
+          if (tip && tip.matches(':hover')) return;
+          hideFloatingTooltip();
+        }, 200);
+      }, true);
 
-    // Dismiss any active tooltip
-    if (activeCollabTooltip) {
-      activeCollabTooltip.classList.remove('visible');
-      activeCollabTooltip = null;
+      // Keep tooltip alive when hovering over it
+      document.addEventListener('mouseleave', (e) => {
+        if (e.target.id === 'ppCollabTooltip') {
+          collabTooltipTimer = setTimeout(() => hideFloatingTooltip(), 150);
+        }
+      }, true);
+      document.addEventListener('mouseenter', (e) => {
+        if (e.target.id === 'ppCollabTooltip') {
+          clearTimeout(collabTooltipTimer);
+        }
+      }, true);
     }
-    clearTimeout(collabTooltipTimer);
-
-    // Highlight the trigger button
-    $('sharedTimelineBtn')?.classList.add('active');
-
-    // Re-render cards in selection mode
-    renderConnections();
-
-    // Show selection bar
-    showSelectionBar();
   }
 
-  function exitSelectionMode() {
-    selectionMode = false;
+  // ── Selection ──
+
+  function clearAllSelections() {
     selectedCollaborators.clear();
-
-    // Unhighlight button
-    $('sharedTimelineBtn')?.classList.remove('active');
-
-    // Re-render normal cards
-    renderConnections();
-
-    // Hide selection bar
-    const bar = $('ppSelectionBar');
-    bar.classList.remove('visible');
-    setTimeout(() => bar.classList.add('hidden'), 300);
+    document.querySelectorAll('.pp-collab-card.selected').forEach(c => c.classList.remove('selected'));
+    updateSelectionBar();
   }
 
   function toggleSelection(id, collab, cardEl) {
@@ -948,7 +960,6 @@
       selectedCollaborators.delete(id);
       cardEl.classList.remove('selected');
     } else {
-      // Cap at 3 (+ profile person = 4 total)
       if (selectedCollaborators.size >= 3) {
         showToast('Maximum 4 people for timeline');
         return;
@@ -962,34 +973,30 @@
       cardEl.classList.add('selected');
     }
 
-    updateSelectionChips();
-    updateSelectionCount();
+    updateSelectionBar();
   }
 
-  function showSelectionBar() {
+  function updateSelectionBar() {
     const bar = $('ppSelectionBar');
+    const hasSelection = selectedCollaborators.size > 0;
+
+    if (!hasSelection) {
+      bar.classList.remove('visible');
+      setTimeout(() => bar.classList.add('hidden'), 300);
+      return;
+    }
+
+    // Populate profile person chip (locked)
     const selfChip = $('ppSelectionSelf');
     const p = profileData.person;
-
-    // Populate profile person (locked)
     const selfPhoto = selfChip.querySelector('.pp-selection-chip-photo');
     selfPhoto.src = p.profile_path ? `${TMDB_IMG}w92${p.profile_path}` : DEFAULT_AVATAR;
     selfPhoto.alt = p.name;
     selfChip.querySelector('.pp-selection-chip-name').textContent = p.name;
 
-    // Clear dynamic chips
-    $('ppSelectionChips').innerHTML = '';
-
-    updateSelectionCount();
-
-    bar.classList.remove('hidden');
-    requestAnimationFrame(() => bar.classList.add('visible'));
-  }
-
-  function updateSelectionChips() {
-    const container = $('ppSelectionChips');
-    container.innerHTML = '';
-
+    // Build collaborator chips
+    const chipsContainer = $('ppSelectionChips');
+    chipsContainer.innerHTML = '';
     selectedCollaborators.forEach((collab, id) => {
       const photo = collab.profile_path ? `${TMDB_IMG}w92${collab.profile_path}` : DEFAULT_AVATAR;
       const chip = document.createElement('div');
@@ -1002,23 +1009,22 @@
       `;
       chip.querySelector('.pp-chip-remove').addEventListener('click', () => {
         selectedCollaborators.delete(id);
-        // Update the card visual
         const card = document.querySelector(`.pp-collab-card[data-person-id="${id}"]`);
         if (card) card.classList.remove('selected');
-        updateSelectionChips();
-        updateSelectionCount();
+        updateSelectionBar();
       });
-      container.appendChild(chip);
+      chipsContainer.appendChild(chip);
     });
-  }
 
-  function updateSelectionCount() {
-    const total = selectedCollaborators.size + 1; // +1 for profile person
+    // Update count and button states
+    const total = selectedCollaborators.size + 1;
     $('ppSelectionCount').textContent = `${total}/4`;
-    const hasSelection = selectedCollaborators.size > 0;
-    $('ppSelectionLaunch').disabled = !hasSelection;
+    $('ppSelectionLaunch').disabled = false;
     const vennBtn = $('ppSelectionVenn');
-    if (vennBtn) vennBtn.disabled = !hasSelection;
+    if (vennBtn) vennBtn.disabled = false;
+
+    bar.classList.remove('hidden');
+    requestAnimationFrame(() => bar.classList.add('visible'));
   }
 
   function launchSharedTimeline() {

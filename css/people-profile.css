@@ -516,6 +516,7 @@ body {
 
 .pp-collab-card {
   position: relative;
+  cursor: pointer;
 }
 
 .pp-collab-tooltip {
@@ -527,16 +528,16 @@ body {
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 1.5;
-  padding: 10px 14px;
-  border-radius: 8px;
-  white-space: nowrap;
+  padding: 12px;
+  border-radius: 10px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
   z-index: 1100;
-  min-width: 160px;
-  max-width: 260px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  min-width: 240px;
+  max-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
 }
 
 .pp-collab-tooltip.visible {
@@ -544,28 +545,52 @@ body {
   pointer-events: auto;
 }
 
-.pp-collab-tooltip-title {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
+.pp-collab-tooltip-header {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
   letter-spacing: 1px;
   color: var(--accent-cyan);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+  text-transform: uppercase;
 }
 
-.pp-collab-tooltip-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.pp-collab-tooltip-movies {
+  max-height: 260px;
+  overflow-y: auto;
 }
 
-.pp-collab-tooltip-list li {
-  padding: 2px 0;
-  color: var(--muted-silver);
-  font-size: 11px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.pp-collab-tooltip-movie {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pp-collab-tooltip-movie:hover {
+  background: rgba(0, 217, 255, 0.08);
+}
+.pp-collab-tooltip-movie img {
+  width: 32px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.pp-collab-tooltip-movie span {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--film-white);
+}
+.pp-tooltip-no-poster {
+  width: 32px;
+  height: 48px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  flex-shrink: 0;
 }
 
 .pp-collab-tooltip-more {
@@ -573,11 +598,53 @@ body {
   color: var(--ghost-gray);
   font-style: italic;
   margin-top: 4px;
+  padding-left: 6px;
 }
 
-/* tooltip-link removed — tooltip is now body-level, no interactive links inside */
+.pp-collab-tooltip-fallback {
+  font-size: 11px;
+  color: var(--muted-silver);
+  padding: 4px 0;
+}
 
-/* ── Selection Mode ── */
+.pp-collab-tooltip-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pp-tooltip-profile-link {
+  font-size: 11px;
+  color: var(--ghost-gray);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.pp-tooltip-profile-link:hover {
+  color: var(--film-white);
+}
+
+.pp-tooltip-timeline-btn {
+  flex: 1;
+  padding: 6px 10px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 6px;
+  color: var(--accent-cyan);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.pp-tooltip-timeline-btn:hover {
+  background: rgba(0, 217, 255, 0.2);
+  border-color: var(--accent-cyan);
+}
+
+/* ── Selection ── */
 
 .pp-collab-card .pp-collab-check {
   position: absolute;
@@ -585,33 +652,29 @@ body {
   right: 8px;
   width: 22px;
   height: 22px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   z-index: 2;
+  opacity: 0;
 }
 
-.pp-collab-card.selectable .pp-collab-check {
-  display: flex;
-}
-
-.pp-collab-card.selectable {
-  border-style: dashed;
-  border-color: rgba(0, 217, 255, 0.2);
+.pp-collab-card:hover .pp-collab-check {
+  opacity: 0.6;
 }
 
 .pp-collab-card.selected {
-  border-style: solid;
   border-color: var(--accent-cyan);
   background: rgba(0, 217, 255, 0.08);
   box-shadow: 0 0 12px rgba(0, 217, 255, 0.15);
 }
 
 .pp-collab-card.selected .pp-collab-check {
+  opacity: 1;
   background: var(--accent-cyan);
   border-color: var(--accent-cyan);
 }
@@ -1317,8 +1380,7 @@ body {
   }
 
   .pp-collab-tooltip {
-    white-space: normal;
-    max-width: 200px;
+    max-width: 260px;
   }
 
   .pp-selection-bar-inner {
