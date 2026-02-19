@@ -1839,6 +1839,7 @@
     setTimeout(function () {
       renderDiscoveryMap(people);
       renderOrbitGenrePie(people);
+      enrichGenreData(people); // background fetch, re-renders pie when done
       renderGapAnalysis(people);
       renderOrbitStats(people);
     }, 50);
@@ -1968,23 +1969,8 @@
   }
 
   function getPeakDecade(filmography) {
-    var decadeCounts = {};
-    filmography.forEach(function (film) {
-      if (!film.release_date) return;
-      var year = parseInt(film.release_date.substring(0, 4));
-      if (!year || year < 1920) return;
-      var decade = Math.floor(year / 10) * 10 + 's';
-      decadeCounts[decade] = (decadeCounts[decade] || 0) + 1;
-    });
-    var peak = null;
-    var maxCount = 0;
-    for (var d in decadeCounts) {
-      if (decadeCounts.hasOwnProperty(d) && decadeCounts[d] > maxCount) {
-        maxCount = decadeCounts[d];
-        peak = d;
-      }
-    }
-    return peak;
+    var decade = calcProminentDecade(filmography);
+    return decade ? decade + 's' : null;
   }
 
   function getPersonMapPosition(person, profileCache, plotW, plotH, padLeft, padTop, genreCount, decadeCount) {
@@ -2101,20 +2087,45 @@
 
   // ── Orbit Genre Pie Chart ──
 
+  function getGenreCache() {
+    try {
+      return JSON.parse(sessionStorage.getItem('orbit_genre_cache') || '{}');
+    } catch (e) { return {}; }
+  }
+
+  function saveGenreCache(cache) {
+    try {
+      sessionStorage.setItem('orbit_genre_cache', JSON.stringify(cache));
+    } catch (e) { /* ignore */ }
+  }
+
   function renderOrbitGenrePie(people) {
     var panel = dom.genrePie;
     if (!panel) return;
 
     var profileCache = getProfileCache();
+    var genreOnlyCache = getGenreCache();
     var genreCounts = {};
     var totalWithGenre = 0;
+    var totalPeople = people.length;
 
     people.forEach(function (person) {
+      // Check full profile cache first
       var entry = profileCache[person.id];
       if (entry && entry.data && entry.data.genreBreakdown && entry.data.genreBreakdown.length > 0) {
         var topGenre = entry.data.genreBreakdown[0].name;
         if (topGenre && topGenre !== 'Other') {
           genreCounts[topGenre] = (genreCounts[topGenre] || 0) + 1;
+          totalWithGenre++;
+        }
+        return;
+      }
+      // Fall back to lightweight genre-only cache
+      var genreEntry = genreOnlyCache[person.id];
+      if (genreEntry && genreEntry.topGenre) {
+        var tg = genreEntry.topGenre;
+        if (tg !== 'Other') {
+          genreCounts[tg] = (genreCounts[tg] || 0) + 1;
           totalWithGenre++;
         }
       }
@@ -2160,11 +2171,15 @@
     html += '<div class="pl-genre-pie-content">';
 
     // Donut
+    var hasDiscrepancy = totalWithGenre < totalPeople;
+    var centerCount = hasDiscrepancy ? (totalWithGenre + ' of ' + totalPeople) : ('' + totalWithGenre);
+    var centerLabel = hasDiscrepancy ? 'people profiled' : 'people';
+
     html += '<div class="pl-genre-donut-wrap">';
     html += '<div class="pl-genre-donut" style="background: ' + gradientCSS + ';">';
     html += '<div class="pl-genre-donut-hole">';
-    html += '<span class="pl-genre-donut-count">' + totalWithGenre + '</span>';
-    html += '<span class="pl-genre-donut-label">people</span>';
+    html += '<span class="pl-genre-donut-count">' + centerCount + '</span>';
+    html += '<span class="pl-genre-donut-label">' + centerLabel + '</span>';
     html += '</div></div></div>';
 
     // Legend
@@ -2179,7 +2194,92 @@
     html += '</div>';
 
     html += '</div>'; // close pl-genre-pie-content
+
+    // Explanation note when there's a discrepancy
+    if (hasDiscrepancy) {
+      html += '<p class="pl-genre-pie-note">Genre data available for profiled people. Visit more profiles to expand.</p>';
+    }
+
     panel.innerHTML = html;
+  }
+
+  // ── Genre Enrichment (background fetch) ──
+
+  var GENRE_ID_NAMES = {
+    28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',
+    80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+    14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',
+    9648: 'Mystery', 10749: 'Romance', 878: 'Sci-Fi', 53: 'Thriller',
+    10752: 'War', 37: 'Western'
+  };
+
+  function enrichGenreData(people) {
+    if (!window.OrbitEncounters || !TMDB_API_KEY) return;
+
+    var profileCache = getProfileCache();
+    var genreOnlyCache = getGenreCache();
+
+    // Find people who have no genre data in either cache
+    var needsData = people.filter(function (person) {
+      if (genreOnlyCache[person.id]) return false;
+      var entry = profileCache[person.id];
+      if (entry && entry.data && entry.data.genreBreakdown && entry.data.genreBreakdown.length > 0) return false;
+      return true;
+    });
+
+    if (needsData.length === 0) return;
+
+    var toFetch = needsData.slice(0, 20);
+    var BATCH_SIZE = 5;
+    var idx = 0;
+
+    function fetchBatch() {
+      var batch = toFetch.slice(idx, idx + BATCH_SIZE);
+      if (batch.length === 0) return;
+
+      Promise.all(batch.map(function (person) {
+        return fetch(
+          'https://api.themoviedb.org/3/person/' + person.id + '/movie_credits?api_key=' + TMDB_API_KEY
+        )
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var genreCounts = {};
+          (data.cast || []).forEach(function (movie) {
+            (movie.genre_ids || []).forEach(function (gid) {
+              var name = GENRE_ID_NAMES[gid];
+              if (name) {
+                genreCounts[name] = (genreCounts[name] || 0) + 1;
+              }
+            });
+          });
+
+          // Find dominant genre
+          var entries = Object.entries(genreCounts).sort(function (a, b) { return b[1] - a[1]; });
+          if (entries.length > 0) {
+            genreOnlyCache[person.id] = {
+              topGenre: entries[0][0],
+              genres: genreCounts
+            };
+          }
+        })
+        .catch(function (err) {
+          console.warn('Genre fetch failed for ' + person.id + ':', err);
+        });
+      })).then(function () {
+        // Save after each batch
+        saveGenreCache(genreOnlyCache);
+
+        idx += BATCH_SIZE;
+        if (idx < toFetch.length) {
+          setTimeout(fetchBatch, 300);
+        } else {
+          // All done — re-render the pie with enriched data
+          renderOrbitGenrePie(people);
+        }
+      });
+    }
+
+    fetchBatch();
   }
 
   // ── Gap Analysis Engine ──

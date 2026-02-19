@@ -98,6 +98,63 @@ trackNavigation();
 document.addEventListener('DOMContentLoaded', initBackNav);
 
 // ============================================
+// PROMINENT DECADE - Weighted Scoring
+// ============================================
+
+/**
+ * Calculate the most prominent decade for a person based on their filmography.
+ * Uses weighted scoring: lead roles in well-rated films count more than
+ * small credits, so the decade of peak PROMINENCE wins, not just raw count.
+ *
+ * @param {Array} entries - Credit objects with release_date/sortDate/airDate,
+ *   and optionally: type, order, vote_average, isGuest
+ * @returns {string|null} Decade string like "1990" or null if no valid entries
+ */
+function calcProminentDecade(entries) {
+  if (!entries || entries.length === 0) return null;
+
+  var decadeScores = {};
+
+  entries.forEach(function (e) {
+    var dateStr = e.sortDate || e.release_date || e.airDate;
+    if (!dateStr) return;
+
+    var year = new Date(dateStr).getFullYear();
+    if (isNaN(year) || year < 1900) return;
+
+    var decade = Math.floor(year / 10) * 10;
+    var score = 1;
+
+    // TV seasons get flat scoring
+    if (e.type === 'tv_season') {
+      score = e.isGuest ? 0.5 : 1.0;
+    } else {
+      // Movies (type 'movie', 'cast', 'crew', or undefined)
+      var order = (e.order != null) ? e.order : 999;
+
+      // Billing position weight
+      if (order <= 2) score = 3.0;
+      else if (order <= 5) score = 2.0;
+      else if (order <= 9) score = 1.5;
+      else score = 1.0;
+
+      // Rating bonus
+      var rating = e.vote_average || 0;
+      if (rating >= 7.0) score += 1.0;
+      else if (rating >= 6.0) score += 0.5;
+
+      // Top-billing bonus
+      if (order === 0) score += 1.0;
+    }
+
+    decadeScores[decade] = (decadeScores[decade] || 0) + score;
+  });
+
+  var sorted = Object.entries(decadeScores).sort(function (a, b) { return b[1] - a[1]; });
+  return sorted.length > 0 ? sorted[0][0] : null;
+}
+
+// ============================================
 // PERSON ID RESOLUTION - Name-Validated Fetch
 // ============================================
 

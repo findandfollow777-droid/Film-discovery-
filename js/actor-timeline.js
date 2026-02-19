@@ -689,38 +689,9 @@ function openCareerDNA() {
   // Compute stats
   const stats = [];
 
-  // Most prominent decade (weighted scoring)
-  const decadeScores = {};
-  unifiedEntries.forEach(e => {
-    const year = new Date(e.sortDate).getFullYear();
-    const decade = Math.floor(year / 10) * 10;
-
-    let score = 1;
-
-    if (e.type === 'movie') {
-      const order = e.order ?? 999;
-      if (order <= 2) score = 3.0;
-      else if (order <= 5) score = 2.0;
-      else if (order <= 9) score = 1.5;
-      else score = 1.0;
-
-      const rating = e.vote_average || 0;
-      if (rating >= 7.0) score += 1.0;
-      else if (rating >= 6.0) score += 0.5;
-
-      if (order === 0) score += 1.0;
-
-      // Popularity multiplier: blockbusters outweigh obscure films
-      const popFactor = Math.min(Math.max((e.popularity || 10) / 25, 0.5), 2.0);
-      score *= popFactor;
-    } else {
-      score = e.isGuest ? 0.5 : 1.0;
-    }
-
-    decadeScores[decade] = (decadeScores[decade] || 0) + score;
-  });
-  const topDecade = Object.entries(decadeScores).sort((a, b) => b[1] - a[1])[0];
-  if (topDecade) stats.push(`<div class="stat-row"><span class="stat-label">Most Prominent Decade</span><span class="stat-value">${topDecade[0]}s</span></div>`);
+  // Most prominent decade (weighted scoring — shared with people-library.js)
+  const topDecadeValue = calcProminentDecade(unifiedEntries);
+  if (topDecadeValue) stats.push(`<div class="stat-row"><span class="stat-label">Most Prominent Decade</span><span class="stat-value">${topDecadeValue}s</span></div>`);
 
   // Longest TV run
   const showSeasonCounts = {};
