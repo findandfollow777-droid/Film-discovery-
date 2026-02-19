@@ -91,8 +91,13 @@ async function initMap() {
 
   // 6. Init MovieCube
   if (typeof initMovieCube === 'function') {
-    initMovieCube();
+    initMovieCube({
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
+      }
+    });
   }
+  if (typeof initPeopleCube === 'function') initPeopleCube();
 
   // 7. Update stats
   updateStats();

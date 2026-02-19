@@ -199,12 +199,16 @@ async function init() {
 
     // Shared movie cube component
     initMovieCube({
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
+      },
       onAnchorClick: (movie) => {
         localStorage.setItem("anchorMovie", JSON.stringify(movie));
         localStorage.setItem("constellationMovies", JSON.stringify(allMovies));
         window.location.href = "constellation.html";
       }
     });
+    if (typeof initPeopleCube === 'function') initPeopleCube();
 
     // Vibe slider elements
     vibeMood = document.getElementById("vibeMood");

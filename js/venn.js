@@ -83,16 +83,15 @@ async function init() {
 
   // Initialize the shared movie cube component
   initMovieCube({
-    onPersonClick: (personId, personName) => {
-      // Navigate to timeline for this person
-      closeMovieCube();
-      window.location.href = `timeline.html?id=${personId}&name=${encodeURIComponent(personName)}`;
+    onPersonClick: (personId) => {
+      if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
     },
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
       window.location.href = "constellation.html";
     }
   });
+  if (typeof initPeopleCube === 'function') initPeopleCube();
 
   setupZoomPan();
   setupEventListeners();

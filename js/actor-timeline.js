@@ -33,13 +33,16 @@ async function init() {
   // MovieCube integration
   if (typeof initMovieCube === 'function') {
     initMovieCube({
-      onPersonClick: null,
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
+      },
       onAnchorClick: (movie) => {
         localStorage.setItem('anchorMovie', JSON.stringify(movie));
         window.location.href = 'games/constellation.html';
       }
     });
   }
+  if (typeof initPeopleCube === 'function') initPeopleCube();
 
   // Toggle buttons
   document.querySelectorAll('.toggle-btn').forEach(btn => {

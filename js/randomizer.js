@@ -706,14 +706,13 @@ function openMovieCubeOverlay() {
   if (!movieCubeInitialized) {
     initMovieCube({
       onPersonClick: (personId) => {
-        localStorage.setItem("timelineMovieId", personId);
-        localStorage.setItem("timelineType", "person");
-        window.location.href = "games/timeline.html";
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
       },
       onAnchorClick: (movie) => {
         openMovieCube(movie.id);
       }
     });
+    if (typeof initPeopleCube === 'function') initPeopleCube();
     movieCubeInitialized = true;
   }
 

@@ -55,9 +55,7 @@
     if (typeof initMovieCube === "function") {
       initMovieCube({
         onPersonClick: (personId) => {
-          localStorage.setItem("timelineMovieId", personId);
-          localStorage.setItem("timelineType", "person");
-          window.location.href = "games/timeline.html";
+          if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
         },
         onAnchorClick: (movie) => {
           localStorage.setItem("anchorMovie", JSON.stringify(movie));
@@ -66,6 +64,7 @@
         }
       });
     }
+    if (typeof initPeopleCube === 'function') initPeopleCube();
 
     // Smart back nav
     if (typeof initBackNav === "function") initBackNav();

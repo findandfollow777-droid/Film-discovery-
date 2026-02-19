@@ -39,9 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Moviecube for movie popups
   if (typeof initMovieCube === 'function') {
     initMovieCube({
-      onPersonClick: (personId, personName) => {
-        // Navigate to person timeline
-        navigateToTimeline('person', personName);
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
       },
       onAnchorClick: (movie) => {
         localStorage.setItem("anchorMovie", JSON.stringify(movie));
@@ -49,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  if (typeof initPeopleCube === 'function') initPeopleCube();
 });
 
 function cacheElements() {

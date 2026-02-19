@@ -45,17 +45,16 @@ function init() {
   
   // Initialize the shared movie cube component
   initMovieCube({
-    onPersonClick: async (personId, personName) => {
-      // Add person to timeline
-      closeMovieCube();
-      await addPerson(parseInt(personId));
+    onPersonClick: (personId) => {
+      if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
     },
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
       window.location.href = "constellation.html";
     }
   });
-  
+  if (typeof initPeopleCube === 'function') initPeopleCube();
+
   // Show "Back to Results" link if coming from results page
   const backToResults = document.getElementById("backToResults");
   if (localStorage.getItem("returnToResults") === "true" && backToResults) {

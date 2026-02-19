@@ -557,7 +557,10 @@
       console.warn("Movie cube not initialized. Call initMovieCube() first.");
       return;
     }
-    
+
+    // Close People Cube if open (mutual exclusion)
+    if (typeof closePeopleCube === 'function') closePeopleCube();
+
     currentFace = 1;
     rotateCube(1);
     

@@ -47,6 +47,21 @@
   // Selection mode state
   let selectedCollaborators = new Map(); // id → { id, name, profile_path }
 
+  // Gallery state
+  let galleryPhotos = [];
+  let lightboxIndex = 0;
+
+  // Pill nav state
+  let scrollSpyObserver = null;
+
+  // Section reorder
+  const SECTION_ORDER_KEY = 'orbit_profile_section_order';
+  const DEFAULT_SECTION_ORDER = [
+    'ppSignatureRoles', 'ppCareerArc', 'ppDna', 'ppBoxOffice',
+    'ppConnections', 'ppAwards', 'ppNebula', 'ppDidYouKnow',
+    'ppPhotoGallery', 'ppSimilarActors', 'ppFilmography'
+  ];
+
   // ── DOM Cache ──
 
   const $ = id => document.getElementById(id);
@@ -63,6 +78,7 @@
     }
 
     initMovieCubeComponent();
+    if (typeof initPeopleCube === 'function') initPeopleCube();
     setupBackNav();
     setupEventListeners();
     loadProfile();
@@ -113,9 +129,8 @@
   function initMovieCubeComponent() {
     if (typeof initMovieCube === 'function') {
       initMovieCube({
-        onPersonClick: (id, name) => {
-          if (typeof closeMovieCube === 'function') closeMovieCube();
-          window.location.href = `people-profile.html?id=${id}`;
+        onPersonClick: (id) => {
+          if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(id));
         },
         onAnchorClick: (movie) => {
           localStorage.setItem('anchorMovie', JSON.stringify(movie));
@@ -153,6 +168,13 @@
     // Share button
     $('ppShareBtn')?.addEventListener('click', shareProfile);
 
+    // People Cube button
+    $('ppCubeBtn')?.addEventListener('click', () => {
+      if (typeof openPeopleCube === 'function' && personId) {
+        openPeopleCube(personId);
+      }
+    });
+
     // Navigation buttons
     $('exploreOrbitBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -172,6 +194,13 @@
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        // Close lightbox first
+        const lightbox = $('ppLightbox');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          closeLightbox();
+          return;
+        }
+
         // Let moviecube handle its own escape first
         const cubeOverlay = document.getElementById('movieCubeOverlay');
         if (cubeOverlay && !cubeOverlay.hidden) return;
@@ -184,7 +213,36 @@
 
         window.location.href = 'people-library.html';
       }
+
+      // Arrow keys for lightbox
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const lightbox = $('ppLightbox');
+        if (lightbox && !lightbox.classList.contains('hidden')) {
+          if (e.key === 'ArrowLeft' && lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); }
+          if (e.key === 'ArrowRight' && lightboxIndex < galleryPhotos.length - 1) { lightboxIndex++; updateLightboxImage(); }
+        }
+      }
     });
+
+    // Lightbox controls
+    $('ppLightboxClose')?.addEventListener('click', closeLightbox);
+    $('ppLightbox')?.querySelector('.pp-lightbox-backdrop')?.addEventListener('click', closeLightbox);
+    $('ppLightboxPrev')?.addEventListener('click', () => { if (lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); } });
+    $('ppLightboxNext')?.addEventListener('click', () => { if (lightboxIndex < galleryPhotos.length - 1) { lightboxIndex++; updateLightboxImage(); } });
+
+    // Lightbox swipe (mobile)
+    const lbWrap = $('ppLightbox');
+    if (lbWrap) {
+      let touchStartX = 0;
+      lbWrap.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      lbWrap.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          if (dx < 0 && lightboxIndex < galleryPhotos.length - 1) { lightboxIndex++; updateLightboxImage(); }
+          if (dx > 0 && lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); }
+        }
+      }, { passive: true });
+    }
   }
 
   // ── Data Loading ──
@@ -198,9 +256,12 @@
     }
 
     try {
-      const [personRes, creditsRes] = await Promise.all([
+      const [personRes, creditsRes, imagesRes] = await Promise.all([
         fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`),
-        fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`)
+        fetch(`https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${TMDB_API_KEY}`),
+        fetch(`https://api.themoviedb.org/3/person/${personId}/images?api_key=${TMDB_API_KEY}`)
+          .then(r => r.ok ? r.json() : { profiles: [] })
+          .catch(() => ({ profiles: [] }))
       ]);
 
       if (!personRes.ok) {
@@ -221,8 +282,13 @@
       const careerSpan = computeCareerSpan(filmography);
       const awards = findAwards(filmography, person.name, person.known_for_department, person.gender);
 
-      // Fetch collaborators (top 3 popular movies)
-      const collaborators = await findCollaborators(filmography, personId);
+      // Sort and cap images
+      const images = (imagesRes.profiles || [])
+        .sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0))
+        .slice(0, 50);
+
+      // Fetch collaborators + cast pool (top 3 popular movies)
+      const { collaborators, castPool } = await findCollaborators(filmography, personId);
 
       profileData = {
         person,
@@ -231,6 +297,8 @@
         careerSpan,
         awards,
         collaborators,
+        castPool,
+        images,
         totalCredits: filmography.length
       };
 
@@ -260,6 +328,7 @@
         vote_count: m.vote_count || 0,
         popularity: m.popularity || 0,
         genre_ids: m.genre_ids || [],
+        order: m.order != null ? m.order : 999,
         role: m.character || null,
         type: 'cast',
         crewJobs: []
@@ -449,9 +518,10 @@
       .sort((a, b) => (b.vote_count || 0) - (a.vote_count || 0))
       .slice(0, 3);
 
-    if (topFilms.length === 0) return [];
+    if (topFilms.length === 0) return { collaborators: [], castPool: [] };
 
     const personCounts = {};
+    const castPoolMap = {};
 
     try {
       const results = await Promise.all(
@@ -465,6 +535,7 @@
       results.forEach((credits, filmIdx) => {
         const film = topFilms[filmIdx];
         const filmYear = film.release_date ? film.release_date.substring(0, 4) : '';
+        const filmGenres = film.genre_ids || [];
         const seen = new Set();
         [...(credits.cast || []).slice(0, 15), ...(credits.crew || []).filter(c => c.job === 'Director')].forEach(p => {
           if (!p.id || p.id === excludeId || seen.has(p.id)) return;
@@ -485,18 +556,48 @@
             poster_path: film.poster_path || null
           });
         });
+
+        // Build cast pool for similar actors (broader: top 20 cast)
+        (credits.cast || []).slice(0, 20).forEach(p => {
+          if (!p.id || p.id === excludeId) return;
+          if (!castPoolMap[p.id]) {
+            castPoolMap[p.id] = {
+              id: p.id,
+              name: p.name,
+              profile_path: p.profile_path,
+              department: p.known_for_department || 'Acting',
+              popularity: p.popularity || 0,
+              _genreSet: new Set(),
+              _yearSet: new Set()
+            };
+          }
+          filmGenres.forEach(g => castPoolMap[p.id]._genreSet.add(g));
+          if (filmYear) castPoolMap[p.id]._yearSet.add(filmYear);
+        });
       });
     } catch (err) {
       console.error('Collaborator fetch error:', err);
-      return [];
+      return { collaborators: [], castPool: [] };
     }
 
-    // Return people who appear in 2+ of the top 3 movies
-    return Object.values(personCounts)
+    const collaborators = Object.values(personCounts)
       .map(p => ({ ...p, count: p.sharedFilms.length }))
       .filter(p => p.count >= 2)
       .sort((a, b) => b.count - a.count)
       .slice(0, 8);
+
+    // Convert Sets to Arrays for JSON serialization
+    const castPool = Object.values(castPoolMap).map(p => ({
+      id: p.id,
+      name: p.name,
+      profile_path: p.profile_path,
+      department: p.department,
+      popularity: p.popularity,
+      filmGenres: Array.from(p._genreSet),
+      filmYears: Array.from(p._yearSet)
+    }));
+
+    return { collaborators, castPool };
   }
 
   // ── Caching ──
@@ -558,13 +659,20 @@
 
     renderHero();
     renderFootprint();
+    renderSignatureRoles();
+    renderCareerArc();
     renderCareerDNA();
+    renderBoxOffice();
     renderConnections();
     renderAwards();
     renderNebula();
     renderDidYouKnow();
+    renderPhotoGallery();
+    renderSimilarActors();
     renderFilmography();
     initScrollReveal();
+    buildPillBar();
+    initSectionReorder();
   }
 
   function renderHero() {
@@ -582,10 +690,11 @@
     nameEl.textContent = p.name;
     fadeOutSkeleton($('ppSkeletonName'), nameEl);
 
-    // Bookmark + Share
+    // Bookmark + Share + Cube
     const bmBtn = $('ppBookmarkBtn');
     bmBtn.classList.remove('hidden');
     $('ppShareBtn')?.classList.remove('hidden');
+    $('ppCubeBtn')?.classList.remove('hidden');
     if (window.OrbitEncounters) {
       const encountered = window.OrbitEncounters.getEncountered();
       const entry = encountered[String(personId)];
@@ -729,7 +838,8 @@
     const collabs = profileData.collaborators;
 
     if (!collabs || collabs.length === 0) {
-      container.innerHTML = '<p class="pp-collabs-empty">This person charts their own orbit — no frequent collaborators found.</p>';
+      // Try recent co-stars fallback
+      renderRecentCoStarsFallback(container);
       return;
     }
 
@@ -758,6 +868,46 @@
     }).join('');
 
     bindCollabTooltips();
+  }
+
+  async function renderRecentCoStarsFallback(container) {
+    // Show loading state
+    container.innerHTML = '<p class="pp-collabs-empty pp-collabs-loading">Searching for recent co-stars&hellip;</p>';
+
+    const coStars = await getRecentCoStars(profileData.filmography, personId);
+    if (coStars.length === 0) {
+      container.innerHTML = '<p class="pp-collabs-empty">Explore their filmography below to discover connections.</p>';
+      return;
+    }
+
+    // Update section title
+    const titleEl = document.querySelector('#ppConnections .pp-section-title');
+    if (titleEl) {
+      titleEl.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="19" cy="7" r="3"/><path d="M21 21v-1a3 3 0 0 0-2-2.83"/></svg>
+        Recent Co-Stars
+        <span class="pp-section-subtitle">From their latest films</span>
+      `;
+    }
+
+    container.innerHTML = coStars.map(c => {
+      const photo = c.profile_path
+        ? `${TMDB_IMG}w92${c.profile_path}`
+        : DEFAULT_AVATAR;
+      return `
+        <a href="people-profile.html?id=${c.id}" class="pp-collab-card pp-costar-card" data-person-id="${c.id}" data-name="${esc(c.name)}">
+          <img class="pp-collab-photo" src="${photo}" alt="${esc(c.name)}" loading="lazy"
+               onerror="this.src='${DEFAULT_AVATAR}'">
+          <span class="pp-collab-name">${esc(c.name)}</span>
+          <span class="pp-collab-count">${esc(c.recent_film.title)} (${c.recent_film.year})</span>
+          <span class="pp-collab-dept">${esc(c.department || '')}</span>
+        </a>
+      `;
+    }).join('');
+
+    // Hide the nav actions (no shared timeline for co-stars)
+    const navActions = $('ppNavActions');
+    if (navActions) navActions.classList.add('hidden');
   }
 
   function getOrCreateTooltip() {
@@ -1541,10 +1691,691 @@
     }, 2000);
   }
 
+  // ── Signature Roles ──
+
+  function getSignatureRoles(filmography) {
+    const castFilms = filmography.filter(f => f.type === 'cast' && f.role);
+    return castFilms.map(f => {
+      const quality = (f.vote_average || 0) * 2;
+      const recognition = Math.log10((f.vote_count || 1)) * 3;
+      const billing = (f.order != null && f.order <= 2) ? 5 : 0;
+      const relevance = (f.popularity || 0) * 0.1;
+      return { ...f, score: quality + recognition + billing + relevance };
+    }).sort((a, b) => b.score - a.score).slice(0, 5);
+  }
+
+  function renderSignatureRoles() {
+    const section = $('ppSignatureRoles');
+    const container = $('ppSignatureContent');
+    if (!section || !container) return;
+
+    const castFilms = profileData.filmography.filter(f => f.type === 'cast');
+    if (castFilms.length < 3) return;
+
+    const roles = getSignatureRoles(profileData.filmography);
+    if (roles.length === 0) return;
+
+    container.innerHTML = roles.map(f => {
+      const poster = f.poster_path
+        ? `<img class="pp-sig-poster" src="${TMDB_IMG}w154${f.poster_path}" alt="${esc(f.title)}" loading="lazy" onerror="this.style.display='none'">`
+        : `<div class="pp-sig-poster pp-sig-no-poster"></div>`;
+      const stars = f.vote_average ? (f.vote_average / 2).toFixed(1) : '';
+      const year = f.release_date ? f.release_date.substring(0, 4) : '';
+      return `<div class="pp-sig-card" data-movie-id="${f.id}">
+        ${poster}
+        <div class="pp-sig-info">
+          <span class="pp-sig-title">${esc(f.title)}${year ? ` <span class="pp-sig-year">(${year})</span>` : ''}</span>
+          <span class="pp-sig-role">${esc(f.role)}</span>
+          ${stars ? `<span class="pp-sig-rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent-gold)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ${stars}</span>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+    // Click → Moviecube
+    container.querySelectorAll('.pp-sig-card[data-movie-id]').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = parseInt(card.dataset.movieId);
+        if (id && typeof openMovieCube === 'function') openMovieCube(id);
+      });
+    });
+
+    section.classList.remove('hidden');
+  }
+
+  // ── Career Arc Sparkline ──
+
+  function buildCareerArc(filmography) {
+    const yearCounts = {};
+    filmography.forEach(f => {
+      if (!f.release_date) return;
+      const year = parseInt(f.release_date.substring(0, 4));
+      if (isNaN(year) || year < 1900) return;
+      yearCounts[year] = (yearCounts[year] || 0) + 1;
+    });
+
+    const years = Object.keys(yearCounts).map(Number).sort((a, b) => a - b);
+    if (years.length < 2) return null;
+
+    const minYear = years[0];
+    const maxYear = years[years.length - 1];
+    if (maxYear - minYear < 5) return null;
+
+    const data = [];
+    for (let y = minYear; y <= maxYear; y++) {
+      data.push({ year: y, count: yearCounts[y] || 0 });
+    }
+    return data;
+  }
+
+  function renderCareerArc() {
+    const section = $('ppCareerArc');
+    const container = $('ppCareerArcChart');
+    if (!section || !container) return;
+
+    const data = buildCareerArc(profileData.filmography);
+    if (!data) return;
+
+    const width = 600;
+    const height = 60;
+    const padX = 0;
+    const padTop = 4;
+    const padBot = 16;
+    const chartH = height - padTop - padBot;
+    const maxCount = Math.max(...data.map(d => d.count), 1);
+    const stepX = data.length > 1 ? (width - padX * 2) / (data.length - 1) : 0;
+
+    // Build SVG path for area chart
+    const points = data.map((d, i) => {
+      const x = padX + i * stepX;
+      const y = padTop + chartH - (d.count / maxCount) * chartH;
+      return { x, y, year: d.year, count: d.count };
+    });
+
+    const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    const areaPath = linePath + ` L${points[points.length - 1].x.toFixed(1)},${padTop + chartH} L${points[0].x.toFixed(1)},${padTop + chartH} Z`;
+
+    // Decade labels
+    const minYear = data[0].year;
+    const maxYear = data[data.length - 1].year;
+    let labels = '';
+    for (let y = Math.ceil(minYear / 10) * 10; y <= maxYear; y += 10) {
+      const idx = y - minYear;
+      if (idx >= 0 && idx < data.length) {
+        const x = padX + idx * stepX;
+        labels += `<text x="${x.toFixed(1)}" y="${height}" fill="var(--ghost-gray, #64748b)" font-size="9" text-anchor="middle" font-family="Barlow, sans-serif">${y}s</text>`;
+      }
+    }
+
+    // Invisible hover rects for tooltips
+    let hoverRects = '';
+    const rectW = Math.max(stepX, 4);
+    points.forEach((p, i) => {
+      hoverRects += `<rect x="${(p.x - rectW / 2).toFixed(1)}" y="0" width="${rectW.toFixed(1)}" height="${height}" fill="transparent" data-idx="${i}"/>`;
+    });
+
+    container.innerHTML = `
+      <svg class="pp-arc-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--accent-cyan, #22d3ee)" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="var(--accent-cyan, #22d3ee)" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <path d="${areaPath}" fill="url(#arcGrad)"/>
+        <path d="${linePath}" fill="none" stroke="var(--accent-cyan, #22d3ee)" stroke-width="1.5" stroke-linejoin="round"/>
+        ${labels}
+        ${hoverRects}
+      </svg>
+      <div class="pp-arc-tooltip hidden" id="ppArcTooltip"></div>
+    `;
+
+    // Hover/tap tooltip
+    const svg = container.querySelector('.pp-arc-svg');
+    const tooltip = $('ppArcTooltip');
+    if (svg && tooltip) {
+      svg.addEventListener('mousemove', (e) => {
+        const rect = svg.getBoundingClientRect();
+        const xRatio = (e.clientX - rect.left) / rect.width;
+        const idx = Math.round(xRatio * (data.length - 1));
+        if (idx >= 0 && idx < data.length) {
+          const d = data[idx];
+          tooltip.textContent = `${d.year}: ${d.count} film${d.count !== 1 ? 's' : ''}`;
+          tooltip.style.left = `${xRatio * 100}%`;
+          tooltip.classList.remove('hidden');
+        }
+      });
+      svg.addEventListener('mouseleave', () => {
+        tooltip.classList.add('hidden');
+      });
+    }
+
+    section.classList.remove('hidden');
+  }
+
+  // ── Box Office Profile ──
+
+  function renderBoxOffice() {
+    const section = $('ppBoxOffice');
+    const container = $('ppBoxOfficeContent');
+    if (!section || !container) return;
+
+    const filmsWithRevenue = profileData.filmography.filter(f => f.revenue && f.revenue > 0);
+    if (filmsWithRevenue.length === 0) return;
+
+    const totalGross = filmsWithRevenue.reduce((sum, f) => sum + f.revenue, 0);
+    const avgGross = totalGross / filmsWithRevenue.length;
+    const biggest = filmsWithRevenue.reduce((a, b) => (a.revenue > b.revenue) ? a : b);
+
+    const fmt = (n) => {
+      if (n >= 1e9) return `$${(n / 1e9).toFixed(1)}B`;
+      if (n >= 1e6) return `$${(n / 1e6).toFixed(0)}M`;
+      return `$${(n / 1e3).toFixed(0)}K`;
+    };
+
+    container.innerHTML = `
+      <div class="pp-box-stats">
+        <div class="pp-box-stat">
+          <span class="pp-box-stat-value">${fmt(totalGross)}</span>
+          <span class="pp-box-stat-label">Total Gross</span>
+        </div>
+        <div class="pp-box-stat">
+          <span class="pp-box-stat-value">${fmt(biggest.revenue)}</span>
+          <span class="pp-box-stat-label">Biggest Hit</span>
+          <span class="pp-box-stat-sub">${esc(biggest.title)}</span>
+        </div>
+        <div class="pp-box-stat">
+          <span class="pp-box-stat-value">${fmt(avgGross)}</span>
+          <span class="pp-box-stat-label">Average</span>
+        </div>
+      </div>
+      <p class="pp-box-disclaimer">Figures approximate, sourced from TMDB</p>
+    `;
+
+    section.classList.remove('hidden');
+  }
+
+  // ── Recent Co-Stars Fallback ──
+
+  async function getRecentCoStars(filmography, excludeId) {
+    const recent = [...filmography]
+      .filter(f => f.type === 'cast' && f.release_date)
+      .sort((a, b) => (b.release_date || '').localeCompare(a.release_date || ''))
+      .slice(0, 3);
+
+    if (recent.length === 0) return [];
+
+    const personMap = {};
+    try {
+      const results = await Promise.all(
+        recent.map(f =>
+          fetch(`https://api.themoviedb.org/3/movie/${f.id}/credits?api_key=${TMDB_API_KEY}`)
+            .then(r => r.json())
+            .catch(() => ({ cast: [] }))
+        )
+      );
+
+      results.forEach((credits, idx) => {
+        const film = recent[idx];
+        const filmYear = film.release_date ? film.release_date.substring(0, 4) : '';
+        (credits.cast || []).slice(0, 10).forEach(p => {
+          if (!p.id || p.id === excludeId) return;
+          if (!personMap[p.id]) {
+            personMap[p.id] = {
+              id: p.id,
+              name: p.name,
+              profile_path: p.profile_path,
+              department: p.known_for_department || 'Acting',
+              recent_film: { title: film.title, year: filmYear, id: film.id }
+            };
+          }
+        });
+      });
+    } catch (err) {
+      console.error('Recent co-stars fetch error:', err);
+      return [];
+    }
+
+    return Object.values(personMap).slice(0, 6);
+  }
+
+  // ── Photo Gallery ──
+
+  function renderPhotoGallery() {
+    const section = $('ppPhotoGallery');
+    const row = $('ppPhotoRow');
+    if (!section || !row) return;
+
+    const photos = profileData.images || [];
+    if (photos.length === 0) return;
+
+    galleryPhotos = photos;
+
+    const countEl = $('ppGalleryCount');
+    if (countEl) countEl.textContent = `(${photos.length})`;
+
+    const thumbCount = Math.min(photos.length, 12);
+    row.innerHTML = photos.slice(0, thumbCount).map((img, i) =>
+      `<div class="pp-photo-thumb" data-idx="${i}">
+        <img src="${TMDB_IMG}w185${img.file_path}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">
+      </div>`
+    ).join('') + (photos.length > thumbCount
+      ? `<div class="pp-photo-more" data-idx="${thumbCount}">+${photos.length - thumbCount}</div>`
+      : '');
+
+    row.addEventListener('click', (e) => {
+      const thumb = e.target.closest('.pp-photo-thumb');
+      const more = e.target.closest('.pp-photo-more');
+      if (thumb) openLightbox(parseInt(thumb.dataset.idx));
+      else if (more) openLightbox(parseInt(more.dataset.idx));
+    });
+
+    section.classList.remove('hidden');
+  }
+
+  function openLightbox(idx) {
+    lightboxIndex = idx;
+    updateLightboxImage();
+    $('ppLightbox').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    $('ppLightbox').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightboxImage() {
+    const photo = galleryPhotos[lightboxIndex];
+    if (!photo) return;
+    const size = window.innerWidth > 768 ? 'w780' : 'w500';
+    $('ppLightboxImg').src = `${TMDB_IMG}${size}${photo.file_path}`;
+    $('ppLightboxCounter').textContent = `${lightboxIndex + 1} / ${galleryPhotos.length}`;
+    $('ppLightboxPrev').style.visibility = lightboxIndex > 0 ? 'visible' : 'hidden';
+    $('ppLightboxNext').style.visibility = lightboxIndex < galleryPhotos.length - 1 ? 'visible' : 'hidden';
+
+    // Preload adjacent
+    [-1, 1].forEach(offset => {
+      const i = lightboxIndex + offset;
+      if (i >= 0 && i < galleryPhotos.length) {
+        const pre = new Image();
+        pre.src = `${TMDB_IMG}${size}${galleryPhotos[i].file_path}`;
+      }
+    });
+  }
+
+  // ── Similar Actors ──
+
+  function findSimilarActors() {
+    const pool = profileData.castPool || [];
+    if (pool.length === 0) return [];
+
+    // Get profile person's top genre IDs
+    const reverseGenreMap = {};
+    Object.entries(GENRE_MAP).forEach(([id, name]) => { reverseGenreMap[name] = parseInt(id); });
+    const topGenreIds = new Set(
+      (profileData.genreBreakdown || []).slice(0, 3)
+        .map(g => reverseGenreMap[g.name])
+        .filter(Boolean)
+    );
+
+    // Get active decades
+    const profileDecades = new Set();
+    const span = profileData.careerSpan;
+    if (span && span.from && span.to) {
+      for (let d = Math.floor(span.from / 10) * 10; d <= span.to; d += 10) {
+        profileDecades.add(d);
+      }
+    }
+
+    const profilePop = profileData.person?.popularity || 0;
+    const encountered = window.OrbitEncounters ? window.OrbitEncounters.getEncountered() : {};
+    const collabIds = new Set((profileData.collaborators || []).map(c => c.id));
+
+    return pool
+      .filter(p => !collabIds.has(p.id))
+      .map(p => {
+        let score = 0;
+        const pGenres = new Set(p.filmGenres || []);
+
+        // +3 per shared genre
+        topGenreIds.forEach(g => { if (pGenres.has(g)) score += 3; });
+
+        // +2 per overlapping decade
+        (p.filmYears || []).forEach(y => {
+          const decade = Math.floor(parseInt(y) / 10) * 10;
+          if (profileDecades.has(decade)) score += 2;
+        });
+
+        // +1 for similar popularity
+        if (profilePop > 0 && p.popularity > 0) {
+          const ratio = p.popularity / profilePop;
+          if (ratio > 0.3 && ratio < 3) score += 1;
+        }
+
+        // +5 if not encountered
+        const isEnc = !!encountered[String(p.id)];
+        if (!isEnc) score += 5;
+
+        return { ...p, score, isEncountered: isEnc };
+      })
+      .filter(p => p.score >= 4)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
+  }
+
+  function renderSimilarActors() {
+    const section = $('ppSimilarActors');
+    const container = $('ppSimilarContent');
+    if (!section || !container) return;
+
+    const similar = findSimilarActors();
+    if (similar.length < 3) return;
+
+    // Update title with person name
+    const titleEl = $('ppSimilarTitle');
+    if (titleEl && profileData.person?.name) {
+      const firstName = profileData.person.name.split(' ')[0];
+      titleEl.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        If You Like ${esc(firstName)}, Try&hellip;
+      `;
+    }
+
+    container.innerHTML = similar.map(p => {
+      const photo = p.profile_path ? `${TMDB_IMG}w92${p.profile_path}` : DEFAULT_AVATAR;
+      const topGenreId = (p.filmGenres || [])[0];
+      const genreLabel = topGenreId ? (GENRE_MAP[topGenreId] || '') : '';
+      const badge = p.isEncountered
+        ? ''
+        : '<span class="pp-sim-new-badge">NEW</span>';
+
+      return `<a href="people-profile.html?id=${p.id}" class="pp-sim-card">
+        ${badge}
+        <img class="pp-sim-photo" src="${photo}" alt="${esc(p.name)}" loading="lazy"
+             onerror="this.src='${DEFAULT_AVATAR}'">
+        <span class="pp-sim-name">${esc(p.name)}</span>
+        ${genreLabel ? `<span class="pp-sim-genre">${esc(genreLabel)}</span>` : ''}
+      </a>`;
+    }).join('');
+
+    section.classList.remove('hidden');
+  }
+
+  // ── Sticky Pill Navigation ──
+
+  function buildPillBar() {
+    const scroll = $('ppPillScroll');
+    const nav = $('ppPillNav');
+    if (!scroll || !nav) return;
+
+    const container = $('ppSectionsContainer');
+    const sections = container
+      ? container.querySelectorAll('.pp-section[data-section]')
+      : document.querySelectorAll('.pp-section[data-section]');
+
+    scroll.innerHTML = '';
+    let visibleCount = 0;
+
+    // People Cube pill (always first)
+    if (typeof openPeopleCube === 'function' && personId) {
+      const cubePill = document.createElement('button');
+      cubePill.className = 'pp-pill pp-pill-cube';
+      cubePill.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:3px"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Cube';
+      cubePill.addEventListener('click', () => openPeopleCube(personId));
+      scroll.appendChild(cubePill);
+    }
+
+    sections.forEach(sec => {
+      if (sec.classList.contains('hidden') || sec.offsetHeight === 0) return;
+      visibleCount++;
+      const pill = document.createElement('button');
+      pill.className = 'pp-pill';
+      pill.textContent = sec.dataset.section;
+      pill.dataset.target = sec.id;
+      pill.addEventListener('click', () => {
+        const navH = document.querySelector('.pp-back-nav')?.offsetHeight || 52;
+        const pillH = nav.offsetHeight || 36;
+        const top = sec.getBoundingClientRect().top + window.scrollY - navH - pillH - 8;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+      scroll.appendChild(pill);
+    });
+
+    if (visibleCount > 0) {
+      nav.classList.remove('hidden');
+      initScrollSpy();
+    } else {
+      nav.classList.add('hidden');
+    }
+  }
+
+  function initScrollSpy() {
+    if (scrollSpyObserver) scrollSpyObserver.disconnect();
+
+    const navH = document.querySelector('.pp-back-nav')?.offsetHeight || 52;
+    const pillH = $('ppPillNav')?.offsetHeight || 36;
+    const rootMargin = `-${navH + pillH + 10}px 0px -60% 0px`;
+
+    scrollSpyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.pp-pill.active').forEach(p => p.classList.remove('active'));
+          const pill = document.querySelector(`.pp-pill[data-target="${entry.target.id}"]`);
+          if (pill) {
+            pill.classList.add('active');
+            pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      });
+    }, { rootMargin, threshold: 0.1 });
+
+    const container = $('ppSectionsContainer');
+    const sections = container
+      ? container.querySelectorAll('.pp-section[data-section]:not(.hidden)')
+      : document.querySelectorAll('.pp-section[data-section]:not(.hidden)');
+    sections.forEach(sec => scrollSpyObserver.observe(sec));
+  }
+
+  // ── Draggable Section Reordering ──
+
+  function initSectionReorder() {
+    const container = $('ppSectionsContainer');
+    if (!container) return;
+
+    applySavedOrder(container);
+
+    // Add drag handles to section titles
+    container.querySelectorAll('.pp-section').forEach(sec => {
+      const title = sec.querySelector('.pp-section-title');
+      if (!title || title.querySelector('.pp-drag-handle')) return;
+      const handle = document.createElement('span');
+      handle.className = 'pp-drag-handle';
+      handle.innerHTML = '&#8942;&#8942;';
+      handle.title = 'Drag to reorder';
+      title.prepend(handle);
+    });
+
+    if (isTouchDevice) {
+      initMobileReorder(container);
+    } else {
+      initDesktopDrag(container);
+    }
+
+    // Reset layout link (only if custom order exists)
+    if (localStorage.getItem(SECTION_ORDER_KEY)) {
+      addResetLink(container);
+    }
+  }
+
+  function applySavedOrder(container) {
+    try {
+      const saved = localStorage.getItem(SECTION_ORDER_KEY);
+      if (!saved) return;
+      const order = JSON.parse(saved);
+      if (!Array.isArray(order)) return;
+
+      order.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec && sec.parentElement === container) {
+          container.appendChild(sec);
+        }
+      });
+    } catch { /* ignore */ }
+  }
+
+  function saveSectionOrder(container) {
+    const order = Array.from(container.querySelectorAll('.pp-section'))
+      .map(sec => sec.id)
+      .filter(Boolean);
+    localStorage.setItem(SECTION_ORDER_KEY, JSON.stringify(order));
+  }
+
+  function initDesktopDrag(container) {
+    let draggedEl = null;
+
+    container.querySelectorAll('.pp-section').forEach(sec => {
+      const handle = sec.querySelector('.pp-drag-handle');
+      if (!handle) return;
+
+      handle.addEventListener('mousedown', () => {
+        sec.setAttribute('draggable', 'true');
+      });
+
+      sec.addEventListener('dragstart', (e) => {
+        draggedEl = sec;
+        sec.classList.add('pp-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', sec.id);
+        setTimeout(() => { sec.style.opacity = '0.4'; }, 0);
+      });
+
+      sec.addEventListener('dragend', () => {
+        sec.classList.remove('pp-dragging');
+        sec.style.opacity = '';
+        sec.removeAttribute('draggable');
+        draggedEl = null;
+        saveSectionOrder(container);
+        buildPillBar();
+      });
+
+      sec.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        if (!draggedEl || draggedEl === sec) return;
+        const rect = sec.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+        if (e.clientY < midY) {
+          container.insertBefore(draggedEl, sec);
+        } else {
+          container.insertBefore(draggedEl, sec.nextSibling);
+        }
+      });
+    });
+
+    document.addEventListener('mouseup', () => {
+      container.querySelectorAll('.pp-section[draggable]').forEach(sec => {
+        sec.removeAttribute('draggable');
+      });
+    });
+  }
+
+  function initMobileReorder(container) {
+    const btn = document.createElement('button');
+    btn.className = 'pp-reorder-mobile-btn';
+    btn.textContent = 'Reorder Sections';
+    btn.addEventListener('click', () => openReorderModal(container));
+    container.parentElement.insertBefore(btn, container);
+  }
+
+  function openReorderModal(container) {
+    const modal = document.createElement('div');
+    modal.className = 'pp-reorder-modal';
+    modal.innerHTML = `
+      <div class="pp-reorder-modal-backdrop"></div>
+      <div class="pp-reorder-modal-panel">
+        <div class="pp-reorder-modal-header">
+          <h3>Reorder Sections</h3>
+          <button class="pp-reorder-modal-close">&times;</button>
+        </div>
+        <ul class="pp-reorder-list" id="ppReorderList"></ul>
+        <div class="pp-reorder-modal-footer">
+          <button class="pp-reorder-reset">Reset to Default</button>
+          <button class="pp-reorder-done">Done</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const list = modal.querySelector('#ppReorderList');
+
+    function populateList() {
+      list.innerHTML = '';
+      const sections = Array.from(container.querySelectorAll('.pp-section'));
+      sections.forEach((sec, i) => {
+        const label = sec.dataset.section || sec.id;
+        const isHidden = sec.classList.contains('hidden');
+        const li = document.createElement('li');
+        li.className = 'pp-reorder-item' + (isHidden ? ' dimmed' : '');
+        li.innerHTML = `
+          <span class="pp-reorder-item-label">${esc(label)}</span>
+          <div class="pp-reorder-arrows">
+            <button class="pp-reorder-up" ${i === 0 ? 'disabled' : ''}>&#9650;</button>
+            <button class="pp-reorder-down" ${i === sections.length - 1 ? 'disabled' : ''}>&#9660;</button>
+          </div>
+        `;
+        li.querySelector('.pp-reorder-up').addEventListener('click', () => {
+          if (i > 0) { container.insertBefore(sec, sections[i - 1]); populateList(); }
+        });
+        li.querySelector('.pp-reorder-down').addEventListener('click', () => {
+          if (i < sections.length - 1) { container.insertBefore(sections[i + 1], sec); populateList(); }
+        });
+        list.appendChild(li);
+      });
+    }
+
+    populateList();
+
+    const closeModal = () => {
+      saveSectionOrder(container);
+      buildPillBar();
+      modal.remove();
+    };
+
+    modal.querySelector('.pp-reorder-modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.pp-reorder-modal-backdrop').addEventListener('click', closeModal);
+    modal.querySelector('.pp-reorder-done').addEventListener('click', closeModal);
+    modal.querySelector('.pp-reorder-reset').addEventListener('click', () => {
+      localStorage.removeItem(SECTION_ORDER_KEY);
+      DEFAULT_SECTION_ORDER.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec) container.appendChild(sec);
+      });
+      populateList();
+    });
+  }
+
+  function addResetLink(container) {
+    if (container.parentElement.querySelector('.pp-reset-layout')) return;
+    const link = document.createElement('button');
+    link.className = 'pp-reset-layout';
+    link.textContent = 'Reset Layout';
+    link.addEventListener('click', () => {
+      localStorage.removeItem(SECTION_ORDER_KEY);
+      DEFAULT_SECTION_ORDER.forEach(id => {
+        const sec = document.getElementById(id);
+        if (sec) container.appendChild(sec);
+      });
+      saveSectionOrder(container);
+      buildPillBar();
+      link.remove();
+    });
+    container.after(link);
+  }
+
   // ── Scroll Reveal ──
 
   function initScrollReveal() {
-    const sections = document.querySelectorAll('#ppFootprint, #ppDna, #ppConnections, #ppAwards, #ppNebula, #ppDidYouKnow, #ppFilmography');
+    const sections = document.querySelectorAll('#ppFootprint, #ppSignatureRoles, #ppCareerArc, #ppDna, #ppBoxOffice, #ppConnections, #ppAwards, #ppNebula, #ppDidYouKnow, #ppPhotoGallery, #ppSimilarActors, #ppFilmography');
     sections.forEach((el, i) => {
       el.classList.add('pp-reveal');
       el.style.transitionDelay = `${i * 0.08}s`;
