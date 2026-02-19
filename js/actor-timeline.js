@@ -179,6 +179,7 @@ function processMovieCredits(data) {
       release_date: m.release_date,
       poster_path: m.poster_path,
       vote_average: m.vote_average || 0,
+      popularity: m.popularity || 0,
       character: m.character || '',
       order: m.order ?? 999,
       type: 'movie'
@@ -708,6 +709,10 @@ function openCareerDNA() {
       else if (rating >= 6.0) score += 0.5;
 
       if (order === 0) score += 1.0;
+
+      // Popularity multiplier: blockbusters outweigh obscure films
+      const popFactor = Math.min(Math.max((e.popularity || 10) / 25, 0.5), 2.0);
+      score *= popFactor;
     } else {
       score = e.isGuest ? 0.5 : 1.0;
     }
