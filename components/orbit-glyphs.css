@@ -1,0 +1,411 @@
+@import url('../variables.css');
+
+/* ============================================================
+   ORBIT GLYPH SYSTEM — Operation Glyph
+   Replaces all emojis with themed SVG outline icons
+   Style: Stroke-only, no fill, round linecaps
+   Colors: Cyan (#00d9ff), Gold (#ffd700), contextual
+   ============================================================ */
+
+/* --- Base Glyph Class --- */
+.og {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.15em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Larger variant for headers/titles */
+.og-lg { width: 1.4em; height: 1.4em; vertical-align: -0.2em; }
+/* Small variant for inline badges */
+.og-sm { width: 0.9em; height: 0.9em; vertical-align: -0.1em; }
+
+
+/* ============================================================
+   UI / ACTION GLYPHS
+   ============================================================ */
+
+/* 🔗 Link/Chain */
+.og-link {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M42 58L58 42' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M36 64Q20 80 20 60Q20 48 32 36L42 26Q54 14 66 26Q72 32 66 38L56 48' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Cpath d='M64 36Q80 20 80 40Q80 52 68 64L58 74Q46 86 34 74Q28 68 34 62L44 52' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+}
+
+/* 🔀 Shuffle */
+.og-shuffle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M20 30H40L60 70H80M20 70H40L60 30H80' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M72 22L82 30L72 38M72 62L82 70L72 78' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🔄 Reset/Reload */
+.og-reset {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M75 30A35 35 0 1 1 30 25' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M30 10L30 32L52 32' stroke='%2300d9ff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 📋 Clipboard/Share */
+.og-clipboard {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='22' y='20' width='56' height='68' rx='6' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M38 20V16A12 12 0 0 1 62 16V20' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='36' y1='46' x2='64' y2='46' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='36' y1='58' x2='56' y2='58' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='36' y1='70' x2='60' y2='70' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ✨ Sparkles */
+.og-sparkle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 10L56 38L84 44L56 50L50 78L44 50L16 44L44 38Z' stroke='%2300d9ff' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M78 14L80 24L90 26L80 28L78 38L76 28L66 26L76 24Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M24 66L26 76L36 78L26 80L24 90L22 80L12 78L22 76Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   MOOD / EMOTION GLYPHS
+   ============================================================ */
+
+/* 😂 Laughing */
+.og-laugh {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='5'/%3E%3Cpath d='M32 42L40 36M60 36L68 42' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M30 56Q50 80 70 56' stroke='%23ffd700' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3Cline x1='30' y1='56' x2='70' y2='56' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🥹 Emotional/Touched */
+.og-touched {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='5'/%3E%3Ccircle cx='36' cy='42' r='5' stroke='%23ffd700' stroke-width='4'/%3E%3Ccircle cx='64' cy='42' r='5' stroke='%23ffd700' stroke-width='4'/%3E%3Cpath d='M38 64Q50 72 62 64' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M60 50L64 60' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 😌 Relieved */
+.og-relieved {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23ffd700' stroke-width='5'/%3E%3Cpath d='M30 40Q36 36 42 40M58 40Q64 36 70 40' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M38 62Q50 70 62 62' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 😔 Sad */
+.og-sad {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%2394a3b8' stroke-width='5'/%3E%3Ccircle cx='36' cy='42' r='4' stroke='%2394a3b8' stroke-width='4'/%3E%3Ccircle cx='64' cy='42' r='4' stroke='%2394a3b8' stroke-width='4'/%3E%3Cpath d='M36 68Q50 58 64 68' stroke='%2394a3b8' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🎉 Party/Celebration */
+.og-party {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M22 88L42 28L82 68Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Cline x1='34' y1='52' x2='56' y2='74' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='38' y1='40' x2='68' y2='70' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='66' cy='24' r='3' stroke='%2300d9ff' stroke-width='3'/%3E%3Ccircle cx='80' cy='40' r='2' stroke='%2300d9ff' stroke-width='3'/%3E%3Cpath d='M54 14L58 20M74 18L70 24M84 30L78 32' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   COLORED GAME INDICATORS
+   These use simple filled squares/circles, not SVG outlines,
+   because they serve as abstract color tokens in share grids.
+   ============================================================ */
+
+.og-sq-yellow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%23ffd700' stroke='%23ffd70080' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-green {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%2310b981' stroke='%2310b98180' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-blue {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%2300d9ff' stroke='%2300d9ff80' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-purple {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%23a855f7' stroke='%23a855f780' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-orange {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%23ff6b35' stroke='%23ff6b3580' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-red {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%23ef4444' stroke='%23ef444480' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-sq-black {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='10' fill='%231e293b' stroke='%2364748b' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-circle-green {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%2310b981' stroke='%2310b98180' stroke-width='4'/%3E%3C/svg%3E");
+}
+.og-circle-black {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%231e293b' stroke='%2364748b' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   SPECIAL / THEMATIC GLYPHS
+   ============================================================ */
+
+/* 🕯️ Candle (memorial) */
+.og-candle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 12Q54 22 50 32Q46 22 50 12Z' stroke='%23ffd700' stroke-width='3' stroke-linejoin='round'/%3E%3Cline x1='50' y1='32' x2='50' y2='40' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='38' y='40' width='24' height='48' rx='3' stroke='%2394a3b8' stroke-width='4'/%3E%3Cellipse cx='50' cy='40' rx='12' ry='4' stroke='%2394a3b8' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+/* 🌀 Swirl (alternate universe) */
+.og-swirl {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 50Q50 36 62 36Q76 36 76 50Q76 70 50 70Q24 70 24 44Q24 14 56 14Q88 14 88 50Q88 86 50 86' stroke='%23a855f7' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+}
+
+/* 💬 Speech bubble */
+.og-speech {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M16 24H84Q88 24 88 28V60Q88 64 84 64H40L24 80V64H16Q12 64 12 60V28Q12 24 16 24Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cline x1='30' y1='38' x2='70' y2='38' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='30' y1='50' x2='58' y2='50' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 💥 Collision/Explosion */
+.og-explosion {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 8L56 34L80 16L66 40L94 42L68 54L86 78L58 62L50 92L42 62L14 78L32 54L6 42L34 40L20 16L44 34Z' stroke='%23ff6b35' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🔥 Fire */
+.og-fire {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 8Q70 30 72 52Q74 72 50 90Q26 72 28 52Q30 30 50 8Z' stroke='%23ff6b35' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M50 40Q58 52 58 62Q58 74 50 80Q42 74 42 62Q42 52 50 40Z' stroke='%23ffd700' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🏁 Checkered flag */
+.og-flag {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='20' y1='12' x2='20' y2='90' stroke='%2394a3b8' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='20' y='12' width='64' height='42' rx='2' stroke='%2300d9ff' stroke-width='4'/%3E%3Cline x1='42' y1='12' x2='42' y2='54' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='64' y1='12' x2='64' y2='54' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='20' y1='26' x2='84' y2='26' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='20' y1='40' x2='84' y2='40' stroke='%2300d9ff' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🔺 Triangle (triple collision) */
+.og-triangle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 12L90 84H10Z' stroke='%23ff6b35' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   DATA / VISUALIZATION GLYPHS
+   ============================================================ */
+
+/* 🥧 Pie chart */
+.og-pie {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='38' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='50' y1='50' x2='50' y2='12' stroke='%2300d9ff' stroke-width='4'/%3E%3Cpath d='M50 50L82 66' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M50 50L26 70' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🤝 Handshake (collaborations) */
+.og-handshake {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M10 44L30 36L50 50L70 36L90 44' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M30 36L46 44L56 38L70 36' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 44L10 62L34 62M90 44L90 62L66 62' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M34 62L54 72L66 62' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 📈 Chart trending up */
+.og-trending {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M12 78L36 54L56 66L88 22' stroke='%2310b981' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M68 22H88V42' stroke='%2310b981' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 📍 Pin/Location */
+.og-pin {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 88L50 88Q24 58 24 38A26 26 0 0 1 76 38Q76 58 50 88Z' stroke='%23ef4444' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='38' r='10' stroke='%23ef4444' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+/* 📅 Calendar */
+.og-calendar {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='14' y='22' width='72' height='66' rx='6' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='14' y1='40' x2='86' y2='40' stroke='%2300d9ff' stroke-width='4'/%3E%3Cline x1='34' y1='12' x2='34' y2='30' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='66' y1='12' x2='66' y2='30' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='36' cy='56' r='4' stroke='%2300d9ff' stroke-width='3'/%3E%3Ccircle cx='50' cy='56' r='4' stroke='%2300d9ff' stroke-width='3'/%3E%3Ccircle cx='64' cy='56' r='4' stroke='%2300d9ff' stroke-width='3'/%3E%3Ccircle cx='36' cy='72' r='4' stroke='%2300d9ff' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 📊 Chart/Stats */
+.og-stats {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='14' y='56' width='16' height='32' rx='3' stroke='%2300d9ff' stroke-width='4'/%3E%3Crect x='42' y='32' width='16' height='56' rx='3' stroke='%2300d9ff' stroke-width='4'/%3E%3Crect x='70' y='14' width='16' height='74' rx='3' stroke='%2300d9ff' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   CONTENT TYPE / CATEGORY GLYPHS
+   ============================================================ */
+
+/* 🧠 Brain (trivia) */
+.og-brain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 86V58' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M50 58Q28 58 22 40Q16 22 34 14Q42 10 50 16Q58 10 66 14Q84 22 78 40Q72 58 50 58Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M50 16V58' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M34 28Q42 34 50 30M66 28Q58 34 50 30' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 📝 Notepad/Info */
+.og-notepad {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='20' y='10' width='60' height='80' rx='5' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='34' y1='30' x2='66' y2='30' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='34' y1='44' x2='66' y2='44' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='34' y1='58' x2='58' y2='58' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='34' y1='72' x2='52' y2='72' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 💰 Money bag (revenue) */
+.og-revenue {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M30 36Q50 10 70 36Q86 56 78 78Q72 92 50 92Q28 92 22 78Q14 56 30 36Z' stroke='%2310b981' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M42 28L50 16L58 28' stroke='%2310b981' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M42 58Q42 50 50 50Q58 50 58 58Q58 66 50 66Q42 66 42 74' stroke='%2310b981' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='48' y1='46' x2='52' y2='46' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='48' y1='78' x2='52' y2='78' stroke='%2310b981' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🎯 Bullseye/Target */
+.og-target {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23ef4444' stroke-width='5'/%3E%3Ccircle cx='50' cy='50' r='26' stroke='%23ef4444' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='12' stroke='%23ef4444' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='4' fill='%23ef4444'/%3E%3C/svg%3E");
+}
+
+/* 📡 Satellite (streaming) */
+.og-satellite {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='30' cy='70' r='6' stroke='%2300d9ff' stroke-width='4'/%3E%3Cpath d='M38 62Q52 48 68 32' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M60 40L76 24' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M72 38L84 26' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M36 76Q36 84 28 84' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M42 82Q42 92 32 92' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🛋️ Couch (comfort viewing) */
+.og-couch {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M18 42V36Q18 26 28 26H72Q82 26 82 36V42' stroke='%23ffd700' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M12 42Q12 38 18 38V62H82V38Q88 38 88 42V72H12V42Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Cline x1='50' y1='38' x2='50' y2='62' stroke='%23ffd700' stroke-width='3'/%3E%3Cline x1='16' y1='72' x2='16' y2='82' stroke='%23ffd700' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='84' y1='72' x2='84' y2='82' stroke='%23ffd700' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🚀 Rocket */
+.og-rocket {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 8Q66 24 66 50L58 70H42L34 50Q34 24 50 8Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='38' r='6' stroke='%2300d9ff' stroke-width='4'/%3E%3Cpath d='M34 50L20 64L34 62' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M66 50L80 64L66 62' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M42 70L46 86L50 78L54 86L58 70' stroke='%23ff6b35' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🛸 UFO */
+.og-ufo {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cellipse cx='50' cy='50' rx='40' ry='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M32 50Q32 28 50 24Q68 28 68 50' stroke='%2300d9ff' stroke-width='5'/%3E%3Ccircle cx='50' cy='36' r='4' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='32' y1='64' x2='28' y2='78' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round' stroke-dasharray='4 6'/%3E%3Cline x1='50' y1='64' x2='50' y2='80' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round' stroke-dasharray='4 6'/%3E%3Cline x1='68' y1='64' x2='72' y2='78' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round' stroke-dasharray='4 6'/%3E%3C/svg%3E");
+}
+
+/* 🌌 Galaxy/Cosmos */
+.og-galaxy {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cellipse cx='50' cy='50' rx='40' ry='16' stroke='%2300d9ff' stroke-width='4' transform='rotate(-30 50 50)'/%3E%3Cellipse cx='50' cy='50' rx='40' ry='16' stroke='%23a855f7' stroke-width='3' transform='rotate(30 50 50)'/%3E%3Ccircle cx='50' cy='50' r='6' stroke='%23ffd700' stroke-width='4'/%3E%3Ccircle cx='26' cy='28' r='2' fill='%2300d9ff'/%3E%3Ccircle cx='76' cy='34' r='2' fill='%2300d9ff'/%3E%3Ccircle cx='30' cy='72' r='2' fill='%23a855f7'/%3E%3Ccircle cx='78' cy='68' r='2' fill='%23a855f7'/%3E%3C/svg%3E");
+}
+
+/* 🪐 Planet */
+.og-planet {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='26' stroke='%2300d9ff' stroke-width='5'/%3E%3Cellipse cx='50' cy='50' rx='44' ry='12' stroke='%23ffd700' stroke-width='4' transform='rotate(-20 50 50)'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   FESTIVAL / AWARD GLYPHS
+   ============================================================ */
+
+/* 🌴 Palm (Cannes) */
+.og-palm {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 88Q48 70 50 55Q52 40 50 25Q49 18 50 12' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M50 45Q40 42 26 44M50 35Q42 30 28 28M50 25Q46 20 40 14' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M50 45Q60 42 74 44M50 35Q58 30 72 28M50 25Q54 20 60 14' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='40' y='85' width='20' height='8' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🦁 Lion (Venice) */
+.og-lion {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M72 38Q78 34 76 28Q72 30 70 28Q72 24 68 22Q66 26 64 24Q66 20 62 18Q60 22 58 20Q58 16 54 16Q54 20 52 20' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 38Q76 42 78 46L82 48' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='76' cy='42' r='2' stroke='%23ffd700' stroke-width='2'/%3E%3Cpath d='M52 20Q44 22 38 28Q32 34 30 44L28 58' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 52Q66 56 58 58Q50 60 42 58L28 58' stroke='%23ffd700' stroke-width='3'/%3E%3Cpath d='M58 58L60 68Q62 72 58 74M48 58L46 72Q44 76 48 78M32 58L30 72Q28 76 32 78' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='16' y='82' width='68' height='6' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🐻 Bear (Berlin) */
+.og-bear {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='40' cy='16' r='4' stroke='%23ffd700' stroke-width='3'/%3E%3Ccircle cx='60' cy='16' r='4' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='50' cy='24' rx='12' ry='10' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='50' cy='28' rx='5' ry='4' stroke='%23ffd700' stroke-width='2'/%3E%3Ccircle cx='44' cy='22' r='1.5' fill='%23ffd700'/%3E%3Ccircle cx='56' cy='22' r='1.5' fill='%23ffd700'/%3E%3Cpath d='M38 32Q32 40 32 52L32 70Q50 78 68 70L68 52Q68 40 62 32' stroke='%23ffd700' stroke-width='3'/%3E%3Cpath d='M32 42Q22 40 18 52M68 42Q78 40 82 52' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cellipse cx='44' cy='86' rx='6' ry='3' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='56' cy='86' rx='6' ry='3' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🌍 Globe (Golden Globe) */
+.og-globe {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='36' stroke='%23ffd700' stroke-width='5'/%3E%3Cellipse cx='50' cy='50' rx='36' ry='14' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='50' cy='50' rx='14' ry='36' stroke='%23ffd700' stroke-width='3'/%3E%3Cline x1='14' y1='36' x2='86' y2='36' stroke='%23ffd700' stroke-width='2'/%3E%3Cline x1='14' y1='64' x2='86' y2='64' stroke='%23ffd700' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* 🏆 Oscar (Academy Award statuette) */
+.og-oscar {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='18' r='8' stroke='%23ffd700' stroke-width='4'/%3E%3Cpath d='M42 26Q44 36 42 42L36 52H64L58 42Q56 36 58 26' stroke='%23ffd700' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M36 52L38 58H62L64 52' stroke='%23ffd700' stroke-width='3' stroke-linejoin='round'/%3E%3Cline x1='50' y1='58' x2='50' y2='72' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Crect x='36' y='72' width='28' height='6' rx='2' stroke='%23ffd700' stroke-width='3'/%3E%3Crect x='32' y='78' width='36' height='8' rx='2' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🎭 BAFTA (theatrical mask) */
+.og-bafta {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M20 30Q20 14 50 10Q80 14 80 30V52Q80 76 50 88Q20 76 20 52V30Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='38' cy='38' r='6' stroke='%23ffd700' stroke-width='4'/%3E%3Ccircle cx='62' cy='38' r='6' stroke='%23ffd700' stroke-width='4'/%3E%3Cpath d='M36 60Q44 70 50 70Q56 70 64 60' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M30 26Q36 22 42 26M58 26Q64 22 70 26' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* Nominee modifier — mutes gold glyphs to silver */
+.og-nominee {
+  filter: brightness(0.5) saturate(0.3);
+  opacity: 0.7;
+}
+
+
+/* ============================================================
+   CONTENT CATEGORY GLYPHS
+   ============================================================ */
+
+/* 📚 Books (miniseries) */
+.og-books {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M16 20H40Q50 20 50 28V82Q50 76 40 76H16V20Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M84 20H60Q50 20 50 28V82Q50 76 60 76H84V20Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🎪 Circus/Tent (reality TV) */
+.og-tent {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M10 80L50 14L90 80' stroke='%23ff6b35' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M50 14Q40 46 30 60Q22 70 10 80' stroke='%23ff6b35' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M50 14Q60 46 70 60Q78 70 90 80' stroke='%23ff6b35' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M38 80Q38 62 50 62Q62 62 62 80' stroke='%23ff6b35' stroke-width='4'/%3E%3Cline x1='50' y1='6' x2='50' y2='14' stroke='%23ff6b35' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🎤 Microphone (talk show) */
+.og-mic {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='36' y='10' width='28' height='48' rx='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M24 44Q24 66 50 66Q76 66 76 44' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='50' y1='66' x2='50' y2='84' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='34' y1='84' x2='66' y2='84' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 📰 Newspaper (news) */
+.og-newspaper {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='14' y='14' width='60' height='72' rx='4' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M74 30H82Q86 30 86 34V82Q86 86 82 86H22' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='26' y1='28' x2='62' y2='28' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='26' y1='42' x2='48' y2='42' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='26' y1='54' x2='52' y2='54' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='26' y1='66' x2='44' y2='66' stroke='%2300d9ff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🎵 Music note */
+.og-music {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cellipse cx='34' cy='72' rx='14' ry='10' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='48' y1='72' x2='48' y2='16' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M48 16Q62 12 76 20L76 36Q62 28 48 32' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🎞️ Film frames */
+.og-film {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='10' y='18' width='80' height='64' rx='4' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='10' y1='34' x2='90' y2='34' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='10' y1='66' x2='90' y2='66' stroke='%2300d9ff' stroke-width='3'/%3E%3Crect x='18' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='34' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='58' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='74' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='18' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='34' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='58' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='74' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* 📷 Camera (cinematography) */
+.og-camera {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='10' y='30' width='80' height='54' rx='8' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M36 30L42 18H58L64 30' stroke='%2300d9ff' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='56' r='16' stroke='%2300d9ff' stroke-width='5'/%3E%3Ccircle cx='50' cy='56' r='8' stroke='%2300d9ff' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🏛️ Classical building (studio) */
+.og-studio {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 10L90 32H10Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cline x1='10' y1='32' x2='90' y2='32' stroke='%2300d9ff' stroke-width='4'/%3E%3Cline x1='26' y1='38' x2='26' y2='72' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='42' y1='38' x2='42' y2='72' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='58' y1='38' x2='58' y2='72' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='74' y1='38' x2='74' y2='72' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='10' y='72' width='80' height='10' rx='2' stroke='%2300d9ff' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+/* ✍️ Writing */
+.og-writing {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M68 16L84 32L36 80L16 86L22 66Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cline x1='60' y1='24' x2='76' y2='40' stroke='%2300d9ff' stroke-width='4'/%3E%3Cpath d='M16 86L22 66L36 80Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ✂️ Scissors (editing) */
+.og-scissors {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='30' cy='74' r='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Ccircle cx='70' cy='74' r='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M38 64L72 20' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M62 64L28 20' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+
+/* ============================================================
+   GAME-SPECIFIC GLYPHS
+   ============================================================ */
+
+/* 🦅 Eagle (under par) */
+.og-eagle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 16Q36 16 28 28Q20 40 28 50L50 72L72 50Q80 40 72 28Q64 16 50 16Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M50 72L42 88M50 72L58 88' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M38 36L50 42L62 36' stroke='%23ffd700' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='40' cy='32' r='3' stroke='%23ffd700' stroke-width='3'/%3E%3Ccircle cx='60' cy='32' r='3' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🛤️ Railroad (journeys) */
+.og-tracks {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='30' y1='10' x2='30' y2='90' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='70' y1='10' x2='70' y2='90' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='26' y1='24' x2='74' y2='24' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='26' y1='42' x2='74' y2='42' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='26' y1='60' x2='74' y2='60' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='26' y1='78' x2='74' y2='78' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 📸 Camera with flash (screenshot) */
+.og-snapshot {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='10' y='32' width='80' height='54' rx='8' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M36 32L42 20H58L64 32' stroke='%2300d9ff' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='58' r='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Cpath d='M76 10L80 24L86 14' stroke='%23ffd700' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 👁️ Eye */
+.og-eye {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M8 50Q30 20 50 20Q70 20 92 50Q70 80 50 80Q30 80 8 50Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='50' r='14' stroke='%2300d9ff' stroke-width='5'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%2300d9ff'/%3E%3C/svg%3E");
+}
+
+/* 👍 Thumbs up */
+.og-thumbsup {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M38 44L48 12Q54 10 58 16L54 44H80Q86 44 86 52L80 84Q78 88 72 88H38V44Z' stroke='%2310b981' stroke-width='5' stroke-linejoin='round'/%3E%3Crect x='14' y='44' width='24' height='44' rx='4' stroke='%2310b981' stroke-width='5'/%3E%3C/svg%3E");
+}
+
+/* 🎓 Graduation cap */
+.og-grad {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 18L10 40L50 62L90 40Z' stroke='%2300d9ff' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M26 48V70Q50 82 74 70V48' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cline x1='90' y1='40' x2='90' y2='72' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='90' cy='74' r='3' stroke='%2300d9ff' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🎲 Dice */
+.og-dice {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='14' y='14' width='72' height='72' rx='10' stroke='%2300d9ff' stroke-width='5'/%3E%3Ccircle cx='34' cy='34' r='6' fill='%2300d9ff'/%3E%3Ccircle cx='66' cy='34' r='6' fill='%2300d9ff'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%2300d9ff'/%3E%3Ccircle cx='34' cy='66' r='6' fill='%2300d9ff'/%3E%3Ccircle cx='66' cy='66' r='6' fill='%2300d9ff'/%3E%3C/svg%3E");
+}
+
+/* 📺 TV */
+.og-tv {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='10' y='20' width='80' height='56' rx='6' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='34' y1='84' x2='66' y2='84' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='50' y1='76' x2='50' y2='84' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ⏱️ Timer/Stopwatch */
+.og-timer {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='56' r='34' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='50' y1='56' x2='50' y2='34' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='50' y1='56' x2='68' y2='56' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M38 14H62' stroke='%2300d9ff' stroke-width='5' stroke-linecap='round'/%3E%3Cline x1='50' y1='14' x2='50' y2='22' stroke='%2300d9ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🏆 Trophy */
+.og-trophy {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M30 16H70V42Q70 56 50 62Q30 56 30 42V16Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M70 20H80Q86 20 86 30Q86 38 80 38H70M30 20H20Q14 20 14 30Q14 38 20 38H30' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='50' y1='62' x2='50' y2='76' stroke='%23ffd700' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M36 76H64Q66 76 66 82Q66 86 62 86H38Q34 86 34 82Q34 76 36 76Z' stroke='%23ffd700' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 🌟 Star (glowing) */
+.og-star {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 10L58 38L88 38L64 56L72 84L50 66L28 84L36 56L12 38L42 38Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ⭐ Rising Star (star within star within star) */
+.og-rising-star {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 4L59 34L92 34L66 54L75 86L50 66L25 86L34 54L8 34L41 34Z' stroke='%2306b6d4' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 22L56 40L76 40L60 52L66 70L50 58L34 70L40 52L24 40L44 40Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 36L53 46L62 46L55 52L57 62L50 56L43 62L45 52L38 46L47 46Z' stroke='%23ffd700' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}

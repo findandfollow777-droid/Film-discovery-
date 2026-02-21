@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Observatory - Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="people-library.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/shortlist-badge.css">
+</head>
+<body>
+
+  <!-- CINEMATIC OVERLAYS -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- HEADER -->
+  <header class="pl-header">
+    <div class="pl-header-top">
+      <a class="back-link" href="../index.html">&larr; Back to ORBIT</a>
+    </div>
+    <h1 class="pl-title">THE OBSERVATORY</h1>
+    <p class="pl-subtitle">View the stars</p>
+
+    <!-- MY ORBIT TOGGLE -->
+    <div class="pl-toggle-wrap" id="plToggleWrap" data-active="all">
+      <span class="pl-toggle-slider"></span>
+      <button class="pl-toggle-btn active" data-mode="all">All People</button>
+      <button class="pl-toggle-btn" data-mode="orbit">My Orbit</button>
+    </div>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="pl-search-wrap">
+    <svg class="pl-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="plSearchInput" class="pl-search-input"
+           placeholder="Search actors, directors, writers..." autocomplete="off">
+    <button id="plSearchClear" class="pl-search-clear hidden">&times;</button>
+  </div>
+  <div id="plSearchBanner" class="pl-search-banner hidden"></div>
+
+  <!-- MY ORBIT PANEL (shown only in orbit mode) -->
+  <div id="plOrbitPanel" class="pl-orbit-panel hidden">
+    <div class="pl-discovery-map">
+      <div class="pl-map-wrap">
+        <canvas id="plMapCanvas" class="pl-map-canvas"></canvas>
+        <div id="plMapTooltip" class="pl-map-tooltip hidden"></div>
+        <div id="plMapOverlay" class="pl-map-overlay hidden">
+          <p class="pl-map-overlay-title">Your constellation is forming...</p>
+        </div>
+      </div>
+      <p class="pl-map-note">Visit profiles to refine your orbit map</p>
+    </div>
+    <div class="pl-genre-pie-wrap" id="plGenrePie"></div>
+    <div class="pl-gap-analysis" id="plGapAnalysis"></div>
+    <div class="pl-orbit-stats" id="plOrbitStats"></div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="pl-filters" id="plFilters">
+    <!-- Department -->
+    <div class="pl-filter-group">
+      <span class="pl-filter-label">Department</span>
+      <div class="pl-filter-chips" id="deptChips">
+        <button class="pl-chip active" data-dept="Acting">Actors</button>
+        <button class="pl-chip" data-dept="Directing">Directors</button>
+        <button class="pl-chip" data-dept="Writing">Writers</button>
+        <button class="pl-chip" data-dept="Production">Producers</button>
+        <button class="pl-chip" data-dept="All">All</button>
+      </div>
+    </div>
+
+    <!-- Era -->
+    <div class="pl-filter-group">
+      <span class="pl-filter-label">Active Era</span>
+      <div class="pl-filter-chips" id="eraChips">
+        <button class="pl-chip" data-era="1950">1950s</button>
+        <button class="pl-chip" data-era="1960">1960s</button>
+        <button class="pl-chip" data-era="1970">1970s</button>
+        <button class="pl-chip" data-era="1980">1980s</button>
+        <button class="pl-chip" data-era="1990">1990s</button>
+        <button class="pl-chip" data-era="2000">2000s</button>
+        <button class="pl-chip" data-era="2010">2010s</button>
+        <button class="pl-chip" data-era="2020">2020s</button>
+      </div>
+    </div>
+
+    <!-- Awards -->
+    <div class="pl-filter-group">
+      <span class="pl-filter-label">Awards</span>
+      <div class="pl-filter-chips" id="awardsChips">
+        <button class="pl-chip" data-award="Oscar">Oscar</button>
+        <button class="pl-chip" data-award="Cannes">Cannes</button>
+        <button class="pl-chip" data-award="Venice">Venice</button>
+        <button class="pl-chip" data-award="Berlin">Berlin</button>
+        <button class="pl-chip" data-award="BAFTA">BAFTA</button>
+        <button class="pl-chip" data-award="Golden Globe">Golden Globe</button>
+      </div>
+      <span class="pl-filter-tip" title="Awards filter highlights confirmed matches. Visit profiles for complete awards history.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ghost-gray)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.5" fill="var(--ghost-gray)"/></svg>
+      </span>
+    </div>
+
+    <!-- Bookmarked (My Orbit only) -->
+    <div class="pl-filter-group hidden" id="plBookmarkGroup">
+      <span class="pl-filter-label">Filter</span>
+      <div class="pl-filter-chips">
+        <button class="pl-chip" id="plBookmarkChip">Bookmarked Only</button>
+      </div>
+    </div>
+
+    <!-- Sort -->
+    <div class="pl-filter-group">
+      <span class="pl-filter-label">Sort</span>
+      <div class="pl-filter-chips">
+        <select id="plSortSelect" class="pl-sort-select">
+          <option value="popularity">Popularity</option>
+          <option value="alpha">Alphabetical</option>
+          <option value="prolific">Most Prolific</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Find All -->
+    <div class="pl-filter-group pl-findall-group" id="plFindAllGroup">
+      <button class="pl-findall-btn" id="plFindAllBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Find All
+      </button>
+    </div>
+  </div>
+
+  <!-- ORBIT EXCLUSIVES -->
+  <div class="pl-exclusives" id="plExclusives">
+    <button class="pl-exclusives-toggle" id="plExclusivesToggle">
+      <span class="pl-exclusives-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        ORBIT EXCLUSIVES
+      </span>
+      <span class="pl-exclusive-pill">ORBIT EXCLUSIVE</span>
+      <svg class="pl-exclusives-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="pl-exclusives-body" id="plExclusivesBody">
+      <!-- Featured Collections -->
+      <div class="pl-collections-section">
+        <span class="pl-filter-label">Collections</span>
+        <div class="pl-collections-row" id="plCollectionsRow"></div>
+      </div>
+      <!-- Director's Circle -->
+      <div class="pl-circle-section">
+        <span class="pl-filter-label">Explore a Director's Circle</span>
+        <select id="plDirectorSelect" class="pl-sort-select pl-director-select">
+          <option value="">Choose a director...</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLLECTION / CIRCLE BANNER -->
+  <div id="plModeBanner" class="pl-mode-banner hidden">
+    <span id="plModeBannerText"></span>
+    <button id="plModeBannerClear" class="pl-mode-banner-clear">&times; Clear</button>
+  </div>
+
+  <!-- RESULT SUMMARY -->
+  <div id="plResultSummary" class="pl-result-summary hidden"></div>
+
+  <!-- MY ORBIT ENCOURAGING MESSAGE -->
+  <div id="plOrbitEncourage" class="pl-orbit-encourage hidden">
+    <p class="pl-orbit-encourage-title">Your orbit is just beginning! Keep exploring ORBIT to discover more people.</p>
+    <p class="pl-orbit-encourage-text">Play games in the Arcade, browse timelines, and explore Moviecubes to grow your collection.</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="pl-main">
+
+    <!-- Skeleton Loading -->
+    <div id="plSkeleton" class="pl-grid">
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="pl-skeleton-card"><div class="pl-skeleton-photo"></div><div class="pl-skeleton-name"></div><div class="pl-skeleton-dept"></div><div class="pl-skeleton-known"></div><div class="pl-skeleton-dots"><span></span><span></span><span></span><span></span><span></span></div></div>
+    </div>
+
+    <!-- Results Grid -->
+    <div id="plGrid" class="pl-grid hidden"></div>
+
+    <!-- Empty State -->
+    <div id="plEmpty" class="pl-empty hidden">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--ghost-gray)" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="8" y1="11" x2="14" y2="11"/>
+      </svg>
+      <p class="pl-empty-title">No people match these filters</p>
+      <p class="pl-empty-text">Try adjusting your search or selecting different filters</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="plError" class="pl-error hidden">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <circle cx="12" cy="16" r="0.5" fill="var(--accent-cyan)"/>
+      </svg>
+      <p>Something went wrong loading people.</p>
+      <button id="plRetryBtn" class="pl-retry-btn">Try Again</button>
+    </div>
+
+    <!-- Load More -->
+    <div id="plLoadMoreWrap" class="pl-load-more-wrap hidden">
+      <button id="plLoadMoreBtn" class="pl-load-more-btn">Load More</button>
+    </div>
+
+  </main>
+
+  <!-- FIRST VISIT WELCOME OVERLAY -->
+  <div id="plWelcomeOverlay" class="pl-welcome-overlay hidden">
+    <div class="pl-welcome-card">
+      <div class="pl-welcome-icon">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M19 21v-1.5c0-2-1.6-3.5-3.5-3.5h-7C6.6 16 5 17.5 5 19.5V21"/>
+          <circle cx="5" cy="9" r="2" opacity="0.5"/>
+          <circle cx="19" cy="9" r="2" opacity="0.5"/>
+        </svg>
+      </div>
+      <h2 class="pl-welcome-title">WELCOME TO THE STELLAR CATALOG</h2>
+      <p class="pl-welcome-text">
+        Discover the people behind cinema. Browse actors, directors, writers, and producers.
+        Build your personal constellation in <strong>My Orbit</strong> mode to track the talent you've encountered.
+      </p>
+      <div class="pl-welcome-features">
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>Search and filter by department, era, or awards</span>
+        </div>
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>Explore curated collections and director circles</span>
+        </div>
+        <div class="pl-welcome-feature">
+          <span class="feature-bullet">→</span>
+          <span>View detailed profiles with filmography timelines</span>
+        </div>
+      </div>
+      <button id="plWelcomeBtn" class="pl-welcome-btn">Get Started</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/awards.js"></script>
+  <script src="people-library.js"></script>
+  <script src="../components/shortlist-badge.js"></script>
+</body>
+</html>

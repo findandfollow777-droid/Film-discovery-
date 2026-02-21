@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Cinematic Discovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="discover.css">
+  <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="movie-mode">
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="background-layer"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  
+  <!-- ANAMORPHIC LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+
+  <!-- HYPERSPACE TRANSITION -->
+  <div id="hyperspaceOverlay" class="hyperspace" hidden>
+    <div class="stars"></div>
+  </div>
+
+  <!-- HOME BUTTON -->
+  <a href="../index.html" class="home-button" title="Home">
+    <div class="home-icon">
+      <div class="outer-ring"></div>
+      <div class="inner-ring"></div>
+      <div class="center-dot"></div>
+    </div>
+  </a>
+
+  <div class="app-shell">
+    <!-- CINEMATIC HEADER -->
+    <header class="orbit-header">
+      <div class="orbit-logo">
+        <div class="orbit-logo-mark">
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring orbit-ring-2"></div>
+        </div>
+        <div class="orbit-logo-text">ORBIT</div>
+      </div>
+      <p class="orbit-tagline">Discover cinema through the intersection of infinite possibilities</p>
+    </header>
+
+    <main class="orbit-main">
+      <!-- MAIN SEARCH & CRITERIA CARD -->
+      <section class="orbit-card" id="mainCard">
+        <header class="orbit-header-row">
+          <div class="orbit-header-center">
+            <h1 class="orbit-card-title">Build your orbit</h1>
+            <p class="orbit-card-subtitle">Select criteria to shape your cinematic universe.</p>
+          </div>
+        </header>
+
+        <!-- GRID OF SECTION CARDS (10 SECTIONS) -->
+        <div class="sections-grid">
+
+          <!-- 1. PEOPLE -->
+          <button class="section-card" data-section="people">
+            <div class="orbit-icon icon-people">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>People</h2>
+              <p>Actors, directors, writers</p>
+            </div>
+          </button>
+
+          <!-- 2. GENRES -->
+          <button class="section-card" data-section="genres">
+            <div class="orbit-icon icon-genres">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Genres</h2>
+              <p>Action, drama, horror & more</p>
+            </div>
+          </button>
+
+          <!-- 3. THEMES -->
+          <button class="section-card" data-section="themes">
+            <div class="orbit-icon icon-themes">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Themes</h2>
+              <p>What's the movie really about?</p>
+            </div>
+          </button>
+
+          <!-- 4. SETTING: WHERE -->
+          <button class="section-card" data-section="settingWhere">
+            <div class="orbit-icon icon-where">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Setting: Where</h2>
+              <p>Story location — cities, countries · <a href="orbit-map.html" style="color:#00d9ff;" onclick="event.stopPropagation();">Open Map</a></p>
+            </div>
+          </button>
+
+          <!-- 5. SETTING: WHEN -->
+          <button class="section-card" data-section="settingWhen">
+            <div class="orbit-icon icon-when">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Setting: When</h2>
+              <p>Story time period — decades & eras</p>
+            </div>
+          </button>
+
+          <!-- 6. BASED ON -->
+          <button class="section-card" data-section="basedOn">
+            <div class="orbit-icon icon-basedon">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Based On</h2>
+              <p>Source material & franchise status</p>
+            </div>
+          </button>
+
+          <!-- 7. RATINGS & CONTENT -->
+          <button class="section-card" data-section="ratingsContent">
+            <div class="orbit-icon icon-ratings">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Ratings & Content</h2>
+              <p>Score, votes, age rating</p>
+            </div>
+          </button>
+
+          <!-- 8. RELEASE DATE & RUNTIME -->
+          <button class="section-card" data-section="timeEra">
+            <div class="orbit-icon icon-datetime">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Release Date & Runtime</h2>
+              <p>Year, decade, film length</p>
+            </div>
+          </button>
+
+          <!-- 9. REGION & LANGUAGE -->
+          <button class="section-card" data-section="regionLanguage">
+            <div class="orbit-icon icon-region">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Region & language</h2>
+              <p>Origin, language</p>
+            </div>
+          </button>
+
+          <!-- 6. PRODUCTION & BOX OFFICE -->
+          <button class="section-card" data-section="production">
+            <div class="orbit-icon icon-production">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Production & Box Office</h2>
+              <p>Studios, budget, revenue</p>
+            </div>
+          </button>
+
+          <!-- 7. WATCH PROVIDERS -->
+          <button class="section-card" data-section="watch">
+            <div class="orbit-icon icon-watch">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Watch providers</h2>
+              <p>Streaming & availability</p>
+            </div>
+          </button>
+
+          <!-- 8. UNIVERSES -->
+          <button class="section-card" data-section="universes">
+            <div class="orbit-icon icon-universes">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Universes</h2>
+              <p>Collections & franchises</p>
+            </div>
+          </button>
+
+          <!-- 9. AWARDS -->
+          <button class="section-card" data-section="awards">
+            <div class="orbit-icon icon-awards">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Awards</h2>
+              <p>Oscar, Golden Globe & more</p>
+            </div>
+          </button>
+
+          <!-- 10. LAUNCH ORBIT -->
+          <button class="section-card launch-card" id="launchCard" disabled>
+            <div class="orbit-icon icon-launch">
+              <div class="ring-outer"></div>
+              <div class="ring-inner"></div>
+              <div class="icon-core"></div>
+            </div>
+            <div class="section-text">
+              <h2>Launch Orbit Search</h2>
+              <p>Discover your movies</p>
+            </div>
+            <div class="launch-glow"></div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- SIDEBAR: ORBIT PANEL + ARCADE -->
+      <div class="sidebar-container">
+        <aside class="orbit-panel" id="orbitPanel">
+          <header class="orbit-panel-header">
+            <div class="orbit-panel-title">
+              <span class="orbit-panel-icon"><span class="orbit-icon icon-planet" style="width:24px;height:24px"><span class="ring-outer"></span><span class="icon-core"></span></span></span>
+              <span>Your orbit</span>
+            </div>
+            <button class="orbit-panel-toggle" id="orbitPanelToggle">⯈</button>
+          </header>
+          <div class="orbit-panel-body" id="orbitFiltersEmpty">
+            <p class="orbit-panel-empty">
+              No criteria selected yet. Build your orbit by selecting filters.
+            </p>
+          </div>
+          <div class="orbit-panel-body" id="orbitFilters" hidden>
+            <!-- Filter chips injected here -->
+          </div>
+          <div class="orbit-panel-actions" id="orbitPanelActions" hidden>
+            <button class="btn-clear-all" id="clearAllButton">
+              Clear all
+            </button>
+          </div>
+        </aside>
+
+        <a href="../games/arcade.html" class="arcade-button" id="arcadeButton">
+          <div class="arcade-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <!-- Galaga bee ship -->
+              <rect x="14" y="2" width="4" height="4"/>
+              <rect x="12" y="6" width="8" height="4"/>
+              <rect x="10" y="10" width="12" height="4"/>
+              <rect x="4" y="8" width="6" height="8"/>
+              <rect x="22" y="8" width="6" height="8"/>
+              <rect x="2" y="12" width="4" height="6"/>
+              <rect x="26" y="12" width="4" height="6"/>
+              <rect x="8" y="14" width="4" height="10"/>
+              <rect x="20" y="14" width="4" height="10"/>
+              <rect x="12" y="14" width="8" height="6"/>
+              <rect x="14" y="20" width="4" height="8"/>
+              <rect x="6" y="24" width="4" height="4"/>
+              <rect x="22" y="24" width="4" height="4"/>
+            </svg>
+          </div>
+          <div class="arcade-text">
+            <h3>TRAVEL TO THE ARCADE</h3>
+            <p>Play daily games & challenges</p>
+          </div>
+          <div class="arcade-arrow">→</div>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOCUS CARD OVERLAY -->
+  <div class="focus-overlay" id="focusOverlay" hidden>
+    <div class="focus-card" id="focusCard">
+      <header class="focus-card-header">
+        <h2 class="focus-card-title" id="focusTitle">Section</h2>
+        <button class="focus-close" id="focusCloseButton">✕</button>
+      </header>
+      <div class="focus-card-content" id="focusContent">
+        <!-- Dynamic controls injected here -->
+      </div>
+      <footer class="focus-card-footer">
+        <button class="btn-primary" id="addToSearchButton">
+          Add to orbit
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/awards.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="era-decade-map.js"></script>
+  <script src="theme-taxonomy.js"></script>
+  <script src="discover.js"></script>
+  <script src="../components/shortlist-badge.js"></script>
+</body>
+</html>

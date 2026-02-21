@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT - Test Harness</title>
+  <link rel="stylesheet" href="../variables.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--deep-void, #0a0e1a);
+      color: var(--starlight, #e2e8f0);
+      font-family: 'Barlow', sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      color: var(--nebula-cyan, #00d9ff);
+      margin-bottom: 0.5rem;
+    }
+    .summary {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: var(--starlight, #94a3b8);
+    }
+    .suite-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      color: var(--solar-gold, #fbbf24);
+      margin: 1.5rem 0 0.5rem;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+      padding-bottom: 0.25rem;
+    }
+    .test-result {
+      font-family: 'Barlow', monospace;
+      font-size: 0.85rem;
+      padding: 0.25rem 0;
+      padding-left: 1rem;
+    }
+    .pass { color: #4ade80; }
+    .fail { color: #f87171; font-weight: 600; }
+    .summary-pass { color: #4ade80; font-weight: 600; }
+    .summary-fail { color: #f87171; font-weight: 600; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h1>ORBIT Test Harness</h1>
+  <div class="summary" id="summary">Running tests...</div>
+  <div id="results"></div>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script>
+    var passed = 0;
+    var failed = 0;
+    var resultsEl = document.getElementById('results');
+    var currentSuite = '';
+    var TEST_PREFIX = '__orbit_test_';
+
+    function suite(name) {
+      currentSuite = name;
+      var h = document.createElement('div');
+      h.className = 'suite-title';
+      h.textContent = name;
+      resultsEl.appendChild(h);
+    }
+
+    function assert(name, condition) {
+      var div = document.createElement('div');
+      div.className = 'test-result';
+      if (condition) {
+        passed++;
+        div.classList.add('pass');
+        div.textContent = '\u2713 ' + name;
+      } else {
+        failed++;
+        div.classList.add('fail');
+        div.textContent = '\u2717 ' + name;
+      }
+      resultsEl.appendChild(div);
+    }
+
+    function assertEqual(name, actual, expected) {
+      var pass = actual === expected;
+      var label = pass ? name : name + ' (got ' + JSON.stringify(actual) + ', expected ' + JSON.stringify(expected) + ')';
+      assert(label, pass);
+    }
+
+    function cleanup() {
+      // Remove all test keys from localStorage
+      var toRemove = [];
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key && key.startsWith(TEST_PREFIX)) toRemove.push(key);
+      }
+      toRemove.forEach(function (k) { localStorage.removeItem(k); });
+    }
+
+    // ── Tests ──────────────────────────────────────────
+
+    // 1. OrbitUtils.ROOT
+    suite('OrbitUtils.ROOT');
+    assert('ROOT is ../ from tests/ directory', OrbitUtils.ROOT === '../');
+
+    // 2. OrbitUtils.getDayNumber
+    suite('OrbitUtils.getDayNumber');
+    (function () {
+      var dayNum = OrbitUtils.getDayNumber();
+      assert('getDayNumber returns a non-negative integer', dayNum >= 0 && Number.isInteger(dayNum));
+
+      // On 2026-02-21 (launch + 5 days), dayNumber should be 5
+      // We can't mock Date easily, but we can verify it's reasonable
+      assert('getDayNumber is within expected range', dayNum >= 0 && dayNum < 10000);
+    })();
+
+    // 3. OrbitUtils.getPuzzleIndex
+    suite('OrbitUtils.getPuzzleIndex');
+    (function () {
+      var idx = OrbitUtils.getPuzzleIndex(364);
+      assert('getPuzzleIndex returns value < arrayLength', idx >= 0 && idx < 364);
+      assertEqual('getPuzzleIndex(1) always returns 0', OrbitUtils.getPuzzleIndex(1), 0);
+
+      // Verify modulo behavior
+      var day = OrbitUtils.getDayNumber();
+      assertEqual('getPuzzleIndex(364) equals day % 364', idx, day % 364);
+    })();
+
+    // 4. OrbitUtils.store
+    suite('OrbitUtils.store (set/get/remove)');
+    (function () {
+      var key = TEST_PREFIX + 'store_test';
+
+      // set + get
+      OrbitUtils.store.set(key, { foo: 'bar', n: 42 });
+      var val = OrbitUtils.store.get(key);
+      assert('store.get returns stored object', val !== null && val.foo === 'bar' && val.n === 42);
+
+      // get with default when missing
+      var missing = OrbitUtils.store.get(TEST_PREFIX + 'nonexistent', 'fallback');
+      assertEqual('store.get returns default for missing key', missing, 'fallback');
+
+      // get with no default returns null
+      var noDefault = OrbitUtils.store.get(TEST_PREFIX + 'nonexistent');
+      assertEqual('store.get returns null when no default', noDefault, null);
+
+      // remove
+      OrbitUtils.store.remove(key);
+      var afterRemove = OrbitUtils.store.get(key);
+      assertEqual('store.remove clears the key', afterRemove, null);
+
+      // store primitive types
+      OrbitUtils.store.set(TEST_PREFIX + 'bool', true);
+      assertEqual('store handles boolean', OrbitUtils.store.get(TEST_PREFIX + 'bool'), true);
+
+      OrbitUtils.store.set(TEST_PREFIX + 'str', 'hello');
+      assertEqual('store handles string', OrbitUtils.store.get(TEST_PREFIX + 'str'), 'hello');
+
+      OrbitUtils.store.set(TEST_PREFIX + 'arr', [1, 2, 3]);
+      var arr = OrbitUtils.store.get(TEST_PREFIX + 'arr');
+      assert('store handles array', Array.isArray(arr) && arr.length === 3);
+    })();
+
+    // 5. OrbitUtils.tmdbImageUrl
+    suite('OrbitUtils.tmdbImageUrl');
+    (function () {
+      var url = OrbitUtils.tmdbImageUrl('/abc123.jpg');
+      assertEqual('default size is w500', url, 'https://image.tmdb.org/t/p/w500/abc123.jpg');
+
+      var urlSm = OrbitUtils.tmdbImageUrl('/pic.jpg', 'w92');
+      assertEqual('custom size w92', urlSm, 'https://image.tmdb.org/t/p/w92/pic.jpg');
+
+      assertEqual('null path returns null', OrbitUtils.tmdbImageUrl(null), null);
+      assertEqual('empty string returns null', OrbitUtils.tmdbImageUrl(''), null);
+      assertEqual('undefined returns null', OrbitUtils.tmdbImageUrl(undefined), null);
+
+      // Each size preset
+      var sizes = OrbitUtils.IMAGE_SIZES;
+      assert('IMAGE_SIZES has POSTER_SM', sizes.POSTER_SM === 'w92');
+      assert('IMAGE_SIZES has BACKDROP', sizes.BACKDROP === 'w1280');
+      assert('IMAGE_SIZES has LOGO', sizes.LOGO === 'original');
+    })();
+
+    // 6. OrbitUtils.formatYear
+    suite('OrbitUtils.formatYear');
+    (function () {
+      assertEqual('full date string', OrbitUtils.formatYear('2024-03-15'), '2024');
+      assertEqual('year only', OrbitUtils.formatYear('1999'), '1999');
+      assertEqual('null input', OrbitUtils.formatYear(null), '');
+      assertEqual('empty string', OrbitUtils.formatYear(''), '');
+      assertEqual('short string', OrbitUtils.formatYear('20'), '');
+      assertEqual('undefined input', OrbitUtils.formatYear(undefined), '');
+    })();
+
+    // 7. OrbitUtils.debounce
+    suite('OrbitUtils.debounce');
+    (function () {
+      var callCount = 0;
+      var debounced = OrbitUtils.debounce(function () { callCount++; }, 50);
+
+      // Call multiple times rapidly
+      debounced();
+      debounced();
+      debounced();
+
+      assert('debounce does not fire synchronously', callCount === 0);
+
+      // Verify it fires after delay
+      setTimeout(function () {
+        var div = document.createElement('div');
+        div.className = 'test-result';
+        if (callCount === 1) {
+          passed++;
+          div.classList.add('pass');
+          div.textContent = '\u2713 debounce fires once after delay';
+        } else {
+          failed++;
+          div.classList.add('fail');
+          div.textContent = '\u2717 debounce fires once after delay (fired ' + callCount + ' times)';
+        }
+        resultsEl.appendChild(div);
+        updateSummary();
+      }, 150);
+    })();
+
+    // 8. OrbitUtils.el
+    suite('OrbitUtils.el');
+    (function () {
+      var node = OrbitUtils.el('div', 'my-class', 'Hello');
+      assertEqual('el creates correct tag', node.tagName, 'DIV');
+      assertEqual('el sets className', node.className, 'my-class');
+      assertEqual('el sets textContent', node.textContent, 'Hello');
+
+      var bare = OrbitUtils.el('span');
+      assertEqual('el without args creates bare element', bare.tagName, 'SPAN');
+      assertEqual('el without class has empty className', bare.className, '');
+    })();
+
+    // ── Summary ──────────────────────────────────────
+
+    function updateSummary() {
+      var el = document.getElementById('summary');
+      var total = passed + failed;
+      if (failed === 0) {
+        el.innerHTML = '<span class="summary-pass">' + passed + '/' + total + ' tests passed</span>';
+      } else {
+        el.innerHTML = '<span class="summary-fail">' + failed + ' failed</span>, <span class="summary-pass">' + passed + ' passed</span> (' + total + ' total)';
+      }
+    }
+
+    // Initial summary (before debounce async test completes)
+    updateSummary();
+
+    // Cleanup test keys
+    cleanup();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,870 @@
+@import url('../variables.css');
+/* ============================================
+   PEOPLE CUBE COMPONENT - CSS
+   Purple-themed 3D card popup for people
+============================================ */
+
+/* ============================================
+   OVERLAY & POPUP CONTAINER
+============================================ */
+
+.pcube-overlay[hidden] {
+  display: none !important;
+}
+
+.pcube-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2100;
+  padding: 30px;
+}
+
+.pcube-popup {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  pointer-events: auto;
+}
+
+.pcube-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: rgba(168, 85, 247, 0.9);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.pcube-close:hover {
+  background: var(--prestige-purple);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   CUBE NAVIGATION
+============================================ */
+
+.pcube-nav {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+.pcube-nav-btn {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: var(--muted-silver);
+  font-size: 10px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pcube-nav-btn:hover {
+  border-color: var(--prestige-purple);
+  color: var(--prestige-purple);
+}
+
+.pcube-nav-btn.active {
+  background: var(--prestige-purple);
+  border-color: var(--prestige-purple);
+  color: var(--space-black);
+  font-weight: 600;
+}
+
+/* ============================================
+   3D CUBE
+============================================ */
+
+.pcube-scene {
+  width: 100%;
+  height: 520px;
+  perspective: 1200px;
+}
+
+.pcube-cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pcube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(10, 14, 26, 0.98);
+  border: 2px solid rgba(168, 85, 247, 0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+/* Active face gets pointer events */
+.pcube-cube[data-face="1"] .pcube-face-front,
+.pcube-cube[data-face="2"] .pcube-face-right,
+.pcube-cube[data-face="3"] .pcube-face-back,
+.pcube-cube[data-face="4"] .pcube-face-left,
+.pcube-cube[data-face="5"] .pcube-face-top {
+  pointer-events: auto;
+}
+
+/* Face positions */
+.pcube-face-front  { transform: rotateY(0deg) translateZ(260px); }
+.pcube-face-right  { transform: rotateY(90deg) translateZ(260px); }
+.pcube-face-back   { transform: rotateY(180deg) translateZ(260px); }
+.pcube-face-left   { transform: rotateY(-90deg) translateZ(260px); }
+.pcube-face-top    { transform: rotateX(90deg) translateZ(260px); }
+
+/* Cube rotation per data-face */
+.pcube-cube[data-face="1"] { transform: translateZ(-260px) rotateY(0deg); }
+.pcube-cube[data-face="2"] { transform: translateZ(-260px) rotateY(-90deg); }
+.pcube-cube[data-face="3"] { transform: translateZ(-260px) rotateY(-180deg); }
+.pcube-cube[data-face="4"] { transform: translateZ(-260px) rotateY(90deg); }
+.pcube-cube[data-face="5"] { transform: translateZ(-260px) rotateX(-90deg); }
+
+/* ============================================
+   FACE SCROLLABLE CONTENT
+============================================ */
+
+.pcube-scroll {
+  padding: 24px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+
+.pcube-scroll::-webkit-scrollbar { width: 4px; }
+.pcube-scroll::-webkit-scrollbar-track { background: transparent; }
+.pcube-scroll::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.3); border-radius: 2px; }
+
+/* ============================================
+   LOADING STATE
+============================================ */
+
+.pcube-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 14, 26, 0.98);
+  border-radius: 14px;
+  z-index: 5;
+}
+
+.pcube-loading[hidden] { display: none; }
+
+.pcube-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(168, 85, 247, 0.2);
+  border-top-color: var(--prestige-purple);
+  border-radius: 50%;
+  animation: pcubeSpin 0.8s linear infinite;
+}
+
+@keyframes pcubeSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   FACE 1: IDENTITY
+============================================ */
+
+.pcube-face-header {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--prestige-purple);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.pcube-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.pcube-photo-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.1);
+  border: 3px solid rgba(168, 85, 247, 0.25);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pcube-photo-placeholder svg {
+  width: 50px;
+  height: 50px;
+  opacity: 0.4;
+}
+
+.pcube-name {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--film-white);
+  text-align: center;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.pcube-dept-badge {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 16px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 3px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: var(--prestige-purple);
+  background: rgba(168, 85, 247, 0.08);
+  text-transform: uppercase;
+}
+
+.pcube-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.pcube-meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+}
+
+.pcube-meta-label {
+  color: var(--ghost-gray);
+}
+
+.pcube-meta-value {
+  color: var(--film-white);
+  text-align: right;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pcube-divider {
+  border: none;
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  margin: 12px 0;
+}
+
+.pcube-awards-line {
+  font-size: 12px;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.pcube-memorial {
+  color: var(--ghost-gray);
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* ============================================
+   FACE 2: SIGNATURE WORK
+============================================ */
+
+.pcube-sig-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pcube-sig-card {
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px;
+  transition: all 0.2s;
+}
+
+.pcube-sig-card:hover {
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.pcube-sig-poster {
+  width: 88px;
+  height: 132px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  transition: all 0.2s;
+  display: block;
+  margin: 0 auto;
+}
+
+.pcube-sig-card:hover .pcube-sig-poster {
+  border-color: var(--prestige-purple);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+.pcube-sig-no-poster {
+  width: 88px;
+  height: 132px;
+  border-radius: 6px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: var(--ghost-gray);
+  font-size: 24px;
+}
+
+.pcube-sig-title {
+  font-size: 11px;
+  color: var(--film-white);
+  margin-top: 6px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+.pcube-sig-year {
+  font-size: 10px;
+  color: var(--ghost-gray);
+}
+
+.pcube-sig-char {
+  font-size: 10px;
+  color: var(--prestige-purple);
+  font-style: italic;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.pcube-sig-rating {
+  font-size: 10px;
+  color: var(--accent-gold);
+  margin-top: 2px;
+}
+
+/* ============================================
+   FACE 3: CAREER PROFILE
+============================================ */
+
+.pcube-section-title {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--prestige-purple);
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.pcube-genre-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.pcube-genre-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pcube-genre-name {
+  font-size: 11px;
+  color: var(--muted-silver);
+  width: 65px;
+  flex-shrink: 0;
+  text-align: right;
+  font-family: var(--font-body);
+}
+
+.pcube-genre-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(168, 85, 247, 0.1);
+  overflow: hidden;
+}
+
+.pcube-genre-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--prestige-purple), rgba(168, 85, 247, 0.5));
+  transition: width 0.4s ease;
+}
+
+.pcube-genre-pct {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  width: 32px;
+  text-align: right;
+  font-family: var(--font-body);
+}
+
+.pcube-stat-block {
+  margin-bottom: 16px;
+}
+
+.pcube-stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.pcube-stat-label {
+  font-size: 12px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+}
+
+.pcube-stat-value {
+  font-size: 12px;
+  color: var(--film-white);
+  font-weight: 500;
+  font-family: var(--font-body);
+}
+
+/* Encounter status */
+.pcube-encounter {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.pcube-encounter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.pcube-encounter-dot.discovered {
+  background: var(--prestige-purple);
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+.pcube-encounter-dot.undiscovered {
+  background: transparent;
+  border: 1px solid var(--ghost-gray);
+}
+
+.pcube-encounter-text {
+  font-size: 12px;
+  color: var(--muted-silver);
+  line-height: 1.4;
+  font-family: var(--font-body);
+}
+
+.pcube-encounter-text strong {
+  color: var(--film-white);
+}
+
+/* ============================================
+   FACE 4: ACTIONS
+============================================ */
+
+.pcube-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pcube-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.pcube-action-btn:hover {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--prestige-purple);
+  padding-left: 20px;
+}
+
+.pcube-action-arrow {
+  color: var(--prestige-purple);
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.pcube-action-btn:hover .pcube-action-arrow {
+  transform: translateX(3px);
+}
+
+.pcube-action-subtitle {
+  font-size: 11px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+}
+
+.pcube-bookmark-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pcube-bookmark-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.pcube-bookmark-btn.bookmarked {
+  color: var(--accent-gold);
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.pcube-bookmark-star {
+  font-size: 18px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pcube-bookmark-btn.bookmarked .pcube-bookmark-star {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+/* ============================================
+   FACE 5: TRIVIA
+============================================ */
+
+.pcube-trivia-stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.pcube-trivia-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+}
+
+.pcube-trivia-pill-icon {
+  color: var(--prestige-purple);
+  font-size: 12px;
+}
+
+.pcube-trivia-completed-badge {
+  text-align: center;
+  font-size: 11px;
+  color: var(--prestige-purple);
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  opacity: 0.7;
+}
+
+.pcube-trivia-progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pcube-trivia-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  transition: all 0.3s;
+}
+
+.pcube-trivia-dot.active {
+  background: var(--prestige-purple);
+  border-color: var(--prestige-purple);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+}
+
+.pcube-trivia-dot.correct {
+  background: #22c55e;
+  border-color: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.4);
+}
+
+.pcube-trivia-dot.wrong {
+  background: var(--danger-red);
+  border-color: var(--danger-red);
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+.pcube-trivia-question {
+  font-size: 14px;
+  color: var(--film-white);
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  min-height: 42px;
+}
+
+.pcube-trivia-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pcube-trivia-option {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.pcube-trivia-option:hover:not(.pcube-trivia-answered) {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--prestige-purple);
+}
+
+.pcube-trivia-option.pcube-trivia-answered {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.pcube-trivia-option.pcube-trivia-correct {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+  color: #22c55e;
+  opacity: 1;
+}
+
+.pcube-trivia-option.pcube-trivia-wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--danger-red);
+  color: var(--danger-red);
+  opacity: 1;
+}
+
+.pcube-trivia-score {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+}
+
+/* Trivia Result Screen */
+.pcube-trivia-final {
+  text-align: center;
+}
+
+.pcube-trivia-final-score {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--prestige-purple);
+  margin: 8px 0;
+}
+
+.pcube-trivia-final-label {
+  font-size: 14px;
+  color: var(--muted-silver);
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.pcube-trivia-perfect-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 12px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid var(--prestige-purple);
+  color: var(--prestige-purple);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.pcube-trivia-session-cats {
+  margin-bottom: 14px;
+}
+
+.pcube-trivia-cat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+.pcube-trivia-cat-name {
+  color: var(--ghost-gray);
+}
+
+.pcube-trivia-cat-score {
+  font-weight: 500;
+}
+
+.pcube-trivia-lifetime {
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  padding-top: 10px;
+  margin-bottom: 14px;
+}
+
+.pcube-trivia-lifetime-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 11px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+}
+
+.pcube-trivia-lifetime-val {
+  color: var(--film-white);
+  font-weight: 500;
+}
+
+.pcube-trivia-retry {
+  padding: 10px 24px;
+  background: var(--prestige-purple);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pcube-trivia-retry:hover {
+  background: #9333ea;
+  transform: scale(1.03);
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width: 480px) {
+  .pcube-overlay { padding: 15px; }
+  .pcube-popup { max-width: 100%; }
+  .pcube-scene { height: 420px; }
+
+  .pcube-face-front  { transform: rotateY(0deg) translateZ(200px); }
+  .pcube-face-right  { transform: rotateY(90deg) translateZ(200px); }
+  .pcube-face-back   { transform: rotateY(180deg) translateZ(200px); }
+  .pcube-face-left   { transform: rotateY(-90deg) translateZ(200px); }
+  .pcube-face-top    { transform: rotateX(90deg) translateZ(200px); }
+
+  .pcube-cube[data-face="1"] { transform: translateZ(-200px) rotateY(0deg); }
+  .pcube-cube[data-face="2"] { transform: translateZ(-200px) rotateY(-90deg); }
+  .pcube-cube[data-face="3"] { transform: translateZ(-200px) rotateY(-180deg); }
+  .pcube-cube[data-face="4"] { transform: translateZ(-200px) rotateY(90deg); }
+  .pcube-cube[data-face="5"] { transform: translateZ(-200px) rotateX(-90deg); }
+
+  .pcube-nav-btn { padding: 6px 10px; font-size: 9px; }
+  .pcube-scroll { padding: 18px; }
+  .pcube-photo { width: 90px; height: 90px; }
+  .pcube-name { font-size: 18px; }
+  .pcube-sig-card { width: 85px; }
+  .pcube-sig-poster { width: 75px; height: 112px; }
+  .pcube-close { top: -36px; width: 32px; height: 32px; font-size: 16px; }
+  .pcube-trivia-question { font-size: 13px; }
+  .pcube-trivia-option { padding: 8px 12px; font-size: 12px; }
+}

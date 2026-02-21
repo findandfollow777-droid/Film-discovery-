@@ -1,0 +1,84 @@
+/* ============================================
+   ORBIT - Shared Design Tokens
+============================================ */
+
+:root {
+  /* Backgrounds */
+  --space-black: #000000;
+  --deep-void: #0a0e17;
+  --nebula-dark: #111827;
+  --cosmic-blue: #1e293b;
+  --nebula-purple: #1a1432;
+
+  /* Accent Colors */
+  --accent-cyan: #00d9ff;
+  --accent-gold: #ffd700;
+  --accent-orange: #ff6b35;
+  --prestige-purple: #a855f7;
+  --warning-orange: #f97316;
+
+  /* RGB Components (for rgba() usage) */
+  --accent-rgb: 0, 217, 255;
+  --accent-gold-rgb: 255, 215, 0;
+  --prestige-purple-rgb: 168, 85, 247;
+
+  /* Status Colors */
+  --success-green: #10b981;
+  --danger-red: #ef4444;
+
+  /* Text Colors */
+  --film-white: #f1f5f9;
+  --muted-silver: #94a3b8;
+  --ghost-gray: #64748b;
+
+  /* Typography */
+  --font-display: 'Orbitron', monospace;
+  --font-body: 'Barlow', sans-serif;
+
+  /* Shadows */
+  --shadow-dramatic: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 217, 255, 0.1);
+  --shadow-neon: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 217, 255, 0.3);
+  --shadow-glow-cyan: 0 0 12px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.1);
+  --shadow-glow-gold: 0 0 8px rgba(255, 215, 0, 0.2);
+  --shadow-glow-purple: 0 0 12px rgba(168, 85, 247, 0.35), 0 0 4px rgba(168, 85, 247, 0.15);
+
+  /* Borders */
+  --border-cyan: 1px solid rgba(0, 217, 255, 0.15);
+  --border-cyan-hover: 1px solid rgba(0, 217, 255, 0.5);
+  --border-gold: 1px solid rgba(255, 215, 0, 0.3);
+
+  /* Border Radius */
+  --radius-card: 16px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-fast: all 0.2s ease;
+
+  /* Glassmorphism */
+  --blur-glass: blur(20px) saturate(180%);
+  --glass-bg: rgba(10, 14, 26, 0.7);
+  --glass-bg-heavy: rgba(10, 14, 26, 0.98);
+
+  /* Gradients */
+  --gradient-cosmic: linear-gradient(135deg, var(--cosmic-blue) 0%, var(--nebula-purple) 50%, var(--deep-void) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-gold) 100%);
+  --gradient-launch: linear-gradient(135deg, #00d9ff 0%, #ffd700 50%, #ff6b35 100%);
+}
+
+/* ============================================
+   SHARED - Back Link
+============================================ */
+.back-link {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.3s, color 0.3s;
+}
+.back-link:hover { opacity: 1; color: var(--film-white); }

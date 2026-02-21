@@ -1,0 +1,319 @@
+@import url('../variables.css');
+/* ============================================
+   ORBIT SWIPE MEMORY - Visual Feedback Styles
+   Include on any page with swipeable cards
+============================================ */
+
+/* ============================================
+   SWIPE INDICATORS
+============================================ */
+
+.swipe-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.swipe-left-indicator {
+  left: 10px;
+  background: rgba(255, 71, 87, 0.9);
+  color: white;
+  border: 2px solid #ff4757;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+}
+
+.swipe-right-indicator {
+  right: 10px;
+  background: rgba(0, 255, 136, 0.9);
+  color: white;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+/* ============================================
+   CARD STATES DURING SWIPE
+============================================ */
+
+.movie-card {
+  touch-action: pan-y; /* Allow vertical scroll, capture horizontal */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.movie-card.swiping-left {
+  border-color: rgba(255, 71, 87, 0.7) !important;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+}
+
+.movie-card.swiping-right {
+  border-color: rgba(0, 255, 136, 0.7) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+/* ============================================
+   SWIPE FEEDBACK ANIMATIONS
+============================================ */
+
+.swipe-feedback-liked {
+  animation: swipe-like-pulse 0.4s ease;
+}
+
+.swipe-feedback-disliked {
+  animation: swipe-dislike-pulse 0.4s ease;
+}
+
+@keyframes swipe-like-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(0, 255, 136, 0);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+@keyframes swipe-dislike-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(255, 71, 87, 0);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+/* ============================================
+   PREFERENCE BADGES (optional - show on cards)
+============================================ */
+
+.movie-card[data-preference="liked"]::after {
+  content: "♥";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 22px;
+  height: 22px;
+  background: rgba(0, 255, 136, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card[data-preference="disliked"]::after {
+  content: "✗";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 71, 87, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   SWIPE HINT (first-time users)
+============================================ */
+
+.swipe-hint {
+  position: fixed;
+  bottom: 100px;
+  left: calc(50% + 140px); /* Offset for sidebar (280px / 2) */
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: rgba(10, 14, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 30px;
+  font-size: 13px;
+  color: #8892a6;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+  animation: hint-fade-in 0.5s ease;
+}
+
+.swipe-hint.hidden {
+  display: none;
+}
+
+@keyframes hint-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.swipe-hint-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.swipe-hint-action:hover {
+  transform: scale(1.05);
+}
+
+.swipe-hint-action.like {
+  color: #00ff88;
+}
+
+.swipe-hint-action.like:hover {
+  background: rgba(0, 255, 136, 0.15);
+}
+
+.swipe-hint-action.dislike {
+  color: #ff4757;
+}
+
+.swipe-hint-action.dislike:hover {
+  background: rgba(255, 71, 87, 0.15);
+}
+
+.swipe-hint-arrow {
+  font-size: 18px;
+}
+
+.swipe-hint-dismiss {
+  margin-left: 10px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  color: #8892a6;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.swipe-hint-dismiss:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+/* ============================================
+   STATS DISPLAY (optional sidebar widget)
+============================================ */
+
+.swipe-stats {
+  padding: 12px;
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.swipe-stats-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.swipe-stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.swipe-stats-label {
+  color: #8892a6;
+}
+
+.swipe-stats-value {
+  font-weight: 600;
+}
+
+.swipe-stats-value.liked {
+  color: #00ff88;
+}
+
+.swipe-stats-value.disliked {
+  color: #ff4757;
+}
+
+/* ============================================
+   ORBIT MOVIE CARDS (Constellation page)
+============================================ */
+
+.orbit-movie .swipe-indicator {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+}
+
+.orbit-movie.swiping-left .orbit-movie-poster,
+.orbit-movie.swiping-right .orbit-movie-poster {
+  transition: border-color 0.15s ease;
+}
+
+.orbit-movie.swiping-left .orbit-movie-poster {
+  border-color: rgba(255, 71, 87, 0.7) !important;
+}
+
+.orbit-movie.swiping-right .orbit-movie-poster {
+  border-color: rgba(0, 255, 136, 0.7) !important;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width: 768px) {
+  .swipe-indicator {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .swipe-hint {
+    bottom: 80px;
+    padding: 10px 16px;
+    font-size: 12px;
+    gap: 12px;
+  }
+}

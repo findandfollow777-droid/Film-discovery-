@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="results.css">
+  <link rel="stylesheet" href="../components/swipe-memory.css">
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+  <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+</head>
+<body>
+  <!-- CINEMATIC OVERLAYS -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- STICKY TOP BAR -->
+  <nav class="results-top-bar">
+    <a href="../index.html" class="back-link" id="backNav">&larr; Back to Orbit</a>
+    <div class="top-bar-brand">
+      <div class="mini-logo">
+        <div class="mini-ring"></div>
+        <span>ORBIT</span>
+      </div>
+    </div>
+    <div class="top-bar-actions">
+      <div class="results-count-pill">
+        <span class="count-number" id="resultsCount">0</span>
+        <span class="count-label">movies found</span>
+      </div>
+      <button class="drawer-toggle" id="drawerToggle" title="Controls &amp; Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOLBAR -->
+  <div class="results-toolbar">
+    <div class="toolbar-inner">
+      <div class="toolbar-search results-search-container">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted-silver)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="resultsSearchInput" class="results-search-input" placeholder="Search results...">
+        <div id="resultsSearchDropdown" class="results-search-dropdown"></div>
+      </div>
+
+      <div class="toolbar-sort">
+        <div class="sort-options">
+          <button class="sort-option active" data-sort="chronology">Chronology</button>
+          <button class="sort-option" data-sort="rating">Rating</button>
+          <button class="sort-option" data-sort="boxoffice">Box Office</button>
+          <button class="sort-option" data-sort="foryou">For You</button>
+          <button class="sort-option sort-awards" data-sort="awards">Awards</button>
+          <button class="sort-option sort-random" data-sort="random">Random</button>
+        </div>
+        <button class="reverse-btn" id="reverseBtn" title="Reverse sort order">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L5 4 M3 6 L5 4 L7 6"/><path d="M11 4 L11 12 M9 10 L11 12 L13 10"/></svg>
+        </button>
+      </div>
+
+      <div class="toolbar-filters">
+        <div class="active-filters" id="activeFilters">
+          <p class="no-filters">Loading filters...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER BACKDROP -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- CONTROLS DRAWER -->
+  <aside class="controls-drawer" id="controlsDrawer">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Controls</h2>
+      <button class="drawer-close" id="drawerClose">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <!-- Navigate -->
+      <div class="drawer-section">
+        <h3 class="drawer-section-title sidebar-section-title">Navigate</h3>
+        <nav class="drawer-nav">
+          <a href="discover.html" class="drawer-nav-item nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            New Search
+          </a>
+          <a href="../games/arcade.html" class="drawer-nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/></svg>
+            Arcade
+          </a>
+        </nav>
+      </div>
+
+      <!-- Gravitational Pull -->
+      <div class="drawer-section vibe-section">
+        <h3 class="drawer-section-title">Gravitational Pull</h3>
+        <p class="vibe-hint">Tune what drifts into your orbit</p>
+        <div class="vibe-slider-group">
+          <div class="vibe-labels"><span>Light</span><span>Dark</span></div>
+          <input type="range" class="vibe-slider" id="vibeMood" min="0" max="100" value="50">
+        </div>
+        <div class="vibe-slider-group">
+          <div class="vibe-labels"><span>Slow Burn</span><span>Intense</span></div>
+          <input type="range" class="vibe-slider" id="vibePace" min="0" max="100" value="50">
+        </div>
+        <div class="vibe-slider-group">
+          <div class="vibe-labels"><span>Familiar</span><span>Challenge Me</span></div>
+          <input type="range" class="vibe-slider" id="vibeFamiliarity" min="0" max="100" value="50">
+        </div>
+        <div class="vibe-slider-group">
+          <div class="vibe-labels"><span>Escapism</span><span>Make Me Think</span></div>
+          <input type="range" class="vibe-slider" id="vibeDepth" min="0" max="100" value="50">
+        </div>
+        <button class="vibe-reset" id="vibeReset">&#8634; Reset Gravity</button>
+      </div>
+
+      <!-- Streaming -->
+      <div class="drawer-section sidebar-section">
+        <h3 class="drawer-section-title">Streaming</h3>
+        <div class="streaming-filter">
+          <select class="streaming-country" id="streamingCountry">
+            <option value="">Select Country...</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="AU">Australia</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="ES">Spain</option>
+            <option value="IT">Italy</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="IN">India</option>
+            <option value="NL">Netherlands</option>
+            <option value="SE">Sweden</option>
+            <option value="NO">Norway</option>
+            <option value="DK">Denmark</option>
+            <option value="FI">Finland</option>
+            <option value="NZ">New Zealand</option>
+            <option value="IE">Ireland</option>
+            <option value="ZA">South Africa</option>
+            <option value="AR">Argentina</option>
+            <option value="CL">Chile</option>
+            <option value="CO">Colombia</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="AT">Austria</option>
+            <option value="CH">Switzerland</option>
+            <option value="BE">Belgium</option>
+            <option value="SG">Singapore</option>
+          </select>
+          <div class="streaming-providers" id="streamingProviders"></div>
+        </div>
+      </div>
+
+      <!-- Page Info -->
+      <div class="drawer-section drawer-page-info">
+        <div class="page-info" id="pageInfo">Page 1 of 1</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PERSON BIO PANEL -->
+  <div class="bio-panel" id="bioPanel" hidden>
+    <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
+      <span class="bio-tab-icon">&#128100;</span>
+    </div>
+    <div class="bio-panel-content" id="bioPanelContent">
+      <button class="bio-close" id="bioClose">&#10005;</button>
+      <div class="bio-header">
+        <img class="bio-photo" id="bioPhoto" src="" alt="">
+        <div class="bio-header-info">
+          <h2 class="bio-name" id="bioName">Loading...</h2>
+          <div class="bio-role" id="bioRole"></div>
+          <div class="bio-dates" id="bioDates"></div>
+        </div>
+      </div>
+      <div class="bio-memorial" id="bioMemorial" hidden>
+        <span class="memorial-icon">&#128367;&#65039;</span>
+        <span class="memorial-text">In Memoriam</span>
+      </div>
+      <div class="bio-details">
+        <div class="bio-birthplace" id="bioBirthplace"></div>
+        <div class="bio-text" id="bioText"></div>
+      </div>
+      <div class="bio-stats" id="bioStats">
+        <div class="bio-stat">
+          <span class="stat-value" id="bioFilmCount">0</span>
+          <span class="stat-label">Films</span>
+        </div>
+        <div class="bio-stat">
+          <span class="stat-value" id="bioPopularity">0</span>
+          <span class="stat-label">Popularity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="results-main">
+    <header class="results-header">
+      <h1 class="results-title" id="resultsTitle">Your Orbit Results</h1>
+      <p class="results-subtitle" id="resultsSubtitle">Discovering your cinematic universe...</p>
+    </header>
+
+    <!-- MOVIE GRID -->
+    <div class="movies-grid" id="moviesGrid"></div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination">
+      <button class="page-btn" id="prevPage" disabled>&larr; Previous</button>
+      <div class="page-numbers" id="pageNumbers"></div>
+      <button class="page-btn" id="nextPage">Next &rarr;</button>
+    </div>
+  </main>
+
+  <!-- SWIPE HINT -->
+  <div class="swipe-hint" id="swipeHint">
+    <button class="swipe-hint-action dislike" id="swipeDislikeBtn" title="Dislike current movie">
+      <span class="swipe-hint-arrow">&larr;</span> Not tonight
+    </button>
+    <span style="color: #444;">|</span>
+    <button class="swipe-hint-action like" id="swipeLikeBtn" title="Like current movie">
+      Love it <span class="swipe-hint-arrow">&rarr;</span>
+    </button>
+    <button class="swipe-hint-dismiss" id="swipeHintDismiss">Got it</button>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/awards.js"></script>
+  <script src="../components/swipe-memory.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
+  <script src="results.js"></script>
+  <script src="../components/shortlist-badge.js"></script>
+</body>
+</html>
