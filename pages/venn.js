@@ -597,10 +597,32 @@ function renderMovies() {
     cardWidth = 85; cardHeight = 127;
   }
   
+  // Tiered convergence sizing — higher overlap = bigger tiles
+  function getConvergenceSize(overlapCount) {
+    let multiplier, maxW;
+    if (overlapCount >= 4) {
+      multiplier = 1.8; maxW = 280;
+    } else if (overlapCount === 3) {
+      multiplier = 1.55; maxW = 250;
+    } else {
+      multiplier = 1.3; maxW = 220;
+    }
+    const w = Math.min(cardWidth * multiplier, maxW);
+    return { w, h: w * 1.5 };
+  }
+
+  // Shared overlap helper — fraction of card A's area covered by card B
+  function cardOverlapFraction(ax, ay, aw, ah, bx, by, bw, bh) {
+    const overlapX = Math.max(0, Math.min(ax + aw / 2, bx + bw / 2) - Math.max(ax - aw / 2, bx - bw / 2));
+    const overlapY = Math.max(0, Math.min(ay + ah / 2, by + bh / 2) - Math.max(ay - ah / 2, by - bh / 2));
+    return (overlapX * overlapY) / (aw * ah);
+  }
+
+  // Global list of every placed card (solo + convergence) for overlap checks
+  const allPlacedCards = [];
+
   // Calculate shared movie regions to avoid (with larger buffer)
   const sharedRegions = [];
-  const convWidth = Math.min(cardWidth * 1.4, 220);
-  const convHeight = convWidth * 1.5;
   
   if (sharedMovies.length > 0) {
     const borderMoviesTemp = new Map();
@@ -617,56 +639,50 @@ function renderMovies() {
       const actorIndices = key.split('-').map(Number);
       const positions = actorIndices.map(i => layout[i]).filter(Boolean);
       if (positions.length >= 2) {
-        const midX = (positions[0].x + positions[1].x) / 2 * WORLD_WIDTH;
-        const midY = (positions[0].y + positions[1].y) / 2 * WORLD_HEIGHT;
-        // Tight exclusion - just the intersection tiles themselves
-        const exclusionRadius = 180 + movies.length * 35;
+        // True centroid of ALL involved people's positions
+        const midX = positions.reduce((s, p) => s + p.x, 0) / positions.length * WORLD_WIDTH;
+        const midY = positions.reduce((s, p) => s + p.y, 0) / positions.length * WORLD_HEIGHT;
+        // Exclusion radius based on tiered tile size
+        const { w: exW } = getConvergenceSize(positions.length);
+        const exclusionRadius = 180 + movies.length * (exW / 6);
         sharedRegions.push({ x: midX, y: midY, radius: exclusionRadius });
       }
     });
   }
   
-  // Render solo movies - ORGANIC SPACE FLOATING with 5% overlap limit
+  // Render solo movies - ORGANIC SPACE FLOATING, max 10% overlap
   soloMoviesByPerson.forEach((movies, pIndex) => {
     const pos = layout[pIndex];
     if (!pos || movies.length === 0) return;
-    
+
     const cx = pos.x * WORLD_WIDTH;
     const cy = pos.y * WORLD_HEIGHT;
-    
+
     // Actor name exclusion (small - just the text)
     const nameRadius = 100;
-    
+
     // Calculate direction AWAY from center (toward outer edge)
     const worldCenterX = WORLD_WIDTH / 2;
     const worldCenterY = WORLD_HEIGHT / 2;
     const outwardAngle = Math.atan2(cy - worldCenterY, cx - worldCenterX);
-    
-    // Place movies organically throughout the territory
-    const placedPositions = [];
-    
-    // 5% overlap limit
-    const maxOverlaps = Math.max(1, Math.floor(movies.length * 0.05));
-    let currentOverlaps = 0;
-    
+
     movies.forEach((entry, i) => {
       const { movie } = entry;
-      
+
       let bestX = cx, bestY = cy;
       let bestScore = -Infinity;
-      
-      // Try more random positions to find non-overlapping spots
-      for (let attempt = 0; attempt < 80; attempt++) {
+
+      // Try random positions to find non-overlapping spots
+      for (let attempt = 0; attempt < 100; attempt++) {
         // Organic distribution - mix of patterns
         let angle, dist;
-        
-        if (attempt < 30) {
+
+        if (attempt < 35) {
           // Random spread throughout territory
           angle = Math.random() * Math.PI * 2;
-          // Mix of close and far distances
           const t = Math.random();
           dist = nameRadius + 40 + t * 700;
-        } else if (attempt < 55) {
+        } else if (attempt < 65) {
           // Fill gaps near intersections (but not in them)
           let nearestRegion = sharedRegions[0];
           let nearestDist = Infinity;
@@ -691,108 +707,76 @@ function renderMovies() {
           angle = outwardAngle + (Math.random() - 0.5) * Math.PI * 1.2;
           dist = 500 + Math.random() * 350;
         }
-        
+
         // Add jitter for organic feel
         const jitterX = (Math.random() - 0.5) * 30;
         const jitterY = (Math.random() - 0.5) * 30;
-        
+
         const x = cx + Math.cos(angle) * dist + jitterX;
         const y = cy + Math.sin(angle) * dist + jitterY;
-        
+
         // Calculate score for this position
-        let score = 50; // Base score
+        let score = 50;
         let valid = true;
-        let wouldOverlap = false;
-        
+
         // Not in shared regions
         for (const region of sharedRegions) {
-          const dx = x - region.x;
-          const dy = y - region.y;
-          const distToRegion = Math.sqrt(dx * dx + dy * dy);
+          const rdx = x - region.x;
+          const rdy = y - region.y;
+          const distToRegion = Math.sqrt(rdx * rdx + rdy * rdy);
           if (distToRegion < region.radius + cardWidth / 2 + 10) {
             valid = false;
             break;
           }
-          // Bonus for being close to intersection edge
           if (distToRegion < region.radius + cardWidth + 100) {
             score += 20;
           }
         }
-        
+
         if (!valid) continue;
-        
+
         // Not too close to actor name
         const distFromName = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-        if (distFromName < nameRadius) {
-          continue;
-        }
-        
-        // Check overlap with placed movies - STRICT: cards touching = overlap
-        let minDistToPlaced = Infinity;
-        const minSeparation = Math.max(cardWidth, cardHeight) * 1.05; // Cards must not touch
-        
-        for (const p of placedPositions) {
-          const dx = x - p.x;
-          const dy = y - p.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          minDistToPlaced = Math.min(minDistToPlaced, d);
-          
-          // Would this touch another card?
-          if (d < minSeparation) {
-            wouldOverlap = true;
-          }
-        }
-        
-        // If would overlap, only allow if under 5% limit
-        if (wouldOverlap && currentOverlaps >= maxOverlaps) {
-          continue; // Skip - too many overlaps already
-        }
-        
-        // Strongly prefer positions with good spacing
-        if (minDistToPlaced > minSeparation * 1.5) {
-          score += 50; // Excellent spacing bonus
-        } else if (minDistToPlaced > minSeparation * 1.2) {
-          score += 30; // Good spacing bonus
-        } else if (minDistToPlaced > minSeparation) {
-          score += 10; // Acceptable spacing
-        }
-        
+        if (distFromName < nameRadius) continue;
+
         // Within world bounds
         const margin = cardWidth * 0.4;
-        if (x < margin || x > WORLD_WIDTH - margin || 
+        if (x < margin || x > WORLD_WIDTH - margin ||
             y < margin || y > WORLD_HEIGHT - margin) {
           continue;
         }
-        
-        // Add randomness
+
+        // Check rectangle overlap against ALL placed cards (solo + convergence)
+        let worstOverlap = 0;
+        for (const p of allPlacedCards) {
+          const frac = cardOverlapFraction(x, y, cardWidth, cardHeight, p.x, p.y, p.w, p.h);
+          const fracOther = cardOverlapFraction(p.x, p.y, p.w, p.h, x, y, cardWidth, cardHeight);
+          worstOverlap = Math.max(worstOverlap, frac, fracOther);
+        }
+
+        // Reject if any card would be more than 10% covered
+        if (worstOverlap > 0.10) continue;
+
+        // Strongly prefer positions with zero overlap
+        if (worstOverlap === 0) {
+          score += 60;
+        } else {
+          score += 10 * (1 - worstOverlap / 0.10);
+        }
+
         score += Math.random() * 15;
-        
+
         if (score > bestScore) {
           bestScore = score;
           bestX = x;
           bestY = y;
         }
       }
-      
-      // Check if final position overlaps
-      let finalOverlaps = false;
-      const minSep = Math.max(cardWidth, cardHeight) * 1.05;
-      for (const p of placedPositions) {
-        const dx = bestX - p.x;
-        const dy = bestY - p.y;
-        if (Math.sqrt(dx * dx + dy * dy) < minSep) {
-          finalOverlaps = true;
-          break;
-        }
-      }
-      if (finalOverlaps) {
-        currentOverlaps++;
-      }
-      
+
       // Random slight rotation for organic feel
       const rotation = (Math.random() - 0.5) * 8; // -4 to +4 degrees
-      
-      placedPositions.push({ x: bestX, y: bestY });
+
+      allPlacedCards.push({ x: bestX, y: bestY, w: cardWidth, h: cardHeight });
       const card = createMovieCard(movie, [pIndex], cardWidth, cardHeight, bestX, bestY, false, rotation);
       moviesLayer.appendChild(card);
     });
@@ -813,65 +797,74 @@ function renderMovies() {
       borderMovies.get(key).push(entry);
     });
     
+    // Sort groups so higher-overlap groups render first (they get priority placement)
+    const sortedGroups = [...borderMovies.entries()].sort((a, b) => {
+      const aCount = a[0].split('-').length;
+      const bCount = b[0].split('-').length;
+      return bCount - aCount;
+    });
+
     // Position movies along each border with better spacing
-    borderMovies.forEach((movies, key) => {
+    sortedGroups.forEach(([key, movies]) => {
       const actorIndices = key.split('-').map(Number);
-      
+
       // Get the two (or more) actor positions
       const positions = actorIndices.map(i => layout[i]).filter(Boolean);
       if (positions.length < 2) return;
-      
-      // Calculate the midpoint and direction of the border
-      const p1 = { x: positions[0].x * WORLD_WIDTH, y: positions[0].y * WORLD_HEIGHT };
-      const p2 = { x: positions[1].x * WORLD_WIDTH, y: positions[1].y * WORLD_HEIGHT };
-      
-      // Midpoint between the two actors
-      const midX = (p1.x + p2.x) / 2;
-      const midY = (p1.y + p2.y) / 2;
-      
-      // Direction perpendicular to the line connecting actors
-      const dx = p2.x - p1.x;
-      const dy = p2.y - p1.y;
-      const borderAngle = Math.atan2(dy, dx) + Math.PI / 2;
-      
-      // INCREASED spread for better spacing
-      const gapBetweenCards = convWidth + 40; // Card width + gap
-      const borderLength = Math.max(600, movies.length * gapBetweenCards);
-      
-      // Use grid layout for many movies
-      const moviesPerRow = Math.ceil(Math.sqrt(movies.length * 1.5));
-      const rows = Math.ceil(movies.length / moviesPerRow);
-      
+
+      // True centroid of ALL involved people
+      const worldPositions = positions.map(p => ({ x: p.x * WORLD_WIDTH, y: p.y * WORLD_HEIGHT }));
+      const midX = worldPositions.reduce((s, p) => s + p.x, 0) / worldPositions.length;
+      const midY = worldPositions.reduce((s, p) => s + p.y, 0) / worldPositions.length;
+
+      // For 2-person: perpendicular to the line connecting them
+      // For 3+ person: diagonal spread (no meaningful border at centroid)
+      let borderAngle;
+      if (positions.length === 2) {
+        const dx = worldPositions[1].x - worldPositions[0].x;
+        const dy = worldPositions[1].y - worldPositions[0].y;
+        borderAngle = Math.atan2(dy, dx) + Math.PI / 2;
+      } else {
+        borderAngle = Math.PI / 4; // 45-degree diagonal spread
+      }
+
+      // Per-group tile size based on overlap count
+      const { w: tileW, h: tileH } = getConvergenceSize(positions.length);
+
+      // Z-index by overlap count: 4-person=35, 3-person=32, 2-person=30
+      const overlapZ = positions.length >= 4 ? 35 : positions.length === 3 ? 32 : 30;
+
       movies.forEach((entry, i) => {
         const { movie, personIndices } = entry;
-        
-        let x, y;
-        
-        if (movies.length <= 4) {
-          // Small count - line them along border
-          const t = movies.length === 1 ? 0 : (i / (movies.length - 1)) - 0.5;
-          const alongBorder = t * borderLength;
-          
-          x = midX + Math.cos(borderAngle) * alongBorder;
-          y = midY + Math.sin(borderAngle) * alongBorder;
-        } else {
-          // Many movies - use a grid pattern centered on midpoint
-          const col = i % moviesPerRow;
-          const row = Math.floor(i / moviesPerRow);
-          
-          // Center the grid
-          const gridWidth = (moviesPerRow - 1) * gapBetweenCards;
-          const gridHeight = (rows - 1) * (convHeight + 30);
-          
-          const offsetX = (col - (moviesPerRow - 1) / 2) * gapBetweenCards;
-          const offsetY = (row - (rows - 1) / 2) * (convHeight + 30);
-          
-          // Rotate grid to align with border
-          x = midX + Math.cos(borderAngle) * offsetX - Math.sin(borderAngle) * offsetY;
-          y = midY + Math.sin(borderAngle) * offsetX + Math.cos(borderAngle) * offsetY;
+
+        // Tight spiral from centroid — golden angle for even packing
+        const spiralAngle = i * 2.399 + borderAngle; // ~137.5° per step, seeded by border angle
+        const spiralDist = i === 0 ? 0 : (tileW * 0.55) * Math.sqrt(i);
+        let x = midX + Math.cos(spiralAngle) * spiralDist + (Math.random() - 0.5) * 10;
+        let y = midY + Math.sin(spiralAngle) * spiralDist + (Math.random() - 0.5) * 10;
+
+        // Resolve overlaps — nudge outward from centroid only as far as needed
+        for (let nudge = 0; nudge < 80; nudge++) {
+          let worstOverlap = 0;
+          for (const placed of allPlacedCards) {
+            const frac = cardOverlapFraction(x, y, tileW, tileH, placed.x, placed.y, placed.w, placed.h);
+            const fracOther = cardOverlapFraction(placed.x, placed.y, placed.w, placed.h, x, y, tileW, tileH);
+            worstOverlap = Math.max(worstOverlap, frac, fracOther);
+          }
+          if (worstOverlap <= 0.10) break;
+
+          // Spiral outward from centroid, staying close
+          const nudgeAngle = (nudge / 80) * Math.PI * 10 + spiralAngle;
+          const nudgeDist = (tileW * 0.3) + nudge * 8;
+          x = midX + Math.cos(nudgeAngle) * nudgeDist;
+          y = midY + Math.sin(nudgeAngle) * nudgeDist;
         }
-        
-        const card = createMovieCard(movie, personIndices, convWidth, convHeight, x, y, true);
+
+        const convRotation = (Math.random() - 0.5) * 6;
+        allPlacedCards.push({ x, y, w: tileW, h: tileH });
+
+        const card = createMovieCard(movie, personIndices, tileW, tileH, x, y, true, convRotation);
+        card.style.zIndex = String(overlapZ);
         moviesLayer.appendChild(card);
       });
     });
@@ -891,16 +884,13 @@ function createMovieCard(movie, personIndices, width, height, x, y, isConvergenc
   card.style.top = `${y}px`;
   
   // Apply rotation for organic floating feel
-  if (rotation && !isConvergence) {
+  if (rotation) {
     card.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
   } else {
     card.style.transform = "translate(-50%, -50%)";
   }
   
-  // Convergence movies get higher z-index to stay on top
-  if (isConvergence) {
-    card.style.zIndex = "30";
-  }
+  // Convergence z-index is set per-card in the rendering loop (tiered by overlap count)
   
   // Set gradient border for convergence
   if (isConvergence && personIndices.length >= 2) {

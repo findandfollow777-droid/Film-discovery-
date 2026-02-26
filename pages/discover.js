@@ -349,6 +349,58 @@ window.addEventListener('resize', () => {
   }
 });
 
+// ── Build filter grid + More modal from layout ──
+(function buildFilterLayout() {
+  var registry = OrbitUtils.FILTER_REGISTRY;
+  var layout = OrbitUtils.store.get('orbit_search_layout') || OrbitUtils.DEFAULT_LAYOUT;
+  var filterGrid = document.getElementById('filterGrid');
+  var moreBtn = document.getElementById('moreFiltersBtn');
+  var moreGrid = document.getElementById('moreFiltersGrid');
+  if (!filterGrid || !moreBtn || !registry) return;
+
+  // Primary cards
+  layout.forEach(function(id) {
+    var def = registry.find(function(r) { return r.id === id; });
+    if (!def) return;
+    var btn = document.createElement('button');
+    btn.className = 'section-card';
+    btn.dataset.section = def.id;
+    btn.innerHTML =
+      '<div class="orbit-icon ' + def.iconClass + '">' +
+        '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
+      '</div>' +
+      '<div class="section-text"><h2>' + def.title + '</h2><p>' + def.subtitle + '</p></div>';
+    filterGrid.insertBefore(btn, moreBtn);
+  });
+
+  // More modal tiles (everything not in layout)
+  if (moreGrid) {
+    var layoutSet = {};
+    layout.forEach(function(id) { layoutSet[id] = true; });
+    registry.filter(function(r) { return !layoutSet[r.id]; }).forEach(function(def) {
+      var tile = document.createElement('button');
+      tile.className = 'more-filter-tile';
+      tile.dataset.section = def.id;
+      tile.innerHTML =
+        '<div class="orbit-icon ' + def.iconClass + '">' +
+          '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
+        '</div>' +
+        '<span class="more-filter-label">' + def.title + '</span>';
+      moreGrid.appendChild(tile);
+    });
+  }
+
+  // Update More button subtitle with remaining filter names
+  var layoutSet2 = {};
+  layout.forEach(function(id) { layoutSet2[id] = true; });
+  var secondaryNames = registry.filter(function(r) { return !layoutSet2[r.id]; })
+    .slice(0, 3).map(function(r) { return r.title.split(':')[0].trim(); });
+  var moreSubtitle = moreBtn.querySelector('.section-text p');
+  if (moreSubtitle && secondaryNames.length) {
+    moreSubtitle.textContent = secondaryNames.join(', ') + ' & more';
+  }
+})();
+
 const sectionDefinitions = {
   people: { title: "People", builder: buildPeopleContent },
   genres: { title: "Genres", builder: buildGenresContent },
@@ -367,8 +419,9 @@ const sectionDefinitions = {
 
 let currentSectionKey = null;
 
-document.querySelectorAll(".section-card:not(.launch-card)").forEach((card) => {
-  card.addEventListener("click", () => openFocusCard(card.dataset.section));
+document.getElementById('filterGrid').addEventListener('click', (e) => {
+  const card = e.target.closest('.section-card[data-section]');
+  if (card) openFocusCard(card.dataset.section);
 });
 
 function openFocusCard(sectionKey) {
@@ -387,6 +440,11 @@ function openFocusCard(sectionKey) {
 function closeFocusCard() {
   focusOverlay.hidden = true;
   document.body.style.overflow = '';
+  // If opened from More modal, reopen it
+  if (typeof openedFromMore !== 'undefined' && openedFromMore) {
+    openedFromMore = false;
+    openMoreFilters();
+  }
 }
 
 focusCloseButton.addEventListener("click", closeFocusCard);
@@ -429,13 +487,37 @@ function updateUIFromState() {
   if (arcadeBtn) arcadeBtn.classList.toggle('hidden', hasFilters);
 
   const sectionsWithFilters = new Set(state.filters.map((f) => f.section));
-  document.querySelectorAll(".section-card:not(.launch-card)").forEach((card) => {
+  document.querySelectorAll(".section-card[data-section]").forEach((card) => {
     if (sectionsWithFilters.has(card.dataset.section)) {
       card.classList.add("active");
     } else {
       card.classList.remove("active");
     }
   });
+
+  // Update "More Filters" badge with count of active secondary filters
+  const currentLayout = OrbitUtils.store.get('orbit_search_layout') || OrbitUtils.DEFAULT_LAYOUT;
+  const layoutSet = new Set(currentLayout);
+  const secondarySections = OrbitUtils.FILTER_REGISTRY.filter(r => !layoutSet.has(r.id)).map(r => r.id);
+  const secondaryCount = secondarySections.filter(s => sectionsWithFilters.has(s)).length;
+  const moreBadge = document.getElementById('moreBadge');
+  if (moreBadge) {
+    moreBadge.textContent = secondaryCount;
+    moreBadge.hidden = secondaryCount === 0;
+  }
+
+  // Sync active state on More modal tiles
+  document.querySelectorAll('.more-filter-tile').forEach(tile => {
+    tile.classList.toggle('active', sectionsWithFilters.has(tile.dataset.section));
+  });
+
+  // Show reset button when there are active filters or persisted session criteria
+  var resetBtn = document.getElementById('resetOrbitButton');
+  if (resetBtn) {
+    var hasSession = false;
+    try { hasSession = !!sessionStorage.getItem('orbit_search_criteria'); } catch (e) {}
+    resetBtn.hidden = !hasFilters && !hasSession;
+  }
 }
 
 function renderFilterChips() {
@@ -468,11 +550,111 @@ function renderFilterChips() {
 orbitPanelToggle.onclick = () => orbitPanel.classList.toggle("collapsed");
 clearAllButton.onclick = () => {
   state.filters = [];
+  state.genreLogic = 'or';
+  try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
   updateUIFromState();
 };
 
+// ── Restore search criteria from sessionStorage ──
+(function restoreSearchCriteria() {
+  try {
+    var raw = sessionStorage.getItem('orbit_search_criteria');
+    if (!raw) return;
+    var saved = JSON.parse(raw);
+    if (!saved || !Array.isArray(saved.filters)) return;
+    var valid = saved.filters.filter(function(f) {
+      return f && typeof f.id === 'string' && typeof f.section === 'string' && typeof f.label === 'string';
+    });
+    if (valid.length === 0) return;
+    state.filters = valid;
+    if (saved.genreLogic === 'and' || saved.genreLogic === 'or') {
+      state.genreLogic = saved.genreLogic;
+    }
+    updateUIFromState();
+  } catch (e) { /* corrupted data — start fresh */ }
+})();
+
+// ── Reset button: clears all criteria + sessionStorage ──
+var resetOrbitButton = document.getElementById('resetOrbitButton');
+if (resetOrbitButton) {
+  resetOrbitButton.addEventListener('click', function() {
+    state.filters = [];
+    state.genreLogic = 'or';
+    try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+    updateUIFromState();
+  });
+}
+
+// ── More Filters modal ──
+const moreFiltersOverlay = document.getElementById('moreFiltersOverlay');
+const moreFiltersBtn = document.getElementById('moreFiltersBtn');
+const moreFiltersClose = document.getElementById('moreFiltersClose');
+let openedFromMore = false;
+
+function openMoreFilters() {
+  if (!moreFiltersOverlay) return;
+  // Sync active state on tiles
+  const sectionsWithFilters = new Set(state.filters.map(f => f.section));
+  moreFiltersOverlay.querySelectorAll('.more-filter-tile').forEach(tile => {
+    tile.classList.toggle('active', sectionsWithFilters.has(tile.dataset.section));
+  });
+  moreFiltersOverlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMoreFilters() {
+  if (!moreFiltersOverlay) return;
+  moreFiltersOverlay.hidden = true;
+  if (focusOverlay.hidden) {
+    document.body.style.overflow = '';
+  }
+}
+
+if (moreFiltersBtn) {
+  moreFiltersBtn.addEventListener('click', openMoreFilters);
+}
+
+if (moreFiltersClose) {
+  moreFiltersClose.addEventListener('click', closeMoreFilters);
+}
+
+// Backdrop click closes modal
+if (moreFiltersOverlay) {
+  moreFiltersOverlay.addEventListener('click', (e) => {
+    if (e.target === moreFiltersOverlay) closeMoreFilters();
+  });
+}
+
+// Tile clicks → close modal, open focus card for that section
+document.getElementById('moreFiltersGrid').addEventListener('click', (e) => {
+  const tile = e.target.closest('.more-filter-tile');
+  if (!tile) return;
+  openedFromMore = true;
+  closeMoreFilters();
+  openFocusCard(tile.dataset.section);
+});
+
+// Escape key: close More modal or focus card
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (moreFiltersOverlay && !moreFiltersOverlay.hidden) {
+      closeMoreFilters();
+    } else if (!focusOverlay.hidden) {
+      closeFocusCard();
+    }
+  }
+});
+
 launchCard.addEventListener("click", async () => {
   if (launchCard.disabled) return;
+
+  // Persist search criteria for session restore
+  try {
+    sessionStorage.setItem('orbit_search_criteria', JSON.stringify({
+      filters: state.filters,
+      genreLogic: state.genreLogic
+    }));
+  } catch (e) {}
 
   try {
     // Check for universe filters
@@ -838,6 +1020,14 @@ function hasAwardsOnlyFilters(filters) {
   return !hasTMDBFilters;
 }
 
+/* Category matching: supports parent categories like "Silver Lion"
+   matching subcategories like "Silver Lion (Director)", "Silver Lion (Grand Jury)" */
+function categoryMatchesAward(selectedCategories, awardCategory) {
+  return selectedCategories.some(c =>
+    awardCategory === c || awardCategory.startsWith(c + " (")
+  );
+}
+
 function getAwardsMatchingIds(filters) {
   const awardFilters = filters.filter(f => f.section === "awards" && f.value);
   const levels = [];
@@ -861,7 +1051,7 @@ function getAwardsMatchingIds(filters) {
     if (!entry.awards || entry.awards.length === 0) continue;
     const match = entry.awards.some(award => {
       if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      if (categories.length > 0 && categories.indexOf(award.category) === -1) return false;
+      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
       if (levels.length === 1) {
         if (levels[0] === "winner" && !award.won) return false;
         if (levels[0] === "nominee" && award.won) return false;
@@ -903,8 +1093,8 @@ function filterByAwards(movies, filters) {
     return entry.awards.some(function(award) {
       // Festival filter (OR within group)
       if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      // Category filter (OR within group)
-      if (categories.length > 0 && categories.indexOf(award.category) === -1) return false;
+      // Category filter (OR within group, supports parent categories)
+      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
       // Level filter
       if (levels.length === 1) {
         if (levels[0] === "winner" && !award.won) return false;
@@ -3087,15 +3277,17 @@ function buildAwardsContent(root) {
   const festivalGroup = document.createElement("div");
   festivalGroup.className = "chip-group";
   const festivals = [
-    { label: "\uD83C\uDFC6 Oscar", value: "Oscar" },
-    { label: "\uD83C\uDF34 Cannes", value: "Cannes" },
-    { label: "\uD83C\uDFAD BAFTA", value: "BAFTA" },
-    { label: "\uD83E\uDD81 Venice", value: "Venice" },
-    { label: "\uD83D\uDC3B Berlin", value: "Berlin" },
-    { label: "\uD83C\uDF0D Golden Globe", value: "Golden Globe" }
+    { label: "Oscar", glyph: "og-oscar", value: "Oscar" },
+    { label: "Cannes", glyph: "og-palm", value: "Cannes" },
+    { label: "BAFTA", glyph: "og-bafta", value: "BAFTA" },
+    { label: "Venice", glyph: "og-lion", value: "Venice" },
+    { label: "Berlin", glyph: "og-bear", value: "Berlin" },
+    { label: "Golden Globe", glyph: "og-globe", value: "Golden Globe" }
   ];
   festivals.forEach(function(f) {
-    festivalGroup.appendChild(makeChip(f.label, "awards", { type: "award-festival", festival: f.value }));
+    const chip = makeChip(f.label, "awards", { type: "award-festival", festival: f.value });
+    chip.innerHTML = '<span class="og ' + f.glyph + '"></span> ' + f.label;
+    festivalGroup.appendChild(chip);
   });
   root.appendChild(festivalGroup);
 

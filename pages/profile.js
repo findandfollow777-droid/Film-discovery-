@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPeopleOrbit();
   loadTasteProfile();
   setupShortlistSection();
+  setupSearchLayout();
   setupDangerZone();
   setupListModal();
 });
@@ -86,27 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================
 
 function getListData() {
-  const swipeData = getStored("orbitSwipeMemory") || { liked: {}, disliked: {} };
+  const lovedMovies = typeof getLovedMovies === "function" ? getLovedMovies() : [];
+  const skippedMovies = typeof getSkippedMovies === "function" ? getSkippedMovies() : [];
   const comfortList = getStored("orbit_comfort_list") || [];
 
-  const loved = Object.values(swipeData.liked || {}).map(entry => ({
-    id: entry.movie?.id,
-    title: entry.movie?.title || "Unknown",
-    poster_path: entry.movie?.poster_path || "",
-    release_date: "",
+  const loved = lovedMovies.map(m => ({
+    id: m.id,
+    title: m.title || "Unknown",
+    poster_path: m.poster || "",
+    release_date: m.year ? String(m.year) : "",
     media_type: "movie",
-    genre_ids: entry.movie?.genre_ids || [],
-    added_at: entry.lastSwiped
+    genre_ids: m.genres || [],
+    added_at: m.addedAt ? new Date(m.addedAt).getTime() : 0
   }));
 
-  const tonight = Object.values(swipeData.disliked || {}).map(entry => ({
-    id: entry.movie?.id,
-    title: entry.movie?.title || "Unknown",
-    poster_path: entry.movie?.poster_path || "",
-    release_date: "",
+  const tonight = skippedMovies.map(m => ({
+    id: m.id,
+    title: m.title || "Unknown",
+    poster_path: m.poster || "",
+    release_date: m.year ? String(m.year) : "",
     media_type: "movie",
-    genre_ids: entry.movie?.genre_ids || [],
-    added_at: entry.lastSwiped
+    genre_ids: m.genres || [],
+    added_at: m.skippedAt ? new Date(m.skippedAt).getTime() : 0
   }));
 
   const comfort = comfortList.map(show => ({
@@ -334,11 +336,10 @@ function renderModalContent(listType) {
 }
 
 function removeFromList(listType, itemId) {
-  if (listType === "loved" || listType === "tonight") {
-    const swipeData = getStored("orbitSwipeMemory") || { liked: {}, disliked: {}, genreAffinities: {} };
-    const collection = listType === "loved" ? "liked" : "disliked";
-    delete swipeData[collection][itemId];
-    localStorage.setItem("orbitSwipeMemory", JSON.stringify(swipeData));
+  if (listType === "loved") {
+    if (typeof unloveMovie === "function") unloveMovie(itemId);
+  } else if (listType === "tonight") {
+    if (typeof unskipMovie === "function") unskipMovie(itemId);
   } else if (listType === "comfort") {
     const comfortList = getStored("orbit_comfort_list") || [];
     const filtered = comfortList.filter(s => s.id !== itemId);
@@ -347,26 +348,39 @@ function removeFromList(listType, itemId) {
 }
 
 function moveItem(fromList, toList, itemId) {
-  const swipeData = getStored("orbitSwipeMemory") || { liked: {}, disliked: {}, genreAffinities: {} };
-  const fromCollection = fromList === "loved" ? "liked" : "disliked";
-  const toCollection = toList === "loved" ? "liked" : "disliked";
+  // Get the source list to find movie data
+  const { loved, tonight } = getListData();
+  const sourceItems = fromList === "loved" ? loved : tonight;
+  const item = sourceItems.find(m => m.id === itemId);
+  if (!item) return;
 
-  const entry = swipeData[fromCollection][itemId];
-  if (entry) {
-    swipeData[toCollection][itemId] = entry;
-    delete swipeData[fromCollection][itemId];
-    localStorage.setItem("orbitSwipeMemory", JSON.stringify(swipeData));
+  const movieData = {
+    id: item.id,
+    title: item.title,
+    year: item.release_date ? parseInt(item.release_date) : null,
+    poster: item.poster_path,
+    genres: item.genre_ids || []
+  };
+
+  if (fromList === "loved" && toList === "tonight") {
+    // Unlove first, then skip
+    if (typeof unloveMovie === "function") unloveMovie(itemId);
+    if (typeof skipMovie === "function") skipMovie(movieData);
+  } else if (fromList === "tonight" && toList === "loved") {
+    // loveMovie auto-removes from skipped
+    if (typeof loveMovie === "function") loveMovie(movieData);
   }
 }
 
 function clearCurrentList() {
   if (!currentModalList) return;
 
-  if (currentModalList === "loved" || currentModalList === "tonight") {
-    const swipeData = getStored("orbitSwipeMemory") || { liked: {}, disliked: {}, genreAffinities: {} };
-    const collection = currentModalList === "loved" ? "liked" : "disliked";
-    swipeData[collection] = {};
-    localStorage.setItem("orbitSwipeMemory", JSON.stringify(swipeData));
+  if (currentModalList === "loved") {
+    const loved = typeof getLovedMovies === "function" ? getLovedMovies() : [];
+    loved.forEach(m => { if (typeof unloveMovie === "function") unloveMovie(m.id); });
+  } else if (currentModalList === "tonight") {
+    const skipped = typeof getSkippedMovies === "function" ? getSkippedMovies() : [];
+    skipped.forEach(m => { if (typeof unskipMovie === "function") unskipMovie(m.id); });
   } else if (currentModalList === "comfort") {
     localStorage.setItem("orbit_comfort_list", JSON.stringify([]));
   }
@@ -758,39 +772,39 @@ function renderPeopleOrbit() {
 // ============================================
 
 function loadTasteProfile() {
-  if (typeof SwipeMemory === "undefined") return;
+  if (typeof getTasteProfile !== "function") return;
 
-  const stats = SwipeMemory.getStats();
-  if (stats.likedCount === 0 && stats.dislikedCount === 0) return;
+  const profile = getTasteProfile();
+  if (profile.lovedCount === 0 && profile.skippedCount === 0) return;
 
   document.getElementById("tasteSection").hidden = false;
-  document.getElementById("likedCount").textContent = stats.likedCount;
-  document.getElementById("dislikedCount").textContent = stats.dislikedCount;
+  document.getElementById("tasteLovedCount").textContent = profile.lovedCount;
+  document.getElementById("tasteSkippedCount").textContent = profile.skippedCount;
 
   const barsEl = document.getElementById("genreBars");
-  const topGenres = stats.topGenres || [];
+  const topGenres = profile.topGenres || [];
   if (topGenres.length > 0) {
-    const maxScore = Math.max(...topGenres.map(g => Math.abs(g.score)), 1);
+    const maxCount = Math.max(...topGenres.map(g => g.count), 1);
     barsEl.innerHTML = topGenres.map(g => {
       const name = GENRE_MAP[g.id] || `Genre ${g.id}`;
-      const pct = Math.round((g.score / maxScore) * 100);
+      const pct = Math.round((g.count / maxCount) * 100);
       return `<div class="genre-row">
         <span class="genre-name">${name}</span>
         <div class="genre-bar-track"><div class="genre-bar-fill" style="width:${pct}%"></div></div>
-        <span class="genre-score">${g.score > 0 ? "+" : ""}${g.score}</span>
+        <span class="genre-score">${g.count}</span>
       </div>`;
     }).join("");
   } else {
-    barsEl.innerHTML = '<div class="genre-empty">Swipe more movies to build your profile</div>';
+    barsEl.innerHTML = '<div class="genre-empty">Love more movies to build your profile</div>';
   }
 
-  const liked = SwipeMemory.getLikedMovies();
-  if (liked.length > 0) {
+  const loved = typeof getLovedMovies === "function" ? getLovedMovies() : [];
+  if (loved.length > 0) {
     document.getElementById("likedMovies").hidden = false;
     const grid = document.getElementById("likedGrid");
-    const recent = liked.slice(-12).reverse();
+    const recent = loved.slice(-12).reverse();
     grid.innerHTML = recent.map(m => {
-      const poster = m.poster_path ? `${TMDB_IMG}w92${m.poster_path}` : "";
+      const poster = m.poster ? `${TMDB_IMG}w92${m.poster}` : "";
       const title = (m.title || "").replace(/"/g, "&quot;");
       return `<div class="liked-card" title="${title}">
         <img src="${poster}" alt="${title}" class="liked-poster">
@@ -801,12 +815,117 @@ function loadTasteProfile() {
 }
 
 // ============================================
+// CUSTOMISE SEARCH LAYOUT
+// ============================================
+
+function setupSearchLayout() {
+  const slotsEl = document.getElementById('layoutSlots');
+  const poolEl = document.getElementById('layoutPool');
+  const actionsEl = document.getElementById('layoutActions');
+  const saveBtn = document.getElementById('layoutSaveBtn');
+  const resetBtn = document.getElementById('layoutResetBtn');
+  if (!slotsEl || !poolEl || !OrbitUtils.FILTER_REGISTRY) return;
+
+  const registry = OrbitUtils.FILTER_REGISTRY;
+  const defaults = OrbitUtils.DEFAULT_LAYOUT;
+  let layout = OrbitUtils.store.get('orbit_search_layout') || [...defaults];
+  let selected = null;
+
+  function render() {
+    slotsEl.innerHTML = '';
+    poolEl.innerHTML = '';
+
+    layout.forEach((id, i) => {
+      const def = registry.find(r => r.id === id);
+      if (!def) return;
+      const btn = document.createElement('button');
+      btn.className = 'layout-filter-btn slot';
+      btn.dataset.id = id;
+      btn.dataset.index = i;
+      if (selected && selected.id === id) btn.classList.add('selected');
+      btn.innerHTML =
+        '<div class="orbit-icon ' + def.iconClass + '">' +
+          '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
+        '</div>' +
+        '<span class="layout-filter-name">' + def.title + '</span>';
+      btn.addEventListener('click', () => handleTap(id, 'slot', i));
+      slotsEl.appendChild(btn);
+    });
+
+    const layoutSet = new Set(layout);
+    registry.filter(r => !layoutSet.has(r.id)).forEach(def => {
+      const btn = document.createElement('button');
+      btn.className = 'layout-filter-btn pool';
+      btn.dataset.id = def.id;
+      if (selected && selected.id === def.id) btn.classList.add('selected');
+      btn.innerHTML =
+        '<div class="orbit-icon ' + def.iconClass + '">' +
+          '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
+        '</div>' +
+        '<span class="layout-filter-name">' + def.title + '</span>';
+      btn.addEventListener('click', () => handleTap(def.id, 'pool'));
+      poolEl.appendChild(btn);
+    });
+
+    const saved = OrbitUtils.store.get('orbit_search_layout');
+    const ref = saved || defaults;
+    const changed = layout.length !== ref.length || layout.some((id, i) => id !== ref[i]);
+    actionsEl.hidden = !changed;
+  }
+
+  function handleTap(id, source, slotIndex) {
+    if (!selected) {
+      selected = { id, source, slotIndex };
+      render();
+      return;
+    }
+
+    if (selected.id === id) {
+      selected = null;
+      render();
+      return;
+    }
+
+    if (selected.source === 'pool' && source === 'slot') {
+      layout[slotIndex] = selected.id;
+    } else if (selected.source === 'slot' && source === 'pool') {
+      layout[selected.slotIndex] = id;
+    } else if (selected.source === 'slot' && source === 'slot') {
+      const temp = layout[selected.slotIndex];
+      layout[selected.slotIndex] = layout[slotIndex];
+      layout[slotIndex] = temp;
+    } else {
+      selected = { id, source };
+      render();
+      return;
+    }
+
+    selected = null;
+    render();
+  }
+
+  saveBtn.addEventListener('click', () => {
+    OrbitUtils.store.set('orbit_search_layout', layout);
+    actionsEl.hidden = true;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    layout = [...defaults];
+    selected = null;
+    OrbitUtils.store.remove('orbit_search_layout');
+    render();
+  });
+
+  render();
+}
+
+// ============================================
 // DANGER ZONE
 // ============================================
 
 function setupDangerZone() {
   document.getElementById("clearDataBtn").addEventListener("click", () => {
-    if (!confirm("Are you sure? This will delete ALL game stats, preferences, and swipe memory permanently.")) return;
+    if (!confirm("Are you sure? This will delete ALL game stats, preferences, and taste data permanently.")) return;
 
     for (const game of GAME_REGISTRY) {
       localStorage.removeItem(game.key);
@@ -821,6 +940,9 @@ function setupDangerZone() {
     }
     keysToRemove.forEach(k => localStorage.removeItem(k));
 
+    // Clear taste data (new system)
+    if (typeof clearAllTasteData === "function") clearAllTasteData();
+    // Clean up legacy swipe memory if still present
     localStorage.removeItem("orbitSwipeMemory");
     localStorage.removeItem("orbit_shortlist");
     localStorage.removeItem("orbit_user_country");

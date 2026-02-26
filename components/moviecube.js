@@ -75,6 +75,7 @@
   let cubeProductionCompanies;
   let cubeTrailerBtn, cubeAnchorBtn, cubeSimilarBtn, cubeSimilarOverlay;
   let cubeShortlistBtn;
+  let cubeTasteLoveBtn, cubeTasteSkipBtn;
 
   // DOM refs - Trailer modal
   let cubeTrailerOverlay, cubeTrailerContainer;
@@ -127,6 +128,8 @@
     cubeSimilarBtn = document.getElementById("cubeSimilarBtn");
     cubeSimilarOverlay = document.getElementById("cubeSimilarOverlay");
     cubeShortlistBtn = document.getElementById("shortlist-btn");
+    cubeTasteLoveBtn = document.getElementById("cubeTasteLove");
+    cubeTasteSkipBtn = document.getElementById("cubeTasteSkip");
     // cubeAwards removed — awards now on Face 7
 
     // Trailer modal
@@ -166,6 +169,16 @@
               <div class="cube-face face-front" data-face="1">
                 <div class="poster-showcase">
                   <img class="popup-poster-large" id="cubePosterLarge" src="" alt="">
+                  <div class="cube-taste-bar" id="cubeTasteBar">
+                    <button class="cube-taste-btn cube-taste-love" id="cubeTasteLove">
+                      <span class="og og-heart"></span>
+                      <span class="cube-taste-label">Love It</span>
+                    </button>
+                    <button class="cube-taste-btn cube-taste-skip" id="cubeTasteSkip">
+                      <span class="og og-moon"></span>
+                      <span class="cube-taste-label">Skip</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               
@@ -308,6 +321,7 @@
               </div>
 
             </div>
+          </div>
 
           <!-- ACTION BUTTONS -->
           <div class="popup-actions-bar">
@@ -419,6 +433,10 @@
     // Shortlist button
     cubeShortlistBtn?.addEventListener("click", handleShortlistClick);
 
+    // Taste buttons (Love / Skip on poster face)
+    cubeTasteLoveBtn?.addEventListener("click", handleTasteLoveClick);
+    cubeTasteSkipBtn?.addEventListener("click", handleTasteSkipClick);
+
     // Similar close
     document.getElementById("cubeSimilarClose")?.addEventListener("click", closeSimilarPanel);
     cubeSimilarOverlay?.addEventListener("click", (e) => {
@@ -520,28 +538,41 @@
         fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${getApiKey()}`),
         fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${getApiKey()}`)
       ]);
-      
+
+      if (!movieRes.ok) {
+        console.error("Failed to fetch movie:", movieRes.status);
+        return;
+      }
+
       cubeMovieData = await movieRes.json();
-      const credits = await creditsRes.json();
-      const videos = await videosRes.json();
-      const similar = await similarRes.json();
-      
+      const credits = creditsRes.ok ? await creditsRes.json() : { cast: [], crew: [] };
+      const videos = videosRes.ok ? await videosRes.json() : { results: [] };
+      const similar = similarRes.ok ? await similarRes.json() : { results: [] };
+
       cubeMovieData.credits = credits;
       cubeMovieData.videos = videos.results || [];
       similarMovies = similar.results || [];
-      
-      populatePosterFace();
-      populateInfoFace();
-      populateCastFace(credits);
-      populateStatsFace();
-      populateSimilarPanel();
-      populateTriviaFace();
-      populateWhereToWatch(cubeMovieData.id);
-      updateShortlistButton();
+
+      // Populate each face with individual error handling so one failure
+      // doesn't prevent the cube from opening
+      const safeCalls = [
+        () => populatePosterFace(),
+        () => populateInfoFace(),
+        () => populateCastFace(credits),
+        () => populateStatsFace(),
+        () => populateSimilarPanel(),
+        () => populateTriviaFace(),
+        () => populateWhereToWatch(cubeMovieData.id),
+        () => updateShortlistButton(),
+        () => updateTasteButtons()
+      ];
+      for (const fn of safeCalls) {
+        try { fn(); } catch (e) { console.warn("MovieCube populate error:", e); }
+      }
 
       cubeOverlay.hidden = false;
       document.body.style.overflow = "hidden";
-      
+
     } catch (err) {
       console.error("Error opening movie cube:", err);
     }
@@ -586,8 +617,11 @@
   // ============================================
 
   function populatePosterFace() {
-    if (cubePoster && cubeMovieData.poster_path) {
+    if (!cubePoster) return;
+    if (cubeMovieData.poster_path) {
       cubePoster.src = `${getImgBase()}w780${cubeMovieData.poster_path}`;
+    } else {
+      cubePoster.src = DEFAULT_POSTER;
     }
   }
 
@@ -1678,15 +1712,19 @@
       btn.classList.add("cube-trivia-wrong");
     }
 
-    // Record stats
-    const category = q.category || "general";
-    triviaSessionResults.push({ category, isCorrect });
-    const updatedStats = recordTriviaAnswer(category, isCorrect, 'movieCube');
-    const statsBar = document.getElementById("cubeTriviaStatsBar");
-    if (statsBar) {
-      const pills = statsBar.querySelectorAll(".trivia-stat-pill span");
-      if (pills[0]) pills[0].textContent = getTriviaAccuracy() + "%";
-      if (pills[1]) pills[1].textContent = updatedStats.currentStreak;
+    // Record stats (wrapped so failures don't freeze trivia)
+    try {
+      const category = q.category || "general";
+      triviaSessionResults.push({ category, isCorrect });
+      const updatedStats = recordTriviaAnswer(category, isCorrect, 'movieCube');
+      const statsBar = document.getElementById("cubeTriviaStatsBar");
+      if (statsBar) {
+        const pills = statsBar.querySelectorAll(".trivia-stat-pill span");
+        if (pills[0]) pills[0].textContent = getTriviaAccuracy() + "%";
+        if (pills[1]) pills[1].textContent = updatedStats.currentStreak;
+      }
+    } catch (e) {
+      console.warn("Trivia stats update failed:", e);
     }
 
     // Update progress dot
@@ -2348,6 +2386,141 @@
   // ============================================
   // SHORTLIST FUNCTIONS
   // ============================================
+
+  // ============================================
+  // TASTE BUTTONS (Poster Face — Love / Skip)
+  // ============================================
+
+  /**
+   * Update taste button state based on current movie
+   */
+  function updateTasteButtons() {
+    if (!cubeTasteLoveBtn || !cubeTasteSkipBtn || !cubeMovieData) return;
+
+    // Check if taste service is loaded
+    if (typeof window.getTasteStatus !== 'function') {
+      cubeTasteLoveBtn.style.display = 'none';
+      cubeTasteSkipBtn.style.display = 'none';
+      return;
+    }
+
+    cubeTasteLoveBtn.style.display = '';
+    cubeTasteSkipBtn.style.display = '';
+
+    const movieId = cubeMovieData.id;
+    const status = window.getTasteStatus(movieId);
+
+    const loveIcon = cubeTasteLoveBtn.querySelector('.og');
+    const loveLabel = cubeTasteLoveBtn.querySelector('.cube-taste-label');
+    const skipIcon = cubeTasteSkipBtn.querySelector('.og');
+    const skipLabel = cubeTasteSkipBtn.querySelector('.cube-taste-label');
+
+    // Reset classes
+    cubeTasteLoveBtn.classList.remove('cube-taste-active');
+    cubeTasteSkipBtn.classList.remove('cube-taste-active');
+
+    if (status === 'loved') {
+      cubeTasteLoveBtn.classList.add('cube-taste-active');
+      if (loveIcon) { loveIcon.className = 'og og-heart-filled'; }
+      if (loveLabel) loveLabel.textContent = 'Loved';
+      if (skipLabel) skipLabel.textContent = 'Skip';
+    } else if (status === 'skipped') {
+      cubeTasteSkipBtn.classList.add('cube-taste-active');
+      if (loveIcon) { loveIcon.className = 'og og-heart'; }
+      if (loveLabel) loveLabel.textContent = 'Love It';
+      if (skipLabel) skipLabel.textContent = 'Skipped';
+    } else {
+      if (loveIcon) { loveIcon.className = 'og og-heart'; }
+      if (loveLabel) loveLabel.textContent = 'Love It';
+      if (skipLabel) skipLabel.textContent = 'Skip';
+    }
+  }
+
+  /**
+   * Handle Love button click
+   */
+  function handleTasteLoveClick() {
+    if (!cubeMovieData) return;
+    if (typeof window.loveMovie !== 'function') return;
+
+    const movieId = cubeMovieData.id;
+    const status = window.getTasteStatus(movieId);
+
+    if (status === 'loved') {
+      // Unlove
+      window.unloveMovie(movieId);
+      flashTasteButton(cubeTasteLoveBtn, 'removed');
+    } else {
+      // Love
+      const movieData = {
+        id: cubeMovieData.id,
+        title: cubeMovieData.title || 'Unknown',
+        year: cubeMovieData.release_date ? new Date(cubeMovieData.release_date).getFullYear() : null,
+        poster: cubeMovieData.poster_path || null,
+        genres: cubeMovieData.genres ? cubeMovieData.genres.map(g => g.id) : []
+      };
+      window.loveMovie(movieData);
+      flashTasteButton(cubeTasteLoveBtn, 'added');
+    }
+
+    updateTasteButtons();
+
+    // Update card indicators if visible behind the cube
+    if (typeof applyTasteClasses === 'function') {
+      applyTasteClasses('#moviesGrid', '.movie-card');
+      applyTasteClasses('#unifiedContent', '.at-card.movie');
+    }
+  }
+
+  /**
+   * Handle Skip button click
+   */
+  function handleTasteSkipClick() {
+    if (!cubeMovieData) return;
+    if (typeof window.skipMovie !== 'function') return;
+
+    const movieId = cubeMovieData.id;
+    const status = window.getTasteStatus(movieId);
+
+    if (status === 'skipped') {
+      // Unskip
+      window.unskipMovie(movieId);
+      flashTasteButton(cubeTasteSkipBtn, 'removed');
+    } else if (status === 'loved') {
+      // Can't skip a loved movie
+      return;
+    } else {
+      // Skip
+      const movieData = {
+        id: cubeMovieData.id,
+        title: cubeMovieData.title || 'Unknown',
+        year: cubeMovieData.release_date ? new Date(cubeMovieData.release_date).getFullYear() : null,
+        poster: cubeMovieData.poster_path || null,
+        genres: cubeMovieData.genres ? cubeMovieData.genres.map(g => g.id) : []
+      };
+      window.skipMovie(movieData);
+      flashTasteButton(cubeTasteSkipBtn, 'added');
+    }
+
+    updateTasteButtons();
+
+    // Update card indicators if visible behind the cube
+    if (typeof applyTasteClasses === 'function') {
+      applyTasteClasses('#moviesGrid', '.movie-card');
+      applyTasteClasses('#unifiedContent', '.at-card.movie');
+    }
+  }
+
+  /**
+   * Flash taste button with brief animation
+   */
+  function flashTasteButton(btn, action) {
+    if (!btn) return;
+    btn.classList.add('cube-taste-flash');
+    setTimeout(() => {
+      btn.classList.remove('cube-taste-flash');
+    }, 300);
+  }
 
   /**
    * Load shortlist service functions (from global window scope)

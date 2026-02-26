@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT - Taste Service Test</title>
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/taste-overlay.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--deep-void);
+      color: var(--film-white);
+      font-family: var(--font-body);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.25rem;
+    }
+    .subtitle {
+      color: var(--muted-silver);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* --- Sections --- */
+    .section {
+      margin-bottom: 2rem;
+      padding: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      background: rgba(17, 24, 39, 0.5);
+    }
+    .section h2 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* --- Controls --- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      background: transparent;
+      color: var(--film-white);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn:hover { border-color: rgba(255, 255, 255, 0.3); }
+    .btn:active { transform: scale(0.97); }
+    .btn-cyan { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+    .btn-cyan:hover { background: rgba(0, 217, 255, 0.1); }
+    .btn-muted { border-color: var(--ghost-gray); color: var(--muted-silver); }
+    .btn-muted:hover { background: rgba(100, 116, 139, 0.1); }
+    .btn-red { border-color: var(--danger-red); color: var(--danger-red); }
+    .btn-red:hover { background: rgba(239, 68, 68, 0.1); }
+    .btn-gold { border-color: var(--accent-gold); color: var(--accent-gold); }
+    .btn-gold:hover { background: rgba(255, 215, 0, 0.1); }
+
+    /* --- Input row --- */
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .input-row label {
+      font-size: 12px;
+      color: var(--muted-silver);
+      min-width: 50px;
+    }
+    .input-row input, .input-row select {
+      background: var(--nebula-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: var(--film-white);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 6px 10px;
+    }
+    .input-row input:focus, .input-row select:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+    }
+    #movieId { width: 80px; }
+    #movieTitle { width: 160px; }
+    #movieYear { width: 70px; }
+    #movieGenres { width: 140px; }
+
+    /* --- Log area --- */
+    .log {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Barlow', monospace;
+      font-size: 12px;
+      color: var(--muted-silver);
+      max-height: 200px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    .log-entry { padding: 2px 0; }
+    .log-success { color: var(--success-green); }
+    .log-error { color: var(--danger-red); }
+    .log-info { color: var(--accent-cyan); }
+
+    /* --- Live data view --- */
+    .data-view {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Barlow', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 400px;
+      overflow-y: auto;
+      color: var(--film-white);
+    }
+    .data-view .key { color: var(--accent-cyan); }
+    .data-view .str { color: var(--success-green); }
+    .data-view .num { color: var(--accent-gold); }
+    .data-view .null { color: var(--ghost-gray); }
+
+    /* --- Glyph preview --- */
+    .glyph-preview {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .glyph-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .glyph-item .og { width: 2em; height: 2em; }
+    .glyph-item span:last-child {
+      font-size: 11px;
+      color: var(--muted-silver);
+    }
+
+    /* --- Taste card demo --- */
+    .demo-cards {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .movie-card {
+      position: relative;
+      width: 130px;
+      border-radius: 12px;
+      overflow: visible;
+      cursor: pointer;
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .movie-poster-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      background: var(--cosmic-blue);
+    }
+    .movie-poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .movie-info {
+      padding: 8px 10px 10px;
+    }
+    .movie-title {
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .movie-meta {
+      font-size: 11px;
+      color: var(--muted-silver);
+    }
+
+    /* --- Profile readout --- */
+    .profile-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--accent-cyan);
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted-silver);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Taste Service Test</h1>
+  <p class="subtitle">Interactive test page for components/taste-service.js</p>
+
+  <!-- GLYPH PREVIEW -->
+  <div class="section">
+    <h2>Glyph Preview</h2>
+    <div class="glyph-preview">
+      <div class="glyph-item">
+        <span class="og og-heart"></span>
+        <span>og-heart</span>
+      </div>
+      <div class="glyph-item">
+        <span class="og og-heart-filled"></span>
+        <span>og-heart-filled</span>
+      </div>
+      <div class="glyph-item">
+        <span class="og og-moon"></span>
+        <span>og-moon</span>
+      </div>
+      <div class="glyph-item">
+        <span class="og og-star"></span>
+        <span>og-star</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOVIE INPUT + ACTIONS -->
+  <div class="section">
+    <h2>Actions</h2>
+    <div class="input-row">
+      <label>ID</label>
+      <input type="number" id="movieId" value="27205" placeholder="TMDB ID">
+      <label>Title</label>
+      <input type="text" id="movieTitle" value="Inception" placeholder="Title">
+      <label>Year</label>
+      <input type="number" id="movieYear" value="2010" placeholder="Year">
+      <label>Genres</label>
+      <input type="text" id="movieGenres" value="28,878,12" placeholder="e.g. 28,878">
+    </div>
+    <div class="input-row">
+      <label>Quick</label>
+      <select id="quickPick" onchange="applyQuickPick()">
+        <option value="">-- Pick a movie --</option>
+        <option value="27205|Inception|2010|28,878,12"   >Inception (2010)</option>
+        <option value="155|The Dark Knight|2008|28,80,18" >The Dark Knight (2008)</option>
+        <option value="680|Pulp Fiction|1994|53,80"       >Pulp Fiction (1994)</option>
+        <option value="11|Star Wars|1977|12,28,878"       >Star Wars (1977)</option>
+        <option value="238|The Godfather|1972|18,80"      >The Godfather (1972)</option>
+        <option value="9802|The Rock|1996|28,53"          >The Rock (1996)</option>
+        <option value="550|Fight Club|1999|18"            >Fight Club (1999)</option>
+        <option value="13|Forrest Gump|1994|35,18,10749"  >Forrest Gump (1994)</option>
+      </select>
+    </div>
+    <div class="controls">
+      <button class="btn btn-cyan" onclick="doLove()">
+        <span class="og og-heart"></span> Love It
+      </button>
+      <button class="btn btn-muted" onclick="doSkip()">
+        <span class="og og-moon"></span> Not Tonight
+      </button>
+      <button class="btn btn-gold" onclick="doCheckStatus()">
+        Check Status
+      </button>
+      <button class="btn" onclick="doUnlove()">Unlove</button>
+      <button class="btn" onclick="doUnskip()">Unskip</button>
+      <button class="btn btn-red" onclick="doClear()">Clear All</button>
+    </div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <!-- PROFILE / ANALYTICS -->
+  <div class="section">
+    <h2>Taste Profile</h2>
+    <div class="profile-stats" id="profileStats"></div>
+    <div style="margin-top: 12px;">
+      <button class="btn btn-gold" onclick="refreshProfile()">Refresh Profile</button>
+    </div>
+  </div>
+
+  <!-- DEMO CARDS -->
+  <div class="section">
+    <h2>Card Overlay Demo</h2>
+    <p style="font-size: 12px; color: var(--muted-silver); margin-bottom: 10px;">
+      Click a card to toggle the taste overlay. Loved cards show the cyan heart indicator.
+    </p>
+    <div class="demo-cards" id="demoCards"></div>
+  </div>
+
+  <!-- LIVE DATA VIEW -->
+  <div class="section">
+    <h2>localStorage: orbit_taste</h2>
+    <div class="data-view" id="dataView">Loading...</div>
+  </div>
+
+  <!-- Load taste service -->
+  <script src="../components/taste-service.js"></script>
+
+  <script>
+    var logEl = document.getElementById('log');
+    var dataViewEl = document.getElementById('dataView');
+
+    // ── Logging ──────────────────────────────────
+
+    function addLog(msg, type) {
+      var div = document.createElement('div');
+      div.className = 'log-entry' + (type ? ' log-' + type : '');
+      div.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+      logEl.insertBefore(div, logEl.firstChild);
+    }
+
+    // ── Movie data from inputs ──────────────────
+
+    function getMovieFromInputs() {
+      var genres = document.getElementById('movieGenres').value;
+      return {
+        id: parseInt(document.getElementById('movieId').value),
+        title: document.getElementById('movieTitle').value,
+        year: parseInt(document.getElementById('movieYear').value) || null,
+        poster: null,
+        genres: genres ? genres.split(',').map(Number).filter(Boolean) : []
+      };
+    }
+
+    function applyQuickPick() {
+      var val = document.getElementById('quickPick').value;
+      if (!val) return;
+      var parts = val.split('|');
+      document.getElementById('movieId').value = parts[0];
+      document.getElementById('movieTitle').value = parts[1];
+      document.getElementById('movieYear').value = parts[2];
+      document.getElementById('movieGenres').value = parts[3];
+    }
+
+    // ── Actions ──────────────────────────────────
+
+    function doLove() {
+      var movie = getMovieFromInputs();
+      var result = loveMovie(movie);
+      if (result.success) {
+        addLog('Loved "' + movie.title + '" — status: ' + result.status, 'success');
+      } else {
+        addLog('Love failed: ' + result.error, 'error');
+      }
+      refreshAll();
+    }
+
+    function doSkip() {
+      var movie = getMovieFromInputs();
+      var result = skipMovie(movie);
+      if (result.success) {
+        addLog('Skipped "' + movie.title + '" — status: ' + result.status, 'success');
+      } else {
+        addLog('Skip failed: ' + result.error, 'error');
+      }
+      refreshAll();
+    }
+
+    function doCheckStatus() {
+      var id = parseInt(document.getElementById('movieId').value);
+      var title = document.getElementById('movieTitle').value;
+      var status = getTasteStatus(id);
+      addLog('"' + title + '" (' + id + ') — status: ' + (status || 'none'), 'info');
+    }
+
+    function doUnlove() {
+      var id = parseInt(document.getElementById('movieId').value);
+      var title = document.getElementById('movieTitle').value;
+      var result = unloveMovie(id);
+      addLog('Unlove "' + title + '" — ' + (result.success ? 'done' : result.error), result.success ? 'success' : 'error');
+      refreshAll();
+    }
+
+    function doUnskip() {
+      var id = parseInt(document.getElementById('movieId').value);
+      var title = document.getElementById('movieTitle').value;
+      var result = unskipMovie(id);
+      addLog('Unskip "' + title + '" — ' + (result.success ? 'done' : result.error), result.success ? 'success' : 'error');
+      refreshAll();
+    }
+
+    function doClear() {
+      if (!confirm('Clear all taste data?')) return;
+      clearAllTasteData();
+      addLog('All taste data cleared', 'error');
+      refreshAll();
+    }
+
+    // ── Live data view ──────────────────────────
+
+    function syntaxHighlight(json) {
+      return json
+        .replace(/("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*")\s*:/g, '<span class="key">$1</span>:')
+        .replace(/: ("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*")/g, ': <span class="str">$1</span>')
+        .replace(/: (\d+)/g, ': <span class="num">$1</span>')
+        .replace(/: (null)/g, ': <span class="null">$1</span>')
+        .replace(/: (true|false)/g, ': <span class="num">$1</span>');
+    }
+
+    function refreshDataView() {
+      var raw = localStorage.getItem('orbit_taste');
+      if (!raw) {
+        dataViewEl.innerHTML = '<span class="null">(empty — no data yet)</span>';
+        return;
+      }
+      try {
+        var obj = JSON.parse(raw);
+        var pretty = JSON.stringify(obj, null, 2);
+        dataViewEl.innerHTML = syntaxHighlight(pretty);
+      } catch (e) {
+        dataViewEl.textContent = raw;
+      }
+    }
+
+    // ── Profile stats ───────────────────────────
+
+    var GENRE_MAP = {
+      28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',
+      80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+      14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',
+      9648: 'Mystery', 10749: 'Romance', 878: 'Sci-Fi', 53: 'Thriller',
+      10752: 'War', 37: 'Western', 10770: 'TV Movie'
+    };
+
+    function refreshProfile() {
+      var profile = getTasteProfile();
+      var el = document.getElementById('profileStats');
+
+      var topGenreNames = profile.topGenres
+        .map(function (g) { return (GENRE_MAP[g.id] || 'ID:' + g.id) + ' (' + g.count + ')'; })
+        .join(', ') || 'none yet';
+
+      var decades = Object.keys(profile.lovedDecades)
+        .sort(function (a, b) { return profile.lovedDecades[b] - profile.lovedDecades[a]; })
+        .map(function (d) { return d + 's (' + profile.lovedDecades[d] + ')'; })
+        .join(', ') || 'none yet';
+
+      el.innerHTML =
+        '<div class="stat"><div class="stat-value">' + profile.lovedCount + '</div><div class="stat-label">Loved</div></div>' +
+        '<div class="stat"><div class="stat-value">' + profile.skippedCount + '</div><div class="stat-label">Skipped</div></div>' +
+        '<div class="stat" style="text-align:left"><div class="stat-label">Top Genres</div><div style="font-size:13px;margin-top:4px">' + topGenreNames + '</div></div>' +
+        '<div class="stat" style="text-align:left"><div class="stat-label">Decades</div><div style="font-size:13px;margin-top:4px">' + decades + '</div></div>';
+    }
+
+    // ── Demo cards ──────────────────────────────
+
+    var DEMO_MOVIES = [
+      { id: 27205, title: 'Inception', year: 2010, genres: [28, 878, 12], poster: 'https://image.tmdb.org/t/p/w200/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg' },
+      { id: 155, title: 'The Dark Knight', year: 2008, genres: [28, 80, 18], poster: 'https://image.tmdb.org/t/p/w200/qJ2tW6WMUDux911BTUgMe1ST0aS.jpg' },
+      { id: 680, title: 'Pulp Fiction', year: 1994, genres: [53, 80], poster: 'https://image.tmdb.org/t/p/w200/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg' },
+      { id: 11, title: 'Star Wars', year: 1977, genres: [12, 28, 878], poster: 'https://image.tmdb.org/t/p/w200/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg' }
+    ];
+
+    function buildDemoCards() {
+      var container = document.getElementById('demoCards');
+      container.innerHTML = '';
+
+      DEMO_MOVIES.forEach(function (movie) {
+        var status = getTasteStatus(movie.id);
+        var statusClass = status === 'loved' ? ' taste-loved' : status === 'skipped' ? ' taste-skipped' : '';
+
+        var card = document.createElement('div');
+        card.className = 'movie-card' + statusClass;
+        card.dataset.movieId = movie.id;
+        card.innerHTML =
+          '<div class="movie-poster-wrap">' +
+            '<img class="movie-poster" src="' + movie.poster + '" alt="' + movie.title + '" onerror="this.style.display=\'none\'">' +
+            '<div class="taste-overlay">' +
+              '<button class="taste-btn taste-btn-love' + (status === 'loved' ? ' taste-active' : '') + '" data-action="love">' +
+                '<span class="og ' + (status === 'loved' ? 'og-heart-filled' : 'og-heart') + '"></span> ' +
+                (status === 'loved' ? 'Loved' : 'Love It') +
+              '</button>' +
+              '<button class="taste-btn taste-btn-skip" data-action="skip">' +
+                '<span class="og og-moon"></span> Not Tonight' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="movie-info">' +
+            '<div class="movie-title">' + movie.title + '</div>' +
+            '<div class="movie-meta">' + movie.year + '</div>' +
+          '</div>';
+
+        // Toggle overlay on card click
+        card.addEventListener('click', function (e) {
+          var isOverlayBtn = e.target.closest('[data-action]');
+          if (isOverlayBtn) {
+            e.stopPropagation();
+            var action = isOverlayBtn.dataset.action;
+            if (action === 'love') {
+              if (status === 'loved') {
+                unloveMovie(movie.id);
+                addLog('Unloved "' + movie.title + '"', 'success');
+              } else {
+                loveMovie(movie);
+                addLog('Loved "' + movie.title + '"', 'success');
+              }
+            } else if (action === 'skip') {
+              if (isLoved(movie.id)) {
+                addLog('Cannot skip "' + movie.title + '" — unlove first', 'error');
+              } else {
+                skipMovie(movie);
+                addLog('Skipped "' + movie.title + '"', 'success');
+              }
+            }
+            refreshAll();
+            return;
+          }
+          // Toggle overlay visibility
+          card.classList.toggle('taste-overlay-active');
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    // ── Refresh everything ──────────────────────
+
+    function refreshAll() {
+      refreshDataView();
+      refreshProfile();
+      buildDemoCards();
+    }
+
+    // ── Init ────────────────────────────────────
+
+    refreshAll();
+    addLog('Taste service loaded — ready to test', 'info');
+  </script>
+
+</body>
+</html>

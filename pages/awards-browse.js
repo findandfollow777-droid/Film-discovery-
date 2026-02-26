@@ -7,7 +7,7 @@
   "use strict";
 
   /* ---------- STATE ---------- */
-  let currentFestival = "All";   // "All" | festival key
+  let selectedFestivals = new Set(); // empty = All festivals
   let currentCategory = "All";   // "All" | category name
   let currentYear     = null;    // null = all years | number
   let currentDecade   = null;    // null = all decades | number (e.g. 2020, 2010)
@@ -29,6 +29,16 @@
   /* ---------- CONSTANTS ---------- */
   const TMDB_IMG_BASE = OrbitUtils.TMDB_IMG + 'w300';
   const FESTIVAL_KEYS = ["Oscar", "Cannes", "Venice", "Berlin", "BAFTA", "GoldenGlobe"];
+
+  /* Festival → valid category mapping (for greying out incompatible sidebar options) */
+  const FESTIVAL_CATEGORIES = {
+    Oscar: ["Best Picture", "Best Director", "Best Actor", "Best Actress"],
+    BAFTA: ["Best Film", "Best Director", "Best Actor", "Best Actress"],
+    GoldenGlobe: ["Best Drama", "Best Comedy/Musical", "Best Director", "Best Actor (Drama)", "Best Actor (Comedy/Musical)", "Best Actress (Drama)", "Best Actress (Comedy/Musical)"],
+    Cannes: ["Palme d'Or", "Grand Prix", "Best Director", "Jury Prize"],
+    Venice: ["Golden Lion", "Silver Lion (Grand Jury)", "Silver Lion (Director)", "Best Director"],
+    Berlin: ["Golden Bear", "Silver Bear (Grand Jury)", "Silver Bear (Director)"]
+  };
 
   /* ---------- AWARDS INDEX (built once at init) ---------- */
   let movieAwardsIndex = {};  // tmdb_id → [{ festival, category, year, isWinner, person }]
@@ -105,12 +115,23 @@
       }
       const tab = e.target.closest(".festival-tab");
       if (!tab) return;
-      currentFestival = tab.dataset.festival;
-      currentCategory = "All";
+      const festival = tab.dataset.festival;
+      if (festival === "All") {
+        selectedFestivals.clear();
+      } else if (selectedFestivals.has(festival)) {
+        selectedFestivals.delete(festival);
+      } else {
+        selectedFestivals.add(festival);
+      }
       currentYear = null;
       currentDecade = null;
-      tabsContainer.querySelectorAll(".festival-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
+      tabsContainer.querySelectorAll(".festival-tab").forEach(t => {
+        if (t.dataset.festival === "All") {
+          t.classList.toggle("active", selectedFestivals.size === 0);
+        } else {
+          t.classList.toggle("active", selectedFestivals.has(t.dataset.festival));
+        }
+      });
       renderCategorySidebar();
       renderDecadeBar();
       renderYearPills();
@@ -122,16 +143,42 @@
      CATEGORY SIDEBAR
   ============================================== */
   function renderCategorySidebar() {
-    const categories = getCategories();
+    const categories = getAllCategories();
+    const validCats = getValidCategorySet();
+
+    // Auto-deselect if the current category is no longer valid
+    if (currentCategory !== "All" && validCats !== null && !validCats.has(currentCategory)) {
+      currentCategory = "All";
+      currentDecade = null;
+      currentYear = null;
+    }
+
+    // Identify which categories are parent groups (have subcategories with parenthetical suffixes)
+    const parentGroups = new Set();
+    categories.forEach(cat => {
+      const m = cat.match(/^(.+?)\s*\(/);
+      if (m) {
+        const base = m[1].trim();
+        if (categories.includes(base)) parentGroups.add(base);
+      }
+    });
+
     let html = `<div class="sidebar-title">CATEGORIES</div>`;
     html += `<button class="category-item${currentCategory === "All" ? " active" : ""}" data-category="All">All Categories</button>`;
 
+    const festsToCheck = selectedFestivals.size > 0 ? Array.from(selectedFestivals) : [];
     categories.forEach(cat => {
       const hasInfo = typeof CATEGORY_INFO !== "undefined" &&
-        CATEGORY_INFO[currentFestival] &&
-        CATEGORY_INFO[currentFestival][cat];
-      html += `<button class="category-item${currentCategory === cat ? " active" : ""}" data-category="${cat}">
-        <span>${cat}</span>
+        festsToCheck.some(f => CATEGORY_INFO[f] && CATEGORY_INFO[f][cat]);
+      // Check if this is a subcategory (has a parenthetical and its parent exists)
+      const m = cat.match(/^(.+?)\s*\((.+)\)$/);
+      const isChild = m && parentGroups.has(m[1].trim());
+      const childClass = isChild ? " category-child" : "";
+      const childLabel = isChild ? m[2].replace(/\)$/, "") : cat;
+      const isDisabled = validCats !== null && !validCats.has(cat);
+      const disabledClass = isDisabled ? " filter-disabled" : "";
+      html += `<button class="category-item${currentCategory === cat ? " active" : ""}${childClass}${disabledClass}" data-category="${cat}">
+        <span>${childLabel}</span>
         ${hasInfo ? `<button class="cat-info-btn" data-info-cat="${cat}" title="About ${cat}">i</button>` : ""}
       </button>`;
     });
@@ -139,20 +186,77 @@
     sidebar.innerHTML = html;
   }
 
-  /* Get distinct categories for current festival */
-  function getCategories() {
+  /* Get ALL distinct categories across every festival (always full set for sidebar).
+     Returns categories with parent groups — e.g. "Silver Lion" is added
+     when both "Silver Lion (Director)" and "Silver Lion (Grand Jury)" exist. */
+  function getAllCategories() {
     if (typeof AWARDS_BROWSE_DATABASE === "undefined") return [];
     const cats = new Set();
-    if (currentFestival === "All") {
-      FESTIVAL_KEYS.forEach(fKey => {
-        const fest = AWARDS_BROWSE_DATABASE[fKey];
-        if (fest) Object.keys(fest).forEach(c => cats.add(c));
-      });
-    } else {
-      const fest = AWARDS_BROWSE_DATABASE[currentFestival];
+    FESTIVAL_KEYS.forEach(fKey => {
+      const fest = AWARDS_BROWSE_DATABASE[fKey];
       if (fest) Object.keys(fest).forEach(c => cats.add(c));
-    }
+    });
+
+    // Add parent groups for categories with parenthetical subcategories
+    const bases = {};
+    cats.forEach(c => {
+      const m = c.match(/^(.+?)\s*\(/);
+      if (m) {
+        const base = m[1].trim();
+        if (!bases[base]) bases[base] = 0;
+        bases[base]++;
+      }
+    });
+    Object.keys(bases).forEach(base => {
+      if (bases[base] >= 2) cats.add(base);
+    });
+
     return Array.from(cats).sort();
+  }
+
+  /* Get the set of categories valid for the currently selected festivals.
+     Returns null if no festivals are selected (all categories valid). */
+  function getValidCategorySet() {
+    if (selectedFestivals.size === 0) return null;
+    const valid = new Set();
+    selectedFestivals.forEach(fest => {
+      if (FESTIVAL_CATEGORIES[fest]) {
+        FESTIVAL_CATEGORIES[fest].forEach(cat => valid.add(cat));
+      }
+    });
+    // Also mark parent groups as valid if they have valid children
+    const allCats = getAllCategories();
+    allCats.forEach(cat => {
+      if (valid.has(cat)) return;
+      const children = allCats.filter(c => c !== cat && c.startsWith(cat + " ("));
+      if (children.length >= 2 && children.some(c => valid.has(c))) {
+        valid.add(cat);
+      }
+    });
+    return valid;
+  }
+
+  /* Expand a selected category to all matching DB categories.
+     If the selected category is a parent group (e.g. "Silver Lion"),
+     returns all subcategories that start with that base name.
+     Otherwise returns just the selected category. */
+  function expandCategory(selectedCat, festivalKeys) {
+    if (selectedCat === "All") return null; // null = all categories
+    const allCats = new Set();
+    festivalKeys.forEach(fKey => {
+      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      if (fest) Object.keys(fest).forEach(c => allCats.add(c));
+    });
+    // If the selected category exists as-is in the database, check if it's also a parent
+    const isExact = allCats.has(selectedCat);
+    const children = Array.from(allCats).filter(c => c !== selectedCat && c.startsWith(selectedCat + " ("));
+    if (children.length > 0) {
+      // It's a parent group — return all children (and the exact match if it exists)
+      const result = children.slice();
+      if (isExact) result.push(selectedCat);
+      return result;
+    }
+    return [selectedCat];
   }
 
   /* ==============================================
@@ -174,12 +278,13 @@
   function getYears() {
     if (typeof AWARDS_BROWSE_DATABASE === "undefined") return [];
     const years = new Set();
-    const festivals = currentFestival === "All" ? FESTIVAL_KEYS : [currentFestival];
+    const festivals = selectedFestivals.size === 0 ? FESTIVAL_KEYS : Array.from(selectedFestivals);
+    const expanded = expandCategory(currentCategory, festivals);
 
     festivals.forEach(fKey => {
       const fest = AWARDS_BROWSE_DATABASE[fKey];
       if (!fest) return;
-      const cats = currentCategory === "All" ? Object.keys(fest) : [currentCategory];
+      const cats = expanded === null ? Object.keys(fest) : expanded;
       cats.forEach(cat => {
         const catData = fest[cat];
         if (catData) Object.keys(catData).forEach(y => years.add(parseInt(y, 10)));
@@ -237,12 +342,13 @@
 
     // Collect all entries: { movie, isWinner, festival, category, year }
     const entries = [];
-    const festivals = currentFestival === "All" ? FESTIVAL_KEYS : [currentFestival];
+    const festivals = selectedFestivals.size === 0 ? FESTIVAL_KEYS : Array.from(selectedFestivals);
+    const expanded = expandCategory(currentCategory, festivals);
 
     festivals.forEach(fKey => {
       const fest = AWARDS_BROWSE_DATABASE[fKey];
       if (!fest) return;
-      const cats = currentCategory === "All" ? Object.keys(fest) : [currentCategory];
+      const cats = expanded === null ? Object.keys(fest) : expanded;
       cats.forEach(cat => {
         const catData = fest[cat];
         if (!catData) return;
@@ -323,7 +429,7 @@
         const tileClass = entry.isWinner ? "award-tile winner-tile" : "award-tile";
         const meta = [];
         if (m.person) meta.push(m.person);
-        if (currentFestival === "All") meta.push(getFestivalShortName(entry.festival));
+        if (selectedFestivals.size !== 1) meta.push(getFestivalShortName(entry.festival));
         if (currentCategory === "All") meta.push(entry.category);
 
         html += `<div class="${tileClass}" data-tmdb-id="${m.tmdb_id}">
@@ -382,7 +488,7 @@
             </ul>
           </div>` : ""}`;
     } else if (type === "category" && typeof CATEGORY_INFO !== "undefined") {
-      const festKey = currentFestival === "All" ? null : currentFestival;
+      const festKey = selectedFestivals.size === 1 ? Array.from(selectedFestivals)[0] : null;
       // Try current festival first, then find any match
       let c = null;
       if (festKey && CATEGORY_INFO[festKey]) c = CATEGORY_INFO[festKey][key];
@@ -461,7 +567,7 @@
         return;
       }
       const item = e.target.closest(".category-item");
-      if (!item) return;
+      if (!item || item.classList.contains("filter-disabled")) return;
       currentCategory = item.dataset.category;
       currentDecade = null;
       currentYear = null;

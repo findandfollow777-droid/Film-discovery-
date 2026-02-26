@@ -5,6 +5,7 @@
   <title>Orbit – Cinematic Discovery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="discover.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,191 +58,26 @@
           </div>
         </header>
 
-        <!-- GRID OF SECTION CARDS (10 SECTIONS) -->
-        <div class="sections-grid">
+        <!-- PRIMARY FILTER GRID (3×2) — cards built dynamically by JS -->
+        <div class="filter-grid" id="filterGrid">
 
-          <!-- 1. PEOPLE -->
-          <button class="section-card" data-section="people">
-            <div class="orbit-icon icon-people">
+          <!-- MORE FILTERS (always last in grid) -->
+          <button class="more-filters-btn" id="moreFiltersBtn">
+            <span class="more-badge" id="moreBadge" hidden>0</span>
+            <div class="orbit-icon icon-more">
               <div class="ring-outer"></div>
               <div class="ring-inner"></div>
               <div class="icon-core"></div>
             </div>
             <div class="section-text">
-              <h2>People</h2>
-              <p>Actors, directors, writers</p>
+              <h2>More Filters</h2>
+              <p>Themes, setting, source & more</p>
             </div>
           </button>
 
-          <!-- 2. GENRES -->
-          <button class="section-card" data-section="genres">
-            <div class="orbit-icon icon-genres">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Genres</h2>
-              <p>Action, drama, horror & more</p>
-            </div>
-          </button>
-
-          <!-- 3. THEMES -->
-          <button class="section-card" data-section="themes">
-            <div class="orbit-icon icon-themes">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Themes</h2>
-              <p>What's the movie really about?</p>
-            </div>
-          </button>
-
-          <!-- 4. SETTING: WHERE -->
-          <button class="section-card" data-section="settingWhere">
-            <div class="orbit-icon icon-where">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Setting: Where</h2>
-              <p>Story location — cities, countries · <a href="orbit-map.html" style="color:#00d9ff;" onclick="event.stopPropagation();">Open Map</a></p>
-            </div>
-          </button>
-
-          <!-- 5. SETTING: WHEN -->
-          <button class="section-card" data-section="settingWhen">
-            <div class="orbit-icon icon-when">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Setting: When</h2>
-              <p>Story time period — decades & eras</p>
-            </div>
-          </button>
-
-          <!-- 6. BASED ON -->
-          <button class="section-card" data-section="basedOn">
-            <div class="orbit-icon icon-basedon">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Based On</h2>
-              <p>Source material & franchise status</p>
-            </div>
-          </button>
-
-          <!-- 7. RATINGS & CONTENT -->
-          <button class="section-card" data-section="ratingsContent">
-            <div class="orbit-icon icon-ratings">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Ratings & Content</h2>
-              <p>Score, votes, age rating</p>
-            </div>
-          </button>
-
-          <!-- 8. RELEASE DATE & RUNTIME -->
-          <button class="section-card" data-section="timeEra">
-            <div class="orbit-icon icon-datetime">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Release Date & Runtime</h2>
-              <p>Year, decade, film length</p>
-            </div>
-          </button>
-
-          <!-- 9. REGION & LANGUAGE -->
-          <button class="section-card" data-section="regionLanguage">
-            <div class="orbit-icon icon-region">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Region & language</h2>
-              <p>Origin, language</p>
-            </div>
-          </button>
-
-          <!-- 6. PRODUCTION & BOX OFFICE -->
-          <button class="section-card" data-section="production">
-            <div class="orbit-icon icon-production">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Production & Box Office</h2>
-              <p>Studios, budget, revenue</p>
-            </div>
-          </button>
-
-          <!-- 7. WATCH PROVIDERS -->
-          <button class="section-card" data-section="watch">
-            <div class="orbit-icon icon-watch">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Watch providers</h2>
-              <p>Streaming & availability</p>
-            </div>
-          </button>
-
-          <!-- 8. UNIVERSES -->
-          <button class="section-card" data-section="universes">
-            <div class="orbit-icon icon-universes">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Universes</h2>
-              <p>Collections & franchises</p>
-            </div>
-          </button>
-
-          <!-- 9. AWARDS -->
-          <button class="section-card" data-section="awards">
-            <div class="orbit-icon icon-awards">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Awards</h2>
-              <p>Oscar, Golden Globe & more</p>
-            </div>
-          </button>
-
-          <!-- 10. LAUNCH ORBIT -->
-          <button class="section-card launch-card" id="launchCard" disabled>
-            <div class="orbit-icon icon-launch">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>Launch Orbit Search</h2>
-              <p>Discover your movies</p>
-            </div>
-            <div class="launch-glow"></div>
-          </button>
+          <!-- ACTION BUTTONS (row 3 of grid) -->
+          <button class="reset-orbit-btn" id="resetOrbitButton" hidden>Reset</button>
+          <button class="launch-orbit-btn" id="launchCard" disabled>Launch Discovery</button>
 
         </div>
       </section>
@@ -315,6 +151,22 @@
           Add to orbit
         </button>
       </footer>
+    </div>
+  </div>
+
+  <!-- MORE FILTERS MODAL -->
+  <div class="more-filters-overlay" id="moreFiltersOverlay" hidden>
+    <div class="more-filters-modal">
+      <header class="more-filters-header">
+        <div>
+          <h2 class="more-filters-title">More Filters</h2>
+          <p class="more-filters-subtitle">Tap a filter to configure</p>
+        </div>
+        <button class="more-filters-close" id="moreFiltersClose">&times;</button>
+      </header>
+      <div class="more-filters-grid" id="moreFiltersGrid">
+        <!-- Secondary filter tiles built dynamically by JS -->
+      </div>
     </div>
   </div>
 

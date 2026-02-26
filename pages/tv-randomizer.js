@@ -521,10 +521,10 @@ function displayResult(show) {
     renderStreamingLogos(providers, providerEl);
   });
 
-  // Update swipe button states
-  const existing = typeof SwipeMemory !== "undefined" ? SwipeMemory.getPreference(`tv_${show.id}`) : null;
-  document.getElementById("swipeLoveBtn").classList.toggle("active", existing === "like");
-  document.getElementById("swipePassBtn").classList.toggle("active", existing === "dislike");
+  // Taste button states
+  const status = typeof getTasteStatus === "function" ? getTasteStatus(show.id) : "none";
+  document.getElementById("swipeLoveBtn").classList.toggle("active", status === "loved");
+  document.getElementById("swipePassBtn").classList.toggle("active", status === "skipped");
 
   // Add to history
   addToHistory(show);
@@ -533,8 +533,18 @@ function displayResult(show) {
 function handleSwipe(preference) {
   if (!currentShow) return;
 
-  if (typeof SwipeMemory !== "undefined") {
-    SwipeMemory.setPreference(`tv_${currentShow.id}`, preference);
+  const showData = {
+    id: currentShow.id,
+    title: currentShow.name || currentShow.title,
+    year: currentShow.first_air_date ? parseInt(currentShow.first_air_date) : null,
+    poster: currentShow.poster_path,
+    genres: (currentShow.genre_ids || (currentShow.genres || []).map(g => g.id)) || []
+  };
+
+  if (preference === "like") {
+    if (typeof loveMovie === "function") loveMovie(showData);
+  } else {
+    if (typeof skipMovie === "function") skipMovie(showData);
   }
 
   document.getElementById("swipeLoveBtn").classList.toggle("active", preference === "like");

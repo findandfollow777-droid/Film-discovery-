@@ -78,11 +78,17 @@ function init() {
   const searchQuery = urlParams.get('search');
   const searchType = urlParams.get('type');
   
+  const openCubeId = urlParams.get('openCube');
+
   if (searchQuery && searchType) {
     // Load from URL parameter search
     loadFromUrlSearch(searchQuery, searchType);
   } else {
-    loadInitialData();
+    loadInitialData().then(() => {
+      if (openCubeId) {
+        openMovieCube(parseInt(openCubeId));
+      }
+    });
   }
   
   setupEventListeners();
@@ -654,7 +660,9 @@ async function loadMovieTimeline(movieId) {
     timelineSubtitle.textContent = "Standalone Film";
   }
   
-  allMovies = movies.filter(m => m.poster_path);
+  // For collections, filter out entries without posters (unreleased etc.)
+  // For standalone movies, always keep even without poster
+  allMovies = movie.belongs_to_collection ? movies.filter(m => m.poster_path) : movies;
   people = [];
 
   processAndRender();
@@ -1676,13 +1684,16 @@ function createMovieCard(movie, width, height, orbitIndex = 0) {
 
   // Use w342 for better image quality
   const posterSize = 'w342';
+  const posterSrc = movie.poster_path
+    ? `${TMDB_IMG}${posterSize}${movie.poster_path}`
+    : `https://placehold.co/${Math.round(width)}x${Math.round(height)}?text=?`;
 
   card.innerHTML = `
     <div class="card-glow"></div>
     <div class="card-inner">
       <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
       ${tvBadge}
-      <img class="card-poster" src="${TMDB_IMG}${posterSize}${movie.poster_path}" alt="${title}" loading="lazy"
+      <img class="card-poster" src="${posterSrc}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${Math.round(width)}x${Math.round(height)}?text=?'">
     </div>
     <div class="card-node"></div>
@@ -1733,7 +1744,7 @@ function createConvergenceCardFull(movie, personIndices, width, height) {
     <div class="card-inner">
       <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
       ${tvBadge}
-      <img class="card-poster" src="${TMDB_IMG}w300${movie.poster_path}" alt="${title}" loading="lazy"
+      <img class="card-poster" src="${movie.poster_path ? TMDB_IMG + 'w300' + movie.poster_path : 'https://placehold.co/' + width + 'x' + height + '?text=?'}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${width}x${height}?text=?'">
       <div class="card-overlay">
         <div class="card-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</div>

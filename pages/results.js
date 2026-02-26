@@ -210,6 +210,31 @@ async function init() {
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();
 
+    // Taste interactions (event delegation — survives re-renders)
+    if (typeof initTasteInteractions === 'function') {
+      initTasteInteractions({
+        container: '#moviesGrid',
+        cardSelector: '.movie-card',
+        getMovieData: function (card) {
+          var movieId = parseInt(card.dataset.movieId);
+          var movie = allMovies.find(m => m.id === movieId);
+          if (!movie) return null;
+          return {
+            id: movie.id,
+            title: movie.title,
+            year: movie.release_date ? parseInt(movie.release_date.split('-')[0]) : null,
+            poster: movie.poster_path,
+            genres: movie.genre_ids || (movie.genres ? movie.genres.map(g => g.id || g) : [])
+          };
+        },
+        onOverlayShow: function () {
+          // Suppress hover tooltip while taste overlay is visible
+          if (hoverTimeout) clearTimeout(hoverTimeout);
+          hideHoverTooltip();
+        }
+      });
+    }
+
     // Vibe slider elements
     vibeMood = document.getElementById("vibeMood");
     vibePace = document.getElementById("vibePace");
@@ -433,20 +458,24 @@ function sortMovies() {
       });
       break;
     case "foryou":
-      // Sort by learned preferences (swipe memory affinity)
-      if (typeof SwipeMemory !== 'undefined') {
+      // Sort by taste preferences (genre affinity from loved movies)
+      if (typeof getLovedGenreWeights === 'function') {
+        const weights = getLovedGenreWeights();
         sortedMovies.sort((a, b) => {
-          const boostA = SwipeMemory.getAffinityBoost(a);
-          const boostB = SwipeMemory.getAffinityBoost(b);
-          // Liked movies first, then by boost score
-          const likedA = SwipeMemory.isLiked(a.id) ? 100 : 0;
-          const likedB = SwipeMemory.isLiked(b.id) ? 100 : 0;
-          const dislikedA = SwipeMemory.isDisliked(a.id) ? -100 : 0;
-          const dislikedB = SwipeMemory.isDisliked(b.id) ? -100 : 0;
-          
-          const scoreA = likedA + dislikedA + boostA;
-          const scoreB = likedB + dislikedB + boostB;
-          
+          // Compute genre affinity boost
+          const genresA = a.genre_ids || [];
+          const genresB = b.genre_ids || [];
+          const boostA = genresA.length ? genresA.reduce((sum, gId) => sum + (weights[gId] || 0), 0) / genresA.length : 0;
+          const boostB = genresB.length ? genresB.reduce((sum, gId) => sum + (weights[gId] || 0), 0) / genresB.length : 0;
+          // Loved movies first, skipped movies last
+          const lovedA = (typeof isLoved === 'function' && isLoved(a.id)) ? 100 : 0;
+          const lovedB = (typeof isLoved === 'function' && isLoved(b.id)) ? 100 : 0;
+          const skippedA = (typeof isSkipped === 'function' && isSkipped(a.id)) ? -100 : 0;
+          const skippedB = (typeof isSkipped === 'function' && isSkipped(b.id)) ? -100 : 0;
+
+          const scoreA = lovedA + skippedA + boostA;
+          const scoreB = lovedB + skippedB + boostB;
+
           return scoreB - scoreA; // Highest affinity first
         });
       }
@@ -664,10 +693,6 @@ function renderPage() {
     // Genres (from stored data if available)
     const genres = movie.genres ? movie.genres.slice(0, 2).map(g => g.name).join(", ") : "";
     
-    // Check swipe preference
-    const preference = typeof SwipeMemory !== 'undefined' ? SwipeMemory.getPreference(movie.id) : null;
-    const prefAttr = preference ? `data-preference="${preference}"` : '';
-    
     // Truncate title for display
     const displayTitle = movie.title.length > 25 ? movie.title.substring(0, 22) + "..." : movie.title;
 
@@ -693,7 +718,6 @@ function renderPage() {
            data-revenue="${revenueDisplay}"
            data-runtime="${runtime}"
            data-genres="${genres}"
-           ${prefAttr}
            style="animation-delay: ${index * 0.015}s;">
         <button class="movie-delete" onclick="event.stopPropagation(); deleteMovie(${movie.id})">✕</button>
         <div class="movie-poster-wrap">
@@ -712,24 +736,15 @@ function renderPage() {
     `;
   }).join("");
   
-  // Add click handlers and enable swipe
+  // Add click handlers
   document.querySelectorAll(".movie-card").forEach(card => {
-    const movieId = parseInt(card.dataset.movieId);
-    const movie = pageMovies.find(m => m.id === movieId);
-    
     // Click to open popup
     card.addEventListener("click", (e) => {
-      // Don't open popup if we just finished swiping
-      if (!card.classList.contains('swiping-left') && !card.classList.contains('swiping-right')) {
-        openMovieCube(card.dataset.movieId);
-      }
+      // Don't open popup if taste overlay is active
+      if (card.classList.contains('taste-overlay-active')) return;
+      openMovieCube(card.dataset.movieId);
     });
-    
-    // Enable swipe memory
-    if (typeof SwipeMemory !== 'undefined' && movie) {
-      SwipeMemory.enableSwipe(card, movie);
-    }
-    
+
     // Add hover tooltip
     setupHoverTooltip(card);
   });
@@ -739,6 +754,11 @@ function renderPage() {
 
   // Re-apply settings badges after page render
   if (settingsData) addSettingsBadges();
+
+  // Apply taste status classes (loved/skipped indicators)
+  if (typeof applyTasteClasses === 'function') {
+    applyTasteClasses('#moviesGrid', '.movie-card');
+  }
 }
 
 // ============================================
@@ -772,6 +792,9 @@ function setupHoverTooltip(card) {
 }
 
 function showHoverTooltip(card, e) {
+  // Don't show tooltip while taste overlay is visible on this card
+  if (card.classList.contains('taste-overlay-active')) return;
+
   // Create tooltip if it doesn't exist
   if (!hoverTooltip) {
     hoverTooltip = document.createElement('div');
@@ -1136,36 +1159,6 @@ function setupEventListeners() {
     }
   });
   
-  // Swipe hint dismiss
-  const swipeHint = document.getElementById("swipeHint");
-  const swipeHintDismiss = document.getElementById("swipeHintDismiss");
-  const swipeLikeBtn = document.getElementById("swipeLikeBtn");
-  const swipeDislikeBtn = document.getElementById("swipeDislikeBtn");
-  
-  // Check if user has already dismissed the hint
-  if (localStorage.getItem("swipeHintDismissed")) {
-    if (swipeHint) swipeHint.classList.add("hidden");
-  }
-  
-  swipeHintDismiss?.addEventListener("click", () => {
-    if (swipeHint) swipeHint.classList.add("hidden");
-    localStorage.setItem("swipeHintDismissed", "true");
-  });
-  
-  // Like button - trigger swipe right on first visible card
-  swipeLikeBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    triggerSwipeOnFirstCard("right");
-  });
-  
-  // Dislike button - trigger swipe left on first visible card
-  swipeDislikeBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    triggerSwipeOnFirstCard("left");
-  });
-  
   // Drawer toggle (controls panel)
   const drawerToggle = document.getElementById('drawerToggle');
   const controlsDrawer = document.getElementById('controlsDrawer');
@@ -1184,64 +1177,6 @@ function setupEventListeners() {
   drawerToggle?.addEventListener('click', openDrawer);
   drawerClose?.addEventListener('click', closeDrawer);
   drawerBackdrop?.addEventListener('click', closeDrawer);
-
-  // Auto-hide hint after first swipe
-  document.addEventListener("swipe-recorded", () => {
-    if (swipeHint && !swipeHint.classList.contains("hidden")) {
-      setTimeout(() => {
-        swipeHint.classList.add("hidden");
-        localStorage.setItem("swipeHintDismissed", "true");
-      }, 2000);
-    }
-  });
-}
-
-// Track which card index we're on for swipe buttons
-let currentSwipeIndex = 0;
-
-// Trigger swipe on next unswiped card
-function triggerSwipeOnFirstCard(direction) {
-  const allCards = document.querySelectorAll(".movie-card");
-  const unswipedCards = document.querySelectorAll(".movie-card:not([data-preference])");
-  
-  if (unswipedCards.length === 0) {
-    // All cards swiped - show message
-    console.log("All movies have been rated!");
-    return;
-  }
-  
-  const targetCard = unswipedCards[0];
-  const movieId = parseInt(targetCard.dataset.movieId);
-  const movie = sortedMovies.find(m => m.id === movieId);
-  
-  if (!movie) return;
-  
-  // Record the preference
-  if (typeof SwipeMemory !== 'undefined') {
-    if (direction === "right") {
-      SwipeMemory.recordSwipe(movie, "liked");
-      targetCard.dataset.preference = "liked";
-      targetCard.classList.add("swiped-liked");
-    } else {
-      SwipeMemory.recordSwipe(movie, "disliked");
-      targetCard.dataset.preference = "disliked";
-      targetCard.classList.add("swiped-disliked");
-    }
-  }
-  
-  // Strong visual feedback
-  const isLike = direction === "right";
-  targetCard.style.transition = "transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease";
-  targetCard.style.transform = isLike ? "translateX(30px) rotate(3deg) scale(1.05)" : "translateX(-30px) rotate(-3deg) scale(0.95)";
-  targetCard.style.boxShadow = isLike ? "0 0 30px rgba(0, 255, 136, 0.6)" : "0 0 30px rgba(255, 71, 87, 0.6)";
-  targetCard.style.opacity = "0.7";
-  
-  setTimeout(() => {
-    targetCard.style.transition = "transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease";
-    targetCard.style.transform = "";
-    targetCard.style.boxShadow = "";
-    targetCard.style.opacity = isLike ? "1" : "0.5";
-  }, 400);
 }
 
 // Expose functions to window for inline onclick handlers

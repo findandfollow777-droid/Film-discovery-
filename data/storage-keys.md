@@ -13,6 +13,7 @@
 | `englishOnlyToggle` | session | `"true"` / `"false"` | app.js, both.js | app.js, both.js, tv.js | English language filter |
 | `watchCountry` | local | String | app.js, both.js, tv.js, moviecube.js | app.js, both.js, tv.js, moviecube.js | **Legacy** — superseded by `orbit_user_country` |
 | `watchProviders` | local | JSON array | app.js, both.js, tv.js, moviecube.js | app.js, both.js, tv.js, moviecube.js | **Legacy** — superseded by `orbit_user_providers` |
+| `orbit_search_layout` | local | JSON array (5 section IDs) | profile.js | profile.js, discover.js | Custom search grid layout |
 
 ## Navigation State
 
@@ -94,6 +95,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `resultsCapped` | local | `"true"` | app.js, tv.js | results.js | Flag: result limit hit |
 | `totalAvailable` | local | String (number) | app.js, tv.js | results.js | Total available count |
 | `orbitBaseQuery` | local | String (query params) | app.js | app.js | Base query string |
+| `orbit_search_criteria` | session | JSON `{filters, genreLogic}` | discover.js | discover.js | Search criteria restored on revisit |
 
 ## Game Launching State
 

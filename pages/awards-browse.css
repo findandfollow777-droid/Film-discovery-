@@ -343,6 +343,12 @@ html, body {
   border-left-color: var(--awards-gold);
 }
 
+.category-item.filter-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: default;
+}
+
 .cat-info-btn {
   width: 16px;
   height: 16px;
@@ -360,6 +366,11 @@ html, body {
   flex-shrink: 0;
   padding: 0;
   line-height: 1;
+}
+
+.category-item.category-child {
+  padding-left: 24px;
+  font-size: 12px;
 }
 
 .category-item:hover .cat-info-btn { opacity: 0.5; }
@@ -1174,6 +1185,11 @@ html, body {
   .category-item.active {
     border-color: var(--awards-gold);
     border-left-color: var(--awards-gold);
+  }
+
+  .category-item.category-child {
+    padding-left: 14px;
+    font-size: 11px;
   }
 
   .cat-info-btn { display: none; }

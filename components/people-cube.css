@@ -215,6 +215,19 @@
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
   margin: 0 auto 12px;
   display: block;
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.pcube-photo--memorial {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow: 0 0 16px rgba(148, 163, 184, 0.1);
+}
+
+.pcube-photo--memorial:hover {
+  filter: grayscale(60%);
+  opacity: 0.85;
 }
 
 .pcube-photo-placeholder {

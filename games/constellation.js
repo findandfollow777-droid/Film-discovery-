@@ -275,11 +275,6 @@ function createOrbitMovie(item, orbitClass, x, y) {
   // Double-click to make new anchor
   div.addEventListener("dblclick", () => makeNewAnchor(movie));
   
-  // Enable swipe memory
-  if (typeof SwipeMemory !== 'undefined') {
-    SwipeMemory.enableSwipe(div, movie);
-  }
-  
   return div;
 }
 

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
 </head>
 <body>
 
@@ -65,7 +66,7 @@
 
         <!-- Teaser (shown when threshold not met) -->
         <div class="summary-teaser" id="summaryTeaser" hidden>
-          <p>Swipe through 10+ titles in Randomizer to build your profile</p>
+          <p>Love or skip 10+ movies to build your profile</p>
         </div>
 
         <!-- List cards (shown when threshold met) -->
@@ -335,10 +336,10 @@
       </h2>
       <div class="taste-grid">
         <div class="taste-card">
-          <div class="taste-header">Movies Rated</div>
+          <div class="taste-header">Taste Summary</div>
           <div class="taste-stats">
-            <span class="taste-stat liked"><span id="likedCount">0</span> liked</span>
-            <span class="taste-stat disliked"><span id="dislikedCount">0</span> disliked</span>
+            <span class="taste-stat liked"><span id="tasteLovedCount">0</span> loved</span>
+            <span class="taste-stat disliked"><span id="tasteSkippedCount">0</span> skipped</span>
           </div>
         </div>
         <div class="taste-card wide">
@@ -347,15 +348,34 @@
         </div>
       </div>
       <div class="liked-movies" id="likedMovies" hidden>
-        <div class="liked-movies-title">Recently Liked</div>
+        <div class="liked-movies-title">Recently Loved</div>
         <div class="liked-movies-grid" id="likedGrid"></div>
+      </div>
+    </section>
+
+    <!-- CUSTOMISE SEARCH LAYOUT -->
+    <section class="section" id="searchLayoutSection">
+      <div class="section-title">
+        <span class="section-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="10" y="1" width="5" height="5" rx="1"/><rect x="1" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/></svg>
+        </span>
+        Customise Search Layout
+      </div>
+      <p class="layout-hint">Choose which 5 filters appear on your search page. Tap a filter to select it, then tap another to swap.</p>
+      <div class="layout-label">Main Grid</div>
+      <div class="layout-slots" id="layoutSlots"></div>
+      <div class="layout-label secondary">Available</div>
+      <div class="layout-pool" id="layoutPool"></div>
+      <div class="layout-actions" id="layoutActions" hidden>
+        <button class="layout-btn reset" id="layoutResetBtn">Reset Default</button>
+        <button class="layout-btn save" id="layoutSaveBtn">Save Layout</button>
       </div>
     </section>
 
     <!-- DANGER ZONE -->
     <section class="section danger-section">
       <button class="danger-btn" id="clearDataBtn">Clear All Data</button>
-      <p class="danger-note">This will reset all game stats, preferences, and swipe memory.</p>
+      <p class="danger-note">This will reset all game stats, preferences, and taste data.</p>
     </section>
 
   </main>
@@ -382,7 +402,7 @@
   <script src="../config.js"></script>
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
-  <script src="../components/swipe-memory.js"></script>
+  <script src="../components/taste-service.js"></script>
   <script src="../components/shortlist-service.js"></script>
   <script src="../components/encounter-service.js"></script>
   <script src="profile.js"></script>

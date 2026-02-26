@@ -299,7 +299,7 @@ async function startSpin() {
     } else if (currentMode === "favorites") {
       const msg = selectedGenres.length > 0 || selectedDecades.length > 0
         ? "No favorites match your current filters. Try removing some filters!"
-        : "You haven't liked any movies yet. Explore and swipe to build your favorites.";
+        : "You haven't loved any movies yet. Explore and mark favorites to build your collection.";
       showError(msg);
     } else {
       showError("No movies found. Try adjusting your filters.");
@@ -492,11 +492,12 @@ async function fetchClassicMovie() {
 }
 
 async function fetchFavoriteMovie() {
-  if (typeof SwipeMemory === "undefined") return null;
+  if (typeof getLovedMovies !== "function") return null;
 
-  const likedIds = SwipeMemory.getLikedIds();
-  if (!likedIds || likedIds.length === 0) return null;
+  const lovedMovies = getLovedMovies();
+  if (!lovedMovies || lovedMovies.length === 0) return null;
 
+  const likedIds = lovedMovies.map(m => m.id);
   let eligibleIds = likedIds;
 
   if (selectedGenres.length > 0 || selectedDecades.length > 0) {
@@ -637,11 +638,11 @@ function displayResult(movie) {
     matchEl.hidden = true;
   }
 
-  // Swipe button states
-  if (typeof SwipeMemory !== "undefined") {
-    const existing = SwipeMemory.getPreference(movie.id);
-    document.getElementById("swipeLoveBtn").classList.toggle("active", existing === "liked");
-    document.getElementById("swipePassBtn").classList.toggle("active", existing === "disliked");
+  // Taste button states
+  if (typeof getTasteStatus === "function") {
+    const status = getTasteStatus(movie.id);
+    document.getElementById("swipeLoveBtn").classList.toggle("active", status === "loved");
+    document.getElementById("swipePassBtn").classList.toggle("active", status === "skipped");
   } else {
     document.getElementById("swipeLoveBtn").classList.remove("active");
     document.getElementById("swipePassBtn").classList.remove("active");
@@ -659,9 +660,21 @@ function displayResult(movie) {
 }
 
 function handleSwipe(preference) {
-  if (!currentMovie || typeof SwipeMemory === "undefined") return;
+  if (!currentMovie) return;
 
-  SwipeMemory.setPreference(currentMovie.id, preference, currentMovie);
+  const movieData = {
+    id: currentMovie.id,
+    title: currentMovie.title,
+    year: currentMovie.release_date ? parseInt(currentMovie.release_date) : null,
+    poster: currentMovie.poster_path,
+    genres: (currentMovie.genre_ids || (currentMovie.genres || []).map(g => g.id)) || []
+  };
+
+  if (preference === "like") {
+    if (typeof loveMovie === "function") loveMovie(movieData);
+  } else {
+    if (typeof skipMovie === "function") skipMovie(movieData);
+  }
 
   document.getElementById("swipeLoveBtn").classList.toggle("active", preference === "like");
   document.getElementById("swipePassBtn").classList.toggle("active", preference === "dislike");

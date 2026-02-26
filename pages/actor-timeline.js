@@ -108,6 +108,29 @@ async function init() {
     renderSacredLine();
     applyMode('both');
 
+    // Taste interactions for movie cards on the timeline
+    if (typeof initTasteInteractions === 'function') {
+      initTasteInteractions({
+        container: '#unifiedContent',
+        cardSelector: '.at-card.movie',
+        getMovieData: function (card) {
+          var movieId = parseInt(card.dataset.movieId);
+          var movie = movieCredits.find(function (m) { return m.id === movieId; });
+          if (!movie) return null;
+          return {
+            id: movie.id,
+            title: movie.title,
+            year: movie.release_date ? parseInt(movie.release_date.split('-')[0]) : null,
+            poster: movie.poster_path,
+            genres: []
+          };
+        },
+        onOverlayShow: function () {
+          hideTooltip();
+        }
+      });
+    }
+
     // Horizontal scroll on mouse wheel
     viewport.addEventListener('wheel', (e) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
@@ -415,6 +438,7 @@ function renderUnifiedTrack() {
 
     if (entry.type === 'movie') {
       card.className = 'at-card movie';
+      card.dataset.movieId = entry.id;
       card.style.left = `${x - 120}px`;
       card.style.top = '15px';
 
@@ -430,9 +454,13 @@ function renderUnifiedTrack() {
       `;
 
       card.addEventListener('click', () => {
+        if (card.classList.contains('taste-overlay-active')) return;
         if (typeof openMovieCube === 'function') openMovieCube(entry.id);
       });
-      card.addEventListener('mouseenter', (e) => showTooltip(e, entry));
+      card.addEventListener('mouseenter', (e) => {
+        if (card.classList.contains('taste-overlay-active')) return;
+        showTooltip(e, entry);
+      });
       card.addEventListener('mouseleave', hideTooltip);
 
     } else {
@@ -467,6 +495,11 @@ function renderUnifiedTrack() {
 
     unifiedContent.appendChild(card);
   });
+
+  // Apply taste status classes to movie cards
+  if (typeof applyTasteClasses === 'function') {
+    applyTasteClasses('#unifiedContent', '.at-card.movie');
+  }
 }
 
 // ── Sacred Line ──

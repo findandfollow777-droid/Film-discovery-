@@ -70,7 +70,9 @@
     { id: 15812, date: '2026-01-17' },  // Roger Allers
     { id: 11514, date: '2026-01-30' },  // Catherine O'Hara
     { id: 19210, date: '2026-02-11' },  // James Van Der Beek
-    { id: 4971, date: '2026-02-12' }    // Bud Cort
+    { id: 4971, date: '2026-02-12' },   // Bud Cort
+    { id: 3087, date: '2026-02-15' },   // Robert Duvall
+    { id: 58115, date: '2026-02-19' }   // Eric Dane
   ];
 
   // Helper: Check if person died in past 12 months

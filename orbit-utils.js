@@ -216,6 +216,28 @@
   };
 
   /* ──────────────────────────────────────────
+     Filter Registry
+  ────────────────────────────────────────── */
+
+  OrbitUtils.FILTER_REGISTRY = [
+    { id: 'people',         title: 'People',                 subtitle: 'Actors, directors, writers',        iconClass: 'icon-people' },
+    { id: 'genres',         title: 'Genres',                 subtitle: 'Action, drama, horror & more',      iconClass: 'icon-genres' },
+    { id: 'timeEra',        title: 'Release Date & Runtime', subtitle: 'Year, decade, film length',         iconClass: 'icon-datetime' },
+    { id: 'ratingsContent', title: 'Ratings & Content',      subtitle: 'Score, votes, age rating',          iconClass: 'icon-ratings' },
+    { id: 'awards',         title: 'Awards',                 subtitle: 'Oscar, Golden Globe & more',        iconClass: 'icon-awards' },
+    { id: 'themes',         title: 'Themes',                 subtitle: "What's the movie really about?",    iconClass: 'icon-themes' },
+    { id: 'settingWhere',   title: 'Setting: Where',         subtitle: 'Story location — cities, countries', iconClass: 'icon-where' },
+    { id: 'settingWhen',    title: 'Setting: When',          subtitle: 'Story time period — decades & eras', iconClass: 'icon-when' },
+    { id: 'basedOn',        title: 'Based On',               subtitle: 'Source material & franchise status', iconClass: 'icon-basedon' },
+    { id: 'regionLanguage', title: 'Region & Language',      subtitle: 'Origin, language',                  iconClass: 'icon-region' },
+    { id: 'production',     title: 'Production & Box Office', subtitle: 'Studios, budget, revenue',         iconClass: 'icon-production' },
+    { id: 'watch',          title: 'Watch Providers',        subtitle: 'Streaming & availability',          iconClass: 'icon-watch' },
+    { id: 'universes',      title: 'Universes',              subtitle: 'Collections & franchises',          iconClass: 'icon-universes' }
+  ];
+
+  OrbitUtils.DEFAULT_LAYOUT = ['people', 'genres', 'timeEra', 'ratingsContent', 'awards'];
+
+  /* ──────────────────────────────────────────
      Expose on window
   ────────────────────────────────────────── */
 

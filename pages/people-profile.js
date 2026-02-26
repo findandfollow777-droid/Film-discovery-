@@ -683,6 +683,9 @@
     photo.src = p.profile_path ? `${TMDB_IMG}w185${p.profile_path}` : DEFAULT_AVATAR;
     photo.alt = p.name;
     photo.onerror = function() { this.src = DEFAULT_AVATAR; };
+    if (p.deathday) {
+      photo.classList.add('pp-hero-photo--memorial');
+    }
     fadeOutSkeleton($('ppSkeletonPhoto'), photo);
 
     // Name

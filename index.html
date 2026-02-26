@@ -350,9 +350,10 @@
             localStorage.setItem('timelineType', 'movie');
             window.location.href = 'pages/timeline.html';
           } else {
-            localStorage.setItem('singleMovie', JSON.stringify(movie));
-            localStorage.setItem('resultsMode', 'single');
-            window.location.href = 'pages/results.html';
+            // Standalone movie → timeline with auto-open MovieCube
+            localStorage.setItem('timelineMovieId', id);
+            localStorage.setItem('timelineType', 'movie');
+            window.location.href = 'pages/timeline.html?openCube=' + id;
           }
         } catch(e) {
           localStorage.setItem('timelineMovieId', id);
