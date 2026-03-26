@@ -42,6 +42,7 @@ let selectedGenres = [];
 let selectedDecades = [];
 let recentSpins = [];
 let currentMovie = null;
+let lastPool = [];
 let streamingFilterActive = false;
 
 // ============================================
@@ -117,14 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Spin button
   document.getElementById("spinBtn").addEventListener("click", startSpin);
 
-  // Swipe buttons
-  document.getElementById("swipeLoveBtn").addEventListener("click", () => handleSwipe("like"));
-  document.getElementById("swipePassBtn").addEventListener("click", () => handleSwipe("dislike"));
-
   // Result actions
-  document.getElementById("spinAgainBtn").addEventListener("click", startSpin);
+  document.getElementById("respinBtn").addEventListener("click", respin);
   document.getElementById("adjustBtn").addEventListener("click", showConfig);
-  document.getElementById("exploreBtn").addEventListener("click", openMovieCubeOverlay);
 
   // Modals
   document.getElementById("helpBtn").addEventListener("click", () => showModal("helpModal"));
@@ -291,11 +287,13 @@ async function startSpin() {
   spinnerSubtext.textContent = subtexts[currentMode] || "Searching...";
 
   try {
-    const movie = await fetchRandomMovie();
+    const pool = await fetchMoviePool();
     // Artificial delay for drama
     await new Promise(r => setTimeout(r, 1500));
-    if (movie) {
-      displayResult(movie);
+    if (pool && pool.length) {
+      lastPool = pool;
+      const picks = pickThree(pool);
+      displayResults(picks);
     } else if (currentMode === "favorites") {
       const msg = selectedGenres.length > 0 || selectedDecades.length > 0
         ? "No favorites match your current filters. Try removing some filters!"
@@ -310,6 +308,12 @@ async function startSpin() {
   }
 }
 
+function respin() {
+  if (!lastPool.length) { startSpin(); return; }
+  const picks = pickThree(lastPool);
+  displayResults(picks);
+}
+
 function showError(msg) {
   spinningSection.hidden = true;
   configSection.hidden = false;
@@ -320,32 +324,38 @@ function showError(msg) {
 // TMDB FETCHING
 // ============================================
 
-async function fetchRandomMovie() {
-  for (let attempt = 0; attempt < 5; attempt++) {
-    try {
-      let movie;
-      switch (currentMode) {
-        case "mood": movie = await fetchMoodMatchMovie(); break;
-        case "random": movie = await fetchPureRandomMovie(); break;
-        case "hidden": movie = await fetchHiddenGemMovie(); break;
-        case "classic": movie = await fetchClassicMovie(); break;
-        case "favorites": movie = await fetchFavoriteMovie(); break;
-      }
-      if (movie && !isInRecentHistory(movie.id)) return movie;
-    } catch (e) { console.warn("Attempt failed:", e); }
-  }
-  // Last resort: return whatever we get
+async function fetchMoviePool() {
   switch (currentMode) {
-    case "mood": return await fetchMoodMatchMovie();
-    case "random": return await fetchPureRandomMovie();
-    case "hidden": return await fetchHiddenGemMovie();
-    case "classic": return await fetchClassicMovie();
-    case "favorites": return await fetchFavoriteMovie();
+    case "mood": return await fetchMoodPool();
+    case "random": return await fetchPureRandomPool();
+    case "hidden": return await fetchHiddenGemPool();
+    case "classic": return await fetchClassicPool();
+    case "favorites": return await fetchFavoritePool();
+    default: return [];
   }
 }
 
-function isInRecentHistory(id) {
-  return recentSpins.some(s => s.id === id);
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickThree(pool) {
+  const seen = new Set();
+  const picks = [];
+  const shuffled = shuffleArray(pool);
+  for (const m of shuffled) {
+    if (!seen.has(m.id)) {
+      seen.add(m.id);
+      picks.push(m);
+      if (picks.length === 3) break;
+    }
+  }
+  return picks;
 }
 
 function buildDateFilter() {
@@ -376,18 +386,15 @@ function buildBaseParams() {
   return params;
 }
 
-async function fetchMoodMatchMovie() {
+async function fetchMoodPool() {
   const params = buildBaseParams();
   params.set("sort_by", "popularity.desc");
 
-  // Use familiarity slider to control popularity range
   const fam = vibeSettings.familiar;
   if (fam > 70) {
-    // Challenge: less popular
     params.set("vote_count.gte", "30");
     params.set("vote_count.lte", "2000");
   } else if (fam < 30) {
-    // Familiar: popular
     params.set("vote_count.gte", "500");
   } else {
     params.set("vote_count.gte", "100");
@@ -395,7 +402,6 @@ async function fetchMoodMatchMovie() {
 
   params.set("vote_average.gte", "5.0");
 
-  // Get vibe-aligned genres if no user selection
   if (selectedGenres.length === 0) {
     const vibeGenres = getVibeBasedGenres();
     if (vibeGenres.length > 0) params.set("with_genres", vibeGenres.join("|"));
@@ -409,18 +415,12 @@ async function fetchMoodMatchMovie() {
   let movies = (data.results || []).filter(m => m.poster_path);
   movies = await filterByStreaming(movies);
 
-  if (!movies.length) return null;
-
-  // Score and pick from top 5
-  const scored = movies.map(m => ({ ...m, vibeScore: calculateVibeScore(m) }));
-  scored.sort((a, b) => b.vibeScore - a.vibeScore);
-  const top = scored.slice(0, 5);
-  const pick = top[Math.floor(Math.random() * top.length)];
-
-  return await fetchFullDetails(pick.id, pick.vibeScore);
+  // Attach vibe scores and sort best-first
+  return movies.map(m => ({ ...m, _vibeScore: calculateVibeScore(m) }))
+    .sort((a, b) => b._vibeScore - a._vibeScore);
 }
 
-async function fetchPureRandomMovie() {
+async function fetchPureRandomPool() {
   const params = buildBaseParams();
   params.set("sort_by", "popularity.desc");
   params.set("vote_count.gte", "50");
@@ -431,10 +431,9 @@ async function fetchPureRandomMovie() {
   const res = await fetch(`https://api.themoviedb.org/3/discover/movie?${params}`);
   const data = await res.json();
   const maxPage = Math.min(data.total_pages || 1, 500);
-  const actualPage = Math.min(page, maxPage);
 
   let movies = (data.results || []).filter(m => m.poster_path);
-  if (!movies.length && actualPage !== page) {
+  if (!movies.length && Math.min(page, maxPage) !== page) {
     params.set("page", Math.floor(Math.random() * maxPage) + 1);
     const res2 = await fetch(`https://api.themoviedb.org/3/discover/movie?${params}`);
     const data2 = await res2.json();
@@ -442,12 +441,10 @@ async function fetchPureRandomMovie() {
   }
 
   movies = await filterByStreaming(movies);
-  if (!movies.length) return null;
-  const pick = movies[Math.floor(Math.random() * movies.length)];
-  return await fetchFullDetails(pick.id);
+  return movies;
 }
 
-async function fetchHiddenGemMovie() {
+async function fetchHiddenGemPool() {
   const params = buildBaseParams();
   params.set("sort_by", "vote_average.desc");
   params.set("vote_count.gte", "100");
@@ -461,19 +458,15 @@ async function fetchHiddenGemMovie() {
   const data = await res.json();
   let movies = (data.results || []).filter(m => m.poster_path);
   movies = await filterByStreaming(movies);
-
-  if (!movies.length) return null;
-  const pick = movies[Math.floor(Math.random() * movies.length)];
-  return await fetchFullDetails(pick.id);
+  return movies;
 }
 
-async function fetchClassicMovie() {
+async function fetchClassicPool() {
   const params = buildBaseParams();
   params.set("sort_by", "vote_average.desc");
   params.set("vote_count.gte", "500");
   params.set("vote_average.gte", "7.5");
 
-  // Override date filter for classic mode
   if (selectedDecades.length === 0) {
     params.set("primary_release_date.lte", "1999-12-31");
   }
@@ -485,32 +478,34 @@ async function fetchClassicMovie() {
   const data = await res.json();
   let movies = (data.results || []).filter(m => m.poster_path);
   movies = await filterByStreaming(movies);
-
-  if (!movies.length) return null;
-  const pick = movies[Math.floor(Math.random() * movies.length)];
-  return await fetchFullDetails(pick.id);
+  return movies;
 }
 
-async function fetchFavoriteMovie() {
-  if (typeof getLovedMovies !== "function") return null;
+async function fetchFavoritePool() {
+  if (typeof getLovedMovies !== "function") return [];
 
   const lovedMovies = getLovedMovies();
-  if (!lovedMovies || lovedMovies.length === 0) return null;
-
-  const likedIds = lovedMovies.map(m => m.id);
-  let eligibleIds = likedIds;
+  if (!lovedMovies || lovedMovies.length === 0) return [];
 
   if (selectedGenres.length > 0 || selectedDecades.length > 0) {
     const details = await Promise.all(
-      likedIds.slice(0, 50).map(id => fetchFullDetails(id).catch(() => null))
+      lovedMovies.slice(0, 50).map(m =>
+        fetchFullDetails(m.id).catch(() => null)
+      )
     );
-    eligibleIds = details.filter(m => m && matchesFilters(m)).map(m => m.id);
+    return details.filter(m => m && m.poster_path && matchesFilters(m));
   }
 
-  if (eligibleIds.length === 0) return null;
-
-  const randomId = eligibleIds[Math.floor(Math.random() * eligibleIds.length)];
-  return await fetchFullDetails(randomId);
+  // Build lightweight pool from loved movie data
+  return lovedMovies.filter(m => m.poster).map(m => ({
+    id: m.id,
+    title: m.title,
+    poster_path: m.poster,
+    release_date: m.year ? String(m.year) : "",
+    vote_average: 0,
+    genre_ids: m.genres || [],
+    overview: ""
+  }));
 }
 
 function matchesFilters(movie) {
@@ -588,115 +583,58 @@ function getVibeBasedGenres() {
 // DISPLAY RESULT
 // ============================================
 
-function displayResult(movie) {
-  currentMovie = movie;
+function displayResults(movies) {
   spinningSection.hidden = true;
   resultSection.hidden = false;
 
-  // Poster
-  const poster = document.getElementById("resultPoster");
-  poster.src = movie.poster_path ? `${TMDB_IMG}w500${movie.poster_path}` : "";
-  poster.alt = movie.title || "";
-
-  // Backdrop
-  if (movie.backdrop_path) {
+  // Use first movie's backdrop if available
+  const backdrop = movies.find(m => m.backdrop_path);
+  if (backdrop) {
     document.querySelector(".game-backdrop").style.backgroundImage =
-      `url(${TMDB_IMG}w1280${movie.backdrop_path})`;
+      `url(${TMDB_IMG}w1280${backdrop.backdrop_path})`;
   }
 
-  // Rating
-  const rating = movie.vote_average || 0;
-  document.getElementById("ratingValue").textContent = rating.toFixed(1);
-  const badge = document.getElementById("resultRating");
-  badge.style.display = rating > 0 ? "inline-flex" : "none";
+  const container = document.getElementById("resultPicks");
+  container.innerHTML = movies.map(movie => {
+    const year = (movie.release_date || "").split("-")[0];
+    const rating = movie.vote_average || 0;
 
-  // Title
-  document.getElementById("resultTitle").textContent = movie.title || "Unknown";
+    // Resolve genre names from genre_ids (discover) or genres (full details)
+    const genreNames = (movie.genre_ids || [])
+      .map(id => GENRE_MAP[id]).filter(Boolean).slice(0, 3)
+      .join(", ")
+      || (movie.genres || []).map(g => g.name).slice(0, 3).join(", ");
 
-  // Meta
-  const year = (movie.release_date || "").split("-")[0];
-  const runtime = movie.runtime ? `${movie.runtime} min` : "";
-  const parts = [year, runtime].filter(Boolean);
-  document.getElementById("resultMeta").textContent = parts.join(" \u00B7 ");
+    const meta = [year, genreNames].filter(Boolean).join(" \u00B7 ");
 
-  // Genres
-  const genresEl = document.getElementById("resultGenres");
-  const genres = movie.genres || [];
-  genresEl.innerHTML = genres.map(g => `<span class="genre-tag">${g.name}</span>`).join("");
+    const matchHtml = (currentMode === "mood" && movie._vibeScore !== undefined)
+      ? `<div class="pick-match">${movie._vibeScore}% match</div>`
+      : "";
 
-  // Overview
-  document.getElementById("resultOverview").textContent = movie.overview || "No overview available.";
+    return `<div class="pick-card" data-id="${movie.id}">
+      <div class="pick-poster-wrap">
+        <img class="pick-poster" src="${movie.poster_path ? TMDB_IMG + 'w342' + movie.poster_path : ''}" alt="${movie.title || ''}">
+        ${rating > 0 ? `<div class="pick-rating"><span class="rating-star">&#x2605;</span> ${rating.toFixed(1)}</div>` : ""}
+        ${matchHtml}
+      </div>
+      <div class="pick-info">
+        <h3 class="pick-title">${movie.title || "Unknown"}</h3>
+        <div class="pick-meta">${meta}</div>
+        ${movie.overview ? `<p class="pick-overview">${movie.overview}</p>` : ""}
+      </div>
+    </div>`;
+  }).join("");
 
-  // Match indicator (mood mode only)
-  const matchEl = document.getElementById("matchIndicator");
-  if (currentMode === "mood" && movie._vibeScore !== undefined) {
-    matchEl.hidden = false;
-    const pct = movie._vibeScore;
-    document.getElementById("matchFill").style.width = pct + "%";
-    document.getElementById("matchPct").textContent = pct + "%";
-  } else {
-    matchEl.hidden = true;
-  }
-
-  // Taste button states
-  if (typeof getTasteStatus === "function") {
-    const status = getTasteStatus(movie.id);
-    document.getElementById("swipeLoveBtn").classList.toggle("active", status === "loved");
-    document.getElementById("swipePassBtn").classList.toggle("active", status === "skipped");
-  } else {
-    document.getElementById("swipeLoveBtn").classList.remove("active");
-    document.getElementById("swipePassBtn").classList.remove("active");
-  }
-
-  // Streaming providers
-  const providerEl = document.getElementById("streamingProviders");
-  providerEl.innerHTML = '';
-  fetchStreamingProviders(movie.id, "movie").then(providers => {
-    renderStreamingLogos(providers, providerEl);
+  // Card click → Movie Cube
+  container.querySelectorAll(".pick-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const movieId = parseInt(card.dataset.id);
+      openMovieCubeForId(movieId);
+    });
   });
 
-  // Add to history
-  addToHistory(movie);
-}
-
-function handleSwipe(preference) {
-  if (!currentMovie) return;
-
-  const movieData = {
-    id: currentMovie.id,
-    title: currentMovie.title,
-    year: currentMovie.release_date ? parseInt(currentMovie.release_date) : null,
-    poster: currentMovie.poster_path,
-    genres: (currentMovie.genre_ids || (currentMovie.genres || []).map(g => g.id)) || []
-  };
-
-  if (preference === "like") {
-    if (typeof loveMovie === "function") loveMovie(movieData);
-  } else {
-    if (typeof skipMovie === "function") skipMovie(movieData);
-  }
-
-  document.getElementById("swipeLoveBtn").classList.toggle("active", preference === "like");
-  document.getElementById("swipePassBtn").classList.toggle("active", preference === "dislike");
-
-  if (preference === "dislike") {
-    setTimeout(() => startSpin(), 500);
-  }
-  if (preference === "like") {
-    showSwipeFeedback("Added to your favorites!");
-  }
-}
-
-function showSwipeFeedback(message) {
-  const toast = document.createElement("div");
-  toast.className = "swipe-toast";
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.classList.add("show"), 10);
-  setTimeout(() => {
-    toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 300);
-  }, 2000);
+  // Add all picks to history
+  movies.forEach(m => addToHistory(m));
 }
 
 // ============================================
@@ -705,12 +643,9 @@ function showSwipeFeedback(message) {
 
 let movieCubeInitialized = false;
 
-function openMovieCubeOverlay() {
-  if (!currentMovie) return;
-
+function openMovieCubeForId(movieId) {
   if (typeof initMovieCube !== "function") {
-    // Fallback to timeline if moviecube not loaded
-    localStorage.setItem("timelineMovieId", currentMovie.id);
+    localStorage.setItem("timelineMovieId", movieId);
     localStorage.setItem("timelineType", "movie");
     window.location.href = "timeline.html";
     return;
@@ -729,7 +664,7 @@ function openMovieCubeOverlay() {
     movieCubeInitialized = true;
   }
 
-  openMovieCube(currentMovie.id);
+  openMovieCube(movieId);
 }
 
 // ============================================
@@ -775,19 +710,9 @@ function renderHistory() {
   }).join("");
 
   list.querySelectorAll(".history-item").forEach(item => {
-    item.addEventListener("click", async () => {
+    item.addEventListener("click", () => {
       hideModal("historyModal");
-      configSection.hidden = true;
-      resultSection.hidden = true;
-      spinningSection.hidden = false;
-      spinnerSubtext.textContent = "Loading from history...";
-      try {
-        const movie = await fetchFullDetails(parseInt(item.dataset.id));
-        await new Promise(r => setTimeout(r, 800));
-        displayResult(movie);
-      } catch (e) {
-        showError("Failed to load movie details.");
-      }
+      openMovieCubeForId(parseInt(item.dataset.id));
     });
   });
 }

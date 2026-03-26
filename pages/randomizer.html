@@ -8,7 +8,120 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="randomizer.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <style>
+    /* Three-pick results grid */
+    .result-picks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .pick-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      animation: fadeIn 0.5s ease both;
+    }
+    .pick-card:nth-child(2) { animation-delay: 0.1s; }
+    .pick-card:nth-child(3) { animation-delay: 0.2s; }
+    .pick-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(var(--accent-rgb), 0.1);
+    }
+    .pick-poster-wrap { position: relative; }
+    .pick-poster {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      background: var(--nebula-dark);
+    }
+    .pick-rating {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 8px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(var(--gold-rgb), 0.3);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .pick-rating .rating-star {
+      color: var(--accent-gold);
+      font-size: 10px;
+    }
+    .pick-match {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 6px 10px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      text-align: right;
+    }
+    .pick-info { padding: 14px; }
+    .pick-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pick-meta {
+      font-size: 12px;
+      color: var(--ghost-gray);
+      margin-bottom: 8px;
+    }
+    .pick-overview {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted-silver);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .result-picks-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .respin-btn .og {
+      width: 16px;
+      height: 16px;
+      vertical-align: -2px;
+    }
+    @media (max-width: 650px) {
+      .result-picks {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -245,46 +358,12 @@
 
     <!-- RESULT SECTION -->
     <section class="result-section" id="resultSection" hidden>
-      <div class="result-card">
-        <div class="result-poster-wrap">
-          <img class="result-poster" id="resultPoster" src="" alt="">
-          <div class="poster-glow"></div>
-        </div>
-        <div class="result-details">
-          <div class="result-rating-badge" id="resultRating">
-            <span class="rating-star">&#x2605;</span>
-            <span class="rating-value" id="ratingValue">0.0</span>
-          </div>
-          <h2 class="result-title" id="resultTitle">Movie Title</h2>
-          <div class="result-meta" id="resultMeta"></div>
-          <div class="result-genres" id="resultGenres"></div>
-          <div class="match-indicator" id="matchIndicator" hidden>
-            <div class="match-label">Vibe Match</div>
-            <div class="match-bar-track">
-              <div class="match-bar-fill" id="matchFill"></div>
-            </div>
-            <div class="match-pct" id="matchPct">0%</div>
-          </div>
-          <p class="result-overview" id="resultOverview"></p>
-          <div class="streaming-providers" id="streamingProviders"></div>
-          <div class="result-actions">
-            <div class="swipe-actions">
-              <button class="swipe-btn love" id="swipeLoveBtn" title="Love it">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span>Love it</span>
-              </button>
-              <button class="swipe-btn pass" id="swipePassBtn" title="Not Tonight">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
-                <span>Not Tonight</span>
-              </button>
-            </div>
-            <div class="nav-actions">
-              <button class="action-btn primary" id="spinAgainBtn">Spin Again</button>
-              <button class="action-btn secondary" id="adjustBtn">Adjust</button>
-              <button class="action-btn accent" id="exploreBtn">Explore Movie</button>
-            </div>
-          </div>
-        </div>
+      <div class="result-picks" id="resultPicks"></div>
+      <div class="result-picks-actions">
+        <button class="action-btn primary respin-btn" id="respinBtn">
+          <span class="og og-shuffle"></span> Respin
+        </button>
+        <button class="action-btn secondary" id="adjustBtn">Adjust</button>
       </div>
     </section>
 
