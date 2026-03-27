@@ -315,17 +315,18 @@ async function startSpin() {
 async function respin() {
   if (!lastPool.length) { startSpin(); return; }
 
-  // Show loading state in each card slot
+  // Show loading overlay in each card (same as Not Tonight but 3× spinner)
   const container = document.getElementById("resultPicks");
   container.querySelectorAll(".pick-card").forEach(card => {
-    card.innerHTML = `<div class="randomizer-loading-state">
-      <div class="mini-spinner">
-        <div class="mini-ring mini-ring-1"></div>
-        <div class="mini-ring mini-ring-2"></div>
-        <div class="mini-core"></div>
-      </div>
-      <p>Finding your next orbit...</p>
-    </div>`;
+    card.insertAdjacentHTML("beforeend",
+      `<div class="randomizer-loading-state">
+        <div class="mini-spinner" style="width:180px;height:180px">
+          <div class="mini-ring mini-ring-1"></div>
+          <div class="mini-ring mini-ring-2"></div>
+          <div class="mini-core" style="width:24px;height:24px"></div>
+        </div>
+      </div>`
+    );
   });
 
   // Pick new movies and wait for minimum animation duration

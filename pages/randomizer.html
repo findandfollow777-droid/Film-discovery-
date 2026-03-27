@@ -193,18 +193,13 @@
       animation: pulse-core 1s ease-in-out infinite;
     }
 
-    /* Respin All loading state (reuses mini-spinner) */
+    /* Respin All loading state (matches individual Not Tonight overlay) */
     .randomizer-loading-state {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem;
-      min-height: 300px;
-      padding: 40px 16px;
-    }
-    .randomizer-loading-state p {
-      color: var(--muted-silver);
-      font-family: var(--font-body);
-      font-size: 13px;
+      position: absolute; inset: 0;
+      background: rgba(10, 14, 23, 0.92);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      animation: fadeIn 0.2s ease;
     }
 
     /* ============================================
