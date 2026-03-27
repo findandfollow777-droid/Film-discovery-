@@ -312,9 +312,28 @@ async function startSpin() {
   }
 }
 
-function respin() {
+async function respin() {
   if (!lastPool.length) { startSpin(); return; }
-  const picks = pickThree(lastPool);
+
+  // Show loading state in each card slot
+  const container = document.getElementById("resultPicks");
+  container.querySelectorAll(".pick-card").forEach(card => {
+    card.innerHTML = `<div class="randomizer-loading-state">
+      <div class="mini-spinner">
+        <div class="mini-ring mini-ring-1"></div>
+        <div class="mini-ring mini-ring-2"></div>
+        <div class="mini-core"></div>
+      </div>
+      <p>Finding your next orbit...</p>
+    </div>`;
+  });
+
+  // Pick new movies and wait for minimum animation duration
+  const [picks] = await Promise.all([
+    Promise.resolve(pickThree(lastPool)),
+    new Promise(r => setTimeout(r, 1500))
+  ]);
+
   displayResults(picks);
 }
 
