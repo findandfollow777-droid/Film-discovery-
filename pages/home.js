@@ -6,8 +6,8 @@
    - Mosaic poster image population
    - Showcase carousel tab switching
    - Search bar submit handling
-   API CALL VOLUME: 2 calls on load (trending movies, trending people)
-   No per-item API calls. Results cached in sessionStorage.
+   API CALL VOLUME: 5 calls on load (trending movies, trending people,
+   mosaic: 2× trending pages + 1× top rated). All cached in sessionStorage.
    Added: 2026-03-28
    ============================================================ */
 
@@ -163,21 +163,25 @@ function renderTimeline(pair, containerId) {
   const trackB = 145;
   const currentYear = new Date().getFullYear();
 
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}">`;
-
-  // Year axis labels every 5 years
-  for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
-    if (y % 5 === 0) {
-      svg += `<text x="${xPos(y)}" y="195" text-anchor="middle" font-size="9" fill="#64748b" font-family="Barlow, sans-serif">${y}</text>`;
-    }
-  }
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}" style="display:block">`;
 
   // Faint vertical grid lines at every decade
   for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
     if (y % 10 === 0) {
-      svg += `<line x1="${xPos(y)}" y1="24" x2="${xPos(y)}" y2="170" stroke="#1e293b" stroke-width="1"/>`;
+      svg += `<line x1="${xPos(y)}" y1="24" x2="${xPos(y)}" y2="170" stroke="#0f172a" stroke-width="1"/>`;
     }
   }
+
+  // Year axis labels every 5 years (Orbitron)
+  for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
+    if (y % 5 === 0) {
+      svg += `<text x="${xPos(y)}" y="195" text-anchor="middle" font-size="11" letter-spacing="2" fill="#334155" font-family="'Orbitron', monospace">${y}</text>`;
+    }
+  }
+
+  // Subtle background runway bars behind career lines
+  svg += `<rect x="${xPos(yearStart)}" y="${trackA - 1}" width="${xPos(yearEnd) - xPos(yearStart)}" height="2" fill="#00d9ff" fill-opacity="0.06" rx="1"/>`;
+  svg += `<rect x="${xPos(yearStart)}" y="${trackB - 1}" width="${xPos(yearEnd) - xPos(yearStart)}" height="2" fill="#ffd700" fill-opacity="0.06" rx="1"/>`;
 
   // Career base lines
   svg += `<line x1="${xPos(yearStart)}" y1="${trackA}" x2="${xPos(yearEnd)}" y2="${trackA}" stroke="#00d9ff" stroke-opacity="0.2" stroke-width="2"/>`;
@@ -185,7 +189,7 @@ function renderTimeline(pair, containerId) {
 
   // NOW dashed line
   if (currentYear >= yearStart - 1 && currentYear <= yearEnd + 1) {
-    svg += `<line x1="${xPos(currentYear)}" y1="24" x2="${xPos(currentYear)}" y2="170" stroke="#64748b" stroke-width="0.5" stroke-dasharray="3,3" stroke-opacity="0.3"/>`;
+    svg += `<line x1="${xPos(currentYear)}" y1="24" x2="${xPos(currentYear)}" y2="170" stroke="#00d9ff" stroke-opacity="0.15" stroke-width="0.5" stroke-dasharray="3,3"/>`;
   }
 
   // Determine shared films for labeling logic
@@ -193,49 +197,52 @@ function renderTimeline(pair, containerId) {
   const firstShared = sharedFilms.length > 0 ? sharedFilms[0] : null;
   const lastShared = sharedFilms.length > 0 ? sharedFilms[sharedFilms.length - 1] : null;
 
-  let labelAlt = 0; // alternation counter for shared labels
+  let labelAlt = 0;
 
   // Render each film
   pair.films.forEach(film => {
     const x = xPos(film.year);
 
     if (film.person === 'both') {
-      // Vertical connector line between tracks
-      svg += `<line x1="${x}" y1="${trackA}" x2="${x}" y2="${trackB}" stroke="#a855f7" stroke-opacity="0.35" stroke-width="1"/>`;
+      // Dashed vertical connector between tracks
+      svg += `<line x1="${x}" y1="${trackA}" x2="${x}" y2="${trackB}" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3,4"/>`;
 
-      // Circles on both tracks
-      const r = film.award ? 8 : 6;
-      svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#a855f7"/>`;
-      svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#a855f7"/>`;
+      // Collision nodes on both tracks
+      const r = film.award ? 9 : 7;
+      const op = film.award ? '1.0' : '0.8';
+      svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#a855f7" opacity="${op}"/>`;
+      svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#a855f7" opacity="${op}"/>`;
 
-      // Award ring
+      // Award halo ring
       if (film.award) {
-        svg += `<circle cx="${x}" cy="${trackA}" r="13" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
-        svg += `<circle cx="${x}" cy="${trackB}" r="13" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="${trackA}" r="14" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="${trackB}" r="14" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1.5"/>`;
       }
 
-      // Label significant shared films: award:true + first + last shared
+      // Label significant shared films
       const isSignificant = film.award || film === firstShared || film === lastShared;
       if (isSignificant) {
-        const labelY = (labelAlt % 2 === 0) ? 70 : 165;
-        svg += `<text x="${x}" y="${labelY}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        const labelY = (labelAlt % 2 === 0) ? 68 : 168;
+        svg += `<text x="${x}" y="${labelY}" text-anchor="middle" font-size="11" fill="#a855f7" fill-opacity="0.85" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
         labelAlt++;
       }
     } else if (film.person === 'A') {
-      // Small cyan circle on personA track
-      svg += `<circle cx="${x}" cy="${trackA}" r="4" fill="#00d9ff" fill-opacity="0.35"/>`;
+      const r = film.award ? 6 : 4;
+      const op = film.award ? '0.65' : '0.45';
+      svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#00d9ff" opacity="${op}"/>`;
 
-      // Label only if award
       if (film.award) {
-        svg += `<text x="${x}" y="${trackA - 12}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        svg += `<circle cx="${x}" cy="${trackA}" r="10" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1"/>`;
+        svg += `<text x="${x}" y="${trackA - 14}" text-anchor="middle" font-size="10" fill="#00d9ff" fill-opacity="0.5" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
       }
     } else if (film.person === 'B') {
-      // Small gold circle on personB track
-      svg += `<circle cx="${x}" cy="${trackB}" r="4" fill="#ffd700" fill-opacity="0.3"/>`;
+      const r = film.award ? 6 : 4;
+      const op = film.award ? '0.55' : '0.38';
+      svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#ffd700" opacity="${op}"/>`;
 
-      // Label only if award
       if (film.award) {
-        svg += `<text x="${x}" y="${trackB + 18}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        svg += `<circle cx="${x}" cy="${trackB}" r="10" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1"/>`;
+        svg += `<text x="${x}" y="${trackB + 20}" text-anchor="middle" font-size="10" fill="#ffd700" fill-opacity="0.45" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
       }
     }
   });
@@ -290,7 +297,6 @@ async function loadTrendingFilms() {
 
 function applyTrendingFilms(results) {
   const tiles = document.querySelectorAll('.film-tile');
-  const posterPaths = [];
 
   results.forEach((movie, i) => {
     if (!tiles[i]) return;
@@ -309,16 +315,11 @@ function applyTrendingFilms(results) {
 
     tile.dataset.movieId = movie.id;
 
-    // Award badge for highly rated popular films
     if (movie.vote_count > 5000 && movie.vote_average > 7.5) {
       const badge = tile.querySelector('.film-tile-award');
       if (badge) badge.style.display = 'block';
     }
-
-    if (movie.poster_path) posterPaths.push(movie.poster_path);
   });
-
-  populateMosaic(posterPaths);
 }
 
 /* ----------------------------------------------------------
@@ -377,30 +378,74 @@ function applyTrendingPeople(results) {
    SECTION 5 — populateMosaic(posterPaths)
    ---------------------------------------------------------- */
 
+async function loadMosaicPosters() {
+  const CACHE_KEY = 'orbit_home_mosaic_posters';
+  const CACHE_TTL = 2 * 60 * 60 * 1000; // 2 hours
+
+  try {
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp < CACHE_TTL) {
+        populateMosaic(parsed.data);
+        return;
+      }
+    }
+
+    const [page1, page2, topRated] = await Promise.all([
+      OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 1 }),
+      OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 2 }),
+      OrbitUtils.tmdbFetch('/movie/top_rated', { language: 'en-US', page: 1 })
+    ]);
+
+    const paths = [
+      ...(page1.results || []),
+      ...(page2.results || []),
+      ...(topRated.results || [])
+    ].map(m => m.poster_path).filter(Boolean);
+
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: paths, timestamp: Date.now() }));
+    populateMosaic(paths);
+  } catch (err) {
+    console.warn('ORBIT: Failed to load mosaic posters', err);
+  }
+}
+
 function populateMosaic(posterPaths) {
   if (!posterPaths || posterPaths.length === 0) return;
 
-  setTimeout(() => {
-    const cells = document.querySelectorAll('.mosaic-cell');
-    if (cells.length === 0) return;
+  const cells = document.querySelectorAll('.mosaic-cell');
+  if (cells.length === 0) return;
 
-    // Shuffle poster paths
-    const shuffled = [...posterPaths].sort(() => Math.random() - 0.5);
+  // Fisher-Yates shuffle
+  const shuffled = [...posterPaths];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
 
-    // Repeat paths if fewer than 42
-    const extended = [];
-    while (extended.length < 42) {
-      extended.push(...shuffled);
+  // Ensure no adjacent cells repeat if we need to extend
+  const paths = [];
+  let idx = 0;
+  for (let i = 0; i < cells.length; i++) {
+    if (idx >= shuffled.length) idx = 0;
+    // Skip if same as previous to avoid adjacent repeats
+    if (i > 0 && paths[i - 1] === shuffled[idx] && shuffled.length > 1) {
+      idx = (idx + 1) % shuffled.length;
     }
+    paths.push(shuffled[idx]);
+    idx++;
+  }
 
-    cells.forEach((cell, i) => {
-      if (extended[i]) {
-        cell.style.backgroundImage = `url(${TMDB_IMG}w92${extended[i]})`;
-        cell.style.backgroundSize = 'cover';
-        cell.style.backgroundPosition = 'center';
-      }
-    });
-  }, 100);
+  // Staggered fade-in
+  cells.forEach((cell, i) => {
+    cell.style.opacity = '0';
+    cell.style.transition = 'opacity 0.8s ease';
+    cell.style.backgroundImage = `url(${TMDB_IMG}w92${paths[i]})`;
+    cell.style.backgroundSize = 'cover';
+    cell.style.backgroundPosition = 'center';
+    setTimeout(() => { cell.style.opacity = '1'; }, 50 * i);
+  });
 }
 
 /* ----------------------------------------------------------
@@ -513,6 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTimeline(pair, 'timeline-svg-wrapper');
   loadTrendingFilms();
   loadTrendingPeople();
+  loadMosaicPosters();
   initShowcase();
   initSearch();
   initScrollHint();
