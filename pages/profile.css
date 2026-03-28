@@ -650,6 +650,25 @@ html, body {
   color: var(--ghost-gray);
 }
 
+.list-icon.towatchiverse-accent {
+  background: rgba(255, 215, 0, 0.12);
+  color: var(--accent-gold);
+}
+
+.towatchiverse-card {
+  text-decoration: none;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.04);
+}
+.towatchiverse-card:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+.list-count-badge.towatchiverse-badge {
+  color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.1);
+}
 
 .list-info {
   flex: 1;

@@ -160,6 +160,14 @@ function refreshSummaryCounts() {
 
   document.getElementById("lovedCount").textContent = loved.length;
   document.getElementById("tonightCount").textContent = tonight.length;
+
+  // Towatchiverse total count
+  const watchlistCount = typeof getWatchlistCount === 'function' ? getWatchlistCount() : 0;
+  const watchedCount = typeof getWatchedCount === 'function' ? getWatchedCount() : 0;
+  const shortlistCount = typeof getShortlistCount === 'function' ? getShortlistCount() : 0;
+  const totalSaved = watchlistCount + loved.length + watchedCount + shortlistCount;
+  const twvCountEl = document.getElementById("towatchiverseCount");
+  if (twvCountEl) twvCountEl.textContent = totalSaved;
 }
 
 // ============================================
