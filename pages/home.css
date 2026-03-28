@@ -39,7 +39,7 @@ body {
 .film-grain {
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
   opacity: 0.03;
   pointer-events: none;
   z-index: 1000;
@@ -64,8 +64,8 @@ body {
   padding: 14px 32px;
   border-bottom: 1px solid var(--cosmic-blue);
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -812,6 +812,11 @@ body {
 
 .showcase-link:hover {
   color: var(--film-white);
+}
+
+/* Venn illustration SVG text */
+.venn-text {
+  font-family: var(--font-body);
 }
 
 .face-tags {
