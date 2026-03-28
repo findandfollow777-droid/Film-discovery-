@@ -2,13 +2,186 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Orbit – Constellation</title>
+  <title>Orbit – Constellation View</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
   <link rel="stylesheet" href="constellation.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+  <style>
+    /* ============================================
+       HUD OVERLAY CHROME
+    ============================================ */
+    .hud-top-bar {
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 20px;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .hud-top-bar > * { pointer-events: auto; }
+
+    .hud-back-btn {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.15em; padding: 6px 14px;
+      border: 1px solid var(--cosmic-blue); border-radius: 3px;
+      background: rgba(0,0,0,0.7); color: var(--accent-cyan);
+      opacity: 0.7; cursor: pointer; text-decoration: none;
+    }
+    .hud-back-btn:hover { opacity: 1; }
+
+    .hud-brand {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hud-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 6px rgba(0,217,255,0.5);
+    }
+    .hud-orbit-name {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      color: var(--accent-cyan); letter-spacing: 0.28em;
+    }
+    .hud-page-name {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      color: var(--ghost-gray); letter-spacing: 0.15em;
+    }
+
+    .hud-hint {
+      font-size: 9px; color: var(--ghost-gray);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANCHOR PANEL (top-left) ── */
+    .hud-anchor-panel {
+      position: absolute; top: 56px; left: 16px;
+      background: rgba(0,0,0,0.82);
+      border: 1px solid var(--cosmic-blue);
+      border-radius: 8px; padding: 14px 16px;
+      width: 216px; z-index: 100;
+    }
+    .hud-anchor-eyebrow {
+      font-family: 'Orbitron', monospace; font-size: 7px;
+      letter-spacing: 0.35em; color: var(--ghost-gray);
+      margin-bottom: 10px;
+    }
+    .hud-anchor-body { display: flex; gap: 10px; align-items: flex-start; }
+    .hud-anchor-poster {
+      width: 40px; flex-shrink: 0; aspect-ratio: 2/3;
+      background: var(--nebula-dark); border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 3px; background-size: cover; background-position: center top;
+    }
+    .hud-anchor-info { flex: 1; min-width: 0; }
+    .hud-anchor-title {
+      font-family: 'Orbitron', monospace; font-size: 13px;
+      color: var(--film-white); line-height: 1.1; margin-bottom: 4px;
+    }
+    .hud-anchor-meta {
+      font-size: 9px; color: var(--ghost-gray);
+      letter-spacing: 0.05em; margin-bottom: 6px; line-height: 1.6;
+    }
+    .hud-anchor-badges {
+      display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px;
+    }
+    .hud-anchor-badge {
+      font-family: 'Orbitron', monospace; font-size: 7px;
+      letter-spacing: 0.08em; padding: 2px 6px;
+      border-radius: 10px; border: 1px solid;
+    }
+    .hud-anchor-cube-btn {
+      width: 100%; font-family: 'Orbitron', monospace; font-size: 8px;
+      letter-spacing: 0.12em; padding: 7px;
+      border: 1px solid rgba(0,217,255,0.2); border-radius: 3px;
+      background: rgba(0,217,255,0.06); color: var(--accent-cyan);
+      cursor: pointer;
+    }
+    .hud-anchor-cube-btn:hover { background: rgba(0,217,255,0.12); }
+
+    /* ── LEGEND (bottom-left) ── */
+    .hud-legend {
+      position: absolute; bottom: 16px; left: 16px;
+      background: rgba(0,0,0,0.80);
+      border: 1px solid rgba(0,217,255,0.15);
+      border-radius: 6px; padding: 10px 14px;
+      z-index: 100;
+    }
+    .hud-legend-title {
+      font-family: 'Orbitron', monospace; font-size: 8px;
+      letter-spacing: 0.2em; color: var(--accent-cyan);
+      opacity: 0.65; margin-bottom: 8px;
+    }
+    .hud-legend-item {
+      display: flex; align-items: center; gap: 7px; margin-bottom: 5px;
+    }
+    .hud-legend-item:last-child { margin-bottom: 0; }
+    .hud-legend-item span { font-size: 9px; color: var(--ghost-gray); }
+    .hud-legend-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .hud-dot-near { background: var(--accent-orange); opacity: 0.85; }
+    .hud-dot-mid { background: var(--accent-cyan); opacity: 0.65; }
+    .hud-dot-far { background: var(--ghost-gray); opacity: 0.5; }
+
+    /* ── ACTIONS (bottom-right) ── */
+    .hud-actions {
+      position: absolute; bottom: 16px; right: 16px;
+      text-align: right; z-index: 100;
+    }
+    .hud-film-count {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.2em; color: var(--ghost-gray);
+      opacity: 0.5; margin-bottom: 8px;
+    }
+    .hud-expand-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 11px 22px;
+      border: 1px solid rgba(168,85,247,0.45); border-radius: 4px;
+      background: rgba(168,85,247,0.08); color: var(--prestige-purple);
+      cursor: pointer; display: inline-flex; align-items: center;
+      gap: 8px; transition: all 0.2s;
+    }
+    .hud-expand-btn:hover { background: rgba(168,85,247,0.14); }
+    .hud-expand-btn.loading { opacity: 0.5; pointer-events: none; }
+
+    /* ── WATCHLIST CONTEXT MENU ── */
+    .wl-context-menu {
+      position: fixed; z-index: 200;
+      background: rgba(0,0,0,0.92);
+      border: 1px solid var(--cosmic-blue);
+      border-radius: 6px; padding: 4px 0;
+      min-width: 180px; display: none;
+    }
+    .wl-context-menu.is-open { display: block; }
+    .wl-context-item {
+      display: block; width: 100%; padding: 8px 16px;
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.1em; border: none; background: transparent;
+      cursor: pointer; text-align: left; transition: background 0.15s;
+    }
+    .wl-context-item:hover { background: rgba(255,255,255,0.05); }
+    .wl-context-item.add { color: var(--accent-cyan); }
+    .wl-context-item.remove { color: var(--danger-red); }
+
+    /* Toast notification */
+    .wl-toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 10px 20px; border-radius: 6px;
+      background: rgba(0,217,255,0.15); border: 1px solid rgba(0,217,255,0.3);
+      color: var(--accent-cyan); font-size: 11px;
+      opacity: 0; transition: all 0.3s ease; z-index: 300;
+      pointer-events: none;
+    }
+    .wl-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Hide old chrome */
+    .constellation-header,
+    .similarity-legend { display: none !important; }
+  </style>
 </head>
 <body>
   <!-- SPACE BACKGROUND -->
@@ -16,49 +189,78 @@
   <div class="stars-field"></div>
   <div class="nebula-glow"></div>
 
-  <!-- HEADER -->
+  <!-- OLD HEADER (hidden by CSS) -->
   <header class="constellation-header">
-    <a href="../pages/results.html" class="back-link" id="backNav">← Back to Results</a>
-    <div class="header-title">
-      <span class="title-icon">✦</span>
-      <h1>Constellation View</h1>
-    </div>
-    <div class="header-hint">
-      Movies orbit by similarity • Click any to explore • Double-click to make new anchor
-    </div>
+    <a href="../pages/results.html" class="back-link" id="backNav"></a>
+    <div class="header-title"><span class="title-icon"></span><h1>Constellation View</h1></div>
+    <div class="header-hint"></div>
   </header>
 
-  <!-- ORBITAL VISUALIZATION -->
+  <!-- HUD: TOP BAR -->
+  <div class="hud-top-bar">
+    <button class="hud-back-btn" onclick="history.back()">&#x2190; BACK</button>
+    <div class="hud-brand">
+      <div class="hud-dot"></div>
+      <span class="hud-orbit-name">ORBIT</span>
+      <span class="hud-page-name">CONSTELLATION VIEW</span>
+    </div>
+    <span class="hud-hint">Click to explore &middot; Double-click to re-anchor</span>
+  </div>
+
+  <!-- HUD: ANCHOR PANEL -->
+  <div class="hud-anchor-panel" id="hud-anchor-panel">
+    <div class="hud-anchor-eyebrow">ANCHOR FILM</div>
+    <div class="hud-anchor-body">
+      <div class="hud-anchor-poster" id="hud-anchor-poster"></div>
+      <div class="hud-anchor-info">
+        <div class="hud-anchor-title" id="hud-anchor-title">&#x2014;</div>
+        <div class="hud-anchor-meta" id="hud-anchor-meta"></div>
+        <div class="hud-anchor-badges" id="hud-anchor-badges"></div>
+        <button class="hud-anchor-cube-btn" id="hud-anchor-cube-btn">OPEN FILM CUBE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD: LEGEND -->
+  <div class="hud-legend">
+    <div class="hud-legend-title">ORBITAL DISTANCE</div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-near"></div><span>Very Similar</span></div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-mid"></div><span>Similar</span></div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-far"></div><span>Less Similar</span></div>
+  </div>
+
+  <!-- HUD: ACTIONS -->
+  <div class="hud-actions">
+    <div class="hud-film-count" id="hud-film-count">&#x2014; FILMS IN ORBIT</div>
+    <button class="hud-expand-btn" id="hud-expand-btn">
+      <span class="og og-galaxy"></span> EXPAND MY UNIVERSE
+    </button>
+  </div>
+
+  <!-- ORBITAL VISUALIZATION (preserved) -->
   <div class="orbital-container" id="orbitalContainer">
-    <!-- Orbital rings (visual guides) -->
     <div class="orbital-ring ring-1"></div>
     <div class="orbital-ring ring-2"></div>
     <div class="orbital-ring ring-3"></div>
     <div class="orbital-ring ring-4"></div>
-    
-    <!-- Anchor star (center) -->
     <div class="anchor-star" id="anchorStar">
       <img class="anchor-poster" id="anchorPoster" src="" alt="">
       <div class="anchor-glow"></div>
       <div class="anchor-label" id="anchorLabel">Loading...</div>
     </div>
-    
-    <!-- Expand Universe Button (shown when < 10 movies) -->
     <div class="expand-universe" id="expandUniverse" hidden>
       <button class="expand-btn" id="expandBtn">
         <span class="expand-icon"><span class="og og-sparkle"></span></span>
         <span class="expand-text">Expand Universe</span>
       </button>
-      <p class="expand-hint">Add similar films based on genre & themes</p>
+      <p class="expand-hint">Add similar films based on genre &amp; themes</p>
     </div>
-    
-    <!-- Orbiting movies will be injected here -->
     <div class="orbiting-movies" id="orbitingMovies"></div>
   </div>
 
-  <!-- MOVIE INFO PANEL (slides in when movie selected) -->
+  <!-- MOVIE INFO PANEL (preserved) -->
   <div class="info-panel" id="infoPanel">
-    <button class="info-close" id="infoClose">✕</button>
+    <button class="info-close" id="infoClose">&#x2715;</button>
     <div class="info-content">
       <img class="info-poster" id="infoPoster" src="" alt="">
       <div class="info-details">
@@ -70,27 +272,46 @@
         </div>
         <p class="info-overview" id="infoOverview"></p>
         <div class="info-actions">
-          <button class="make-anchor-btn" id="makeAnchorBtn" onclick="handleMakeAnchorClick()">
-            <span>✦</span> Make This the Anchor
+          <button class="make-anchor-btn" id="makeAnchorBtn">
+            <span class="og og-sparkle"></span> Make This the Anchor
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SIMILARITY LEGEND -->
-  <div class="similarity-legend">
-    <div class="legend-title">Orbital Distance</div>
-    <div class="legend-scale">
-      <span class="legend-close">● Very Similar</span>
-      <span class="legend-far">○ Less Similar</span>
-    </div>
+  <!-- OLD LEGEND (hidden by CSS) -->
+  <div class="similarity-legend"></div>
+
+  <!-- WATCHLIST CONTEXT MENU -->
+  <div class="wl-context-menu" id="wlContextMenu">
+    <button class="wl-context-item" id="wlContextBtn"></button>
   </div>
+
+  <!-- TOAST -->
+  <div class="wl-toast" id="wlToast"></div>
+
+  <!-- Load Nebula Service Module -->
+  <script type="module">
+    import * as nebulaService from '../components/nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+  </script>
 
   <script src="../config.js"></script>
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
   <script src="../components/taste-service.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/watchlist-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
   <script src="constellation.js"></script>
 </body>
 </html>
