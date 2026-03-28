@@ -74,43 +74,85 @@ body {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
 }
 
-.nav-logo-dot {
-  width: 10px;
-  height: 10px;
+.nav-logo-mark {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent-cyan);
   border-radius: 50%;
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4),
+              inset 0 0 12px rgba(var(--accent-rgb), 0.15);
+  animation: orbit-spin 8s linear infinite;
+}
+
+.orbit-ring-2 {
+  width: 70%;
+  height: 70%;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 14px rgba(var(--gold-rgb), 0.3),
+              inset 0 0 10px rgba(var(--gold-rgb), 0.15);
+  animation-direction: reverse;
+  animation-duration: 6s;
+}
+
+.orbit-core {
+  width: 8px;
+  height: 8px;
   background: var(--accent-cyan);
-  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px rgba(var(--accent-rgb), 0.3);
+  z-index: 1;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .nav-logo-text {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 900;
   letter-spacing: 3px;
-  color: var(--film-white);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .nav-links a {
   font-family: var(--font-display);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--ghost-gray);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: opacity 0.2s;
 }
 
 .nav-links a:hover {
-  color: var(--film-white);
+  opacity: 0.7;
 }
 
 /* ============================================================
