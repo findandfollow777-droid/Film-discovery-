@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT — Film Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+  <!-- ============================================
+       FILM GRAIN + VIGNETTE OVERLAYS
+  ============================================ -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- ============================================
+       NAV
+  ============================================ -->
+  <nav class="home-nav">
+    <div class="nav-left">
+      <span class="orbit-logo-dot"></span>
+      <span class="orbit-wordmark">ORBIT</span>
+    </div>
+    <div class="nav-right">
+      <a href="../games/arcade.html" class="nav-link">ARCADE</a>
+      <a href="awards-browse.html" class="nav-link">AWARDS</a>
+      <a href="timeline.html" class="nav-link">TIMELINE</a>
+      <a href="randomizer.html" class="nav-link">RANDOMISER</a>
+      <a href="profile.html" class="nav-link">PROFILE</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+  ============================================ -->
+  <section class="home-hero">
+
+    <!-- LEFT COLUMN -->
+    <div class="hero-left">
+      <p class="hero-micro-label">FILM DISCOVERY · GAMES · AWARDS · TIMELINES</p>
+
+      <h1 class="hero-heading">
+        Chart your<br>
+        <span class="cyan">cinema.</span>
+      </h1>
+
+      <div class="hero-divider"></div>
+
+      <p class="hero-tagline">
+        Search any two people in film — actors, directors, composers — and
+        ORBIT maps everywhere their careers collide. Venn diagrams, timelines,
+        awards, trivia games and more.
+      </p>
+
+      <!-- Search Bar -->
+      <form class="hero-search" autocomplete="off">
+        <span class="hero-search-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input type="text" class="hero-search-input" placeholder="Actor, director, film…">
+        <button type="submit" class="hero-search-btn">SEARCH</button>
+      </form>
+
+      <!-- Seed suggestions -->
+      <p class="hero-seeds">
+        Try:
+        <span class="seed-link" data-seed="scorsese+deniro">Scorsese + De Niro</span>
+        <span class="seed-link" data-seed="blanchett+pitt">Blanchett + Pitt</span>
+        <span class="seed-link" data-seed="nolan+bale">Nolan + Bale</span>
+      </p>
+
+      <!-- Stats row -->
+      <div class="hero-stats">
+        <div class="stat-box">
+          <span class="stat-number">7,040</span>
+          <span class="stat-label">AWARD ENTRIES</span>
+        </div>
+        <div class="stat-box stat-gold">
+          <span class="stat-number">6</span>
+          <span class="stat-label">GAMES</span>
+        </div>
+        <div class="stat-box stat-purple">
+          <span class="stat-number">400+</span>
+          <span class="stat-label">NEBULA REVIEWS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="hero-right">
+
+      <!-- LAYER 1: Mosaic grid -->
+      <div class="hero-mosaic">
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-cell"></div>
+        <div class="mosaic-vignette"></div>
+        <div class="mosaic-fade-left"></div>
+      </div>
+
+      <!-- LAYER 2: Timeline overlay -->
+      <div class="hero-timeline">
+        <div class="timeline-top-bar">
+          <span class="timeline-title">SACRED TIMELINE</span>
+          <span class="timeline-pair-label"></span>
+        </div>
+
+        <div class="timeline-legend">
+          <div class="legend-item">
+            <span class="legend-line cyan"></span>
+            <span class="legend-text">PERSON A</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-line gold"></span>
+            <span class="legend-text">PERSON B</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot purple"></span>
+            <span class="legend-text">COLLISION</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-ring gold"></span>
+            <span class="legend-text">AWARD</span>
+          </div>
+        </div>
+
+        <div class="timeline-scroll-container">
+          <div class="timeline-svg-wrapper" id="timeline-svg-wrapper" style="width:1600px;"></div>
+        </div>
+
+        <span class="timeline-scroll-hint visible">← scroll to explore →</span>
+
+        <a href="timeline.html" class="timeline-explore-link">EXPLORE FULL TIMELINE →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       CURRENTLY IN ORBIT
+  ============================================ -->
+  <section class="home-section home-films">
+    <div class="section-header">
+      <span class="accent-bar cyan"></span>
+      <h2>CURRENTLY IN ORBIT — THIS WEEK'S FIVE</h2>
+      <a href="results.html" class="section-link">VIEW ALL →</a>
+    </div>
+
+    <div class="film-strip">
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">01</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">02</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">03</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">04</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">05</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BRIGHTEST STARS
+  ============================================ -->
+  <section class="home-section home-actors">
+    <div class="section-header">
+      <span class="accent-bar gold"></span>
+      <h2>BRIGHTEST STARS — IN THE CONSTELLATION</h2>
+      <a href="timeline.html" class="section-link">EXPLORE TIMELINES →</a>
+    </div>
+
+    <div class="actor-strip">
+      <div class="actor-tile">
+        <div class="actor-portrait"></div>
+        <span class="actor-name"></span>
+        <span class="actor-subtitle"></span>
+      </div>
+      <div class="actor-tile">
+        <div class="actor-portrait"></div>
+        <span class="actor-name"></span>
+        <span class="actor-subtitle"></span>
+      </div>
+      <div class="actor-tile">
+        <div class="actor-portrait"></div>
+        <span class="actor-name"></span>
+        <span class="actor-subtitle"></span>
+      </div>
+      <div class="actor-tile">
+        <div class="actor-portrait"></div>
+        <span class="actor-name"></span>
+        <span class="actor-subtitle"></span>
+      </div>
+      <div class="actor-tile">
+        <div class="actor-portrait"></div>
+        <span class="actor-name"></span>
+        <span class="actor-subtitle"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       THE PRESTIGE CIRCUIT
+  ============================================ -->
+  <section class="home-section home-awards">
+    <div class="section-header">
+      <span class="accent-bar gold"></span>
+      <h2>THE PRESTIGE CIRCUIT — SIX FESTIVALS · 7,040 ENTRIES</h2>
+      <a href="awards-browse.html" class="section-link">BROWSE AWARDS →</a>
+    </div>
+
+    <div class="glyph-strip">
+      <div class="glyph-cell">
+        <span class="og og-star gold"></span>
+        <span class="glyph-label">ACADEMY</span>
+        <span class="glyph-count">2,847</span>
+      </div>
+      <div class="glyph-cell">
+        <span class="og og-globe gold"></span>
+        <span class="glyph-label">GOLDEN GLOBE</span>
+        <span class="glyph-count">1,204</span>
+      </div>
+      <div class="glyph-cell">
+        <span class="og og-film cyan"></span>
+        <span class="glyph-label">BAFTA</span>
+        <span class="glyph-count">1,188</span>
+      </div>
+      <div class="glyph-cell">
+        <span class="og og-palm green"></span>
+        <span class="glyph-label">CANNES</span>
+        <span class="glyph-count">892</span>
+      </div>
+      <div class="glyph-cell">
+        <span class="og og-lion purple"></span>
+        <span class="glyph-label">VENICE</span>
+        <span class="glyph-count">548</span>
+      </div>
+      <div class="glyph-cell">
+        <span class="og og-bear amber"></span>
+        <span class="glyph-label">BERLIN</span>
+        <span class="glyph-count">361</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       WHERE YOUR SEARCH TAKES YOU
+  ============================================ -->
+  <section class="home-section home-showcase">
+    <div class="section-header">
+      <span class="accent-bar purple"></span>
+      <h2>WHERE YOUR SEARCH TAKES YOU</h2>
+      <p class="section-subtitle">Every result opens a universe of tools</p>
+    </div>
+
+    <div class="showcase-tabs">
+      <button class="showcase-tab active" data-panel="0">COSMIC VENN</button>
+      <button class="showcase-tab" data-panel="1">DUAL TIMELINES</button>
+      <button class="showcase-tab" data-panel="2">MOVIE CUBE</button>
+      <button class="showcase-tab" data-panel="3">SHORTLIST</button>
+    </div>
+
+    <div class="showcase-panel-container">
+
+      <!-- Panel 0: COSMIC VENN -->
+      <div class="showcase-panel active" data-panel="0">
+        <div class="panel-col panel-text">
+          <h3>COSMIC VENN</h3>
+          <p>
+            See where two filmographies overlap in real time. ORBIT builds a
+            dynamic Venn diagram mapping every shared film — colour-coded by
+            genre, decade and critical reception. Hover any node to reveal
+            cast, crew and award history.
+          </p>
+          <a href="venn.html" class="panel-link">OPEN COSMIC VENN →</a>
+        </div>
+        <div class="panel-col panel-visual">
+          <svg class="venn-illustration" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="100" r="80" fill="none" stroke="var(--accent-cyan, #00e5ff)" stroke-width="2" opacity="0.6"/>
+            <circle cx="200" cy="100" r="80" fill="none" stroke="var(--accent-gold, #ffd700)" stroke-width="2" opacity="0.6"/>
+            <ellipse cx="160" cy="100" rx="40" ry="70" fill="var(--accent-purple, #b388ff)" opacity="0.15"/>
+            <text x="80" y="96" fill="#fff" font-family="Barlow, sans-serif" font-size="9" opacity="0.7">THE DEPARTED</text>
+            <text x="80" y="110" fill="#fff" font-family="Barlow, sans-serif" font-size="9" opacity="0.7">GOODFELLAS</text>
+            <text x="145" y="90" fill="#fff" font-family="Barlow, sans-serif" font-size="10" font-weight="600" opacity="0.9">CAPE FEAR</text>
+            <text x="145" y="106" fill="#fff" font-family="Barlow, sans-serif" font-size="10" font-weight="600" opacity="0.9">CASINO</text>
+            <text x="210" y="96" fill="#fff" font-family="Barlow, sans-serif" font-size="9" opacity="0.7">JOKER</text>
+            <text x="210" y="110" fill="#fff" font-family="Barlow, sans-serif" font-size="9" opacity="0.7">TAXI DRIVER</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Panel 1: DUAL TIMELINES -->
+      <div class="showcase-panel" data-panel="1">
+        <div class="panel-full">
+          <h3>DUAL TIMELINES</h3>
+          <p>
+            Two careers, one axis. The Sacred Timeline plots every credit
+            side-by-side across decades — collisions glow where both people
+            worked on the same film. Scroll through an entire shared history
+            in seconds.
+          </p>
+          <div class="timeline-placeholder">
+            <span class="placeholder-label">TIMELINE ILLUSTRATION</span>
+          </div>
+          <a href="timeline.html" class="panel-link">OPEN DUAL TIMELINES →</a>
+        </div>
+      </div>
+
+      <!-- Panel 2: MOVIE CUBE -->
+      <div class="showcase-panel" data-panel="2">
+        <div class="panel-col panel-text">
+          <h3>MOVIE CUBE</h3>
+          <p>
+            Every film becomes a six-sided card you can flip through: poster,
+            full cast, stats, trivia, awards history and Nebula community
+            reviews — all without leaving the results page.
+          </p>
+          <div class="face-tags">
+            <span class="face-tag">POSTER</span>
+            <span class="face-tag">CAST</span>
+            <span class="face-tag">STATS</span>
+            <span class="face-tag">TRIVIA</span>
+            <span class="face-tag gold">AWARDS</span>
+            <span class="face-tag purple">NEBULA</span>
+          </div>
+          <a href="results.html" class="panel-link">SEE MOVIE CUBES →</a>
+        </div>
+        <div class="panel-col panel-visual">
+          <div class="cube-illustration">
+            <div class="cube-face-flat"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: SHORTLIST -->
+      <div class="showcase-panel" data-panel="3">
+        <div class="panel-col panel-text">
+          <h3>SHORTLIST</h3>
+          <p>
+            Pin films as you browse and compare them side-by-side. The
+            Shortlist drawer lets you stack up to five picks, view stats in
+            parallel, and decide what to watch tonight.
+          </p>
+          <a href="results.html" class="panel-link">START COMPARING →</a>
+        </div>
+        <div class="panel-col panel-visual">
+          <div class="comparison-cards">
+            <div class="comparison-card"></div>
+            <div class="comparison-card"></div>
+            <div class="comparison-card"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       FEATURES + STATS
+  ============================================ -->
+  <section class="home-section home-features">
+
+    <!-- LEFT: YOUR INSTRUMENTS -->
+    <div class="features-left">
+      <span class="accent-bar cyan"></span>
+      <h2>YOUR INSTRUMENTS</h2>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <span class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <h3>QUICK SEARCH</h3>
+          <p>Find any actor, director or composer — results appear instantly as you type.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon"><span class="og og-film"></span></span>
+          <h3>SACRED TIMELINE</h3>
+          <p>Two careers plotted side-by-side across decades, with every collision highlighted.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon"><span class="og og-galaxy"></span></span>
+          <h3>COSMIC VENN</h3>
+          <p>Interactive Venn diagrams revealing every shared film between two people.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon"><span class="og og-sparkle gold"></span></span>
+          <h3>AWARDS</h3>
+          <p>Seven thousand entries across six major festivals — Oscars to Berlin.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon"><span class="og og-dice green"></span></span>
+          <h3>THE ARCADE</h3>
+          <p>Six trivia and guessing games built from real film data. Test your knowledge.</p>
+        </div>
+        <div class="feature-box">
+          <span class="feature-icon"><span class="og og-planet purple"></span></span>
+          <h3>NEBULA</h3>
+          <p>Community-powered micro-reviews. Rate any film in three words and see what sticks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: THE NUMBERS -->
+    <div class="features-right">
+      <div class="features-right-backdrop"></div>
+      <span class="accent-bar purple"></span>
+      <h2>THE NUMBERS</h2>
+
+      <div class="stat-blocks">
+        <div class="stat-block cyan">
+          <span class="stat-block-number">7,040</span>
+          <span class="stat-block-label">AWARD ENTRIES INDEXED</span>
+        </div>
+        <div class="stat-block gold">
+          <span class="stat-block-number">6</span>
+          <span class="stat-block-label">ARCADE GAMES</span>
+        </div>
+        <div class="stat-block purple">
+          <span class="stat-block-number">400+</span>
+          <span class="stat-block-label">NEBULA REVIEWS</span>
+        </div>
+        <div class="stat-block green">
+          <span class="stat-block-number">∞</span>
+          <span class="stat-block-label">PAIR COMBINATIONS</span>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <a href="#" class="cta-link" id="ctaBegin">BEGIN YOUR DISCOVERY</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       FOOTER
+  ============================================ -->
+  <footer class="home-footer">
+    <div class="footer-left">
+      <span class="orbit-logo-dot dimmed"></span>
+      <span class="orbit-wordmark dimmed">ORBIT</span>
+    </div>
+    <div class="footer-center">
+      <p class="tmdb-attribution">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-tagline">A FILM LOVER'S CLUBHOUSE</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       MOVIECUBE CSS (loaded late)
+  ============================================ -->
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+
+  <!-- ============================================
+       NEBULA SERVICE MODULE
+  ============================================ -->
+  <script type="module">
+    import * as nebulaService from '../components/nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+  </script>
+
+  <!-- ============================================
+       SCRIPTS
+  ============================================ -->
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../components/taste-service.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/watchlist-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
+  <script src="home.js"></script>
+
+</body>
+</html>
