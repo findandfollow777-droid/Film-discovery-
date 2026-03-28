@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Towatchiverse – Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="towatchiverse.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+</head>
+<body>
+
+  <!-- CINEMATIC BACKGROUND -->
+  <div class="game-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- HEADER -->
+  <header class="twv-header">
+    <a class="back-link" onclick="history.back()">&#x2190; Back</a>
+    <div class="twv-header-center">
+      <h1 class="twv-title">My Towatchiverse</h1>
+      <p class="twv-subtitle">Your personal film universe</p>
+    </div>
+    <div class="twv-header-spacer"></div>
+  </header>
+
+  <!-- STATS LINE -->
+  <div class="twv-stats">
+    <span><strong id="statWatchlist">0</strong> films queued</span>
+    <span class="twv-stats-dot">&#183;</span>
+    <span><strong id="statLoved">0</strong> loved</span>
+    <span class="twv-stats-dot">&#183;</span>
+    <span><strong id="statWatched">0</strong> watched</span>
+    <span class="twv-stats-dot">&#183;</span>
+    <span><strong id="statShortlist">0</strong> in shortlist</span>
+  </div>
+
+  <!-- TABS -->
+  <nav class="twv-tabs">
+    <button class="twv-tab active" data-tab="watchlist">
+      <span class="og og-couch"></span>
+      <span class="twv-tab-label">Watchlist</span>
+      <span class="twv-tab-count" id="tabCountWatchlist">0</span>
+    </button>
+    <button class="twv-tab" data-tab="liked">
+      <span class="og og-thumbsup"></span>
+      <span class="twv-tab-label">Liked</span>
+      <span class="twv-tab-count" id="tabCountLiked">0</span>
+    </button>
+    <button class="twv-tab" data-tab="watched">
+      <span class="og og-eye"></span>
+      <span class="twv-tab-label">Watched</span>
+      <span class="twv-tab-count" id="tabCountWatched">0</span>
+    </button>
+    <button class="twv-tab" data-tab="shortlist">
+      <span class="og og-sparkle"></span>
+      <span class="twv-tab-label">Shortlist</span>
+      <span class="twv-tab-count" id="tabCountShortlist">0</span>
+    </button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="twv-main">
+
+    <!-- FILTER / SORT BAR -->
+    <div class="twv-toolbar">
+      <button class="twv-sort-btn" id="twvSortBtn">
+        Sort: Date Added <span class="twv-sort-arrow">&#x25BE;</span>
+      </button>
+      <div class="twv-search-wrap">
+        <input type="text" class="twv-search" id="twvSearch" placeholder="Search within list...">
+      </div>
+    </div>
+
+    <!-- MOVIE GRID -->
+    <div class="towatchiverse-grid" id="towatchiverseGrid">
+      <!-- Cards injected by towatchiverse.js -->
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="towatchiverse-empty" id="towatchiverseEmpty">
+      <span class="og og-planet og-lg"></span>
+      <p>Nothing here yet</p>
+      <a href="randomizer.html" class="twv-find-btn">
+        <span class="og og-shuffle"></span> Find Something
+      </a>
+    </div>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/watchlist-service.js"></script>
+  <script src="../components/watched-service.js"></script>
+  <script src="../components/taste-service.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+</body>
+</html>
