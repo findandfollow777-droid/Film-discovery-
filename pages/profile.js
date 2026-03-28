@@ -89,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function getListData() {
   const lovedMovies = typeof getLovedMovies === "function" ? getLovedMovies() : [];
   const skippedMovies = typeof getSkippedMovies === "function" ? getSkippedMovies() : [];
-  const comfortList = getStored("orbit_comfort_list") || [];
 
   const loved = lovedMovies.map(m => ({
     id: m.id,
@@ -111,19 +110,7 @@ function getListData() {
     added_at: m.skippedAt ? new Date(m.skippedAt).getTime() : 0
   }));
 
-  const comfort = comfortList.map(show => ({
-    id: show.id,
-    title: show.name || "Unknown",
-    poster_path: show.poster || "",
-    release_date: "",
-    media_type: "tv",
-    number_of_episodes: show.selectedSeasons ? show.selectedSeasons.length * 10 : 0,
-    totalSeasons: show.totalSeasons || 0,
-    selectedSeasons: show.selectedSeasons || [],
-    added_at: show.addedAt
-  }));
-
-  return { loved, tonight, comfort };
+  return { loved, tonight };
 }
 
 function setupProfileSummary() {
@@ -138,8 +125,8 @@ function setupProfileSummary() {
   refreshSummaryCounts();
 
   // Auto-expand if has content
-  const { loved, tonight, comfort } = getListData();
-  const total = loved.length + tonight.length + comfort.length;
+  const { loved, tonight } = getListData();
+  const total = loved.length + tonight.length;
   if (total >= 10) {
     body.classList.add("expanded");
     header.classList.add("open");
@@ -147,12 +134,10 @@ function setupProfileSummary() {
 }
 
 function refreshSummaryCounts() {
-  const { loved, tonight, comfort } = getListData();
-  const total = loved.length + tonight.length + comfort.length;
+  const { loved, tonight } = getListData();
+  const total = loved.length + tonight.length;
 
-  // Compute TV episode total for threshold check
-  const tvEpisodeTotal = comfort.reduce((sum, s) => sum + (s.number_of_episodes || 0), 0);
-  const meetsThreshold = total >= 10 || tvEpisodeTotal >= 10;
+  const meetsThreshold = total >= 10;
 
   const teaser = document.getElementById("summaryTeaser");
   const lists = document.getElementById("summaryLists");
@@ -175,7 +160,6 @@ function refreshSummaryCounts() {
 
   document.getElementById("lovedCount").textContent = loved.length;
   document.getElementById("tonightCount").textContent = tonight.length;
-  document.getElementById("comfortCount").textContent = comfort.length;
 }
 
 // ============================================
@@ -193,7 +177,6 @@ function setupListModal() {
   // Open modal from list cards
   document.getElementById("lovedCard").addEventListener("click", () => openListModal("loved"));
   document.getElementById("tonightCard").addEventListener("click", () => openListModal("tonight"));
-  document.getElementById("comfortCard").addEventListener("click", () => openListModal("comfort"));
 
   // Close
   closeBtn.addEventListener("click", closeListModal);
@@ -233,11 +216,6 @@ function openListModal(listType) {
       icon.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>';
       title.textContent = "Not Tonight";
       break;
-    case "comfort":
-      icon.classList.add("comfort-modal");
-      icon.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0 0-4z"/></svg>';
-      title.textContent = "Comfort List";
-      break;
   }
 
   renderModalContent(listType);
@@ -253,12 +231,11 @@ function closeListModal() {
 }
 
 function renderModalContent(listType) {
-  const { loved, tonight, comfort } = getListData();
+  const { loved, tonight } = getListData();
   let items;
   switch (listType) {
     case "loved": items = loved; break;
     case "tonight": items = tonight; break;
-    case "comfort": items = comfort; break;
   }
 
   // Sort by most recent
@@ -340,10 +317,6 @@ function removeFromList(listType, itemId) {
     if (typeof unloveMovie === "function") unloveMovie(itemId);
   } else if (listType === "tonight") {
     if (typeof unskipMovie === "function") unskipMovie(itemId);
-  } else if (listType === "comfort") {
-    const comfortList = getStored("orbit_comfort_list") || [];
-    const filtered = comfortList.filter(s => s.id !== itemId);
-    localStorage.setItem("orbit_comfort_list", JSON.stringify(filtered));
   }
 }
 
@@ -381,8 +354,6 @@ function clearCurrentList() {
   } else if (currentModalList === "tonight") {
     const skipped = typeof getSkippedMovies === "function" ? getSkippedMovies() : [];
     skipped.forEach(m => { if (typeof unskipMovie === "function") unskipMovie(m.id); });
-  } else if (currentModalList === "comfort") {
-    localStorage.setItem("orbit_comfort_list", JSON.stringify([]));
   }
 
   renderModalContent(currentModalList);

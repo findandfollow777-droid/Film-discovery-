@@ -650,10 +650,6 @@ html, body {
   color: var(--ghost-gray);
 }
 
-.list-icon.comfort-accent {
-  background: rgba(0, 217, 255, 0.1);
-  color: var(--accent-cyan);
-}
 
 .list-info {
   flex: 1;
@@ -689,11 +685,6 @@ html, body {
 .list-count-badge.tonight-badge {
   color: var(--ghost-gray);
   background: rgba(148, 163, 184, 0.08);
-}
-
-.list-count-badge.comfort-badge {
-  color: var(--accent-cyan);
-  background: rgba(0, 217, 255, 0.1);
 }
 
 /* ============================================
@@ -892,7 +883,6 @@ html, body {
 
 .list-modal-icon.loved-modal { background: rgba(255, 215, 0, 0.12); color: var(--accent-gold); }
 .list-modal-icon.tonight-modal { background: rgba(148, 163, 184, 0.12); color: var(--ghost-gray); }
-.list-modal-icon.comfort-modal { background: rgba(0, 217, 255, 0.12); color: var(--accent-cyan); }
 
 .list-modal-title {
   font-family: var(--font-display);
