@@ -35,7 +35,7 @@
       <a href="../games/arcade.html">ARCADE</a>
       <a href="awards-browse.html">AWARDS</a>
       <a href="timeline.html">TIMELINE</a>
-      <a href="randomizer.html">RANDOMISER</a>
+      <a href="randomizer-hub.html">WHAT TO WATCH</a>
       <a href="profile.html">PROFILE</a>
     </div>
   </nav>
@@ -150,21 +150,30 @@
         <div class="mosaic-fade-left"></div>
       </div>
 
-      <!-- LAYER 2: Timeline iframe -->
-      <div class="hero-timeline-frame">
-        <div class="timeline-frame-header">
-          <span class="timeline-frame-label">SACRED TIMELINE</span>
-          <span class="timeline-pair-label" id="timeline-pair-label"></span>
-          <a href="timeline.html" class="timeline-explore-link">EXPLORE FULL TIMELINE &#x2192;</a>
+      <!-- LAYER 2: Anchor Film -->
+      <div class="hero-anchor" id="hero-anchor">
+        <div class="anchor-label-bar">
+          <span class="anchor-eyebrow">FILM IN ORBIT</span>
+          <span class="anchor-meta" id="anchor-year-genre"></span>
         </div>
-        <iframe
-          id="timeline-preview-frame"
-          class="timeline-preview-frame"
-          scrolling="no"
-          frameborder="0"
-          title="Sacred Timeline Preview"
-        ></iframe>
-        <div class="timeline-frame-overlay"></div>
+        <div class="anchor-poster-wrap">
+          <div class="anchor-poster loading" id="anchor-poster">
+            <div class="anchor-poster-glow"></div>
+          </div>
+        </div>
+        <div class="anchor-info" id="anchor-info">
+          <div class="anchor-title" id="anchor-title">&#x2014;</div>
+          <div class="anchor-director" id="anchor-director"></div>
+          <div class="anchor-tagline" id="anchor-tagline"></div>
+          <div class="anchor-badges" id="anchor-badges"></div>
+          <button class="anchor-cta" id="anchor-cta">
+            OPEN FILM CUBE <span class="og og-film"></span>
+          </button>
+        </div>
+        <div class="anchor-foot">
+          <span class="anchor-foot-label">TODAY'S FEATURED FILM</span>
+          <span class="anchor-foot-rotate">ROTATES DAILY</span>
+        </div>
       </div>
 
     </div>
