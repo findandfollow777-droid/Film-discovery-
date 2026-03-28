@@ -371,6 +371,21 @@ function initSearch() {
    ---------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Init MovieCube with anchor handler
+  if (typeof initMovieCube === 'function') {
+    initMovieCube({
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
+      },
+      onAnchorClick: (movie) => {
+        localStorage.setItem('anchorMovie', JSON.stringify(movie));
+        localStorage.removeItem('anchorFromResults');
+        window.location.href = 'anchor.html';
+      }
+    });
+    if (typeof initPeopleCube === 'function') initPeopleCube();
+  }
+
   loadAnchorFilm();
   loadTrendingFilms();
   loadTrendingPeople();

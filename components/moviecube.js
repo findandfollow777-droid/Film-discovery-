@@ -424,12 +424,10 @@
       if (onAnchorClick && cubeMovieData) {
         onAnchorClick(cubeMovieData);
       } else if (cubeMovieData) {
-        // Navigate to results page with this movie as anchor
-        const params = new URLSearchParams({ 
-          anchor: cubeMovieData.id, 
-          title: cubeMovieData.title 
-        });
-        window.location.href = `${_pagesPrefix}results.html?${params}`;
+        // Fallback: save anchor and navigate to anchor page
+        localStorage.setItem('anchorMovie', JSON.stringify(cubeMovieData));
+        localStorage.removeItem('anchorFromResults');
+        window.location.href = `${_pagesPrefix}anchor.html`;
       }
     });
     
