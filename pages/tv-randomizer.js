@@ -245,8 +245,7 @@ async function startSpin() {
   const subtexts = {
     mood: "Finding your vibe match",
     quick: "Searching for quick binges",
-    hidden: "Unearthing hidden treasures",
-    comfort: "Finding beloved classics"
+    hidden: "Unearthing hidden treasures"
   };
   spinnerSubtext.textContent = subtexts[currentMode] || "Searching...";
 
@@ -354,7 +353,6 @@ async function fetchTVPool() {
     case "mood": return await fetchMoodPool();
     case "quick": return await fetchQuickPool();
     case "hidden": return await fetchHiddenGemPool();
-    case "comfort": return await fetchComfortPool();
     default: return await fetchMoodPool();
   }
 }
@@ -465,31 +463,6 @@ async function fetchHiddenGemPool() {
     shows = await filterTVByStreaming(shows);
     shows = await filterByTimeCommitment(shows);
     allShows = allShows.concat(shows);
-  }
-
-  return allShows;
-}
-
-async function fetchComfortPool() {
-  const params = buildTVParams();
-  params.set("sort_by", "vote_average.desc");
-  params.set("vote_count.gte", "500");
-  params.set("vote_average.gte", "7.5");
-  params.set("with_status", "0"); // Ended
-  lastDiscoverParams = new URLSearchParams(params.toString());
-
-  const startPage = Math.floor(Math.random() * 10) + 1;
-  let allShows = [];
-  for (let p = startPage; p < startPage + 2 && allShows.length < 3; p++) {
-    params.set("page", p);
-    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
-    const data = await res.json();
-    let shows = (data.results || []).filter(s => s.poster_path);
-
-    // Filter for long-running — need details
-    const detailed = await Promise.all(shows.slice(0, 15).map(s => fetchTVDetails(s.id).catch(() => null)));
-    const longRunning = detailed.filter(s => s && s.number_of_seasons >= 4 && s.poster_path);
-    allShows = allShows.concat(longRunning);
   }
 
   return allShows;

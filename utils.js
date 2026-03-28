@@ -45,7 +45,6 @@ function getBackLabel(page) {
     'arcade.html': 'Arcade',
     'randomizer.html': 'Randomizer',
     'randomizer-hub.html': 'Randomizer Hub',
-    're-randomizer.html': 'Re-Randomizer',
     'tv-randomizer.html': 'TV Randomizer',
     'results.html': 'Results',
     'profile.html': 'Profile',
