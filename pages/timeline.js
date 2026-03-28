@@ -41,8 +41,14 @@ document.addEventListener("DOMContentLoaded", init);
 window.addEventListener("resize", OrbitUtils.debounce(renderCurrentView, 200));
 
 function init() {
+  // Embed mode: hide chrome when loaded in an iframe
+  const urlParams0 = new URLSearchParams(window.location.search);
+  if (urlParams0.get('embed') === '1') {
+    document.body.classList.add('timeline-embed-mode');
+  }
+
   cacheElements();
-  
+
   // Initialize the shared movie cube component
   initMovieCube({
     onPersonClick: (personId) => {

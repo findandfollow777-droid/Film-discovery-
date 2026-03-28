@@ -146,39 +146,21 @@
         <div class="mosaic-fade-left"></div>
       </div>
 
-      <!-- LAYER 2: Timeline overlay -->
-      <div class="hero-timeline">
-        <div class="timeline-top-bar">
-          <span class="timeline-title">SACRED TIMELINE</span>
-          <span class="timeline-pair-label"></span>
+      <!-- LAYER 2: Timeline iframe -->
+      <div class="hero-timeline-frame">
+        <div class="timeline-frame-header">
+          <span class="timeline-frame-label">SACRED TIMELINE</span>
+          <span class="timeline-pair-label" id="timeline-pair-label"></span>
+          <a href="timeline.html" class="timeline-explore-link">EXPLORE FULL TIMELINE &#x2192;</a>
         </div>
-
-        <div class="timeline-legend">
-          <div class="legend-item">
-            <span class="legend-line cyan"></span>
-            <span class="legend-text">PERSON A</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-line gold"></span>
-            <span class="legend-text">PERSON B</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-dot purple"></span>
-            <span class="legend-text">COLLISION</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-ring gold"></span>
-            <span class="legend-text">AWARD</span>
-          </div>
-        </div>
-
-        <div class="timeline-scroll-container">
-          <div class="timeline-svg-wrapper" id="timeline-svg-wrapper" style="width:1600px;"></div>
-        </div>
-
-        <span class="timeline-scroll-hint visible">← scroll to explore →</span>
-
-        <a href="timeline.html" class="timeline-explore-link">EXPLORE FULL TIMELINE →</a>
+        <iframe
+          id="timeline-preview-frame"
+          class="timeline-preview-frame"
+          scrolling="no"
+          frameborder="0"
+          title="Sacred Timeline Preview"
+        ></iframe>
+        <div class="timeline-frame-overlay"></div>
       </div>
 
     </div>

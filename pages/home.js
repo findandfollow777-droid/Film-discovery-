@@ -141,127 +141,33 @@ const FEATURED_PAIRS = [
 const pairIndex = Math.floor(Date.now() / (3 * 60 * 60 * 1000)) % FEATURED_PAIRS.length;
 
 /* ----------------------------------------------------------
-   SECTION 2 — renderTimeline(pair, containerId)
+   SECTION 2 — loadTimelinePreview(pair)
+   Loads the real timeline.html in an iframe for pixel-perfect
+   consistency with the rest of ORBIT.
    ---------------------------------------------------------- */
 
-function renderTimeline(pair, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
+function loadTimelinePreview(pair) {
+  const frame = document.getElementById('timeline-preview-frame');
+  const pairLabel = document.getElementById('timeline-pair-label');
+  if (!frame) return;
 
-  const svgW = 1800;
-  const svgH = 220;
-  const xPad = 60;
-  const yearStart = pair.yearStart;
-  const yearEnd = pair.yearEnd;
-  const xScale = (svgW - xPad * 2) / (yearEnd - yearStart + 2);
-
-  function xPos(year) {
-    return xPad + (year - yearStart + 1) * xScale;
-  }
-
-  const trackA = 88;
-  const trackB = 145;
-  const currentYear = new Date().getFullYear();
-
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}" style="display:block">`;
-
-  // Faint vertical grid lines at every decade
-  for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
-    if (y % 10 === 0) {
-      svg += `<line x1="${xPos(y)}" y1="24" x2="${xPos(y)}" y2="170" stroke="#0f172a" stroke-width="1"/>`;
-    }
-  }
-
-  // Year axis labels every 5 years (Orbitron)
-  for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
-    if (y % 5 === 0) {
-      svg += `<text x="${xPos(y)}" y="195" text-anchor="middle" font-size="11" letter-spacing="2" fill="#334155" font-family="'Orbitron', monospace">${y}</text>`;
-    }
-  }
-
-  // Subtle background runway bars behind career lines
-  svg += `<rect x="${xPos(yearStart)}" y="${trackA - 1}" width="${xPos(yearEnd) - xPos(yearStart)}" height="2" fill="#00d9ff" fill-opacity="0.06" rx="1"/>`;
-  svg += `<rect x="${xPos(yearStart)}" y="${trackB - 1}" width="${xPos(yearEnd) - xPos(yearStart)}" height="2" fill="#ffd700" fill-opacity="0.06" rx="1"/>`;
-
-  // Career base lines
-  svg += `<line x1="${xPos(yearStart)}" y1="${trackA}" x2="${xPos(yearEnd)}" y2="${trackA}" stroke="#00d9ff" stroke-opacity="0.2" stroke-width="2"/>`;
-  svg += `<line x1="${xPos(yearStart)}" y1="${trackB}" x2="${xPos(yearEnd)}" y2="${trackB}" stroke="#ffd700" stroke-opacity="0.16" stroke-width="2"/>`;
-
-  // NOW dashed line
-  if (currentYear >= yearStart - 1 && currentYear <= yearEnd + 1) {
-    svg += `<line x1="${xPos(currentYear)}" y1="24" x2="${xPos(currentYear)}" y2="170" stroke="#00d9ff" stroke-opacity="0.15" stroke-width="0.5" stroke-dasharray="3,3"/>`;
-  }
-
-  // Determine shared films for labeling logic
-  const sharedFilms = pair.films.filter(f => f.person === 'both');
-  const firstShared = sharedFilms.length > 0 ? sharedFilms[0] : null;
-  const lastShared = sharedFilms.length > 0 ? sharedFilms[sharedFilms.length - 1] : null;
-
-  let labelAlt = 0;
-
-  // Render each film
-  pair.films.forEach(film => {
-    const x = xPos(film.year);
-
-    if (film.person === 'both') {
-      // Dashed vertical connector between tracks
-      svg += `<line x1="${x}" y1="${trackA}" x2="${x}" y2="${trackB}" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="3,4"/>`;
-
-      // Collision nodes on both tracks
-      const r = film.award ? 9 : 7;
-      const op = film.award ? '1.0' : '0.8';
-      svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#a855f7" opacity="${op}"/>`;
-      svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#a855f7" opacity="${op}"/>`;
-
-      // Award halo ring
-      if (film.award) {
-        svg += `<circle cx="${x}" cy="${trackA}" r="14" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1.5"/>`;
-        svg += `<circle cx="${x}" cy="${trackB}" r="14" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1.5"/>`;
-      }
-
-      // Label significant shared films
-      const isSignificant = film.award || film === firstShared || film === lastShared;
-      if (isSignificant) {
-        const labelY = (labelAlt % 2 === 0) ? 68 : 168;
-        svg += `<text x="${x}" y="${labelY}" text-anchor="middle" font-size="11" fill="#a855f7" fill-opacity="0.85" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
-        labelAlt++;
-      }
-    } else if (film.person === 'A') {
-      const r = film.award ? 6 : 4;
-      const op = film.award ? '0.65' : '0.45';
-      svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#00d9ff" opacity="${op}"/>`;
-
-      if (film.award) {
-        svg += `<circle cx="${x}" cy="${trackA}" r="10" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1"/>`;
-        svg += `<text x="${x}" y="${trackA - 14}" text-anchor="middle" font-size="10" fill="#00d9ff" fill-opacity="0.5" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
-      }
-    } else if (film.person === 'B') {
-      const r = film.award ? 6 : 4;
-      const op = film.award ? '0.55' : '0.38';
-      svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#ffd700" opacity="${op}"/>`;
-
-      if (film.award) {
-        svg += `<circle cx="${x}" cy="${trackB}" r="10" fill="none" stroke="#ffd700" stroke-opacity="0.5" stroke-width="1"/>`;
-        svg += `<text x="${x}" y="${trackB + 20}" text-anchor="middle" font-size="10" fill="#ffd700" fill-opacity="0.45" font-family="'Barlow', sans-serif">${film.title} (${film.year})</text>`;
-      }
-    }
-  });
-
-  svg += '</svg>';
-
-  container.innerHTML = svg;
-
-  // Update pair label text
-  const pairLabel = document.querySelector('.timeline-pair-label');
+  // Update the pair name label above the iframe
   if (pairLabel) {
     pairLabel.textContent = pair.personA.name.toUpperCase() + ' \u00D7 ' + pair.personB.name.toUpperCase();
   }
 
-  // Update legend labels
-  const legendA = document.getElementById('legendPersonA');
-  const legendB = document.getElementById('legendPersonB');
-  if (legendA) legendA.textContent = pair.personA.name;
-  if (legendB) legendB.textContent = pair.personB.name;
+  // timeline.html reads ?search= and ?type= URL params
+  // Load person A first — the real timeline will render their filmography
+  const params = new URLSearchParams({
+    type: 'person',
+    search: pair.personA.name,
+    embed: '1'
+  });
+
+  // Set iframe src after short delay so main page renders first
+  setTimeout(() => {
+    frame.src = 'timeline.html?' + params.toString();
+  }, 400);
 }
 
 /* ----------------------------------------------------------
@@ -512,56 +418,18 @@ function initSearch() {
    SECTION 8 — initScrollHint()
    ---------------------------------------------------------- */
 
-function initScrollHint() {
-  const scrollContainer = document.querySelector('.timeline-scroll-container');
-  const hint = document.querySelector('.timeline-scroll-hint');
-
-  if (scrollContainer && hint) {
-    scrollContainer.addEventListener('scroll', () => {
-      hint.classList.add('hidden');
-    }, { once: true });
-  }
-
-  // Mouse-drag scroll for desktop
-  if (scrollContainer) {
-    let isDown = false, startX, scrollLeft;
-
-    scrollContainer.addEventListener('mousedown', (e) => {
-      isDown = true;
-      scrollContainer.classList.add('dragging');
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
-    });
-    scrollContainer.addEventListener('mouseleave', () => {
-      isDown = false;
-      scrollContainer.classList.remove('dragging');
-    });
-    scrollContainer.addEventListener('mouseup', () => {
-      isDown = false;
-      scrollContainer.classList.remove('dragging');
-    });
-    scrollContainer.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - scrollContainer.offsetLeft;
-      scrollContainer.scrollLeft = scrollLeft - (x - startX) * 1.5;
-    });
-  }
-}
-
 /* ----------------------------------------------------------
    SECTION 9 — INIT
    ---------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
   const pair = FEATURED_PAIRS[pairIndex];
-  renderTimeline(pair, 'timeline-svg-wrapper');
+  loadTimelinePreview(pair);
   loadTrendingFilms();
   loadTrendingPeople();
   loadMosaicPosters();
   initShowcase();
   initSearch();
-  initScrollHint();
 
   // Film tiles -> MovieCube (with fallback)
   document.querySelectorAll('.film-tile').forEach(tile => {

@@ -2771,3 +2771,22 @@ html, body {
   100% { transform: scale(1.0); }
 }
 .tile-long-press-pulse { animation: tilePulse 0.2s ease; }
+
+/* ============================================================
+   EMBED MODE — When loaded inside an iframe (home page hero)
+   ============================================================ */
+.timeline-embed-mode .timeline-header,
+.timeline-embed-mode .controls-bar,
+.timeline-embed-mode .orbit-labels,
+.timeline-embed-mode .timeline-minimap,
+.timeline-embed-mode .empty-state,
+.timeline-embed-mode #upcomingSection {
+  display: none !important;
+}
+.timeline-embed-mode {
+  background: transparent !important;
+}
+.timeline-embed-mode #timelineViewport {
+  margin-top: 0 !important;
+  padding-top: 12px !important;
+}
