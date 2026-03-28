@@ -205,7 +205,8 @@ async function init() {
       onAnchorClick: (movie) => {
         localStorage.setItem("anchorMovie", JSON.stringify(movie));
         localStorage.setItem("constellationMovies", JSON.stringify(allMovies));
-        window.location.href = "../games/constellation.html";
+        localStorage.setItem("anchorFromResults", "true");
+        window.location.href = "anchor.html";
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();

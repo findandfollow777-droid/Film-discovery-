@@ -897,7 +897,9 @@ function openMovieCubeForId(movieId) {
         if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId));
       },
       onAnchorClick: (movie) => {
-        openMovieCube(movie.id);
+        localStorage.setItem('anchorMovie', JSON.stringify(movie));
+        localStorage.removeItem('anchorFromResults');
+        window.location.href = 'anchor.html';
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();

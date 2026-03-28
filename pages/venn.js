@@ -88,7 +88,8 @@ async function init() {
     },
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
-      window.location.href = "../games/constellation.html";
+      localStorage.removeItem("anchorFromResults");
+      window.location.href = "anchor.html";
     }
   });
   if (typeof initPeopleCube === 'function') initPeopleCube();
@@ -1672,10 +1673,10 @@ function setAsAnchor() {
   if (!currentInfoMovieId) return;
   
   localStorage.setItem("anchorMovieId", currentInfoMovieId);
+  localStorage.removeItem("anchorFromResults");
   closePopup();
-  
-  // Navigate to constellation
-  window.location.href = "../games/constellation.html";
+
+  window.location.href = "anchor.html";
 }
 
 // Init popup on load

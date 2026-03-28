@@ -134,7 +134,8 @@
         },
         onAnchorClick: (movie) => {
           localStorage.setItem('anchorMovie', JSON.stringify(movie));
-          window.location.href = '../games/constellation.html';
+          localStorage.removeItem('anchorFromResults');
+          window.location.href = 'anchor.html';
         }
       });
     }

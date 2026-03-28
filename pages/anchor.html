@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anchor Film – ORBIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="anchor.css">
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+</head>
+<body>
+
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <nav class="anchor-nav">
+    <a class="anchor-back" onclick="history.back()">&#x2190; BACK</a>
+    <a href="home.html" class="anchor-logo">
+      <span class="anchor-logo-dot"></span>
+      <span class="anchor-logo-text">ORBIT</span>
+    </a>
+  </nav>
+
+  <main class="anchor-main">
+
+    <section class="anchor-hero">
+      <div class="anchor-hero-inner">
+        <div class="anchor-poster-col">
+          <div class="anchor-poster-frame" id="anchor-poster">
+            <div class="anchor-badge">ANCHOR FILM</div>
+          </div>
+        </div>
+        <div class="anchor-info-col">
+          <div class="anchor-eyebrow">ANCHOR FILM</div>
+          <h1 class="anchor-title" id="anchor-title">&#x2014;</h1>
+          <div class="anchor-meta" id="anchor-meta"></div>
+          <p class="anchor-overview" id="anchor-overview"></p>
+          <div class="anchor-actions">
+            <button class="anchor-open-cube" id="anchor-open-cube">
+              OPEN FILM CUBE <span class="og og-film"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="anchor-constellation">
+      <div class="constellation-header">
+        <div class="constellation-header-left">
+          <div class="accent-bar-cyan"></div>
+          <span class="constellation-label" id="constellation-label">FILMS IN THIS ORBIT</span>
+          <span class="constellation-count" id="constellation-count"></span>
+        </div>
+        <button class="expand-universe-btn" id="expand-btn">
+          <span class="og og-galaxy"></span> EXPAND MY UNIVERSE
+        </button>
+      </div>
+
+      <div class="constellation-grid" id="constellation-grid"></div>
+
+      <div class="constellation-loading hidden" id="constellation-loading">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <span class="loading-label">EXPANDING THE UNIVERSE&#x2026;</span>
+      </div>
+
+      <div class="constellation-empty hidden" id="constellation-empty">
+        <p>No similar films found in the cosmos.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Load Nebula Service Module -->
+  <script type="module">
+    import * as nebulaService from '../components/nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+  </script>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/taste-service.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/watchlist-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
+  <script src="anchor.js"></script>
+</body>
+</html>

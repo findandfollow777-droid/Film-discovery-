@@ -69,8 +69,8 @@
         },
         onAnchorClick: (movie) => {
           localStorage.setItem("anchorMovie", JSON.stringify(movie));
-          localStorage.setItem("resultsMode", "anchor");
-          window.location.href = "results.html";
+          localStorage.removeItem("anchorFromResults");
+          window.location.href = "anchor.html";
         }
       });
     }

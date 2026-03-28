@@ -1,0 +1,360 @@
+@import url('../variables.css');
+/* ============================================================
+   ANCHOR VIEW — Constellation Discovery Page
+   Added: 2026-03-29
+   ============================================================ */
+
+:root {
+  --accent-rgb: 0, 217, 255;
+  --gold-rgb: 255, 215, 0;
+  --prestige-purple-rgb: 168, 85, 247;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: var(--space-black);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+[hidden] { display: none !important; }
+
+/* Film grain + vignette */
+.film-grain {
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.03; pointer-events: none; z-index: 1000; mix-blend-mode: overlay;
+}
+.vignette {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, var(--space-black) 100%);
+  pointer-events: none; z-index: -1;
+}
+
+/* ============================================
+   NAV
+============================================ */
+.anchor-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--cosmic-blue);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.anchor-back {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.anchor-back:hover { opacity: 1; }
+
+.anchor-logo {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+}
+.anchor-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
+}
+.anchor-logo-text {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ============================================
+   HERO — ANCHOR FILM
+============================================ */
+.anchor-main {
+  background: var(--space-black);
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
+.anchor-hero {
+  padding: 48px 52px;
+  border-bottom: 1px solid var(--cosmic-blue);
+  background: var(--deep-void);
+}
+
+.anchor-hero-inner {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.anchor-poster-frame {
+  width: 200px;
+  flex-shrink: 0;
+  aspect-ratio: 2/3;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--nebula-dark);
+  border: 2px solid rgba(var(--accent-rgb), 0.25);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.anchor-poster-frame:hover {
+  transform: scale(1.02);
+  border-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.anchor-badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  background: rgba(0,0,0,0.7);
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+}
+
+.anchor-eyebrow {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--accent-cyan);
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+
+.anchor-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--film-white);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.anchor-meta {
+  font-size: 13px;
+  color: var(--muted-silver);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.anchor-overview {
+  font-size: 13px;
+  color: var(--ghost-gray);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.anchor-open-cube {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  padding: 11px 24px;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+.anchor-open-cube:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+}
+.anchor-open-cube .og { width: 14px; height: 14px; }
+
+/* ============================================
+   CONSTELLATION — SURROUNDING FILMS
+============================================ */
+.anchor-constellation {
+  padding: 44px 52px;
+}
+
+.constellation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.constellation-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.accent-bar-cyan {
+  width: 3px; height: 14px;
+  border-radius: 1px;
+  background: var(--accent-cyan);
+}
+
+.constellation-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--ghost-gray);
+}
+
+.constellation-count {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  opacity: 0.5;
+  margin-left: 12px;
+}
+
+.expand-universe-btn {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  padding: 10px 20px;
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.5);
+  border-radius: 4px;
+  background: rgba(var(--prestige-purple-rgb), 0.07);
+  color: var(--prestige-purple);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.expand-universe-btn:hover {
+  background: rgba(var(--prestige-purple-rgb), 0.14);
+  border-color: rgba(var(--prestige-purple-rgb), 0.7);
+}
+.expand-universe-btn.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.constellation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.constellation-film-tile {
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid var(--cosmic-blue);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  background: var(--nebula-dark);
+}
+.constellation-film-tile:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  transform: translateY(-2px);
+}
+
+.constellation-film-poster {
+  aspect-ratio: 2/3;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--cosmic-blue);
+}
+
+.constellation-film-info {
+  padding: 8px 10px 10px;
+}
+
+.constellation-film-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted-silver);
+  line-height: 1.3;
+  margin-bottom: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.constellation-film-year {
+  font-size: 9px;
+  color: var(--ghost-gray);
+}
+
+/* Loading + empty states */
+.constellation-loading {
+  text-align: center;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.constellation-loading.hidden { display: none; }
+.constellation-empty.hidden { display: none; }
+
+.constellation-empty {
+  text-align: center;
+  padding: 48px;
+  color: var(--ghost-gray);
+  font-size: 14px;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  opacity: 0.4;
+  margin: 0 3px;
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-pulse {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1.0; }
+}
+
+.loading-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ghost-gray);
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 900px) {
+  .anchor-hero-inner { flex-direction: column; }
+  .anchor-poster-frame { width: 160px; margin: 0 auto; }
+  .anchor-info-col { text-align: center; }
+  .anchor-title { font-size: 24px; }
+  .anchor-overview { margin-left: auto; margin-right: auto; }
+  .anchor-hero, .anchor-constellation { padding: 28px 24px; }
+  .constellation-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .anchor-nav { padding: 12px 20px; }
+  .constellation-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .constellation-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .anchor-title { font-size: 20px; }
+}
