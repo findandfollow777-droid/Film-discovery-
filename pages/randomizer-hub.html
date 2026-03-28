@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="randomizer-hub.css">
-  <link rel="stylesheet" href="../components/orbit-glyphs.css">
 </head>
 <body>
 
@@ -17,20 +16,18 @@
   <div class="backdrop-overlay"></div>
   <div class="film-grain"></div>
   <div class="vignette"></div>
-  <div class="lens-flare lens-flare-1"></div>
-  <div class="lens-flare lens-flare-2"></div>
 
   <!-- HEADER -->
   <header class="hub-header">
-    <a href="../index.html" class="back-link">← Back to ORBIT</a>
+    <a class="back-link" onclick="history.back()">&#x2190; Back</a>
 
-    <div class="hub-title">
+    <div class="orbit-logo">
       <div class="orbit-logo-mark">
         <div class="orbit-ring"></div>
         <div class="orbit-ring orbit-ring-2"></div>
         <div class="orbit-core"></div>
       </div>
-      <h1>What To Watch</h1>
+      <span class="orbit-logo-text">ORBIT</span>
     </div>
 
     <div class="header-spacer"></div>
@@ -38,76 +35,73 @@
 
   <!-- MAIN -->
   <main class="hub-main">
-    <p class="hub-subtitle">Choose your adventure</p>
 
-    <div class="hub-grid">
+    <p class="hub-section-label">What to Watch</p>
 
-      <!-- MOVIES - Cyan Theme -->
-      <a href="randomizer.html" class="hub-card movie-card">
-        <div class="card-glow"></div>
-        <div class="card-icon">
+    <!-- HERO TILE — Movies -->
+    <a href="randomizer.html" class="hub-hero">
+      <div class="hub-icon">
+        <div class="icon-ring-outer"></div>
+        <div class="icon-ring-inner"></div>
+        <svg class="icon-glyph" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/>
+        </svg>
+      </div>
+      <span class="hub-badge hub-badge-cyan">Main Feature</span>
+      <h2 class="hub-hero-title">Movie Randomizer</h2>
+      <p class="hub-hero-sub">Find your next film based on mood, discover hidden gems, or spin pure chaos</p>
+      <div class="hub-features">
+        <span class="feature-tag feature-tag-cyan">Mood Match</span>
+        <span class="feature-tag feature-tag-cyan">My Favorites</span>
+        <span class="feature-tag feature-tag-cyan">Hidden Gems</span>
+      </div>
+    </a>
+
+    <!-- SECONDARY TILES -->
+    <div class="hub-secondary-grid">
+
+      <!-- TV Shows -->
+      <a href="tv-randomizer.html" class="hub-tile">
+        <div class="hub-icon hub-icon-sm">
           <div class="icon-ring-outer"></div>
           <div class="icon-ring-inner"></div>
-          <svg class="icon-glyph" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/>
-          </svg>
-        </div>
-        <h2>Movies</h2>
-        <p>Find your next film based on mood, discover hidden gems, or spin pure chaos</p>
-        <div class="card-features">
-          <span class="feature-tag">Mood Match</span>
-          <span class="feature-tag">My Favorites</span>
-          <span class="feature-tag">Hidden Gems</span>
-        </div>
-        <div class="card-accent"></div>
-      </a>
-
-      <!-- TV - Amber Theme -->
-      <a href="tv-randomizer.html" class="hub-card tv-card">
-        <div class="card-glow"></div>
-        <div class="card-icon">
-          <div class="icon-ring-outer"></div>
-          <div class="icon-ring-inner"></div>
-          <svg class="icon-glyph" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+          <svg class="icon-glyph" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <rect x="2" y="3" width="20" height="14" rx="2"/>
             <path d="M8 21h8M12 17v4"/>
           </svg>
         </div>
-        <h2>TV Shows</h2>
-        <p>Discover series with time commitment in mind — from quick binges to epic sagas</p>
-        <div class="card-features">
-          <span class="feature-tag">Time Filters</span>
-          <span class="feature-tag">Quick Binge</span>
-          <span class="feature-tag">Comfort Classics</span>
+        <span class="hub-badge hub-badge-amber">TV</span>
+        <h3 class="hub-tile-title">TV Shows</h3>
+        <p class="hub-tile-sub">Discover series with time commitment in mind — from quick binges to epic sagas</p>
+        <div class="hub-features">
+          <span class="feature-tag feature-tag-amber">Time Filters</span>
+          <span class="feature-tag feature-tag-amber">Quick Binge</span>
+          <span class="feature-tag feature-tag-amber">Comfort Classics</span>
         </div>
-        <div class="card-accent"></div>
       </a>
 
-      <!-- RE-WATCH - Warm Gold Theme -->
-      <a href="re-randomizer.html" class="hub-card comfort-card">
-        <div class="card-glow"></div>
-        <div class="card-icon">
+      <!-- Re-watch -->
+      <a href="re-randomizer.html" class="hub-tile">
+        <div class="hub-icon hub-icon-sm">
           <div class="icon-ring-outer"></div>
           <div class="icon-ring-inner"></div>
-          <svg class="icon-glyph" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+          <svg class="icon-glyph" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <path d="M21 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0 0-4z"/>
           </svg>
         </div>
-        <h2>Re-watch</h2>
-        <p>Random episode from your comfort shows — let fate decide tonight's familiar friend</p>
-        <div class="card-features">
+        <span class="hub-badge hub-badge-muted">Re-watch</span>
+        <h3 class="hub-tile-title">Comfort List</h3>
+        <p class="hub-tile-sub">Random episode from your comfort shows — let fate decide tonight's familiar friend</p>
+        <div class="hub-features">
           <span class="feature-tag">Comfort List</span>
           <span class="feature-tag">Season Picker</span>
           <span class="feature-tag">Episode Roulette</span>
         </div>
-        <div class="card-accent"></div>
       </a>
 
     </div>
+
   </main>
 
-  <script src="../config.js"></script>
-  <script src="../orbit-utils.js"></script>
-  <script src="../utils.js"></script>
 </body>
 </html>

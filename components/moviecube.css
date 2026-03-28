@@ -740,6 +740,65 @@
   font-size: 12px;
 }
 
+/* ============================================================
+   WATCHLIST BUTTON — Mirrors Shortlist, gold theme
+   ============================================================ */
+
+.watchlist-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.watchlist-btn.not-added {
+  background: transparent;
+  border: 2px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.watchlist-btn.not-added:hover {
+  background: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.watchlist-btn.added {
+  background: var(--accent-gold);
+  border: 2px solid var(--accent-gold);
+  color: var(--space-black);
+}
+
+.watchlist-btn.added:hover {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.watchlist-btn .og {
+  font-size: 14px;
+}
+
+.watchlist-label {
+  font-size: 12px;
+}
+
+.watchlist-flash {
+  animation: watchlist-pulse 0.3s ease;
+}
+
+@keyframes watchlist-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
 /* Flash animation for add/remove feedback */
 @keyframes shortlist-flash {
   0%, 100% { transform: scale(1); }

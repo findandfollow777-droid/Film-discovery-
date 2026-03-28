@@ -3398,3 +3398,197 @@ function updateMediaModeToggleVisibility() {
     });
   }
 }
+
+/* ============================================================
+   CONTEXT MENU — Right-click / Long-press — Added 2026-03-28
+   Quick Watchlist + Shortlist actions on movie poster tiles.
+   Desktop: right-click. Mobile: 500ms long-press.
+   Uses watchlist-service.js and shortlist-service.js.
+   ============================================================ */
+
+(function initContextMenu() {
+  const TILE_SELECTOR = '.timeline-card';
+  const LONG_PRESS_MS = 500;
+  const MOVE_THRESHOLD = 8;
+
+  // Build menu element once
+  const menu = document.createElement('div');
+  menu.className = 'orbit-context-menu';
+  menu.id = 'orbitContextMenu';
+  menu.innerHTML = `
+    <button class="context-menu-item context-watchlist" data-action="watchlist">
+      <span class="og og-couch"></span>
+      <span class="context-menu-label">Watch Later</span>
+    </button>
+    <button class="context-menu-item context-shortlist" data-action="shortlist">
+      <span class="og og-sparkle"></span>
+      <span class="context-menu-label">Add to Shortlist</span>
+    </button>
+    <button class="context-menu-item context-open-cube" data-action="cube">
+      <span class="og og-film"></span>
+      <span class="context-menu-label">Open Movie Cube</span>
+    </button>`;
+  document.body.appendChild(menu);
+
+  let activeMovieId = null;
+  let activeMovieTitle = null;
+  let longPressTimer = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function getMovieDataFromTile(tile) {
+    const id = parseInt(tile.dataset.movieId);
+    const titleEl = tile.querySelector('.card-title, .timeline-title, h3, h4');
+    const title = titleEl ? titleEl.textContent.trim() : '';
+    const posterEl = tile.querySelector('img');
+    const poster = posterEl ? posterEl.src.replace(/.*\/w\d+/, '') : '';
+    return { id, title, poster };
+  }
+
+  function openMenu(x, y, movieId, movieTitle) {
+    closeMenu();
+    activeMovieId = movieId;
+    activeMovieTitle = movieTitle;
+
+    // Update states
+    const watchBtn = menu.querySelector('.context-watchlist');
+    const shortBtn = menu.querySelector('.context-shortlist');
+
+    const inWatchlist = typeof isInWatchlist === 'function' && isInWatchlist(movieId);
+    const inShortlist = typeof isInShortlist === 'function' && isInShortlist(movieId);
+    const shortlistFull = typeof getShortlistCount === 'function' && getShortlistCount() >= 20;
+
+    watchBtn.className = 'context-menu-item context-watchlist' + (inWatchlist ? ' is-added' : '');
+    watchBtn.querySelector('.context-menu-label').textContent = inWatchlist ? 'Watchlisted' : 'Watch Later';
+
+    if (shortlistFull && !inShortlist) {
+      shortBtn.className = 'context-menu-item context-shortlist is-disabled';
+      shortBtn.querySelector('.context-menu-label').textContent = 'Shortlist Full';
+    } else {
+      shortBtn.className = 'context-menu-item context-shortlist' + (inShortlist ? ' is-added' : '');
+      shortBtn.querySelector('.context-menu-label').textContent = inShortlist ? 'Shortlisted' : 'Add to Shortlist';
+    }
+
+    menu.classList.add('is-open');
+
+    // Position with viewport edge detection
+    const mw = menu.offsetWidth;
+    const mh = menu.offsetHeight;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    menu.style.left = (x + mw > vw ? Math.max(0, x - mw) : x) + 'px';
+    menu.style.top = (y + mh > vh ? Math.max(0, y - mh) : y) + 'px';
+  }
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    activeMovieId = null;
+    activeMovieTitle = null;
+  }
+
+  function showConfirmation(text) {
+    menu.innerHTML = `<div class="context-menu-confirmation">${text}</div>`;
+    setTimeout(() => {
+      closeMenu();
+      // Restore original buttons
+      menu.innerHTML = `
+        <button class="context-menu-item context-watchlist" data-action="watchlist">
+          <span class="og og-couch"></span>
+          <span class="context-menu-label">Watch Later</span>
+        </button>
+        <button class="context-menu-item context-shortlist" data-action="shortlist">
+          <span class="og og-sparkle"></span>
+          <span class="context-menu-label">Add to Shortlist</span>
+        </button>
+        <button class="context-menu-item context-open-cube" data-action="cube">
+          <span class="og og-film"></span>
+          <span class="context-menu-label">Open Movie Cube</span>
+        </button>`;
+    }, 1500);
+  }
+
+  // Menu item clicks
+  menu.addEventListener('click', (e) => {
+    const item = e.target.closest('.context-menu-item');
+    if (!item || !activeMovieId) return;
+    if (item.classList.contains('is-disabled')) return;
+
+    const action = item.dataset.action;
+
+    if (action === 'watchlist') {
+      if (typeof isInWatchlist === 'function' && isInWatchlist(activeMovieId)) {
+        removeFromWatchlist(activeMovieId);
+        showConfirmation('Removed from Watchlist');
+      } else if (typeof addToWatchlist === 'function') {
+        addToWatchlist({ id: activeMovieId, title: activeMovieTitle });
+        showConfirmation('Added to Watchlist');
+      }
+    } else if (action === 'shortlist') {
+      if (typeof isInShortlist === 'function' && isInShortlist(activeMovieId)) {
+        removeFromShortlist(activeMovieId);
+        showConfirmation('Removed from Shortlist');
+      } else if (typeof addToShortlist === 'function') {
+        addToShortlist({ id: activeMovieId, title: activeMovieTitle });
+        showConfirmation('Added to Shortlist');
+      }
+    } else if (action === 'cube') {
+      closeMenu();
+      if (typeof openMovieCube === 'function') openMovieCube(activeMovieId);
+    }
+  });
+
+  // Desktop: right-click
+  document.addEventListener('contextmenu', (e) => {
+    const tile = e.target.closest(TILE_SELECTOR);
+    if (!tile) return;
+    if (tile.dataset.mediaType === 'tv') return; // TV shows use series.html
+    e.preventDefault();
+    const data = getMovieDataFromTile(tile);
+    if (data.id) openMenu(e.clientX, e.clientY, data.id, data.title);
+  });
+
+  // Mobile: long-press
+  document.addEventListener('touchstart', (e) => {
+    const tile = e.target.closest(TILE_SELECTOR);
+    if (!tile || tile.dataset.mediaType === 'tv') return;
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+
+    longPressTimer = setTimeout(() => {
+      longPressTimer = null;
+      tile.classList.add('tile-long-press-pulse');
+      setTimeout(() => tile.classList.remove('tile-long-press-pulse'), 200);
+
+      const rect = tile.getBoundingClientRect();
+      const data = getMovieDataFromTile(tile);
+      if (data.id) openMenu(rect.left + rect.width / 2, rect.top + rect.height / 2, data.id, data.title);
+    }, LONG_PRESS_MS);
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!longPressTimer) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.sqrt(dx * dx + dy * dy) > MOVE_THRESHOLD) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+  });
+
+  // Dismiss
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();

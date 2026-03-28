@@ -1,5 +1,5 @@
 // ============================================
-// TV RANDOMIZER - Amber Theme
+// TV RANDOMIZER - Amber Theme (3-Pick)
 // ============================================
 
 const HISTORY_KEY = "orbit_tv_randomizer_history";
@@ -53,7 +53,18 @@ let preferShortEpisodes = false;
 let showStatus = "all";
 let streamingFilterActive = false;
 let recentSpins = [];
-let currentShow = null;
+let lastPool = [];
+let lastDiscoverParams = null;
+let recentlyShown = [];
+
+// ============================================
+// DOM REFERENCES
+// ============================================
+
+const configSection = document.getElementById("configSection");
+const spinningSection = document.getElementById("spinningSection");
+const resultSection = document.getElementById("resultSection");
+const spinnerSubtext = document.getElementById("spinnerSubtext");
 
 // ============================================
 // INITIALIZATION
@@ -117,13 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("spinBtn").addEventListener("click", startSpin);
 
   // Result actions
-  document.getElementById("spinAgainBtn").addEventListener("click", startSpin);
+  document.getElementById("respinBtn").addEventListener("click", respin);
   document.getElementById("adjustBtn").addEventListener("click", showConfig);
-  document.getElementById("exploreBtn").addEventListener("click", exploreShow);
 
-  // Swipe buttons
-  document.getElementById("swipeLoveBtn").addEventListener("click", () => handleSwipe("like"));
-  document.getElementById("swipePassBtn").addEventListener("click", () => handleSwipe("dislike"));
+  // Card button delegation
+  document.getElementById("resultPicks").addEventListener("click", handleCardClick);
 
   // Streaming filter
   initTVStreamingFilter();
@@ -219,9 +228,9 @@ function showModal(id) { document.getElementById(id).hidden = false; }
 function hideModal(id) { document.getElementById(id).hidden = true; }
 
 function showConfig() {
-  document.getElementById("configSection").hidden = false;
-  document.getElementById("spinningSection").hidden = true;
-  document.getElementById("resultSection").hidden = true;
+  configSection.hidden = false;
+  spinningSection.hidden = true;
+  resultSection.hidden = true;
 }
 
 // ============================================
@@ -229,9 +238,9 @@ function showConfig() {
 // ============================================
 
 async function startSpin() {
-  document.getElementById("configSection").hidden = true;
-  document.getElementById("resultSection").hidden = true;
-  document.getElementById("spinningSection").hidden = false;
+  configSection.hidden = true;
+  resultSection.hidden = true;
+  spinningSection.hidden = false;
 
   const subtexts = {
     mood: "Finding your vibe match",
@@ -239,32 +248,114 @@ async function startSpin() {
     hidden: "Unearthing hidden treasures",
     comfort: "Finding beloved classics"
   };
-  document.getElementById("spinnerSubtext").textContent = subtexts[currentMode] || "Searching...";
+  spinnerSubtext.textContent = subtexts[currentMode] || "Searching...";
 
   try {
-    const show = await fetchTVShow();
+    const pool = await fetchTVPool();
     await new Promise(r => setTimeout(r, 1500));
 
-    if (show) {
-      displayResult(show);
+    if (pool && pool.length) {
+      lastPool = pool;
+      const picks = pickThree(pool);
+      displayResults(picks);
     } else {
-      alert("No shows found. Try adjusting your filters.");
-      showConfig();
+      showError("No shows found. Try adjusting your filters.");
     }
   } catch (err) {
     console.error(err);
-    alert("Something went wrong. Please try again.");
-    showConfig();
+    showError("Something went wrong. Please try again.");
   }
 }
 
-async function fetchTVShow() {
+async function respin() {
+  if (!lastPool.length) { startSpin(); return; }
+
+  // Show loading overlay in each card
+  const container = document.getElementById("resultPicks");
+  container.querySelectorAll(".pick-card").forEach(card => {
+    card.insertAdjacentHTML("beforeend",
+      `<div class="randomizer-loading-state">
+        <div class="mini-spinner" style="width:180px;height:180px">
+          <div class="mini-ring mini-ring-1"></div>
+          <div class="mini-ring mini-ring-2"></div>
+          <div class="mini-core" style="width:24px;height:24px"></div>
+        </div>
+      </div>`
+    );
+  });
+
+  // Pick new shows and wait for minimum animation duration
+  const [picks] = await Promise.all([
+    Promise.resolve(pickThree(lastPool)),
+    new Promise(r => setTimeout(r, 1500))
+  ]);
+
+  displayResults(picks);
+}
+
+function showError(msg) {
+  spinningSection.hidden = true;
+  configSection.hidden = false;
+  alert(msg);
+}
+
+// ============================================
+// HELPERS
+// ============================================
+
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickThree(pool) {
+  const cooldown = new Set(recentlyShown);
+  const seen = new Set();
+  const picks = [];
+  const shuffled = shuffleArray(pool);
+  // Prefer shows not in cooldown
+  for (const s of shuffled) {
+    if (!seen.has(s.id) && !cooldown.has(s.id)) {
+      seen.add(s.id);
+      picks.push(s);
+      if (picks.length === 3) break;
+    }
+  }
+  // Fall back to cooldown items if pool is too small
+  if (picks.length < 3) {
+    for (const s of shuffled) {
+      if (!seen.has(s.id)) {
+        seen.add(s.id);
+        picks.push(s);
+        if (picks.length === 3) break;
+      }
+    }
+  }
+  return picks;
+}
+
+function trackShown(ids) {
+  recentlyShown = recentlyShown.concat(ids);
+  if (recentlyShown.length > 20) {
+    recentlyShown = recentlyShown.slice(-20);
+  }
+}
+
+// ============================================
+// TMDB FETCHING
+// ============================================
+
+async function fetchTVPool() {
   switch (currentMode) {
-    case "mood": return await fetchMoodMatchTV();
-    case "quick": return await fetchQuickBingeTV();
-    case "hidden": return await fetchHiddenGemTV();
-    case "comfort": return await fetchComfortClassicTV();
-    default: return await fetchMoodMatchTV();
+    case "mood": return await fetchMoodPool();
+    case "quick": return await fetchQuickPool();
+    case "hidden": return await fetchHiddenGemPool();
+    case "comfort": return await fetchComfortPool();
+    default: return await fetchMoodPool();
   }
 }
 
@@ -272,8 +363,8 @@ function buildTVParams() {
   const params = new URLSearchParams({
     api_key: TMDB_API_KEY,
     language: "en-US",
-    include_adult: false,
-    "vote_count.gte": 50
+    include_adult: "false",
+    "vote_count.gte": "50"
   });
 
   if (selectedGenres.length > 0) {
@@ -306,92 +397,102 @@ function getYearRange() {
   return { minYear, maxYear };
 }
 
-async function fetchMoodMatchTV() {
+async function fetchMoodPool() {
   const params = buildTVParams();
   params.set("sort_by", "popularity.desc");
-  params.set("page", Math.floor(Math.random() * 10) + 1);
 
   if (selectedGenres.length === 0) {
     const vibeGenres = getTVVibeBasedGenres();
     if (vibeGenres.length) params.set("with_genres", vibeGenres.join("|"));
   }
 
-  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
-  const data = await res.json();
+  lastDiscoverParams = new URLSearchParams(params.toString());
 
-  let shows = (data.results || []).filter(s => s.poster_path);
-  shows = await filterTVByStreaming(shows);
-  shows = await filterByTimeCommitment(shows);
+  const startPage = Math.floor(Math.random() * 5) + 1;
+  let allShows = [];
+  for (let p = startPage; p < startPage + 2 && allShows.length < 3; p++) {
+    params.set("page", p);
+    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
+    const data = await res.json();
+    let shows = (data.results || []).filter(s => s.poster_path);
+    shows = await filterTVByStreaming(shows);
+    shows = await filterByTimeCommitment(shows);
+    allShows = allShows.concat(shows);
+  }
 
-  if (!shows.length) return null;
-
-  const scored = shows.map(s => ({ show: s, score: calculateTVVibeScore(s) }))
-                      .sort((a, b) => b.score - a.score);
-
-  const top = scored.slice(0, 5);
-  const pick = top[Math.floor(Math.random() * top.length)];
-
-  const details = await fetchTVDetails(pick.show.id);
-  details._vibeScore = pick.score;
-  return details;
+  // Attach vibe scores and sort best-first
+  return allShows.map(s => ({ ...s, _vibeScore: calculateTVVibeScore(s) }))
+    .sort((a, b) => b._vibeScore - a._vibeScore);
 }
 
-async function fetchQuickBingeTV() {
+async function fetchQuickPool() {
   const params = buildTVParams();
   params.set("sort_by", "vote_average.desc");
-  params.set("vote_count.gte", 100);
-  params.set("vote_average.gte", 7.0);
-  params.set("page", Math.floor(Math.random() * 10) + 1);
+  params.set("vote_count.gte", "100");
+  params.set("vote_average.gte", "7.0");
+  lastDiscoverParams = new URLSearchParams(params.toString());
 
-  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
-  const data = await res.json();
+  const startPage = Math.floor(Math.random() * 10) + 1;
+  let allShows = [];
+  for (let p = startPage; p < startPage + 2 && allShows.length < 3; p++) {
+    params.set("page", p);
+    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
+    const data = await res.json();
+    let shows = (data.results || []).filter(s => s.poster_path);
+    shows = await filterTVByStreaming(shows);
+    shows = await filterByTimeCommitment(shows, "limited");
+    allShows = allShows.concat(shows);
+  }
 
-  let shows = (data.results || []).filter(s => s.poster_path);
-  shows = await filterTVByStreaming(shows);
-  shows = await filterByTimeCommitment(shows, "limited");
-
-  if (!shows.length) return null;
-  return await fetchTVDetails(shows[Math.floor(Math.random() * shows.length)].id);
+  return allShows;
 }
 
-async function fetchHiddenGemTV() {
+async function fetchHiddenGemPool() {
   const params = buildTVParams();
   params.set("sort_by", "vote_average.desc");
-  params.set("vote_count.gte", 50);
-  params.set("vote_count.lte", 500);
-  params.set("vote_average.gte", 7.5);
-  params.set("page", Math.floor(Math.random() * 10) + 1);
+  params.set("vote_count.gte", "50");
+  params.set("vote_count.lte", "500");
+  params.set("vote_average.gte", "7.5");
+  lastDiscoverParams = new URLSearchParams(params.toString());
 
-  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
-  const data = await res.json();
+  const startPage = Math.floor(Math.random() * 10) + 1;
+  let allShows = [];
+  for (let p = startPage; p < startPage + 2 && allShows.length < 3; p++) {
+    params.set("page", p);
+    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
+    const data = await res.json();
+    let shows = (data.results || []).filter(s => s.poster_path);
+    shows = await filterTVByStreaming(shows);
+    shows = await filterByTimeCommitment(shows);
+    allShows = allShows.concat(shows);
+  }
 
-  let shows = (data.results || []).filter(s => s.poster_path);
-  shows = await filterTVByStreaming(shows);
-  shows = await filterByTimeCommitment(shows);
-
-  if (!shows.length) return null;
-  return await fetchTVDetails(shows[Math.floor(Math.random() * shows.length)].id);
+  return allShows;
 }
 
-async function fetchComfortClassicTV() {
+async function fetchComfortPool() {
   const params = buildTVParams();
   params.set("sort_by", "vote_average.desc");
-  params.set("vote_count.gte", 500);
-  params.set("vote_average.gte", 7.5);
+  params.set("vote_count.gte", "500");
+  params.set("vote_average.gte", "7.5");
   params.set("with_status", "0"); // Ended
-  params.set("page", Math.floor(Math.random() * 10) + 1);
+  lastDiscoverParams = new URLSearchParams(params.toString());
 
-  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
-  const data = await res.json();
+  const startPage = Math.floor(Math.random() * 10) + 1;
+  let allShows = [];
+  for (let p = startPage; p < startPage + 2 && allShows.length < 3; p++) {
+    params.set("page", p);
+    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
+    const data = await res.json();
+    let shows = (data.results || []).filter(s => s.poster_path);
 
-  let shows = (data.results || []).filter(s => s.poster_path);
+    // Filter for long-running — need details
+    const detailed = await Promise.all(shows.slice(0, 15).map(s => fetchTVDetails(s.id).catch(() => null)));
+    const longRunning = detailed.filter(s => s && s.number_of_seasons >= 4 && s.poster_path);
+    allShows = allShows.concat(longRunning);
+  }
 
-  // Filter for long-running
-  const detailed = await Promise.all(shows.slice(0, 15).map(s => fetchTVDetails(s.id).catch(() => null)));
-  const longRunning = detailed.filter(s => s && s.number_of_seasons >= 4);
-
-  if (!longRunning.length) return null;
-  return longRunning[Math.floor(Math.random() * longRunning.length)];
+  return allShows;
 }
 
 async function filterByTimeCommitment(shows, overrideCommitment = null) {
@@ -452,114 +553,200 @@ function calculateTVVibeScore(show) {
     if (TV_GENRE_VIBES.depth[gid] !== undefined) { depthSum += TV_GENRE_VIBES.depth[gid]; depthCount++; }
   }
 
-  const movieMood = moodCount ? moodSum / moodCount : 50;
-  const moviePace = paceCount ? paceSum / paceCount : 50;
-  const movieDepth = depthCount ? depthSum / depthCount : 50;
+  const showMood = moodCount ? moodSum / moodCount : 50;
+  const showPace = paceCount ? paceSum / paceCount : 50;
+  const showDepth = depthCount ? depthSum / depthCount : 50;
 
-  const moodDiff = Math.abs(movieMood - vibeSettings.mood);
-  const paceDiff = Math.abs(moviePace - vibeSettings.pace);
-  const depthDiff = Math.abs(movieDepth - vibeSettings.depth);
+  const moodDiff = Math.abs(showMood - vibeSettings.mood);
+  const paceDiff = Math.abs(showPace - vibeSettings.pace);
+  const depthDiff = Math.abs(showDepth - vibeSettings.depth);
 
   return Math.max(0, Math.min(100, Math.round(100 - (moodDiff + paceDiff + depthDiff) / 3)));
 }
 
 // ============================================
-// DISPLAY RESULT
+// CARD RENDERING & INTERACTIONS
 // ============================================
 
-function displayResult(show) {
-  currentShow = show;
-  document.getElementById("spinningSection").hidden = true;
-  document.getElementById("resultSection").hidden = false;
-
-  // Poster
-  document.getElementById("resultPoster").src = show.poster_path ? `${TMDB_IMG}w500${show.poster_path}` : "";
-
-  // Rating
+function renderCardHtml(show) {
+  const year = (show.first_air_date || "").split("-")[0];
   const rating = show.vote_average || 0;
-  document.getElementById("ratingValue").textContent = rating.toFixed(1);
 
-  // Title
-  document.getElementById("resultTitle").textContent = show.name || "Unknown";
+  const matchHtml = (currentMode === "mood" && show._vibeScore !== undefined)
+    ? `<div class="pick-match">${show._vibeScore}% match</div>`
+    : "";
 
-  // TV-specific meta
-  const seasons = show.number_of_seasons || 0;
-  const episodes = show.number_of_episodes || 0;
-  const runtime = show.episode_run_time?.[0] || "?";
-
-  document.getElementById("resultSeasons").textContent = `${seasons} Season${seasons !== 1 ? "s" : ""}`;
-  document.getElementById("resultEpisodes").textContent = `${episodes} Episodes`;
-  document.getElementById("resultRuntime").textContent = `${runtime} min`;
-
-  // Status badge
-  const statusEl = document.getElementById("resultStatus");
-  const status = show.status || "Unknown";
-  statusEl.textContent = status;
-  statusEl.className = "meta-item status-badge " + status.toLowerCase().replace(/\s+/g, "-");
-
-  // Genres
-  const genres = show.genres || [];
-  document.getElementById("resultGenres").innerHTML = genres.map(g => `<span class="genre-tag">${g.name}</span>`).join("");
-
-  // Overview
-  document.getElementById("resultOverview").textContent = show.overview || "No overview available.";
-
-  // Match indicator
-  const matchEl = document.getElementById("matchIndicator");
-  if (currentMode === "mood" && show._vibeScore !== undefined) {
-    matchEl.hidden = false;
-    document.getElementById("matchFill").style.width = show._vibeScore + "%";
-    document.getElementById("matchPct").textContent = show._vibeScore + "%";
-  } else {
-    matchEl.hidden = true;
-  }
-
-  // Streaming providers
-  const providerEl = document.getElementById("streamingProviders");
-  providerEl.innerHTML = '';
-  fetchStreamingProviders(show.id, "tv").then(providers => {
-    renderStreamingLogos(providers, providerEl);
-  });
-
-  // Taste button states
-  const status = typeof getTasteStatus === "function" ? getTasteStatus(show.id) : "none";
-  document.getElementById("swipeLoveBtn").classList.toggle("active", status === "loved");
-  document.getElementById("swipePassBtn").classList.toggle("active", status === "skipped");
-
-  // Add to history
-  addToHistory(show);
+  return `<div class="pick-card" data-id="${show.id}">
+    <div class="pick-poster-wrap">
+      <img class="pick-poster" src="${show.poster_path ? TMDB_IMG + 'w342' + show.poster_path : ''}" alt="${show.name || ''}">
+      ${matchHtml}
+    </div>
+    <div class="pick-info">
+      <h3 class="pick-title">${show.name || "Unknown"}</h3>
+      <div class="pick-pills">
+        ${year ? `<span class="pick-pill">${year}</span>` : ""}
+        <span class="pick-pill pick-pill-seasons" data-show-id="${show.id}" hidden></span>
+        <span class="pick-pill pick-pill-runtime" data-show-id="${show.id}" hidden></span>
+        ${rating > 0 ? `<span class="pick-pill pick-pill-rating">&#x2605; ${rating.toFixed(1)}</span>` : ""}
+      </div>
+      <p class="pick-overview">${show.overview || ""}</p>
+      <div class="pick-streaming" data-show-id="${show.id}"></div>
+      <div class="pick-actions">
+        <button class="pick-btn pick-btn-love" data-id="${show.id}">
+          <span class="og og-thumbsup"></span> Love It
+        </button>
+        <button class="pick-btn pick-btn-skip" data-id="${show.id}">
+          <span class="og og-sad"></span> Not Tonight
+        </button>
+      </div>
+    </div>
+  </div>`;
 }
 
-function handleSwipe(preference) {
-  if (!currentShow) return;
+function displayResults(shows) {
+  spinningSection.hidden = true;
+  resultSection.hidden = false;
 
-  const showData = {
-    id: currentShow.id,
-    title: currentShow.name || currentShow.title,
-    year: currentShow.first_air_date ? parseInt(currentShow.first_air_date) : null,
-    poster: currentShow.poster_path,
-    genres: (currentShow.genre_ids || (currentShow.genres || []).map(g => g.id)) || []
-  };
-
-  if (preference === "like") {
-    if (typeof loveMovie === "function") loveMovie(showData);
-  } else {
-    if (typeof skipMovie === "function") skipMovie(showData);
+  const backdrop = shows.find(s => s.backdrop_path);
+  if (backdrop) {
+    document.querySelector(".game-backdrop").style.backgroundImage =
+      `url(${TMDB_IMG}w1280${backdrop.backdrop_path})`;
   }
 
-  document.getElementById("swipeLoveBtn").classList.toggle("active", preference === "like");
-  document.getElementById("swipePassBtn").classList.toggle("active", preference === "dislike");
+  const container = document.getElementById("resultPicks");
+  container.innerHTML = shows.map(s => renderCardHtml(s)).join("");
 
-  if (preference === "dislike") {
-    setTimeout(startSpin, 500);
+  // Fetch extras for each card (runtime + seasons + streaming)
+  shows.forEach(s => fetchCardExtras(s.id));
+
+  trackShown(shows.map(s => s.id));
+  shows.forEach(s => addToHistory(s));
+}
+
+async function fetchCardExtras(showId) {
+  const country = localStorage.getItem("orbit_user_country") || "AU";
+
+  const [details, providers] = await Promise.all([
+    fetch(`https://api.themoviedb.org/3/tv/${showId}?api_key=${TMDB_API_KEY}&language=en-US`)
+      .then(r => r.json()).catch(() => null),
+    fetch(`https://api.themoviedb.org/3/tv/${showId}/watch/providers?api_key=${TMDB_API_KEY}`)
+      .then(r => r.json()).catch(() => null)
+  ]);
+
+  // Seasons pill
+  if (details) {
+    const seasons = details.number_of_seasons || 0;
+    const episodes = details.number_of_episodes || 0;
+    const seasonsEl = document.querySelector(`.pick-pill-seasons[data-show-id="${showId}"]`);
+    if (seasonsEl && seasons > 0) {
+      seasonsEl.textContent = `${seasons} Season${seasons !== 1 ? "s" : ""} \u00B7 ${episodes} Eps`;
+      seasonsEl.hidden = false;
+    }
+  }
+
+  // Runtime pill (episode runtime)
+  if (details && details.episode_run_time && details.episode_run_time.length) {
+    const el = document.querySelector(`.pick-pill-runtime[data-show-id="${showId}"]`);
+    if (el) { el.textContent = details.episode_run_time[0] + " min/ep"; el.hidden = false; }
+  }
+
+  // Streaming logos
+  if (providers && providers.results) {
+    const data = providers.results[country] || providers.results["US"];
+    if (data && data.flatrate && data.flatrate.length) {
+      const el = document.querySelector(`.pick-streaming[data-show-id="${showId}"]`);
+      if (el) {
+        el.innerHTML = data.flatrate.slice(0, 5).map(p =>
+          `<img src="${TMDB_IMG}w45${p.logo_path}" alt="${p.provider_name}" title="${p.provider_name}">`
+        ).join("");
+      }
+    }
   }
 }
 
-function exploreShow() {
-  if (!currentShow) return;
-  localStorage.setItem("timelineMovieId", currentShow.id);
-  localStorage.setItem("timelineType", "tv");
-  window.location.href = "timeline.html";
+function handleCardClick(e) {
+  const loveBtn = e.target.closest(".pick-btn-love");
+  if (loveBtn) {
+    e.stopPropagation();
+    const showId = parseInt(loveBtn.dataset.id);
+    window.location.href = `../games/series.html?id=${showId}`;
+    return;
+  }
+
+  const skipBtn = e.target.closest(".pick-btn-skip");
+  if (skipBtn) {
+    e.stopPropagation();
+    respinCard(skipBtn.closest(".pick-card"));
+    return;
+  }
+}
+
+async function respinCard(cardEl) {
+  const allCards = document.querySelectorAll(".pick-card");
+  const excludeIds = new Set(recentlyShown);
+  allCards.forEach(c => excludeIds.add(parseInt(c.dataset.id)));
+
+  // Find replacement from pool, avoiding recently shown
+  let replacement = lastPool.find(s => !excludeIds.has(s.id));
+
+  // Pool exhausted — fetch another page
+  if (!replacement) {
+    const more = await fetchMoreForPool();
+    replacement = more.find(s => !excludeIds.has(s.id));
+  }
+  // Last resort — ignore cooldown
+  if (!replacement) {
+    const visibleIds = new Set();
+    allCards.forEach(c => visibleIds.add(parseInt(c.dataset.id)));
+    replacement = lastPool.find(s => !visibleIds.has(s.id));
+  }
+
+  if (!replacement) return;
+
+  // Show spinner overlay inside this card
+  cardEl.insertAdjacentHTML("beforeend",
+    `<div class="pick-card-spinner">
+      <div class="mini-spinner">
+        <div class="mini-ring mini-ring-1"></div>
+        <div class="mini-ring mini-ring-2"></div>
+        <div class="mini-core"></div>
+      </div>
+    </div>`
+  );
+
+  await new Promise(r => setTimeout(r, 1200));
+
+  // Replace the card
+  cardEl.outerHTML = renderCardHtml(replacement);
+
+  // Fetch extras for the new card
+  fetchCardExtras(replacement.id);
+
+  trackShown([replacement.id]);
+  addToHistory(replacement);
+
+  if (replacement.backdrop_path) {
+    document.querySelector(".game-backdrop").style.backgroundImage =
+      `url(${TMDB_IMG}w1280${replacement.backdrop_path})`;
+  }
+}
+
+async function fetchMoreForPool() {
+  if (!lastDiscoverParams) return [];
+  const params = new URLSearchParams(lastDiscoverParams.toString());
+  params.set("page", Math.floor(Math.random() * 20) + 1);
+
+  const res = await fetch(`https://api.themoviedb.org/3/discover/tv?${params}`);
+  const data = await res.json();
+  let shows = (data.results || []).filter(s => s.poster_path);
+  shows = await filterTVByStreaming(shows);
+
+  if (currentMode === "mood") {
+    shows = shows.map(s => ({ ...s, _vibeScore: calculateTVVibeScore(s) }));
+  }
+
+  lastPool = lastPool.concat(shows);
+  return shows;
 }
 
 // ============================================
@@ -567,10 +754,16 @@ function exploreShow() {
 // ============================================
 
 function addToHistory(show) {
-  recentSpins = [
-    { id: show.id, name: show.name, poster: show.poster_path, timestamp: Date.now() },
-    ...recentSpins.filter(s => s.id !== show.id)
-  ].slice(0, 20);
+  const entry = {
+    id: show.id,
+    name: show.name || show.title || "Unknown",
+    poster: show.poster_path || "",
+    timestamp: Date.now()
+  };
+
+  recentSpins = recentSpins.filter(s => s.id !== entry.id);
+  recentSpins.unshift(entry);
+  recentSpins = recentSpins.slice(0, 20);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(recentSpins));
 }
 
@@ -596,14 +789,10 @@ function renderHistory() {
   `).join("");
 
   list.querySelectorAll(".history-item").forEach(item => {
-    item.addEventListener("click", async () => {
+    item.addEventListener("click", () => {
       hideModal("historyModal");
-      document.getElementById("configSection").hidden = true;
-      document.getElementById("spinningSection").hidden = false;
-      document.getElementById("spinnerSubtext").textContent = "Loading...";
-      const show = await fetchTVDetails(parseInt(item.dataset.id));
-      await new Promise(r => setTimeout(r, 800));
-      displayResult(show);
+      const showId = parseInt(item.dataset.id);
+      window.location.href = `../games/series.html?id=${showId}`;
     });
   });
 }

@@ -44,6 +44,7 @@ let recentSpins = [];
 let currentMovie = null;
 let lastPool = [];
 let lastDiscoverParams = null;
+let recentlyShown = [];
 let streamingFilterActive = false;
 
 // ============================================
@@ -369,17 +370,36 @@ function shuffleArray(arr) {
 }
 
 function pickThree(pool) {
+  const cooldown = new Set(recentlyShown);
   const seen = new Set();
   const picks = [];
   const shuffled = shuffleArray(pool);
+  // Prefer movies not in cooldown
   for (const m of shuffled) {
-    if (!seen.has(m.id)) {
+    if (!seen.has(m.id) && !cooldown.has(m.id)) {
       seen.add(m.id);
       picks.push(m);
       if (picks.length === 3) break;
     }
   }
+  // Fall back to cooldown items if pool is too small
+  if (picks.length < 3) {
+    for (const m of shuffled) {
+      if (!seen.has(m.id)) {
+        seen.add(m.id);
+        picks.push(m);
+        if (picks.length === 3) break;
+      }
+    }
+  }
   return picks;
+}
+
+function trackShown(ids) {
+  recentlyShown = recentlyShown.concat(ids);
+  if (recentlyShown.length > 20) {
+    recentlyShown = recentlyShown.slice(-20);
+  }
 }
 
 function buildDateFilter() {
@@ -634,6 +654,12 @@ function getVibeBasedGenres() {
 // CARD RENDERING & INTERACTIONS
 // ============================================
 
+/* ============================================================
+   WATCHLIST BUTTON — Randomiser Cards — Added 2026-03-28
+   Per-card Watch Later action using watchlist-service.js.
+   Sits between Love It and Not Tonight in the action row.
+   ============================================================ */
+
 function renderCardHtml(movie) {
   const year = (movie.release_date || "").split("-")[0];
   const rating = movie.vote_average || 0;
@@ -660,6 +686,9 @@ function renderCardHtml(movie) {
         <button class="pick-btn pick-btn-love" data-id="${movie.id}">
           <span class="og og-thumbsup"></span> Love It
         </button>
+        <button class="pick-btn pick-btn-watch${typeof isInWatchlist === 'function' && isInWatchlist(movie.id) ? ' added' : ''}" data-id="${movie.id}">
+          <span class="og og-couch"></span> ${typeof isInWatchlist === 'function' && isInWatchlist(movie.id) ? 'Watchlisted' : 'Watch Later'}
+        </button>
         <button class="pick-btn pick-btn-skip" data-id="${movie.id}">
           <span class="og og-sad"></span> Not Tonight
         </button>
@@ -684,6 +713,7 @@ function displayResults(movies) {
   // Fetch runtime + streaming for each card (6 parallel calls)
   movies.forEach(m => fetchCardExtras(m.id));
 
+  trackShown(movies.map(m => m.id));
   movies.forEach(m => addToHistory(m));
 }
 
@@ -718,33 +748,85 @@ async function fetchCardExtras(movieId) {
 }
 
 function handleCardClick(e) {
+  // Love It → register as loved
   const loveBtn = e.target.closest(".pick-btn-love");
   if (loveBtn) {
     e.stopPropagation();
-    openMovieCubeForId(parseInt(loveBtn.dataset.id));
+    const card = loveBtn.closest(".pick-card");
+    const movieId = parseInt(loveBtn.dataset.id);
+    if (typeof loveMovie === "function") {
+      const movie = lastPool.find(m => m.id === movieId);
+      loveMovie({
+        id: movieId,
+        title: movie?.title || card.querySelector(".pick-title")?.textContent || "",
+        poster: movie?.poster_path || "",
+        genres: movie?.genre_ids || []
+      });
+    }
+    loveBtn.classList.add("active");
+    loveBtn.textContent = "Loved!";
     return;
   }
 
+  // Watch Later → toggle watchlist
+  const watchBtn = e.target.closest(".pick-btn-watch");
+  if (watchBtn) {
+    e.stopPropagation();
+    const movieId = parseInt(watchBtn.dataset.id);
+    if (typeof isInWatchlist === "function" && isInWatchlist(movieId)) {
+      removeFromWatchlist(movieId);
+      watchBtn.classList.remove("added");
+      watchBtn.innerHTML = '<span class="og og-couch"></span> Watch Later';
+    } else if (typeof addToWatchlist === "function") {
+      const movie = lastPool.find(m => m.id === movieId);
+      addToWatchlist({
+        id: movieId,
+        title: movie?.title || "",
+        poster_path: movie?.poster_path || "",
+        release_date: movie?.release_date || "",
+        vote_average: movie?.vote_average || 0
+      });
+      watchBtn.classList.add("added");
+      watchBtn.innerHTML = '<span class="og og-couch"></span> Watchlisted';
+    }
+    return;
+  }
+
+  // Not Tonight → individual respin
   const skipBtn = e.target.closest(".pick-btn-skip");
   if (skipBtn) {
     e.stopPropagation();
     respinCard(skipBtn.closest(".pick-card"));
     return;
   }
+
+  // Poster click → Movie Cube
+  const poster = e.target.closest(".pick-poster-wrap");
+  if (poster) {
+    const card = poster.closest(".pick-card");
+    openMovieCubeForId(parseInt(card.dataset.id));
+    return;
+  }
 }
 
 async function respinCard(cardEl) {
   const allCards = document.querySelectorAll(".pick-card");
-  const excludeIds = new Set();
+  const excludeIds = new Set(recentlyShown);
   allCards.forEach(c => excludeIds.add(parseInt(c.dataset.id)));
 
-  // Find replacement from pool
+  // Find replacement from pool, avoiding recently shown
   let replacement = lastPool.find(m => !excludeIds.has(m.id));
 
   // Pool exhausted — fetch another page
   if (!replacement) {
     const more = await fetchMoreForPool();
     replacement = more.find(m => !excludeIds.has(m.id));
+  }
+  // Last resort — ignore cooldown
+  if (!replacement) {
+    const visibleIds = new Set();
+    allCards.forEach(c => visibleIds.add(parseInt(c.dataset.id)));
+    replacement = lastPool.find(m => !visibleIds.has(m.id));
   }
 
   if (!replacement) return;
@@ -768,6 +850,7 @@ async function respinCard(cardEl) {
   // Fetch extras for the new card
   fetchCardExtras(replacement.id);
 
+  trackShown([replacement.id]);
   addToHistory(replacement);
 
   if (replacement.backdrop_path) {

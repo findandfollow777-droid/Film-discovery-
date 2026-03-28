@@ -47,7 +47,7 @@
     }
 
     /* Poster */
-    .pick-poster-wrap { position: relative; }
+    .pick-poster-wrap { position: relative; cursor: pointer; }
     .pick-poster {
       width: 100%;
       aspect-ratio: 2/3;
@@ -155,6 +155,22 @@
       background: rgba(148, 163, 184, 0.15);
       border-color: var(--muted-silver);
     }
+    .pick-btn-watch {
+      background: transparent;
+      border: 2px solid var(--accent-gold);
+      color: var(--accent-gold);
+    }
+    .pick-btn-watch:hover {
+      background: rgba(255, 215, 0, 0.1);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+    .pick-btn-watch.added {
+      background: var(--accent-gold);
+      color: var(--space-black);
+    }
+    .pick-btn-watch.added:hover {
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
 
     /* Card spin overlay (individual respin) */
     .pick-card-spinner {
@@ -230,6 +246,9 @@
         grid-template-columns: 1fr;
         min-height: auto;
       }
+      .pick-actions {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -247,7 +266,7 @@
 
   <!-- HEADER -->
   <header class="game-header">
-    <a href="../index.html" class="back-link" id="backNav">← Back to ORBIT</a>
+    <a class="back-link" onclick="history.back()">&#x2190; Back</a>
 
     <div class="orbit-logo">
       <div class="orbit-logo-mark">
@@ -551,6 +570,7 @@
   <script src="../utils.js"></script>
   <script src="../components/taste-service.js"></script>
   <script src="../components/shortlist-service.js"></script>
+  <script src="../components/watchlist-service.js"></script>
   <script src="../components/encounter-service.js"></script>
   <script src="../components/trivia-stats.js"></script>
   <script src="../components/moviecube.js"></script>

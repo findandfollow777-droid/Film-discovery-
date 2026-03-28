@@ -2803,3 +2803,55 @@ body {
   .bio-panel.expanded { width: 100%; }
   .bio-panel-content { width: 100%; }
 }
+
+/* ============================================================
+   CONTEXT MENU — Right-click / Long-press
+   ============================================================ */
+
+.orbit-context-menu {
+  position: fixed;
+  z-index: 9999;
+  background: var(--nebula-dark);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  min-width: 200px;
+  padding: 6px;
+  display: none;
+}
+.orbit-context-menu.is-open { display: block; }
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--film-white);
+  transition: background 0.15s ease;
+}
+.context-menu-item:hover { background: rgba(var(--accent-rgb), 0.1); }
+.context-watchlist { color: var(--accent-gold); }
+.context-shortlist { color: var(--accent-cyan); }
+.context-open-cube { color: var(--muted-silver); }
+.context-menu-item.is-added { opacity: 0.7; }
+.context-menu-item.is-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+.context-menu-confirmation {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  color: var(--accent-gold);
+  font-family: var(--font-body);
+}
+
+@keyframes tilePulse {
+  0%   { transform: scale(1.0); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1.0); }
+}
+.tile-long-press-pulse { animation: tilePulse 0.2s ease; }

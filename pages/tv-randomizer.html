@@ -8,6 +8,229 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tv-randomizer.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <style>
+    /* ============================================
+       THREE-PICK RESULTS
+    ============================================ */
+    .result-section {
+      width: calc(100vw - 40px);
+      max-width: 1200px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+    .result-picks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+      min-height: 70vh;
+      align-items: stretch;
+    }
+    .pick-card {
+      background: var(--nebula-dark);
+      border: 2px solid rgba(var(--tv-primary-rgb), 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition-smooth);
+      animation: fadeIn 0.5s ease both;
+    }
+    .pick-card:nth-child(2) { animation-delay: 0.1s; }
+    .pick-card:nth-child(3) { animation-delay: 0.2s; }
+    .pick-card:hover {
+      border-color: rgba(var(--tv-primary-rgb), 0.5);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 24px rgba(var(--tv-primary-rgb), 0.12);
+    }
+
+    /* Poster */
+    .pick-poster-wrap { position: relative; }
+    .pick-poster {
+      width: 100%;
+      aspect-ratio: 2/3;
+      min-height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--deep-void);
+    }
+    .pick-match {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 8px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      font-family: var(--font-display);
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      color: var(--accent-cyan); text-align: right;
+    }
+
+    /* Card info */
+    .pick-info {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .pick-title {
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      color: var(--film-white);
+    }
+
+    /* Pill row */
+    .pick-pills {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 12px;
+    }
+    .pick-pill {
+      padding: 3px 10px;
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      background: rgba(var(--tv-primary-rgb), 0.08);
+      border: 1px solid rgba(var(--tv-primary-rgb), 0.2);
+      border-radius: var(--radius-pill);
+      color: var(--tv-primary);
+    }
+    .pick-pill-rating {
+      background: rgba(var(--gold-rgb), 0.12);
+      border-color: rgba(var(--gold-rgb), 0.3);
+      color: var(--accent-gold);
+    }
+
+    /* Synopsis — full text, no truncation */
+    .pick-overview {
+      font-size: 13px; line-height: 1.6;
+      color: var(--muted-silver);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    /* Streaming logos */
+    .pick-streaming {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 14px;
+      min-height: 4px;
+    }
+    .pick-streaming img {
+      width: 30px; height: 30px;
+      border-radius: 6px; object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Per-card action buttons */
+    .pick-actions {
+      display: flex; gap: 8px;
+      margin-top: auto;
+    }
+    .pick-btn {
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
+      gap: 6px; padding: 10px 8px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: var(--transition-smooth);
+      border: 1.5px solid;
+    }
+    .pick-btn-love {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--success-green);
+    }
+    .pick-btn-love:hover {
+      background: rgba(16, 185, 129, 0.2);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+    .pick-btn-skip {
+      background: rgba(148, 163, 184, 0.08);
+      border-color: rgba(148, 163, 184, 0.25);
+      color: var(--muted-silver);
+    }
+    .pick-btn-skip:hover {
+      background: rgba(148, 163, 184, 0.15);
+      border-color: var(--muted-silver);
+    }
+
+    /* Card spin overlay (individual respin) */
+    .pick-card-spinner {
+      position: absolute; inset: 0;
+      background: rgba(10, 14, 23, 0.92);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      animation: fadeIn 0.2s ease;
+    }
+    .mini-spinner {
+      width: 60px; height: 60px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mini-ring {
+      position: absolute; border-radius: 50%;
+      border: 2px solid transparent;
+    }
+    .mini-ring-1 {
+      width: 100%; height: 100%;
+      border-top-color: var(--tv-primary);
+      border-right-color: var(--tv-primary);
+      box-shadow: 0 0 12px rgba(var(--tv-primary-rgb), 0.4);
+      animation: spin-fast 1.2s linear infinite;
+    }
+    .mini-ring-2 {
+      width: 70%; height: 70%;
+      border-top-color: var(--accent-gold);
+      border-left-color: var(--accent-gold);
+      animation: spin-fast 1.8s linear infinite reverse;
+    }
+    .mini-core {
+      width: 8px; height: 8px;
+      background: var(--tv-primary); border-radius: 50%;
+      box-shadow: 0 0 12px var(--tv-primary);
+      animation: pulse-core 1s ease-in-out infinite;
+    }
+
+    /* Respin All loading state */
+    .randomizer-loading-state {
+      position: absolute; inset: 0;
+      background: rgba(10, 14, 23, 0.92);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5;
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* ============================================
+       GLOBAL CONTROLS (Respin All + Adjust)
+    ============================================ */
+    .result-picks-actions {
+      display: flex; justify-content: center; gap: 16px;
+      margin-top: 8px;
+    }
+    .result-picks-actions .action-btn {
+      min-height: 56px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 900px) {
+      .result-picks { grid-template-columns: repeat(2, 1fr); }
+      .result-picks .pick-card:nth-child(3) { grid-column: 1 / -1; }
+    }
+    @media (max-width: 650px) {
+      .result-picks {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -21,7 +244,7 @@
 
   <!-- HEADER -->
   <header class="game-header tv-theme">
-    <a href="../index.html" class="back-link" id="backNav">← Back to ORBIT</a>
+    <a class="back-link" onclick="history.back()">&#x2190; Back</a>
 
     <div class="orbit-logo">
       <div class="orbit-logo-mark">
@@ -253,66 +476,14 @@
 
     <!-- RESULT SECTION -->
     <section class="result-section" id="resultSection" hidden>
-      <div class="result-card">
-        <div class="result-poster-wrap">
-          <img class="result-poster" id="resultPoster" src="" alt="">
-          <div class="poster-glow"></div>
-        </div>
-        <div class="result-details">
-          <div class="result-rating-badge" id="resultRating">
-            <span class="rating-star">&#x2605;</span>
-            <span class="rating-value" id="ratingValue">0.0</span>
-          </div>
-          <h2 class="result-title" id="resultTitle">Show Title</h2>
-
-          <!-- TV-specific meta -->
-          <div class="result-meta">
-            <span class="meta-item" id="resultSeasons">3 Seasons</span>
-            <span class="meta-dot">&#183;</span>
-            <span class="meta-item" id="resultEpisodes">24 Episodes</span>
-            <span class="meta-dot">&#183;</span>
-            <span class="meta-item" id="resultRuntime">45 min</span>
-            <span class="meta-dot">&#183;</span>
-            <span class="meta-item status-badge" id="resultStatus">Ended</span>
-          </div>
-
-          <div class="result-genres" id="resultGenres"></div>
-
-          <div class="match-indicator" id="matchIndicator" hidden>
-            <div class="match-label">Vibe Match</div>
-            <div class="match-bar-track">
-              <div class="match-bar-fill" id="matchFill"></div>
-            </div>
-            <div class="match-pct" id="matchPct">0%</div>
-          </div>
-
-          <p class="result-overview" id="resultOverview"></p>
-          <div class="streaming-providers" id="streamingProviders"></div>
-
-          <!-- Swipe + Actions -->
-          <div class="result-actions">
-            <div class="swipe-actions">
-              <button class="swipe-btn love" id="swipeLoveBtn">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-                <span>Love it</span>
-              </button>
-              <button class="swipe-btn pass" id="swipePassBtn">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
-                </svg>
-                <span>Not Tonight</span>
-              </button>
-            </div>
-
-            <div class="nav-actions">
-              <button class="action-btn primary" id="spinAgainBtn">Spin Again</button>
-              <button class="action-btn secondary" id="adjustBtn">Adjust</button>
-              <button class="action-btn accent" id="exploreBtn">Explore Show</button>
-            </div>
-          </div>
-        </div>
+      <div class="result-picks" id="resultPicks"></div>
+      <div class="result-picks-actions">
+        <button class="action-btn primary" id="respinBtn">
+          <span class="og og-shuffle og-lg"></span> Respin All
+        </button>
+        <button class="action-btn secondary" id="adjustBtn">
+          <span class="og og-reset og-lg"></span> Adjust
+        </button>
       </div>
     </section>
 

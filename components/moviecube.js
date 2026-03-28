@@ -75,6 +75,7 @@
   let cubeProductionCompanies;
   let cubeTrailerBtn, cubeAnchorBtn, cubeSimilarBtn, cubeSimilarOverlay;
   let cubeShortlistBtn;
+  let cubeWatchlistBtn;
   let cubeTasteLoveBtn, cubeTasteSkipBtn;
 
   // DOM refs - Trailer modal
@@ -128,6 +129,7 @@
     cubeSimilarBtn = document.getElementById("cubeSimilarBtn");
     cubeSimilarOverlay = document.getElementById("cubeSimilarOverlay");
     cubeShortlistBtn = document.getElementById("shortlist-btn");
+    cubeWatchlistBtn = document.getElementById("watchlist-btn");
     cubeTasteLoveBtn = document.getElementById("cubeTasteLove");
     cubeTasteSkipBtn = document.getElementById("cubeTasteSkip");
     // cubeAwards removed — awards now on Face 7
@@ -339,6 +341,10 @@
                 <span class="shortlist-icon">☆</span>
                 <span class="shortlist-label">Shortlist</span>
               </button>
+              <button class="watchlist-btn not-added" id="watchlist-btn" title="Watch Later">
+                <span class="og og-couch"></span>
+                <span class="watchlist-label">Watch Later</span>
+              </button>
             </div>
           </div>
         </div>
@@ -432,6 +438,9 @@
 
     // Shortlist button
     cubeShortlistBtn?.addEventListener("click", handleShortlistClick);
+
+    // Watchlist button
+    cubeWatchlistBtn?.addEventListener("click", handleWatchlistClick);
 
     // Taste buttons (Love / Skip on poster face)
     cubeTasteLoveBtn?.addEventListener("click", handleTasteLoveClick);
@@ -564,6 +573,7 @@
         () => populateTriviaFace(),
         () => populateWhereToWatch(cubeMovieData.id),
         () => updateShortlistButton(),
+        () => updateWatchlistButton(),
         () => updateTasteButtons()
       ];
       for (const fn of safeCalls) {
@@ -2642,6 +2652,77 @@
     }, 300);
   }
 
+  /* ============================================================
+     WATCHLIST BUTTON — Added 2026-03-28
+     Adds/removes current movie from orbit_watchlist via
+     watchlist-service.js. Mirrors Shortlist button pattern.
+     ============================================================ */
+
+  function getWatchlistFunctions() {
+    return {
+      addToWatchlist: window.addToWatchlist,
+      removeFromWatchlist: window.removeFromWatchlist,
+      isInWatchlist: window.isInWatchlist
+    };
+  }
+
+  function updateWatchlistButton() {
+    if (!cubeWatchlistBtn || !cubeMovieData) return;
+
+    const fns = getWatchlistFunctions();
+    if (!fns.isInWatchlist) {
+      cubeWatchlistBtn.style.display = 'none';
+      return;
+    }
+
+    cubeWatchlistBtn.style.display = 'flex';
+
+    const isAdded = fns.isInWatchlist(cubeMovieData.id);
+    const labelSpan = cubeWatchlistBtn.querySelector('.watchlist-label');
+
+    cubeWatchlistBtn.className = 'watchlist-btn';
+
+    if (isAdded) {
+      cubeWatchlistBtn.classList.add('added');
+      cubeWatchlistBtn.title = 'Remove from Watchlist';
+      if (labelSpan) labelSpan.textContent = 'Watchlisted';
+    } else {
+      cubeWatchlistBtn.classList.add('not-added');
+      cubeWatchlistBtn.title = 'Watch Later';
+      if (labelSpan) labelSpan.textContent = 'Watch Later';
+    }
+  }
+
+  function handleWatchlistClick() {
+    if (!cubeMovieData) return;
+
+    const fns = getWatchlistFunctions();
+    if (!fns.addToWatchlist || !fns.removeFromWatchlist || !fns.isInWatchlist) {
+      console.warn('Watchlist service not loaded');
+      return;
+    }
+
+    const movieId = cubeMovieData.id;
+
+    if (fns.isInWatchlist(movieId)) {
+      fns.removeFromWatchlist(movieId);
+    } else {
+      fns.addToWatchlist({
+        id: cubeMovieData.id,
+        title: cubeMovieData.title || 'Unknown',
+        poster_path: cubeMovieData.poster_path || null,
+        release_date: cubeMovieData.release_date || null,
+        vote_average: cubeMovieData.vote_average || null
+      });
+    }
+
+    // Flash feedback
+    cubeWatchlistBtn.classList.add('watchlist-flash');
+    setTimeout(() => cubeWatchlistBtn.classList.remove('watchlist-flash'), 300);
+
+    updateWatchlistButton();
+  }
+
   // ============================================
   // EXPORTS
   // ============================================
@@ -2649,5 +2730,6 @@
   window.openMovieCube = openMovieCube;
   window.closeMovieCube = closeMovieCube;
   window.checkNebulaAvailable = checkNebulaAvailable;
+  window.updateWatchlistButton = updateWatchlistButton;
 
 })();
