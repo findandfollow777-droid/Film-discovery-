@@ -148,18 +148,19 @@ function renderTimeline(pair, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const svgW = 1600;
-  const svgH = 180;
+  const svgW = 1800;
+  const svgH = 220;
+  const xPad = 60;
   const yearStart = pair.yearStart;
   const yearEnd = pair.yearEnd;
-  const xScale = 1560 / (yearEnd - yearStart + 2);
+  const xScale = (svgW - xPad * 2) / (yearEnd - yearStart + 2);
 
   function xPos(year) {
-    return 20 + (year - yearStart + 1) * xScale;
+    return xPad + (year - yearStart + 1) * xScale;
   }
 
-  const trackA = 75;
-  const trackB = 120;
+  const trackA = 88;
+  const trackB = 145;
   const currentYear = new Date().getFullYear();
 
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}">`;
@@ -167,24 +168,24 @@ function renderTimeline(pair, containerId) {
   // Year axis labels every 5 years
   for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
     if (y % 5 === 0) {
-      svg += `<text x="${xPos(y)}" y="155" text-anchor="middle" font-size="9" fill="#64748b" font-family="Barlow, sans-serif">${y}</text>`;
+      svg += `<text x="${xPos(y)}" y="195" text-anchor="middle" font-size="9" fill="#64748b" font-family="Barlow, sans-serif">${y}</text>`;
     }
   }
 
   // Faint vertical grid lines at every decade
   for (let y = yearStart - 1; y <= yearEnd + 1; y++) {
     if (y % 10 === 0) {
-      svg += `<line x1="${xPos(y)}" y1="50" x2="${xPos(y)}" y2="145" stroke="#1e293b" stroke-width="1"/>`;
+      svg += `<line x1="${xPos(y)}" y1="24" x2="${xPos(y)}" y2="170" stroke="#1e293b" stroke-width="1"/>`;
     }
   }
 
   // Career base lines
-  svg += `<line x1="${xPos(yearStart)}" y1="${trackA}" x2="${xPos(yearEnd)}" y2="${trackA}" stroke="#00d9ff" stroke-opacity="0.2" stroke-width="1.5"/>`;
-  svg += `<line x1="${xPos(yearStart)}" y1="${trackB}" x2="${xPos(yearEnd)}" y2="${trackB}" stroke="#ffd700" stroke-opacity="0.16" stroke-width="1.5"/>`;
+  svg += `<line x1="${xPos(yearStart)}" y1="${trackA}" x2="${xPos(yearEnd)}" y2="${trackA}" stroke="#00d9ff" stroke-opacity="0.2" stroke-width="2"/>`;
+  svg += `<line x1="${xPos(yearStart)}" y1="${trackB}" x2="${xPos(yearEnd)}" y2="${trackB}" stroke="#ffd700" stroke-opacity="0.16" stroke-width="2"/>`;
 
   // NOW dashed line
   if (currentYear >= yearStart - 1 && currentYear <= yearEnd + 1) {
-    svg += `<line x1="${xPos(currentYear)}" y1="50" x2="${xPos(currentYear)}" y2="145" stroke="#64748b" stroke-width="0.5" stroke-dasharray="3,3" stroke-opacity="0.3"/>`;
+    svg += `<line x1="${xPos(currentYear)}" y1="24" x2="${xPos(currentYear)}" y2="170" stroke="#64748b" stroke-width="0.5" stroke-dasharray="3,3" stroke-opacity="0.3"/>`;
   }
 
   // Determine shared films for labeling logic
@@ -203,38 +204,38 @@ function renderTimeline(pair, containerId) {
       svg += `<line x1="${x}" y1="${trackA}" x2="${x}" y2="${trackB}" stroke="#a855f7" stroke-opacity="0.35" stroke-width="1"/>`;
 
       // Circles on both tracks
-      const r = film.award ? 6 : 5;
+      const r = film.award ? 8 : 6;
       svg += `<circle cx="${x}" cy="${trackA}" r="${r}" fill="#a855f7"/>`;
       svg += `<circle cx="${x}" cy="${trackB}" r="${r}" fill="#a855f7"/>`;
 
       // Award ring
       if (film.award) {
-        svg += `<circle cx="${x}" cy="${trackA}" r="9" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
-        svg += `<circle cx="${x}" cy="${trackB}" r="9" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="${trackA}" r="13" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="${trackB}" r="13" fill="none" stroke="#ffd700" stroke-opacity="0.35" stroke-width="1.5"/>`;
       }
 
       // Label significant shared films: award:true + first + last shared
       const isSignificant = film.award || film === firstShared || film === lastShared;
       if (isSignificant) {
-        const labelY = (labelAlt % 2 === 0) ? 55 : 140;
-        svg += `<text x="${x}" y="${labelY}" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        const labelY = (labelAlt % 2 === 0) ? 70 : 165;
+        svg += `<text x="${x}" y="${labelY}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
         labelAlt++;
       }
     } else if (film.person === 'A') {
       // Small cyan circle on personA track
-      svg += `<circle cx="${x}" cy="${trackA}" r="3" fill="#00d9ff" fill-opacity="0.35"/>`;
+      svg += `<circle cx="${x}" cy="${trackA}" r="4" fill="#00d9ff" fill-opacity="0.35"/>`;
 
       // Label only if award
       if (film.award) {
-        svg += `<text x="${x}" y="${trackA - 10}" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        svg += `<text x="${x}" y="${trackA - 12}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
       }
     } else if (film.person === 'B') {
       // Small gold circle on personB track
-      svg += `<circle cx="${x}" cy="${trackB}" r="3" fill="#ffd700" fill-opacity="0.3"/>`;
+      svg += `<circle cx="${x}" cy="${trackB}" r="4" fill="#ffd700" fill-opacity="0.3"/>`;
 
       // Label only if award
       if (film.award) {
-        svg += `<text x="${x}" y="${trackB + 15}" text-anchor="middle" font-size="7.5" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
+        svg += `<text x="${x}" y="${trackB + 18}" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Barlow, sans-serif">${film.title} (${film.year})</text>`;
       }
     }
   });
@@ -395,9 +396,11 @@ function populateMosaic(posterPaths) {
     cells.forEach((cell, i) => {
       if (extended[i]) {
         cell.style.backgroundImage = `url(${TMDB_IMG}w92${extended[i]})`;
+        cell.style.backgroundSize = 'cover';
+        cell.style.backgroundPosition = 'center';
       }
     });
-  }, 300);
+  }, 100);
 }
 
 /* ----------------------------------------------------------
@@ -473,6 +476,32 @@ function initScrollHint() {
       hint.classList.add('hidden');
     }, { once: true });
   }
+
+  // Mouse-drag scroll for desktop
+  if (scrollContainer) {
+    let isDown = false, startX, scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+      isDown = true;
+      scrollContainer.classList.add('dragging');
+      startX = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft = scrollContainer.scrollLeft;
+    });
+    scrollContainer.addEventListener('mouseleave', () => {
+      isDown = false;
+      scrollContainer.classList.remove('dragging');
+    });
+    scrollContainer.addEventListener('mouseup', () => {
+      isDown = false;
+      scrollContainer.classList.remove('dragging');
+    });
+    scrollContainer.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scrollContainer.offsetLeft;
+      scrollContainer.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+  }
 }
 
 /* ----------------------------------------------------------
@@ -488,11 +517,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initScrollHint();
 
-  // Film tiles -> MovieCube
+  // Film tiles -> MovieCube (with fallback)
   document.querySelectorAll('.film-tile').forEach(tile => {
     tile.addEventListener('click', () => {
-      const id = tile.dataset.movieId;
-      if (id && typeof openMovieCube === 'function') openMovieCube(parseInt(id));
+      const movieId = parseInt(tile.dataset.movieId);
+      if (movieId && typeof openMovieCube === 'function') {
+        openMovieCube(movieId);
+      } else if (movieId) {
+        window.location.href = 'results.html?movie=' + movieId;
+      }
     });
   });
 
