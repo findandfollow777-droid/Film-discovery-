@@ -25,7 +25,9 @@ const GENRE_VIBES = {
   }
 };
 
-const TMDB_IMG = OrbitUtils.TMDB_IMG;
+const TMDB_IMG = (typeof OrbitUtils !== 'undefined' && OrbitUtils.TMDB_IMG)
+  ? OrbitUtils.TMDB_IMG
+  : 'https://image.tmdb.org/t/p/';
 
 let anchorMovie = null;
 let allMovies = [];
@@ -145,7 +147,8 @@ function populateAnchorPanel(movie) {
 
   const posterEl = document.getElementById('hud-anchor-poster');
   if (posterEl && movie.poster_path) {
-    posterEl.style.backgroundImage = `url(${TMDB_IMG}w185${movie.poster_path})`;
+    const imgBase = (typeof TMDB_IMG !== 'undefined' && TMDB_IMG) ? TMDB_IMG : 'https://image.tmdb.org/t/p/';
+    posterEl.style.backgroundImage = `url(${imgBase}w185${movie.poster_path})`;
   }
 
   const titleEl = document.getElementById('hud-anchor-title');
@@ -197,12 +200,13 @@ function updateFilmCount(count) {
 
 function displayAnchor() {
   if (!anchorMovie) return;
-  if (anchorPoster) {
-    anchorPoster.src = `${TMDB_IMG}w300${anchorMovie.poster_path}`;
-    anchorPoster.alt = anchorMovie.title;
+  if (anchorPoster && anchorMovie.poster_path) {
+    const imgBase = (typeof TMDB_IMG !== 'undefined' && TMDB_IMG) ? TMDB_IMG : 'https://image.tmdb.org/t/p/';
+    anchorPoster.src = imgBase + 'w300' + anchorMovie.poster_path;
+    anchorPoster.alt = anchorMovie.title || '';
   }
   if (anchorLabel) {
-    anchorLabel.textContent = anchorMovie.title;
+    anchorLabel.textContent = anchorMovie.title || '';
   }
 
   // Anchor star click → open MovieCube
@@ -321,8 +325,9 @@ function createOrbitMovie(item, orbitClass, x, y) {
   div.style.top = `${y}px`;
   div.style.transform = "translate(-50%, -50%)";
 
+  const imgBase = (typeof TMDB_IMG !== 'undefined' && TMDB_IMG) ? TMDB_IMG : 'https://image.tmdb.org/t/p/';
   const posterUrl = movie.poster_path
-    ? `${TMDB_IMG}w200${movie.poster_path}`
+    ? imgBase + 'w200' + movie.poster_path
     : "https://placehold.co/80x120?text=?";
 
   div.innerHTML = `
@@ -420,7 +425,11 @@ function reAnchor(movieId) {
 
 async function fetchMovieDetails(movieId) {
   try {
-    return await OrbitUtils.tmdbFetch('/movie/' + movieId, { language: 'en-US' });
+    if (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch) {
+      return await OrbitUtils.tmdbFetch('/movie/' + movieId, { language: 'en-US' });
+    }
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&language=en-US`);
+    return await res.json();
   } catch (e) {
     console.error("Failed to fetch movie details:", e);
     return null;
@@ -478,9 +487,17 @@ document.head.appendChild(style);
 
 async function loadRecommendations(movieId) {
   try {
+    const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
+      ? (ep, p) => OrbitUtils.tmdbFetch(ep, p)
+      : async (ep, p) => {
+          const q = new URLSearchParams({ api_key: TMDB_API_KEY, language: 'en-US', ...p });
+          const r = await fetch('https://api.themoviedb.org/3' + ep + '?' + q);
+          return r.json();
+        };
+
     const [recs, similar] = await Promise.all([
-      OrbitUtils.tmdbFetch('/movie/' + movieId + '/recommendations', { language: 'en-US', page: 1 }),
-      OrbitUtils.tmdbFetch('/movie/' + movieId + '/similar', { language: 'en-US', page: 1 })
+      tmdbFetch('/movie/' + movieId + '/recommendations', { page: 1 }),
+      tmdbFetch('/movie/' + movieId + '/similar', { page: 1 })
     ]);
 
     const combined = [...(recs.results || []), ...(similar.results || [])];
@@ -525,9 +542,17 @@ async function handleExpandUniverse() {
   if (hudBtn) { hudBtn.classList.add('loading'); }
 
   try {
+    const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
+      ? (ep, p) => OrbitUtils.tmdbFetch(ep, p)
+      : async (ep, p) => {
+          const q = new URLSearchParams({ api_key: TMDB_API_KEY, language: 'en-US', ...p });
+          const r = await fetch('https://api.themoviedb.org/3' + ep + '?' + q);
+          return r.json();
+        };
+
     const [similarData, recData] = await Promise.all([
-      OrbitUtils.tmdbFetch('/movie/' + anchorMovie.id + '/similar', { page: 1 }),
-      OrbitUtils.tmdbFetch('/movie/' + anchorMovie.id + '/recommendations', { page: 1 })
+      tmdbFetch('/movie/' + anchorMovie.id + '/similar', { page: 1 }),
+      tmdbFetch('/movie/' + anchorMovie.id + '/recommendations', { page: 1 })
     ]);
 
     const existingIds = new Set([anchorMovie.id, ...allMovies.map(m => m.id)]);
