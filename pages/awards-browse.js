@@ -70,7 +70,7 @@
         onAnchorClick: (movie) => {
           localStorage.setItem("anchorMovie", JSON.stringify(movie));
           localStorage.removeItem("anchorFromResults");
-          window.location.href = "anchor.html";
+          window.location.href = "../games/constellation.html";
         }
       });
     }

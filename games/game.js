@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       onAnchorClick: (movie) => {
         localStorage.setItem("anchorMovie", JSON.stringify(movie));
         localStorage.removeItem("anchorFromResults");
-        window.location.href = "../pages/anchor.html";
+        window.location.href = "constellation.html";
       }
     });
   }

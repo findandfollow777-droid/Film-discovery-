@@ -57,7 +57,7 @@ function init() {
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
       localStorage.removeItem("anchorFromResults");
-      window.location.href = "anchor.html";
+      window.location.href = "../games/constellation.html";
     }
   });
   if (typeof initPeopleCube === 'function') initPeopleCube();
@@ -2408,7 +2408,7 @@ function makeAnchorStar() {
   localStorage.setItem("anchorMovie", JSON.stringify(currentMovieData));
   localStorage.setItem("constellationMovies", JSON.stringify(allMov));
   localStorage.removeItem("anchorFromResults");
-  window.location.href = "anchor.html";
+  window.location.href = "../games/constellation.html";
 }
 
 // ============================================

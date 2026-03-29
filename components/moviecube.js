@@ -427,7 +427,7 @@
         // Fallback: save anchor and navigate to anchor page
         localStorage.setItem('anchorMovie', JSON.stringify(cubeMovieData));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = `${_pagesPrefix}anchor.html`;
+        window.location.href = OrbitUtils.ROOT + 'games/constellation.html';
       }
     });
     

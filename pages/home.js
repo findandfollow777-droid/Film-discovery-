@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
       onAnchorClick: (movie) => {
         localStorage.setItem('anchorMovie', JSON.stringify(movie));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = 'anchor.html';
+        window.location.href = '../games/constellation.html';
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();
