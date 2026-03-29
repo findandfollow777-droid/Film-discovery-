@@ -85,22 +85,25 @@ function init() {
 
   allMovies = (allMovies || []).filter(m => m && m.id !== anchorMovie.id);
 
+  console.log('[CONSTELLATION] anchorMovie:', anchorMovie?.title, 'id:', anchorMovie?.id, 'poster:', anchorMovie?.poster_path);
+  console.log('[CONSTELLATION] allMovies count:', allMovies.length);
+
   displayAnchor();
   populateAnchorPanel(anchorMovie);
   setupEventListeners();
-  initMovieCubeOnPage();
-  initWatchlistMenu();
+
+  try { initMovieCubeOnPage(); } catch (e) { console.warn('[CONSTELLATION] MovieCube init failed:', e); }
+  try { initWatchlistMenu(); } catch (e) { console.warn('[CONSTELLATION] Watchlist menu init failed:', e); }
 
   if (allMovies.length > 0) {
-    // Context A: have constellation movies from search results
     calculateSimilarities();
     renderOrbits();
     updateFilmCount(allMovies.length);
     checkExpandUniverse();
-    console.log("Constellation initialized with", allMovies.length, "orbiting movies");
+    console.log("[CONSTELLATION] Rendered", allMovies.length, "orbiting movies");
   } else {
-    // Context B: no constellation movies — fetch recommendations
     updateFilmCount(0);
+    console.log("[CONSTELLATION] No stored movies, fetching recommendations for", anchorMovie.id);
     loadRecommendations(anchorMovie.id);
   }
 }
@@ -486,6 +489,7 @@ document.head.appendChild(style);
 // ============================================
 
 async function loadRecommendations(movieId) {
+  console.log('[CONSTELLATION] loadRecommendations called for movieId:', movieId);
   try {
     const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
       ? (ep, p) => OrbitUtils.tmdbFetch(ep, p)
@@ -511,16 +515,15 @@ async function loadRecommendations(movieId) {
     }
 
     allMovies = unique.slice(0, 30);
+    console.log('[CONSTELLATION] Fetched', allMovies.length, 'unique films, recs:', (recs.results||[]).length, 'similar:', (similar.results||[]).length);
     localStorage.setItem("constellationMovies", JSON.stringify([anchorMovie, ...allMovies]));
 
     calculateSimilarities();
     renderOrbits();
     updateFilmCount(allMovies.length);
     checkExpandUniverse();
-
-    console.log("Loaded", allMovies.length, "recommended films for constellation");
   } catch (e) {
-    console.error("Failed to load recommendations:", e);
+    console.error("[CONSTELLATION] Failed to load recommendations:", e);
     showError("Could not load similar films.");
   }
 }
