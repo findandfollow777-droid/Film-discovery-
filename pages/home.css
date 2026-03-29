@@ -359,7 +359,7 @@ body {
   grid-template-rows: repeat(6, 1fr);
   gap: 2px;
   padding: 2px;
-  opacity: 0.2;
+  opacity: 0.32;
   z-index: 0;
   pointer-events: none;
 }
@@ -368,7 +368,7 @@ body {
   border-radius: 2px;
   background-size: cover;
   background-position: center;
-  filter: blur(1.5px) saturate(0.5) brightness(0.45);
+  filter: blur(0.8px) saturate(0.65) brightness(0.55);
   transition: opacity 0.8s ease;
 }
 
@@ -480,8 +480,8 @@ body {
 /* Tiles */
 .home-const-tile {
   position: absolute;
-  width: 72px;
-  height: 104px;
+  width: 88px;
+  height: 128px;
   border-radius: 5px;
   background-size: cover;
   background-position: center top;
@@ -517,8 +517,8 @@ body {
 /* Anchor tile */
 .home-const-anchor {
   position: absolute;
-  width: 100px;
-  height: 144px;
+  width: 120px;
+  height: 172px;
   border-radius: 7px;
   background-size: cover;
   background-position: center top;

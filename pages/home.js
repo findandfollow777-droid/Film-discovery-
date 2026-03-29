@@ -74,7 +74,7 @@ async function loadHomeConstellation() {
   if (orbitals.length === 0) {
     try {
       const res = await OrbitUtils.tmdbFetch('/movie/' + anchorFilm.id + '/recommendations', { language: 'en-US', page: 1 });
-      orbitals = (res.results || []).filter(m => m.poster_path && m.id !== anchorFilm.id).slice(0, 16);
+      orbitals = (res.results || []).filter(m => m.poster_path && m.id !== anchorFilm.id).slice(0, 20);
       sessionStorage.setItem(recsCacheKey, JSON.stringify({ films: orbitals, timestamp: Date.now() }));
     } catch (e) {
       orbitals = [];
@@ -95,10 +95,10 @@ async function loadHomeConstellation() {
     enterBtn.addEventListener('click', (e) => { e.preventDefault(); setAnchorAndNavigate(anchorFilm); });
   }
 
-  waitForSize(canvas, () => renderHomeConstellation(anchorFilm, orbitals, canvas, setAnchorAndNavigate));
+  waitForSize(canvas, () => renderHomeConstellation(anchorFilm, orbitals, canvas));
 }
 
-function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
+function renderHomeConstellation(anchor, orbitals, canvas) {
   const loading = document.getElementById('home-const-loading');
   if (loading) loading.classList.add('hidden');
 
@@ -115,8 +115,8 @@ function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
   canvas.appendChild(linesEl);
   const ctx = linesEl.getContext('2d');
 
-  const anchorW = 100, anchorH = 144;
-  const tileW = 72, tileH = 104;
+  const anchorW = 120, anchorH = 172;
+  const tileW = 88, tileH = 128;
 
   // Anchor tile
   const anchorEl = document.createElement('div');
@@ -130,18 +130,20 @@ function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
   anchorLabel.className = 'home-const-anchor-label';
   anchorLabel.textContent = anchor.title;
   anchorEl.appendChild(anchorLabel);
-  anchorEl.addEventListener('click', () => onFilmClick(anchor));
+  anchorEl.addEventListener('click', () => {
+    if (typeof openMovieCube === 'function') openMovieCube(anchor.id);
+  });
   canvas.appendChild(anchorEl);
 
   // Position orbital tiles
-  const count = Math.min(orbitals.length, 16);
+  const count = Math.min(orbitals.length, 20);
   const positions = [];
 
   for (let i = 0; i < count; i++) {
-    const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
-    const variance = 0.55 + Math.random() * 0.45;
-    const rx = W * 0.38 * variance;
-    const ry = H * 0.32 * variance;
+    const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+    const variance = 0.45 + Math.random() * 0.55;
+    const rx = W * 0.44 * variance;
+    const ry = H * 0.38 * variance;
     let x = cx + Math.cos(angle) * rx - tileW / 2;
     let y = cy + Math.sin(angle) * ry - tileH / 2;
     x = Math.max(8, Math.min(W - tileW - 8, x));
@@ -225,7 +227,9 @@ function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
     label.className = 'home-const-tile-label';
     label.textContent = pos.film.title;
     tile.appendChild(label);
-    tile.addEventListener('click', () => onFilmClick(pos.film));
+    tile.addEventListener('click', () => {
+      if (typeof openMovieCube === 'function') openMovieCube(pos.film.id);
+    });
     canvas.appendChild(tile);
   });
 
