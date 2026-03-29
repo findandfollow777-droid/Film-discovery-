@@ -520,7 +520,7 @@ body {
 .home-carousel-slide {
   min-width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 24px 52px;
   gap: 28px;
   box-sizing: border-box;
@@ -531,7 +531,7 @@ body {
 .hcs-poster:hover { border-color: rgba(var(--accent-rgb), 0.4); }
 .hcs-poster.active-anchor-poster { border: 2px solid var(--accent-gold); box-shadow: 0 0 16px rgba(var(--gold-rgb), 0.3), 0 0 32px rgba(var(--gold-rgb), 0.12); }
 /* Info column */
-.hcs-info-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.hcs-info-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; justify-content: flex-start; }
 .hcs-title { font-family: var(--font-display); font-size: 32px; color: var(--film-white); line-height: 1.1; letter-spacing: 0.03em; }
 .hcs-meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 /* Stat pills */
@@ -542,13 +542,45 @@ body {
 .hcs-stat--cinema { color: var(--success-green); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.06); }
 .hcs-stat--revenue { color: var(--accent-orange); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.06); }
 /* Synopsis */
-.hcs-synopsis { font-size: 15px; color: var(--ghost-gray); line-height: 1.85; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-/* Cast */
-.hcs-cast-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.hcs-cast-label { font-size: 12px; color: var(--ghost-gray); opacity: 0.6; letter-spacing: 0.08em; }
-.hcs-cast-name { font-size: 12px; color: var(--muted-silver); cursor: pointer; transition: color 0.15s; }
-.hcs-cast-name:hover { color: var(--accent-cyan); }
-.hcs-cast-separator { font-size: 12px; color: var(--ghost-gray); opacity: 0.3; }
+.hcs-synopsis { font-size: 16px; color: var(--ghost-gray); line-height: 1.85; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+/* Cast grid — 2×2 photos */
+.hcs-cast-grid {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 160px;
+}
+.hcs-cast-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.hcs-cast-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--nebula-dark);
+  border: 1px solid var(--cosmic-blue);
+  transition: border-color 0.2s;
+}
+.hcs-cast-cell:hover .hcs-cast-photo {
+  border-color: rgba(var(--accent-rgb), 0.4);
+}
+.hcs-cast-cell-name {
+  font-size: 9px;
+  color: var(--muted-silver);
+  text-align: center;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 /* Arrows */
 .home-carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); border: 1px solid var(--cosmic-blue); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; color: var(--muted-silver); z-index: 10; transition: all 0.2s; line-height: 1; }
 .home-carousel-arrow:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0,0,0,0.9); }

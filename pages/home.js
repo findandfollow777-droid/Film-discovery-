@@ -450,36 +450,41 @@ function renderCarouselSlides(films) {
       infoCol.appendChild(syn);
     }
 
-    // Cast row
-    const credits = film.credits;
-    if (credits && credits.cast && credits.cast.length > 0) {
-      const castRow = document.createElement('div');
-      castRow.className = 'hcs-cast-row';
-      const castLabel = document.createElement('span');
-      castLabel.className = 'hcs-cast-label';
-      castLabel.textContent = 'CAST';
-      castRow.appendChild(castLabel);
+    slide.appendChild(infoCol);
 
-      const topCast = credits.cast.slice(0, 4);
-      topCast.forEach((member, ci) => {
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'hcs-cast-name';
-        nameSpan.textContent = member.name;
-        nameSpan.addEventListener('click', () => {
-          if (typeof openPeopleCube === 'function') openPeopleCube(member.id);
-        });
-        castRow.appendChild(nameSpan);
-        if (ci < topCast.length - 1) {
-          const sep = document.createElement('span');
-          sep.className = 'hcs-cast-separator';
-          sep.textContent = '\u00B7';
-          castRow.appendChild(sep);
+    // Cast grid — 2×2 photo squares with names
+    const credits = film.credits;
+    if (credits && credits.cast && credits.cast.length >= 4) {
+      const castGrid = document.createElement('div');
+      castGrid.className = 'hcs-cast-grid';
+
+      credits.cast.slice(0, 4).forEach(member => {
+        const cell = document.createElement('div');
+        cell.className = 'hcs-cast-cell';
+        cell.style.cursor = 'pointer';
+
+        const photo = document.createElement('div');
+        photo.className = 'hcs-cast-photo';
+        if (member.profile_path) {
+          photo.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + member.profile_path + ')';
         }
+        cell.appendChild(photo);
+
+        const name = document.createElement('div');
+        name.className = 'hcs-cast-cell-name';
+        name.textContent = member.name;
+        cell.appendChild(name);
+
+        cell.addEventListener('click', () => {
+          window.location.href = 'timeline.html?type=person&search=' + encodeURIComponent(member.name);
+        });
+
+        castGrid.appendChild(cell);
       });
-      infoCol.appendChild(castRow);
+
+      slide.appendChild(castGrid);
     }
 
-    slide.appendChild(infoCol);
     track.insertBefore(slide, instructionSlide);
   });
 }
