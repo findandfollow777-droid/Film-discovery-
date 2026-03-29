@@ -1,7 +1,7 @@
 /* ============================================
    ORBIT CONSTELLATION PAGE — HUD Redesign
    Anchor Film Orbital Visualization
-   Click: MovieCube · Double-click: Re-anchor
+   Click: Preview Panel · Double-click: Re-anchor
    Right-click / Long-press: Watchlist
    Added: 2026-03-29
 ============================================ */
@@ -32,6 +32,8 @@ let allMovies = [];
 let rankedMovies = [];
 let selectedMovie = null;
 let movieCubeReady = false;
+let expandPage = 1;
+let previewFilm = null;
 
 // DOM Elements
 let anchorPoster, anchorLabel, orbitingMovies;
@@ -83,9 +85,6 @@ function init() {
 
   allMovies = (allMovies || []).filter(m => m && m.id !== anchorMovie.id);
 
-  console.log('[CONSTELLATION] anchorMovie:', anchorMovie?.title, 'id:', anchorMovie?.id, 'poster:', anchorMovie?.poster_path);
-  console.log('[CONSTELLATION] allMovies count:', allMovies.length);
-
   displayAnchor();
   populateAnchorPanel(anchorMovie);
   setupEventListeners();
@@ -98,10 +97,8 @@ function init() {
     renderOrbits();
     updateFilmCount(allMovies.length);
     checkExpandUniverse();
-    console.log("[CONSTELLATION] Rendered", allMovies.length, "orbiting movies");
   } else {
     updateFilmCount(0);
-    console.log("[CONSTELLATION] No stored movies, fetching recommendations for", anchorMovie.id);
     loadRecommendations(anchorMovie.id);
   }
 }
@@ -281,7 +278,7 @@ function getGenreAverage(genres, vibeMap, defaultVal) {
 }
 
 // ============================================
-// RENDER ORBITS (preserved exactly)
+// RENDER ORBITS (preserved layout, added fade-entering)
 // ============================================
 
 function renderOrbits() {
@@ -311,6 +308,10 @@ function renderOrbits() {
       const x = centerX + Math.cos(angleVariation) * radiusVariation;
       const y = centerY + Math.sin(angleVariation) * radiusVariation;
       const movieEl = createOrbitMovie(item, orbit.class, x, y);
+      // Add fade-entering animation with staggered delay
+      const globalIdx = movieIndex - orbit.maxMovies + i;
+      movieEl.classList.add('fade-entering');
+      movieEl.style.animationDelay = Math.min(globalIdx * 40, 800) + 'ms';
       orbitingMovies.appendChild(movieEl);
     });
   });
@@ -336,10 +337,10 @@ function createOrbitMovie(item, orbitClass, x, y) {
     <div class="orbit-similarity"></div>
   `;
 
-  // Single click → open MovieCube
+  // Single click → open preview panel
   div.addEventListener("click", (e) => {
     e.stopPropagation();
-    openCubeForMovie(movie.id);
+    openPreviewPanel(movie);
   });
 
   // Double click → re-anchor
@@ -349,6 +350,76 @@ function createOrbitMovie(item, orbitClass, x, y) {
   });
 
   return div;
+}
+
+// ============================================
+// PREVIEW PANEL
+// ============================================
+
+function openPreviewPanel(film) {
+  previewFilm = film;
+  const panel = document.getElementById('preview-panel');
+  const backdrop = document.getElementById('preview-backdrop');
+  if (!panel) return;
+
+  const imgBase = (typeof TMDB_IMG !== 'undefined' && TMDB_IMG) ? TMDB_IMG : 'https://image.tmdb.org/t/p/';
+
+  // Populate poster
+  const posterEl = document.getElementById('preview-poster');
+  if (posterEl) {
+    posterEl.style.backgroundImage = film.poster_path
+      ? `url(${imgBase}w300${film.poster_path})`
+      : 'none';
+  }
+
+  // Populate title
+  const titleEl = document.getElementById('preview-title');
+  if (titleEl) titleEl.textContent = film.title || '\u2014';
+
+  // Populate meta (year · rating)
+  const metaEl = document.getElementById('preview-meta');
+  if (metaEl) {
+    const year = (film.release_date || '').substring(0, 4);
+    const rating = film.vote_average ? '\u2605 ' + Number(film.vote_average).toFixed(1) : '';
+    metaEl.textContent = [year, rating].filter(Boolean).join(' \u00B7 ');
+  }
+
+  // Populate overview (220 chars max)
+  const overviewEl = document.getElementById('preview-overview');
+  if (overviewEl) {
+    const text = film.overview || 'No overview available.';
+    overviewEl.textContent = text.length > 220 ? text.substring(0, 217) + '...' : text;
+  }
+
+  // Wire anchor button
+  const anchorBtn = document.getElementById('preview-anchor-btn');
+  if (anchorBtn) {
+    anchorBtn.onclick = () => {
+      closePreviewPanel();
+      makeNewAnchor(film);
+    };
+  }
+
+  // Wire cube button
+  const cubeBtn = document.getElementById('preview-cube-btn');
+  if (cubeBtn) {
+    cubeBtn.onclick = () => {
+      closePreviewPanel();
+      openCubeForMovie(film.id);
+    };
+  }
+
+  // Open panel
+  panel.classList.add('open');
+  if (backdrop) backdrop.classList.add('open');
+}
+
+function closePreviewPanel() {
+  previewFilm = null;
+  const panel = document.getElementById('preview-panel');
+  const backdrop = document.getElementById('preview-backdrop');
+  if (panel) panel.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('open');
 }
 
 // ============================================
@@ -395,6 +466,48 @@ function closeInfoPanel() {
 }
 
 // ============================================
+// LOADING STATE
+// ============================================
+
+function startLoadingState() {
+  // Fade out existing orbit tiles
+  const tiles = document.querySelectorAll('.orbit-movie');
+  tiles.forEach(t => { t.style.transition = 'opacity 0.3s'; t.style.opacity = '0'; });
+
+  // Pulse orbital rings
+  document.querySelectorAll('.orbital-ring').forEach(r => r.classList.add('pulsing'));
+
+  // Glow anchor
+  const anchor = document.getElementById('anchorStar');
+  if (anchor) anchor.classList.add('loading-glow');
+
+  // Show loading label
+  const label = document.getElementById('orbit-loading-label');
+  if (label) label.hidden = false;
+
+  // Mark expand button loading
+  const hudBtn = document.getElementById('hud-expand-btn');
+  if (hudBtn) hudBtn.classList.add('loading');
+}
+
+function endLoadingState() {
+  // Hide loading label
+  const label = document.getElementById('orbit-loading-label');
+  if (label) label.hidden = true;
+
+  // Remove ring pulse
+  document.querySelectorAll('.orbital-ring').forEach(r => r.classList.remove('pulsing'));
+
+  // Remove anchor glow
+  const anchor = document.getElementById('anchorStar');
+  if (anchor) anchor.classList.remove('loading-glow');
+
+  // Remove expand button loading
+  const hudBtn = document.getElementById('hud-expand-btn');
+  if (hudBtn) hudBtn.classList.remove('loading');
+}
+
+// ============================================
 // MAKE NEW ANCHOR (preserved logic)
 // ============================================
 
@@ -402,11 +515,17 @@ function makeNewAnchor(movie) {
   reAnchor(movie.id);
 }
 
-function reAnchor(movieId) {
+async function reAnchor(movieId) {
   const movie = allMovies.find(m => m.id === movieId) || selectedMovie;
   if (!movie) return;
 
-  fetchMovieDetails(movieId).then(fullMovie => {
+  startLoadingState();
+
+  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+
+  try {
+    const [fullMovie] = await Promise.all([fetchMovieDetails(movieId), minTimer]);
+
     const oldAnchor = anchorMovie;
     anchorMovie = fullMovie || movie;
 
@@ -421,7 +540,12 @@ function reAnchor(movieId) {
     closeInfoPanel();
     updateFilmCount(allMovies.length);
     flashAnchor();
-  });
+    expandPage = 1;
+  } catch (e) {
+    console.error("Failed to re-anchor:", e);
+  }
+
+  endLoadingState();
 }
 
 async function fetchMovieDetails(movieId) {
@@ -468,13 +592,20 @@ function setupEventListeners() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeInfoPanel();
+    if (e.key === "Escape") {
+      closePreviewPanel();
+      closeInfoPanel();
+    }
   });
 
   window.addEventListener("resize", OrbitUtils.debounce(() => { renderOrbits(); }, 250));
 
   // HUD expand button
   document.getElementById('hud-expand-btn')?.addEventListener('click', handleExpandUniverse);
+
+  // Preview panel close button and backdrop
+  document.getElementById('preview-close')?.addEventListener('click', closePreviewPanel);
+  document.getElementById('preview-backdrop')?.addEventListener('click', closePreviewPanel);
 }
 
 // Anchor flash animation
@@ -487,7 +618,10 @@ document.head.appendChild(style);
 // ============================================
 
 async function loadRecommendations(movieId) {
-  console.log('[CONSTELLATION] loadRecommendations called for movieId:', movieId);
+  startLoadingState();
+
+  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+
   try {
     const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
       ? (ep, p) => OrbitUtils.tmdbFetch(ep, p)
@@ -499,7 +633,8 @@ async function loadRecommendations(movieId) {
 
     const [recs, similar] = await Promise.all([
       tmdbFetch('/movie/' + movieId + '/recommendations', { page: 1 }),
-      tmdbFetch('/movie/' + movieId + '/similar', { page: 1 })
+      tmdbFetch('/movie/' + movieId + '/similar', { page: 1 }),
+      minTimer
     ]);
 
     const combined = [...(recs.results || []), ...(similar.results || [])];
@@ -513,7 +648,6 @@ async function loadRecommendations(movieId) {
     }
 
     allMovies = unique.slice(0, 30);
-    console.log('[CONSTELLATION] Fetched', allMovies.length, 'unique films, recs:', (recs.results||[]).length, 'similar:', (similar.results||[]).length);
     localStorage.setItem("constellationMovies", JSON.stringify([anchorMovie, ...allMovies]));
 
     calculateSimilarities();
@@ -524,10 +658,12 @@ async function loadRecommendations(movieId) {
     console.error("[CONSTELLATION] Failed to load recommendations:", e);
     showError("Could not load similar films.");
   }
+
+  endLoadingState();
 }
 
 // ============================================
-// EXPAND UNIVERSE (preserved logic)
+// EXPAND UNIVERSE (always refreshes)
 // ============================================
 
 function checkExpandUniverse() {
@@ -537,10 +673,15 @@ function checkExpandUniverse() {
 }
 
 async function handleExpandUniverse() {
-  const hudBtn = document.getElementById('hud-expand-btn');
   if (!anchorMovie) return;
 
-  if (hudBtn) { hudBtn.classList.add('loading'); }
+  expandPage++;
+  if (expandPage > 5) expandPage = 1;
+
+  startLoadingState();
+
+  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+  const anchorId = anchorMovie.id;
 
   try {
     const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
@@ -551,38 +692,47 @@ async function handleExpandUniverse() {
           return r.json();
         };
 
-    const [similarData, recData] = await Promise.all([
-      tmdbFetch('/movie/' + anchorMovie.id + '/similar', { page: 1 }),
-      tmdbFetch('/movie/' + anchorMovie.id + '/recommendations', { page: 1 })
+    const [recData, similarData] = await Promise.all([
+      tmdbFetch('/movie/' + anchorId + '/recommendations', { page: expandPage }),
+      tmdbFetch('/movie/' + anchorId + '/similar', { page: expandPage }),
+      minTimer
     ]);
 
-    const existingIds = new Set([anchorMovie.id, ...allMovies.map(m => m.id)]);
-    const newMovies = [...(similarData.results || []), ...(recData.results || [])]
-      .filter(m => m.poster_path && !existingIds.has(m.id));
-
-    const uniqueNew = [];
-    const seenIds = new Set();
-    for (const m of newMovies) {
-      if (!seenIds.has(m.id)) { seenIds.add(m.id); uniqueNew.push(m); }
+    // Combine and deduplicate
+    const combined = [...(recData.results || []), ...(similarData.results || [])];
+    const seen = new Set([anchorId]);
+    const unique = [];
+    for (const m of combined) {
+      if (m && m.poster_path && !seen.has(m.id)) {
+        seen.add(m.id);
+        unique.push(m);
+      }
     }
 
-    const toAdd = uniqueNew.slice(0, 20);
-    if (toAdd.length > 0) {
-      allMovies = [...allMovies, ...toAdd];
-      localStorage.setItem("constellationMovies", JSON.stringify([anchorMovie, ...allMovies]));
-      calculateSimilarities();
-      renderOrbits();
-      updateFilmCount(allMovies.length);
+    // Fisher-Yates shuffle
+    for (let i = unique.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [unique[i], unique[j]] = [unique[j], unique[i]];
     }
 
-    if (hudBtn) {
-      hudBtn.innerHTML = '<span class="og og-galaxy"></span> EXPLORE DEEPER';
-    }
+    // Replace all orbital films (up to 40)
+    allMovies = unique.slice(0, 40);
+    localStorage.setItem("constellationMovies", JSON.stringify([anchorMovie, ...allMovies]));
+
+    calculateSimilarities();
+    renderOrbits();
+    updateFilmCount(allMovies.length);
   } catch (e) {
     console.error("Failed to expand universe:", e);
   }
 
-  if (hudBtn) hudBtn.classList.remove('loading');
+  endLoadingState();
+
+  // Always keep label as EXPAND MY UNIVERSE
+  const hudBtn = document.getElementById('hud-expand-btn');
+  if (hudBtn) {
+    hudBtn.innerHTML = '<span class="og og-galaxy"></span> EXPAND MY UNIVERSE';
+  }
 }
 
 // ============================================

@@ -181,6 +181,87 @@
     /* Hide old chrome */
     .constellation-header,
     .similarity-legend { display: none !important; }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel {
+      position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+      background: rgba(5,10,20,0.96); border-left: 1px solid var(--cosmic-blue);
+      z-index: 200; display: flex; flex-direction: column;
+      padding: 24px 24px 32px; transition: right 0.35s cubic-bezier(0.16,1,0.3,1);
+      overflow-y: auto;
+    }
+    .preview-panel.open { right: 0; }
+    .preview-close {
+      position: absolute; top: 16px; right: 16px;
+      background: transparent; border: 1px solid var(--cosmic-blue);
+      border-radius: 3px; color: var(--ghost-gray); font-size: 12px;
+      cursor: pointer; padding: 4px 8px; font-family: 'Orbitron', monospace;
+    }
+    .preview-poster-wrap { width: 100%; margin-bottom: 20px; margin-top: 32px; }
+    .preview-poster {
+      width: 180px; aspect-ratio: 2/3; background-size: cover;
+      background-position: center top; background-color: var(--nebula-dark);
+      border: 1px solid rgba(0,217,255,0.15); border-radius: 8px; margin: 0 auto;
+    }
+    .preview-title {
+      font-family: 'Orbitron', monospace; font-size: 20px;
+      color: var(--film-white); line-height: 1.15; margin-bottom: 8px;
+    }
+    .preview-meta {
+      font-size: 11px; color: var(--muted-silver);
+      letter-spacing: 0.08em; margin-bottom: 14px; line-height: 1.7;
+    }
+    .preview-overview {
+      font-size: 12px; color: var(--ghost-gray);
+      line-height: 1.75; margin-bottom: 24px; flex: 1;
+    }
+    .preview-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+    .preview-anchor-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 12px; width: 100%;
+      border: 1px solid rgba(255,215,0,0.4); border-radius: 4px;
+      background: rgba(255,215,0,0.07); color: var(--accent-gold);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .preview-anchor-btn:hover { background: rgba(255,215,0,0.13); }
+    .preview-cube-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 12px; width: 100%;
+      border: 1px solid rgba(0,217,255,0.3); border-radius: 4px;
+      background: rgba(0,217,255,0.06); color: var(--accent-cyan);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .preview-cube-btn:hover { background: rgba(0,217,255,0.12); }
+    .preview-backdrop {
+      position: fixed; inset: 0; z-index: 199; display: none; cursor: pointer;
+    }
+    .preview-backdrop.open { display: block; }
+
+    /* ── LOADING ANIMATION ── */
+    .orbit-loading-label {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: calc(50% + 90px);
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.3em; color: var(--accent-cyan); opacity: 0.6;
+      z-index: 50; transition: opacity 0.2s;
+    }
+    @keyframes ringPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.015); }
+    }
+    @keyframes anchorGlow {
+      0% { border-color: rgba(255,215,0,0.2); }
+      100% { border-color: rgba(255,215,0,0.7); }
+    }
+    .orbital-ring.pulsing { animation: ringPulse 1.8s ease-in-out infinite; }
+    .anchor-star.loading-glow .anchor-poster {
+      animation: anchorGlow 1.4s ease-in-out infinite alternate;
+    }
+    @keyframes fadeInTile {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .orbit-movie.fade-entering { opacity: 0; animation: fadeInTile 0.4s ease forwards; }
   </style>
 </head>
 <body>
@@ -248,6 +329,7 @@
       <div class="anchor-glow"></div>
       <div class="anchor-label" id="anchorLabel">Loading...</div>
     </div>
+    <div class="orbit-loading-label" id="orbit-loading-label" hidden>RECONFIGURING ORBIT&#x2026;</div>
     <div class="expand-universe" id="expandUniverse" hidden>
       <button class="expand-btn" id="expandBtn">
         <span class="expand-icon"><span class="og og-sparkle"></span></span>
@@ -282,6 +364,24 @@
 
   <!-- OLD LEGEND (hidden by CSS) -->
   <div class="similarity-legend"></div>
+
+  <!-- PREVIEW PANEL -->
+  <div class="preview-panel" id="preview-panel">
+    <button class="preview-close" id="preview-close">&#x2715;</button>
+    <div class="preview-poster-wrap">
+      <div class="preview-poster" id="preview-poster"></div>
+    </div>
+    <div class="preview-info">
+      <div class="preview-title" id="preview-title"></div>
+      <div class="preview-meta" id="preview-meta"></div>
+      <p class="preview-overview" id="preview-overview"></p>
+    </div>
+    <div class="preview-actions">
+      <button class="preview-anchor-btn" id="preview-anchor-btn">MAKE THIS THE ANCHOR</button>
+      <button class="preview-cube-btn" id="preview-cube-btn">OPEN FULL FILM CUBE</button>
+    </div>
+  </div>
+  <div class="preview-backdrop" id="preview-backdrop"></div>
 
   <!-- WATCHLIST CONTEXT MENU -->
   <div class="wl-context-menu" id="wlContextMenu">
