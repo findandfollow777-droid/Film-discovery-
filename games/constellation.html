@@ -261,7 +261,9 @@
       from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
       to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     }
-    .orbit-movie.fade-entering { opacity: 0; animation: fadeInTile 0.4s ease forwards; }
+    .orbit-movie.fade-entering { opacity: 0; animation: fadeInTile 0.4s ease both; }
+    .orbit-movie.fade-done { opacity: 1; transform: translate(-50%, -50%) scale(1); animation: none; }
+    .orbit-movie.selected.fade-done, .orbit-movie.selected { transform: translate(-50%, -50%) scale(1.75) !important; z-index: 50; }
 
     /* ── COSMOS LOADER ── */
     .cosmos-loader {

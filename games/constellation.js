@@ -412,11 +412,18 @@ function renderOrbits() {
     movieEl.classList.add('fade-entering');
     const delay = Math.min(renderIdx * 40, 800);
     movieEl.style.animationDelay = delay + 'ms';
-    // Remove fade-entering after animation so CSS :hover transform works
+    // After fade-in animation, switch to fade-done so .selected transform works
     movieEl.addEventListener('animationend', () => {
       movieEl.classList.remove('fade-entering');
-      movieEl.style.opacity = '1';
+      movieEl.classList.add('fade-done');
     }, { once: true });
+    // Fallback in case animationend doesn't fire
+    setTimeout(() => {
+      if (movieEl.classList.contains('fade-entering')) {
+        movieEl.classList.remove('fade-entering');
+        movieEl.classList.add('fade-done');
+      }
+    }, delay + 500);
     orbitingMovies.appendChild(movieEl);
     renderIdx++;
   }
