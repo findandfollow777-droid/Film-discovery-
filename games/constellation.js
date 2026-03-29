@@ -410,7 +410,13 @@ function renderOrbits() {
     const cy = p.y + p.h / 2;
     const movieEl = createOrbitMovie(p.item, p.orbitClass, cx, cy);
     movieEl.classList.add('fade-entering');
-    movieEl.style.animationDelay = Math.min(renderIdx * 40, 800) + 'ms';
+    const delay = Math.min(renderIdx * 40, 800);
+    movieEl.style.animationDelay = delay + 'ms';
+    // Remove fade-entering after animation so CSS :hover transform works
+    movieEl.addEventListener('animationend', () => {
+      movieEl.classList.remove('fade-entering');
+      movieEl.style.opacity = '1';
+    }, { once: true });
     orbitingMovies.appendChild(movieEl);
     renderIdx++;
   }
