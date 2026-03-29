@@ -598,6 +598,7 @@ body {
 .hcs-avatar-circle {
   width: 88px; height: 88px; border-radius: 8px;
   background-color: var(--nebula-dark);
+  background-position: center 20%;
   border: 1.5px solid; overflow: hidden; flex-shrink: 0;
 }
 .hcs-avatar-name {

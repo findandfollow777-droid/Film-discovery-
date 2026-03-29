@@ -486,7 +486,6 @@ function renderCarouselSlides(films) {
         if (actor.profile_path) {
           circle.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + actor.profile_path + ')';
           circle.style.backgroundSize = 'cover';
-          circle.style.backgroundPosition = 'center top';
         }
         wrap.appendChild(circle);
 
