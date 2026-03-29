@@ -450,7 +450,14 @@ function renderCarouselSlides(films) {
     // Synopsis
     const syn = document.createElement('div');
     syn.className = 'hcs-synopsis';
-    syn.textContent = film.overview || '';
+    // Truncate at last full sentence within ~180 chars
+    let overview = film.overview || '';
+    if (overview.length > 180) {
+      const cut = overview.substring(0, 180);
+      const lastPeriod = cut.lastIndexOf('.');
+      overview = lastPeriod > 60 ? cut.substring(0, lastPeriod + 1) : cut + '\u2026';
+    }
+    syn.textContent = overview;
     infoCol.appendChild(syn);
 
     // Cast strip — circular portraits pinned to bottom
@@ -477,7 +484,7 @@ function renderCarouselSlides(films) {
         circle.className = 'hcs-avatar-circle';
         circle.style.borderColor = borderColors[ci % borderColors.length];
         if (actor.profile_path) {
-          circle.style.backgroundImage = 'url(' + TMDB_IMG + 'w45' + actor.profile_path + ')';
+          circle.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + actor.profile_path + ')';
           circle.style.backgroundSize = 'cover';
           circle.style.backgroundPosition = 'center top';
         }
