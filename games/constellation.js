@@ -25,9 +25,7 @@ const GENRE_VIBES = {
   }
 };
 
-const TMDB_IMG = (typeof OrbitUtils !== 'undefined' && OrbitUtils.TMDB_IMG)
-  ? OrbitUtils.TMDB_IMG
-  : 'https://image.tmdb.org/t/p/';
+// TMDB_IMG already declared by utils.js — use it directly
 
 let anchorMovie = null;
 let allMovies = [];
