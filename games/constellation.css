@@ -262,13 +262,18 @@ html, body {
   position: absolute;
   pointer-events: auto;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Position will be set by JavaScript */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .orbit-movie:hover {
-  transform: scale(1.15) !important;
-  z-index: 100;
+  transform: translate(-50%, -50%) scale(1.12);
+  z-index: 50;
+}
+
+.orbit-movie:active {
+  transform: translate(-50%, -50%) scale(1.06);
 }
 
 .orbit-movie-poster {

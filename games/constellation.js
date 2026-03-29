@@ -281,6 +281,16 @@ function getGenreAverage(genres, vibeMap, defaultVal) {
 // RENDER ORBITS (preserved layout, added fade-entering)
 // ============================================
 
+// Tile sizes per orbit class (from constellation.css)
+const TILE_SIZES = {
+  'orbit-1': { w: 135, h: 203 },
+  'orbit-2': { w: 120, h: 180 },
+  'orbit-3': { w: 105, h: 158 },
+  'orbit-4': { w: 90, h: 135 }
+};
+const ANCHOR_SIZE = { w: 240, h: 360 };
+const TILE_PAD = 10; // breathing room on each side
+
 function renderOrbits() {
   if (!orbitingMovies) return;
   orbitingMovies.innerHTML = "";
@@ -291,7 +301,6 @@ function renderOrbits() {
   const centerX = vw / 2;
   const centerY = vh / 2;
 
-  // Cinematic elliptical orbits — wider than tall
   const orbits = [
     { spreadX: 0.18, spreadY: 0.14, maxMovies: 6, class: "orbit-1" },
     { spreadX: 0.28, spreadY: 0.22, maxMovies: 10, class: "orbit-2" },
@@ -299,11 +308,23 @@ function renderOrbits() {
     { spreadX: 0.42, spreadY: 0.34, maxMovies: 20, class: "orbit-4" }
   ];
 
-  const exclusionRadius = 120; // clear zone around anchor
+  // Step 1: Calculate initial positions
+  const positions = [];
   let globalIdx = 0;
+
+  // Add anchor as immovable obstacle (centred)
+  const anchorW = ANCHOR_SIZE.w + TILE_PAD * 2;
+  const anchorH = ANCHOR_SIZE.h + TILE_PAD * 2;
+  positions.push({
+    id: -1, x: centerX - anchorW / 2, y: centerY - anchorH / 2,
+    w: anchorW, h: anchorH, fixed: true, orbitClass: 'anchor', item: null
+  });
 
   orbits.forEach((orbit) => {
     const moviesInOrbit = rankedMovies.slice(globalIdx, globalIdx + orbit.maxMovies);
+    const size = TILE_SIZES[orbit.class] || { w: 120, h: 180 };
+    const pw = size.w + TILE_PAD * 2;
+    const ph = size.h + TILE_PAD * 2;
 
     moviesInOrbit.forEach((item, i) => {
       const angle = (2 * Math.PI * i / moviesInOrbit.length) - Math.PI / 2;
@@ -312,26 +333,85 @@ function renderOrbits() {
       const radiusY = vh * orbit.spreadY * randFactor;
       const angleVar = angle + (Math.random() - 0.5) * 0.2;
 
-      let x = centerX + Math.cos(angleVar) * radiusX;
-      let y = centerY + Math.sin(angleVar) * radiusY;
+      // x,y = top-left corner (for collision), centred on the computed point
+      const cx = centerX + Math.cos(angleVar) * radiusX;
+      const cy = centerY + Math.sin(angleVar) * radiusY;
 
-      // Enforce exclusion zone
-      const dx = x - centerX;
-      const dy = y - centerY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < exclusionRadius && dist > 0) {
-        const scale = exclusionRadius / dist;
-        x = centerX + dx * scale;
-        y = centerY + dy * scale;
-      }
-
-      const movieEl = createOrbitMovie(item, orbit.class, x, y);
-      movieEl.classList.add('fade-entering');
-      movieEl.style.animationDelay = Math.min(globalIdx * 40, 800) + 'ms';
-      orbitingMovies.appendChild(movieEl);
+      positions.push({
+        id: item.movie.id, x: cx - pw / 2, y: cy - ph / 2,
+        w: pw, h: ph, fixed: false, orbitClass: orbit.class, item: item
+      });
       globalIdx++;
     });
   });
+
+  // Step 2: Separation loop (skip index 0 = anchor)
+  for (let iter = 0; iter < 200; iter++) {
+    let anyCollision = false;
+    for (let i = 1; i < positions.length; i++) {
+      for (let j = 0; j < positions.length; j++) {
+        if (i === j) continue;
+        const a = positions[i];
+        const b = positions[j];
+        const overlapX = (Math.min(a.w, b.w)) - Math.abs((a.x + a.w / 2) - (b.x + b.w / 2));
+        const overlapY = (Math.min(a.h, b.h)) - Math.abs((a.y + a.h / 2) - (b.y + b.h / 2));
+
+        // Use half-widths sum for proper overlap detection
+        const halfWSum = (a.w + b.w) / 2;
+        const halfHSum = (a.h + b.h) / 2;
+        const dxC = (a.x + a.w / 2) - (b.x + b.w / 2);
+        const dyC = (a.y + a.h / 2) - (b.y + b.h / 2);
+        const oX = halfWSum - Math.abs(dxC);
+        const oY = halfHSum - Math.abs(dyC);
+
+        if (oX > 0 && oY > 0) {
+          anyCollision = true;
+          // Push along the axis of least overlap
+          const pushX = oX < oY ? (dxC > 0 ? oX : -oX) : 0;
+          const pushY = oX >= oY ? (dyC > 0 ? oY : -oY) : 0;
+          const clamp = 8;
+          const px = Math.max(-clamp, Math.min(clamp, pushX));
+          const py = Math.max(-clamp, Math.min(clamp, pushY));
+
+          if (b.fixed) {
+            // Push only a (orbital tile away from anchor)
+            a.x += px;
+            a.y += py;
+          } else if (a.fixed) {
+            // Push only b
+            b.x -= px;
+            b.y -= py;
+          } else {
+            a.x += px / 2;
+            a.y += py / 2;
+            b.x -= px / 2;
+            b.y -= py / 2;
+          }
+        }
+      }
+
+      // Clamp to viewport
+      const a = positions[i];
+      a.x = Math.max(10, Math.min(vw - a.w - 10, a.x));
+      a.y = Math.max(10, Math.min(vh - a.h - 10, a.y));
+    }
+    if (!anyCollision) break;
+  }
+
+  // Step 3: Render tiles at final separated positions
+  let renderIdx = 0;
+  for (let i = 1; i < positions.length; i++) {
+    const p = positions[i];
+    if (!p.item) continue;
+    // Convert back to centre point for the tile (tiles use translate(-50%,-50%))
+    const cx = p.x + p.w / 2;
+    const cy = p.y + p.h / 2;
+    const movieEl = createOrbitMovie(p.item, p.orbitClass, cx, cy);
+    movieEl.classList.add('fade-entering');
+    movieEl.style.animationDelay = Math.min(renderIdx * 40, 800) + 'ms';
+    orbitingMovies.appendChild(movieEl);
+    renderIdx++;
+  }
 }
 
 function createOrbitMovie(item, orbitClass, x, y) {
