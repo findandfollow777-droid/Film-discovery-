@@ -313,8 +313,10 @@ function renderOrbits() {
   let globalIdx = 0;
 
   // Add anchor as immovable obstacle (centred)
-  const anchorW = ANCHOR_SIZE.w + TILE_PAD * 2;
-  const anchorH = ANCHOR_SIZE.h + TILE_PAD * 2;
+  // Extra clearance around anchor so no tiles sit under it
+  const anchorClearance = 40;
+  const anchorW = ANCHOR_SIZE.w + TILE_PAD * 2 + anchorClearance * 2;
+  const anchorH = ANCHOR_SIZE.h + TILE_PAD * 2 + anchorClearance * 2;
   positions.push({
     id: -1, x: centerX - anchorW / 2, y: centerY - anchorH / 2,
     w: anchorW, h: anchorH, fixed: true, orbitClass: 'anchor', item: null

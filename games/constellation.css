@@ -199,7 +199,7 @@ html, body {
 }
 
 .anchor-star:hover {
-  transform: scale(1.12);
+  transform: scale(2.0);
   z-index: 60;
 }
 
@@ -269,12 +269,12 @@ html, body {
 }
 
 .orbit-movie:hover {
-  transform: translate(-50%, -50%) scale(1.12);
+  transform: translate(-50%, -50%) scale(1.75);
   z-index: 50;
 }
 
 .orbit-movie:active {
-  transform: translate(-50%, -50%) scale(1.06);
+  transform: translate(-50%, -50%) scale(1.5);
 }
 
 .orbit-movie-poster {
