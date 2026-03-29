@@ -442,10 +442,17 @@ function createOrbitMovie(item, orbitClass, x, y) {
     <div class="orbit-similarity"></div>
   `;
 
-  // Single click → open preview panel
+  // First click → grow tile. Second click on selected tile → preview panel.
   div.addEventListener("click", (e) => {
     e.stopPropagation();
-    openPreviewPanel(movie);
+    if (div.classList.contains('selected')) {
+      // Already selected — open preview
+      openPreviewPanel(movie);
+    } else {
+      // Deselect any other selected tile
+      document.querySelectorAll('.orbit-movie.selected').forEach(t => t.classList.remove('selected'));
+      div.classList.add('selected');
+    }
   });
 
   // Double click → re-anchor
@@ -685,6 +692,10 @@ function setupEventListeners() {
   infoClose?.addEventListener("click", closeInfoPanel);
 
   document.addEventListener("click", (e) => {
+    // Deselect tiles when clicking empty space
+    if (!e.target.closest('.orbit-movie') && !e.target.closest('.preview-panel') && !e.target.closest('.hud-anchor-panel')) {
+      document.querySelectorAll('.orbit-movie.selected').forEach(t => t.classList.remove('selected'));
+    }
     if (infoPanel?.classList.contains("active")) {
       if (e.target.closest("#makeAnchorBtn")) return;
       if (!infoPanel.contains(e.target) && !e.target.closest(".orbit-movie")) {
