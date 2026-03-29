@@ -62,32 +62,45 @@ function init() {
   const anchorData = localStorage.getItem("anchorMovie");
   const moviesData = localStorage.getItem("constellationMovies");
 
-  if (!anchorData || !moviesData) {
+  if (!anchorData) {
     showError("No anchor movie selected. Return to Results and choose a movie.");
     return;
   }
 
   try {
     anchorMovie = JSON.parse(anchorData);
-    allMovies = JSON.parse(moviesData);
   } catch (e) {
-    showError("Error loading movie data.");
+    showError("Error loading anchor movie data.");
     return;
   }
 
-  allMovies = allMovies.filter(m => m.id !== anchorMovie.id);
+  // Load constellation movies if available
+  try {
+    if (moviesData) allMovies = JSON.parse(moviesData);
+  } catch (e) {
+    allMovies = [];
+  }
+
+  allMovies = (allMovies || []).filter(m => m && m.id !== anchorMovie.id);
 
   displayAnchor();
   populateAnchorPanel(anchorMovie);
-  calculateSimilarities();
-  renderOrbits();
   setupEventListeners();
-  updateFilmCount(allMovies.length);
-  checkExpandUniverse();
   initMovieCubeOnPage();
   initWatchlistMenu();
 
-  console.log("Constellation initialized with", allMovies.length, "orbiting movies");
+  if (allMovies.length > 0) {
+    // Context A: have constellation movies from search results
+    calculateSimilarities();
+    renderOrbits();
+    updateFilmCount(allMovies.length);
+    checkExpandUniverse();
+    console.log("Constellation initialized with", allMovies.length, "orbiting movies");
+  } else {
+    // Context B: no constellation movies — fetch recommendations
+    updateFilmCount(0);
+    loadRecommendations(anchorMovie.id);
+  }
 }
 
 function showError(message) {
@@ -458,6 +471,42 @@ function setupEventListeners() {
 const style = document.createElement("style");
 style.textContent = `@keyframes anchor-flash { 0% { filter: brightness(1); } 50% { filter: brightness(2) drop-shadow(0 0 30px gold); } 100% { filter: brightness(1); } }`;
 document.head.appendChild(style);
+
+// ============================================
+// LOAD RECOMMENDATIONS (Context B — no stored movies)
+// ============================================
+
+async function loadRecommendations(movieId) {
+  try {
+    const [recs, similar] = await Promise.all([
+      OrbitUtils.tmdbFetch('/movie/' + movieId + '/recommendations', { language: 'en-US', page: 1 }),
+      OrbitUtils.tmdbFetch('/movie/' + movieId + '/similar', { language: 'en-US', page: 1 })
+    ]);
+
+    const combined = [...(recs.results || []), ...(similar.results || [])];
+    const seen = new Set([movieId]);
+    const unique = [];
+    for (const m of combined) {
+      if (m && m.poster_path && !seen.has(m.id)) {
+        seen.add(m.id);
+        unique.push(m);
+      }
+    }
+
+    allMovies = unique.slice(0, 30);
+    localStorage.setItem("constellationMovies", JSON.stringify([anchorMovie, ...allMovies]));
+
+    calculateSimilarities();
+    renderOrbits();
+    updateFilmCount(allMovies.length);
+    checkExpandUniverse();
+
+    console.log("Loaded", allMovies.length, "recommended films for constellation");
+  } catch (e) {
+    console.error("Failed to load recommendations:", e);
+    showError("Could not load similar films.");
+  }
+}
 
 // ============================================
 // EXPAND UNIVERSE (preserved logic)
