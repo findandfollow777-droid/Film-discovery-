@@ -95,7 +95,7 @@ async function loadHomeConstellation() {
     enterBtn.addEventListener('click', (e) => { e.preventDefault(); setAnchorAndNavigate(anchorFilm); });
   }
 
-  renderHomeConstellation(anchorFilm, orbitals, canvas, setAnchorAndNavigate);
+  waitForSize(canvas, () => renderHomeConstellation(anchorFilm, orbitals, canvas, setAnchorAndNavigate));
 }
 
 function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
@@ -383,7 +383,7 @@ async function loadMosaicPosters() {
 function populateMosaic(posterPaths) {
   if (!posterPaths || posterPaths.length === 0) return;
 
-  const cells = document.querySelectorAll('.mosaic-cell');
+  const cells = document.querySelectorAll('#hero-mosaic .mosaic-cell');
   if (cells.length === 0) return;
 
   // Fisher-Yates shuffle
@@ -478,8 +478,56 @@ function initSearch() {
 }
 
 /* ----------------------------------------------------------
-   SECTION 8 — initScrollHint()
+   SECTION 8 — Star Field + Helpers
    ---------------------------------------------------------- */
+
+function generateStarField(container) {
+  const existing = container.querySelector('.hero-star-field');
+  if (existing) existing.remove();
+
+  const cvs = document.createElement('canvas');
+  cvs.className = 'hero-star-field';
+  cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+  container.insertBefore(cvs, container.firstChild);
+
+  function draw() {
+    cvs.width = container.offsetWidth || 600;
+    cvs.height = container.offsetHeight || 480;
+    const ctx = cvs.getContext('2d');
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+    for (let i = 0; i < 90; i++) {
+      const x = Math.random() * cvs.width;
+      const y = Math.random() * cvs.height;
+      const r = Math.random() * 0.9 + 0.2;
+      const o = Math.random() * 0.35 + 0.06;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${o})`;
+      ctx.fill();
+    }
+
+    for (let i = 0; i < 14; i++) {
+      const x = Math.random() * cvs.width;
+      const y = Math.random() * cvs.height;
+      const r = Math.random() * 0.7 + 0.9;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fill();
+    }
+  }
+
+  draw();
+  window.addEventListener('resize', draw);
+}
+
+function waitForSize(el, cb, attempts) {
+  attempts = attempts || 0;
+  if (el.offsetWidth > 0 && el.offsetHeight > 0) { cb(); return; }
+  if (attempts > 20) return;
+  requestAnimationFrame(() => waitForSize(el, cb, attempts + 1));
+}
 
 /* ----------------------------------------------------------
    SECTION 9 — INIT
@@ -500,6 +548,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();
   }
+
+  // Star field behind constellation
+  const heroRight = document.querySelector('.hero-right');
+  if (heroRight) generateStarField(heroRight);
 
   loadHomeConstellation();
   loadTrendingFilms();
