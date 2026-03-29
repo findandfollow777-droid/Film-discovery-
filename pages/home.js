@@ -136,6 +136,26 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
   const anchorW = 148, anchorH = 212;
   const tileW = 96, tileH = 138;
 
+  // Star field (behind everything)
+  const starCvs = document.createElement('canvas');
+  starCvs.width = W;
+  starCvs.height = H;
+  starCvs.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;';
+  const sCtx = starCvs.getContext('2d');
+  for (let i = 0; i < 80; i++) {
+    sCtx.beginPath();
+    sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 0.8 + 0.2, 0, Math.PI * 2);
+    sCtx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.25 + 0.05) + ')';
+    sCtx.fill();
+  }
+  for (let i = 0; i < 10; i++) {
+    sCtx.beginPath();
+    sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 0.6 + 0.8, 0, Math.PI * 2);
+    sCtx.fillStyle = 'rgba(255,255,255,0.5)';
+    sCtx.fill();
+  }
+  canvas.appendChild(starCvs);
+
   // Corona glow
   const glow = document.createElement('div');
   glow.style.cssText = `position:absolute;width:340px;height:340px;left:${cx-170}px;top:${cy-170}px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.12) 0%,rgba(255,215,0,0.05) 35%,transparent 70%);pointer-events:none;z-index:5;animation:anchorCorona 3s ease-in-out infinite alternate;`;
@@ -208,6 +228,37 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
     }
     if (!any) break;
   }
+
+  // Connection lines (behind tiles)
+  const linesCvs = document.createElement('canvas');
+  linesCvs.width = W;
+  linesCvs.height = H;
+  linesCvs.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;';
+  const lCtx = linesCvs.getContext('2d');
+  positions.forEach(pos => {
+    const tcx = pos.x + tileW / 2;
+    const tcy = pos.y + tileH / 2;
+    const dist = Math.hypot(tcx - cx, tcy - cy);
+    const maxDist = Math.hypot(W / 2, H / 2);
+    const prox = 1 - (dist / maxDist);
+
+    // Line from anchor to tile
+    lCtx.beginPath();
+    lCtx.moveTo(cx, cy);
+    lCtx.lineTo(tcx, tcy);
+    lCtx.strokeStyle = 'rgba(0, 217, 255, ' + (0.06 + prox * 0.12) + ')';
+    lCtx.lineWidth = 0.6;
+    lCtx.stroke();
+
+    // Small dot at midpoint
+    const dotX = cx + (tcx - cx) * 0.55;
+    const dotY = cy + (tcy - cy) * 0.55;
+    lCtx.beginPath();
+    lCtx.arc(dotX, dotY, 1.5, 0, Math.PI * 2);
+    lCtx.fillStyle = prox > 0.5 ? 'rgba(255,107,53,0.5)' : 'rgba(0,217,255,0.3)';
+    lCtx.fill();
+  });
+  canvas.appendChild(linesCvs);
 
   // Render tiles
   positions.forEach((pos, i) => {
