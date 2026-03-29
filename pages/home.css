@@ -177,7 +177,7 @@ body {
 
 /* Content sits above mosaic */
 .hero-micro-label, .hero-heading, .hero-divider,
-.hero-tagline, .hero-search, .hero-seeds, .hero-stats {
+.hero-tagline, .hero-search, .home-search-wrap, .hero-seeds, .hero-stats {
   position: relative;
   z-index: 2;
 }
@@ -277,6 +277,90 @@ body {
 
 .hero-search-btn:hover {
   background: rgba(var(--accent-rgb), 0.2);
+}
+
+/* ---------- Home Search Dropdown ---------- */
+.home-search-wrap {
+  position: relative;
+  z-index: 200;
+}
+
+.home-search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--deep-void);
+  border: 1px solid var(--cosmic-blue);
+  border-radius: 8px;
+  z-index: 200;
+  max-height: 360px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  display: none;
+}
+.home-search-dropdown.open { display: block; }
+
+.home-search-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid var(--cosmic-blue);
+}
+.home-search-result:last-child { border-bottom: none; }
+.home-search-result:hover { background: var(--nebula-dark); }
+
+.home-search-thumb {
+  flex-shrink: 0;
+  width: 32px;
+  height: 48px;
+  border-radius: 3px;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--nebula-dark);
+}
+.home-search-thumb.person {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.home-search-result-info {
+  flex: 1;
+  min-width: 0;
+}
+.home-search-result-title {
+  font-size: 12px;
+  color: var(--film-white);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.home-search-result-meta {
+  font-size: 10px;
+  color: var(--ghost-gray);
+}
+
+.home-search-badge {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+.home-search-no-results {
+  padding: 16px 14px;
+  font-size: 12px;
+  color: var(--ghost-gray);
+  text-align: center;
 }
 
 /* ---------- Hero Seeds ---------- */

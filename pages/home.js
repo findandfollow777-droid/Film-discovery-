@@ -614,44 +614,177 @@ function initShowcase() {
 }
 
 /* ----------------------------------------------------------
-   SECTION 7 — initSearch()
+   SECTION 7 — Home Search — Live dropdown
+   Identical behaviour to index.html Quick Search.
+   Debounced live dropdown with TMDB results.
+   Added: 2026-03-29
    ---------------------------------------------------------- */
 
 function initSearch() {
   const input = document.querySelector('.hero-search-input');
   const btn = document.querySelector('.hero-search-btn');
+  const dropdown = document.getElementById('home-search-dropdown');
+  if (!input || !dropdown) return;
 
-  function submitSearch() {
-    if (!input) return;
+  let debounceTimer = null;
+  let fetchController = null;
+
+  // Debounced input
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
     const q = input.value.trim();
-    if (!q) return;
-    window.location.href = '../index.html?quicksearch=' + encodeURIComponent(q);
-  }
+    if (q.length < 2) { closeDropdown(); return; }
+    debounceTimer = setTimeout(() => fetchResults(q), 300);
+  });
 
-  if (input) {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        submitSearch();
-      }
+  // Enter key — select first result or submit as search
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const first = dropdown.querySelector('.home-search-result');
+      if (first) first.click();
+    }
+    if (e.key === 'Escape') closeDropdown();
+  });
+
+  // Search button — trigger search immediately
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const q = input.value.trim();
+      if (q.length >= 2) fetchResults(q);
     });
   }
 
-  if (btn) {
-    btn.addEventListener('click', submitSearch);
-  }
+  // Click outside to close
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#home-search-wrap')) closeDropdown();
+  });
 
   // Seed suggestion clicks
-  document.querySelectorAll('.hero-seed').forEach(seed => {
+  document.querySelectorAll('.seed-link').forEach(seed => {
     seed.addEventListener('click', () => {
       if (!input) return;
       const text = seed.textContent || '';
-      // Extract first name (e.g., "Scorsese" from "Scorsese + De Niro")
       const firstName = text.split('+')[0].trim().split('\u00D7')[0].trim();
       input.value = firstName;
-      submitSearch();
+      fetchResults(firstName);
     });
   });
+
+  async function fetchResults(query) {
+    if (fetchController) fetchController.abort();
+    fetchController = new AbortController();
+
+    try {
+      // Search movies and people in parallel
+      const [movieRes, personRes] = await Promise.all([
+        fetch('https://api.themoviedb.org/3/search/movie?api_key=' + TMDB_API_KEY + '&query=' + encodeURIComponent(query), { signal: fetchController.signal }).then(r => r.json()),
+        fetch('https://api.themoviedb.org/3/search/person?api_key=' + TMDB_API_KEY + '&query=' + encodeURIComponent(query), { signal: fetchController.signal }).then(r => r.json())
+      ]);
+
+      const movies = (movieRes.results || []).slice(0, 4).map(m => ({ ...m, _type: 'movie' }));
+      const people = (personRes.results || []).slice(0, 4).map(p => ({ ...p, _type: 'person' }));
+
+      // Interleave: movie, person, movie, person...
+      const results = [];
+      const maxLen = Math.max(movies.length, people.length);
+      for (let i = 0; i < maxLen; i++) {
+        if (i < movies.length) results.push(movies[i]);
+        if (i < people.length) results.push(people[i]);
+      }
+
+      renderDropdown(results.slice(0, 8));
+    } catch (err) {
+      if (err.name !== 'AbortError') console.warn('[ORBIT Search]', err);
+    } finally {
+      fetchController = null;
+    }
+  }
+
+  function renderDropdown(results) {
+    if (results.length === 0) {
+      dropdown.innerHTML = '<div class="home-search-no-results">No results found</div>';
+      dropdown.classList.add('open');
+      return;
+    }
+
+    dropdown.innerHTML = results.map(item => {
+      if (item._type === 'movie') {
+        const year = (item.release_date || '').split('-')[0];
+        const rating = item.vote_average ? ' \u00B7 \u2605' + item.vote_average.toFixed(1) : '';
+        const thumb = item.poster_path ? TMDB_IMG + 'w92' + item.poster_path : '';
+        return `<div class="home-search-result" data-id="${item.id}" data-type="movie" data-title="${(item.title||'').replace(/"/g,'&quot;')}">
+          <div class="home-search-thumb" style="${thumb ? 'background-image:url('+thumb+')' : ''}"></div>
+          <div class="home-search-result-info">
+            <div class="home-search-result-title">${item.title || ''}</div>
+            <div class="home-search-result-meta">${year}${rating}</div>
+          </div>
+          <span class="home-search-badge" style="color:var(--accent-cyan);border-color:rgba(0,217,255,0.3)">FILM</span>
+        </div>`;
+      } else {
+        const dept = item.known_for_department || '';
+        const knownFor = (item.known_for || []).map(k => k.title || k.name).filter(Boolean).slice(0,2).join(', ');
+        const thumb = item.profile_path ? TMDB_IMG + 'w92' + item.profile_path : '';
+        return `<div class="home-search-result" data-id="${item.id}" data-type="person" data-name="${(item.name||'').replace(/"/g,'&quot;')}">
+          <div class="home-search-thumb person" style="${thumb ? 'background-image:url('+thumb+')' : ''}"></div>
+          <div class="home-search-result-info">
+            <div class="home-search-result-title">${item.name || ''}</div>
+            <div class="home-search-result-meta">${dept}${knownFor ? ' \u00B7 ' + knownFor : ''}</div>
+          </div>
+          <span class="home-search-badge" style="color:var(--accent-gold);border-color:rgba(255,215,0,0.3)">PERSON</span>
+        </div>`;
+      }
+    }).join('');
+
+    dropdown.classList.add('open');
+
+    // Wire click handlers
+    dropdown.querySelectorAll('.home-search-result').forEach(row => {
+      row.addEventListener('click', () => {
+        const id = parseInt(row.dataset.id);
+        const type = row.dataset.type;
+        closeDropdown();
+        handleSelect(id, type, row.dataset.title || row.dataset.name || '');
+      });
+    });
+  }
+
+  async function handleSelect(id, type, name) {
+    // Clear old state
+    localStorage.removeItem('vennPeople');
+    localStorage.removeItem('orbitFilters');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('orbitBaseQuery');
+
+    if (type === 'movie') {
+      // Check for collection
+      try {
+        const movie = await fetch('https://api.themoviedb.org/3/movie/' + id + '?api_key=' + TMDB_API_KEY).then(r => r.json());
+        localStorage.setItem('timelineMovieId', id);
+        localStorage.setItem('timelineType', 'movie');
+        if (movie.belongs_to_collection) {
+          window.location.href = 'timeline.html';
+        } else {
+          window.location.href = 'timeline.html?openCube=' + id;
+        }
+      } catch (e) {
+        localStorage.setItem('timelineMovieId', id);
+        localStorage.setItem('timelineType', 'movie');
+        window.location.href = 'timeline.html?openCube=' + id;
+      }
+    } else {
+      // Person
+      localStorage.setItem('timelineMovieId', id);
+      localStorage.setItem('timelineType', 'person');
+      localStorage.setItem('timelineMediaMode', 'both');
+      window.location.href = 'timeline.html';
+    }
+  }
+
+  function closeDropdown() {
+    dropdown.classList.remove('open');
+    dropdown.innerHTML = '';
+  }
 }
 
 /* ----------------------------------------------------------
