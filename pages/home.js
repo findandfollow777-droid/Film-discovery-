@@ -122,6 +122,9 @@ async function loadHomeConstellation() {
   }
 
   waitForSize(canvas, () => renderHomeConstellation(anchorFilm, orbitals, canvas));
+
+  // Popular strip (needs the full popular array)
+  renderPopularStrip(popular, anchorFilm.id);
 }
 
 function renderHomeConstellation(anchor, orbitals, canvas) {
@@ -136,22 +139,29 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
   const anchorW = 148, anchorH = 212;
   const tileW = 96, tileH = 138;
 
-  // Star field (behind everything)
+  // Star field (behind everything) — vivid
   const starCvs = document.createElement('canvas');
   starCvs.width = W;
   starCvs.height = H;
   starCvs.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;';
   const sCtx = starCvs.getContext('2d');
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 120; i++) {
     sCtx.beginPath();
-    sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 0.8 + 0.2, 0, Math.PI * 2);
-    sCtx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.25 + 0.05) + ')';
+    sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 1.2 + 0.3, 0, Math.PI * 2);
+    sCtx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.4 + 0.1) + ')';
     sCtx.fill();
   }
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
+    sCtx.beginPath();
+    sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 0.8 + 1.0, 0, Math.PI * 2);
+    sCtx.fillStyle = 'rgba(255,255,255,0.7)';
+    sCtx.fill();
+  }
+  // A few coloured stars
+  for (let i = 0; i < 6; i++) {
     sCtx.beginPath();
     sCtx.arc(Math.random() * W, Math.random() * H, Math.random() * 0.6 + 0.8, 0, Math.PI * 2);
-    sCtx.fillStyle = 'rgba(255,255,255,0.5)';
+    sCtx.fillStyle = i % 2 === 0 ? 'rgba(0,217,255,0.4)' : 'rgba(255,215,0,0.35)';
     sCtx.fill();
   }
   canvas.appendChild(starCvs);
@@ -246,16 +256,16 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
     lCtx.beginPath();
     lCtx.moveTo(cx, cy);
     lCtx.lineTo(tcx, tcy);
-    lCtx.strokeStyle = 'rgba(0, 217, 255, ' + (0.06 + prox * 0.12) + ')';
-    lCtx.lineWidth = 0.6;
+    lCtx.strokeStyle = 'rgba(0, 217, 255, ' + (0.12 + prox * 0.2) + ')';
+    lCtx.lineWidth = 0.8;
     lCtx.stroke();
 
-    // Small dot at midpoint
+    // Dot at midpoint
     const dotX = cx + (tcx - cx) * 0.55;
     const dotY = cy + (tcy - cy) * 0.55;
     lCtx.beginPath();
-    lCtx.arc(dotX, dotY, 1.5, 0, Math.PI * 2);
-    lCtx.fillStyle = prox > 0.5 ? 'rgba(255,107,53,0.5)' : 'rgba(0,217,255,0.3)';
+    lCtx.arc(dotX, dotY, 2.2, 0, Math.PI * 2);
+    lCtx.fillStyle = prox > 0.5 ? 'rgba(255,107,53,0.65)' : 'rgba(0,217,255,0.45)';
     lCtx.fill();
   });
   canvas.appendChild(linesCvs);
@@ -292,6 +302,112 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
     canvas.appendChild(tile);
   });
 
+}
+
+/* ----------------------------------------------------------
+   Popular Strip + Loading Helpers
+   ---------------------------------------------------------- */
+
+function showHomeLoader() {
+  const canvas = document.getElementById('home-const-canvas');
+  if (!canvas) return;
+  let loader = canvas.querySelector('.home-const-loading');
+  if (loader) { loader.classList.remove('hidden'); return; }
+  loader = document.createElement('div');
+  loader.className = 'home-const-loading';
+  loader.innerHTML = '<div class="home-const-rings"><div class="hcr hcr-1"></div><div class="hcr hcr-2"></div><div class="hcr hcr-3"></div><div class="hcr-core"></div></div>';
+  canvas.appendChild(loader);
+}
+
+function hideHomeLoader() {
+  const loader = document.querySelector('#home-const-canvas .home-const-loading');
+  if (loader) loader.classList.add('hidden');
+}
+
+function renderPopularStrip(films, activeId) {
+  const strip = document.getElementById('home-popular-strip');
+  if (!strip) return;
+  strip.innerHTML = '';
+
+  const five = films.slice(0, 5);
+
+  five.forEach(film => {
+    const tile = document.createElement('div');
+    tile.className = 'home-popular-tile';
+    tile.dataset.filmId = film.id;
+
+    if (film.poster_path) {
+      tile.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + film.poster_path + ')';
+    }
+
+    if (film.id === activeId) {
+      tile.classList.add('active-anchor');
+    }
+
+    // Single click — switch constellation anchor
+    let clickTimer = null;
+    tile.addEventListener('click', () => {
+      if (clickTimer) return;
+      clickTimer = setTimeout(() => {
+        clickTimer = null;
+        if (film.id === activeId) return;
+
+        // Update active glow
+        strip.querySelectorAll('.home-popular-tile').forEach(t => t.classList.remove('active-anchor'));
+        tile.classList.add('active-anchor');
+        activeId = film.id;
+
+        populateInfoStrip(film);
+        showHomeLoader();
+
+        // Update enter link
+        const enterBtn = document.getElementById('home-const-enter');
+        if (enterBtn) {
+          enterBtn.onclick = (e) => {
+            e.preventDefault();
+            localStorage.setItem('anchorMovie', JSON.stringify({
+              id: film.id, title: film.title, poster_path: film.poster_path,
+              release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
+            }));
+            localStorage.removeItem('anchorFromResults');
+            window.location.href = '../games/constellation.html';
+          };
+        }
+
+        // Fetch recs and re-render
+        (async () => {
+          let recs = [];
+          const recsCacheKey = 'orbit_home_const_recs_' + film.id;
+          const ttl = 4 * 3600000;
+          try {
+            const rc = sessionStorage.getItem(recsCacheKey);
+            if (rc) { const p = JSON.parse(rc); if (Date.now() - p.timestamp < ttl) recs = p.films; }
+          } catch (e) {}
+          if (recs.length === 0) {
+            try {
+              const res = await OrbitUtils.tmdbFetch('/movie/' + film.id + '/recommendations', { language: 'en-US', page: 1 });
+              recs = (res.results || []).filter(m => m.poster_path && m.id !== film.id).slice(0, 20);
+              sessionStorage.setItem(recsCacheKey, JSON.stringify({ films: recs, timestamp: Date.now() }));
+            } catch (e) { recs = []; }
+          }
+
+          hideHomeLoader();
+          const canvas = document.getElementById('home-const-canvas');
+          if (!canvas) return;
+          canvas.innerHTML = '';
+          waitForSize(canvas, () => renderHomeConstellation(film, recs, canvas));
+        })();
+      }, 220);
+    });
+
+    // Double click — MovieCube
+    tile.addEventListener('dblclick', () => {
+      if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
+      if (typeof openMovieCube === 'function') openMovieCube(film.id);
+    });
+
+    strip.appendChild(tile);
+  });
 }
 
 /* ----------------------------------------------------------
