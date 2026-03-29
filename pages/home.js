@@ -367,7 +367,12 @@ function renderCarouselSlides(films) {
   const instructionSlide = document.getElementById('home-carousel-slide-6');
   if (!track || !instructionSlide) return;
 
-  const genreMap = {28:'Action',12:'Adventure',16:'Animation',35:'Comedy',80:'Crime',99:'Documentary',18:'Drama',10751:'Family',14:'Fantasy',36:'History',27:'Horror',10402:'Music',9648:'Mystery',10749:'Romance',878:'Sci-Fi',10770:'TV Movie',53:'Thriller',10752:'War',37:'Western'};
+  const borderColors = [
+    'rgba(0,217,255,0.35)',
+    'rgba(168,85,247,0.35)',
+    'rgba(16,185,129,0.3)',
+    'rgba(255,215,0,0.28)'
+  ];
 
   films.forEach((film, i) => {
     const slide = document.createElement('div');
@@ -375,13 +380,14 @@ function renderCarouselSlides(films) {
     slide.id = 'home-carousel-slide-' + (i + 1);
     slide.dataset.slide = String(i + 1);
 
-    // Poster column
+    // Poster column — full bleed
     const posterCol = document.createElement('div');
     posterCol.className = 'hcs-poster-col';
     const poster = document.createElement('div');
     poster.className = 'hcs-poster';
+    poster.id = 'hcs-poster-' + film.id;
     if (film.poster_path) {
-      poster.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + film.poster_path + ')';
+      poster.style.backgroundImage = 'url(' + TMDB_IMG + 'w342' + film.poster_path + ')';
     }
     poster.addEventListener('click', () => {
       if (typeof openMovieCube === 'function') openMovieCube(film.id);
@@ -393,98 +399,112 @@ function renderCarouselSlides(films) {
     const infoCol = document.createElement('div');
     infoCol.className = 'hcs-info-col';
 
+    // Eyebrow
+    const eyebrow = document.createElement('div');
+    eyebrow.className = 'hcs-eyebrow';
+    eyebrow.textContent = 'NOW PLAYING';
+    infoCol.appendChild(eyebrow);
+
     // Title
     const titleEl = document.createElement('div');
     titleEl.className = 'hcs-title';
     titleEl.textContent = film.title || '';
     infoCol.appendChild(titleEl);
 
-    // Meta row with stat pills
+    // Stats row
     const metaRow = document.createElement('div');
     metaRow.className = 'hcs-meta-row';
 
     if (film.vote_average) {
-      const ratingPill = document.createElement('span');
-      ratingPill.className = 'hcs-stat hcs-stat--rating';
-      ratingPill.textContent = '\u2605 ' + film.vote_average.toFixed(1);
-      metaRow.appendChild(ratingPill);
+      const r = document.createElement('span');
+      r.className = 'hcs-stat hcs-stat--rating';
+      r.textContent = '\u2605 ' + film.vote_average.toFixed(1);
+      metaRow.appendChild(r);
     }
-
     if (film.runtime) {
-      const rtPill = document.createElement('span');
-      rtPill.className = 'hcs-stat hcs-stat--runtime';
-      rtPill.textContent = film.runtime + ' MIN';
-      metaRow.appendChild(rtPill);
+      const hrs = Math.floor(film.runtime / 60);
+      const mins = film.runtime % 60;
+      const rt = document.createElement('span');
+      rt.className = 'hcs-stat hcs-stat--runtime';
+      rt.textContent = hrs > 0 ? hrs + 'h ' + mins + 'm' : mins + 'm';
+      metaRow.appendChild(rt);
     }
-
-    const genres = film.genres || [];
-    if (genres.length > 0) {
-      const gPill = document.createElement('span');
-      gPill.className = 'hcs-stat hcs-stat--genre';
-      gPill.textContent = genres[0].name ? genres[0].name.toUpperCase() : '';
-      metaRow.appendChild(gPill);
+    if (film.genres && film.genres[0]) {
+      const g = document.createElement('span');
+      g.className = 'hcs-stat hcs-stat--genre';
+      g.textContent = film.genres[0].name.toUpperCase();
+      metaRow.appendChild(g);
     }
-
-    if (film.status === 'Released') {
-      const cPill = document.createElement('span');
-      cPill.className = 'hcs-stat hcs-stat--cinema';
-      cPill.textContent = 'IN CINEMAS';
-      metaRow.appendChild(cPill);
+    const cin = document.createElement('span');
+    cin.className = 'hcs-stat hcs-stat--cinema';
+    cin.textContent = 'IN CINEMAS';
+    metaRow.appendChild(cin);
+    if (film.revenue && film.revenue > 1000000) {
+      const rev = document.createElement('span');
+      rev.className = 'hcs-stat hcs-stat--revenue';
+      rev.textContent = '$' + (film.revenue / 1000000).toFixed(0) + 'M BOX OFFICE';
+      metaRow.appendChild(rev);
     }
-
-    if (film.revenue && film.revenue > 0) {
-      const revPill = document.createElement('span');
-      revPill.className = 'hcs-stat hcs-stat--revenue';
-      const revM = (film.revenue / 1000000).toFixed(0);
-      revPill.textContent = '$' + revM + 'M';
-      metaRow.appendChild(revPill);
-    }
-
     infoCol.appendChild(metaRow);
 
     // Synopsis
-    if (film.overview) {
-      const syn = document.createElement('div');
-      syn.className = 'hcs-synopsis';
-      syn.textContent = film.overview;
-      infoCol.appendChild(syn);
+    const syn = document.createElement('div');
+    syn.className = 'hcs-synopsis';
+    syn.textContent = film.overview || '';
+    infoCol.appendChild(syn);
+
+    // Cast strip — circular portraits pinned to bottom
+    const credits = film.credits;
+    if (credits && credits.cast && credits.cast.length > 0) {
+      const castStrip = document.createElement('div');
+      castStrip.className = 'hcs-cast-strip';
+
+      const castLabel = document.createElement('span');
+      castLabel.className = 'hcs-cast-strip-label';
+      castLabel.textContent = 'CAST';
+      castStrip.appendChild(castLabel);
+
+      const castAvatars = document.createElement('div');
+      castAvatars.className = 'hcs-cast-avatars';
+
+      credits.cast.slice(0, 4).forEach((actor, ci) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'hcs-avatar-wrap';
+        wrap.title = actor.name;
+        wrap.style.cursor = 'pointer';
+
+        const circle = document.createElement('div');
+        circle.className = 'hcs-avatar-circle';
+        circle.style.borderColor = borderColors[ci % borderColors.length];
+        if (actor.profile_path) {
+          circle.style.backgroundImage = 'url(' + TMDB_IMG + 'w45' + actor.profile_path + ')';
+          circle.style.backgroundSize = 'cover';
+          circle.style.backgroundPosition = 'center top';
+        }
+        wrap.appendChild(circle);
+
+        const name = document.createElement('div');
+        name.className = 'hcs-avatar-name';
+        const parts = actor.name.split(' ');
+        if (parts.length >= 2) {
+          name.innerHTML = parts.slice(0, -1).join(' ') + '<br>' + parts[parts.length - 1];
+        } else {
+          name.textContent = actor.name;
+        }
+        wrap.appendChild(name);
+
+        wrap.addEventListener('click', () => {
+          window.location.href = 'timeline.html?type=person&search=' + encodeURIComponent(actor.name);
+        });
+
+        castAvatars.appendChild(wrap);
+      });
+
+      castStrip.appendChild(castAvatars);
+      infoCol.appendChild(castStrip);
     }
 
     slide.appendChild(infoCol);
-
-    // Cast grid — 2×2 photo squares with names
-    const credits = film.credits;
-    if (credits && credits.cast && credits.cast.length >= 4) {
-      const castGrid = document.createElement('div');
-      castGrid.className = 'hcs-cast-grid';
-
-      credits.cast.slice(0, 4).forEach(member => {
-        const cell = document.createElement('div');
-        cell.className = 'hcs-cast-cell';
-        cell.style.cursor = 'pointer';
-
-        const photo = document.createElement('div');
-        photo.className = 'hcs-cast-photo';
-        if (member.profile_path) {
-          photo.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + member.profile_path + ')';
-        }
-        cell.appendChild(photo);
-
-        const name = document.createElement('div');
-        name.className = 'hcs-cast-cell-name';
-        name.textContent = member.name;
-        cell.appendChild(name);
-
-        cell.addEventListener('click', () => {
-          window.location.href = 'timeline.html?type=person&search=' + encodeURIComponent(member.name);
-        });
-
-        castGrid.appendChild(cell);
-      });
-
-      slide.appendChild(castGrid);
-    }
-
     track.insertBefore(slide, instructionSlide);
   });
 }
