@@ -346,6 +346,8 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--space-black);
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---------- Mosaic (behind hero-left) ---------- */
@@ -401,8 +403,8 @@ body {
   background: transparent;
   position: relative;
   overflow: hidden;
-  min-height: 320px;
   z-index: 1;
+  height: 100%;
 }
 
 .home-const-bar {
@@ -444,7 +446,7 @@ body {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  min-height: 280px;
+  min-height: 0;
 }
 
 .home-const-footer {
