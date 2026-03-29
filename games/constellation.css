@@ -199,7 +199,8 @@ html, body {
 }
 
 .anchor-star:hover {
-  transform: scale(1.05);
+  transform: scale(1.12);
+  z-index: 60;
 }
 
 .anchor-poster {
@@ -332,6 +333,7 @@ html, body {
   height: 8px;
   border-radius: 50%;
   background: var(--accent-green);
+  pointer-events: none;
 }
 
 .orbit-movie.orbit-2 .orbit-similarity {
