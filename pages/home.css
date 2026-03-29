@@ -574,15 +574,12 @@ body {
 .hcs-synopsis {
   font-size: 21px; color: var(--ghost-gray); line-height: 1.5;
   flex: 1; overflow: hidden;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  display: block;
   margin-bottom: 12px;
 }
-/* Cast strip — circular portraits pinned to bottom */
+/* Cast strip — hidden */
 .hcs-cast-strip {
-  border-top: 1px solid var(--cosmic-blue);
-  padding: 11px 0 16px;
-  display: flex; align-items: center; gap: 14px;
-  flex-shrink: 0;
+  display: none;
 }
 .hcs-cast-strip-label {
   font-family: var(--font-display); font-size: 8px;

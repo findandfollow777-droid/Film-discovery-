@@ -450,14 +450,7 @@ function renderCarouselSlides(films) {
     // Synopsis
     const syn = document.createElement('div');
     syn.className = 'hcs-synopsis';
-    // Truncate at last full sentence within ~180 chars
-    let overview = film.overview || '';
-    if (overview.length > 180) {
-      const cut = overview.substring(0, 180);
-      const lastPeriod = cut.lastIndexOf('.');
-      overview = lastPeriod > 60 ? cut.substring(0, lastPeriod + 1) : cut + '\u2026';
-    }
-    syn.textContent = overview;
+    syn.textContent = film.overview || '';
     infoCol.appendChild(syn);
 
     // Cast strip — circular portraits pinned to bottom
