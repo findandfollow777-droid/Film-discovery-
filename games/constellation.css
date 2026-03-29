@@ -203,8 +203,8 @@ html, body {
 }
 
 .anchor-poster {
-  width: 160px;
-  height: 240px;
+  width: 240px;
+  height: 360px;
   object-fit: cover;
   border-radius: 12px;
   border: 3px solid var(--accent-gold);
@@ -272,8 +272,8 @@ html, body {
 }
 
 .orbit-movie-poster {
-  width: 80px;
-  height: 120px;
+  width: 120px;
+  height: 172px;
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid rgba(0, 217, 255, 0.5);
@@ -290,29 +290,29 @@ html, body {
 
 /* Orbit distance classes - affects size and brightness */
 .orbit-movie.orbit-1 .orbit-movie-poster {
-  width: 90px;
-  height: 135px;
+  width: 135px;
+  height: 203px;
   border-color: rgba(0, 217, 255, 0.7);
   opacity: 1;
 }
 
 .orbit-movie.orbit-2 .orbit-movie-poster {
-  width: 80px;
-  height: 120px;
+  width: 120px;
+  height: 180px;
   border-color: rgba(0, 217, 255, 0.5);
   opacity: 0.95;
 }
 
 .orbit-movie.orbit-3 .orbit-movie-poster {
-  width: 70px;
-  height: 105px;
+  width: 105px;
+  height: 158px;
   border-color: rgba(0, 217, 255, 0.3);
   opacity: 0.85;
 }
 
 .orbit-movie.orbit-4 .orbit-movie-poster {
-  width: 60px;
-  height: 90px;
+  width: 90px;
+  height: 135px;
   border-color: rgba(0, 217, 255, 0.2);
   opacity: 0.7;
 }
@@ -529,8 +529,8 @@ html, body {
   }
   
   .anchor-poster {
-    width: 120px;
-    height: 180px;
+    width: 180px;
+    height: 270px;
   }
   
   .info-panel {

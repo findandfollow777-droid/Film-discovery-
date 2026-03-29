@@ -184,7 +184,7 @@
 
     /* ── PREVIEW PANEL ── */
     .preview-panel {
-      position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+      position: fixed; top: 0; right: -440px; width: 420px; height: 100vh;
       background: rgba(5,10,20,0.96); border-left: 1px solid var(--cosmic-blue);
       z-index: 200; display: flex; flex-direction: column;
       padding: 24px 24px 32px; transition: right 0.35s cubic-bezier(0.16,1,0.3,1);
@@ -199,12 +199,12 @@
     }
     .preview-poster-wrap { width: 100%; margin-bottom: 20px; margin-top: 32px; }
     .preview-poster {
-      width: 180px; aspect-ratio: 2/3; background-size: cover;
+      width: 100%; aspect-ratio: 2/3; background-size: cover;
       background-position: center top; background-color: var(--nebula-dark);
       border: 1px solid rgba(0,217,255,0.15); border-radius: 8px; margin: 0 auto;
     }
     .preview-title {
-      font-family: 'Orbitron', monospace; font-size: 20px;
+      font-family: 'Orbitron', monospace; font-size: 22px;
       color: var(--film-white); line-height: 1.15; margin-bottom: 8px;
     }
     .preview-meta {
@@ -212,13 +212,13 @@
       letter-spacing: 0.08em; margin-bottom: 14px; line-height: 1.7;
     }
     .preview-overview {
-      font-size: 12px; color: var(--ghost-gray);
+      font-size: 14px; color: var(--ghost-gray);
       line-height: 1.75; margin-bottom: 24px; flex: 1;
     }
     .preview-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
     .preview-anchor-btn {
       font-family: 'Orbitron', monospace; font-size: 10px;
-      letter-spacing: 0.15em; padding: 12px; width: 100%;
+      letter-spacing: 0.15em; padding: 14px; width: 100%;
       border: 1px solid rgba(255,215,0,0.4); border-radius: 4px;
       background: rgba(255,215,0,0.07); color: var(--accent-gold);
       cursor: pointer; transition: background 0.2s;
@@ -226,7 +226,7 @@
     .preview-anchor-btn:hover { background: rgba(255,215,0,0.13); }
     .preview-cube-btn {
       font-family: 'Orbitron', monospace; font-size: 10px;
-      letter-spacing: 0.15em; padding: 12px; width: 100%;
+      letter-spacing: 0.15em; padding: 14px; width: 100%;
       border: 1px solid rgba(0,217,255,0.3); border-radius: 4px;
       background: rgba(0,217,255,0.06); color: var(--accent-cyan);
       cursor: pointer; transition: background 0.2s;
@@ -262,6 +262,74 @@
       to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     }
     .orbit-movie.fade-entering { opacity: 0; animation: fadeInTile 0.4s ease forwards; }
+
+    /* ── COSMOS LOADER ── */
+    .cosmos-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(2,4,12,0.88);
+      backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .cosmos-loader.active { opacity: 1; pointer-events: auto; }
+    .cosmos-loader-inner {
+      position: relative; width: 160px; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cosmos-spinner-wrap {
+      position: relative; width: 120px; height: 120px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cosmos-ring {
+      position: absolute; border-radius: 50%;
+      border: 2px solid transparent;
+    }
+    .cosmos-ring-outer {
+      width: 120px; height: 120px;
+      border-top-color: rgba(0,217,255,0.7);
+      border-right-color: rgba(0,217,255,0.2);
+      animation: cosmos-spin 2s linear infinite;
+    }
+    .cosmos-ring-mid {
+      width: 86px; height: 86px;
+      border-bottom-color: rgba(168,85,247,0.6);
+      border-left-color: rgba(168,85,247,0.15);
+      animation: cosmos-spin 1.4s linear infinite reverse;
+    }
+    .cosmos-ring-inner {
+      width: 52px; height: 52px;
+      border-top-color: rgba(255,215,0,0.6);
+      border-right-color: rgba(255,215,0,0.15);
+      animation: cosmos-spin 1s linear infinite;
+    }
+    .cosmos-core {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,217,255,0.9), rgba(0,217,255,0.2));
+      box-shadow: 0 0 14px rgba(0,217,255,0.5);
+      animation: cosmos-pulse 1.2s ease-in-out infinite alternate;
+    }
+    .cosmos-stars { position: absolute; inset: 0; }
+    .cosmos-loader-label {
+      position: absolute; bottom: -36px; left: 50%;
+      transform: translateX(-50%); white-space: nowrap;
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.35em; color: var(--accent-cyan);
+      animation: cosmos-label-pulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes cosmos-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes cosmos-pulse {
+      from { transform: scale(0.85); border-color: rgba(0,217,255,0.2); }
+      to { transform: scale(1.15); border-color: rgba(0,217,255,0.8); }
+    }
+    @keyframes cosmos-label-pulse {
+      from { opacity: 0.4; }
+      to { opacity: 0.9; }
+    }
   </style>
 </head>
 <body>
@@ -390,6 +458,20 @@
 
   <!-- TOAST -->
   <div class="wl-toast" id="wlToast"></div>
+
+  <!-- COSMOS LOADER -->
+  <div class="cosmos-loader" id="cosmos-loader">
+    <div class="cosmos-loader-inner">
+      <div class="cosmos-spinner-wrap">
+        <div class="cosmos-ring cosmos-ring-outer"></div>
+        <div class="cosmos-ring cosmos-ring-mid"></div>
+        <div class="cosmos-ring cosmos-ring-inner"></div>
+        <div class="cosmos-core"></div>
+      </div>
+      <div class="cosmos-stars" id="cosmos-stars"></div>
+      <div class="cosmos-loader-label" id="cosmos-loader-label">RECONFIGURING ORBIT</div>
+    </div>
+  </div>
 
   <!-- Load Nebula Service Module -->
   <script type="module">

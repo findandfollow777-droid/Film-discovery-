@@ -286,33 +286,50 @@ function renderOrbits() {
   orbitingMovies.innerHTML = "";
 
   const container = document.getElementById("orbitalContainer");
-  const centerX = container.offsetWidth / 2;
-  const centerY = container.offsetHeight / 2;
+  const vw = container.offsetWidth;
+  const vh = container.offsetHeight;
+  const centerX = vw / 2;
+  const centerY = vh / 2;
 
+  // Cinematic elliptical orbits — wider than tall
   const orbits = [
-    { radius: 180, maxMovies: 6, class: "orbit-1" },
-    { radius: 280, maxMovies: 10, class: "orbit-2" },
-    { radius: 380, maxMovies: 14, class: "orbit-3" },
-    { radius: 480, maxMovies: 20, class: "orbit-4" }
+    { spreadX: 0.18, spreadY: 0.14, maxMovies: 6, class: "orbit-1" },
+    { spreadX: 0.28, spreadY: 0.22, maxMovies: 10, class: "orbit-2" },
+    { spreadX: 0.36, spreadY: 0.28, maxMovies: 14, class: "orbit-3" },
+    { spreadX: 0.42, spreadY: 0.34, maxMovies: 20, class: "orbit-4" }
   ];
 
-  let movieIndex = 0;
+  const exclusionRadius = 120; // clear zone around anchor
+  let globalIdx = 0;
+
   orbits.forEach((orbit) => {
-    const moviesInOrbit = rankedMovies.slice(movieIndex, movieIndex + orbit.maxMovies);
-    movieIndex += orbit.maxMovies;
+    const moviesInOrbit = rankedMovies.slice(globalIdx, globalIdx + orbit.maxMovies);
 
     moviesInOrbit.forEach((item, i) => {
       const angle = (2 * Math.PI * i / moviesInOrbit.length) - Math.PI / 2;
-      const radiusVariation = orbit.radius + (Math.random() - 0.5) * 30;
-      const angleVariation = angle + (Math.random() - 0.5) * 0.15;
-      const x = centerX + Math.cos(angleVariation) * radiusVariation;
-      const y = centerY + Math.sin(angleVariation) * radiusVariation;
+      const randFactor = 0.4 + Math.random() * 0.6;
+      const radiusX = vw * orbit.spreadX * randFactor;
+      const radiusY = vh * orbit.spreadY * randFactor;
+      const angleVar = angle + (Math.random() - 0.5) * 0.2;
+
+      let x = centerX + Math.cos(angleVar) * radiusX;
+      let y = centerY + Math.sin(angleVar) * radiusY;
+
+      // Enforce exclusion zone
+      const dx = x - centerX;
+      const dy = y - centerY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < exclusionRadius && dist > 0) {
+        const scale = exclusionRadius / dist;
+        x = centerX + dx * scale;
+        y = centerY + dy * scale;
+      }
+
       const movieEl = createOrbitMovie(item, orbit.class, x, y);
-      // Add fade-entering animation with staggered delay
-      const globalIdx = movieIndex - orbit.maxMovies + i;
       movieEl.classList.add('fade-entering');
       movieEl.style.animationDelay = Math.min(globalIdx * 40, 800) + 'ms';
       orbitingMovies.appendChild(movieEl);
+      globalIdx++;
     });
   });
 }
@@ -329,8 +346,8 @@ function createOrbitMovie(item, orbitClass, x, y) {
 
   const imgBase = (typeof TMDB_IMG !== 'undefined' && TMDB_IMG) ? TMDB_IMG : 'https://image.tmdb.org/t/p/';
   const posterUrl = movie.poster_path
-    ? imgBase + 'w200' + movie.poster_path
-    : "https://placehold.co/80x120?text=?";
+    ? imgBase + 'w342' + movie.poster_path
+    : "https://placehold.co/120x172?text=?";
 
   div.innerHTML = `
     <img class="orbit-movie-poster" src="${posterUrl}" alt="${movie.title}">
@@ -368,7 +385,7 @@ function openPreviewPanel(film) {
   const posterEl = document.getElementById('preview-poster');
   if (posterEl) {
     posterEl.style.backgroundImage = film.poster_path
-      ? `url(${imgBase}w300${film.poster_path})`
+      ? `url(${imgBase}w500${film.poster_path})`
       : 'none';
   }
 
@@ -384,11 +401,11 @@ function openPreviewPanel(film) {
     metaEl.textContent = [year, rating].filter(Boolean).join(' \u00B7 ');
   }
 
-  // Populate overview (220 chars max)
+  // Populate overview (300 chars max)
   const overviewEl = document.getElementById('preview-overview');
   if (overviewEl) {
     const text = film.overview || 'No overview available.';
-    overviewEl.textContent = text.length > 220 ? text.substring(0, 217) + '...' : text;
+    overviewEl.textContent = text.length > 300 ? text.substring(0, 297) + '...' : text;
   }
 
   // Wire anchor button
@@ -469,40 +486,42 @@ function closeInfoPanel() {
 // LOADING STATE
 // ============================================
 
-function startLoadingState() {
-  // Fade out existing orbit tiles
-  const tiles = document.querySelectorAll('.orbit-movie');
-  tiles.forEach(t => { t.style.transition = 'opacity 0.3s'; t.style.opacity = '0'; });
+function showCosmosLoader(label) {
+  const loader = document.getElementById('cosmos-loader');
+  const labelEl = document.getElementById('cosmos-loader-label');
+  if (labelEl && label) labelEl.textContent = label;
 
-  // Pulse orbital rings
-  document.querySelectorAll('.orbital-ring').forEach(r => r.classList.add('pulsing'));
+  // Generate star dots
+  const stars = document.getElementById('cosmos-stars');
+  if (stars) {
+    stars.innerHTML = '';
+    for (let i = 0; i < 12; i++) {
+      const dot = document.createElement('div');
+      const angle = (i / 12) * Math.PI * 2;
+      const distance = 70 + Math.random() * 30;
+      dot.style.cssText = `
+        position:absolute;width:${3+Math.random()*3}px;height:${3+Math.random()*3}px;
+        border-radius:50%;background:rgba(0,217,255,${0.3+Math.random()*0.5});
+        left:${60+Math.cos(angle)*distance}px;top:${60+Math.sin(angle)*distance}px;
+        animation:cosmos-pulse ${1+Math.random()}s ease-in-out infinite alternate;
+        animation-delay:${i*0.1}s;
+      `;
+      stars.appendChild(dot);
+    }
+  }
 
-  // Glow anchor
-  const anchor = document.getElementById('anchorStar');
-  if (anchor) anchor.classList.add('loading-glow');
+  if (loader) loader.classList.add('active');
 
-  // Show loading label
-  const label = document.getElementById('orbit-loading-label');
-  if (label) label.hidden = false;
-
-  // Mark expand button loading
+  // Also keep HUD expand button loading state
   const hudBtn = document.getElementById('hud-expand-btn');
   if (hudBtn) hudBtn.classList.add('loading');
 }
 
-function endLoadingState() {
-  // Hide loading label
-  const label = document.getElementById('orbit-loading-label');
-  if (label) label.hidden = true;
+function hideCosmosLoader() {
+  const loader = document.getElementById('cosmos-loader');
+  if (loader) loader.classList.remove('active');
 
-  // Remove ring pulse
-  document.querySelectorAll('.orbital-ring').forEach(r => r.classList.remove('pulsing'));
-
-  // Remove anchor glow
-  const anchor = document.getElementById('anchorStar');
-  if (anchor) anchor.classList.remove('loading-glow');
-
-  // Remove expand button loading
+  // Also remove HUD expand button loading state
   const hudBtn = document.getElementById('hud-expand-btn');
   if (hudBtn) hudBtn.classList.remove('loading');
 }
@@ -519,9 +538,9 @@ async function reAnchor(movieId) {
   const movie = allMovies.find(m => m.id === movieId) || selectedMovie;
   if (!movie) return;
 
-  startLoadingState();
+  showCosmosLoader('ENTERING NEW ORBIT');
 
-  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+  const minTimer = new Promise(resolve => setTimeout(resolve, 1500));
 
   try {
     const [fullMovie] = await Promise.all([fetchMovieDetails(movieId), minTimer]);
@@ -545,7 +564,7 @@ async function reAnchor(movieId) {
     console.error("Failed to re-anchor:", e);
   }
 
-  endLoadingState();
+  hideCosmosLoader();
 }
 
 async function fetchMovieDetails(movieId) {
@@ -618,9 +637,9 @@ document.head.appendChild(style);
 // ============================================
 
 async function loadRecommendations(movieId) {
-  startLoadingState();
+  showCosmosLoader('RECONFIGURING ORBIT');
 
-  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+  const minTimer = new Promise(resolve => setTimeout(resolve, 1500));
 
   try {
     const tmdbFetch = (typeof OrbitUtils !== 'undefined' && OrbitUtils.tmdbFetch)
@@ -659,7 +678,7 @@ async function loadRecommendations(movieId) {
     showError("Could not load similar films.");
   }
 
-  endLoadingState();
+  hideCosmosLoader();
 }
 
 // ============================================
@@ -678,9 +697,9 @@ async function handleExpandUniverse() {
   expandPage++;
   if (expandPage > 5) expandPage = 1;
 
-  startLoadingState();
+  showCosmosLoader('EXPANDING THE UNIVERSE');
 
-  const minTimer = new Promise(resolve => setTimeout(resolve, 800));
+  const minTimer = new Promise(resolve => setTimeout(resolve, 1500));
   const anchorId = anchorMovie.id;
 
   try {
@@ -726,7 +745,7 @@ async function handleExpandUniverse() {
     console.error("Failed to expand universe:", e);
   }
 
-  endLoadingState();
+  hideCosmosLoader();
 
   // Always keep label as EXPAND MY UNIVERSE
   const hudBtn = document.getElementById('hud-expand-btn');
