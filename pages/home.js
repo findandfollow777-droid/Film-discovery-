@@ -11,8 +11,6 @@
    Added: 2026-03-28
    ============================================================ */
 
-const TMDB_IMG = OrbitUtils.TMDB_IMG;
-
 /* ============================================================
    HOME CONSTELLATION PREVIEW — Added 2026-03-29
    Shows a mini constellation of a popular film rotating every
@@ -25,6 +23,35 @@ const CONSTELLATION_ROTATION_HOURS = 4;
 
 function getRotationIndex(len) {
   return Math.floor(Date.now() / (CONSTELLATION_ROTATION_HOURS * 3600000)) % len;
+}
+
+function populateInfoStrip(film) {
+  const titleEl = document.getElementById('home-const-info-title');
+  const metaEl = document.getElementById('home-const-info-meta');
+  const badgesEl = document.getElementById('home-const-info-badges');
+  if (titleEl) titleEl.textContent = film.title || '\u2014';
+  if (metaEl) {
+    const year = (film.release_date || '').split('-')[0];
+    const rating = film.vote_average ? film.vote_average.toFixed(1) : '';
+    metaEl.textContent = [year, rating ? '\u2605 ' + rating : ''].filter(Boolean).join(' \u00B7 ');
+  }
+  if (badgesEl) {
+    badgesEl.innerHTML = '';
+    const genres = film.genre_ids || [];
+    const genreMap = {28:'Action',12:'Adventure',16:'Animation',35:'Comedy',80:'Crime',99:'Documentary',18:'Drama',10751:'Family',14:'Fantasy',36:'History',27:'Horror',10402:'Music',9648:'Mystery',10749:'Romance',878:'Sci-Fi',10770:'TV Movie',53:'Thriller',10752:'War',37:'Western'};
+    if (genres.length > 0 && genreMap[genres[0]]) {
+      const pill = document.createElement('span');
+      pill.textContent = genreMap[genres[0]].toUpperCase();
+      pill.style.cssText = 'display:inline-block;padding:2px 8px;font-family:var(--font-display);font-size:9px;letter-spacing:0.08em;border-radius:10px;background:rgba(0,217,255,0.12);border:1px solid rgba(0,217,255,0.3);color:var(--accent-cyan);';
+      badgesEl.appendChild(pill);
+    }
+    if (film.vote_average >= 7.5) {
+      const gold = document.createElement('span');
+      gold.textContent = 'HIGHLY RATED';
+      gold.style.cssText = 'display:inline-block;padding:2px 8px;font-family:var(--font-display);font-size:9px;letter-spacing:0.08em;border-radius:10px;background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.3);color:var(--accent-gold);';
+      badgesEl.appendChild(gold);
+    }
+  }
 }
 
 async function loadHomeConstellation() {
@@ -57,8 +84,7 @@ async function loadHomeConstellation() {
   const idx = getRotationIndex(popular.length);
   const anchorFilm = popular[idx];
 
-  const nameEl = document.getElementById('home-const-film-name');
-  if (nameEl) nameEl.textContent = anchorFilm.title;
+  populateInfoStrip(anchorFilm);
 
   // Fetch recommendations
   let orbitals = [];
@@ -107,16 +133,13 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
   const cx = W / 2;
   const cy = H / 2;
 
-  // Lines canvas
-  const linesEl = document.createElement('canvas');
-  linesEl.className = 'home-const-lines-canvas';
-  linesEl.width = W;
-  linesEl.height = H;
-  canvas.appendChild(linesEl);
-  const ctx = linesEl.getContext('2d');
+  const anchorW = 148, anchorH = 212;
+  const tileW = 96, tileH = 138;
 
-  const anchorW = 120, anchorH = 172;
-  const tileW = 88, tileH = 128;
+  // Corona glow
+  const glow = document.createElement('div');
+  glow.style.cssText = `position:absolute;width:340px;height:340px;left:${cx-170}px;top:${cy-170}px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.12) 0%,rgba(255,215,0,0.05) 35%,transparent 70%);pointer-events:none;z-index:5;animation:anchorCorona 3s ease-in-out infinite alternate;`;
+  canvas.appendChild(glow);
 
   // Anchor tile
   const anchorEl = document.createElement('div');
@@ -186,40 +209,25 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
     if (!any) break;
   }
 
-  // Draw connection lines
-  positions.forEach(pos => {
-    const tcx = pos.x + tileW / 2;
-    const tcy = pos.y + tileH / 2;
-    const dist = Math.hypot(tcx - cx, tcy - cy);
-    const maxDist = Math.hypot(W / 2, H / 2);
-    const prox = 1 - (dist / maxDist);
-
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(tcx, tcy);
-    ctx.strokeStyle = 'rgba(30,58,74,' + (0.3 + prox * 0.4) + ')';
-    ctx.lineWidth = 0.7;
-    ctx.stroke();
-
-    const dotT = 0.55 + prox * 0.25;
-    const dx = cx + (tcx - cx) * dotT;
-    const dy = cy + (tcy - cy) * dotT;
-    ctx.beginPath();
-    ctx.arc(dx, dy, 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = prox > 0.6 ? '#ff6b35' : prox > 0.35 ? 'rgba(0,217,255,0.7)' : 'rgba(100,116,139,0.5)';
-    ctx.fill();
-  });
-
   // Render tiles
   positions.forEach((pos, i) => {
+    const dist = Math.hypot((pos.x + tileW/2) - cx, (pos.y + tileH/2) - cy);
+    const maxDist = Math.hypot(W/2, H/2);
+    const band = dist / maxDist;
+
     const tile = document.createElement('div');
     tile.className = 'home-const-tile';
     tile.style.left = pos.x + 'px';
     tile.style.top = pos.y + 'px';
     tile.style.zIndex = '2';
     tile.style.opacity = '0';
+    const finalOp = (band >= 0.65) ? 0.82 : 1.0;
+    if (band >= 0.65) {
+      tile.style.filter = 'brightness(0.85)';
+    }
     tile.style.animation = 'homeConstellationFadeIn 0.4s ease forwards';
     tile.style.animationDelay = (i * 35) + 'ms';
+    tile.addEventListener('animationend', () => { tile.style.opacity = finalOp; }, { once: true });
     if (pos.film.poster_path) {
       tile.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + pos.film.poster_path + ')';
     }
@@ -233,8 +241,6 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
     canvas.appendChild(tile);
   });
 
-  const countEl = document.getElementById('home-const-count');
-  if (countEl) countEl.textContent = count + ' FILMS IN ORBIT';
 }
 
 /* ----------------------------------------------------------

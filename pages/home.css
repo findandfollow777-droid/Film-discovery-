@@ -359,7 +359,7 @@ body {
   grid-template-rows: repeat(6, 1fr);
   gap: 2px;
   padding: 2px;
-  opacity: 0.32;
+  opacity: 0.37;
   z-index: 0;
   pointer-events: none;
 }
@@ -392,7 +392,7 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(to right, transparent 55%, var(--space-black) 100%);
+  background: linear-gradient(to right, transparent 0%, transparent 88%, var(--space-black) 100%);
 }
 
 /* ---------- Home Constellation ---------- */
@@ -407,63 +407,14 @@ body {
   height: 100%;
 }
 
-.home-const-bar {
-  padding: 14px 20px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--cosmic-blue);
-  flex-shrink: 0;
-}
-
-.home-const-label {
-  font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  color: var(--accent-cyan);
-  opacity: 0.7;
-  margin-right: 10px;
-}
-
-.home-const-sublabel {
-  font-family: var(--font-display);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--film-white);
-  opacity: 0.85;
-}
-
-.home-const-rotate-hint {
-  font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  color: var(--ghost-gray);
-  opacity: 0.4;
-}
 
 .home-const-canvas {
-  flex: 1;
+  width: 100%;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  min-height: 0;
-}
-
-.home-const-footer {
-  padding: 10px 20px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--cosmic-blue);
-  flex-shrink: 0;
-}
-
-.home-const-count {
-  font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--ghost-gray);
-  opacity: 0.45;
 }
 
 .home-const-enter {
@@ -477,11 +428,26 @@ body {
 }
 .home-const-enter:hover { opacity: 1.0; }
 
+.home-const-info-strip {
+  padding: 14px 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.6);
+  border-top: 1px solid var(--cosmic-blue);
+  flex-shrink: 0;
+}
+.home-const-info-left { display: flex; flex-direction: column; gap: 4px; }
+.home-const-info-title { font-family: var(--font-display); font-size: 16px; color: var(--film-white); letter-spacing: 0.04em; line-height: 1.1; }
+.home-const-info-meta { font-size: 11px; color: var(--muted-silver); letter-spacing: 0.08em; }
+.home-const-info-right { display: flex; align-items: center; gap: 12px; }
+.home-const-info-badges { display: flex; gap: 6px; }
+
 /* Tiles */
 .home-const-tile {
   position: absolute;
-  width: 88px;
-  height: 128px;
+  width: 96px;
+  height: 138px;
   border-radius: 5px;
   background-size: cover;
   background-position: center top;
@@ -499,26 +465,14 @@ body {
 }
 
 .home-const-tile-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 4px 5px 5px;
-  background: rgba(0,0,0,0.75);
-  font-size: 7px;
-  font-family: var(--font-display);
-  color: var(--muted-silver);
-  line-height: 1.3;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  border-radius: 0 0 4px 4px;
+  display: none;
 }
 
 /* Anchor tile */
 .home-const-anchor {
   position: absolute;
-  width: 120px;
-  height: 172px;
+  width: 148px;
+  height: 212px;
   border-radius: 7px;
   background-size: cover;
   background-position: center top;
@@ -533,25 +487,7 @@ body {
 .home-const-anchor:hover { transform: scale(1.05); }
 
 .home-const-anchor-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 5px 6px 6px;
-  background: rgba(0,0,0,0.85);
-  font-size: 8px;
-  font-family: var(--font-display);
-  color: var(--accent-gold);
-  opacity: 0.9;
-  line-height: 1.3;
-  text-align: center;
-  border-radius: 0 0 5px 5px;
-}
-
-/* Connection lines canvas */
-.home-const-lines-canvas {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 /* Loading */
@@ -577,6 +513,10 @@ body {
 @keyframes hcr-spin { to { transform: rotate(360deg); } }
 @keyframes hcr-pulse { from { transform: scale(0.8); } to { transform: scale(1.2); } }
 @keyframes homeConstellationFadeIn { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: scale(1); } }
+@keyframes anchorCorona {
+  from { transform: scale(0.92); opacity: 0.7; }
+  to { transform: scale(1.08); opacity: 1.0; }
+}
 
 /* ============================================================
    SECTIONS
