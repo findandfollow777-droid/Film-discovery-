@@ -58,7 +58,7 @@ async function loadHomeConstellation() {
   const canvas = document.getElementById('home-const-canvas');
   if (!canvas) return;
 
-  const cacheKey = 'orbit_home_constellation_v1';
+  const cacheKey = 'orbit_home_nowplaying_v1';
   const ttl = CONSTELLATION_ROTATION_HOURS * 3600000;
   let popular = null;
 
@@ -72,11 +72,11 @@ async function loadHomeConstellation() {
 
   if (!popular) {
     try {
-      const res = await OrbitUtils.tmdbFetch('/movie/popular', { language: 'en-US', page: 1 });
+      const res = await OrbitUtils.tmdbFetch('/movie/now_playing', { language: 'en-US', page: 1 });
       popular = (res.results || []).filter(m => m.poster_path).slice(0, 20);
       sessionStorage.setItem(cacheKey, JSON.stringify({ films: popular, timestamp: Date.now() }));
     } catch (e) {
-      console.warn('[ORBIT Home] Constellation popular fetch failed:', e);
+      console.warn('[ORBIT Home] Constellation now_playing fetch failed:', e);
       return;
     }
   }
@@ -123,8 +123,24 @@ async function loadHomeConstellation() {
 
   waitForSize(canvas, () => renderHomeConstellation(anchorFilm, orbitals, canvas));
 
-  // Popular strip (needs the full popular array)
-  renderPopularStrip(popular, anchorFilm.id);
+  // Fetch detailed info for carousel films
+  const detailCacheTTL = 2 * 3600000;
+  const detailPromises = popular.slice(0, 5).map(f => {
+    const detailCacheKey = 'orbit_home_film_detail_' + f.id;
+    try {
+      const dc = sessionStorage.getItem(detailCacheKey);
+      if (dc) {
+        const dp = JSON.parse(dc);
+        if (Date.now() - dp.timestamp < detailCacheTTL) return Promise.resolve(dp.data);
+      }
+    } catch (e) {}
+    return OrbitUtils.tmdbFetch('/movie/' + f.id, { append_to_response: 'credits', language: 'en-US' }).then(d => {
+      try { sessionStorage.setItem(detailCacheKey, JSON.stringify({ data: d, timestamp: Date.now() })); } catch (e) {}
+      return d;
+    });
+  });
+  const detailedFilms = await Promise.all(detailPromises);
+  initFilmCarousel(detailedFilms);
 }
 
 function renderHomeConstellation(anchor, orbitals, canvas) {
@@ -324,89 +340,395 @@ function hideHomeLoader() {
   if (loader) loader.classList.add('hidden');
 }
 
-function renderPopularStrip(films, activeId) {
-  const strip = document.getElementById('home-popular-strip');
-  if (!strip) return;
-  strip.innerHTML = '';
+/* ============================================================
+   HOME FILM CAROUSEL — Added 2026-03-29
+   6-slide carousel below constellation. Slides 1-5: now_playing
+   films with full detail. Slide 6: instructional panel.
+   ============================================================ */
 
-  const five = films.slice(0, 5);
+let carouselCurrentIndex = 0;
+let carouselFilms = [];
+let hasInteracted = false;
+let hciSelectedFilm = null;
 
-  five.forEach(film => {
-    const tile = document.createElement('div');
-    tile.className = 'home-popular-tile';
-    tile.dataset.filmId = film.id;
+function initFilmCarousel(films) {
+  carouselFilms = films;
+  renderCarouselSlides(films);
+  wireCarouselNavigation();
+  wireCarouselTouch();
+  wireSlide6Search();
+  // Go to rotation anchor slide
+  const rotIdx = getRotationIndex(films.length);
+  goToSlide(rotIdx, false);
+}
 
+function renderCarouselSlides(films) {
+  const track = document.getElementById('home-carousel-track');
+  const instructionSlide = document.getElementById('home-carousel-slide-6');
+  if (!track || !instructionSlide) return;
+
+  const genreMap = {28:'Action',12:'Adventure',16:'Animation',35:'Comedy',80:'Crime',99:'Documentary',18:'Drama',10751:'Family',14:'Fantasy',36:'History',27:'Horror',10402:'Music',9648:'Mystery',10749:'Romance',878:'Sci-Fi',10770:'TV Movie',53:'Thriller',10752:'War',37:'Western'};
+
+  films.forEach((film, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'home-carousel-slide';
+    slide.id = 'home-carousel-slide-' + (i + 1);
+    slide.dataset.slide = String(i + 1);
+
+    // Poster column
+    const posterCol = document.createElement('div');
+    posterCol.className = 'hcs-poster-col';
+    const poster = document.createElement('div');
+    poster.className = 'hcs-poster';
     if (film.poster_path) {
-      tile.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + film.poster_path + ')';
+      poster.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + film.poster_path + ')';
     }
-
-    if (film.id === activeId) {
-      tile.classList.add('active-anchor');
-    }
-
-    // Single click — switch constellation anchor
-    let clickTimer = null;
-    tile.addEventListener('click', () => {
-      if (clickTimer) return;
-      clickTimer = setTimeout(() => {
-        clickTimer = null;
-        if (film.id === activeId) return;
-
-        // Update active glow
-        strip.querySelectorAll('.home-popular-tile').forEach(t => t.classList.remove('active-anchor'));
-        tile.classList.add('active-anchor');
-        activeId = film.id;
-
-        populateInfoStrip(film);
-        showHomeLoader();
-
-        // Update enter link
-        const enterBtn = document.getElementById('home-const-enter');
-        if (enterBtn) {
-          enterBtn.onclick = (e) => {
-            e.preventDefault();
-            localStorage.setItem('anchorMovie', JSON.stringify({
-              id: film.id, title: film.title, poster_path: film.poster_path,
-              release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
-            }));
-            localStorage.removeItem('anchorFromResults');
-            window.location.href = '../games/constellation.html';
-          };
-        }
-
-        // Fetch recs and re-render
-        (async () => {
-          let recs = [];
-          const recsCacheKey = 'orbit_home_const_recs_' + film.id;
-          const ttl = 4 * 3600000;
-          try {
-            const rc = sessionStorage.getItem(recsCacheKey);
-            if (rc) { const p = JSON.parse(rc); if (Date.now() - p.timestamp < ttl) recs = p.films; }
-          } catch (e) {}
-          if (recs.length === 0) {
-            try {
-              const res = await OrbitUtils.tmdbFetch('/movie/' + film.id + '/recommendations', { language: 'en-US', page: 1 });
-              recs = (res.results || []).filter(m => m.poster_path && m.id !== film.id).slice(0, 20);
-              sessionStorage.setItem(recsCacheKey, JSON.stringify({ films: recs, timestamp: Date.now() }));
-            } catch (e) { recs = []; }
-          }
-
-          hideHomeLoader();
-          const canvas = document.getElementById('home-const-canvas');
-          if (!canvas) return;
-          canvas.innerHTML = '';
-          waitForSize(canvas, () => renderHomeConstellation(film, recs, canvas));
-        })();
-      }, 220);
-    });
-
-    // Double click — MovieCube
-    tile.addEventListener('dblclick', () => {
-      if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
+    poster.addEventListener('click', () => {
       if (typeof openMovieCube === 'function') openMovieCube(film.id);
     });
+    posterCol.appendChild(poster);
+    slide.appendChild(posterCol);
 
-    strip.appendChild(tile);
+    // Info column
+    const infoCol = document.createElement('div');
+    infoCol.className = 'hcs-info-col';
+
+    // Title
+    const titleEl = document.createElement('div');
+    titleEl.className = 'hcs-title';
+    titleEl.textContent = film.title || '';
+    infoCol.appendChild(titleEl);
+
+    // Meta row with stat pills
+    const metaRow = document.createElement('div');
+    metaRow.className = 'hcs-meta-row';
+
+    if (film.vote_average) {
+      const ratingPill = document.createElement('span');
+      ratingPill.className = 'hcs-stat hcs-stat--rating';
+      ratingPill.textContent = '\u2605 ' + film.vote_average.toFixed(1);
+      metaRow.appendChild(ratingPill);
+    }
+
+    if (film.runtime) {
+      const rtPill = document.createElement('span');
+      rtPill.className = 'hcs-stat hcs-stat--runtime';
+      rtPill.textContent = film.runtime + ' MIN';
+      metaRow.appendChild(rtPill);
+    }
+
+    const genres = film.genres || [];
+    if (genres.length > 0) {
+      const gPill = document.createElement('span');
+      gPill.className = 'hcs-stat hcs-stat--genre';
+      gPill.textContent = genres[0].name ? genres[0].name.toUpperCase() : '';
+      metaRow.appendChild(gPill);
+    }
+
+    if (film.status === 'Released') {
+      const cPill = document.createElement('span');
+      cPill.className = 'hcs-stat hcs-stat--cinema';
+      cPill.textContent = 'IN CINEMAS';
+      metaRow.appendChild(cPill);
+    }
+
+    if (film.revenue && film.revenue > 0) {
+      const revPill = document.createElement('span');
+      revPill.className = 'hcs-stat hcs-stat--revenue';
+      const revM = (film.revenue / 1000000).toFixed(0);
+      revPill.textContent = '$' + revM + 'M';
+      metaRow.appendChild(revPill);
+    }
+
+    infoCol.appendChild(metaRow);
+
+    // Synopsis
+    if (film.overview) {
+      const syn = document.createElement('div');
+      syn.className = 'hcs-synopsis';
+      syn.textContent = film.overview;
+      infoCol.appendChild(syn);
+    }
+
+    // Cast row
+    const credits = film.credits;
+    if (credits && credits.cast && credits.cast.length > 0) {
+      const castRow = document.createElement('div');
+      castRow.className = 'hcs-cast-row';
+      const castLabel = document.createElement('span');
+      castLabel.className = 'hcs-cast-label';
+      castLabel.textContent = 'CAST';
+      castRow.appendChild(castLabel);
+
+      const topCast = credits.cast.slice(0, 4);
+      topCast.forEach((member, ci) => {
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'hcs-cast-name';
+        nameSpan.textContent = member.name;
+        nameSpan.addEventListener('click', () => {
+          if (typeof openPeopleCube === 'function') openPeopleCube(member.id);
+        });
+        castRow.appendChild(nameSpan);
+        if (ci < topCast.length - 1) {
+          const sep = document.createElement('span');
+          sep.className = 'hcs-cast-separator';
+          sep.textContent = '\u00B7';
+          castRow.appendChild(sep);
+        }
+      });
+      infoCol.appendChild(castRow);
+    }
+
+    slide.appendChild(infoCol);
+    track.insertBefore(slide, instructionSlide);
+  });
+}
+
+function goToSlide(index, fromInteraction) {
+  const track = document.getElementById('home-carousel-track');
+  const dots = document.querySelectorAll('.home-carousel-dot');
+  if (!track) return;
+
+  const totalSlides = 6;
+  if (index < 0) index = totalSlides - 1;
+  if (index >= totalSlides) index = 0;
+
+  carouselCurrentIndex = index;
+  track.style.transform = 'translateX(-' + (index * 100) + '%)';
+
+  // Update dots
+  dots.forEach((dot, di) => {
+    dot.classList.toggle('active', di === index);
+  });
+
+  // Update poster glow
+  const allPosters = document.querySelectorAll('.hcs-poster');
+  allPosters.forEach((p, pi) => {
+    p.classList.toggle('active-anchor-poster', pi === index);
+  });
+
+  if (fromInteraction) hasInteracted = true;
+
+  // Trigger constellation change for film slides (0-4)
+  if (index < 5 && carouselFilms[index]) {
+    triggerConstellationChange(carouselFilms[index]);
+  }
+}
+
+function wireCarouselNavigation() {
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const dots = document.querySelectorAll('.home-carousel-dot');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goToSlide(carouselCurrentIndex - 1, true);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goToSlide(carouselCurrentIndex + 1, true);
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.index);
+      if (!isNaN(idx)) goToSlide(idx, true);
+    });
+  });
+}
+
+function wireCarouselTouch() {
+  const wrap = document.getElementById('home-carousel-wrap');
+  if (!wrap) return;
+
+  let startX = 0;
+  let startY = 0;
+  let dragging = false;
+
+  wrap.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dragging = true;
+  }, { passive: true });
+
+  wrap.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+  }, { passive: true });
+
+  wrap.addEventListener('touchend', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const dx = endX - startX;
+    const dy = endY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) {
+        goToSlide(carouselCurrentIndex + 1, true);
+      } else {
+        goToSlide(carouselCurrentIndex - 1, true);
+      }
+    }
+  }, { passive: true });
+}
+
+function triggerConstellationChange(film) {
+  populateInfoStrip(film);
+  showHomeLoader();
+
+  // Update enter link
+  const enterBtn = document.getElementById('home-const-enter');
+  if (enterBtn) {
+    enterBtn.onclick = (e) => {
+      e.preventDefault();
+      localStorage.setItem('anchorMovie', JSON.stringify({
+        id: film.id, title: film.title, poster_path: film.poster_path,
+        release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
+      }));
+      localStorage.removeItem('anchorFromResults');
+      window.location.href = '../games/constellation.html';
+    };
+  }
+
+  // Fetch recs and re-render constellation
+  (async () => {
+    let recs = [];
+    const recsCacheKey = 'orbit_home_const_recs_' + film.id;
+    const ttl = 4 * 3600000;
+    try {
+      const rc = sessionStorage.getItem(recsCacheKey);
+      if (rc) { const p = JSON.parse(rc); if (Date.now() - p.timestamp < ttl) recs = p.films; }
+    } catch (e) {}
+    if (recs.length === 0) {
+      try {
+        const res = await OrbitUtils.tmdbFetch('/movie/' + film.id + '/recommendations', { language: 'en-US', page: 1 });
+        recs = (res.results || []).filter(m => m.poster_path && m.id !== film.id).slice(0, 20);
+        sessionStorage.setItem(recsCacheKey, JSON.stringify({ films: recs, timestamp: Date.now() }));
+      } catch (e) { recs = []; }
+    }
+
+    hideHomeLoader();
+    const canvas = document.getElementById('home-const-canvas');
+    if (!canvas) return;
+    canvas.innerHTML = '';
+    waitForSize(canvas, () => renderHomeConstellation(film, recs, canvas));
+  })();
+}
+
+function wireSlide6Search() {
+  const input = document.getElementById('hci-search-input');
+  const btn = document.getElementById('hci-anchor-btn');
+  const hintEl = document.querySelector('.hci-anchor-hint');
+  const searchWrap = document.getElementById('hci-search-wrap');
+  if (!input || !btn) return;
+
+  let debounceTimer = null;
+  let fetchController = null;
+  let dropdown = null;
+
+  function ensureDropdown() {
+    if (!dropdown) {
+      dropdown = document.createElement('div');
+      dropdown.className = 'home-search-dropdown';
+      dropdown.style.cssText = 'position:absolute;top:100%;left:0;right:0;z-index:200;';
+      searchWrap.appendChild(dropdown);
+    }
+    return dropdown;
+  }
+
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const q = input.value.trim();
+    if (q.length < 2) { closeHciDropdown(); return; }
+    debounceTimer = setTimeout(() => fetchHciResults(q), 300);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const dd = ensureDropdown();
+      const first = dd.querySelector('.home-search-result');
+      if (first) first.click();
+    }
+    if (e.key === 'Escape') closeHciDropdown();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#hci-search-wrap')) closeHciDropdown();
+  });
+
+  async function fetchHciResults(query) {
+    if (fetchController) fetchController.abort();
+    fetchController = new AbortController();
+    try {
+      const movieRes = await fetch('https://api.themoviedb.org/3/search/movie?api_key=' + TMDB_API_KEY + '&query=' + encodeURIComponent(query), { signal: fetchController.signal }).then(r => r.json());
+      const movies = (movieRes.results || []).slice(0, 6);
+      renderHciDropdown(movies);
+    } catch (err) {
+      if (err.name !== 'AbortError') console.warn('[ORBIT HCI Search]', err);
+    } finally {
+      fetchController = null;
+    }
+  }
+
+  function renderHciDropdown(movies) {
+    const dd = ensureDropdown();
+    if (movies.length === 0) {
+      dd.innerHTML = '<div class="home-search-no-results">No films found</div>';
+      dd.classList.add('open');
+      return;
+    }
+
+    dd.innerHTML = movies.map(m => {
+      const year = (m.release_date || '').split('-')[0];
+      const rating = m.vote_average ? ' \u00B7 \u2605' + m.vote_average.toFixed(1) : '';
+      const thumb = m.poster_path ? TMDB_IMG + 'w92' + m.poster_path : '';
+      return '<div class="home-search-result" data-id="' + m.id + '">' +
+        '<div class="home-search-thumb" style="' + (thumb ? 'background-image:url(' + thumb + ')' : '') + '"></div>' +
+        '<div class="home-search-result-info">' +
+          '<div class="home-search-result-title">' + (m.title || '') + '</div>' +
+          '<div class="home-search-result-meta">' + year + rating + '</div>' +
+        '</div>' +
+        '<span class="home-search-badge" style="color:var(--accent-cyan);border-color:rgba(0,217,255,0.3)">FILM</span>' +
+      '</div>';
+    }).join('');
+
+    dd.classList.add('open');
+
+    dd.querySelectorAll('.home-search-result').forEach(row => {
+      row.addEventListener('click', () => {
+        const movie = movies.find(m => String(m.id) === row.dataset.id);
+        if (!movie) return;
+        hciSelectedFilm = movie;
+        input.value = movie.title || '';
+        closeHciDropdown();
+        btn.disabled = false;
+        if (hintEl) hintEl.classList.add('hidden');
+      });
+    });
+  }
+
+  function closeHciDropdown() {
+    if (dropdown) {
+      dropdown.classList.remove('open');
+      dropdown.innerHTML = '';
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    if (!hciSelectedFilm || btn.disabled) return;
+    localStorage.setItem('anchorMovie', JSON.stringify({
+      id: hciSelectedFilm.id,
+      title: hciSelectedFilm.title,
+      poster_path: hciSelectedFilm.poster_path,
+      release_date: hciSelectedFilm.release_date,
+      vote_average: hciSelectedFilm.vote_average,
+      overview: hciSelectedFilm.overview
+    }));
+    localStorage.removeItem('anchorFromResults');
+    window.location.href = '../games/constellation.html';
   });
 }
 
