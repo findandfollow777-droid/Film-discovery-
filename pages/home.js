@@ -13,109 +13,224 @@
 
 const TMDB_IMG = OrbitUtils.TMDB_IMG;
 
-/* ----------------------------------------------------------
-   SECTION 1 — FEATURED ANCHOR FILMS — Daily rotation
-   Curated selection of cinematically significant films.
-   Rotates daily using day-of-year index.
-   ---------------------------------------------------------- */
+/* ============================================================
+   HOME CONSTELLATION PREVIEW — Added 2026-03-29
+   Shows a mini constellation of a popular film rotating every
+   4 hours. Clicking navigates to constellation.html.
+   API calls: 2 on load (popular + recommendations)
+   Cache: sessionStorage, 4-hour TTL
+   ============================================================ */
 
-const ANCHOR_FILM_IDS = [
-  238, 278, 240, 424, 389, 129, 19404, 637, 372058, 680,
-  13, 155, 11216, 245891, 497, 769, 598, 27205, 157336, 289,
-  311, 539, 77338, 274, 510, 197, 429, 73, 207, 78,
-  105, 122, 120, 8587, 585, 862, 348, 218, 11, 601,
-  953, 324552, 490132, 530385, 496243
-/* ----------------------------------------------------------
-   SECTION 2 — loadAnchorFilm()
-   Fetches today's featured film from TMDB and populates the
-   hero anchor panel. 1 API call, cached in sessionStorage.
-   ---------------------------------------------------------- */
+const CONSTELLATION_ROTATION_HOURS = 4;
 
-async function loadAnchorFilm() {
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-  const movieId = ANCHOR_FILM_IDS[dayOfYear % ANCHOR_FILM_IDS.length];
+function getRotationIndex(len) {
+  return Math.floor(Date.now() / (CONSTELLATION_ROTATION_HOURS * 3600000)) % len;
+}
 
-  const posterEl = document.getElementById('anchor-poster');
-  const cacheKey = 'orbit_home_anchor_' + movieId;
-  let movie = null;
+async function loadHomeConstellation() {
+  const canvas = document.getElementById('home-const-canvas');
+  if (!canvas) return;
+
+  const cacheKey = 'orbit_home_constellation_v1';
+  const ttl = CONSTELLATION_ROTATION_HOURS * 3600000;
+  let popular = null;
 
   try {
     const cached = sessionStorage.getItem(cacheKey);
-    if (cached) movie = JSON.parse(cached);
+    if (cached) {
+      const p = JSON.parse(cached);
+      if (Date.now() - p.timestamp < ttl) popular = p.films;
+    }
   } catch (e) {}
 
-  if (!movie) {
+  if (!popular) {
     try {
-      movie = await OrbitUtils.tmdbFetch('/movie/' + movieId, {
-        language: 'en-US',
-        append_to_response: 'credits'
-      });
-      sessionStorage.setItem(cacheKey, JSON.stringify(movie));
+      const res = await OrbitUtils.tmdbFetch('/movie/popular', { language: 'en-US', page: 1 });
+      popular = (res.results || []).filter(m => m.poster_path).slice(0, 20);
+      sessionStorage.setItem(cacheKey, JSON.stringify({ films: popular, timestamp: Date.now() }));
     } catch (e) {
-      console.warn('[ORBIT Home] Failed to load anchor film:', e);
+      console.warn('[ORBIT Home] Constellation popular fetch failed:', e);
       return;
     }
   }
 
-  if (!movie) return;
+  const idx = getRotationIndex(popular.length);
+  const anchorFilm = popular[idx];
 
-  const director = movie.credits?.crew?.find(p => p.job === 'Director');
-  const year = movie.release_date ? movie.release_date.substring(0, 4) : '';
-  const genre = movie.genres?.[0]?.name || '';
-  const posterUrl = movie.poster_path ? TMDB_IMG + 'w500' + movie.poster_path : '';
+  const nameEl = document.getElementById('home-const-film-name');
+  if (nameEl) nameEl.textContent = anchorFilm.title;
 
-  if (posterEl && posterUrl) {
-    posterEl.classList.remove('loading');
-    posterEl.style.backgroundImage = `url(${posterUrl})`;
-    posterEl.dataset.movieId = movieId;
-  }
-
-  const titleEl = document.getElementById('anchor-title');
-  if (titleEl) titleEl.textContent = movie.title || '\u2014';
-
-  const directorEl = document.getElementById('anchor-director');
-  if (directorEl) {
-    const parts = [director ? director.name : '', year].filter(Boolean);
-    directorEl.textContent = parts.join('  \u00B7  ');
-  }
-
-  const taglineEl = document.getElementById('anchor-tagline');
-  if (taglineEl && movie.tagline) {
-    taglineEl.textContent = '\u201C' + movie.tagline + '\u201D';
-  }
-
-  const metaEl = document.getElementById('anchor-year-genre');
-  if (metaEl) metaEl.textContent = [year, genre].filter(Boolean).join('  \u00B7  ');
-
-  // Badges
-  const badgesEl = document.getElementById('anchor-badges');
-  if (badgesEl) {
-    badgesEl.innerHTML = '';
-    if (movie.vote_average && movie.vote_count > 1000) {
-      const b = document.createElement('span');
-      b.className = 'anchor-badge';
-      b.textContent = '\u2605  ' + movie.vote_average.toFixed(1);
-      b.style.cssText = 'color:var(--accent-gold);border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.07)';
-      badgesEl.appendChild(b);
+  // Fetch recommendations
+  let orbitals = [];
+  const recsCacheKey = 'orbit_home_const_recs_' + anchorFilm.id;
+  try {
+    const rc = sessionStorage.getItem(recsCacheKey);
+    if (rc) {
+      const p = JSON.parse(rc);
+      if (Date.now() - p.timestamp < ttl) orbitals = p.films;
     }
-    if (genre) {
-      const b = document.createElement('span');
-      b.className = 'anchor-badge';
-      b.textContent = genre.toUpperCase();
-      b.style.cssText = 'color:var(--accent-cyan);border-color:rgba(0,217,255,0.25);background:rgba(0,217,255,0.06)';
-      badgesEl.appendChild(b);
+  } catch (e) {}
+
+  if (orbitals.length === 0) {
+    try {
+      const res = await OrbitUtils.tmdbFetch('/movie/' + anchorFilm.id + '/recommendations', { language: 'en-US', page: 1 });
+      orbitals = (res.results || []).filter(m => m.poster_path && m.id !== anchorFilm.id).slice(0, 16);
+      sessionStorage.setItem(recsCacheKey, JSON.stringify({ films: orbitals, timestamp: Date.now() }));
+    } catch (e) {
+      orbitals = [];
     }
   }
 
-  // Wire clicks to MovieCube
-  const ctaBtn = document.getElementById('anchor-cta');
-  const openCube = () => {
-    if (typeof openMovieCube === 'function') openMovieCube(movieId);
-    else window.location.href = 'results.html?movie=' + movieId;
+  const setAnchorAndNavigate = (film) => {
+    localStorage.setItem('anchorMovie', JSON.stringify({
+      id: film.id, title: film.title, poster_path: film.poster_path,
+      release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
+    }));
+    localStorage.removeItem('anchorFromResults');
+    window.location.href = '../games/constellation.html';
   };
-  if (posterEl) posterEl.addEventListener('click', openCube);
-  if (ctaBtn) ctaBtn.addEventListener('click', openCube);
+
+  const enterBtn = document.getElementById('home-const-enter');
+  if (enterBtn) {
+    enterBtn.addEventListener('click', (e) => { e.preventDefault(); setAnchorAndNavigate(anchorFilm); });
+  }
+
+  renderHomeConstellation(anchorFilm, orbitals, canvas, setAnchorAndNavigate);
+}
+
+function renderHomeConstellation(anchor, orbitals, canvas, onFilmClick) {
+  const loading = document.getElementById('home-const-loading');
+  if (loading) loading.classList.add('hidden');
+
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  const cx = W / 2;
+  const cy = H / 2;
+
+  // Lines canvas
+  const linesEl = document.createElement('canvas');
+  linesEl.className = 'home-const-lines-canvas';
+  linesEl.width = W;
+  linesEl.height = H;
+  canvas.appendChild(linesEl);
+  const ctx = linesEl.getContext('2d');
+
+  const anchorW = 100, anchorH = 144;
+  const tileW = 72, tileH = 104;
+
+  // Anchor tile
+  const anchorEl = document.createElement('div');
+  anchorEl.className = 'home-const-anchor';
+  anchorEl.style.left = (cx - anchorW / 2) + 'px';
+  anchorEl.style.top = (cy - anchorH / 2) + 'px';
+  if (anchor.poster_path) {
+    anchorEl.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + anchor.poster_path + ')';
+  }
+  const anchorLabel = document.createElement('div');
+  anchorLabel.className = 'home-const-anchor-label';
+  anchorLabel.textContent = anchor.title;
+  anchorEl.appendChild(anchorLabel);
+  anchorEl.addEventListener('click', () => onFilmClick(anchor));
+  canvas.appendChild(anchorEl);
+
+  // Position orbital tiles
+  const count = Math.min(orbitals.length, 16);
+  const positions = [];
+
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+    const variance = 0.55 + Math.random() * 0.45;
+    const rx = W * 0.38 * variance;
+    const ry = H * 0.32 * variance;
+    let x = cx + Math.cos(angle) * rx - tileW / 2;
+    let y = cy + Math.sin(angle) * ry - tileH / 2;
+    x = Math.max(8, Math.min(W - tileW - 8, x));
+    y = Math.max(8, Math.min(H - tileH - 8, y));
+    positions.push({ x, y, film: orbitals[i] });
+  }
+
+  // Separation pass
+  const pad = 8;
+  for (let iter = 0; iter < 150; iter++) {
+    let any = false;
+    for (let a = 0; a < positions.length; a++) {
+      // Tile vs tile
+      for (let b = a + 1; b < positions.length; b++) {
+        const pa = positions[a], pb = positions[b];
+        const oX = (tileW + pad) - Math.abs((pa.x + tileW / 2) - (pb.x + tileW / 2));
+        const oY = (tileH + pad) - Math.abs((pa.y + tileH / 2) - (pb.y + tileH / 2));
+        if (oX > 0 && oY > 0) {
+          any = true;
+          const sx = Math.sign((pa.x + tileW / 2) - (pb.x + tileW / 2)) || 1;
+          const sy = Math.sign((pa.y + tileH / 2) - (pb.y + tileH / 2)) || 1;
+          const px = Math.min(6, oX / 2) * sx;
+          const py = Math.min(6, oY / 2) * sy;
+          pa.x += px; pa.y += py;
+          pb.x -= px; pb.y -= py;
+        }
+      }
+      // Tile vs anchor
+      const p = positions[a];
+      const aoX = (tileW / 2 + anchorW / 2 + pad * 2) - Math.abs((p.x + tileW / 2) - cx);
+      const aoY = (tileH / 2 + anchorH / 2 + pad * 2) - Math.abs((p.y + tileH / 2) - cy);
+      if (aoX > 0 && aoY > 0) {
+        any = true;
+        p.x += 5 * (Math.sign((p.x + tileW / 2) - cx) || 1);
+        p.y += 5 * (Math.sign((p.y + tileH / 2) - cy) || 1);
+      }
+      positions[a].x = Math.max(8, Math.min(W - tileW - 8, positions[a].x));
+      positions[a].y = Math.max(8, Math.min(H - tileH - 8, positions[a].y));
+    }
+    if (!any) break;
+  }
+
+  // Draw connection lines
+  positions.forEach(pos => {
+    const tcx = pos.x + tileW / 2;
+    const tcy = pos.y + tileH / 2;
+    const dist = Math.hypot(tcx - cx, tcy - cy);
+    const maxDist = Math.hypot(W / 2, H / 2);
+    const prox = 1 - (dist / maxDist);
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(tcx, tcy);
+    ctx.strokeStyle = 'rgba(30,58,74,' + (0.3 + prox * 0.4) + ')';
+    ctx.lineWidth = 0.7;
+    ctx.stroke();
+
+    const dotT = 0.55 + prox * 0.25;
+    const dx = cx + (tcx - cx) * dotT;
+    const dy = cy + (tcy - cy) * dotT;
+    ctx.beginPath();
+    ctx.arc(dx, dy, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = prox > 0.6 ? '#ff6b35' : prox > 0.35 ? 'rgba(0,217,255,0.7)' : 'rgba(100,116,139,0.5)';
+    ctx.fill();
+  });
+
+  // Render tiles
+  positions.forEach((pos, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'home-const-tile';
+    tile.style.left = pos.x + 'px';
+    tile.style.top = pos.y + 'px';
+    tile.style.zIndex = '2';
+    tile.style.opacity = '0';
+    tile.style.animation = 'homeConstellationFadeIn 0.4s ease forwards';
+    tile.style.animationDelay = (i * 35) + 'ms';
+    if (pos.film.poster_path) {
+      tile.style.backgroundImage = 'url(' + TMDB_IMG + 'w185' + pos.film.poster_path + ')';
+    }
+    const label = document.createElement('div');
+    label.className = 'home-const-tile-label';
+    label.textContent = pos.film.title;
+    tile.appendChild(label);
+    tile.addEventListener('click', () => onFilmClick(pos.film));
+    canvas.appendChild(tile);
+  });
+
+  const countEl = document.getElementById('home-const-count');
+  if (countEl) countEl.textContent = count + ' FILMS IN ORBIT';
 }
 
 /* ----------------------------------------------------------
@@ -386,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initPeopleCube === 'function') initPeopleCube();
   }
 
-  loadAnchorFilm();
+  loadHomeConstellation();
   loadTrendingFilms();
   loadTrendingPeople();
   loadMosaicPosters();
