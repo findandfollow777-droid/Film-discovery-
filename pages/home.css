@@ -166,7 +166,7 @@ body {
 .hero-left {
   width: 42%;
   padding: 64px 52px;
-  border-right: 1px solid var(--cosmic-blue);
+  border-right: none;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -505,6 +505,34 @@ body {
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(to right, transparent 0%, transparent 88%, var(--space-black) 100%);
+}
+
+/* Stars melding into mosaic edge */
+.hero-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 120px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(1px 1px at 85% 8%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 72% 14%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.2px 1.2px at 90% 20%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 78% 32%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.2px 1.2px at 95% 38%, rgba(0,217,255,0.3), transparent),
+    radial-gradient(1px 1px at 65% 44%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 88% 50%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 55% 56%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1.2px 1.2px at 80% 62%, rgba(255,215,0,0.25), transparent),
+    radial-gradient(1px 1px at 92% 68%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 70% 74%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 85% 80%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1.2px 1.2px at 75% 86%, rgba(0,217,255,0.2), transparent),
+    radial-gradient(1px 1px at 90% 92%, rgba(255,255,255,0.3), transparent);
 }
 
 /* ---------- Home Constellation ---------- */
