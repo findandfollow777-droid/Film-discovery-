@@ -1,24 +1,33 @@
 tmdb_id,title,year,festival,category,won
-0,Anora,2025,Oscar,Best Picture,false
-0,The Brutalist,2025,Oscar,Best Picture,false
-0,A Complete Unknown,2025,Oscar,Best Picture,false
-0,Conclave,2025,Oscar,Best Picture,false
-0,Dune: Part Two,2025,Oscar,Best Picture,false
-0,Emilia Pérez,2025,Oscar,Best Picture,false
-0,I'm Still Here,2025,Oscar,Best Picture,false
-0,Nickel Boys,2025,Oscar,Best Picture,false
-0,The Substance,2025,Oscar,Best Picture,false
-0,Wicked,2025,Oscar,Best Picture,false
-0,Anora,2025,Oscar,Best Director,false
-0,The Brutalist,2025,Oscar,Best Director,false
-0,A Complete Unknown,2025,Oscar,Best Director,false
-0,Emilia Pérez,2025,Oscar,Best Director,false
-0,The Substance,2025,Oscar,Best Director,false
-0,The Brutalist,2025,Oscar,Best Actor,false
-0,A Complete Unknown,2025,Oscar,Best Actor,false
-0,Sing Sing,2025,Oscar,Best Actor,false
-0,Conclave,2025,Oscar,Best Actor,false
-0,The Apprentice,2025,Oscar,Best Actor,false
+1064213,Anora,2025,Oscar,Best Picture,true
+549509,The Brutalist,2025,Oscar,Best Picture,false
+661539,A Complete Unknown,2025,Oscar,Best Picture,false
+974576,Conclave,2025,Oscar,Best Picture,false
+693134,Dune: Part Two,2025,Oscar,Best Picture,false
+974950,Emilia Pérez,2025,Oscar,Best Picture,false
+1000837,I'm Still Here,2025,Oscar,Best Picture,false
+1028196,Nickel Boys,2025,Oscar,Best Picture,false
+933260,The Substance,2025,Oscar,Best Picture,false
+402431,Wicked,2025,Oscar,Best Picture,false
+1064213,Anora,2025,Oscar,Best Director,true
+549509,The Brutalist,2025,Oscar,Best Director,false
+661539,A Complete Unknown,2025,Oscar,Best Director,false
+974950,Emilia Pérez,2025,Oscar,Best Director,false
+933260,The Substance,2025,Oscar,Best Director,false
+549509,The Brutalist,2025,Oscar,Best Actor,true
+661539,A Complete Unknown,2025,Oscar,Best Actor,false
+1155828,Sing Sing,2025,Oscar,Best Actor,false
+974576,Conclave,2025,Oscar,Best Actor,false
+1182047,The Apprentice,2025,Oscar,Best Actor,false
+1064213,Anora,2025,Oscar,Best Actress,true
+402431,Wicked,2025,Oscar,Best Actress,false
+974950,Emilia Pérez,2025,Oscar,Best Actress,false
+933260,The Substance,2025,Oscar,Best Actress,false
+1000837,I'm Still Here,2025,Oscar,Best Actress,false
+1054867,One Battle After Another,2026,Oscar,Best Picture,true
+1054867,One Battle After Another,2026,Oscar,Best Director,true
+1233413,Sinners,2026,Oscar,Best Actor,true
+858024,Hamnet,2026,Oscar,Best Actress,true
 872585,Oppenheimer,2024,Oscar,Best Picture,true
 346698,Barbie,2024,Oscar,Best Picture,false
 1056380,American Fiction,2024,Oscar,Best Picture,false
@@ -1725,7 +1734,6 @@ tmdb_id,title,year,festival,category,won
 0,Wild Diamond,2024,Cannes,Palme d'Or,false
 0,April,2024,Venice,Golden Lion,false
 0,Babygirl,2024,Venice,Golden Lion,false
-0,Battleground,2024,Venice,Golden Lion,false
 0,The Brutalist,2024,Venice,Golden Lion,false
 0,Diva Futura,2024,Venice,Golden Lion,false
 0,Harvest,2024,Venice,Golden Lion,false
@@ -2000,27 +2008,8 @@ tmdb_id,title,year,festival,category,won
 0,Mystic River,2003,Oscar,Best Picture,false
 0,Seabiscuit,2003,Oscar,Best Picture,false
 0,Anora,2024,Cannes,Palme d'Or,true
-0,All We Imagine as Light,2024,Cannes,Palme d'Or,false
-0,The Apprentice,2024,Cannes,Palme d'Or,false
 0,Beating Hearts,2024,Cannes,Palme d'Or,false
-0,Bird,2024,Cannes,Palme d'Or,false
-0,Caught by the Tides,2024,Cannes,Palme d'Or,false
-0,Emilia Pérez,2024,Cannes,Palme d'Or,false
-0,The Girl with the Needle,2024,Cannes,Palme d'Or,false
-0,Grand Tour,2024,Cannes,Palme d'Or,false
-0,Kinds of Kindness,2024,Cannes,Palme d'Or,false
-0,Limonov: The Ballad,2024,Cannes,Palme d'Or,false
-0,Marcello Mio,2024,Cannes,Palme d'Or,false
-0,Megalopolis,2024,Cannes,Palme d'Or,false
 0,The Most Precious of Cargoes,2024,Cannes,Palme d'Or,false
-0,Motel Destino,2024,Cannes,Palme d'Or,false
-0,Oh Canada,2024,Cannes,Palme d'Or,false
-0,Parthenope,2024,Cannes,Palme d'Or,false
-0,The Seed of the Sacred Fig,2024,Cannes,Palme d'Or,false
-0,The Shrouds,2024,Cannes,Palme d'Or,false
-0,The Substance,2024,Cannes,Palme d'Or,false
-0,Three Kilometres to the End of the World,2024,Cannes,Palme d'Or,false
-0,Wild Diamond,2024,Cannes,Palme d'Or,false
 0,Anatomy of a Fall,2023,Cannes,Palme d'Or,true
 0,About Dry Grasses,2023,Cannes,Palme d'Or,false
 0,Asteroid City,2023,Cannes,Palme d'Or,false
@@ -2350,94 +2339,48 @@ tmdb_id,title,year,festival,category,won
 0,Robert De Niro,1990,Oscar,Best Actor,false
 0,Gerard Depardieu,1990,Oscar,Best Actor,false
 0,Richard Harris,1990,Oscar,Best Actor,false
-0,Avatar,2010,BAFTA,Best Film,false
-0,An Education,2010,BAFTA,Best Film,false
-0,Precious,2010,BAFTA,Best Film,false
-0,Up in the Air,2010,BAFTA,Best Film,false
 0,Avatar,2010,Golden Globe,Best Drama,false
-0,The Hurt Locker,2010,Golden Globe,Best Drama,false
-0,Inglourious Basterds,2010,Golden Globe,Best Drama,false
-0,Precious,2010,Golden Globe,Best Drama,false
-0,Up in the Air,2010,Golden Globe,Best Drama,false
-0,The Curious Case of Benjamin Button,2009,BAFTA,Best Film,false
-0,Frost/Nixon,2009,BAFTA,Best Film,false
-0,Milk,2009,BAFTA,Best Film,false
-0,The Reader,2009,BAFTA,Best Film,false
 0,The Curious Case of Benjamin Button,2009,Golden Globe,Best Drama,false
 0,Frost/Nixon,2009,Golden Globe,Best Drama,false
 0,The Reader,2009,Golden Globe,Best Drama,false
 0,Revolutionary Road,2009,Golden Globe,Best Drama,false
-0,American Gangster,2008,BAFTA,Best Film,false
-0,The Lives of Others,2008,BAFTA,Best Film,false
-0,No Country for Old Men,2008,BAFTA,Best Film,false
-0,There Will Be Blood,2008,BAFTA,Best Film,false
 0,American Gangster,2008,Golden Globe,Best Drama,false
 0,Eastern Promises,2008,Golden Globe,Best Drama,false
 0,The Great Debaters,2008,Golden Globe,Best Drama,false
 0,Michael Clayton,2008,Golden Globe,Best Drama,false
 0,No Country for Old Men,2008,Golden Globe,Best Drama,false
 0,There Will Be Blood,2008,Golden Globe,Best Drama,false
-0,Babel,2007,BAFTA,Best Film,false
-0,The Departed,2007,BAFTA,Best Film,false
-0,The Last King of Scotland,2007,BAFTA,Best Film,false
-0,Little Miss Sunshine,2007,BAFTA,Best Film,false
 0,Bobby,2007,Golden Globe,Best Drama,false
 0,The Departed,2007,Golden Globe,Best Drama,false
 0,Little Children,2007,Golden Globe,Best Drama,false
 0,The Queen,2007,Golden Globe,Best Drama,false
-0,Capote,2006,BAFTA,Best Film,false
-0,The Constant Gardener,2006,BAFTA,Best Film,false
-0,Crash,2006,BAFTA,Best Film,false
-0,Good Night and Good Luck,2006,BAFTA,Best Film,false
 0,The Constant Gardener,2006,Golden Globe,Best Drama,false
 0,Good Night and Good Luck,2006,Golden Globe,Best Drama,false
 0,A History of Violence,2006,Golden Globe,Best Drama,false
 0,Match Point,2006,Golden Globe,Best Drama,false
-0,Eternal Sunshine of the Spotless Mind,2005,BAFTA,Best Film,false
-0,Finding Neverland,2005,BAFTA,Best Film,false
-0,The Motorcycle Diaries,2005,BAFTA,Best Film,false
-0,Vera Drake,2005,BAFTA,Best Film,false
 0,Closer,2005,Golden Globe,Best Drama,false
 0,Finding Neverland,2005,Golden Globe,Best Drama,false
 0,Hotel Rwanda,2005,Golden Globe,Best Drama,false
 0,Kinsey,2005,Golden Globe,Best Drama,false
 0,Million Dollar Baby,2005,Golden Globe,Best Drama,false
-0,Big Fish,2004,BAFTA,Best Film,false
-0,Cold Mountain,2004,BAFTA,Best Film,false
-0,Lost in Translation,2004,BAFTA,Best Film,false
 0,Master and Commander,2004,BAFTA,Best Film,false
 0,Cold Mountain,2004,Golden Globe,Best Drama,false
 0,Master and Commander,2004,Golden Globe,Best Drama,false
 0,Mystic River,2004,Golden Globe,Best Drama,false
 0,Seabiscuit,2004,Golden Globe,Best Drama,false
-0,Chicago,2003,BAFTA,Best Film,false
-0,Gangs of New York,2003,BAFTA,Best Film,false
-0,The Hours,2003,BAFTA,Best Film,false
-0,The Two Towers,2003,BAFTA,Best Film,false
 0,About Schmidt,2003,Golden Globe,Best Drama,false
 0,Gangs of New York,2003,Golden Globe,Best Drama,false
 0,The Two Towers,2003,Golden Globe,Best Drama,false
 0,The Pianist,2003,Golden Globe,Best Drama,false
 0,Amelie,2002,BAFTA,Best Film,false
-0,A Beautiful Mind,2002,BAFTA,Best Film,false
-0,Moulin Rouge!,2002,BAFTA,Best Film,false
-0,Shrek,2002,BAFTA,Best Film,false
 0,In the Bedroom,2002,Golden Globe,Best Drama,false
 0,The Fellowship of the Ring,2002,Golden Globe,Best Drama,false
 0,The Man Who Wasn't There,2002,Golden Globe,Best Drama,false
 0,Mulholland Drive,2002,Golden Globe,Best Drama,false
-0,Almost Famous,2001,BAFTA,Best Film,false
-0,Billy Elliot,2001,BAFTA,Best Film,false
-0,Crouching Tiger Hidden Dragon,2001,BAFTA,Best Film,false
-0,Erin Brockovich,2001,BAFTA,Best Film,false
 0,Billy Elliot,2001,Golden Globe,Best Drama,false
 0,Erin Brockovich,2001,Golden Globe,Best Drama,false
 0,Sunshine,2001,Golden Globe,Best Drama,false
 0,Traffic,2001,Golden Globe,Best Drama,false
-0,Being John Malkovich,2000,BAFTA,Best Film,false
-0,The End of the Affair,2000,BAFTA,Best Film,false
-0,The Sixth Sense,2000,BAFTA,Best Film,false
-0,The Talented Mr. Ripley,2000,BAFTA,Best Film,false
 0,The End of the Affair,2000,Golden Globe,Best Drama,false
 0,The Hurricane,2000,Golden Globe,Best Drama,false
 0,The Insider,2000,Golden Globe,Best Drama,false
@@ -3293,7 +3236,6 @@ tmdb_id,title,year,festival,category,won
 0,Sidney Lumet,1982,Oscar,Best Director,false
 0,Wolfgang Petersen,1982,Oscar,Best Director,false
 0,Sydney Pollack,1982,Oscar,Best Director,false
-0,Steven Spielberg,1982,Oscar,Best Director,false
 0,Atlantic City,1981,Oscar,Best Picture,false
 0,On Golden Pond,1981,Oscar,Best Picture,false
 0,Raiders of the Lost Ark,1981,Oscar,Best Picture,false
@@ -3339,7 +3281,6 @@ tmdb_id,title,year,festival,category,won
 0,Network,1976,Oscar,Best Picture,false
 0,Taxi Driver,1976,Oscar,Best Picture,false
 0,Ingmar Bergman,1976,Oscar,Best Director,false
-0,Sidney Lumet,1976,Oscar,Best Director,false
 0,Alan J. Pakula,1976,Oscar,Best Director,false
 0,Lina Wertmuller,1976,Oscar,Best Director,false
 0,Barry Lyndon,1975,Oscar,Best Picture,false
@@ -3410,7 +3351,6 @@ tmdb_id,title,year,festival,category,won
 0,Doctor Dolittle,1967,Oscar,Best Picture,false
 0,The Graduate,1967,Oscar,Best Picture,false
 0,Guess Who's Coming to Dinner,1967,Oscar,Best Picture,false
-0,Richard Brooks,1967,Oscar,Best Director,false
 0,Norman Jewison,1967,Oscar,Best Director,false
 0,Stanley Kramer,1967,Oscar,Best Director,false
 0,Arthur Penn,1967,Oscar,Best Director,false
@@ -3469,7 +3409,6 @@ tmdb_id,title,year,festival,category,won
 0,Jack Cardiff,1960,Oscar,Best Director,false
 0,Jules Dassin,1960,Oscar,Best Director,false
 0,Alfred Hitchcock,1960,Oscar,Best Director,false
-0,Fred Zinnemann,1960,Oscar,Best Director,false
 0,Anatomy of a Murder,1959,Oscar,Best Picture,false
 0,The Diary of Anne Frank,1959,Oscar,Best Picture,false
 0,The Nun's Story,1959,Oscar,Best Picture,false
@@ -3484,7 +3423,6 @@ tmdb_id,title,year,festival,category,won
 0,Separate Tables,1958,Oscar,Best Picture,false
 0,Richard Brooks,1958,Oscar,Best Director,false
 0,Stanley Kramer,1958,Oscar,Best Director,false
-0,Mark Robson,1958,Oscar,Best Director,false
 0,Robert Wise,1958,Oscar,Best Director,false
 0,12 Angry Men,1957,Oscar,Best Picture,false
 0,Peyton Place,1957,Oscar,Best Picture,false
@@ -3778,7 +3716,6 @@ tmdb_id,title,year,festival,category,won
 0,Tom Hanks,1988,Oscar,Best Actor,false
 0,Edward James Olmos,1988,Oscar,Best Actor,false
 0,Max von Sydow,1988,Oscar,Best Actor,false
-0,William Hurt,1987,Oscar,Best Actor,false
 0,Marcello Mastroianni,1987,Oscar,Best Actor,false
 0,Jack Nicholson,1987,Oscar,Best Actor,false
 0,Robin Williams,1987,Oscar,Best Actor,false
@@ -3791,7 +3728,6 @@ tmdb_id,title,year,festival,category,won
 0,Jack Nicholson,1985,Oscar,Best Actor,false
 0,Jon Voight,1985,Oscar,Best Actor,false
 0,Jeff Bridges,1984,Oscar,Best Actor,false
-0,Albert Finney,1984,Oscar,Best Actor,false
 0,Tom Hulce,1984,Oscar,Best Actor,false
 0,Sam Waterston,1984,Oscar,Best Actor,false
 0,Michael Caine,1983,Oscar,Best Actor,false
@@ -3800,7 +3736,6 @@ tmdb_id,title,year,festival,category,won
 0,Albert Finney,1983,Oscar,Best Actor,false
 0,Dustin Hoffman,1982,Oscar,Best Actor,false
 0,Jack Lemmon,1982,Oscar,Best Actor,false
-0,Paul Newman,1982,Oscar,Best Actor,false
 0,Peter O'Toole,1982,Oscar,Best Actor,false
 0,Warren Beatty,1981,Oscar,Best Actor,false
 0,Burt Lancaster,1981,Oscar,Best Actor,false
@@ -3808,7 +3743,6 @@ tmdb_id,title,year,festival,category,won
 0,Paul Newman,1981,Oscar,Best Actor,false
 0,Robert Duvall,1980,Oscar,Best Actor,false
 0,John Hurt,1980,Oscar,Best Actor,false
-0,Jack Lemmon,1980,Oscar,Best Actor,false
 0,Peter O'Toole,1980,Oscar,Best Actor,false
 0,Jack Lemmon,1979,Oscar,Best Actor,false
 0,Al Pacino,1979,Oscar,Best Actor,false
@@ -3827,13 +3761,10 @@ tmdb_id,title,year,festival,category,won
 0,William Holden,1976,Oscar,Best Actor,false
 0,Sylvester Stallone,1976,Oscar,Best Actor,false
 0,Walter Matthau,1975,Oscar,Best Actor,false
-0,Al Pacino,1975,Oscar,Best Actor,false
 0,Maximilian Schell,1975,Oscar,Best Actor,false
 0,James Whitmore,1975,Oscar,Best Actor,false
 0,Albert Finney,1974,Oscar,Best Actor,false
 0,Dustin Hoffman,1974,Oscar,Best Actor,false
-0,Jack Nicholson,1974,Oscar,Best Actor,false
-0,Al Pacino,1974,Oscar,Best Actor,false
 0,Marlon Brando,1973,Oscar,Best Actor,false
 0,Jack Nicholson,1973,Oscar,Best Actor,false
 0,Al Pacino,1973,Oscar,Best Actor,false
@@ -3852,7 +3783,6 @@ tmdb_id,title,year,festival,category,won
 0,Ryan O'Neal,1970,Oscar,Best Actor,false
 0,Richard Burton,1969,Oscar,Best Actor,false
 0,Dustin Hoffman,1969,Oscar,Best Actor,false
-0,Peter O'Toole,1969,Oscar,Best Actor,false
 0,Jon Voight,1969,Oscar,Best Actor,false
 0,Alan Arkin,1968,Oscar,Best Actor,false
 0,Alan Bates,1968,Oscar,Best Actor,false
@@ -3863,10 +3793,8 @@ tmdb_id,title,year,festival,category,won
 0,Paul Newman,1967,Oscar,Best Actor,false
 0,Spencer Tracy,1967,Oscar,Best Actor,false
 0,Alan Arkin,1966,Oscar,Best Actor,false
-0,Richard Burton,1966,Oscar,Best Actor,false
 0,Michael Caine,1966,Oscar,Best Actor,false
 0,Steve McQueen,1966,Oscar,Best Actor,false
-0,Richard Burton,1965,Oscar,Best Actor,false
 0,Laurence Olivier,1965,Oscar,Best Actor,false
 0,Rod Steiger,1965,Oscar,Best Actor,false
 0,Oskar Werner,1965,Oscar,Best Actor,false
@@ -3884,10 +3812,8 @@ tmdb_id,title,year,festival,category,won
 0,Peter O'Toole,1962,Oscar,Best Actor,false
 0,Charles Boyer,1961,Oscar,Best Actor,false
 0,Paul Newman,1961,Oscar,Best Actor,false
-0,Spencer Tracy,1961,Oscar,Best Actor,false
 0,Stuart Whitman,1961,Oscar,Best Actor,false
 0,Trevor Howard,1960,Oscar,Best Actor,false
-0,Jack Lemmon,1960,Oscar,Best Actor,false
 0,Laurence Olivier,1960,Oscar,Best Actor,false
 0,Spencer Tracy,1960,Oscar,Best Actor,false
 0,Laurence Harvey,1959,Oscar,Best Actor,false
@@ -3902,7 +3828,6 @@ tmdb_id,title,year,festival,category,won
 0,Anthony Franciosa,1957,Oscar,Best Actor,false
 0,Charles Laughton,1957,Oscar,Best Actor,false
 0,Anthony Quinn,1957,Oscar,Best Actor,false
-0,James Dean,1956,Oscar,Best Actor,false
 0,Kirk Douglas,1956,Oscar,Best Actor,false
 0,Rock Hudson,1956,Oscar,Best Actor,false
 0,Laurence Olivier,1956,Oscar,Best Actor,false
@@ -3914,11 +3839,9 @@ tmdb_id,title,year,festival,category,won
 0,Bing Crosby,1954,Oscar,Best Actor,false
 0,James Mason,1954,Oscar,Best Actor,false
 0,Dan O'Herlihy,1954,Oscar,Best Actor,false
-0,Marlon Brando,1953,Oscar,Best Actor,false
 0,Richard Burton,1953,Oscar,Best Actor,false
 0,Montgomery Clift,1953,Oscar,Best Actor,false
 0,Burt Lancaster,1953,Oscar,Best Actor,false
-0,Marlon Brando,1952,Oscar,Best Actor,false
 0,Kirk Douglas,1952,Oscar,Best Actor,false
 0,Jose Ferrer,1952,Oscar,Best Actor,false
 0,Alec Guinness,1952,Oscar,Best Actor,false
@@ -4572,7 +4495,6 @@ tmdb_id,title,year,festival,category,won
 0,Even Cowgirls Get the Blues,1993,Venice,Golden Lion,false
 0,A Dangerous Game,1993,Venice,Golden Lion,false
 0,Shadowlands,1993,Venice,Golden Lion,false
-0,Glengarry Glen Ross,1992,Venice,Golden Lion,false
 0,Hammon Hammon,1992,Venice,Golden Lion,false
 0,In the Soup,1992,Venice,Golden Lion,false
 0,Olivier Olivier,1992,Venice,Golden Lion,false
@@ -5261,7 +5183,6 @@ tmdb_id,title,year,festival,category,won
 0,Sean Penn,2001,Oscar,Best Actor,false
 0,Will Smith,2001,Oscar,Best Actor,false
 0,Tom Wilkinson,2001,Oscar,Best Actor,false
-0,Shoplifters,2018,Cannes,Palme d'Or,true
 0,3 Faces,2018,Cannes,Palme d'Or,false
 0,Asako I & II,2018,Cannes,Palme d'Or,false
 0,Ash Is Purest White,2018,Cannes,Palme d'Or,false
@@ -5283,7 +5204,6 @@ tmdb_id,title,year,festival,category,won
 0,Under the Silver Lake,2018,Cannes,Palme d'Or,false
 0,The Wild Pear Tree,2018,Cannes,Palme d'Or,false
 0,Yomeddine,2018,Cannes,Palme d'Or,false
-0,The Square,2017,Cannes,Palme d'Or,true
 0,120 Beats Per Minute,2017,Cannes,Palme d'Or,false
 0,The Beguiled,2017,Cannes,Palme d'Or,false
 0,The Day After,2017,Cannes,Palme d'Or,false
@@ -5301,7 +5221,6 @@ tmdb_id,title,year,festival,category,won
 0,Rodin,2017,Cannes,Palme d'Or,false
 0,Wonderstruck,2017,Cannes,Palme d'Or,false
 0,You Were Never Really Here,2017,Cannes,Palme d'Or,false
-0,I Daniel Blake,2016,Cannes,Palme d'Or,true
 0,American Honey,2016,Cannes,Palme d'Or,false
 0,Aquarius,2016,Cannes,Palme d'Or,false
 0,Elle,2016,Cannes,Palme d'Or,false
@@ -5322,7 +5241,6 @@ tmdb_id,title,year,festival,category,won
 0,Staying Vertical,2016,Cannes,Palme d'Or,false
 0,Toni Erdmann,2016,Cannes,Palme d'Or,false
 0,The Unknown Girl,2016,Cannes,Palme d'Or,false
-0,Dheepan,2015,Cannes,Palme d'Or,true
 0,The Assassin,2015,Cannes,Palme d'Or,false
 0,Carol,2015,Cannes,Palme d'Or,false
 0,Chronic,2015,Cannes,Palme d'Or,false
@@ -5342,7 +5260,6 @@ tmdb_id,title,year,festival,category,won
 0,Tale of Tales,2015,Cannes,Palme d'Or,false
 0,Valley of Love,2015,Cannes,Palme d'Or,false
 0,Youth,2015,Cannes,Palme d'Or,false
-0,Winter Sleep,2014,Cannes,Palme d'Or,true
 0,Bird People,2014,Cannes,Palme d'Or,false
 0,The Captive,2014,Cannes,Palme d'Or,false
 0,Clouds of Sils Maria,2014,Cannes,Palme d'Or,false
@@ -5361,7 +5278,6 @@ tmdb_id,title,year,festival,category,won
 0,Two Days One Night,2014,Cannes,Palme d'Or,false
 0,Wild Tales,2014,Cannes,Palme d'Or,false
 0,The Wonders,2014,Cannes,Palme d'Or,false
-0,Blue Is the Warmest Colour,2013,Cannes,Palme d'Or,true
 0,Behind the Candelabra,2013,Cannes,Palme d'Or,false
 0,Borgman,2013,Cannes,Palme d'Or,false
 0,The Great Beauty,2013,Cannes,Palme d'Or,false
@@ -5379,7 +5295,6 @@ tmdb_id,title,year,festival,category,won
 0,A Touch of Sin,2013,Cannes,Palme d'Or,false
 0,Venus in Fur,2013,Cannes,Palme d'Or,false
 0,Young & Beautiful,2013,Cannes,Palme d'Or,false
-0,Amour,2012,Cannes,Palme d'Or,true
 0,After the Battle,2012,Cannes,Palme d'Or,false
 0,The Angels' Share,2012,Cannes,Palme d'Or,false
 0,Beyond the Hills,2012,Cannes,Palme d'Or,false
@@ -5401,7 +5316,6 @@ tmdb_id,title,year,festival,category,won
 0,Rust and Bone,2012,Cannes,Palme d'Or,false
 0,The Taste of Money,2012,Cannes,Palme d'Or,false
 0,You Ain't Seen Nothin' Yet,2012,Cannes,Palme d'Or,false
-0,The Tree of Life,2011,Cannes,Palme d'Or,true
 0,The Artist,2011,Cannes,Palme d'Or,false
 0,Drive,2011,Cannes,Palme d'Or,false
 0,Footnote,2011,Cannes,Palme d'Or,false
@@ -5420,7 +5334,6 @@ tmdb_id,title,year,festival,category,won
 0,The Source,2011,Cannes,Palme d'Or,false
 0,This Must Be the Place,2011,Cannes,Palme d'Or,false
 0,We Need to Talk About Kevin,2011,Cannes,Palme d'Or,false
-0,Uncle Boonmee Who Can Recall His Past Lives,2010,Cannes,Palme d'Or,true
 0,Another Year,2010,Cannes,Palme d'Or,false
 0,Biutiful,2010,Cannes,Palme d'Or,false
 0,Certified Copy,2010,Cannes,Palme d'Or,false
@@ -5439,7 +5352,6 @@ tmdb_id,title,year,festival,category,won
 0,Route Irish,2010,Cannes,Palme d'Or,false
 0,A Screaming Man,2010,Cannes,Palme d'Or,false
 0,Tender Son: The Frankenstein Project,2010,Cannes,Palme d'Or,false
-0,The White Ribbon,2009,Cannes,Palme d'Or,true
 0,Antichrist,2009,Cannes,Palme d'Or,false
 0,Bright Star,2009,Cannes,Palme d'Or,false
 0,Broken Embraces,2009,Cannes,Palme d'Or,false
@@ -5459,7 +5371,6 @@ tmdb_id,title,year,festival,category,won
 0,Vengeance,2009,Cannes,Palme d'Or,false
 0,Vincere,2009,Cannes,Palme d'Or,false
 0,Wild Grass,2009,Cannes,Palme d'Or,false
-0,The Class,2008,Cannes,Palme d'Or,true
 0,24 City,2008,Cannes,Palme d'Or,false
 0,Adoration,2008,Cannes,Palme d'Or,false
 0,Blindness,2008,Cannes,Palme d'Or,false
@@ -5480,7 +5391,6 @@ tmdb_id,title,year,festival,category,won
 0,Two Lovers,2008,Cannes,Palme d'Or,false
 0,Waltz with Bashir,2008,Cannes,Palme d'Or,false
 0,The Headless Woman,2008,Cannes,Palme d'Or,false
-0,4 Months 3 Weeks and 2 Days,2007,Cannes,Palme d'Or,true
 0,Alexandra,2007,Cannes,Palme d'Or,false
 0,The Banishment,2007,Cannes,Palme d'Or,false
 0,Breath,2007,Cannes,Palme d'Or,false
@@ -5502,7 +5412,6 @@ tmdb_id,title,year,festival,category,won
 0,Tehilim,2007,Cannes,Palme d'Or,false
 0,We Own the Night,2007,Cannes,Palme d'Or,false
 0,Zodiac,2007,Cannes,Palme d'Or,false
-0,The Wind That Shakes the Barley,2006,Cannes,Palme d'Or,true
 0,Babel,2006,Cannes,Palme d'Or,false
 0,The Caiman,2006,Cannes,Palme d'Or,false
 0,Charlie Says,2006,Cannes,Palme d'Or,false
@@ -5522,7 +5431,6 @@ tmdb_id,title,year,festival,category,won
 0,Summer Palace,2006,Cannes,Palme d'Or,false
 0,Volver,2006,Cannes,Palme d'Or,false
 0,When I Was a Singer,2006,Cannes,Palme d'Or,false
-0,L'Enfant,2005,Cannes,Palme d'Or,true
 0,Baging,2005,Cannes,Palme d'Or,false
 0,Battle in Heaven,2005,Cannes,Palme d'Or,false
 0,Broken Flowers,2005,Cannes,Palme d'Or,false
@@ -5542,7 +5450,6 @@ tmdb_id,title,year,festival,category,won
 0,Tale of Cinema,2005,Cannes,Palme d'Or,false
 0,The Three Burials of Melquiades Estrada,2005,Cannes,Palme d'Or,false
 0,Where the Truth Lies,2005,Cannes,Palme d'Or,false
-0,Fahrenheit 9/11,2004,Cannes,Palme d'Or,true
 0,2046,2004,Cannes,Palme d'Or,false
 0,Clean,2004,Cannes,Palme d'Or,false
 0,The Consequences of Love,2004,Cannes,Palme d'Or,false
@@ -5559,7 +5466,6 @@ tmdb_id,title,year,festival,category,won
 0,Shrek 2,2004,Cannes,Palme d'Or,false
 0,Tropical Malady,2004,Cannes,Palme d'Or,false
 0,Woman Is the Future of Man,2004,Cannes,Palme d'Or,false
-0,Elephant,2003,Cannes,Palme d'Or,true
 0,At Five in the Afternoon,2003,Cannes,Palme d'Or,false
 0,The Barbarian Invasions,2003,Cannes,Palme d'Or,false
 0,Bright Future,2003,Cannes,Palme d'Or,false
@@ -5963,114 +5869,89 @@ tmdb_id,title,year,festival,category,won
 0,A Place in the Sun,1951,Golden Globe,Best Drama,true
 0,An American in Paris,1951,Golden Globe,Best Comedy/Musical,true
 0,Sunset Boulevard,1950,Golden Globe,Best Drama,true
-0,sex lies and videotape,1989,Cannes,Palme d'Or,true
 0,Do the Right Thing,1989,Cannes,Palme d'Or,false
 0,Cinema Paradiso,1989,Cannes,Palme d'Or,false
 0,Mystery Train,1989,Cannes,Palme d'Or,false
 0,Sweetie,1989,Cannes,Palme d'Or,false
 0,Time of the Gypsies,1989,Cannes,Palme d'Or,false
-0,Pelle the Conqueror,1988,Cannes,Palme d'Or,true
 0,Bird,1988,Cannes,Palme d'Or,false
 0,A World Apart,1988,Cannes,Palme d'Or,false
 0,Drowning by Numbers,1988,Cannes,Palme d'Or,false
 0,Short Film About Killing,1988,Cannes,Palme d'Or,false
-0,Under the Sun of Satan,1987,Cannes,Palme d'Or,true
 0,Wings of Desire,1987,Cannes,Palme d'Or,false
 0,The Glass Menagerie,1987,Cannes,Palme d'Or,false
 0,Barfly,1987,Cannes,Palme d'Or,false
 0,Shinran: Path to Purity,1987,Cannes,Palme d'Or,false
-0,The Mission,1986,Cannes,Palme d'Or,true
 0,The Sacrifice,1986,Cannes,Palme d'Or,false
 0,Down by Law,1986,Cannes,Palme d'Or,false
 0,After Hours,1986,Cannes,Palme d'Or,false
 0,Mona Lisa,1986,Cannes,Palme d'Or,false
 0,Runaway Train,1986,Cannes,Palme d'Or,false
-0,When Father Was Away on Business,1985,Cannes,Palme d'Or,true
 0,Birdy,1985,Cannes,Palme d'Or,false
 0,Pale Rider,1985,Cannes,Palme d'Or,false
 0,Kiss of the Spider Woman,1985,Cannes,Palme d'Or,false
 0,Mask,1985,Cannes,Palme d'Or,false
 0,The Purple Rose of Cairo,1985,Cannes,Palme d'Or,false
-0,Paris Texas,1984,Cannes,Palme d'Or,true
 0,Under the Volcano,1984,Cannes,Palme d'Or,false
 0,Voyage to Cythera,1984,Cannes,Palme d'Or,false
 0,Where the Green Ants Dream,1984,Cannes,Palme d'Or,false
 0,The Bounty,1984,Cannes,Palme d'Or,false
-0,The Ballad of Narayama,1983,Cannes,Palme d'Or,true
 0,The King of Comedy,1983,Cannes,Palme d'Or,false
 0,L'Argent,1983,Cannes,Palme d'Or,false
 0,Merry Christmas Mr. Lawrence,1983,Cannes,Palme d'Or,false
 0,Monty Python's The Meaning of Life,1983,Cannes,Palme d'Or,false
 0,Nostalghia,1983,Cannes,Palme d'Or,false
 0,Tender Mercies,1983,Cannes,Palme d'Or,false
-0,Missing,1982,Cannes,Palme d'Or,true
-0,Yol,1982,Cannes,Palme d'Or,true
 0,Fitzcarraldo,1982,Cannes,Palme d'Or,false
 0,Hammett,1982,Cannes,Palme d'Or,false
 0,Shoot the Moon,1982,Cannes,Palme d'Or,false
-0,Man of Iron,1981,Cannes,Palme d'Or,true
 0,Chariots of Fire,1981,Cannes,Palme d'Or,false
 0,Excalibur,1981,Cannes,Palme d'Or,false
 0,Heaven's Gate,1981,Cannes,Palme d'Or,false
 0,Possession,1981,Cannes,Palme d'Or,false
 0,Thief,1981,Cannes,Palme d'Or,false
-0,All That Jazz,1980,Cannes,Palme d'Or,true
-0,Kagemusha,1980,Cannes,Palme d'Or,true
 0,Being There,1980,Cannes,Palme d'Or,false
 0,The Big Red One,1980,Cannes,Palme d'Or,false
 0,Breaker Morant,1980,Cannes,Palme d'Or,false
 0,The Long Riders,1980,Cannes,Palme d'Or,false
-0,Apocalypse Now,1979,Cannes,Palme d'Or,true
-0,The Tin Drum,1979,Cannes,Palme d'Or,true
 0,The China Syndrome,1979,Cannes,Palme d'Or,false
 0,Days of Heaven,1979,Cannes,Palme d'Or,false
 0,Hair,1979,Cannes,Palme d'Or,false
 0,Norma Rae,1979,Cannes,Palme d'Or,false
 0,Wise Blood,1979,Cannes,Palme d'Or,false
 0,Woyzeck,1979,Cannes,Palme d'Or,false
-0,The Tree of Wooden Clogs,1978,Cannes,Palme d'Or,true
 0,Coming Home,1978,Cannes,Palme d'Or,false
 0,An Unmarried Woman,1978,Cannes,Palme d'Or,false
 0,Midnight Express,1978,Cannes,Palme d'Or,false
 0,Pretty Baby,1978,Cannes,Palme d'Or,false
 0,The Shout,1978,Cannes,Palme d'Or,false
-0,Padre Padrone,1977,Cannes,Palme d'Or,true
 0,The American Friend,1977,Cannes,Palme d'Or,false
 0,The Duellists,1977,Cannes,Palme d'Or,false
 0,3 Women,1977,Cannes,Palme d'Or,false
 0,Bound for Glory,1977,Cannes,Palme d'Or,false
 0,Car Wash,1977,Cannes,Palme d'Or,false
-0,Taxi Driver,1976,Cannes,Palme d'Or,true
 0,The Tenant,1976,Cannes,Palme d'Or,false
 0,Bugsy Malone,1976,Cannes,Palme d'Or,false
 0,Kings of the Road,1976,Cannes,Palme d'Or,false
 0,Next Stop Greenwich Village,1976,Cannes,Palme d'Or,false
-0,Chronicle of the Years of Fire,1975,Cannes,Palme d'Or,true
 0,Alice Doesn't Live Here Anymore,1975,Cannes,Palme d'Or,false
 0,The Enigma of Kaspar Hauser,1975,Cannes,Palme d'Or,false
 0,Lenny,1975,Cannes,Palme d'Or,false
 0,The Passenger,1975,Cannes,Palme d'Or,false
-0,The Conversation,1974,Cannes,Palme d'Or,true
 0,The Sugarland Express,1974,Cannes,Palme d'Or,false
 0,Arabian Nights,1974,Cannes,Palme d'Or,false
 0,The Last Detail,1974,Cannes,Palme d'Or,false
 0,Thieves Like Us,1974,Cannes,Palme d'Or,false
-0,Scarecrow,1973,Cannes,Palme d'Or,true
-0,The Hireling,1973,Cannes,Palme d'Or,true
 0,Fantastic Planet,1973,Cannes,Palme d'Or,false
 0,Godspell,1973,Cannes,Palme d'Or,false
 0,The Mother and the Whore,1973,Cannes,Palme d'Or,false
-0,The Working Class Goes to Heaven,1972,Cannes,Palme d'Or,true
-0,The Mattei Affair,1972,Cannes,Palme d'Or,true
 0,Solaris,1972,Cannes,Palme d'Or,false
 0,Jeremiah Johnson,1972,Cannes,Palme d'Or,false
 0,Slaughterhouse-Five,1972,Cannes,Palme d'Or,false
-0,The Go-Between,1971,Cannes,Palme d'Or,true
 0,Death in Venice,1971,Cannes,Palme d'Or,false
 0,Johnny Got His Gun,1971,Cannes,Palme d'Or,false
 0,Taking Off,1971,Cannes,Palme d'Or,false
 0,Walkabout,1971,Cannes,Palme d'Or,false
-0,MASH,1970,Cannes,Palme d'Or,true
 0,The Strawberry Statement,1970,Cannes,Palme d'Or,false
 0,Tell Me That You Love Me Junie Moon,1970,Cannes,Palme d'Or,false
 0,Woodstock,1970,Cannes,Palme d'Or,false
@@ -9887,3 +9768,22 @@ tmdb_id,title,year,festival,category,won
 0,Marlene Dietrich,1957,Golden Globe,Best Actress (Drama),false,Witness for the Prosecution
 0,Deborah Kerr,1957,Golden Globe,Best Actress (Drama),false,Heaven Knows, Mr. Allison
 0,Anna Magnani,1957,Golden Globe,Best Actress (Drama),false,Wild Is the Wind
+1228682,Dreams (Sex Love),2025,Berlin,Golden Bear,true
+1172265,The Blue Trail,2025,Berlin,Silver Bear (Grand Jury),true
+1421153,Living the Land,2025,Berlin,Silver Bear (Director),true
+1456349,It Was Just an Accident,2025,Cannes,Palme d'Or,true
+1124566,Sentimental Value,2025,Cannes,Grand Prix,true
+1220564,The Secret Agent,2025,Cannes,Best Director,true
+1221061,Sound of Falling,2025,Cannes,Jury Prize,true
+1151272,Sirat,2025,Cannes,Jury Prize,true
+1159206,Father Mother Sister Brother,2025,Venice,Golden Lion,true
+1480382,The Voice of Hind Rajab,2025,Venice,Silver Lion (Grand Jury),true
+760329,The Smashing Machine,2025,Venice,Silver Lion (Director),true
+858024,Hamnet,2026,Golden Globe,Best Drama,true
+1054867,One Battle After Another,2026,Golden Globe,Best Comedy/Musical,true
+0,Paul Thomas Anderson,2026,Golden Globe,Best Director,true
+0,Jessie Buckley,2026,Golden Globe,Best Actress (Drama),true
+1054867,One Battle After Another,2026,BAFTA,Best Film,true
+0,Paul Thomas Anderson,2026,BAFTA,Best Director,true
+0,Robert Aramayo,2026,BAFTA,Best Actor,true
+0,Jessie Buckley,2026,BAFTA,Best Actress,true
