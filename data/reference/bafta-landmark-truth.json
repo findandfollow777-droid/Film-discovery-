@@ -186,30 +186,30 @@
           "winner_film": "Oppenheimer",
           "winner_recipient": "Christopher Nolan",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024 (parity rule applied; 6 nominees)"
+          "source": "BAFTA press release 18 Feb 2024 (parity rule applied; 6 nominees per Wikipedia)"
         },
         "bafta.best_leading_actor": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Cillian Murphy",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "BAFTA press release 18 Feb 2024"
         },
         "bafta.best_leading_actress": {
           "winner_film": "Poor Things",
           "winner_recipient": "Emma Stone",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "BAFTA press release 18 Feb 2024"
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Robert Downey Jr.",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "BAFTA press release 18 Feb 2024"
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The Holdovers",
           "winner_recipient": "Da'Vine Joy Randolph",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "BAFTA press release 18 Feb 2024"
         },
         "bafta.best_film_not_in_english": {
@@ -244,6 +244,91 @@
           "winner_recipient": "Mia McKenna-Bruce",
           "expected_nomination_count": 5,
           "source": "BAFTA press release 18 Feb 2024 / NPR"
+        }
+      }
+    },
+    "76": {
+      "ceremony_year": 2023,
+      "honours_year": 2022,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "All Quiet on the Western Front",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.best_director": {
+          "winner_film": "All Quiet on the Western Front",
+          "winner_recipient": "Edward Berger",
+          "expected_nomination_count": 7,
+          "source": "Wikipedia / parity rule (7 nominees per Wikipedia 76th BAFTA)"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Elvis",
+          "winner_recipient": "Austin Butler",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Tár",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "The Banshees of Inisherin",
+          "expected_nomination_count": 10,
+          "source": "Wikipedia 76th BAFTA"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Aftersun",
+          "winner_recipient": "Charlotte Wells",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 76th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Emma Mackey",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 76th BAFTA"
+        }
+      }
+    },
+    "75": {
+      "ceremony_year": 2022,
+      "honours_year": 2021,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Power of the Dog",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Power of the Dog",
+          "winner_recipient": "Jane Campion",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / parity rule"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "King Richard",
+          "winner_recipient": "Will Smith",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "After Love",
+          "winner_recipient": "Joanna Scanlan",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / multiple"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "The Harder They Fall",
+          "winner_recipient": "Jeymes Samuel",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 75th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Lashana Lynch",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 75th BAFTA"
         }
       }
     }

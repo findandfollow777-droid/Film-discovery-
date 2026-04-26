@@ -134,10 +134,19 @@
     },
     "bafta.outstanding_british_film": {
       "typical_nominations": 10,
-      "tolerance": 2,
+      "tolerance": 5,
       "first_year": 1948,
       "last_year": null,
-      "notes": "Large nomination slate; 8-12 nominees typical"
+      "notes": "BAFTA expanded the Outstanding British Film slate to 10 nominees from ceremony 74 (2021) onwards. Earlier ceremonies had 5-6 nominees. Tolerance widened to 5 as interim fix to cover both eras. Future enhancement: the era_overrides array below encodes the proper era-specific bounds; the wrapper does not yet read it.",
+      "era_overrides": [
+        {
+          "from_year": 2000,
+          "to_year": 2020,
+          "typical_nominations": 6,
+          "tolerance": 1,
+          "reason": "Pre-expansion era (5-6 nominees). The 73rd BAFTAs (2020) had 6; older ceremonies had 5 or 6. The expansion to 10 took effect at the 74th (2021)."
+        }
+      ]
     },
     "bafta.outstanding_debut": {
       "typical_nominations": 5,
