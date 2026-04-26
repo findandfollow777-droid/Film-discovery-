@@ -1,0 +1,359 @@
+{
+  "date": "2026-04-19",
+  "preserved_rows": 3155,
+  "bucket_a": {
+    "total_rows": 12519,
+    "proposed_drops": 6721,
+    "proposed_keeps": 5798,
+    "breakdown": [
+      {
+        "festival": "BAFTA",
+        "category": "Best Actor",
+        "count": 1658
+      },
+      {
+        "festival": "Cannes",
+        "category": "Palme d'Or",
+        "count": 1402
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Actress",
+        "count": 1176
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Picture",
+        "count": 1096
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Director",
+        "count": 1077
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Drama",
+        "count": 754
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Actress",
+        "count": 746
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Film",
+        "count": 745
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Director",
+        "count": 663
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Comedy/Musical",
+        "count": 646
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Actor",
+        "count": 550
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Director",
+        "count": 546
+      },
+      {
+        "festival": "Venice",
+        "category": "Golden Lion",
+        "count": 508
+      },
+      {
+        "festival": "Berlin",
+        "category": "Golden Bear",
+        "count": 482
+      },
+      {
+        "festival": "Cannes",
+        "category": "Jury Prize",
+        "count": 144
+      },
+      {
+        "festival": "Berlin",
+        "category": "Silver Bear (Grand Jury)",
+        "count": 128
+      },
+      {
+        "festival": "Cannes",
+        "category": "Grand Prix",
+        "count": 120
+      },
+      {
+        "festival": "Venice",
+        "category": "Silver Lion (Grand Jury)",
+        "count": 62
+      },
+      {
+        "festival": "Venice",
+        "category": "Best Director",
+        "count": 12
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Comedy/Musical)",
+        "count": 2
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Drama)",
+        "count": 2
+      }
+    ]
+  },
+  "bucket_b": {
+    "total_rows": 2862,
+    "proposed_drops": 1431,
+    "proposed_keeps": 1431,
+    "all_review_required": true,
+    "breakdown": [
+      {
+        "festival": "Oscar",
+        "category": "Best Actor",
+        "count": 628
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Director",
+        "count": 624
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Actress",
+        "count": 506
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Picture",
+        "count": 400
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Actor",
+        "count": 150
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Director",
+        "count": 94
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Director",
+        "count": 94
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Actress",
+        "count": 84
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actress (Comedy/Musical)",
+        "count": 56
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actress (Drama)",
+        "count": 54
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Comedy/Musical)",
+        "count": 48
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Drama)",
+        "count": 46
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Drama",
+        "count": 30
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Film",
+        "count": 26
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Comedy/Musical",
+        "count": 22
+      }
+    ]
+  },
+  "bucket_c": {
+    "total_rows": 6370,
+    "all_review_required": true,
+    "breakdown": [
+      {
+        "festival": "BAFTA",
+        "category": "Best Actor",
+        "count": 1220
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Actress",
+        "count": 1056
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Director",
+        "count": 1054
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Director",
+        "count": 687
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Actor",
+        "count": 365
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Director",
+        "count": 365
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Actress",
+        "count": 361
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Drama)",
+        "count": 276
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actor (Comedy/Musical)",
+        "count": 265
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actress (Drama)",
+        "count": 264
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actress (Comedy/Musical)",
+        "count": 258
+      },
+      {
+        "festival": "Cannes",
+        "category": "Best Director",
+        "count": 68
+      },
+      {
+        "festival": "Berlin",
+        "category": "Silver Bear (Director)",
+        "count": 66
+      },
+      {
+        "festival": "Venice",
+        "category": "Silver Lion (Director)",
+        "count": 28
+      },
+      {
+        "festival": "Venice",
+        "category": "Best Director",
+        "count": 12
+      },
+      {
+        "festival": "Cannes",
+        "category": "Grand Prix",
+        "count": 5
+      },
+      {
+        "festival": "Oscar",
+        "category": "Best Picture",
+        "count": 4
+      },
+      {
+        "festival": "Cannes",
+        "category": "Jury Prize",
+        "count": 4
+      },
+      {
+        "festival": "Cannes",
+        "category": "Palme d'Or",
+        "count": 4
+      },
+      {
+        "festival": "Berlin",
+        "category": "Golden Bear",
+        "count": 2
+      },
+      {
+        "festival": "BAFTA",
+        "category": "Best Film",
+        "count": 2
+      },
+      {
+        "festival": "Venice",
+        "category": "Golden Lion",
+        "count": 2
+      },
+      {
+        "festival": "Berlin",
+        "category": "Silver Bear (Grand Jury)",
+        "count": 1
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Drama",
+        "count": 1
+      }
+    ]
+  },
+  "bucket_d": {
+    "total_entries": 5,
+    "breakdown": [
+      {
+        "festival": "BAFTA",
+        "category": "Best Film",
+        "count": 1
+      },
+      {
+        "festival": "Cannes",
+        "category": "Jury Prize",
+        "count": 1
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Actress (Drama)",
+        "count": 1
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Comedy/Musical",
+        "count": 1
+      },
+      {
+        "festival": "Golden Globe",
+        "category": "Best Drama",
+        "count": 1
+      }
+    ]
+  },
+  "totals": {
+    "total_proposed_drops": 8152,
+    "total_review_required": 9232
+  }
+}

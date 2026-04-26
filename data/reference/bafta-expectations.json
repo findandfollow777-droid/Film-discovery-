@@ -1,0 +1,177 @@
+{
+  "schema_version": "v1",
+  "festival": "bafta",
+  "generated_at": "2026-04-26T01:00:00+00:00",
+  "generated_from": "scripts/scrape-bafta-categories.json",
+  "expectations": {
+    "bafta.best_film": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1948,
+      "last_year": null,
+      "notes": "Producers credited; team rows with multi-name recipients"
+    },
+    "bafta.best_director": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 1948,
+      "last_year": null,
+      "notes": "BAFTA parity rule allows 6 or 7 nominees in some years"
+    },
+    "bafta.best_leading_actor": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1952,
+      "last_year": null,
+      "notes": "BAFTA often has 6 nominees for acting categories"
+    },
+    "bafta.best_leading_actress": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1952,
+      "last_year": null,
+      "notes": "BAFTA often has 6 nominees for acting categories"
+    },
+    "bafta.best_supporting_actor": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1969,
+      "last_year": null,
+      "notes": "BAFTA often has 6 nominees for acting categories"
+    },
+    "bafta.best_supporting_actress": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1969,
+      "last_year": null,
+      "notes": "BAFTA often has 6 nominees for acting categories"
+    },
+    "bafta.best_original_screenplay": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1984,
+      "last_year": null
+    },
+    "bafta.best_adapted_screenplay": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1984,
+      "last_year": null
+    },
+    "bafta.best_animated_film": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 2006,
+      "last_year": null,
+      "notes": "Sometimes 3-4 nominees in lean years"
+    },
+    "bafta.best_documentary": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 2011,
+      "last_year": null
+    },
+    "bafta.best_film_not_in_english": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1982,
+      "last_year": null
+    },
+    "bafta.best_casting": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 2020,
+      "last_year": null
+    },
+    "bafta.best_cinematography": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1963,
+      "last_year": null
+    },
+    "bafta.best_costume_design": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1964,
+      "last_year": null
+    },
+    "bafta.best_editing": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1967,
+      "last_year": null,
+      "notes": "Sometimes editing teams credited; co_recipient split possible"
+    },
+    "bafta.best_makeup_and_hair": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1982,
+      "last_year": null
+    },
+    "bafta.best_original_score": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1968,
+      "last_year": null
+    },
+    "bafta.best_production_design": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1964,
+      "last_year": null
+    },
+    "bafta.best_sound": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1969,
+      "last_year": null
+    },
+    "bafta.best_special_visual_effects": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1982,
+      "last_year": null
+    },
+    "bafta.outstanding_british_film": {
+      "typical_nominations": 10,
+      "tolerance": 2,
+      "first_year": 1948,
+      "last_year": null,
+      "notes": "Large nomination slate; 8-12 nominees typical"
+    },
+    "bafta.outstanding_debut": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1998,
+      "last_year": null,
+      "notes": "Writer/director/producer team category; recipient_type must be set to a multi-person value to avoid silent splits"
+    },
+    "bafta.best_british_short_animation": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 1990,
+      "last_year": null,
+      "notes": "Sometimes 3-4 nominees"
+    },
+    "bafta.best_british_short_film": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1990,
+      "last_year": null
+    },
+    "bafta.best_childrens_film": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 2025,
+      "last_year": null,
+      "notes": "New category introduced 2025; initial slates may be smaller"
+    },
+    "bafta.ee_rising_star": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 2006,
+      "last_year": null,
+      "notes": "Public vote category; no film_title expected on rows"
+    }
+  }
+}

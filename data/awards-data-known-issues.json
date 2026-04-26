@@ -1,0 +1,160 @@
+[
+  {
+    "issue_id": "scraper-roles-empty-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "all Oscar scraped CSVs to date (ceremonies 94, 95, 96, 97)",
+    "issue_type": "missing_field_value",
+    "field": "recipients[].role",
+    "description": "The Oscar scraper currently leaves recipients[].role as null on all rows. Schema §7.4 requires role to be populated. Substantive data (recipient names) is correct; only the role label is missing.",
+    "deferred_resolution": "Build a post-processing pass that derives role from the row's category_id and category metadata. For Best Picture: 'Producer'. For Best Director: 'Director'. For acting categories: 'Actor' or 'Actress' or appropriate variant. For craft categories with recipient_type multiple_persons: derive from category name (e.g. 'Sound', 'Visual Effects', 'Editor'). To be run as bulk fix before Phase 5 compile to v1 JSON.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "categories-lifecycle-drift-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "scripts/scrape-oscar-categories.json",
+    "issue_type": "convention_drift",
+    "description": "Lifecycle field values were using film-year semantics for some category boundaries instead of the locked ceremony-year convention. Affected: sound merger (4 fields), makeup rename (2 fields). All caught and corrected via lifecycle audit on 2026-04-25.",
+    "resolution": "Fields corrected. Ceremony 92 re-scraped to use correct boundaries. Ceremonies 93-97 unaffected (all post-merge).",
+    "resolved_date": "2026-04-25",
+    "preventative_action": "Future improvement — derive categories.json deterministically from scope doc (which is canonical) to prevent this class of drift. Currently logged in handover as deferred runbook item.",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "best-original-song-film-title-misuse-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "All Best Original Song rows scraped before schema v1.2 — ceremonies 91 through 97",
+    "issue_type": "field_misuse",
+    "description": "The Oscar scraper was populating film_title with the song name for Best Original Song rows, rather than the film name. Cross-check against DLu (which uses film names) produced false disagreements. Schema v1.2 adds subject_title as a separate field; parser updated to populate film_title with film name and subject_title with song name.",
+    "resolution": "Schema bumped to v1.2. Parser updated. All seven scraped ceremonies re-run with corrected field population. Best Original Score evaluated separately — it correctly uses film names in film_title, no fix needed (has_subject_title not set).",
+    "resolved_date": "2026-04-25",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "dlu-title-translation-variance-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "Oscar ceremonies 75, 78",
+    "issue_type": "cross_check_title_variance",
+    "description": "Three DLu rows (Wallace & Gromit ceremony 78 Animated Feature, Don't Tell ceremony 78 International Feature, El Crimen del Padre Amaro ceremony 75 International Feature) were flagged because their titles differ from Wikipedia's by word order or translation/punctuation difference, beyond what the strip-to-alphanum fuzzy matcher handles. Wikipedia data is complete; these are duplicate rows.",
+    "resolution": "Marked all three rows as auto_verified with manually_resolved_dlu_duplicate flag. No data lost.",
+    "resolved_date": "2026-04-25",
+    "preventative_action": "Future improvement — extend cross-check to optionally fuzzy-match by recipient name as a secondary signal when title variance is large. Deferred — only 3 rows affected so far, manual resolution sufficient at this scale.",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "oscar-screenplay-section-aliases-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "Oscar ceremonies 72, 73, 74",
+    "issue_type": "section_alias_gap",
+    "description": "Wikipedia ceremony articles for the 72nd-74th Academy Awards use long-form section headings ('Best Writing (Screenplay Written Directly for the Screen)' and 'Best Writing (Screenplay Based on Material Previously Produced or Published)') that were not in the parser's wikipedia_section_aliases. As a result, 30 screenplay rows (5 Original + 5 Adapted, x 3 ceremonies) were initially flagged because Wikipedia parsing missed the sections and DLu was the only source.",
+    "resolution": "Inspected actual Wikipedia section headings for those three ceremonies, added the long-form names to wikipedia_section_aliases for both oscar.best_original_screenplay and oscar.best_adapted_screenplay. Re-scraped. All 30 rows now wikipedia_dlu_agree.",
+    "resolved_date": "2026-04-25",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "oscar-72-73-dlu-title-variance-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "Oscar ceremonies 72, 73",
+    "issue_type": "cross_check_title_variance",
+    "description": "Three DLu rows (1 Live Action Short + 1 Sound Editing in ceremony 72; 1 International Feature in ceremony 73) were flagged because their titles differ from Wikipedia's by punctuation/format beyond what the strip-to-alphanum fuzzy matcher handles. Same pattern as Wallace & Gromit / Don't Tell / El Crimen del Padre Amaro from ceremonies 75 and 78.",
+    "resolution": "Manually marked auto_verified with manually_resolved_dlu_duplicate flag. Wikipedia data complete; these are duplicate rows DLu maintains under different title formats.",
+    "resolved_date": "2026-04-25",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "compile-preview-subject-title-missing-from-legacy-view-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "scripts/compile-preview.py output, affects all Best Original Song rows in data/awards-data-v1.2-preview-legacy.js",
+    "issue_type": "field_dropped_in_compile",
+    "description": "The legacy-shaped derived view produced by compile-preview.py drops the subject_title field. As a result, Best Original Song tiles render the film name only (e.g. 'Barbie') with no song name visible. The canonical v1.2 JSON has the field correctly; only the legacy-shape view drops it.",
+    "resolution": "DEFERRED. Two paths: (a) extend legacy-view compile to include subject_title on Original Song rows AND update existing UI to read it; (b) skip legacy compatibility for Original Song and target the v1.2 canonical JSON directly when this category is built out in Phase 6 (UI integration). Decision pending — see Phase 6 backlog.",
+    "resolved_date": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "preview-co-winner-rendering-tile-merge-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "Existing pages/awards-browse.html + pages/awards-browse.js rendering of AWARDS_BROWSE_DATABASE_PREVIEW",
+    "issue_type": "ui_assumption_incompatible_with_schema",
+    "description": "The v1.2 schema produces two rows for co-winner cases (e.g. Daniel Kwan and Daniel Scheinert at Best Director 2023; Skyfall and Zero Dark Thirty at Best Sound Editing 2013). The existing legacy UI detects multiple rows in the same (year, category) and merges them into a single tile with names ampersand-joined. This is the UI's pre-existing tile-merging logic, not introduced by preview mode, but surfaced here because the new dataset has correctly-split co-winner rows.",
+    "resolution": "DEFERRED to Phase 6 UI work. Open question: should co-winners render as two separate tiles (faithful to data) or remain visually merged with both names? Either is workable; UI decides. The data does not need to change.",
+    "resolved_date": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "bafta-categories-json-slug-drift-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "scripts/scrape-bafta-categories.json",
+    "issue_type": "slug_drift",
+    "description": "categories.json had bafta.outstanding_british_debut as the stable ID, but ORBIT-AWARDS-SCOPE-v1.2.md canonical name was bafta.outstanding_debut. Same drift class as oscar.best_makeup vs oscar.best_makeup_and_hairstyling caught earlier. The display name 'Outstanding Debut by a British Writer, Director or Producer' is consistent with both slug forms; the scope doc lock is canonical.",
+    "resolution": "Renamed slug to bafta.outstanding_debut. Re-scraped ceremonies 78 and 79.",
+    "resolved_date": "2026-04-25",
+    "preventative_action": "Same as Oscar — deferred runbook item to derive categories.json deterministically from scope doc.",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "bafta-childrens-family-film-missed-in-scope-v1.2-2026-04-25",
+    "discovered_date": "2026-04-25",
+    "scope": "ORBIT-AWARDS-SCOPE-v1.2.md (BAFTA section 5)",
+    "issue_type": "missed_category",
+    "description": "BAFTA introduced the Best Children's & Family Film category at the 78th BAFTAs (February 2025). It was missed when scope v1.2 was written — the BAFTA section locked in 25 categories instead of 26. Categories.json correctly included it during scraper-build, which surfaced the gap.",
+    "resolution": "Added bafta.best_childrens_film to scope as v1.3. Category metadata confirmed via web sources (Variety BAFTA rules announcement, BAFTA press release, Wikipedia category article). first_year: 2025; recipient_type: film_and_director; category_group: feature_sections. Re-scraped ceremonies 78 and 79; data already present.",
+    "resolved_date": "2026-04-25",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "truth-file-internal-contradiction-2026-04-26",
+    "discovered_date": "2026-04-26",
+    "scope": "data/reference/bafta-landmark-truth.json (and any future per-festival landmark truth files)",
+    "issue_type": "process_curation_bug",
+    "description": "When the BAFTA landmark truth file was first populated, the ceremony 78 bafta.outstanding_debut entry contained self-contradicting data: expected_nomination_count was set to 5 (matching the broken scraper output), while the known_issue field correctly noted that BAFTA awarded 6 nominations and one was missing. The wrapper's verification logic reads expected_nomination_count and reports PASS or FAIL based on that field alone — the known_issue text is human-readable context, not machine-verified. Result: the wrapper correctly enforced the truth file's assertion, but the assertion itself was wrong. Ceremony 78 reported PASS when the underlying data had a real silent-drop bug. The trap: a truth file containing both 'this is what the scraped data shows' AND 'this is what reality is' in different fields creates silent test passes when the two diverge.",
+    "resolution": "Truth files must record REALITY, not the current state of scraped data. expected_nomination_count is the authoritative number. known_nominations array must be complete. known_issue field is for context that augments the assertion — never for noting that the assertion contradicts known truth. If the data doesn't match the truth file, the data is wrong, not the truth file.",
+    "preventative_action": "When curating any truth file (BAFTA, Oscar, future festivals): every numeric field is reality. Every list is complete or omitted entirely. The known_issue field describes parser gotchas or BAFTA conventions worth knowing — never 'data is wrong, expected count is X but actual is Y'. If reality is uncertain, omit the assertion rather than encoding a guess. For curation review: every truth file entry should be readable as a standalone factual claim about what the awards body did, with no reference to what any scraper produced.",
+    "related_issues": [
+      "bafta-recipient-splitting-team-categories-2026-04-26"
+    ],
+    "resolved_date": "2026-04-26",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "bafta-team-category-recipient-splitting-2026-04-26",
+    "discovered_date": "2026-04-26",
+    "scope": "BAFTA ceremonies 78, 79 — bafta.outstanding_debut confirmed, bafta.best_editing minor",
+    "issue_type": "recipient_type_mismatch",
+    "description": "bafta.outstanding_debut had recipient_type 'director' which is in SINGLE_PERSON_RECIPIENT_TYPES, causing multi-name teams to be split into separate rows. Ceremony 79 produced 9 rows instead of 5 (The Ceremony and Wasteman teams split). bafta.best_editing similarly split the Kneecap editing team at ceremony 78.",
+    "resolution": "Changed bafta.outstanding_debut recipient_type from 'director' to 'producers' in categories.json. Re-scraped ceremonies 78 and 79. bafta.best_editing fix deferred per investigation Option 2 (requires scraper architectural change to move SINGLE_PERSON_RECIPIENT_TYPES from global constant to per-category metadata field). best_editing will continue to occasionally produce 1 extra row per team-credited editing nomination until the architectural fix lands.",
+    "resolved_date": "2026-04-27",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "verification-gap-silent-splits-2026-04-26",
+    "discovered_date": "2026-04-26",
+    "scope": "All scraped ceremonies (Oscar and BAFTA)",
+    "issue_type": "verification_weakness",
+    "description": "The scraper's verification (exit code 0 = all categories have rows, exit code 2 = flagged rows) does not detect silent recipient splits. A category producing 9 rows instead of 5 passes with exit code 0. The 'all rows auto_verified' status is also misleading — it verifies provenance, not semantic correctness of row-count-per-nomination. Manual spot-checks caught this issue; automated checks did not.",
+    "resolution": "PARTIALLY RESOLVED. The BAFTA batch wrapper (scripts/scrape-bafta-batch.py) plus per-category expectations and landmark truth files (data/reference/) now provide the missing verification layer. Silent splits and silent drops are caught when truth coverage exists for a ceremony. The wrapper detects: row count outside expected +/-tolerance, landmark winner mismatches, missing categories. Coverage gap: ceremonies without truth file entries fall back to expectations.json only, which catches gross anomalies but not landmark-level mismatches. Curating truth file entries for older ceremonies is ongoing work.",
+    "resolved_date": null,
+    "status": "partially_resolved"
+  },
+  {
+    "issue_id": "bafta-best-editing-team-split-deferred-2026-04-26",
+    "discovered_date": "2026-04-26",
+    "scope": "scripts/scrape-bafta.py SINGLE_PERSON_RECIPIENT_TYPES global constant; affects bafta.best_editing when nomination is team-credited",
+    "issue_type": "deferred_architectural_fix",
+    "description": "BAFTA best_editing occasionally has team-credited nominations (e.g., Julian Ulrichs and Chris Gill for Kneecap at 78th BAFTAs). Current scraper splits these into separate rows because 'editor' is in SINGLE_PERSON_RECIPIENT_TYPES. Fixing properly requires moving splitting-behavior decision from a global set to a per-category metadata field (suggested name: 'split_co_recipients' boolean). Cannot be fixed by metadata alone because Oscar editing IS legitimately single-person and shares the global set.",
+    "resolution": "DEFERRED. To fix later: (a) add 'split_co_recipients' boolean to schema, defaulting to true for backward compatibility; (b) update both scrapers to read this field instead of the global constant; (c) set false on the few BAFTA categories that need it; (d) re-scrape affected ceremonies. Estimated impact: 1-2 extra rows per affected BAFTA ceremony. Real but small.",
+    "resolved_date": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "bafta-78-outstanding-debut-wikipedia-gap-2026-04-27",
+    "discovered_date": "2026-04-27",
+    "scope": "ceremony 78 bafta.outstanding_debut row in data/scraped/bafta/bafta-ceremony-78.csv",
+    "issue_type": "source_data_gap",
+    "description": "BAFTA awarded 6 Outstanding Debut nominations at the 78th BAFTAs per Wonderland Magazine and BAFTA's own listings, but the Wikipedia article lists only 5. Sister Midnight had two distinct credits (director Karan Kandhari; producers James Bowsher and Balthazar De Ganay) which Wikipedia conflated or omitted. The scraper correctly extracts all 5 entries Wikipedia provides; the 6th is simply not in the source.",
+    "resolution": "DEFERRED to Phase 4 (human review) or backfill from BAFTA archive. Single-source-Wikipedia limitation now visible in concrete data. The single_source_wikipedia_only flag on the rows was already honest about this risk.",
+    "resolved_date": null,
+    "status": "deferred"
+  }
+]

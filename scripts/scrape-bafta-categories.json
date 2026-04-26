@@ -1,0 +1,477 @@
+[
+  {
+    "id": "bafta.best_film",
+    "display_name": "Best Film",
+    "historical_names": [
+      {"name": "Best Film", "from": 1948, "to": null}
+    ],
+    "first_year": 1948,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Film"]
+  },
+  {
+    "id": "bafta.best_director",
+    "display_name": "Best Director",
+    "historical_names": [
+      {"name": "Best Director", "from": 2013, "to": null},
+      {"name": "Best Direction", "from": 1948, "to": 2012}
+    ],
+    "first_year": 1948,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Director", "Best Direction"]
+  },
+  {
+    "id": "bafta.best_leading_actor",
+    "display_name": "Best Actor in a Leading Role",
+    "historical_names": [
+      {"name": "Best Actor in a Leading Role", "from": 1952, "to": null}
+    ],
+    "first_year": 1952,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Actor in a Leading Role", "Best Leading Actor"]
+  },
+  {
+    "id": "bafta.best_leading_actress",
+    "display_name": "Best Actress in a Leading Role",
+    "historical_names": [
+      {"name": "Best Actress in a Leading Role", "from": 1952, "to": null}
+    ],
+    "first_year": 1952,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Actress in a Leading Role", "Best Leading Actress"]
+  },
+  {
+    "id": "bafta.best_supporting_actor",
+    "display_name": "Best Actor in a Supporting Role",
+    "historical_names": [
+      {"name": "Best Actor in a Supporting Role", "from": 1969, "to": null}
+    ],
+    "first_year": 1969,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Actor in a Supporting Role", "Best Supporting Actor"]
+  },
+  {
+    "id": "bafta.best_supporting_actress",
+    "display_name": "Best Actress in a Supporting Role",
+    "historical_names": [
+      {"name": "Best Actress in a Supporting Role", "from": 1969, "to": null}
+    ],
+    "first_year": 1969,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Actress in a Supporting Role", "Best Supporting Actress"]
+  },
+  {
+    "id": "bafta.best_original_screenplay",
+    "display_name": "Best Original Screenplay",
+    "historical_names": [
+      {"name": "Best Original Screenplay", "from": 1984, "to": null}
+    ],
+    "first_year": 1984,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Original Screenplay"]
+  },
+  {
+    "id": "bafta.best_adapted_screenplay",
+    "display_name": "Best Adapted Screenplay",
+    "historical_names": [
+      {"name": "Best Adapted Screenplay", "from": 1984, "to": null}
+    ],
+    "first_year": 1984,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Adapted Screenplay"]
+  },
+  {
+    "id": "bafta.best_animated_film",
+    "display_name": "Best Animated Film",
+    "historical_names": [
+      {"name": "Best Animated Film", "from": 2006, "to": null}
+    ],
+    "first_year": 2006,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Animated Film"]
+  },
+  {
+    "id": "bafta.best_documentary",
+    "display_name": "Best Documentary",
+    "historical_names": [
+      {"name": "Best Documentary", "from": 2011, "to": null}
+    ],
+    "first_year": 2011,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Documentary"]
+  },
+  {
+    "id": "bafta.best_film_not_in_english",
+    "display_name": "Best Film Not in the English Language",
+    "historical_names": [
+      {"name": "Best Film Not in the English Language", "from": 1982, "to": null}
+    ],
+    "first_year": 1982,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Film Not in the English Language"]
+  },
+  {
+    "id": "bafta.best_casting",
+    "display_name": "Best Casting",
+    "historical_names": [
+      {"name": "Best Casting", "from": 2020, "to": null}
+    ],
+    "first_year": 2020,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "casting_director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Casting"]
+  },
+  {
+    "id": "bafta.best_cinematography",
+    "display_name": "Best Cinematography",
+    "historical_names": [
+      {"name": "Best Cinematography", "from": 1963, "to": null}
+    ],
+    "first_year": 1963,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "cinematographer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Cinematography"]
+  },
+  {
+    "id": "bafta.best_costume_design",
+    "display_name": "Best Costume Design",
+    "historical_names": [
+      {"name": "Best Costume Design", "from": 1964, "to": null}
+    ],
+    "first_year": 1964,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "costume_designer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Costume Design"]
+  },
+  {
+    "id": "bafta.best_editing",
+    "display_name": "Best Editing",
+    "historical_names": [
+      {"name": "Best Editing", "from": 1967, "to": null}
+    ],
+    "first_year": 1967,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "editor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Editing"]
+  },
+  {
+    "id": "bafta.best_makeup_and_hair",
+    "display_name": "Best Make Up & Hair",
+    "historical_names": [
+      {"name": "Best Make Up & Hair", "from": 2014, "to": null},
+      {"name": "Best Makeup and Hair", "from": 1982, "to": 2013}
+    ],
+    "first_year": 1982,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "makeup_artist",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Make Up & Hair", "Best Makeup and Hair", "Best Make Up and Hair"]
+  },
+  {
+    "id": "bafta.best_original_score",
+    "display_name": "Best Original Score",
+    "historical_names": [
+      {"name": "Best Original Score", "from": 2015, "to": null},
+      {"name": "Best Original Music", "from": 1968, "to": 2014}
+    ],
+    "first_year": 1968,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "composer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Original Score", "Best Original Music", "Best Film Music"]
+  },
+  {
+    "id": "bafta.best_production_design",
+    "display_name": "Best Production Design",
+    "historical_names": [
+      {"name": "Best Production Design", "from": 1964, "to": null}
+    ],
+    "first_year": 1964,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "art_director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Production Design"]
+  },
+  {
+    "id": "bafta.best_sound",
+    "display_name": "Best Sound",
+    "historical_names": [
+      {"name": "Best Sound", "from": 1969, "to": null}
+    ],
+    "first_year": 1969,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "sound_mixer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Sound"]
+  },
+  {
+    "id": "bafta.best_special_visual_effects",
+    "display_name": "Best Special Visual Effects",
+    "historical_names": [
+      {"name": "Best Special Visual Effects", "from": 1982, "to": null}
+    ],
+    "first_year": 1982,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "vfx_supervisor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Special Visual Effects"]
+  },
+  {
+    "id": "bafta.outstanding_british_film",
+    "display_name": "Outstanding British Film",
+    "historical_names": [
+      {"name": "Outstanding British Film", "from": 1948, "to": null}
+    ],
+    "first_year": 1948,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Outstanding British Film", "Best British Film"]
+  },
+  {
+    "id": "bafta.outstanding_debut",
+    "display_name": "Outstanding Debut by a British Writer, Director or Producer",
+    "historical_names": [
+      {"name": "Outstanding Debut by a British Writer, Director or Producer", "from": 1998, "to": null}
+    ],
+    "first_year": 1998,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Outstanding Debut by a British Writer, Director or Producer", "Outstanding Debut", "Carl Foreman Award"]
+  },
+  {
+    "id": "bafta.best_british_short_animation",
+    "display_name": "Best British Short Animation",
+    "historical_names": [
+      {"name": "Best British Short Animation", "from": 2013, "to": null},
+      {"name": "Best Short Animation", "from": 1990, "to": 2012}
+    ],
+    "first_year": 1990,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best British Short Animation", "Best Short Animation"]
+  },
+  {
+    "id": "bafta.best_british_short_film",
+    "display_name": "Best British Short Film",
+    "historical_names": [
+      {"name": "Best British Short Film", "from": 2013, "to": null},
+      {"name": "Best Short Film", "from": 1990, "to": 2012}
+    ],
+    "first_year": 1990,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best British Short Film", "Best Short Film"]
+  },
+  {
+    "id": "bafta.best_childrens_film",
+    "display_name": "Best Children's & Family Film",
+    "historical_names": [
+      {"name": "Best Children's & Family Film", "from": 2025, "to": null}
+    ],
+    "first_year": 2025,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "film_and_director",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["Best Children's & Family Film", "Best Children's Film"],
+    "notes": "First BAFTA Film category introduced in 5 years. Replaces the discontinued British Academy Children's Awards (separate ceremony, ended 2022). Eligibility: U, PG, or 12A rating from the BBFC. First awarded at the 78th BAFTAs in February 2025."
+  },
+  {
+    "id": "bafta.ee_rising_star",
+    "display_name": "EE Rising Star Award",
+    "historical_names": [
+      {"name": "EE Rising Star Award", "from": 2013, "to": null},
+      {"name": "Orange Rising Star Award", "from": 2006, "to": 2012}
+    ],
+    "first_year": 2006,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "dlu_canonical": null,
+    "wikipedia_section_aliases": ["EE Rising Star Award", "Orange Rising Star Award", "Rising Star Award", "EE BAFTA Rising Star Award"]
+  }
+]

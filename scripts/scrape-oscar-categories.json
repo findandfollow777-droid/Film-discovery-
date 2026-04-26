@@ -1,0 +1,453 @@
+[
+  {
+    "id": "oscar.best_picture",
+    "display_name": "Best Picture",
+    "historical_names": [
+      {"name": "Best Picture", "from": 1944, "to": null},
+      {"name": "Outstanding Motion Picture", "from": 1941, "to": 1943},
+      {"name": "Outstanding Production", "from": 1929, "to": 1940}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 10,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "BEST PICTURE",
+    "wikipedia_section_aliases": ["Best Picture"]
+  },
+  {
+    "id": "oscar.best_director",
+    "display_name": "Best Director",
+    "historical_names": [
+      {"name": "Best Director", "from": 1941, "to": null},
+      {"name": "Best Directing", "from": 1929, "to": 1940}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "DIRECTING",
+    "wikipedia_section_aliases": ["Best Director", "Best Directing", "Directing"]
+  },
+  {
+    "id": "oscar.best_actor",
+    "display_name": "Best Actor",
+    "historical_names": [
+      {"name": "Best Actor in a Leading Role", "from": 1929, "to": null}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ACTOR IN A LEADING ROLE",
+    "wikipedia_section_aliases": ["Best Actor in a Leading Role", "Best Actor", "Actor in a Leading Role"]
+  },
+  {
+    "id": "oscar.best_actress",
+    "display_name": "Best Actress",
+    "historical_names": [
+      {"name": "Best Actress in a Leading Role", "from": 1929, "to": null}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ACTRESS IN A LEADING ROLE",
+    "wikipedia_section_aliases": ["Best Actress in a Leading Role", "Best Actress", "Actress in a Leading Role"]
+  },
+  {
+    "id": "oscar.best_supporting_actor",
+    "display_name": "Best Supporting Actor",
+    "historical_names": [
+      {"name": "Best Actor in a Supporting Role", "from": 1937, "to": null}
+    ],
+    "first_year": 1937,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ACTOR IN A SUPPORTING ROLE",
+    "wikipedia_section_aliases": ["Best Actor in a Supporting Role", "Best Supporting Actor", "Actor in a Supporting Role"]
+  },
+  {
+    "id": "oscar.best_supporting_actress",
+    "display_name": "Best Supporting Actress",
+    "historical_names": [
+      {"name": "Best Actress in a Supporting Role", "from": 1937, "to": null}
+    ],
+    "first_year": 1937,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ACTRESS IN A SUPPORTING ROLE",
+    "wikipedia_section_aliases": ["Best Actress in a Supporting Role", "Best Supporting Actress", "Actress in a Supporting Role"]
+  },
+  {
+    "id": "oscar.best_animated_feature",
+    "display_name": "Best Animated Feature Film",
+    "historical_names": [
+      {"name": "Best Animated Feature Film", "from": 2002, "to": null}
+    ],
+    "first_year": 2002,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ANIMATED FEATURE FILM",
+    "wikipedia_section_aliases": ["Best Animated Feature Film", "Animated Feature Film", "Best Animated Feature"]
+  },
+  {
+    "id": "oscar.best_international_feature",
+    "display_name": "Best International Feature Film",
+    "historical_names": [
+      {"name": "Best International Feature Film", "from": 2020, "to": null},
+      {"name": "Best Foreign Language Film", "from": 1957, "to": 2019}
+    ],
+    "first_year": 1957,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "country",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "INTERNATIONAL FEATURE FILM",
+    "wikipedia_section_aliases": ["Best International Feature Film", "International Feature Film", "Best Foreign Language Film", "Foreign Language Film"]
+  },
+  {
+    "id": "oscar.best_documentary_feature",
+    "display_name": "Best Documentary Feature Film",
+    "historical_names": [
+      {"name": "Best Documentary Feature Film", "from": 1943, "to": null}
+    ],
+    "first_year": 1943,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "DOCUMENTARY (Feature)",
+    "wikipedia_section_aliases": ["Best Documentary Feature Film", "Best Documentary Feature", "Documentary (Feature)"]
+  },
+  {
+    "id": "oscar.best_documentary_short",
+    "display_name": "Best Documentary Short Film",
+    "historical_names": [
+      {"name": "Best Documentary Short Film", "from": 1943, "to": null}
+    ],
+    "first_year": 1943,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "DOCUMENTARY (Short Subject)",
+    "wikipedia_section_aliases": ["Best Documentary Short Film", "Best Documentary Short Subject", "Documentary (Short Subject)", "Documentary Short Film"]
+  },
+  {
+    "id": "oscar.best_animated_short",
+    "display_name": "Best Animated Short Film",
+    "historical_names": [
+      {"name": "Best Animated Short Film", "from": 1932, "to": null}
+    ],
+    "first_year": 1932,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "SHORT FILM (Animated)",
+    "wikipedia_section_aliases": ["Best Animated Short Film", "Short Film (Animated)", "Animated Short Film"]
+  },
+  {
+    "id": "oscar.best_live_action_short",
+    "display_name": "Best Live Action Short Film",
+    "historical_names": [
+      {"name": "Best Live Action Short Film", "from": 1932, "to": null}
+    ],
+    "first_year": 1932,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "SHORT FILM (Live Action)",
+    "wikipedia_section_aliases": ["Best Live Action Short Film", "Short Film (Live Action)", "Live Action Short Film"]
+  },
+  {
+    "id": "oscar.best_original_screenplay",
+    "display_name": "Best Original Screenplay",
+    "historical_names": [
+      {"name": "Best Original Screenplay", "from": 1940, "to": null}
+    ],
+    "first_year": 1940,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "WRITING (Original Screenplay)",
+    "wikipedia_section_aliases": ["Best Original Screenplay", "Writing (Original Screenplay)", "Original Screenplay", "Best Writing (Screenplay Written Directly for the Screen)"]
+  },
+  {
+    "id": "oscar.best_adapted_screenplay",
+    "display_name": "Best Adapted Screenplay",
+    "historical_names": [
+      {"name": "Best Adapted Screenplay", "from": 1940, "to": null}
+    ],
+    "first_year": 1940,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "WRITING (Adapted Screenplay)",
+    "wikipedia_section_aliases": ["Best Adapted Screenplay", "Writing (Adapted Screenplay)", "Adapted Screenplay", "Best Writing (Screenplay Based on Material Previously Produced or Published)"]
+  },
+  {
+    "id": "oscar.best_cinematography",
+    "display_name": "Best Cinematography",
+    "historical_names": [
+      {"name": "Best Cinematography", "from": 1929, "to": null}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "cinematographer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "CINEMATOGRAPHY",
+    "wikipedia_section_aliases": ["Best Cinematography", "Cinematography"]
+  },
+  {
+    "id": "oscar.best_film_editing",
+    "display_name": "Best Film Editing",
+    "historical_names": [
+      {"name": "Best Film Editing", "from": 1935, "to": null}
+    ],
+    "first_year": 1935,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "editor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "FILM EDITING",
+    "wikipedia_section_aliases": ["Best Film Editing", "Film Editing"]
+  },
+  {
+    "id": "oscar.best_production_design",
+    "display_name": "Best Production Design",
+    "historical_names": [
+      {"name": "Best Production Design", "from": 2013, "to": null},
+      {"name": "Best Art Direction", "from": 1929, "to": 2012}
+    ],
+    "first_year": 1929,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "art_director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "ART DIRECTION",
+    "wikipedia_section_aliases": ["Best Production Design", "Best Art Direction", "Production Design", "Art Direction"]
+  },
+  {
+    "id": "oscar.best_costume_design",
+    "display_name": "Best Costume Design",
+    "historical_names": [
+      {"name": "Best Costume Design", "from": 1949, "to": null}
+    ],
+    "first_year": 1949,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "costume_designer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "COSTUME DESIGN",
+    "wikipedia_section_aliases": ["Best Costume Design", "Costume Design"]
+  },
+  {
+    "id": "oscar.best_makeup_and_hairstyling",
+    "display_name": "Best Makeup and Hairstyling",
+    "historical_names": [
+      {"name": "Best Makeup and Hairstyling", "from": 2013, "to": null},
+      {"name": "Best Makeup", "from": 1982, "to": 2012}
+    ],
+    "first_year": 1982,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "makeup_artist",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "MAKEUP AND HAIRSTYLING",
+    "wikipedia_section_aliases": ["Best Makeup and Hairstyling", "Best Makeup", "Makeup and Hairstyling"]
+  },
+  {
+    "id": "oscar.best_original_score",
+    "display_name": "Best Original Score",
+    "historical_names": [
+      {"name": "Best Original Score", "from": 2000, "to": null},
+      {"name": "Best Original Music Score", "from": 1972, "to": 1999}
+    ],
+    "first_year": 1935,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "composer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "MUSIC (Original Score)",
+    "wikipedia_section_aliases": ["Best Original Score", "Music (Original Score)", "Original Score"]
+  },
+  {
+    "id": "oscar.best_original_song",
+    "has_subject_title": true,
+    "display_name": "Best Original Song",
+    "historical_names": [
+      {"name": "Best Original Song", "from": 1935, "to": null}
+    ],
+    "first_year": 1935,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "songwriter",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "MUSIC (Original Song)",
+    "wikipedia_section_aliases": ["Best Original Song", "Music (Original Song)", "Original Song"]
+  },
+  {
+    "id": "oscar.best_sound",
+    "display_name": "Best Sound",
+    "historical_names": [
+      {"name": "Best Sound", "from": 2021, "to": null}
+    ],
+    "first_year": 2021,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "sound_mixer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": ["oscar.best_sound_editing", "oscar.best_sound_mixing"],
+    "merged_into": null,
+    "dlu_canonical": "SOUND MIXING",
+    "wikipedia_section_aliases": ["Best Sound", "Best Sound Mixing", "Sound", "Sound Mixing"]
+  },
+  {
+    "id": "oscar.best_sound_editing",
+    "display_name": "Best Sound Editing",
+    "historical_names": [
+      {"name": "Best Sound Editing", "from": 1964, "to": 2020}
+    ],
+    "first_year": 1964,
+    "last_year": 2020,
+    "tile_type": "person",
+    "recipient_type": "sound_editor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": "oscar.best_sound",
+    "dlu_canonical": "SOUND EDITING",
+    "wikipedia_section_aliases": ["Best Sound Editing", "Sound Editing"]
+  },
+  {
+    "id": "oscar.best_sound_mixing",
+    "display_name": "Best Sound Mixing",
+    "historical_names": [
+      {"name": "Best Sound Mixing", "from": 2003, "to": 2020},
+      {"name": "Best Sound", "from": 1930, "to": 2002}
+    ],
+    "first_year": 1930,
+    "last_year": 2020,
+    "tile_type": "film",
+    "recipient_type": "multiple_persons",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": "oscar.best_sound",
+    "dlu_canonical": "SOUND MIXING",
+    "wikipedia_section_aliases": ["Best Sound Mixing", "Best Sound", "Sound Mixing", "Sound"]
+  },
+  {
+    "id": "oscar.best_visual_effects",
+    "display_name": "Best Visual Effects",
+    "historical_names": [
+      {"name": "Best Visual Effects", "from": 1964, "to": null}
+    ],
+    "first_year": 1964,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "vfx_supervisor",
+    "shortlist_published": true,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "VISUAL EFFECTS",
+    "wikipedia_section_aliases": ["Best Visual Effects", "Visual Effects"]
+  },
+  {
+    "id": "oscar.best_casting",
+    "display_name": "Best Casting",
+    "historical_names": [
+      {"name": "Best Casting", "from": 2026, "to": null}
+    ],
+    "first_year": 2026,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "casting_director",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "dlu_canonical": "CASTING",
+    "wikipedia_section_aliases": ["Best Casting", "Casting"]
+  }
+]

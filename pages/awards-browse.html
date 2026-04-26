@@ -45,6 +45,16 @@
     </div>
   </header>
 
+  <!-- AWARDS HUB NAV -->
+  <nav class="awards-hub-nav" id="awardsHubNav">
+    <span class="hub-nav-label">Awards Hub</span>
+    <div class="hub-nav-divider"></div>
+    <a href="awards-browse.html" class="hub-nav-btn active" data-section="browse">Browse</a>
+    <a href="awards-guide.html" class="hub-nav-btn" data-section="guide">Guide</a>
+    <a href="awards-stats.html" class="hub-nav-btn" data-section="stats">Stats</a>
+    <a href="awards-stories.html" class="hub-nav-btn" data-section="stories">Stories</a>
+  </nav>
+
   <!-- FESTIVAL TABS -->
   <nav class="festival-tabs" id="festivalTabs">
     <!-- JS-populated -->
@@ -119,6 +129,12 @@
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
   <script src="../data/awards-data.js"></script>
+  <script>
+    // Preview mode: load preview data when ?preview=true
+    if (new URLSearchParams(window.location.search).get('preview') === 'true') {
+      document.write('<script src="../data/awards-data-v1.2-preview-legacy.js"><\/script>');
+    }
+  </script>
   <script src="../components/shortlist-service.js"></script>
   <script src="../components/encounter-service.js"></script>
   <script src="../components/trivia-stats.js"></script>

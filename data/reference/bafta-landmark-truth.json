@@ -1,0 +1,176 @@
+{
+  "schema_version": "v1",
+  "festival": "bafta",
+  "ceremonies": {
+    "79": {
+      "ceremony_year": 2026,
+      "honours_year": 2025,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "One Battle After Another",
+          "winner_recipient": "Adam Somner",
+          "expected_nomination_count": 5,
+          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/"
+        },
+        "bafta.best_director": {
+          "winner_film": "One Battle After Another",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_nomination_count": 6,
+          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "I Swear",
+          "winner_recipient": "Robert Aramayo",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Hamnet",
+          "winner_recipient": "Jessie Buckley",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "One Battle After Another",
+          "winner_recipient": "Sean Penn",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Sinners",
+          "winner_recipient": "Wunmi Mosaku",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Sentimental Value",
+          "winner_recipient": "Joachim Trier",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Mr Nobody Against Putin",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Zootopia 2",
+          "expected_nomination_count": 3,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.best_childrens_film": {
+          "winner_film": "Boong",
+          "expected_nomination_count": 4,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Hamnet",
+          "expected_nomination_count": 10,
+          "source": "BAFTA press release 22 Feb 2026"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "My Father's Shadow",
+          "winner_recipient": "Akinola Davies Jr.",
+          "expected_nomination_count": 5,
+          "source": "BAFTA.org explicitly states 'Number of items: (5)'"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Robert Aramayo",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 22 Feb 2026"
+        }
+      }
+    },
+    "78": {
+      "ceremony_year": 2025,
+      "honours_year": 2024,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Conclave",
+          "winner_recipient": "Tessa Ross",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Brady Corbet",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Adrien Brody",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Anora",
+          "winner_recipient": "Mikey Madison",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "A Real Pain",
+          "winner_recipient": "Kieran Culkin",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Zoe Saldaña",
+          "expected_nomination_count": 6,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Jacques Audiard",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Super/Man: The Christopher Reeve Story",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Wallace & Gromit: Vengeance Most Fowl",
+          "winner_recipient": "Nick Park",
+          "expected_nomination_count": 4,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.best_childrens_film": {
+          "winner_film": "Wallace & Gromit: Vengeance Most Fowl",
+          "winner_recipient": "Nick Park",
+          "expected_nomination_count": 4,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Conclave",
+          "winner_recipient": "Edward Berger",
+          "expected_nomination_count": 10,
+          "source": "BAFTA press release 16 Feb 2025"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Kneecap",
+          "winner_recipient": "Rich Peppiatt",
+          "expected_nomination_count": 6,
+          "source": "Wonderland Magazine 78th BAFTA nominees list confirms 6 nominations including Sister Midnight with multi-producer team",
+          "known_nominations": [
+            "Hoard / Luna Carmoon",
+            "Kneecap / Rich Peppiatt",
+            "Monkey Man / Dev Patel",
+            "Santosh / Sandhya Suri",
+            "Sister Midnight / Karan Kandhari",
+            "Sister Midnight / James Bowsher & Balthazar De Ganay (producers)"
+          ],
+          "known_issue": null
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "David Jonsson",
+          "expected_nomination_count": 5,
+          "source": "BAFTA press release 16 Feb 2025"
+        }
+      }
+    }
+  }
+}

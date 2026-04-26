@@ -1,0 +1,577 @@
+{
+  "per_file": {
+    "awards7coltemplate.csv": {
+      "rows": 5126,
+      "pre_2000": 3020,
+      "post_2000": 2106,
+      "distinct_festivals": 6
+    },
+    "awardssample.csv": {
+      "rows": 9787,
+      "pre_2000": 6116,
+      "post_2000": 3671,
+      "distinct_festivals": 6
+    },
+    "ggdirector2000.csv": {
+      "rows": 141,
+      "pre_2000": 0,
+      "post_2000": 141,
+      "distinct_festivals": 1
+    },
+    "ggdirectorearly.csv": {
+      "rows": 245,
+      "pre_2000": 245,
+      "post_2000": 0,
+      "distinct_festivals": 1
+    },
+    "goldenglobeextra.csv": {
+      "rows": 965,
+      "pre_2000": 711,
+      "post_2000": 254,
+      "distinct_festivals": 1
+    },
+    "baftaactordata.csv": {
+      "rows": 141,
+      "pre_2000": 0,
+      "post_2000": 141,
+      "distinct_festivals": 1
+    },
+    "baftaactorearly.csv": {
+      "rows": 222,
+      "pre_2000": 222,
+      "post_2000": 0,
+      "distinct_festivals": 1
+    },
+    "baftaactressraw.csv": {
+      "rows": 330,
+      "pre_2000": 190,
+      "post_2000": 140,
+      "distinct_festivals": 1
+    },
+    "baftadirectorraw.csv": {
+      "rows": 217,
+      "pre_2000": 77,
+      "post_2000": 140,
+      "distinct_festivals": 1
+    },
+    "persondataraw.csv": {
+      "rows": 2553,
+      "pre_2000": 1414,
+      "post_2000": 1139,
+      "distinct_festivals": 3
+    }
+  },
+  "duplicates": {
+    "total_duplicate_rows": 6721,
+    "intra_file": 850,
+    "cross_file": 5871,
+    "top_pairs": [
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "awardssample.csv"
+        ],
+        "count": 3580
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "persondataraw.csv"
+        ],
+        "count": 798
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "baftaactressraw.csv"
+        ],
+        "count": 326
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "ggdirectorearly.csv"
+        ],
+        "count": 245
+      },
+      {
+        "pair": [
+          "baftaactorearly.csv",
+          "persondataraw.csv"
+        ],
+        "count": 221
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "baftadirectorraw.csv"
+        ],
+        "count": 217
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "baftaactorearly.csv"
+        ],
+        "count": 209
+      },
+      {
+        "pair": [
+          "awards7coltemplate.csv",
+          "goldenglobeextra.csv"
+        ],
+        "count": 201
+      },
+      {
+        "pair": [
+          "baftadirectorraw.csv",
+          "persondataraw.csv"
+        ],
+        "count": 189
+      },
+      {
+        "pair": [
+          "ggdirectorearly.csv",
+          "goldenglobeextra.csv"
+        ],
+        "count": 148
+      }
+    ]
+  },
+  "cross_year": {
+    "multi_year_tuples": 1498,
+    "gap_distribution": {
+      "1yr": 1510,
+      "2yr": 246,
+      "3yr_plus": 904
+    },
+    "industry_collision_suspects": 1510,
+    "film_festival_1yr_flags": 0
+  },
+  "post_2000_quality": [
+    {
+      "festival": "BAFTA",
+      "category": "Best Actor",
+      "rows": 374,
+      "winners": 52,
+      "nominees": 322,
+      "missing_tmdb": 374,
+      "missing_person": 233,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "BAFTA",
+      "category": "Best Actress",
+      "rows": 380,
+      "winners": 55,
+      "nominees": 325,
+      "missing_tmdb": 380,
+      "missing_person": 232,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "BAFTA",
+      "category": "Best Director",
+      "rows": 389,
+      "winners": 63,
+      "nominees": 326,
+      "missing_tmdb": 389,
+      "missing_person": 238,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "BAFTA",
+      "category": "Best Film",
+      "rows": 130,
+      "winners": 26,
+      "nominees": 104,
+      "missing_tmdb": 129,
+      "missing_person": 0,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Berlin",
+      "category": "Golden Bear",
+      "rows": 127,
+      "winners": 28,
+      "nominees": 99,
+      "missing_tmdb": 126,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Berlin",
+      "category": "Silver Bear (Director)",
+      "rows": 51,
+      "winners": 51,
+      "nominees": 0,
+      "missing_tmdb": 50,
+      "missing_person": 26,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Berlin",
+      "category": "Silver Bear (Grand Jury)",
+      "rows": 27,
+      "winners": 27,
+      "nominees": 0,
+      "missing_tmdb": 26,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Cannes",
+      "category": "Best Director",
+      "rows": 55,
+      "winners": 55,
+      "nominees": 0,
+      "missing_tmdb": 54,
+      "missing_person": 28,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Cannes",
+      "category": "Grand Prix",
+      "rows": 28,
+      "winners": 28,
+      "nominees": 0,
+      "missing_tmdb": 27,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Cannes",
+      "category": "Jury Prize",
+      "rows": 34,
+      "winners": 34,
+      "nominees": 0,
+      "missing_tmdb": 32,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Cannes",
+      "category": "Palme d'Or",
+      "rows": 428,
+      "winners": 25,
+      "nominees": 403,
+      "missing_tmdb": 427,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Actor (Comedy/Musical)",
+      "rows": 251,
+      "winners": 50,
+      "nominees": 201,
+      "missing_tmdb": 251,
+      "missing_person": 125,
+      "year_range": "2000-2024"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Actor (Drama)",
+      "rows": 251,
+      "winners": 50,
+      "nominees": 201,
+      "missing_tmdb": 251,
+      "missing_person": 125,
+      "year_range": "2000-2024"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Actress (Comedy/Musical)",
+      "rows": 252,
+      "winners": 50,
+      "nominees": 202,
+      "missing_tmdb": 252,
+      "missing_person": 126,
+      "year_range": "2000-2024"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Actress (Drama)",
+      "rows": 255,
+      "winners": 51,
+      "nominees": 204,
+      "missing_tmdb": 255,
+      "missing_person": 128,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Comedy/Musical",
+      "rows": 87,
+      "winners": 26,
+      "nominees": 61,
+      "missing_tmdb": 86,
+      "missing_person": 0,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Director",
+      "rows": 389,
+      "winners": 67,
+      "nominees": 322,
+      "missing_tmdb": 389,
+      "missing_person": 248,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Drama",
+      "rows": 133,
+      "winners": 26,
+      "nominees": 107,
+      "missing_tmdb": 132,
+      "missing_person": 0,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Oscar",
+      "category": "Best Actor",
+      "rows": 367,
+      "winners": 77,
+      "nominees": 290,
+      "missing_tmdb": 331,
+      "missing_person": 242,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Oscar",
+      "category": "Best Actress",
+      "rows": 382,
+      "winners": 77,
+      "nominees": 305,
+      "missing_tmdb": 376,
+      "missing_person": 257,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Oscar",
+      "category": "Best Director",
+      "rows": 369,
+      "winners": 79,
+      "nominees": 290,
+      "missing_tmdb": 328,
+      "missing_person": 244,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Oscar",
+      "category": "Best Picture",
+      "rows": 187,
+      "winners": 29,
+      "nominees": 158,
+      "missing_tmdb": 148,
+      "missing_person": 0,
+      "year_range": "2000-2026"
+    },
+    {
+      "festival": "Venice",
+      "category": "Golden Lion",
+      "rows": 106,
+      "winners": 26,
+      "nominees": 80,
+      "missing_tmdb": 105,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Venice",
+      "category": "Silver Lion (Director)",
+      "rows": 53,
+      "winners": 53,
+      "nominees": 0,
+      "missing_tmdb": 52,
+      "missing_person": 27,
+      "year_range": "2000-2025"
+    },
+    {
+      "festival": "Venice",
+      "category": "Silver Lion (Grand Jury)",
+      "rows": 26,
+      "winners": 26,
+      "nominees": 0,
+      "missing_tmdb": 25,
+      "missing_person": 0,
+      "year_range": "2000-2025"
+    }
+  ],
+  "year_gaps": [
+    {
+      "festival": "BAFTA",
+      "category": "Best Film",
+      "missing_years": [
+        2025
+      ],
+      "max_year": 2026
+    },
+    {
+      "festival": "Cannes",
+      "category": "Jury Prize",
+      "missing_years": [
+        2001
+      ],
+      "max_year": 2025
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Actress (Drama)",
+      "missing_years": [
+        2025
+      ],
+      "max_year": 2026
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Comedy/Musical",
+      "missing_years": [
+        2025
+      ],
+      "max_year": 2026
+    },
+    {
+      "festival": "Golden Globe",
+      "category": "Best Drama",
+      "missing_years": [
+        2025
+      ],
+      "max_year": 2026
+    }
+  ],
+  "festival_variants": {
+    "Oscar": 5397,
+    "Cannes": 1851,
+    "Venice": 644,
+    "Berlin": 803,
+    "BAFTA": 5790,
+    "Golden Globe": 5242
+  },
+  "canonical_file_map": {
+    "Oscar|Best Picture": {
+      "awards7coltemplate.csv": 182,
+      "awardssample.csv": 183
+    },
+    "Oscar|Best Director": {
+      "awards7coltemplate.csv": 31,
+      "awardssample.csv": 250,
+      "persondataraw.csv": 125
+    },
+    "Oscar|Best Actor": {
+      "awards7coltemplate.csv": 28,
+      "awardssample.csv": 248,
+      "persondataraw.csv": 125
+    },
+    "Cannes|Palme d'Or": {
+      "awards7coltemplate.csv": 423,
+      "awardssample.csv": 424
+    },
+    "Cannes|Grand Prix": {
+      "awards7coltemplate.csv": 27,
+      "awardssample.csv": 28
+    },
+    "Cannes|Best Director": {
+      "awards7coltemplate.csv": 27,
+      "awardssample.csv": 28
+    },
+    "Cannes|Jury Prize": {
+      "awards7coltemplate.csv": 30,
+      "awardssample.csv": 32
+    },
+    "Venice|Golden Lion": {
+      "awards7coltemplate.csv": 104,
+      "awardssample.csv": 104
+    },
+    "Venice|Silver Lion (Grand Jury)": {
+      "awards7coltemplate.csv": 25,
+      "awardssample.csv": 26
+    },
+    "Venice|Silver Lion (Director)": {
+      "awards7coltemplate.csv": 26,
+      "awardssample.csv": 27
+    },
+    "Berlin|Golden Bear": {
+      "awards7coltemplate.csv": 124,
+      "awardssample.csv": 125
+    },
+    "Berlin|Silver Bear (Grand Jury)": {
+      "awards7coltemplate.csv": 25,
+      "awardssample.csv": 26
+    },
+    "Berlin|Silver Bear (Director)": {
+      "awards7coltemplate.csv": 25,
+      "awardssample.csv": 26
+    },
+    "BAFTA|Best Film": {
+      "awards7coltemplate.csv": 127,
+      "awardssample.csv": 128
+    },
+    "Golden Globe|Best Drama": {
+      "awards7coltemplate.csv": 131,
+      "awardssample.csv": 132
+    },
+    "Golden Globe|Best Comedy/Musical": {
+      "awards7coltemplate.csv": 86,
+      "awardssample.csv": 87
+    },
+    "Oscar|Best Actress": {
+      "awards7coltemplate.csv": 125,
+      "awardssample.csv": 256,
+      "persondataraw.csv": 125
+    },
+    "BAFTA|Best Actor": {
+      "awards7coltemplate.csv": 140,
+      "awardssample.csv": 259,
+      "baftaactordata.csv": 141,
+      "persondataraw.csv": 129
+    },
+    "Golden Globe|Best Director": {
+      "awards7coltemplate.csv": 141,
+      "awardssample.csv": 262,
+      "ggdirector2000.csv": 141,
+      "goldenglobeextra.csv": 53,
+      "persondataraw.csv": 76
+    },
+    "BAFTA|Best Actress": {
+      "awards7coltemplate.csv": 139,
+      "awardssample.csv": 256,
+      "baftaactressraw.csv": 140,
+      "persondataraw.csv": 127
+    },
+    "BAFTA|Best Director": {
+      "awards7coltemplate.csv": 140,
+      "awardssample.csv": 258,
+      "baftadirectorraw.csv": 140,
+      "persondataraw.csv": 128
+    },
+    "Golden Globe|Best Actor (Comedy/Musical)": {
+      "awardssample.csv": 126,
+      "goldenglobeextra.csv": 50,
+      "persondataraw.csv": 76
+    },
+    "Golden Globe|Best Actor (Drama)": {
+      "awardssample.csv": 126,
+      "goldenglobeextra.csv": 50,
+      "persondataraw.csv": 76
+    },
+    "Golden Globe|Best Actress (Comedy/Musical)": {
+      "awardssample.csv": 126,
+      "goldenglobeextra.csv": 50,
+      "persondataraw.csv": 76
+    },
+    "Golden Globe|Best Actress (Drama)": {
+      "awardssample.csv": 128,
+      "goldenglobeextra.csv": 51,
+      "persondataraw.csv": 76
+    }
+  },
+  "totals": {
+    "total_rows": 19727,
+    "files_loaded": 10,
+    "files_missing": 1,
+    "date": "2026-04-19"
+  }
+}
