@@ -156,5 +156,27 @@
     "resolution": "DEFERRED to Phase 4 (human review) or backfill from BAFTA archive. Single-source-Wikipedia limitation now visible in concrete data. The single_source_wikipedia_only flag on the rows was already honest about this risk.",
     "resolved_date": null,
     "status": "deferred"
+  },
+  {
+    "issue_id": "bafta-first-year-metadata-errors-2026-04-27",
+    "discovered_date": "2026-04-27",
+    "scope": "ORBIT-AWARDS-SCOPE-v1.3.md (BAFTA section 5) and scripts/scrape-bafta-categories.json",
+    "issue_type": "scope_metadata_error",
+    "description": "Two BAFTA category first_year values were off by one in scope v1.3: bafta.best_documentary encoded as 2011, actual is 2012 (revived at 65th BAFTAs). bafta.best_animated_film encoded as 2006, actual is 2007 (re-introduced at 60th BAFTAs). Wrapper FAILed at ceremonies 64 and 59 because expected categories were missing from Wikipedia articles — those categories genuinely didn't exist at those ceremonies. Same pattern as Best Children's & Family Film miss in v1.2 — scope category lifecycle metadata written from memory without cross-source verification.",
+    "resolution": "Bumped scope to v1.4 with corrected first_years. Updated categories.json to match. Added era_overrides entry for Best Documentary inaugural year (3 nominees vs standard 5). No re-scrape needed — existing CSVs for ceremonies 65, 64, 59 are already correct given the actual category lifecycle.",
+    "resolved_date": "2026-04-27",
+    "preventative_action": "Future scope work for remaining festivals (GG, Cannes, Venice, Berlin) MUST verify each category's first_year against authoritative sources before locking. Do not write first_year fields from memory.",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "scope-category-lifecycle-verification-process-2026-04-27",
+    "discovered_date": "2026-04-27",
+    "scope": "Scope curation process for all festivals",
+    "issue_type": "process_curation_weakness",
+    "description": "Two distinct scope-metadata errors caught in BAFTA scope v1.2 and v1.3 (Best Children's & Family Film miss, Best Documentary first_year off-by-one, Best Animated Film first_year off-by-one). All three were caught only after scraper-build via wrapper validation, not during scope review. Pattern: scope first_year metadata was written from memory without per-category cross-source verification.",
+    "resolution": "PROCESS LEARNING. Going forward, every scope category record requires explicit first_year verification against at least one authoritative source (festival official archive, Wikipedia category article, festival press release) before scope is locked. Memory of first awards is unreliable for boundary years.",
+    "preventative_action": "When writing scope sections for remaining festivals (GG, Cannes, Venice, Berlin), pause at each category first_year/last_year boundary and verify the boundary against an authoritative source. Document the source URL inline in the scope doc.",
+    "resolved_date": null,
+    "status": "open"
   }
 ]

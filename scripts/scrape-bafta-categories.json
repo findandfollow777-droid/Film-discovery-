@@ -148,9 +148,9 @@
     "id": "bafta.best_animated_film",
     "display_name": "Best Animated Film",
     "historical_names": [
-      {"name": "Best Animated Film", "from": 2006, "to": null}
+      {"name": "Best Animated Film", "from": 2007, "to": null}
     ],
-    "first_year": 2006,
+    "first_year": 2007,
     "last_year": null,
     "tile_type": "film",
     "recipient_type": "producers",
@@ -166,9 +166,9 @@
     "id": "bafta.best_documentary",
     "display_name": "Best Documentary",
     "historical_names": [
-      {"name": "Best Documentary", "from": 2011, "to": null}
+      {"name": "Best Documentary", "from": 2012, "to": null}
     ],
-    "first_year": 2011,
+    "first_year": 2012,
     "last_year": null,
     "tile_type": "film",
     "recipient_type": "producers",

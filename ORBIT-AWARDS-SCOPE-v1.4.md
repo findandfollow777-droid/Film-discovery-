@@ -1,10 +1,8 @@
-> **SUPERSEDED by v1.4.** Retained for historical reference. New work uses v1.4.
+# ORBIT Awards Scope v1.4.0
 
-# ORBIT Awards Scope v1.3.0
-
-**Version:** 1.3.0  
-**Date:** 2026-04-26  
-**Status:** Superseded
+**Version:** 1.4.0  
+**Date:** 2026-04-27  
+**Status:** Active
 
 ---
 
@@ -102,8 +100,8 @@ Categories active across the full 2000-present scope:
 
 ### 5.2 Feature Sections with Lifecycle Changes
 
-- bafta.best_animated_film — first_year 2006. Best Animated Film.
-- bafta.best_documentary — first_year 2011. Best Documentary.
+- bafta.best_animated_film — first_year 2007 (60th BAFTAs). Best Animated Film. Re-introduced after hiatus; Happy Feet was first recipient.
+- bafta.best_documentary — first_year 2012 (65th BAFTAs). Best Documentary. Reinstated after hiatus since 1989; Senna was first recipient.
 - bafta.best_casting — first_year 2020. Best Casting.
 - bafta.best_childrens_film — first_year 2025 (78th BAFTAs). Best Children's & Family Film. Replaces the discontinued British Academy Children's Awards (separate ceremony, ended 2022). Eligibility: U, PG, or 12A rating from the BBFC.
 - bafta.ee_rising_star — first_year 2006. EE Rising Star Award (public vote, not jury-decided). Renamed from Orange Rising Star Award in 2013.
@@ -175,3 +173,4 @@ First awarded at the 78th BAFTAs (February 2025). The scraper's categories.json 
 | 1.1.0 | 2026-04-25 | Lifecycle field corrections (sound merger, makeup rename) |
 | 1.2.0 | 2026-04-25 | Added subject_title documentation for Best Original Song. Scope definitions unchanged. |
 | 1.3.0 | 2026-04-26 | Added BAFTA Best Children's & Family Film as a 26th BAFTA category (feature_sections group). Introduced at the 78th BAFTAs in February 2025; was missed in v1.2 scope. Added full BAFTA category section (§5). No other scope changes. |
+| 1.4.0 | 2026-04-27 | Corrected first_year for two BAFTA categories caught by wrapper at ceremonies 64 and 59. Best Documentary: 2011→2012 (reinstated at 65th BAFTAs in 2012, not 64th). Best Animated Film: 2006→2007 (re-introduced at 60th BAFTAs in 2007, not 59th). Both corrections verified against Wikipedia, Grokipedia, FilmAffinity. |

@@ -61,15 +61,25 @@
     "bafta.best_animated_film": {
       "typical_nominations": 5,
       "tolerance": 2,
-      "first_year": 2006,
+      "first_year": 2007,
       "last_year": null,
-      "notes": "Sometimes 3-4 nominees in lean years"
+      "notes": "Re-introduced at 60th BAFTAs (2007). Sometimes 3-4 nominees in lean years"
     },
     "bafta.best_documentary": {
       "typical_nominations": 5,
-      "tolerance": 1,
-      "first_year": 2011,
-      "last_year": null
+      "tolerance": 2,
+      "first_year": 2012,
+      "last_year": null,
+      "notes": "Reinstated 2012 (65th BAFTAs) after hiatus since 1989. Inaugural slate was 3 nominees; settled to 5 from ceremony 66 onwards. Tolerance widened to 2 as interim fix to cover inaugural-year 3-nominee slate. era_overrides below encodes proper era-specific bounds; wrapper does not yet read it.",
+      "era_overrides": [
+        {
+          "from_year": 2012,
+          "to_year": 2012,
+          "typical_nominations": 3,
+          "tolerance": 0,
+          "reason": "Inaugural year of revived category. Per FilmAffinity / Wikipedia, BAFTA awarded only 3 nominations: Senna (winner) and 2 others."
+        }
+      ]
     },
     "bafta.best_film_not_in_english": {
       "typical_nominations": 5,
