@@ -1,11 +1,8 @@
-# ORBIT Awards Schema v1.2.0
+# ORBIT Awards Schema v1.3.0
 
-> ⚠️ **SUPERSEDED by v1.3.0 (2026-04-28).** See `ORBIT-AWARDS-SCHEMA-v1.3.md`.
-> v1.3 adds the optional `split_co_recipients` field to the Category entity to fix silent recipient splitting on team-credited categories. v1.2 documents are retained for historical reference; do not author new code against v1.2.
-
-**Version:** 1.2.0  
-**Date:** 2026-04-25  
-**Status:** Superseded
+**Version:** 1.3.0  
+**Date:** 2026-04-28  
+**Status:** Active
 
 ---
 
@@ -49,6 +46,7 @@ See ORBIT-AWARDS-SCOPE for the full category registry. Each category record incl
 | last_year | integer/null | Last ceremony year, or null if still active |
 | tile_type | string | UI tile type: "film" or "person" |
 | recipient_type | string | Type of recipient: "director", "actor", "actress", "producers", etc. |
+| split_co_recipients | bool (optional) | Defaults to true. When false, categories with multi-name recipients (e.g., directing duos, composer pairs, editing teams) keep all names in a single row's recipients[] array instead of being split into separate rows. Use false for team-credited categories where multiple individuals form a single nomination. |
 | shortlist_published | boolean | Whether the Academy publishes a shortlist before nominations |
 | typical_shortlist_size | integer | Usual number of nominees |
 | merged_from | array/null | Category IDs that merged into this one |
@@ -174,3 +172,4 @@ When a single nomination is shared by multiple individually-credited people in a
 | 1.0.0 | 2026-04-19 | Initial schema |
 | 1.1.0 | 2026-04-25 | Added co_recipient flag, dlu_title_variance flag |
 | 1.2.0 | 2026-04-25 | Added optional subject_title field on Award entity for categories where the awarded item has its own title distinct from the film (Best Original Song, optionally Best Original Score). Existing v1.1 data is forward-compatible (subject_title defaults null). |
+| 1.3.0 | 2026-04-28 | Added optional split_co_recipients field to Category entity. Backward compatible — default true preserves prior behaviour. Companion to v1.3 categories.json updates and scraper logic changes that fix silent recipient splitting on team-credited directing/editing/score categories per investigation 2026-04-26. |

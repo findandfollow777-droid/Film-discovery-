@@ -1,33 +1,60 @@
 #!/usr/bin/env python3
 """
-ORBIT BAFTA Scraper — Phase 1 (no TMDB)
+ORBIT Golden Globe Scraper — Phase 1 (no TMDB)
 
 Reads Wikipedia ceremony articles via the MediaWiki API as the sole source.
-awards.bafta.org is inaccessible (301 → 403), so PATH B applies:
-single-source Wikipedia-only, all rows flagged "single_source_wikipedia_only".
+
+PHASE 1 INVESTIGATION FINDINGS (2026-04-28):
+============================================
+
+Wikipedia URL pattern (Phase 1.3):
+  Candidate A: https://en.wikipedia.org/w/api.php?action=parse
+                 &page={ordinal}_Golden_Globe_Awards&format=json&prop=wikitext
+    → 200 OK; the page redirects to "{ordinal} Golden Globes" (renamed
+      circa 2024) but the API follows the redirect transparently when
+      called with redirects=1. Verified for ceremonies 58, 82, 83.
+
+  Candidate B: https://en.wikipedia.org/w/api.php?action=parse
+                 &page=Golden_Globe_Awards_{year}&format=json&prop=wikitext
+    → 404 missingtitle. Wikipedia does not maintain this URL form.
+
+  Decision: Use Candidate A with redirects=1.
+
+goldenglobes.com accessibility (Phase 1.4):
+  - https://goldenglobes.com/awards-database/  → HTTP 200 (HTML, WordPress)
+  - https://goldenglobes.com/winners-nominees/ → HTTP 200 BUT React-rendered
+    (template class "page-template-page-winners-nominees-react"). Nominee
+    data is fetched client-side; the static HTML payload contains no rows.
+  - Project policy forbids headless browsers (no Selenium/Playwright).
+
+Source strategy decision (Phase 1.5): PATH B (Wikipedia only)
+  - Reason: goldenglobes.com /winners-nominees/ is JS-rendered; nominee
+    data only resolves after client-side React hydration, which we cannot
+    parse without a headless browser.
+  - Same pattern as BAFTA scraper.
+  - Every row gets flag "single_source_wikipedia_only".
+  - verified_status: "auto_verified" (single-source-but-clean is
+    acceptable per scope decision in handover v1.1).
+  - No cross-check available.
+
+Wikitext structure (verified on 83rd and 82nd Golden Globes pages):
+  - {{Award category|<color>|[[Golden Globe Award for X|Display Name]]}}
+  - * '''winner''' (single bullet, bold)
+  - ** nominee (double bullet, optionally italic)
+  - Display names sometimes change between ceremonies (e.g. acting
+    categories renamed at the 83rd GG from "Best Actor" to
+    "Best Male Actor"). wikipedia_section_aliases handles both forms.
+
+Best Original Song format (GG-specific, differs from Oscars):
+  Oscar:  "Song" from ''[[Film]]'' – credits
+  GG:     "[[Song]]" (writers) – ''[[Film]]''
+  i.e. on Golden Globe pages, the writers come BEFORE the en-dash and
+  the film comes AFTER. _parse_song_entry handles this.
+
+Ceremony year formula:
+  N = year - 1943   (58th = 2001, 82nd = 2025, 83rd = 2026)
 
 Dependencies: stdlib + requests + mwparserfromhell
-
-Wikipedia wikitext structure (79th British Academy Film Awards, 2026):
-  - URL pattern: {N}th_British_Academy_Film_Awards
-  - Ceremony number formula: N = year - 1947
-  - Categories use {{Award category|{{BAFTA Film Awards Chron/colour}}|[[link|Name]]}}
-  - Winner: single bullet * with bold '''...'''
-  - Nominees: double bullet **
-  - Same structural pattern as Oscar ceremonies
-  - 26 competitive categories for modern ceremonies
-
-awards.bafta.org investigation (2026-04-26):
-  - awards.bafta.org returns 301 → www.bafta.org/awards
-  - www.bafta.org/awards returns 403 Forbidden
-  - No programmatic access available
-  - Decision: PATH B (Wikipedia only, single source)
-
-Source strategy: WIKIPEDIA ONLY (PATH B)
-  - Every row gets flag "single_source_wikipedia_only"
-  - verified_status: "auto_verified" (single-source-but-clean is acceptable
-    per scope decision in handover v1.1)
-  - No cross-check available; future work may add BAFTA API if one emerges
 """
 
 import argparse
@@ -37,7 +64,6 @@ import os
 import re
 import sys
 import time
-from collections import defaultdict
 from datetime import date, datetime, timezone
 
 try:
@@ -57,26 +83,32 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CATEGORIES_FILE = os.path.join(REPO_ROOT, "scripts", "scrape-bafta-categories.json")
-SCRAPED_DIR = os.path.join(REPO_ROOT, "data", "scraped", "bafta")
+CATEGORIES_FILE = os.path.join(REPO_ROOT, "scripts", "scrape-gg-categories.json")
+SCRAPED_DIR = os.path.join(REPO_ROOT, "data", "scraped", "gg")
 RAW_DIR = os.path.join(SCRAPED_DIR, "raw")
 
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 USER_AGENT = "ORBIT-Awards-Scraper/1.0 (https://github.com/orbit-project/Film-discovery-)"
-SCRAPE_VERSION = "scrape-bafta-v1.0.0"
+SCRAPE_VERSION = "scrape-gg-v1.0.0"
 
-# Ceremony N = year - 1947. 53rd = 2000, 79th = 2026.
-CEREMONY_YEAR_OFFSET = 1947
-MIN_CEREMONY = 53  # year 2000
+# Ceremony N = year - 1943. 58th = 2001 (scope floor), 83rd = 2026.
+CEREMONY_YEAR_OFFSET = 1943
+MIN_CEREMONY = 58  # year 2001
 
-# Single-person recipient types — co-recipient splitting applies
+# Single-person recipient types — co-recipient splitting applies.
+# Note: "writer" (Best Screenplay) is intentionally excluded; multi-name
+# screenplay credits are kept together as a credited team rather than split.
+# "songwriter" is also excluded; song credits live in the recipients array
+# but multiple songwriters per song are kept together.
 SINGLE_PERSON_RECIPIENT_TYPES = {
-    "director", "actor", "actress", "cinematographer",
-    "editor", "composer",
+    "director", "actor", "actress", "composer",
 }
 
+# Rate limit: 1 request/sec
+REQUEST_DELAY_SEC = 1.0
+
 # ---------------------------------------------------------------------------
-# Helpers (shared patterns with Oscar scraper)
+# Helpers
 # ---------------------------------------------------------------------------
 
 def ceremony_to_year(ceremony_num):
@@ -103,6 +135,7 @@ def fetch_with_retry(url, params=None, headers=None, max_retries=3):
         try:
             resp = requests.get(url, params=params, headers=headers, timeout=30)
             resp.raise_for_status()
+            time.sleep(REQUEST_DELAY_SEC)
             return resp
         except requests.RequestException as e:
             if attempt == max_retries - 1:
@@ -146,7 +179,7 @@ def get_historical_name(cat, year):
 # ---------------------------------------------------------------------------
 
 def fetch_wikipedia_wikitext(ceremony_num):
-    page_title = f"{ordinal(ceremony_num)}_British_Academy_Film_Awards"
+    page_title = f"{ordinal(ceremony_num)}_Golden_Globe_Awards"
     page_url = f"https://en.wikipedia.org/wiki/{page_title}"
 
     params = {
@@ -154,6 +187,7 @@ def fetch_wikipedia_wikitext(ceremony_num):
         "page": page_title,
         "format": "json",
         "prop": "wikitext",
+        "redirects": 1,  # follow the rename redirect to "{ordinal} Golden Globes"
     }
     headers = {"User-Agent": USER_AGENT}
 
@@ -163,6 +197,10 @@ def fetch_wikipedia_wikitext(ceremony_num):
 
     if "error" in data:
         raise RuntimeError(f"Wikipedia API error: {data['error'].get('info', data['error'])}")
+
+    resolved_title = data["parse"].get("title", page_title)
+    if resolved_title != page_title.replace("_", " "):
+        print(f"  Wikipedia redirected to: {resolved_title}")
 
     wikitext = data["parse"]["wikitext"]["*"]
     return wikitext, page_url, data
@@ -177,7 +215,7 @@ def save_raw_response(ceremony_num, data):
 
 
 # ---------------------------------------------------------------------------
-# Wikitext parsing (shared architecture with Oscar scraper)
+# Wikitext parsing — same Award category template structure as BAFTA
 # ---------------------------------------------------------------------------
 
 def extract_category_sections(wikitext):
@@ -205,20 +243,25 @@ def extract_category_sections(wikitext):
             continue
         start_pos += len(tmpl_str)
 
+        # Bound the section. Always consider the next Award template, the
+        # next "\n|}" table close, and the next "\n=+" heading — pick the
+        # earliest. This matters on GG ceremony pages where film categories
+        # and TV categories sit in separate tables, with honorary recipient
+        # text between them. Without the table-end bound, the last film
+        # category (Best Original Song) bleeds into the inter-table content.
+        candidates = [len(full_text)]
         if i + 1 < len(award_templates):
             next_tmpl_str = str(award_templates[i + 1])
-            end_pos = full_text.find(next_tmpl_str, start_pos)
-            if end_pos == -1:
-                end_pos = len(full_text)
-        else:
-            table_end = full_text.find("\n|}", start_pos)
-            section_match = re.search(r'\n==[^=]', full_text[start_pos:])
-            candidates = [len(full_text)]
-            if table_end != -1:
-                candidates.append(table_end)
-            if section_match:
-                candidates.append(start_pos + section_match.start())
-            end_pos = min(candidates)
+            next_pos = full_text.find(next_tmpl_str, start_pos)
+            if next_pos != -1:
+                candidates.append(next_pos)
+        table_end = full_text.find("\n|}", start_pos)
+        if table_end != -1:
+            candidates.append(table_end)
+        section_match = re.search(r'\n=+[^=\s]', full_text[start_pos:])
+        if section_match:
+            candidates.append(start_pos + section_match.start())
+        end_pos = min(candidates)
 
         section_text = full_text[start_pos:end_pos].strip()
         results.append((cat_name, section_text))
@@ -260,7 +303,7 @@ def match_category_to_section(cat, sections, year):
 
 
 # ---------------------------------------------------------------------------
-# Entry parsing (same logic as Oscar scraper)
+# Entry parsing
 # ---------------------------------------------------------------------------
 
 def parse_nominees_from_section(section_text, cat, year):
@@ -288,13 +331,18 @@ def parse_nominees_from_section(section_text, cat, year):
             continue
 
         content_clean = content.strip()
+        # Strip trailing daggers and stray apostrophes
         content_clean = re.sub(r"\s*[‡†]?\s*'*\s*$", "", content_clean)
+        # Strip surrounding bold markers (winner rows wrap entire content in ''')
         content_clean = content_clean.strip("'").strip()
         content_clean = re.sub(r"^'{2,3}", "", content_clean)
         content_clean = re.sub(r"'{2,3}$", "", content_clean)
         content_clean = content_clean.strip()
 
-        entry = _parse_entry_line(content_clean, cat)
+        if cat.get("has_subject_title", False):
+            entry = _parse_song_entry(content_clean)
+        else:
+            entry = _parse_entry_line(content_clean, cat)
         entry["is_winner"] = is_winner
         entries.append(entry)
 
@@ -307,6 +355,73 @@ def _protect_wikilink_dashes(text, placeholder):
     return re.sub(r'\[\[[^\]]*\]\]', _replace, text)
 
 
+def _parse_song_entry(content):
+    """
+    Parse Best Original Song entry. Golden Globe Wikipedia format:
+        "[[Song]]" ([[Writer1]], [[Writer2]], and [[Writer3]]) – ''[[Film]]''
+    or  "Song" (Writer1, Writer2) – ''Film''
+
+    Writers come BEFORE the en-dash, film AFTER.
+    """
+    result = {"name": "", "film": "", "role": "", "extra_names": [], "subject_title": ""}
+
+    # Strip wiki templates that show up sometimes
+    content = re.sub(r'\{\{(sort|double-dagger|double dagger|nom|won|efn[^}]*)\|?[^}]*\}\}',
+                     '', content, flags=re.IGNORECASE)
+
+    # Match the song name: "[[Song]]" OR "[[Page|Song]]" OR "Song" — at the start
+    song_m = re.match(
+        r'\s*"?\[\[([^|\]]+?)\|([^\]]+?)\]\]"?\s*'
+        r'|\s*"?\[\[([^|\]]+?)\]\]"?\s*'
+        r'|\s*"([^"]+)"\s*',
+        content,
+    )
+    if song_m:
+        # group ordering across the three alternatives
+        subject = (song_m.group(2) or song_m.group(3) or song_m.group(4) or "").strip().strip('"')
+        result["subject_title"] = subject
+        remainder = content[song_m.end():]
+    else:
+        remainder = content
+
+    # Now extract writers (parenthesized) and film (after the en-dash)
+    # Writers section: leading "(...)" — may contain wikilinks
+    writers_m = re.match(r'\s*\(([^)]*)\)\s*', remainder)
+    writers_text = ""
+    if writers_m:
+        writers_text = writers_m.group(1)
+        remainder = remainder[writers_m.end():]
+
+    # Film comes after en-dash/em-dash
+    DASH_PH = "\x00DASH\x00"
+    rem_protected = _protect_wikilink_dashes(remainder, DASH_PH)
+    parts = re.split(r'\s*[–—]\s*', rem_protected, maxsplit=1)
+    parts = [p.replace(DASH_PH, "–") for p in parts]
+    if len(parts) == 2:
+        film_part = parts[1].strip()
+    else:
+        film_part = parts[0].strip()
+
+    result["film"] = _extract_title(film_part)
+
+    # Extract writer names from the parenthesized list
+    if writers_text:
+        names = _extract_all_names(writers_text)
+        if names:
+            result["name"] = names[0]
+            result["extra_names"] = names[1:]
+        else:
+            # Fall back to comma-and-and split on the cleaned text
+            cleaned = _clean_wikilinks(writers_text)
+            parts2 = re.split(r',\s*|\s+and\s+', cleaned)
+            parts2 = [p.strip() for p in parts2 if p.strip()]
+            if parts2:
+                result["name"] = parts2[0]
+                result["extra_names"] = parts2[1:]
+
+    return result
+
+
 def _parse_entry_line(content, cat):
     result = {"name": "", "film": "", "role": "", "extra_names": [], "subject_title": ""}
 
@@ -315,8 +430,12 @@ def _parse_entry_line(content, cat):
     content = re.sub(r'\{\{double dagger\}\}', '', content, flags=re.IGNORECASE)
     content = re.sub(r'\{\{nom\}\}', '', content, flags=re.IGNORECASE)
     content = re.sub(r'\{\{won\}\}', '', content, flags=re.IGNORECASE)
-    # Remove efn (explanatory footnotes)
     content = re.sub(r'\{\{efn[^}]*\}\}', '', content, flags=re.IGNORECASE)
+
+    # Some Best Motion Picture - Non-English entries trail the country
+    # in parentheses, e.g. "''Film'' (Brazil)". Strip a trailing simple
+    # country marker for film extraction; we don't store the country.
+    content = re.sub(r"\s*\(([A-Z][A-Za-z .]+)\)\s*$", "", content)
 
     DASH_PLACEHOLDER = "\x00DASH\x00"
     protected = _protect_wikilink_dashes(content, DASH_PLACEHOLDER)
@@ -358,6 +477,14 @@ def _parse_entry_line(content, cat):
     elif len(parts) == 1:
         single = parts[0].strip()
         if _looks_like_film(single):
+            result["film"] = _extract_title(single)
+        elif cat.get("tile_type") == "film":
+            # Film-tile categories (e.g. GG Best Motion Picture - Drama)
+            # often list only the film in the wikitext, with no producer
+            # credits and no dash separator. The italic markers around the
+            # film were already stripped by the bold-stripping pass that
+            # runs in parse_nominees_from_section, so _looks_like_film
+            # cannot detect them here. Trust tile_type instead.
             result["film"] = _extract_title(single)
         else:
             result["name"] = _extract_person_name(single)
@@ -464,7 +591,7 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
                 others_str = ", ".join(others)
                 row = {
                     "id": _build_row_id(cat["id"], year, individual_name),
-                    "ceremony_id": f"bafta.{year}",
+                    "ceremony_id": f"gg.{year}",
                     "category_id": cat["id"],
                     "year": year,
                     "result": "won" if entry["is_winner"] else "nominated",
@@ -480,7 +607,7 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
                     "film_release_year": None,
                     "film_poster_path": None,
                     "source_url": page_url,
-                    "source_citation": f"{ordinal(ceremony_num)} British Academy Film Awards Wikipedia article, {hist_name} section",
+                    "source_citation": f"{ordinal(ceremony_num)} Golden Globe Awards Wikipedia article, {hist_name} section",
                     "scraped_at": scraped_at,
                     "scrape_version": SCRAPE_VERSION,
                     "verified_status": "auto_verified",
@@ -536,7 +663,7 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
 
             row = {
                 "id": _build_row_id(cat["id"], year, trailing),
-                "ceremony_id": f"bafta.{year}",
+                "ceremony_id": f"gg.{year}",
                 "category_id": cat["id"],
                 "year": year,
                 "result": "won" if entry["is_winner"] else "nominated",
@@ -547,7 +674,7 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
                 "film_release_year": None,
                 "film_poster_path": None,
                 "source_url": page_url,
-                "source_citation": f"{ordinal(ceremony_num)} British Academy Film Awards Wikipedia article, {hist_name} section",
+                "source_citation": f"{ordinal(ceremony_num)} Golden Globe Awards Wikipedia article, {hist_name} section",
                 "scraped_at": scraped_at,
                 "scrape_version": SCRAPE_VERSION,
                 "verified_status": "auto_verified",
@@ -621,11 +748,11 @@ def write_csv(rows, path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="ORBIT BAFTA Scraper — scrape BAFTA ceremony data from Wikipedia"
+        description="ORBIT Golden Globe Scraper — scrape GG ceremony data from Wikipedia"
     )
     parser.add_argument(
         "--ceremony", type=int, required=True,
-        help=f"Ceremony number (min {MIN_CEREMONY}, e.g. 79 for 2026)"
+        help=f"Ceremony number (min {MIN_CEREMONY}, e.g. 83 for 2026)"
     )
     parser.add_argument(
         "--dry-run", action="store_true",
@@ -647,9 +774,9 @@ def main():
         print(f"ERROR: Ceremony {ceremony_num} (year {year}) is in the future.")
         sys.exit(1)
 
-    print(f"Scraping {ordinal(ceremony_num)} British Academy Film Awards ({year})")
+    print(f"Scraping {ordinal(ceremony_num)} Golden Globe Awards ({year})")
     print("=" * 60)
-    print(f"Source strategy: PATH B (Wikipedia only)")
+    print(f"Source strategy: PATH B (Wikipedia only, single-source)")
 
     # Load categories
     print("\n[1] Loading categories")
@@ -687,10 +814,9 @@ def main():
             print(msg)
             categories_with_zero_rows.append(cat["display_name"])
 
-            parse_err_dir = RAW_DIR
-            os.makedirs(parse_err_dir, exist_ok=True)
-            err_path = os.path.join(parse_err_dir,
-                                     f"ceremony-{ceremony_num}-{slugify(cat['display_name'])}.parse-error")
+            os.makedirs(RAW_DIR, exist_ok=True)
+            err_path = os.path.join(RAW_DIR,
+                                    f"ceremony-{ceremony_num}-{slugify(cat['display_name'])}.parse-error")
             with open(err_path, "w", encoding="utf-8") as f:
                 f.write(f"Category: {cat['display_name']}\n")
                 f.write(f"Historical name: {hist_name}\n")
@@ -699,7 +825,7 @@ def main():
                 for sname, _ in sections:
                     f.write(f"  - {sname}\n")
             summary_lines.append(
-                f"[scrape-bafta {ceremony_num}] {cat['display_name']}: "
+                f"[scrape-gg {ceremony_num}] {cat['display_name']}: "
                 f"0 rows — section not found in Wikipedia"
             )
             continue
@@ -709,16 +835,15 @@ def main():
 
         if not entries:
             categories_with_zero_rows.append(cat["display_name"])
-            parse_err_dir = RAW_DIR
-            os.makedirs(parse_err_dir, exist_ok=True)
-            err_path = os.path.join(parse_err_dir,
-                                     f"ceremony-{ceremony_num}-{slugify(cat['display_name'])}.parse-error")
+            os.makedirs(RAW_DIR, exist_ok=True)
+            err_path = os.path.join(RAW_DIR,
+                                    f"ceremony-{ceremony_num}-{slugify(cat['display_name'])}.parse-error")
             with open(err_path, "w", encoding="utf-8") as f:
                 f.write(f"Category: {cat['display_name']}\n")
                 f.write(f"Section found: {sect_name}\n")
                 f.write(f"Section text:\n{sect_text}\n")
             summary_lines.append(
-                f"[scrape-bafta {ceremony_num}] {cat['display_name']}: "
+                f"[scrape-gg {ceremony_num}] {cat['display_name']}: "
                 f"0 rows — section found but parsing failed"
             )
             continue
@@ -727,7 +852,7 @@ def main():
         cat_rows = detect_co_winners(cat_rows)
 
         summary_lines.append(
-            f"[scrape-bafta {ceremony_num}] {cat['display_name']}: "
+            f"[scrape-gg {ceremony_num}] {cat['display_name']}: "
             f"{len(cat_rows)} rows (all single-source wikipedia)"
         )
         all_rows.extend(cat_rows)
@@ -742,11 +867,11 @@ def main():
     auto_verified = sum(1 for r in all_rows if r["verified_status"] == "auto_verified")
     flagged_rows = sum(1 for r in all_rows if r["verified_status"] == "flagged")
 
-    print(f"\n  [scrape-bafta {ceremony_num}] TOTAL: {len(all_rows)} rows across "
+    print(f"\n  [scrape-gg {ceremony_num}] TOTAL: {len(all_rows)} rows across "
           f"{len(active_cats)} categories")
-    print(f"  [scrape-bafta {ceremony_num}] Verified status: "
+    print(f"  [scrape-gg {ceremony_num}] Verified status: "
           f"{auto_verified} auto_verified, {flagged_rows} flagged")
-    print(f"  [scrape-bafta {ceremony_num}] Cross-check: all single-source (PATH B)")
+    print(f"  [scrape-gg {ceremony_num}] Cross-check: all single-source (PATH B)")
 
     if categories_with_zero_rows:
         print(f"\n  WARNING: {len(categories_with_zero_rows)} categories with zero rows:")
@@ -754,30 +879,47 @@ def main():
             print(f"    - {c}")
 
     # Write output
-    csv_path = os.path.join(SCRAPED_DIR, f"bafta-ceremony-{ceremony_num}.csv")
+    csv_path = os.path.join(SCRAPED_DIR, f"gg-ceremony-{ceremony_num}.csv")
 
     if args.dry_run:
         print(f"\n  --dry-run: would write to {csv_path}")
         print(f"  --dry-run: no CSV written")
     else:
         write_csv(all_rows, csv_path)
-        print(f"\n  [scrape-bafta {ceremony_num}] Output: {csv_path}")
+        print(f"\n  [scrape-gg {ceremony_num}] Output: {csv_path}")
 
-    # Landmark verification
+    # Landmark verification (printed for human verification, not asserted)
     print(f"\n  === Landmark winners (verify against Wikipedia article) ===")
     landmark_cats = [
-        "bafta.best_film", "bafta.best_director",
-        "bafta.best_leading_actor", "bafta.best_leading_actress",
-        "bafta.best_film_not_in_english",
+        "gg.best_motion_picture_drama",
+        "gg.best_motion_picture_musical_comedy",
+        "gg.best_director",
+        "gg.best_screenplay",
+        "gg.best_motion_picture_animated",
+        "gg.best_motion_picture_non_english",
+        "gg.best_original_score",
+        "gg.best_original_song",
+        "gg.cinematic_box_office_achievement",
     ]
     for cat_id in landmark_cats:
         won = [r for r in all_rows if r["category_id"] == cat_id and r["result"] == "won"]
         if won:
             r = won[0]
             name = r["recipients"][0]["name"] if r["recipients"] else "(none)"
-            print(f"  {cat_id}: {name} / {r['film_title']}")
+            subj = r.get("subject_title")
+            if subj:
+                print(f"  {cat_id}: \"{subj}\" / {r['film_title']} / {name}")
+            else:
+                print(f"  {cat_id}: {name} / {r['film_title']}")
         else:
             print(f"  {cat_id}: no winner row found")
+
+    # Source-strategy + summary footer
+    print(f"\n  === Source strategy ===")
+    print(f"  PATH B (Wikipedia only). Reasoning: goldenglobes.com /winners-nominees/")
+    print(f"  is React-rendered (page-template-page-winners-nominees-react).")
+    print(f"  Project policy forbids headless browsers, so static HTML is unparseable.")
+    print(f"  Wikipedia is the sole accessible authoritative source.")
 
     # Exit code
     if categories_with_zero_rows:

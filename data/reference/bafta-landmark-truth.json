@@ -259,8 +259,9 @@
         "bafta.best_director": {
           "winner_film": "All Quiet on the Western Front",
           "winner_recipient": "Edward Berger",
-          "expected_nomination_count": 7,
-          "source": "Wikipedia / parity rule (7 nominees per Wikipedia 76th BAFTA)"
+          "expected_nomination_count": 6,
+          "source": "Wikipedia / parity rule (7 nominees per Wikipedia 76th BAFTA)",
+          "notes": "Pre-fix count was 7 due to Daniels (Kwan + Scheinert) being mis-split into 2 rows. Post-architectural-fix the team consolidates to 1 row, total nominees: 6 (5 solo directors + 1 Daniels-as-team)."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Elvis",

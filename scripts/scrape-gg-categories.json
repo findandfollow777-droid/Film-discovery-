@@ -1,0 +1,266 @@
+[
+  {
+    "id": "gg.best_motion_picture_drama",
+    "display_name": "Best Motion Picture – Drama",
+    "historical_names": [
+      {"name": "Best Motion Picture – Drama", "from": 1944, "to": null}
+    ],
+    "first_year": 1944,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Motion Picture – Drama", "Best Motion Picture - Drama", "Best Motion Picture Drama"]
+  },
+  {
+    "id": "gg.best_motion_picture_musical_comedy",
+    "display_name": "Best Motion Picture – Musical or Comedy",
+    "historical_names": [
+      {"name": "Best Motion Picture – Musical or Comedy", "from": 1952, "to": null}
+    ],
+    "first_year": 1952,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Motion Picture – Musical or Comedy", "Best Motion Picture - Musical or Comedy", "Best Motion Picture – Comedy or Musical", "Best Motion Picture Musical or Comedy"]
+  },
+  {
+    "id": "gg.best_motion_picture_animated",
+    "display_name": "Best Motion Picture – Animated",
+    "historical_names": [
+      {"name": "Best Motion Picture – Animated", "from": 2007, "to": null}
+    ],
+    "first_year": 2007,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Motion Picture – Animated", "Best Motion Picture - Animated", "Best Animated Feature Film", "Best Animated Feature"]
+  },
+  {
+    "id": "gg.best_motion_picture_non_english",
+    "display_name": "Best Motion Picture – Non-English Language",
+    "historical_names": [
+      {"name": "Best Motion Picture – Non-English Language", "from": 2022, "to": null},
+      {"name": "Best Foreign Language Film", "from": 1965, "to": 2021}
+    ],
+    "first_year": 1965,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Motion Picture – Non-English Language", "Best Motion Picture - Non-English Language", "Best Foreign Language Film", "Best Motion Picture – Foreign Language", "Best Foreign Film"]
+  },
+  {
+    "id": "gg.best_actor_drama",
+    "display_name": "Best Actor in a Motion Picture – Drama",
+    "historical_names": [
+      {"name": "Best Male Actor in a Motion Picture – Drama", "from": 2026, "to": null},
+      {"name": "Best Actor in a Motion Picture – Drama", "from": 1951, "to": 2025}
+    ],
+    "first_year": 1951,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Drama", "Best Actor in a Motion Picture - Drama", "Best Male Actor in a Motion Picture – Drama", "Best Male Actor in a Motion Picture - Drama", "Best Performance by an Actor in a Motion Picture – Drama"]
+  },
+  {
+    "id": "gg.best_actress_drama",
+    "display_name": "Best Actress in a Motion Picture – Drama",
+    "historical_names": [
+      {"name": "Best Female Actor in a Motion Picture – Drama", "from": 2026, "to": null},
+      {"name": "Best Actress in a Motion Picture – Drama", "from": 1951, "to": 2025}
+    ],
+    "first_year": 1951,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Drama", "Best Actress in a Motion Picture - Drama", "Best Female Actor in a Motion Picture – Drama", "Best Female Actor in a Motion Picture - Drama", "Best Performance by an Actress in a Motion Picture – Drama"]
+  },
+  {
+    "id": "gg.best_actor_musical_comedy",
+    "display_name": "Best Actor in a Motion Picture – Musical or Comedy",
+    "historical_names": [
+      {"name": "Best Male Actor in a Motion Picture – Musical or Comedy", "from": 2026, "to": null},
+      {"name": "Best Actor in a Motion Picture – Musical or Comedy", "from": 1952, "to": 2025}
+    ],
+    "first_year": 1952,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Musical or Comedy", "Best Actor in a Motion Picture - Musical or Comedy", "Best Male Actor in a Motion Picture – Musical or Comedy", "Best Male Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actor in a Motion Picture – Musical or Comedy"]
+  },
+  {
+    "id": "gg.best_actress_musical_comedy",
+    "display_name": "Best Actress in a Motion Picture – Musical or Comedy",
+    "historical_names": [
+      {"name": "Best Female Actor in a Motion Picture – Musical or Comedy", "from": 2026, "to": null},
+      {"name": "Best Actress in a Motion Picture – Musical or Comedy", "from": 1952, "to": 2025}
+    ],
+    "first_year": 1952,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Musical or Comedy", "Best Actress in a Motion Picture - Musical or Comedy", "Best Female Actor in a Motion Picture – Musical or Comedy", "Best Female Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actress in a Motion Picture – Musical or Comedy"]
+  },
+  {
+    "id": "gg.best_supporting_actor",
+    "display_name": "Best Supporting Actor – Motion Picture",
+    "historical_names": [
+      {"name": "Best Supporting Male Actor in a Motion Picture", "from": 2026, "to": null},
+      {"name": "Best Supporting Actor in a Motion Picture", "from": 1969, "to": 2025}
+    ],
+    "first_year": 1969,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Supporting Actor – Motion Picture", "Best Supporting Actor - Motion Picture", "Best Supporting Actor in a Motion Picture", "Best Supporting Male Actor in a Motion Picture", "Best Performance by an Actor in a Supporting Role in a Motion Picture"]
+  },
+  {
+    "id": "gg.best_supporting_actress",
+    "display_name": "Best Supporting Actress – Motion Picture",
+    "historical_names": [
+      {"name": "Best Supporting Female Actor in a Motion Picture", "from": 2026, "to": null},
+      {"name": "Best Supporting Actress in a Motion Picture", "from": 1969, "to": 2025}
+    ],
+    "first_year": 1969,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "shortlist_published": false,
+    "typical_shortlist_size": 5,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Supporting Actress – Motion Picture", "Best Supporting Actress - Motion Picture", "Best Supporting Actress in a Motion Picture", "Best Supporting Female Actor in a Motion Picture", "Best Performance by an Actress in a Supporting Role in a Motion Picture"]
+  },
+  {
+    "id": "gg.best_director",
+    "display_name": "Best Director",
+    "historical_names": [
+      {"name": "Best Director", "from": 1947, "to": null}
+    ],
+    "first_year": 1947,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Director", "Best Director – Motion Picture", "Best Director - Motion Picture"]
+  },
+  {
+    "id": "gg.best_screenplay",
+    "display_name": "Best Screenplay",
+    "historical_names": [
+      {"name": "Best Screenplay", "from": 1947, "to": null}
+    ],
+    "first_year": 1947,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Screenplay", "Best Screenplay – Motion Picture", "Best Screenplay - Motion Picture"]
+  },
+  {
+    "id": "gg.best_original_score",
+    "display_name": "Best Original Score",
+    "historical_names": [
+      {"name": "Best Original Score", "from": 1959, "to": null}
+    ],
+    "first_year": 1959,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "composer",
+    "split_co_recipients": false,
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Best Original Score", "Best Original Score – Motion Picture", "Best Original Score - Motion Picture"]
+  },
+  {
+    "id": "gg.best_original_song",
+    "display_name": "Best Original Song",
+    "historical_names": [
+      {"name": "Best Original Song", "from": 1962, "to": null}
+    ],
+    "first_year": 1962,
+    "last_year": null,
+    "tile_type": "person",
+    "recipient_type": "songwriter",
+    "shortlist_published": false,
+    "typical_shortlist_size": 6,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": true,
+    "wikipedia_section_aliases": ["Best Original Song", "Best Original Song – Motion Picture", "Best Original Song - Motion Picture"]
+  },
+  {
+    "id": "gg.cinematic_box_office_achievement",
+    "display_name": "Cinematic and Box Office Achievement",
+    "historical_names": [
+      {"name": "Cinematic and Box Office Achievement", "from": 2024, "to": null}
+    ],
+    "first_year": 2024,
+    "last_year": null,
+    "tile_type": "film",
+    "recipient_type": "producers",
+    "shortlist_published": false,
+    "typical_shortlist_size": 8,
+    "merged_from": null,
+    "merged_into": null,
+    "has_subject_title": false,
+    "wikipedia_section_aliases": ["Cinematic and Box Office Achievement"]
+  }
+]

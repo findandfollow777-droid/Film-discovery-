@@ -458,6 +458,12 @@ def _parse_entry_line(content, cat):
         elif right_is_film:
             # Person – Film pattern (acting, directing, etc.)
             result["name"] = _extract_person_name(left)
+            # Mirror left_is_film: capture every wikilinked name on the
+            # person side, not just the first. Required for team-credited
+            # Person-first wikitext like "[[A]] and [[B]] – ''Film''" so
+            # downstream code (governed by split_co_recipients) can choose
+            # to keep the team on a single row instead of dropping name B.
+            result["extra_names"] = _extract_all_names(left)
             film_part = right_core
             # Extract character name if present (after "as")
             as_match = re.split(r'\s+as\s+', film_part, maxsplit=1)
@@ -840,7 +846,10 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
     rows = []
     scraped_at = datetime.now(timezone.utc).isoformat()
     hist_name = get_historical_name(cat, year)
-    is_single_person = cat.get("recipient_type", "") in SINGLE_PERSON_RECIPIENT_TYPES
+    is_single_person = (
+        cat.get("split_co_recipients", True)
+        and cat.get("recipient_type", "") in SINGLE_PERSON_RECIPIENT_TYPES
+    )
 
     for entry in entries:
         name = entry.get("name", "")
@@ -886,25 +895,53 @@ def build_award_rows(entries, cat, year, page_url, ceremony_num):
                 }
                 rows.append(row)
         else:
-            # Standard single-row handling
+            # Standard single-row handling.
+            #
+            # When split_co_recipients=false on the category, we keep the
+            # team as one row but still split the name string into atomic
+            # recipients[] entries. This re-uses _split_co_recipients
+            # (which originally split rows) to split the names within a
+            # row. Single-name nominations pass through unchanged because
+            # _split_co_recipients returns [name] when there's no
+            # separator.
+            should_split_in_row = (
+                not cat.get("split_co_recipients", True)
+                and cat.get("recipient_type", "") in SINGLE_PERSON_RECIPIENT_TYPES
+            )
+            if should_split_in_row and name:
+                name_atoms = _split_co_recipients(name)
+            else:
+                name_atoms = [name] if name else []
+
             trailing = name or film
+            # When the atoms successfully split a fused "A and B" name,
+            # suppress the original fused string from extras (e.g.
+            # _extract_all_names returns the same combined wikilink
+            # display "[[Page|A and B]]") so it doesn't reappear.
+            suppress = {name} if (should_split_in_row and len(name_atoms) > 1) else set()
             recipients = []
-            if name:
+            seen = set()
+            for atom in name_atoms:
+                if not atom or atom in seen or atom in suppress:
+                    continue
                 recipients.append({
-                    "name": name,
+                    "name": atom,
                     "role": entry.get("role") or None,
                     "tmdb_person_id": None,
                     "profile_path": None,
                 })
+                seen.add(atom)
             # Add extra names for multi-recipient categories
             for extra in entry.get("extra_names", []):
-                if extra != name and extra:
-                    recipients.append({
-                        "name": extra,
-                        "role": None,
-                        "tmdb_person_id": None,
-                        "profile_path": None,
-                    })
+                if not extra or extra in seen or extra in suppress:
+                    continue
+                recipients.append({
+                    "name": extra,
+                    "role": None,
+                    "tmdb_person_id": None,
+                    "profile_path": None,
+                })
+                seen.add(extra)
 
             row = {
                 "id": _build_row_id(cat["id"], year, trailing),

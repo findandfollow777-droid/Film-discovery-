@@ -1,0 +1,158 @@
+{
+  "schema_version": "v1",
+  "festival": "gg",
+  "ceremonies": {
+    "83": {
+      "ceremony_year": 2026,
+      "honours_year": 2025,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Hamnet",
+          "expected_nomination_count": 6,
+          "source": "Rolling Stone / Gold Derby / Rotten Tomatoes 83rd GG winners list"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "One Battle After Another",
+          "expected_nomination_count": 6,
+          "source": "Rolling Stone / Rotten Tomatoes"
+        },
+        "gg.best_director": {
+          "winner_film": "One Battle After Another",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_nomination_count": 6,
+          "source": "Rotten Tomatoes 83rd GG"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "One Battle After Another",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_nomination_count": 6,
+          "source": "Rotten Tomatoes 83rd GG"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "KPop Demon Hunters",
+          "expected_nomination_count": 6,
+          "source": "Gold Derby 83rd GG"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "The Secret Agent",
+          "expected_nomination_count": 6,
+          "source": "Gold Derby 83rd GG"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Sinners",
+          "winner_recipient": "Ludwig Göransson",
+          "expected_nomination_count": 6,
+          "source": "Rotten Tomatoes 83rd GG"
+        },
+        "gg.best_original_song": {
+          "winner_film": "KPop Demon Hunters",
+          "winner_song": "Golden",
+          "expected_nomination_count": 6,
+          "source": "Gold Derby 83rd GG"
+        },
+        "gg.cinematic_box_office_achievement": {
+          "winner_film": "Sinners",
+          "expected_nomination_count": 8,
+          "source": "Rotten Tomatoes 83rd GG (this category typically has 8 nominees)"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Secret Agent",
+          "winner_recipient": "Wagner Moura",
+          "expected_nomination_count": 6,
+          "source": "83rd Golden Globes Wikipedia article"
+        }
+      }
+    },
+    "82": {
+      "ceremony_year": 2025,
+      "honours_year": 2024,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Brutalist",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article / Variety / Rolling Stone winners list"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Emilia Pérez",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_director": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Brady Corbet",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Conclave",
+          "winner_recipient": "Peter Straughan",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Flow",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Emilia Pérez",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article (France entry)"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Challengers",
+          "winner_recipients": ["Trent Reznor", "Atticus Ross"],
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Emilia Pérez",
+          "winner_song": "El Mal",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.cinematic_box_office_achievement": {
+          "winner_film": "Wicked",
+          "expected_nomination_count": 8,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Adrien Brody",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "I'm Still Here",
+          "winner_recipient": "Fernanda Torres",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "A Different Man",
+          "winner_recipient": "Sebastian Stan",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "The Substance",
+          "winner_recipient": "Demi Moore",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "A Real Pain",
+          "winner_recipient": "Kieran Culkin",
+          "expected_nomination_count": 5,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Zoe Saldaña",
+          "expected_nomination_count": 5,
+          "source": "82nd Golden Globes Wikipedia article"
+        }
+      }
+    }
+  }
+}

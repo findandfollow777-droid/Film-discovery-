@@ -178,5 +178,54 @@
     "preventative_action": "When writing scope sections for remaining festivals (GG, Cannes, Venice, Berlin), pause at each category first_year/last_year boundary and verify the boundary against an authoritative source. Document the source URL inline in the scope doc.",
     "resolved_date": null,
     "status": "open"
+  },
+  {
+    "issue_id": "split-co-recipients-architectural-fix-2026-04-28",
+    "discovered_date": "2026-04-26",
+    "scope": "scripts/scrape-oscar.py, scripts/scrape-bafta.py, scripts/scrape-gg.py plus 8 categories across {oscar,bafta,gg}-categories.json",
+    "issue_type": "architectural_fix_landed",
+    "description": "Schema v1.2 had no per-category way to express that a category's recipient_type allowed multi-name credits as a single nomination. The global SINGLE_PERSON_RECIPIENT_TYPES set in each scraper caused team-credited directing duos (Coens, Daniels), editing teams (Sall/King), and composer pairs (Reznor/Ross) to be silently split. Two failure modes: Mode 1 over-splitting on plain-text 'X and Y' patterns; Mode 2 silent loss of second name in Person-first wikitext. Fix: schema v1.3 adds split_co_recipients optional bool (default true), set false on 8 affected categories. Parser also fixed in right_is_film branch to capture all wikilinks symmetric to left_is_film branch.",
+    "resolution": "Schema bumped to v1.3. Categories.json updated for 8 categories. All three scrapers updated identically. Re-scrape of affected ceremonies (Oscar 80/83/95, BAFTA 60/65/76/78, GG 82) deferred to next prompt.",
+    "resolved_date": "2026-04-28",
+    "follow_up": "Truth file format may need winner_recipients array support for team-credited cases (currently winner_recipient is a single string). Address during re-scrape verification."
+  },
+  {
+    "issue_id": "co-winner-flag-misapplied-team-credits-2026-04-28",
+    "discovered_date": "2026-04-26",
+    "scope": "Existing rows in oscar-ceremony-{80,95}.csv, bafta-ceremony-{65}.csv where co_winner flag was applied to team-credited single nominations (Coens, Daniels, Sall/King)",
+    "issue_type": "flag_semantics_drift",
+    "description": "The co_winner flag is intended to mark cases where two SEPARATE entities tie for the same award (e.g., Skyfall + Zero Dark Thirty Best Sound Editing 2013). It was incorrectly applied to team-credited single nominations where multiple individuals form one team (Coens for No Country, Daniels for EEAAO, Sall/King for Senna). After the architectural fix lands and these ceremonies are re-scraped, those rows will consolidate to single rows with multi-name recipients[] and NO co_winner flag.",
+    "resolution": "RESOLVED. Re-scraped affected ceremonies (Oscar 80/83/95, BAFTA 60/65/76/78, GG 82) with the architectural fix AND in-row recipient splitting fix in place. Coens, Daniels, Dayton/Faris, Sall/King, Ulrichs/Gill, Reznor/Ross now consolidate to single rows with atomic multi-recipient arrays (e.g., recipients=[{name: 'Joel Coen'}, {name: 'Ethan Coen'}]). The legitimate co_winner case (Skyfall + Zero Dark Thirty Best Sound Editing 2013) remains correctly flagged as it represents two separate films tied for the same award.",
+    "resolved_date": "2026-04-28"
+  },
+  {
+    "issue_id": "in-row-recipient-split-fix-2026-04-28",
+    "discovered_date": "2026-04-28",
+    "scope": "scripts/scrape-{oscar,bafta,gg}.py build_award_rows in-row recipient construction",
+    "issue_type": "architectural_fix_followup",
+    "description": "The split_co_recipients=false architectural fix correctly stopped Mode 1 over-splitting, but the consolidated row contained a single recipients[] entry with a fused name string ('Joel Coen and Ethan Coen') rather than two atomic entries. Wikipedia authors team duos either as a single wikilink with combined display text ([[Coen brothers|Joel Coen and Ethan Coen]]) or as plain-text 'A and B' — neither pattern provides a structural separator the parser recognises as two distinct people without explicit post-processing.",
+    "resolution": "Added in-row split logic in build_award_rows for all three scrapers. When split_co_recipients=false AND recipient_type is in SINGLE set AND the parsed name contains 'and'/'&'/'; ', re-uses _split_co_recipients to atomise names within the single row's recipients[] array. Fix verified across 7 affected ceremonies; all duos now present as atomic recipient entries.",
+    "resolved_date": "2026-04-28",
+    "follow_up": "Wikilinks with pipe-display ([[X|A and B]]) lose the link target when split. TMDB resolution in Phase 2 will need fuzzy-name matching for these cases. Acceptable — Phase 2 already plans for fuzzy matching."
+  },
+  {
+    "issue_id": "prompt-factual-error-bafta76-director-2026-04-28",
+    "discovered_date": "2026-04-28",
+    "scope": "Daniel's Claude prompt for in-row recipient splitting fix",
+    "issue_type": "process_human_factual_error",
+    "description": "Daniel's prompt incorrectly instructed updating bafta-landmark-truth.json ceremony 76 best_director with the Daniels as winners. The Daniels won Best Director at the 95th Academy Awards (Oscar 95), not the 76th BAFTAs (where Edward Berger won solo for All Quiet on the Western Front). Claude Code caught the conflict between the prompt's instruction and the existing factually-correct Berger entry, and stopped rather than auto-resolving.",
+    "resolution": "Daniel confirmed option (a) — apply array form to GG 82 only. BAFTA 76 truth entry remains singular for Berger as solo winner. The Daniels' nominee row in the BAFTA 76 CSV correctly shows recipients=[Kwan, Scheinert] via the in-row split fix.",
+    "resolved_date": "2026-04-28",
+    "preventative_action": "When Daniel writes truth-file curation prompts, verify the actual winner of each landmark category against authoritative sources before instructing replacement values. Memory of same-year cross-festival winners (BAFTA vs Oscar same-season) is unreliable and needs verification."
+  },
+  {
+    "issue_id": "bafta76-director-count-stale-post-architectural-fix-2026-04-28",
+    "discovered_date": "2026-04-28",
+    "scope": "data/reference/bafta-landmark-truth.json ceremony 76 bafta.best_director",
+    "issue_type": "truth_file_count_stale",
+    "description": "After the architectural fix consolidated the Daniels (Kwan + Scheinert) nominee at BAFTA 76 from 2 rows to 1 row, the truth file's expected_nomination_count of 7 became stale. Real nomination count post-fix is 6 (5 solo directors + 1 Daniels-as-team). Wrapper FAILed on this after the architectural fix re-scrape.",
+    "resolution": "Updated expected_nomination_count from 7 to 6 in truth file. Added note documenting the cause. Wrapper now PASSes on ceremony 76.",
+    "resolved_date": "2026-04-28",
+    "preventative_action": "When future architectural fixes consolidate row counts, check truth file expected_nomination_count values for any covered ceremony where the affected category has team-credited nominees (winners or otherwise). The BAFTA 76 director case generalises to: if expected count was set before fix and the slate has any team-credited nominees, count needs revisiting."
   }
 ]
