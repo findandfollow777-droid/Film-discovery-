@@ -153,9 +153,9 @@
     "scope": "ceremony 78 bafta.outstanding_debut row in data/scraped/bafta/bafta-ceremony-78.csv",
     "issue_type": "source_data_gap",
     "description": "BAFTA awarded 6 Outstanding Debut nominations at the 78th BAFTAs per Wonderland Magazine and BAFTA's own listings, but the Wikipedia article lists only 5. Sister Midnight had two distinct credits (director Karan Kandhari; producers James Bowsher and Balthazar De Ganay) which Wikipedia conflated or omitted. The scraper correctly extracts all 5 entries Wikipedia provides; the 6th is simply not in the source.",
-    "resolution": "DEFERRED to Phase 4 (human review) or backfill from BAFTA archive. Single-source-Wikipedia limitation now visible in concrete data. The single_source_wikipedia_only flag on the rows was already honest about this risk.",
-    "resolved_date": null,
-    "status": "deferred"
+    "resolution": "RESOLVED. Backfilled the missing 6th nomination (Sister Midnight / James Bowsher & Balthazar De Ganay, producers) manually with manual_verified provenance and manually_resolved_wikipedia_gap flag. Source: Wonderland Magazine 78th BAFTA nominees article (15 Jan 2025). Bowsher and De Ganay are the two producers named on the BAFTA nomination; additional Sister Midnight producers Alan McAlex and Mike Goodridge are credited on the film but not named on the nomination per Wonderland's primary listing. Wrapper now PASSes on ceremony 78.",
+    "resolved_date": "2026-04-29",
+    "status": "resolved"
   },
   {
     "issue_id": "bafta-first-year-metadata-errors-2026-04-27",
