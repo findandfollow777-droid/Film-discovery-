@@ -227,5 +227,15 @@
     "resolution": "Updated expected_nomination_count from 7 to 6 in truth file. Added note documenting the cause. Wrapper now PASSes on ceremony 76.",
     "resolved_date": "2026-04-28",
     "preventative_action": "When future architectural fixes consolidate row counts, check truth file expected_nomination_count values for any covered ceremony where the affected category has team-credited nominees (winners or otherwise). The BAFTA 76 director case generalises to: if expected count was set before fix and the slate has any team-credited nominees, count needs revisiting."
+  },
+  {
+    "issue_id": "bafta-wrapper-era-overrides-enhancement-2026-04-29",
+    "discovered_date": "2026-04-29",
+    "scope": "scripts/scrape-bafta-batch.py expectations check (Phase D); data/reference/bafta-expectations.json entries for bafta.outstanding_british_film and bafta.best_documentary",
+    "issue_type": "interim_widened_tolerance",
+    "description": "bafta-expectations.json carried era_overrides arrays on bafta.outstanding_british_film (pre-2021 5-6-nominee era vs post-2021 10-nominee slate) and bafta.best_documentary (2012 inaugural-year 3-nominee slate vs subsequent 5). The wrapper did not read era_overrides, so the interim mitigation was widening top-level tolerance (±5 on british_film, ±2 on documentary) — which masked genuine drift inside the wide bands.",
+    "resolution": "RESOLVED. Updated scripts/scrape-bafta-batch.py to read era_overrides from bafta-expectations.json and apply per-ceremony overrides where matching. Restored tight top-level tolerances on bafta.outstanding_british_film (10 ± 1) and bafta.best_documentary (5 ± 1) now that era_overrides handle the genuine historical variances. Verified across 9 ceremonies (5 modern + 4 older); all PASS with era_overrides correctly firing on affected categories (cer 65 best_documentary → typ=3 tol=0; cer 72/73 outstanding_british_film → typ=6 tol=1) and correctly falling back to top-level outside override ranges (cer 77 best_documentary, cer 78 outstanding_british_film).",
+    "resolved_date": "2026-04-29",
+    "status": "resolved"
   }
 ]

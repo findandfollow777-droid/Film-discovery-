@@ -62,6 +62,22 @@ def load_csv_rows(path):
         return list(csv.DictReader(f))
 
 
+def resolve_expectation(category_entry, ceremony_year):
+    """Return (typical, tolerance) for this year, applying era_overrides if any match.
+
+    First matching override in the array wins (defensive against overlapping ranges,
+    which shouldn't occur in practice). Falls back to top-level fields when no
+    override matches.
+    """
+    overrides = category_entry.get("era_overrides", [])
+    for override in overrides:
+        from_year = override.get("from_year", float("-inf"))
+        to_year = override.get("to_year", float("inf"))
+        if from_year <= ceremony_year <= to_year:
+            return (override["typical_nominations"], override["tolerance"])
+    return (category_entry["typical_nominations"], category_entry["tolerance"])
+
+
 # ---------------------------------------------------------------------------
 # Verification phases
 # ---------------------------------------------------------------------------
@@ -155,8 +171,7 @@ def phase_d_expectations(rows, expectations, year):
         if year < fy or (ly is not None and year > ly):
             continue  # Category not active
 
-        typical = exp["typical_nominations"]
-        tol = exp["tolerance"]
+        typical, tol = resolve_expectation(exp, year)
         actual = cat_counts.get(cat_id, 0)
 
         if actual == 0:
