@@ -143,13 +143,13 @@
         "gg.best_supporting_actor": {
           "winner_film": "A Real Pain",
           "winner_recipient": "Kieran Culkin",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "82nd Golden Globes Wikipedia article"
         },
         "gg.best_supporting_actress": {
           "winner_film": "Emilia Pérez",
           "winner_recipient": "Zoe Saldaña",
-          "expected_nomination_count": 5,
+          "expected_nomination_count": 6,
           "source": "82nd Golden Globes Wikipedia article"
         }
       }
