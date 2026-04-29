@@ -237,5 +237,16 @@
     "resolution": "RESOLVED. Updated scripts/scrape-bafta-batch.py to read era_overrides from bafta-expectations.json and apply per-ceremony overrides where matching. Restored tight top-level tolerances on bafta.outstanding_british_film (10 ± 1) and bafta.best_documentary (5 ± 1) now that era_overrides handle the genuine historical variances. Verified across 9 ceremonies (5 modern + 4 older); all PASS with era_overrides correctly firing on affected categories (cer 65 best_documentary → typ=3 tol=0; cer 72/73 outstanding_british_film → typ=6 tol=1) and correctly falling back to top-level outside override ranges (cer 77 best_documentary, cer 78 outstanding_british_film).",
     "resolved_date": "2026-04-29",
     "status": "resolved"
+  },
+  {
+    "issue_id": "bafta-truth-curation-batch-a-2026-04-29",
+    "discovered_date": "2026-04-29",
+    "scope": "data/reference/bafta-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "BAFTA truth file curation expansion Batch A: added landmark entries for ceremonies 74, 73, 72, 71, 70 (covering 2017-2021 era). Truth coverage grows from 5 of 27 ceremonies (75-79) to 10 of 27 (70-79). Landmarks verified against authoritative external sources (Variety, Wikipedia, Gold Derby, IndieWire, Hollywood Reporter, Billboard, Deadline) and cross-checked against scraped Wikipedia wikitext.",
+    "resolution": "10 of 27 BAFTA ceremonies now have curated landmark truth coverage. Remaining batches B/C/D will cover 65-69, 60-64, 53-59 respectively.",
+    "resolved_date": "2026-04-29",
+    "follow_up": "Batches B (65-69), C (60-64), D (53-59) to follow.",
+    "status": "resolved"
   }
 ]
