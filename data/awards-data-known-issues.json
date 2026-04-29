@@ -257,7 +257,7 @@
     "description": "BAFTA 73rd Outstanding Debut winner Bait was credited to Mark Jenkin (writer/director) AND Kate Byers, Linn Waite (producers) per multiple authoritative sources (Variety, BAFTA's nominee announcement, Wikipedia's 73rd BAFTAs article). The scraped CSV captured only Mark Jenkin in the recipients[] array; Kate Byers and Linn Waite are missing. Pattern matches the Outstanding Debut recipient_type issue but specifically affects this team-credited row at the older ceremony, before the architectural fix and recipient_type correction were in place. Discovered during truth file curation Batch A when cross-checking against external sources.",
     "resolution": "Truth file uses 'Mark Jenkin' (substring-matchable form) so the wrapper PASSes. Backfill of Byers and Waite as additional atomic recipients[] entries deferred — would require either re-scraping ceremony 73 (which may surface other differences post-architectural-fix) or a targeted manual edit. Not addressed in this prompt.",
     "resolved_date": null,
-    "follow_up": "When ceremony 73 is re-scraped or Phase 4 manual review touches this row, add Byers and Waite as atomic recipients[] entries with role: 'producer'. Source: Variety 2020 BAFTA winners list."
+    "follow_up": "Resolved together with bafta-outstanding-debut-name-field-role-tags-2026-04-29 and bafta-outstanding-debut-fused-multi-recipient-strings-2026-04-29 once outstanding_debut parser enhancement lands. AUDIT 2026-04-30 finding: re-scrape alone doesn't resolve this — same parser-enhancement gating as the Pattern B/C entries. Source: Variety 2020 BAFTA winners list."
   },
   {
     "issue_id": "bafta-outstanding-debut-name-field-role-tags-2026-04-29",
@@ -265,9 +265,9 @@
     "scope": "data/scraped/bafta/bafta-ceremony-{72,74,...}.csv bafta.outstanding_debut rows scraped before today's recipient_type and architectural fixes",
     "issue_type": "scraper_data_quality_gap",
     "description": "Older Outstanding Debut rows have role tags embedded inside the recipients name field, e.g. 'Remi Weekes (Writer/Director)' instead of name='Remi Weekes' with role='director' or similar. Pattern likely affects all Outstanding Debut rows scraped before the recipient_type was corrected to 'producers' for this category and the architectural fix landed. Discovered during truth file curation Batch A; truth file workaround uses substring matching against just the name portion.",
-    "resolution": "Truth file uses substring-matchable form (e.g. 'Remi Weekes') so the wrapper PASSes. Cleanup of name field artifacts deferred to either a re-scrape of affected ceremonies or a Phase 4 manual pass.",
+    "resolution": "Truth file uses substring-matchable form (e.g., 'Remi Weekes') so the wrapper PASSes. AUDIT 2026-04-30 finding: re-scraping under current scrapers does NOT resolve this pattern. The architectural fix's in-row split logic is gated on recipient_type ∈ SINGLE; outstanding_debut uses recipient_type: producers (multi-person), so the fix doesn't apply. Cer 76 post-fix-2026-04-28 control row still shows Pattern B residue, confirming this. Cleanup requires parser enhancement for outstanding_debut, not just a re-scrape.",
     "resolved_date": null,
-    "follow_up": "Cleanup options: (a) re-scrape affected ceremonies under the corrected recipient_type and architectural fix — recipients should atomize properly. (b) Targeted Phase 4 cleanup pass that strips role tags from name fields and populates role separately. Likely (a) is simpler when the time comes."
+    "follow_up": "Parser enhancement required for outstanding_debut: extract role tags from name fields into separate role attribute. Current state: 32 Pattern B rows across 16 ceremonies (per AUDIT-rescrape-scope-2026-04-30.md). After parser change lands, re-scrape affected ceremonies to clean. Worth its own focused session."
   },
   {
     "issue_id": "bafta-outstanding-debut-fused-multi-recipient-strings-2026-04-29",
@@ -275,9 +275,9 @@
     "scope": "data/scraped/bafta/bafta-ceremony-{72,74,...}.csv bafta.outstanding_debut rows scraped before today's architectural fix",
     "issue_type": "scraper_data_quality_gap",
     "description": "Older Outstanding Debut rows have unsplit 'X and Y' / 'X, Y' multi-recipient strings in the name field, e.g. 'Michael Pearce ... and Lauren Dark ...' as a single fused name entry instead of two atomic entries. Same architectural class as the co-recipient drop fixed today (split_co_recipients + Mode 2 parser fix + in-row split), but affecting older ceremonies that weren't in the Phase 1 architectural-fix re-scrape scope (those covered Oscar 80/83/95, BAFTA 60/65/76/78, GG 82). The architectural fix is in the scrapers; older Outstanding Debut ceremonies just need re-scraping to benefit.",
-    "resolution": "Truth file uses substring-matchable form (e.g. 'Michael Pearce') so the wrapper PASSes. Re-scrape of affected older ceremonies deferred — would benefit from doing it once the full BAFTA truth file is curated (Batches B/C/D complete) so the wrapper validates the re-scraped data against richer truth.",
+    "resolution": "Truth file uses substring-matchable form (e.g., 'Michael Pearce') so the wrapper PASSes. AUDIT 2026-04-30 finding: re-scraping under current scrapers does NOT resolve this pattern. Same root cause as the role-tags entry: outstanding_debut uses recipient_type: producers, so the architectural fix's in-row split logic doesn't apply. Cer 76 control row still shows Pattern C residue post-fix-2026-04-28.",
     "resolved_date": null,
-    "follow_up": "Schedule re-scrape of older Outstanding Debut ceremonies after Batch D completes truth coverage. Wrapper validation will catch any unintended diffs. The fix is purely in re-running the scraper — no code changes needed."
+    "follow_up": "Parser enhancement required for outstanding_debut: split fused 'X and Y' / 'X, Y' multi-recipient strings into atomic recipients[] entries. Current state: 16 Pattern C rows across affected ceremonies (per AUDIT-rescrape-scope-2026-04-30.md). Best resolved together with the role-tags entry as one parser-enhancement session."
   },
   {
     "issue_id": "bafta-truth-curation-batch-b-2026-04-29",
@@ -321,5 +321,35 @@
     "resolution": "Phase 1 cleanup 2026-04-30: committed all untracked GG infrastructure (gg-expectations.json, raw cache for cer 82+83, gg-ceremony-83.csv, batch-reports/ dir with .gitkeep, raw/.gitkeep). State now consistent.",
     "resolved_date": "2026-04-30",
     "follow_up": "Phase 2 builds scripts/scrape-gg-batch.py and validates cer 82+83 against existing 2-of-27 truth coverage. Phase 3 scrapes cer 57-81 (25 ceremonies). Phase 4 expands truth coverage to 27/27 across 6 batches."
+  },
+  {
+    "issue_id": "bafta-61-best-director-coens-consolidation-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/scraped/bafta/bafta-ceremony-61.csv bafta.best_director Coens won row",
+    "issue_type": "scraper_data_quality_gap",
+    "description": "BAFTA 61st (2008) Best Director winner was Joel Coen + Ethan Coen for No Country for Old Men, per Wikipedia article narrative ('Coen brothers, Joel and Ethan, won...') and multiple authoritative sources. The pre-fix scraped CSV captured only 'Joel Coen' as a single recipient. Same architectural class as Oscar 80/83/95, BAFTA 60/65/76/78, GG 82 rows fixed in the 2026-04-26 architectural fix re-scrape, but ceremony 61 wasn't in that re-scrape scope.",
+    "resolution": "Re-scraped 2026-04-30 under current scrapers (post-architectural-fix). Best Director row now has atomic recipients[] = [Joel Coen, Ethan Coen]. Truth file winner_recipients[] array assertion remains documentation-only since wrapper validates only winner_recipient singular, but CSV is now structurally correct.",
+    "resolved_date": "2026-04-30",
+    "follow_up": null
+  },
+  {
+    "issue_id": "bafta-55-outstanding-debut-hopkins-usborne-co-recipients-dropped-2026-04-30",
+    "discovered_date": "2026-04-29",
+    "scope": "data/scraped/bafta/bafta-ceremony-55.csv bafta.outstanding_debut Jump Tomorrow won row",
+    "issue_type": "scraper_data_quality_gap",
+    "description": "BAFTA 55th (2002) Outstanding Debut (Carl Foreman Award) winner was Joel Hopkins (Director) + Nicola Usborne (Writer/Producer) for Jump Tomorrow, per Wikipedia article narrative and Variety coverage. Pre-fix scraped CSV captured only 'Joel Hopkins' as a single recipient. Discovered during truth file curation Batch D 2026-04-29 but not logged at the time.",
+    "resolution": "Truth file uses winner_recipients[] array form ['Joel Hopkins', 'Nicola Usborne'] which the wrapper currently doesn't validate. CSV backfill deferred — outstanding_debut uses recipient_type: producers, so the architectural fix's in-row split logic doesn't apply (per AUDIT 2026-04-30 finding). Cleanup requires parser enhancement for outstanding_debut, then re-scrape.",
+    "resolved_date": null,
+    "follow_up": "Resolved together with bafta-outstanding-debut-name-field-role-tags-2026-04-29 and bafta-outstanding-debut-fused-multi-recipient-strings-2026-04-29 once outstanding_debut parser enhancement lands."
+  },
+  {
+    "issue_id": "bafta-66-outstanding-debut-layton-doganis-co-recipients-dropped-2026-04-30",
+    "discovered_date": "2026-04-29",
+    "scope": "data/scraped/bafta/bafta-ceremony-66.csv bafta.outstanding_debut The Imposter won row",
+    "issue_type": "scraper_data_quality_gap",
+    "description": "BAFTA 66th (2013) Outstanding Debut (Carl Foreman Award) winner was Bart Layton (Director) + Dimitri Doganis (Producer) for The Imposter, per Wikipedia article. Pre-fix scraped CSV captured only 'Bart Layton' as a single recipient. Discovered during truth file curation Batch B 2026-04-29 but not logged at the time.",
+    "resolution": "Truth file uses 'Bart Layton' (substring-matchable form) so the wrapper PASSes. CSV backfill deferred — same parser-enhancement gating as cer 55 Hopkins+Usborne entry above.",
+    "resolved_date": null,
+    "follow_up": "Resolved together with bafta-outstanding-debut-name-field-role-tags-2026-04-29 and bafta-outstanding-debut-fused-multi-recipient-strings-2026-04-29 once outstanding_debut parser enhancement lands."
   }
 ]
