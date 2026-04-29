@@ -311,5 +311,15 @@
     "resolved_date": "2026-04-29",
     "follow_up": "Per existing tracker entries bafta-outstanding-debut-name-field-role-tags and bafta-outstanding-debut-fused-multi-recipient-strings and bafta-73-outstanding-debut-co-recipients-dropped: schedule re-scrape of older Outstanding Debut ceremonies under post-architectural-fix scrapers. Two additional team-credit gaps identified during Batches C/D (cer 61 best_director Coens; cer 55 outstanding_debut Hopkins+Usborne) — same architectural class, will benefit from same re-scrape. Wrapper validation now has 100% truth coverage for catching diffs.",
     "status": "resolved"
+  },
+  {
+    "issue_id": "gg-phase-1-infrastructure-cleanup-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "GG scraping/wrapper/truth infrastructure",
+    "issue_type": "infrastructure_normalization",
+    "description": "Pre-existing GG work from earlier sessions left several artifacts on disk but uncommitted: data/reference/gg-expectations.json, data/scraped/gg/raw/ceremony-{82,83}-wikipedia.json, data/scraped/gg/gg-ceremony-83.csv (dry-run cache), data/scraped/gg/batch-reports/ dir. Cer 82 was committed in 2026-04-26 architectural fix (commit 704e9dd), but cer 83's CSV scraped under the same fix was not committed. Discovered via GG truth curation investigation 2026-04-30. Spot-check on cer 82 gg.best_screenplay confirmed no active split_co_recipients gap: all 6 nominee rows architecturally clean (The Brutalist row correctly atomized [Brady Corbet, Mona Fastvold] via recipient_type=writer in SINGLE_PERSON_RECIPIENT_TYPES; no flag change required).",
+    "resolution": "Phase 1 cleanup 2026-04-30: committed all untracked GG infrastructure (gg-expectations.json, raw cache for cer 82+83, gg-ceremony-83.csv, batch-reports/ dir with .gitkeep, raw/.gitkeep). State now consistent.",
+    "resolved_date": "2026-04-30",
+    "follow_up": "Phase 2 builds scripts/scrape-gg-batch.py and validates cer 82+83 against existing 2-of-27 truth coverage. Phase 3 scrapes cer 57-81 (25 ceremonies). Phase 4 expands truth coverage to 27/27 across 6 batches."
   }
 ]

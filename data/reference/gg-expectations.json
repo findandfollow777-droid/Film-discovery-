@@ -1,0 +1,122 @@
+{
+  "schema_version": "v1",
+  "festival": "gg",
+  "generated_at": "2026-04-28T00:00:00+00:00",
+  "generated_from": "scripts/scrape-gg-categories.json",
+  "expectations": {
+    "gg.best_motion_picture_drama": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1944,
+      "last_year": null,
+      "notes": "Drama slate has been 5-6 nominees in modern era; recent ceremonies (e.g. 82nd, 83rd) used 6"
+    },
+    "gg.best_motion_picture_musical_comedy": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1952,
+      "last_year": null,
+      "notes": "Musical/Comedy slate has been 5-6 nominees in modern era; recent ceremonies used 6"
+    },
+    "gg.best_motion_picture_animated": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 2007,
+      "last_year": null,
+      "notes": "Inaugural slate (2007) was 3 nominees; later expanded. 83rd GG had 6.",
+      "era_overrides": [
+        {
+          "from_year": 2007,
+          "to_year": 2007,
+          "typical_nominations": 3,
+          "tolerance": 0,
+          "reason": "Inaugural year of category — only 3 nominees (Cars, Happy Feet, Monster House)."
+        }
+      ]
+    },
+    "gg.best_motion_picture_non_english": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1965,
+      "last_year": null,
+      "notes": "Renamed from Best Foreign Language Film at 79th GG (2022). Slate size mostly stable at 5-6."
+    },
+    "gg.best_actor_drama": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1951,
+      "last_year": null,
+      "notes": "Acting categories typically 5-6 nominees. Display name changed at 83rd (2026) to 'Best Male Actor...'"
+    },
+    "gg.best_actress_drama": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1951,
+      "last_year": null,
+      "notes": "Acting categories typically 5-6 nominees. Display name changed at 83rd (2026) to 'Best Female Actor...'"
+    },
+    "gg.best_actor_musical_comedy": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1952,
+      "last_year": null,
+      "notes": "Display name changed at 83rd (2026)."
+    },
+    "gg.best_actress_musical_comedy": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1952,
+      "last_year": null,
+      "notes": "Display name changed at 83rd (2026)."
+    },
+    "gg.best_supporting_actor": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1969,
+      "last_year": null,
+      "notes": "Display name changed at 83rd (2026) to 'Best Supporting Male Actor...'"
+    },
+    "gg.best_supporting_actress": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1969,
+      "last_year": null,
+      "notes": "Display name changed at 83rd (2026) to 'Best Supporting Female Actor...'"
+    },
+    "gg.best_director": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1947,
+      "last_year": null,
+      "notes": "Modern slates 5-6; 83rd had 6"
+    },
+    "gg.best_screenplay": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1947,
+      "last_year": null,
+      "notes": "Multi-author screenplay credits common — co-recipient teams listed together; not split into separate rows"
+    },
+    "gg.best_original_score": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1959,
+      "last_year": null,
+      "notes": "Hiatus 1954-1958 pre-dates scope window. Continuous since 1959."
+    },
+    "gg.best_original_song": {
+      "typical_nominations": 6,
+      "tolerance": 1,
+      "first_year": 1962,
+      "last_year": null,
+      "notes": "Wikipedia format: '\"Song\" (writers) – ''Film''' — writers listed BEFORE the dash, film AFTER. subject_title populated with song name."
+    },
+    "gg.cinematic_box_office_achievement": {
+      "typical_nominations": 8,
+      "tolerance": 1,
+      "first_year": 2024,
+      "last_year": null,
+      "notes": "New category introduced at 81st GG (2024). Limited history (2024-present). Slate size 8 confirmed at 81st, 82nd, and 83rd ceremonies."
+    }
+  }
+}
