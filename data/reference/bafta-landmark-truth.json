@@ -333,6 +333,347 @@
         }
       }
     },
+    "60": {
+      "ceremony_year": 2007,
+      "honours_year": 2006,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Queen",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "United 93",
+          "winner_recipient": "Paul Greengrass",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Last King of Scotland",
+          "winner_recipient": "Forest Whitaker",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "The Queen",
+          "winner_recipient": "Helen Mirren",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Little Miss Sunshine",
+          "winner_recipient": "Alan Arkin",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Dreamgirls",
+          "winner_recipient": "Jennifer Hudson",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Pan's Labyrinth",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Happy Feet",
+          "winner_recipient": "George Miller",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 60th BAFTA",
+          "notes": "Inaugural year for Best Animated Film (first_year=2007 per scope v1.4). Wikipedia ceremony article explicitly: 'The ceremony also featured the inaugural BAFTA Award for Best Animated Film'. Slate of 3: Happy Feet (winner), Cars, Flushed Away."
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "The Last King of Scotland",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Red Road",
+          "winner_recipient": "Andrea Arnold",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Eva Green",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 60th BAFTA"
+        }
+      }
+    },
+    "61": {
+      "ceremony_year": 2008,
+      "honours_year": 2007,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Atonement",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipients": ["Joel Coen", "Ethan Coen"],
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA — explicitly states 'Coen brothers, Joel and Ethan, won Best Director'",
+          "notes": "Team-credited award (Joel Coen + Ethan Coen). Architectural fix landed today should produce a single row with both atomic recipients[], but ceremony 61 CSV was scraped pre-fix and currently captures only 'Joel Coen'. Truth file records the team credit (winner_recipients array form); wrapper currently validates only winner_recipient singular so recipient check is effectively skipped on this row pending wrapper enhancement to read winner_recipients[]. Tracked under bafta-outstanding-debut-co-recipients-dropped class (analogous: this is best_director, but same architectural pattern; resolution path is re-scrape post-fix)."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "La Vie en Rose",
+          "winner_recipient": "Marion Cotillard",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipient": "Javier Bardem",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Michael Clayton",
+          "winner_recipient": "Tilda Swinton",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Lives of Others",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Ratatouille",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 61st BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "This Is England",
+          "winner_recipient": "Shane Meadows",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Control",
+          "winner_recipient": "Matt Greenhalgh",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Shia LaBeouf",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 61st BAFTA"
+        }
+      }
+    },
+    "62": {
+      "ceremony_year": 2009,
+      "honours_year": 2008,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Slumdog Millionaire",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Danny Boyle",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Wrestler",
+          "winner_recipient": "Mickey Rourke",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "The Reader",
+          "winner_recipient": "Kate Winslet",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "The Dark Knight",
+          "winner_recipient": "Heath Ledger",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / Variety",
+          "notes": "Posthumous award. Ledger died January 2008; ceremony held February 2009."
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Vicky Cristina Barcelona",
+          "winner_recipient": "Penélope Cruz",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "I've Loved You So Long",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "WALL-E",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 62nd BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Man on Wire",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Hunger",
+          "winner_recipient": "Steve McQueen",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Noel Clarke",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 62nd BAFTA"
+        }
+      }
+    },
+    "63": {
+      "ceremony_year": 2010,
+      "honours_year": 2009,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Hurt Locker",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Hurt Locker",
+          "winner_recipient": "Kathryn Bigelow",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "A Single Man",
+          "winner_recipient": "Colin Firth",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "An Education",
+          "winner_recipient": "Carey Mulligan",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Inglourious Basterds",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Precious",
+          "winner_recipient": "Mo'Nique",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "A Prophet",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Up",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 63rd BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Fish Tank",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Moon",
+          "winner_recipient": "Duncan Jones",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Kristen Stewart",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 63rd BAFTA"
+        }
+      }
+    },
+    "64": {
+      "ceremony_year": 2011,
+      "honours_year": 2010,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The King's Speech",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Social Network",
+          "winner_recipient": "David Fincher",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / Variety",
+          "notes": "Best Film and Best Director split: The King's Speech (Hooper) won Best Film while Fincher won Best Director for The Social Network."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Colin Firth",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Black Swan",
+          "winner_recipient": "Natalie Portman",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Geoffrey Rush",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Helena Bonham Carter",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Girl with the Dragon Tattoo",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Toy Story 3",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 64th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "The King's Speech",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Four Lions",
+          "winner_recipient": "Chris Morris",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Tom Hardy",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 64th BAFTA"
+        }
+      }
+    },
     "65": {
       "ceremony_year": 2012,
       "honours_year": 2011,

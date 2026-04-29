@@ -289,5 +289,16 @@
     "resolved_date": "2026-04-29",
     "follow_up": "Batches C (60-64), D (53-59) to follow.",
     "status": "resolved"
+  },
+  {
+    "issue_id": "bafta-truth-curation-batch-c-2026-04-29",
+    "discovered_date": "2026-04-29",
+    "scope": "data/reference/bafta-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "BAFTA truth file curation expansion Batch C: added landmark entries for ceremonies 64, 63, 62, 61, 60 (covering 2007-2011 era). Truth coverage grows from 15 of 27 ceremonies (65-79) to 20 of 27 (60-79). Landmarks verified against authoritative external sources (BAFTA press releases, Wikipedia, Variety, Deadline, Hollywood Reporter, Screen Daily, France 24, CBC, Washington Post, CBS News). Notable lifecycle moments captured: ceremony 60 Best Animated Film inaugural year (Happy Feet won as first recipient; slate 3 nominees: Happy Feet/Cars/Flushed Away); ceremony 61 Best Director Coens recorded as team-credited via winner_recipients array form (CSV captured Joel only — pre-architectural-fix scrape gap; truth file documents reality with notes cross-referencing scraper-gap tracker).",
+    "resolution": "20 of 27 BAFTA ceremonies now have curated landmark truth coverage (74% of dataset). Remaining batch D will cover 53-59 (oldest 7 ceremonies, 2000-2006).",
+    "resolved_date": "2026-04-29",
+    "follow_up": "Batch D (53-59) is the final BAFTA truth curation batch.",
+    "status": "resolved"
   }
 ]
