@@ -278,5 +278,16 @@
     "resolution": "Truth file uses substring-matchable form (e.g. 'Michael Pearce') so the wrapper PASSes. Re-scrape of affected older ceremonies deferred — would benefit from doing it once the full BAFTA truth file is curated (Batches B/C/D complete) so the wrapper validates the re-scraped data against richer truth.",
     "resolved_date": null,
     "follow_up": "Schedule re-scrape of older Outstanding Debut ceremonies after Batch D completes truth coverage. Wrapper validation will catch any unintended diffs. The fix is purely in re-running the scraper — no code changes needed."
+  },
+  {
+    "issue_id": "bafta-truth-curation-batch-b-2026-04-29",
+    "discovered_date": "2026-04-29",
+    "scope": "data/reference/bafta-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "BAFTA truth file curation expansion Batch B: added landmark entries for ceremonies 69, 68, 67, 66, 65 (covering 2012-2016 era). Truth coverage grows from 10 of 27 ceremonies (70-79) to 15 of 27 (65-79). Landmarks verified against authoritative external sources (BAFTA press releases, Wikipedia, BFI, Variety, Deadline, Hollywood Reporter, IndieWire, Billboard, Marie Claire UK, Screen Daily) and cross-checked against scraped Wikipedia wikitext. Ceremony 65 Best Documentary inaugural year (3 nominees per era_override) explicitly handled.",
+    "resolution": "15 of 27 BAFTA ceremonies now have curated landmark truth coverage. Remaining batches C/D will cover 60-64 and 53-59.",
+    "resolved_date": "2026-04-29",
+    "follow_up": "Batches C (60-64), D (53-59) to follow.",
+    "status": "resolved"
   }
 ]

@@ -333,6 +333,388 @@
         }
       }
     },
+    "65": {
+      "ceremony_year": 2012,
+      "honours_year": 2011,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Thomas Langmann",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Michel Hazanavicius",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Jean Dujardin",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "The Iron Lady",
+          "winner_recipient": "Meryl Streep",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Beginners",
+          "winner_recipient": "Christopher Plummer",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "The Help",
+          "winner_recipient": "Octavia Spencer",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Skin I Live In",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Rango",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 65th BAFTA"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Senna",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 65th BAFTA / FilmAffinity",
+          "notes": "Inaugural year for the revived Best Documentary category. Slate of 3 nominees per era_override in expectations.json (era 2012-2012 ⇒ typ=3, tol=0). Subsequent ceremonies revert to standard 5-nominee slate."
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Tinker Tailor Soldier Spy",
+          "winner_recipient": "Tomas Alfredson",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA / pre-2021 era_override (5-6 nominee slate)"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Ludovic Bource",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA — historical category name was 'Best Original Music' (renamed to 'Best Original Score' in 2015); slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Tyrannosaur",
+          "winner_recipient": "Paddy Considine",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Adam Deacon",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 65th BAFTA"
+        }
+      }
+    },
+    "66": {
+      "ceremony_year": 2013,
+      "honours_year": 2012,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Argo",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Argo",
+          "winner_recipient": "Ben Affleck",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Lincoln",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Amour",
+          "winner_recipient": "Emmanuelle Riva",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Django Unchained",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Les Misérables",
+          "winner_recipient": "Anne Hathaway",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Amour",
+          "winner_recipient": "Michael Haneke",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Brave",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 66th BAFTA"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Searching for Sugar Man",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Skyfall",
+          "winner_recipient": "Sam Mendes",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "Skyfall",
+          "winner_recipient": "Thomas Newman",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA — historical category name was 'Best Original Music' (renamed to 'Best Original Score' in 2015); slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "The Imposter",
+          "winner_recipient": "Bart Layton",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA",
+          "notes": "Co-recipient Dimitri Doganis (producer) named on the BAFTA award per Wikipedia but absent from scraped CSV recipients_json (scraper captured Bart Layton only). Truth uses 'Bart Layton' to match scraped data; co-recipient gap tracked under bafta-outstanding-debut-fused-multi-recipient-strings-2026-04-29 / co-recipients-dropped class."
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Juno Temple",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 66th BAFTA"
+        }
+      }
+    },
+    "67": {
+      "ceremony_year": 2014,
+      "honours_year": 2013,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "12 Years a Slave",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Gravity",
+          "winner_recipient": "Alfonso Cuarón",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "12 Years a Slave",
+          "winner_recipient": "Chiwetel Ejiofor",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Blue Jasmine",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Captain Phillips",
+          "winner_recipient": "Barkhad Abdi",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "American Hustle",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Great Beauty",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Frozen",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 67th BAFTA"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "The Act of Killing",
+          "winner_recipient": "Joshua Oppenheimer",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Gravity",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 67th BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Kelly + Victor",
+          "winner_recipient": "Kieran Evans",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Will Poulter",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 67th BAFTA"
+        }
+      }
+    },
+    "68": {
+      "ceremony_year": 2015,
+      "honours_year": 2014,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Boyhood",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Richard Linklater",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Theory of Everything",
+          "winner_recipient": "Eddie Redmayne",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Still Alice",
+          "winner_recipient": "Julianne Moore",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Whiplash",
+          "winner_recipient": "J. K. Simmons",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / Variety",
+          "notes": "Spaced form 'J. K. Simmons' matches scraped CSV. External outlets often render as 'J.K. Simmons'; same person."
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Patricia Arquette",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Ida",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "The Lego Movie",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 68th BAFTA"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Citizenfour",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "The Theory of Everything",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 68th BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Pride",
+          "winner_recipient": "Stephen Beresford",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "Jack O'Connell",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 68th BAFTA"
+        }
+      }
+    },
+    "69": {
+      "ceremony_year": 2016,
+      "honours_year": 2015,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Revenant",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Revenant",
+          "winner_recipient": "Alejandro González Iñárritu",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / Variety",
+          "notes": "Full name 'Alejandro González Iñárritu' matches scraped CSV (Wikipedia source). External outlets often shorten to 'Alejandro G. Iñárritu'; same person."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "The Revenant",
+          "winner_recipient": "Leonardo DiCaprio",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Room",
+          "winner_recipient": "Brie Larson",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Bridge of Spies",
+          "winner_recipient": "Mark Rylance",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Steve Jobs",
+          "winner_recipient": "Kate Winslet",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Wild Tales",
+          "winner_recipient": "Damián Szifron",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA"
+        },
+        "bafta.best_animated_film": {
+          "winner_film": "Inside Out",
+          "expected_nomination_count": 3,
+          "source": "Wikipedia 69th BAFTA"
+        },
+        "bafta.best_documentary": {
+          "winner_film": "Amy",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Brooklyn",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 69th BAFTA / pre-2021 era_override"
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Theeb",
+          "winner_recipient": "Naji Abu Nowar",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "John Boyega",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 69th BAFTA"
+        }
+      }
+    },
     "70": {
       "ceremony_year": 2017,
       "honours_year": 2016,
