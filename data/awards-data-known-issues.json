@@ -300,5 +300,16 @@
     "resolved_date": "2026-04-29",
     "follow_up": "Batch D (53-59) is the final BAFTA truth curation batch.",
     "status": "resolved"
+  },
+  {
+    "issue_id": "bafta-truth-curation-batch-d-2026-04-29",
+    "discovered_date": "2026-04-29",
+    "scope": "data/reference/bafta-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "BAFTA truth file curation expansion Batch D (FINAL): added landmark entries for ceremonies 59, 58, 57, 56, 55, 54, 53 (covering 2000-2006 era). Truth coverage grows from 20 of 27 ceremonies to 27 of 27 (100% of BAFTA dataset). Landmarks verified against authoritative external sources (Wikipedia, BAFTA press releases, Variety, Deadline, Hollywood Reporter, Screen Daily, IndieWire, BFI, ABC News, CBS News, Time, France 24, CBC, Washington Post). Notable lifecycle moments captured: ceremony 59 EE Rising Star inaugural year (James McAvoy as first winner — originally branded 'Orange Rising Star Award' under Orange sponsorship); 5 instances of Best Film/Best Director split (53, 54, 57, 58 in this batch; 60, 64 in earlier batches) — recurring BAFTA pattern in 2000s era; ceremony 55 Outstanding Debut Hopkins+Usborne team credit handled via winner_recipients array form (same architectural class as cer 61 Coens); ceremony 54 Jamie Bell youngest BAFTA Best Actor at age 14 noted; ceremony 59 supporting_actress spelling 'Thandiwe Newton' (current canonical) noted vs historical 'Thandie Newton' rendering.",
+    "resolution": "BAFTA truth coverage now 100% (27 of 27 ceremonies). Phase 3.5 BAFTA truth curation milestone complete. Other festivals (Oscar, GG, Cannes, Venice, Berlin) truth file curation not yet started — separate workstreams.",
+    "resolved_date": "2026-04-29",
+    "follow_up": "Per existing tracker entries bafta-outstanding-debut-name-field-role-tags and bafta-outstanding-debut-fused-multi-recipient-strings and bafta-73-outstanding-debut-co-recipients-dropped: schedule re-scrape of older Outstanding Debut ceremonies under post-architectural-fix scrapers. Two additional team-credit gaps identified during Batches C/D (cer 61 best_director Coens; cer 55 outstanding_debut Hopkins+Usborne) — same architectural class, will benefit from same re-scrape. Wrapper validation now has 100% truth coverage for catching diffs.",
+    "status": "resolved"
   }
 ]

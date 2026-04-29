@@ -333,6 +333,473 @@
         }
       }
     },
+    "53": {
+      "ceremony_year": 2000,
+      "honours_year": 1999,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "American Beauty",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 53rd BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "All About My Mother",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 53rd BAFTA — David Lean Award for Direction",
+          "notes": "Best Film and Best Director split: Sam Mendes directed American Beauty (Best Film) but Almodóvar won Best Director for All About My Mother."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Kevin Spacey",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 53rd BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Annette Bening",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 53rd BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "The Talented Mr. Ripley",
+          "winner_recipient": "Jude Law",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 53rd BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Tea with Mussolini",
+          "winner_recipient": "Maggie Smith",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 53rd BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "All About My Mother",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 53rd BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "East Is East",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 53rd BAFTA / pre-2021 era_override (5-6 nominee slate)"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Thomas Newman",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 53rd BAFTA — historical category name was 'Best Original Music' / Anthony Asquith Award; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Ratcatcher",
+          "winner_recipient": "Lynne Ramsay",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 53rd BAFTA — Carl Foreman Award for Special Achievement by a British Director, Producer or Writer"
+        }
+      }
+    },
+    "54": {
+      "ceremony_year": 2001,
+      "honours_year": 2000,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Gladiator",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA — David Lean Award for Direction",
+          "notes": "Best Film and Best Director split: Ridley Scott directed Gladiator (Best Film) but Ang Lee won Best Director for Crouching Tiger, Hidden Dragon."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Billy Elliot",
+          "winner_recipient": "Jamie Bell",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / Variety",
+          "notes": "Jamie Bell won at age 14 — youngest BAFTA Best Leading Actor winner."
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Erin Brockovich",
+          "winner_recipient": "Julia Roberts",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Benicio del Toro",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Billy Elliot",
+          "winner_recipient": "Julie Walters",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Billy Elliot",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Tan Dun",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA — historical category name was 'Best Original Music'; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Last Resort",
+          "winner_recipient": "Paweł Pawlikowski",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 54th BAFTA"
+        }
+      }
+    },
+    "55": {
+      "ceremony_year": 2002,
+      "honours_year": 2001,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
+          "winner_recipient": "Peter Jackson",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA — David Lean Award for Direction"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Russell Crowe",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Iris",
+          "winner_recipient": "Judi Dench",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Moulin Rouge!",
+          "winner_recipient": "Jim Broadbent",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Jennifer Connelly",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Amores perros",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Gosford Park",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_screenplay": {
+          "winner_film": "Amélie",
+          "winner_recipient": "Jean-Pierre Jeunet",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA"
+        },
+        "bafta.best_adapted_screenplay": {
+          "winner_film": "Shrek",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "Moulin Rouge!",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 55th BAFTA — historical category name was 'Best Original Music'; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Jump Tomorrow",
+          "winner_recipients": ["Joel Hopkins", "Nicola Usborne"],
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 55th BAFTA — Carl Foreman Award",
+          "notes": "Team-credited award: Joel Hopkins (Director) + Nicola Usborne (Writer/Producer). Same architectural class as cer 61 Coens — CSV captured 'Joel Hopkins' only (Usborne dropped pre-architectural-fix). Truth file documents reality via winner_recipients array form. Wrapper currently validates only winner_recipient singular; recipient check effectively skipped on this row pending wrapper enhancement or post-Batch-D re-scrape. Tracked under bafta-outstanding-debut-co-recipients-dropped class."
+        }
+      }
+    },
+    "56": {
+      "ceremony_year": 2003,
+      "honours_year": 2002,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Pianist",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "The Pianist",
+          "winner_recipient": "Roman Polanski",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA — David Lean Award for Direction"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Gangs of New York",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "The Hours",
+          "winner_recipient": "Nicole Kidman",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Catch Me If You Can",
+          "winner_recipient": "Christopher Walken",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Chicago",
+          "winner_recipient": "Catherine Zeta-Jones",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "Talk to Her",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "The Warrior",
+          "winner_recipient": "Asif Kapadia",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "The Hours",
+          "winner_recipient": "Philip Glass",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 56th BAFTA — Anthony Asquith Award (historical name 'Best Original Music'); slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "The Warrior",
+          "winner_recipient": "Asif Kapadia",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 56th BAFTA — Carl Foreman Award"
+        }
+      }
+    },
+    "57": {
+      "ceremony_year": 2004,
+      "honours_year": 2003,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Master and Commander: The Far Side of the World",
+          "winner_recipient": "Peter Weir",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / Variety",
+          "notes": "Notable Best Film/Best Director split: Peter Jackson directed LOTR: The Return of the King (Best Film) but Peter Weir won Best Director for Master and Commander — flagged as a major surprise of the ceremony in contemporaneous press coverage."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Lost in Translation",
+          "winner_recipient": "Bill Murray",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 57th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Lost in Translation",
+          "winner_recipient": "Scarlett Johansson",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Love Actually",
+          "winner_recipient": "Bill Nighy",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Cold Mountain",
+          "winner_recipient": "Renée Zellweger",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "In This World",
+          "expected_nomination_count": 6,
+          "source": "Wikipedia 57th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Touching the Void",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "Cold Mountain",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 57th BAFTA — historical Anthony Asquith Award; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Kiss of Life",
+          "winner_recipient": "Emily Young",
+          "expected_nomination_count": 4,
+          "source": "Wikipedia 57th BAFTA — Carl Foreman Award"
+        }
+      }
+    },
+    "58": {
+      "ceremony_year": 2005,
+      "honours_year": 2004,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "The Aviator",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / BAFTA press release / Variety"
+        },
+        "bafta.best_director": {
+          "winner_film": "Vera Drake",
+          "winner_recipient": "Mike Leigh",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA — David Lean Award for Direction",
+          "notes": "Best Film and Best Director split: Martin Scorsese directed The Aviator (Best Film) but Mike Leigh won Best Director for Vera Drake."
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Ray",
+          "winner_recipient": "Jamie Foxx",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Vera Drake",
+          "winner_recipient": "Imelda Staunton",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Closer",
+          "winner_recipient": "Clive Owen",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / Variety"
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Motorcycle Diaries",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "My Summer of Love",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "The Motorcycle Diaries",
+          "winner_recipient": "Gustavo Santaolalla",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA — historical Anthony Asquith Award; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "A Way of Life",
+          "winner_recipient": "Amma Asante",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 58th BAFTA — Carl Foreman Award"
+        }
+      }
+    },
+    "59": {
+      "ceremony_year": 2006,
+      "honours_year": 2005,
+      "landmarks": {
+        "bafta.best_film": {
+          "winner_film": "Brokeback Mountain",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / BAFTA press release / Variety / IndieWire"
+        },
+        "bafta.best_director": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / Variety"
+        },
+        "bafta.best_leading_actor": {
+          "winner_film": "Capote",
+          "winner_recipient": "Philip Seymour Hoffman",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / Variety"
+        },
+        "bafta.best_leading_actress": {
+          "winner_film": "Walk the Line",
+          "winner_recipient": "Reese Witherspoon",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actor": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Jake Gyllenhaal",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / Variety"
+        },
+        "bafta.best_supporting_actress": {
+          "winner_film": "Crash",
+          "winner_recipient": "Thandiwe Newton",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / Variety",
+          "notes": "Spelling 'Thandiwe Newton' matches scraped CSV (current canonical spelling, adopted by the actress in 2021). External outlets at the time (2006) wrote 'Thandie Newton'; same person."
+        },
+        "bafta.best_film_not_in_english": {
+          "winner_film": "The Beat That My Heart Skipped",
+          "winner_recipient": "Jacques Audiard",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA"
+        },
+        "bafta.outstanding_british_film": {
+          "winner_film": "Wallace & Gromit: The Curse of the Were-Rabbit",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / pre-2021 era_override"
+        },
+        "bafta.best_original_score": {
+          "winner_film": "Memoirs of a Geisha",
+          "winner_recipient": "John Williams",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA — Anthony Asquith Award; slug bafta.best_original_score is canonical."
+        },
+        "bafta.outstanding_debut": {
+          "winner_film": "Pride & Prejudice",
+          "winner_recipient": "Joe Wright",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA — Carl Foreman Award"
+        },
+        "bafta.ee_rising_star": {
+          "winner_recipient": "James McAvoy",
+          "expected_nomination_count": 5,
+          "source": "Wikipedia 59th BAFTA / BAFTA heritage page",
+          "notes": "Inaugural year for the Rising Star Award (first_year=2006 per scope v1.4). Originally branded 'Orange Rising Star Award' under Orange's title sponsorship; renamed 'EE Rising Star Award' after EE acquired Orange UK. Slug bafta.ee_rising_star is canonical (current name). Wikipedia 59th BAFTA article explicitly documents James McAvoy as the Orange Rising Star Award winner — first ever recipient of this category."
+        }
+      }
+    },
     "60": {
       "ceremony_year": 2007,
       "honours_year": 2006,
