@@ -2,6 +2,379 @@
   "schema_version": "v1",
   "festival": "gg",
   "ceremonies": {
+    "70": {
+      "ceremony_year": 2013,
+      "honours_year": 2012,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Argo",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Les Misérables",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Argo",
+          "winner_recipient": "Ben Affleck",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Affleck's GG Best Director win was particularly notable because he had been infamously snubbed for an Oscar Best Director nomination for Argo that same year — yet Argo went on to win Best Picture at both the GGs and the Oscars."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Lincoln",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Zero Dark Thirty",
+          "winner_recipient": "Jessica Chastain",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Les Misérables",
+          "winner_recipient": "Hugh Jackman",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Silver Linings Playbook",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Django Unchained",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Les Misérables",
+          "winner_recipient": "Anne Hathaway",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Brave",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Amour",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Django Unchained",
+          "winner_recipient": "Quentin Tarantino",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Life of Pi",
+          "winner_recipient": "Mychael Danna",
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Skyfall",
+          "winner_song": "Skyfall",
+          "winner_recipients": [
+            "Adele",
+            "Paul Epworth"
+          ],
+          "expected_nomination_count": 5,
+          "source": "70th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "71": {
+      "ceremony_year": 2014,
+      "honours_year": 2013,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "12 Years a Slave",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "American Hustle",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Gravity",
+          "winner_recipient": "Alfonso Cuarón",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Dallas Buyers Club",
+          "winner_recipient": "Matthew McConaughey",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Blue Jasmine",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Wolf of Wall Street",
+          "winner_recipient": "Leonardo DiCaprio",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "American Hustle",
+          "winner_recipient": "Amy Adams",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Dallas Buyers Club",
+          "winner_recipient": "Jared Leto",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "American Hustle",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Frozen",
+          "expected_nomination_count": 3,
+          "source": "71st Golden Globes Wikipedia article",
+          "notes": "Animated slate at this ceremony was 3 nominees (Frozen winner, plus The Croods and Despicable Me 2) — smaller than the typical 5 of later years. Within expectations.json tolerance ±2."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "The Great Beauty",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Her",
+          "winner_recipient": "Spike Jonze",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "All Is Lost",
+          "winner_recipient": "Alex Ebert",
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Mandela: Long Walk to Freedom",
+          "winner_song": "Ordinary Love",
+          "winner_recipients": [
+            "U2",
+            "Danger Mouse"
+          ],
+          "expected_nomination_count": 5,
+          "source": "71st Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipient parse for this row contains a malformed second recipient '[[Danger Mouse (musician' due to a parser bug on wikilinks with parentheses-bearing targets and pipe display text. Truth winner_recipients records canonical 2-credit form (U2 + Danger Mouse / Brian Burton)."
+        }
+      }
+    },
+    "72": {
+      "ceremony_year": 2015,
+      "honours_year": 2014,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Boyhood",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Boyhood/Birdman split: Boyhood won Best Picture Drama and Best Director (Linklater) at the GGs, while Birdman went on to win Best Picture and Best Director at the Oscars — a notable GG/Oscar divergence."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Grand Budapest Hotel",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Richard Linklater",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety",
+          "notes": "Linklater won Best Director at the GGs for Boyhood; Iñárritu won Best Director at the Oscars for Birdman that same year."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Theory of Everything",
+          "winner_recipient": "Eddie Redmayne",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Still Alice",
+          "winner_recipient": "Julianne Moore",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Birdman",
+          "winner_recipient": "Michael Keaton",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Big Eyes",
+          "winner_recipient": "Amy Adams",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Whiplash",
+          "winner_recipient": "J. K. Simmons",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Patricia Arquette",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "How to Train Your Dragon 2",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Leviathan",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Birdman",
+          "winner_recipients": [
+            "Alejandro G. Iñárritu",
+            "Nicolás Giacobone",
+            "Alexander Dinelaris Jr.",
+            "Armando Bo"
+          ],
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety",
+          "notes": "Four-author screenplay credit. Birdman was nominated for Best Picture Drama but did not win; it took screenplay and Best Actor MC (Keaton) at the GGs."
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Theory of Everything",
+          "winner_recipient": "Jóhann Jóhannsson",
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Selma",
+          "winner_song": "Glory",
+          "winner_recipients": [
+            "John Legend",
+            "Common"
+          ],
+          "expected_nomination_count": 5,
+          "source": "72nd Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "73": {
+      "ceremony_year": 2016,
+      "honours_year": 2015,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Revenant",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Martian",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "The Revenant",
+          "winner_recipient": "Alejandro G. Iñárritu",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Revenant",
+          "winner_recipient": "Leonardo DiCaprio",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Room",
+          "winner_recipient": "Brie Larson",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Martian",
+          "winner_recipient": "Matt Damon",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Joy",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Creed",
+          "winner_recipient": "Sylvester Stallone",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Stallone's first GG win since 1976 (for Rocky). His Creed nomination/win was a notable late-career return-to-Rocky-franchise comeback story."
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Steve Jobs",
+          "winner_recipient": "Kate Winslet",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Inside Out",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Son of Saul",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Steve Jobs",
+          "winner_recipient": "Aaron Sorkin",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Hateful Eight",
+          "winner_recipient": "Ennio Morricone",
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Morricone's only Golden Globe win in a career spanning 60+ years. He went on to win the Oscar for the same score that year — his first competitive Oscar after an honorary Academy Award in 2007."
+        },
+        "gg.best_original_song": {
+          "winner_film": "Spectre",
+          "winner_song": "Writing's on the Wall",
+          "winner_recipients": [
+            "Sam Smith",
+            "Jimmy Napes"
+          ],
+          "expected_nomination_count": 5,
+          "source": "73rd Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
     "74": {
       "ceremony_year": 2017,
       "honours_year": 2016,

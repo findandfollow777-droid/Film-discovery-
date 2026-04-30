@@ -411,5 +411,25 @@
     "resolution": "10 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper combined sweep cer 74-83: 10/10 PASS, 0 anomalies, 766 total rows. Remaining batches C-F will cover cer 57-73.",
     "resolved_date": "2026-04-30",
     "follow_up": "Batch C: cer 70-73 (2013-2016), Batch D: cer 66-69 (2009-2012), Batch E: cer 62-65 (2005-2008), Batch F: cer 57-61 (2000-2004). Era-sensitive content (cer 57/59 score slates) deferred to Batch F. Cer 76 screenplay CSV partial-capture (and similar dropped-author patterns at older ceremonies) tracked separately as scraper data quality gap; full songwriter/screenwriter team capture to be addressed when scraper handles longer fused-name parenthetical credits."
+  },
+  {
+    "issue_id": "gg-truth-curation-batch-c-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/reference/gg-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "GG truth file curation expansion Batch C: added landmark entries for cer 70, 71, 72, 73 (covering 2013-2016 era). Truth coverage grows from 10 of 27 ceremonies (74-83) to 14 of 27 (70-83). Landmarks verified against authoritative external sources (Variety, Hollywood Reporter, Deadline, CBS News, CNN, Time, Rotten Tomatoes, ABC News, NPR, Screen Daily, NBC) and cross-verified against scraped Wikipedia wikitext. Notable lifecycle moments captured: cer 70 Ben Affleck won Best Director for Argo despite being Oscar-snubbed for the same film; cer 72 Boyhood/Birdman GG-Oscar split (Boyhood took Drama Picture + Director at GG, Birdman took both at Oscars; Iñárritu+team took screenplay at GG); cer 73 Ennio Morricone won his ONLY Golden Globe for The Hateful Eight; cer 73 Sylvester Stallone Creed comeback (first GG win since Rocky 1976); cer 71 Animated slate of only 3 nominees (Frozen winner) — smaller than typical 5 of later years.",
+    "resolution": "14 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper combined sweep cer 70-83: 14/14 PASS, 0 anomalies, 1044 total rows. Remaining batches D-F will cover cer 57-69.",
+    "resolved_date": "2026-04-30",
+    "follow_up": "Batch D: cer 66-69 (2009-2012), Batch E: cer 62-65 (2005-2008), Batch F: cer 57-61 (2000-2004). Era-sensitive content (cer 57/59 score slates) deferred to Batch F."
+  },
+  {
+    "issue_id": "gg-cer-71-best-original-song-recipient-name-malformed-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/scraped/gg/gg-ceremony-71.csv gg.best_original_song won row recipients_json",
+    "issue_type": "scraper_data_quality_gap",
+    "description": "Cer 71 best_original_song winner row recipients_json has a malformed second recipient: '[[Danger Mouse (musician' instead of 'Danger Mouse'. The wikitext source is '[[U2]] and [[Danger Mouse (musician)|Danger Mouse]]' — the parser truncates at the first '|' inside the parenthesized link target, producing a bad atomic name. Pattern: any wikilink with parentheses-bearing link target plus pipe display (e.g. [[Page (qualifier)|Display]]) where the first '|' inside the brackets confuses _split_co_recipients or _extract_all_names. Discovered during Phase 4 Batch C truth curation 2026-04-30.",
+    "resolution": "Truth file gg-landmark-truth.json cer 71 best_original_song uses canonical winner_recipients=['U2','Danger Mouse']. Wrapper currently validates only winner_recipient (singular), so the malformed CSV name does not trigger a Phase E failure — but the CSV row itself shows a bad name in any downstream consumer.",
+    "resolved_date": null,
+    "follow_up": "Scraper enhancement: in _extract_all_names / _split_co_recipients, handle wikilinks where the link target contains parentheses (e.g. 'Danger Mouse (musician)'). Likely fix: regex must match the FIRST '|' that's outside any parenthesis pair within [[...]], or use mwparserfromhell wikilink iteration instead of regex. Would benefit all festivals (BAFTA, Oscar, GG) since the pattern is generic Wikipedia wikitext."
   }
 ]
