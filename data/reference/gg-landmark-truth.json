@@ -2,6 +2,262 @@
   "schema_version": "v1",
   "festival": "gg",
   "ceremonies": {
+    "62": {
+      "ceremony_year": 2005,
+      "honours_year": 2004,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Aviator",
+          "expected_nomination_count": 6,
+          "source": "62nd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era)."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Sideways",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipient": "Clint Eastwood",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Leonardo DiCaprio",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipient": "Hilary Swank",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Ray",
+          "winner_recipient": "Jamie Foxx",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Being Julia",
+          "winner_recipient": "Annette Bening",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Closer",
+          "winner_recipient": "Clive Owen",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Supporting Actor split: Owen took GG for Closer; Morgan Freeman took Oscar for Million Dollar Baby."
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Closer",
+          "winner_recipient": "Natalie Portman",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety",
+          "notes": "Closer took both supporting acting Globes (Owen + Portman) — an unusual single-film sweep of the supporting categories."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "The Sea Inside",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Sideways",
+          "winner_recipients": [
+            "Alexander Payne",
+            "Jim Taylor"
+          ],
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Howard Shore",
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Alfie",
+          "winner_song": "Old Habits Die Hard",
+          "winner_recipients": [
+            "Mick Jagger",
+            "David A. Stewart"
+          ],
+          "expected_nomination_count": 5,
+          "source": "62nd Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "63": {
+      "ceremony_year": 2006,
+      "honours_year": 2005,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Brokeback Mountain",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Brokeback Mountain swept Drama Picture, Director (Lee), Screenplay (McMurtry + Ossana), and Original Song at this ceremony — a major landmark for LGBTQ+ representation in mainstream film awards."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Walk the Line",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 6,
+          "source": "63rd Golden Globes Wikipedia article / Variety",
+          "notes": "Director slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era)."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Capote",
+          "winner_recipient": "Philip Seymour Hoffman",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Transamerica",
+          "winner_recipient": "Felicity Huffman",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Walk the Line",
+          "winner_recipient": "Joaquin Phoenix",
+          "expected_nomination_count": 6,
+          "source": "63rd Golden Globes Wikipedia article / Variety",
+          "notes": "Actor MC slate at this ceremony was 6 nominees (slightly larger than typical 5)."
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Walk the Line",
+          "winner_recipient": "Reese Witherspoon",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Syriana",
+          "winner_recipient": "George Clooney",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "The Constant Gardener",
+          "winner_recipient": "Rachel Weisz",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Paradise Now",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipients": [
+            "Larry McMurtry",
+            "Diana Ossana"
+          ],
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Memoirs of a Geisha",
+          "winner_recipient": "John Williams",
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Brokeback Mountain",
+          "winner_song": "A Love That Will Never Grow Old",
+          "winner_recipients": [
+            "Gustavo Santaolalla",
+            "Bernie Taupin"
+          ],
+          "expected_nomination_count": 5,
+          "source": "63rd Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "65": {
+      "ceremony_year": 2008,
+      "honours_year": 2007,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Atonement",
+          "expected_nomination_count": 7,
+          "source": "65th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Drama Picture slate at this ceremony was 7 nominees — larger than typical 5-6 of this era. The 65th GGs were unusual: held as a press conference, not a televised gala, due to the 2007-2008 Writers Guild strike."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Sweeney Todd: The Demon Barber of Fleet Street",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Away from Her",
+          "winner_recipient": "Julie Christie",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Sweeney Todd: The Demon Barber of Fleet Street",
+          "winner_recipient": "Johnny Depp",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "La Vie en Rose",
+          "winner_recipient": "Marion Cotillard",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipient": "Javier Bardem",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "I'm Not There",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety",
+          "notes": "Blanchett portrayed Bob Dylan in I'm Not There — a notable cross-gender role."
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Ratatouille",
+          "expected_nomination_count": 3,
+          "source": "65th Golden Globes Wikipedia article",
+          "notes": "Animated slate at this ceremony was 3 nominees (within tolerance ±2)."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "The Diving Bell and the Butterfly",
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Into the Wild",
+          "winner_song": "Guaranteed",
+          "winner_recipients": [
+            "Eddie Vedder"
+          ],
+          "expected_nomination_count": 5,
+          "source": "65th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
     "66": {
       "ceremony_year": 2009,
       "honours_year": 2008,
