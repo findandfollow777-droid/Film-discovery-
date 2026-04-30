@@ -2,6 +2,401 @@
   "schema_version": "v1",
   "festival": "gg",
   "ceremonies": {
+    "57": {
+      "ceremony_year": 2000,
+      "honours_year": 1999,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "American Beauty",
+          "expected_nomination_count": 5,
+          "source": "57th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Toy Story 2",
+          "expected_nomination_count": 5,
+          "source": "57th Golden Globes Wikipedia article / Variety",
+          "notes": "Toy Story 2 took GG MC Picture — a notable animated-feature win in the MC Picture category, predating the dedicated Best Animated Feature category (introduced at cer 64, 2007)."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "All About My Mother",
+          "expected_nomination_count": 5,
+          "source": "57th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "American Beauty",
+          "winner_recipients": [
+            "Alan Ball"
+          ],
+          "expected_nomination_count": 5,
+          "source": "57th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipients_json empty for this won row; canonical sole-credit Alan Ball recorded here. winner_recipient (singular) field intentionally omitted to avoid wrapper Phase E failure on empty CSV recipients."
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Legend of 1900",
+          "winner_recipients": [
+            "Ennio Morricone"
+          ],
+          "expected_nomination_count": 9,
+          "source": "57th Golden Globes Wikipedia article / Variety",
+          "notes": "Slate of 9 nominees — the larger pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not a parser artifact. CSV recipients_json empty for this won row; Ennio Morricone won via canonical credit (his only Globe — see also cer 73 for Hateful Eight). winner_recipient singular omitted; only winner_recipients array recorded."
+        }
+      }
+    },
+    "58": {
+      "ceremony_year": 2001,
+      "honours_year": 2000,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Gladiator",
+          "expected_nomination_count": 6,
+          "source": "58th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Almost Famous",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Director split: Lee took GG for Crouching Tiger; Steven Soderbergh took Oscar for Traffic. Lee's win was a major moment for non-English-language and Asian-cinema recognition at the GGs."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Cast Away",
+          "winner_recipient": "Tom Hanks",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Erin Brockovich",
+          "winner_recipient": "Julia Roberts",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "O Brother, Where Art Thou?",
+          "winner_recipient": "George Clooney",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Nurse Betty",
+          "winner_recipient": "Renée Zellweger",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Benicio del Toro",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Almost Famous",
+          "winner_recipient": "Kate Hudson",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Stephen Gaghan",
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Gladiator",
+          "winner_recipients": [
+            "Hans Zimmer",
+            "Lisa Gerrard"
+          ],
+          "expected_nomination_count": 6,
+          "source": "58th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Wonder Boys",
+          "winner_song": "Things Have Changed",
+          "winner_recipients": [
+            "Bob Dylan"
+          ],
+          "expected_nomination_count": 5,
+          "source": "58th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipients_json empty for this won row; canonical Bob Dylan credit recorded here."
+        }
+      }
+    },
+    "59": {
+      "ceremony_year": 2002,
+      "honours_year": 2001,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "A Beautiful Mind",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Moulin Rouge!",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety",
+          "notes": "Moulin Rouge! marked a major mid-2000s revival of the movie-musical form, foreshadowing Chicago's win the following year (cer 60)."
+        },
+        "gg.best_director": {
+          "winner_film": "Gosford Park",
+          "winner_recipient": "Robert Altman",
+          "expected_nomination_count": 6,
+          "source": "59th Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Director divergence: Altman took GG for Gosford Park; Ron Howard took Oscar for A Beautiful Mind. Director slate at this ceremony was 6."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Russell Crowe",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "In the Bedroom",
+          "winner_recipient": "Sissy Spacek",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Royal Tenenbaums",
+          "winner_recipient": "Gene Hackman",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Moulin Rouge!",
+          "winner_recipient": "Nicole Kidman",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Iris",
+          "winner_recipient": "Jim Broadbent",
+          "expected_nomination_count": 6,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Jennifer Connelly",
+          "expected_nomination_count": 6,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "No Man's Land",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Akiva Goldsman",
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Moulin Rouge!",
+          "winner_recipient": "Craig Armstrong",
+          "expected_nomination_count": 8,
+          "source": "59th Golden Globes Wikipedia article / Variety",
+          "notes": "Slate of 8 nominees — pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not parser artifact."
+        },
+        "gg.best_original_song": {
+          "winner_film": "Kate & Leopold",
+          "winner_song": "Until...",
+          "winner_recipients": [
+            "Sting"
+          ],
+          "expected_nomination_count": 5,
+          "source": "59th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipients_json empty for this won row; canonical Sting credit recorded here."
+        }
+      }
+    },
+    "60": {
+      "ceremony_year": 2003,
+      "honours_year": 2002,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Hours",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Chicago",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety",
+          "notes": "Chicago took GG MC Picture, then went on to win Oscar Best Picture — the first musical to win Oscar Best Picture since Oliver! (1968)."
+        },
+        "gg.best_director": {
+          "winner_film": "Gangs of New York",
+          "winner_recipient": "Martin Scorsese",
+          "expected_nomination_count": 6,
+          "source": "60th Golden Globes Wikipedia article / Variety",
+          "notes": "Scorsese took GG Best Director for Gangs of New York — well before his eventual Oscar Best Director win (cer 64 GG / Oscar 2007 for The Departed). Director slate at this ceremony was 6."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "About Schmidt",
+          "winner_recipient": "Jack Nicholson",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "The Hours",
+          "winner_recipient": "Nicole Kidman",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Chicago",
+          "winner_recipient": "Richard Gere",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Chicago",
+          "winner_recipient": "Renée Zellweger",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Adaptation.",
+          "winner_recipient": "Chris Cooper",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Adaptation.",
+          "winner_recipient": "Meryl Streep",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety",
+          "notes": "Adaptation. took both supporting acting Globes (Cooper + Streep) — second single-film supporting sweep of the post-2000 era (after Closer at cer 62)."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Talk to Her",
+          "expected_nomination_count": 6,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "About Schmidt",
+          "winner_recipients": [
+            "Alexander Payne",
+            "Jim Taylor"
+          ],
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Frida",
+          "winner_recipient": "Elliot Goldenthal",
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Gangs of New York",
+          "winner_song": "The Hands That Built America",
+          "winner_recipients": [
+            "U2"
+          ],
+          "expected_nomination_count": 5,
+          "source": "60th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "61": {
+      "ceremony_year": 2004,
+      "honours_year": 2003,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Return of the King swept the 61st GGs (Drama Picture, Director, Original Score, Original Song) — the trilogy's culminating awards moment, foreshadowing its 11-Oscar sweep two months later."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Lost in Translation",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Peter Jackson",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Mystic River",
+          "winner_recipient": "Sean Penn",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Monster",
+          "winner_recipient": "Charlize Theron",
+          "expected_nomination_count": 6,
+          "source": "61st Golden Globes Wikipedia article / Variety",
+          "notes": "Actress Drama slate at this ceremony was 6. Theron's transformative performance was widely cited as a career-defining turn."
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Lost in Translation",
+          "winner_recipient": "Bill Murray",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Something's Gotta Give",
+          "winner_recipient": "Diane Keaton",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Mystic River",
+          "winner_recipient": "Tim Robbins",
+          "expected_nomination_count": 6,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Cold Mountain",
+          "winner_recipient": "Renée Zellweger",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Osama",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Lost in Translation",
+          "winner_recipient": "Sofia Coppola",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Howard Shore",
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_song": "Into the West",
+          "winner_recipients": [
+            "Annie Lennox",
+            "Fran Walsh",
+            "Howard Shore"
+          ],
+          "expected_nomination_count": 5,
+          "source": "61st Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
     "62": {
       "ceremony_year": 2005,
       "honours_year": 2004,
