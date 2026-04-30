@@ -2,6 +2,460 @@
   "schema_version": "v1",
   "festival": "gg",
   "ceremonies": {
+    "78": {
+      "ceremony_year": 2021,
+      "honours_year": 2020,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Nomadland",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety / Hollywood Reporter / Deadline"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Borat Subsequent Moviefilm",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_director": {
+          "winner_film": "Nomadland",
+          "winner_recipient": "Chloé Zhao",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety / Deadline",
+          "notes": "Zhao was the second woman ever to win Best Director (after Barbra Streisand 1984) and the first woman of color."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Ma Rainey's Black Bottom",
+          "winner_recipient": "Chadwick Boseman",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / CBS News / NBC News",
+          "notes": "Posthumous win. Boseman died 2020-08-28; the award was accepted by his widow Taylor Simone Ledward."
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "The United States vs. Billie Holiday",
+          "winner_recipient": "Andra Day",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Borat Subsequent Moviefilm",
+          "winner_recipient": "Sacha Baron Cohen",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "I Care a Lot",
+          "winner_recipient": "Rosamund Pike",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Judas and the Black Messiah",
+          "winner_recipient": "Daniel Kaluuya",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "The Mauritanian",
+          "winner_recipient": "Jodie Foster",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Soul",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Minari",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "The Trial of the Chicago 7",
+          "winner_recipient": "Aaron Sorkin",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Soul",
+          "winner_recipients": [
+            "Trent Reznor",
+            "Atticus Ross",
+            "Jon Batiste"
+          ],
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety",
+          "notes": "Triple team credit. Same architectural pattern as cer 82 best_original_score (Reznor + Ross duo for Challengers)."
+        },
+        "gg.best_original_song": {
+          "winner_film": "The Life Ahead",
+          "winner_song": "Io sì (Seen)",
+          "expected_nomination_count": 5,
+          "source": "78th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "79": {
+      "ceremony_year": 2022,
+      "honours_year": 2021,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Power of the Dog",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "West Side Story",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "The Power of the Dog",
+          "winner_recipient": "Jane Campion",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "King Richard",
+          "winner_recipient": "Will Smith",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Being the Ricardos",
+          "winner_recipient": "Nicole Kidman",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "tick, tick... BOOM!",
+          "winner_recipient": "Andrew Garfield",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "West Side Story",
+          "winner_recipient": "Rachel Zegler",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "The Power of the Dog",
+          "winner_recipient": "Kodi Smit-McPhee",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "West Side Story",
+          "winner_recipient": "Ariana DeBose",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Encanto",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Drive My Car",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Belfast",
+          "winner_recipient": "Kenneth Branagh",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Dune",
+          "winner_recipient": "Hans Zimmer",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "No Time to Die",
+          "winner_song": "No Time to Die",
+          "expected_nomination_count": 5,
+          "source": "79th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "80": {
+      "ceremony_year": 2023,
+      "honours_year": 2022,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Fabelmans",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Banshees of Inisherin",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "The Fabelmans",
+          "winner_recipient": "Steven Spielberg",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Elvis",
+          "winner_recipient": "Austin Butler",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Tár",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Banshees of Inisherin",
+          "winner_recipient": "Colin Farrell",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Michelle Yeoh",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Ke Huy Quan",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Black Panther: Wakanda Forever",
+          "winner_recipient": "Angela Bassett",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Guillermo del Toro's Pinocchio",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Argentina, 1985",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "The Banshees of Inisherin",
+          "winner_recipient": "Martin McDonagh",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Babylon",
+          "winner_recipient": "Justin Hurwitz",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "RRR",
+          "winner_song": "Naatu Naatu",
+          "expected_nomination_count": 5,
+          "source": "80th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "81": {
+      "ceremony_year": 2024,
+      "honours_year": 2023,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Oppenheimer",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Poor Things",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Christopher Nolan",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Cillian Murphy",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Killers of the Flower Moon",
+          "winner_recipient": "Lily Gladstone",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Holdovers",
+          "winner_recipient": "Paul Giamatti",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Poor Things",
+          "winner_recipient": "Emma Stone",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Robert Downey Jr.",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "The Holdovers",
+          "winner_recipient": "Da'Vine Joy Randolph",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "The Boy and the Heron",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Anatomy of a Fall",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Anatomy of a Fall",
+          "winner_recipients": [
+            "Justine Triet",
+            "Arthur Harari"
+          ],
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Ludwig Göransson",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Barbie",
+          "winner_song": "What Was I Made For?",
+          "expected_nomination_count": 6,
+          "source": "81st Golden Globes Wikipedia article / Variety"
+        },
+        "gg.cinematic_box_office_achievement": {
+          "winner_film": "Barbie",
+          "expected_nomination_count": 8,
+          "source": "81st Golden Globes Wikipedia article / Variety / CNBC / Hypebeast",
+          "notes": "Inaugural year of the category. Slate of 8 nominees confirmed at first ceremony (continued at 82nd, 83rd)."
+        }
+      }
+    },
+    "82": {
+      "ceremony_year": 2025,
+      "honours_year": 2024,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Brutalist",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article / Variety / Rolling Stone winners list"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Emilia Pérez",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_director": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Brady Corbet",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Conclave",
+          "winner_recipient": "Peter Straughan",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Flow",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Emilia Pérez",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article (France entry)"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Challengers",
+          "winner_recipients": [
+            "Trent Reznor",
+            "Atticus Ross"
+          ],
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Emilia Pérez",
+          "winner_song": "El Mal",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.cinematic_box_office_achievement": {
+          "winner_film": "Wicked",
+          "expected_nomination_count": 8,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Adrien Brody",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "I'm Still Here",
+          "winner_recipient": "Fernanda Torres",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "A Different Man",
+          "winner_recipient": "Sebastian Stan",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "The Substance",
+          "winner_recipient": "Demi Moore",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "A Real Pain",
+          "winner_recipient": "Kieran Culkin",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Zoe Saldaña",
+          "expected_nomination_count": 6,
+          "source": "82nd Golden Globes Wikipedia article"
+        }
+      }
+    },
     "83": {
       "ceremony_year": 2026,
       "honours_year": 2025,
@@ -60,97 +514,6 @@
           "winner_recipient": "Wagner Moura",
           "expected_nomination_count": 6,
           "source": "83rd Golden Globes Wikipedia article"
-        }
-      }
-    },
-    "82": {
-      "ceremony_year": 2025,
-      "honours_year": 2024,
-      "landmarks": {
-        "gg.best_motion_picture_drama": {
-          "winner_film": "The Brutalist",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article / Variety / Rolling Stone winners list"
-        },
-        "gg.best_motion_picture_musical_comedy": {
-          "winner_film": "Emilia Pérez",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_director": {
-          "winner_film": "The Brutalist",
-          "winner_recipient": "Brady Corbet",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_screenplay": {
-          "winner_film": "Conclave",
-          "winner_recipient": "Peter Straughan",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_motion_picture_animated": {
-          "winner_film": "Flow",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_motion_picture_non_english": {
-          "winner_film": "Emilia Pérez",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article (France entry)"
-        },
-        "gg.best_original_score": {
-          "winner_film": "Challengers",
-          "winner_recipients": ["Trent Reznor", "Atticus Ross"],
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_original_song": {
-          "winner_film": "Emilia Pérez",
-          "winner_song": "El Mal",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.cinematic_box_office_achievement": {
-          "winner_film": "Wicked",
-          "expected_nomination_count": 8,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_actor_drama": {
-          "winner_film": "The Brutalist",
-          "winner_recipient": "Adrien Brody",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_actress_drama": {
-          "winner_film": "I'm Still Here",
-          "winner_recipient": "Fernanda Torres",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_actor_musical_comedy": {
-          "winner_film": "A Different Man",
-          "winner_recipient": "Sebastian Stan",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_actress_musical_comedy": {
-          "winner_film": "The Substance",
-          "winner_recipient": "Demi Moore",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_supporting_actor": {
-          "winner_film": "A Real Pain",
-          "winner_recipient": "Kieran Culkin",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
-        },
-        "gg.best_supporting_actress": {
-          "winner_film": "Emilia Pérez",
-          "winner_recipient": "Zoe Saldaña",
-          "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
         }
       }
     }

@@ -391,5 +391,15 @@
     "resolution": "Not addressed in Phase 3.6 (expectations.json is out of scope per the Phase 3.6 prompt). The 2 REVIEW verdicts are non-critical anomalies — data is correct, expectations metadata just doesn't yet reflect older-era slate sizes. Wrapper Phases A-D otherwise PASS for these ceremonies (categories present, won-row uniqueness, no missing rows, no recipients_json corruption).",
     "resolved_date": null,
     "follow_up": "Phase 4 truth curation work should add era_override to gg.best_original_score in gg-expectations.json: typical=8, tolerance=2 for ceremony years 2000-2002 (pre-cer 60 or thereabouts — exact boundary should be confirmed by checking cer 60+ slate sizes during truth curation)."
+  },
+  {
+    "issue_id": "gg-truth-curation-batch-a-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/reference/gg-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "GG truth file curation expansion Batch A: added landmark entries for cer 78, 79, 80, 81 (covering 2021-2024 era, recent era). Truth coverage grows from 2 of 27 ceremonies (82, 83) to 6 of 27 (78-83). Landmarks verified against authoritative external sources (Variety, Hollywood Reporter, Deadline, Rolling Stone, CBS News, CNBC, ABC News, Wikipedia, Hypebeast, NBC News, Good Morning America) and cross-verified against scraped Wikipedia wikitext. Notable lifecycle moments captured: cer 81 cinematic_box_office_achievement inaugural year (Barbie won as first recipient with 8-nominee slate); cer 78 best_original_score triple team credit (Reznor + Ross + Batiste for Soul); cer 78 best_actor_drama posthumous (Chadwick Boseman); cer 78 best_director Chloé Zhao 2nd-ever woman / first woman of color.",
+    "resolution": "6 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper combined sweep cer 78-83: 6/6 PASS, 0 anomalies, 486 total rows. Remaining batches B-F will cover cer 57-77.",
+    "resolved_date": "2026-04-30",
+    "follow_up": "Batch B: cer 74-77, Batch C: cer 70-73, Batch D: cer 66-69, Batch E: cer 62-65, Batch F: cer 57-61. Era-sensitive content (best_original_score larger slates at older ceremonies, cer 57/59 era_overrides) deferred to appropriate batch."
   }
 ]
