@@ -114,7 +114,9 @@ If you modify any JSON data file, seed file, or awards database, leave a dated n
 All user-facing text should maintain ORBIT's space/cinema vocabulary where natural. Use terms like "orbit", "constellation", "nebula", "stellar" in feature names and UI labels. Don't force it into instructional text or error messages where clarity matters more than theme.
 
 ### 24. Cinema First, TV Minimal
-ORBIT is a cinema-focused platform. TV functionality exists in simplified form on actor timelines only. Do not expand TV integration into new features without explicit discussion. Quick Search, Venn, and all games are movies-only.
+ORBIT is a cinema-focused platform. TV functionality exists in simplified form on actor timelines only. Do not expand TV integration into new features without explicit discussion. Venn and all games are movies-only.
+
+**Quick Search exception (added May 1, 2026):** Quick Search includes TV credits when the actor's tenure on the show is substantial — proxied as `episode_count >= 20` on the TMDB credit. This catches recurring/regular roles (Deadwood, Lovejoy, American Gods) while excluding one-off guest spots. Movies are always included regardless of episode count.
 
 ### 25. Content Origin Awareness
 When adding new data sources (AI-generated reviews, trivia questions, enriched metadata), track the origin. Include a `source` or `generated_by` field where practical. This matters for potential future API monetisation of original content.
