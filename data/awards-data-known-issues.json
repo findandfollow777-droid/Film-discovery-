@@ -401,5 +401,15 @@
     "resolution": "6 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper combined sweep cer 78-83: 6/6 PASS, 0 anomalies, 486 total rows. Remaining batches B-F will cover cer 57-77.",
     "resolved_date": "2026-04-30",
     "follow_up": "Batch B: cer 74-77, Batch C: cer 70-73, Batch D: cer 66-69, Batch E: cer 62-65, Batch F: cer 57-61. Era-sensitive content (best_original_score larger slates at older ceremonies, cer 57/59 era_overrides) deferred to appropriate batch."
+  },
+  {
+    "issue_id": "gg-truth-curation-batch-b-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/reference/gg-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "GG truth file curation expansion Batch B: added landmark entries for cer 74, 75, 76, 77 (covering 2017-2020 era). Truth coverage grows from 6 of 27 ceremonies (78-83) to 10 of 27 (74-83). Landmarks verified against authoritative external sources (Variety, Hollywood Reporter, Deadline, CBS News, CNN, Time, Rotten Tomatoes, ABC News, NPR, Screen Daily, NBC) and cross-verified against scraped Wikipedia wikitext. Notable lifecycle moments captured: cer 77 Awkwafina first Asian American actress in Motion Picture – Musical or Comedy category; cer 74 La La Land record 7 Globes; cer 76 Roma won director + foreign but lost Best Picture Drama to Bohemian Rhapsody (notable upset); cer 74 best_supporting_actor diverged from Oscar (Aaron Taylor-Johnson at GG vs Mahershala Ali at Oscar). Surfaced cer 76 best_screenplay CSV partial-capture: Brian Hayes Currie (3rd author of Green Book) was dropped during scrape — same architectural pattern as cer 80 best_original_song missing Chandrabose. Truth file records full 3-author canonical credit via winner_recipients array.",
+    "resolution": "10 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper combined sweep cer 74-83: 10/10 PASS, 0 anomalies, 766 total rows. Remaining batches C-F will cover cer 57-73.",
+    "resolved_date": "2026-04-30",
+    "follow_up": "Batch C: cer 70-73 (2013-2016), Batch D: cer 66-69 (2009-2012), Batch E: cer 62-65 (2005-2008), Batch F: cer 57-61 (2000-2004). Era-sensitive content (cer 57/59 score slates) deferred to Batch F. Cer 76 screenplay CSV partial-capture (and similar dropped-author patterns at older ceremonies) tracked separately as scraper data quality gap; full songwriter/screenwriter team capture to be addressed when scraper handles longer fused-name parenthetical credits."
   }
 ]
