@@ -93,7 +93,7 @@ SCRAPE_VERSION = "scrape-gg-v1.0.0"
 
 # Ceremony N = year - 1943. 58th = 2001 (scope floor), 83rd = 2026.
 CEREMONY_YEAR_OFFSET = 1943
-MIN_CEREMONY = 58  # year 2001
+MIN_CEREMONY = 57  # year 2000 — matches scope doc 'GG 2000-present'
 
 # Single-person recipient types — co-recipient splitting applies.
 # Note: "writer" (Best Screenplay) is intentionally excluded; multi-name
@@ -229,7 +229,10 @@ def extract_category_sections(wikitext):
             award_templates.append(t)
 
     if not award_templates:
-        return []
+        # Older articles (cer 57-80) wrap categories in a wikitable with bare
+        # ! [[Golden Globe Award for X|Display]] header cells, not in
+        # {{Award category|...}} templates. Walk the table instead.
+        return _extract_table_based_sections(wikitext)
 
     full_text = str(parsed)
     results = []
@@ -266,6 +269,87 @@ def extract_category_sections(wikitext):
         section_text = full_text[start_pos:end_pos].strip()
         results.append((cat_name, section_text))
 
+    return results
+
+
+def _extract_table_based_sections(wikitext):
+    """Fallback for cer 57-80 articles. Walks the Film-section wikitable
+    pairing each `! [[Golden Globe Award for X|Display]]` header with its
+    corresponding content cell. Returns same shape as extract_category_sections:
+    [(link_target, section_text), ...]. Section name is the wikilink target
+    (which match_category_to_section then resolves via aliases)."""
+    film_match = re.search(r'^={2,3}\s*Film\s*={2,3}\s*$', wikitext, re.MULTILINE)
+    if not film_match:
+        return []
+    film_start = film_match.end()
+    next_heading = re.search(r'\n={2,}[^=\n]', wikitext[film_start:])
+    film_end = film_start + (next_heading.start() if next_heading else len(wikitext) - film_start)
+    film_text = wikitext[film_start:film_end]
+
+    results = []
+    current_headers = []
+    current_cells = []
+    last_parent = None
+
+    def flush():
+        for h, c in zip(current_headers, current_cells):
+            if c:
+                results.append((h, "\n".join(c)))
+
+    def _strip_wiki_decor(text):
+        # Strip {{anchor|...}}, {{fontcolor|...|TEXT}}, etc. Keep TEXT.
+        text = re.sub(r"\{\{anchor\|[^}]*\}\}", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\{\{fontcolor\|[^|}]*\|([^}]*)\}\}", r"\1", text, flags=re.IGNORECASE)
+        text = re.sub(r"\{\{[^}]*\}\}", "", text)
+        return text.strip()
+
+    def _extract_plain_header(stripped):
+        # Strip leading `!`, then take text after the last `|` (cell separator).
+        text = stripped[1:]
+        if "|" in text:
+            text = text.split("|")[-1]
+        return _strip_wiki_decor(text).strip()
+
+    for line in film_text.split("\n"):
+        stripped = line.strip()
+        if stripped == "|}" or stripped.startswith("{|"):
+            flush()
+            current_headers = []
+            current_cells = []
+            last_parent = None
+            continue
+        if stripped == "|-":
+            continue
+        if stripped.startswith("!"):
+            stripped_clean = _strip_wiki_decor(stripped)
+            has_award_link = bool(re.search(r"\[\[Golden Globe Award for ", stripped_clean))
+            if "colspan" in stripped.lower() and not has_award_link:
+                # True parent header (spans children below) — store as context for short child labels.
+                last_parent = _extract_plain_header(stripped)
+                continue
+            if current_cells:
+                flush()
+                current_headers = []
+                current_cells = []
+            found_link = False
+            for m in re.finditer(r"\[\[Golden Globe Award for ([^|\]]+?)\|([^\]]+?)\]\]", stripped_clean):
+                current_headers.append(m.group(1).strip())
+                found_link = True
+            if not found_link:
+                cell_text = _extract_plain_header(stripped)
+                if cell_text and len(cell_text) > 1:
+                    if last_parent and len(cell_text) <= 30 and not cell_text.lower().startswith("best "):
+                        current_headers.append(f"{last_parent} – {cell_text}")
+                    else:
+                        current_headers.append(cell_text)
+            continue
+        if stripped.startswith("|"):
+            current_cells.append([])
+            continue
+        if stripped and current_cells:
+            current_cells[-1].append(line)
+
+    flush()
     return results
 
 
@@ -308,6 +392,10 @@ def match_category_to_section(cat, sections, year):
 
 def parse_nominees_from_section(section_text, cat, year):
     lines = section_text.split("\n")
+    # Cer 58-59 film tables use a flat bullet style: bare '''winner''' lines
+    # (no leading *) and single-* nominees. When no ** is present, dispatch
+    # to flat-mode parsing.
+    has_double_bullet = any(line.strip().startswith("**") for line in lines)
     entries = []
 
     for line in lines:
@@ -316,19 +404,28 @@ def parse_nominees_from_section(section_text, cat, year):
             continue
 
         is_winner = False
-        if stripped.startswith("* ") and not stripped.startswith("** "):
-            is_winner = True
-            content = stripped[2:]
-        elif stripped.startswith("** "):
-            content = stripped[3:]
-        elif stripped.startswith("*"):
-            if stripped.startswith("**"):
-                content = stripped[2:]
-            else:
+        if has_double_bullet:
+            if stripped.startswith("* ") and not stripped.startswith("** "):
                 is_winner = True
-                content = stripped[1:]
+                content = stripped[2:]
+            elif stripped.startswith("** "):
+                content = stripped[3:]
+            elif stripped.startswith("*"):
+                if stripped.startswith("**"):
+                    content = stripped[2:]
+                else:
+                    is_winner = True
+                    content = stripped[1:]
+            else:
+                continue
         else:
-            continue
+            if stripped.startswith("*"):
+                content = stripped.lstrip("*").lstrip()
+            elif stripped.startswith("'''"):
+                is_winner = True
+                content = stripped
+            else:
+                continue
 
         content_clean = content.strip()
         # Strip trailing daggers and stray apostrophes

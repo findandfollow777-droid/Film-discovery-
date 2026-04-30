@@ -371,5 +371,25 @@
     "resolution": "Corrected both expected_nomination_count values from 5 to 6 in gg-landmark-truth.json. Wrapper now PASSes 2/2 on existing GG truth coverage. This is exactly the class of error the wrapper is designed to catch.",
     "resolved_date": "2026-04-30",
     "follow_up": "Process learning: future GG truth file curation work (Phase 4 batches A-F) should use slate size 6 as default for all GG film/acting categories unless era_overrides specify otherwise."
+  },
+  {
+    "issue_id": "gg-phase-3-6-scraper-section-detection-fallback-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "scripts/scrape-gg.py + scripts/scrape-gg-categories.json",
+    "issue_type": "scraper_enhancement",
+    "description": "Phase 3 surfaced systematic failure on cer 58-80: Wikipedia restructured those articles to use bare table-header cells (! [[Golden Globe Award for X|Display]]) instead of {{Award category|...}} templates. The scraper's section detector only knew about templates → 0 sections found → empty CSVs. Plus MIN_CEREMONY hardcoded at 58 blocking cer 57 (scope says 57+). Plus cer 64 used plain-text headers (no wikilinks) and cer 58/63 used colspan-with-wikilink for Foreign Language Film.",
+    "resolution": "Phase 3.6 added fallback section walker activating when 0 templates found: scans for ! [[Golden Globe Award for X|Display]] cells with parent-context synthesis for short plain-text labels (cer 64). Treats colspan headers as parent context only when no wikilink present (cer 58/63 fix). Strips {{anchor|...}} and {{fontcolor|...|TEXT}} decoration. Bullet-style detection: when no ** present, uses flat parsing (cer 58-59 film tables). Lowered MIN_CEREMONY from 58 to 57. Added link-target aliases for older actor/actress section names + 'Best Animated Film' alias (cer 64 short form). Re-scraped all 24 affected ceremonies (57-80). Wrapper combined sweep: 27/27 Phases A-D structurally sound (25 PASS, 2 REVIEW non-critical, 0 FAIL); 2/27 PASS Phase E (cer 82, 83 unchanged). Cer 81-83 byte-identical post-fix.",
+    "resolved_date": "2026-04-30",
+    "follow_up": "Phase 4: truth curation Batches A-F to expand coverage from 2/27 to 27/27."
+  },
+  {
+    "issue_id": "gg-best-original-score-larger-slate-pre-2003-2026-04-30",
+    "discovered_date": "2026-04-30",
+    "scope": "data/reference/gg-expectations.json gg.best_original_score era_overrides",
+    "issue_type": "expectations_era_override_needed",
+    "description": "Best Original Score had a larger slate at older GG ceremonies than the modern 6-nominee norm. Cer 57 (2000) had 9 nominees: The Legend of 1900 (won), American Beauty, Angela's Ashes, Anna and the King, The End of the Affair, Eyes Wide Shut, The Insider, The Straight Story, The Talented Mr. Ripley. Cer 59 (2002) had 8 nominees: Moulin Rouge! (won), Ali, A.I., A Beautiful Mind, LOTR Fellowship, Mulholland Drive, Pearl Harbor, The Shipping News. Verified against Wikipedia source — these are real GG nominees, not silent-split parser artifacts. Wrapper Phase D flags REVIEW (OVER) on these two ceremonies because expectations.json typical=6 tolerance=1 doesn't accommodate older era. Discovered during Phase 3.6 wrapper combined sweep 2026-04-30.",
+    "resolution": "Not addressed in Phase 3.6 (expectations.json is out of scope per the Phase 3.6 prompt). The 2 REVIEW verdicts are non-critical anomalies — data is correct, expectations metadata just doesn't yet reflect older-era slate sizes. Wrapper Phases A-D otherwise PASS for these ceremonies (categories present, won-row uniqueness, no missing rows, no recipients_json corruption).",
+    "resolved_date": null,
+    "follow_up": "Phase 4 truth curation work should add era_override to gg.best_original_score in gg-expectations.json: typical=8, tolerance=2 for ceremony years 2000-2002 (pre-cer 60 or thereabouts — exact boundary should be confirmed by checking cer 60+ slate sizes during truth curation)."
   }
 ]

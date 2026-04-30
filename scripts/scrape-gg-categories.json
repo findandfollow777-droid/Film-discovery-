@@ -48,7 +48,7 @@
     "merged_from": null,
     "merged_into": null,
     "has_subject_title": false,
-    "wikipedia_section_aliases": ["Best Motion Picture – Animated", "Best Motion Picture - Animated", "Best Animated Feature Film", "Best Animated Feature"]
+    "wikipedia_section_aliases": ["Best Motion Picture – Animated", "Best Motion Picture - Animated", "Best Animated Feature Film", "Best Animated Feature", "Best Animated Film"]
   },
   {
     "id": "gg.best_motion_picture_non_english",
@@ -84,7 +84,7 @@
     "merged_from": null,
     "merged_into": null,
     "has_subject_title": false,
-    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Drama", "Best Actor in a Motion Picture - Drama", "Best Male Actor in a Motion Picture – Drama", "Best Male Actor in a Motion Picture - Drama", "Best Performance by an Actor in a Motion Picture – Drama"]
+    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Drama", "Best Actor in a Motion Picture - Drama", "Best Male Actor in a Motion Picture – Drama", "Best Male Actor in a Motion Picture - Drama", "Best Performance by an Actor in a Motion Picture – Drama", "Best Actor – Motion Picture Drama", "Best Actor - Motion Picture Drama"]
   },
   {
     "id": "gg.best_actress_drama",
@@ -102,7 +102,7 @@
     "merged_from": null,
     "merged_into": null,
     "has_subject_title": false,
-    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Drama", "Best Actress in a Motion Picture - Drama", "Best Female Actor in a Motion Picture – Drama", "Best Female Actor in a Motion Picture - Drama", "Best Performance by an Actress in a Motion Picture – Drama"]
+    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Drama", "Best Actress in a Motion Picture - Drama", "Best Female Actor in a Motion Picture – Drama", "Best Female Actor in a Motion Picture - Drama", "Best Performance by an Actress in a Motion Picture – Drama", "Best Actress – Motion Picture Drama", "Best Actress - Motion Picture Drama"]
   },
   {
     "id": "gg.best_actor_musical_comedy",
@@ -120,7 +120,7 @@
     "merged_from": null,
     "merged_into": null,
     "has_subject_title": false,
-    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Musical or Comedy", "Best Actor in a Motion Picture - Musical or Comedy", "Best Male Actor in a Motion Picture – Musical or Comedy", "Best Male Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actor in a Motion Picture – Musical or Comedy"]
+    "wikipedia_section_aliases": ["Best Actor in a Motion Picture – Musical or Comedy", "Best Actor in a Motion Picture - Musical or Comedy", "Best Male Actor in a Motion Picture – Musical or Comedy", "Best Male Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actor in a Motion Picture – Musical or Comedy", "Best Actor – Motion Picture Musical or Comedy", "Best Actor - Motion Picture Musical or Comedy", "Best Actor – Motion Picture Comedy or Musical", "Best Actor - Motion Picture Comedy or Musical"]
   },
   {
     "id": "gg.best_actress_musical_comedy",
@@ -138,7 +138,7 @@
     "merged_from": null,
     "merged_into": null,
     "has_subject_title": false,
-    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Musical or Comedy", "Best Actress in a Motion Picture - Musical or Comedy", "Best Female Actor in a Motion Picture – Musical or Comedy", "Best Female Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actress in a Motion Picture – Musical or Comedy"]
+    "wikipedia_section_aliases": ["Best Actress in a Motion Picture – Musical or Comedy", "Best Actress in a Motion Picture - Musical or Comedy", "Best Actress in a Motion Picture – Comedy or Musical", "Best Actress in a Motion Picture - Comedy or Musical", "Best Female Actor in a Motion Picture – Musical or Comedy", "Best Female Actor in a Motion Picture - Musical or Comedy", "Best Performance by an Actress in a Motion Picture – Musical or Comedy", "Best Actress – Motion Picture Musical or Comedy", "Best Actress - Motion Picture Musical or Comedy", "Best Actress – Motion Picture Comedy or Musical", "Best Actress - Motion Picture Comedy or Musical"]
   },
   {
     "id": "gg.best_supporting_actor",
