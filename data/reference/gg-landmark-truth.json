@@ -2,6 +2,349 @@
   "schema_version": "v1",
   "festival": "gg",
   "ceremonies": {
+    "66": {
+      "ceremony_year": 2009,
+      "honours_year": 2008,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Slumdog Millionaire",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "Vicky Cristina Barcelona",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Wrestler",
+          "winner_recipient": "Mickey Rourke",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Comeback win — Rourke's first major Globe after a long career interruption."
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "WALL-E",
+          "expected_nomination_count": 3,
+          "source": "66th Golden Globes Wikipedia article",
+          "notes": "Animated slate at this ceremony was 3 nominees (WALL-E winner, plus Bolt and Kung Fu Panda) — within typical_nominations 5 ±2."
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "Waltz with Bashir",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Simon Beaufoy",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "A. R. Rahman",
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Rahman's first GG and a major international moment — Slumdog Millionaire swept Drama Picture, Director (Boyle), Screenplay, and Score at this ceremony."
+        },
+        "gg.best_original_song": {
+          "winner_film": "The Wrestler",
+          "winner_song": "The Wrestler",
+          "winner_recipients": [
+            "Bruce Springsteen"
+          ],
+          "expected_nomination_count": 5,
+          "source": "66th Golden Globes Wikipedia article / Variety"
+        }
+      }
+    },
+    "67": {
+      "ceremony_year": 2010,
+      "honours_year": 2009,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "Avatar",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "GG/Oscar Best Picture split: Avatar took GG Drama Picture; The Hurt Locker took Oscar Best Picture six weeks later."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Hangover",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety",
+          "notes": "Notable broad-comedy win — The Hangover is among the rare raucous-comedy GG Best Picture Musical/Comedy winners of the post-2000 era."
+        },
+        "gg.best_director": {
+          "winner_film": "Avatar",
+          "winner_recipient": "James Cameron",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Director split: Cameron took GG Best Director for Avatar; his ex-wife Kathryn Bigelow took Oscar Best Director for The Hurt Locker (the first woman ever to win Oscar for directing)."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "Crazy Heart",
+          "winner_recipient": "Jeff Bridges",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "The Blind Side",
+          "winner_recipient": "Sandra Bullock",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Sherlock Holmes",
+          "winner_recipient": "Robert Downey Jr.",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "Julie & Julia",
+          "winner_recipient": "Meryl Streep",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Inglourious Basterds",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "Precious",
+          "winner_recipient": "Mo'Nique",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Up",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "The White Ribbon",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Up in the Air",
+          "winner_recipients": [
+            "Jason Reitman",
+            "Sheldon Turner"
+          ],
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "Up",
+          "winner_recipient": "Michael Giacchino",
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "Crazy Heart",
+          "winner_song": "The Weary Kind",
+          "winner_recipients": [
+            "Ryan Bingham",
+            "T Bone Burnett"
+          ],
+          "expected_nomination_count": 5,
+          "source": "67th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipients_json was empty for this row; canonical 2-author credit recorded here. CSV remediation tracked separately."
+        }
+      }
+    },
+    "68": {
+      "ceremony_year": 2011,
+      "honours_year": 2010,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Social Network",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "GG/Oscar Best Picture split: The Social Network took GG Drama Picture and 4 awards including Director, Score, Screenplay; The King's Speech took Oscar Best Picture and Director (Hooper)."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Kids Are All Right",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_director": {
+          "winner_film": "The Social Network",
+          "winner_recipient": "David Fincher",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Director split: Fincher took GG Best Director for The Social Network; Tom Hooper took Oscar Best Director for The King's Speech."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Colin Firth",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "Black Swan",
+          "winner_recipient": "Natalie Portman",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "Barney's Version",
+          "winner_recipient": "Paul Giamatti",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "The Kids Are All Right",
+          "winner_recipient": "Annette Bening",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "The Fighter",
+          "winner_recipient": "Christian Bale",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "The Fighter",
+          "winner_recipient": "Melissa Leo",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "Toy Story 3",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "In a Better World",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "The Social Network",
+          "winner_recipient": "Aaron Sorkin",
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Social Network",
+          "winner_recipients": [
+            "Trent Reznor",
+            "Atticus Ross"
+          ],
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Reznor + Ross duo's first GG win — they would go on to win again at cer 82 (Challengers). Same architectural pattern as cer 82 best_original_score (winner_recipients array)."
+        },
+        "gg.best_original_song": {
+          "winner_film": "Burlesque",
+          "winner_song": "You Haven't Seen the Last of Me",
+          "winner_recipients": [
+            "Diane Warren"
+          ],
+          "expected_nomination_count": 5,
+          "source": "68th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipients_json was empty for this row; canonical Diane Warren credit recorded here."
+        }
+      }
+    },
+    "69": {
+      "ceremony_year": 2012,
+      "honours_year": 2011,
+      "landmarks": {
+        "gg.best_motion_picture_drama": {
+          "winner_film": "The Descendants",
+          "expected_nomination_count": 6,
+          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than the typical 5 of this era)."
+        },
+        "gg.best_motion_picture_musical_comedy": {
+          "winner_film": "The Artist",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Silent-film win — The Artist was a black-and-white silent film and a notable atypical GG MC Picture winner. The film went on to win Best Picture at the Oscars."
+        },
+        "gg.best_director": {
+          "winner_film": "Hugo",
+          "winner_recipient": "Martin Scorsese",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety",
+          "notes": "GG/Oscar Director split: Scorsese took GG Best Director for Hugo; Michel Hazanavicius took Oscar Best Director for The Artist."
+        },
+        "gg.best_actor_drama": {
+          "winner_film": "The Descendants",
+          "winner_recipient": "George Clooney",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actress_drama": {
+          "winner_film": "The Iron Lady",
+          "winner_recipient": "Meryl Streep",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_actor_musical_comedy": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Jean Dujardin",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
+          "notes": "Dujardin was the first French actor to win GG Best Actor (Musical or Comedy). He went on to win the Oscar for the same role."
+        },
+        "gg.best_actress_musical_comedy": {
+          "winner_film": "My Week with Marilyn",
+          "winner_recipient": "Michelle Williams",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actor": {
+          "winner_film": "Beginners",
+          "winner_recipient": "Christopher Plummer",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_supporting_actress": {
+          "winner_film": "The Help",
+          "winner_recipient": "Octavia Spencer",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_motion_picture_animated": {
+          "winner_film": "The Adventures of Tintin: The Secret of the Unicorn",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article"
+        },
+        "gg.best_motion_picture_non_english": {
+          "winner_film": "A Separation",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_screenplay": {
+          "winner_film": "Midnight in Paris",
+          "winner_recipient": "Woody Allen",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_score": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Ludovic Bource",
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety"
+        },
+        "gg.best_original_song": {
+          "winner_film": "W.E.",
+          "winner_song": "Masterpiece",
+          "winner_recipients": [
+            "Madonna"
+          ],
+          "expected_nomination_count": 5,
+          "source": "69th Golden Globes Wikipedia article / Variety",
+          "notes": "CSV recipient_json corrupted for this row: ['music', 'lyrics by [[Madonna (entertainer'] due to scraper bug on wikilinks with parenthesized link targets and pipe display (same pattern as cer 71 Danger Mouse). Canonical sole-credit Madonna recorded here."
+        }
+      }
+    },
     "70": {
       "ceremony_year": 2013,
       "honours_year": 2012,
