@@ -462,7 +462,7 @@
 #### Imports & Constants
 ```javascript
 ✅ Imports shortlist-service.js (ES6 module)
-✅ TMDB_API_KEY: "dd1b9aebd0769bc49a68b7853b6f4266"
+✅ TMDB_API_KEY: loaded from config.js (value redacted — see Rule 26)
 ✅ TMDB_IMG: "https://image.tmdb.org/t/p/"
 ✅ MOVIE_COLORS: Array of 5 colors (cyan, gold, purple, green, red)
 ```
@@ -631,7 +631,7 @@
 
 ### Test D: Compare Page ↔ TMDB API
 ```
-✅ API key correct ("dd1b9aebd0769bc49a68b7853b6f4266")
+✅ API key loaded correctly from config.js (value redacted — see Rule 26)
 ✅ Fetches 3 endpoints per movie (details, credits, keywords)
 ✅ Handles API errors gracefully
 ✅ Stores all data in window.comparisonMovies

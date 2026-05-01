@@ -12,7 +12,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const TMDB_API_KEY = 'dd1b9aebd0769bc49a68b7853b6f4266';
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
+if (!TMDB_API_KEY) {
+  console.error('Set TMDB_API_KEY env var before running this script.');
+  process.exit(1);
+}
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 // ~200 well-known movie IDs across decades

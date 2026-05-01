@@ -1,5 +1,6 @@
 import https from "https";
-const K="dd1b9aebd0769bc49a68b7853b6f4266";
+const K = process.env.TMDB_API_KEY;
+if (!K) { console.error("Set TMDB_API_KEY env var before running."); process.exit(1); }
 function f(u){return new Promise((ok,no)=>{https.get(u,r=>{let d="";r.on("data",c=>d+=c);r.on("end",()=>{try{ok(JSON.parse(d))}catch(e){no(e)}})}).on("error",no)})}
 const B="https://api.themoviedb.org";
 async function g(i){let d=await f(B+"/3/movie/"+i+"?api_key="+K);return[d.title,d.id,d.poster_path]}
