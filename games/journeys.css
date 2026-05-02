@@ -222,9 +222,10 @@ html, body {
 
 .honeycomb-container {
   width: 100%;
-  min-height: 320px;
+  min-height: 360px;
   position: relative;
   overflow: visible;
+  transition: min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .honeycomb-svg {
@@ -247,6 +248,99 @@ html, body {
   transform-box: fill-box;
   transform-origin: center;
   filter: brightness(1.2);
+}
+
+/* Entry animation when a new hex is added to the chain.
+   `transform-box: fill-box` makes the scale anchor on the hex's own
+   bounding box, not the whole SVG canvas. */
+@keyframes hexPop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  70%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.hex-content.hex-new {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hexPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Failure feedback on the goal placeholder when the user clicks it but
+   their last movie doesn't include the goal actor.
+   .hex-fail is added to the inner .hex-content for 800ms. The shake runs
+   on the content; the red flash + white X overlay fades in/out in sync. */
+@keyframes hexShake {
+  0%, 100% { transform: translateX(0); }
+  15%      { transform: translateX(-6px); }
+  30%      { transform: translateX(6px); }
+  45%      { transform: translateX(-5px); }
+  60%      { transform: translateX(5px); }
+  75%      { transform: translateX(-3px); }
+  90%      { transform: translateX(2px); }
+}
+
+.hex-content.hex-fail {
+  animation: hexShake 0.8s ease-in-out;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes hexFailFlash {
+  0%   { opacity: 0; }
+  18%  { opacity: 1; }
+  65%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hex-content.hex-fail .hex-fail-overlay {
+  animation: hexFailFlash 0.8s ease-out;
+}
+
+/* Success flash — green overlay + white tick on goal hex when reached.
+   Mirrors hexFailFlash timing; no shake (success shouldn't wobble). */
+@keyframes hexSuccessFlash {
+  0%   { opacity: 0; }
+  18%  { opacity: 1; }
+  65%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hex-content.hex-success .hex-success-overlay {
+  animation: hexSuccessFlash 0.8s ease-out;
+}
+
+/* ============================================
+   COMPLETION SUPERNOVA — Added 2026-05-02
+   Bright hex grows from the goal's screen position to engulf the
+   viewport at climax, then fades to reveal the now-complete chain.
+============================================ */
+.completion-supernova {
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  z-index: 400; /* below celebration-overlay (500), above everything else */
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 245, 210, 0.85) 0%,
+    rgba(255, 230, 150, 0.7) 22%,
+    rgba(255, 200, 50, 0.55) 45%,
+    rgba(0, 200, 240, 0.35) 70%,
+    rgba(0, 217, 255, 0) 100%
+  );
+  filter: blur(0.7px) drop-shadow(0 0 60px rgba(255, 215, 0, 0.3));
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  animation: supernovaEngulf 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes supernovaEngulf {
+  0%   { transform: translate(-50%, -50%) scale(0.3);  opacity: 0; }
+  12%  { transform: translate(-50%, -50%) scale(2);    opacity: 0.75; }
+  45%  { transform: translate(-50%, -50%) scale(40);   opacity: 0.85; }
+  75%  { transform: translate(-50%, -50%) scale(80);   opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(120);  opacity: 0; }
 }
 
 /* ============================================
@@ -349,6 +443,25 @@ html, body {
 
 .search-result-item:hover {
   background: rgba(20, 184, 166, 0.1);
+}
+
+/* Pinned goal at top of actor search — gold highlight */
+.search-result-item.search-goal-pin {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.14), rgba(255, 215, 0, 0.04));
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 13px;
+}
+.search-result-item.search-goal-pin:hover {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.22), rgba(255, 215, 0, 0.08));
+}
+.search-result-item.search-goal-pin .search-result-sub {
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.search-result-item.search-goal-pin .search-result-img {
+  border: 2px solid var(--accent-gold);
 }
 
 .search-result-img {
@@ -873,7 +986,12 @@ html, body {
 ============================================ */
 
 .setup-content {
-  max-width: 460px;
+  max-width: 600px;
+}
+
+/* Setup overlay title — match holding-screen title size */
+#setupOverlay .celebration-title {
+  font-size: 39px;
 }
 
 .setup-instruction {
@@ -899,8 +1017,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  width: 110px;
+  gap: 10px;
+  width: 220px;
 }
 
 /* Flat-top hexagon frame — sized to match honeycomb hex proportions.
@@ -911,17 +1029,17 @@ html, body {
 */
 .setup-pick-photo {
   position: relative;
-  width: 124px;
-  height: 124px;
+  width: 204px;
+  height: 177px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.35));
+  filter: drop-shadow(0 0 12px rgba(0, 217, 255, 0.6));
 }
 
 .setup-pick-photo::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--deep-void);
+  background: rgba(0, 217, 255, 0.15);
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   z-index: 0;
 }
@@ -966,12 +1084,15 @@ html, body {
 .setup-pick-frame polygon {
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.5;
+  stroke-width: 3;
   stroke-linejoin: miter;
 }
 
 .setup-pick-goal .setup-pick-photo {
-  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+.setup-pick-goal .setup-pick-photo::before {
+  background: rgba(255, 215, 0, 0.2);
 }
 .setup-pick-goal .setup-pick-frame { color: var(--accent-gold); }
 
@@ -980,7 +1101,8 @@ html, body {
 
 .setup-pick-label {
   font-family: var(--font-display);
-  font-size: 9px;
+  font-size: 23px;
+  font-weight: bold;
   letter-spacing: 2px;
   color: var(--accent-cyan);
 }
@@ -988,24 +1110,28 @@ html, body {
 
 .setup-pick-name {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 26px;
+  font-weight: 600;
   color: var(--film-white);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.2;
   min-height: 32px;
   word-break: break-word;
 }
 
 .setup-arrow {
   font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--ghost-gray);
-  margin-bottom: 24px;
+  font-size: 56px;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  align-self: flex-start;
+  margin-top: 61px;
 }
 
 .setup-search-wrap {
   margin: 0 auto 16px;
-  max-width: 360px;
+  max-width: 420px;
 }
 
 .setup-randomize {
@@ -1020,6 +1146,35 @@ html, body {
   background: rgba(168, 85, 247, 0.16);
   border-color: var(--prestige-purple);
   color: var(--film-white);
+}
+
+/* Player name inputs — Pass & Play only, sit above the confirm row */
+.setup-names {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 14px auto 0;
+  max-width: 460px;
+}
+.setup-name-input {
+  flex: 1 1 50%;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  outline: none;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+.setup-name-input::placeholder {
+  color: var(--ghost-gray);
+}
+.setup-name-input:focus {
+  border-color: var(--prestige-purple);
+  background: rgba(168, 85, 247, 0.08);
 }
 
 /* Confirm row — visible once both picks made */
@@ -1150,13 +1305,110 @@ html, body {
   text-align: center;
 }
 
+.challenge-opponent-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  text-align: center;
+  margin-bottom: 8px;
+  transition: var(--transition-smooth);
+}
+.challenge-opponent-input::placeholder { color: var(--ghost-gray); }
+.challenge-opponent-input:focus {
+  border-color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.06);
+}
+
+/* Series selector (Create Challenge only) */
+.setup-series {
+  margin: 0 auto 18px;
+  max-width: 460px;
+}
+.setup-series-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted-silver);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.setup-series-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.setup-series-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.setup-series-btn:hover {
+  background: rgba(0, 217, 255, 0.08);
+  color: var(--film-white);
+}
+.setup-series-btn.active {
+  background: rgba(0, 217, 255, 0.18);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* Series caption on holding screen (incoming + result-back) */
+.holding-series-info {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin-bottom: 14px;
+}
+
+/* Result-back actions row (Counter-challenge + Back to Menu) */
+.holding-result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* "My Challenges" link in mode menu */
+.mode-btn-link {
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--muted-silver);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: var(--transition-smooth);
+}
+.mode-btn-link:hover {
+  background: rgba(0, 217, 255, 0.08);
+  color: var(--accent-cyan);
+}
+
 /* ============================================
    HOLDING SCREEN (Incoming Challenge)
    Added 2026-05-02
 ============================================ */
 
 .holding-content {
-  max-width: 480px;
+  max-width: 600px;
 }
 
 .holding-versus {
@@ -1171,63 +1423,114 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  width: 130px;
+  gap: 10px;
+  width: 220px;
 }
 
+/* Hex frame — geometry matches the in-game flat-top hex (HEX_SIZE=68):
+   width = 2r = 136, height = sqrt(3)·r ≈ 118. Three layers:
+     ::before  translucent fill (cyan for start, gold for goal — same as
+               the game's path fill, so portrait letterbox bands tint)
+     content   glyph or img (clipped to hex)
+     <svg>     stroked outline drawn ON TOP at stroke-width 3 (matches game) */
 .holding-photo {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 3px solid var(--accent-cyan);
-  background: rgba(0, 217, 255, 0.08);
-  overflow: hidden;
+  position: relative;
+  width: 204px;
+  height: 177px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(0, 217, 255, 0.6));
+}
+
+.holding-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 217, 255, 0.15);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.holding-photo-content {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-cyan);
-  font-size: 40px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  z-index: 1;
+  overflow: hidden;
 }
 
-.holding-photo img {
+.holding-photo-content .og {
+  display: block;
+  width: 56%;
+  height: 56%;
+}
+
+.holding-photo-content img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
 }
 
+.holding-photo-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+  color: var(--accent-cyan);
+}
+.holding-photo-frame polygon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linejoin: miter;
+}
+
 .holding-actor-goal .holding-photo {
-  border-color: var(--accent-gold);
-  background: rgba(255, 215, 0, 0.08);
-  color: var(--accent-gold);
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+.holding-actor-goal .holding-photo::before {
+  background: rgba(255, 215, 0, 0.2);
+}
+.holding-actor-goal .holding-photo-frame { color: var(--accent-gold); }
+
+.holding-name {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--film-white);
+  text-align: center;
+  line-height: 1.2;
 }
 
 .holding-label {
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 23px;
+  font-weight: bold;
   letter-spacing: 2px;
   color: var(--accent-cyan);
 }
 .holding-actor-goal .holding-label { color: var(--accent-gold); }
 
-.holding-name {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--film-white);
-  text-align: center;
-  line-height: 1.3;
-}
-
 .holding-arrow {
   font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--ghost-gray);
-  margin-bottom: 28px;
+  font-size: 56px;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  /* Align with the hex's vertical center (177px tall hex / 2 - arrow / 2). */
+  align-self: flex-start;
+  margin-top: 61px;
 }
 
 .holding-par {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 24px;
   color: var(--muted-silver);
   margin-bottom: 24px;
 }
@@ -1236,6 +1539,51 @@ html, body {
   color: var(--accent-gold);
   letter-spacing: 2px;
   font-weight: 700;
+  font-size: 24px;
+}
+
+/* Result-back view — shown when ?r= param present (your friend's score) */
+.holding-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.holding-result-score {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-display);
+}
+
+.holding-result-num {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--film-white);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
+}
+
+.holding-result-vs {
+  font-size: 20px;
+  color: var(--muted-silver);
+  letter-spacing: 2px;
+}
+.holding-result-vs span {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.holding-result .score-verdict {
+  font-size: 22px;
+}
+
+@media (max-width: 480px) {
+  .holding-result-num { font-size: 44px; }
+  .holding-result-vs { font-size: 16px; }
+  .holding-result .score-verdict { font-size: 16px; }
 }
 
 /* ============================================
@@ -1271,19 +1619,258 @@ html, body {
   padding: 14px 32px;
 }
 
+#acceptChallengeBtn {
+  font-size: 48px;
+  font-weight: 800;
+  padding: 26px 52px;
+  letter-spacing: 3px;
+  border-radius: 18px;
+}
+
+/* Holding screen title — 40% larger than the default celebration title */
+#holdingScreen .celebration-title {
+  font-size: 39px;
+}
+
+/* Discreet ? help button on the holding screen */
+.holding-help-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--muted-silver);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  z-index: 10;
+}
+.holding-help-btn:hover {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* Help panel — sub-overlay covering the holding screen on demand */
+.holding-help {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 26, 0.96);
+  backdrop-filter: blur(15px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  border-radius: 0;
+  animation: fadeSlideIn 0.3s ease-out;
+}
+
+.holding-help-content {
+  max-width: 520px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.holding-help-content h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: var(--accent-cyan);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.holding-help-content p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--film-white);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.holding-help-content strong {
+  color: var(--accent-gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.holding-help-close {
+  margin-top: 20px;
+  padding: 12px 32px;
+  background: var(--gradient-journeys);
+  border: none;
+  color: var(--space-black);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.holding-help-close:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 16px rgba(20, 184, 166, 0.45);
+}
+
+@media (max-width: 480px) {
+  .holding-help-content { padding: 32px 20px; }
+  .holding-help-content h3 { font-size: 20px; letter-spacing: 2px; }
+  .holding-help-content p { font-size: 14px; }
+}
+
 /* Hide PAR slot in party mode (no par tracking) */
 .info-bar.party-mode > .info-tag:nth-of-type(2),
 .info-bar.party-mode > .info-divider:nth-of-type(1) {
   display: none;
 }
 
+/* ============================================
+   PARTY PATHWAYS — both players' chains in the celebration
+   Added 2026-05-02
+============================================ */
+.party-pathways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 24px 0;
+  text-align: left;
+}
+.party-pathway-col {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 12px;
+  min-width: 0;
+}
+.party-pathway-title {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+  text-align: center;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+.party-pathway-col:nth-child(2) .party-pathway-title {
+  color: var(--prestige-purple);
+}
+.party-pathway-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  counter-reset: party-row;
+}
+.party-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.party-row-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Default fallback (shouldn't normally show — column-specific rules below win) */
+.party-row { color: var(--film-white); }
+
+/* PLAYER 1 = cyan column */
+.party-pathway-col:nth-child(1) .party-row {
+  background: rgba(0, 217, 255, 0.06);
+  border-left: 3px solid rgba(0, 217, 255, 0.4);
+}
+.party-pathway-col:nth-child(1) .party-row:hover {
+  background: rgba(0, 217, 255, 0.18);
+  border-left-color: var(--accent-cyan);
+}
+
+/* PLAYER 2 = purple column */
+.party-pathway-col:nth-child(2) .party-row {
+  background: rgba(168, 85, 247, 0.06);
+  border-left: 3px solid rgba(168, 85, 247, 0.4);
+}
+.party-pathway-col:nth-child(2) .party-row:hover {
+  background: rgba(168, 85, 247, 0.18);
+  border-left-color: var(--prestige-purple);
+}
+.party-row-badge {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.party-row-badge.cyan { background: rgba(0,217,255,0.2); color: var(--accent-cyan); }
+.party-row-badge.gold { background: rgba(255,215,0,0.2); color: var(--accent-gold); }
+
+/* Score numbers — only override in party mode (avoid breaking daily/duel) */
+.celebration-overlay.party-result .your-score .score-num {
+  background: linear-gradient(135deg, var(--accent-cyan), #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.celebration-overlay.party-result .par-score .score-num {
+  background: linear-gradient(135deg, var(--prestige-purple), #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* override the default ghost-gray */
+}
+.celebration-overlay.party-result .your-score .score-label { color: var(--accent-cyan); }
+.celebration-overlay.party-result .par-score  .score-label { color: var(--prestige-purple); }
+
+/* Verdict pill colored by winner */
+.score-verdict.party-p1-wins {
+  background: rgba(0, 217, 255, 0.15);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+.score-verdict.party-p2-wins {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid var(--prestige-purple);
+  color: var(--prestige-purple);
+}
+
 @media (max-width: 480px) {
-  .setup-pick { width: 110px; }
-  .setup-pick-photo { width: 96px; height: 96px; }
-  .setup-arrow { font-size: 18px; }
-  .holding-actor { width: 100px; }
-  .holding-photo { width: 78px; height: 78px; }
-  .holding-versus { gap: 12px; }
+  .party-pathways { grid-template-columns: 1fr; }
+  .party-row { font-size: 12px; padding: 6px 10px; }
+}
+
+@media (max-width: 480px) {
+  .setup-pick { width: 162px; }
+  .setup-pick-photo { width: 144px; height: 125px; }
+  .setup-pick-name { font-size: 21px; }
+  .setup-pick-label { font-size: 18px; }
+  .setup-arrow { font-size: 40px; margin-top: 43px; }
+  #setupOverlay .celebration-title { font-size: 25px; }
+  .holding-actor { width: 162px; }
+  .holding-photo { width: 144px; height: 125px; }
+  .holding-versus { gap: 8px; }
+  .holding-arrow { font-size: 40px; margin-top: 43px; }
+  .holding-name { font-size: 21px; }
+  .holding-label { font-size: 18px; }
+  .holding-par { font-size: 19px; }
+  .holding-par strong { font-size: 19px; }
+  #acceptChallengeBtn { font-size: 35px; padding: 18px 33px; }
+  #holdingScreen .celebration-title { font-size: 25px; }
 }
 
 /* ============================================
@@ -1462,7 +2049,7 @@ html, body {
 
   .info-bar { font-size: 9px; gap: 10px; padding: 10px 12px; }
 
-  .honeycomb-container { min-height: 260px; }
+  .honeycomb-container { min-height: 300px; }
 
   .results-columns { grid-template-columns: 1fr; gap: 20px; }
 
@@ -1472,7 +2059,7 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .honeycomb-container { min-height: 220px; }
+  .honeycomb-container { min-height: 250px; }
 
   .celebration-title { font-size: 18px; }
   .score-num { font-size: 32px; }

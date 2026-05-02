@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="journeys.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+  <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <link rel="stylesheet" href="../components/taste-overlay.css">
   <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body>
@@ -57,6 +61,7 @@
         <button class="cel-btn share-btn" id="btnDaily">Daily Journey</button>
         <button class="cel-btn review-btn" id="btnChallenge">Create a Challenge</button>
         <button class="cel-btn mode-btn-party" id="btnParty">Pass &amp; Play</button>
+        <a class="mode-btn-link" id="btnMyChallenges" href="../pages/my-challenges.html">My Challenges</a>
       </div>
       <p class="mode-menu-tagline">Powered by <span>Orbit</span></p>
     </section>
@@ -141,11 +146,24 @@
           PAR
           <strong id="challengePar">3</strong>
         </div>
+        <input type="text" class="challenge-opponent-input" id="challengeOpponentInput" placeholder="Sending to (optional)" maxlength="24" autocomplete="off">
         <input type="text" class="challenge-link-input" id="challengeLinkInput" readonly>
+      </div>
+
+      <div class="party-pathways" id="partyPathways" hidden>
+        <div class="party-pathway-col">
+          <h4 class="party-pathway-title" id="partyPathTitle1">Player 1's Path</h4>
+          <ol class="party-pathway-list" id="partyPathList1"></ol>
+        </div>
+        <div class="party-pathway-col">
+          <h4 class="party-pathway-title" id="partyPathTitle2">Player 2's Path</h4>
+          <ol class="party-pathway-list" id="partyPathList2"></ol>
+        </div>
       </div>
 
       <div class="celebration-actions">
         <button class="cel-btn review-btn" id="reviewBtn">Review Journey</button>
+        <button class="cel-btn share-btn" id="rematchBtn" hidden>Rematch</button>
         <button class="cel-btn share-btn" id="shareBtn"><span><span class="og og-clipboard"></span></span> Share</button>
       </div>
     </div>
@@ -157,6 +175,16 @@
     <div class="celebration-content setup-content">
       <h2 class="celebration-title" id="setupTitle">CREATE CHALLENGE</h2>
       <p class="setup-instruction" id="setupInstruction">Pick the <span class="setup-emph-cyan">START</span> actor</p>
+
+      <div class="setup-series" id="setupSeries" hidden>
+        <div class="setup-series-label">SERIES LENGTH</div>
+        <div class="setup-series-buttons">
+          <button class="setup-series-btn active" data-series="1">Single</button>
+          <button class="setup-series-btn" data-series="3">Best of 3</button>
+          <button class="setup-series-btn" data-series="5">Best of 5</button>
+          <button class="setup-series-btn" data-series="7">Best of 7</button>
+        </div>
+      </div>
 
       <div class="setup-spinner-zone" id="setupSpinnerZone" hidden>
         <div class="setup-cosmic-spinner">
@@ -176,8 +204,8 @@
               <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
             </svg>
           </div>
-          <div class="setup-pick-label">START</div>
           <div class="setup-pick-name" id="setupStartName">—</div>
+          <div class="setup-pick-label">START</div>
         </div>
         <div class="setup-arrow">→</div>
         <div class="setup-pick setup-pick-goal" id="setupGoalPick">
@@ -187,8 +215,8 @@
               <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
             </svg>
           </div>
-          <div class="setup-pick-label">GOAL</div>
           <div class="setup-pick-name" id="setupGoalName">—</div>
+          <div class="setup-pick-label">GOAL</div>
         </div>
       </div>
 
@@ -200,6 +228,11 @@
       <button class="action-btn setup-randomize" id="randomizeBtn">
         <span class="og og-dice"></span> Randomize Path
       </button>
+
+      <div class="setup-names" id="setupNames" hidden>
+        <input type="text" class="setup-name-input" id="player1NameInput" placeholder="Player 1 name" maxlength="24" autocomplete="off">
+        <input type="text" class="setup-name-input" id="player2NameInput" placeholder="Player 2 name" maxlength="24" autocomplete="off">
+      </div>
 
       <div class="setup-confirm-row" id="setupConfirmRow" hidden>
         <button class="cel-btn review-btn" id="setupResetBtn">Reset Picks</button>
@@ -222,23 +255,59 @@
   <!-- HOLDING SCREEN (incoming challenge URL) -->
   <section id="holdingScreen" class="celebration-overlay" data-orbit-popup hidden>
     <button class="overlay-close orbit-close" id="holdingClose" aria-label="Close">✕</button>
+    <button class="holding-help-btn" id="holdingHelpBtn" aria-label="How to play">?</button>
     <div class="celebration-content holding-content">
       <h2 class="celebration-title">INCOMING CHALLENGE</h2>
       <div class="holding-versus">
         <div class="holding-actor">
-          <div class="holding-photo" id="holdStartPhoto"><span class="og og-person og-lg"></span></div>
-          <div class="holding-label">START</div>
+          <div class="holding-photo">
+            <div class="holding-photo-content" id="holdStartPhoto"><span class="og og-person-bare"></span></div>
+            <svg class="holding-photo-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
+            </svg>
+          </div>
           <div class="holding-name" id="holdStartName">…</div>
+          <div class="holding-label">START</div>
         </div>
         <div class="holding-arrow">→</div>
         <div class="holding-actor holding-actor-goal">
-          <div class="holding-photo" id="holdGoalPhoto"><span class="og og-person og-lg"></span></div>
-          <div class="holding-label">GOAL</div>
+          <div class="holding-photo">
+            <div class="holding-photo-content" id="holdGoalPhoto"><span class="og og-person-bare-gold"></span></div>
+            <svg class="holding-photo-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
+            </svg>
+          </div>
           <div class="holding-name" id="holdGoalName">…</div>
+          <div class="holding-label">GOAL</div>
         </div>
       </div>
-      <p class="holding-par">Beat <strong>Par <span id="holdPar">3</span></strong></p>
+      <div class="holding-series-info" id="holdingChallengeSeries" hidden></div>
+      <p class="holding-par" id="holdingChallengeBlock">Beat <strong>Par <span id="holdPar">3</span></strong></p>
       <button class="cel-btn share-btn" id="acceptChallengeBtn">ACCEPT MISSION</button>
+
+      <!-- Result-back view (sibling shown when ?r= param present) -->
+      <div class="holding-result" id="holdingResultBlock" hidden>
+        <div class="holding-series-info" id="holdingSeriesInfo" hidden></div>
+        <div class="holding-result-score">
+          <span class="holding-result-num" id="resultBackSteps">0</span>
+          <span class="holding-result-vs">vs Par <span id="resultBackPar">0</span></span>
+        </div>
+        <div class="score-verdict" id="resultBackVerdict"></div>
+        <div class="holding-result-actions">
+          <button class="cel-btn share-btn" id="counterChallengeBtn" hidden>Counter-challenge</button>
+          <button class="cel-btn review-btn" id="resultBackHomeBtn">Back to Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="holding-help" id="holdingHelp" hidden>
+      <div class="holding-help-content">
+        <h3>HOW TO PLAY</h3>
+        <p>A friend has challenged you to connect <strong>START</strong> to <strong>GOAL</strong>.</p>
+        <p>Build a chain through movies they share:<br>Start&nbsp;→&nbsp;Movie&nbsp;→&nbsp;Actor&nbsp;→&nbsp;Movie&nbsp;→&nbsp;…&nbsp;→&nbsp;Goal</p>
+        <p>Each movie must include both the actor before and after it. Beat the <strong>Par</strong> to win.</p>
+        <button class="holding-help-close" id="holdingHelpDismiss">Got it</button>
+      </div>
     </div>
   </section>
 
@@ -316,6 +385,15 @@
   <script src="../config.js"></script>
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
+  <!-- MovieCube + dependencies (used by Pass & Play pathway list) -->
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/taste-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
+  <script src="../components/taste-interactions.js"></script>
+  <script src="../components/shortlist-badge.js"></script>
   <script src="journeys.js"></script>
 </body>
 </html>

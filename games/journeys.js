@@ -46,13 +46,89 @@ let gameState = {
   steps: 0,
   completed: false,
   puzzleNumber: 1,
+  lastAddedId: null, // hex-pop animation target — cleared after 600ms
   // Party (Pass & Play) only
   activePlayer: 0,
   players: [
-    { steps: 0, chain: [] },
-    { steps: 0, chain: [] }
-  ]
+    { name: 'Player 1', steps: 0, chain: [] },
+    { name: 'Player 2', steps: 0, chain: [] }
+  ],
+  // Best-of-N series + rivalry tracking (challenge / duel only)
+  seriesLength: 1,    // 1, 3, 5, or 7
+  seriesProgress: 0,  // 0-indexed round in the series
+  challengeId: null,  // unique id for this round; persisted in localStorage
+  replyTo: null,      // parent cid if this round is a reply (counter-challenge)
+  senderName: '',     // optional creator-provided sender name (URL param `n`)
+  opponentName: ''    // creator-provided "send to" name (saved on share)
 };
+
+/* ============================================================
+   CHALLENGE STORAGE — Added 2026-05-02
+   localStorage key: orbit_my_challenges (see data/storage-keys.md)
+   Schema: { sent: [...], received: [...] }
+   Each entry: { id, createdAt, startActor, endActor, par, seriesLength,
+                 round, replyTo, sentTo?, from?, mySteps?, myChain?,
+                 opponentResult?: {steps, completedAt} }
+   ============================================================ */
+const MY_CHALLENGES_KEY = 'orbit_my_challenges';
+
+function loadMyChallenges() {
+  try {
+    const raw = localStorage.getItem(MY_CHALLENGES_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (parsed && Array.isArray(parsed.sent) && Array.isArray(parsed.received)) {
+      return parsed;
+    }
+  } catch (e) { /* fall through */ }
+  return { sent: [], received: [] };
+}
+
+function saveMyChallenges(data) {
+  try {
+    localStorage.setItem(MY_CHALLENGES_KEY, JSON.stringify(data));
+  } catch (e) { /* storage full — silently fail */ }
+}
+
+function recordSentChallenge(entry) {
+  const data = loadMyChallenges();
+  // Replace any existing entry with the same id (idempotent on repeat shares)
+  data.sent = data.sent.filter(c => c.id !== entry.id).concat(entry);
+  saveMyChallenges(data);
+}
+
+function recordReceivedChallenge(entry) {
+  const data = loadMyChallenges();
+  data.received = data.received.filter(c => c.id !== entry.id).concat(entry);
+  saveMyChallenges(data);
+}
+
+function recordOpponentResult(cid, steps) {
+  const data = loadMyChallenges();
+  const challenge = data.sent.find(c => c.id === cid);
+  if (!challenge) return null;
+  challenge.opponentResult = { steps, completedAt: Date.now() };
+  saveMyChallenges(data);
+  return challenge;
+}
+
+function recordMyResult(cid, steps, chain) {
+  const data = loadMyChallenges();
+  const challenge = data.received.find(c => c.id === cid);
+  if (!challenge) return null;
+  challenge.mySteps = steps;
+  challenge.myChain = chain.map(({ photo, poster, ...rest }) => rest);
+  challenge.completedAt = Date.now();
+  saveMyChallenges(data);
+  return challenge;
+}
+
+function newChallengeId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+function getPlayerName(idx) {
+  return (gameState.players?.[idx]?.name) || (idx === 0 ? 'Player 1' : 'Player 2');
+}
 
 // Cache for filmographies
 let filmographyCache = {};
@@ -118,8 +194,8 @@ let undoBtn, resetBtn;
 let celebrationOverlay, postgameResults;
 let headerStatus;
 
-// Honeycomb geometry (flat-top hexagons)
-const HEX_SIZE = 68; // radius (center to vertex)
+// Honeycomb geometry (flat-top hexagons) — BASE values, scaled per render
+const HEX_SIZE = 68; // radius (center to vertex) at scale 1.0
 const HEX_WIDTH = HEX_SIZE * 2;
 const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE;
 
@@ -127,6 +203,16 @@ const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE;
 const HORIZ_SPACING = HEX_SIZE * 1.5;        // Gameplay spacing
 const COMPLETE_SPACING = HEX_SIZE * 1.75;     // Completion spacing (touch, no overlap)
 const VERT_OFFSET = HEX_HEIGHT * 0.5;        // Zigzag amount for honeycomb
+
+/* Dynamic hex scaling — prevents overlap on long chains.
+   Chain length grows with par; we shrink the hex (and everything that
+   scales with it: spacing, labels, image clips) so the path still fits. */
+function getHexScale(totalNodes) {
+  if (totalNodes <= 7) return 1.0;
+  if (totalNodes <= 10) return 0.8;
+  if (totalNodes <= 15) return 0.65;
+  return 0.5;
+}
 
 // ============================================
 // INITIALIZATION
@@ -209,6 +295,12 @@ async function loadCustomPuzzle(start, end, par, mode) {
   gameState.completed = false;
   gameState.searchType = 'movie';
 
+  // Mint a challengeId for challenge mode if we don't already have one (a duel
+  // mode loads from URL, where cid was set by checkUrlParams).
+  if (mode === 'challenge' && !gameState.challengeId) {
+    gameState.challengeId = newChallengeId();
+  }
+
   if (parValue) parValue.textContent = par;
   if (stepsValue) stepsValue.textContent = 0;
 
@@ -225,6 +317,10 @@ async function loadCustomPuzzle(start, end, par, mode) {
    ============================================================ */
 let setupSearchDebounced = null;
 let setupPickStage = 'start'; // 'start' | 'goal'
+// Counter-challenge carry-forward — populated when user clicks Counter-challenge.
+let pendingReplyTo = null;
+let pendingSeriesLength = null;
+let pendingSeriesProgress = null;
 
 function openSetupOverlay(forMode) {
   gameState.mode = forMode; // 'challenge' (Step 4 will add 'party')
@@ -238,6 +334,7 @@ function openSetupOverlay(forMode) {
     'Pick the <span class="setup-emph-cyan">START</span> actor';
   resetSetupPicks();
   document.getElementById('setupSearch').value = '';
+  document.getElementById('setupSearch').placeholder = 'Search Start actor...';
   document.getElementById('setupSearchResults').hidden = true;
   // Restore default UI state (in case user is reopening after previous run)
   document.getElementById('setupSpinnerZone').hidden = true;
@@ -245,6 +342,34 @@ function openSetupOverlay(forMode) {
   document.getElementById('setupSearchWrap').hidden = false;
   document.getElementById('randomizeBtn').hidden = false;
   document.getElementById('setupConfirmRow').hidden = true;
+  // Player name inputs — only relevant for Pass & Play
+  const setupNames = document.getElementById('setupNames');
+  setupNames.hidden = forMode !== 'party';
+  if (forMode === 'party') {
+    document.getElementById('player1NameInput').value = '';
+    document.getElementById('player2NameInput').value = '';
+  }
+  // Series selector — only for Create Challenge
+  const setupSeries = document.getElementById('setupSeries');
+  setupSeries.hidden = forMode !== 'challenge';
+  if (forMode === 'challenge') {
+    // Carry forward from a counter-challenge, otherwise default to Single (1).
+    const desiredLen = pendingSeriesLength != null ? pendingSeriesLength : 1;
+    gameState.seriesLength = desiredLen;
+    gameState.seriesProgress = pendingSeriesProgress != null ? pendingSeriesProgress : 0;
+    gameState.replyTo = pendingReplyTo;
+    document.querySelectorAll('.setup-series-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.series) === desiredLen);
+    });
+    // Clear the carry-forward so a fresh "Create Challenge" later doesn't inherit it.
+    pendingReplyTo = null;
+    pendingSeriesLength = null;
+    pendingSeriesProgress = null;
+  } else {
+    gameState.seriesLength = 1;
+    gameState.seriesProgress = 0;
+    gameState.replyTo = null;
+  }
 
   document.getElementById('modeMenu').hidden = true;
   document.getElementById('setupOverlay').hidden = false;
@@ -325,7 +450,40 @@ function initSetupOverlay() {
     document.getElementById('holdingScreen').hidden = true;
     startMode('duel');
   });
+  document.getElementById('resultBackHomeBtn').addEventListener('click', () => {
+    document.getElementById('holdingScreen').hidden = true;
+    if (window.location.search) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    showModeMenu();
+  });
+  document.getElementById('counterChallengeBtn').addEventListener('click', () => {
+    document.getElementById('holdingScreen').hidden = true;
+    if (window.location.search) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    // Carry the series forward — same series length, next round, link to parent cid.
+    pendingReplyTo = gameState.challengeId;
+    pendingSeriesLength = gameState.seriesLength;
+    pendingSeriesProgress = gameState.seriesProgress + 1;
+    openSetupOverlay('challenge');
+  });
+
+  // Series-selector buttons (challenge mode only, hidden for party)
+  document.querySelectorAll('.setup-series-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.setup-series-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      gameState.seriesLength = parseInt(btn.dataset.series) || 1;
+    });
+  });
   document.getElementById('descrambleBtn').addEventListener('click', startPlayer2Turn);
+  document.getElementById('holdingHelpBtn').addEventListener('click', () => {
+    document.getElementById('holdingHelp').hidden = false;
+  });
+  document.getElementById('holdingHelpDismiss').addEventListener('click', () => {
+    document.getElementById('holdingHelp').hidden = true;
+  });
   document.getElementById('privacyShield').addEventListener('orbit:close', () => {
     // Abandoning mid-handoff — back to menu, drop transient state.
     gameState.players = [{ steps: 0, chain: [] }, { steps: 0, chain: [] }];
@@ -353,6 +511,7 @@ function handleSetupPick(id, name, photo) {
     document.getElementById('setupInstruction').innerHTML =
       'Now pick the <span class="setup-emph-gold">GOAL</span> actor';
     document.getElementById('setupSearch').value = '';
+    document.getElementById('setupSearch').placeholder = 'Search Goal actor...';
     document.getElementById('setupSearchResults').hidden = true;
     document.getElementById('setupSearch').focus();
   } else {
@@ -393,6 +552,7 @@ function resetSetupFlow() {
   document.getElementById('setupInstruction').innerHTML =
     'Pick the <span class="setup-emph-cyan">START</span> actor';
   document.getElementById('setupSearch').value = '';
+  document.getElementById('setupSearch').placeholder = 'Search Start actor...';
   document.getElementById('setupSearchResults').hidden = true;
   document.getElementById('setupSearch').focus();
 }
@@ -405,12 +565,16 @@ function beginCustomPuzzleFromSetup() {
     // Par starts at 3, will be set to max(3, steps) on completion.
     loadCustomPuzzle(gameState.startActor, gameState.endActor, 3, 'challenge');
   } else if (gameState.mode === 'party') {
+    const p1Raw = document.getElementById('player1NameInput').value.trim();
+    const p2Raw = document.getElementById('player2NameInput').value.trim();
+    const p1Name = p1Raw || 'Player 1';
+    const p2Name = p2Raw || 'Player 2';
     gameState.activePlayer = 0;
     gameState.players = [
-      { steps: 0, chain: [] },
-      { steps: 0, chain: [] }
+      { name: p1Name, steps: 0, chain: [] },
+      { name: p2Name, steps: 0, chain: [] }
     ];
-    setModeTag('PASS & PLAY — P1', false);
+    setModeTag(`PASS & PLAY — ${p1Name.toUpperCase()}`, false);
     document.getElementById('infoBar').classList.add('party-mode');
     showGameUI();
     loadCustomPuzzle(gameState.startActor, gameState.endActor, 0, 'party');
@@ -422,20 +586,53 @@ function beginCustomPuzzleFromSetup() {
    Picks two distinct actors from the curated DAILY_JOURNEYS
    roster (verified IDs, all have TMDB portraits).
    ============================================================ */
-async function randomizePath() {
-  // Build pool from verified DAILY_JOURNEYS roster
+/* Pick two distinct actors from DAILY_JOURNEYS who have NOT co-starred in
+   any reasonably popular movie. TMDB's /discover/movie?with_cast=A,B returns
+   the films they share; if total_results === 0, they're not direct co-stars,
+   so the puzzle requires ≥3 hops. Up to `maxAttempts` rolls; if every attempt
+   fails (extremely unlikely with the curated roster), accept the last pair. */
+async function pickValidRandomPair(maxAttempts) {
   const pool = new Map();
   DAILY_JOURNEYS.forEach(p => {
     pool.set(p.start.id, p.start);
     pool.set(p.end.id, p.end);
   });
   const list = Array.from(pool.values());
-  const a = Math.floor(Math.random() * list.length);
-  let b = Math.floor(Math.random() * list.length);
-  while (b === a) b = Math.floor(Math.random() * list.length);
-  const start = list[a];
-  const goal = list[b];
+  const tried = new Set();
+  let lastStart = list[0];
+  let lastGoal = list[1];
 
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const a = Math.floor(Math.random() * list.length);
+    let b = Math.floor(Math.random() * list.length);
+    while (b === a) b = Math.floor(Math.random() * list.length);
+    const start = list[a];
+    const goal = list[b];
+    lastStart = start;
+    lastGoal = goal;
+
+    // Bidirectional pair key — order doesn't matter for co-star check
+    const key = [start.id, goal.id].sort().join(':');
+    if (tried.has(key)) continue;
+    tried.add(key);
+
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_cast=${start.id},${goal.id}&vote_count.gte=10`
+      );
+      const data = await res.json();
+      if ((data.total_results || 0) === 0) {
+        return { start, goal };
+      }
+    } catch (err) {
+      // Network hiccup — accept this pair rather than block the user.
+      return { start, goal };
+    }
+  }
+  return { start: lastStart, goal: lastGoal };
+}
+
+async function randomizePath() {
   // Reset state, show cosmic spinner, hide picks/search/randomize/confirm
   setupPickStage = 'start';
   gameState.startActor = null;
@@ -448,12 +645,16 @@ async function randomizePath() {
   document.getElementById('setupSpinnerZone').hidden = false;
   document.getElementById('setupInstruction').innerHTML = '&nbsp;';
 
-  // Fetch portraits in parallel while spinner runs
+  // Hold the spinner for at least 1.5s for theatrical effect, while we
+  // (a) roll a non-cosharing pair and (b) prefetch portraits in parallel.
+  const minSpinner = new Promise(r => setTimeout(r, 1500));
+
+  const { start, goal } = await pickValidRandomPair(4);
   const [startPath, goalPath] = await Promise.all([
     fetchAndCachePortrait(start.id),
-    fetchAndCachePortrait(goal.id),
-    new Promise(r => setTimeout(r, 1500)) // minimum theatrical duration
+    fetchAndCachePortrait(goal.id)
   ]);
+  await minSpinner;
 
   document.getElementById('setupSpinnerZone').hidden = true;
   document.getElementById('setupPicks').hidden = false;
@@ -479,11 +680,33 @@ async function checkUrlParams() {
   const startId = parseInt(params.get('s'));
   const goalId = parseInt(params.get('g'));
   const par = Math.max(3, parseInt(params.get('p') || '3'));
+  const resultRaw = params.get('r');
+  const result = resultRaw != null && !isNaN(parseInt(resultRaw)) ? parseInt(resultRaw) : null;
   if (!startId || !goalId || startId === goalId) return false;
+
+  // Series + rivalry params
+  const cid = params.get('cid') || null;
+  const seriesLength = Math.max(1, parseInt(params.get('series') || '1'));
+  const seriesProgress = Math.max(0, parseInt(params.get('round') || '0'));
+  const replyTo = params.get('reply') || null;
+  const senderName = (params.get('n') || '').trim();
+  gameState.challengeId = cid;
+  gameState.seriesLength = seriesLength;
+  gameState.seriesProgress = seriesProgress;
+  gameState.replyTo = replyTo;
+  gameState.senderName = senderName;
 
   document.getElementById('modeMenu').hidden = true;
   document.getElementById('holdingScreen').hidden = false;
   if (!setupSearchDebounced) initSetupOverlay();
+
+  // Toggle which content block shows based on whether a result is encoded.
+  const isResultBack = result != null && result > 0;
+  document.getElementById('holdingChallengeBlock').hidden = isResultBack;
+  document.getElementById('acceptChallengeBtn').hidden = isResultBack;
+  document.getElementById('holdingResultBlock').hidden = !isResultBack;
+  document.querySelector('#holdingScreen .celebration-title').textContent =
+    isResultBack ? "YOUR FRIEND'S RESULT" : 'INCOMING CHALLENGE';
 
   try {
     const [sData, gData] = await Promise.all([
@@ -506,6 +729,58 @@ async function checkUrlParams() {
     gameState.startActor = { id: startId, name: sData.name };
     gameState.endActor = { id: goalId, name: gData.name };
     gameState.par = par;
+
+    // Series info caption — shown on both incoming and result-back views
+    if (seriesLength > 1) {
+      const caption = `Best of ${seriesLength} • Round ${seriesProgress + 1}/${seriesLength}`;
+      document.getElementById('holdingChallengeSeries').textContent = caption;
+      document.getElementById('holdingChallengeSeries').hidden = false;
+      document.getElementById('holdingSeriesInfo').textContent = caption;
+      document.getElementById('holdingSeriesInfo').hidden = false;
+    } else {
+      document.getElementById('holdingChallengeSeries').hidden = true;
+      document.getElementById('holdingSeriesInfo').hidden = true;
+    }
+
+    if (isResultBack) {
+      document.getElementById('resultBackSteps').textContent = result;
+      document.getElementById('resultBackPar').textContent = par;
+      const verdictEl = document.getElementById('resultBackVerdict');
+      const diff = result - par;
+      if (diff < 0) {
+        verdictEl.innerHTML = `<span class="og og-eagle"></span> ${-diff} Under Par!`;
+        verdictEl.className = 'score-verdict under-par';
+      } else if (diff === 0) {
+        verdictEl.innerHTML = '<span class="og og-target"></span> On Par!';
+        verdictEl.className = 'score-verdict on-par';
+      } else {
+        verdictEl.textContent = `${diff} Over Par`;
+        verdictEl.className = 'score-verdict over-par';
+      }
+
+      // Persist the opponent's result against the matching sent challenge.
+      if (cid) recordOpponentResult(cid, result);
+
+      // Counter-challenge available unless we've already played all rounds.
+      const canCounter = seriesLength === 1 || (seriesProgress + 1) < seriesLength;
+      document.getElementById('counterChallengeBtn').hidden = !canCounter;
+    } else {
+      // Incoming challenge — record receipt against B's localStorage if cid present.
+      if (cid) {
+        recordReceivedChallenge({
+          id: cid,
+          receivedAt: Date.now(),
+          from: senderName || null,
+          startActor: { id: startId, name: sData.name },
+          endActor: { id: goalId, name: gData.name },
+          par,
+          seriesLength,
+          round: seriesProgress,
+          replyTo
+        });
+      }
+    }
+
     return true;
   } catch (err) {
     console.error('Failed to load incoming challenge:', err);
@@ -578,6 +853,7 @@ function setupEventListeners() {
 
   // Share
   document.getElementById("shareBtn").addEventListener("click", shareResult);
+  document.getElementById("rematchBtn").addEventListener("click", rematchParty);
 
   // Celebration overlay
   document.getElementById("celebrationClose").addEventListener("click", closeCelebration);
@@ -736,6 +1012,13 @@ async function loadActorPhotos() {
   }
 }
 
+function setLastAdded(id) {
+  gameState.lastAddedId = id;
+  setTimeout(() => {
+    if (gameState.lastAddedId === id) gameState.lastAddedId = null;
+  }, 600);
+}
+
 async function loadFilmography(actorId) {
   if (filmographyCache[actorId]) return filmographyCache[actorId];
 
@@ -807,7 +1090,23 @@ async function handleSearch() {
     );
     const data = await res.json();
 
-    const results = (data.results || []).slice(0, 6);
+    let results = (data.results || []).slice(0, 6);
+
+    // In actor mode, pin the goal actor to the top — they're always a valid pick.
+    if (
+      gameState.searchType === 'actor' &&
+      gameState.endActor &&
+      !gameState.completed
+    ) {
+      const goalId = gameState.endActor.id;
+      const filtered = results.filter(r => r.id !== goalId);
+      results = [{
+        id: goalId,
+        name: gameState.endActor.name,
+        photo: gameState.endActor.photo,
+        isGoalPin: true
+      }, ...filtered].slice(0, 6);
+    }
 
     if (results.length === 0) {
       searchResults.hidden = true;
@@ -830,14 +1129,19 @@ async function handleSearch() {
           </div>
         `;
       } else {
-        const photo = item.profile_path ? `${TMDB_IMG}w185${item.profile_path}` : "";
+        const isGoalPin = !!item.isGoalPin;
+        const photo = isGoalPin
+          ? (item.photo || "")
+          : (item.profile_path ? `${TMDB_IMG}w185${item.profile_path}` : "");
         const safeName = (item.name || "").replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        const subtext = isGoalPin ? 'GOAL' : (item.known_for_department || 'Actor');
+        const cls = isGoalPin ? 'search-result-item search-goal-pin' : 'search-result-item';
         return `
-          <div class="search-result-item" data-id="${item.id}" data-name="${safeName}" data-type="actor" data-photo="${photo}">
+          <div class="${cls}" data-id="${item.id}" data-name="${safeName}" data-type="actor" data-photo="${photo}">
             <img class="search-result-img" src="${photo}" alt="">
             <div>
               <div class="search-result-title">${item.name}</div>
-              <div class="search-result-sub">${item.known_for_department || 'Actor'}</div>
+              <div class="search-result-sub">${subtext}</div>
             </div>
           </div>
         `;
@@ -900,6 +1204,7 @@ async function handleMovieSelection(movieId, movieTitle, posterPath) {
     const posterUrl = posterPath ? `${TMDB_IMG}w185${posterPath}` : null;
     gameState.chain.push({ type: 'movie', id: movieId, name: movieTitle, poster: posterUrl });
     gameState.steps++;
+    setLastAdded(movieId);
 
     setSearchType('actor');
     renderHoneycombPath();
@@ -922,6 +1227,7 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
 
   if (lastMovie.type !== 'movie') {
     showNotification("Please select a movie first", 'error');
+    if (actorId === gameState.endActor?.id) flashGoalFail();
     return;
   }
 
@@ -939,6 +1245,7 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
 
     if (!inCast && !inCrew) {
       showNotification(`${actorName} is not in ${lastMovie.name}`, 'error');
+      if (actorId === gameState.endActor?.id) flashGoalFail();
       return;
     }
 
@@ -955,6 +1262,24 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
         const path = await fetchAndCachePortrait(actorId);
         if (path) goalPhoto = `${TMDB_IMG}w185${path}`;
       }
+
+      // 1) Green tick on placeholder (chain still dashed).
+      flashGoalSuccess();
+      await new Promise(r => setTimeout(r, 600));
+
+      // 2) Spawn supernova hex at the goal's screen position.
+      const placeholderHex = honeycombContainer.querySelector('.hex-placeholder');
+      let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      if (placeholderHex) {
+        const rect = placeholderHex.getBoundingClientRect();
+        cx = rect.left + rect.width / 2;
+        cy = rect.top + rect.height / 2;
+      }
+      triggerCompletionSupernova(cx, cy);
+
+      // 3) Wait for supernova to engulf the screen, then join the chain
+      //    behind the bright peak — user can't see the transition.
+      await new Promise(r => setTimeout(r, 850));
       gameState.chain.push({
         type: 'actor',
         id: actorId,
@@ -962,12 +1287,16 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
         photo: goalPhoto,
         isGoal: true
       });
+      setLastAdded(actorId);
       gameState.completed = true;
       updateUI();
       saveTodayState();
       saveStats();
       renderHoneycombPath();
-      setTimeout(handleCompletion, 800);
+
+      // 4) Let the supernova fade out, revealing the completed chain.
+      await new Promise(r => setTimeout(r, 1050));
+      handleCompletion();
       return;
     }
 
@@ -978,6 +1307,7 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
     }
     gameState.chain.push({ type: 'actor', id: actorId, name: actorName, photo: resolvedPhoto });
     gameState.currentActor = { id: actorId, name: actorName };
+    setLastAdded(actorId);
 
     await loadFilmography(actorId);
 
@@ -1017,29 +1347,56 @@ function renderHoneycombPath() {
     middleItems.push(item);
   }
 
+  // Compute current hex scale based on total node count.
+  const totalNodes = middleItems.length + 2; // START + middles + GOAL
+  const tierScale = getHexScale(totalNodes);
+  let hexSize = Math.round(HEX_SIZE * tierScale);
+
+  // Width-aware cap: shrink further if even-distribution slot would force
+  // more than ~15% overlap. Slot per node ≈ (W - margins) / (totalNodes-1).
+  // Hex visual width = 2 * hexSize. We want slot >= 1.7 * hexSize for
+  // no/marginal overlap → hexSize <= slot / 1.7.
+  if (totalNodes > 2) {
+    const avail = Math.max(0, W - 60);
+    const maxHexFromWidth = Math.floor(avail / ((totalNodes - 1) * 1.7));
+    hexSize = Math.min(hexSize, maxHexFromWidth);
+  }
+  hexSize = Math.max(28, hexSize);
+
+  const hexHeight = Math.sqrt(3) * hexSize;
+  const horizSpacing = hexSize * 1.5;
+  const completeSpacing = hexSize * 1.75;
+  const vertOffset = hexHeight * 0.5;
+
   let startPos, goalPos, middlePositions;
 
   if (isComplete) {
-    // CENTERED chain with COMPLETE_SPACING (touch, no overlap)
-    const totalHexagons = middleItems.length + 2; // START + middles + GOAL
-    const totalChainWidth = (totalHexagons - 1) * COMPLETE_SPACING;
+    // CENTERED chain. Cap spacing so the chain never exceeds W; otherwise
+    // long completed chains run off the canvas.
+    const margin = 30;
+    const maxChainWidth = Math.max(0, W - margin * 2);
+    const desired = (totalNodes - 1) * completeSpacing;
+    const finalSpacing = desired <= maxChainWidth
+      ? completeSpacing
+      : maxChainWidth / Math.max(1, totalNodes - 1);
+
+    const totalChainWidth = (totalNodes - 1) * finalSpacing;
     const chainStartX = (W - totalChainWidth) / 2;
 
     startPos = { x: chainStartX, y: centerY };
-    goalPos = { x: chainStartX + (totalHexagons - 1) * COMPLETE_SPACING, y: centerY };
+    goalPos = { x: chainStartX + (totalNodes - 1) * finalSpacing, y: centerY };
 
-    // Middle positions between START and GOAL
     middlePositions = [];
     for (let i = 0; i < middleItems.length; i++) {
-      const x = chainStartX + (i + 1) * COMPLETE_SPACING;
-      const zigzag = ((i + 1) % 2 === 0 ? -VERT_OFFSET * 0.35 : VERT_OFFSET * 0.35);
+      const x = chainStartX + (i + 1) * finalSpacing;
+      const zigzag = ((i + 1) % 2 === 0 ? -vertOffset * 0.35 : vertOffset * 0.35);
       middlePositions.push({ x, y: centerY + zigzag });
     }
   } else {
-    // Gameplay: START fixed left, GOAL fixed right
-    startPos = { x: HEX_SIZE + 30, y: centerY };
-    goalPos = { x: W - HEX_SIZE - 30, y: centerY };
-    middlePositions = computeMiddlePositions(middleItems.length, startPos, goalPos, centerY);
+    // Gameplay: START fixed left, GOAL fixed right; middles distributed evenly.
+    startPos = { x: hexSize + 30, y: centerY };
+    goalPos = { x: W - hexSize - 30, y: centerY };
+    middlePositions = computeMiddlePositions(middleItems.length, startPos, goalPos, centerY, horizSpacing, vertOffset);
   }
 
   // Assemble full node list: START + middles + GOAL
@@ -1103,7 +1460,7 @@ function renderHoneycombPath() {
 
   // Draw hexagon nodes
   allNodes.forEach((node, i) => {
-    svg += renderHexagonNode(node.pos, node.item, i, node.isPlaceholder, isComplete);
+    svg += renderHexagonNode(node.pos, node.item, i, node.isPlaceholder, isComplete, hexSize);
   });
 
   svg += `</svg>`;
@@ -1112,6 +1469,13 @@ function renderHoneycombPath() {
   // Add click handlers ONLY when game is complete
   if (isComplete) {
     attachClickHandlers();
+  } else {
+    // Placeholder goal hex is clickable — try-finish shortcut.
+    const placeholderHex = honeycombContainer.querySelector('.hex-placeholder');
+    if (placeholderHex) {
+      placeholderHex.style.cursor = 'pointer';
+      placeholderHex.addEventListener('click', handleGoalClick);
+    }
   }
 
   // Update header status
@@ -1121,17 +1485,22 @@ function renderHoneycombPath() {
   }
 }
 
-function computeMiddlePositions(count, startPos, goalPos, centerY) {
+function computeMiddlePositions(count, startPos, goalPos, centerY, horizSpacing, vertOffset) {
   // Only used during gameplay (completion is handled inline)
   if (count === 0) return [];
 
-  const positions = [];
-  const maxWidth = (goalPos.x - startPos.x - 100) * 0.60;
-  const chainStartX = startPos.x + HORIZ_SPACING;
+  const vo = vertOffset != null ? vertOffset : VERT_OFFSET;
 
+  // Distribute middles EVENLY between start and goal so they never stack
+  // on top of each other. As count grows, the slot tightens — pair with
+  // hex shrinkage in renderHoneycombPath to keep overlap marginal.
+  const span = goalPos.x - startPos.x;
+  const slot = span / (count + 1);
+
+  const positions = [];
   for (let i = 0; i < count; i++) {
-    const x = Math.min(chainStartX + i * HORIZ_SPACING, chainStartX + maxWidth);
-    const zigzag = (i % 2 === 0 ? -VERT_OFFSET * 0.4 : VERT_OFFSET * 0.4);
+    const x = startPos.x + (i + 1) * slot;
+    const zigzag = (i % 2 === 0 ? -vo * 0.4 : vo * 0.4);
     positions.push({ x, y: centerY + zigzag });
   }
 
@@ -1148,7 +1517,11 @@ function hexPathD(cx, cy, size) {
   return `M${points.join('L')}Z`;
 }
 
-function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
+function renderHexagonNode(pos, item, index, isPlaceholder, isComplete, hexSize) {
+  // Default to base if caller didn't pass a scaled size.
+  const HS = hexSize != null ? hexSize : HEX_SIZE;
+  // Scale-relative offset so labels and font sizes shrink with the hex.
+  const sFactor = HS / HEX_SIZE;
   let svg = '';
 
   const isStart = item?.isStart;
@@ -1159,9 +1532,10 @@ function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
   // Determine colors
   let fillColor, strokeColor, glowFilter;
   if (isPlaceholder) {
-    fillColor = 'rgba(30, 41, 59, 0.3)';
+    // Match the regular goal hex fill so portrait letterbox bands read as gold
+    fillColor = 'rgba(255, 215, 0, 0.2)';
     strokeColor = '#ffd700';
-    glowFilter = '';
+    glowFilter = 'filter="url(#glow)"';
   } else if (isStart) {
     fillColor = 'rgba(0, 217, 255, 0.15)';
     strokeColor = '#00d9ff';
@@ -1186,14 +1560,28 @@ function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
 
   const strokeWidth = (isStart || isGoal) ? 3 : 2;
   const clickableClass = !isPlaceholder && isComplete ? 'hex-clickable' : '';
+  const placeholderClass = isPlaceholder ? 'hex-placeholder' : '';
   const dataAttrs = !isPlaceholder && item
     ? `data-type="${item.type}" data-id="${item.id}" data-name="${(item.name || '').replace(/"/g, '&quot;')}"`
     : '';
+  const isNew =
+    (item && item.id != null && item.id === gameState.lastAddedId) ||
+    (isPlaceholder && gameState.lastAddedId === 'placeholder-init');
+  const newClass = isNew ? 'hex-new' : '';
 
-  svg += `<g class="hex-node ${clickableClass}" transform="translate(${pos.x}, ${pos.y})" ${dataAttrs}>`;
+  svg += `<g class="hex-node ${clickableClass} ${placeholderClass}" transform="translate(${pos.x}, ${pos.y})" ${dataAttrs}>`;
+  svg += `<g class="hex-content ${newClass}">`;
+
+  // Scaled label offsets + fonts so they shrink with the hex.
+  const nameY = HS + Math.round(26 * sFactor);
+  const badgeY = HS + Math.round(50 * sFactor);
+  const nameFont = Math.max(10, Math.round(20 * sFactor));
+  const badgeFont = Math.max(9, Math.round(18 * sFactor));
+  const movieFont = Math.max(8, Math.round(11 * sFactor));
+  const movieLine = Math.max(10, Math.round(14 * sFactor));
 
   // Hexagon background
-  svg += `<path d="${hexPathD(0, 0, HEX_SIZE)}" fill="${fillColor}" stroke="${strokeColor}" 
+  svg += `<path d="${hexPathD(0, 0, HS)}" fill="${fillColor}" stroke="${strokeColor}"
                stroke-width="${strokeWidth}" ${glowFilter}/>`;
 
   // Content
@@ -1202,68 +1590,88 @@ function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
     const goalPhoto = gameState.endActor?.photo || '';
     if (goalPhoto) {
       const goalClipId = `hex-clip-goal-${index}`;
-      svg += `<defs><clipPath id="${goalClipId}"><path d="${hexPathD(0, 0, HEX_SIZE - 2)}"/></clipPath></defs>`;
-      svg += `<image href="${goalPhoto}" x="${-HEX_SIZE + 2}" y="${-HEX_SIZE + 2}"
-                   width="${(HEX_SIZE - 2) * 2}" height="${(HEX_SIZE - 2) * 2}"
+      svg += `<defs><clipPath id="${goalClipId}"><path d="${hexPathD(0, 0, HS - 2)}"/></clipPath></defs>`;
+      svg += `<image href="${goalPhoto}" x="${-HS + 2}" y="${-HS + 2}"
+                   width="${(HS - 2) * 2}" height="${(HS - 2) * 2}"
                    clip-path="url(#${goalClipId})" preserveAspectRatio="xMidYMin meet"/>`;
     } else {
       // Person silhouette fallback (matches .og-person glyph)
-      const r = HEX_SIZE - 2;
+      const r = HS - 2;
       svg += `<g opacity="0.85">
-        <circle cx="0" cy="-8" r="${r * 0.22}" stroke="#ffd700" stroke-width="3" fill="none"/>
+        <circle cx="0" cy="${-8 * sFactor}" r="${r * 0.22}" stroke="#ffd700" stroke-width="3" fill="none"/>
         <path d="M${-r * 0.5} ${r * 0.55}Q${-r * 0.5} ${r * 0.18} 0 ${r * 0.18}Q${r * 0.5} ${r * 0.18} ${r * 0.5} ${r * 0.55}"
               stroke="#ffd700" stroke-width="3" fill="none"/>
       </g>`;
     }
-    svg += `<text x="0" y="${HEX_SIZE + 16}" text-anchor="middle" fill="#f1f5f9"
-                 font-size="10" font-family="Barlow, sans-serif">${escapeHtml(gameState.endActor?.name || 'GOAL')}</text>`;
-    svg += `<text x="0" y="${HEX_SIZE + 30}" text-anchor="middle" fill="#ffd700"
-                 font-size="9" font-family="Orbitron, sans-serif" font-weight="bold">GOAL</text>`;
+    svg += `<text x="0" y="${nameY}" text-anchor="middle" fill="#f1f5f9"
+                 font-size="${nameFont}" font-family="Barlow, sans-serif" font-weight="600">${escapeHtml(gameState.endActor?.name || 'GOAL')}</text>`;
+    svg += `<text x="0" y="${badgeY}" text-anchor="middle" fill="#ffd700"
+                 font-size="${badgeFont}" font-family="Orbitron, sans-serif" font-weight="bold" letter-spacing="2">GOAL</text>`;
+
+    // Fail overlay — red flash + white X. Hidden by default; .hex-fail
+    // class triggers fade-in/out animation in sync with the shake.
+    const cx = HS * 0.3;
+    const xStroke = Math.max(4, Math.round(9 * sFactor));
+    svg += `<g class="hex-fail-overlay" opacity="0">
+      <path d="${hexPathD(0, 0, HS)}" fill="rgba(239, 68, 68, 0.5)"/>
+      <line x1="${-cx}" y1="${-cx}" x2="${cx}" y2="${cx}" stroke="#ffffff" stroke-width="${xStroke}" stroke-linecap="round"/>
+      <line x1="${-cx}" y1="${cx}" x2="${cx}" y2="${-cx}" stroke="#ffffff" stroke-width="${xStroke}" stroke-linecap="round"/>
+    </g>`;
+
+    // Success overlay — green flash + white tick. Fires on the placeholder
+    // BEFORE the chain joins up to the goal actor.
+    svg += `<g class="hex-success-overlay" opacity="0">
+      <path d="${hexPathD(0, 0, HS)}" fill="rgba(16, 185, 129, 0.55)"/>
+      <polyline points="${-cx},${-cx * 0.15} ${-cx * 0.25},${cx * 0.55} ${cx},${-cx * 0.55}"
+                fill="none" stroke="#ffffff" stroke-width="${xStroke}" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>`;
   } else if (isMovie) {
-    // Movie title
+    // Movie title — wrap width also scales (fewer chars per line on smaller hexes).
+    const wrapWidth = Math.max(6, Math.round(12 * sFactor));
     const words = (item.name || '').toUpperCase().split(' ');
-    const lines = wrapText(words, 12);
-    const lineHeight = 14;
-    const startY = -(lines.length - 1) * lineHeight / 2;
+    const lines = wrapText(words, wrapWidth);
+    // dominant-baseline="central" makes the y coordinate the visual center
+    // of each line, so the block stays centered at any font size.
+    const startY = -(lines.length - 1) * movieLine / 2;
 
     lines.slice(0, 4).forEach((line, i) => {
-      svg += `<text x="0" y="${startY + i * lineHeight + 4}" text-anchor="middle"
-                   fill="#00d9ff" font-size="11" font-family="Orbitron, sans-serif" font-weight="bold">${escapeHtml(line)}</text>`;
+      svg += `<text x="0" y="${startY + i * movieLine}" text-anchor="middle" dominant-baseline="central"
+                   fill="#00d9ff" font-size="${movieFont}" font-family="Orbitron, sans-serif" font-weight="bold">${escapeHtml(line)}</text>`;
     });
   } else if (isActor) {
     // Actor photo clipped to hexagon shape (fills entire hex)
     const photoUrl = item.photo || '';
     if (photoUrl) {
       const clipId = `hex-clip-${index}`;
-      svg += `<defs><clipPath id="${clipId}"><path d="${hexPathD(0, 0, HEX_SIZE - 2)}"/></clipPath></defs>`;
-      svg += `<image href="${photoUrl}" x="${-HEX_SIZE + 2}" y="${-HEX_SIZE + 2}"
-                   width="${(HEX_SIZE - 2) * 2}" height="${(HEX_SIZE - 2) * 2}"
+      svg += `<defs><clipPath id="${clipId}"><path d="${hexPathD(0, 0, HS - 2)}"/></clipPath></defs>`;
+      svg += `<image href="${photoUrl}" x="${-HS + 2}" y="${-HS + 2}"
+                   width="${(HS - 2) * 2}" height="${(HS - 2) * 2}"
                    clip-path="url(#${clipId})" preserveAspectRatio="xMidYMin meet"/>`;
     } else {
       // Person silhouette fallback (matches .og-person glyph)
-      const r = HEX_SIZE - 2;
+      const r = HS - 2;
       svg += `<g opacity="0.85">
-        <circle cx="0" cy="-8" r="${r * 0.22}" stroke="${strokeColor}" stroke-width="3" fill="none"/>
+        <circle cx="0" cy="${-8 * sFactor}" r="${r * 0.22}" stroke="${strokeColor}" stroke-width="3" fill="none"/>
         <path d="M${-r * 0.5} ${r * 0.55}Q${-r * 0.5} ${r * 0.18} 0 ${r * 0.18}Q${r * 0.5} ${r * 0.18} ${r * 0.5} ${r * 0.55}"
               stroke="${strokeColor}" stroke-width="3" fill="none"/>
       </g>`;
     }
 
     // Name below
-    svg += `<text x="0" y="${HEX_SIZE + 16}" text-anchor="middle" fill="#f1f5f9" 
-                 font-size="10" font-family="Barlow, sans-serif">${escapeHtml(item.name)}</text>`;
+    svg += `<text x="0" y="${nameY}" text-anchor="middle" fill="#f1f5f9"
+                 font-size="${nameFont}" font-family="Barlow, sans-serif" font-weight="600">${escapeHtml(item.name)}</text>`;
 
     // Badge
     if (isStart) {
-      svg += `<text x="0" y="${HEX_SIZE + 30}" text-anchor="middle" fill="#00d9ff" 
-                   font-size="9" font-family="Orbitron, sans-serif" font-weight="bold">START</text>`;
+      svg += `<text x="0" y="${badgeY}" text-anchor="middle" fill="#00d9ff"
+                   font-size="${badgeFont}" font-family="Orbitron, sans-serif" font-weight="bold" letter-spacing="2">START</text>`;
     } else if (isGoal) {
-      svg += `<text x="0" y="${HEX_SIZE + 30}" text-anchor="middle" fill="#ffd700" 
-                   font-size="9" font-family="Orbitron, sans-serif" font-weight="bold">GOAL ✓</text>`;
+      svg += `<text x="0" y="${badgeY}" text-anchor="middle" fill="#ffd700"
+                   font-size="${badgeFont}" font-family="Orbitron, sans-serif" font-weight="bold" letter-spacing="2">GOAL ✓</text>`;
     }
   }
 
-  svg += `</g>`;
+  svg += `</g></g>`; // close .hex-content then .hex-node
   return svg;
 }
 
@@ -1284,6 +1692,60 @@ function wrapText(words, maxLen) {
 
 function escapeHtml(text) {
   return (text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+async function handleGoalClick() {
+  if (gameState.completed || isValidating) return;
+  const lastItem = gameState.chain[gameState.chain.length - 1];
+
+  if (!lastItem || lastItem.type !== 'movie') {
+    showNotification('Pick a movie first', 'error');
+    flashGoalFail();
+    return;
+  }
+
+  const stepsBefore = gameState.chain.length;
+  await handleActorSelection(
+    gameState.endActor.id,
+    gameState.endActor.name,
+    gameState.endActor.photo
+  );
+  // If chain didn't grow, the credit check failed — flash to confirm.
+  if (gameState.chain.length === stepsBefore) {
+    flashGoalFail();
+  }
+}
+
+function flashGoalFail() {
+  const placeholderInner = honeycombContainer.querySelector('.hex-placeholder .hex-content');
+  if (!placeholderInner) return;
+  // Re-trigger animation: remove class, force reflow, re-add.
+  placeholderInner.classList.remove('hex-fail');
+  void placeholderInner.offsetWidth;
+  placeholderInner.classList.add('hex-fail');
+  setTimeout(() => placeholderInner.classList.remove('hex-fail'), 800);
+}
+
+function flashGoalSuccess() {
+  // Target the PLACEHOLDER hex (chain not yet joined). Mirrors flashGoalFail.
+  const placeholderInner = honeycombContainer.querySelector('.hex-placeholder .hex-content');
+  if (!placeholderInner) return;
+  placeholderInner.classList.remove('hex-success');
+  void placeholderInner.offsetWidth;
+  placeholderInner.classList.add('hex-success');
+  setTimeout(() => placeholderInner.classList.remove('hex-success'), 800);
+}
+
+/* Cinematic completion supernova. A radial-gradient hex grows from the
+   goal's screen position, engulfs the viewport at peak brightness, then
+   fades — revealing the completed chain that was joined behind it. */
+function triggerCompletionSupernova(centerX, centerY) {
+  const sn = document.createElement('div');
+  sn.className = 'completion-supernova';
+  sn.style.left = centerX + 'px';
+  sn.style.top = centerY + 'px';
+  document.body.appendChild(sn);
+  setTimeout(() => sn.remove(), 1900);
 }
 
 function attachClickHandlers() {
@@ -1394,8 +1856,10 @@ function resetGame() {
 
 function handleCompletion() {
   if (gameState.mode === 'party') {
-    // Snapshot the just-finished player
+    // Snapshot the just-finished player (preserve their name)
+    const existingName = getPlayerName(gameState.activePlayer);
     gameState.players[gameState.activePlayer] = {
+      name: existingName,
       steps: gameState.steps,
       chain: gameState.chain.slice()
     };
@@ -1409,7 +1873,72 @@ function handleCompletion() {
 }
 
 function showPrivacyShield() {
+  // Reflect the next player's name on the shield.
+  const nextLabel = document.querySelector('#privacyShield .privacy-next');
+  if (nextLabel) nextLabel.textContent = getPlayerName(1).toUpperCase();
   document.getElementById('privacyShield').hidden = false;
+}
+
+function renderPartyPathways() {
+  const list1 = document.getElementById('partyPathList1');
+  const list2 = document.getElementById('partyPathList2');
+  document.getElementById('partyPathTitle1').textContent = `${getPlayerName(0)}'s Path`;
+  document.getElementById('partyPathTitle2').textContent = `${getPlayerName(1)}'s Path`;
+
+  function rowHtml(item) {
+    const safeName = escapeHtml(item.name || '');
+    const cls = item.type === 'movie' ? 'party-row-movie' : 'party-row-actor';
+    const badge = item.isStart ? '<span class="party-row-badge cyan">START</span>'
+                : item.isGoal  ? '<span class="party-row-badge gold">GOAL</span>'
+                : '';
+    return `<li class="party-row ${cls}" data-id="${item.id}" data-type="${item.type}" data-name="${safeName}">
+      <span class="party-row-name">${safeName}</span>${badge}
+    </li>`;
+  }
+
+  list1.innerHTML = (gameState.players[0].chain || []).map(rowHtml).join('');
+  list2.innerHTML = (gameState.players[1].chain || []).map(rowHtml).join('');
+
+  // Wire click handlers — actors → actor-timeline, movies → MovieCube popup
+  [list1, list2].forEach(list => {
+    list.querySelectorAll('.party-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const type = row.dataset.type;
+        const id = parseInt(row.dataset.id);
+        if (!id) return;
+        if (type === 'movie' && typeof window.openMovieCube === 'function') {
+          window.openMovieCube(id);
+        } else if (type === 'movie') {
+          // MovieCube unavailable — fall back to results page
+          localStorage.setItem('singleMovie', JSON.stringify({ id, title: row.dataset.name }));
+          localStorage.setItem('resultsMode', 'single');
+          window.location.href = '../pages/results.html';
+        } else if (type === 'actor') {
+          OrbitUtils.navigateToTimeline(id, row.dataset.name, 'person');
+        }
+      });
+    });
+  });
+
+  document.getElementById('partyPathways').hidden = false;
+}
+
+function rematchParty() {
+  if (gameState.mode !== 'party' || !gameState.startActor || !gameState.endActor) return;
+  // Preserve names; clear chains and scores.
+  const n1 = getPlayerName(0);
+  const n2 = getPlayerName(1);
+  gameState.players = [
+    { name: n1, steps: 0, chain: [] },
+    { name: n2, steps: 0, chain: [] }
+  ];
+  gameState.activePlayer = 0;
+  // Hide party-result UI before reloading the puzzle.
+  document.getElementById('partyPathways').hidden = true;
+  document.getElementById('rematchBtn').hidden = true;
+  celebrationOverlay.hidden = true;
+  setModeTag(`PASS & PLAY — ${n1.toUpperCase()}`, false);
+  loadCustomPuzzle(gameState.startActor, gameState.endActor, 0, 'party');
 }
 
 function startPlayer2Turn() {
@@ -1426,7 +1955,7 @@ function startPlayer2Turn() {
     isStart: true
   }];
   gameState.currentActor = { id: gameState.startActor.id, name: gameState.startActor.name };
-  setModeTag('PASS & PLAY — P2', false);
+  setModeTag(`PASS & PLAY — ${getPlayerName(1).toUpperCase()}`, false);
   setSearchType('movie');
   renderHoneycombPath();
   updateUI();
@@ -1455,17 +1984,19 @@ function showResult() {
     document.getElementById('challengeLinkDisplay').hidden = true;
     const p1 = gameState.players[0].steps;
     const p2 = gameState.players[1].steps;
+    const n1 = getPlayerName(0);
+    const n2 = getPlayerName(1);
     document.getElementById('yourSteps').textContent = p1;
     document.getElementById('parSteps').textContent = p2;
-    yourLabel.textContent = 'Player 1';
-    parLabel.textContent = 'Player 2';
+    yourLabel.textContent = n1;
+    parLabel.textContent = n2;
 
     if (p1 < p2) {
-      verdictEl.innerHTML = '<span class="og og-trophy"></span> Player 1 Wins!';
-      verdictEl.className = 'score-verdict under-par';
+      verdictEl.innerHTML = `<span class="og og-trophy"></span> ${escapeHtml(n1)} Wins!`;
+      verdictEl.className = 'score-verdict party-p1-wins';
     } else if (p1 > p2) {
-      verdictEl.innerHTML = '<span class="og og-trophy"></span> Player 2 Wins!';
-      verdictEl.className = 'score-verdict under-par';
+      verdictEl.innerHTML = `<span class="og og-trophy"></span> ${escapeHtml(n2)} Wins!`;
+      verdictEl.className = 'score-verdict party-p2-wins';
     } else {
       verdictEl.innerHTML = '<span class="og og-target"></span> Tie!';
       verdictEl.className = 'score-verdict on-par';
@@ -1476,9 +2007,16 @@ function showResult() {
     nextPuzzle.style.display = 'none';
     reviewBtn.textContent = 'Back to Menu';
     shareBtn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
+    document.getElementById('rematchBtn').hidden = false;
+    celebrationOverlay.classList.add('party-result');
+    renderPartyPathways();
     celebrationOverlay.hidden = false;
     return;
   }
+  // Hide party-only UI + drop the party-result class when not in party mode
+  celebrationOverlay.classList.remove('party-result');
+  document.getElementById('rematchBtn').hidden = true;
+  document.getElementById('partyPathways').hidden = true;
 
   if (gameState.mode === 'challenge') {
     // Creator just solved their own challenge — their steps become Par.
@@ -1540,10 +2078,20 @@ function showResult() {
 
 function closeCelebration() {
   celebrationOverlay.hidden = true;
+  celebrationOverlay.classList.remove('party-result');
+  // Always reset party-only UI so it doesn't leak into other modes.
+  const rematchBtn = document.getElementById('rematchBtn');
+  if (rematchBtn) rematchBtn.hidden = true;
+  const partyPathways = document.getElementById('partyPathways');
+  if (partyPathways) partyPathways.hidden = true;
+
   if (gameState.mode === 'daily') {
     renderPostGameResults();
   } else {
-    // challenge / duel — back to menu, reset transient state
+    // challenge / duel / party — back to menu, reset transient state, strip URL.
+    if (window.location.search) {
+      history.replaceState(null, '', window.location.pathname);
+    }
     showModeMenu();
     gameState.chain = [];
     gameState.completed = false;
@@ -1689,6 +2237,7 @@ function loadTodayState() {
 function shareResult() {
   if (gameState.mode === 'challenge') return generateChallengeLink();
   if (gameState.mode === 'party') return shareParty();
+  if (gameState.mode === 'duel') return shareDuelResult();
 
   const steps = gameState.steps;
   const par = gameState.par;
@@ -1723,19 +2272,68 @@ Play at orbit-game.com/journeys`;
   });
 }
 
+function shareDuelResult() {
+  const steps = gameState.steps;
+  const par = gameState.par;
+  let verdict = 'On par!';
+  if (steps < par) verdict = `🦅 ${par - steps} under par!`;
+  else if (steps > par) verdict = `${steps - par} over par`;
+
+  // Persist B's own result against the matching received challenge (if cid present).
+  if (gameState.challengeId) {
+    recordMyResult(gameState.challengeId, steps, gameState.chain);
+  }
+
+  // Build result-back URL — preserve cid + series metadata so A's browser can
+  // record it against the same rivalry and offer a counter-challenge.
+  const params = new URLSearchParams();
+  params.set('s', gameState.startActor.id);
+  params.set('g', gameState.endActor.id);
+  params.set('p', par);
+  params.set('r', steps);
+  if (gameState.challengeId) params.set('cid', gameState.challengeId);
+  if (gameState.seriesLength > 1) {
+    params.set('series', gameState.seriesLength);
+    params.set('round', gameState.seriesProgress);
+  }
+  if (gameState.replyTo) params.set('reply', gameState.replyTo);
+  const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+
+  const text = `🛤️ JOURNEYS RESULT
+
+${gameState.startActor.name} → ${gameState.endActor.name}
+I scored ${steps} (Par ${par}) — ${verdict}
+
+See my run: ${url}
+
+Powered by Orbit`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('shareBtn');
+    btn.innerHTML = '<span>✓</span> Result link copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
+    }, 2000);
+  }).catch(() => {
+    prompt('Copy this result link:', url);
+  });
+}
+
 function shareParty() {
   const p1 = gameState.players[0].steps;
   const p2 = gameState.players[1].steps;
+  const n1 = getPlayerName(0);
+  const n2 = getPlayerName(1);
   let verdict = 'Tie!';
-  if (p1 < p2) verdict = 'Player 1 wins!';
-  else if (p1 > p2) verdict = 'Player 2 wins!';
+  if (p1 < p2) verdict = `${n1} wins!`;
+  else if (p1 > p2) verdict = `${n2} wins!`;
 
   const text = `🛤️ Journeys Pass & Play
 
 ${gameState.startActor.name} → ${gameState.endActor.name}
 
-Player 1: ${p1} steps
-Player 2: ${p2} steps
+${n1}: ${p1} steps
+${n2}: ${p2} steps
 ${verdict}
 
 Play at orbit-game.com/journeys`;
@@ -1750,11 +2348,51 @@ Play at orbit-game.com/journeys`;
 }
 
 function generateChallengeLink() {
-  const url = `${window.location.origin}${window.location.pathname}?s=${gameState.startActor.id}&g=${gameState.endActor.id}&p=${gameState.par}`;
+  const cid = gameState.challengeId || newChallengeId();
+  gameState.challengeId = cid;
+
+  const opponentInput = document.getElementById('challengeOpponentInput');
+  const sentTo = (opponentInput?.value || '').trim();
+  gameState.opponentName = sentTo;
+
+  // Build URL with all challenge metadata
+  const params = new URLSearchParams();
+  params.set('s', gameState.startActor.id);
+  params.set('g', gameState.endActor.id);
+  params.set('p', gameState.par);
+  params.set('cid', cid);
+  if (gameState.seriesLength > 1) {
+    params.set('series', gameState.seriesLength);
+    params.set('round', gameState.seriesProgress);
+  }
+  if (gameState.replyTo) params.set('reply', gameState.replyTo);
+  // Sender name only embedded if user has named themselves (we use the
+  // challenge-opponent-input label "Sending to" so we DON'T embed sentTo —
+  // sentTo is local-only for rivalry tracking. See `n` param if desired later).
+
+  const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+
+  // Persist the sent challenge for the My Challenges page + rivalries.
+  recordSentChallenge({
+    id: cid,
+    createdAt: Date.now(),
+    startActor: { id: gameState.startActor.id, name: gameState.startActor.name },
+    endActor:   { id: gameState.endActor.id,   name: gameState.endActor.name },
+    par: gameState.par,
+    seriesLength: gameState.seriesLength,
+    round: gameState.seriesProgress,
+    replyTo: gameState.replyTo,
+    sentTo: sentTo || null,
+    myChain: gameState.chain.map(({ photo, poster, ...rest }) => rest)
+  });
+
+  const seriesLabel = gameState.seriesLength > 1
+    ? `Best of ${gameState.seriesLength} • Round ${gameState.seriesProgress + 1}/${gameState.seriesLength}\n`
+    : '';
   const text = `🛤️ JOURNEYS CHALLENGE
 
 ${gameState.startActor.name} → ${gameState.endActor.name}
-Can you beat my Par ${gameState.par}?
+${seriesLabel}Can you beat my Par ${gameState.par}?
 
 Play: ${url}
 

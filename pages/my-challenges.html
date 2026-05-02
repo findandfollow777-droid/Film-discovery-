@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Challenges — Orbit Journeys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="my-challenges.css">
+</head>
+<body>
+  <header class="mc-header">
+    <a href="../games/journeys.html" class="back-link">← Journeys</a>
+    <div class="mc-header-title">MY CHALLENGES</div>
+    <div class="mc-header-spacer"></div>
+  </header>
+
+  <main class="mc-main">
+    <section class="mc-section">
+      <h2 class="mc-section-title"><span class="og og-trophy"></span> Rivalries</h2>
+      <div id="rivalriesList" class="mc-list"></div>
+    </section>
+
+    <section class="mc-section">
+      <h2 class="mc-section-title">Pending</h2>
+      <div id="pendingList" class="mc-list"></div>
+    </section>
+
+    <section class="mc-section">
+      <h2 class="mc-section-title">Completed</h2>
+      <div id="completedList" class="mc-list"></div>
+    </section>
+  </main>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="my-challenges.js"></script>
+</body>
+</html>

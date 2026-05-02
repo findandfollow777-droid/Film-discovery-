@@ -74,6 +74,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `orbit_pcube_cache` | session | 1 hour, max 30 | people-cube.js | people-cube.js | People Cube data cache |
 | `orbit_map_results` | local | Until cleared | orbit-map.js | results.js | Discovery Map results |
 | `orbit_journeys_portraits` | session | Session | journeys.js | journeys.js | Map of `{personId: profile_path \| false}` — caches TMDB portrait paths so actors picked mid-chain don't re-hit `/person/{id}` when search results omit `profile_path`. |
+| `orbit_my_challenges` | local | Until cleared | journeys.js | journeys.js, my-challenges.js | JSON `{sent: [], received: []}` — records of challenges the user created (sent) or received via URL. Each entry includes start/goal actors, par, series metadata (`seriesLength`, `round`, `replyTo`, `cid`), opponent name (optional), and result data once played. Used to render the My Challenges page and derive per-opponent W-L rivalries. |
 
 ## User Lists & Memory
 
