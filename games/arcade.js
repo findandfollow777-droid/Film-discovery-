@@ -12,7 +12,131 @@ document.addEventListener("DOMContentLoaded", () => {
   initRetroSprites();
   loadGameStatuses();
   loadAggregateStats();
+  initGameTooltips();
 });
+
+/* ============================================================
+   GAME CARD HOVER TOOLTIP — Added 2026-05-02
+   Shows synopsis + available play modes on .game-card hover.
+   Keyed by data-game attribute on each card.
+   ============================================================ */
+
+const GAME_INFO = {
+  constellation: {
+    synopsis: "Five actor photos, one shared movie. Narrow it down in six guesses or fewer using the cast as your only clue.",
+    modes: ["daily"]
+  },
+  collision: {
+    synopsis: "Two actors share the screen — name as many of their joint films as you can before the three-minute clock runs out.",
+    modes: ["daily"]
+  },
+  triple: {
+    synopsis: "Three actors, seven Venn zones. Place films into the right overlap to prove you know who shared what.",
+    modes: ["daily"]
+  },
+  journeys: {
+    synopsis: "Build the shortest chain between two actors using shared films. Beat par to win the round.",
+    modes: ["daily", "passandplay", "challenger"]
+  },
+  connections: {
+    synopsis: "Four movies are linked by a single hidden thread — genre, director, era, theme. Find the connection in four guesses.",
+    modes: ["daily"]
+  },
+  screenshot: {
+    synopsis: "A single still flashes on screen. Identify the film before the timer expires across rapid-fire rounds.",
+    modes: ["daily"]
+  },
+  sequelshot: {
+    synopsis: "Pick which entry in a franchise the scene comes from. Thirty seconds, streak scoring, no second chances.",
+    modes: ["daily"]
+  },
+  "tenth-star": {
+    synopsis: "A Top 10 list with one film missing. Spot the gap across nine rounds of curated cinema lists.",
+    modes: ["weekly"]
+  },
+  mastermind: {
+    synopsis: "Sixty seconds on your specialist subject — pick a director, franchise, or decade and answer as many as you can.",
+    modes: ["challenger"]
+  },
+  alternate: {
+    synopsis: "Weekly 'what if' casting scenarios. Vote on alternate timelines and debate them with the community.",
+    modes: ["weekly"]
+  }
+};
+
+const MODE_LABELS = {
+  daily: "Daily",
+  passandplay: "Pass & Play",
+  challenger: "Challenger",
+  weekly: "Weekly"
+};
+
+function initGameTooltips() {
+  // Skip on touch-only devices — hover doesn't make sense and tap navigates.
+  if (window.matchMedia("(hover: none)").matches) return;
+
+  const tooltip = document.createElement("div");
+  tooltip.className = "game-tooltip";
+  tooltip.setAttribute("role", "tooltip");
+  tooltip.setAttribute("aria-hidden", "true");
+  document.body.appendChild(tooltip);
+
+  let activeCard = null;
+
+  const showFor = (card) => {
+    const key = card.dataset.game;
+    const info = GAME_INFO[key];
+    if (!info) return;
+
+    activeCard = card;
+    const modePills = info.modes
+      .map(m => `<span class="game-tooltip-pill mode-${m}">${MODE_LABELS[m] || m}</span>`)
+      .join("");
+    tooltip.innerHTML = `
+      <p class="game-tooltip-synopsis">${info.synopsis}</p>
+      <div class="game-tooltip-modes">${modePills}</div>
+    `;
+    positionTooltip(card);
+    tooltip.classList.add("visible");
+    tooltip.setAttribute("aria-hidden", "false");
+  };
+
+  const hide = () => {
+    activeCard = null;
+    tooltip.classList.remove("visible");
+    tooltip.setAttribute("aria-hidden", "true");
+  };
+
+  const positionTooltip = (card) => {
+    const rect = card.getBoundingClientRect();
+    const tipRect = tooltip.getBoundingClientRect();
+    const margin = 12;
+    let top = rect.bottom + margin;
+    let left = rect.left + (rect.width / 2) - (tipRect.width / 2);
+
+    // Flip above card if it would overflow the viewport bottom.
+    if (top + tipRect.height > window.innerHeight - margin) {
+      top = rect.top - tipRect.height - margin;
+    }
+    // Clamp horizontally.
+    left = Math.max(margin, Math.min(left, window.innerWidth - tipRect.width - margin));
+
+    tooltip.style.top = `${top + window.scrollY}px`;
+    tooltip.style.left = `${left}px`;
+  };
+
+  document.querySelectorAll(".game-card[data-game]").forEach(card => {
+    if (!GAME_INFO[card.dataset.game]) return;
+    card.addEventListener("mouseenter", () => showFor(card));
+    card.addEventListener("mouseleave", hide);
+    card.addEventListener("focus", () => showFor(card));
+    card.addEventListener("blur", hide);
+  });
+
+  window.addEventListener("scroll", () => {
+    if (activeCard) positionTooltip(activeCard);
+  }, { passive: true });
+}
 
 // ============================================
 // RETRO SPRITE BACKGROUND

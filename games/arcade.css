@@ -736,6 +736,76 @@ html, body {
   }
 }
 
+/* ============================================================
+   GAME CARD HOVER TOOLTIP — Added 2026-05-02
+   ============================================================ */
+
+.game-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  max-width: 320px;
+  min-width: 240px;
+  padding: 14px 16px;
+  background: var(--surface-glass, rgba(12, 18, 32, 0.92));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(var(--accent-cyan-rgb, 0, 217, 255), 0.35);
+  border-radius: var(--radius-md, 10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(var(--accent-cyan-rgb, 0, 217, 255), 0.08);
+  font-family: 'Barlow', sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.game-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.game-tooltip-synopsis {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-primary, #e8ecf4);
+  font-weight: 400;
+}
+
+.game-tooltip-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.game-tooltip-pill {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.game-tooltip-pill.mode-daily {
+  color: var(--accent-cyan, #00d9ff);
+}
+.game-tooltip-pill.mode-passandplay {
+  color: var(--accent-gold, #ffc857);
+}
+.game-tooltip-pill.mode-challenger {
+  color: var(--collision-orange, #ff7a45);
+}
+.game-tooltip-pill.mode-weekly {
+  color: var(--prestige-purple, #b48cff);
+}
+
 @media (max-width: 480px) {
   .section-title { font-size: 14px; }
   .section-desc { padding-left: 0; }
