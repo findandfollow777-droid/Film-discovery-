@@ -270,19 +270,35 @@
    FESTIVAL / AWARD GLYPHS
    ============================================================ */
 
+/* ============================================
+ * LEGACY FESTIVAL GLYPHS (decorative use only)
+ * ============================================
+ * Superseded as canonical festival markers by the Two-Ring
+ * Orbit typography system in `data/festival-glyphs.js`
+ * (Phase 1.11). These drawn-trophy glyphs remain available
+ * for decorative imagery on festival info pages
+ * (awards-guide-festival.html) — e.g. as the hero icon
+ * above each festival's "About" section, or as a watermark
+ * in the "Top Prize" card.
+ *
+ * For canonical festival markers (tiles, badges, tabs),
+ * use the new orbit glyphs via `data-festival="{id}"`.
+ * ============================================
+ */
+
 /* 🌴 Palm (Cannes) */
 .og-palm {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 88Q48 70 50 55Q52 40 50 25Q49 18 50 12' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M50 45Q40 42 26 44M50 35Q42 30 28 28M50 25Q46 20 40 14' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M50 45Q60 42 74 44M50 35Q58 30 72 28M50 25Q54 20 60 14' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='40' y='85' width='20' height='8' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
 }
 
-/* 🦁 Lion (Venice) */
+/* 🦁 Lion (Venice) — Frontal lion with bold curved wings */
 .og-lion {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M72 38Q78 34 76 28Q72 30 70 28Q72 24 68 22Q66 26 64 24Q66 20 62 18Q60 22 58 20Q58 16 54 16Q54 20 52 20' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 38Q76 42 78 46L82 48' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='76' cy='42' r='2' stroke='%23ffd700' stroke-width='2'/%3E%3Cpath d='M52 20Q44 22 38 28Q32 34 30 44L28 58' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 52Q66 56 58 58Q50 60 42 58L28 58' stroke='%23ffd700' stroke-width='3'/%3E%3Cpath d='M58 58L60 68Q62 72 58 74M48 58L46 72Q44 76 48 78M32 58L30 72Q28 76 32 78' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='16' y='82' width='68' height='6' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23ffd700'%3E%3Cpath d='M72 38Q78 34 76 28Q72 30 70 28Q72 24 68 22Q66 26 64 24Q66 20 62 18Q60 22 58 20Q58 16 54 16Q54 20 52 20' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 38Q76 42 78 46L82 48' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='76' cy='42' r='2' stroke-width='2'/%3E%3Cpath d='M52 20Q44 22 38 28Q32 34 30 44L28 58' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 52Q66 56 58 58Q50 60 42 58L28 58' stroke-width='3'/%3E%3Cpath d='M58 58L60 68Q62 72 58 74M48 58L46 72Q44 76 48 78M32 58L30 72Q28 76 32 78' stroke-width='3' stroke-linecap='round'/%3E%3Crect x='16' y='82' width='68' height='6' rx='1' stroke-width='3'/%3E%3Cpath d='M28 52 Q12 36 4 16 Q14 28 28 38' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M14 28 L18 32 M10 22 L16 26 M22 38 L26 40' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M72 52 Q88 36 96 16 Q86 28 72 38' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M86 28 L82 32 M90 22 L84 26 M78 38 L74 40' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
-/* 🐻 Bear (Berlin) */
+/* 🐻 Bear (Berlin) — Frontal reference bear */
 .og-bear {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='40' cy='16' r='4' stroke='%23ffd700' stroke-width='3'/%3E%3Ccircle cx='60' cy='16' r='4' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='50' cy='24' rx='12' ry='10' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='50' cy='28' rx='5' ry='4' stroke='%23ffd700' stroke-width='2'/%3E%3Ccircle cx='44' cy='22' r='1.5' fill='%23ffd700'/%3E%3Ccircle cx='56' cy='22' r='1.5' fill='%23ffd700'/%3E%3Cpath d='M38 32Q32 40 32 52L32 70Q50 78 68 70L68 52Q68 40 62 32' stroke='%23ffd700' stroke-width='3'/%3E%3Cpath d='M32 42Q22 40 18 52M68 42Q78 40 82 52' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3Cellipse cx='44' cy='86' rx='6' ry='3' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='56' cy='86' rx='6' ry='3' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23ffd700'%3E%3Ccircle cx='38' cy='14' r='5' stroke-width='3'/%3E%3Ccircle cx='62' cy='14' r='5' stroke-width='3'/%3E%3Cellipse cx='50' cy='24' rx='14' ry='12' stroke-width='3'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='5' stroke-width='2'/%3E%3Ccircle cx='44' cy='22' r='1.5' fill='%23ffd700'/%3E%3Ccircle cx='56' cy='22' r='1.5' fill='%23ffd700'/%3E%3Cpath d='M36 38 Q28 50 28 66 L28 84 Q34 92 50 92 Q66 92 72 84 L72 66 Q72 50 64 38' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M28 50 Q14 46 8 56 Q14 60 22 60' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 50 Q86 46 92 56 Q86 60 78 60' stroke-width='3' stroke-linecap='round'/%3E%3Cellipse cx='38' cy='90' rx='9' ry='4' stroke-width='3'/%3E%3Cellipse cx='62' cy='90' rx='9' ry='4' stroke-width='3'/%3E%3C/svg%3E");
 }
 
 /* 🌍 Globe (Golden Globe) */
@@ -298,6 +314,16 @@
 /* 🎭 BAFTA (theatrical mask) */
 .og-bafta {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M20 30Q20 14 50 10Q80 14 80 30V52Q80 76 50 88Q20 76 20 52V30Z' stroke='%23ffd700' stroke-width='5' stroke-linejoin='round'/%3E%3Ccircle cx='38' cy='38' r='6' stroke='%23ffd700' stroke-width='4'/%3E%3Ccircle cx='62' cy='38' r='6' stroke='%23ffd700' stroke-width='4'/%3E%3Cpath d='M36 60Q44 70 50 70Q56 70 64 60' stroke='%23ffd700' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M30 26Q36 22 42 26M58 26Q64 22 70 26' stroke='%23ffd700' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* 🏆 Statuette (Oscar / Academy Awards) — The Knight (tall column) */
+.og-statuette {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' fill='none' stroke='%23ffd700'%3E%3Cellipse cx='50' cy='14' rx='5.5' ry='8' stroke-width='3'/%3E%3Cpath d='M44 22 Q42 28 42 36 L42 62 Q42 68 46 70 L54 70 Q58 68 58 62 L58 36 Q58 28 56 22' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M44 32 Q40 38 40 46 L40 60' stroke-width='2' opacity='0.7'/%3E%3Cpath d='M56 32 Q60 38 60 46 L60 60' stroke-width='2' opacity='0.7'/%3E%3Cline x1='50' y1='32' x2='50' y2='70' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='42' y1='36' x2='58' y2='36' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='32' r='1.5' fill='%23ffd700'/%3E%3Ccircle cx='46' cy='40' r='2' stroke-width='1.5'/%3E%3Ccircle cx='54' cy='40' r='2' stroke-width='1.5'/%3E%3Cline x1='44' y1='70' x2='44' y2='116' stroke-width='3'/%3E%3Cline x1='56' y1='70' x2='56' y2='116' stroke-width='3'/%3E%3Cellipse cx='50' cy='70' rx='6' ry='1.5' stroke-width='2' opacity='0.6'/%3E%3Cellipse cx='50' cy='116' rx='6' ry='1.5' stroke-width='2.5'/%3E%3Crect x='38' y='118' width='24' height='6' rx='1' stroke-width='3'/%3E%3Crect x='34' y='124' width='32' height='6' rx='1' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* 🎭 Mask (BAFTA / British Academy) */
+.og-mask {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cellipse cx='50' cy='44' rx='26' ry='32' stroke='%23ffd700' stroke-width='3'/%3E%3Cellipse cx='40' cy='40' rx='5' ry='3.5' stroke='%23ffd700' stroke-width='2.5'/%3E%3Cellipse cx='60' cy='40' rx='5' ry='3.5' stroke='%23ffd700' stroke-width='2.5'/%3E%3Cpath d='M32 28Q28 22 26 16' stroke='%23ffd700' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M68 28Q72 22 74 16' stroke='%23ffd700' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M50 44L48 52L52 52Z' stroke='%23ffd700' stroke-width='1.5'/%3E%3Cpath d='M40 60Q50 66 60 60' stroke='%23ffd700' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='32' y='80' width='36' height='6' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3Crect x='28' y='86' width='44' height='8' rx='1' stroke='%23ffd700' stroke-width='3'/%3E%3C/svg%3E");
 }
 
 /* Nominee modifier — mutes gold glyphs to silver */
@@ -339,6 +365,22 @@
 /* 🎞️ Film frames */
 .og-film {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Crect x='10' y='18' width='80' height='64' rx='4' stroke='%2300d9ff' stroke-width='5'/%3E%3Cline x1='10' y1='34' x2='90' y2='34' stroke='%2300d9ff' stroke-width='3'/%3E%3Cline x1='10' y1='66' x2='90' y2='66' stroke='%2300d9ff' stroke-width='3'/%3E%3Crect x='18' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='34' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='58' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='74' y='22' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='18' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='34' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='58' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3Crect x='74' y='70' width='8' height='8' rx='1' stroke='%2300d9ff' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* 👤 Person silhouette (fallback for missing actor portraits) */
+.og-person {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='50' r='46' stroke='%2300d9ff' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' stroke='rgba(0,217,255,0.15)' stroke-width='2'/%3E%3Ccircle cx='50' cy='38' r='10' stroke='%2300d9ff' stroke-width='3'/%3E%3Cpath d='M27 75Q27 58 50 58Q73 58 73 75' stroke='%2300d9ff' stroke-width='3' fill='none'/%3E%3C/svg%3E");
+}
+
+/* 👤 Person silhouette — bare (no outer ring), for use INSIDE shaped frames (hex, etc.).
+   Visual content centered around viewBox y=52 so it reads centered in flat-top hexes. */
+.og-person-bare {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='32' r='14' stroke='%2300d9ff' stroke-width='4'/%3E%3Cpath d='M20 80Q20 50 50 50Q80 50 80 80' stroke='%2300d9ff' stroke-width='4' fill='none'/%3E%3C/svg%3E");
+}
+
+/* 👤 Person silhouette — bare gold variant (for goal frames) */
+.og-person-bare-gold {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Ccircle cx='50' cy='32' r='14' stroke='%23ffd700' stroke-width='4'/%3E%3Cpath d='M20 80Q20 50 50 50Q80 50 80 80' stroke='%23ffd700' stroke-width='4' fill='none'/%3E%3C/svg%3E");
 }
 
 /* 📷 Camera (cinematography) */
@@ -424,4 +466,12 @@
 /* ⭐ Rising Star (star within star within star) */
 .og-rising-star {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 4L59 34L92 34L66 54L75 86L50 66L25 86L34 54L8 34L41 34Z' stroke='%2306b6d4' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 22L56 40L76 40L60 52L66 70L50 58L34 70L40 52L24 40L44 40Z' stroke='%2300d9ff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M50 36L53 46L62 46L55 52L57 62L50 56L43 62L45 52L38 46L47 46Z' stroke='%23ffd700' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ◎ Timeline Journey — double ring (cyan outer, gold inner) with rising
+   curved path + gold arrowhead and faded cyan start dot. */
+.og-timeline-journey {
+  width: var(--glyph-size, 24px);
+  height: var(--glyph-size, 24px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52' fill='none'%3E%3Ccircle cx='26' cy='26' r='24' stroke='%2300d9ff' stroke-width='1.5'/%3E%3Ccircle cx='26' cy='26' r='19' stroke='%23ffd700' stroke-width='1' opacity='0.6'/%3E%3Cpath d='M11 32 Q19 20 28 24 Q35 27 41 20' stroke='%2300d9ff' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='11' cy='32' r='2.5' fill='%2300d9ff' opacity='0.5'/%3E%3Cpolygon points='41,20 37,21 38,17' fill='%23ffd700'/%3E%3C/svg%3E");
 }

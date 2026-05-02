@@ -36,6 +36,7 @@ const DAILY_JOURNEYS = [
 
 // Game state
 let gameState = {
+  mode: 'menu', // 'menu' | 'daily' | 'challenge' | 'party' | 'duel'
   startActor: null,
   endActor: null,
   par: 3,
@@ -44,11 +45,66 @@ let gameState = {
   searchType: 'movie',
   steps: 0,
   completed: false,
-  puzzleNumber: 1
+  puzzleNumber: 1,
+  // Party (Pass & Play) only
+  activePlayer: 0,
+  players: [
+    { steps: 0, chain: [] },
+    { steps: 0, chain: [] }
+  ]
 };
 
 // Cache for filmographies
 let filmographyCache = {};
+
+/* ============================================================
+   PORTRAIT CACHE — Added 2026-05-02
+   sessionStorage key: orbit_journeys_portraits
+   Format: { [personId: number]: string | false }
+     - string = TMDB profile_path (e.g. "/abc.jpg")
+     - false  = TMDB has no portrait for this person
+   Purpose: avoid re-fetching /person/{id} for actors picked
+   mid-chain whose search result returned a null profile_path.
+   See data/storage-keys.md.
+   ============================================================ */
+const PORTRAIT_CACHE_KEY = 'orbit_journeys_portraits';
+
+function getCachedPortrait(personId) {
+  try {
+    const cache = JSON.parse(sessionStorage.getItem(PORTRAIT_CACHE_KEY) || '{}');
+    return Object.prototype.hasOwnProperty.call(cache, personId) ? cache[personId] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function cachePortrait(personId, pathOrFalse) {
+  try {
+    const cache = JSON.parse(sessionStorage.getItem(PORTRAIT_CACHE_KEY) || '{}');
+    cache[personId] = pathOrFalse;
+    sessionStorage.setItem(PORTRAIT_CACHE_KEY, JSON.stringify(cache));
+  } catch (e) {
+    // Storage full — silently fail
+  }
+}
+
+async function fetchAndCachePortrait(personId) {
+  const cached = getCachedPortrait(personId);
+  if (cached !== null) return cached;
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/person/${personId}?api_key=${TMDB_API_KEY}`
+    );
+    const data = await res.json();
+    const pathOrFalse = data.profile_path || false;
+    cachePortrait(personId, pathOrFalse);
+    return pathOrFalse;
+  } catch (err) {
+    console.error('Portrait fetch failed:', err);
+    cachePortrait(personId, false);
+    return false;
+  }
+}
 
 // Validation lock to prevent race conditions during async credit checks
 let isValidating = false;
@@ -63,7 +119,7 @@ let celebrationOverlay, postgameResults;
 let headerStatus;
 
 // Honeycomb geometry (flat-top hexagons)
-const HEX_SIZE = 55; // radius (center to vertex)
+const HEX_SIZE = 68; // radius (center to vertex)
 const HEX_WIDTH = HEX_SIZE * 2;
 const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE;
 
@@ -76,11 +132,387 @@ const VERT_OFFSET = HEX_HEIGHT * 0.5;        // Zigzag amount for honeycomb
 // INITIALIZATION
 // ============================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   cacheElements();
   setupEventListeners();
-  loadDailyPuzzle();
+  const incoming = await checkUrlParams();
+  if (!incoming) showModeMenu();
 });
+
+/* ============================================================
+   MODE ROUTER — Added 2026-05-02
+   Landing screen offers Daily / Challenge / Pass & Play.
+   Game UI sections start hidden and are revealed when a mode
+   is picked. Daily is the only mode that writes to journeys_stats
+   and journeys_game_${date} — challenge/party are ephemeral.
+   ============================================================ */
+
+function showModeMenu() {
+  gameState.mode = 'menu';
+  document.getElementById('modeMenu').hidden = false;
+  document.getElementById('infoBar').hidden = true;
+  document.getElementById('honeycombSection').hidden = true;
+  document.getElementById('inputSection').hidden = true;
+  if (postgameResults) postgameResults.hidden = true;
+}
+
+function showGameUI() {
+  document.getElementById('modeMenu').hidden = true;
+  document.getElementById('infoBar').hidden = false;
+  document.getElementById('honeycombSection').hidden = false;
+  document.getElementById('inputSection').hidden = false;
+}
+
+function setModeTag(text, isDaily, puzzleNum) {
+  const modeTag = document.getElementById('modeTag');
+  if (isDaily) {
+    modeTag.innerHTML = `${text}<span id="puzzleNumber">${puzzleNum != null ? puzzleNum : 1}</span>`;
+  } else {
+    modeTag.textContent = text;
+  }
+}
+
+function startMode(mode) {
+  gameState.mode = mode;
+  const infoBar = document.getElementById('infoBar');
+  infoBar.classList.toggle('party-mode', mode === 'party');
+
+  if (mode === 'daily') {
+    setModeTag('DAILY JOURNEY #', true);
+    showGameUI();
+    loadDailyPuzzle();
+  } else if (mode === 'challenge') {
+    openSetupOverlay('challenge');
+  } else if (mode === 'party') {
+    openSetupOverlay('party');
+  } else if (mode === 'duel') {
+    setModeTag('INCOMING CHALLENGE', false);
+    showGameUI();
+    loadCustomPuzzle(gameState.startActor, gameState.endActor, gameState.par, 'duel');
+  }
+}
+
+/* ============================================================
+   CUSTOM PUZZLE LOADER — Added 2026-05-02
+   Used by Challenge and Duel modes (and Pass & Play in Step 4).
+   Skips daily-only side effects: trackPlayed, saveTodayState,
+   saveStats are all gated on gameState.mode === 'daily'.
+   ============================================================ */
+async function loadCustomPuzzle(start, end, par, mode) {
+  gameState.mode = mode;
+  gameState.startActor = { id: start.id, name: start.name };
+  gameState.endActor = { id: end.id, name: end.name };
+  gameState.par = par;
+  gameState.chain = [{ type: 'actor', id: start.id, name: start.name, isStart: true }];
+  gameState.currentActor = { id: start.id, name: start.name };
+  gameState.steps = 0;
+  gameState.completed = false;
+  gameState.searchType = 'movie';
+
+  if (parValue) parValue.textContent = par;
+  if (stepsValue) stepsValue.textContent = 0;
+
+  await loadActorPhotos();
+  setSearchType('movie');
+  await loadFilmography(start.id);
+  renderHoneycombPath();
+  updateUI();
+}
+
+/* ============================================================
+   SETUP OVERLAY — Added 2026-05-02
+   Pick start + goal actors for a Challenge.
+   ============================================================ */
+let setupSearchDebounced = null;
+let setupPickStage = 'start'; // 'start' | 'goal'
+
+function openSetupOverlay(forMode) {
+  gameState.mode = forMode; // 'challenge' (Step 4 will add 'party')
+  gameState.startActor = null;
+  gameState.endActor = null;
+
+  setupPickStage = 'start';
+  const titleMap = { challenge: 'CREATE CHALLENGE', party: 'PASS & PLAY' };
+  document.getElementById('setupTitle').textContent = titleMap[forMode] || 'NEW JOURNEY';
+  document.getElementById('setupInstruction').innerHTML =
+    'Pick the <span class="setup-emph-cyan">START</span> actor';
+  resetSetupPicks();
+  document.getElementById('setupSearch').value = '';
+  document.getElementById('setupSearchResults').hidden = true;
+  // Restore default UI state (in case user is reopening after previous run)
+  document.getElementById('setupSpinnerZone').hidden = true;
+  document.getElementById('setupPicks').hidden = false;
+  document.getElementById('setupSearchWrap').hidden = false;
+  document.getElementById('randomizeBtn').hidden = false;
+  document.getElementById('setupConfirmRow').hidden = true;
+
+  document.getElementById('modeMenu').hidden = true;
+  document.getElementById('setupOverlay').hidden = false;
+  document.getElementById('setupSearch').focus();
+
+  if (!setupSearchDebounced) initSetupOverlay();
+}
+
+function resetSetupPicks() {
+  document.getElementById('setupStartPhoto').innerHTML = '<span class="og og-person-bare"></span>';
+  document.getElementById('setupGoalPhoto').innerHTML = '<span class="og og-person-bare-gold"></span>';
+  document.getElementById('setupStartName').textContent = '—';
+  document.getElementById('setupGoalName').textContent = '—';
+  document.getElementById('setupStartPick').classList.remove('picked');
+  document.getElementById('setupGoalPick').classList.remove('picked');
+}
+
+function initSetupOverlay() {
+  const setupSearchEl = document.getElementById('setupSearch');
+  const setupResultsEl = document.getElementById('setupSearchResults');
+
+  setupSearchDebounced = OrbitUtils.debounce(async () => {
+    const query = setupSearchEl.value.trim();
+    if (query.length < 2) {
+      setupResultsEl.hidden = true;
+      return;
+    }
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
+      const results = (data.results || []).filter(p => p.known_for_department === 'Acting').slice(0, 8);
+      if (!results.length) { setupResultsEl.hidden = true; return; }
+
+      setupResultsEl.innerHTML = results.map(p => {
+        const photo = p.profile_path ? `${TMDB_IMG}w92${p.profile_path}` : '';
+        const safeName = (p.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        return `
+          <div class="search-result-item" data-id="${p.id}" data-name="${safeName}" data-photo="${photo}">
+            ${photo
+              ? `<img class="search-result-img" src="${photo}" alt="">`
+              : `<span class="search-result-img og og-person"></span>`}
+            <div>
+              <div class="search-result-title">${p.name}</div>
+              <div class="search-result-sub">${p.known_for_department || 'Actor'}</div>
+            </div>
+          </div>`;
+      }).join('');
+      setupResultsEl.hidden = false;
+
+      setupResultsEl.querySelectorAll('.search-result-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const id = parseInt(item.dataset.id);
+          const name = item.dataset.name;
+          const photo = item.dataset.photo;
+          handleSetupPick(id, name, photo);
+        });
+      });
+    } catch (err) {
+      console.error('Setup search failed:', err);
+    }
+  }, 300);
+
+  setupSearchEl.addEventListener('input', setupSearchDebounced);
+  document.getElementById('randomizeBtn').addEventListener('click', randomizePath);
+  document.getElementById('setupResetBtn').addEventListener('click', resetSetupFlow);
+  document.getElementById('setupStartGameBtn').addEventListener('click', beginCustomPuzzleFromSetup);
+  document.getElementById('setupOverlay').addEventListener('orbit:close', () => {
+    showModeMenu();
+  });
+  document.getElementById('holdingScreen').addEventListener('orbit:close', () => {
+    // Decline incoming challenge → strip URL params, return to menu
+    history.replaceState(null, '', window.location.pathname);
+    showModeMenu();
+  });
+  document.getElementById('acceptChallengeBtn').addEventListener('click', () => {
+    document.getElementById('holdingScreen').hidden = true;
+    startMode('duel');
+  });
+  document.getElementById('descrambleBtn').addEventListener('click', startPlayer2Turn);
+  document.getElementById('privacyShield').addEventListener('orbit:close', () => {
+    // Abandoning mid-handoff — back to menu, drop transient state.
+    gameState.players = [{ steps: 0, chain: [] }, { steps: 0, chain: [] }];
+    gameState.activePlayer = 0;
+    gameState.chain = [];
+    gameState.completed = false;
+    showModeMenu();
+  });
+}
+
+function handleSetupPick(id, name, photo) {
+  const fallbackGlyph = setupPickStage === 'goal'
+    ? '<span class="og og-person-bare-gold"></span>'
+    : '<span class="og og-person-bare"></span>';
+  const photoHtml = photo
+    ? `<img src="${photo}" alt="${name}">`
+    : fallbackGlyph;
+
+  if (setupPickStage === 'start') {
+    gameState.startActor = { id, name, photo };
+    document.getElementById('setupStartPhoto').innerHTML = photoHtml;
+    document.getElementById('setupStartName').textContent = name;
+    document.getElementById('setupStartPick').classList.add('picked');
+    setupPickStage = 'goal';
+    document.getElementById('setupInstruction').innerHTML =
+      'Now pick the <span class="setup-emph-gold">GOAL</span> actor';
+    document.getElementById('setupSearch').value = '';
+    document.getElementById('setupSearchResults').hidden = true;
+    document.getElementById('setupSearch').focus();
+  } else {
+    if (gameState.startActor && id === gameState.startActor.id) {
+      alert('Goal must be a different actor.');
+      return;
+    }
+    gameState.endActor = { id, name, photo };
+    document.getElementById('setupGoalPhoto').innerHTML = photoHtml;
+    document.getElementById('setupGoalName').textContent = name;
+    document.getElementById('setupGoalPick').classList.add('picked');
+    document.getElementById('setupSearchResults').hidden = true;
+    document.getElementById('setupInstruction').innerHTML =
+      'Path locked. <span class="setup-emph-cyan">Start Game</span> when ready.';
+    showSetupConfirm();
+  }
+}
+
+function showSetupConfirm() {
+  // Both picks made — surface confirm row, hide search + randomize.
+  document.getElementById('setupSearchWrap').hidden = true;
+  document.getElementById('randomizeBtn').hidden = true;
+  document.getElementById('setupConfirmRow').hidden = false;
+}
+
+function hideSetupConfirm() {
+  document.getElementById('setupSearchWrap').hidden = false;
+  document.getElementById('randomizeBtn').hidden = false;
+  document.getElementById('setupConfirmRow').hidden = true;
+}
+
+function resetSetupFlow() {
+  setupPickStage = 'start';
+  gameState.startActor = null;
+  gameState.endActor = null;
+  resetSetupPicks();
+  hideSetupConfirm();
+  document.getElementById('setupInstruction').innerHTML =
+    'Pick the <span class="setup-emph-cyan">START</span> actor';
+  document.getElementById('setupSearch').value = '';
+  document.getElementById('setupSearchResults').hidden = true;
+  document.getElementById('setupSearch').focus();
+}
+
+function beginCustomPuzzleFromSetup() {
+  document.getElementById('setupOverlay').hidden = true;
+  if (gameState.mode === 'challenge') {
+    setModeTag('CREATE CHALLENGE', false);
+    showGameUI();
+    // Par starts at 3, will be set to max(3, steps) on completion.
+    loadCustomPuzzle(gameState.startActor, gameState.endActor, 3, 'challenge');
+  } else if (gameState.mode === 'party') {
+    gameState.activePlayer = 0;
+    gameState.players = [
+      { steps: 0, chain: [] },
+      { steps: 0, chain: [] }
+    ];
+    setModeTag('PASS & PLAY — P1', false);
+    document.getElementById('infoBar').classList.add('party-mode');
+    showGameUI();
+    loadCustomPuzzle(gameState.startActor, gameState.endActor, 0, 'party');
+  }
+}
+
+/* ============================================================
+   RANDOMIZE PATH — Added 2026-05-02
+   Picks two distinct actors from the curated DAILY_JOURNEYS
+   roster (verified IDs, all have TMDB portraits).
+   ============================================================ */
+async function randomizePath() {
+  // Build pool from verified DAILY_JOURNEYS roster
+  const pool = new Map();
+  DAILY_JOURNEYS.forEach(p => {
+    pool.set(p.start.id, p.start);
+    pool.set(p.end.id, p.end);
+  });
+  const list = Array.from(pool.values());
+  const a = Math.floor(Math.random() * list.length);
+  let b = Math.floor(Math.random() * list.length);
+  while (b === a) b = Math.floor(Math.random() * list.length);
+  const start = list[a];
+  const goal = list[b];
+
+  // Reset state, show cosmic spinner, hide picks/search/randomize/confirm
+  setupPickStage = 'start';
+  gameState.startActor = null;
+  gameState.endActor = null;
+  resetSetupPicks();
+  hideSetupConfirm();
+  document.getElementById('setupPicks').hidden = true;
+  document.getElementById('setupSearchWrap').hidden = true;
+  document.getElementById('randomizeBtn').hidden = true;
+  document.getElementById('setupSpinnerZone').hidden = false;
+  document.getElementById('setupInstruction').innerHTML = '&nbsp;';
+
+  // Fetch portraits in parallel while spinner runs
+  const [startPath, goalPath] = await Promise.all([
+    fetchAndCachePortrait(start.id),
+    fetchAndCachePortrait(goal.id),
+    new Promise(r => setTimeout(r, 1500)) // minimum theatrical duration
+  ]);
+
+  document.getElementById('setupSpinnerZone').hidden = true;
+  document.getElementById('setupPicks').hidden = false;
+
+  const startPhoto = startPath ? `${TMDB_IMG}w185${startPath}` : '';
+  const goalPhoto = goalPath ? `${TMDB_IMG}w185${goalPath}` : '';
+
+  setupPickStage = 'start';
+  handleSetupPick(start.id, start.name, startPhoto);
+  handleSetupPick(goal.id, goal.name, goalPhoto);
+  // handleSetupPick auto-shows the confirm row when both picks land.
+}
+
+/* ============================================================
+   URL PARAM HANDLER — Added 2026-05-02
+   Incoming challenge: ?s=<startId>&g=<goalId>&p=<par>
+   Shows holding screen with both actors before duel starts.
+   ============================================================ */
+async function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('s') || !params.has('g')) return false;
+
+  const startId = parseInt(params.get('s'));
+  const goalId = parseInt(params.get('g'));
+  const par = Math.max(3, parseInt(params.get('p') || '3'));
+  if (!startId || !goalId || startId === goalId) return false;
+
+  document.getElementById('modeMenu').hidden = true;
+  document.getElementById('holdingScreen').hidden = false;
+  if (!setupSearchDebounced) initSetupOverlay();
+
+  try {
+    const [sData, gData] = await Promise.all([
+      fetch(`https://api.themoviedb.org/3/person/${startId}?api_key=${TMDB_API_KEY}`).then(r => r.json()),
+      fetch(`https://api.themoviedb.org/3/person/${goalId}?api_key=${TMDB_API_KEY}`).then(r => r.json())
+    ]);
+
+    document.getElementById('holdStartName').textContent = sData.name || 'Unknown';
+    document.getElementById('holdGoalName').textContent = gData.name || 'Unknown';
+    if (sData.profile_path) {
+      document.getElementById('holdStartPhoto').innerHTML =
+        `<img src="${TMDB_IMG}w185${sData.profile_path}" alt="${sData.name}">`;
+    }
+    if (gData.profile_path) {
+      document.getElementById('holdGoalPhoto').innerHTML =
+        `<img src="${TMDB_IMG}w185${gData.profile_path}" alt="${gData.name}">`;
+    }
+    document.getElementById('holdPar').textContent = par;
+
+    gameState.startActor = { id: startId, name: sData.name };
+    gameState.endActor = { id: goalId, name: gData.name };
+    gameState.par = par;
+    return true;
+  } catch (err) {
+    console.error('Failed to load incoming challenge:', err);
+    document.getElementById('holdingScreen').hidden = true;
+    return false;
+  }
+}
 
 function cacheElements() {
   parValue = document.getElementById("parValue");
@@ -103,6 +535,11 @@ function cacheElements() {
 }
 
 function setupEventListeners() {
+  // Mode menu buttons
+  document.getElementById('btnDaily').addEventListener('click', () => startMode('daily'));
+  document.getElementById('btnChallenge').addEventListener('click', () => startMode('challenge'));
+  document.getElementById('btnParty').addEventListener('click', () => startMode('party'));
+
   // Search input
   searchInput.addEventListener("input", OrbitUtils.debounce(handleSearch, 300));
   searchInput.addEventListener("keydown", (e) => {
@@ -513,11 +950,16 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
 
     // Check if this is the GOAL actor!
     if (actorId === gameState.endActor.id) {
+      let goalPhoto = actorPhoto || gameState.endActor.photo;
+      if (!goalPhoto) {
+        const path = await fetchAndCachePortrait(actorId);
+        if (path) goalPhoto = `${TMDB_IMG}w185${path}`;
+      }
       gameState.chain.push({
         type: 'actor',
         id: actorId,
         name: actorName,
-        photo: actorPhoto || gameState.endActor.photo,
+        photo: goalPhoto,
         isGoal: true
       });
       gameState.completed = true;
@@ -525,11 +967,16 @@ async function handleActorSelection(actorId, actorName, actorPhoto) {
       saveTodayState();
       saveStats();
       renderHoneycombPath();
-      setTimeout(() => showResult(), 800);
+      setTimeout(handleCompletion, 800);
       return;
     }
 
-    gameState.chain.push({ type: 'actor', id: actorId, name: actorName, photo: actorPhoto });
+    let resolvedPhoto = actorPhoto;
+    if (!resolvedPhoto) {
+      const path = await fetchAndCachePortrait(actorId);
+      if (path) resolvedPhoto = `${TMDB_IMG}w185${path}`;
+    }
+    gameState.chain.push({ type: 'actor', id: actorId, name: actorName, photo: resolvedPhoto });
     gameState.currentActor = { id: actorId, name: actorName };
 
     await loadFilmography(actorId);
@@ -751,22 +1198,37 @@ function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
 
   // Content
   if (isPlaceholder) {
-    // Goal placeholder with dashed outline
-    svg += `<path d="${hexPathD(0, 0, HEX_SIZE - 4)}" fill="none" stroke="#ffd700" 
-                 stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>`;
-    svg += `<text x="0" y="5" text-anchor="middle" fill="#ffd700" font-size="20" opacity="0.6">?</text>`;
-    svg += `<text x="0" y="${HEX_SIZE + 18}" text-anchor="middle" fill="#ffd700" 
-                 font-size="10" font-family="Orbitron, sans-serif" opacity="0.7">${gameState.endActor?.name || 'GOAL'}</text>`;
+    // Goal hex during gameplay — render the goal actor's portrait at full strength.
+    const goalPhoto = gameState.endActor?.photo || '';
+    if (goalPhoto) {
+      const goalClipId = `hex-clip-goal-${index}`;
+      svg += `<defs><clipPath id="${goalClipId}"><path d="${hexPathD(0, 0, HEX_SIZE - 2)}"/></clipPath></defs>`;
+      svg += `<image href="${goalPhoto}" x="${-HEX_SIZE + 2}" y="${-HEX_SIZE + 2}"
+                   width="${(HEX_SIZE - 2) * 2}" height="${(HEX_SIZE - 2) * 2}"
+                   clip-path="url(#${goalClipId})" preserveAspectRatio="xMidYMin meet"/>`;
+    } else {
+      // Person silhouette fallback (matches .og-person glyph)
+      const r = HEX_SIZE - 2;
+      svg += `<g opacity="0.85">
+        <circle cx="0" cy="-8" r="${r * 0.22}" stroke="#ffd700" stroke-width="3" fill="none"/>
+        <path d="M${-r * 0.5} ${r * 0.55}Q${-r * 0.5} ${r * 0.18} 0 ${r * 0.18}Q${r * 0.5} ${r * 0.18} ${r * 0.5} ${r * 0.55}"
+              stroke="#ffd700" stroke-width="3" fill="none"/>
+      </g>`;
+    }
+    svg += `<text x="0" y="${HEX_SIZE + 16}" text-anchor="middle" fill="#f1f5f9"
+                 font-size="10" font-family="Barlow, sans-serif">${escapeHtml(gameState.endActor?.name || 'GOAL')}</text>`;
+    svg += `<text x="0" y="${HEX_SIZE + 30}" text-anchor="middle" fill="#ffd700"
+                 font-size="9" font-family="Orbitron, sans-serif" font-weight="bold">GOAL</text>`;
   } else if (isMovie) {
     // Movie title
     const words = (item.name || '').toUpperCase().split(' ');
-    const lines = wrapText(words, 10);
-    const lineHeight = 10;
+    const lines = wrapText(words, 12);
+    const lineHeight = 14;
     const startY = -(lines.length - 1) * lineHeight / 2;
 
     lines.slice(0, 4).forEach((line, i) => {
-      svg += `<text x="0" y="${startY + i * lineHeight + 3}" text-anchor="middle" 
-                   fill="#00d9ff" font-size="8" font-family="Orbitron, sans-serif" font-weight="bold">${escapeHtml(line)}</text>`;
+      svg += `<text x="0" y="${startY + i * lineHeight + 4}" text-anchor="middle"
+                   fill="#00d9ff" font-size="11" font-family="Orbitron, sans-serif" font-weight="bold">${escapeHtml(line)}</text>`;
     });
   } else if (isActor) {
     // Actor photo clipped to hexagon shape (fills entire hex)
@@ -776,9 +1238,15 @@ function renderHexagonNode(pos, item, index, isPlaceholder, isComplete) {
       svg += `<defs><clipPath id="${clipId}"><path d="${hexPathD(0, 0, HEX_SIZE - 2)}"/></clipPath></defs>`;
       svg += `<image href="${photoUrl}" x="${-HEX_SIZE + 2}" y="${-HEX_SIZE + 2}"
                    width="${(HEX_SIZE - 2) * 2}" height="${(HEX_SIZE - 2) * 2}"
-                   clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice"/>`;
+                   clip-path="url(#${clipId})" preserveAspectRatio="xMidYMin meet"/>`;
     } else {
-      svg += `<text x="0" y="5" text-anchor="middle" fill="${strokeColor}" font-size="24">👤</text>`;
+      // Person silhouette fallback (matches .og-person glyph)
+      const r = HEX_SIZE - 2;
+      svg += `<g opacity="0.85">
+        <circle cx="0" cy="-8" r="${r * 0.22}" stroke="${strokeColor}" stroke-width="3" fill="none"/>
+        <path d="M${-r * 0.5} ${r * 0.55}Q${-r * 0.5} ${r * 0.18} 0 ${r * 0.18}Q${r * 0.5} ${r * 0.18} ${r * 0.5} ${r * 0.55}"
+              stroke="${strokeColor}" stroke-width="3" fill="none"/>
+      </g>`;
     }
 
     // Name below
@@ -917,37 +1385,169 @@ function resetGame() {
   saveTodayState();
 }
 
+/* ============================================================
+   PASS & PLAY HANDOFF — Added 2026-05-02
+   After Player 1 finishes, snapshot their run, show Privacy
+   Shield ("hand the device to P2"). On Descramble, reset the
+   board for P2 starting from the same start actor.
+   ============================================================ */
+
+function handleCompletion() {
+  if (gameState.mode === 'party') {
+    // Snapshot the just-finished player
+    gameState.players[gameState.activePlayer] = {
+      steps: gameState.steps,
+      chain: gameState.chain.slice()
+    };
+    if (gameState.activePlayer === 0) {
+      showPrivacyShield();
+      return;
+    }
+    // Player 2 done — fall through to dual-score result
+  }
+  showResult();
+}
+
+function showPrivacyShield() {
+  document.getElementById('privacyShield').hidden = false;
+}
+
+function startPlayer2Turn() {
+  document.getElementById('privacyShield').hidden = true;
+  gameState.activePlayer = 1;
+  gameState.completed = false;
+  gameState.steps = 0;
+  gameState.searchType = 'movie';
+  gameState.chain = [{
+    type: 'actor',
+    id: gameState.startActor.id,
+    name: gameState.startActor.name,
+    photo: gameState.startActor.photo,
+    isStart: true
+  }];
+  gameState.currentActor = { id: gameState.startActor.id, name: gameState.startActor.name };
+  setModeTag('PASS & PLAY — P2', false);
+  setSearchType('movie');
+  renderHoneycombPath();
+  updateUI();
+}
+
 // ============================================
 // RESULT & CELEBRATION
 // ============================================
 
 function showResult() {
   const steps = gameState.steps;
-  const par = gameState.par;
-
-  document.getElementById("yourSteps").textContent = steps;
-  document.getElementById("parSteps").textContent = par;
-
+  const titleEl = document.querySelector('.celebration-title');
+  const scoreDisplay = document.querySelector('.score-display');
+  const nextPuzzle = document.querySelector('.next-puzzle');
+  const shareBtn = document.getElementById('shareBtn');
+  const reviewBtn = document.getElementById('reviewBtn');
   const verdictEl = document.getElementById("scoreVerdict");
+  const yourLabel = document.querySelector('.your-score .score-label');
+  const parLabel = document.querySelector('.par-score .score-label');
 
-  if (steps < par) {
-    verdictEl.textContent = `${par - steps} Under Par!`;
-    verdictEl.className = "score-verdict under-par";
-  } else if (steps === par) {
-    verdictEl.textContent = "On Par!";
-    verdictEl.className = "score-verdict on-par";
+  // Reset score labels to defaults; modes override below.
+  if (yourLabel) yourLabel.textContent = 'Your Steps';
+  if (parLabel) parLabel.textContent = 'Par';
+
+  if (gameState.mode === 'party') {
+    document.getElementById('challengeLinkDisplay').hidden = true;
+    const p1 = gameState.players[0].steps;
+    const p2 = gameState.players[1].steps;
+    document.getElementById('yourSteps').textContent = p1;
+    document.getElementById('parSteps').textContent = p2;
+    yourLabel.textContent = 'Player 1';
+    parLabel.textContent = 'Player 2';
+
+    if (p1 < p2) {
+      verdictEl.innerHTML = '<span class="og og-trophy"></span> Player 1 Wins!';
+      verdictEl.className = 'score-verdict under-par';
+    } else if (p1 > p2) {
+      verdictEl.innerHTML = '<span class="og og-trophy"></span> Player 2 Wins!';
+      verdictEl.className = 'score-verdict under-par';
+    } else {
+      verdictEl.innerHTML = '<span class="og og-target"></span> Tie!';
+      verdictEl.className = 'score-verdict on-par';
+    }
+
+    titleEl.textContent = 'JOURNEY COMPLETE!';
+    scoreDisplay.style.display = '';
+    nextPuzzle.style.display = 'none';
+    reviewBtn.textContent = 'Back to Menu';
+    shareBtn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
+    celebrationOverlay.hidden = false;
+    return;
+  }
+
+  if (gameState.mode === 'challenge') {
+    // Creator just solved their own challenge — their steps become Par.
+    gameState.par = Math.max(3, steps);
+    if (parValue) parValue.textContent = gameState.par;
+
+    titleEl.textContent = 'CHALLENGE CREATED!';
+    scoreDisplay.style.display = 'none';
+    nextPuzzle.style.display = 'none';
+
+    // Surface the link on screen
+    const url = `${window.location.origin}${window.location.pathname}?s=${gameState.startActor.id}&g=${gameState.endActor.id}&p=${gameState.par}`;
+    document.getElementById('challengePar').textContent = gameState.par;
+    document.getElementById('challengeLinkInput').value = url;
+    document.getElementById('challengeLinkDisplay').hidden = false;
+    // Auto-select the link on focus for easy manual copy
+    document.getElementById('challengeLinkInput').addEventListener('focus', function () {
+      this.select();
+    }, { once: true });
+
+    shareBtn.innerHTML = '<span class="og og-clipboard"></span> Copy Challenge Link';
+    reviewBtn.textContent = 'Back to Menu';
   } else {
-    verdictEl.textContent = `${steps - par} Over Par`;
-    verdictEl.className = "score-verdict over-par";
+    document.getElementById('challengeLinkDisplay').hidden = true;
+    // Daily or duel: show steps vs par + verdict.
+    const par = gameState.par;
+    document.getElementById("yourSteps").textContent = steps;
+    document.getElementById("parSteps").textContent = par;
+
+    if (steps < par) {
+      verdictEl.innerHTML = `<span class="og og-eagle"></span> ${par - steps} Under Par!`;
+      verdictEl.className = "score-verdict under-par";
+    } else if (steps === par) {
+      verdictEl.innerHTML = '<span class="og og-target"></span> On Par!';
+      verdictEl.className = "score-verdict on-par";
+    } else {
+      verdictEl.textContent = `${steps - par} Over Par`;
+      verdictEl.className = "score-verdict over-par";
+    }
+
+    titleEl.textContent = 'JOURNEY COMPLETE!';
+    scoreDisplay.style.display = '';
+
+    if (gameState.mode === 'duel') {
+      nextPuzzle.style.display = 'none';
+      reviewBtn.textContent = 'Back to Menu';
+      shareBtn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
+    } else {
+      // daily
+      nextPuzzle.style.display = '';
+      reviewBtn.textContent = 'Review Journey';
+      shareBtn.innerHTML = '<span class="og og-clipboard"></span> Share';
+      startNextPuzzleCountdown();
+    }
   }
 
   celebrationOverlay.hidden = false;
-  startNextPuzzleCountdown();
 }
 
 function closeCelebration() {
   celebrationOverlay.hidden = true;
-  renderPostGameResults();
+  if (gameState.mode === 'daily') {
+    renderPostGameResults();
+  } else {
+    // challenge / duel — back to menu, reset transient state
+    showModeMenu();
+    gameState.chain = [];
+    gameState.completed = false;
+  }
 }
 
 function renderPostGameResults() {
@@ -1029,6 +1629,7 @@ function getStats() {
 }
 
 function saveStats() {
+  if (gameState.mode !== 'daily') return; // only daily counts toward stats
   const stats = getStats();
   stats.solved++;
   stats.totalSteps += gameState.steps;
@@ -1063,6 +1664,7 @@ function getTodayKey() {
 }
 
 function saveTodayState() {
+  if (gameState.mode !== 'daily') return; // challenge/duel/party are ephemeral
   const stateToSave = {
     ...gameState,
     startActor: { id: gameState.startActor.id, name: gameState.startActor.name },
@@ -1085,6 +1687,9 @@ function loadTodayState() {
 // ============================================
 
 function shareResult() {
+  if (gameState.mode === 'challenge') return generateChallengeLink();
+  if (gameState.mode === 'party') return shareParty();
+
   const steps = gameState.steps;
   const par = gameState.par;
 
@@ -1095,7 +1700,11 @@ function shareResult() {
 
   const chainEmoji = gameState.chain.map(item => item.type === 'actor' ? '🎭' : '🎬').join('→');
 
-  const text = `🛤️ Journeys #${gameState.puzzleNumber}
+  const header = gameState.mode === 'duel'
+    ? `🛤️ Journeys Challenge`
+    : `🛤️ Journeys #${gameState.puzzleNumber}`;
+
+  const text = `${header}
 
 ${gameState.startActor.name} → ${gameState.endActor.name}
 
@@ -1111,6 +1720,54 @@ Play at orbit-game.com/journeys`;
     setTimeout(() => {
       btn.innerHTML = '<span class="og og-clipboard"></span> Share';
     }, 2000);
+  });
+}
+
+function shareParty() {
+  const p1 = gameState.players[0].steps;
+  const p2 = gameState.players[1].steps;
+  let verdict = 'Tie!';
+  if (p1 < p2) verdict = 'Player 1 wins!';
+  else if (p1 > p2) verdict = 'Player 2 wins!';
+
+  const text = `🛤️ Journeys Pass & Play
+
+${gameState.startActor.name} → ${gameState.endActor.name}
+
+Player 1: ${p1} steps
+Player 2: ${p2} steps
+${verdict}
+
+Play at orbit-game.com/journeys`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('shareBtn');
+    btn.innerHTML = '<span>✓</span> Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
+    }, 2000);
+  });
+}
+
+function generateChallengeLink() {
+  const url = `${window.location.origin}${window.location.pathname}?s=${gameState.startActor.id}&g=${gameState.endActor.id}&p=${gameState.par}`;
+  const text = `🛤️ JOURNEYS CHALLENGE
+
+${gameState.startActor.name} → ${gameState.endActor.name}
+Can you beat my Par ${gameState.par}?
+
+Play: ${url}
+
+Powered by Orbit`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("shareBtn");
+    btn.innerHTML = '<span>✓</span> Link Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="og og-clipboard"></span> Copy Challenge Link';
+    }, 2000);
+  }).catch(() => {
+    prompt('Copy this challenge link:', url);
   });
 }
 

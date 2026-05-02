@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="journeys.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body>
 
@@ -37,8 +39,8 @@
   </header>
 
   <!-- INFO BAR -->
-  <div class="info-bar">
-    <span class="info-tag">DAILY JOURNEY #<span id="puzzleNumber">1</span></span>
+  <div class="info-bar" id="infoBar" hidden>
+    <span class="info-tag" id="modeTag">DAILY JOURNEY #<span id="puzzleNumber">1</span></span>
     <span class="info-divider">|</span>
     <span class="info-tag">PAR <span id="parValue">3</span></span>
     <span class="info-divider">|</span>
@@ -48,16 +50,27 @@
   <!-- MAIN GAME AREA -->
   <main class="game-main">
 
+    <!-- MODE MENU (landing) -->
+    <section id="modeMenu" class="mode-menu">
+      <h2 class="mode-menu-title">SELECT MISSION</h2>
+      <div class="mode-buttons">
+        <button class="cel-btn share-btn" id="btnDaily">Daily Journey</button>
+        <button class="cel-btn review-btn" id="btnChallenge">Create a Challenge</button>
+        <button class="cel-btn mode-btn-party" id="btnParty">Pass &amp; Play</button>
+      </div>
+      <p class="mode-menu-tagline">Powered by <span>Orbit</span></p>
+    </section>
+
     <!-- HONEYCOMB PATH CONTAINER (unified chain: START → chain → GOAL) -->
-    <section class="honeycomb-section">
+    <section class="honeycomb-section" id="honeycombSection" hidden>
       <div class="honeycomb-container" id="honeycombContainer">
         <!-- SVG honeycomb path rendered here by JS -->
       </div>
     </section>
 
     <!-- POST-GAME RESULTS (two columns) -->
-    <section class="postgame-results" id="postgameResults" hidden>
-      <button class="postgame-close" id="postgameClose">✕</button>
+    <section class="postgame-results" id="postgameResults" data-orbit-popup hidden>
+      <button class="postgame-close orbit-close" id="postgameClose" aria-label="Close">✕</button>
       <h3 class="postgame-header">YOUR JOURNEY</h3>
       <div class="results-columns">
         <div class="results-column movies-column">
@@ -72,7 +85,7 @@
     </section>
 
     <!-- CONTROLS -->
-    <section class="controls-section" id="inputSection">
+    <section class="controls-section" id="inputSection" hidden>
       <div class="input-toggle">
         <button class="toggle-btn active" id="movieToggle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg> Movie</button>
         <button class="toggle-btn" id="actorToggle"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg> Actor</button>
@@ -91,8 +104,8 @@
   </main>
 
   <!-- WIN CELEBRATION OVERLAY -->
-  <section class="celebration-overlay" id="celebrationOverlay" hidden>
-    <button class="overlay-close" id="celebrationClose">✕</button>
+  <section class="celebration-overlay" id="celebrationOverlay" data-orbit-popup hidden>
+    <button class="overlay-close orbit-close" id="celebrationClose" aria-label="Close">✕</button>
     <div class="celebration-content">
       <div class="supernova-burst">
         <div class="supernova-core"></div>
@@ -123,6 +136,14 @@
         <span class="next-timer" id="nextTimer">--:--:--</span>
       </div>
 
+      <div class="challenge-link-display" id="challengeLinkDisplay" hidden>
+        <div class="challenge-par-display">
+          PAR
+          <strong id="challengePar">3</strong>
+        </div>
+        <input type="text" class="challenge-link-input" id="challengeLinkInput" readonly>
+      </div>
+
       <div class="celebration-actions">
         <button class="cel-btn review-btn" id="reviewBtn">Review Journey</button>
         <button class="cel-btn share-btn" id="shareBtn"><span><span class="og og-clipboard"></span></span> Share</button>
@@ -130,10 +151,101 @@
     </div>
   </section>
 
+  <!-- SETUP OVERLAY (Create Challenge / Pass & Play) -->
+  <section id="setupOverlay" class="celebration-overlay" data-orbit-popup hidden>
+    <button class="overlay-close orbit-close" id="setupClose" aria-label="Close">✕</button>
+    <div class="celebration-content setup-content">
+      <h2 class="celebration-title" id="setupTitle">CREATE CHALLENGE</h2>
+      <p class="setup-instruction" id="setupInstruction">Pick the <span class="setup-emph-cyan">START</span> actor</p>
+
+      <div class="setup-spinner-zone" id="setupSpinnerZone" hidden>
+        <div class="setup-cosmic-spinner">
+          <div class="setup-spinner-ring setup-spinner-ring-1"></div>
+          <div class="setup-spinner-ring setup-spinner-ring-2"></div>
+          <div class="setup-spinner-ring setup-spinner-ring-3"></div>
+          <div class="setup-spinner-core"></div>
+        </div>
+        <div class="setup-spinner-text">CHARTING JOURNEY…</div>
+      </div>
+
+      <div class="setup-picks" id="setupPicks">
+        <div class="setup-pick" id="setupStartPick">
+          <div class="setup-pick-photo">
+            <div class="setup-pick-photo-content" id="setupStartPhoto"><span class="og og-person-bare"></span></div>
+            <svg class="setup-pick-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
+            </svg>
+          </div>
+          <div class="setup-pick-label">START</div>
+          <div class="setup-pick-name" id="setupStartName">—</div>
+        </div>
+        <div class="setup-arrow">→</div>
+        <div class="setup-pick setup-pick-goal" id="setupGoalPick">
+          <div class="setup-pick-photo">
+            <div class="setup-pick-photo-content" id="setupGoalPhoto"><span class="og og-person-bare-gold"></span></div>
+            <svg class="setup-pick-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <polygon points="25,1 75,1 99,50 75,99 25,99 1,50"/>
+            </svg>
+          </div>
+          <div class="setup-pick-label">GOAL</div>
+          <div class="setup-pick-name" id="setupGoalName">—</div>
+        </div>
+      </div>
+
+      <div class="search-wrap setup-search-wrap" id="setupSearchWrap">
+        <input type="text" class="search-input" id="setupSearch" placeholder="Search actors..." autocomplete="off">
+        <div class="search-results" id="setupSearchResults" hidden></div>
+      </div>
+
+      <button class="action-btn setup-randomize" id="randomizeBtn">
+        <span class="og og-dice"></span> Randomize Path
+      </button>
+
+      <div class="setup-confirm-row" id="setupConfirmRow" hidden>
+        <button class="cel-btn review-btn" id="setupResetBtn">Reset Picks</button>
+        <button class="cel-btn share-btn" id="setupStartGameBtn">Start Game</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY SHIELD (Pass & Play handoff) -->
+  <section id="privacyShield" class="celebration-overlay" data-orbit-popup hidden>
+    <button class="overlay-close orbit-close" id="privacyClose" aria-label="Close">✕</button>
+    <div class="celebration-content privacy-content">
+      <h2 class="celebration-title">TRANSMISSION LOCKED</h2>
+      <p class="privacy-message">Hand the device to <span class="privacy-next">PLAYER 2</span></p>
+      <p class="privacy-sub">They will connect the same path</p>
+      <button class="cel-btn share-btn" id="descrambleBtn">DESCRAMBLE</button>
+    </div>
+  </section>
+
+  <!-- HOLDING SCREEN (incoming challenge URL) -->
+  <section id="holdingScreen" class="celebration-overlay" data-orbit-popup hidden>
+    <button class="overlay-close orbit-close" id="holdingClose" aria-label="Close">✕</button>
+    <div class="celebration-content holding-content">
+      <h2 class="celebration-title">INCOMING CHALLENGE</h2>
+      <div class="holding-versus">
+        <div class="holding-actor">
+          <div class="holding-photo" id="holdStartPhoto"><span class="og og-person og-lg"></span></div>
+          <div class="holding-label">START</div>
+          <div class="holding-name" id="holdStartName">…</div>
+        </div>
+        <div class="holding-arrow">→</div>
+        <div class="holding-actor holding-actor-goal">
+          <div class="holding-photo" id="holdGoalPhoto"><span class="og og-person og-lg"></span></div>
+          <div class="holding-label">GOAL</div>
+          <div class="holding-name" id="holdGoalName">…</div>
+        </div>
+      </div>
+      <p class="holding-par">Beat <strong>Par <span id="holdPar">3</span></strong></p>
+      <button class="cel-btn share-btn" id="acceptChallengeBtn">ACCEPT MISSION</button>
+    </div>
+  </section>
+
   <!-- HELP MODAL -->
-  <div class="modal-overlay" id="helpModal" hidden>
+  <div class="modal-overlay" id="helpModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="helpClose">✕</button>
+      <button class="modal-close orbit-close" id="helpClose" aria-label="Close">✕</button>
       <h2 class="modal-title">How to Play</h2>
       <div class="help-content">
         <div class="help-step">
@@ -176,9 +288,9 @@
   </div>
 
   <!-- STATS MODAL -->
-  <div class="modal-overlay" id="statsModal" hidden>
+  <div class="modal-overlay" id="statsModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="statsClose">✕</button>
+      <button class="modal-close orbit-close" id="statsClose" aria-label="Close">✕</button>
       <h2 class="modal-title">Statistics</h2>
       <div class="stats-grid">
         <div class="stat-box">

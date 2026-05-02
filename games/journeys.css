@@ -139,6 +139,76 @@ html, body {
 }
 
 /* ============================================
+   MODE MENU (landing) — Added 2026-05-02
+   Shown on page entry. Daily / Challenge / Pass & Play.
+============================================ */
+
+.mode-menu {
+  text-align: center;
+  padding: 56px 24px 40px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.mode-menu-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  background: var(--gradient-journeys);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 32px;
+}
+
+.mode-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.mode-buttons .cel-btn {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.mode-btn-party {
+  background: rgba(168, 85, 247, 0.12);
+  border: 2px solid var(--prestige-purple);
+  color: var(--prestige-purple);
+}
+
+.mode-btn-party:hover {
+  background: rgba(168, 85, 247, 0.22);
+  transform: scale(1.03);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.mode-menu-tagline {
+  font-size: 12px;
+  color: var(--ghost-gray);
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+
+.mode-menu-tagline span {
+  font-family: var(--font-display);
+  color: var(--journeys-teal);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 480px) {
+  .mode-menu { padding: 40px 20px 32px; }
+  .mode-menu-title { font-size: 20px; letter-spacing: 3px; }
+  .mode-buttons .cel-btn { font-size: 14px; padding: 14px 20px; }
+}
+
+/* ============================================
    HONEYCOMB SECTION (Unified Chain)
 ============================================ */
 
@@ -152,7 +222,7 @@ html, body {
 
 .honeycomb-container {
   width: 100%;
-  min-height: 280px;
+  min-height: 320px;
   position: relative;
   overflow: visible;
 }
@@ -496,7 +566,7 @@ html, body {
 .postgame-photo {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
   border: 2px solid rgba(168, 85, 247, 0.4);
@@ -711,7 +781,13 @@ html, body {
   letter-spacing: 2px;
   padding: 10px 24px;
   border-radius: 30px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.score-verdict .og {
+  width: 1.25em;
+  height: 1.25em;
 }
 
 .score-verdict.under-par {
@@ -789,6 +865,425 @@ html, body {
 .share-btn:hover {
   transform: scale(1.03);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* ============================================
+   SETUP OVERLAY (Create Challenge / Pass & Play)
+   Added 2026-05-02
+============================================ */
+
+.setup-content {
+  max-width: 460px;
+}
+
+.setup-instruction {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted-silver);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.setup-emph-cyan { color: var(--accent-cyan); font-weight: 700; letter-spacing: 2px; }
+.setup-emph-gold { color: var(--accent-gold); font-weight: 700; letter-spacing: 2px; }
+
+.setup-picks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.setup-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 110px;
+}
+
+/* Flat-top hexagon frame — sized to match honeycomb hex proportions.
+   Three layers stacked z-index 0 → 2:
+     ::before  fill background
+     content   glyph or img (clipped to hex)
+     <svg>     stroked outline rendered ON TOP of the image
+*/
+.setup-pick-photo {
+  position: relative;
+  width: 124px;
+  height: 124px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.35));
+}
+
+.setup-pick-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--deep-void);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.setup-pick-photo-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Bare silhouette glyph: explicit small size, flex-centered */
+.setup-pick-photo-content .og {
+  display: block;
+  width: 56%;
+  height: 56%;
+}
+
+/* Game-equivalent fit: contain (= SVG `meet`), heads anchored to top */
+.setup-pick-photo-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+}
+
+/* Hex outline, drawn above the image */
+.setup-pick-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+  color: var(--accent-cyan);
+}
+.setup-pick-frame polygon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linejoin: miter;
+}
+
+.setup-pick-goal .setup-pick-photo {
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+}
+.setup-pick-goal .setup-pick-frame { color: var(--accent-gold); }
+
+.setup-pick.picked .setup-pick-photo { filter: drop-shadow(0 0 12px rgba(0, 217, 255, 0.7)); }
+.setup-pick-goal.picked .setup-pick-photo { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7)); }
+
+.setup-pick-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+}
+.setup-pick-goal .setup-pick-label { color: var(--accent-gold); }
+
+.setup-pick-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--film-white);
+  text-align: center;
+  line-height: 1.3;
+  min-height: 32px;
+  word-break: break-word;
+}
+
+.setup-arrow {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--ghost-gray);
+  margin-bottom: 24px;
+}
+
+.setup-search-wrap {
+  margin: 0 auto 16px;
+  max-width: 360px;
+}
+
+.setup-randomize {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: var(--prestige-purple);
+}
+.setup-randomize:hover {
+  background: rgba(168, 85, 247, 0.16);
+  border-color: var(--prestige-purple);
+  color: var(--film-white);
+}
+
+/* Confirm row — visible once both picks made */
+.setup-confirm-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.setup-confirm-row .cel-btn { padding: 12px 22px; font-size: 14px; }
+
+/* Cosmic spinner (ported from pages/randomizer.css) */
+.setup-spinner-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.setup-cosmic-spinner {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup-spinner-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.setup-spinner-ring-1 {
+  width: 100%;
+  height: 100%;
+  border-top-color: var(--accent-cyan);
+  border-right-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  animation: journeys-spin-fast 1.2s linear infinite;
+}
+.setup-spinner-ring-2 {
+  width: 75%;
+  height: 75%;
+  border-top-color: var(--accent-gold);
+  border-left-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  animation: journeys-spin-fast 1.8s linear infinite reverse;
+}
+.setup-spinner-ring-3 {
+  width: 50%;
+  height: 50%;
+  border-bottom-color: var(--prestige-purple);
+  border-right-color: var(--prestige-purple);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+  animation: journeys-spin-fast 0.9s linear infinite;
+}
+
+.setup-spinner-core {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 18px var(--accent-cyan), 0 0 36px rgba(0, 217, 255, 0.3);
+  animation: journeys-pulse-core 1s ease-in-out infinite;
+}
+
+.setup-spinner-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+  animation: journeys-pulse-text 2s ease-in-out infinite;
+}
+
+@keyframes journeys-spin-fast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes journeys-pulse-core {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+@keyframes journeys-pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Challenge link display — shown after a Challenge is created */
+.challenge-link-display {
+  margin: 20px auto 24px;
+  max-width: 420px;
+  padding: 18px;
+  background: rgba(0, 217, 255, 0.06);
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.challenge-par-display {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+.challenge-par-display strong {
+  font-size: 28px;
+  display: block;
+  margin-top: 2px;
+  color: var(--accent-gold);
+}
+
+.challenge-link-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 12px;
+  outline: none;
+  text-align: center;
+}
+
+/* ============================================
+   HOLDING SCREEN (Incoming Challenge)
+   Added 2026-05-02
+============================================ */
+
+.holding-content {
+  max-width: 480px;
+}
+
+.holding-versus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin: 24px 0;
+}
+
+.holding-actor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 130px;
+}
+
+.holding-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-cyan);
+  background: rgba(0, 217, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  font-size: 40px;
+}
+
+.holding-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.holding-actor-goal .holding-photo {
+  border-color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.08);
+  color: var(--accent-gold);
+}
+
+.holding-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+}
+.holding-actor-goal .holding-label { color: var(--accent-gold); }
+
+.holding-name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--film-white);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.holding-arrow {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--ghost-gray);
+  margin-bottom: 28px;
+}
+
+.holding-par {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--muted-silver);
+  margin-bottom: 24px;
+}
+.holding-par strong {
+  font-family: var(--font-display);
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* ============================================
+   PRIVACY SHIELD (Pass & Play handoff)
+   Added 2026-05-02
+============================================ */
+
+.privacy-content {
+  max-width: 440px;
+}
+
+.privacy-message {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--film-white);
+  margin: 18px 0 6px;
+  letter-spacing: 0.5px;
+}
+.privacy-next {
+  font-family: var(--font-display);
+  color: var(--accent-cyan);
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+.privacy-sub {
+  font-size: 13px;
+  color: var(--muted-silver);
+  margin-bottom: 24px;
+}
+
+#descrambleBtn {
+  letter-spacing: 2px;
+  padding: 14px 32px;
+}
+
+/* Hide PAR slot in party mode (no par tracking) */
+.info-bar.party-mode > .info-tag:nth-of-type(2),
+.info-bar.party-mode > .info-divider:nth-of-type(1) {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .setup-pick { width: 110px; }
+  .setup-pick-photo { width: 96px; height: 96px; }
+  .setup-arrow { font-size: 18px; }
+  .holding-actor { width: 100px; }
+  .holding-photo { width: 78px; height: 78px; }
+  .holding-versus { gap: 12px; }
 }
 
 /* ============================================
@@ -967,7 +1462,7 @@ html, body {
 
   .info-bar { font-size: 9px; gap: 10px; padding: 10px 12px; }
 
-  .honeycomb-container { min-height: 220px; }
+  .honeycomb-container { min-height: 260px; }
 
   .results-columns { grid-template-columns: 1fr; gap: 20px; }
 
@@ -977,10 +1472,20 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .honeycomb-container { min-height: 180px; }
+  .honeycomb-container { min-height: 220px; }
 
   .celebration-title { font-size: 18px; }
   .score-num { font-size: 32px; }
+  .score-verdict { font-size: 14px; padding: 8px 18px; letter-spacing: 1.5px; }
 
   .cel-btn { padding: 12px 20px; font-size: 13px; }
+
+  /* Overlays: tighten content max-width and inner padding */
+  .celebration-content { padding: 0 16px; }
+  .holding-versus { gap: 10px; }
+  .privacy-message { font-size: 14px; }
+
+  /* Challenge link box */
+  .challenge-link-display { padding: 14px; }
+  .challenge-link-input { font-size: 11px; }
 }

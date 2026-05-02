@@ -73,6 +73,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `cube_actor_trivia_${personId}` | local | 1 session | people-cube.js | people-cube.js | PeopleCube trivia questions |
 | `orbit_pcube_cache` | session | 1 hour, max 30 | people-cube.js | people-cube.js | People Cube data cache |
 | `orbit_map_results` | local | Until cleared | orbit-map.js | results.js | Discovery Map results |
+| `orbit_journeys_portraits` | session | Session | journeys.js | journeys.js | Map of `{personId: profile_path \| false}` — caches TMDB portrait paths so actors picked mid-chain don't re-hit `/person/{id}` when search results omit `profile_path`. |
 
 ## User Lists & Memory
 
@@ -101,8 +102,8 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 
 | Key | Format | Set By | Read By | Purpose |
 |-----|--------|--------|---------|---------|
-| `anchorMovie` | JSON object | Multiple | constellation.js, results.js | Starting movie for games |
-| `constellationMovies` | JSON array | Multiple | constellation.js | Movies for Constellation |
+| `anchorMovie` | JSON object | Multiple | anchor-point.js, results.js | Starting movie for games |
+| `constellationMovies` | JSON array | Multiple | anchor-point.js | Movies for Constellation View |
 | `singleMovie` | JSON object | Multiple | results.js | Single-movie result mode |
 | `resultsMode` | String | Multiple | results.js | Results display mode |
 
@@ -135,3 +136,15 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 ### Naming inconsistencies
 - `timelineMovieId` vs `timelineShowId` (unused)
 - `anchorMovie` vs `anchorMovieId` (unused)
+
+## Next Frontier Page
+
+| Key | Storage | Format | Set By | Read By | Purpose |
+|-----|---------|--------|--------|---------|---------|
+| `orbit_want_to_see` | local | JSON array of `{id, title, releaseDate, posterPath}` | next-frontier.js | next-frontier.js | Films the user wants to see (countdown list) |
+| `orbit_nf_region` | local | String (`AU`/`US`/`GB`/`NZ`/`CA`) | next-frontier.js | next-frontier.js | Last selected region code |
+| `orbit_nf_services` | local | JSON array of provider IDs | next-frontier.js | next-frontier.js | Streaming services the user has toggled on |
+| `orbit_nf_tab` | local | String (`bigscreen`/`streamers`) | next-frontier.js | next-frontier.js | Last active tab |
+| `orbit_nf_upcoming_{region}` | session | JSON array | next-frontier.js | next-frontier.js | Cached upcoming movies per region |
+| `orbit_nf_stream_{svcId}_{region}_{type}` | session | JSON array | next-frontier.js | next-frontier.js | Cached streaming titles per service/region/type |
+| `orbit_nf_prov_{movieId}` | session | JSON array | next-frontier.js | next-frontier.js | Cached watch providers per movie |
