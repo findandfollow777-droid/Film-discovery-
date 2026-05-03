@@ -351,7 +351,7 @@
 .pcube-dept-badge {
   display: block;
   width: fit-content;
-  margin: 0 auto 14px;
+  margin: 0 auto 10px;
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 600;
@@ -376,8 +376,8 @@
   background: rgba(var(--cosmic-blue-rgb), 0.4);
   border: 1px solid rgba(var(--accent-rgb), 0.25);
   border-radius: var(--radius-sm);
-  padding: 10px;
-  min-height: 52px;
+  padding: 8px 10px;
+  min-height: 44px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -418,12 +418,13 @@
 .pcube-awards-badge {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: rgba(var(--prestige-purple-rgb), 0.12);
   border: 1px solid rgba(var(--prestige-purple-rgb), 0.5);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  margin-top: 12px;
+  padding: 8px 12px;
+  margin-top: 6px;
   font-family: var(--font-body);
 }
 
