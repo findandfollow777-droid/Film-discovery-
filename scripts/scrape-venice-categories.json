@@ -1,0 +1,132 @@
+[
+  {
+    "id": "venice.golden_lion",
+    "display_name": "Golden Lion",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Golden Lion"],
+    "display_aliases": ["Golden Lion", "Leone d'Oro"]
+  },
+  {
+    "id": "venice.silver_lion_grand_jury",
+    "display_name": "Grand Jury Prize",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Grand Jury Prize (Venice Film Festival)"],
+    "display_aliases": ["Grand Jury Prize", "Grand Special Jury Prize", "Premio Speciale della Giuria"],
+    "notes": "Maps to Venice's 'Grand Jury Prize' / 'Premio Speciale della Giuria' — the second-tier non-director prize that has been awarded across the full 2000-2025 scope. Despite the category ID name 'silver_lion_grand_jury', this is a SEPARATE award from the 'Silver Lion' — Venice ceremonies typically award both each year. Wikilink target consistent: [[Grand Jury Prize (Venice Film Festival)]]. Display text varies (sometimes 'Grand Special Jury Prize')."
+  },
+  {
+    "id": "venice.silver_lion_best_director",
+    "display_name": "Silver Lion",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Lion"],
+    "display_aliases": ["Silver Lion", "Silver Lion for Best Director", "Leone d'Argento"],
+    "notes": "Maps to Venice's 'Silver Lion' award (target [[Silver Lion]]). Modern era (2013+): explicitly 'Silver Lion for Best Director' (person-first format). Pre-2013 era: typically awarded as a film+director second-tier prize without 'Best Director' qualifier. Both eras share the same wikilink target so we treat them as one category for tracking continuity."
+  },
+  {
+    "id": "venice.special_jury_prize",
+    "display_name": "Special Jury Prize",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Special Jury Prize (Venice Film Festival)"],
+    "display_aliases": ["Special Jury Prize"],
+    "notes": "Distinct from Grand Jury Prize — Venice has both. Special Jury Prize is intermittent (not awarded in some years, including cer 2000). Wikilink target [[Special Jury Prize (Venice Film Festival)]]."
+  },
+  {
+    "id": "venice.volpi_cup_best_actor",
+    "display_name": "Volpi Cup for Best Actor",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Volpi Cup for Best Actor"],
+    "display_aliases": ["Volpi Cup for Best Actor", "Coppa Volpi per la migliore interpretazione maschile"]
+  },
+  {
+    "id": "venice.volpi_cup_best_actress",
+    "display_name": "Volpi Cup for Best Actress",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Volpi Cup for Best Actress"],
+    "display_aliases": ["Volpi Cup for Best Actress", "Coppa Volpi per la migliore interpretazione femminile"]
+  },
+  {
+    "id": "venice.best_screenplay",
+    "display_name": "Best Screenplay",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": [
+      "Best Screenplay (Venice Film Festival)",
+      "Venice Film Festival Award for Best Screenplay",
+      "Golden Osella"
+    ],
+    "display_aliases": [
+      "Best Screenplay",
+      "Premio Osella",
+      "Golden Osella for Outstanding Technical Contribution (screenplay)",
+      "Golden Osella for Best Screenplay",
+      "Osella for Best Screenplay"
+    ],
+    "notes": "Premio Osella for Best Screenplay. Wikilink target moved between 'Best Screenplay (Venice Film Festival)' and 'Venice Film Festival Award for Best Screenplay' over the years. Older ceremonies (cer 2000+) sometimes use bold-only display 'Golden Osella for Outstanding Technical Contribution (screenplay)' — alias-matching needed."
+  },
+  {
+    "id": "venice.marcello_mastroianni_award",
+    "display_name": "Marcello Mastroianni Award",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Marcello Mastroianni Award"],
+    "display_aliases": ["Marcello Mastroianni Award", "Premio Marcello Mastroianni"],
+    "notes": "Awarded to an emerging actor or actress. Has a spotty history at Venice — has been retired and reinstated; Wikipedia coverage gaps possible for some years. If absent from a ceremony's awards section, the scraper produces 0 rows for that category."
+  },
+  {
+    "id": "venice.lion_of_the_future",
+    "display_name": "Lion of the Future — Luigi De Laurentiis Award",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Lion of the Future", "Luigi De Laurentiis Award"],
+    "display_aliases": [
+      "Lion of the Future",
+      "Luigi De Laurentiis Award",
+      "Luigi De Laurentis Award",
+      "Luigi De Laurentis Award for a Debut Film",
+      "Luigi De Laurentis Award for Debut Feature"
+    ],
+    "notes": "Venice's debut-feature prize, equivalent to Cannes Caméra d'Or. Typically appears in a SEPARATE === Lion of the Future === or === Luigi De Laurentis Award === subsection within the Official Awards block; bullets inside that subsection don't carry an inline category wikilink, so the scraper's section-heading-driven Pass 2 (same pattern as Cannes Caméra d'Or) catches it. Spelling varies: 'Laurentis' vs 'Laurentiis'."
+  }
+]

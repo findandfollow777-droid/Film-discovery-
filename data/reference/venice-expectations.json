@@ -1,0 +1,71 @@
+{
+  "schema_version": "v1",
+  "festival": "venice",
+  "generated_at": "2026-05-04T00:00:00+00:00",
+  "generated_from": "scripts/scrape-venice-categories.json — Phase 1 baseline; refine after initial-scrape data is in",
+  "expectations": {
+    "venice.golden_lion": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Golden Lion (Leone d'Oro) — single winner per ceremony in modern era. Tolerance 1 allows for the rare hypothetical tie."
+    },
+    "venice.silver_lion_grand_jury": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Maps to Wikipedia's 'Grand Jury Prize (Venice Film Festival)' — the second-tier non-director prize. Awarded in essentially every ceremony in the 2000-2025 scope. Tolerance 1 allows for ties."
+    },
+    "venice.silver_lion_best_director": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Maps to Wikipedia's 'Silver Lion' (target [[Silver Lion]]). Modern era (2013+): person-first 'Silver Lion for Best Director' format. Pre-2013: typically film+director second-tier prize without Best Director qualifier. Tolerance 1 allows for ties."
+    },
+    "venice.special_jury_prize": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Distinct from Grand Jury Prize — Venice has both, with Special Jury Prize awarded intermittently (not awarded in cer 2000 and possibly other early years). Tolerance 1; era_overrides may be added if initial-scrape data shows extended gap years."
+    },
+    "venice.volpi_cup_best_actor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Volpi Cup for Best Actor. Cannes-style ties have occurred occasionally; tolerance 1 covers."
+    },
+    "venice.volpi_cup_best_actress": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Volpi Cup for Best Actress. Cannes-style ties have occurred occasionally; tolerance 1 covers."
+    },
+    "venice.best_screenplay": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Premio Osella for Best Screenplay. Display name varies historically ('Golden Osella for Outstanding Technical Contribution (screenplay)' in older years). Tolerance 1 covers ties / co-author teams."
+    },
+    "venice.marcello_mastroianni_award": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Spotty history at Venice — has been retired and reinstated; expect 0-row years for some ceremonies. Tolerance 1 allows for ties; era_overrides will likely be added once gap years are identified from initial scrape."
+    },
+    "venice.lion_of_the_future": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Luigi De Laurentis Award for Debut Feature. Section-heading-driven extraction (Pass 2). Single winner expected per ceremony."
+    }
+  }
+}
