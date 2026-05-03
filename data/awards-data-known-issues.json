@@ -485,10 +485,20 @@
   {
     "issue_id": "oscar-adapted-screenplay-the-play-artifact-2026-05-03",
     "discovered_date": "2026-05-03",
-    "scope": "Oscar ceremony 93 (2021) Best Adapted Screenplay won row",
+    "scope": "Oscar ceremonies 88 (2016) Best Adapted Screenplay (The Big Short — 'the book') and 93 (2021) Best Adapted Screenplay (The Father — 'the play')",
     "issue_type": "recipient_extraction_artifact",
-    "description": "The Wikipedia source line for The Father's Best Adapted Screenplay win reads roughly 'Christopher Hampton and Florian Zeller; based on the play by Florian Zeller'. The scraper's _extract_all_names captures three wikilinked-or-italic candidates and produces a third recipient literal 'the play' alongside the canonical Hampton + Zeller credits. The won film, the win itself, and both real recipient names are correct; only the spurious third recipient is a parser artifact. Surfaced during Phase 4 truth curation Batch A.",
-    "deferred_resolution": "Add a stop-list to recipient extraction so common 'based on' clause fragments ('the play', 'the novel', 'the book', 'the story', 'the article', 'the screenplay') are not promoted into recipients[]. Should be a small targeted fix in _extract_all_names or _parse_entry_line, not a structural rewrite. Re-scrape ceremony 93 after the fix lands and re-run wrapper. Truth file landmark for this row already records canonical winner_recipients = [Hampton, Zeller]; winner_recipient (singular) = 'Christopher Hampton' fuzzy-matches against the CSV via Phase E.",
+    "description": "The Wikipedia source lines for these Best Adapted Screenplay wins read along the lines of 'Christopher Hampton and Florian Zeller; based on the play by Florian Zeller' or 'Charles Randolph and Adam McKay; based on the book by Michael Lewis'. The scraper's _extract_all_names captures the trailing 'the play' / 'the book' as recipient candidates alongside the canonical writer credits. The won film, the win itself, and the real recipient names are correct; only the spurious 'the X' recipient is a parser artifact. Scope expanded from cer 93 only (Batch A) to cer 88 + 93 (Batch B) — likely affects additional pre-2021 Adapted Screenplay rows that haven't been individually inspected yet.",
+    "deferred_resolution": "Add a stop-list to recipient extraction so common 'based on' clause fragments ('the play', 'the novel', 'the book', 'the story', 'the article', 'the screenplay', 'the memoir') are not promoted into recipients[]. Should be a small targeted fix in _extract_all_names or _parse_entry_line, not a structural rewrite. Re-scrape affected ceremonies (88, 93, plus any others surfaced in subsequent Phase 4 batches) after the fix lands. Truth file landmarks for affected rows already record canonical winner_recipients with the spurious entries excluded; winner_recipient (singular) fuzzy-matches against the CSV via Phase E.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "oscar-production-design-role-label-artifact-2026-05-03",
+    "discovered_date": "2026-05-03",
+    "scope": "Oscar ceremonies 88 (2016) Best Production Design (Mad Max: Fury Road) and 89 (2017) Best Production Design (La La Land); likely additional pre-2018 Production Design rows",
+    "issue_type": "recipient_extraction_artifact",
+    "description": "The Wikipedia source lines for these Best Production Design wins format credits as 'Production Design: Colin Gibson; Set Decoration: Lisa Thompson' (or similar with wikilinked role labels). The scraper's _extract_all_names captures the role labels themselves ('Production Design', 'Set Decoration') as recipient names alongside the actual designer credits. The won film and the win itself are correct; only the role-label entries are parser artifacts. Distinct from the 'the play' / 'the book' artifact class — this is wikilinked role labels being treated as person names, not 'based on' clause fragments. Surfaced during Phase 4 truth curation Batch B.",
+    "deferred_resolution": "Two complementary paths: (1) add a stop-list of common Oscar craft role labels ('Production Design', 'Set Decoration', 'Art Direction', 'Costume Design', etc.) to filter from recipient extraction; or (2) detect the colon-separated 'Role: Name' pattern in the source line and parse it structurally. Path (1) is faster; path (2) is more robust. Re-scrape affected ceremonies after the fix lands. Truth file landmarks for cer 88 + 89 record winner_recipient = lead designer (Colin Gibson, David Wasco) which fuzzy-matches the CSV via Phase E despite the spurious role labels also being present.",
     "blocks_phase": null,
     "status": "deferred"
   },
@@ -511,6 +521,17 @@
     "resolution": "Batch A landmark coverage complete. 5 of 26 Oscar ceremonies now have curated truth coverage. Wrapper Batch A re-run after truth file write expected to produce all 5 PASS with Phase E landmark verification active. Two new scraper-artifact known-issues opened (deferred — do not block consumption of truth coverage).",
     "resolved_date": "2026-05-03",
     "follow_up": "Continue Oscar Phase 4 with Batch B (cer 88-92, 2016-2020) in a separate session. Final batches will cover cer 82-87 and cer 72-81.",
+    "status": "resolved"
+  },
+  {
+    "issue_id": "oscar-truth-curation-batch-b-2026-05-03",
+    "discovered_date": "2026-05-03",
+    "scope": "data/reference/oscar-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "Oscar truth file curation Batch B: added landmark entries for cer 88 (2016), 89 (2017), 90 (2018), 91 (2019), 92 (2020). Truth coverage grows from 5 of 26 ceremonies (93-97) to 10 of 26 (88-97). Each ceremony has 15-17 landmarks across the Big 8, key craft (incl. Cinematography/Editing/Score/Original Song with subject_title), and specialty categories (Animated Feature, International Feature, plus Production Design / Costume Design / Makeup-Hairstyling / VFX where landmark-significant). All landmarks verified against scraped CSVs at data/scraped/oscar/oscar-ceremony-{88..92}.csv before writing. Notable historical moments captured: cer 92 Parasite first non-English Best Picture + simultaneous Picture/International double; cer 91 Cuarón Director+International+Cinematography triple for Roma; cer 91 Mahershala Ali first Black actor with two acting Oscars; cer 91 Ruth E. Carter + Hannah Beachler first Black designers in their categories; cer 90 Roger Deakins ends 14-nomination drought; cer 90 Jordan Peele first Black Best Original Screenplay winner; cer 89 Moonlight Best Picture (La La Land announced in error); cer 89 Damien Chazelle youngest Best Director; cer 89 Mahershala Ali first Muslim acting Oscar; cer 88 Iñárritu back-to-back Director (first since Mankiewicz 1949-50); cer 88 DiCaprio first Oscar after 6 nominations; cer 88 Morricone first competitive Oscar at 87; cer 88 ceremony took place during second consecutive #OscarsSoWhite. Surfaced two scraper artifact classes during verification — see oscar-adapted-screenplay-the-play-artifact (scope expanded to cer 88) and the new oscar-production-design-role-label-artifact (cer 88 + 89).",
+    "resolution": "Batch B landmark coverage complete. 10 of 26 Oscar ceremonies now have curated truth coverage. Wrapper Batch B re-run after truth file write produced 5/5 PASS with Phase E landmark verification active; combined sweep cer 88-97 produced 10/10 PASS. One known-issue scope-expanded (the-play-artifact); one new known-issue opened (production-design role-label artifact); both deferred and do not block consumption of truth coverage.",
+    "resolved_date": "2026-05-03",
+    "follow_up": "Continue Oscar Phase 4 with Batch C (cer 82-87, 2010-2015) in a separate session. Final batch will cover cer 72-81 (2000-2009).",
     "status": "resolved"
   }
 ]
