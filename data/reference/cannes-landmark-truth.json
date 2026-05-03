@@ -2,6 +2,322 @@
   "schema_version": "v1",
   "festival": "cannes",
   "ceremonies": {
+    "2016": {
+      "ceremony_year": 2016,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "I, Daniel Blake",
+          "winner_recipient": "Ken Loach",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ken Loach's second Palme d'Or (after The Wind That Shakes the Barley, 2006) — joins the small group of two-time Palme winners (Bille August, Emir Kusturica, Shohei Imamura, Michael Haneke, Dardennes, Loach; Östlund and Audiard later joined the group). Loach was 80 at the time of the win, one of the oldest Palme d'Or winners.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "It's Only the End of the World",
+          "winner_recipient": "Xavier Dolan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Xavier Dolan's second Grand Prix-equivalent prize — he had won the Jury Prize in 2014 for Mommy. Dolan was 27 at this win, one of the youngest filmmakers to receive the Grand Prix in modern Cannes history.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "American Honey",
+          "winner_recipient": "Andrea Arnold",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrea Arnold's third Jury Prize at Cannes (after Red Road, 2006; Fish Tank, 2009) — making her the most-credited Jury Prize recipient in Cannes history.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Graduation",
+          "winner_recipient": "Cristian Mungiu",
+          "winner_films": ["Graduation", "Personal Shopper"],
+          "winner_recipients": ["Cristian Mungiu", "Olivier Assayas"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Cristian Mungiu (Romania) shares Best Director with Olivier Assayas (France). Mungiu had previously won the Palme d'Or in 2007 for 4 Months, 3 Weeks and 2 Days. Both rows correctly flagged co_winner=true (sub-bullet tie format).",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Salesman",
+          "winner_recipient": "Shahab Hosseini",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Shahab Hosseini becomes the first Iranian actor to win Best Actor at Cannes. The Salesman went on to win Best International Feature at the 89th Academy Awards (cer 89) — Asghar Farhadi's second Oscar in the category.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Ma' Rosa",
+          "winner_recipient": "Jaclyn Jose",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jaclyn Jose becomes the first Filipino actress to win Best Actress at Cannes.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Salesman",
+          "winner_recipient": "Asghar Farhadi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "The Salesman wins both Best Actor (Hosseini) and Best Screenplay (Farhadi) — a rare double-honour for a single film at Cannes.",
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Divines",
+          "winner_recipient": "Houda Benyamina",
+          "expected_winner_count": 1,
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Timecode",
+          "winner_recipient": "Juanjo Giménez",
+          "expected_winner_count": 1,
+          "source": "69th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2017": {
+      "ceremony_year": 2017,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "The Square",
+          "winner_recipient": "Ruben Östlund",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ruben Östlund's first Palme d'Or — he later won again in 2022 (Triangle of Sadness), making him a two-time Palme winner. The 70th Cannes Film Festival anniversary edition.",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "BPM (Beats per Minute)",
+          "winner_recipient": "Robin Campillo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Robin Campillo's first Grand Prix — BPM is a film about the AIDS activism movement ACT UP Paris in the early 1990s.",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Loveless",
+          "winner_recipient": "Andrey Zvyagintsev",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrey Zvyagintsev's second Jury Prize (after Leviathan's Best Screenplay in 2014). Loveless went on to receive an Oscar nomination for Best International Feature (cer 90).",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "The Beguiled",
+          "winner_recipient": "Sofia Coppola",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sofia Coppola becomes the second woman ever to win Best Director at Cannes (the first was Soviet filmmaker Yuliya Solntseva in 1961 — a 56-year gap).",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "You Were Never Really Here",
+          "winner_recipient": "Joaquin Phoenix",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Joaquin Phoenix's first Cannes Best Actor — he later won Best Actor at the 92nd Academy Awards (cer 92) for Joker.",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "In the Fade",
+          "winner_recipient": "Diane Kruger",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Diane Kruger's first Cannes Best Actress.",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Killing of a Sacred Deer",
+          "winner_recipient": "Yorgos Lanthimos",
+          "winner_films": ["The Killing of a Sacred Deer", "You Were Never Really Here"],
+          "winner_recipients": ["Yorgos Lanthimos", "Efthimis Filippou", "Lynne Ramsay"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Yorgos Lanthimos and Efthimis Filippou (The Killing of a Sacred Deer) share Best Screenplay with Lynne Ramsay (You Were Never Really Here). Both rows flagged co_winner=true. You Were Never Really Here also won Best Actor (Phoenix) at this ceremony — a rare same-film cross-category tied honour.",
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Montparnasse Bienvenue",
+          "winner_recipient": "Léonor Serraille",
+          "expected_winner_count": 1,
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "A Gentle Night",
+          "winner_recipient": "Qiu Yang",
+          "expected_winner_count": 1,
+          "source": "70th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2018": {
+      "ceremony_year": 2018,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Shoplifters",
+          "winner_recipient": "Hirokazu Kore-eda",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hirokazu Kore-eda's first Palme d'Or — Japan's first Palme d'Or since Shohei Imamura's The Eel in 1997 (a 21-year gap). Shoplifters went on to receive a Best International Feature nomination at the 91st Academy Awards (cer 91).",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "BlacKkKlansman",
+          "winner_recipient": "Spike Lee",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Spike Lee's first major Cannes prize. BlacKkKlansman went on to win Best Adapted Screenplay at the 91st Academy Awards (cer 91) — Lee's first competitive Oscar after his 2016 Honorary Award.",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Capernaum",
+          "winner_recipient": "Nadine Labaki",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nadine Labaki's first Cannes prize — Lebanon's first major Cannes win. Capernaum went on to receive a Best International Feature nomination at the 91st Academy Awards (cer 91).",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Cold War",
+          "winner_recipient": "Paweł Pawlikowski",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paweł Pawlikowski's first Cannes Best Director. Cold War went on to receive three Academy Award nominations (cer 91: Director, Cinematography, International Feature).",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Dogman",
+          "winner_recipient": "Marcello Fonte",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Marcello Fonte's first major acting prize.",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Ayka",
+          "winner_recipient": "Samal Yeslyamova",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Samal Yeslyamova becomes the first Kazakh actress to win Best Actress at Cannes.",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Happy as Lazzaro",
+          "winner_recipient": "Alice Rohrwacher",
+          "winner_films": ["Happy as Lazzaro", "3 Faces"],
+          "winner_recipients": ["Alice Rohrwacher", "Jafar Panahi", "Nader Saeivar"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Alice Rohrwacher (Happy as Lazzaro) shares Best Screenplay with Jafar Panahi and Nader Saeivar (3 Faces). Panahi was barred from leaving Iran at the time; the prize was accepted on his behalf. Panahi later won the Palme d'Or in 2025 (his first festival appearance after the lifting of his travel ban). Both rows flagged co_winner=true.",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Girl",
+          "winner_recipient": "Lukas Dhont",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lukas Dhont's debut feature wins Caméra d'Or — Dhont later took the Grand Prix in 2022 for Close.",
+          "source": "71st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "All These Creatures",
+          "winner_recipient": "Charles Williams",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Manually inserted row — absent from the Wikipedia ceremony article. See known-issue cannes-2018-short-film-palme-dor-wikipedia-gap-2026-05-04. Source: festival-cannes.com / Variety. The truth-file landmark mirrors the canonical winner; Phase E winner_film and winner_recipient checks pass against the manually-inserted row.",
+          "source": "71st Cannes Film Festival Wikipedia article gap (manual insertion) / festival-cannes.com"
+        }
+      }
+    },
+    "2019": {
+      "ceremony_year": 2019,
+      "category_count": 8,
+      "winner_count": 12,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Parasite",
+          "winner_recipient": "Bong Joon-ho",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bong Joon-ho's first Palme d'Or — and South Korea's first Palme d'Or in the festival's history. Parasite went on to win Best Picture, Director, Original Screenplay, and International Feature at the 92nd Academy Awards (cer 92), becoming the first non-English-language film ever to win Best Picture in the 92-year history of the Oscars. The Cannes-to-Oscar trajectory is one of the most-celebrated awards seasons in modern cinema.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Atlantics",
+          "winner_recipient": "Mati Diop",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mati Diop becomes the first Black woman to have a film selected in Competition at Cannes AND to win a major prize. Atlantics is a Senegalese-French co-production.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Bacurau",
+          "winner_recipient": "Kleber Mendonça Filho",
+          "winner_films": ["Bacurau", "Les Misérables", "Fire Will Come"],
+          "winner_recipients": ["Kleber Mendonça Filho", "Juliano Dornelles", "Ladj Ly", "Oliver Laxe"],
+          "expected_winner_count": 3,
+          "notable": true,
+          "note": "Three-way tie — the first 3-way Jury Prize tie in modern Cannes history (the second was the 2025 ceremony). Bacurau (Mendonça Filho/Dornelles), Les Misérables (Ladj Ly), and Fire Will Come (Oliver Laxe) share. CSV co_winner flag inconsistency: the third row (Fire Will Come) has co_winner=false because of the multi-bullet-tie pattern; the first two are correctly flagged. See known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Young Ahmed",
+          "winner_recipient": "Jean-Pierre and Luc Dardenne",
+          "winner_films": ["Young Ahmed", "Beanpole"],
+          "winner_recipients": ["Jean-Pierre and Luc Dardenne", "Kantemir Balagov"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. The Dardenne brothers (two-time Palme winners for Rosetta 1999 and L'Enfant 2005) share Best Director with Kantemir Balagov (Beanpole). CSV co_winner=false on both rows because of the multi-bullet-tie pattern; same root cause as 2025 Best Director tie. See known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Pain and Glory",
+          "winner_recipient": "Antonio Banderas",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Antonio Banderas's first Cannes Best Actor — for Pedro Almodóvar's Pain and Glory. Banderas had been a long-running Almodóvar collaborator. He went on to receive a Best Actor Oscar nomination for the same role at the 92nd Academy Awards (cer 92).",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Little Joe",
+          "winner_recipient": "Emily Beecham",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Emily Beecham's first Cannes Best Actress.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Portrait of a Lady on Fire",
+          "winner_recipient": "Céline Sciamma",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Céline Sciamma's first major Cannes prize.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Our Mothers",
+          "winner_recipient": "César Díaz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Guatemala's first Caméra d'Or.",
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "The Distance Between Us and the Sky",
+          "winner_recipient": "Vasilis Kekatos",
+          "expected_winner_count": 1,
+          "source": "72nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
     "2021": {
       "ceremony_year": 2021,
       "category_count": 8,
