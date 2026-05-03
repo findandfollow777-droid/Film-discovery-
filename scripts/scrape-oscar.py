@@ -66,7 +66,7 @@ RAW_DIR = os.path.join(SCRAPED_DIR, "raw")
 
 WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
 USER_AGENT = "ORBIT-Awards-Scraper/1.0 (https://github.com/orbit-project/Film-discovery-)"
-SCRAPE_VERSION = "scrape-oscar-v1.1.0"
+SCRAPE_VERSION = "scrape-oscar-v1.2.0"
 
 # Ceremony 72 = year 2000. Ceremony N = year (N + 1928).
 CEREMONY_YEAR_OFFSET = 1928
@@ -389,6 +389,38 @@ def _parse_entry_line(content, cat):
     content = re.sub(r'\{\{nom\}\}', '', content, flags=re.IGNORECASE)
     # Remove {{won}} templates
     content = re.sub(r'\{\{won\}\}', '', content, flags=re.IGNORECASE)
+    # Strip trailing "based on ..." source-attribution clauses from the
+    # entire content before any further parsing. Resolves
+    # oscar-adapted-screenplay-the-play-artifact-2026-05-03 — the
+    # adapted-screenplay format "Writer; based on the X by Author – ''Film''"
+    # was leaking source-work titles, generic source fragments, and
+    # source-author names into recipients[].
+    #
+    # Protects content inside [[wikilinks]] from the strip. This handles
+    # the cer 82 Precious case where "Based on" appears INSIDE the film
+    # wikilink ("Precious: Based on the Novel 'Push' by Sapphire"); the
+    # wikilink protection makes that internal text invisible to the
+    # strip, so the film title survives intact.
+    #
+    # We deliberately DO NOT protect ''italic'' spans here because
+    # parse_nominees_from_section's .strip("'") destroys the leading
+    # italic markers on winner rows, leaving an orphan trailing '' or '''.
+    # An italic-protection regex would then match greedily across that
+    # asymmetric pair and capture the entire middle of the line —
+    # including the "based on" clause we're trying to strip — defeating
+    # the fix. Wikilink protection alone is sufficient for the cases that
+    # matter (the "based on" clause never appears inside an italic span
+    # without also being inside a wikilink in Oscar Wikipedia data).
+    _PH = "\x01PROT_{}\x01"
+    _protected_segments = []
+    def _grab(m):
+        _protected_segments.append(m.group(0))
+        return _PH.format(len(_protected_segments) - 1)
+    _work = re.sub(r"\[\[[^\]]+\]\]", _grab, content)
+    _work = re.sub(r'\s*[;,(]?\s*\bbased on\b.*$', '', _work, flags=re.IGNORECASE).strip()
+    for _i in range(len(_protected_segments) - 1, -1, -1):
+        _work = _work.replace(_PH.format(_i), _protected_segments[_i])
+    content = _work
 
     recipient_type = cat.get("recipient_type", "")
     has_subject = cat.get("has_subject_title", False)
@@ -405,6 +437,12 @@ def _parse_entry_line(content, cat):
         )
         if song_match:
             subject = (song_match.group(1) or song_match.group(2) or song_match.group(3) or "").strip().strip('"')
+            # Strip residual wikitext markup ('''...''', [[...|...]], [[...]]) from the
+            # captured subject. Resolves oscar-original-song-subject-title-markup-leak-2026-05-03:
+            # cer 84 'Man or Muppet' was stored as "'''[[Man or Muppet]]" because
+            # the regex capture preserved bold-marker and bracket fragments around
+            # the song name. _clean_wikilinks is idempotent on already-clean strings.
+            subject = _clean_wikilinks(subject).strip().strip('"')
             remainder = content[song_match.end():]
             # remainder is: ''[[Film]]'' – credits
             # Split on dash to get film part and credits part
@@ -521,10 +559,18 @@ def _extract_title(text):
 
 
 def _extract_person_name(text):
-    """Extract person name from wikitext like [[Person Name|Display]]."""
-    m = re.search(r"\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\]", text)
-    if m:
-        return (m.group(2) or m.group(1)).strip()
+    """Extract person name from wikitext like [[Person Name|Display]].
+
+    Skips wikilinks whose display text matches NON_PERSON_NAMES (role
+    labels, editorial annotations, generic source-work fragments). Required
+    so the FIRST wikilink in a 'Role: Name' style credit string isn't
+    captured as the recipient — extends the role-label-artifact fix to
+    cover the primary-name extraction path, not just the extras path.
+    """
+    for m in re.finditer(r"\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\]", text):
+        name = (m.group(2) or m.group(1)).strip()
+        if name.lower() not in NON_PERSON_NAMES:
+            return name
     return _clean_wikilinks(text).strip()
 
 
@@ -540,6 +586,36 @@ def _extract_names_text(text):
     return parts[0].strip()
 
 
+# Wikilinked strings that look like recipient names but are actually role
+# labels, editorial annotations, or generic source-work fragments. Filtered
+# out of recipient extraction in _extract_all_names.
+#
+# Resolves:
+#   - oscar-production-design-role-label-artifact-2026-05-03 (role labels
+#     "Production Design", "Set Decoration", "Art Direction" appearing as
+#     wikilinks in the credits string for Production Design / Art Direction
+#     winners across cer 72-89).
+#   - oscar-documentary-feature-posthumous-award-artifact-2026-05-03
+#     ("posthumous award" annotation captured as a recipient at cer 86
+#     20 Feet from Stardom).
+#   - Belt-and-braces backup for oscar-adapted-screenplay-the-play-artifact:
+#     even though the "based on" clause is now stripped before this
+#     function runs, the generic source-fragment phrases are kept here in
+#     case Wikipedia formatting puts them outside a "based on" context.
+NON_PERSON_NAMES = {
+    # Production Design / Art Direction role labels
+    "production design", "set decoration", "art direction",
+    "set decorator", "art director",
+    # Documentary editorial annotations
+    "posthumous award", "posthumous", "honorary award", "honorary",
+    # Generic source-work fragments (defensive — the based-on strip in
+    # _parse_entry_line should already remove these)
+    "the play", "the novel", "the book", "his novel", "her novel",
+    "the short story", "the memoir", "the biography",
+    "the screenplay", "the article", "the story",
+}
+
+
 def _extract_all_names(text):
     """Extract all person names from a text with multiple names."""
     names = re.findall(r"\[\[([^|\]]+?)(?:\|([^\]]+?))?\]\]", text)
@@ -548,6 +624,9 @@ def _extract_all_names(text):
         name = (display or link).strip()
         # Filter out non-person links (years, films, etc.)
         if name and not name.isdigit() and len(name) > 2:
+            # Skip role labels / annotations / source-fragment phrases
+            if name.lower() in NON_PERSON_NAMES:
+                continue
             result.append(name)
     return result
 
