@@ -1,0 +1,604 @@
+{
+  "schema_version": "v1",
+  "festival": "oscar",
+  "ceremonies": {
+    "93": {
+      "ceremony_year": 2021,
+      "honours_year": 2020,
+      "category_count": 23,
+      "nomination_count": 118,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Nomadland",
+          "winner_recipients": ["Mollye Asher", "Frances McDormand", "Peter Spears", "Chloé Zhao"],
+          "expected_nomination_count": 8,
+          "notable": true,
+          "note": "Frances McDormand becomes only the second person (after Warren Beatty) to be credited as both producer and Best Actress winner for the same film at the same ceremony.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Nomadland",
+          "winner_recipient": "Chloé Zhao",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Chloé Zhao becomes the first woman of colour and the second woman ever (after Kathryn Bigelow) to win Best Director.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Father",
+          "winner_recipient": "Anthony Hopkins",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Anthony Hopkins, 83, becomes the oldest performer to win an acting Oscar; accepted in absentia in an upset over the late Chadwick Boseman.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Nomadland",
+          "winner_recipient": "Frances McDormand",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "McDormand's third Best Actress win (after Fargo, 1997; Three Billboards Outside Ebbing, Missouri, 2018), joining Meryl Streep, Ingrid Bergman, and Katharine Hepburn (4) as the only actresses with three or more lead-acting Oscars.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Judas and the Black Messiah",
+          "winner_recipient": "Daniel Kaluuya",
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Minari",
+          "winner_recipient": "Yuh-jung Youn",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Yuh-jung Youn becomes the first Korean performer to win an acting Oscar and the second Asian woman (after Miyoshi Umeki, 1958) to win Best Supporting Actress.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Promising Young Woman",
+          "winner_recipient": "Emerald Fennell",
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Father",
+          "winner_recipient": "Christopher Hampton",
+          "winner_recipients": ["Christopher Hampton", "Florian Zeller"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains a parser artifact 'the play' as a third recipient (extracted from the 'based on the play by Florian Zeller' clause in the Wikipedia source). Canonical credit is Hampton + Zeller. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Mank",
+          "winner_recipient": "Erik Messerschmidt",
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Sound of Metal",
+          "winner_recipient": "Mikkel E. G. Nielsen",
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Soul",
+          "winner_recipients": ["Jon Batiste", "Trent Reznor", "Atticus Ross"],
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS",
+          "notes": "Three-credit team kept as one row (split_co_recipients=false on Best Original Score). winner_recipient singular omitted; winner_recipients array carries canonical credit."
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Judas and the Black Messiah",
+          "winner_subject": "Fight for You",
+          "winner_recipients": ["Dernst Emile II", "H.E.R.", "Tiara Thomas"],
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Soul",
+          "winner_recipients": ["Pete Docter", "Dana Murray"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pixar's eleventh Best Animated Feature win and Pete Docter's third (after Up, 2010; Inside Out, 2016).",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Another Round",
+          "winner_recipient": "Thomas Vinterberg",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Denmark's fourth International Feature win and Thomas Vinterberg's first Oscar (also nominated for Best Director — rare double nomination for an international film director).",
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_documentary_feature": {
+          "winner_film": "My Octopus Teacher",
+          "expected_nomination_count": 5,
+          "source": "93rd Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "94": {
+      "ceremony_year": 2022,
+      "honours_year": 2021,
+      "category_count": 23,
+      "nomination_count": 120,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "CODA",
+          "winner_recipients": ["Philippe Rousselet", "Fabrice Gianfermi", "Patrick Wachsberger"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "CODA becomes the first film distributed by a streaming service (Apple TV+) to win Best Picture, and the first Best Picture winner with a predominantly deaf principal cast.",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Power of the Dog",
+          "winner_recipient": "Jane Campion",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Picture/Director split — CODA took Best Picture while Campion took Best Director. Campion is only the third woman ever to win Best Director, and consecutive ceremonies producing female Best Director winners (Zhao 2021, Campion 2022) is a first.",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "King Richard",
+          "winner_recipient": "Will Smith",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Will Smith's first Best Actor win after three nominations. The ceremony was overshadowed by an off-screen incident earlier in the broadcast; Smith subsequently resigned from the Academy and received a 10-year ban from attending Academy events.",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Eyes of Tammy Faye",
+          "winner_recipient": "Jessica Chastain",
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "CODA",
+          "winner_recipient": "Troy Kotsur",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Troy Kotsur becomes the first deaf man to win an acting Oscar (Marlee Matlin, also in CODA, was the first deaf actress, in 1986).",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "West Side Story",
+          "winner_recipient": "Ariana DeBose",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ariana DeBose, an Afro-Latina openly queer woman, wins for the same role (Anita) for which Rita Moreno won the same Oscar in 1962 — the first time two performers have won an acting Oscar for the same role.",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Belfast",
+          "winner_recipient": "Kenneth Branagh",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Kenneth Branagh wins his first Oscar after eight nominations across seven categories (acting, directing, picture, screenplay, short film) — the most categories any individual has ever been nominated in.",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "CODA",
+          "winner_recipient": "Sian Heder",
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Dune",
+          "winner_recipient": "Greig Fraser",
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Dune",
+          "winner_recipient": "Joe Walker",
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Dune",
+          "winner_recipient": "Hans Zimmer",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Hans Zimmer's second Best Original Score Oscar, 27 years after his first (The Lion King, 1995).",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "No Time to Die",
+          "winner_subject": "No Time to Die",
+          "winner_recipients": ["Billie Eilish", "Finneas O'Connell"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Billie Eilish and Finneas O'Connell become the youngest sibling pair to win an Oscar; third consecutive James Bond theme to win Best Original Song (after 'Skyfall', 2013; 'Writing's on the Wall', 2016).",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Encanto",
+          "winner_recipients": ["Jared Bush", "Byron Howard", "Yvett Merino", "Clark Spencer"],
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Drive My Car",
+          "winner_recipient": "Ryusuke Hamaguchi",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Japan's fifth International Feature win (first since Departures, 2009).",
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Dune",
+          "expected_nomination_count": 5,
+          "source": "94th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "95": {
+      "ceremony_year": 2023,
+      "honours_year": 2022,
+      "category_count": 23,
+      "nomination_count": 120,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipients": ["Daniel Kwan", "Daniel Scheinert", "Jonathan Wang"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "Everything Everywhere All at Once wins seven Oscars from 11 nominations — the most for any film at this ceremony — including a sweep of four acting/directing categories. A24's first Best Picture win.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Daniel Kwan",
+          "winner_recipients": ["Daniel Kwan", "Daniel Scheinert"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Daniels (Kwan & Scheinert) become the third directing duo to win Best Director (after Robert Wise & Jerome Robbins for West Side Story, 1962; Joel & Ethan Coen for No Country for Old Men, 2008). Kept as one row per category split_co_recipients=false.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Whale",
+          "winner_recipient": "Brendan Fraser",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Brendan Fraser's first Oscar nomination and win — a high-profile career comeback after roughly a decade out of leading roles.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Michelle Yeoh",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Michelle Yeoh becomes the first Asian woman and the first Malaysian-born performer to win Best Actress, and only the second woman of colour ever to win the category (after Halle Berry, 2002).",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Ke Huy Quan",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ke Huy Quan's first Oscar — a comeback win 38 years after his child-actor breakout in Indiana Jones and the Temple of Doom (1984) and The Goonies (1985).",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Jamie Lee Curtis",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jamie Lee Curtis's first Oscar nomination and win.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Daniel Kwan",
+          "winner_recipients": ["Daniel Kwan", "Daniel Scheinert"],
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Women Talking",
+          "winner_recipient": "Sarah Polley",
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "All Quiet on the Western Front",
+          "winner_recipient": "James Friend",
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Everything Everywhere All at Once",
+          "winner_recipient": "Paul Rogers",
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "All Quiet on the Western Front",
+          "winner_recipient": "Volker Bertelmann",
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "RRR",
+          "winner_subject": "Naatu Naatu",
+          "winner_recipients": ["M. M. Keeravani", "Chandrabose"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "'Naatu Naatu' from RRR is the first song from an Indian production to win Best Original Song, and the first Telugu-language song to win.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Guillermo del Toro's Pinocchio",
+          "winner_recipients": ["Guillermo del Toro", "Mark Gustafson", "Alex Bulkley", "Corey Campodonico"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Guillermo del Toro's Pinocchio wins Best Animated Feature; del Toro becomes one of a small handful of directors to win Oscars in both live-action (Best Director, The Shape of Water, 2018) and animation categories.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_short": {
+          "winner_film": "The Boy, the Mole, the Fox and the Horse",
+          "winner_recipient": "Charlie Mackesy",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains only Charlie Mackesy; canonical credit also includes Matthew Freud (and the production team). The under-extraction is a Wikipedia parser limitation, not a missing winner. See known-issue oscar-animated-short-recipient-undercount-2026-05-03.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "All Quiet on the Western Front",
+          "winner_recipient": "Edward Berger",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Germany's fourth International Feature win.",
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Avatar: The Way of Water",
+          "expected_nomination_count": 5,
+          "source": "95th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "96": {
+      "ceremony_year": 2024,
+      "honours_year": 2023,
+      "category_count": 23,
+      "nomination_count": 120,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Oppenheimer",
+          "winner_recipients": ["Emma Thomas", "Charles Roven", "Christopher Nolan"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "Oppenheimer wins seven Oscars from 13 nominations — the most for any film at this ceremony.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Christopher Nolan",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Christopher Nolan's first competitive Oscar after eight prior nominations across directing, screenplay, and picture categories.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Cillian Murphy",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Cillian Murphy's first Oscar nomination and win — the first Irish-born actor to win Best Actor.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Poor Things",
+          "winner_recipient": "Emma Stone",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Emma Stone's second Best Actress Oscar (after La La Land, 2017), at age 35.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Robert Downey Jr.",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Robert Downey Jr.'s first Oscar after three nominations spanning four decades — a high-profile late-career win following a public reinvention.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "The Holdovers",
+          "winner_recipient": "Da'Vine Joy Randolph",
+          "expected_nomination_count": 5,
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Anatomy of a Fall",
+          "winner_recipient": "Justine Triet",
+          "winner_recipients": ["Justine Triet", "Arthur Harari"],
+          "expected_nomination_count": 5,
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "American Fiction",
+          "winner_recipient": "Cord Jefferson",
+          "expected_nomination_count": 5,
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Hoyte van Hoytema",
+          "expected_nomination_count": 5,
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Jennifer Lame",
+          "expected_nomination_count": 5,
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Oppenheimer",
+          "winner_recipient": "Ludwig Göransson",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ludwig Göransson's second Oscar (after Black Panther, 2019).",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Barbie",
+          "winner_subject": "What Was I Made For?",
+          "winner_recipients": ["Billie Eilish", "Finneas O'Connell"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Billie Eilish and Finneas O'Connell's second Best Original Song Oscar (after 'No Time to Die', 2022) — the youngest two-time Oscar winners in any category.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "The Boy and the Heron",
+          "winner_recipients": ["Hayao Miyazaki", "Toshio Suzuki"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Hayao Miyazaki's second Best Animated Feature Oscar (after Spirited Away, 2003) — at age 83, the oldest winner in the category. Studio Ghibli's first win in 21 years.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Zone of Interest",
+          "winner_recipient": "Jonathan Glazer",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "United Kingdom's first International Feature win in the modern era of the category.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Godzilla Minus One",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "First Japanese-produced film to win Best Visual Effects, and Toho Studios' first VFX Oscar — a notable upset over Hollywood blockbuster competition on a far smaller budget.",
+          "source": "96th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "97": {
+      "ceremony_year": 2025,
+      "honours_year": 2024,
+      "category_count": 23,
+      "nomination_count": 120,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Anora",
+          "winner_recipients": ["Alex Coco", "Samantha Quan", "Sean Baker"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "Anora wins five Oscars from six nominations — a clean sweep of Picture, Director, Original Screenplay, Editing, and Actress for an indie film. Neon's first Best Picture win.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Anora",
+          "winner_recipient": "Sean Baker",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sean Baker becomes the first individual to win four Oscars in a single ceremony for the same film (Picture, Director, Original Screenplay, Film Editing) — a feat last approached by Walt Disney's multi-category wins for short films.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Adrien Brody",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Adrien Brody's second Best Actor Oscar (after The Pianist, 2003) — 22 years after his first, when at 29 he was the youngest Best Actor winner.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Anora",
+          "winner_recipient": "Mikey Madison",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Mikey Madison's first Oscar nomination and win — a high-profile upset over odds-on favourite Demi Moore (The Substance).",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "A Real Pain",
+          "winner_recipient": "Kieran Culkin",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Kieran Culkin's first Oscar nomination and win.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Zoe Saldaña",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Zoe Saldaña's first Oscar nomination and win — the first American of Dominican descent to win an acting Oscar.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Anora",
+          "winner_recipient": "Sean Baker",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Conclave",
+          "winner_recipient": "Peter Straughan",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Lol Crawley",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Anora",
+          "winner_recipient": "Sean Baker",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Daniel Blumberg",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Daniel Blumberg's first Oscar nomination and win — composing his first feature score.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Emilia Pérez",
+          "winner_subject": "El Mal",
+          "winner_recipients": ["Clément Ducol", "Camille", "Jacques Audiard"],
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Flow",
+          "winner_recipients": ["Gints Zilbalodis", "Matīss Kaža"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Flow becomes the first Latvian film to win an Oscar and the first independently produced animated feature (no major studio backing) to win Best Animated Feature; produced in the free open-source software Blender.",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "I'm Still Here",
+          "winner_recipient": "Walter Salles",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Brazil's first International Feature Oscar — a notable upset over Emilia Pérez (which entered the ceremony with 13 nominations, the most ever for a non-English-language film).",
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_makeup_and_hairstyling": {
+          "winner_film": "The Substance",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Dune: Part Two",
+          "expected_nomination_count": 5,
+          "source": "97th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    }
+  }
+}

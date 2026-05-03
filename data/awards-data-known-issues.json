@@ -481,5 +481,36 @@
     "resolution": "Phase 4 truth curation complete. 26 of 27 GG ceremonies now have curated landmark truth coverage. Wrapper full 27-ceremony sweep: 25 PASS, 2 REVIEW (cer 57/59 score slate sizes — expected and acceptable), 0 FAIL, 1936 total rows. The 2 REVIEW verdicts are real-data anomalies (older-era score slates larger than typical 6) not parser artifacts; era_override addition to expectations.json deferred. Cer 64 omitted entirely awaiting scraper fix (canonical landmarks pre-recorded in known-issues).",
     "resolved_date": "2026-04-30",
     "follow_up": "GG Phase 4 truth curation complete. Outstanding scraper enhancements (low priority, batched): (1) cer 64 zero-winners Mode B fix; (2) cer 66/65/57 winner-row swap Mode A fix; (3) cer 71/69 wikilink-with-parens recipient malformation fix; (4) cer 76/77/78/80 song-team partial-capture fix. After scraper fixes land, re-scrape affected ceremonies and expand cer 64/57/65/66 truth entries to full landmark coverage. Era_override addition to gg-expectations.json (cer 57/59 score slates) is a separate follow-up. None of these block downstream consumption of the 26/27 landmark truth coverage."
+  },
+  {
+    "issue_id": "oscar-adapted-screenplay-the-play-artifact-2026-05-03",
+    "discovered_date": "2026-05-03",
+    "scope": "Oscar ceremony 93 (2021) Best Adapted Screenplay won row",
+    "issue_type": "recipient_extraction_artifact",
+    "description": "The Wikipedia source line for The Father's Best Adapted Screenplay win reads roughly 'Christopher Hampton and Florian Zeller; based on the play by Florian Zeller'. The scraper's _extract_all_names captures three wikilinked-or-italic candidates and produces a third recipient literal 'the play' alongside the canonical Hampton + Zeller credits. The won film, the win itself, and both real recipient names are correct; only the spurious third recipient is a parser artifact. Surfaced during Phase 4 truth curation Batch A.",
+    "deferred_resolution": "Add a stop-list to recipient extraction so common 'based on' clause fragments ('the play', 'the novel', 'the book', 'the story', 'the article', 'the screenplay') are not promoted into recipients[]. Should be a small targeted fix in _extract_all_names or _parse_entry_line, not a structural rewrite. Re-scrape ceremony 93 after the fix lands and re-run wrapper. Truth file landmark for this row already records canonical winner_recipients = [Hampton, Zeller]; winner_recipient (singular) = 'Christopher Hampton' fuzzy-matches against the CSV via Phase E.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "oscar-animated-short-recipient-undercount-2026-05-03",
+    "discovered_date": "2026-05-03",
+    "scope": "Oscar ceremony 95 (2023) Best Animated Short won row (The Boy, the Mole, the Fox and the Horse)",
+    "issue_type": "recipient_undercount",
+    "description": "The won row's recipients_json contains only 'Charlie Mackesy'. Canonical credit also includes Matthew Freud (and per AMPAS the broader production team). The Wikipedia source line at the 95th Academy Awards article likely formats credits in a way that the scraper's parse step treats only the first wikilinked name as a recipient. The won film and the win itself are correct; only the additional credited person is missing. Surfaced during Phase 4 truth curation Batch A.",
+    "deferred_resolution": "Investigate the specific Wikipedia formatting at the 95th article for this row, then extend the entry parser (likely in _parse_entry_line or the producers-list path) to capture the full team. Verify the fix does not regress other shorts winners. Re-scrape ceremony 95 after the fix lands. Truth file landmark records winner_recipient = 'Charlie Mackesy' to match current CSV state, with note flagging the gap.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
+    "issue_id": "oscar-truth-curation-batch-a-2026-05-03",
+    "discovered_date": "2026-05-03",
+    "scope": "data/reference/oscar-landmark-truth.json",
+    "issue_type": "truth_coverage_expansion",
+    "description": "Oscar truth file curation Batch A: created data/reference/oscar-landmark-truth.json and added landmark entries for cer 93 (2021), 94 (2022), 95 (2023), 96 (2024), 97 (2025). Truth coverage grows from 0 of 26 ceremonies to 5 of 26 (93-97, the most recent five). Each ceremony has 15-16 landmarks across the Big 8 (Picture, Director, Acting x4, Original/Adapted Screenplay), key craft categories (Cinematography, Editing, Score, Original Song with subject_title), and specialty categories (Animated Feature, International Feature, plus VFX/Makeup/Documentary where landmark-significant). All landmarks verified against scraped CSVs at data/scraped/oscar/oscar-ceremony-{93..97}.csv before writing. Notable verifications recorded: cer 97 Best Actress Mikey Madison (Anora) — upset over Demi Moore; cer 97 Best International Feature I'm Still Here (not Emilia Pérez despite EP's record nomination count); cer 96 Christopher Nolan first Oscar; cer 95 EEAAO seven-Oscar sweep + Daniels duo Best Director; cer 94 CODA first streaming Best Picture + Troy Kotsur first deaf male acting Oscar; cer 93 Chloé Zhao first woman of colour Best Director + Anthony Hopkins oldest Best Actor at 83. Surfaced two scraper artifacts during verification — see oscar-adapted-screenplay-the-play-artifact and oscar-animated-short-recipient-undercount.",
+    "resolution": "Batch A landmark coverage complete. 5 of 26 Oscar ceremonies now have curated truth coverage. Wrapper Batch A re-run after truth file write expected to produce all 5 PASS with Phase E landmark verification active. Two new scraper-artifact known-issues opened (deferred — do not block consumption of truth coverage).",
+    "resolved_date": "2026-05-03",
+    "follow_up": "Continue Oscar Phase 4 with Batch B (cer 88-92, 2016-2020) in a separate session. Final batches will cover cer 82-87 and cer 72-81.",
+    "status": "resolved"
   }
 ]
