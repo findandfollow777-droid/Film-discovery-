@@ -1,0 +1,71 @@
+{
+  "schema_version": "v1",
+  "festival": "cannes",
+  "generated_at": "2026-05-03T00:00:00+00:00",
+  "generated_from": "scripts/scrape-cannes-categories.json — Phase 1 baseline; refine after initial-scrape data is in",
+  "expectations": {
+    "cannes.palme_dor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Palme d'Or — single winner per ceremony in modern era. Tolerance 1 allows for the rare hypothetical tie."
+    },
+    "cannes.grand_prix": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Grand Prix (runner-up to Palme d'Or). Single winner expected; tolerance 1 for ties."
+    },
+    "cannes.jury_prize": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Jury Prize. Frequently tied at Cannes (e.g. cer 2000 had a tie); tolerance 1 covers the typical 1-2 winner case."
+    },
+    "cannes.best_director": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Best Director. Person-typed; co-direction credits split into separate rows per split_co_recipients=true."
+    },
+    "cannes.best_actor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Best Actor. Tied at Cannes occasionally (e.g. cer 2010: Bardem + Germano); tolerance 1 covers ties."
+    },
+    "cannes.best_actress": {
+      "typical_winners": 1,
+      "tolerance": 3,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Best Actress. Occasionally tied or awarded as a team (e.g. cer 2024 — 4 actresses for one film, split into 4 rows). Tolerance 3 covers team-award years; refine after initial scrape if needed."
+    },
+    "cannes.best_screenplay": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Best Screenplay. Generally single winner; co-writers kept on one row per split_co_recipients=false."
+    },
+    "cannes.camera_dor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Caméra d'Or (best first feature). Cer 2000 was a tie; tolerance 1 covers."
+    },
+    "cannes.short_film_palme_dor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Short Film Palme d'Or. Single winner expected; tolerance 1 for occasional ties."
+    }
+  }
+}

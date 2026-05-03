@@ -1,0 +1,110 @@
+[
+  {
+    "id": "cannes.palme_dor",
+    "display_name": "Palme d'Or",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Palme d'Or"],
+    "display_aliases": ["Palme d'Or", "Palme dʼOr"]
+  },
+  {
+    "id": "cannes.grand_prix",
+    "display_name": "Grand Prix",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Grand Prix (Cannes Film Festival)", "Grand Prix"],
+    "display_aliases": ["Grand Prix", "Grand Prix Spécial du Jury", "Gran Prix"]
+  },
+  {
+    "id": "cannes.jury_prize",
+    "display_name": "Jury Prize",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Jury Prize (Cannes Film Festival)", "Jury Prize (Cannes Festival)", "Jury Prize"],
+    "display_aliases": ["Jury Prize", "Prix du Jury"]
+  },
+  {
+    "id": "cannes.best_director",
+    "display_name": "Best Director",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Cannes Film Festival Award for Best Director", "Best Director Award (Cannes Film Festival)"],
+    "display_aliases": ["Best Director", "Prix de la mise en scène"]
+  },
+  {
+    "id": "cannes.best_actor",
+    "display_name": "Best Actor",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Cannes Film Festival Award for Best Actor", "Best Actor Award (Cannes Film Festival)"],
+    "display_aliases": ["Best Actor", "Prix d'interprétation masculine"]
+  },
+  {
+    "id": "cannes.best_actress",
+    "display_name": "Best Actress",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Cannes Film Festival Award for Best Actress", "Best Actress Award (Cannes Film Festival)"],
+    "display_aliases": ["Best Actress", "Prix d'interprétation féminine"]
+  },
+  {
+    "id": "cannes.best_screenplay",
+    "display_name": "Best Screenplay",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Cannes Film Festival Award for Best Screenplay", "Best Screenplay Award (Cannes Film Festival)"],
+    "display_aliases": ["Best Screenplay", "Prix du scénario"]
+  },
+  {
+    "id": "cannes.camera_dor",
+    "display_name": "Caméra d'Or",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Caméra d'Or", "Camera d'Or"],
+    "display_aliases": ["Caméra d'Or", "Camera d'Or", "Golden Camera"]
+  },
+  {
+    "id": "cannes.short_film_palme_dor",
+    "display_name": "Short Film Palme d'Or",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Short Film Palme d'Or", "Palme d'Or for Best Short Film"],
+    "display_aliases": ["Short Film Palme d'Or", "Palme d'Or - Short Film", "Short Film Palme dʼOr"]
+  }
+]
