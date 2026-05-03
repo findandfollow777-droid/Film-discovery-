@@ -272,8 +272,15 @@ def find_category_bullets(awards_block, categories):
     # bullets don't carry inline category wikilinks (Caméra d'Or, Short
     # Film Palme d'Or). Find ===Heading=== whose wikilink target matches
     # one of our category targets, then claim its top-level bullets.
+    #
+    # Stop collecting at the first top-level bullet that carries its own
+    # inline category marker (bold prefix like "* '''Short Film Jury
+    # Prize''':" or a category-wikilink prefix). Those bullets are
+    # distinct sub-awards within the section, not winners of the
+    # section's main category. Required for cer 2001 Short Film Palme
+    # d'Or section which lists the actual Palme bullet first then a
+    # separate "Short Film Jury Prize" sub-award with its own tie.
     for sec_start, sec_end, sec_cat_id in _find_category_sections(lines, target_lookup):
-        # Skip if this category was already populated from Pass 1
         if found.get(sec_cat_id):
             continue
         k = sec_start
@@ -282,17 +289,21 @@ def find_category_bullets(awards_block, categories):
             if k in matched_line_indices:
                 k += 1
                 continue
-            if not (line.startswith("* ") or line.startswith("*[") or line.startswith("*'")):
-                k += 1
-                continue
-            if line.startswith("**"):
+            if not line.startswith("*") or line.startswith("**"):
                 k += 1
                 continue
             body = line[1:].lstrip()
-            # Skip "honorary" and sub-bullets dressed as parents
+            body = unwrap_lang_templates(body)
             if "honorary" in body.lower():
                 k += 1
                 continue
+
+            # Stop at any bullet that has its own category marker —
+            # bold prefix with colon ("* '''X''':") or a wikilink
+            # prefix with colon ("* [[X]]:"). Those are different
+            # awards, not winners of this section's category.
+            if _bullet_has_inline_category_marker(body):
+                break
 
             sub_bullets = []
             m = k + 1
@@ -307,11 +318,28 @@ def find_category_bullets(awards_block, categories):
                     continue
                 break
             found[sec_cat_id].append((body, sub_bullets))
-            # First top-level bullet only — if there are more they're
-            # likely a tie. Take ALL top-level bullets in the section so
-            # that ties (e.g. cer 2000 Caméra d'Or) are captured.
             k = m
     return found
+
+
+def _bullet_has_inline_category_marker(body):
+    """Return True if the bullet body looks like a distinct named
+    sub-award rather than a plain film+director winner.
+
+    Heuristic: bold-prefix-with-colon ("'''Name''':") or
+    wikilink-prefix-with-colon ("[[Page]]:" / "[[Page|Display]]:") at
+    the start indicates a different award being introduced.
+    """
+    if re.match(r"^\s*'''[^']+'''\s*:", body):
+        return True
+    # A wikilink prefix followed by colon is a category marker only if
+    # the wikilink is NOT the film title (films are wrapped in italics).
+    # If the bullet starts with ''[[...]]'' (italic film title), there's
+    # no category marker. If it starts with [[X]]: (no italics), that's
+    # a category marker.
+    if re.match(r"^\s*\[\[[^\]]+\]\]\s*:", body) and not body.lstrip().startswith("''"):
+        return True
+    return False
 
 
 def _find_category_sections(lines, target_lookup):

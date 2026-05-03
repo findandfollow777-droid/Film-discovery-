@@ -20,10 +20,10 @@
     },
     "cannes.jury_prize": {
       "typical_winners": 1,
-      "tolerance": 1,
+      "tolerance": 3,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Jury Prize. Frequently tied at Cannes (e.g. cer 2000 had a tie); tolerance 1 covers the typical 1-2 winner case."
+      "notes": "Jury Prize. Frequently tied at Cannes — observed 2-way ties (cer 2000) and 3-way ties (cer 2019, 2025). Tolerance 3 covers the historical 1-3 winner range."
     },
     "cannes.best_director": {
       "typical_winners": 1,
@@ -34,17 +34,17 @@
     },
     "cannes.best_actor": {
       "typical_winners": 1,
-      "tolerance": 1,
+      "tolerance": 5,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Best Actor. Tied at Cannes occasionally (e.g. cer 2010: Bardem + Germano); tolerance 1 covers ties."
+      "notes": "Best Actor. Tied at Cannes occasionally (e.g. cer 2010: Bardem + Germano); also team awards (cer 2006 Days of Glory — 5 actors split into 5 rows). Tolerance 5 covers historical 1-5 winner range observed in initial scrape."
     },
     "cannes.best_actress": {
       "typical_winners": 1,
-      "tolerance": 3,
+      "tolerance": 6,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Best Actress. Occasionally tied or awarded as a team (e.g. cer 2024 — 4 actresses for one film, split into 4 rows). Tolerance 3 covers team-award years; refine after initial scrape if needed."
+      "notes": "Best Actress. Occasionally tied or awarded as a team (cer 2024 — 4 actresses for one film, cer 2006 Volver — 6 actresses for one film, both split into separate rows). Tolerance 6 covers historical 1-6 winner range observed in initial scrape."
     },
     "cannes.best_screenplay": {
       "typical_winners": 1,
