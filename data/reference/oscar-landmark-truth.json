@@ -2,6 +2,641 @@
   "schema_version": "v1",
   "festival": "oscar",
   "ceremonies": {
+    "78": {
+      "ceremony_year": 2006,
+      "honours_year": 2005,
+      "category_count": 24,
+      "nomination_count": 111,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Crash",
+          "winner_recipients": ["Paul Haggis", "Cathy Schulman"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Crash wins Best Picture in a high-profile upset over Brokeback Mountain, which had won Best Director and most major precursor awards. The result remains one of the most-debated Best Picture choices of the 21st century — critics later cited it as illustrative of homophobic bias in the older Academy membership.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ang Lee becomes the first Asian filmmaker — and the first non-white director ever — to win Best Director. Picture/Director split: Brokeback Mountain took Director, Adapted Screenplay, and Score; Crash took Picture, Original Screenplay, and Editing.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Capote",
+          "winner_recipient": "Philip Seymour Hoffman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Philip Seymour Hoffman's first and only Oscar (he died in 2014). Won for portraying Truman Capote.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Walk the Line",
+          "winner_recipient": "Reese Witherspoon",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Reese Witherspoon's first Oscar, for portraying June Carter Cash (with live vocal performance).",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Syriana",
+          "winner_recipient": "George Clooney",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "George Clooney's first acting Oscar; he was simultaneously nominated for Best Director and Best Original Screenplay for Good Night, and Good Luck — only the second person ever (after Orson Welles for Citizen Kane) to be nominated for directing, writing, and acting in two different films at the same ceremony.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "The Constant Gardener",
+          "winner_recipient": "Rachel Weisz",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Rachel Weisz's first Oscar, on her first nomination.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Crash",
+          "winner_recipients": ["Paul Haggis", "Robert Moresco"],
+          "expected_nomination_count": 5,
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipients": ["Larry McMurtry", "Diana Ossana"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'the short story' (generic) and 'Annie Proulx' (the actual short-story author, who is not a recipient of the screenplay Oscar) captured alongside the canonical McMurtry + Ossana credits. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03 (Batch D scope expansion).",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Memoirs of a Geisha",
+          "winner_recipient": "Dion Beebe",
+          "expected_nomination_count": 5,
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Crash",
+          "winner_recipient": "Hughes Winborne",
+          "expected_nomination_count": 5,
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Gustavo Santaolalla",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Gustavo Santaolalla's first Oscar — first of two consecutive Best Original Score wins (Babel, 2007). The first Argentine composer to win in the category.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Hustle & Flow",
+          "winner_subject": "It's Hard out Here for a Pimp",
+          "winner_recipients": ["Jordan Houston", "Cedric Coleman", "Paul Beauregard"],
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Three 6 Mafia (Jordan Houston aka Juicy J, Cedric Coleman aka Frayser Boy, Paul Beauregard aka DJ Paul) win Best Original Song — the first hip-hop track to win in the category. Slate of 3 nominees this year.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Wallace & Gromit: The Curse of the Were-Rabbit",
+          "winner_recipients": ["Nick Park", "Steve Box"],
+          "expected_nomination_count": 4,
+          "notable": true,
+          "note": "Aardman Animations' first Best Animated Feature Oscar (Nick Park had previously won three times in Best Animated Short). The first stop-motion feature to win in the category. Canonical slate was 3 nominees; CSV contains 4 rows due to a duplicate won row for the same film with a slight title variance ('Wallace & Gromit: The Curse of the Were-Rabbit' vs 'Wallace & Gromit in The Curse of the Were-Rabbit') flagged manually_resolved_dlu_duplicate — see existing known-issue dlu-title-translation-variance-2026-04-25. expected_nomination_count tracks CSV reality (4) not canonical reality (3).",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Tsotsi",
+          "winner_recipient": "Gavin Hood",
+          "expected_nomination_count": 6,
+          "notable": true,
+          "note": "South Africa's first International Feature Oscar (then Best Foreign Language Film). Canonical slate was 5 nominees; CSV contains 6 rows due to a duplicate row for 'Don't Tell' (Italian: 'La bestia nel cuore') with title variance flagged manually_resolved_dlu_duplicate — see existing known-issue dlu-title-translation-variance-2026-04-25. expected_nomination_count tracks CSV reality (6) not canonical reality (5).",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "King Kong",
+          "expected_nomination_count": 3,
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Memoirs of a Geisha",
+          "winner_recipient": "John Myhre",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction at this ceremony. CSV recipients_json contains role-label artifacts ('Art Direction', 'Set Decoration') captured as recipients alongside the canonical John Myhre + Gretchen Rau credits. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "79": {
+      "ceremony_year": 2007,
+      "honours_year": 2006,
+      "category_count": 24,
+      "nomination_count": 113,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "The Departed",
+          "winner_recipients": ["Graham King"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "The Departed wins Best Picture, with Martin Scorsese taking Best Director — ending the most-discussed Best Director drought in modern Oscar history. The film won four Oscars total (Picture, Director, Adapted Screenplay, Editing).",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Departed",
+          "winner_recipient": "Martin Scorsese",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Martin Scorsese's first Oscar after five prior Best Director nominations (Raging Bull, 1981; The Last Temptation of Christ, 1989; Goodfellas, 1991; Gangs of New York, 2003; The Aviator, 2005), plus earlier nominations across writing and producing categories. The win was widely framed as career-overdue recognition; Steven Spielberg, Francis Ford Coppola, and George Lucas presented the award together.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Last King of Scotland",
+          "winner_recipient": "Forest Whitaker",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Forest Whitaker's first Oscar, for portraying Idi Amin.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Queen",
+          "winner_recipient": "Helen Mirren",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Helen Mirren's first Oscar, for portraying Queen Elizabeth II — at the same ceremony as her two Emmy and SAG wins for portraying Queen Elizabeth I (Elizabeth I miniseries).",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Little Miss Sunshine",
+          "winner_recipient": "Alan Arkin",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alan Arkin's first Oscar after 40 years and three nominations.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Dreamgirls",
+          "winner_recipient": "Jennifer Hudson",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jennifer Hudson's first Oscar — for her feature film debut. Hudson was a former American Idol contestant; one of a small number of Oscar winners with this kind of debut performance.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Little Miss Sunshine",
+          "winner_recipient": "Michael Arndt",
+          "expected_nomination_count": 5,
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Departed",
+          "winner_recipient": "William Monahan",
+          "winner_recipients": ["William Monahan"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "William Monahan's first Oscar — adapted from the Hong Kong film Infernal Affairs (2002). CSV recipients_json contains parser artifact 'Infernal Affairs' (the source film title) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Pan's Labyrinth",
+          "winner_recipient": "Guillermo Navarro",
+          "expected_nomination_count": 5,
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Departed",
+          "winner_recipient": "Thelma Schoonmaker",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Thelma Schoonmaker's third Best Film Editing Oscar (after Raging Bull, 1981; The Aviator, 2005) — all three for Martin Scorsese films, making her the most-credited editor in the category for one director-collaborator.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Babel",
+          "winner_recipient": "Gustavo Santaolalla",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Gustavo Santaolalla's second consecutive Best Original Score (after Brokeback Mountain, 2006) — only the third composer to win in consecutive years (also John Williams and Alan Menken).",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "An Inconvenient Truth",
+          "winner_subject": "I Need to Wake Up",
+          "winner_recipient": "Melissa Etheridge",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Melissa Etheridge's first Oscar — for the climate-change documentary An Inconvenient Truth. The film also won Best Documentary Feature at the same ceremony.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Happy Feet",
+          "winner_recipient": "George Miller",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Happy Feet (Warner Bros / Animal Logic) — a non-Pixar/non-Disney winner of Best Animated Feature, breaking a string of Pixar/DreamWorks dominance. George Miller's first Oscar (he later won Best Picture for Mad Max: Fury Road indirectly via the production team).",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Lives of Others",
+          "winner_recipient": "Florian Henckel von Donnersmarck",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Germany's first International Feature Oscar in the modern era (most prior German wins were before reunification in 1990).",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Pirates of the Caribbean: Dead Man's Chest",
+          "expected_nomination_count": 3,
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Pan's Labyrinth",
+          "winner_recipient": "Eugenio Caballero",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts captured as recipients. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "79th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "80": {
+      "ceremony_year": 2008,
+      "honours_year": 2007,
+      "category_count": 24,
+      "nomination_count": 113,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipients": ["Scott Rudin", "Ethan Coen", "Joel Coen"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "No Country for Old Men sweeps the top categories: Picture, Director (co-direction), Adapted Screenplay, and Supporting Actor. The 80th-anniversary ceremony.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipient": "Joel Coen",
+          "winner_recipients": ["Joel Coen", "Ethan Coen"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Joel and Ethan Coen become the second co-directing team to win Best Director (after Robert Wise & Jerome Robbins for West Side Story, 1962) — until Daniels (Kwan & Scheinert) at cer 95. The Coens also won Adapted Screenplay at the same ceremony, taking three Oscars personally.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Daniel Day-Lewis's second Best Actor Oscar (after My Left Foot, 1990). His third would come at cer 85 for Lincoln, making him the only male performer with three Best Actor wins.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "La Vie en Rose",
+          "winner_recipient": "Marion Cotillard",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Marion Cotillard wins Best Actress for portraying Édith Piaf — the first Best Actress win for a primarily French-language performance, and the first French-born winner of the category since Simone Signoret (Room at the Top, 1959, who was Polish-born but French-naturalised).",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipient": "Javier Bardem",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Javier Bardem becomes the first Spanish actor to win an acting Oscar — for portraying Anton Chigurh.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Michael Clayton",
+          "winner_recipient": "Tilda Swinton",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Tilda Swinton's first Oscar.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Juno",
+          "winner_recipient": "Diablo Cody",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Diablo Cody's first Oscar — for her debut produced screenplay.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "No Country for Old Men",
+          "winner_recipients": ["Joel Coen", "Ethan Coen"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts: 'the novel' (generic) and 'Cormac McCarthy' (the source-novel author, who is not a recipient of the screenplay Oscar) captured alongside the canonical Coen credits. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Robert Elswit",
+          "expected_nomination_count": 5,
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Bourne Ultimatum",
+          "winner_recipient": "Christopher Rouse",
+          "expected_nomination_count": 5,
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Atonement",
+          "winner_recipient": "Dario Marianelli",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Dario Marianelli's first Oscar — score notable for its diegetic typewriter percussion.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Once",
+          "winner_subject": "Falling Slowly",
+          "winner_recipients": ["Glen Hansard", "Markéta Irglová"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Glen Hansard and Markéta Irglová win Best Original Song for the indie film Once — exceptionally rare for a small-budget independent musical to take the category. Markéta Irglová was 19 at the time, among the youngest Oscar winners in the category.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Ratatouille",
+          "winner_recipient": "Brad Bird",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Brad Bird's second Best Animated Feature (after The Incredibles, 2005). Pixar's third win in the category.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Counterfeiters",
+          "winner_recipient": "Stefan Ruzowitzky",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Austria's first International Feature Oscar.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Sweeney Todd: The Demon Barber of Fleet Street",
+          "winner_recipient": "Dante Ferretti",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Dante Ferretti's second Oscar (with Francesca Lo Schiavo) — pre-rename era, category was Best Art Direction. CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "80th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "81": {
+      "ceremony_year": 2009,
+      "honours_year": 2008,
+      "category_count": 24,
+      "nomination_count": 111,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipients": ["Christian Colson"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Slumdog Millionaire wins eight Oscars from ten nominations — the third-highest haul for any Best Picture winner since 2000. The first Best Picture winner with a predominantly Indian setting and substantial Hindi-language dialogue. Final ceremony of the fixed 5-nominee Best Picture slate before the 82nd's expansion to 10.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Danny Boyle",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Danny Boyle's first Oscar.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Milk",
+          "winner_recipient": "Sean Penn",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sean Penn's second Best Actor Oscar (after Mystic River, 2004) — for portraying Harvey Milk.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Reader",
+          "winner_recipient": "Kate Winslet",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Kate Winslet's first Oscar after six prior nominations spanning 13 years (Sense and Sensibility, 1996; Titanic, 1998; Iris, 2002; Eternal Sunshine of the Spotless Mind, 2005; Little Children, 2007 — plus The Reader at this ceremony). At 33, the youngest performer to receive a sixth acting nomination.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "The Dark Knight",
+          "winner_recipient": "Heath Ledger",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Heath Ledger's posthumous Best Supporting Actor win for his portrayal of the Joker — the second posthumous acting Oscar in history (after Peter Finch for Network, 1977) and the first posthumous win in the supporting categories. Ledger died in January 2008, before nominations were announced. Award accepted by his family. Some 13 years later, Joaquin Phoenix won Best Actor for portraying the same character (Joker, cer 92).",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Vicky Cristina Barcelona",
+          "winner_recipient": "Penélope Cruz",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Penélope Cruz becomes the first Spanish actress to win an acting Oscar (Javier Bardem had won the previous year as the first Spanish actor). The married pair are the first Spanish couple to both hold acting Oscars.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Milk",
+          "winner_recipient": "Dustin Lance Black",
+          "expected_nomination_count": 5,
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Simon Beaufoy",
+          "winner_recipients": ["Simon Beaufoy"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'Q & A' (Vikas Swarup's source novel) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Anthony Dod Mantle",
+          "expected_nomination_count": 5,
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "Chris Dickens",
+          "expected_nomination_count": 5,
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_recipient": "A. R. Rahman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "A. R. Rahman's first Oscar — the first Indian composer to win Best Original Score, and the first composer in many years to win both Best Original Score AND Best Original Song at the same ceremony (also for Slumdog Millionaire's 'Jai Ho').",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Slumdog Millionaire",
+          "winner_subject": "Jai Ho",
+          "winner_recipients": ["A. R. Rahman", "Gulzar"],
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "First Hindi/Urdu-language song to win Best Original Song. A. R. Rahman's second Oscar of the night. Slate of 3 nominees this year — within the typical=5±3 expectations tolerance.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "WALL-E",
+          "winner_recipient": "Andrew Stanton",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Pixar's fourth Best Animated Feature in eight years.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Departures",
+          "winner_recipient": "Yōjirō Takita",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Japan's fourth International Feature Oscar (then Best Foreign Language Film) — following long-form winners across the prior decades.",
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "The Curious Case of Benjamin Button",
+          "expected_nomination_count": 3,
+          "source": "81st Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "82": {
+      "ceremony_year": 2010,
+      "honours_year": 2009,
+      "category_count": 24,
+      "nomination_count": 121,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "The Hurt Locker",
+          "winner_recipients": ["Kathryn Bigelow", "Mark Boal", "Nicolas Chartier", "Greg Shapiro"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "First ceremony of the expanded 10-nominee Best Picture slate (per AMPAS rule change announced in mid-2009). The Hurt Locker becomes the lowest-grossing Best Picture winner of the modern era at the time, beating Avatar — which had grossed roughly 100x more at the box office. Six Oscars total for The Hurt Locker.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Hurt Locker",
+          "winner_recipient": "Kathryn Bigelow",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Kathryn Bigelow becomes the first woman to win Best Director in the 82-year history of the Academy. She also beat her ex-husband James Cameron (Avatar) for the prize — among the most-discussed competitive narratives of the season.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Crazy Heart",
+          "winner_recipient": "Jeff Bridges",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jeff Bridges's first Oscar after five prior nominations spanning 38 years (The Last Picture Show, 1972; Thunderbolt and Lightfoot, 1975; Starman, 1985; The Contender, 2001; Crazy Heart at this ceremony).",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Blind Side",
+          "winner_recipient": "Sandra Bullock",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sandra Bullock's first Oscar nomination and win.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Inglourious Basterds",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Christoph Waltz's first Best Supporting Actor — for portraying Hans Landa. He became the first Austrian-born actor to win an acting Oscar; his second came at cer 85 for Django Unchained, also a Tarantino film.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Precious: Based on the Novel 'Push' by Sapphire",
+          "winner_recipient": "Mo'Nique",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Mo'Nique's first Oscar nomination and win — for portraying Mary Lee Johnston in Precious.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "The Hurt Locker",
+          "winner_recipient": "Mark Boal",
+          "expected_nomination_count": 5,
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Precious: Based on the Novel 'Push' by Sapphire",
+          "winner_recipient": "Geoffrey Fletcher",
+          "winner_recipients": ["Geoffrey Fletcher"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Geoffrey Fletcher becomes the first Black writer to win Best Adapted Screenplay. CSV recipients_json contains parser artifacts: 'Push' (the source novel by Sapphire, embedded directly in the film's title) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Avatar",
+          "winner_recipient": "Mauro Fiore",
+          "expected_nomination_count": 5,
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Hurt Locker",
+          "winner_recipients": ["Bob Murawski", "Chris Innis"],
+          "expected_nomination_count": 5,
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Up",
+          "winner_recipient": "Michael Giacchino",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Michael Giacchino's first Oscar.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Crazy Heart",
+          "winner_subject": "The Weary Kind",
+          "winner_recipients": ["Ryan Bingham", "T Bone Burnett"],
+          "expected_nomination_count": 5,
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Up",
+          "winner_recipient": "Pete Docter",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Up wins Best Animated Feature; it was simultaneously nominated for Best Picture (only the second animated film ever to receive a Best Picture nomination, after Beauty and the Beast at the 64th in 1992 — and the first under the expanded 10-nominee slate). Pete Docter's first Oscar; he later won again for Inside Out (cer 88) and Soul (cer 93).",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Secret in Their Eyes",
+          "winner_recipient": "Juan José Campanella",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Argentina's second International Feature Oscar.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Avatar",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Avatar wins Best Visual Effects in the final year of the 3-nominee slate before the 83rd's expansion to 5 — see oscar-expectations.json era_override (1964-2010 = 3 ±0; 2011+ = 5 ±0).",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Avatar",
+          "winner_recipient": "Rick Carter",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "82nd Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
     "83": {
       "ceremony_year": 2011,
       "honours_year": 2010,
