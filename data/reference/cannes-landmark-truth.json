@@ -1,0 +1,407 @@
+{
+  "schema_version": "v1",
+  "festival": "cannes",
+  "ceremonies": {
+    "2021": {
+      "ceremony_year": 2021,
+      "category_count": 8,
+      "winner_count": 11,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Titane",
+          "winner_recipient": "Julia Ducournau",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Julia Ducournau becomes the first woman to win the Palme d'Or solo (Jane Campion's 1993 win for The Piano was shared with Chen Kaige's Farewell My Concubine). Titane was widely considered a divisive choice; jury president Spike Lee mistakenly announced the winner at the start of the ceremony rather than the end. The 74th Cannes — postponed from May to July 2021 due to COVID-19 (replacing the 2020 cancellation).",
+          "source": "74th Cannes Film Festival Wikipedia article / Variety / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "A Hero",
+          "winner_recipient": "Asghar Farhadi",
+          "winner_films": ["A Hero", "Compartment No. 6"],
+          "winner_recipients": ["Asghar Farhadi", "Juho Kuosmanen"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Asghar Farhadi (Iran) shares Grand Prix with Juho Kuosmanen (Finland). Farhadi already held two International Feature Oscars at this point (A Separation 2012, The Salesman 2017).",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Ahed's Knee",
+          "winner_recipient": "Nadav Lapid",
+          "winner_films": ["Ahed's Knee", "Memoria"],
+          "winner_recipients": ["Nadav Lapid", "Apichatpong Weerasethakul"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Apichatpong Weerasethakul's Memoria shares Jury Prize with Nadav Lapid's Ahed's Knee — Weerasethakul previously won the Palme d'Or in 2010 for Uncle Boonmee.",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Annette",
+          "winner_recipient": "Leos Carax",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Leos Carax's first Best Director Cannes prize. Annette opened the festival.",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Nitram",
+          "winner_recipient": "Caleb Landry Jones",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Caleb Landry Jones's first major acting prize.",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Worst Person in the World",
+          "winner_recipient": "Renate Reinsve",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Renate Reinsve becomes the first Norwegian actress to win Best Actress at Cannes. The Worst Person in the World was later nominated for two Oscars (cer 94: Best International Feature + Best Original Screenplay).",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Drive My Car",
+          "winner_recipient": "Ryusuke Hamaguchi",
+          "winner_recipients": ["Ryusuke Hamaguchi", "Takamasa Oe"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ryusuke Hamaguchi and Takamasa Oe win Best Screenplay for Drive My Car, which went on to win Best International Feature at the 94th Academy Awards (cer 94 in ORBIT Oscar truth) — the first Japanese film ever to win that Oscar category in the modern era after a long drought.",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Murina",
+          "winner_recipient": "Antoneta Alamat Kusijanović",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Croatia's first Caméra d'Or.",
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "All the Crows in the World",
+          "winner_recipient": "Tang Yi",
+          "expected_winner_count": 1,
+          "source": "74th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2022": {
+      "ceremony_year": 2022,
+      "category_count": 8,
+      "winner_count": 11,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Triangle of Sadness",
+          "winner_recipient": "Ruben Östlund",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ruben Östlund's second Palme d'Or (after The Square, 2017) — joins the small group of two-time Palme winners (Bille August, Emir Kusturica, Shohei Imamura, Michael Haneke, Ken Loach, Dardenne brothers).",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Close",
+          "winner_recipient": "Lukas Dhont",
+          "winner_films": ["Close", "Stars at Noon"],
+          "winner_recipients": ["Lukas Dhont", "Claire Denis"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Lukas Dhont (Close) shares Grand Prix with Claire Denis (Stars at Noon). Denis is one of the most-prolific Cannes alums; Stars at Noon her first Grand Prix.",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "EO",
+          "winner_recipient": "Jerzy Skolimowski",
+          "winner_films": ["EO", "The Eight Mountains"],
+          "winner_recipients": ["Jerzy Skolimowski", "Felix van Groeningen", "Charlotte Vandermeersch"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Jerzy Skolimowski's EO (a donkey-perspective road movie) shares with Felix van Groeningen and Charlotte Vandermeersch's The Eight Mountains.",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Decision to Leave",
+          "winner_recipient": "Park Chan-wook",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Park Chan-wook's first Best Director at Cannes — the first South Korean filmmaker ever to win the category. He had previously won the Grand Prix for Oldboy (2004).",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Broker",
+          "winner_recipient": "Song Kang-ho",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Song Kang-ho becomes the first South Korean actor to win Best Actor at Cannes. Cer 2022 saw both Best Director and Best Actor go to South Korean talent — the country's strongest year at the festival.",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Holy Spider",
+          "winner_recipient": "Zar Amir Ebrahimi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Zar Amir Ebrahimi (Iranian-born French actress) wins Best Actress for Holy Spider, a film banned in Iran; Ebrahimi had been forced to leave Iran in 2008 after a private video was leaked publicly.",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Boy from Heaven",
+          "winner_recipient": "Tarik Saleh",
+          "expected_winner_count": 1,
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "War Pony",
+          "winner_recipient": "Riley Keough",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Riley Keough's directorial debut (co-directed with Gina Gammell). Keough is better-known as an actress; her Caméra d'Or win is one of a small handful of high-profile actor-to-director crossovers honoured by Cannes.",
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "The Water Murmurs",
+          "winner_recipient": "Jianying Chen",
+          "expected_winner_count": 1,
+          "source": "75th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2023": {
+      "ceremony_year": 2023,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Anatomy of a Fall",
+          "winner_recipient": "Justine Triet",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Justine Triet becomes only the third woman to win the Palme d'Or (after Jane Campion's shared 1993 win for The Piano and Julia Ducournau's solo 2021 win for Titane). Anatomy of a Fall went on to receive five Academy Award nominations (cer 96), winning Best Original Screenplay.",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "The Zone of Interest",
+          "winner_recipient": "Jonathan Glazer",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jonathan Glazer's first Cannes prize. The Zone of Interest later won Best International Feature at the Oscars (cer 96).",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Fallen Leaves",
+          "winner_recipient": "Aki Kaurismäki",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Aki Kaurismäki's first Jury Prize — the deadpan Finnish auteur returned to feature filmmaking after a six-year retirement.",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "The Taste of Things",
+          "winner_recipient": "Tran Anh Hung",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tran Anh Hung's first Best Director at Cannes — the French-Vietnamese filmmaker's first major Cannes prize since The Scent of Green Papaya took the Caméra d'Or in 1993.",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Perfect Days",
+          "winner_recipient": "Kōji Yakusho",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kōji Yakusho's first Cannes Best Actor for Wim Wenders's Perfect Days — Yakusho was a long-standing collaborator of Shohei Imamura (Palme d'Or winner The Eel, Black Rain).",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "About Dry Grasses",
+          "winner_recipient": "Merve Dizdar",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Merve Dizdar becomes the first Turkish actress to win Best Actress at Cannes.",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Monster",
+          "winner_recipient": "Yuji Sakamoto",
+          "expected_winner_count": 1,
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Inside the Yellow Cocoon Shell",
+          "winner_recipient": "Pham Thien An",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Pham Thien An's debut feature wins Caméra d'Or — Vietnam's first major win in the category in the post-2000 era.",
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "27",
+          "winner_recipient": "Flóra Anna Buda",
+          "expected_winner_count": 1,
+          "source": "76th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2024": {
+      "ceremony_year": 2024,
+      "category_count": 8,
+      "winner_count": 12,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Anora",
+          "winner_recipient": "Sean Baker",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sean Baker's first Palme d'Or for Anora — the film went on to win five Oscars including Best Picture, Director, Actress (Mikey Madison), Original Screenplay, and Editing at the 97th Academy Awards (cer 97). Neon's first Cannes Palme. Baker is the first American filmmaker to win the Palme d'Or since Terrence Malick's The Tree of Life in 2011.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "All We Imagine as Light",
+          "winner_recipient": "Payal Kapadia",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Payal Kapadia's first feature Grand Prix — India's first Grand Prix at Cannes. The film was widely acclaimed as the first major Indian film selected in Competition at Cannes in three decades.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Jacques Audiard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jacques Audiard's third major Cannes prize (he previously won the Palme d'Or for Dheepan in 2015 and the Grand Prix for A Prophet in 2009). Emilia Pérez later set the record for most Oscar nominations for a non-English-language film (13) at the 97th Academy Awards.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Grand Tour",
+          "winner_recipient": "Miguel Gomes",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Miguel Gomes's first Best Director at Cannes — the Portuguese filmmaker's most-prominent prize after years of festival circuit acclaim.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Kinds of Kindness",
+          "winner_recipient": "Jesse Plemons",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jesse Plemons's first Cannes Best Actor.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Emilia Pérez",
+          "winner_recipient": "Adriana Paz",
+          "winner_recipients": ["Adriana Paz", "Karla Sofía Gascón", "Selena Gomez", "Zoe Saldaña"],
+          "expected_winner_count": 4,
+          "notable": true,
+          "note": "Best Actress awarded as a four-person team to the entire principal cast of Emilia Pérez (Adriana Paz, Karla Sofía Gascón, Selena Gomez, Zoe Saldaña). Karla Sofía Gascón becomes the first openly transgender performer to share a major Cannes acting prize. CSV split_co_recipients=true produces 4 rows for the team award; all 4 flagged co_winner=true. Phase E winner_recipient check uses the first row (Adriana Paz, alphabetical-first in the Wikipedia listing).",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Substance",
+          "winner_recipient": "Coralie Fargeat",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Coralie Fargeat's first Cannes prize — The Substance went on to receive five Academy Award nominations (cer 97).",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Armand",
+          "winner_recipient": "Halfdan Ullmann Tøndel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Halfdan Ullmann Tøndel — grandson of Ingmar Bergman and Liv Ullmann — wins Caméra d'Or for his debut feature. Norway's third Caméra d'Or.",
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "The Man Who Could Not Remain Silent",
+          "winner_recipient": "Nebojša Slijepčević",
+          "expected_winner_count": 1,
+          "source": "77th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2025": {
+      "ceremony_year": 2025,
+      "category_count": 8,
+      "winner_count": 15,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "It Was Just an Accident",
+          "winner_recipient": "Jafar Panahi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jafar Panahi's first Palme d'Or — a landmark moment given Panahi had been banned from filmmaking by the Iranian regime for over a decade and had previously been imprisoned. Panahi attended the ceremony in person, his first international festival appearance after the lifting of his travel ban. The 78th Cannes Film Festival saw an exceptional density of ties — five categories tied (Best Director, Best Actor, Best Actress, Best Screenplay, and Jury Prize three-way).",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Sentimental Value",
+          "winner_recipient": "Joachim Trier",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Joachim Trier's first Grand Prix — his first major Cannes prize after years of Competition selections.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Sirāt",
+          "winner_recipient": "Oliver Laxe",
+          "winner_films": ["Sirāt", "Sound of Falling", "A Poet"],
+          "winner_recipients": ["Oliver Laxe", "Mascha Schilinski", "Simón Mesa Soto"],
+          "expected_winner_count": 3,
+          "notable": true,
+          "note": "Three-way tie — the second 3-way Jury Prize tie in modern Cannes history (after 2019). Oliver Laxe (Sirāt), Mascha Schilinski (Sound of Falling), and Simón Mesa Soto (A Poet) share. CSV co_winner flag inconsistency: only the first two rows have co_winner=true; the third (A Poet) has co_winner=false. See known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04 — affects co_winner flag accuracy only, not winner identity or count.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "The Secret Agent",
+          "winner_recipient": "Kleber Mendonça Filho",
+          "winner_films": ["The Secret Agent", "Once Upon a Time in Gaza"],
+          "winner_recipients": ["Kleber Mendonça Filho", "Tarzan and Arab Nasser"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Kleber Mendonça Filho (Brazil) shares Best Director with the Palestinian twin brothers Tarzan and Arab Nasser. CSV co_winner=false on both rows because the wikitext format used separate top-level bullets per winner rather than the canonical sub-bullet tie format — same root cause as the cannes-co-winner-flag-multi-bullet-tie-2026-05-04 issue.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Secret Agent",
+          "winner_recipient": "Wagner Moura",
+          "winner_films": ["The Secret Agent", "Urchin"],
+          "winner_recipients": ["Wagner Moura", "Frank Dillane"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Wagner Moura becomes the first Brazilian actor to win Best Actor at Cannes; shares the prize with Frank Dillane (Urchin). Same multi-bullet-tie co_winner flag issue as Best Director.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Little Sister",
+          "winner_recipient": "Nadia Melliti",
+          "winner_films": ["The Little Sister", "I Only Rest in the Storm"],
+          "winner_recipients": ["Nadia Melliti", "Cleo Diára"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie between Nadia Melliti (The Little Sister) and Cleo Diára (I Only Rest in the Storm). Same multi-bullet-tie co_winner flag issue as Best Director.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Young Mothers",
+          "winner_recipient": "Jean-Pierre and Luc Dardenne",
+          "winner_films": ["Young Mothers", "Pillion"],
+          "winner_recipients": ["Jean-Pierre and Luc Dardenne", "Harry Lighton"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. The Dardenne brothers (two-time Palme winners for Rosetta 1999 and L'Enfant 2005) share Best Screenplay with Harry Lighton (Pillion).",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "The President's Cake",
+          "winner_recipient": "Hasan Hadi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iraq's first Caméra d'Or.",
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "I'm Glad You're Dead Now",
+          "winner_recipient": "Tawfeek Barhom",
+          "expected_winner_count": 1,
+          "source": "78th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    }
+  }
+}
