@@ -2,6 +2,478 @@
   "schema_version": "v1",
   "festival": "cannes",
   "ceremonies": {
+    "2000": {
+      "ceremony_year": 2000,
+      "category_count": 8,
+      "winner_count": 11,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Palme d'Or",
+          "winner_recipient": "Lars von Trier",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lars von Trier's first and only Palme d'Or — for Dancer in the Dark, the avant-garde musical that also took Best Actress for Björk at the same ceremony. CSV film_title contains a parse-leak artifact 'Palme d'Or' (the category name) instead of canonical 'Dancer in the Dark' — same italic-prefix leak as cer 2008 (Laurent Cantet / The Class). See known-issue cannes-palme-dor-italic-prefix-leak-2026-05-04. Recipient (Lars von Trier) is correct in the CSV.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Devils on the Doorstep",
+          "winner_recipient": "Jiang Wen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jiang Wen's first major Cannes prize — Chinese filmmaker's controversial WWII-era film. The film was officially banned in China at the time of the win.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Songs from the Second Floor",
+          "winner_recipient": "Roy Andersson",
+          "winner_films": ["Songs from the Second Floor", "Blackboards"],
+          "winner_recipients": ["Roy Andersson", "Samira Makhmalbaf"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Roy Andersson (Songs from the Second Floor) shares with Samira Makhmalbaf (Blackboards — Iranian filmmaker, age 20 at win, one of the youngest Cannes Jury Prize recipients). Both rows correctly flagged co_winner=true.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Yi Yi",
+          "winner_recipient": "Edward Yang",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Edward Yang's only Cannes Best Director — and his only major Western festival prize. Yang died in 2007; Yi Yi is widely cited as one of the most-acclaimed Asian films of the 2000s.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "In the Mood for Love",
+          "winner_recipient": "Tony Leung Chiu-wai",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tony Leung Chiu-wai's first Cannes Best Actor — for Wong Kar-wai's In the Mood for Love. A high-water mark for Hong Kong cinema at Cannes.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Dancer in the Dark",
+          "winner_recipient": "Björk",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Björk's first and only acting prize — the Icelandic musician's only feature acting role at the time of the win. Same film took the Palme d'Or — the cross-category honour at the top tier of the festival.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Nurse Betty",
+          "winner_recipient": "James Flamberg",
+          "winner_recipients": ["James Flamberg", "John C. Richards"],
+          "expected_winner_count": 1,
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Djomeh",
+          "winner_recipient": "Hassan Yektapanah",
+          "winner_films": ["Djomeh", "A Time for Drunken Horses"],
+          "winner_recipients": ["Hassan Yektapanah", "Bahman Ghobadi"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Iranian filmmakers Hassan Yektapanah (Djomeh) and Bahman Ghobadi (A Time for Drunken Horses) share Caméra d'Or — both Iranian-Kurdish debut features. CSV co_winner=false on both rows because of the multi-bullet-tie pattern; see known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Shadows",
+          "winner_recipient": "Raymond Red",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Philippines' first Short Film Palme d'Or.",
+          "source": "53rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2001": {
+      "ceremony_year": 2001,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Palme d'Or",
+          "winner_recipient": "Nanni Moretti",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nanni Moretti's first and only Palme d'Or — for The Son's Room (La stanza del figlio). CSV has a double parse-leak: film_title='Palme d'Or' (the category name leaked due to italic-prefix issue, same as cer 2000 + cer 2008) AND recipients_json contains 'The Son's Room' as a spurious recipient alongside 'Nanni Moretti' (the apostrophe in 'Son's' breaks the italic-span dropper in _extract_persons, leaking the film-title wikilink into recipients). See known-issues cannes-palme-dor-italic-prefix-leak-2026-05-04 and cannes-recipient-extraction-apostrophe-leak-2026-05-04. Phase E winner_recipient='Nanni Moretti' fuzzy-matches the second recipient in recipients_json.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "The Piano Teacher",
+          "winner_recipient": "Michael Haneke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Haneke's first major Cannes prize — Grand Prix for The Piano Teacher (his Palmes followed in 2009 and 2012). The Piano Teacher swept three categories at this ceremony — Grand Prix, Best Actor (Magimel), and Best Actress (Huppert) — an exceptionally rare cross-category triple for a single film at Cannes.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Distance",
+          "winner_recipient": "Hirokazu Kore-eda",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hirokazu Kore-eda's Distance — manually inserted row, absent from the Wikipedia ceremony article. See known-issue cannes-2001-jury-prize-wikipedia-gap-2026-05-04. Source: festival-cannes.com / Variety. Kore-eda later won Jury Prize for Like Father, Like Son (cer 2013) and the Palme d'Or for Shoplifters (cer 2018).",
+          "source": "54th Cannes Film Festival Wikipedia article gap (manual insertion) / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Mulholland Dr.",
+          "winner_recipient": "David Lynch",
+          "winner_films": ["Mulholland Dr.", "The Man Who Wasn't There"],
+          "winner_recipients": ["David Lynch", "Joel Coen"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. David Lynch (Mulholland Dr.) shares Best Director with Joel Coen (The Man Who Wasn't There) — Lynch's only major Cannes prize for Mulholland Dr., a film widely considered one of the best of the 2000s. The Coen brothers had previously won the Palme d'Or for Barton Fink (1991). Both rows correctly flagged co_winner=true.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Piano Teacher",
+          "winner_recipient": "Benoît Magimel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Benoît Magimel's first Cannes Best Actor — for The Piano Teacher, opposite Isabelle Huppert (who took Best Actress for the same film).",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Piano Teacher",
+          "winner_recipient": "Isabelle Huppert",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Isabelle Huppert's first Cannes Best Actress (after a previous nomination for Violette Nozière in 1978). The Piano Teacher took Grand Prix, Best Actor (Magimel), and Best Actress (Huppert) — same-film triple-honour.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "No Man's Land",
+          "winner_recipient": "Danis Tanović",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Danis Tanović's first Cannes Best Screenplay — No Man's Land later won Best International Feature at the 74th Academy Awards (cer 74), Bosnia and Herzegovina's first International Feature Oscar.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Atanarjuat: The Fast Runner",
+          "winner_recipient": "Zacharias Kunuk",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Zacharias Kunuk's debut feature wins Caméra d'Or — Canada's first Caméra d'Or, and the first feature in Inuktitut to receive a major Cannes prize.",
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Bean Cake",
+          "winner_recipient": "David Greenspan",
+          "expected_winner_count": 1,
+          "source": "54th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2002": {
+      "ceremony_year": 2002,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "The Pianist",
+          "winner_recipient": "Roman Polanski",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roman Polanski's first and only Palme d'Or — accepted in absentia; Polanski had been a fugitive from U.S. justice since 1978 and could not attend. The Pianist later won Best Director, Best Actor, and Best Adapted Screenplay at the 75th Academy Awards (cer 75) — an exceptionally rare Palme-to-Oscar trajectory.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "The Man Without a Past",
+          "winner_recipient": "Aki Kaurismäki",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Aki Kaurismäki's first Grand Prix — Finnish auteur's only major Cannes prize until his 2017 Best Director win (The Other Side of Hope) and 2023 Jury Prize (Fallen Leaves). The Man Without a Past also took Best Actress (Outinen) — same-film cross-category honour.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Divine Intervention",
+          "winner_recipient": "Elia Suleiman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Elia Suleiman's first Cannes prize — Palestine's first major Cannes win. Divine Intervention was controversially excluded from Best International Feature Oscar consideration that year on technicalities concerning Palestinian statehood.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Chi-hwa-seon",
+          "winner_recipient": "Im Kwon-taek",
+          "winner_films": ["Chi-hwa-seon", "Punch-Drunk Love"],
+          "winner_recipients": ["Im Kwon-taek", "Paul Thomas Anderson"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Im Kwon-taek (Chi-hwa-seon — South Korean veteran auteur) shares Best Director with Paul Thomas Anderson (Punch-Drunk Love) — PTA's only major Cannes prize. Both rows correctly flagged co_winner=true.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Son",
+          "winner_recipient": "Olivier Gourmet",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Olivier Gourmet's first Cannes Best Actor — for the Dardenne brothers' The Son. A frequent Dardenne collaborator.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Man Without a Past",
+          "winner_recipient": "Kati Outinen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kati Outinen's first Cannes Best Actress — Finnish actress and frequent Aki Kaurismäki collaborator. Same film also took Grand Prix.",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Sweet Sixteen",
+          "winner_recipient": "Paul Laverty",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paul Laverty's first Cannes Best Screenplay — long-time Ken Loach collaborator. Loach later won the Palme d'Or in 2006 (The Wind That Shakes the Barley) and 2016 (I, Daniel Blake).",
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Seaside",
+          "winner_recipient": "Julie Lopes-Curval",
+          "expected_winner_count": 1,
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "After Rain",
+          "winner_recipient": "Péter Mészáros",
+          "expected_winner_count": 1,
+          "source": "55th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2003": {
+      "ceremony_year": 2003,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Elephant",
+          "winner_recipient": "Gus Van Sant",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Gus Van Sant's first Palme d'Or — for Elephant, his Columbine-themed minimalist drama. Van Sant won Best Director for the same film at the same ceremony — only a small handful of films in Cannes history have won both Palme and Best Director (a rare 'double honour').",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Uzak",
+          "winner_recipient": "Nuri Bilge Ceylan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nuri Bilge Ceylan's first Grand Prix — Turkish auteur's first major Cannes prize. He later won Best Director (2008), Grand Prix (2011), and Palme d'Or (2014). Uzak also took Best Actor (shared) at this ceremony — same-film cross-category honour.",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "At Five in the Afternoon",
+          "winner_recipient": "Samira Makhmalbaf",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Samira Makhmalbaf's second Jury Prize (after Blackboards's shared 2000 win) — Iranian filmmaker's second major Cannes prize before age 25.",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Elephant",
+          "winner_recipient": "Gus Van Sant",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Gus Van Sant takes Best Director for the same film he took the Palme d'Or for at the same ceremony — Elephant. The Palme + Best Director double-honour for a single film is exceptionally rare in modern Cannes history.",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Uzak",
+          "winner_recipient": "Muzaffer Özdemir",
+          "winner_films": ["Uzak", "Uzak"],
+          "winner_recipients": ["Muzaffer Özdemir", "Emin Toprak"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way team award — both Best Actor winners are from the same film, Nuri Bilge Ceylan's Uzak. Mehmet Emin Toprak died in a car accident in late 2002 (months before the ceremony) and was awarded posthumously. Both rows correctly flagged co_winner=true. Same film also took Grand Prix (Ceylan) — same-film triple honour.",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Barbarian Invasions",
+          "winner_recipient": "Marie-Josée Croze",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Marie-Josée Croze's first Cannes Best Actress. The Barbarian Invasions also took Best Screenplay at the same ceremony, and went on to win Best International Feature at the 76th Academy Awards (cer 76) — Canada's first International Feature Oscar.",
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Barbarian Invasions",
+          "winner_recipient": "Denys Arcand",
+          "expected_winner_count": 1,
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Reconstruction",
+          "winner_recipient": "Christoffer Boe",
+          "expected_winner_count": 1,
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Cracker Bag",
+          "winner_recipient": "Glendyn Ivin",
+          "expected_winner_count": 1,
+          "source": "56th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2004": {
+      "ceremony_year": 2004,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Fahrenheit 9/11",
+          "winner_recipient": "Michael Moore",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Moore's only Palme d'Or — Fahrenheit 9/11 became the first documentary feature to win the Palme d'Or since The Silent World (Jacques-Yves Cousteau and Louis Malle, 1956), a 48-year gap. The win was politically charged: a sharp critique of the Bush administration's response to 9/11 and the Iraq War, awarded by Quentin Tarantino's jury.",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Oldboy",
+          "winner_recipient": "Park Chan-wook",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Park Chan-wook's first Grand Prix — and South Korean cinema's first Grand Prix at Cannes. Oldboy is widely considered the breakthrough film for Korean cinema in the West. Park later won Best Director in 2022 (Decision to Leave).",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Tropical Malady",
+          "winner_recipient": "Apichatpong Weerasethakul",
+          "winner_films": ["Tropical Malady", "The Ladykillers"],
+          "winner_recipients": ["Apichatpong Weerasethakul", "Irma P. Hall"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Apichatpong Weerasethakul (Tropical Malady — his first major Cannes prize, he later won the Palme d'Or in 2010 for Uncle Boonmee) shares with Irma P. Hall — actress receiving a special Jury Prize for her ensemble role in the Coen brothers' The Ladykillers. Both rows correctly flagged co_winner=true.",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Exils",
+          "winner_recipient": "Tony Gatlif",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tony Gatlif's first Cannes Best Director — French-Algerian filmmaker known for films about Romani culture.",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Nobody Knows",
+          "winner_recipient": "Yūya Yagira",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Yūya Yagira, age 14, becomes the youngest Best Actor winner in Cannes history — for Hirokazu Kore-eda's Nobody Knows. Kore-eda himself later took the Jury Prize in 2013 (Like Father, Like Son) and the Palme d'Or in 2018 (Shoplifters).",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Clean",
+          "winner_recipient": "Maggie Cheung",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Maggie Cheung becomes the first Asian actress to win Best Actress at Cannes — for Olivier Assayas's Clean (Cheung and Assayas were married at the time).",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Look at Me",
+          "winner_recipient": "Agnès Jaoui",
+          "winner_recipients": ["Agnès Jaoui", "Jean-Pierre Bacri"],
+          "expected_winner_count": 1,
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Or (My Treasure)",
+          "winner_recipient": "Keren Yedaya",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Keren Yedaya's debut feature wins Caméra d'Or — Israel's first Caméra d'Or.",
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Trafic",
+          "winner_recipient": "Cătălin Mitulescu",
+          "expected_winner_count": 1,
+          "source": "57th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2005": {
+      "ceremony_year": 2005,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "L'Enfant",
+          "winner_recipient": "Jean-Pierre and Luc Dardenne",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "The Dardenne brothers' second Palme d'Or (after Rosetta, 1999) — joining the small group of two-time Palme winners (Bille August, Emir Kusturica, Shohei Imamura, Francis Ford Coppola, Alf Sjöberg). Their tightly-spaced double-Palme made them the youngest two-time winners since Coppola.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Broken Flowers",
+          "winner_recipient": "Jim Jarmusch",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jim Jarmusch's first Grand Prix — American indie auteur's most-prominent Cannes prize.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Shanghai Dreams",
+          "winner_recipient": "Wang Xiaoshuai",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Wang Xiaoshuai's first Cannes Jury Prize — Chinese Sixth Generation filmmaker.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Caché",
+          "winner_recipient": "Michael Haneke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Haneke's first Cannes Best Director — for Caché (Hidden). His first major Cannes prize, before his two Palmes (The White Ribbon 2009, Amour 2012).",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Three Burials of Melquiades Estrada",
+          "winner_recipient": "Tommy Lee Jones",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tommy Lee Jones's first Cannes Best Actor — for his own directorial debut, The Three Burials of Melquiades Estrada (Jones directed and starred). Same film also took Best Screenplay (Guillermo Arriaga).",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Free Zone",
+          "winner_recipient": "Hanna Laslo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hanna Laslo's first Cannes Best Actress — Israeli actress's only major international acting prize.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Three Burials of Melquiades Estrada",
+          "winner_recipient": "Guillermo Arriaga",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Guillermo Arriaga's first Cannes Best Screenplay — Mexican screenwriter known for collaborations with Alejandro González Iñárritu (21 Grams, Babel).",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "The Forsaken Land",
+          "winner_recipient": "Vimukthi Jayasundara",
+          "winner_films": ["The Forsaken Land", "Me and You and Everyone We Know"],
+          "winner_recipients": ["Vimukthi Jayasundara", "Miranda July"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Vimukthi Jayasundara (The Forsaken Land — Sri Lanka's first major Cannes prize) shares Caméra d'Or with Miranda July (Me and You and Everyone We Know — actress-musician's directorial debut). CSV co_winner=false on both rows because of the multi-bullet-tie pattern; see known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Wayfarers",
+          "winner_recipient": "Igor Strembitskyy",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ukraine's first Short Film Palme d'Or.",
+          "source": "58th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
     "2006": {
       "ceremony_year": 2006,
       "category_count": 8,
