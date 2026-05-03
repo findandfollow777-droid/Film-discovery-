@@ -2,6 +2,662 @@
   "schema_version": "v1",
   "festival": "oscar",
   "ceremonies": {
+    "83": {
+      "ceremony_year": 2011,
+      "honours_year": 2010,
+      "category_count": 24,
+      "nomination_count": 120,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "The King's Speech",
+          "winner_recipients": ["Iain Canning", "Emile Sherman", "Gareth Unwin"],
+          "expected_nomination_count": 10,
+          "notable": true,
+          "note": "First ceremony of the variable 8-10 slate after the 82nd's fixed-10 expansion. The King's Speech wins Best Picture in a high-profile split with David Fincher's The Social Network, which had taken the season's earlier critical-precursor awards (NYFCC, Globes Drama, BAFTA). The King's Speech also took Director, Actor, and Original Screenplay — a four-Oscar haul.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Tom Hooper",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Tom Hooper wins Best Director over David Fincher (The Social Network) — the most discussed Picture+Director split of the season, with Fincher having swept earlier precursor awards including the Golden Globe and the DGA preliminary tally.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "Colin Firth",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Colin Firth's first Oscar after his prior nomination (A Single Man, 2010).",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Black Swan",
+          "winner_recipient": "Natalie Portman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Natalie Portman's first Oscar.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "The Fighter",
+          "winner_recipient": "Christian Bale",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Christian Bale's first Oscar nomination and win. Both Supporting Acting Oscars went to The Fighter (also Melissa Leo for Best Supporting Actress) — a rare same-film sweep of the supporting categories.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "The Fighter",
+          "winner_recipient": "Melissa Leo",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Melissa Leo's first Oscar.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "The King's Speech",
+          "winner_recipient": "David Seidler",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "David Seidler, 73, becomes the oldest Best Original Screenplay winner up to that point — for a screenplay he had been developing for decades.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Social Network",
+          "winner_recipient": "Aaron Sorkin",
+          "winner_recipients": ["Aaron Sorkin"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Aaron Sorkin's first Oscar. CSV recipients_json contains a parser artifact 'The Accidental Billionaires' (the source-book title by Ben Mezrich) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03 (scope expanded across all of Batch C).",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Inception",
+          "winner_recipient": "Wally Pfister",
+          "expected_nomination_count": 5,
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Social Network",
+          "winner_recipients": ["Angus Wall", "Kirk Baxter"],
+          "expected_nomination_count": 5,
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Social Network",
+          "winner_recipients": ["Trent Reznor", "Atticus Ross"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Trent Reznor and Atticus Ross's first Oscar — a watershed moment for electronic and rock-influenced scoring at the Academy. Reznor (Nine Inch Nails) is the first major rock musician to win Best Original Score in the modern era. The Social Network lost Best Picture but won this category, in keeping with the Picture/Director split narrative of the night.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Toy Story 3",
+          "winner_subject": "We Belong Together",
+          "winner_recipient": "Randy Newman",
+          "expected_nomination_count": 4,
+          "notable": true,
+          "note": "Randy Newman's second Best Original Song Oscar (after 'If I Didn't Have You' from Monsters, Inc., 2002). Slate of 4 nominees this year — within the typical=5±3 expectations tolerance.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Toy Story 3",
+          "winner_recipient": "Lee Unkrich",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Toy Story 3 wins Best Animated Feature; at the time, the first animated film to gross over $1 billion worldwide. Pixar's seventh Best Animated Feature win in the category's nine-year history. Slate of 3 nominees per the pre-2012 lower-volume era.",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "In a Better World",
+          "winner_recipient": "Susanne Bier",
+          "expected_nomination_count": 5,
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Inception",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "First ceremony at which Best Visual Effects expanded from 3 to 5 nominees — see oscar-expectations.json era_override (1964-2010 = 3 ±0; 2011+ = 5 ±0).",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Alice in Wonderland",
+          "winner_recipient": "Robert Stromberg",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains role-label artifacts ('Art Direction', 'Set Decoration') captured as recipients alongside the canonical Robert Stromberg + Karen O'Hara credits. Pre-rename era of the category — same root cause as cer 88+ Production Design artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03 (scope expanded to cover the older 'Art Direction' phrasing across cer 83-84).",
+          "source": "83rd Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "84": {
+      "ceremony_year": 2012,
+      "honours_year": 2011,
+      "category_count": 24,
+      "nomination_count": 119,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "The Artist",
+          "winner_recipients": ["Thomas Langmann"],
+          "expected_nomination_count": 9,
+          "notable": true,
+          "note": "The Artist becomes the first largely silent (and predominantly black-and-white) film to win Best Picture since Wings won the inaugural award at the 1st ceremony in 1929 — an 84-year gap. Also the first French-produced Best Picture winner.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Michel Hazanavicius",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "First French director to win Best Director.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Jean Dujardin",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jean Dujardin becomes the first French actor to win Best Actor, and the first Best Actor winner for a (predominantly) silent performance since Emil Jannings at the inaugural ceremony in 1929.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Iron Lady",
+          "winner_recipient": "Meryl Streep",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Meryl Streep's third Oscar (after Best Supporting Actress for Kramer vs. Kramer, 1980, and Best Actress for Sophie's Choice, 1983) — and her first acting Oscar in 29 years across 14 nominations in the interim. Joins Ingrid Bergman as one of the only actresses with three competitive acting Oscars at the time (Katharine Hepburn at 4 was the all-time leader).",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Beginners",
+          "winner_recipient": "Christopher Plummer",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Christopher Plummer, 82, becomes the oldest acting Oscar winner up to that point (record subsequently broken by Anthony Hopkins at 83 in cer 93). His first Oscar after a 53-year film career.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "The Help",
+          "winner_recipient": "Octavia Spencer",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Octavia Spencer's first Oscar; sixth Black actress to win Best Supporting Actress.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Midnight in Paris",
+          "winner_recipient": "Woody Allen",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Woody Allen's third Best Original Screenplay (after Annie Hall, 1978, and Hannah and Her Sisters, 1987) — extending his record as the most-credited Best Original Screenplay winner.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Descendants",
+          "winner_recipient": "Alexander Payne",
+          "winner_recipients": ["Alexander Payne", "Nat Faxon", "Jim Rash"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains a parser artifact 'the novel' captured as a recipient (from the 'based on the novel by Kaui Hart Hemmings' clause). See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03 (Batch C scope expansion).",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Hugo",
+          "winner_recipient": "Robert Richardson",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Robert Richardson's third Best Cinematography Oscar (after JFK, 1992, and The Aviator, 2005), making him a three-time winner alongside Conrad Hall and Vittorio Storaro.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Girl with the Dragon Tattoo",
+          "winner_recipients": ["Angus Wall", "Kirk Baxter"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Wall and Baxter's second consecutive Best Film Editing Oscar (after The Social Network, 2011) — both wins on David Fincher films.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Ludovic Bource",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ludovic Bource wins Best Original Score for an effectively silent film — the score functions as the film's primary auditory layer, making this an unusually score-dependent win in the category's history.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "The Muppets",
+          "winner_subject": "Man or Muppet",
+          "winner_recipient": "Bret McKenzie",
+          "expected_nomination_count": 2,
+          "notable": true,
+          "note": "Bret McKenzie's first Oscar. Famously the smallest Best Original Song slate in modern Oscar history — only 2 nominees, due to a quirk in the category's nomination rules in effect at the time. CSV subject_title contains markup-leak artifact (\"'''[[Man or Muppet]]\") instead of the clean song name; see known-issue oscar-original-song-subject-title-markup-leak-2026-05-03. Phase E winner_subject check still passes via fuzzy substring match.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Rango",
+          "winner_recipient": "Gore Verbinski",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Rango (Paramount Animation / Industrial Light & Magic) becomes a rare non-Disney/Pixar/DreamWorks Best Animated Feature winner — Pixar had won six of the prior eight Animated Feature Oscars.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "A Separation",
+          "winner_recipient": "Asghar Farhadi",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Iran's first International Feature Oscar (then Best Foreign Language Film). Asghar Farhadi's first Oscar; he later won again at cer 89 for The Salesman.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Hugo",
+          "winner_recipient": "Dante Ferretti",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains role-label artifacts ('Art Direction', 'Set Decoration') captured as recipients alongside the canonical Dante Ferretti + Francesca Lo Schiavo credits. Pre-rename phrasing — see known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "84th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "85": {
+      "ceremony_year": 2013,
+      "honours_year": 2012,
+      "category_count": 24,
+      "nomination_count": 122,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Argo",
+          "winner_recipients": ["Grant Heslov", "Ben Affleck", "George Clooney"],
+          "expected_nomination_count": 9,
+          "notable": true,
+          "note": "Argo wins Best Picture despite Ben Affleck not receiving a Best Director nomination — only the fourth time in Oscar history (and first since Driving Miss Daisy, 1989) that the Best Picture winner was directed by someone not nominated for Best Director. Affleck's snub became the season's defining narrative.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Life of Pi",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ang Lee's second Best Director (after Brokeback Mountain, 2006). Picture/Director split — Argo took Picture, Life of Pi took Director.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Lincoln",
+          "winner_recipient": "Daniel Day-Lewis",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Daniel Day-Lewis becomes the first man ever to win three Best Actor Oscars (after My Left Foot, 1990; There Will Be Blood, 2008). No other male performer has reached three lead-acting wins.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Silver Linings Playbook",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jennifer Lawrence's first Oscar at age 22, on her second nomination (after Winter's Bone at cer 83) — among the youngest Best Actress winners in Oscar history (Marlee Matlin at 21 holds the record from 1987).",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Django Unchained",
+          "winner_recipient": "Christoph Waltz",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Christoph Waltz's second Best Supporting Actor in three years (after Inglourious Basterds, 2010) — both wins for Quentin Tarantino films, both with German-language dialogue forming a meaningful share of the role.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Les Misérables",
+          "winner_recipient": "Anne Hathaway",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Anne Hathaway's first Oscar; widely credited to her live-on-set vocal performance of 'I Dreamed a Dream'.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Django Unchained",
+          "winner_recipient": "Quentin Tarantino",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Quentin Tarantino's second Best Original Screenplay (after Pulp Fiction, 1995).",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Argo",
+          "winner_recipient": "Chris Terrio",
+          "winner_recipients": ["Chris Terrio"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'Wired' (the magazine that published Joshuah Bearman's source article) and the article author's name treated as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03 (Batch C scope expansion to cover article-source variants alongside book/play sources).",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Life of Pi",
+          "winner_recipient": "Claudio Miranda",
+          "expected_nomination_count": 5,
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Argo",
+          "winner_recipient": "William Goldenberg",
+          "expected_nomination_count": 5,
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Life of Pi",
+          "winner_recipient": "Mychael Danna",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Mychael Danna's first Oscar.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Skyfall",
+          "winner_subject": "Skyfall",
+          "winner_recipients": ["Adele Adkins", "Paul Epworth"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Adele's 'Skyfall' becomes the first James Bond theme to win Best Original Song in the franchise's 50-year history — and the only such win until 'Writing's on the Wall' (Spectre, cer 88) and 'No Time to Die' (cer 94) made it three consecutive wins for Bond themes.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Brave",
+          "winner_recipients": ["Mark Andrews", "Brenda Chapman"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Brenda Chapman becomes the first woman to win Best Animated Feature.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Amour",
+          "winner_recipient": "Michael Haneke",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Austria's second International Feature Oscar (after The Counterfeiters, 2008). Amour was also nominated for Best Picture, Director, Actress, and Original Screenplay — exceptionally rare cross-category recognition for a foreign-language film.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_sound_editing": {
+          "winner_films": ["Skyfall", "Zero Dark Thirty"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Co-winner tie — Best Sound Editing produced two won rows at this ceremony, only the sixth tie in Oscars history at the time. Skyfall (Per Hallberg, Karen Baker Landers) and Zero Dark Thirty (Paul N. J. Ottosson) split the award. CSV correctly produces two won rows, both flagged co_winner. winner_film/winner_recipient Phase E checks omitted to avoid first-row-only enforcement on a genuine tie.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Lincoln",
+          "winner_recipient": "Rick Carter",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "First ceremony at which the category was renamed from Best Art Direction to Best Production Design (effective for the 85th, 2013 onward). CSV recipients_json contains role-label artifacts — see known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "85th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "86": {
+      "ceremony_year": 2014,
+      "honours_year": 2013,
+      "category_count": 24,
+      "nomination_count": 122,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "12 Years a Slave",
+          "winner_recipients": ["Brad Pitt", "Dede Gardner", "Jeremy Kleiner", "Steve McQueen", "Anthony Katagas"],
+          "expected_nomination_count": 9,
+          "notable": true,
+          "note": "12 Years a Slave becomes the first Best Picture winner directed by a Black filmmaker (Steve McQueen) and the first film with a Black director to win the top prize in the Academy's 86-year history.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Gravity",
+          "winner_recipient": "Alfonso Cuarón",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alfonso Cuarón becomes the first Mexican director — and the first Latin American director — to win Best Director, opening the 'Three Amigos' sequence (Cuarón 2014, Iñárritu 2015 + 2016, del Toro 2018). Picture/Director split — 12 Years a Slave took Picture, Gravity took Director plus six craft Oscars.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Dallas Buyers Club",
+          "winner_recipient": "Matthew McConaughey",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Matthew McConaughey's first Oscar nomination and win, capping the 'McConaissance' career reinvention from romantic-comedy lead into prestige dramatic actor.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Blue Jasmine",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Cate Blanchett's second Oscar (after Best Supporting Actress for The Aviator, 2005) and first Best Actress.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Dallas Buyers Club",
+          "winner_recipient": "Jared Leto",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jared Leto's first Oscar nomination and win — for the role of Rayon, a transgender woman with HIV.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "12 Years a Slave",
+          "winner_recipient": "Lupita Nyong'o",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Lupita Nyong'o's first acting role and first Oscar — the first Kenyan and the first Mexican-born actor to win an acting Oscar, and the seventh Black actress to win Best Supporting Actress.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Her",
+          "winner_recipient": "Spike Jonze",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Spike Jonze's first Oscar — sole-credit win for an original screenplay across an unusually competitive year (also nominated: American Hustle, Blue Jasmine, Dallas Buyers Club, Nebraska).",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "12 Years a Slave",
+          "winner_recipient": "John Ridley",
+          "winner_recipients": ["John Ridley"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "John Ridley becomes the second Black writer to win Best Adapted Screenplay (after Geoffrey Fletcher, Precious, 2010). CSV recipients_json contains parser artifact 'Twelve Years a Slave' (Solomon Northup's source memoir title) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Gravity",
+          "winner_recipient": "Emmanuel Lubezki",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Emmanuel Lubezki's first Oscar after seven prior nominations (a then-record drought for the category). Begins his three-peat run (also Birdman, 2015; The Revenant, 2016).",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Gravity",
+          "winner_recipients": ["Alfonso Cuarón", "Mark Sanger"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alfonso Cuarón shares the Best Film Editing Oscar in addition to his Best Director win — only the second time a Best Director winner has also won Film Editing for the same film at the same ceremony.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Gravity",
+          "winner_recipient": "Steven Price",
+          "expected_nomination_count": 5,
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Frozen",
+          "winner_subject": "Let It Go",
+          "winner_recipients": ["Kristen Anderson-Lopez", "Robert Lopez"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "'Let It Go' (Frozen) becomes one of the most commercially successful Best Original Song winners in the modern era — the song reached the Billboard Hot 100 top 10 and crossed 14 million sales. Robert Lopez was already an EGOT recipient when this win came in (the second-fastest EGOT in history at the time).",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Frozen",
+          "winner_recipients": ["Chris Buck", "Jennifer Lee", "Peter Del Vecho"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jennifer Lee becomes the first female director credited on a Best Animated Feature winner. Frozen also crossed $1 billion in box office, becoming Disney Animation's biggest hit at the time.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Great Beauty",
+          "winner_recipient": "Paolo Sorrentino",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Italy's eleventh International Feature Oscar — at the time the most-credited country in the category.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Gravity",
+          "expected_nomination_count": 5,
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "The Great Gatsby",
+          "winner_recipient": "Catherine Martin",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Catherine Martin's third and fourth Oscars at this ceremony (also Best Costume Design for The Great Gatsby) — a same-ceremony double in the design categories. CSV recipients_json contains role-label artifacts; see known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "86th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "87": {
+      "ceremony_year": 2015,
+      "honours_year": 2014,
+      "category_count": 24,
+      "nomination_count": 121,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Birdman or (The Unexpected Virtue of Ignorance)",
+          "winner_recipients": ["Alejandro G. Iñárritu", "John Lesher", "James W. Skotchdopole"],
+          "expected_nomination_count": 8,
+          "notable": true,
+          "note": "Birdman wins Best Picture in a Picture/Director-aligned but precursor-divided sweep — Boyhood had taken the Globes Drama, BAFTA Picture, and Critics' Choice Picture before Birdman's Oscar surge. The 87th ceremony's all-white acting nominee slate prompted the start of the #OscarsSoWhite hashtag and conversation, which intensified the following year.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Birdman or (The Unexpected Virtue of Ignorance)",
+          "winner_recipient": "Alejandro G. Iñárritu",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alejandro G. Iñárritu's first Best Director Oscar — second consecutive year a Mexican director took the prize (after Cuarón, 2014). Iñárritu would win again the following year (The Revenant, 2016), making it three Mexican director wins in a row.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Theory of Everything",
+          "winner_recipient": "Eddie Redmayne",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Eddie Redmayne's first Oscar — for portraying Stephen Hawking.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Still Alice",
+          "winner_recipient": "Julianne Moore",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Julianne Moore's first Oscar after four prior nominations spanning 13 years.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Whiplash",
+          "winner_recipient": "J. K. Simmons",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "J. K. Simmons's first Oscar nomination and win, at age 60.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Patricia Arquette",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Patricia Arquette's first Oscar — for a role she filmed across 12 years as part of Boyhood's distinctive longitudinal production. Acceptance speech included a high-profile call for equal pay for women.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Birdman or (The Unexpected Virtue of Ignorance)",
+          "winner_recipients": ["Alejandro G. Iñárritu", "Nicolás Giacobone", "Alexander Dinelaris Jr.", "Armando Bo"],
+          "expected_nomination_count": 5,
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Imitation Game",
+          "winner_recipient": "Graham Moore",
+          "winner_recipients": ["Graham Moore"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Graham Moore's first Oscar; acceptance speech ('Stay weird, stay different') became the night's most-quoted moment. CSV recipients_json contains parser artifacts 'Alan Turing: The Enigma' (the Andrew Hodges biography) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Birdman or (The Unexpected Virtue of Ignorance)",
+          "winner_recipient": "Emmanuel Lubezki",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Emmanuel Lubezki's second consecutive Best Cinematography Oscar (after Gravity, 2014) — the third year of his historic three-peat run, completed at cer 88 with The Revenant.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Whiplash",
+          "winner_recipient": "Tom Cross",
+          "expected_nomination_count": 5,
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Grand Budapest Hotel",
+          "winner_recipient": "Alexandre Desplat",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alexandre Desplat's first Oscar after eight prior nominations across seven years.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Selma",
+          "winner_subject": "Glory",
+          "winner_recipients": ["John Stephens", "Lonnie Lynn"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "'Glory' performed by Common (Lonnie Lynn) and John Legend (John Stephens) wins Best Original Song. Selma was widely seen as snubbed in major categories; the win for 'Glory' was the film's only Oscar against five expected major nominations.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Big Hero 6",
+          "winner_recipients": ["Don Hall", "Chris Williams", "Roy Conli"],
+          "expected_nomination_count": 5,
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Ida",
+          "winner_recipient": "Paweł Pawlikowski",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Poland's first International Feature Oscar.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Interstellar",
+          "expected_nomination_count": 5,
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "The Grand Budapest Hotel",
+          "winner_recipient": "Adam Stockhausen",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "The Grand Budapest Hotel won four Oscars at this ceremony (Production Design, Costume Design, Makeup and Hairstyling, Original Score) — the most of any film tied with Birdman. CSV recipients_json contains role-label artifacts — see known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "87th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
     "88": {
       "ceremony_year": 2016,
       "honours_year": 2015,
