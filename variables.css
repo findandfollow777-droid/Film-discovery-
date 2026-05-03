@@ -21,6 +21,11 @@
   --accent-rgb: 0, 217, 255;
   --accent-gold-rgb: 255, 215, 0;
   --prestige-purple-rgb: 168, 85, 247;
+  --deep-void-rgb: 10, 14, 23;
+  --cosmic-blue-rgb: 30, 41, 59;
+  --muted-silver-rgb: 148, 163, 184;
+  --success-green-rgb: 16, 185, 129;
+  --danger-red-rgb: 239, 68, 68;
 
   /* Status Colors */
   --success-green: #10b981;

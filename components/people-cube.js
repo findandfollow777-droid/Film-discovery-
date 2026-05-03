@@ -412,10 +412,13 @@
       }
     });
 
-    // Action button clicks on Face 4
+    // Action button clicks on Face 4 (primary + share secondary)
     document.addEventListener('click', function(e) {
-      var btn = e.target.closest('#peopleCubeOverlay .pcube-action-btn');
-      if (btn) handleAction(btn.dataset.action);
+      var btn = e.target.closest('#peopleCubeOverlay [data-action]');
+      if (!btn) return;
+      // Don't double-fire on the bookmark button (it has its own handler).
+      if (btn.classList.contains('pcube-bookmark-btn')) return;
+      handleAction(btn.dataset.action);
     });
 
     // Bookmark toggle on Face 4
@@ -863,14 +866,6 @@
       '<div class="pcube-face-header">Explore</div>' +
       '<div class="pcube-face-subhead">Navigate ' + esc(firstName) + '\u2019s ORBIT</div>' +
       '<div class="pcube-actions-list">' +
-        '<button class="pcube-action-btn" data-action="profile">' +
-          '<span class="pcube-action-icon"><span class="og og-film" aria-hidden="true"></span></span>' +
-          '<span class="pcube-action-body">' +
-            '<span class="pcube-action-title">Full Profile</span>' +
-            '<span class="pcube-action-subtitle">Deep dive into their career</span>' +
-          '</span>' +
-          '<span class="pcube-action-arrow">\u2192</span>' +
-        '</button>' +
         '<button class="pcube-action-btn" data-action="timeline">' +
           '<span class="pcube-action-icon"><span class="og og-calendar" aria-hidden="true"></span></span>' +
           '<span class="pcube-action-body">' +
@@ -879,19 +874,25 @@
           '</span>' +
           '<span class="pcube-action-arrow">\u2192</span>' +
         '</button>' +
-        '<button class="pcube-action-btn pcube-action-btn--secondary" data-action="observatory">' +
+        '<button class="pcube-action-btn pcube-action-btn--secondary" data-action="constellation">' +
           '<span class="pcube-action-icon"><span class="og og-galaxy" aria-hidden="true"></span></span>' +
           '<span class="pcube-action-body">' +
-            '<span class="pcube-action-title">The Observatory</span>' +
-            '<span class="pcube-action-subtitle">People discovery hub</span>' +
+            '<span class="pcube-action-title">Constellation View</span>' +
+            '<span class="pcube-action-subtitle">Discover similar people</span>' +
           '</span>' +
           '<span class="pcube-action-arrow">\u2192</span>' +
         '</button>' +
       '</div>' +
-      '<button class="pcube-bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '">' +
-        '<span class="pcube-bookmark-star og og-star" aria-hidden="true"></span>' +
-        '<span class="pcube-bookmark-label">' + (isBookmarked ? 'Bookmarked' : 'Bookmark') + '</span>' +
-      '</button>';
+      '<div class="pcube-actions-secondary">' +
+        '<button class="pcube-secondary-btn pcube-bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '">' +
+          '<span class="pcube-bookmark-star og og-star" aria-hidden="true"></span>' +
+          '<span class="pcube-bookmark-label">' + (isBookmarked ? 'Bookmarked' : 'Bookmark') + '</span>' +
+        '</button>' +
+        '<button class="pcube-secondary-btn pcube-share-btn" data-action="share">' +
+          '<span class="og og-link" aria-hidden="true"></span>' +
+          '<span>Share</span>' +
+        '</button>' +
+      '</div>';
   }
 
   // Trivia stats come from shared trivia-stats.js (window.getTriviaStats, etc.)
@@ -1307,12 +1308,16 @@
   function handleAction(action) {
     var p = pcubePersonData ? pcubePersonData.person : null;
     if (!p) return;
+
+    // Share doesn't navigate — handle before closing the cube.
+    if (action === 'share') {
+      handleShare(p);
+      return;
+    }
+
     closePeopleCube();
 
     switch (action) {
-      case 'profile':
-        window.location.href = _pagesPrefix + 'people-profile.html?id=' + p.id;
-        break;
       case 'timeline':
         localStorage.removeItem('vennPeople');
         localStorage.setItem('timelineMovieId', String(p.id));
@@ -1321,9 +1326,38 @@
         var encodedName = encodeURIComponent(p.name || '');
         window.location.href = _pagesPrefix + 'timeline.html?type=person&search=' + encodedName;
         break;
-      case 'observatory':
+      case 'constellation':
+        // No dedicated person-constellation view today — route to the
+        // people discovery hub. Revisit when a similar-actors page exists.
         window.location.href = _pagesPrefix + 'people-library.html';
         break;
+    }
+  }
+
+  function handleShare(p) {
+    var root = (window.OrbitUtils && OrbitUtils.ROOT) ? OrbitUtils.ROOT : '/';
+    var url = window.location.origin + root + 'pages/people-profile.html?id=' + p.id;
+    var title = p.name + ' on ORBIT';
+    var text = 'Check out ' + p.name + '’s career on ORBIT ✨';
+
+    if (navigator.share) {
+      navigator.share({ title: title, text: text, url: url }).catch(function() {});
+      return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function() {
+        var btn = document.querySelector('#peopleCubeOverlay .pcube-share-btn');
+        if (!btn) return;
+        var label = btn.querySelector('span:not(.og)');
+        var original = label ? label.textContent : 'Share';
+        if (label) label.textContent = 'Copied!';
+        btn.classList.add('pcube-share-btn--copied');
+        setTimeout(function() {
+          if (label) label.textContent = original;
+          btn.classList.remove('pcube-share-btn--copied');
+        }, 1600);
+      }).catch(function() {});
     }
   }
 

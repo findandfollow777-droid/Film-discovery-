@@ -304,8 +304,8 @@
 .pcube-photo--memorial {
   filter: grayscale(100%);
   opacity: 0.7;
-  border-color: rgba(148, 163, 184, 0.4);
-  box-shadow: 0 0 16px rgba(148, 163, 184, 0.1);
+  border-color: rgba(var(--muted-silver-rgb), 0.4);
+  box-shadow: 0 0 16px rgba(var(--muted-silver-rgb), 0.1);
 }
 
 .pcube-photo--memorial:hover {
@@ -373,7 +373,7 @@
 }
 
 .pcube-info-card {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(var(--cosmic-blue-rgb), 0.4);
   border: 1px solid rgba(var(--accent-rgb), 0.25);
   border-radius: var(--radius-sm);
   padding: 10px;
@@ -385,7 +385,7 @@
 }
 
 .pcube-info-card--memorial {
-  border-color: rgba(148, 163, 184, 0.3);
+  border-color: rgba(var(--muted-silver-rgb), 0.3);
 }
 
 .pcube-info-label {
@@ -658,7 +658,7 @@
 }
 
 .pcube-stat-row {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(var(--cosmic-blue-rgb), 0.4);
   border: 1px solid rgba(var(--accent-rgb), 0.25);
   border-radius: var(--radius-sm);
   padding: 10px;
@@ -819,7 +819,14 @@
   color: var(--muted-silver);
 }
 
-.pcube-bookmark-btn {
+/* Secondary action grid: Bookmark + Share */
+.pcube-actions-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.pcube-secondary-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -837,10 +844,15 @@
   transition: all 0.3s ease-out;
 }
 
-.pcube-bookmark-btn:hover {
+.pcube-secondary-btn:hover {
   border-color: var(--accent-gold);
   color: var(--accent-gold);
   box-shadow: 0 0 12px rgba(var(--accent-gold-rgb), 0.3);
+}
+
+.pcube-secondary-btn .og {
+  font-size: 16px;
+  transition: transform 0.3s ease-out;
 }
 
 .pcube-bookmark-btn.bookmarked {
@@ -850,8 +862,6 @@
 }
 
 .pcube-bookmark-star {
-  font-size: 16px;
-  transition: transform 0.3s ease-out;
   display: inline-flex;
   align-items: center;
 }
@@ -859,6 +869,12 @@
 .pcube-bookmark-btn.bookmarked .pcube-bookmark-star {
   transform: scale(1.15);
   filter: drop-shadow(0 0 4px rgba(var(--accent-gold-rgb), 0.5));
+}
+
+.pcube-share-btn--copied {
+  border-color: var(--success-green);
+  color: var(--success-green);
+  box-shadow: 0 0 12px rgba(var(--success-green-rgb), 0.35);
 }
 
 /* ============================================
@@ -928,13 +944,13 @@
 .pcube-trivia-dot.correct {
   background: var(--success-green);
   border-color: var(--success-green);
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 0 6px rgba(var(--success-green-rgb), 0.45);
 }
 
 .pcube-trivia-dot.wrong {
   background: var(--danger-red);
   border-color: var(--danger-red);
-  box-shadow: 0 0 6px rgba(239, 68, 68, 0.45);
+  box-shadow: 0 0 6px rgba(var(--danger-red-rgb), 0.45);
 }
 
 .pcube-trivia-question {
@@ -980,14 +996,14 @@
 }
 
 .pcube-trivia-option.pcube-trivia-correct {
-  background: rgba(16, 185, 129, 0.18);
+  background: rgba(var(--success-green-rgb), 0.18);
   border-color: var(--success-green);
   color: var(--success-green);
   opacity: 1;
 }
 
 .pcube-trivia-option.pcube-trivia-wrong {
-  background: rgba(239, 68, 68, 0.18);
+  background: rgba(var(--danger-red-rgb), 0.18);
   border-color: var(--danger-red);
   color: var(--danger-red);
   opacity: 1;
@@ -1101,7 +1117,7 @@
 
 @media (max-width: 650px) {
   .pcube-action-btn { padding: 14px; }
-  .pcube-bookmark-btn { padding: 14px; min-height: 48px; }
+  .pcube-secondary-btn { padding: 14px; min-height: 48px; }
 }
 
 @media (max-width: 480px) {
