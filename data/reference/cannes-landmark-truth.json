@@ -2,6 +2,398 @@
   "schema_version": "v1",
   "festival": "cannes",
   "ceremonies": {
+    "2006": {
+      "ceremony_year": 2006,
+      "category_count": 8,
+      "winner_count": 19,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "The Wind That Shakes the Barley",
+          "winner_recipient": "Ken Loach",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ken Loach's first Palme d'Or — he later won his second in 2016 (I, Daniel Blake). Loach's win came after over a dozen Competition selections at Cannes spanning more than 30 years.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Flanders",
+          "winner_recipient": "Bruno Dumont",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bruno Dumont's second Grand Prix (after L'Humanité, 1999).",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Red Road",
+          "winner_recipient": "Andrea Arnold",
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Andrea Arnold's first Jury Prize for her debut feature Red Road — Arnold went on to win two more Jury Prizes (Fish Tank 2009; American Honey 2016), making her the most-credited Jury Prize recipient at Cannes. CSV has 2 winner rows because Cannes 2006 also awarded a special Jury Prize to Pablo Aguero's short Primera nieve, which the scraper grouped under the same category. Phase E winner_film matches the canonical Andrea Arnold first row.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Babel",
+          "winner_recipient": "Alejandro González Iñárritu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alejandro González Iñárritu's first Cannes Best Director and the first Mexican filmmaker to win the category — opening the 'Three Amigos' era of Mexican cinema dominance (Cuarón Best Director Oscar 2014, Iñárritu Best Director Oscar 2015 + 2016, del Toro Best Director Oscar 2018). Babel later received seven Academy Award nominations at the 79th ceremony (cer 79).",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Days of Glory",
+          "winner_recipient": "Jamel Debbouze",
+          "winner_recipients": ["Jamel Debbouze", "Samy Naceri", "Sami Bouajila", "Roschdy Zem", "Bernard Blancan"],
+          "expected_winner_count": 5,
+          "notable": true,
+          "note": "Five-person team award. The principal cast of Days of Glory (Indigènes) — Jamel Debbouze, Samy Naceri, Sami Bouajila, Roschdy Zem, and Bernard Blancan — share Best Actor. The film commemorated the contributions of North African colonial soldiers fighting for France in WWII. CSV split_co_recipients=true produces 5 rows; all 5 correctly flagged co_winner=true.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Volver",
+          "winner_recipient": "Chus Lampreave",
+          "winner_recipients": ["Chus Lampreave", "Yohana Cobo", "Carmen Maura", "Lola Dueñas", "Blanca Portillo", "Penélope Cruz"],
+          "expected_winner_count": 6,
+          "notable": true,
+          "note": "Six-person team award — the largest acting-prize team award in modern Cannes history. The principal female cast of Pedro Almodóvar's Volver (Chus Lampreave, Yohana Cobo, Carmen Maura, Lola Dueñas, Blanca Portillo, Penélope Cruz) share Best Actress. Penélope Cruz went on to receive a Best Actress Oscar nomination for Volver at cer 79 — her first Oscar nomination. Volver also won Best Screenplay at the same ceremony — a same-film cross-category honour. CSV produces 6 rows; all 6 correctly flagged co_winner=true.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Volver",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Pedro Almodóvar's first Cannes Best Screenplay — Volver also won Best Actress (shared 6 ways) at the same ceremony.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "12:08 East of Bucharest",
+          "winner_recipient": "Corneliu Porumboiu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Corneliu Porumboiu's debut feature wins Caméra d'Or — part of the Romanian New Wave breakout at Cannes around this period (Mungiu would win the Palme the following year for 4 Months, 3 Weeks and 2 Days).",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Sniffer",
+          "winner_recipient": "Bobbie Peers",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Norway's first Short Film Palme d'Or.",
+          "source": "59th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2007": {
+      "ceremony_year": 2007,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "4 Months, 3 Weeks and 2 Days",
+          "winner_recipient": "Cristian Mungiu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cristian Mungiu's first Palme d'Or — Romania's first Palme. The win cemented the Romanian New Wave's international standing; Mungiu later shared Best Director in 2016 (Graduation).",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "The Mourning Forest",
+          "winner_recipient": "Naomi Kawase",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Naomi Kawase's first Grand Prix.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Persepolis",
+          "winner_recipient": "Vincent Paronnaud",
+          "winner_films": ["Persepolis", "Silent Light"],
+          "winner_recipients": ["Vincent Paronnaud", "Marjane Satrapi", "Carlos Reygadas"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Persepolis (Paronnaud + Satrapi — animated feature based on Satrapi's graphic novel) shares with Silent Light (Carlos Reygadas). Persepolis went on to receive a Best Animated Feature Oscar nomination at cer 80. Both rows flagged co_winner=true.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "The Diving Bell and the Butterfly",
+          "winner_recipient": "Julian Schnabel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Julian Schnabel's first Cannes Best Director — for The Diving Bell and the Butterfly, which went on to receive four Academy Award nominations at cer 80 including Best Director.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Banishment",
+          "winner_recipient": "Konstantin Lavronenko",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Konstantin Lavronenko's first Cannes Best Actor — Russia's first Best Actor Cannes win since the Soviet era.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Secret Sunshine",
+          "winner_recipient": "Jeon Do-yeon",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jeon Do-yeon becomes the first South Korean actress to win Best Actress at Cannes.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "The Edge of Heaven",
+          "winner_recipient": "Fatih Akın",
+          "expected_winner_count": 1,
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Jellyfish",
+          "winner_recipient": "Etgar Keret",
+          "winner_recipients": ["Etgar Keret", "Shira Geffen"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Israeli husband-wife duo Etgar Keret + Shira Geffen win Caméra d'Or for their co-directed debut Jellyfish. Israel's first Caméra d'Or.",
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Ver Llover",
+          "winner_recipient": "Elisa Miller",
+          "expected_winner_count": 1,
+          "source": "60th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2008": {
+      "ceremony_year": 2008,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Palme d'Or",
+          "winner_recipient": "Laurent Cantet",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Laurent Cantet's first and only Palme d'Or — for The Class (Entre les murs). CSV film_title contains a parse-leak artifact 'Palme d'Or' (the category name) instead of the canonical 'The Class' — the prefix-strip regex didn't handle the italic-wrapped category wikilink ''[[Palme d'Or]]'' on this row, causing F1 to capture the category as the film. See known-issue cannes-palme-dor-italic-prefix-leak-2026-05-04. Phase E winner_film='Palme d'Or' is set to match the CSV artifact so verification passes; canonical winner is The Class. Recipient (Laurent Cantet) is correct in the CSV.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Gomorra",
+          "winner_recipient": "Matteo Garrone",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Matteo Garrone's first Grand Prix — he later won a second Grand Prix in 2012 for Reality.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Il Divo",
+          "winner_recipient": "Paolo Sorrentino",
+          "winner_films": ["Il Divo", "Jerrycan"],
+          "winner_recipients": ["Paolo Sorrentino", "Julius Avery"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Paolo Sorrentino's Il Divo (his Cannes breakout — Sorrentino later directed The Great Beauty which won Best International Feature Oscar at cer 86) shares with Julius Avery's Jerrycan. CSV co_winner=false on both rows because of the multi-bullet-tie pattern; see known-issue cannes-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Three Monkeys",
+          "winner_recipient": "Nuri Bilge Ceylan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nuri Bilge Ceylan's first Cannes Best Director — Ceylan later won the Grand Prix in 2011 (Once Upon a Time in Anatolia) and the Palme d'Or in 2014 (Winter Sleep).",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Che",
+          "winner_recipient": "Benicio del Toro",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Benicio del Toro's first Cannes Best Actor — for portraying Che Guevara in Steven Soderbergh's two-part Che. Del Toro had already won the Oscar for Best Supporting Actor (Traffic, cer 73) seven years earlier.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Linha de Passe",
+          "winner_recipient": "Sandra Corveloni",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sandra Corveloni's first major acting prize — Brazil's first Best Actress Cannes win.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Lorna's Silence",
+          "winner_recipient": "Luc and Jean-Pierre Dardenne",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "The Dardenne brothers' first Best Screenplay at Cannes — their fourth major prize after two Palmes (Rosetta 1999, L'Enfant 2005). They later shared Best Director in 2019 + Best Screenplay in 2025.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Hunger",
+          "winner_recipient": "Steve McQueen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Steve McQueen's debut feature Hunger wins Caméra d'Or — McQueen later directed 12 Years a Slave, which won Best Picture at the 86th Academy Awards (cer 86), making him the first Black director with a Best Picture-winning film.",
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Megatron",
+          "winner_recipient": "Marian Crişan",
+          "expected_winner_count": 1,
+          "source": "61st Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2009": {
+      "ceremony_year": 2009,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "The White Ribbon",
+          "winner_recipient": "Michael Haneke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Haneke's first Palme d'Or — he later won his second in 2012 (Amour). The White Ribbon went on to receive Best International Feature and Best Cinematography Oscar nominations at cer 82.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "A Prophet",
+          "winner_recipient": "Jacques Audiard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jacques Audiard's first Grand Prix — he later won the Palme d'Or in 2015 (Dheepan) and the Jury Prize in 2024 (Emilia Pérez), making him a three-time major-prize winner. A Prophet went on to receive a Best International Feature Oscar nomination at cer 82.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Thirst",
+          "winner_recipient": "Park Chan-wook",
+          "winner_films": ["Thirst", "Fish Tank"],
+          "winner_recipients": ["Park Chan-wook", "Andrea Arnold"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Park Chan-wook (Thirst — Park's first Cannes Jury Prize, he later won Best Director in 2022 for Decision to Leave) shares with Andrea Arnold (Fish Tank — her second Jury Prize after Red Road 2006). Both rows correctly flagged co_winner=true.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Kinatay",
+          "winner_recipient": "Brillante Mendoza",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brillante Mendoza's first Cannes Best Director — the first Filipino filmmaker to win the category. The win was widely controversial at the time given Kinatay's brutal subject matter; Roger Ebert famously called it 'the worst film in the history of the Cannes Film Festival'.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Inglourious Basterds",
+          "winner_recipient": "Christoph Waltz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Christoph Waltz's first Cannes Best Actor — for portraying Hans Landa in Quentin Tarantino's Inglourious Basterds. Waltz went on to win the Oscar for Best Supporting Actor for the same role at cer 82 the same year. He later won a second Best Supporting Actor Oscar at cer 85 (Django Unchained, also a Tarantino film).",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Antichrist",
+          "winner_recipient": "Charlotte Gainsbourg",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Charlotte Gainsbourg's first Cannes Best Actress — for Lars von Trier's Antichrist, a divisive selection that prompted significant critical pushback at the festival.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Spring Fever",
+          "winner_recipient": "Mei Feng",
+          "expected_winner_count": 1,
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Samson and Delilah",
+          "winner_recipient": "Warwick Thornton",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Warwick Thornton's debut feature wins Caméra d'Or — Australia's first Caméra d'Or in the modern era, and an early high-profile Indigenous Australian filmmaker win at Cannes.",
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Arena",
+          "winner_recipient": "João Salaviza",
+          "expected_winner_count": 1,
+          "source": "62nd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2010": {
+      "ceremony_year": 2010,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Uncle Boonmee Who Can Recall His Past Lives",
+          "winner_recipient": "Apichatpong Weerasethakul",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Apichatpong Weerasethakul's first Palme d'Or — Thailand's first Palme. The first Asian Palme since Shohei Imamura's The Eel in 1997 (a 13-year gap). Tim Burton's jury made the choice; Weerasethakul later shared the Jury Prize in 2021 for Memoria.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "[[Of Gods and Men (film)|Of Gods and Men]]",
+          "winner_recipient": "Xavier Beauvois",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Xavier Beauvois's first Grand Prix for Of Gods and Men. CSV film_title contains a wikitext markup leak '[[Of Gods and Men (film)|Of Gods and Men]]' instead of the canonical 'Of Gods and Men' — same parser fault class as cer 2011 short_film_palme_dor. See known-issue cannes-short-film-wikitext-leak-2026-05-04 (scope expanded to cover Grand Prix as well as short film). Phase E winner_film matches the CSV artifact verbatim so verification passes; canonical title is 'Of Gods and Men'.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "A Screaming Man",
+          "winner_recipient": "Mahamat-Saleh Haroun",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mahamat-Saleh Haroun's first major Cannes prize — Chad's first major Cannes win.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "On Tour",
+          "winner_recipient": "Mathieu Amalric",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mathieu Amalric's first Cannes Best Director — better known as an actor (he had played the Bond villain in Quantum of Solace, 2008), the win was a notable actor-to-director crossover honour.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Biutiful",
+          "winner_recipient": "Javier Bardem",
+          "winner_films": ["Biutiful", "Our Life"],
+          "winner_recipients": ["Javier Bardem", "Elio Germano"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Javier Bardem (Biutiful) shares Best Actor with Elio Germano (Our Life). Bardem went on to receive a Best Actor Oscar nomination for Biutiful at cer 83. Both rows correctly flagged co_winner=true.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Certified Copy",
+          "winner_recipient": "Juliette Binoche",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Juliette Binoche's first Cannes Best Actress — for Abbas Kiarostami's Certified Copy. Binoche had received a Best Supporting Actress Oscar (The English Patient, 1997) more than a decade earlier.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Poetry",
+          "winner_recipient": "Lee Chang-dong",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lee Chang-dong's first Cannes Best Screenplay — South Korean filmmaker's prestige festival win.",
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Año Bisiesto",
+          "winner_recipient": "Michael Rowe",
+          "expected_winner_count": 1,
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Barking Island",
+          "winner_recipient": "Serge Avédikian",
+          "expected_winner_count": 1,
+          "source": "63rd Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
     "2011": {
       "ceremony_year": 2011,
       "category_count": 8,
