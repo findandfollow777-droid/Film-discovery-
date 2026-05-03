@@ -50,6 +50,52 @@
   // Path prefix for navigation
   const _pagesPrefix = OrbitUtils.ROOT + 'pages/';
 
+  /* ============================================================
+     BOX OFFICE FETCH + CACHE — Added May 3, 2026
+     Sums TMDB revenue across the 6 signature films for the Signature
+     face stats bar. Uses sessionStorage per-movie cache (Rule 28) so
+     re-opens are free. localStorage key registry (Rule 8): keys are
+     sessionStorage scoped, prefix `orbit_pcube_revenue_<movieId>`,
+     stores `{ revenue: number, cached_at: ms }`.
+     ============================================================ */
+
+  var PCUBE_REVENUE_PREFIX = 'orbit_pcube_revenue_';
+
+  function getCachedRevenue(movieId) {
+    try {
+      var raw = sessionStorage.getItem(PCUBE_REVENUE_PREFIX + movieId);
+      if (!raw) return null;
+      var entry = JSON.parse(raw);
+      return typeof entry.revenue === 'number' ? entry.revenue : null;
+    } catch (e) { return null; }
+  }
+
+  function setCachedRevenue(movieId, revenue) {
+    try {
+      sessionStorage.setItem(
+        PCUBE_REVENUE_PREFIX + movieId,
+        JSON.stringify({ revenue: revenue, cached_at: Date.now() })
+      );
+    } catch (e) { /* quota — silent */ }
+  }
+
+  function fetchRevenue(movieId) {
+    var cached = getCachedRevenue(movieId);
+    if (cached !== null) return Promise.resolve(cached);
+    return OrbitUtils.tmdbFetch('/movie/' + movieId).then(function(m) {
+      var rev = (m && typeof m.revenue === 'number') ? m.revenue : 0;
+      setCachedRevenue(movieId, rev);
+      return rev;
+    }).catch(function() { return 0; });
+  }
+
+  function formatRevenue(total) {
+    if (!total || total <= 0) return '—';
+    if (total >= 1e9) return '$' + (total / 1e9).toFixed(1) + 'B';
+    if (total >= 1e6) return '$' + Math.round(total / 1e6) + 'M';
+    return '$' + Math.round(total / 1e3) + 'K';
+  }
+
   // ── SessionStorage Cache ──
 
   function getCached(personId) {
@@ -412,20 +458,8 @@
       }
     });
 
-    // Action button clicks on Face 4 (primary + share secondary)
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('#peopleCubeOverlay [data-action]');
-      if (!btn) return;
-      // Don't double-fire on the bookmark button (it has its own handler).
-      if (btn.classList.contains('pcube-bookmark-btn')) return;
-      handleAction(btn.dataset.action);
-    });
-
-    // Bookmark toggle on Face 4
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('#peopleCubeOverlay .pcube-bookmark-btn');
-      if (btn) handleBookmark(btn);
-    });
+    // Face 4 click handlers are bound directly in populateActionsFace()
+    // (per-button addEventListener) — see that function for wiring.
 
     // Trivia option clicks on Face 5
     document.addEventListener('click', function(e) {
@@ -727,29 +761,34 @@
       var posterHTML = r.poster_path
         ? '<img class="pcube-sig-poster" src="' + imgUrl(r.poster_path, 'w185') + '" alt="' + esc(r.title) + '" loading="lazy">'
         : '<div class="pcube-sig-no-poster">?</div>';
-      var charHTML = r.role ? '<div class="pcube-sig-char">' + esc(r.role) + '</div>' : '';
       var ratingHTML = r.vote_average
         ? '<div class="pcube-sig-rating"><span class="og og-star" aria-hidden="true"></span> ' + r.vote_average.toFixed(1) + '</div>'
         : '';
+      var yearHTML = year ? '<div class="pcube-sig-year">' + year + '</div>' : '';
 
       return '<div class="pcube-sig-card" data-movie-id="' + r.id + '">' +
         posterHTML +
-        '<div class="pcube-sig-title">' + esc(r.title) +
-          ' <span class="pcube-sig-year">' + year + '</span></div>' +
-        charHTML +
-        ratingHTML +
-        '</div>';
+        '<div class="pcube-sig-overlay">' +
+          '<div class="pcube-sig-title">' + esc(r.title) + '</div>' +
+          yearHTML +
+          ratingHTML +
+        '</div>' +
+      '</div>';
     }).join('');
 
     var statsBarHTML =
       '<div class="pcube-stats-bar">' +
         '<div class="pcube-stats-bar-cell">' +
           '<div class="pcube-stats-bar-value pcube-stats-bar-value--rating">' + avgRating + '</div>' +
-          '<div class="pcube-stats-bar-label">Avg Rating</div>' +
+          '<div class="pcube-stats-bar-label">Rating</div>' +
+        '</div>' +
+        '<div class="pcube-stats-bar-cell">' +
+          '<div class="pcube-stats-bar-value pcube-stats-bar-value--bo" id="pcubeSigBo">…</div>' +
+          '<div class="pcube-stats-bar-label">Box Office</div>' +
         '</div>' +
         '<div class="pcube-stats-bar-cell">' +
           '<div class="pcube-stats-bar-value pcube-stats-bar-value--count">' + totalFilms + '</div>' +
-          '<div class="pcube-stats-bar-label">Total Films</div>' +
+          '<div class="pcube-stats-bar-label">Films</div>' +
         '</div>' +
       '</div>';
 
@@ -758,6 +797,22 @@
       '<div class="pcube-face-subhead">' + subhead + '</div>' +
       '<div class="' + gridClass + '">' + cardsHTML + '</div>' +
       statsBarHTML;
+
+    // Lazy-fetch revenue for the rendered roles. Cached per movieId in
+    // sessionStorage so re-opens are zero-cost.
+    var personIdAtFetch = pcubePersonData.person.id;
+    Promise.all(roles.map(function(r) { return fetchRevenue(r.id); }))
+      .then(function(revenues) {
+        // Bail if user closed or switched person while we were fetching.
+        if (!pcubePersonData || pcubePersonData.person.id !== personIdAtFetch) return;
+        var total = revenues.reduce(function(a, b) { return a + (b || 0); }, 0);
+        var boEl = document.getElementById('pcubeSigBo');
+        if (boEl) boEl.textContent = formatRevenue(total);
+      })
+      .catch(function() {
+        var boEl = document.getElementById('pcubeSigBo');
+        if (boEl) boEl.textContent = '—';
+      });
   }
 
   // ── Face 3: Career Profile ──
@@ -893,6 +948,25 @@
           '<span>Share</span>' +
         '</button>' +
       '</div>';
+
+    // Wire each button directly. More reliable than document-level
+    // delegation because buttons are rebuilt on every cube open.
+    el.querySelectorAll('.pcube-action-btn[data-action], .pcube-share-btn[data-action]')
+      .forEach(function (btn) {
+        btn.addEventListener('click', function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          handleAction(btn.dataset.action);
+        });
+      });
+    var bookmarkBtn = el.querySelector('.pcube-bookmark-btn');
+    if (bookmarkBtn) {
+      bookmarkBtn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        handleBookmark(bookmarkBtn);
+      });
+    }
   }
 
   // Trivia stats come from shared trivia-stats.js (window.getTriviaStats, etc.)
