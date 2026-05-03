@@ -102,11 +102,21 @@ def phase_c_structural(rows, year, expectations):
 
     Cannes-specific checks:
       - 8 distinct categories present (no missing category)
-      - All rows have result="won" (winners-only schema)
-      - No empty film_title
-      - recipients_json valid JSON list
-      - required fields populated
       - row count >= 8 (more allowed for ties / team awards)
+      - every expected category has >= 1 winner row
+      - all rows have result="won" (winners-only schema — no nominee rows)
+      - no empty film_title
+      - recipients_json valid JSON list
+      - recipients_json non-empty (every winner row must name at least
+        one recipient — added Phase 2)
+      - all rows have verified_status="auto_verified" (Cannes has no DLu
+        cross-check so any other value indicates a manual override or a
+        scraper bug — added Phase 2)
+      - required fields populated
+      - zero rows with verified_status="flagged" (kept for symmetry with
+        Oscar wrapper)
+      - co_winner informational count (always passes — surface count of
+        co-winner rows for visibility — added Phase 2)
     """
     checks = []
     cat_ids = [r["category_id"] for r in rows]
@@ -155,17 +165,27 @@ def phase_c_structural(rows, year, expectations):
 
     # Check 6: recipients_json is valid list
     json_errors = 0
+    empty_recipients = 0
     for r in rows:
         try:
             j = json.loads(r.get("recipients_json", "[]"))
             if not isinstance(j, list):
                 json_errors += 1
+            elif len(j) == 0:
+                empty_recipients += 1
         except (json.JSONDecodeError, TypeError):
             json_errors += 1
     checks.append(("recipients_json_valid", json_errors == 0,
                    f"errors={json_errors}"))
 
-    # Check 7: required fields populated
+    # Check 7: recipients_json non-empty (every winner row must name at
+    # least one recipient). Added Phase 2 — catches rows where the
+    # parser produced a winner with film_title but no extracted person
+    # names, indicating a parse-recipient regression.
+    checks.append(("recipients_non_empty", empty_recipients == 0,
+                   f"empty_recipient_rows={empty_recipients}"))
+
+    # Check 8: required fields populated
     missing_fields = 0
     for r in rows:
         for field in REQUIRED_FIELDS:
@@ -174,11 +194,26 @@ def phase_c_structural(rows, year, expectations):
     checks.append(("required_fields", missing_fields == 0,
                    f"missing_values={missing_fields}"))
 
-    # Check 8: zero_flagged (parallel to Oscar wrapper).
-    # Cannes always sets verified_status="auto_verified" so this should
-    # always pass — but the check is here for symmetry with other festivals.
+    # Check 9: verified_status equals "auto_verified" for all rows.
+    # Added Phase 2 — Cannes has no DLu cross-check, so any value other
+    # than "auto_verified" indicates either a manual override that
+    # wasn't documented in known-issues, or a scraper bug.
+    bad_verified = sum(1 for r in rows if r.get("verified_status") != "auto_verified")
+    checks.append(("verified_status_auto_verified", bad_verified == 0,
+                   f"non_auto_verified_rows={bad_verified}"))
+
+    # Check 10: zero_flagged (kept for symmetry with Oscar wrapper —
+    # subset of Check 9, but useful as a separate signal in reports).
     flagged = sum(1 for r in rows if r.get("verified_status") == "flagged")
     checks.append(("zero_flagged", flagged == 0, f"flagged={flagged}"))
+
+    # Check 11: co_winner informational count. Added Phase 2 — surface
+    # the number of co-winner rows for visibility. Always passes (this
+    # is real Cannes data — ties are common); the count just makes the
+    # tie density explicit in reports.
+    co_winners = sum(1 for r in rows if str(r.get("co_winner", "")).lower() == "true")
+    checks.append(("co_winner_count_info", True,
+                   f"co_winner_rows={co_winners} (informational)"))
 
     return checks
 
