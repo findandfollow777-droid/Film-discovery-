@@ -305,9 +305,12 @@
 
   function injectPeopleCubeHTML() {
     var html = `
-      <div class="pcube-overlay" id="peopleCubeOverlay" hidden>
+      <div class="pcube-overlay" id="peopleCubeOverlay" data-orbit-popup hidden>
         <div class="pcube-popup">
-          <button class="pcube-close" id="pcubeCloseBtn">\u2715</button>
+          <span class="pcube-particle pcube-particle--1" aria-hidden="true"></span>
+          <span class="pcube-particle pcube-particle--2" aria-hidden="true"></span>
+          <span class="pcube-particle pcube-particle--3" aria-hidden="true"></span>
+          <button class="pcube-close orbit-close" id="pcubeCloseBtn" aria-label="Close">\u2715</button>
           <div class="pcube-nav">
             <button class="pcube-nav-btn active" data-face="1">Identity</button>
             <button class="pcube-nav-btn" data-face="2">Signature</button>
@@ -346,19 +349,40 @@
   // ── Events ──
 
   function setupEvents() {
+    // Rule 17: trigger Black Hole exit, then run closePeopleCube teardown.
+    // CSS keyframes live in orbit-close.css.
+    function triggerOrbitClose() {
+      var btn = document.getElementById('pcubeCloseBtn');
+      if (pcubeOverlay && pcubeOverlay.classList.contains('orbit-popup-closing')) return;
+      if (btn) btn.classList.add('closing');
+      if (pcubeOverlay) pcubeOverlay.classList.add('orbit-popup-closing');
+      var reduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () {
+        if (btn) btn.classList.remove('closing');
+        if (pcubeOverlay) pcubeOverlay.classList.remove('orbit-popup-closing');
+        closePeopleCube();
+      }, reduced ? 200 : 600);
+    }
+    if (pcubeOverlay) pcubeOverlay._triggerOrbitClose = triggerOrbitClose;
+
     // Close button
-    document.getElementById('pcubeCloseBtn').addEventListener('click', closePeopleCube);
+    document.getElementById('pcubeCloseBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose();
+    });
 
     // Backdrop click
     document.getElementById('peopleCubeOverlay').addEventListener('click', function(e) {
-      if (e.target === this) closePeopleCube();
+      if (e.target === this) triggerOrbitClose();
     });
 
     // Keyboard: Escape to close, arrows to navigate
     document.addEventListener('keydown', function(e) {
       if (!pcubeOverlay || pcubeOverlay.hidden) return;
       if (e.key === 'Escape') {
-        closePeopleCube();
+        triggerOrbitClose();
       } else if (e.key === 'ArrowRight') {
         rotateTo(currentFace >= 5 ? 1 : currentFace + 1);
       } else if (e.key === 'ArrowLeft') {
@@ -564,40 +588,50 @@
     // Age
     var age = calcAge(p.birthday, p.deathday);
 
-    // Career span text
+    // Build the four info-grid cells: Born/Died, From, Career, Credits
+    function card(label, value, modifier) {
+      var cls = 'pcube-info-card' + (modifier ? ' ' + modifier : '');
+      return '<div class="' + cls + '">' +
+        '<div class="pcube-info-label">' + esc(label) + '</div>' +
+        '<div class="pcube-info-value">' + value + '</div>' +
+      '</div>';
+    }
+
+    var cards = [];
+
+    // Cell 1: Born or Died
+    if (p.deathday) {
+      var diedText = formatDate(p.deathday);
+      if (age !== null) diedText += ' (' + age + ')';
+      cards.push(card('Died', esc(diedText), 'pcube-info-card--memorial'));
+    } else if (p.birthday) {
+      var bornText = formatDate(p.birthday);
+      if (age !== null) bornText += ' (' + age + ')';
+      cards.push(card('Born', esc(bornText)));
+    } else {
+      cards.push(card('Born', '<span class="pcube-memorial">Unknown</span>'));
+    }
+
+    // Cell 2: From
+    cards.push(card('From', p.place_of_birth ? esc(p.place_of_birth) : '<span class="pcube-memorial">Unknown</span>'));
+
+    // Cell 3: Career span
     var careerText = '';
     if (span.from) {
       var toYear = span.to && span.to < new Date().getFullYear() - 1 ? span.to : 'present';
-      careerText = span.from + ' \u2014 ' + toYear;
-      if (span.years > 0) careerText += ' (' + span.years + ' years)';
+      careerText = span.from + '\u2013' + toYear;
+      if (span.years > 0) careerText += ' (' + span.years + 'y)';
+    } else {
+      careerText = '\u2014';
     }
+    cards.push(card('Career', esc(careerText)));
 
-    // Meta rows
-    var metaHTML = '';
+    // Cell 4: Credits
+    cards.push(card('Credits', filmCount + ' film' + (filmCount !== 1 ? 's' : '')));
 
-    if (p.birthday) {
-      var bornText = formatDate(p.birthday);
-      if (age !== null && !p.deathday) bornText += ' (age ' + age + ')';
-      metaHTML += '<div class="pcube-meta-row"><span class="pcube-meta-label">Born</span><span class="pcube-meta-value">' + bornText + '</span></div>';
-    }
+    var infoGridHTML = '<div class="pcube-info-grid">' + cards.join('') + '</div>';
 
-    if (p.deathday) {
-      var diedText = formatDate(p.deathday);
-      if (age !== null) diedText += ' (age ' + age + ')';
-      metaHTML += '<div class="pcube-meta-row pcube-memorial"><span class="pcube-meta-label">Died</span><span class="pcube-meta-value">' + diedText + '</span></div>';
-    }
-
-    if (p.place_of_birth) {
-      metaHTML += '<div class="pcube-meta-row"><span class="pcube-meta-label">From</span><span class="pcube-meta-value">' + esc(p.place_of_birth) + '</span></div>';
-    }
-
-    if (careerText) {
-      metaHTML += '<div class="pcube-meta-row"><span class="pcube-meta-label">Career</span><span class="pcube-meta-value">' + careerText + '</span></div>';
-    }
-
-    metaHTML += '<div class="pcube-meta-row"><span class="pcube-meta-label">Credits</span><span class="pcube-meta-value">' + filmCount + ' films</span></div>';
-
-    // Awards summary
+    // Awards badge \u2014 purple panel + gold trophy glyph (Rule 11)
     var awardsHTML = '';
     var awards = pcubePersonData.awards;
     if (awards.length > 0) {
@@ -608,19 +642,24 @@
         var festivalWins = {};
         wins.forEach(function(a) { festivalWins[a.festival] = (festivalWins[a.festival] || 0) + 1; });
         var topFestival = Object.entries(festivalWins).sort(function(a, b) { return b[1] - a[1]; });
-        parts.push('\u00d7' + wins.length + ' win' + (wins.length !== 1 ? 's' : ''));
-        if (topFestival.length > 0) parts[0] += ' (' + topFestival[0][0] + ')';
+        var winText = '<strong>' + wins.length + ' win' + (wins.length !== 1 ? 's' : '') + '</strong>';
+        if (topFestival.length > 0) winText += ' \u00b7 ' + esc(topFestival[0][0]);
+        parts.push(winText);
       }
       if (noms.length > 0) {
-        parts.push('\u00d7' + noms.length + ' nom' + (noms.length !== 1 ? 's' : ''));
+        parts.push(noms.length + ' nom' + (noms.length !== 1 ? 's' : ''));
       }
-      awardsHTML = '<div class="pcube-awards-line">\uD83C\uDFC6 ' + parts.join(' \u00b7 ') + '</div>';
+      awardsHTML =
+        '<div class="pcube-awards-badge">' +
+          '<span class="og og-trophy" aria-hidden="true"></span>' +
+          '<span class="pcube-awards-badge-text">' + parts.join(' &nbsp;\u00b7&nbsp; ') + '</span>' +
+        '</div>';
     }
 
     el.innerHTML = photoHTML +
       '<h2 class="pcube-name">' + esc(p.name) + '</h2>' +
       '<span class="pcube-dept-badge">' + esc(deptLabel) + '</span>' +
-      '<div class="pcube-meta">' + metaHTML + '</div>' +
+      infoGridHTML +
       awardsHTML;
   }
 
@@ -634,35 +673,88 @@
     var isActor = dept === 'Acting';
 
     var roles = isActor ? pcubePersonData.signatureRoles : pcubePersonData.keyFilms;
-    // Fallback: if actor has no cast roles, show key films
     if (roles.length === 0) roles = pcubePersonData.keyFilms;
 
     var heading = isActor ? 'Signature Roles' : 'Key Films';
+    var subhead = isActor ? 'The defining performances' : 'Defining works';
 
     if (roles.length === 0) {
-      el.innerHTML = '<div class="pcube-face-header">' + heading + '</div>' +
-        '<p style="color:var(--ghost-gray);text-align:center;font-size:13px;margin-top:40px;">No credits found</p>';
+      el.innerHTML =
+        '<div class="pcube-face-header">' + heading + '</div>' +
+        '<p style="color:var(--muted-silver);text-align:center;font-size:14px;margin-top:40px;">No credits found</p>';
       return;
     }
+
+    // Pad to exactly 6 from the broader filmography (highest-rated first,
+    // then by popularity), de-duped against IDs already in `roles`.
+    var TARGET = 6;
+    var seen = {};
+    roles.forEach(function(r) { seen[r.id] = true; });
+    if (roles.length < TARGET) {
+      var pool = (pcubePersonData.filmography || []).slice().sort(function(a, b) {
+        var av = (b.vote_average || 0) - (a.vote_average || 0);
+        if (av !== 0) return av;
+        return (b.popularity || 0) - (a.popularity || 0);
+      });
+      for (var i = 0; i < pool.length && roles.length < TARGET; i++) {
+        var f = pool[i];
+        if (!seen[f.id]) {
+          roles = roles.concat([f]);
+          seen[f.id] = true;
+        }
+      }
+    }
+    roles = roles.slice(0, TARGET);
+
+    // Stats from the films we render
+    var ratingTotal = 0, ratingCount = 0;
+    roles.forEach(function(r) {
+      if (typeof r.vote_average === 'number' && r.vote_average > 0) {
+        ratingTotal += r.vote_average;
+        ratingCount++;
+      }
+    });
+    var avgRating = ratingCount > 0 ? (ratingTotal / ratingCount).toFixed(1) : '\u2014';
+    var totalFilms = (pcubePersonData.filmography || []).length;
+
+    var gridClass = roles.length < 6 ? 'pcube-sig-grid pcube-sig-grid--two' : 'pcube-sig-grid';
 
     var cardsHTML = roles.map(function(r) {
       var year = r.release_date ? r.release_date.substring(0, 4) : '';
       var posterHTML = r.poster_path
-        ? '<img class="pcube-sig-poster" src="' + imgUrl(r.poster_path, 'w92') + '" alt="' + esc(r.title) + '" loading="lazy">'
+        ? '<img class="pcube-sig-poster" src="' + imgUrl(r.poster_path, 'w185') + '" alt="' + esc(r.title) + '" loading="lazy">'
         : '<div class="pcube-sig-no-poster">?</div>';
       var charHTML = r.role ? '<div class="pcube-sig-char">' + esc(r.role) + '</div>' : '';
-      var ratingHTML = r.vote_average ? '<div class="pcube-sig-rating">\u2605 ' + r.vote_average.toFixed(1) + '</div>' : '';
+      var ratingHTML = r.vote_average
+        ? '<div class="pcube-sig-rating"><span class="og og-star" aria-hidden="true"></span> ' + r.vote_average.toFixed(1) + '</div>'
+        : '';
 
       return '<div class="pcube-sig-card" data-movie-id="' + r.id + '">' +
         posterHTML +
-        '<div class="pcube-sig-title">' + esc(r.title) + ' <span class="pcube-sig-year">' + year + '</span></div>' +
+        '<div class="pcube-sig-title">' + esc(r.title) +
+          ' <span class="pcube-sig-year">' + year + '</span></div>' +
         charHTML +
         ratingHTML +
         '</div>';
     }).join('');
 
-    el.innerHTML = '<div class="pcube-face-header">' + heading + '</div>' +
-      '<div class="pcube-sig-grid">' + cardsHTML + '</div>';
+    var statsBarHTML =
+      '<div class="pcube-stats-bar">' +
+        '<div class="pcube-stats-bar-cell">' +
+          '<div class="pcube-stats-bar-value pcube-stats-bar-value--rating">' + avgRating + '</div>' +
+          '<div class="pcube-stats-bar-label">Avg Rating</div>' +
+        '</div>' +
+        '<div class="pcube-stats-bar-cell">' +
+          '<div class="pcube-stats-bar-value pcube-stats-bar-value--count">' + totalFilms + '</div>' +
+          '<div class="pcube-stats-bar-label">Total Films</div>' +
+        '</div>' +
+      '</div>';
+
+    el.innerHTML =
+      '<div class="pcube-face-header">' + heading + '</div>' +
+      '<div class="pcube-face-subhead">' + subhead + '</div>' +
+      '<div class="' + gridClass + '">' + cardsHTML + '</div>' +
+      statsBarHTML;
   }
 
   // ── Face 3: Career Profile ──
@@ -695,25 +787,37 @@
       html += '</div>';
     }
 
-    // Stats
+    // Stats — 2-col grid of labelled cards with colored numbers
     html += '<div class="pcube-section-title">Stats</div>';
     html += '<div class="pcube-stat-block">';
 
     if (decade) {
-      html += '<div class="pcube-stat-row"><span class="pcube-stat-label">Most Prominent Decade</span><span class="pcube-stat-value">' + decade + 's</span></div>';
+      html += '<div class="pcube-stat-row">' +
+        '<span class="pcube-stat-label">Prominent Decade</span>' +
+        '<span class="pcube-stat-value pcube-stat-value--purple">' + decade + 's</span>' +
+      '</div>';
     }
 
-    html += '<div class="pcube-stat-row"><span class="pcube-stat-label">Total Credits</span><span class="pcube-stat-value">' + filmCount + '</span></div>';
+    html += '<div class="pcube-stat-row">' +
+      '<span class="pcube-stat-label">Total Credits</span>' +
+      '<span class="pcube-stat-value pcube-stat-value--cyan">' + filmCount + '</span>' +
+    '</div>';
 
-    // Awards summary
     if (awards.length > 0) {
       var wins = awards.filter(function(a) { return a.won; }).length;
       var noms = awards.filter(function(a) { return !a.won; }).length;
-      var awardsText = '';
-      if (wins > 0) awardsText += wins + ' win' + (wins !== 1 ? 's' : '');
-      if (wins > 0 && noms > 0) awardsText += ', ';
-      if (noms > 0) awardsText += noms + ' nom' + (noms !== 1 ? 's' : '');
-      html += '<div class="pcube-stat-row"><span class="pcube-stat-label">Awards</span><span class="pcube-stat-value">' + awardsText + '</span></div>';
+      if (wins > 0) {
+        html += '<div class="pcube-stat-row">' +
+          '<span class="pcube-stat-label">Wins</span>' +
+          '<span class="pcube-stat-value pcube-stat-value--gold">' + wins + '</span>' +
+        '</div>';
+      }
+      if (noms > 0) {
+        html += '<div class="pcube-stat-row">' +
+          '<span class="pcube-stat-label">Nominations</span>' +
+          '<span class="pcube-stat-value">' + noms + '</span>' +
+        '</div>';
+      }
     }
 
     html += '</div>';
@@ -753,24 +857,39 @@
       } catch (e) { /* ignore */ }
     }
 
+    var firstName = (p.name || '').split(' ')[0] || p.name || 'them';
+
     el.innerHTML =
       '<div class="pcube-face-header">Explore</div>' +
+      '<div class="pcube-face-subhead">Navigate ' + esc(firstName) + '\u2019s ORBIT</div>' +
       '<div class="pcube-actions-list">' +
         '<button class="pcube-action-btn" data-action="profile">' +
-          '<div><div>Open Full Profile</div><div class="pcube-action-subtitle">Deep dive into their career</div></div>' +
+          '<span class="pcube-action-icon"><span class="og og-film" aria-hidden="true"></span></span>' +
+          '<span class="pcube-action-body">' +
+            '<span class="pcube-action-title">Full Profile</span>' +
+            '<span class="pcube-action-subtitle">Deep dive into their career</span>' +
+          '</span>' +
           '<span class="pcube-action-arrow">\u2192</span>' +
         '</button>' +
         '<button class="pcube-action-btn" data-action="timeline">' +
-          '<div><div>Sacred Timeline</div><div class="pcube-action-subtitle">Visual career chronology</div></div>' +
+          '<span class="pcube-action-icon"><span class="og og-calendar" aria-hidden="true"></span></span>' +
+          '<span class="pcube-action-body">' +
+            '<span class="pcube-action-title">Sacred Timeline</span>' +
+            '<span class="pcube-action-subtitle">Visual career chronology</span>' +
+          '</span>' +
           '<span class="pcube-action-arrow">\u2192</span>' +
         '</button>' +
-        '<button class="pcube-action-btn" data-action="observatory">' +
-          '<div><div>The Observatory</div><div class="pcube-action-subtitle">People discovery hub</div></div>' +
+        '<button class="pcube-action-btn pcube-action-btn--secondary" data-action="observatory">' +
+          '<span class="pcube-action-icon"><span class="og og-galaxy" aria-hidden="true"></span></span>' +
+          '<span class="pcube-action-body">' +
+            '<span class="pcube-action-title">The Observatory</span>' +
+            '<span class="pcube-action-subtitle">People discovery hub</span>' +
+          '</span>' +
           '<span class="pcube-action-arrow">\u2192</span>' +
         '</button>' +
       '</div>' +
       '<button class="pcube-bookmark-btn' + (isBookmarked ? ' bookmarked' : '') + '">' +
-        '<span class="pcube-bookmark-star">' + (isBookmarked ? '\u2605' : '\u2606') + '</span>' +
+        '<span class="pcube-bookmark-star og og-star" aria-hidden="true"></span>' +
         '<span class="pcube-bookmark-label">' + (isBookmarked ? 'Bookmarked' : 'Bookmark') + '</span>' +
       '</button>';
   }
@@ -1214,17 +1333,34 @@
     var newState = window.OrbitEncounters.toggleBookmark(personId);
 
     btn.classList.toggle('bookmarked', newState);
-    var star = btn.querySelector('.pcube-bookmark-star');
     var label = btn.querySelector('.pcube-bookmark-label');
-    if (star) star.textContent = newState ? '\u2605' : '\u2606';
     if (label) label.textContent = newState ? 'Bookmarked' : 'Bookmark';
+    // Star uses og-star glyph; bookmarked state is handled by CSS opacity/filter.
   }
 
   // ── Init ──
 
+  /* ============================================================
+     ORBIT CLOSE BOOTSTRAP — Added Apr 27, 2026 (Rule 17)
+     Auto-loads orbit-close.css so the People Cube X gets the
+     Black Hole exit animation without needing a per-page <link>.
+     ============================================================ */
+  function ensureOrbitCloseLoaded() {
+    var root = (window.OrbitUtils && OrbitUtils.ROOT) ? OrbitUtils.ROOT : '';
+    if (!document.querySelector('link[data-orbit-close]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = root + 'orbit-close.css';
+      link.setAttribute('data-orbit-close', '');
+      document.head.appendChild(link);
+    }
+  }
+
   function initPeopleCube(options) {
     options = options || {};
     onMovieClick = options.onMovieClick || null;
+
+    ensureOrbitCloseLoaded();
 
     if (!document.getElementById('peopleCubeOverlay')) {
       injectPeopleCubeHTML();
