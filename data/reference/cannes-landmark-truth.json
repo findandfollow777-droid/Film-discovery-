@@ -2,6 +2,403 @@
   "schema_version": "v1",
   "festival": "cannes",
   "ceremonies": {
+    "2011": {
+      "ceremony_year": 2011,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "The Tree of Life",
+          "winner_recipient": "Terrence Malick",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Terrence Malick's first and only Palme d'Or. The first American filmmaker to win the Palme d'Or since Michael Moore's Fahrenheit 9/11 in 2004, and the first non-documentary American Palme winner since Quentin Tarantino's Pulp Fiction in 1994. Malick was famously absent from the ceremony; producers Bill Pohlad and Sarah Green accepted on his behalf.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Once Upon a Time in Anatolia",
+          "winner_recipient": "Nuri Bilge Ceylan",
+          "winner_films": ["Once Upon a Time in Anatolia", "The Kid with a Bike"],
+          "winner_recipients": ["Nuri Bilge Ceylan", "Jean-Pierre and Luc Dardenne"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Nuri Bilge Ceylan (Once Upon a Time in Anatolia) shares Grand Prix with the Dardenne brothers (The Kid with a Bike). Both rows correctly flagged co_winner=true.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Polisse",
+          "winner_recipient": "Maïwenn",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Maïwenn's first major Cannes prize.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Drive",
+          "winner_recipient": "Nicolas Winding Refn",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nicolas Winding Refn's first Cannes Best Director — a high-profile genre-cinema win for the Danish filmmaker's stylized neo-noir Drive.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Artist",
+          "winner_recipient": "Jean Dujardin",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jean Dujardin's first Cannes Best Actor — for a (predominantly) silent black-and-white performance in The Artist. He went on to win Best Actor at the 84th Academy Awards (cer 84) for the same role, becoming the first French actor to win the Oscar Best Actor.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Melancholia",
+          "winner_recipient": "Kirsten Dunst",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kirsten Dunst's first Cannes Best Actress. The award came amid a controversial press conference at which director Lars von Trier was declared persona non grata by the festival.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Footnote",
+          "winner_recipient": "Joseph Cedar",
+          "expected_winner_count": 1,
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Las Acacias",
+          "winner_recipient": "Pablo Giorgelli",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Argentina's Caméra d'Or for a debut feature.",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Cross-Country",
+          "winner_recipient": "Maryna Vroda",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ukraine's first Short Film Palme d'Or. CSV film_title contains raw wikitext markup '[[Cross-Country (2011 film)|Cross-Country]]' — parser leak in the section-heading-driven Pass 2 path. Canonical title is 'Cross-Country'. See known-issue cannes-short-film-wikitext-leak-2026-05-04. Phase E winner_film check passes via fuzzy substring match (canonical 'Cross-Country' is a substring of the leaked text).",
+          "source": "64th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2012": {
+      "ceremony_year": 2012,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Amour",
+          "winner_recipient": "Michael Haneke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Haneke's second Palme d'Or (after The White Ribbon, 2009) — only the seventh director to win two Palmes (Bille August, Emir Kusturica, Shohei Imamura, Francis Ford Coppola, Alf Sjöberg, Dardenne brothers, Haneke). Amour went on to win Best International Feature and receive five total Oscar nominations at the 85th Academy Awards (cer 85).",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Reality",
+          "winner_recipient": "Matteo Garrone",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Matteo Garrone's second Grand Prix (after Gomorrah, 2008).",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "The Angels' Share",
+          "winner_recipient": "Ken Loach",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ken Loach's third Jury Prize at Cannes — Loach later won his second Palme d'Or in 2016 (I, Daniel Blake).",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Post Tenebras Lux",
+          "winner_recipient": "Carlos Reygadas",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Carlos Reygadas's first major Cannes prize — Mexican filmmaker's auteur breakthrough at the festival.",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Hunt",
+          "winner_recipient": "Mads Mikkelsen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mads Mikkelsen's first Cannes Best Actor — for Thomas Vinterberg's The Hunt.",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Beyond the Hills",
+          "winner_recipient": "Cristina Flutur",
+          "winner_recipients": ["Cristina Flutur", "Cosmina Stratan"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way team award. Cristina Flutur and Cosmina Stratan share Best Actress for the same film, Beyond the Hills (Cristian Mungiu). Beyond the Hills also won Best Screenplay at the same ceremony — a same-film triple honour. Both rows correctly flagged co_winner=true.",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Beyond the Hills",
+          "winner_recipient": "Cristian Mungiu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cristian Mungiu's first Best Screenplay at Cannes (he had previously won the Palme d'Or for 4 Months, 3 Weeks and 2 Days in 2007). Beyond the Hills also won Best Actress (shared) — a same-film cross-category honour.",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Beasts of the Southern Wild",
+          "winner_recipient": "Benh Zeitlin",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Benh Zeitlin's debut feature wins Caméra d'Or. Beasts of the Southern Wild went on to receive four Academy Award nominations at the 85th ceremony (cer 85), including Best Picture and Best Director — exceptionally rare cross-recognition for a Caméra d'Or-winning debut.",
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Silent",
+          "winner_recipient": "L. Rezan Yesilbas",
+          "expected_winner_count": 1,
+          "source": "65th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2013": {
+      "ceremony_year": 2013,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Blue Is the Warmest Colour",
+          "winner_recipient": "Abdellatif Kechiche",
+          "winner_recipients": ["Abdellatif Kechiche", "Adèle Exarchopoulos", "Léa Seydoux"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Steven Spielberg's jury made an unprecedented decision to award the Palme d'Or jointly to director Abdellatif Kechiche AND the two lead actresses Adèle Exarchopoulos and Léa Seydoux — the only time in Cannes history the Palme has been awarded to performers alongside the director. CSV recipients_json correctly captures all three recipients in a single row (the joint-Palme is encoded as one team award, not as a 3-way tie). Phase E winner_recipient check uses 'Abdellatif Kechiche' as the canonical primary recipient (matches first recipient in the row).",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Inside Llewyn Davis",
+          "winner_recipient": "Joel & Ethan Coen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "The Coen brothers' first Grand Prix at Cannes — they had previously won the Palme d'Or for Barton Fink in 1991 and Best Director for Fargo in 1996.",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Like Father, Like Son",
+          "winner_recipient": "Hirokazu Koreeda",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hirokazu Kore-eda's first Cannes prize. He later won the Palme d'Or in 2018 for Shoplifters.",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Heli",
+          "winner_recipient": "Amat Escalante",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Amat Escalante's first major Cannes prize — Mexican filmmaker, protégé of Carlos Reygadas (who had won Best Director the prior year, cer 2012).",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Nebraska",
+          "winner_recipient": "Bruce Dern",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bruce Dern's first Cannes Best Actor at age 76 — capped his career-late renaissance under Alexander Payne's direction.",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "The Past",
+          "winner_recipient": "Bérénice Bejo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bérénice Bejo's first Cannes Best Actress — for Asghar Farhadi's The Past, two years after her Oscar nomination for The Artist (cer 84).",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "A Touch of Sin",
+          "winner_recipient": "Jia Zhangke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jia Zhangke's first major Cannes prize — Chinese filmmaker's politically-charged anthology film.",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Ilo Ilo",
+          "winner_recipient": "Anthony Chen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Singapore's first Caméra d'Or.",
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Safe",
+          "winner_recipient": "Moon Byoung-gon",
+          "expected_winner_count": 1,
+          "source": "66th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2014": {
+      "ceremony_year": 2014,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Winter Sleep",
+          "winner_recipient": "Nuri Bilge Ceylan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nuri Bilge Ceylan's first Palme d'Or — Turkey's first Palme since Yılmaz Güney's Yol in 1982 (a 32-year gap). Ceylan had previously taken the Grand Prix in 2011 for Once Upon a Time in Anatolia.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "The Wonders",
+          "winner_recipient": "Alice Rohrwacher",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alice Rohrwacher's first Grand Prix — her breakthrough at Cannes. Rohrwacher later shared Best Screenplay in 2018 (Happy as Lazzaro).",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "Mommy",
+          "winner_recipient": "Xavier Dolan",
+          "winner_films": ["Mommy", "Goodbye to Language"],
+          "winner_recipients": ["Xavier Dolan", "Jean-Luc Godard"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Xavier Dolan (Mommy, age 25) shares Jury Prize with Jean-Luc Godard (Goodbye to Language, age 83) — a 58-year age gap between co-winners that became the festival's most-discussed pairing of the year. Godard did not attend. Both rows correctly flagged co_winner=true.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "Foxcatcher",
+          "winner_recipient": "Bennett Miller",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bennett Miller's first Cannes Best Director — Foxcatcher went on to receive five Academy Award nominations at the 87th ceremony (cer 87) including Best Director.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "Mr. Turner",
+          "winner_recipient": "Timothy Spall",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Timothy Spall's first major acting prize — for portraying J.M.W. Turner in Mike Leigh's Mr. Turner.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Maps to the Stars",
+          "winner_recipient": "Julianne Moore",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Julianne Moore's first Cannes Best Actress — she went on to win Best Actress at the 87th Academy Awards (cer 87) for Still Alice the same year.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Leviathan",
+          "winner_recipient": "Andrey Zvyagintsev",
+          "winner_recipients": ["Andrey Zvyagintsev", "Oleg Negin"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrey Zvyagintsev and Oleg Negin's first Cannes Best Screenplay — Leviathan went on to receive a Best International Feature nomination at the 87th Academy Awards (cer 87).",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Party Girl",
+          "winner_recipient": "Marie Amachoukeli",
+          "winner_recipients": ["Marie Amachoukeli", "Claire Burger", "Samuel Theis"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Co-directed feature debut by three filmmakers — exceptionally rare for the Caméra d'Or to go to a three-director team.",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Leidi",
+          "winner_recipient": "Simón Mesa Soto",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Colombia's first Short Film Palme d'Or. Simón Mesa Soto later won the Jury Prize as part of the 2025 three-way tie (A Poet).",
+          "source": "67th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
+    "2015": {
+      "ceremony_year": 2015,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "cannes.palme_dor": {
+          "winner_film": "Dheepan",
+          "winner_recipient": "Jacques Audiard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jacques Audiard's first Palme d'Or — a notable upset over heavily-favoured Son of Saul (which took Grand Prix). Audiard had previously won the Grand Prix in 2009 for A Prophet. Audiard later took the Jury Prize in 2024 for Emilia Pérez — his third major Cannes prize.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.grand_prix": {
+          "winner_film": "Son of Saul",
+          "winner_recipient": "László Nemes",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "László Nemes's debut feature wins the Grand Prix — exceptionally rare for a debut. Son of Saul went on to win Best International Feature at the 88th Academy Awards (cer 88) — Hungary's second International Feature Oscar.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.jury_prize": {
+          "winner_film": "The Lobster",
+          "winner_recipient": "Yorgos Lanthimos",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Yorgos Lanthimos's first Cannes Jury Prize — he later shared Best Screenplay in 2017 (The Killing of a Sacred Deer).",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_director": {
+          "winner_film": "The Assassin",
+          "winner_recipient": "Hou Hsiao-hsien",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hou Hsiao-hsien's first Cannes Best Director — Taiwan's first Best Director Cannes prize. The legendary Taiwanese auteur's first major Cannes win after decades of festival selections.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actor": {
+          "winner_film": "The Measure of a Man",
+          "winner_recipient": "Vincent Lindon",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Vincent Lindon's first Cannes Best Actor.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_actress": {
+          "winner_film": "Mon Roi",
+          "winner_recipient": "Emmanuelle Bercot",
+          "winner_films": ["Mon Roi", "Carol"],
+          "winner_recipients": ["Emmanuelle Bercot", "Rooney Mara"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Emmanuelle Bercot (Mon Roi) shares Best Actress with Rooney Mara (Carol). Mara had received a Supporting Actress Oscar nomination for Carol the following year (cer 88). Both rows correctly flagged co_winner=true.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.best_screenplay": {
+          "winner_film": "Chronic",
+          "winner_recipient": "Michel Franco",
+          "expected_winner_count": 1,
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.camera_dor": {
+          "winner_film": "Land and Shade",
+          "winner_recipient": "César Augusto Acevedo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Colombia's first Caméra d'Or.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        },
+        "cannes.short_film_palme_dor": {
+          "winner_film": "Waves '98",
+          "winner_recipient": "Ely Dagher",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lebanon's first Short Film Palme d'Or.",
+          "source": "68th Cannes Film Festival Wikipedia article / festival-cannes.com"
+        }
+      }
+    },
     "2016": {
       "ceremony_year": 2016,
       "category_count": 8,

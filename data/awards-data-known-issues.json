@@ -608,6 +608,16 @@
     "status": "manually-resolved"
   },
   {
+    "issue_id": "cannes-short-film-wikitext-leak-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "scripts/scrape-cannes.py + cer 2011 short_film_palme_dor row (and likely other cer-year/short_film_palme_dor rows where the wikitext bullet uses italic markers around a piped wikilink). cer 2011 confirmed: film_title='[[Cross-Country (2011 film)|Cross-Country]]' instead of canonical 'Cross-Country'.",
+    "issue_type": "scraper_field_leak",
+    "description": "Pass 2 (section-heading-driven) extraction of Caméra d'Or / Short Film Palme d'Or bullets routes through _parse_winner_line. For cer 2011 the bullet wikitext is '*''[[Cross-Country (2011 film)|Cross-Country]]'' by [[Maryna Vroda]]' — italic markers wrapping a piped wikilink. The italic-stripped F1 regex in _parse_winner_line is '^''(?:\\[\\[(?:[^|\\]]*\\|)?([^\\]]+)\\]\\]|([^']+))''(.*)$' which expects '' immediately bracketing the wikilink. The bullet's body after Pass 2's strip-prefix step retains both italic markers and the wikilink, but extra whitespace or template residue between '' and [[ may have prevented the F1 match, causing the function to fall through to the F2/F3/fallback paths which extract the raw bracketed string as the film title. Surfaced during Phase 4 Batch C truth curation.",
+    "deferred_resolution": "Audit _parse_winner_line F1 fallback path: when the italic+wikilink regex fails, post-process the captured film_title via _clean_wikilinks (or similar) to strip residual '[[...|...]]' markup before assigning. Cheap fix. Re-scrape cer 2011 + spot-check cer 2003-2010 short_film_palme_dor rows for similar leaks. Truth-file landmark for cer 2011 records canonical 'Cross-Country' film_title; Phase E winner_film check passes via fuzzy substring match (canonical is a substring of the leaked text).",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
     "issue_id": "cannes-co-winner-flag-multi-bullet-tie-2026-05-04",
     "discovered_date": "2026-05-04",
     "scope": "scripts/scrape-cannes.py + affected CSVs cer 2025 (best_director, best_actor, best_actress, best_screenplay, jury_prize 3rd row), and likely earlier years where Wikipedia format multiple tie winners as separate top-level bullets rather than as sub-bullets under a parent category bullet.",
