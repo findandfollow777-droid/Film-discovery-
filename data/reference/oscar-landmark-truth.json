@@ -2,6 +2,807 @@
   "schema_version": "v1",
   "festival": "oscar",
   "ceremonies": {
+    "72": {
+      "ceremony_year": 2000,
+      "honours_year": 1999,
+      "category_count": 23,
+      "nomination_count": 112,
+      "animated_feature_active": false,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "American Beauty",
+          "winner_recipients": ["Bruce Cohen", "Dan Jinks"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "American Beauty wins five Oscars (Picture, Director, Actor, Original Screenplay, Cinematography) — DreamWorks SKG's first Best Picture win. The 72nd is the first ceremony in this Phase 1 scope (Oscars 2000-present per ORBIT-AWARDS-SCOPE-v1.4.md).",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Sam Mendes",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sam Mendes wins Best Director for his feature directorial debut — exceptionally rare; only a small handful of directors have won the category for their first feature.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Kevin Spacey",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Kevin Spacey's second Oscar (after Best Supporting Actor for The Usual Suspects, 1996) and his first in the lead category.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Boys Don't Cry",
+          "winner_recipient": "Hilary Swank",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Hilary Swank's first Oscar — for portraying Brandon Teena, one of the earliest mainstream cinematic portrayals of a transgender male character. First of two Best Actress wins (also Million Dollar Baby, cer 77).",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "The Cider House Rules",
+          "winner_recipient": "Michael Caine",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Michael Caine's second Oscar (after Best Supporting Actor for Hannah and Her Sisters, 1987).",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Girl, Interrupted",
+          "winner_recipient": "Angelina Jolie",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Angelina Jolie's first Oscar nomination and win.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Alan Ball",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alan Ball's first Oscar — for his first produced feature screenplay.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Cider House Rules",
+          "winner_recipient": "John Irving",
+          "winner_recipients": ["John Irving"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "John Irving wins Best Adapted Screenplay for adapting his own novel — a rare instance of a novelist winning for adapting their own source work. CSV recipients_json contains the parser artifact 'his novel' (a new variant — pre-Batch E inspections only saw 'the novel'/'the book'/concrete titles). See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "American Beauty",
+          "winner_recipient": "Conrad Hall",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Conrad Hall's second Best Cinematography (after Butch Cassidy and the Sundance Kid, 1970), 30 years after his first. He would win posthumously a third time (Road to Perdition, cer 75).",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Matrix",
+          "winner_recipient": "Zach Staenberg",
+          "expected_nomination_count": 5,
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Red Violin",
+          "winner_recipient": "John Corigliano",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "John Corigliano wins Best Original Score for The Red Violin — Corigliano is among the most-credited classical composers ever to take the category, with this his only Oscar.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Tarzan",
+          "winner_subject": "You'll Be in My Heart",
+          "winner_recipient": "Phil Collins",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Phil Collins's first and only Oscar — sole-recipient win for an animated feature ballad.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "All About My Mother",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Spain's third International Feature Oscar (then Best Foreign Language Film); Pedro Almodóvar's first Oscar.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "The Matrix",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "The Matrix takes Best Visual Effects — its iconic 'bullet time' sequences popularised the technique across the industry. Pre-2011 fixed 3-nominee era.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_live_action_short": {
+          "winner_film": "My Mother Dreams the Satan's Disciples in New York",
+          "expected_nomination_count": 6,
+          "notable": true,
+          "note": "Canonical slate was 5 nominees; CSV contains 6 rows due to a duplicate row with title-format variance (DLu vs Wikipedia) flagged manually_resolved_dlu_duplicate. See existing known-issue oscar-72-73-dlu-title-variance-2026-04-25. expected_nomination_count tracks CSV reality (6) not canonical reality (5).",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_sound_editing": {
+          "winner_film": "The Matrix",
+          "expected_nomination_count": 6,
+          "notable": true,
+          "note": "Canonical slate was 5 nominees (within the era's variable 2-6 range — the era_override for 1964-2006 is typical=4 ±2); CSV contains 6 rows due to a duplicate row with title-format variance flagged manually_resolved_dlu_duplicate. See existing known-issue oscar-72-73-dlu-title-variance-2026-04-25.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Sleepy Hollow",
+          "winner_recipient": "Rick Heinrichs",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts ('Art Direction', 'Set Decoration') captured as recipients alongside the canonical Rick Heinrichs + Peter Young credits. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "72nd Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "73": {
+      "ceremony_year": 2001,
+      "honours_year": 2000,
+      "category_count": 23,
+      "nomination_count": 107,
+      "animated_feature_active": false,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Gladiator",
+          "winner_recipients": ["Douglas Wick", "David Franzoni", "Branko Lustig"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Gladiator wins five Oscars (Picture, Actor, Costume Design, Sound, Visual Effects) — the first sword-and-sandal epic to win Best Picture since Ben-Hur (1960). DreamWorks's second consecutive Best Picture (after American Beauty, cer 72).",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Steven Soderbergh",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Steven Soderbergh's first Oscar — Picture/Director split with Gladiator. Soderbergh was simultaneously nominated for Best Director for Erin Brockovich (Roberts won Actress for that film), making him the first director nominated twice in the same year since Michael Curtiz in 1938.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Gladiator",
+          "winner_recipient": "Russell Crowe",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Russell Crowe's first Oscar after consecutive nominations (The Insider, 1999; Gladiator, 2000).",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Erin Brockovich",
+          "winner_recipient": "Julia Roberts",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Julia Roberts's first Oscar — at the height of her commercial draw as one of the highest-paid actresses in Hollywood.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Benicio del Toro",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Benicio del Toro's first Oscar — for a role performed predominantly in Spanish, an unusually language-coded supporting performance for a winning role.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Pollock",
+          "winner_recipient": "Marcia Gay Harden",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Marcia Gay Harden's first Oscar — a notable upset over odds-on favourite Kate Hudson (Almost Famous).",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Almost Famous",
+          "winner_recipient": "Cameron Crowe",
+          "expected_nomination_count": 5,
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Stephen Gaghan",
+          "winner_recipients": ["Stephen Gaghan"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Stephen Gaghan's first Oscar — adapted from the British TV miniseries Traffik (Channel 4, 1989). CSV recipients_json contains parser artifact 'Traffik' (the source TV miniseries title) captured as a recipient. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Peter Pau",
+          "expected_nomination_count": 5,
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Stephen Mirrione",
+          "expected_nomination_count": 5,
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Tan Dun",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Tan Dun becomes the first Chinese composer to win Best Original Score. Crouching Tiger, Hidden Dragon won four Oscars at this ceremony (International Feature, Score, Cinematography, Art Direction) — the most ever for a non-English-language film at that time, a record only matched by Parasite (cer 92, also 4 Oscars) and exceeded by no others until Emilia Pérez set a new nomination record (cer 97).",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Wonder Boys",
+          "winner_subject": "Things Have Changed",
+          "winner_recipient": "Bob Dylan",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Bob Dylan wins Best Original Song — his first Oscar. Dylan accepted via satellite from Sydney where he was on tour, performing the song live during the broadcast on a video link.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Ang Lee",
+          "expected_nomination_count": 6,
+          "notable": true,
+          "note": "Taiwan's first International Feature Oscar (then Best Foreign Language Film). Crouching Tiger, Hidden Dragon also became the highest-grossing non-English-language film in U.S. history at the time. Canonical slate was 5 nominees; CSV contains 6 rows due to a duplicate row with title-format variance flagged manually_resolved_dlu_duplicate. See existing known-issue oscar-72-73-dlu-title-variance-2026-04-25.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Gladiator",
+          "expected_nomination_count": 3,
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_costume_design": {
+          "winner_film": "Gladiator",
+          "winner_recipient": "Janty Yates",
+          "expected_nomination_count": 5,
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Crouching Tiger, Hidden Dragon",
+          "winner_recipient": "Timmy Yip",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts captured as recipients alongside the canonical Timmy Yip credit. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "73rd Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "74": {
+      "ceremony_year": 2002,
+      "honours_year": 2001,
+      "category_count": 24,
+      "nomination_count": 109,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipients": ["Brian Grazer", "Ron Howard"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "A Beautiful Mind wins four Oscars (Picture, Director, Adapted Screenplay, Supporting Actress). Ceremony also marks landmark Black acting achievements: Halle Berry (Best Actress) and Denzel Washington (Best Actor) — the first time two Black performers won lead-acting Oscars at the same ceremony.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Ron Howard",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Ron Howard's first Oscar.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Training Day",
+          "winner_recipient": "Denzel Washington",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Denzel Washington's second Oscar (after Best Supporting Actor for Glory, 1990) and his first in the lead category — making him the first Black man to win Best Actor since Sidney Poitier (Lilies of the Field, 1964), a 38-year gap. Sidney Poitier received an Honorary Oscar at the same ceremony.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Monster's Ball",
+          "winner_recipient": "Halle Berry",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Halle Berry becomes the first Black woman to win Best Actress in the 74-year history of the Oscars. As of subsequent ceremonies through cer 97, she remains the only Black woman ever to have won the category.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Iris",
+          "winner_recipient": "Jim Broadbent",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jim Broadbent's first Oscar.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Jennifer Connelly",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jennifer Connelly's first Oscar.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Gosford Park",
+          "winner_recipient": "Julian Fellowes",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Julian Fellowes's first Oscar — the screenplay later seeded his Downton Abbey universe.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "A Beautiful Mind",
+          "winner_recipient": "Akiva Goldsman",
+          "winner_recipients": ["Akiva Goldsman"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'the book' and 'Sylvia Nasar' (the source-biography author) captured as recipients alongside the canonical Akiva Goldsman credit. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
+          "winner_recipient": "Andrew Lesnie",
+          "expected_nomination_count": 5,
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Black Hawk Down",
+          "winner_recipient": "Pietro Scalia",
+          "expected_nomination_count": 5,
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
+          "winner_recipient": "Howard Shore",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Howard Shore's first Oscar — first of three for the Lord of the Rings trilogy (also The Return of the King at cer 76 — Score and Original Song).",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "Monsters, Inc.",
+          "winner_subject": "If I Didn't Have You",
+          "winner_recipient": "Randy Newman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Randy Newman's first Oscar after 16 prior nominations spanning over 20 years — at the time, the most-nominated person in any category to finally win.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Shrek",
+          "winner_recipient": "Aron Warner",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Inaugural Best Animated Feature winner — the category debuted at the 74th Academy Awards (per scope §4.2 first_year=2002). Shrek (DreamWorks Animation) becomes the category's first-ever winner, beating Monsters, Inc. and Jimmy Neutron: Boy Genius.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "No Man's Land",
+          "winner_recipient": "Danis Tanović",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Bosnia and Herzegovina's first International Feature Oscar.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
+          "expected_nomination_count": 3,
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Moulin Rouge!",
+          "winner_recipient": "Catherine Martin",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. Catherine Martin's first of four Oscars (later won again for Costume Design here, then Production Design+Costume Design double for The Great Gatsby at cer 86). CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "74th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "75": {
+      "ceremony_year": 2003,
+      "honours_year": 2002,
+      "category_count": 24,
+      "nomination_count": 113,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Chicago",
+          "winner_recipients": ["Martin Richards"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Chicago becomes the first musical to win Best Picture since Oliver! (1968) — a 35-year gap. The 75th-anniversary ceremony.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Pianist",
+          "winner_recipient": "Roman Polanski",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Roman Polanski wins Best Director in absentia — he had been a fugitive from U.S. justice since 1978 and could not attend. Picture/Director split with Chicago.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "The Pianist",
+          "winner_recipient": "Adrien Brody",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Adrien Brody, 29, becomes the youngest Best Actor winner in Oscar history (record still standing as of cer 97) — for his portrayal of Władysław Szpilman. Brody's acceptance kiss with presenter Halle Berry remains one of the most-replayed live broadcast moments of the era. He won a second Best Actor at cer 97 (The Brutalist) — 22 years apart.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "The Hours",
+          "winner_recipient": "Nicole Kidman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Nicole Kidman's first Oscar — for portraying Virginia Woolf with prosthetic-enhanced transformation.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Adaptation",
+          "winner_recipient": "Chris Cooper",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Chris Cooper's first Oscar.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Chicago",
+          "winner_recipient": "Catherine Zeta-Jones",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Catherine Zeta-Jones's first Oscar — for performing 'All That Jazz' as Velma Kelly. Won while heavily pregnant with her second child.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Talk to Her",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pedro Almodóvar's second Oscar (after International Feature for All About My Mother, cer 72) and his first in a non-International category. Won Best Original Screenplay for a non-English-language film — exceptionally rare.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Pianist",
+          "winner_recipient": "Ronald Harwood",
+          "winner_recipients": ["Ronald Harwood"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'the book' and 'Władysław Szpilman' (the memoir's author and subject) captured as recipients alongside the canonical Ronald Harwood credit. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Road to Perdition",
+          "winner_recipient": "Conrad Hall",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Conrad Hall's third Best Cinematography Oscar — awarded posthumously, three months after his death in January 2003.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "Chicago",
+          "winner_recipient": "Martin Walsh",
+          "expected_nomination_count": 5,
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Frida",
+          "winner_recipient": "Elliot Goldenthal",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Elliot Goldenthal's first and only Oscar.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "8 Mile",
+          "winner_subject": "Lose Yourself",
+          "winner_recipients": ["Eminem", "Jeff Bass", "Luis Resto"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "'Lose Yourself' by Eminem becomes the first hip-hop track to win Best Original Song. Eminem famously did not attend the ceremony; the win was widely credited as a watershed moment for hip-hop's recognition by the Academy. CSV winner_recipients shows 'Eminem' (Marshall Mathers) under his stage name.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Spirited Away",
+          "winner_recipient": "Hayao Miyazaki",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Spirited Away becomes the first (and as of cer 97, only) anime/Japanese-animated feature to win Best Animated Feature, and the first non-English-language film ever to win in the category. Hayao Miyazaki's first Oscar — he later won again at cer 96 (The Boy and the Heron). Studio Ghibli's first Oscar.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "Nowhere in Africa",
+          "winner_recipient": "Caroline Link",
+          "expected_nomination_count": 6,
+          "notable": true,
+          "note": "Germany's third International Feature Oscar (then Best Foreign Language Film). Canonical slate was 5 nominees; CSV contains 6 rows due to a duplicate row for 'El Crimen del Padre Amaro' with title variance flagged manually_resolved_dlu_duplicate. See existing known-issue dlu-title-translation-variance-2026-04-25.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_makeup_and_hairstyling": {
+          "winner_film": "Frida",
+          "winner_recipients": ["John Jackson", "Beatrice De Alba"],
+          "expected_nomination_count": 2,
+          "notable": true,
+          "note": "Slate of 2 nominees this year — at the lower end of the era_override range (1982-2019: typical=3 ±2, range 1-5). Frida wins both Makeup and Original Score at this ceremony.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "Chicago",
+          "winner_recipient": "John Myhre",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "75th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "76": {
+      "ceremony_year": 2004,
+      "honours_year": 2003,
+      "category_count": 24,
+      "nomination_count": 110,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipients": ["Barrie M. Osborne", "Peter Jackson", "Fran Walsh"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "The Return of the King wins all 11 Oscars for which it was nominated — tying Ben-Hur (1960, 11/12) and Titanic (1998, 11/14) for the most Oscar wins by a single film, and the only film ever to win Oscars in every category in which it was nominated. The first fantasy film to win Best Picture.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Peter Jackson",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Peter Jackson's first Oscar — won three at this ceremony (Director, Picture, Adapted Screenplay).",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Mystic River",
+          "winner_recipient": "Sean Penn",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sean Penn's first Oscar after four prior nominations.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Monster",
+          "winner_recipient": "Charlize Theron",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Charlize Theron's first Oscar — for portraying serial killer Aileen Wuornos with extensive physical transformation. South Africa's first Best Actress winner.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Mystic River",
+          "winner_recipient": "Tim Robbins",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Tim Robbins's first Oscar.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "Cold Mountain",
+          "winner_recipient": "Renée Zellweger",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Renée Zellweger's first Oscar (later won Best Actress at cer 92 for Judy).",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Lost in Translation",
+          "winner_recipient": "Sofia Coppola",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Sofia Coppola's first Oscar; she becomes the third generation of the Coppola family to win an Oscar (after father Francis Ford Coppola and grandfather Carmine Coppola).",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipients": ["Fran Walsh", "Philippa Boyens", "Peter Jackson"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "CSV recipients_json contains parser artifacts 'the book' and 'J. R. R. Tolkien' (the source-novel author) captured alongside the canonical Walsh/Boyens/Jackson credits. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "Master and Commander: The Far Side of the World",
+          "winner_recipient": "Russell Boyd",
+          "expected_nomination_count": 5,
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Jamie Selkirk",
+          "expected_nomination_count": 5,
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Howard Shore",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Howard Shore's third Oscar of the LOTR trilogy (Score for Fellowship at cer 74, Score + Original Song for Return of the King at this ceremony).",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_subject": "Into the West",
+          "winner_recipients": ["Fran Walsh", "Howard Shore", "Annie Lennox"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Annie Lennox's first Oscar. Performed live during the credits of the film.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "Finding Nemo",
+          "winner_recipient": "Andrew Stanton",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Pixar's first Best Animated Feature win.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Barbarian Invasions",
+          "winner_recipient": "Denys Arcand",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Canada's first International Feature Oscar.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "expected_nomination_count": 3,
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "The Lord of the Rings: The Return of the King",
+          "winner_recipient": "Grant Major",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Pre-rename era — category was Best Art Direction. CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "76th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
+    "77": {
+      "ceremony_year": 2005,
+      "honours_year": 2004,
+      "category_count": 24,
+      "nomination_count": 112,
+      "landmarks": {
+        "oscar.best_picture": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipients": ["Clint Eastwood", "Albert S. Ruddy", "Tom Rosenberg"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Million Dollar Baby wins four Oscars (Picture, Director, Actress, Supporting Actor) — a notable upset over The Aviator, which had led the nominations field with 11.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_director": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipient": "Clint Eastwood",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Clint Eastwood's second Best Director Oscar (after Unforgiven, 1993). At 74, he became the oldest Best Director winner up to that point. Picture/Director-aligned win against The Aviator's industry-precursor sweep.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actor": {
+          "winner_film": "Ray",
+          "winner_recipient": "Jamie Foxx",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jamie Foxx's first Oscar — for portraying Ray Charles. Foxx was simultaneously nominated for Best Supporting Actor for Collateral, making him the first man double-nominated in lead and supporting in the same year since Al Pacino (1992).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_actress": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipient": "Hilary Swank",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Hilary Swank's second Best Actress Oscar (after Boys Don't Cry, cer 72). At 30, she became the youngest two-time Best Actress winner.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actor": {
+          "winner_film": "Million Dollar Baby",
+          "winner_recipient": "Morgan Freeman",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Morgan Freeman's first Oscar after four prior nominations (Street Smart, 1988; Driving Miss Daisy, 1990; The Shawshank Redemption, 1995; Million Dollar Baby at this ceremony).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_supporting_actress": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Cate Blanchett",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Cate Blanchett's first Oscar — for portraying Katharine Hepburn (who held the all-time Best Actress wins record at 4). Blanchett later won Best Actress at cer 86 (Blue Jasmine).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_screenplay": {
+          "winner_film": "Eternal Sunshine of the Spotless Mind",
+          "winner_recipients": ["Charlie Kaufman", "Michel Gondry", "Pierre Bismuth"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Charlie Kaufman's first Oscar.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_adapted_screenplay": {
+          "winner_film": "Sideways",
+          "winner_recipients": ["Alexander Payne", "Jim Taylor"],
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Alexander Payne's first Oscar (later won Adapted Screenplay again for The Descendants at cer 84). CSV recipients_json contains parser artifacts 'the novel' and 'Rex Pickett' (the source-novel author) captured alongside the canonical Payne + Taylor credits. See known-issue oscar-adapted-screenplay-the-play-artifact-2026-05-03.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_cinematography": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Robert Richardson",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Robert Richardson's second Oscar (after JFK, 1992) — third would come at cer 84 (Hugo).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_film_editing": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Thelma Schoonmaker",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Thelma Schoonmaker's second Best Film Editing (after Raging Bull, 1981) — both for Martin Scorsese films. Third would come at cer 79 (The Departed).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_score": {
+          "winner_film": "Finding Neverland",
+          "winner_recipient": "Jan A. P. Kaczmarek",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jan A. P. Kaczmarek's first and only Oscar — first Polish composer to win Best Original Score.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_original_song": {
+          "winner_film": "The Motorcycle Diaries",
+          "winner_subject": "Al otro lado del río",
+          "winner_recipient": "Jorge Drexler",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Jorge Drexler's first Oscar — first Spanish-language song to win Best Original Song, and the first Uruguayan-born winner in any Oscar category. Drexler was famously denied the chance to perform the song live at the ceremony (Antonio Banderas and Carlos Santana performed it instead); Drexler sang the chorus a cappella during his acceptance.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_animated_feature": {
+          "winner_film": "The Incredibles",
+          "winner_recipient": "Brad Bird",
+          "expected_nomination_count": 3,
+          "notable": true,
+          "note": "Brad Bird's first Oscar — Pixar's second Best Animated Feature win (later won again with Ratatouille, cer 80).",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_international_feature": {
+          "winner_film": "The Sea Inside",
+          "winner_recipient": "Alejandro Amenábar",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Spain's fourth International Feature Oscar (then Best Foreign Language Film) — Spain's third in the post-2000 era after All About My Mother (cer 72) and the prior franchise wins.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_visual_effects": {
+          "winner_film": "Spider-Man 2",
+          "expected_nomination_count": 3,
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        },
+        "oscar.best_production_design": {
+          "winner_film": "The Aviator",
+          "winner_recipient": "Dante Ferretti",
+          "expected_nomination_count": 5,
+          "notable": true,
+          "note": "Dante Ferretti's first Oscar (with Francesca Lo Schiavo) after seven prior nominations — pre-rename era, category was Best Art Direction. CSV recipients_json contains role-label artifacts. See known-issue oscar-production-design-role-label-artifact-2026-05-03.",
+          "source": "77th Academy Awards Wikipedia article / Variety / AMPAS"
+        }
+      }
+    },
     "78": {
       "ceremony_year": 2006,
       "honours_year": 2005,
@@ -96,7 +897,7 @@
           "winner_recipients": ["Jordan Houston", "Cedric Coleman", "Paul Beauregard"],
           "expected_nomination_count": 3,
           "notable": true,
-          "note": "Three 6 Mafia (Jordan Houston aka Juicy J, Cedric Coleman aka Frayser Boy, Paul Beauregard aka DJ Paul) win Best Original Song — the first hip-hop track to win in the category. Slate of 3 nominees this year.",
+          "note": "Three 6 Mafia (Jordan Houston aka Juicy J, Cedric Coleman aka Frayser Boy, Paul Beauregard aka DJ Paul) win Best Original Song — the second hip-hop track to win the category, after Eminem's 'Lose Yourself' (8 Mile, cer 75). Their on-stage acceptance is widely remembered as one of the most exuberant Oscar moments of the era. Slate of 3 nominees this year.",
           "source": "78th Academy Awards Wikipedia article / Variety / AMPAS"
         },
         "oscar.best_animated_feature": {
