@@ -1401,38 +1401,82 @@
         window.location.href = _pagesPrefix + 'timeline.html?type=person&search=' + encodedName;
         break;
       case 'constellation':
-        // No dedicated person-constellation view today — route to the
-        // people discovery hub. Revisit when a similar-actors page exists.
-        window.location.href = _pagesPrefix + 'people-library.html';
+        // people-library.html supports ?circle=<id> — loads the
+        // person's collaborator circle (loadCircleFromPerson).
+        window.location.href = _pagesPrefix + 'people-library.html?circle=' + p.id;
         break;
     }
   }
 
   function handleShare(p) {
+    // Build absolute URL where possible, fall back to relative when the
+    // browsing context has no origin (file:// or sandboxed iframe).
+    var origin = (window.location && window.location.origin && window.location.origin !== 'null')
+      ? window.location.origin
+      : '';
     var root = (window.OrbitUtils && OrbitUtils.ROOT) ? OrbitUtils.ROOT : '/';
-    var url = window.location.origin + root + 'pages/people-profile.html?id=' + p.id;
+    var url = origin + root + 'pages/people-profile.html?id=' + p.id;
     var title = p.name + ' on ORBIT';
     var text = 'Check out ' + p.name + '’s career on ORBIT ✨';
 
+    function flashCopied(textOnFlash) {
+      var btn = document.querySelector('#peopleCubeOverlay .pcube-share-btn');
+      if (!btn) return;
+      var label = btn.querySelector('span:not(.og)');
+      var original = label ? label.textContent : 'Share';
+      if (label) label.textContent = textOnFlash;
+      btn.classList.add('pcube-share-btn--copied');
+      setTimeout(function () {
+        if (label) label.textContent = original;
+        btn.classList.remove('pcube-share-btn--copied');
+      }, 1600);
+    }
+
     if (navigator.share) {
-      navigator.share({ title: title, text: text, url: url }).catch(function() {});
+      navigator.share({ title: title, text: text, url: url })
+        .then(function () { flashCopied('Shared!'); })
+        .catch(function () { /* user dismissed — no flash */ });
       return;
     }
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(function() {
-        var btn = document.querySelector('#peopleCubeOverlay .pcube-share-btn');
-        if (!btn) return;
-        var label = btn.querySelector('span:not(.og)');
-        var original = label ? label.textContent : 'Share';
-        if (label) label.textContent = 'Copied!';
-        btn.classList.add('pcube-share-btn--copied');
-        setTimeout(function() {
-          if (label) label.textContent = original;
-          btn.classList.remove('pcube-share-btn--copied');
-        }, 1600);
-      }).catch(function() {});
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext !== false) {
+      navigator.clipboard.writeText(url)
+        .then(function () { flashCopied('Copied!'); })
+        .catch(function () { promptFallback(url); });
+      return;
     }
+
+    promptFallback(url);
+  }
+
+  function promptFallback(url) {
+    // Last-ditch fallback: a temporary textarea + execCommand('copy'),
+    // and if that fails, show a prompt() so the user can copy manually.
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand && document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) {
+        var btn = document.querySelector('#peopleCubeOverlay .pcube-share-btn');
+        if (btn) {
+          var label = btn.querySelector('span:not(.og)');
+          var original = label ? label.textContent : 'Share';
+          if (label) label.textContent = 'Copied!';
+          btn.classList.add('pcube-share-btn--copied');
+          setTimeout(function () {
+            if (label) label.textContent = original;
+            btn.classList.remove('pcube-share-btn--copied');
+          }, 1600);
+        }
+        return;
+      }
+    } catch (e) { /* fall through */ }
+    window.prompt('Copy this link:', url);
   }
 
   function handleBookmark(btn) {
