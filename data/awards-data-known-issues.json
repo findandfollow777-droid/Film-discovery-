@@ -649,6 +649,16 @@
     "status": "deferred"
   },
   {
+    "issue_id": "venice-co-winner-flag-multi-bullet-tie-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "scripts/scrape-venice.py + cer 2006 silver_lion_best_director rows (Resnais + Crialese tie). Likely affects additional rows where Wikipedia formats ties as separate top-level bullets rather than as sub-bullets under a parent category line.",
+    "issue_type": "scraper_flag_inconsistency",
+    "description": "Same root cause as cannes-co-winner-flag-multi-bullet-tie-2026-05-04. When Venice ties between multiple winners are formatted in Wikipedia as separate top-level bullet lines (each carrying its own category prefix), the scraper treats each parent bullet independently and sets co_winner=false. Only the canonical sub-bullet tie format (parent line '* [[Cat]]:' with sub-bullets '** ...') currently triggers co_winner=true. Surfaced during Phase 4 Batch D truth curation: cer 2006 has TWO Silver Lion Best Director rows (Resnais for Private Fears in Public Places, Crialese for Golden Door) — both rows have co_winner=false even though they share the prize. Winner identities, films, and counts are correct; only the boolean flag is inaccurate.",
+    "deferred_resolution": "Same fix recommendation as Cannes counterpart: post-process after extracting all rows for a ceremony, group by category_id and set co_winner=true on all rows in any category with >1 winner row. Cheap, robust, no parser changes needed. Re-scrape affected ceremonies after fix lands. Truth-file landmarks for Batch D rows already record canonical winner_films/winner_recipients arrays.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
     "issue_id": "venice-lion-of-the-future-italic-leak-2026-05-04",
     "discovered_date": "2026-05-04",
     "scope": "scripts/scrape-venice.py + cer 2015 lion_of_the_future row (The Childhood of a Leader). Same parser-leak class as cannes-short-film-wikitext-leak-2026-05-04.",

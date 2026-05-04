@@ -2,6 +2,358 @@
   "schema_version": "v1",
   "festival": "venice",
   "ceremonies": {
+    "2006": {
+      "ceremony_year": 2006,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Still Life",
+          "winner_recipient": "Jia Zhangke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jia Zhangke's first Golden Lion — Chinese Sixth Generation auteur's first major Western festival prize. Still Life is a portrait of life affected by the Three Gorges Dam project. Jia later took Cannes Best Screenplay in 2013 (A Touch of Sin).",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Daratt",
+          "winner_recipient": "Mahamat-Saleh Haroun",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mahamat-Saleh Haroun's first major Venice prize — Chad's first major win at the festival. Haroun later took the Cannes Jury Prize in 2010 (A Screaming Man).",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Private Fears in Public Places",
+          "winner_recipient": "Alain Resnais",
+          "winner_films": ["Private Fears in Public Places", "Golden Door"],
+          "winner_recipients": ["Alain Resnais", "Emanuele Crialese"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Alain Resnais (Private Fears in Public Places) shares Silver Lion for Best Director with Emanuele Crialese (Golden Door). Resnais was 84 at the time of the win — among the oldest Silver Lion winners. Crialese later took the Grand Jury Prize in 2011 (Terraferma). CSV co_winner flag missing on both rows due to multi-bullet-tie format — see known-issue venice-co-winner-flag-multi-bullet-tie-2026-05-04.",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Hollywoodland",
+          "winner_recipient": "Ben Affleck",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ben Affleck's first Volpi Cup for Best Actor — for portraying TV's Superman George Reeves.",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Queen",
+          "winner_recipient": "Helen Mirren",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Helen Mirren's first Volpi Cup for Best Actress — she went on to win the Best Actress Oscar at the 79th Academy Awards (cer 79) for the same role. The Venice-to-Oscar acting pipeline played out cleanly. Same film also took Best Screenplay (Peter Morgan) at the same ceremony.",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Queen",
+          "winner_recipient": "Peter Morgan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Peter Morgan's first Venice Best Screenplay. The Queen went on to receive six Academy Award nominations at cer 79 including Best Picture and Best Original Screenplay.",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Untouchable",
+          "winner_recipient": "Isild Le Besco",
+          "expected_winner_count": 1,
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Khadak",
+          "winner_recipient": "Peter Brosens",
+          "winner_recipients": ["Peter Brosens", "Jessica Woodworth"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Belgian-Mongolian co-directed debut feature. Brosens and Woodworth's collaboration continued across multiple subsequent festival features.",
+          "source": "63rd Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2007": {
+      "ceremony_year": 2007,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Lust, Caution",
+          "winner_recipient": "Ang Lee",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ang Lee's second Golden Lion in three years — first was Brokeback Mountain (2005, outside scope). Lee becomes the first director in the 21st century to win two Golden Lions. Lust, Caution is an erotic spy thriller set in WWII-era Shanghai; the film received an NC-17 rating in the US, making it one of the highest-profile NC-17 releases since the rating was introduced.",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Redacted",
+          "winner_recipient": "Brian De Palma",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brian De Palma's first Silver Lion for Best Director — for his anti-Iraq War found-footage drama. The win was politically controversial; Redacted was based on the Mahmudiyah killings of 2006. (Note: silver_lion_grand_jury was not awarded at the 64th Venice — see era_override.)",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "I'm Not There",
+          "winner_recipient": "Todd Haynes",
+          "winner_films": ["I'm Not There", "The Secret of the Grain"],
+          "winner_recipients": ["Todd Haynes", "Abdellatif Kechiche"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Todd Haynes's I'm Not There (Bob Dylan biopic with multiple actors playing Dylan, including Cate Blanchett who took Volpi Best Actress for the same film) shares with Abdellatif Kechiche's The Secret of the Grain. Both rows correctly flagged co_winner=true. Kechiche later won the Cannes Palme d'Or in 2013 (Blue Is the Warmest Colour, shared with the two lead actresses).",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Assassination of Jesse James by the Coward Robert Ford",
+          "winner_recipient": "Brad Pitt",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brad Pitt's first Volpi Cup for Best Actor.",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "I'm Not There",
+          "winner_recipient": "Cate Blanchett",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cate Blanchett's first Volpi Cup for Best Actress — for portraying a Bob Dylan-inspired character in Todd Haynes's experimental biopic. The cross-gender casting was widely discussed at the time. Blanchett went on to receive the Best Supporting Actress Oscar nomination at cer 80 for the same role, and won her second Volpi for Tár in 2022.",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "It's a Free World...",
+          "winner_recipient": "Paul Laverty",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paul Laverty's first Venice Best Screenplay — Ken Loach's frequent collaborator. Laverty later took Venice Best Screenplay again in 2002 (Sweet Sixteen) — wait, 2002 came first; Laverty won Best Screenplay at Cannes 2002 for Sweet Sixteen and now this Venice 2007 prize.",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Secret of the Grain",
+          "winner_recipient": "Hafsia Herzi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hafsia Herzi's first major acting prize — same film took Special Jury Prize (shared, Kechiche).",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "La Zona",
+          "winner_recipient": "Rodrigo Plá",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mexican filmmaker Rodrigo Plá's debut feature.",
+          "source": "64th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2008": {
+      "ceremony_year": 2008,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Wrestler",
+          "winner_recipient": "Darren Aronofsky",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Darren Aronofsky's first Golden Lion — drama centred on Mickey Rourke's career-defining comeback as faded wrestler Randy 'The Ram' Robinson. Rourke went on to receive a Best Actor nomination at the 81st Academy Awards (cer 81). Aronofsky later directed Black Swan (2010 Venice opener — Mila Kunis took Mastroianni 2010).",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Paper Soldier",
+          "winner_recipient": "Aleksei Alekseivich German",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Aleksei German Jr.'s first Silver Lion for Best Director — Russian filmmaker. (Note: silver_lion_grand_jury was not awarded at the 65th Venice — see era_override.)",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Teza",
+          "winner_recipient": "Haile Gerima",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Haile Gerima's first Venice Special Jury Prize — Ethiopian filmmaker's politically-charged drama. Same film also took Best Screenplay at the same ceremony — same-film cross-honour.",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Giovanna's Father",
+          "winner_recipient": "Silvio Orlando",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Silvio Orlando's first Volpi Cup for Best Actor — Italian veteran actor.",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Other One",
+          "winner_recipient": "Dominique Blanc",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Dominique Blanc's first Volpi Cup for Best Actress.",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Teza",
+          "winner_recipient": "Haile Gerima",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Haile Gerima takes Best Screenplay for the same film he won the Special Jury Prize for at the same ceremony — exceptional same-film cross-honour for an Ethiopian filmmaker.",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Burning Plain",
+          "winner_recipient": "Jennifer Lawrence",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jennifer Lawrence's first major international acting prize at age 18 — pre-The Hunger Games and pre-Winter's Bone Oscar nomination. Lawrence went on to win the Best Actress Oscar at the 85th Academy Awards (cer 85) for Silver Linings Playbook, and to be the youngest two-time Best Actress nominee at the time.",
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Mid-August Lunch",
+          "winner_recipient": "Gianni Di Gregorio",
+          "expected_winner_count": 1,
+          "source": "65th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2009": {
+      "ceremony_year": 2009,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Lebanon",
+          "winner_recipient": "Samuel Maoz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Samuel Maoz's debut feature Golden Lion — Israeli filmmaker's autobiographical drama about a tank crew during the 1982 Lebanon War. Maoz returned to Venice in 2017 with Foxtrot (Grand Jury Prize). Exceptional for a debut feature to take Venice's top prize.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Soul Kitchen",
+          "winner_recipient": "Fatih Akin",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Fatih Akin's first major Venice prize — German-Turkish filmmaker's comedy about a struggling restaurant in Hamburg.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Women Without Men",
+          "winner_recipient": "Shirin Neshat",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Shirin Neshat becomes the first Iranian woman to win the Silver Lion for Best Director — Iranian-American visual artist's debut feature.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "A Single Man",
+          "winner_recipient": "Colin Firth",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Colin Firth's first Volpi Cup for Best Actor — for fashion-designer-turned-filmmaker Tom Ford's debut feature. Firth went on to receive a Best Actor nomination at the 82nd Academy Awards (cer 82) for the same role, and won the Best Actor Oscar at cer 83 for The King's Speech.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Double Hour",
+          "winner_recipient": "Kseniya Rappoport",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kseniya Rappoport's first Volpi Cup for Best Actress — Russian-Italian actress.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Life During Wartime",
+          "winner_recipient": "Todd Solondz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Todd Solondz's first Venice Best Screenplay — sequel to his 1998 indie drama Happiness.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Big Dream",
+          "winner_recipient": "Jasmine Trinca",
+          "expected_winner_count": 1,
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Engkwentro",
+          "winner_recipient": "Pepe Diokno",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Filipino debut feature wins Lion of the Future — Pepe Diokno's first festival-prize.",
+          "source": "66th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2010": {
+      "ceremony_year": 2010,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Somewhere",
+          "winner_recipient": "Sofia Coppola",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sofia Coppola's first Golden Lion — fourth feature, an autobiographical-leaning drama about a Hollywood actor's relationship with his daughter. Sofia is the second member of the Coppola family with a major festival top prize (after father Francis Ford Coppola won the Cannes Palme d'Or twice in 1974 + 1979). Coppola later won Cannes Best Director in 2017 (The Beguiled).",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Essential Killing",
+          "winner_recipient": "Jerzy Skolimowski",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jerzy Skolimowski's first Venice Grand Jury Prize — Polish auteur's drama. Same film took Volpi Cup for Best Actor (Vincent Gallo) at the same ceremony — same-film cross-honour. Skolimowski later took Cannes Jury Prize in 2022 (EO).",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Last Circus",
+          "winner_recipient": "Álex de la Iglesia",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Álex de la Iglesia's first Silver Lion for Best Director — Spanish filmmaker. Same film took Best Screenplay (also Iglesia) — same-film cross-honour and same-recipient double-honour.",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Essential Killing",
+          "winner_recipient": "Vincent Gallo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Vincent Gallo's first Volpi Cup for Best Actor — same film took Grand Jury Prize (Skolimowski) at the same ceremony.",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Attenberg",
+          "winner_recipient": "Ariane Labed",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ariane Labed's first Volpi Cup for Best Actress — Greek actress's debut prize.",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Last Circus",
+          "winner_recipient": "Álex de la Iglesia",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Álex de la Iglesia takes Best Screenplay for the same film he won the Silver Lion Best Director for — exceptional same-recipient cross-category double-honour.",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Black Swan",
+          "winner_recipient": "Mila Kunis",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mila Kunis's first major acting prize — for Aronofsky's Black Swan, two years after Aronofsky's Golden Lion for The Wrestler (2008). Black Swan went on to receive five Academy Award nominations at cer 83 including Best Picture and Best Actress for Natalie Portman (who won).",
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Majority",
+          "winner_recipient": "Seren Yüce",
+          "expected_winner_count": 1,
+          "source": "67th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
     "2011": {
       "ceremony_year": 2011,
       "category_count": 8,
