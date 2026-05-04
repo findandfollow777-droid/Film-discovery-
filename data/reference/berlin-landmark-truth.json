@@ -3,6 +3,358 @@
   "festival": "berlin",
   "generated_at": "2026-05-04T00:00:00+00:00",
   "ceremonies": {
+    "2000": {
+      "ceremony_year": 2000,
+      "category_count": 6,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Magnolia",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paul Thomas Anderson's Golden Bear for Magnolia — PT Anderson's only major-festival top prize and the most-celebrated American Golden Bear of the early 2000s. Anderson returned to Berlin's prize roster eight years later (cer 2008 Best Director Silver Bear for There Will Be Blood) — same-director cross-decade Golden Bear + Silver Bear pair. Magnolia is one of the canonical late-1990s American auteur works.",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Road Home",
+          "winner_recipient": "Zhang Yimou",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Zhang Yimou's Silver Bear Grand Jury Prize for The Road Home — minimalist rural-romance flashback film featuring an early-career Zhang Ziyi. Zhang Yimou is one of Berlin's most-decorated repeat laureates of the 1980s-90s; cer 2000 is his Silver Bear top-up after his earlier Golden Bear wins (Red Sorghum 1988, etc.).",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Man on the Moon",
+          "winner_recipient": "Miloš Forman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Czech-American veteran Miloš Forman (One Flew Over the Cuckoo's Nest, Amadeus) takes the Silver Bear for Best Director for Man on the Moon — Andy Kaufman biopic starring Jim Carrey. Forman's last major-festival prize before his 2018 death.",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "The Hurricane",
+          "winner_recipient": "Denzel Washington",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Denzel Washington's Silver Bear for Best Actor for Norman Jewison's The Hurricane — biographical drama on Rubin 'Hurricane' Carter. Washington was nominated for the 2000 Best Actor Oscar for the same role; cer 2000 Berlin is one of his major non-Hollywood-academy honours.",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "The Legend of Rita",
+          "winner_recipients": ["Bibiana Beglau", "Nadja Uhl"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Silver Bear Best Actress: Bibiana Beglau AND Nadja Uhl, both for the same film — Volker Schlöndorff's The Legend of Rita / Die Stille nach dem Schuss (RAF / East-German political thriller). Scraper produces 2 winner rows (split_co_recipients=true on this category). Same-film Best Actress TIE — extremely rare cross-acting double on a single film.",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Boy's Choir",
+          "winner_recipient": "Akira Ogata",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Japanese director Akira Ogata — Alfred Bauer for the school-set drama Boy's Choir.",
+          "source": "50th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "50th Berlinale (anniversary edition) — Paul Thomas Anderson's only major-festival Golden Bear (Magnolia); same-film Best Actress TIE (Beglau + Uhl for The Legend of Rita). Outstanding Artistic Contribution was awarded to 'The Cast of Paradiso: Seven Days with Seven Women' (ensemble citation, no individual recipient) — scraper correctly skips the row because the recipient is filtered as a non-person label. Best Screenplay and Best First Feature did not exist as Silver Bear categories at this Berlinale (Best Screenplay debuted cer 2008, Best First Feature debuted cer 2006); first_year filters in expectations correctly skip both."
+    },
+    "2001": {
+      "ceremony_year": 2001,
+      "category_count": 7,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Intimacy",
+          "winner_recipient": "Patrice Chéreau",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "French theatre+film director Patrice Chéreau's Golden Bear for Intimacy — explicit-sex London-set chamber drama based on Hanif Kureishi short stories. Same-film cross-honour: Intimacy also took Best Actress (Kerry Fox) at the same ceremony — Golden Bear + Best Actress double. Chéreau later won Berlin Best Director two years on (cer 2003, His Brother) — Berlin Golden Bear → Best Director cross-ceremony pair.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Beijing Bicycle",
+          "winner_recipient": "Wang Xiaoshuai",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Wang Xiaoshuai's Silver Bear Grand Jury Prize for Beijing Bicycle — youth-class drama recalling De Sica's Bicycle Thieves. Wang Xiaoshuai later took the inaugural Berlin Best Screenplay (cer 2008, In Love We Trust) and same-film Best Actor + Actress double (cer 2019, So Long, My Son) — three-prize Berlin career arc.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Betelnut Beauty",
+          "winner_recipient": "Lin Cheng-sheng",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Taiwanese director Lin Cheng-sheng — youth-crime drama set in Taipei.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Traffic",
+          "winner_recipient": "Benicio del Toro",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Benicio del Toro's Silver Bear for Best Actor for Steven Soderbergh's Traffic — for which he also won the 2001 Best Supporting Actor Oscar at the same year's Academy Awards. Cer 2001 Berlin is one of two major-festival honours for the same role.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Intimacy",
+          "winner_recipient": "Kerry Fox",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "New Zealand actress Kerry Fox wins for Intimacy — same-film Golden Bear + Best Actress double with director Patrice Chéreau at the same ceremony.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "You're the One",
+          "winner_recipient": "Raúl Pérez Cubero",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Spanish DP Raúl Pérez Cubero — implicit cinematography citation (no specialty parenthetical in the wikitext bullet, but Pérez Cubero is a long-time DP).",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "La Ciénaga",
+          "winner_recipient": "Lucrecia Martel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Argentine director Lucrecia Martel's debut feature La Ciénaga takes the Alfred Bauer Prize — pre-figures Martel's emergence as one of the most-celebrated Latin American auteurs of the 21st century (Zama, etc.). Cer 2001 is her career-launching festival prize.",
+          "source": "51st Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "51st Berlinale — Intimacy (Patrice Chéreau) takes a same-film Golden Bear + Best Actress double (Kerry Fox); Wang Xiaoshuai's Grand Jury win launches his three-prize Berlin career arc; Lucrecia Martel's debut launches her major auteur career. Best Screenplay and Best First Feature did not exist as Silver Bear categories (lifecycle absence)."
+    },
+    "2002": {
+      "ceremony_year": 2002,
+      "category_count": 7,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Bloody Sunday",
+          "winner_recipients": ["Paul Greengrass", "Hayao Miyazaki"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Golden Bear: Paul Greengrass for Bloody Sunday (Northern-Ireland-1972 docu-drama) AND Hayao Miyazaki for Spirited Away (Japanese animation). Scraper produces 2 winner rows (Bloody Sunday first, Spirited Away second per Wikipedia bullet order). The Miyazaki side is a permanent festival landmark — FIRST animated film to win the Berlin Golden Bear, and Miyazaki's only major Western festival top prize. Spirited Away went on to win the 2003 Best Animated Feature Oscar. Greengrass's Bloody Sunday side is itself notable as one of the most-acclaimed political-cinema works of the early 2000s. Same-ceremony Golden Bear TIE between live-action political drama and hand-drawn animation is unprecedented.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Grill Point",
+          "winner_recipient": "Andreas Dresen",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German director Andreas Dresen — relationship drama Halbe Treppe / Grill Point.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Monday Morning",
+          "winner_recipient": "Otar Iosseliani",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Georgian-French veteran Otar Iosseliani — Silver Bear for Best Director for Monday Morning. Iosseliani is one of the most-celebrated post-Soviet émigré directors; cer 2002 Berlin is his major-festival peak.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Safe Conduct",
+          "winner_recipient": "Jacques Gamblin",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "French actor Jacques Gamblin — Bertrand Tavernier's Vichy-era drama.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Monster's Ball",
+          "winner_recipient": "Halle Berry",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Halle Berry's Silver Bear for Best Actress for Monster's Ball — at the same year's Academy Awards she became the FIRST Black woman to win the Best Actress Oscar (also for Monster's Ball). Cer 2002 Berlin's recognition is therefore part of one of the most-defining acting-prize doubles of the early 2000s.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "8 Women",
+          "winner_recipient": "Ensemble of actresses",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded to the 'Ensemble of actresses' of François Ozon's 8 Women / 8 femmes — Catherine Deneuve, Isabelle Huppert, Emmanuelle Béart, Fanny Ardant, Virginie Ledoyen, Danielle Darrieux, Ludivine Sagnier, Firmine Richard. Scraper extracts the literal phrase 'Ensemble of actresses' as the recipient since no individual names appear in the wikitext bullet. The eight Frenchwomen ensemble represents one of the strongest single-film acting collectives of the 2000s.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Baader",
+          "winner_recipient": "Christopher Roth",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German director Christopher Roth — Andreas Baader / RAF biopic.",
+          "source": "52nd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "52nd Berlinale — TIE for Golden Bear: Bloody Sunday (Paul Greengrass) + Spirited Away (Hayao Miyazaki). FIRST animated film to win the Berlin Golden Bear (Miyazaki, also went on to a Best Animated Feature Oscar). Halle Berry takes Best Actress for Monster's Ball — the same role that won her the historic 2002 Best Actress Oscar. OAC awarded to the eight-actress ensemble of 8 Women (no individual names; scraper extracts 'Ensemble of actresses' as recipient). Best Screenplay and BFF lifecycle-absent."
+    },
+    "2003": {
+      "ceremony_year": 2003,
+      "category_count": 6,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "In This World",
+          "winner_recipient": "Michael Winterbottom",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Winterbottom's Golden Bear for In This World — Afghan-refugee-journey docu-drama. Winterbottom returned to Berlin's prize roster three years later (cer 2006 Best Director TIE for The Road to Guantanamo) — Golden Bear → Best Director cross-ceremony pair within four years.",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Adaptation",
+          "winner_recipient": "Spike Jonze",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Spike Jonze's Silver Bear Grand Jury Prize for Adaptation — Charlie Kaufman meta-screenplay. Jonze's only major-festival main-prize.",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "His Brother",
+          "winner_recipient": "Patrice Chéreau",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Patrice Chéreau's Silver Bear for Best Director for His Brother / Son frère — same-director Berlin Golden Bear → Best Director cross-ceremony pair (cer 2001 Intimacy → cer 2003 His Brother), within two years.",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Confessions of a Dangerous Mind",
+          "winner_recipient": "Sam Rockwell",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sam Rockwell's Silver Bear for Best Actor for Confessions of a Dangerous Mind — George Clooney's directorial debut, biopic of Chuck Barris. Cer 2003 Berlin is Rockwell's first major-festival lead-acting prize; he later won the 2018 Best Supporting Actor Oscar for Three Billboards Outside Ebbing, Missouri.",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "The Hours",
+          "winner_recipients": ["Meryl Streep", "Nicole Kidman", "Julianne Moore"],
+          "expected_winner_count": 3,
+          "notable": true,
+          "note": "Famous THREE-WAY TIE for Silver Bear Best Actress: Meryl Streep + Nicole Kidman + Julianne Moore, all for the same film — Stephen Daldry's The Hours (Virginia Woolf-themed cross-era ensemble drama). Scraper produces 3 winner rows (split_co_recipients=true; expectations.json has a cer-2003 era_override with typical_winners=3). One of the most-cited multi-winner acting prizes in modern Berlin history. At the same ceremony Nicole Kidman went on to win the 2003 Best Actress Oscar for the same role — making her cer 2003 Berlin one-third of a Berlinale-Oscar overlap.",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Blind Shaft",
+          "winner_recipient": "Yang Li",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Yang Li (Li Yang) for Blind Shaft — coal-mine murder thriller. Unusual OAC citation: directorial citation rather than a specific craft (no parenthetical specialty in the wikitext bullet).",
+          "source": "53rd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "53rd Berlinale — famous THREE-WAY TIE for Best Actress (Streep + Kidman + Moore for The Hours), one of the most-cited multi-winner acting prizes in modern Berlin history (Kidman went on to take the same year's Best Actress Oscar for the same role). Patrice Chéreau wins Best Director two years after his cer 2001 Golden Bear. Alfred Bauer Prize is ABSENT from the cer 2003 Wikipedia article (article completeness gap, suppressed by expectations.json era_override; no MISSING REVIEW). Best Screenplay and BFF lifecycle-absent."
+    },
+    "2004": {
+      "ceremony_year": 2004,
+      "category_count": 6,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Head-On",
+          "winner_recipient": "Fatih Akın",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Turkish-German director Fatih Akın's Golden Bear for Head-On / Gegen die Wand — Turkish-German diaspora drama. First Turkish-German Golden Bear and a landmark for European Turkish-diasporic cinema. Akın's career-launching festival prize.",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Lost Embrace",
+          "winner_recipient": "Daniel Burman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Argentine director Daniel Burman's Silver Bear Grand Jury Prize for Lost Embrace / El abrazo partido — same-film cross-honour: Lost Embrace also took Best Actor (Daniel Hendler) at the same ceremony.",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Samaritan Girl",
+          "winner_recipient": "Kim Ki-duk",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "South Korean director Kim Ki-duk's Silver Bear for Best Director for Samaritan Girl. Kim followed up later that year with the Venice Silver Lion for 3-Iron — making 2004 his peak festival year (Berlin + Venice main-competition prizes within months).",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Lost Embrace",
+          "winner_recipient": "Daniel Hendler",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Uruguayan actor Daniel Hendler — same-film Grand Jury + Best Actor double for Lost Embrace at cer 2004.",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Maria Full of Grace",
+          "winner_recipients": ["Catalina Sandino Moreno", "Charlize Theron"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Silver Bear Best Actress: Catalina Sandino Moreno for Maria Full of Grace AND Charlize Theron for Monster (different films). Scraper produces 2 winner rows. Theron also won the 2004 Best Actress Oscar for Monster — same role as her share of this Berlin Silver Bear. Sandino Moreno was Oscar-nominated the same year — making cer 2004 Berlin a same-prize Oscar-overlap split between two simultaneously-Oscar-honoured performances.",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Daybreak",
+          "winner_recipient": "Leif Andrée",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded as 'Outstanding Artistic Achievement' (rare Berlin variant of OAC) to the FIFTEEN-PERSON ENSEMBLE CAST of the Swedish film Daybreak (Daggry / Daybreak): Leif Andrée + Pernilla August + Jan Coster + Jakob Eklund + Ingvar Hirdwall + Magnus Krepper + Johan Kvarnström + Camilla Larsson + Marika Lindström + Peter Lorentzon + Hampus Penttinen + Ann Petrén + Marie Richardson + Jenny Svärdsäter + Claes-Göran Turesson. Scraper produces a single row with all 15 names in the recipients_json (split_co_recipients=false on OAC). Largest-named-ensemble OAC in Berlin history.",
+          "source": "54th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "54th Berlinale — Fatih Akın's Turkish-German diasporic Golden Bear (Head-On); same-film Grand Jury + Best Actor double for Lost Embrace; Best Actress TIE (Sandino Moreno + Charlize Theron, both also 2004 Oscar-honoured); FIFTEEN-PERSON ENSEMBLE OAC for Daybreak (largest named OAC ensemble in Berlin history). Alfred Bauer Prize is ABSENT from the cer 2004 Wikipedia article (article gap, suppressed by expectations era_override). Best Screenplay and BFF lifecycle-absent."
+    },
+    "2005": {
+      "ceremony_year": 2005,
+      "category_count": 6,
+      "winner_count": 6,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "U-Carmen eKhayelitsha",
+          "winner_recipient": "Mark Dornford-May",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "South African director Mark Dornford-May's Golden Bear for U-Carmen eKhayelitsha — Xhosa-language reimagining of Bizet's Carmen, set in a Cape Town township. First South African Golden Bear and one of the most-unusual genre-source-material adaptations to win a major festival top prize. Permanent festival landmark.",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Peacock",
+          "winner_recipient": "Gu Changwei",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Gu Changwei's Silver Bear Grand Jury Prize for Peacock — Cultural Revolution-era family drama. Gu Changwei is best known as a cinematographer (Farewell My Concubine) — cer 2005 is his most-celebrated directorial prize.",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Sophie Scholl – The Final Days",
+          "winner_recipient": "Marc Rothemund",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German director Marc Rothemund's Silver Bear for Best Director for Sophie Scholl – The Final Days — Nazi-resistance drama. Same-film cross-honour: Sophie Scholl also took Best Actress (Julia Jentsch) at the same ceremony — Best Director + Best Actress double, the strongest cer 2005 cross-honour.",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Thumbsucker",
+          "winner_recipient": "Lou Taylor Pucci",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Young American actor Lou Taylor Pucci — Mike Mills's debut feature Thumbsucker.",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Sophie Scholl – The Final Days",
+          "winner_recipient": "Julia Jentsch",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actress Julia Jentsch wins for Sophie Scholl – The Final Days — same-film Best Director + Best Actress double with Marc Rothemund's directing prize.",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "The Wayward Cloud",
+          "winner_recipient": "Tsai Ming-liang",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Taiwanese auteur Tsai Ming-liang for The Wayward Cloud — pornography-and-watermelon musical hybrid. Unusual OAC citation: directorial citation rather than a specific craft (no parenthetical specialty in the wikitext bullet, similar to cer 2003 Yang Li).",
+          "source": "55th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "55th Berlinale — South African Xhosa-language Golden Bear (U-Carmen eKhayelitsha, Mark Dornford-May); same-film Best Director + Best Actress double for Sophie Scholl – The Final Days; Tsai Ming-liang's only Berlinale main-prize. Alfred Bauer Prize is ABSENT from the cer 2005 Wikipedia article (article gap, suppressed by expectations era_override). Best Screenplay and BFF lifecycle-absent."
+    },
     "2006": {
       "ceremony_year": 2006,
       "category_count": 8,

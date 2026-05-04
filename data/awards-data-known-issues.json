@@ -822,5 +822,38 @@
     "deferred_resolution": "None — this is a true lifecycle absence (the prize did not exist), already correctly modeled by the expectations.json first_year=2008.",
     "blocks_phase": null,
     "status": "documented"
+  },
+  {
+    "issue_id": "berlin-oac-ensemble-cer-2000-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2000.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.silver_bear_outstanding_artistic_contribution",
+    "description": "At cer 2000 (50th Berlinale), Outstanding Artistic Contribution was awarded to 'The Cast of Paradiso: Seven Days with Seven Women' — no individual recipient names. Wikitext bullet reads '''Silver Bear for an Outstanding Artistic Contribution''': The Cast of {{ill|Paradiso: Seven Days with Seven Women|...}}. The scraper's NON_PERSON_NAMES filter strips 'the cast of', and the empty-recipient row guard then drops the row entirely. Result: 0 winner rows in the CSV for OAC at cer 2000. Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK. The prize was genuinely awarded; just not extractable as an individual-recipient row. Documented in cer 2000 berlin-landmark-truth.json entry notes. Same root cause as cer 2007 OAC ensemble issue and cer 2011 ensemble-acting issue.",
+    "deferred_resolution": "None — recorded for posterity. If a future schema accommodates 'ensemble' as a recipient archetype with film_title as the de-facto laureate, backfill the truth-file entry and the scraper.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-oac-ensemble-string-cer-2002-2004-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2002.csv, berlin-2004.csv",
+    "issue_type": "data_quality_note",
+    "field": "berlin.silver_bear_outstanding_artistic_contribution.recipients_json",
+    "description": "Two cer-2000s OAC awards survived the NON_PERSON_NAMES filter but with sub-optimal recipient strings: (1) cer 2002 OAC for 8 Women has a single-string recipient 'Ensemble of actresses' (not in NON_PERSON_NAMES; the eight Frenchwomen — Deneuve/Huppert/Beart/Ardant/Ledoyen/Darrieux/Sagnier/Richard — are not enumerated in the wikitext bullet). (2) Cer 2004 OAC ('Outstanding Artistic Achievement' variant display) for Daybreak captures the FIFTEEN-PERSON ENSEMBLE CAST as 15 separate recipients within a single row (split_co_recipients=false on OAC), which is technically correct but unwieldy. Both rows pass Phase E landmark verification because the truth file matches them as-is. Documented as a data-quality note rather than a scraper bug — these are accurate transcriptions of the Wikipedia source.",
+    "deferred_resolution": "If/when the recipients_json schema introduces a 'recipient_kind' field (individual vs ensemble vs collective), backfill these rows with kind=ensemble. Until then, the current capture is the most-faithful transcription of the source.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-alfred-bauer-cer-2003-2005-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2003.csv, berlin-2004.csv, berlin-2005.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.alfred_bauer_prize",
+    "description": "Alfred Bauer Prize winner is ABSENT from the Wikipedia ceremony articles for cer 2003 (53rd), cer 2004 (54th), and cer 2005 (55th). This is already documented in expectations.json via an era_override (typical_winners=0 for from_year=2003 to_year=2005), which suppresses Phase D MISSING REVIEW. The prize was likely awarded those years (the Alfred Bauer Prize was active 2000-2019) but the winner bullets do not appear in the corresponding Wikipedia ceremony articles. Three consecutive Wikipedia article-completeness gaps in this 2003-2005 window. Phase D era_override correctly handles this; landmarks for these three ceremonies omit the alfred_bauer_prize entry entirely (per the omit-gap-categories convention).",
+    "deferred_resolution": "None — recorded for posterity. If a future review backfills the cer 2003-2005 Alfred Bauer winners from a primary source (berlinale.de archives), update the truth-file entries and remove the era_override.",
+    "blocks_phase": null,
+    "status": "documented"
   }
 ]
