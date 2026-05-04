@@ -649,6 +649,16 @@
     "status": "deferred"
   },
   {
+    "issue_id": "venice-lion-of-the-future-italic-leak-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "scripts/scrape-venice.py + cer 2015 lion_of_the_future row (The Childhood of a Leader). Same parser-leak class as cannes-short-film-wikitext-leak-2026-05-04.",
+    "issue_type": "scraper_field_leak",
+    "description": "Pass 2 (section-heading-driven) extraction of Lion of the Future bullets routes through _parse_winner_line. For cer 2015 the bullet wikitext is '*''[[The Childhood of a Leader]]'' by [[Brady Corbet]]' with italic markers wrapping a wikilink. The italic-stripped F1 regex captures the bracketed-and-italicised film title verbatim instead of extracting the wikilink display, leaking '[[The Childhood of a Leader]]' (after _clean_wikilinks the visible artifact is just leading/trailing italic markers). CSV film_title='''The Childhood of a Leader''' (italic markers retained). Phase E winner_film fuzzy substring match still passes. Same root cause as the Cannes wikitext-leak issues. Surfaced during Phase 4 Batch C truth curation.",
+    "deferred_resolution": "Audit _parse_winner_line F1 regex; pass captured film_title through a markup-stripping helper (similar to _clean_wikilinks) before returning. Cheap fix. Re-scrape cer 2015 + audit other Pass 2 rows for similar leaks. Truth file landmark for cer 2015 lion_of_the_future records canonical 'The Childhood of a Leader' film_title; Phase E currently passes via fuzzy match.",
+    "blocks_phase": null,
+    "status": "deferred"
+  },
+  {
     "issue_id": "venice-special-jury-prize-era-gaps-2026-05-04",
     "discovered_date": "2026-05-04",
     "scope": "data/scraped/venice/venice-{2000..2006,2009..2011}.csv (10 ceremonies). Affects Phase D MISSING verdict expectation suppression in data/reference/venice-expectations.json.",

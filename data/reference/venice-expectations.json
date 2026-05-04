@@ -50,10 +50,10 @@
         },
         {
           "from_year": 2009,
-          "to_year": 2011,
+          "to_year": 2012,
           "typical_winners": 0,
           "tolerance": 1,
-          "reason": "Special Jury Prize not awarded at Venice 2009-2011. Confirmed real-data gap from initial Phase 1 scrape."
+          "reason": "Special Jury Prize not awarded at Venice 2009-2012. Confirmed real-data gap (extended from initial 2009-2011 range during Phase 4 Batch C truth curation when cer 2012 also surfaced as missing)."
         }
       ]
     },

@@ -2,6 +2,374 @@
   "schema_version": "v1",
   "festival": "venice",
   "ceremonies": {
+    "2011": {
+      "ceremony_year": 2011,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Faust",
+          "winner_recipient": "Alexander Sokurov",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alexander Sokurov's first Golden Lion — Russian auteur's most-prominent international prize. Faust is the final part of Sokurov's tetralogy on the corrupting nature of power (after Moloch, Taurus, and The Sun).",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Terraferma",
+          "winner_recipient": "Emanuele Crialese",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Emanuele Crialese's second major Venice prize — he previously won the Special Jury Prize in 2002 for Respiro. Italian filmmaker's drama about migration to Lampedusa.",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "People Mountain People Sea",
+          "winner_recipient": "Cai Shangjun",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cai Shangjun's first Silver Lion for Best Director — Chinese filmmaker's revenge drama based on a real-life murder case.",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Shame",
+          "winner_recipient": "Michael Fassbender",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michael Fassbender's first Volpi Cup for Best Actor — for Steve McQueen's Shame. McQueen and Fassbender's collaboration continued with 12 Years a Slave (Best Picture Oscar at cer 86).",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "A Simple Life",
+          "winner_recipient": "Deanie Ip",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Deanie Ip's first Volpi Cup for Best Actress — Hong Kong actress's career-late prize at age 64. Ann Hui directed.",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Alps",
+          "winner_recipient": "Yorgos Lanthimos",
+          "winner_recipients": ["Yorgos Lanthimos", "Efthimis Filippou"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Yorgos Lanthimos and Efthimis Filippou's first major Venice prize — Lanthimos went on to win the Venice Grand Jury Prize in 2018 (The Favourite) and the Golden Lion in 2023 (Poor Things).",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Himizu",
+          "winner_recipient": "Shota Sometani",
+          "winner_recipients": ["Shota Sometani", "Fumi Nikaido"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-person team award. Shota Sometani and Fumi Nikaido share the Marcello Mastroianni Award for the same film, Sion Sono's Himizu (post-tsunami drama). Both rows correctly flagged co_winner=true.",
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Là-bas: A Criminal Education",
+          "winner_recipient": "Guido Lombardi",
+          "expected_winner_count": 1,
+          "source": "68th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2012": {
+      "ceremony_year": 2012,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Pietà",
+          "winner_recipient": "Kim Ki-duk",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kim Ki-duk becomes the first South Korean filmmaker to win the Golden Lion. Pietà is a violent revenge drama set in a Seoul slum. The win predates Bong Joon-ho's 2019 Cannes Palme d'Or for Parasite by seven years — South Korea's first major-festival top prize of the modern era.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Paradise: Faith",
+          "winner_recipient": "Ulrich Seidl",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ulrich Seidl's first major Venice prize — middle entry of his 'Paradise' trilogy.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Master",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paul Thomas Anderson's first Silver Lion for Best Director — and his only major Venice prize. PTA had previously shared Cannes Best Director in 2002 for Punch-Drunk Love. Same film took the Volpi Cup for Best Actor (shared by Hoffman + Phoenix) at the same ceremony — exceptional same-film cross-honour.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Master",
+          "winner_recipient": "Philip Seymour Hoffman",
+          "winner_films": ["The Master", "The Master"],
+          "winner_recipients": ["Philip Seymour Hoffman", "Joaquin Phoenix"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way team award. Philip Seymour Hoffman and Joaquin Phoenix share the Volpi Cup for Best Actor for the same film, PTA's The Master. Same film also took Silver Lion for Best Director (PT Anderson) — exceptional same-film triple-honour. Hoffman died in 2014; the Volpi was one of his last major prizes. Both rows correctly flagged co_winner=true.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Fill the Void",
+          "winner_recipient": "Hadas Yaron",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hadas Yaron's first Volpi Cup for Best Actress — Israeli actress's drama set in the Hasidic Jewish community of Tel Aviv.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Something in the Air",
+          "winner_recipient": "Olivier Assayas",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Olivier Assayas's first Venice Best Screenplay — French auteur's autobiographical drama about post-1968 student activism.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Dormant Beauty",
+          "winner_recipient": "Fabrizio Falco",
+          "expected_winner_count": 1,
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Mold",
+          "winner_recipient": "Ali Aydın",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Turkey's first Lion of the Future. Ali Aydın's debut feature.",
+          "source": "69th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2013": {
+      "ceremony_year": 2013,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Sacro GRA",
+          "winner_recipient": "Gianfranco Rosi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Gianfranco Rosi's first Golden Lion — and the FIRST documentary to win the Golden Lion in modern Venice history (the previous documentary Golden Lion was the 1956 winner Below the Sahara — a 57-year gap). Rosi went on to take Venice's Special Jury Prize in 2025 for Below the Clouds. Sacro GRA is a portrait of life around Rome's ring road.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Stray Dogs",
+          "winner_recipient": "Tsai Ming-liang",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tsai Ming-liang's first Venice Grand Jury Prize — Taiwanese auteur's contemplative slow-cinema film. Tsai had won Venice's Best Director in 1994 for Vive L'Amour.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Miss Violence",
+          "winner_recipient": "Alexandros Avranas",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alexandros Avranas's first Silver Lion for Best Director — Greek filmmaker's family drama. Same film also took the Volpi Cup for Best Actor (Themis Panou) — same-film cross-honour.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "The Police Officer's Wife",
+          "winner_recipient": "Philip Gröning",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Philip Gröning's first Venice Special Jury Prize.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Miss Violence",
+          "winner_recipient": "Themis Panou",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Themis Panou's first major acting prize — same film took Silver Lion for Best Director (Avranas) at the same ceremony.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "A Street in Palermo",
+          "winner_recipient": "Elena Cotta",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Elena Cotta's first Volpi Cup for Best Actress at age 82 — Italian actress's career-late prize.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Philomena",
+          "winner_recipient": "Steve Coogan",
+          "winner_recipients": ["Steve Coogan", "Jeff Pope"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Steve Coogan and Jeff Pope's first Venice Best Screenplay. Philomena went on to receive a Best Adapted Screenplay nomination at the 86th Academy Awards (cer 86) and four other Oscar nominations including Best Picture.",
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Joe",
+          "winner_recipient": "Tye Sheridan",
+          "expected_winner_count": 1,
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "White Shadow",
+          "winner_recipient": "Noaz Deshe",
+          "expected_winner_count": 1,
+          "source": "70th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2014": {
+      "ceremony_year": 2014,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "A Pigeon Sat on a Branch Reflecting on Existence",
+          "winner_recipient": "Roy Andersson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roy Andersson's first Golden Lion — Swedish auteur's deadpan tableaux style. The film is the third part of his 'Living trilogy' (after Songs from the Second Floor and You, the Living). Andersson later took Silver Lion for Best Director in 2019 for About Endlessness.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Look of Silence",
+          "winner_recipient": "Joshua Oppenheimer",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Joshua Oppenheimer's first Venice Grand Jury Prize — companion piece to The Act of Killing (2012). Both films document the 1965-66 Indonesian killings. The Look of Silence went on to receive a Best Documentary Feature Oscar nomination at cer 88.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Postman's White Nights",
+          "winner_recipient": "Andrei Konchalovsky",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrei Konchalovsky's first Silver Lion for Best Director — he later shared Silver Lion for Best Director in 2016 (Paradise) and won Special Jury Prize in 2020 (Dear Comrades!), making him a three-time Venice prizewinner across the decade.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Sivas",
+          "winner_recipient": "Kaan Müjdeci",
+          "expected_winner_count": 1,
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Hungry Hearts",
+          "winner_recipient": "Adam Driver",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Adam Driver's first Volpi Cup for Best Actor — pre-Star Wars career milestone.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Hungry Hearts",
+          "winner_recipient": "Alba Rohrwacher",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alba Rohrwacher's first Volpi Cup for Best Actress. Same film also took Volpi for Best Actor (Adam Driver) — exceptional same-film acting double-honour.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Tales",
+          "winner_recipient": "Rakhshān Banietemad",
+          "winner_recipients": ["Rakhshān Banietemad", "Farid Mostafavi"],
+          "expected_winner_count": 1,
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Last Hammer Blow",
+          "winner_recipient": "Romain Paul",
+          "expected_winner_count": 1,
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Court",
+          "winner_recipient": "Chaitanya Tamhane",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chaitanya Tamhane's debut feature wins Lion of the Future — Indian filmmaker's first major prize. Tamhane went on to win Best Screenplay at Venice 2020 for The Disciple.",
+          "source": "71st Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2015": {
+      "ceremony_year": 2015,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "From Afar",
+          "winner_recipient": "Lorenzo Vigas",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lorenzo Vigas's debut feature wins the Golden Lion — Venezuela's first Golden Lion. Exceptionally rare for a debut feature to take Venice's top prize.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Anomalisa",
+          "winner_recipient": "Charlie Kaufman",
+          "winner_recipients": ["Charlie Kaufman", "Duke Johnson"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Charlie Kaufman and Duke Johnson's stop-motion animated feature wins the Grand Jury Prize — exceptionally rare for an animated film to take a major Venice prize. Anomalisa went on to receive a Best Animated Feature nomination at the 88th Academy Awards (cer 88).",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Clan",
+          "winner_recipient": "Pablo Trapero",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Pablo Trapero's first Silver Lion for Best Director — Argentine filmmaker's true-crime drama based on the Puccio family kidnappings.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Frenzy",
+          "winner_recipient": "Emin Alper",
+          "expected_winner_count": 1,
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Courted",
+          "winner_recipient": "Fabrice Luchini",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Fabrice Luchini's first Volpi Cup for Best Actor — French actor's career-late prize. Same film also took Best Screenplay (Christian Vincent) — same-film cross-honour.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Per amor vostro",
+          "winner_recipient": "Valeria Golino",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Valeria Golino's first Volpi Cup for Best Actress — Italian actress.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Courted",
+          "winner_recipient": "Christian Vincent",
+          "expected_winner_count": 1,
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Beasts of No Nation",
+          "winner_recipient": "Abraham Attah",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Abraham Attah's debut acting role wins the Marcello Mastroianni Award — Ghanaian child actor in Cary Joji Fukunaga's drama about child soldiers in West Africa.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "The Childhood of a Leader",
+          "winner_recipient": "Brady Corbet",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brady Corbet's directorial debut wins Lion of the Future — Corbet later took Venice's Silver Lion for Best Director in 2024 for The Brutalist (which went on to 3 Oscars at cer 97 including Brody Best Actor). Two Venice prizes nine years apart for Corbet, with the second representing the prestige escalation. CSV film_title contains a wikitext markup leak (''The Childhood of a Leader'' with italic markers) — Phase E winner_film passes via fuzzy substring match. See known-issue venice-lion-of-the-future-italic-leak-2026-05-04.",
+          "source": "72nd Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
     "2016": {
       "ceremony_year": 2016,
       "category_count": 9,
