@@ -1,0 +1,355 @@
+{
+  "schema_version": "v1",
+  "festival": "berlin",
+  "generated_at": "2026-05-04T00:00:00+00:00",
+  "ceremonies": {
+    "2021": {
+      "ceremony_year": 2021,
+      "category_count": 7,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Bad Luck Banging or Loony Porn",
+          "winner_recipient": "Radu Jude",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Romanian filmmaker Radu Jude's first Golden Bear, awarded at the 71st Berlinale's COVID-restricted online edition (industry-only March 2021; public summer 2021). Jude later won Berlin Best Screenplay for Kontinental '25 (cer 2025) — same-festival prize-pair across two ceremonies.",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Wheel of Fortune and Fantasy",
+          "winner_recipient": "Ryusuke Hamaguchi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ryusuke Hamaguchi's Berlin Grand Jury Prize for Wheel of Fortune and Fantasy. Hamaguchi went on to win the 2022 Best International Feature Oscar for Drive My Car, making 2021 his international breakout year.",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Natural Light",
+          "winner_recipient": "Dénes Nagy",
+          "expected_winner_count": 1,
+          "notable": false,
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_leading_performance": {
+          "winner_film": "I'm Your Man",
+          "winner_recipient": "Maren Eggert",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "FIRST winner of the gender-neutral Silver Bear for Best Leading Performance, introduced at the 71st Berlinale (cer 2021) replacing the gendered Best Actor + Best Actress. Maren Eggert holds permanent landmark status as the inaugural Best Leading Performance laureate.",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_supporting_performance": {
+          "winner_film": "Forest - I See You Everywhere",
+          "winner_recipient": "Lilla Kizlinger",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "FIRST winner of the gender-neutral Silver Bear for Best Supporting Performance, introduced at the 71st Berlinale (cer 2021) alongside Best Leading Performance. Lilla Kizlinger holds permanent landmark status as the inaugural Best Supporting Performance laureate.",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Introduction",
+          "winner_recipient": "Hong Sang-soo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hong Sang-soo's Berlin Best Screenplay for Introduction. Hong is a Berlin perennial — he won the Silver Bear Grand Jury Prize the following year (cer 2022) for The Novelist's Film, and again in cer 2024 for A Traveler's Needs. Three consecutive Berlinale prizes in the 2021-2024 window is one of the most concentrated festival runs of any director.",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "A Cop Movie",
+          "winner_recipient": "Yibrán Asuad",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Awarded for editing of A Cop Movie (Mexican docu-fiction hybrid by Alonso Ruizpalacios).",
+          "source": "71st Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "First COVID-restricted Berlinale, split across two-stage ceremony (industry March 2021, public summer 2021). First year of gender-neutral acting prizes. Alfred Bauer Prize newly retired (after 2019 revelations); not awarded cer 2021+. Best First Feature returned at the standard cadence."
+    },
+    "2022": {
+      "ceremony_year": 2022,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Alcarràs",
+          "winner_recipient": "Carla Simón",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Carla Simón's first Golden Bear — Catalan-language film by a Spanish female director. Alcarràs is a quiet family drama about a peach-farming family losing their land, marking a continued Berlinale preference for European art cinema with regional/agricultural settings.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Novelist's Film",
+          "winner_recipient": "Hong Sang-soo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hong Sang-soo's second consecutive Berlinale prize (Best Screenplay 2021 → Grand Jury 2022) — same director winning two distinct main-competition Silver Bears in two years.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Both Sides of the Blade",
+          "winner_recipient": "Claire Denis",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Claire Denis's first Silver Bear for Best Director — French auteur honoured for Both Sides of the Blade (Avec amour et acharnement) starring Juliette Binoche and Vincent Lindon.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_leading_performance": {
+          "winner_film": "Rabiye Kurnaz vs. George W. Bush",
+          "winner_recipient": "Meltem Kaptan",
+          "expected_winner_count": 1,
+          "notable": false,
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_supporting_performance": {
+          "winner_film": "Before, Now & Then",
+          "winner_recipient": "Laura Basuki",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Indonesian actress Laura Basuki — Berlin's second Best Supporting Performance laureate.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Rabiye Kurnaz vs. George W. Bush",
+          "winner_recipient": "Laila Stieler",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Same-film double-laureate at cer 2022: Rabiye Kurnaz vs. George W. Bush won both Best Leading Performance (Meltem Kaptan) and Best Screenplay (Laila Stieler) — a same-ceremony cross-category honour.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Everything Will Be Ok",
+          "winner_recipient": "Rithy Panh",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cambodian director Rithy Panh (and collaborator Sarit Mang — scraper captures Panh as primary). Panh is best known for genocide-witness documentary work (The Missing Picture, Cannes 2013). Berlinale OAC awarded for the artistic contribution as a whole, not a single craft specialty.",
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Sonne",
+          "winner_recipient": "Kurdwin Ayub",
+          "expected_winner_count": 1,
+          "notable": false,
+          "source": "72nd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "First post-COVID in-person Berlinale (held in February 2022 with reduced capacity). Hong Sang-soo's second consecutive Silver Bear; Carla Simón becomes a young female Golden Bear laureate; Rabiye Kurnaz takes a same-film double across acting + screenplay."
+    },
+    "2023": {
+      "ceremony_year": 2023,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "On the Adamant",
+          "winner_recipient": "Nicolas Philibert",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Documentary film wins the Golden Bear — On the Adamant is a French observational documentary set on a Seine river-boat psychiatric day-care centre. Documentary Golden Bears are rare; Nicolas Philibert (To Be and to Have, 2002) had previously been a celebrated documentarian without major festival hardware. The 2023 win signalled the Berlinale's continued openness to non-fiction in the main competition.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Afire",
+          "winner_recipient": "Christian Petzold",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Christian Petzold's first Silver Bear Grand Jury Prize (after multiple Berlin nominations). Afire (Roter Himmel) is part of Petzold's elemental-themed trilogy with Paula Beer.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "The Plough",
+          "winner_recipient": "Philippe Garrel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Veteran French director Philippe Garrel's first Berlin Best Director (his fourth-decade festival recognition). The Plough is a family drama featuring three of Garrel's own children.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_leading_performance": {
+          "winner_film": "20,000 Species of Bees",
+          "winner_recipient": "Sofía Otero",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sofía Otero — at age 8 — became the youngest winner of a Berlin acting prize in festival history, taking the Silver Bear for Best Leading Performance for her portrayal of a transgender child in 20,000 Species of Bees. Notable both for the actor's age and for the gender-neutral acting category enabling cross-age recognition.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_supporting_performance": {
+          "winner_film": "Till the End of the Night",
+          "winner_recipient": "Thea Ehre",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Thea Ehre — first openly transgender performer to win a Berlin acting Silver Bear, in the third year of the gender-neutral category. Confirms the category's intent to recognise performance regardless of gender.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Music",
+          "winner_recipient": "Angela Schanelec",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German Berlin School director Angela Schanelec — Music is a loose retelling of Oedipus.",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Disco Boy",
+          "winner_recipient": "Hélène Louvart",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for cinematography of Disco Boy. Hélène Louvart is one of the most celebrated arthouse cinematographers active today (collaborator of Alice Rohrwacher, Maggie Gyllenhaal, Wim Wenders).",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "The Klezmer Project",
+          "winner_recipients": ["Leandro Koch", "Paloma Schachmann"],
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Co-directed Argentinian docu-fiction hybrid (single bullet, two named co-directors).",
+          "source": "73rd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "73rd Berlinale — documentary Golden Bear (rare); Sofía Otero (age 8) becomes youngest Berlin acting laureate; Thea Ehre is first transgender Berlin acting Silver Bear winner."
+    },
+    "2024": {
+      "ceremony_year": 2024,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Dahomey",
+          "winner_recipient": "Mati Diop",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mati Diop's Golden Bear for Dahomey — Senegalese-French director's documentary on the return of looted artefacts from France to Benin. Diop's prior feature Atlantics had won the Cannes Grand Prix in 2019; Dahomey makes her one of very few directors to have won major top/second prizes at both Cannes and Berlin. Confirmed in Phase 1 bug fix audit (cer 2024).",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "A Traveler's Needs",
+          "winner_recipient": "Hong Sang-soo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hong Sang-soo's THIRD Berlinale main-competition prize in four years (Best Screenplay 2021 → Grand Jury 2022 → Grand Jury 2024). Confirmed in Phase 1 bug fix audit (cer 2024 grand jury film_title parser bug).",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Pepe",
+          "winner_recipient": "Nelson Carlo De Los Santos Arias",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Dominican director Nelson Carlo De Los Santos Arias's Silver Bear for Best Director — Pepe is a magical-realist fable narrated from the perspective of a hippo descended from those introduced to Colombia by Pablo Escobar.",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_leading_performance": {
+          "winner_film": "A Different Man",
+          "winner_recipient": "Sebastian Stan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sebastian Stan's first major-festival acting prize. Stan is best known for the Marvel Cinematic Universe (Bucky Barnes / Winter Soldier) and the 2024 Trump biopic The Apprentice; A Different Man positioned him as a serious arthouse-acting voice in the same year.",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_supporting_performance": {
+          "winner_film": "Small Things Like These",
+          "winner_recipient": "Emily Watson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Emily Watson — long-celebrated British actress (Breaking the Waves, 1996) finally winning a Berlin Silver Bear after a three-decade career. Awarded for her supporting role in Small Things Like These (Cillian Murphy lead, Tim Mielants directing) — a Magdalene-laundries drama set in 1985 Ireland.",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Dying",
+          "winner_recipient": "Matthias Glasner",
+          "expected_winner_count": 1,
+          "notable": false,
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "The Devil's Bath",
+          "winner_recipient": "Martin Gschlacht",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for cinematography of The Devil's Bath (Veronika Franz / Severin Fiala). The Devil's Bath is a folk-horror set in 18th-century Austria; Gschlacht's painterly cinematography was the explicit citation.",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Cu Li Never Cries",
+          "winner_recipient": "Phạm Ngọc Lân",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Vietnamese debut feature.",
+          "source": "74th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "74th Berlinale — Mati Diop's Cannes-Berlin prize-pair across two festivals; Hong Sang-soo's third Silver Bear in four years; Sebastian Stan transitions to arthouse credibility; Emily Watson finally collects a Berlin prize after decades of acclaimed work."
+    },
+    "2025": {
+      "ceremony_year": 2025,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Dreams (Sex Love)",
+          "winner_recipient": "Dag Johan Haugerud",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Norwegian director Dag Johan Haugerud's Golden Bear for Dreams (Sex Love) — middle film of his Sex / Love / Dreams trilogy, with Berlin awarding the Dreams (Sex Love) installment. First Norwegian Golden Bear since 1979.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Blue Trail",
+          "winner_recipient": "Gabriel Mascaro",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Brazilian director Gabriel Mascaro's near-future-set Amazonian fable.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Living the Land",
+          "winner_recipient": "Huo Meng",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Chinese director Huo Meng — rural-China multi-generational drama.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_leading_performance": {
+          "winner_film": "If I Had Legs I'd Kick You",
+          "winner_recipient": "Rose Byrne",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Australian actress Rose Byrne's first major festival acting prize. If I Had Legs I'd Kick You is a Mary Bronstein psychological drama; Byrne plays a stressed mother in a chamber-drama tour de force.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_supporting_performance": {
+          "winner_film": "Blue Moon",
+          "winner_recipient": "Andrew Scott",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrew Scott (Fleabag, All of Us Strangers) wins for Blue Moon — Richard Linklater's Lorenz Hart biopic. Scott's first major festival acting Silver Bear.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Kontinental '25",
+          "winner_recipient": "Radu Jude",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Radu Jude's second Berlin main-competition prize after his cer 2021 Golden Bear (Bad Luck Banging or Loony Porn) — same-festival prize-pair across two ceremonies, joining Hong Sang-soo as a Berlin perennial in this batch window.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "The Ice Tower",
+          "winner_recipient": "Lucile Hadžihalilović",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lucile Hadžihalilović and the creative ensemble of The Ice Tower — Berlin frames this as ensemble craftsmanship rather than a single specialty (no parenthetical specialty in the wikitext, unlike most OAC bullets). Hadžihalilović is the French art-cinema director of Innocence and Earwig.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "The Devil Smokes (and Saves the Burnt Matches in the Same Box)",
+          "winner_recipient": "Ernesto Martínez Bucio",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Mexican debut feature with one of the longest film titles in Berlinale Best First Feature history.",
+          "source": "75th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "75th Berlinale — anniversary edition. Norway's first Golden Bear in over four decades; Radu Jude returns to the Berlinale prize roster four years after his Golden Bear; OAC unusually framed as ensemble-craft (no parenthetical specialty)."
+    }
+  }
+}
