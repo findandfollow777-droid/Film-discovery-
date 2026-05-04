@@ -780,12 +780,12 @@
     "status": "documented"
   },
   {
-    "issue_id": "berlin-best-first-feature-cer-2011-2013-gap-2026-05-04",
+    "issue_id": "berlin-best-first-feature-cer-2007-2013-gap-2026-05-04",
     "discovered_date": "2026-05-04",
-    "scope": "data/scraped/berlin/berlin-2011.csv, berlin-2012.csv, berlin-2013.csv",
+    "scope": "data/scraped/berlin/berlin-2007.csv, berlin-2008.csv, berlin-2009.csv, berlin-2010.csv, berlin-2011.csv, berlin-2012.csv, berlin-2013.csv",
     "issue_type": "real_data_gap",
     "field": "berlin.best_first_feature",
-    "description": "Best First Feature Award winner is ABSENT from the Wikipedia ceremony articles for cer 2011 (61st), cer 2012 (62nd), and cer 2013 (63rd). Each article has only a 'Best First Feature Award' (or 'First Feature Award') section listing the jury members; no winner subsection or winner bullet appears. The scraper correctly returns 0 winner rows for these years (Pass 2 section-heading-driven extraction finds the heading but no eligible winner bullet inside the section). Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK without raising MISSING REVIEW. The prizes were genuinely awarded (visible via berlinale.de archives) but are not represented in the Wikipedia ceremony articles for these three consecutive years. Documented in cer 2011/2012/2013 berlin-landmark-truth.json entry notes.",
+    "description": "Best First Feature Award winner is ABSENT from the Wikipedia ceremony articles for SEVEN consecutive ceremonies: cer 2007 (57th), cer 2008 (58th), cer 2009 (59th), cer 2010 (60th), cer 2011 (61st), cer 2012 (62nd), and cer 2013 (63rd). Each article has only a 'Best First Feature Award' (or 'First Feature Award') section listing the jury members; no winner subsection or winner bullet appears. The scraper correctly returns 0 winner rows for these years (Pass 2 section-heading-driven extraction finds the heading but no eligible winner bullet inside the section). Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK without raising MISSING REVIEW. Cer 2006 (inaugural BFF year) HAS a properly-structured winner section ('=== Best First Feature ===' at line 180 of the article) that Pass 2 captures correctly. Cer 2014, 2015 also have winner sections. Cer 2019 is documented separately. The cer 2007-2013 block represents seven consecutive Wikipedia article-completeness gaps. The prizes were genuinely awarded (visible via berlinale.de archives); just not represented in the Wikipedia ceremony articles for these consecutive years.",
     "deferred_resolution": "None — recorded for posterity. If a future review backfills the cer 2011/2012/2013 BFF winners from a primary source, the truth-file entries can be updated; the scraper's Pass 2 needs no changes since the issue is upstream-source completeness.",
     "blocks_phase": null,
     "status": "documented"
@@ -798,6 +798,28 @@
     "field": "berlin.silver_bear_best_actor + berlin.silver_bear_best_actress",
     "description": "At cer 2011 (61st Berlinale), Best Actor and Best Actress were awarded as ENSEMBLE prizes — the entire male and female casts of A Separation, with no individual recipient names listed. Wikitext bullets read 'the actor ensemble of [Nader and Simin, A Separation]' / 'the actress ensemble of [Nader and Simin, A Separation]'. The scraper's NON_PERSON_NAMES filter strips 'the actor ensemble of' / 'the actress ensemble of' (these are role labels, not person names), and the empty-recipient row guard then drops the row entirely. Result: 0 winner rows in the CSV for both acting categories at cer 2011. Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK. The prizes were genuinely awarded; just not extractable as individual-recipient rows. Documented in cer 2011 berlin-landmark-truth.json entry notes.",
     "deferred_resolution": "None — recorded for posterity. If a future schema accommodates 'ensemble' as a recipient archetype (with film_title as the de-facto laureate), backfill the truth-file entry and the scraper. Currently the ORBIT recipients_json schema requires named individuals.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-oac-ensemble-cer-2007-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2007.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.silver_bear_outstanding_artistic_contribution",
+    "description": "At cer 2007 (57th Berlinale), Outstanding Artistic Contribution was awarded to 'For the Ensemble Cast of The Good Shepherd' — no individual recipient names. Wikitext bullet reads '''Silver Bear for Outstanding Artistic Contribution''': For the Ensemble Cast of [[The Good Shepherd (film)|The Good Shepherd]]. The scraper's F4 path matches 'For the Ensemble of' but returns empty recipients list, and the empty-recipient row guard then drops the row entirely. Result: 0 winner rows in the CSV for OAC at cer 2007. Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK. The prize was genuinely awarded; just not extractable as an individual-recipient row. Documented in cer 2007 berlin-landmark-truth.json entry notes. Same root cause as cer 2011 ensemble-acting issue (separate known-issue entry).",
+    "deferred_resolution": "None — recorded for posterity. If a future schema accommodates 'ensemble' as a recipient archetype with film_title as the de-facto laureate, backfill the truth-file entry and the scraper. Currently the ORBIT recipients_json schema requires named individuals.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-best-screenplay-cer-2006-2007-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2006.csv, berlin-2007.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.silver_bear_best_screenplay",
+    "description": "Best Screenplay Silver Bear was NOT awarded at the 56th (cer 2006) or 57th (cer 2007) Berlinale. The Berlin Best Screenplay prize debuted at cer 2008 (Wang Xiaoshuai for In Love We Trust). Wikipedia ceremony articles for cer 2006 and cer 2007 contain a 'Silver Bear for Best Music' / 'Silver Bear for Best Film Music' bullet (a separate craft prize) but no 'Best Screenplay' bullet. Expectations file has first_year=2008 for berlin.silver_bear_best_screenplay, so Phase D correctly skips the category for cer 2000-2007 (the lifecycle filter cuts the category from the active set entirely). No anomalies surfaced. Documented in cer 2006/2007 berlin-landmark-truth.json entry notes.",
+    "deferred_resolution": "None — this is a true lifecycle absence (the prize did not exist), already correctly modeled by the expectations.json first_year=2008.",
     "blocks_phase": null,
     "status": "documented"
   }

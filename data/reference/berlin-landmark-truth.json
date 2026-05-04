@@ -3,6 +3,350 @@
   "festival": "berlin",
   "generated_at": "2026-05-04T00:00:00+00:00",
   "ceremonies": {
+    "2006": {
+      "ceremony_year": 2006,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Grbavica: The Land of My Dreams",
+          "winner_recipient": "Jasmila Žbanić",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bosnian director Jasmila Žbanić's debut feature Grbavica takes the Golden Bear — wartime-rape-trauma drama set in postwar Sarajevo. Female-director debut Golden Bear win; one of the most-cited Berlinale political-cinema decisions of the mid-2000s. Žbanić served on the cer 2008 BFF jury the following year.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Offside",
+          "winner_recipients": ["Jafar Panahi", "Pernille Fischer Christensen"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Silver Bear Grand Jury Prize: Jafar Panahi for Offside AND Pernille Fischer Christensen for En soap. Scraper produces 2 winner rows (split as a TIE). The Panahi side is itself notable — Offside is about Iranian women smuggling themselves into a male-only football match; this Berlin Grand Jury was Panahi's first major-festival prize, predating his eventual Berlin Golden Bear (cer 2015). The En soap side sweeps a same-film cross-honour with Best First Feature at the same ceremony — same director (Pernille Fischer Christensen) wins Grand Jury + BFF for the same film.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "The Road to Guantanamo",
+          "winner_recipients": ["Michael Winterbottom", "Mat Whitecross"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Co-directors Michael Winterbottom AND Mat Whitecross take the Silver Bear for Best Director for The Road to Guantanamo — a docu-drama on the British detainees of Camp X-Ray. Scraper produces 2 winner rows (split_co_recipients=true on this category). Winterbottom is best known for 24 Hour Party People and Tristram Shandy; this is his Berlin peak.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "The Elementary Particles",
+          "winner_recipient": "Moritz Bleibtreu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actor Moritz Bleibtreu (Run Lola Run, Munich) wins Best Actor for the Houellebecq adaptation The Elementary Particles. One of the most-recognisable German actors of his generation receiving major-festival recognition.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Requiem",
+          "winner_recipient": "Sandra Hüller",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actress Sandra Hüller's first major-festival acting prize for her debut feature Requiem (a 1970s Catholic-exorcism case). Hüller went on to become one of the most internationally-prized actresses of the 2020s — Cannes 2023 (Anatomy of a Fall + The Zone of Interest, both in competition the same year), 2024 Best Actress Oscar nomination, AMPAS member. Cer 2006 Best Actress is therefore Hüller's career launch.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "The Free Will",
+          "winner_recipient": "Jürgen Vogel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actor-producer Jürgen Vogel — unusual OAC citation for an actor (most OAC awards go to crafts like cinematography or costume). Vogel was credited on The Free Will as actor, producer, AND co-writer; the OAC citation recognises his multi-hat auteur contribution. No specialty parenthetical in the wikitext bullet.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "The Minder",
+          "winner_recipient": "Rodrigo Moreno",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Argentine director Rodrigo Moreno — minimalist office-worker drama (El custodio). Moreno later returned to Berlinale and won an Encounters prize at cer 2023 for The Delinquents.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "En soap",
+          "winner_recipient": "Pernille Fischer Christensen",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "INAUGURAL Best First Feature Award winner — cer 2006 (56th Berlinale) was the FIRST year this prize existed. Pernille Fischer Christensen's En soap also took a share of the Silver Bear Grand Jury Prize at the same ceremony — same-film, same-director debut-feature double of Grand Jury + BFF. Permanent festival landmark as the inaugural BFF laureate.",
+          "source": "56th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "56th Berlinale — INAUGURAL year of Best First Feature Award (Pernille Fischer Christensen / En soap, also taking a share of Grand Jury); Golden Bear to Jasmila Žbanić's debut Grbavica (rare female-director debut Golden Bear); Sandra Hüller's career-launching Best Actress for debut feature Requiem (years before her 2024 Oscar arc); Best Director TIE (Winterbottom + Whitecross); Grand Jury TIE (Panahi + Fischer Christensen). Best Screenplay was NOT awarded — Berlin had not yet introduced a dedicated Best Screenplay Silver Bear (debuted cer 2008); first_year=2008 in expectations means Phase D correctly skips this category."
+    },
+    "2007": {
+      "ceremony_year": 2007,
+      "category_count": 6,
+      "winner_count": 6,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Tuya's Marriage",
+          "winner_recipient": "Wang Quan'an",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Wang Quan'an's Golden Bear for Tuya's Marriage — Inner Mongolia-set rural drama. Wang Quan'an returned to Berlin's prize roster three years later (cer 2010 Best Screenplay for Apart Together) — same-director cross-ceremony pair within four years.",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Other",
+          "winner_recipient": "Ariel Rotter",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Argentine director Ariel Rotter — same-film cross-honour with Best Actor: The Other / El otro also took Best Actor (Julio Chávez) at the same ceremony.",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Beaufort",
+          "winner_recipient": "Joseph Cedar",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Israeli director Joseph Cedar's Silver Bear for Best Director — Beaufort follows the IDF's withdrawal from Lebanon. Cedar's most-decorated festival peak; Beaufort was nominated for the 2008 Best Foreign Language Film Oscar.",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "The Other",
+          "winner_recipient": "Julio Chávez",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Argentine actor Julio Chávez — same-film Grand Jury + Best Actor double for The Other (with director Ariel Rotter on the Grand Jury side).",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Yella",
+          "winner_recipient": "Nina Hoss",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actress Nina Hoss wins Best Actress for Christian Petzold's Yella — the first major Petzold-Hoss collaboration recognised by Berlin (the duo went on to make Phoenix, Barbara, etc.). Petzold won Best Director for Barbara five years later (cer 2012, also starring Hoss) — same-collaboration prize-pair across two ceremonies.",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "I'm a Cyborg, But That's OK",
+          "winner_recipient": "Park Chan-wook",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "South Korean director Park Chan-wook — best known for Oldboy and the Vengeance trilogy — takes the Alfred Bauer Prize for I'm a Cyborg, But That's OK (a stylistic departure into psychiatric-ward romance). Park later won Cannes Best Director (2022) for Decision to Leave; cer 2007 Berlin remains his only Berlinale main-prize.",
+          "source": "57th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "57th Berlinale — same-film cross-honour for The Other (Grand Jury + Best Actor: Ariel Rotter + Julio Chávez); Park Chan-wook's only Berlinale main-prize. Best Screenplay NOT awarded (pre-cer-2008 lifecycle gap; expectations first_year=2008). Best First Feature winner ABSENT from Wikipedia article (article completeness gap; only the jury section appears). Outstanding Artistic Contribution awarded as 'For the Ensemble Cast of The Good Shepherd' (no individual recipient extractable; scraper correctly skips the row)."
+    },
+    "2008": {
+      "ceremony_year": 2008,
+      "category_count": 7,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Elite Squad",
+          "winner_recipient": "José Padilha",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brazilian director José Padilha's Golden Bear for Tropa de Elite / Elite Squad — Rio de Janeiro paramilitary-police thriller. The film became one of the most-influential Brazilian films of the 2000s and spawned a sequel; Padilha later directed RoboCop (2014) and the Narcos series.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Standard Operating Procedure",
+          "winner_recipient": "Errol Morris",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "American documentarian Errol Morris's Silver Bear Grand Jury Prize for Standard Operating Procedure — Abu Ghraib torture-photography investigation. Morris is one of the most celebrated American documentarians (The Thin Blue Line, The Fog of War); cer 2008 Berlin is his only major fiction-festival main-prize.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Paul Thomas Anderson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paul Thomas Anderson's Silver Bear for Best Director for There Will Be Blood — the most-celebrated American film at Berlin in the late 2000s. Same-film cross-honour: There Will Be Blood also took Outstanding Artistic Contribution (Jonny Greenwood for the score) at the same ceremony. PT Anderson had previously won the cer 2000 Berlin Golden Bear for Magnolia, making cer 2008 his second Berlin main-competition Silver Bear within the same decade.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "The Song of Sparrows",
+          "winner_recipient": "Reza Naji",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iranian actor Reza Naji wins Best Actor for Majid Majidi's The Song of Sparrows. Naji's win comes amid the Berlinale's continued recognition of Iranian cinema in the late 2000s.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Happy-Go-Lucky",
+          "winner_recipient": "Sally Hawkins",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "British actress Sally Hawkins's career-launching Best Actress for Mike Leigh's Happy-Go-Lucky. Hawkins went on to be Oscar-nominated for The Shape of Water (2017) and Blue Jasmine (2013). Cer 2008 is her major-festival breakthrough.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "In Love We Trust",
+          "winner_recipient": "Wang Xiaoshuai",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "INAUGURAL Best Screenplay Silver Bear winner — cer 2008 (58th Berlinale) was the FIRST year this prize existed at Berlin. Chinese director-writer Wang Xiaoshuai for In Love We Trust. Permanent festival landmark as the inaugural Berlin Best Screenplay laureate. Wang Xiaoshuai returned to Berlin's prize roster eleven years later (cer 2019 same-film acting double for So Long, My Son) — directorial cross-ceremony pair.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "There Will Be Blood",
+          "winner_recipient": "Jonny Greenwood",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for the score of There Will Be Blood. Radiohead's Jonny Greenwood — better known internationally as a rock musician than a film composer — receives Berlin's craft-prize Silver Bear for what would become one of the most-celebrated American film scores of the 21st century. Same-film cross-honour with Best Director (Paul Thomas Anderson) at the same ceremony.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Lake Tahoe",
+          "winner_recipient": "Fernando Eimbcke",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mexican director Fernando Eimbcke — second feature after debut Duck Season. Eimbcke went on to chair the cer 2015 Best First Feature jury at Berlinale.",
+          "source": "58th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "58th Berlinale — INAUGURAL Best Screenplay Silver Bear (Wang Xiaoshuai for In Love We Trust). Same-film Best Director + OAC double for There Will Be Blood (Paul Thomas Anderson + Jonny Greenwood). PT Anderson collects his second Berlin main-competition prize within the same decade (Magnolia Golden Bear cer 2000 + this Best Director cer 2008). Sally Hawkins's career-launching Best Actress. Best First Feature winner ABSENT from Wikipedia article (article completeness gap; only the jury section appears)."
+    },
+    "2009": {
+      "ceremony_year": 2009,
+      "category_count": 8,
+      "winner_count": 10,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "The Milk of Sorrow",
+          "winner_recipient": "Claudia Llosa",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Peruvian director Claudia Llosa's Golden Bear for The Milk of Sorrow / La teta asustada — Quechua-language drama on intergenerational trauma after the Shining Path conflict. First Peruvian Golden Bear; female-director second feature win. The film went on to a 2010 Best Foreign Language Film Oscar nomination.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Giant",
+          "winner_recipients": ["Adrián Biniez", "Maren Ade"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Silver Bear Grand Jury Prize: Adrián Biniez for Giant / Gigante AND Maren Ade for Everyone Else. Scraper produces 2 winner rows. The Maren Ade side is especially notable in retrospect: Everyone Else is the second feature of the future-Toni-Erdmann director, and Berlin recognised her seven years before her Cannes 2016 breakout. The Adrián Biniez side ALSO won the Alfred Bauer Prize at the same ceremony — same director, same film, two cross-category prizes.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "About Elly",
+          "winner_recipient": "Asghar Farhadi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Asghar Farhadi's first Berlin Silver Bear (Best Director for About Elly / Darbareye Elly) — pre-figures his cer 2011 Golden Bear for A Separation. Two consecutive Berlinale main prizes within three years: 2009 Best Director → 2011 Golden Bear. Cer 2009 launches Farhadi's international Berlinale arc.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "London River",
+          "winner_recipient": "Sotigui Kouyaté",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Burkinabé-Malian actor Sotigui Kouyaté wins Best Actor for Rachid Bouchareb's London River. Kouyaté is the first Sub-Saharan-African actor to win a Berlin Best Actor Silver Bear; he died one year later (April 2010). Permanent festival landmark.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Everyone Else",
+          "winner_recipient": "Birgit Minichmayr",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Austrian actress Birgit Minichmayr — Best Actress for Maren Ade's Everyone Else. Same-film cross-honour: Everyone Else also took a share of Grand Jury (Maren Ade direction). Minichmayr's most-celebrated film role.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "The Messenger",
+          "winner_recipients": ["Oren Moverman", "Alessandro Camon"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Co-writers Oren Moverman and Alessandro Camon — Iraq War casualty-notification drama. Scraper captures both names in a single row (split_co_recipients=false on Best Screenplay, but the JSON lists both as recipients). The Messenger went on to two Oscar nominations (Best Original Screenplay, Best Supporting Actor for Woody Harrelson).",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Katalin Varga",
+          "winner_recipient": "György Kovács",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for sound design of Katalin Varga (Peter Strickland's debut feature) — three-person sound team (György Kovács + Gábor ifj. Erdélyi + Tamás Székely; scraper merges into a single recipient row). Strickland later went on to direct Berberian Sound Studio and The Duke of Burgundy.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Tatarak",
+          "winner_recipients": ["Andrzej Wajda", "Adrián Biniez"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Alfred Bauer Prize: Polish veteran Andrzej Wajda for Tatarak / Sweet Rush AND Argentine Adrián Biniez for Giant. Scraper produces 2 winner rows. The Biniez side is the FIRST recorded cer-same-festival double prize within this batch — Biniez ALSO took a share of the Silver Bear Grand Jury Prize at the same ceremony for the same film. Same director winning two distinct Silver Bears at one ceremony is extremely rare.",
+          "source": "59th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "59th Berlinale — Claudia Llosa's Peruvian Golden Bear (first Peruvian top prize, launching toward a 2010 Oscar nomination); Asghar Farhadi's first Berlin prize launches his Berlinale arc to the cer 2011 Golden Bear; Sotigui Kouyaté is the first Sub-Saharan-African Best Actor; Adrián Biniez wins TWO cer-2009 Silver Bears (Grand Jury TIE + Alfred Bauer TIE) for Giant — extraordinarily rare same-director, same-film, same-ceremony double-laureate. Best First Feature winner ABSENT from Wikipedia article (article completeness gap)."
+    },
+    "2010": {
+      "ceremony_year": 2010,
+      "category_count": 8,
+      "winner_count": 9,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Bal",
+          "winner_recipient": "Semih Kaplanoğlu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Turkish director Semih Kaplanoğlu's Golden Bear for Bal / Honey — third and final installment of his Yusuf trilogy (Egg / Milk / Honey, working backward through a poet's childhood). First Turkish Golden Bear; rare top-prize win for a third-of-a-trilogy completion film.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "If I Want to Whistle, I Whistle",
+          "winner_recipient": "Florin Șerban",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Romanian director Florin Șerban's Silver Bear Grand Jury Prize for If I Want to Whistle, I Whistle. Same-film cross-honour: also took the Alfred Bauer Prize at the same ceremony — same-film, same-director Grand Jury + Alfred Bauer double.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "The Ghost Writer",
+          "winner_recipient": "Roman Polanski",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roman Polanski's Silver Bear for Best Director for The Ghost Writer — Polanski was under Swiss house arrest at the time of the ceremony following his US sex-crime extradition request, and accepted in absentia. One of the most controversial Berlin Silver Bears of the modern era for the off-screen circumstances. The film itself is a Tony Blair stand-in political thriller.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "How I Ended This Summer",
+          "winner_recipients": ["Grigoriy Dobrygin", "Sergei Puskepalis"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Silver Bear Best Actor — Russian actors Grigoriy Dobrygin AND Sergei Puskepalis for How I Ended This Summer (an Arctic-research-station two-hander). Scraper produces 2 winner rows (split_co_recipients=true on this category). Same-film TRIPLE cross-honour at cer 2010: How I Ended This Summer also took Outstanding Artistic Contribution (Cinematography, Pavel Kostomarov) — Best Actor TIE + OAC for one film, only Best Director and Golden Bear evaded.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Caterpillar",
+          "winner_recipient": "Shinobu Terajima",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Japanese actress Shinobu Terajima — anti-war drama about a quadruple-amputee Imperial Japanese Army veteran returning home. The film and performance directly engage with Japan's wartime memory.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Apart Together",
+          "winner_recipients": ["Jin Na", "Wang Quan'an"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Co-writers Jin Na and Wang Quan'an. Wang Quan'an returns to Berlin's prize roster three years after his cer 2007 Golden Bear (Tuya's Marriage) — same-director cross-ceremony pair within four years.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "How I Ended This Summer",
+          "winner_recipient": "Pavel Kostomarov",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for Camera (cinematography) of How I Ended This Summer. Same-film cross-honour with the Best Actor TIE at the same ceremony — How I Ended This Summer takes a triple-prize sweep (Best Actor TIE + OAC) on the strength of its remote Arctic-station production.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "If I Want to Whistle, I Whistle",
+          "winner_recipient": "Florin Șerban",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Romanian director Florin Șerban — same-film, same-director Alfred Bauer + Grand Jury double for If I Want to Whistle, I Whistle. Two prizes for one debut feature at the same ceremony.",
+          "source": "60th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "60th Berlinale (anniversary edition) — Turkish first Golden Bear (Semih Kaplanoğlu, Bal — third of Yusuf trilogy); Roman Polanski's in-absentia Best Director Silver Bear under Swiss house arrest; If I Want to Whistle, I Whistle takes a same-film Grand Jury + Alfred Bauer double (Florin Șerban); How I Ended This Summer takes a same-film Best Actor TIE + OAC double (Dobrygin + Puskepalis + Pavel Kostomarov cinematography). Best First Feature winner ABSENT from Wikipedia article (article completeness gap)."
+    },
     "2011": {
       "ceremony_year": 2011,
       "category_count": 7,
