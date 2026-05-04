@@ -3,6 +3,366 @@
   "festival": "berlin",
   "generated_at": "2026-05-04T00:00:00+00:00",
   "ceremonies": {
+    "2011": {
+      "ceremony_year": 2011,
+      "category_count": 7,
+      "winner_count": 7,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "A Separation",
+          "winner_recipient": "Asghar Farhadi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Asghar Farhadi's Golden Bear for Nader and Simin, A Separation — the most-decorated single Berlin film in modern history. The film also took the Best Actor + Best Actress ensemble awards at the same ceremony (the entire male and female casts of A Separation), and went on to win the 2012 Best Foreign Language Film Oscar. First Iranian Golden Bear since the 1980s; cer 2011 launches Iranian arthouse cinema's most internationally visible decade.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Turin Horse",
+          "winner_recipient": "Béla Tarr",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hungarian master Béla Tarr's final feature The Turin Horse takes the Silver Bear Grand Jury Prize. Tarr publicly declared after this ceremony that The Turin Horse would be his last film — Berlin therefore holds the laureate role for his retirement-feature.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Sleeping Sickness",
+          "winner_recipient": "Ulrich Köhler",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German Berlin School director Ulrich Köhler — Cameroon-set medical drama.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "The Forgiveness of Blood",
+          "winner_recipient": "Joshua Marston",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "American director Joshua Marston (with Andamion Murataj) — Albanian blood-feud drama. Marston's follow-up to Maria Full of Grace.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "The Prize",
+          "winner_recipients": ["Barbara Enriquez", "Wojciech Staroń"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TWO Outstanding Artistic Contribution Silver Bears awarded at cer 2011, both for The Prize: Barbara Enriquez for Production Design + Wojciech Staroń for Camera (cinematography). Same-film double-craft OAC is unusual — Berlin recognised distinct craft contributions on the same film as separate prizes. Scraper produces 2 winner rows accordingly.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "If Not Us, Who?",
+          "winner_recipient": "Andres Veiel",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German director Andres Veiel — RAF / Red Army Faction-era drama.",
+          "source": "61st Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "61st Berlinale — A Separation sweeps Golden Bear + Best Actor (ENSEMBLE) + Best Actress (ENSEMBLE), launching toward a 2012 Best Foreign Language Film Oscar. Best Actor and Best Actress were awarded as ENSEMBLE prizes (the entire male/female casts of A Separation) — scraper correctly skips these rows because no individual recipient is named in the wikitext bullet ('the actor ensemble of' / 'the actress ensemble of' triggers the NON_PERSON_NAMES filter). Both prizes were genuinely awarded; just not extractable as individual-recipient rows. Best First Feature Award is ABSENT from this ceremony's Wikipedia article (article completeness gap — only the jury list appears, not the winner). Two OAC Silver Bears awarded for The Prize (Production Design + Camera). Béla Tarr's final feature wins Grand Jury."
+    },
+    "2012": {
+      "ceremony_year": 2012,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Caesar Must Die",
+          "winner_recipient": "Paolo and Vittorio Taviani",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Italian veteran brother-directors Paolo and Vittorio Taviani take the Golden Bear for Caesar Must Die — a docu-fictional staging of Shakespeare's Julius Caesar performed by inmates of Rebibbia prison in Rome. The Tavianis (born 1929 + 1931) were among the oldest Golden Bear laureates in festival history when they won. Vittorio died in 2018; Paolo continued directing into his 90s.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Just the Wind",
+          "winner_recipient": "Benedek Fliegauf",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Hungarian director Benedek Fliegauf — drama based on real Roma family killings in Hungary.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Barbara",
+          "winner_recipient": "Christian Petzold",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Christian Petzold's first Silver Bear for Best Director — East German Cold War drama starring Nina Hoss. Petzold returns to the Berlin prize roster eleven years later (cer 2023 Grand Jury for Afire).",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "A Royal Affair",
+          "winner_recipient": "Mikkel Boe Følsgaard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Danish actor Mikkel Boe Følsgaard — debut-feature performer winning Best Actor at his graduation from Copenhagen's National School of Theatre. Same-film cross-honour: A Royal Affair also took Best Screenplay.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "War Witch",
+          "winner_recipient": "Rachel Mwanza",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Congolese first-time actress Rachel Mwanza — discovered on the streets of Kinshasa for Kim Nguyen's child-soldier drama Rebelle / War Witch. Among the youngest Berlin Best Actress laureates and one of very few Best Actress winners with no prior acting credits.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "A Royal Affair",
+          "winner_recipient": "Nikolaj Arcel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Danish writer-director Nikolaj Arcel (with Rasmus Heisterberg) — same-film cross-honour with Best Actor at cer 2012.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "White Deer Plain",
+          "winner_recipient": "Lutz Reitemeier",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Awarded for cinematography of White Deer Plain (Wang Quan'an).",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Tabu",
+          "winner_recipient": "Miguel Gomes",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Portuguese director Miguel Gomes — Tabu is a black-and-white silent-cinema-style colonial-Mozambique romance. Gomes's most-decorated festival peak; he later took Cannes Best Director (2024) for Grand Tour.",
+          "source": "62nd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "62nd Berlinale — Taviani brothers (born 1929 + 1931) take a late-career Golden Bear for prison-Shakespeare adaptation. A Royal Affair takes a same-film Best Actor + Best Screenplay double. Best First Feature Award is ABSENT from this ceremony's Wikipedia article (article completeness gap)."
+    },
+    "2013": {
+      "ceremony_year": 2013,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Child's Pose",
+          "winner_recipient": "Călin Peter Netzer",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Romanian director Călin Peter Netzer's Golden Bear for Child's Pose — keeping the Berlinale's mid-2010s Romanian New Wave streak. Netzer's editor Dana Bunescu later won OAC for editing (cer 2017 Ana, mon amour) under the same director — a same-collaboration prize-pair across two ceremonies.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "An Episode in the Life of an Iron Picker",
+          "winner_recipient": "Danis Tanović",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bosnian director Danis Tanović's Silver Bear Grand Jury Prize for An Episode in the Life of an Iron Picker — same-film cross-honour with Best Actor (Nazif Mujić, the real Roma scrap-metal collector who plays himself). Tanović returns to the Berlinale prize roster three years later (cer 2016 Grand Jury for Death in Sarajevo) — two Grand Jury Prizes within four years.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Prince Avalanche",
+          "winner_recipient": "David Gordon Green",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "American director David Gordon Green's Silver Bear for Best Director — Prince Avalanche is a Paul Rudd / Emile Hirsch two-hander shot during a personal-project pivot from his stoner-comedy phase. Green's only major festival win.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "An Episode in the Life of an Iron Picker",
+          "winner_recipient": "Nazif Mujić",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roma scrap-metal collector Nazif Mujić — first non-professional actor to win Berlin Best Actor in the modern era, playing a fictionalised version of himself in a Tanović docu-drama. Mujić died of a heart attack in 2018, partly attributed to ongoing poverty after the festival despite his Silver Bear.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Gloria",
+          "winner_recipient": "Paulina García",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chilean actress Paulina García — late-career Best Actress for Sebastián Lelio's Gloria. Lelio returned to Berlin and won Best Screenplay four years later (cer 2017, A Fantastic Woman) — same-director-different-collaborator cross-ceremony pair.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Closed Curtain",
+          "winner_recipient": "Jafar Panahi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iranian director Jafar Panahi's Best Screenplay for Closed Curtain — written and made under his post-2010 Iranian filmmaking ban. Panahi could not attend; Berlin awarded the prize as an act of solidarity. Panahi later won the Golden Bear at cer 2015 (Taxi) — a Berlin three-prize-window arc (cer 2010 in absentia for Offside, cer 2013 Best Screenplay, cer 2015 Golden Bear).",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Harmony Lessons",
+          "winner_recipient": "Aziz Zhambakiyev",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Awarded to Aziz Zhambakiyev for Harmony Lessons (Emir Baigazin) — Kazakh school-drama. No specialty noted in the wikitext bullet (unusual omission for OAC).",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Vic and Flo Saw a Bear",
+          "winner_recipient": "Denis Côté",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Quebec director Denis Côté — Côté returns to Berlin's main competition repeatedly through the 2010s-2020s; cer 2013 Alfred Bauer is his only main-prize win.",
+          "source": "63rd Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "63rd Berlinale — same-film Grand Jury + Best Actor double for An Episode in the Life of an Iron Picker (Tanović + non-professional actor Nazif Mujić). Jafar Panahi takes Best Screenplay in absentia under his Iranian filmmaking ban — Berlinale's continued Panahi-solidarity arc. Best First Feature Award is ABSENT from this ceremony's Wikipedia article (article completeness gap)."
+    },
+    "2014": {
+      "ceremony_year": 2014,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Black Coal, Thin Ice",
+          "winner_recipient": "Diao Yinan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese director Diao Yinan's Golden Bear for Black Coal, Thin Ice — neo-noir thriller. Same-film cross-honour: Black Coal, Thin Ice also took Best Actor (Liao Fan) at the same ceremony — Golden Bear + Best Actor double, the strongest cross-honour pattern of cer 2014.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Grand Budapest Hotel",
+          "winner_recipient": "Wes Anderson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Wes Anderson's first major festival prize — Grand Jury for The Grand Budapest Hotel, the festival's opening film. Pre-figures Anderson's Berlin Best Director Silver Bear four years later (cer 2018, Isle of Dogs). The Grand Budapest Hotel went on to win four Oscars.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Boyhood",
+          "winner_recipient": "Richard Linklater",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Richard Linklater's Silver Bear for Best Director for Boyhood — the 12-year-shot coming-of-age epic. Boyhood became one of the most-celebrated American films of the 2010s; Berlin's Best Director Silver Bear was its first major festival recognition. Linklater later went on to win at cer 2025 (Andrew Scott Best Supporting Performance for Blue Moon, a Linklater-directed Lorenz Hart biopic) — same-director Berlinale-recognition cross-decade pair.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Black Coal, Thin Ice",
+          "winner_recipient": "Liao Fan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese actor Liao Fan wins for Black Coal, Thin Ice — same-film Golden Bear + Best Actor double. Liao Fan and Diao Yinan reunited and went on to make further neo-noir collaborations.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "The Little House",
+          "winner_recipient": "Haru Kuroki",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Japanese actress Haru Kuroki wins for Yōji Yamada's The Little House — period-domestic-melodrama lead. Yamada is best known for the Tora-san film series.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Stations of the Cross",
+          "winner_recipient": "Dietrich Brüggemann",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "German writer-director Dietrich Brüggemann (with Anna Brüggemann) — Catholic-fundamentalism family drama structured in 14 long static-shot scenes echoing the Stations of the Cross.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Blind Massage",
+          "winner_recipient": "Lou Ye",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for Cinematography of Blind Massage (Lou Ye). Unusual citation — the bullet credits the film and its director (Lou Ye) rather than a named DP, possibly because the prize honoured the film's cinematography as a whole.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Life of Riley",
+          "winner_recipient": "Alain Resnais",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alain Resnais's final feature Life of Riley takes the Alfred Bauer Prize. Resnais (born 1922) died one month after this Berlinale, on 1 March 2014, making cer 2014 a posthumous-coda festival appearance for one of European cinema's greatest auteurs.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Güeros",
+          "winner_recipient": "Alonso Ruizpalacios",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mexican director Alonso Ruizpalacios's debut Güeros — black-and-white road-trip drama. Ruizpalacios returned to Berlin and won Best Screenplay four years later (cer 2018, Museum) and OAC seven years later (cer 2021, A Cop Movie editing) — three Berlinale prizes across three different categories.",
+          "source": "64th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "64th Berlinale — Black Coal, Thin Ice takes Golden Bear + Best Actor double; Wes Anderson's first festival prize (Grand Jury for The Grand Budapest Hotel) pre-figures his cer 2018 Best Director Silver Bear; Richard Linklater's Boyhood is launched on the European festival circuit; Alain Resnais wins his final festival prize one month before death. Alonso Ruizpalacios's BFF debut here precedes two further Berlinale prizes."
+    },
+    "2015": {
+      "ceremony_year": 2015,
+      "category_count": 10,
+      "winner_count": 10,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Taxi",
+          "winner_recipient": "Jafar Panahi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iranian director Jafar Panahi's Golden Bear for Taxi — shot secretly in defiance of his Iranian filmmaking ban; Panahi could not attend the ceremony and the prize was accepted by his niece. Cer 2015 completes Panahi's Berlinale three-prize arc (cer 2010 in absentia for Offside; cer 2013 Best Screenplay for Closed Curtain; cer 2015 Golden Bear for Taxi). Berlin's most-sustained festival-solidarity statement of the modern era.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "The Club",
+          "winner_recipient": "Pablo Larraín",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chilean director Pablo Larraín's Silver Bear Grand Jury Prize for The Club — secluded-priest sex-abuse drama. Larraín emerges in the mid-2010s as one of the most internationally-prized Latin American directors; he goes on to make Jackie (2016), Spencer (2021), and Maria (2024).",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Aferim!",
+          "winner_recipients": ["Radu Jude", "Małgorzata Szumowska"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TIE for Best Director at cer 2015: Radu Jude for Aferim! (Romanian historical drama on 19th-century Roma slavery) AND Małgorzata Szumowska for Body. Scraper produces 2 separate winner rows (split_co_recipients=true on this category). Notable directorial-tie ceremony; Jude returns to Berlin's prize roster six years later with the cer 2021 Golden Bear for Bad Luck Banging or Loony Porn — same-festival prize-pair across two ceremonies. Szumowska had previously won the cer 2013 Alfred Bauer Prize and won the cer 2018 Silver Bear Grand Jury.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "45 Years",
+          "winner_recipient": "Tom Courtenay",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "British actor Tom Courtenay wins for Andrew Haigh's 45 Years. Same-film cross-honour: 45 Years also took Best Actress (Charlotte Rampling) — third recorded same-film Best Actor + Best Actress double in this batch window (cer 2011 A Separation ensemble; cer 2015 45 Years; cer 2019 So Long, My Son).",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "45 Years",
+          "winner_recipient": "Charlotte Rampling",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "British actress Charlotte Rampling wins for 45 Years — long-overdue major-festival acting Silver Bear after a six-decade career. Same-film double with co-star Tom Courtenay's Best Actor.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "The Pearl Button",
+          "winner_recipient": "Patricio Guzmán",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chilean documentarian Patricio Guzmán's Best Screenplay for The Pearl Button — second installment of his cosmic-meditation trilogy on Chile's geography, politics, and history (after Nostalgia for the Light, before The Cordillera of Dreams). Documentary winning a Best Screenplay Silver Bear is highly unusual.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Victoria",
+          "winner_recipient": "Sturla Brandth Grøvlen",
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "TWO Outstanding Artistic Contribution Silver Bears awarded at cer 2015 in a TIE for cinematography: Sturla Brandth Grøvlen for Victoria (the famous one-take Berlin-set heist drama, two and a half hours, ONE continuous shot) AND Sergey Mikhalchuk + Evgeniy Privin for Under Electric Clouds. Scraper produces 2 winner rows. Victoria's one-shot achievement is one of the most cited recent Berlin OAC-cinematography wins.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Ixcanul",
+          "winner_recipient": "Jayro Bustamante",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Guatemalan director Jayro Bustamante's debut Ixcanul — Mayan Kaqchikel-language drama. Bustamante was on the cer 2017 BFF jury, signalling Berlinale's continued investment in Latin American debut features.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "600 Miles",
+          "winner_recipient": "Gabriel Ripstein",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Mexican director Gabriel Ripstein's debut — son of legendary Mexican director Arturo Ripstein.",
+          "source": "65th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "65th Berlinale — Jafar Panahi's secret-shot Taxi takes the Golden Bear (in absentia), completing his Berlinale three-prize solidarity arc (2010 → 2013 → 2015). Best Director TIE (Radu Jude + Małgorzata Szumowska); 45 Years takes a same-film Best Actor + Best Actress double (Tom Courtenay + Charlotte Rampling); OAC TIE for cinematography (Victoria one-shot achievement + Under Electric Clouds)."
+    },
     "2016": {
       "ceremony_year": 2016,
       "category_count": 8,

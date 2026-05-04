@@ -778,5 +778,27 @@
     "deferred_resolution": "None — recorded for posterity. If a future review identifies the actual cer 2019 BFF winner from a primary source (berlinale.de archives), backfill the truth-file entry; the scraper's section-heading-driven Pass 2 will not need changes since the issue is upstream-source completeness.",
     "blocks_phase": null,
     "status": "documented"
+  },
+  {
+    "issue_id": "berlin-best-first-feature-cer-2011-2013-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2011.csv, berlin-2012.csv, berlin-2013.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.best_first_feature",
+    "description": "Best First Feature Award winner is ABSENT from the Wikipedia ceremony articles for cer 2011 (61st), cer 2012 (62nd), and cer 2013 (63rd). Each article has only a 'Best First Feature Award' (or 'First Feature Award') section listing the jury members; no winner subsection or winner bullet appears. The scraper correctly returns 0 winner rows for these years (Pass 2 section-heading-driven extraction finds the heading but no eligible winner bullet inside the section). Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK without raising MISSING REVIEW. The prizes were genuinely awarded (visible via berlinale.de archives) but are not represented in the Wikipedia ceremony articles for these three consecutive years. Documented in cer 2011/2012/2013 berlin-landmark-truth.json entry notes.",
+    "deferred_resolution": "None — recorded for posterity. If a future review backfills the cer 2011/2012/2013 BFF winners from a primary source, the truth-file entries can be updated; the scraper's Pass 2 needs no changes since the issue is upstream-source completeness.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-acting-ensemble-cer-2011-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2011.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.silver_bear_best_actor + berlin.silver_bear_best_actress",
+    "description": "At cer 2011 (61st Berlinale), Best Actor and Best Actress were awarded as ENSEMBLE prizes — the entire male and female casts of A Separation, with no individual recipient names listed. Wikitext bullets read 'the actor ensemble of [Nader and Simin, A Separation]' / 'the actress ensemble of [Nader and Simin, A Separation]'. The scraper's NON_PERSON_NAMES filter strips 'the actor ensemble of' / 'the actress ensemble of' (these are role labels, not person names), and the empty-recipient row guard then drops the row entirely. Result: 0 winner rows in the CSV for both acting categories at cer 2011. Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK. The prizes were genuinely awarded; just not extractable as individual-recipient rows. Documented in cer 2011 berlin-landmark-truth.json entry notes.",
+    "deferred_resolution": "None — recorded for posterity. If a future schema accommodates 'ensemble' as a recipient archetype (with film_title as the de-facto laureate), backfill the truth-file entry and the scraper. Currently the ORBIT recipients_json schema requires named individuals.",
+    "blocks_phase": null,
+    "status": "documented"
   }
 ]
