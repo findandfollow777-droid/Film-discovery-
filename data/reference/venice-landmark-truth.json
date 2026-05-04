@@ -2,6 +2,385 @@
   "schema_version": "v1",
   "festival": "venice",
   "ceremonies": {
+    "2000": {
+      "ceremony_year": 2000,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Circle",
+          "winner_recipient": "Jafar Panahi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jafar Panahi's first Golden Lion — Iranian cinema landmark and the festival's first major prize for Panahi. Panahi was subsequently banned from filmmaking and imprisoned by the Iranian regime; he later won the Cannes Palme d'Or in 2025 for It Was Just an Accident — his first international festival appearance after the lifting of his travel ban. The 25-year arc from this Golden Lion to the 2025 Palme is one of the most-defining political stories in modern festival history.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Before Night Falls",
+          "winner_recipient": "Julian Schnabel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Julian Schnabel's first Venice Grand Jury Prize — he later won the Cannes Best Director prize in 2007 for The Diving Bell and the Butterfly. Same film also took the Volpi Cup for Best Actor (Javier Bardem) at the same ceremony — same-film cross-honour.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Uttara",
+          "winner_recipient": "Buddhadev Dasgupta",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Buddhadev Dasgupta's first Silver Lion for Best Director — Bengali Indian filmmaker.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Before Night Falls",
+          "winner_recipient": "Javier Bardem",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Javier Bardem's first Volpi Cup for Best Actor — he went on to receive his first Best Actor Oscar nomination at the 73rd Academy Awards (cer 73, 2001) for the same role. Bardem later won a second Volpi (shared with Elio Germano) at Cannes 2010 for Biutiful, and the Best Supporting Actor Oscar at cer 80 for No Country for Old Men.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Goddess of 1967",
+          "winner_recipient": "Rose Byrne",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Rose Byrne's first major international acting prize — pre-fame Australian actress's career-launching Venice win.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "One Hundred Steps",
+          "winner_recipient": "Claudio Fava",
+          "winner_recipients": ["Claudio Fava", "Marco Tullio Giordana", "Monica Zapelli"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Best Screenplay (then displayed as 'Golden Osella for Outstanding Technical Contribution (screenplay)') for One Hundred Steps — Italian drama about the murder of journalist Peppino Impastato by the Mafia.",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Liam",
+          "winner_recipient": "Megan Burns",
+          "expected_winner_count": 1,
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Poetical Refugee",
+          "winner_recipient": "Abdellatif Kechiche",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Abdellatif Kechiche's debut feature wins Lion of the Future. Kechiche later won the Cannes Palme d'Or in 2013 for Blue Is the Warmest Colour (jointly awarded to him and the two lead actresses Adèle Exarchopoulos and Léa Seydoux — only time in Cannes history performers shared the Palme).",
+          "source": "57th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2001": {
+      "ceremony_year": 2001,
+      "category_count": 7,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Monsoon Wedding",
+          "winner_recipient": "Mira Nair",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mira Nair's first Golden Lion — making her the first Indian woman to win the top prize at Venice, and the first female director to take Venice's top prize since Margarethe von Trotta's German Sisters in 1981 (a 20-year gap). Indian cinema landmark.",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Dog Days",
+          "winner_recipient": "Ulrich Seidl",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ulrich Seidl's first Venice prize — he later won the Grand Jury Prize again in 2012 (Paradise: Faith).",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Secret Ballot",
+          "winner_recipient": "Babak Payami",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Babak Payami's first Silver Lion for Best Director — Iranian filmmaker. Iranian cinema double honour at the 58th festival (Panahi's Golden Lion the year before, Iranian Best Director here).",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Light of My Eyes",
+          "winner_recipient": "Luigi Lo Cascio",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Luigi Lo Cascio's first Volpi Cup for Best Actor. Same film took the Volpi Cup for Best Actress (Sandra Ceccarelli) at the same ceremony — exceptionally rare same-film acting double honour.",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Light of My Eyes",
+          "winner_recipient": "Sandra Ceccarelli",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sandra Ceccarelli's first Volpi Cup for Best Actress — same film as Best Actor (Lo Cascio) — same-film acting double honour.",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Y tu mamá también",
+          "winner_recipient": "Gael García Bernal",
+          "winner_recipients": ["Gael García Bernal", "Diego Luna"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-person team award. Gael García Bernal and Diego Luna share the Marcello Mastroianni Award for Alfonso Cuarón's Y tu mamá también — both pre-stardom Mexican actors. Both rows correctly flagged co_winner=true. The film's Cuarón directorial credit foreshadowed his subsequent Cannes/Oscar dominance — Cuarón later won Venice's Golden Lion in 2018 (Roma) + multiple Oscars at cer 91.",
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Bread and Milk",
+          "winner_recipient": "Jan Cvitkovic",
+          "expected_winner_count": 1,
+          "source": "58th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2002": {
+      "ceremony_year": 2002,
+      "category_count": 7,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Magdalene Sisters",
+          "winner_recipient": "Peter Mullan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Peter Mullan's first Golden Lion — drama about the abusive Magdalene Laundries run by the Catholic Church in 20th-century Ireland. The win prompted strong condemnation from the Vatican; the controversy made The Magdalene Sisters one of the most-discussed Golden Lion winners of the early 2000s.",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "House of Fools",
+          "winner_recipient": "Andrei Konchalovsky",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrei Konchalovsky's first Venice prize — he later shared Silver Lion for Best Director in 2016 (Paradise) and won the Special Jury Prize in 2020 (Dear Comrades!), a 18-year span of Venice prizes. Konchalovsky also won Silver Lion for Best Director in 2014 (The Postman's White Nights).",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Oasis",
+          "winner_recipient": "Lee Chang-dong",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lee Chang-dong's first Silver Lion for Best Director — Korean filmmaker. Same film took the Marcello Mastroianni Award (Moon So-ri) at the same ceremony. Lee Chang-dong later won Cannes Best Screenplay in 2010 for Poetry.",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "A Journey Called Love",
+          "winner_recipient": "Stefano Accorsi",
+          "expected_winner_count": 1,
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Far from Heaven",
+          "winner_recipient": "Julianne Moore",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Julianne Moore's first Volpi Cup for Best Actress — for Todd Haynes's Far from Heaven. Moore went on to receive a Best Actress Oscar nomination at cer 75 for the same role, and won a second Volpi Cup in 2014 for Maps to the Stars. She won the Best Actress Oscar at cer 87 for Still Alice.",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Oasis",
+          "winner_recipient": "Moon So-ri",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Moon So-ri's first major acting prize — same film took Best Director (Lee Chang-dong) at the same ceremony. Korean cinema cross-honour.",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Two Friends",
+          "winner_recipient": "Francesco Sframeli",
+          "winner_films": ["Two Friends", "Roger Dodger"],
+          "winner_recipients": ["Francesco Sframeli", "Spiro Scimone", "Dylan Kidd"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Two Friends (Sframeli/Scimone) shares Lion of the Future with Roger Dodger (Dylan Kidd). CSV co_winner=false on both rows due to multi-bullet-tie format — see known-issue venice-co-winner-flag-multi-bullet-tie-2026-05-04 (scope expanded from cer 2006 to cover cer 2002 as well).",
+          "source": "59th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2003": {
+      "ceremony_year": 2003,
+      "category_count": 6,
+      "winner_count": 6,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Return",
+          "winner_recipient": "Andrey Zvyagintsev",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrey Zvyagintsev's debut feature wins the Golden Lion — exceptionally rare for a first feature to take Venice's top prize. Zvyagintsev later won Cannes Best Screenplay in 2014 (Leviathan), the Cannes Jury Prize in 2017 (Loveless), and Venice's Grand Jury Prize in 2017 (Foxtrot — Samuel Maoz). The 60th Venice Film Festival was unusually sparse — only 6 of the 9 target categories were awarded that year (Special Jury Prize, Best Screenplay, and Lion of the Future were not given per the era_overrides documented in venice-expectations.json).",
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Kite",
+          "winner_recipient": "Randa Chahal",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Randa Chahal's first major Venice prize — Lebanese filmmaker.",
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Zatōichi",
+          "winner_recipient": "Takeshi Kitano",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Takeshi Kitano's first Silver Lion for Best Director — Japanese filmmaker's contemporary take on the classic blind swordsman character. Kitano had previously won the Golden Lion in 1997 for Hana-bi.",
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "21 Grams",
+          "winner_recipient": "Sean Penn",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sean Penn's first Volpi Cup for Best Actor — for Iñárritu's 21 Grams. Penn went on to win the Oscar for Best Actor at cer 76 (Mystic River, the same year).",
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Rosenstrasse",
+          "winner_recipient": "Katja Riemann",
+          "expected_winner_count": 1,
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Raja",
+          "winner_recipient": "Najat Benssallem",
+          "expected_winner_count": 1,
+          "source": "60th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2004": {
+      "ceremony_year": 2004,
+      "category_count": 7,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Vera Drake",
+          "winner_recipient": "Mike Leigh",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mike Leigh's first Golden Lion — drama about a working-class British woman performing illegal abortions in 1950s London. Same film took the Volpi Cup for Best Actress (Imelda Staunton) at the same ceremony — exceptional same-film top-tier double honour. Vera Drake went on to receive Best Director and Best Actress Oscar nominations at cer 77.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Sea Inside",
+          "winner_recipient": "Alejandro Amenábar",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alejandro Amenábar's first Venice Grand Jury Prize. Same film took the Volpi Cup for Best Actor (Javier Bardem) — exceptional same-film cross-honour. The Sea Inside went on to win Best Foreign Language Film at the 77th Academy Awards (cer 77) — Spain's third International Feature Oscar.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "3-Iron",
+          "winner_recipient": "Kim Ki-duk",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kim Ki-duk's first major Venice prize — Korean filmmaker's contemplative drama. Kim Ki-duk later won the Golden Lion in 2012 for Pietà — South Korea's first Golden Lion. Two Venice prizes eight years apart, with the second representing Kim's prestige escalation.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Sea Inside",
+          "winner_recipient": "Javier Bardem",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Javier Bardem's second Volpi Cup for Best Actor (after Before Night Falls in 2000) — for portraying quadriplegic right-to-die activist Ramón Sampedro. Same film took Grand Jury Prize (Amenábar) at the same ceremony.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Vera Drake",
+          "winner_recipient": "Imelda Staunton",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Imelda Staunton's first Volpi Cup for Best Actress — same film took the Golden Lion (Mike Leigh) at the same ceremony, an exceptional same-film top-tier double honour. Staunton went on to receive a Best Actress Oscar nomination at cer 77 for the same role.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Working Slowly (Radio Alice)",
+          "winner_recipient": "Tommaso Ramenghi",
+          "winner_recipients": ["Tommaso Ramenghi", "Marco Luisi"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-person team award. Tommaso Ramenghi and Marco Luisi share the Marcello Mastroianni Award. Both rows correctly flagged co_winner=true.",
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "The Great Journey",
+          "winner_recipient": "Ismaël Ferroukhi",
+          "winner_recipients": ["Ismaël Ferroukhi", "Humbert Balsan"],
+          "expected_winner_count": 1,
+          "source": "61st Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2005": {
+      "ceremony_year": 2005,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Brokeback Mountain",
+          "winner_recipient": "Ang Lee",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ang Lee's first Golden Lion — for the LGBTQ+-themed romance Brokeback Mountain. The film went on to win Best Director at the 78th Academy Awards (cer 78) for Lee, in a famous Picture/Director split where Crash took Best Picture (a result widely cited as illustrative of homophobic bias in the older Academy membership). Lee won his second Venice Golden Lion two years later in 2007 (Lust, Caution) — the first non-American director with two 21st-century Golden Lions.",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Mary",
+          "winner_recipient": "Abel Ferrara",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Abel Ferrara's first Venice Grand Jury Prize — American indie auteur's religious-themed drama.",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Regular Lovers",
+          "winner_recipient": "Philippe Garrel",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Philippe Garrel's first Silver Lion for Best Director — French auteur's drama about post-1968 Paris.",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Good Night, and Good Luck",
+          "winner_recipient": "David Strathairn",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "David Strathairn's first Volpi Cup for Best Actor — for portraying CBS journalist Edward R. Murrow during the McCarthy era. Same film took Best Screenplay (Clooney + Heslov) at the same ceremony. Strathairn went on to receive a Best Actor Oscar nomination at cer 78 for the same role.",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Beast in the Heart",
+          "winner_recipient": "Giovanna Mezzogiorno",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Giovanna Mezzogiorno's first Volpi Cup for Best Actress — Italian actress.",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Good Night, and Good Luck",
+          "winner_recipient": "George Clooney",
+          "winner_recipients": ["George Clooney", "Grant Heslov"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "George Clooney and Grant Heslov's first Venice Best Screenplay — first dedicated screenplay-Osella since the 2001-2004 era_override gap (which ended this year). The film went on to receive six Academy Award nominations at cer 78 including Best Picture, Best Director, Best Original Screenplay, and Best Actor (Strathairn).",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Heading South",
+          "winner_recipient": "Ménothy Cesar",
+          "expected_winner_count": 1,
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "13 Tzameti",
+          "winner_recipient": "Gela Babluani",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Gela Babluani's debut feature wins Lion of the Future — Georgian filmmaker's existential thriller (later remade as a 2010 American film with Sam Riley).",
+          "source": "62nd Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
     "2006": {
       "ceremony_year": 2006,
       "category_count": 8,
