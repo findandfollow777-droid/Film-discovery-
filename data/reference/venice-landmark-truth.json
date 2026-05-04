@@ -1,0 +1,395 @@
+{
+  "schema_version": "v1",
+  "festival": "venice",
+  "ceremonies": {
+    "2021": {
+      "ceremony_year": 2021,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Happening",
+          "winner_recipient": "Audrey Diwan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Audrey Diwan's first Golden Lion — for L'événement (Happening), an adaptation of Annie Ernaux's autobiographical novel about a young woman seeking an illegal abortion in 1960s France. Diwan's second feature.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Hand of God",
+          "winner_recipient": "Paolo Sorrentino",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paolo Sorrentino's first Grand Jury Prize at Venice — his autobiographical Naples-set drama. The Hand of God went on to receive a Best International Feature nomination at the 94th Academy Awards (cer 94). Same film also took the Marcello Mastroianni Award (Filippo Scotti).",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Power of the Dog",
+          "winner_recipient": "Jane Campion",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jane Campion's first Silver Lion for Best Director — she went on to win Best Director at the 94th Academy Awards (cer 94) for the same film, becoming only the third woman ever to win Best Director Oscar. Power of the Dog's Venice-to-Oscar trajectory was one of the most-discussed awards seasons of the era.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Il buco",
+          "winner_recipient": "Michelangelo Frammartino",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michelangelo Frammartino's first major Venice prize — Italian filmmaker's contemplative documentary-fiction hybrid about cave exploration in 1960s Calabria.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "On the Job: The Missing 8",
+          "winner_recipient": "John Arcilla",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "John Arcilla becomes the first Filipino actor to win the Volpi Cup for Best Actor.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Parallel Mothers",
+          "winner_recipient": "Penélope Cruz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Penélope Cruz's first Volpi Cup for Best Actress — for Pedro Almodóvar's Parallel Mothers. Cruz had previously won the Cannes Best Supporting Actress shared 6-way for Almodóvar's Volver in 2006. Almodóvar himself later won Venice's Golden Lion in 2024 (The Room Next Door).",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Lost Daughter",
+          "winner_recipient": "Maggie Gyllenhaal",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Maggie Gyllenhaal's first Cannes-equivalent prize — won Best Screenplay for her directorial debut, an adaptation of Elena Ferrante's novel. Gyllenhaal received Oscar nominations for Adapted Screenplay and Picture at cer 94.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Hand of God",
+          "winner_recipient": "Filippo Scotti",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Filippo Scotti's first major acting prize — Sorrentino's autobiographical lead. Same film took Grand Jury Prize at the same ceremony.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Immaculate",
+          "winner_recipient": "George Chiper-Lillemark",
+          "winner_recipients": ["George Chiper-Lillemark", "Monica Stan"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Romanian co-directed debut feature wins Lion of the Future / Luigi De Laurentiis Award.",
+          "source": "78th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2022": {
+      "ceremony_year": 2022,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "All the Beauty and the Bloodshed",
+          "winner_recipient": "Laura Poitras",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Laura Poitras's first Golden Lion — only the second documentary in modern Venice history to win the top prize (after Gianfranco Rosi's Sacro GRA, 2013). The film centres on photographer Nan Goldin's activism against the Sackler family. Poitras had previously won the Best Documentary Oscar for Citizenfour (cer 87).",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Saint Omer",
+          "winner_recipient": "Alice Diop",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alice Diop's debut feature wins the Grand Jury Prize AND the Lion of the Future at the same ceremony — an exceptional same-film double-honour for a first feature. Saint Omer went on to be France's submission for Best International Feature at cer 95.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Bones and All",
+          "winner_recipient": "Luca Guadagnino",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Luca Guadagnino's first Silver Lion for Best Director — same film also took the Marcello Mastroianni Award (Taylor Russell) at the same ceremony. Guadagnino had previously been Oscar-nominated as a producer for Call Me by Your Name (cer 90).",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "No Bears",
+          "winner_recipient": "Jafar Panahi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jafar Panahi's first Venice Special Jury Prize — Panahi was imprisoned in Iran at the time and could not attend. The film centres on a director shooting a film through proxies due to a travel ban — directly autobiographical. Panahi later won the Palme d'Or in 2025 (It Was Just an Accident), his first festival appearance after the lifting of his travel ban.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Banshees of Inisherin",
+          "winner_recipient": "Colin Farrell",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Colin Farrell's first major acting prize — went on to receive Best Actor nominations at the 95th Academy Awards (cer 95) and BAFTA. Same film also took Best Screenplay (McDonagh) at the same ceremony.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Tár",
+          "winner_recipient": "Cate Blanchett",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cate Blanchett's first Volpi Cup for Best Actress — her career-late renaissance under Todd Field's direction. Blanchett went on to receive a Best Actress nomination at the 95th Academy Awards (cer 95) for the same role; her sixth acting Oscar nomination.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Banshees of Inisherin",
+          "winner_recipient": "Martin McDonagh",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Martin McDonagh's first Venice Best Screenplay — went on to receive a Best Original Screenplay Oscar nomination at cer 95. Same film took Best Actor (Farrell) at the same ceremony.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Bones and All",
+          "winner_recipient": "Taylor Russell",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Taylor Russell's first major acting prize — Bones and All took Best Director (Guadagnino) at the same ceremony.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Saint Omer",
+          "winner_recipient": "Alice Diop",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alice Diop's debut feature Saint Omer wins Lion of the Future / Luigi De Laurentiis — same film also took the Grand Jury Prize at the same ceremony. The same-film Grand-Jury + Lion-of-the-Future double is exceptionally rare in Venice's history.",
+          "source": "79th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2023": {
+      "ceremony_year": 2023,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Poor Things",
+          "winner_recipient": "Yorgos Lanthimos",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Yorgos Lanthimos's first Golden Lion — Poor Things went on to win four Academy Awards at cer 96 (Best Actress for Emma Stone, Production Design, Costume Design, Makeup & Hairstyling) and the BAFTA Best Film. The film's Venice-to-Oscar trajectory was one of the most-celebrated of the season.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Evil Does Not Exist",
+          "winner_recipient": "Ryusuke Hamaguchi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ryusuke Hamaguchi's first Venice Grand Jury Prize — Hamaguchi had previously won Cannes Best Screenplay in 2021 for Drive My Car (which went on to win the International Feature Oscar at cer 94).",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Io capitano",
+          "winner_recipient": "Matteo Garrone",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Matteo Garrone's first Silver Lion for Best Director — Garrone had previously won two Cannes Grand Prix wins (Gomorrah, 2008; Reality, 2012). Same film also took the Marcello Mastroianni Award (Seydou Sarr) at the same ceremony.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Green Border",
+          "winner_recipient": "Agnieszka Holland",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Agnieszka Holland's first Venice Special Jury Prize — Polish veteran filmmaker's drama set on the Belarus-Poland border refugee crisis. The win was politically charged in Poland; the ruling government condemned it publicly.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Memory",
+          "winner_recipient": "Peter Sarsgaard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Peter Sarsgaard's first major acting prize — for Michel Franco's Memory, opposite Jessica Chastain.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Priscilla",
+          "winner_recipient": "Cailee Spaeny",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Cailee Spaeny's first major acting prize — for Sofia Coppola's Priscilla, portraying Priscilla Presley.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "El Conde",
+          "winner_recipient": "Guillermo Calderón",
+          "winner_recipients": ["Guillermo Calderón", "Pablo Larraín"],
+          "expected_winner_count": 1,
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Io capitano",
+          "winner_recipient": "Seydou Sarr",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Seydou Sarr's debut acting role wins the Marcello Mastroianni Award — Senegalese actor's first major prize. Same film took Best Director (Garrone) at the same ceremony.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Love Is a Gun",
+          "winner_recipient": "Lee Hong-chi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lee Hong-chi's debut feature wins Lion of the Future — Taiwanese-Hong Kong co-production.",
+          "source": "80th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2024": {
+      "ceremony_year": 2024,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Room Next Door",
+          "winner_recipient": "Pedro Almodóvar",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Pedro Almodóvar's first Golden Lion — and his first English-language feature. Almodóvar had previously won three Cannes prizes including Best Original Screenplay for Talk to Her (cer 75) and Best Director for All About My Mother (cer 72). The Room Next Door's win marked the first time a Spanish filmmaker had taken Venice's top prize.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Vermiglio",
+          "winner_recipient": "Maura Delpero",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Maura Delpero's second feature wins the Grand Jury Prize. Delpero became Italy's submission for the 97th Academy Awards Best International Feature (cer 97).",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Brutalist",
+          "winner_recipient": "Brady Corbet",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Brady Corbet's first Silver Lion for Best Director — The Brutalist subsequently won three Academy Awards at cer 97 (Best Actor for Adrien Brody, Best Cinematography, Best Original Score). The Venice Best Director-to-Oscar Best Actor trajectory was one of the season's defining narratives.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "April",
+          "winner_recipient": "Dea Kulumbegashvili",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Dea Kulumbegashvili's second feature wins the Special Jury Prize — Georgian filmmaker's continued Venice presence after Beginning's 2020 acclaim.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Quiet Son",
+          "winner_recipient": "Vincent Lindon",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Vincent Lindon's first Volpi Cup for Best Actor — Lindon had previously won Cannes Best Actor in 2015 for The Measure of a Man, making him a winner of both major continental Best Actor prizes.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Babygirl",
+          "winner_recipient": "Nicole Kidman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Nicole Kidman's first Volpi Cup for Best Actress — Kidman had previously won the Oscar for Best Actress (The Hours, cer 75) and the Cannes Best Actress (To Die For, 1995 — outside our scope).",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "I'm Still Here",
+          "winner_recipient": "Murilo Hauser",
+          "winner_recipients": ["Murilo Hauser", "Heitor Lorega"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Murilo Hauser and Heitor Lorega's first major screenplay prize — I'm Still Here went on to win the 97th Academy Awards Best International Feature (cer 97) — Brazil's first International Feature Oscar.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "And Their Children After Them",
+          "winner_recipient": "Paul Kircher",
+          "expected_winner_count": 1,
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Familiar Touch",
+          "winner_recipient": "Sarah Friedland",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sarah Friedland's debut feature wins Lion of the Future. Friedland also took Best Director in the Orizzonti section at the same ceremony — a rare cross-section honour.",
+          "source": "81st Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2025": {
+      "ceremony_year": 2025,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Father Mother Sister Brother",
+          "winner_recipient": "Jim Jarmusch",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jim Jarmusch's first Golden Lion — American indie auteur's most-prominent career-late prize. Jarmusch had previously won the Cannes Grand Prix in 2005 for Broken Flowers and the Caméra d'Or for Stranger Than Paradise (1984, outside scope).",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Voice of Hind Rajab",
+          "winner_recipient": "Kaouther Ben Hania",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kaouther Ben Hania's first Venice Grand Jury Prize — Tunisian filmmaker's politically-charged docudrama about the killing of a Palestinian child during the 2024 Gaza war.",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Smashing Machine",
+          "winner_recipient": "Benny Safdie",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Benny Safdie's first Silver Lion for Best Director — solo directorial effort following the Safdie brothers' break-up of their joint directorial partnership (Uncut Gems, Good Time).",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Below the Clouds",
+          "winner_recipient": "Gianfranco Rosi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Gianfranco Rosi's second major Venice prize — he previously won the Golden Lion for Sacro GRA in 2013, the first documentary to win the top prize in modern Venice history.",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "La grazia",
+          "winner_recipient": "Toni Servillo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Toni Servillo's first Volpi Cup for Best Actor — Italian veteran best known for collaborations with Paolo Sorrentino (The Great Beauty won Best International Feature at cer 86).",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Sun Rises on Us All",
+          "winner_recipient": "Xin Zhilei",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Xin Zhilei becomes the first Chinese actress to win the Volpi Cup for Best Actress.",
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "At Work",
+          "winner_recipient": "Valérie Donzelli",
+          "winner_recipients": ["Valérie Donzelli", "Gilles Marchand"],
+          "expected_winner_count": 1,
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Silent Friend",
+          "winner_recipient": "Luna Wedler",
+          "expected_winner_count": 1,
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Short Summer",
+          "winner_recipient": "Nastia Korkia",
+          "expected_winner_count": 1,
+          "source": "82nd Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    }
+  }
+}
