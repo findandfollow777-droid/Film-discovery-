@@ -2,6 +2,385 @@
   "schema_version": "v1",
   "festival": "venice",
   "ceremonies": {
+    "2016": {
+      "ceremony_year": 2016,
+      "category_count": 9,
+      "winner_count": 10,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Woman Who Left",
+          "winner_recipient": "Lav Diaz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Lav Diaz becomes the first Filipino filmmaker to win the Golden Lion. The Woman Who Left is part of his career-long catalogue of long-form, slow-cinema epics; the win marked the highest international honour for Filipino cinema in modern festival history.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Nocturnal Animals",
+          "winner_recipient": "Tom Ford",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tom Ford's first major Venice prize — fashion-designer-turned-filmmaker's second feature.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Untamed",
+          "winner_recipient": "Amat Escalante",
+          "winner_films": ["The Untamed", "Paradise"],
+          "winner_recipients": ["Amat Escalante", "Andrei Konchalovsky"],
+          "expected_winner_count": 2,
+          "notable": true,
+          "note": "Two-way tie. Amat Escalante (The Untamed) shares Silver Lion for Best Director with Andrei Konchalovsky (Paradise). Escalante had previously won Cannes Best Director 2013 for Heli; Konchalovsky later won Venice's Special Jury Prize in 2020 for Dear Comrades! Both rows correctly flagged co_winner=true.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "The Bad Batch",
+          "winner_recipient": "Ana Lily Amirpour",
+          "expected_winner_count": 1,
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Distinguished Citizen",
+          "winner_recipient": "Oscar Martínez",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Oscar Martínez's first Volpi Cup for Best Actor — Argentine actor's most-prominent international prize.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "La La Land",
+          "winner_recipient": "Emma Stone",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Emma Stone's first Volpi Cup for Best Actress — she went on to win the Best Actress Oscar at the 89th Academy Awards (cer 89) for the same role. The Venice-to-Oscar acting pipeline played out cleanly.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Jackie",
+          "winner_recipient": "Noah Oppenheim",
+          "expected_winner_count": 1,
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Frantz",
+          "winner_recipient": "Paula Beer",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paula Beer's first major acting prize.",
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "The Last of Us",
+          "winner_recipient": "Ala Eddine Slim",
+          "expected_winner_count": 1,
+          "source": "73rd Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2017": {
+      "ceremony_year": 2017,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "The Shape of Water",
+          "winner_recipient": "Guillermo del Toro",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Guillermo del Toro's first Golden Lion — The Shape of Water went on to win four Academy Awards at the 90th ceremony (cer 90), including Best Picture and Best Director, making del Toro the third Mexican director to win Best Director Oscar in five years (after Cuarón 2014 and Iñárritu 2015 + 2016 — the 'Three Amigos' era of Mexican cinema).",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "Foxtrot",
+          "winner_recipient": "Samuel Maoz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Samuel Maoz's second Venice prize — he previously won the Golden Lion in 2009 for Lebanon.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Custody",
+          "winner_recipient": "Xavier Legrand",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Xavier Legrand's debut feature wins BOTH Silver Lion for Best Director AND Lion of the Future at the same ceremony — an exceptional same-film double-honour for a first feature, on the same scale as Saint Omer (Diop 2022).",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Sweet Country",
+          "winner_recipient": "Warwick Thornton",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Warwick Thornton's second major festival prize — he had previously won the Caméra d'Or at Cannes 2009 (Samson and Delilah). Indigenous Australian filmmaker.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "The Insult",
+          "winner_recipient": "Kamel El Basha",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kamel El Basha becomes the first Palestinian actor to win the Volpi Cup for Best Actor.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Hannah",
+          "winner_recipient": "Charlotte Rampling",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Charlotte Rampling's first Volpi Cup for Best Actress.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "Three Billboards Outside Ebbing, Missouri",
+          "winner_recipient": "Martin McDonagh",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Martin McDonagh's first Venice Best Screenplay — Three Billboards went on to win Best Actress (McDormand) and Best Supporting Actor (Rockwell) at the 90th Academy Awards (cer 90). McDonagh later won Venice Best Screenplay AGAIN in 2022 for The Banshees of Inisherin.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Lean on Pete",
+          "winner_recipient": "Charlie Plummer",
+          "expected_winner_count": 1,
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "Custody",
+          "winner_recipient": "Xavier Legrand",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Xavier Legrand's debut feature Custody wins Lion of the Future / Luigi De Laurentiis Award — same film also took Silver Lion for Best Director at the same ceremony, an exceptional same-film cross-honour.",
+          "source": "74th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2018": {
+      "ceremony_year": 2018,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Roma",
+          "winner_recipient": "Alfonso Cuarón",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Alfonso Cuarón's first Golden Lion — and the first Netflix-distributed film to win Venice's top prize. Cuarón went on to win Best Director, Best Cinematography, and Best International Feature at the 91st Academy Awards (cer 91) for Roma — a clean Venice-to-Oscar trajectory. Cuarón is the first Mexican filmmaker to win Venice's Golden Lion.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "The Favourite",
+          "winner_recipient": "Yorgos Lanthimos",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Yorgos Lanthimos's first Venice Grand Jury Prize — he later took the Golden Lion in 2023 for Poor Things. Same film also took the Volpi Cup for Best Actress (Olivia Colman) at the same ceremony.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "The Sisters Brothers",
+          "winner_recipient": "Jacques Audiard",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jacques Audiard's first Venice Best Director — French filmmaker's first English-language feature. Audiard had previously won the Cannes Palme d'Or in 2015 for Dheepan and the Cannes Grand Prix in 2009 for A Prophet.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "The Nightingale",
+          "winner_recipient": "Jennifer Kent",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Jennifer Kent's second feature wins the Special Jury Prize. Same film also took the Marcello Mastroianni Award (Baykali Ganambarr) at the same ceremony.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "At Eternity's Gate",
+          "winner_recipient": "Willem Dafoe",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Willem Dafoe's first Volpi Cup for Best Actor — for portraying Vincent van Gogh. Dafoe went on to receive a Best Actor nomination at the 91st Academy Awards (cer 91) for the same role.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "The Favourite",
+          "winner_recipient": "Olivia Colman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Olivia Colman's first Volpi Cup for Best Actress — she went on to win the Best Actress Oscar at the 91st Academy Awards (cer 91) for the same role (Queen Anne in The Favourite). The Venice-to-Oscar acting pipeline played out cleanly. Same film also took Grand Jury Prize (Lanthimos) at the same ceremony — same-film cross-honour.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Ballad of Buster Scruggs",
+          "winner_recipient": "Joel and Ethan Coen",
+          "winner_recipients": ["Joel Coen", "Ethan Coen"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "The Coen brothers' first Venice Best Screenplay — they had previously won the Cannes Palme d'Or for Barton Fink (1991) and the Cannes Best Director for Fargo (1996). The Ballad of Buster Scruggs received a Best Adapted Screenplay Oscar nomination at the 91st ceremony (cer 91).",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "The Nightingale",
+          "winner_recipient": "Baykali Ganambarr",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Baykali Ganambarr's first major acting prize — Indigenous Australian actor in his debut feature role. Same film took the Special Jury Prize (Kent) at the same ceremony.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "The Day I Lost My Shadow",
+          "winner_recipient": "Soudade Kaadan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Syria's first Lion of the Future. Soudade Kaadan's debut feature.",
+          "source": "75th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2019": {
+      "ceremony_year": 2019,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Joker",
+          "winner_recipient": "Todd Phillips",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Joker becomes the first comic-book film to win the Golden Lion in Venice's history. Todd Phillips's first major festival prize. The film went on to receive eleven Academy Award nominations at cer 92, with Joaquin Phoenix winning Best Actor (the second consecutive Best Actor win for portraying the Joker character — after Heath Ledger's posthumous Best Supporting Actor at cer 81).",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "An Officer and a Spy",
+          "winner_recipient": "Roman Polanski",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roman Polanski's third major Venice prize (after the Golden Lion for The Pianist at Cannes 2002 — wait, Pianist won Cannes Palme not Venice. Polanski's prior Venice prize was the Career Golden Lion at the 51st festival, 1994). The 2019 Grand Jury Prize was widely controversial given Polanski's status as a fugitive from US justice; Polanski did not attend.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "About Endlessness",
+          "winner_recipient": "Roy Andersson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Roy Andersson's second major Venice prize — he previously won the Golden Lion in 2014 for A Pigeon Sat on a Branch Reflecting on Existence. Swedish auteur's deadpan tableaux style.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "The Mafia Is No Longer What It Used to Be",
+          "winner_recipient": "Franco Maresco",
+          "expected_winner_count": 1,
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Martin Eden",
+          "winner_recipient": "Luca Marinelli",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Luca Marinelli's first Volpi Cup for Best Actor — Italian actor's most-prominent international prize.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Gloria Mundi",
+          "winner_recipient": "Ariane Ascaride",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Ariane Ascaride's first Volpi Cup for Best Actress — French actress and frequent Robert Guédiguian collaborator.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "No.7 Cherry Lane",
+          "winner_recipient": "Yonfan",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hong Kong filmmaker Yonfan's animated feature wins Best Screenplay — exceptionally rare for an animated film to take a screenplay prize at a major festival.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Babyteeth",
+          "winner_recipient": "Toby Wallace",
+          "expected_winner_count": 1,
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.lion_of_the_future": {
+          "winner_film": "You Will Die at Twenty",
+          "winner_recipient": "Amjad Abu Alala",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sudan's first Lion of the Future. Amjad Abu Alala's debut feature — also Sudan's first submission for the Best International Feature Oscar.",
+          "source": "76th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
+    "2020": {
+      "ceremony_year": 2020,
+      "category_count": 8,
+      "winner_count": 8,
+      "lion_of_the_future_active": false,
+      "landmarks": {
+        "venice.golden_lion": {
+          "winner_film": "Nomadland",
+          "winner_recipient": "Chloé Zhao",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chloé Zhao becomes the first Asian woman ever to win the Golden Lion. Nomadland went on to win Best Picture, Best Director, and Best Actress (Frances McDormand) at the 93rd Academy Awards (cer 93) — Zhao becoming the second woman ever and the first woman of colour to win Best Director Oscar. The Venice-to-Oscar Best Picture pipeline is exceptionally rare; Nomadland's trajectory remains one of the cleanest in modern festival history. The 77th Venice ran on a COVID-restricted format with reduced awards (Lion of the Future not awarded — see era_override).",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_grand_jury": {
+          "winner_film": "New Order",
+          "winner_recipient": "Michel Franco",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Michel Franco's first major Venice prize — Mexican filmmaker's politically-charged dystopian drama.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.silver_lion_best_director": {
+          "winner_film": "Wife of a Spy",
+          "winner_recipient": "Kiyoshi Kurosawa",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Kiyoshi Kurosawa's first Silver Lion for Best Director — Japanese auteur's WWII espionage drama.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.special_jury_prize": {
+          "winner_film": "Dear Comrades!",
+          "winner_recipient": "Andrei Konchalovsky",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Andrei Konchalovsky's second Venice prize in five years — he previously shared the Silver Lion for Best Director in 2016 for Paradise.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actor": {
+          "winner_film": "Padrenostro",
+          "winner_recipient": "Pierfrancesco Favino",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Pierfrancesco Favino's first Volpi Cup for Best Actor — Italian actor.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.volpi_cup_best_actress": {
+          "winner_film": "Pieces of a Woman",
+          "winner_recipient": "Vanessa Kirby",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Vanessa Kirby's first Volpi Cup for Best Actress — she went on to receive a Best Actress nomination at the 93rd Academy Awards (cer 93) for the same role.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.best_screenplay": {
+          "winner_film": "The Disciple",
+          "winner_recipient": "Chaitanya Tamhane",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chaitanya Tamhane's second feature wins Best Screenplay — he previously won the Caméra d'Or at Cannes 2014 for Court (his debut feature).",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        },
+        "venice.marcello_mastroianni_award": {
+          "winner_film": "Sun Children",
+          "winner_recipient": "Rouhollah Zamani",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iranian child actor Rouhollah Zamani's first major acting prize.",
+          "source": "77th Venice Film Festival Wikipedia article / labiennale.org"
+        }
+      }
+    },
     "2021": {
       "ceremony_year": 2021,
       "category_count": 9,
