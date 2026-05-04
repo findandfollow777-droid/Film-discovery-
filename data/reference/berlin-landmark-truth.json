@@ -3,6 +3,382 @@
   "festival": "berlin",
   "generated_at": "2026-05-04T00:00:00+00:00",
   "ceremonies": {
+    "2016": {
+      "ceremony_year": 2016,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Fire at Sea",
+          "winner_recipient": "Gianfranco Rosi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Documentary Golden Bear for Gianfranco Rosi's Fuocoammare / Fire at Sea — observational documentary about migrant rescue operations on the Italian island of Lampedusa. Rosi had previously won Venice's Golden Lion for documentary Sacro GRA in 2013, making him one of only a handful of directors to take top prizes at both Berlin and Venice for documentary work. The 2016 win marked the second documentary Golden Bear of the modern era and a continued Berlinale political-documentary streak.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Death in Sarajevo",
+          "winner_recipient": "Danis Tanović",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Bosnian director Danis Tanović — Oscar winner for No Man's Land (2001) — takes the Silver Bear Grand Jury Prize for Death in Sarajevo, set on the centennial of the Archduke Franz Ferdinand assassination.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Things to Come",
+          "winner_recipient": "Mia Hansen-Løve",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Mia Hansen-Løve's first Silver Bear for Best Director — French auteur honoured for the Isabelle Huppert vehicle Things to Come (L'Avenir). Hansen-Løve emerges as one of the most consistently prized European directors of the late 2010s.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Hedi",
+          "winner_recipient": "Majd Mastoura",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tunisian actor Majd Mastoura — first-time performer recognised for his role in Hedi (Mohamed Ben Attia's debut feature). Same-film cross-honour: Hedi also won Best First Feature at the same ceremony.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "The Commune",
+          "winner_recipient": "Trine Dyrholm",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Danish actress Trine Dyrholm wins for Thomas Vinterberg's The Commune — recognised for her layered portrayal of a wife whose marriage is upended by her husband's open-marriage proposal in a 1970s Copenhagen commune.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Crosscurrent",
+          "winner_recipient": "Mark Lee Ping Bin",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for cinematography of Crosscurrent. Mark Lee Ping Bin (Mark Lee Ping Bing / Lee Ping-bin) is one of Asian cinema's most celebrated DPs — long-time collaborator of Hou Hsiao-hsien and the cinematographer of In the Mood for Love (uncredited 2nd-unit) and Café Lumière.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "A Lullaby to the Sorrowful Mystery",
+          "winner_recipient": "Lav Diaz",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Filipino slow-cinema auteur Lav Diaz takes the Alfred Bauer Prize for his eight-hour A Lullaby to the Sorrowful Mystery — one of the longest films ever to play in any festival main competition. Diaz went on to win the Venice Golden Lion later the same year (2016) for The Woman Who Left, making 2016 his international breakout.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Hedi",
+          "winner_recipient": "Mohamed Ben Attia",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Tunisian director Mohamed Ben Attia's debut Hedi sweeps a Best First Feature + Best Actor double at cer 2016 — same-film, same-festival cross-category honour. Berlin's stamp helped propel the new wave of Tunisian arthouse cinema in the mid-2010s.",
+          "source": "66th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "66th Berlinale — second-ever modern documentary Golden Bear (Gianfranco Rosi). Best Screenplay was NOT awarded at this ceremony (real-data gap, scraper correctly returns 0 rows; Phase D tolerance covers). Hedi takes a same-film Best Actor + Best First Feature double; Lav Diaz wins Alfred Bauer with an eight-hour film and goes on to take the Venice Golden Lion later in 2016."
+    },
+    "2017": {
+      "ceremony_year": 2017,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "On Body and Soul",
+          "winner_recipient": "Ildikó Enyedi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hungarian director Ildikó Enyedi's first Golden Bear — On Body and Soul is a slaughterhouse-set romance featuring shared deer dreams. The film went on to a 2018 Best Foreign Language Film Oscar nomination, making 2017 Enyedi's international breakout after a quarter-century gap from her 1989 Camera d'Or win for My Twentieth Century.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Félicité",
+          "winner_recipient": "Alain Gomis",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Senegalese-French director Alain Gomis — Kinshasa-set music drama.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "The Other Side of Hope",
+          "winner_recipient": "Aki Kaurismäki",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Finnish auteur Aki Kaurismäki's Silver Bear for Best Director — second installment of his Refugee/Port trilogy. One of Kaurismäki's last announced features before his post-2017 'retirement' that he subsequently reversed.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Bright Nights",
+          "winner_recipient": "Georg Friedrich",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Austrian actor Georg Friedrich — long-time character actor finally winning a major festival prize for his lead role in Thomas Arslan's Bright Nights.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "On the Beach at Night Alone",
+          "winner_recipient": "Kim Min-hee",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "South Korean actress Kim Min-hee wins for Hong Sang-soo's On the Beach at Night Alone — a thinly-veiled autobiographical film about her relationship with the (married) director, which had been a Korean tabloid scandal. Hong-Kim collaboration recognition that pre-figures Hong's three-Silver-Bear Berlinale streak in cer 2021-2024.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "A Fantastic Woman",
+          "winner_recipient": "Sebastián Lelio",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Sebastián Lelio (with Gonzalo Maza) takes Best Screenplay for A Fantastic Woman — film centred on a transgender protagonist (Daniela Vega). The film went on to win the 2018 Best Foreign Language Film Oscar, making cer 2017 Berlin its international launchpad.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Ana, mon amour",
+          "winner_recipient": "Dana Bunescu",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for editing of Ana, mon amour (Călin Peter Netzer). Dana Bunescu is one of Romanian New Wave cinema's signature editors (4 Months, 3 Weeks and 2 Days; Aurora; Toni Erdmann).",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "Spoor",
+          "winner_recipient": "Agnieszka Holland",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Polish veteran Agnieszka Holland (Europa Europa, In Darkness) takes Alfred Bauer for Spoor — eco-mystery thriller adapted from Olga Tokarczuk's novel.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Estiu 1993",
+          "winner_recipient": "Carla Simón",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Carla Simón's debut feature Estiu 1993 (Summer 1993) wins Best First Feature — Catalan-language autobiographical film. Simón returned to Berlin five years later (cer 2022) and won the Golden Bear for Alcarràs, completing a Berlin BFF → Golden Bear arc within the same festival.",
+          "source": "67th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "67th Berlinale — Ildikó Enyedi returns after a 25-year hiatus; Hong Sang-soo / Kim Min-hee Berlinale connection that pre-figures Hong's later Silver Bear streak; A Fantastic Woman launches toward an Oscar. Carla Simón's BFF win here precedes her cer 2022 Golden Bear, making her a rare both-Berlin-debut-and-top-prize winner."
+    },
+    "2018": {
+      "ceremony_year": 2018,
+      "category_count": 9,
+      "winner_count": 9,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Touch Me Not",
+          "winner_recipient": "Adina Pintilie",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Adina Pintilie's debut feature Touch Me Not wins the Golden Bear AND Best First Feature at the same ceremony — extraordinarily rare same-film, same-director, same-festival double. Touch Me Not is a documentary-fiction hybrid about intimacy and disability. Pintilie joins the very short list of directors who won the Berlinale's top prize on a debut feature.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Mug",
+          "winner_recipient": "Małgorzata Szumowska",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Polish director Małgorzata Szumowska's second Berlin Silver Bear (after her 2015 Best Director win for Body), confirming her as a Berlinale regular in the 2010s.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "Isle of Dogs",
+          "winner_recipient": "Wes Anderson",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Wes Anderson's first major festival award for direction — Isle of Dogs is his second stop-motion animated feature. Notable that a stop-motion film took a competitive director Silver Bear; the Berlinale opened with Isle of Dogs that year.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "The Prayer",
+          "winner_recipient": "Anthony Bajon",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Young French actor Anthony Bajon — recovery-drama lead role.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "The Heiresses",
+          "winner_recipient": "Ana Brun",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paraguayan actress Ana Brun — late-career performer winning a major festival prize. The Heiresses takes an unusual same-film double at cer 2018, also winning the Alfred Bauer Prize for director Marcelo Martinessi.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Museum",
+          "winner_recipient": "Alonso Ruizpalacios",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Mexican director-writer Alonso Ruizpalacios (with Manuel Alcalá) — Museum is a heist film starring Gael García Bernal. Ruizpalacios returns to Berlin's prize roster years later (cer 2021 OAC for editing of A Cop Movie).",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Dovlatov",
+          "winner_recipient": "Elena Okopnaya",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for costume and production design of Dovlatov (Aleksey German Jr.). Unusual dual-craft OAC citation — Berlin recognises both costume and production design as a unified contribution.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "The Heiresses",
+          "winner_recipient": "Marcelo Martinessi",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Paraguayan director Marcelo Martinessi — The Heiresses takes Alfred Bauer for director AND Best Actress (Ana Brun) at the same ceremony. Cer 2018 has TWO same-film cross-category doubles (Touch Me Not for Golden Bear + BFF; The Heiresses for Best Actress + Alfred Bauer) — the most concentrated cross-honour year in this batch.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Touch Me Not",
+          "winner_recipient": "Adina Pintilie",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Touch Me Not's second prize at cer 2018 — same-film, same-director Golden Bear + Best First Feature double. Permanent festival landmark.",
+          "source": "68th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "68th Berlinale — landmark cross-honour ceremony. Touch Me Not (Adina Pintilie debut) takes Golden Bear + Best First Feature; The Heiresses (Marcelo Martinessi debut) takes Best Actress (Ana Brun) + Alfred Bauer. Wes Anderson's first festival Best Director Silver Bear."
+    },
+    "2019": {
+      "ceremony_year": 2019,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "Synonyms",
+          "winner_recipient": "Nadav Lapid",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Israeli director Nadav Lapid's Golden Bear for Synonyms — autobiographical Paris-set drama about an Israeli emigrant. Lapid went on to a controversial 2022 IFFI Goa jury president speech criticising The Kashmir Files; cer 2019 Berlin remains his major-festival peak.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "By the Grace of God",
+          "winner_recipient": "François Ozon",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "François Ozon's Silver Bear Grand Jury Prize for By the Grace of God (Grâce à Dieu) — based on real Catholic-Church abuse cases in Lyon. Ozon's first major Berlin prize after a long career.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "I Was at Home, But",
+          "winner_recipient": "Angela Schanelec",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Berlin School director Angela Schanelec's first Silver Bear for Best Director — her formal-cinema return. Schanelec returns four years later for Best Screenplay (cer 2023, Music) — two distinct Silver Bears in this batch window.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "So Long, My Son",
+          "winner_recipient": "Wang Jingchun",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese actor Wang Jingchun wins for Wang Xiaoshuai's So Long, My Son. Same-film acting double at cer 2019 — co-star Yong Mei takes Best Actress. The last Berlinale before the COVID pandemic and the last cer with the gendered Best Actor + Best Actress structure paired on the same film.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "So Long, My Son",
+          "winner_recipient": "Yong Mei",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Chinese actress Yong Mei wins for the same film (So Long, My Son) as her Best Actor co-star Wang Jingchun — historic same-film cross-acting double. One of the very few Berlinales where a single film took both gendered acting Silver Bears.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Piranhas",
+          "winner_recipients": ["Claudio Giovannesi", "Roberto Saviano"],
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Co-writer pair: Italian director Claudio Giovannesi and journalist-author Roberto Saviano (with Maurizio Braucci, captured by scraper as primary pair). Saviano is best known internationally for Gomorrah (2008 book + film). Piranhas is a Naples youth-mafia drama.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "Out Stealing Horses",
+          "winner_recipient": "Rasmus Videbæk",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Awarded for Cinematography of Out Stealing Horses (Hans Petter Moland; Stellan Skarsgård lead) — Norwegian-Swedish-Danish co-production.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.alfred_bauer_prize": {
+          "winner_film": "System Crasher",
+          "winner_recipient": "Nora Fingscheidt",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German director Nora Fingscheidt's debut System Crasher takes the LAST Alfred Bauer Prize before its retirement — the prize was discontinued in 2020 following revelations about Bauer's Nazi-era ties. Fingscheidt's win therefore holds permanent landmark status as the FINAL Alfred Bauer laureate.",
+          "source": "69th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "69th Berlinale — last pre-COVID festival. So Long, My Son takes a same-film Best Actor + Best Actress double (Wang Jingchun + Yong Mei). System Crasher (Nora Fingscheidt) is the FINAL Alfred Bauer laureate before the prize's retirement. Best First Feature was NOT awarded at this ceremony per the Wikipedia article (real-data gap, scraper correctly returns 0 rows; Phase D tolerance covers)."
+    },
+    "2020": {
+      "ceremony_year": 2020,
+      "category_count": 8,
+      "winner_count": 8,
+      "landmarks": {
+        "berlin.golden_bear": {
+          "winner_film": "There Is No Evil",
+          "winner_recipient": "Mohammad Rasoulof",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Iranian director Mohammad Rasoulof's Golden Bear for There Is No Evil — a four-part anthology examining capital punishment in Iran. Rasoulof was BANNED from leaving Iran by the regime and could not attend the ceremony; the prize was accepted in absentia. Rasoulof later went into exile and won the 2024 Cannes Special Jury Prize for The Seed of the Sacred Fig — making the cer 2020 Golden Bear part of one of the most-defining political-cinema arcs in modern festival history.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_grand_jury": {
+          "winner_film": "Never Rarely Sometimes Always",
+          "winner_recipient": "Eliza Hittman",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "American director Eliza Hittman's Silver Bear Grand Jury Prize — abortion-access road-trip drama. The film's pre-pandemic festival run was abruptly truncated by the March 2020 COVID lockdown; the Berlin Silver Bear remained its highest-profile recognition.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_director": {
+          "winner_film": "The Woman Who Ran",
+          "winner_recipient": "Hong Sang-soo",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Hong Sang-soo's first Silver Bear for Best Director — pre-figures his three-Silver-Bear Berlin streak across cer 2021-2024 (Best Screenplay 2021, Grand Jury 2022, Grand Jury 2024). Cer 2020 is the start of Hong's most-decorated Berlinale era.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actor": {
+          "winner_film": "Hidden Away",
+          "winner_recipient": "Elio Germano",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Italian actor Elio Germano — LAST winner of the gendered Silver Bear for Best Actor before its retirement. Berlin announced post-cer-2020 that the gendered acting prizes would be replaced by gender-neutral Best Leading Performance + Best Supporting Performance starting at cer 2021. Germano therefore holds permanent landmark status as the FINAL Best Actor laureate.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_actress": {
+          "winner_film": "Undine",
+          "winner_recipient": "Paula Beer",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "German actress Paula Beer — LAST winner of the gendered Silver Bear for Best Actress, in Christian Petzold's Undine (the first installment of his Petzold-Beer water-mythology series; Petzold returned to Berlin's prize roster in cer 2023 with Afire taking the Grand Jury Prize). Beer holds permanent landmark status as the FINAL Best Actress laureate.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_best_screenplay": {
+          "winner_film": "Bad Tales",
+          "winner_recipient": "Damiano and Fabio D'Innocenzo",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Italian D'Innocenzo brothers — captured as a single recipient by the scraper (split_co_recipients=false on Best Screenplay).",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.silver_bear_outstanding_artistic_contribution": {
+          "winner_film": "DAU. Natasha",
+          "winner_recipient": "Jürgen Jürges",
+          "expected_winner_count": 1,
+          "notable": true,
+          "note": "Awarded for cinematography of DAU. Natasha — installment of Ilya Khrzhanovsky's controversial DAU project (decade-long immersive Soviet-research-institute reconstruction). German DP Jürgen Jürges (long-time Fassbinder and Haneke collaborator) recognised for shooting under the project's notoriously unconventional production conditions.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        },
+        "berlin.best_first_feature": {
+          "winner_film": "Los conductos",
+          "winner_recipient": "Camilo Restrepo",
+          "expected_winner_count": 1,
+          "notable": false,
+          "note": "Colombian-French director Camilo Restrepo's experimental debut.",
+          "source": "70th Berlin International Film Festival Wikipedia article"
+        }
+      },
+      "notes": "70th Berlinale — final pre-pandemic in-person festival. THREE simultaneous lifecycle landmarks: (1) Mohammad Rasoulof's in-absentia Golden Bear under Iranian travel ban; (2) Elio Germano is the FINAL Best Actor; (3) Paula Beer is the FINAL Best Actress. Alfred Bauer Prize is ABSENT from cer 2020 — retired after the cer 2019 ceremony following revelations about Bauer's Nazi-era ties. Hong Sang-soo's first Silver Bear, beginning his 2020-2024 Berlinale streak."
+    },
     "2021": {
       "ceremony_year": 2021,
       "category_count": 7,

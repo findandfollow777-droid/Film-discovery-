@@ -756,5 +756,27 @@
     "resolved_date": "2026-05-03",
     "follow_up": "Optional follow-up: amend truth-file landmark notes that reference the now-resolved artifact disclaimers to remove the disclaimers (the underlying winner data didn't change so this is documentation-only). Separate follow-up: address the remaining oscar-animated-short-recipient-undercount-2026-05-03 (cer 95 W&G/MK), which is an under-extraction (parser missing a recipient, not over-extracting). Different fix shape — likely needs investigation of the Wikipedia source line format for that specific row before patching.",
     "status": "resolved"
+  },
+  {
+    "issue_id": "berlin-best-screenplay-cer-2016-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2016.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.silver_bear_best_screenplay",
+    "description": "Silver Bear for Best Screenplay was NOT awarded at the 66th Berlinale (cer 2016). The Wikipedia ceremony article for 2016 lists no Best Screenplay bullet in the Main Competition prizes. The scraper correctly returns 0 winner rows for this category at this ceremony. Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK without raising MISSING REVIEW; the gap is documented in cer 2016's berlin-landmark-truth.json entry notes. No action required — this is a real-data gap, not a scraper bug.",
+    "deferred_resolution": "None — recorded for posterity. If a future review confirms the prize WAS awarded that year (and the Wikipedia article is incomplete), backfill the truth-file entry and add an era_override.",
+    "blocks_phase": null,
+    "status": "documented"
+  },
+  {
+    "issue_id": "berlin-best-first-feature-cer-2019-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/berlin/berlin-2019.csv",
+    "issue_type": "real_data_gap",
+    "field": "berlin.best_first_feature",
+    "description": "Best First Feature Award was NOT awarded at the 69th Berlinale (cer 2019). The Wikipedia ceremony article for 2019 has only a 'First Feature Award Jury' section listing the jury members; no winner subsection or winner bullet appears anywhere. The scraper correctly returns 0 winner rows for this category at this ceremony (Pass 2 section-heading-driven extraction finds no winner bullet to emit). Phase D tolerance (typical=1, tol=1) accepts actual=0 as OK without raising MISSING REVIEW; the gap is documented in cer 2019's berlin-landmark-truth.json entry notes. No action required — this is either a real-data gap (prize not awarded that year) or a Wikipedia article completeness gap, not a scraper bug.",
+    "deferred_resolution": "None — recorded for posterity. If a future review identifies the actual cer 2019 BFF winner from a primary source (berlinale.de archives), backfill the truth-file entry; the scraper's section-heading-driven Pass 2 will not need changes since the issue is upstream-source completeness.",
+    "blocks_phase": null,
+    "status": "documented"
   }
 ]
