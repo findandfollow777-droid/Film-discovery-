@@ -16,7 +16,16 @@
       "tolerance": 1,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Maps to Wikipedia's 'Grand Jury Prize (Venice Film Festival)' — the second-tier non-director prize. Awarded in essentially every ceremony in the 2000-2025 scope. Tolerance 1 allows for ties."
+      "notes": "Maps to Wikipedia's 'Grand Jury Prize (Venice Film Festival)' — the second-tier non-director prize. Awarded in most ceremonies, but Venice did not award it in 2007 + 2008 (era_override). Tolerance 1 allows for ties.",
+      "era_overrides": [
+        {
+          "from_year": 2007,
+          "to_year": 2008,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Grand Jury Prize was not awarded at Venice in 2007 (64th festival) or 2008 (65th). Confirmed real-data gap from initial Phase 1 scrape."
+        }
+      ]
     },
     "venice.silver_lion_best_director": {
       "typical_winners": 1,
@@ -30,7 +39,23 @@
       "tolerance": 1,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Distinct from Grand Jury Prize — Venice has both, with Special Jury Prize awarded intermittently (not awarded in cer 2000 and possibly other early years). Tolerance 1; era_overrides may be added if initial-scrape data shows extended gap years."
+      "notes": "Distinct from Grand Jury Prize — Venice has both. Special Jury Prize was awarded intermittently in the early 2000s (era_overrides for the gap years 2000-2006 + 2009-2011). Awarded as a regular fixture from 2012 onward. Tolerance 1 covers ties.",
+      "era_overrides": [
+        {
+          "from_year": 2000,
+          "to_year": 2006,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Special Jury Prize not awarded at Venice 2000-2006. Confirmed real-data gap from initial Phase 1 scrape (Wikipedia ceremony articles for these years do not list a Special Jury Prize bullet)."
+        },
+        {
+          "from_year": 2009,
+          "to_year": 2011,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Special Jury Prize not awarded at Venice 2009-2011. Confirmed real-data gap from initial Phase 1 scrape."
+        }
+      ]
     },
     "venice.volpi_cup_best_actor": {
       "typical_winners": 1,
@@ -51,7 +76,16 @@
       "tolerance": 1,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Premio Osella for Best Screenplay. Display name varies historically ('Golden Osella for Outstanding Technical Contribution (screenplay)' in older years). Tolerance 1 covers ties / co-author teams."
+      "notes": "Premio Osella for Best Screenplay. Display name varies historically ('Golden Osella for Outstanding Technical Contribution (screenplay)' in older years). Not awarded as a dedicated screenplay prize in 2001-2004 (the Golden Osella was sometimes given for non-screenplay technical contributions in those years — era_override). Tolerance 1 covers ties / co-author teams.",
+      "era_overrides": [
+        {
+          "from_year": 2001,
+          "to_year": 2004,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Best Screenplay (Premio Osella) not awarded as a dedicated screenplay prize at Venice 2001-2004 — pre-Premio-Osella-for-Screenplay era. The Golden Osella in those years was given for other technical contributions (e.g. cer 2004 went to Studio Ghibli for Howl's Moving Castle, an animation/technical award). Confirmed real-data gap from initial Phase 1 scrape."
+        }
+      ]
     },
     "venice.marcello_mastroianni_award": {
       "typical_winners": 1,
@@ -65,7 +99,23 @@
       "tolerance": 1,
       "first_year": 2000,
       "last_year": 2025,
-      "notes": "Luigi De Laurentis Award for Debut Feature. Section-heading-driven extraction (Pass 2). Single winner expected per ceremony."
+      "notes": "Luigi De Laurentis Award for Debut Feature. Section-heading-driven extraction (Pass 2). Two ceremony-specific gap years documented via era_overrides: 2003 (Wikipedia article gap — section absent from the ceremony article) and 2020 (COVID-restricted ceremony — Lion of the Future not awarded). Single winner expected per ceremony for all other years.",
+      "era_overrides": [
+        {
+          "from_year": 2003,
+          "to_year": 2003,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Lion of the Future / Luigi De Laurentis Award absent from cer 2003 Wikipedia article. Either a Wikipedia article completeness gap or a real non-award. Documented in known-issue venice-lion-of-the-future-gaps-2026-05-04."
+        },
+        {
+          "from_year": 2020,
+          "to_year": 2020,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Cer 2020 (77th Venice) ran on a COVID-restricted format and did not award the Lion of the Future / Luigi De Laurentis Award. Confirmed real-data gap from initial Phase 1 scrape."
+        }
+      ]
     }
   }
 }

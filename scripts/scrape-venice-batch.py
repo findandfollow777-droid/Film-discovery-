@@ -198,14 +198,19 @@ def phase_d_expectations(rows, expectations, year):
             continue
         typical, tol = resolve_expectation(exp, year)
         actual = cat_counts.get(cat_id, 0)
-        if actual == 0:
-            verdict = "MISSING"
-        elif actual < typical - tol:
-            verdict = "UNDER"
-        elif actual > typical + tol:
-            verdict = "OVER"
-        else:
+        # Tolerance range, clamped to >= 0
+        low = max(0, typical - tol)
+        high = typical + tol
+        # Order matters: if typical=0 (era_override gap year), actual=0
+        # is OK — must be checked before the actual==0 MISSING shortcut.
+        if low <= actual <= high:
             verdict = "OK"
+        elif actual == 0:
+            verdict = "MISSING"
+        elif actual < low:
+            verdict = "UNDER"
+        else:
+            verdict = "OVER"
         results.append((cat_id, typical, tol, actual, verdict, exp.get("notes", "")))
     return results
 

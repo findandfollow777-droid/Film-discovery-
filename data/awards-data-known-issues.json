@@ -649,6 +649,51 @@
     "status": "deferred"
   },
   {
+    "issue_id": "venice-special-jury-prize-era-gaps-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/venice/venice-{2000..2006,2009..2011}.csv (10 ceremonies). Affects Phase D MISSING verdict expectation suppression in data/reference/venice-expectations.json.",
+    "issue_type": "real_data_category_gap",
+    "description": "Venice's Special Jury Prize was not awarded as a Main Competition prize in 2000-2006 (7 ceremonies) and 2009-2011 (3 ceremonies). The award was reinstated as a regular fixture from 2012 onward. Each affected ceremony's Wikipedia Official Awards section omits the Special Jury Prize bullet from the Main Competition subsection. This is a real-data non-award (Venice's jury simply chose not to award the prize in those years), not a parser gap. Distinct from Venice's Grand Jury Prize, which is a separate award and was given in most of these years.",
+    "resolution": "Encoded as era_overrides in data/reference/venice-expectations.json for the venice.special_jury_prize category: from_year=2000 to=2006 typical=0 tol=1; from_year=2009 to=2011 typical=0 tol=1. Phase D no longer raises MISSING REVIEW for these years. Phase 4 truth curation should record these as 'no award given' landmark notes (not as omissions).",
+    "resolved_date": "2026-05-04",
+    "blocks_phase": null,
+    "status": "manually-resolved"
+  },
+  {
+    "issue_id": "venice-best-screenplay-pre-osella-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/venice/venice-{2001..2004}.csv (4 ceremonies). Affects Phase D MISSING verdict expectation suppression in data/reference/venice-expectations.json.",
+    "issue_type": "real_data_category_gap",
+    "description": "Venice's Best Screenplay (Premio Osella for Best Screenplay) was not awarded as a dedicated screenplay prize in 2001-2004. In those years, the Golden Osella was given for other technical contributions (cer 2004's Golden Osella went to Studio Ghibli for Howl's Moving Castle as an animation/technical award, not a screenplay credit). The dedicated Premio Osella for Best Screenplay was instituted in 2005 onward. Each affected ceremony's Wikipedia Official Awards section omits the screenplay-specific bullet from the Main Competition subsection.",
+    "resolution": "Encoded as era_override in venice-expectations.json for venice.best_screenplay: from_year=2001 to=2004 typical=0 tol=1. Phase D no longer raises MISSING REVIEW for these years. Phase 4 truth curation should record these as 'no dedicated screenplay prize awarded' landmark notes.",
+    "resolved_date": "2026-05-04",
+    "blocks_phase": null,
+    "status": "manually-resolved"
+  },
+  {
+    "issue_id": "venice-silver-lion-grand-jury-2007-2008-gap-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/venice/venice-{2007,2008}.csv (2 ceremonies). Affects Phase D MISSING verdict expectation suppression in data/reference/venice-expectations.json.",
+    "issue_type": "real_data_category_gap",
+    "description": "Venice's Grand Jury Prize was not awarded in 2007 (64th festival) or 2008 (65th festival). Each affected ceremony's Wikipedia Official Awards section omits the Grand Jury Prize bullet. This is a real-data non-award; Venice's jury did not give the prize in those two specific years.",
+    "resolution": "Encoded as era_override in venice-expectations.json for venice.silver_lion_grand_jury: from_year=2007 to=2008 typical=0 tol=1. Phase D no longer raises MISSING REVIEW for these years.",
+    "resolved_date": "2026-05-04",
+    "blocks_phase": null,
+    "status": "manually-resolved"
+  },
+  {
+    "issue_id": "venice-lion-of-the-future-gaps-2026-05-04",
+    "discovered_date": "2026-05-04",
+    "scope": "data/scraped/venice/venice-{2003,2020}.csv (2 ceremonies). Affects Phase D MISSING verdict expectation suppression in data/reference/venice-expectations.json.",
+    "issue_type": "real_data_category_gap",
+    "description": "Venice's Lion of the Future / Luigi De Laurentiis Award for Debut Feature has two confirmed gap years in the 2000-2025 scope: (1) cer 2003 — the Wikipedia ceremony article does not include a Lion of the Future / Luigi De Laurentiis subsection at all; this could be a Wikipedia article completeness gap OR a real non-award. (2) cer 2020 — the 77th Venice Film Festival ran on a COVID-restricted format with reduced awards; the Lion of the Future was not awarded that year. Both are documented as separate era_overrides. Phase 4 truth curation may revisit cer 2003 with external research to confirm whether the prize was actually awarded that year.",
+    "resolution": "Encoded as ceremony-specific era_overrides in venice-expectations.json for venice.lion_of_the_future: from=2003 to=2003 typical=0 tol=1 (Wikipedia article gap — may need external-source research in Phase 4); from=2020 to=2020 typical=0 tol=1 (confirmed COVID-related non-award). Phase D no longer raises MISSING REVIEW for these years.",
+    "resolved_date": "2026-05-04",
+    "follow_up": "If Phase 4 truth curation reveals that cer 2003 did award the Lion of the Future via external sources (festival press, Variety, etc.), the row should be manually inserted into venice-2003.csv (same pattern as cer 2001 jury_prize / cer 2018 short_film_palme_dor in Cannes). Update the era_override accordingly.",
+    "blocks_phase": null,
+    "status": "manually-resolved"
+  },
+  {
     "issue_id": "cannes-co-winner-flag-multi-bullet-tie-2026-05-04",
     "discovered_date": "2026-05-04",
     "scope": "scripts/scrape-cannes.py + affected CSVs cer 2025 (best_director, best_actor, best_actress, best_screenplay, jury_prize 3rd row), and likely earlier years where Wikipedia format multiple tie winners as separate top-level bullets rather than as sub-bullets under a parent category bullet.",
