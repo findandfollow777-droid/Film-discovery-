@@ -1,0 +1,8 @@
+"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
+"2001","berlin.golden_bear","won","[{""name"": ""Patrice Chéreau"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Intimacy","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.silver_bear_grand_jury","won","[{""name"": ""Wang Xiaoshuai"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Beijing Bicycle","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.silver_bear_best_director","won","[{""name"": ""Lin Cheng-sheng"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Betelnut Beauty","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.silver_bear_best_actor","won","[{""name"": ""Benicio del Toro"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Traffic","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.silver_bear_best_actress","won","[{""name"": ""Kerry Fox"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Intimacy","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.silver_bear_outstanding_artistic_contribution","won","[{""name"": ""Raúl Pérez Cubero"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","You're the One","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"
+"2001","berlin.alfred_bauer_prize","won","[{""name"": ""Lucrecia Martel"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","La Ciénaga","","false","auto_verified","","2026-05-04T07:01:48.134067+00:00"

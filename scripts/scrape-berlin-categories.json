@@ -1,0 +1,168 @@
+[
+  {
+    "id": "berlin.golden_bear",
+    "display_name": "Golden Bear",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Golden Bear"],
+    "display_aliases": ["Golden Bear", "Goldener Bär"]
+  },
+  {
+    "id": "berlin.silver_bear_grand_jury",
+    "display_name": "Silver Bear Grand Jury Prize",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear Grand Jury Prize", "Jury Grand Prix"],
+    "display_aliases": [
+      "Silver Bear Grand Jury Prize",
+      "Silver Bear Special Jury Prize",
+      "Großer Preis der Jury"
+    ],
+    "notes": "Maps to Berlin's 'Grand Jury Prize' / second-tier prize. Modern wikilink target [[Silver Bear Grand Jury Prize]]; older years used [[Jury Grand Prix|Silver Bear Special Jury Prize]] (cer 2000-2009ish). Distinct from the Berlin 'Silver Bear Jury Prize' (no 'Grand') which is a SEPARATE third prize introduced more recently — that prize is OUT OF SCOPE for the 11 user categories and is filtered out by exact target matching."
+  },
+  {
+    "id": "berlin.silver_bear_best_director",
+    "display_name": "Silver Bear for Best Director",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "director",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Director"],
+    "display_aliases": ["Silver Bear for Best Director", "Best Director"]
+  },
+  {
+    "id": "berlin.silver_bear_best_actor",
+    "display_name": "Silver Bear for Best Actor",
+    "first_year": 2000,
+    "last_year": 2020,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Actor"],
+    "display_aliases": ["Silver Bear for Best Actor", "Best Actor"],
+    "notes": "Gendered Best Actor prize active 2000-2020 only. Berlin consolidated acting prizes into gender-neutral Best Leading Performance + Best Supporting Performance starting at the 71st Berlinale (cer 2021)."
+  },
+  {
+    "id": "berlin.silver_bear_best_actress",
+    "display_name": "Silver Bear for Best Actress",
+    "first_year": 2000,
+    "last_year": 2020,
+    "tile_type": "person",
+    "recipient_type": "actress",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Actress"],
+    "display_aliases": ["Silver Bear for Best Actress", "Best Actress"],
+    "notes": "Gendered Best Actress prize active 2000-2020 only. See berlin.silver_bear_best_actor note."
+  },
+  {
+    "id": "berlin.silver_bear_best_leading_performance",
+    "display_name": "Silver Bear for Best Leading Performance",
+    "first_year": 2021,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Leading Performance"],
+    "display_aliases": [
+      "Silver Bear for Best Leading Performance",
+      "Best Leading Performance"
+    ],
+    "notes": "Gender-neutral acting prize introduced at the 71st Berlinale (cer 2021), replacing the gendered Best Actor + Best Actress."
+  },
+  {
+    "id": "berlin.silver_bear_best_supporting_performance",
+    "display_name": "Silver Bear for Best Supporting Performance",
+    "first_year": 2021,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "actor",
+    "split_co_recipients": true,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Supporting Performance"],
+    "display_aliases": [
+      "Silver Bear for Best Supporting Performance",
+      "Best Supporting Performance"
+    ],
+    "notes": "Gender-neutral acting prize introduced at the 71st Berlinale (cer 2021), replacing the gendered Best Actor + Best Actress."
+  },
+  {
+    "id": "berlin.silver_bear_best_screenplay",
+    "display_name": "Silver Bear for Best Screenplay",
+    "first_year": 2008,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "writer",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Best Screenplay"],
+    "display_aliases": ["Silver Bear for Best Screenplay", "Best Screenplay"]
+  },
+  {
+    "id": "berlin.silver_bear_outstanding_artistic_contribution",
+    "display_name": "Silver Bear for Outstanding Artistic Contribution",
+    "first_year": 2000,
+    "last_year": 2025,
+    "tile_type": "person",
+    "recipient_type": "craft",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Silver Bear for Outstanding Artistic Contribution"],
+    "display_aliases": [
+      "Silver Bear for Outstanding Artistic Contribution",
+      "Silver Bear for an Outstanding Artistic Contribution",
+      "Silver Bear for Outstanding Artistic Achievement",
+      "Outstanding Artistic Contribution",
+      "Outstanding Artistic Achievement",
+      "Outstanding Artistic Contribution (Camera)",
+      "Outstanding Artistic Contribution (cinematography)",
+      "Outstanding Artistic Contribution (Editing)",
+      "Outstanding Artistic Contribution (editing)",
+      "Outstanding Artistic Contribution (Music)",
+      "Outstanding Artistic Contribution (Costume)",
+      "Outstanding Artistic Contribution (Production Design)"
+    ],
+    "notes": "Berlin's craft/technical prize. Display name varies year-to-year: sometimes plain 'Outstanding Artistic Contribution', sometimes with parenthetical specialty (Camera/cinematography/editing/music/costume etc.). Pre-2024 articles use bold-only display ('''Silver Bear...''') with no wikilink; cer 2024+ uses wikilinked target. Both display-alias and wikilink-target matching needed."
+  },
+  {
+    "id": "berlin.alfred_bauer_prize",
+    "display_name": "Alfred Bauer Prize",
+    "first_year": 2000,
+    "last_year": 2019,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Alfred Bauer Prize"],
+    "display_aliases": ["Alfred Bauer Prize", "Silver Bear Alfred Bauer Prize"],
+    "notes": "Innovation/'opens new perspectives in cinema' prize named after Berlinale founder Alfred Bauer. RETIRED in 2020 after revelations about Bauer's Nazi-era ties. Active 2000-2019 only. Phase D era_override gap suppresses MISSING REVIEW for cer 2020-2025."
+  },
+  {
+    "id": "berlin.best_first_feature",
+    "display_name": "Best First Feature Award",
+    "first_year": 2006,
+    "last_year": 2025,
+    "tile_type": "film",
+    "recipient_type": "director",
+    "split_co_recipients": false,
+    "has_subject_title": false,
+    "wikilink_targets": ["Best First Feature Award", "GWFF Best First Feature Award"],
+    "display_aliases": [
+      "Best First Feature Award",
+      "GWFF Best First Feature Award"
+    ],
+    "notes": "Berlin's debut-feature prize, equivalent to Cannes Caméra d'Or / Venice Lion of the Future. Introduced at the 56th Berlinale (cer 2006) — does NOT exist for 2000-2005. Typically appears in a SEPARATE === Best First Feature Award === or === GWFF Best First Feature Award === subsection within Official Awards (renamed to GWFF after sponsorship deal); section-heading-driven Pass 2 catches it. Phase D era_override gap suppresses MISSING REVIEW for cer 2000-2005."
+  }
+]

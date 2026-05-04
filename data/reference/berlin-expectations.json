@@ -1,0 +1,103 @@
+{
+  "schema_version": "v1",
+  "festival": "berlin",
+  "generated_at": "2026-05-04T00:00:00+00:00",
+  "generated_from": "scripts/scrape-berlin-categories.json — Phase 1 baseline; refine after initial-scrape data is in",
+  "expectations": {
+    "berlin.golden_bear": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Goldener Bär — top prize, single winner per ceremony. Tolerance 1 covers the rare hypothetical tie."
+    },
+    "berlin.silver_bear_grand_jury": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Maps to Berlin's Großer Preis der Jury / Silver Bear Grand Jury Prize. Modern wikilink target [[Silver Bear Grand Jury Prize]]; older years (2000-2009ish) use [[Jury Grand Prix|Silver Bear Special Jury Prize]]. Distinct from the separately-named 'Silver Bear Jury Prize' (no 'Grand') which is OUT OF SCOPE. Tolerance 1 covers ties."
+    },
+    "berlin.silver_bear_best_director": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Silver Bear for Best Director. Single director per ceremony; tolerance 1 covers ties / co-director teams."
+    },
+    "berlin.silver_bear_best_actor": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2020,
+      "notes": "Gendered Best Actor prize active 2000-2020 only. Berlin consolidated acting prizes into gender-neutral Best Leading Performance + Best Supporting Performance starting at the 71st Berlinale (cer 2021). Tolerance 1 covers ties."
+    },
+    "berlin.silver_bear_best_actress": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2020,
+      "notes": "Gendered Best Actress prize active 2000-2020 only. See berlin.silver_bear_best_actor note. Tolerance 1 covers ties. cer 2003 era_override covers the famous three-way tie (Streep, Kidman, Moore for The Hours).",
+      "era_overrides": [
+        {
+          "from_year": 2003,
+          "to_year": 2003,
+          "typical_winners": 3,
+          "tolerance": 0,
+          "reason": "Three-way tie at cer 2003 — Meryl Streep, Nicole Kidman and Julianne Moore for The Hours. With split_co_recipients=true the scraper produces 3 rows; this override accepts that as the correct typical count for this single ceremony."
+        }
+      ]
+    },
+    "berlin.silver_bear_best_leading_performance": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2021,
+      "last_year": 2025,
+      "notes": "Gender-neutral acting prize introduced at the 71st Berlinale (cer 2021), replacing the gendered Best Actor + Best Actress. Tolerance 1 covers ties."
+    },
+    "berlin.silver_bear_best_supporting_performance": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2021,
+      "last_year": 2025,
+      "notes": "Gender-neutral acting prize introduced at the 71st Berlinale (cer 2021), replacing the gendered Best Actor + Best Actress. Tolerance 1 covers ties."
+    },
+    "berlin.silver_bear_best_screenplay": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2008,
+      "last_year": 2025,
+      "notes": "Silver Bear for Best Screenplay was introduced at the 58th Berlinale (cer 2008) — first_year=2008 hard-cuts the category for cer 2000-2007. Single screenplay per ceremony; tolerance 1 covers co-writer teams (split_co_recipients=false on this category — co-authors stay on a single row)."
+    },
+    "berlin.silver_bear_outstanding_artistic_contribution": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2025,
+      "notes": "Berlin's craft/technical prize. Single recipient per ceremony in most years; occasional team awards (camera + camera operator, etc.) covered by tolerance 1. Display name varies year-to-year (parenthetical specialty). Pre-2024 articles use bold-only display ('''Silver Bear...''') with no wikilink; cer 2024+ uses wikilinked target — both code paths in the scraper."
+    },
+    "berlin.alfred_bauer_prize": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2000,
+      "last_year": 2019,
+      "notes": "Innovation/'opens new perspectives in cinema' prize named after Berlinale founder Alfred Bauer. RETIRED in 2020 after revelations about Bauer's Nazi-era ties; first_year/last_year=2000-2019 hard-cuts the category for cer 2020+. Cer 2003-2005 era_override gap: the Wikipedia ceremony articles for these years do not list an Alfred Bauer Prize (real-data gap or article completeness gap). Tolerance 1 covers ties.",
+      "era_overrides": [
+        {
+          "from_year": 2003,
+          "to_year": 2005,
+          "typical_winners": 0,
+          "tolerance": 1,
+          "reason": "Alfred Bauer Prize absent from Wikipedia ceremony articles for cer 2003, 2004, 2005. Either a real-data gap (prize not awarded those years) or an article completeness gap. Documenting as a known gap suppresses MISSING REVIEW for this lifecycle window."
+        }
+      ]
+    },
+    "berlin.best_first_feature": {
+      "typical_winners": 1,
+      "tolerance": 1,
+      "first_year": 2006,
+      "last_year": 2025,
+      "notes": "Berlin's debut-feature prize, equivalent to Cannes Caméra d'Or / Venice Lion of the Future. Introduced at the 56th Berlinale (cer 2006); first_year=2006 hard-cuts for cer 2000-2005. Section-heading-driven extraction (Pass 2). Renamed to 'GWFF Best First Feature Award' after sponsorship deal — both heading variants supported. Tolerance 1 covers occasional ties."
+    }
+  }
+}

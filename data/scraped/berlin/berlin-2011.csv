@@ -1,0 +1,8 @@
+"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
+"2011","berlin.golden_bear","won","[{""name"": ""Asghar Farhadi"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","A Separation","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.silver_bear_grand_jury","won","[{""name"": ""Béla Tarr"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Turin Horse","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.silver_bear_best_director","won","[{""name"": ""Ulrich Köhler"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Sleeping Sickness","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.silver_bear_best_screenplay","won","[{""name"": ""Joshua Marston"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Forgiveness of Blood","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.silver_bear_outstanding_artistic_contribution","won","[{""name"": ""Barbara Enriquez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Prize","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.silver_bear_outstanding_artistic_contribution","won","[{""name"": ""Wojciech Staroń"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Prize","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
+"2011","berlin.alfred_bauer_prize","won","[{""name"": ""Andres Veiel"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","If Not Us, Who?","","false","auto_verified","","2026-05-04T07:02:08.187495+00:00"
