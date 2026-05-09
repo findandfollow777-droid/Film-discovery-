@@ -874,25 +874,34 @@
         "bafta.best_film": {
           "winner_film": "The Queen",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "*The Queen* (Stephen Frears) wins Best Film at the 60th ceremony in 2007 — a Working Title biopic about Elizabeth II's response to Diana's death. Aligns with the same-season Oscar Best Actress for Helen Mirren but lost Oscar Best Picture to *The Departed*.",
+          "winner_recipient": "Andy Harries, Christine Langan, Tracey Seaward"
         },
         "bafta.best_director": {
           "winner_film": "United 93",
           "winner_recipient": "Paul Greengrass",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / Variety"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Paul Greengrass wins Best Director for *United 93* — a BAFTA/Oscar split with the Best Film winner (*The Queen*) and with the Oscar Best Director, which went to Martin Scorsese for *The Departed*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Last King of Scotland",
           "winner_recipient": "Forest Whitaker",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / Variety"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Forest Whitaker wins Best Leading Actor for his Idi Amin performance in *The Last King of Scotland*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "The Queen",
           "winner_recipient": "Helen Mirren",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / Variety"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Helen Mirren wins Best Leading Actress for her Elizabeth II performance in *The Queen*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Little Miss Sunshine",
@@ -904,12 +913,17 @@
           "winner_film": "Dreamgirls",
           "winner_recipient": "Jennifer Hudson",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / Variety"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Jennifer Hudson's first BAFTA, for her debut feature performance in *Dreamgirls*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Pan's Labyrinth",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Guillermo del Toro's *Pan's Labyrinth* wins Best Film Not in the English Language at the 60th ceremony — also Alfonso Cuarón's first BAFTA win in the truth-file record (he would go on to win 7 BAFTAs through cer 72).",
+          "winner_recipient": "Alfonso Cuarón, Guillermo del Toro"
         },
         "bafta.best_animated_film": {
           "winner_film": "Happy Feet",
@@ -921,13 +935,18 @@
         "bafta.outstanding_british_film": {
           "winner_film": "The Last King of Scotland",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "*The Last King of Scotland* wins Outstanding British Film alongside its Best Leading Actor win for Forest Whitaker — Kevin Macdonald's first dramatic feature after his documentary work.",
+          "winner_recipient": "Andrea Calderwood, Kevin Macdonald, Peter Morgan, Jeremy Brock"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Red Road",
           "winner_recipient": "Andrea Arnold",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 60th BAFTA"
+          "source": "BAFTA press release 11 Feb 2007 / Wikipedia 60th BAFTA",
+          "notable": true,
+          "note": "Andrea Arnold's first BAFTA, taking Outstanding Debut for *Red Road* at the 60th ceremony; she would return to win Outstanding British Film for *Fish Tank* at the 63rd."
         },
         "bafta.ee_rising_star": {
           "winner_recipient": "Eva Green",
@@ -943,7 +962,10 @@
         "bafta.best_film": {
           "winner_film": "Atonement",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "*Atonement* (Joe Wright) wins Best Film at the 61st ceremony — a Working Title production. A BAFTA Best Film/Best Director split as the Coens took Director for *No Country for Old Men*, which went on to win Oscar Best Picture.",
+          "winner_recipient": "Tim Bevan, Eric Fellner, Paul Webster"
         },
         "bafta.best_director": {
           "winner_film": "No Country for Old Men",
@@ -952,37 +974,51 @@
             "Ethan Coen"
           ],
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA — explicitly states 'Coen brothers, Joel and Ethan, won Best Director'",
-          "notes": "Team-credited award (Joel Coen + Ethan Coen). Architectural fix landed today should produce a single row with both atomic recipients[], but ceremony 61 CSV was scraped pre-fix and currently captures only 'Joel Coen'. Truth file records the team credit (winner_recipients array form); wrapper currently validates only winner_recipient singular so recipient check is effectively skipped on this row pending wrapper enhancement to read winner_recipients[]. Tracked under bafta-outstanding-debut-co-recipients-dropped class (analogous: this is best_director, but same architectural pattern; resolution path is re-scrape post-fix)."
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notes": "Team-credited award (Joel Coen + Ethan Coen). Architectural fix landed today should produce a single row with both atomic recipients[], but ceremony 61 CSV was scraped pre-fix and currently captures only 'Joel Coen'. Truth file records the team credit (winner_recipients array form); wrapper currently validates only winner_recipient singular so recipient check is effectively skipped on this row pending wrapper enhancement to read winner_recipients[]. Tracked under bafta-outstanding-debut-co-recipients-dropped class (analogous: this is best_director, but same architectural pattern; resolution path is re-scrape post-fix).",
+          "notable": true,
+          "note": "Joel and Ethan Coen win Best Director for *No Country for Old Men* — their first BAFTA in the truth-file record. A BAFTA Best Film/Best Director split with *Atonement*. Aligns with their Oscar Best Director and Best Picture wins.",
+          "winner_recipient": "Joel Coen, Ethan Coen"
         },
         "bafta.best_leading_actor": {
           "winner_film": "There Will Be Blood",
           "winner_recipient": "Daniel Day-Lewis",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "Daniel Day-Lewis's second BAFTA Best Leading Actor, for *There Will Be Blood* — first was *Gangs of New York* at the 56th. He would win again at the 66th for *Lincoln*. Aligns with his Oscar Best Actor win."
         },
         "bafta.best_leading_actress": {
           "winner_film": "La Vie en Rose",
           "winner_recipient": "Marion Cotillard",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "Marion Cotillard wins Best Leading Actress for her Édith Piaf performance in *La Vie en Rose* — a French-language performance taking the BAFTA top acting prize. Aligns with her Oscar Best Actress win, where the role broke a decades-long drought for non-English-language Best Actress wins."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "No Country for Old Men",
           "winner_recipient": "Javier Bardem",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "Javier Bardem's first BAFTA, for *No Country for Old Men*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Michael Clayton",
           "winner_recipient": "Tilda Swinton",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "Tilda Swinton's first BAFTA, for *Michael Clayton*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Lives of Others",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "*The Lives of Others* wins Best Film Not in the English Language at the 61st ceremony — Donnersmarck's debut feature, which had also taken Oscar Best Foreign Language Film the prior season.",
+          "winner_recipient": "Florian Henckel von Donnersmarck"
         },
         "bafta.best_animated_film": {
           "winner_film": "Ratatouille",
@@ -1004,7 +1040,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Shia LaBeouf",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 61st BAFTA"
+          "source": "BAFTA press release 10 Feb 2008 / Wikipedia 61st BAFTA",
+          "notable": true,
+          "note": "Shia LaBeouf wins EE Rising Star at the 61st ceremony — the third public-vote Rising Star recipient since the award's inauguration at the 59th.",
+          "winner_film": ""
         }
       }
     },
@@ -1015,38 +1054,51 @@
         "bafta.best_film": {
           "winner_film": "Slumdog Millionaire",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "*Slumdog Millionaire* (Danny Boyle) wins Best Film at the 62nd ceremony with a leading 7-BAFTA haul; aligns with its Oscar Best Picture sweep the same season.",
+          "winner_recipient": "Christian Colson"
         },
         "bafta.best_director": {
           "winner_film": "Slumdog Millionaire",
           "winner_recipient": "Danny Boyle",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "Danny Boyle's first BAFTA Best Director, for *Slumdog Millionaire*; aligns with his Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Wrestler",
           "winner_recipient": "Mickey Rourke",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "Mickey Rourke wins Best Leading Actor for *The Wrestler* — a BAFTA/Oscar split, as Sean Penn took the Oscar Best Actor for *Milk* the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "The Reader",
           "winner_recipient": "Kate Winslet",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "Kate Winslet's first BAFTA Best Leading Actress, for *The Reader* (after years of nominations); aligns with her Oscar Best Actress win the same season. She would return to win Best Supporting Actress at the 69th for *Steve Jobs*."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "The Dark Knight",
           "winner_recipient": "Heath Ledger",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / Variety",
-          "notes": "Posthumous award. Ledger died January 2008; ceremony held February 2009."
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notes": "Posthumous award. Ledger died January 2008; ceremony held February 2009.",
+          "notable": true,
+          "note": "Heath Ledger wins Best Supporting Actor posthumously for his Joker performance in *The Dark Knight*; aligns with his posthumous Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Vicky Cristina Barcelona",
           "winner_recipient": "Penélope Cruz",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "Penélope Cruz's first BAFTA, for Woody Allen's *Vicky Cristina Barcelona*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "I've Loved You So Long",
@@ -1061,13 +1113,18 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Man on Wire",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "*Man on Wire* wins Outstanding British Film at the 62nd ceremony — a documentary feature taking the category, an unusual outcome for a doc.",
+          "winner_recipient": "Simon Chinn, James Marsh"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Hunger",
           "winner_recipient": "Steve McQueen",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 62nd BAFTA"
+          "source": "BAFTA press release 8 Feb 2009 / Wikipedia 62nd BAFTA",
+          "notable": true,
+          "note": "Steve McQueen's first BAFTA, taking Outstanding Debut for *Hunger* at the 62nd ceremony; he would return to win Best Film at the 67th for *12 Years a Slave* — the first BAFTA Best Film for a Black director in the truth-file record."
         },
         "bafta.ee_rising_star": {
           "winner_recipient": "Noel Clarke",
@@ -1083,37 +1140,50 @@
         "bafta.best_film": {
           "winner_film": "The Hurt Locker",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "*The Hurt Locker* (Kathryn Bigelow) wins Best Film at the 63rd ceremony with 6 BAFTAs total — the year's leading haul — defeating *Avatar*'s box-office juggernaut. Aligns with its Oscar Best Picture win the same season.",
+          "winner_recipient": "Kathryn Bigelow, Mark Boal, Nicolas Chartier"
         },
         "bafta.best_director": {
           "winner_film": "The Hurt Locker",
           "winner_recipient": "Kathryn Bigelow",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Kathryn Bigelow becomes the first woman to win BAFTA Best Director, for *The Hurt Locker*. Chloé Zhao would become the second at the 74th for *Nomadland*. Aligns with Bigelow's Oscar Best Director — the first woman to win that prize too."
         },
         "bafta.best_leading_actor": {
           "winner_film": "A Single Man",
           "winner_recipient": "Colin Firth",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Colin Firth's first BAFTA Best Leading Actor, for *A Single Man* — Tom Ford's directorial debut. He would win again the following year at the 64th for *The King's Speech* — a back-to-back BAFTA Best Actor double."
         },
         "bafta.best_leading_actress": {
           "winner_film": "An Education",
           "winner_recipient": "Carey Mulligan",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Carey Mulligan's first BAFTA, for her breakthrough performance in *An Education*; she had also won EE Rising Star nomination consideration in earlier years."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Inglourious Basterds",
           "winner_recipient": "Christoph Waltz",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Christoph Waltz's first BAFTA, for *Inglourious Basterds*; aligns with his Oscar Best Supporting Actor win. He would return to win the same category at the 66th for another Tarantino film, *Django Unchained*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Precious",
           "winner_recipient": "Mo'Nique",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / Variety"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Mo'Nique's first BAFTA, for *Precious*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "A Prophet",
@@ -1128,18 +1198,26 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Fish Tank",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Andrea Arnold's second BAFTA, taking Outstanding British Film for *Fish Tank* at the 63rd ceremony — three years after winning Outstanding Debut for *Red Road* at the 60th.",
+          "winner_recipient": "Andrea Arnold"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Moon",
           "winner_recipient": "Duncan Jones",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Duncan Jones's first BAFTA, taking Outstanding Debut for the science-fiction feature *Moon*."
         },
         "bafta.ee_rising_star": {
           "winner_recipient": "Kristen Stewart",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 63rd BAFTA"
+          "source": "BAFTA press release 21 Feb 2010 / Wikipedia 63rd BAFTA",
+          "notable": true,
+          "note": "Kristen Stewart wins EE Rising Star at the 63rd ceremony — recognised for the *Twilight* franchise.",
+          "winner_film": ""
         }
       }
     },
@@ -1150,38 +1228,51 @@
         "bafta.best_film": {
           "winner_film": "The King's Speech",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "*The King's Speech* (Tom Hooper) wins Best Film at the 64th ceremony with a leading 7-BAFTA haul; aligns with its Oscar Best Picture win the same season.",
+          "winner_recipient": "Iain Canning, Emile Sherman, Gareth Unwin"
         },
         "bafta.best_director": {
           "winner_film": "The Social Network",
           "winner_recipient": "David Fincher",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / Variety",
-          "notes": "Best Film and Best Director split: The King's Speech (Hooper) won Best Film while Fincher won Best Director for The Social Network."
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notes": "Best Film and Best Director split: The King's Speech (Hooper) won Best Film while Fincher won Best Director for The Social Network.",
+          "notable": true,
+          "note": "David Fincher wins Best Director for *The Social Network* — a notable BAFTA/Oscar split as Tom Hooper took the Oscar Best Director for *The King's Speech* (which won BAFTA Best Film here)."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The King's Speech",
           "winner_recipient": "Colin Firth",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / Variety"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "Colin Firth's second consecutive BAFTA Best Leading Actor, for *The King's Speech* — following his 63rd-ceremony win for *A Single Man*. The back-to-back is a rare feat in the truth-file record. Aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Black Swan",
           "winner_recipient": "Natalie Portman",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / Variety"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "Natalie Portman's first BAFTA, for *Black Swan*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "The King's Speech",
           "winner_recipient": "Geoffrey Rush",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / Variety"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "Geoffrey Rush wins Best Supporting Actor for *The King's Speech* — a BAFTA/Oscar split as Christian Bale took the Oscar for *The Fighter*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The King's Speech",
           "winner_recipient": "Helena Bonham Carter",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / Variety"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "Helena Bonham Carter wins Best Supporting Actress for *The King's Speech* — a BAFTA/Oscar split as Melissa Leo took the Oscar for *The Fighter*."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Girl with the Dragon Tattoo",
@@ -1196,7 +1287,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "The King's Speech",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "*The King's Speech* wins Outstanding British Film alongside Best Film — the same film taking both top British/global prizes, contributing to its 7-BAFTA leading haul.",
+          "winner_recipient": "Tom Hooper, David Seidler, Iain Canning, Emile Sherman, Gareth Unwin"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Four Lions",
@@ -1207,7 +1301,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Tom Hardy",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 64th BAFTA"
+          "source": "BAFTA press release 13 Feb 2011 / Wikipedia 64th BAFTA",
+          "notable": true,
+          "note": "Tom Hardy wins EE Rising Star at the 64th ceremony — recognised for *Inception* and *Bronson*.",
+          "winner_film": ""
         }
       }
     },
