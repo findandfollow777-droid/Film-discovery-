@@ -1376,78 +1376,108 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Moonlight",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "*Moonlight* (Barry Jenkins) wins Best Motion Picture — Drama at the 74th Golden Globes — A24's coming-of-age story; would go on to win Oscar Best Picture in the famous *La La Land* envelope mix-up the same season.",
+          "winner_recipient": "Adele Romanski, Dede Gardner, Jeremy Kleiner"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "La La Land",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety / CNN",
-          "notes": "La La Land won 7 Golden Globes at this ceremony — a record for a single film at the GGs."
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notes": "La La Land won 7 Golden Globes at this ceremony — a record for a single film at the GGs.",
+          "notable": true,
+          "note": "*La La Land* (Damien Chazelle) wins Best Motion Picture — Musical/Comedy as part of an unprecedented 7-of-7 GG sweep — the most Golden Globes ever won by a single film, breaking the previous record of 6.",
+          "winner_recipient": "Marc Platt, Fred Berger, Jordan Horowitz"
         },
         "gg.best_director": {
           "winner_film": "La La Land",
           "winner_recipient": "Damien Chazelle",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Damien Chazelle wins GG Best Director for *La La Land* at age 32 — one of the youngest Best Director winners. Aligns with his Oscar Best Director win for the same film."
         },
         "gg.best_actor_drama": {
           "winner_film": "Manchester by the Sea",
           "winner_recipient": "Casey Affleck",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Casey Affleck's first GG, for *Manchester by the Sea*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Elle",
           "winner_recipient": "Isabelle Huppert",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Isabelle Huppert wins Best Drama Actress for *Elle* — a French-language performance taking the GG top dramatic actress prize, an unusual outcome for a non-English-language role."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "La La Land",
           "winner_recipient": "Ryan Gosling",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Ryan Gosling's first GG, for *La La Land* — part of the film's record 7-of-7 sweep at the 74th ceremony."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "La La Land",
           "winner_recipient": "Emma Stone",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Emma Stone's first GG, for *La La Land*; aligns with her Oscar Best Actress win the same season. She would return to win Best Actress Musical/Comedy again at the 81st for *Poor Things*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Nocturnal Animals",
           "winner_recipient": "Aaron Taylor-Johnson",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Differs from Oscars Best Supporting Actor (Mahershala Ali for Moonlight) — Taylor-Johnson was a notable GG-specific upset that did not translate to other awards."
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notes": "Differs from Oscars Best Supporting Actor (Mahershala Ali for Moonlight) — Taylor-Johnson was a notable GG-specific upset that did not translate to other awards.",
+          "notable": true,
+          "note": "Aaron Taylor-Johnson wins Best Supporting Actor for *Nocturnal Animals* — a surprise upset, with Mahershala Ali widely-favoured for *Moonlight* (Ali would win the Oscar for the role)."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Fences",
           "winner_recipient": "Viola Davis",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Viola Davis's first GG, for *Fences*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Zootopia",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "*Zootopia* wins Best Motion Picture — Animated at the 74th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Byron Howard, Rich Moore, Clark Spencer"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Elle",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "*Elle* (Paul Verhoeven) wins Best Motion Picture — Foreign Language alongside its Best Drama Actress win for Isabelle Huppert — a same-night double for the French-language production.",
+          "winner_recipient": "Paul Verhoeven"
         },
         "gg.best_screenplay": {
           "winner_film": "La La Land",
           "winner_recipient": "Damien Chazelle",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Damien Chazelle wins Best Screenplay for *La La Land* alongside Best Director — a same-night double, contributing to the film's record 7-of-7 sweep."
         },
         "gg.best_original_score": {
           "winner_film": "La La Land",
           "winner_recipient": "Justin Hurwitz",
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "Justin Hurwitz wins Best Original Score for *La La Land* alongside Best Original Song the same night — a same-night double, his first two GGs of an eventual four."
         },
         "gg.best_original_song": {
           "winner_film": "La La Land",
@@ -1458,7 +1488,10 @@
             "Justin Paul"
           ],
           "expected_nomination_count": 5,
-          "source": "74th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 8 Jan 2017 / Wikipedia 74th Golden Globes",
+          "notable": true,
+          "note": "*La La Land*'s 'City of Stars' wins Best Original Song — completing the film's record 7-of-7 GG sweep at the 74th ceremony.",
+          "winner_recipient": "Justin Hurwitz, Benj Pasek, Justin Paul"
         }
       }
     },
@@ -1469,76 +1502,106 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "*Three Billboards Outside Ebbing, Missouri* (Martin McDonagh) wins Best Motion Picture — Drama at the 75th Golden Globes with 4 GGs total — the night's leading haul. A GG/Oscar split as *The Shape of Water* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Graham Broadbent, Peter Czernin, Martin McDonagh"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Lady Bird",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "*Lady Bird* (Greta Gerwig) wins Best Motion Picture — Musical/Comedy at the 75th Golden Globes — Gerwig's solo directorial debut.",
+          "winner_recipient": "Scott Rudin, Eli Bush, Evelyn O'Neill"
         },
         "gg.best_director": {
           "winner_film": "The Shape of Water",
           "winner_recipient": "Guillermo del Toro",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Guillermo del Toro's first GG Best Director, for *The Shape of Water* — a notable Best Picture/Best Director split, with *Three Billboards* winning Best Drama Picture. Aligns with his Oscar Best Director win the same season."
         },
         "gg.best_actor_drama": {
           "winner_film": "Darkest Hour",
           "winner_recipient": "Gary Oldman",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Gary Oldman's first GG, for his Winston Churchill performance in *Darkest Hour*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "winner_recipient": "Frances McDormand",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Frances McDormand's first GG, for *Three Billboards*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Disaster Artist",
           "winner_recipient": "James Franco",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "James Franco's first GG, for *The Disaster Artist*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Lady Bird",
           "winner_recipient": "Saoirse Ronan",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Saoirse Ronan's first GG, for *Lady Bird*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "winner_recipient": "Sam Rockwell",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Sam Rockwell's first GG, for *Three Billboards*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "I, Tonya",
           "winner_recipient": "Allison Janney",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Allison Janney's first GG film win, for *I, Tonya*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Coco",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "*Coco* wins Best Motion Picture — Animated at the 75th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Lee Unkrich, Darla K. Anderson"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "In the Fade",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "*In the Fade* (Fatih Akin) wins Best Motion Picture — Foreign Language at the 75th Golden Globes — a German production starring Diane Kruger.",
+          "winner_recipient": "Fatih Akin"
         },
         "gg.best_screenplay": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "winner_recipient": "Martin McDonagh",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Martin McDonagh's first GG Best Screenplay, for *Three Billboards*. He would return to win the same category at the 80th for *The Banshees of Inisherin*."
         },
         "gg.best_original_score": {
           "winner_film": "The Shape of Water",
           "winner_recipient": "Alexandre Desplat",
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "Alexandre Desplat's first GG, for *The Shape of Water*; aligns with his second Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "The Greatest Showman",
@@ -1548,7 +1611,10 @@
             "Justin Paul"
           ],
           "expected_nomination_count": 5,
-          "source": "75th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 7 Jan 2018 / Wikipedia 75th Golden Globes",
+          "notable": true,
+          "note": "*The Greatest Showman*'s 'This Is Me' wins Best Original Song — Pasek and Paul's second consecutive GG, after winning at the 74th for La La Land's 'City of Stars'.",
+          "winner_recipient": "Benj Pasek, Justin Paul"
         }
       }
     },
@@ -1559,66 +1625,92 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Bohemian Rhapsody",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Considered an upset — Roma was favoured but lost Best Picture Drama. Roma did win Best Director and Best Foreign Language Film at this ceremony."
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notes": "Considered an upset — Roma was favoured but lost Best Picture Drama. Roma did win Best Director and Best Foreign Language Film at this ceremony.",
+          "notable": true,
+          "note": "*Bohemian Rhapsody* wins Best Motion Picture — Drama at the 76th Golden Globes — a surprise upset over expected favourites *A Star Is Born* and *Roma*. The film took zero Oscar top-line wins (BP, Director, Screenplay) the same season.",
+          "winner_recipient": "Graham King"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Green Book",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "*Green Book* wins Best Motion Picture — Musical/Comedy at the 76th Golden Globes; would go on to win Oscar Best Picture the same season.",
+          "winner_recipient": "Jim Burke, Charles B. Wessler, Brian Currie, Peter Farrelly, Nick Vallelonga"
         },
         "gg.best_director": {
           "winner_film": "Roma",
           "winner_recipient": "Alfonso Cuarón",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Alfonso Cuarón's second GG Best Director, for *Roma* — first was the 71st for *Gravity*. Aligns with his Oscar Best Director win for *Roma*."
         },
         "gg.best_actor_drama": {
           "winner_film": "Bohemian Rhapsody",
           "winner_recipient": "Rami Malek",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Rami Malek's first GG, for his Freddie Mercury performance in *Bohemian Rhapsody*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "The Wife",
           "winner_recipient": "Glenn Close",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Glenn Close's first GG Best Drama Actress, for *The Wife* — recognised after more than four decades and seven prior Oscar nominations. Her acceptance speech became one of the night's most-discussed moments."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Vice",
           "winner_recipient": "Christian Bale",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Christian Bale's second GG, for his Dick Cheney performance in *Vice* — first was Best Supporting Actor at the 68th for *The Fighter*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "The Favourite",
           "winner_recipient": "Olivia Colman",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Olivia Colman's first GG, for *The Favourite*; she would go on to win Oscar Best Actress for the same film the same season."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Green Book",
           "winner_recipient": "Mahershala Ali",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Mahershala Ali's first GG, for *Green Book*; aligns with his Oscar Best Supporting Actor win the same season — his second Oscar in three years."
         },
         "gg.best_supporting_actress": {
           "winner_film": "If Beale Street Could Talk",
           "winner_recipient": "Regina King",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Regina King's first GG film win, for *If Beale Street Could Talk*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Spider-Man: Into the Spider-Verse",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "*Spider-Man: Into the Spider-Verse* wins Best Motion Picture — Animated at the 76th Golden Globes — the first Spider-Man film to win in the category. Aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Bob Persichetti, Peter Ramsey, Rodney Rothman"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Roma",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety",
-          "notes": "Roma also won Best Director (Cuarón) but lost Best Picture Drama to Bohemian Rhapsody — an unusual split between director and picture."
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notes": "Roma also won Best Director (Cuarón) but lost Best Picture Drama to Bohemian Rhapsody — an unusual split between director and picture.",
+          "notable": true,
+          "note": "*Roma* (Alfonso Cuarón) wins Best Motion Picture — Foreign Language alongside Best Director — a same-night double. The film was famously snubbed for the Best Drama Picture top prize despite being widely-favoured.",
+          "winner_recipient": "Alfonso Cuarón"
         },
         "gg.best_screenplay": {
           "winner_film": "Green Book",
@@ -1628,14 +1720,19 @@
             "Brian Hayes Currie"
           ],
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety",
-          "notes": "Three-author screenplay credit. CSV captured only Farrelly + Vallelonga (Brian Hayes Currie dropped) — same partial-capture pattern as cer 80 best_original_song. Truth winner_recipients records full canonical 3-author team."
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notes": "Three-author screenplay credit. CSV captured only Farrelly + Vallelonga (Brian Hayes Currie dropped) — same partial-capture pattern as cer 80 best_original_song. Truth winner_recipients records full canonical 3-author team.",
+          "notable": true,
+          "note": "*Green Book* wins Best Screenplay alongside Best Musical/Comedy Picture — aligns with its Oscar Best Original Screenplay win the same season.",
+          "winner_recipient": "Peter Farrelly, Nick Vallelonga, Brian Hayes Currie"
         },
         "gg.best_original_score": {
           "winner_film": "First Man",
           "winner_recipient": "Justin Hurwitz",
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "Justin Hurwitz's third GG, for *First Man* — following his Score and Song double for *La La Land* at the 74th. He would return to win again at the 80th for *Babylon*."
         },
         "gg.best_original_song": {
           "winner_film": "A Star Is Born",
@@ -1647,7 +1744,10 @@
             "Andrew Wyatt"
           ],
           "expected_nomination_count": 5,
-          "source": "76th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 6 Jan 2019 / Wikipedia 76th Golden Globes",
+          "notable": true,
+          "note": "*A Star Is Born*'s 'Shallow' wins Best Original Song at the 76th Golden Globes — Lady Gaga's first GG; aligns with the song's Oscar Best Original Song win.",
+          "winner_recipient": "Lady Gaga, Mark Ronson, Anthony Rossomando, Andrew Wyatt"
         }
       }
     },
@@ -1658,77 +1758,107 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "1917",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "*1917* (Sam Mendes) wins Best Motion Picture — Drama at the 77th Golden Globes alongside Best Director. A GG/Oscar split as *Parasite* would take Oscar Best Picture the same season — the first non-English-language Oscar Best Picture in history.",
+          "winner_recipient": "Sam Mendes, Pippa Harris, Jayne-Ann Tenggren, Callum McDougall"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Once Upon a Time in Hollywood",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "*Once Upon a Time in Hollywood* (Quentin Tarantino) wins Best Motion Picture — Musical/Comedy at the 77th Golden Globes with 3 GGs total, including Best Screenplay and Best Supporting Actor for Brad Pitt.",
+          "winner_recipient": "David Heyman, Shannon McIntosh, Quentin Tarantino"
         },
         "gg.best_director": {
           "winner_film": "1917",
           "winner_recipient": "Sam Mendes",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Sam Mendes's second GG Best Director, for *1917* — first was the 57th for *American Beauty*. A 20-year gap between his two GG Director wins. Aligns with no Oscar Best Director (Bong Joon-ho took the Oscar for *Parasite*)."
         },
         "gg.best_actor_drama": {
           "winner_film": "Joker",
           "winner_recipient": "Joaquin Phoenix",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Joaquin Phoenix's second GG, for *Joker* — first was Best Actor Musical/Comedy at the 63rd for *Walk the Line*. A 14-year gap between his two GG wins. Aligns with his Oscar Best Actor win for *Joker*."
         },
         "gg.best_actress_drama": {
           "winner_film": "Judy",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Renée Zellweger's fourth GG, for *Judy* — first three were the 58th (*Nurse Betty*, Musical/Comedy), 60th (*Chicago*, Musical/Comedy) and 61st (*Cold Mountain*, Supporting). Aligns with her Oscar Best Actress win."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Rocketman",
           "winner_recipient": "Taron Egerton",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Taron Egerton's first GG, for his Elton John performance in *Rocketman*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "The Farewell",
           "winner_recipient": "Awkwafina",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety / Time / NPR",
-          "notes": "Awkwafina was the first Asian American actress to win Best Actress in a Motion Picture – Musical or Comedy."
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notes": "Awkwafina was the first Asian American actress to win Best Actress in a Motion Picture – Musical or Comedy.",
+          "notable": true,
+          "note": "Awkwafina wins Best Actress Musical/Comedy for *The Farewell* — the first performer of Asian descent to win the category at the Golden Globes."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Once Upon a Time in Hollywood",
           "winner_recipient": "Brad Pitt",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Brad Pitt's first GG acting win, for *Once Upon a Time in Hollywood*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Marriage Story",
           "winner_recipient": "Laura Dern",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Laura Dern's first GG film win, for *Marriage Story*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Missing Link",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "*Missing Link* (Laika Animation) wins Best Motion Picture — Animated at the 77th Golden Globes — a stop-motion feature taking the category over major-studio Disney/Pixar competition.",
+          "winner_recipient": "Chris Butler, Arianne Sutner, Travis Knight"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Parasite",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "*Parasite* (Bong Joon-ho) wins Best Motion Picture — Foreign Language at the 77th Golden Globes — preceding the film's historic Oscar Best Picture sweep, the first non-English-language film to win Oscar Best Picture.",
+          "winner_recipient": "Bong Joon-ho"
         },
         "gg.best_screenplay": {
           "winner_film": "Once Upon a Time in Hollywood",
           "winner_recipient": "Quentin Tarantino",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Quentin Tarantino's second GG Best Screenplay, for *Once Upon a Time in Hollywood* — first was the 70th for *Django Unchained*."
         },
         "gg.best_original_score": {
           "winner_film": "Joker",
           "winner_recipient": "Hildur Guðnadóttir",
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Hildur Guðnadóttir wins Best Original Score for *Joker* — the first woman to win GG Best Original Score in the category's history. Aligns with her Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "Rocketman",
@@ -1738,7 +1868,10 @@
             "Bernie Taupin"
           ],
           "expected_nomination_count": 5,
-          "source": "77th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 5 Jan 2020 / Wikipedia 77th Golden Globes",
+          "notable": true,
+          "note": "Elton John and Bernie Taupin win Best Original Song for *Rocketman*'s '(I'm Gonna) Love Me Again' — Taupin's second GG (first was the 63rd for *Brokeback Mountain*'s 'A Love That Will Never Grow Old').",
+          "winner_recipient": "Elton John, Bernie Taupin"
         }
       }
     },
@@ -1749,72 +1882,100 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Nomadland",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety / Hollywood Reporter / Deadline"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "*Nomadland* (Chloé Zhao) wins Best Motion Picture — Drama at the 78th Golden Globes alongside Best Director. The COVID-delayed ceremony was held in February 2021. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Mollye Asher, Frances McDormand, Peter Spears, Chloé Zhao"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Borat Subsequent Moviefilm",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "*Borat Subsequent Moviefilm* wins Best Motion Picture — Musical/Comedy at the 78th Golden Globes — a follow-up to the 2006 original released by Amazon Studios in 2020.",
+          "winner_recipient": "Sacha Baron Cohen"
         },
         "gg.best_director": {
           "winner_film": "Nomadland",
           "winner_recipient": "Chloé Zhao",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety / Deadline",
-          "notes": "Zhao was the second woman ever to win Best Director (after Barbra Streisand 1984) and the first woman of color."
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notes": "Zhao was the second woman ever to win Best Director (after Barbra Streisand 1984) and the first woman of color.",
+          "notable": true,
+          "note": "Chloé Zhao becomes the first woman to win GG Best Director in the truth-file record, and the first Asian woman to win the category — for *Nomadland*. Aligns with her Oscar Best Director win the same season — also the first Asian woman to win Oscar Best Director."
         },
         "gg.best_actor_drama": {
           "winner_film": "Ma Rainey's Black Bottom",
           "winner_recipient": "Chadwick Boseman",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / CBS News / NBC News",
-          "notes": "Posthumous win. Boseman died 2020-08-28; the award was accepted by his widow Taylor Simone Ledward."
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notes": "Posthumous win. Boseman died 2020-08-28; the award was accepted by his widow Taylor Simone Ledward.",
+          "notable": true,
+          "note": "Chadwick Boseman wins Best Drama Actor posthumously for *Ma Rainey's Black Bottom* — Boseman died in August 2020 of colon cancer aged 43. Aligns with his posthumous Oscar Best Actor nomination (he lost the Oscar to Anthony Hopkins)."
         },
         "gg.best_actress_drama": {
           "winner_film": "The United States vs. Billie Holiday",
           "winner_recipient": "Andra Day",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Andra Day's first GG, for her Billie Holiday performance in *The United States vs. Billie Holiday* — only the second Black woman to win Best Drama Actress at the Golden Globes (after Whoopi Goldberg for *The Color Purple* in 1986)."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Borat Subsequent Moviefilm",
           "winner_recipient": "Sacha Baron Cohen",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Sacha Baron Cohen's first GG acting win, for *Borat Subsequent Moviefilm*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "I Care a Lot",
           "winner_recipient": "Rosamund Pike",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Rosamund Pike's first GG, for *I Care a Lot*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Judas and the Black Messiah",
           "winner_recipient": "Daniel Kaluuya",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Daniel Kaluuya's first GG, for his Fred Hampton performance in *Judas and the Black Messiah*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "The Mauritanian",
           "winner_recipient": "Jodie Foster",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Jodie Foster's first GG since long pre-truth-file career wins — recognised for *The Mauritanian* at the 78th Golden Globes."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Soul",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "*Soul* (Pixar) wins Best Motion Picture — Animated at the 78th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Pete Docter, Dana Murray"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Minari",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "*Minari* (Lee Isaac Chung) wins Best Motion Picture — Foreign Language at the 78th Golden Globes — controversially placed in the Foreign category despite being a US production with American director, financed by US studio A24, on the basis of its Korean dialogue. The decision sparked widespread industry debate about category eligibility rules.",
+          "winner_recipient": "Lee Isaac Chung"
         },
         "gg.best_screenplay": {
           "winner_film": "The Trial of the Chicago 7",
           "winner_recipient": "Aaron Sorkin",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Aaron Sorkin's third GG Best Screenplay, for *The Trial of the Chicago 7* — following his wins at the 68th for *The Social Network* and the 73rd for *Steve Jobs*."
         },
         "gg.best_original_score": {
           "winner_film": "Soul",
@@ -1824,14 +1985,20 @@
             "Jon Batiste"
           ],
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety",
-          "notes": "Triple team credit. Same architectural pattern as cer 82 best_original_score (Reznor + Ross duo for Challengers)."
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notes": "Triple team credit. Same architectural pattern as cer 82 best_original_score (Reznor + Ross duo for Challengers).",
+          "notable": true,
+          "note": "Trent Reznor and Atticus Ross win their second GG Best Original Score for *Soul* (with Jon Batiste) — first was the 68th for *The Social Network*. Jon Batiste's first GG. Aligns with the trio's Oscar Best Original Score win for the same film.",
+          "winner_recipient": "Trent Reznor, Atticus Ross, Jon Batiste"
         },
         "gg.best_original_song": {
           "winner_film": "The Life Ahead",
           "winner_song": "Io sì (Seen)",
           "expected_nomination_count": 5,
-          "source": "78th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 28 Feb 2021 / Wikipedia 78th Golden Globes",
+          "notable": true,
+          "note": "Diane Warren's first GG win, for *The Life Ahead*'s 'Io sì (Seen)' — recognised after more than two decades of GG Best Original Song nominations dating back to her career-spanning songwriting work.",
+          "winner_recipient": "Diane Warren, Laura Pausini, Niccolò Agliardi"
         }
       }
     },
