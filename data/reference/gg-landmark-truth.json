@@ -495,62 +495,85 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Brokeback Mountain",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Brokeback Mountain swept Drama Picture, Director (Lee), Screenplay (McMurtry + Ossana), and Original Song at this ceremony — a major landmark for LGBTQ+ representation in mainstream film awards."
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notes": "Brokeback Mountain swept Drama Picture, Director (Lee), Screenplay (McMurtry + Ossana), and Original Song at this ceremony — a major landmark for LGBTQ+ representation in mainstream film awards.",
+          "notable": true,
+          "note": "*Brokeback Mountain* (Ang Lee) wins Best Motion Picture — Drama at the 63rd Golden Globes with 4 GGs total, including Best Director, Best Screenplay and Best Original Song. A famous GG/Oscar split: *Crash* would take Oscar Best Picture in a widely-debated upset.",
+          "winner_recipient": "Diana Ossana, James Schamus"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Walk the Line",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "*Walk the Line* (James Mangold) wins Best Motion Picture — Musical/Comedy at the 63rd Golden Globes with 3 GGs total, sweeping the lead acting categories.",
+          "winner_recipient": "Cathy Konrad, James Mangold"
         },
         "gg.best_director": {
           "winner_film": "Brokeback Mountain",
           "winner_recipient": "Ang Lee",
           "expected_nomination_count": 6,
-          "source": "63rd Golden Globes Wikipedia article / Variety",
-          "notes": "Director slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era)."
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notes": "Director slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era).",
+          "notable": true,
+          "note": "Ang Lee's second GG Best Director, for *Brokeback Mountain* — first was the 58th for *Crouching Tiger, Hidden Dragon*. Aligns with his Oscar Best Director win the same season."
         },
         "gg.best_actor_drama": {
           "winner_film": "Capote",
           "winner_recipient": "Philip Seymour Hoffman",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "Philip Seymour Hoffman's first GG, for his Truman Capote performance in *Capote*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Transamerica",
           "winner_recipient": "Felicity Huffman",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "Felicity Huffman's first GG, for *Transamerica* — playing a transgender woman ahead of her Oscar Best Actress nomination."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Walk the Line",
           "winner_recipient": "Joaquin Phoenix",
           "expected_nomination_count": 6,
-          "source": "63rd Golden Globes Wikipedia article / Variety",
-          "notes": "Actor MC slate at this ceremony was 6 nominees (slightly larger than typical 5)."
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notes": "Actor MC slate at this ceremony was 6 nominees (slightly larger than typical 5).",
+          "notable": true,
+          "note": "Joaquin Phoenix's first GG, for his Johnny Cash performance in *Walk the Line*. He would return to win Best Drama Actor at the 77th for *Joker* — a 14-year gap."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Walk the Line",
           "winner_recipient": "Reese Witherspoon",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "Reese Witherspoon's first GG, for her June Carter Cash performance in *Walk the Line*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Syriana",
           "winner_recipient": "George Clooney",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "George Clooney's second GG, for *Syriana* — first was Best Actor Musical/Comedy at the 58th for *O Brother, Where Art Thou?*. Aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "The Constant Gardener",
           "winner_recipient": "Rachel Weisz",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "Rachel Weisz's first GG, for *The Constant Gardener*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Paradise Now",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "*Paradise Now* (Hany Abu-Assad) wins Best Motion Picture — Foreign Language at the 63rd Golden Globes — a Palestinian production about would-be suicide bombers, the first Palestinian film to win the category.",
+          "winner_recipient": "Hany Abu-Assad"
         },
         "gg.best_screenplay": {
           "winner_film": "Brokeback Mountain",
@@ -559,13 +582,18 @@
             "Diana Ossana"
           ],
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "Larry McMurtry and Diana Ossana win Best Screenplay for *Brokeback Mountain*; aligns with their Oscar Best Adapted Screenplay win the same season.",
+          "winner_recipient": "Larry McMurtry, Diana Ossana"
         },
         "gg.best_original_score": {
           "winner_film": "Memoirs of a Geisha",
           "winner_recipient": "John Williams",
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "John Williams wins Best Original Score for *Memoirs of a Geisha* at the 63rd Golden Globes — Williams's first GG in the truth-file record (he had multiple earlier GGs outside the cer 57+ window)."
         },
         "gg.best_original_song": {
           "winner_film": "Brokeback Mountain",
@@ -575,7 +603,10 @@
             "Bernie Taupin"
           ],
           "expected_nomination_count": 5,
-          "source": "63rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2006 / Wikipedia 63rd Golden Globes",
+          "notable": true,
+          "note": "*Brokeback Mountain*'s 'A Love That Will Never Grow Old' wins Best Original Song — Bernie Taupin's first GG (he would return at the 77th for *Rocketman*'s '(I'm Gonna) Love Me Again').",
+          "winner_recipient": "Gustavo Santaolalla, Bernie Taupin"
         }
       }
     },
@@ -586,61 +617,85 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Atonement",
           "expected_nomination_count": 7,
-          "source": "65th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Drama Picture slate at this ceremony was 7 nominees — larger than typical 5-6 of this era. The 65th GGs were unusual: held as a press conference, not a televised gala, due to the 2007-2008 Writers Guild strike."
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notes": "Drama Picture slate at this ceremony was 7 nominees — larger than typical 5-6 of this era. The 65th GGs were unusual: held as a press conference, not a televised gala, due to the 2007-2008 Writers Guild strike.",
+          "notable": true,
+          "note": "*Atonement* (Joe Wright) wins Best Motion Picture — Drama at the 65th Golden Globes — the only major awards announcement of the night, as the ceremony was reduced to a press conference due to the 2007–2008 Writers Guild strike. *No Country for Old Men* would go on to take Oscar Best Picture.",
+          "winner_recipient": "Tim Bevan, Eric Fellner, Paul Webster"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Sweeney Todd: The Demon Barber of Fleet Street",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "*Sweeney Todd* (Tim Burton) wins Best Motion Picture — Musical/Comedy at the 65th Golden Globes — a Stephen Sondheim adaptation. The 65th was a press-conference announcement, not a televised ceremony, due to the 2007–2008 Writers Guild strike.",
+          "winner_recipient": "Richard D. Zanuck, Walter F. Parkes, Laurie MacDonald, John Logan"
         },
         "gg.best_actor_drama": {
           "winner_film": "There Will Be Blood",
           "winner_recipient": "Daniel Day-Lewis",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Daniel Day-Lewis's first GG Best Drama Actor in the truth-file record, for *There Will Be Blood*. He would return to win the same category at the 70th for *Lincoln*. Aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Away from Her",
           "winner_recipient": "Julie Christie",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Julie Christie's first GG in the truth-file record, for Sarah Polley's directorial debut *Away from Her* — Christie playing a woman with Alzheimer's disease."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Sweeney Todd: The Demon Barber of Fleet Street",
           "winner_recipient": "Johnny Depp",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Johnny Depp's first GG film win, for his Sweeney Todd performance in Tim Burton's *Sweeney Todd*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "La Vie en Rose",
           "winner_recipient": "Marion Cotillard",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Marion Cotillard wins Best Actress Musical/Comedy for *La Vie en Rose* — a French-language Édith Piaf biopic taking the GG Comedy category, an unusual outcome for a non-English-language performance. Aligns with her Oscar Best Actress win the same season — the first Best Actress Oscar for a French-language performance in decades."
         },
         "gg.best_supporting_actor": {
           "winner_film": "No Country for Old Men",
           "winner_recipient": "Javier Bardem",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Javier Bardem's first GG, for *No Country for Old Men*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "I'm Not There",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety",
-          "notes": "Blanchett portrayed Bob Dylan in I'm Not There — a notable cross-gender role."
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notes": "Blanchett portrayed Bob Dylan in I'm Not There — a notable cross-gender role.",
+          "notable": true,
+          "note": "Cate Blanchett's first GG, for her Bob Dylan portrayal in *I'm Not There* — playing a male role. She would return to win Best Drama Actress at the 71st for *Blue Jasmine* and the 80th for *Tár*."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Ratatouille",
           "expected_nomination_count": 3,
-          "source": "65th Golden Globes Wikipedia article",
-          "notes": "Animated slate at this ceremony was 3 nominees (within tolerance ±2)."
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notes": "Animated slate at this ceremony was 3 nominees (within tolerance ±2).",
+          "notable": true,
+          "note": "*Ratatouille* (Pixar) wins Best Motion Picture — Animated at the 65th Golden Globes — the second year of the Globes' Best Animated Feature category.",
+          "winner_recipient": "Brad Bird, Brad Lewis"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "The Diving Bell and the Butterfly",
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "*The Diving Bell and the Butterfly* (Julian Schnabel) wins Best Motion Picture — Foreign Language at the 65th Golden Globes — a French-language production from American director Schnabel, who also took the GG Best Director award (outside this schema).",
+          "winner_recipient": "Julian Schnabel"
         },
         "gg.best_original_song": {
           "winner_film": "Into the Wild",
@@ -649,7 +704,10 @@
             "Eddie Vedder"
           ],
           "expected_nomination_count": 5,
-          "source": "65th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2008 / Wikipedia 65th Golden Globes",
+          "notable": true,
+          "note": "Eddie Vedder's first GG, for *Into the Wild*'s 'Guaranteed' — Vedder's solo soundtrack work for Sean Penn's adaptation.",
+          "winner_recipient": "Eddie Vedder"
         }
       }
     },
@@ -660,43 +718,61 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Slumdog Millionaire",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notable": true,
+          "note": "*Slumdog Millionaire* (Danny Boyle) wins Best Motion Picture — Drama at the 66th Golden Globes with 4 GGs total — the night's leading haul. Aligns with the film's Oscar Best Picture sweep the same season.",
+          "winner_recipient": "Christian Colson"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Vicky Cristina Barcelona",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notable": true,
+          "note": "*Vicky Cristina Barcelona* (Woody Allen) wins Best Motion Picture — Musical/Comedy at the 66th Golden Globes — the same Allen film that took GG Best Supporting Actress for Penélope Cruz at this ceremony (outside this schema).",
+          "winner_recipient": "Letty Aronson, Stephen Tenenbaum"
         },
         "gg.best_actor_drama": {
           "winner_film": "The Wrestler",
           "winner_recipient": "Mickey Rourke",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Comeback win — Rourke's first major Globe after a long career interruption."
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notes": "Comeback win — Rourke's first major Globe after a long career interruption.",
+          "notable": true,
+          "note": "Mickey Rourke's first GG, for his comeback role as an aging professional wrestler in Darren Aronofsky's *The Wrestler*. A BAFTA/GG/Oscar split: Rourke took GG and BAFTA, Sean Penn took the Oscar Best Actor for *Milk*."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "WALL-E",
           "expected_nomination_count": 3,
-          "source": "66th Golden Globes Wikipedia article",
-          "notes": "Animated slate at this ceremony was 3 nominees (WALL-E winner, plus Bolt and Kung Fu Panda) — within typical_nominations 5 ±2."
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notes": "Animated slate at this ceremony was 3 nominees (WALL-E winner, plus Bolt and Kung Fu Panda) — within typical_nominations 5 ±2.",
+          "notable": true,
+          "note": "*WALL-E* (Pixar) wins Best Motion Picture — Animated at the 66th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Andrew Stanton, Jim Morris"
         },
         "gg.best_motion_picture_non_english": {
-          "winner_film": "Waltz with Bashir",
+          "winner_film": "Waltz with Bashir (Vals im Bashir)",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notable": true,
+          "note": "*Waltz with Bashir* (Ari Folman) wins Best Motion Picture — Foreign Language at the 66th Golden Globes — an Israeli animated documentary, an unusual category combination.",
+          "winner_recipient": "Ari Folman"
         },
         "gg.best_screenplay": {
           "winner_film": "Slumdog Millionaire",
           "winner_recipient": "Simon Beaufoy",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notable": true,
+          "note": "Simon Beaufoy's first GG, for *Slumdog Millionaire*; aligns with his Oscar Best Adapted Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "Slumdog Millionaire",
           "winner_recipient": "A. R. Rahman",
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Rahman's first GG and a major international moment — Slumdog Millionaire swept Drama Picture, Director (Boyle), Screenplay, and Score at this ceremony."
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notes": "Rahman's first GG and a major international moment — Slumdog Millionaire swept Drama Picture, Director (Boyle), Screenplay, and Score at this ceremony.",
+          "notable": true,
+          "note": "A. R. Rahman's first GG, for *Slumdog Millionaire* — the first Indian composer to win the category. Aligns with his two Oscar wins (Best Original Score and Best Original Song) for the same film."
         },
         "gg.best_original_song": {
           "winner_film": "The Wrestler",
@@ -705,7 +781,10 @@
             "Bruce Springsteen"
           ],
           "expected_nomination_count": 5,
-          "source": "66th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2009 / Wikipedia 66th Golden Globes",
+          "notable": true,
+          "note": "Bruce Springsteen's first GG, for *The Wrestler*'s title song — a song he wrote without a fee for the film, alongside Mickey Rourke's Best Drama Actor win.",
+          "winner_recipient": "Bruce Springsteen"
         }
       }
     },
@@ -716,67 +795,93 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Avatar",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "GG/Oscar Best Picture split: Avatar took GG Drama Picture; The Hurt Locker took Oscar Best Picture six weeks later."
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notes": "GG/Oscar Best Picture split: Avatar took GG Drama Picture; The Hurt Locker took Oscar Best Picture six weeks later.",
+          "notable": true,
+          "note": "*Avatar* (James Cameron) wins Best Motion Picture — Drama at the 67th Golden Globes — the box-office juggernaut taking the GG top prize. A famous GG/Oscar split as *The Hurt Locker* would take Oscar Best Picture, beating *Avatar* despite Cameron's record-setting commercial success.",
+          "winner_recipient": "James Cameron, Jon Landau"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Hangover",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety",
-          "notes": "Notable broad-comedy win — The Hangover is among the rare raucous-comedy GG Best Picture Musical/Comedy winners of the post-2000 era."
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notes": "Notable broad-comedy win — The Hangover is among the rare raucous-comedy GG Best Picture Musical/Comedy winners of the post-2000 era.",
+          "notable": true,
+          "note": "*The Hangover* (Todd Phillips) wins Best Motion Picture — Musical/Comedy at the 67th Golden Globes — a low-budget studio comedy taking the category over higher-prestige competition.",
+          "winner_recipient": "Todd Phillips, Daniel Goldberg"
         },
         "gg.best_director": {
           "winner_film": "Avatar",
           "winner_recipient": "James Cameron",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Director split: Cameron took GG Best Director for Avatar; his ex-wife Kathryn Bigelow took Oscar Best Director for The Hurt Locker (the first woman ever to win Oscar for directing)."
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notes": "GG/Oscar Director split: Cameron took GG Best Director for Avatar; his ex-wife Kathryn Bigelow took Oscar Best Director for The Hurt Locker (the first woman ever to win Oscar for directing).",
+          "notable": true,
+          "note": "James Cameron wins Best Director for *Avatar* — a famous GG/Oscar split, as Kathryn Bigelow took the Oscar Best Director for *The Hurt Locker* (becoming the first woman to win Oscar Best Director). Cameron and Bigelow are former spouses, adding personal drama to the divergent results."
         },
         "gg.best_actor_drama": {
           "winner_film": "Crazy Heart",
           "winner_recipient": "Jeff Bridges",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Jeff Bridges's first GG, for his washed-up country-singer performance in *Crazy Heart*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "The Blind Side",
           "winner_recipient": "Sandra Bullock",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Sandra Bullock's first GG, for *The Blind Side*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Sherlock Holmes",
           "winner_recipient": "Robert Downey Jr.",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Robert Downey Jr.'s first GG, for *Sherlock Holmes* — Guy Ritchie's reinvention of the character. He would return to win Best Supporting Actor at the 81st for *Oppenheimer*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Julie & Julia",
           "winner_recipient": "Meryl Streep",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Meryl Streep's second GG in the truth-file record, for her Julia Child performance in *Julie & Julia* — first was Best Supporting Actress at the 60th for *Adaptation.*. She would return to win Best Drama Actress at the 69th for *The Iron Lady*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Inglourious Basterds",
           "winner_recipient": "Christoph Waltz",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Christoph Waltz's first GG, for *Inglourious Basterds*; aligns with his Oscar Best Supporting Actor win the same season. He would return to win the same GG category at the 70th for another Tarantino film, *Django Unchained*."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Precious",
           "winner_recipient": "Mo'Nique",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Mo'Nique's first GG, for *Precious*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Up",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "*Up* (Pixar) wins Best Motion Picture — Animated at the 67th Golden Globes; aligns with its Oscar Best Animated Feature win — director Pete Docter's first of multiple GG Animated wins (cer 67/73/78).",
+          "winner_recipient": "Pete Docter, Bob Peterson"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "The White Ribbon",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "*The White Ribbon* (Michael Haneke) wins Best Motion Picture — Foreign Language at the 67th Golden Globes — a black-and-white German production. Haneke would return to win the same GG category at the 70th for *Amour*.",
+          "winner_recipient": "Michael Haneke"
         },
         "gg.best_screenplay": {
           "winner_film": "Up in the Air",
@@ -785,13 +890,18 @@
             "Sheldon Turner"
           ],
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Jason Reitman and Sheldon Turner win Best Screenplay for *Up in the Air* — a recession-era drama directed by Reitman.",
+          "winner_recipient": "Jason Reitman, Sheldon Turner"
         },
         "gg.best_original_score": {
           "winner_film": "Up",
           "winner_recipient": "Michael Giacchino",
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notable": true,
+          "note": "Michael Giacchino's first GG, for *Up*; aligns with his Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "Crazy Heart",
@@ -801,8 +911,11 @@
             "T Bone Burnett"
           ],
           "expected_nomination_count": 5,
-          "source": "67th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipients_json was empty for this row; canonical 2-author credit recorded here. CSV remediation tracked separately."
+          "source": "HFPA / Golden Globes press release 17 Jan 2010 / Wikipedia 67th Golden Globes",
+          "notes": "CSV recipients_json was empty for this row; canonical 2-author credit recorded here. CSV remediation tracked separately.",
+          "notable": true,
+          "note": "*Crazy Heart*'s 'The Weary Kind' wins Best Original Song at the 67th Golden Globes; aligns with its Oscar Best Original Song win the same season.",
+          "winner_recipient": "Ryan Bingham, T Bone Burnett"
         }
       }
     },
@@ -813,72 +926,100 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Social Network",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "GG/Oscar Best Picture split: The Social Network took GG Drama Picture and 4 awards including Director, Score, Screenplay; The King's Speech took Oscar Best Picture and Director (Hooper)."
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notes": "GG/Oscar Best Picture split: The Social Network took GG Drama Picture and 4 awards including Director, Score, Screenplay; The King's Speech took Oscar Best Picture and Director (Hooper).",
+          "notable": true,
+          "note": "*The Social Network* (David Fincher) wins Best Motion Picture — Drama at the 68th Golden Globes with 4 GGs total — the night's leading haul, including Best Director, Best Screenplay and Best Original Score. A famous GG/Oscar split: *The King's Speech* would take Oscar Best Picture.",
+          "winner_recipient": "Scott Rudin, Dana Brunetti, Michael De Luca, Ceán Chaffin"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Kids Are All Right",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "*The Kids Are All Right* (Lisa Cholodenko) wins Best Motion Picture — Musical/Comedy at the 68th Golden Globes — an indie family-comedy from the Sundance circuit.",
+          "winner_recipient": "Gary Gilbert, Jeffrey Levy-Hinte, Celine Rattray"
         },
         "gg.best_director": {
           "winner_film": "The Social Network",
           "winner_recipient": "David Fincher",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Director split: Fincher took GG Best Director for The Social Network; Tom Hooper took Oscar Best Director for The King's Speech."
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notes": "GG/Oscar Director split: Fincher took GG Best Director for The Social Network; Tom Hooper took Oscar Best Director for The King's Speech.",
+          "notable": true,
+          "note": "David Fincher's first GG Best Director, for *The Social Network* — a notable GG/Oscar split as Tom Hooper took the Oscar Best Director for *The King's Speech*."
         },
         "gg.best_actor_drama": {
           "winner_film": "The King's Speech",
           "winner_recipient": "Colin Firth",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Colin Firth's first GG, for his George VI performance in *The King's Speech*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Black Swan",
           "winner_recipient": "Natalie Portman",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Natalie Portman's second GG, for *Black Swan* — first was Best Supporting Actress at the 62nd for *Closer*. Aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Barney's Version",
           "winner_recipient": "Paul Giamatti",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Paul Giamatti's first GG, for *Barney's Version*. He would return to win the same category at the 81st for *The Holdovers* — a 13-year gap between his two GG wins."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "The Kids Are All Right",
           "winner_recipient": "Annette Bening",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Annette Bening's second GG, for *The Kids Are All Right* — first was the 62nd for *Being Julia* in the same Best Comedy/Musical Actress category."
         },
         "gg.best_supporting_actor": {
           "winner_film": "The Fighter",
           "winner_recipient": "Christian Bale",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Christian Bale's first GG, for his Dicky Eklund performance in *The Fighter*; aligns with his Oscar Best Supporting Actor win the same season. He would return at the 76th for *Vice* (Best Comedy Actor)."
         },
         "gg.best_supporting_actress": {
           "winner_film": "The Fighter",
           "winner_recipient": "Melissa Leo",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Melissa Leo's first GG, for *The Fighter*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Toy Story 3",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "*Toy Story 3* (Pixar) wins Best Motion Picture — Animated at the 68th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Lee Unkrich, Darla K. Anderson"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "In a Better World",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "*In a Better World* (Susanne Bier) wins Best Motion Picture — Foreign Language at the 68th Golden Globes — a Danish production; aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Susanne Bier"
         },
         "gg.best_screenplay": {
           "winner_film": "The Social Network",
           "winner_recipient": "Aaron Sorkin",
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notable": true,
+          "note": "Aaron Sorkin's first GG Best Screenplay, for *The Social Network*; aligns with his Oscar Best Adapted Screenplay win the same season. He would return to win the category at the 73rd for *Steve Jobs* and the 78th for *The Trial of the Chicago 7* — three GG Screenplay wins total."
         },
         "gg.best_original_score": {
           "winner_film": "The Social Network",
@@ -887,8 +1028,11 @@
             "Atticus Ross"
           ],
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Reznor + Ross duo's first GG win — they would go on to win again at cer 82 (Challengers). Same architectural pattern as cer 82 best_original_score (winner_recipients array)."
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notes": "Reznor + Ross duo's first GG win — they would go on to win again at cer 82 (Challengers). Same architectural pattern as cer 82 best_original_score (winner_recipients array).",
+          "notable": true,
+          "note": "Trent Reznor and Atticus Ross's first GG Best Original Score, for *The Social Network*; aligns with their Oscar Best Original Score win the same season. They would return to win the same category at the 78th for *Soul* and the 82nd for *Challengers* — three GG Score wins total.",
+          "winner_recipient": "Trent Reznor, Atticus Ross"
         },
         "gg.best_original_song": {
           "winner_film": "Burlesque",
@@ -897,8 +1041,11 @@
             "Diane Warren"
           ],
           "expected_nomination_count": 5,
-          "source": "68th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipients_json was empty for this row; canonical Diane Warren credit recorded here."
+          "source": "HFPA / Golden Globes press release 16 Jan 2011 / Wikipedia 68th Golden Globes",
+          "notes": "CSV recipients_json was empty for this row; canonical Diane Warren credit recorded here.",
+          "notable": true,
+          "note": "*Burlesque*'s 'You Haven't Seen the Last of Me' wins Best Original Song at the 68th Golden Globes — Diane Warren's only GG Best Song win for many years until her next at the 78th for *The Life Ahead*.",
+          "winner_recipient": "Diane Warren"
         }
       }
     },
