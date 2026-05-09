@@ -404,48 +404,67 @@
         "bafta.best_film": {
           "winner_film": "American Beauty",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 53rd BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "*American Beauty* (Sam Mendes) wins Best Film at the 53rd ceremony in 2000 — Mendes's directorial debut feature. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Bruce Cohen, Dan Jinks"
         },
         "bafta.best_director": {
           "winner_film": "All About My Mother",
           "winner_recipient": "Pedro Almodóvar",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 53rd BAFTA — David Lean Award for Direction",
-          "notes": "Best Film and Best Director split: Sam Mendes directed American Beauty (Best Film) but Almodóvar won Best Director for All About My Mother."
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notes": "Best Film and Best Director split: Sam Mendes directed American Beauty (Best Film) but Almodóvar won Best Director for All About My Mother.",
+          "notable": true,
+          "note": "Pedro Almodóvar wins Best Director for *All About My Mother* — a Spanish-language film taking BAFTA Best Director, and a notable BAFTA Best Film/Best Director split with *American Beauty*. Sam Mendes took the Oscar Best Director the same season. Almodóvar also won Best Film Not in the English Language at this ceremony — a same-night double."
         },
         "bafta.best_leading_actor": {
           "winner_film": "American Beauty",
           "winner_recipient": "Kevin Spacey",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 53rd BAFTA / Variety"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "Kevin Spacey wins Best Leading Actor for *American Beauty*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "American Beauty",
           "winner_recipient": "Annette Bening",
           "expected_nomination_count": 4,
-          "source": "Wikipedia 53rd BAFTA / Variety"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "Annette Bening wins Best Leading Actress for *American Beauty* — a BAFTA/Oscar split, as Hilary Swank took the Oscar Best Actress for *Boys Don't Cry* the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "The Talented Mr. Ripley",
           "winner_recipient": "Jude Law",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 53rd BAFTA / Variety"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "Jude Law's first BAFTA, for *The Talented Mr. Ripley*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Tea with Mussolini",
           "winner_recipient": "Maggie Smith",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 53rd BAFTA / Variety"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "Maggie Smith wins Best Supporting Actress for *Tea with Mussolini* at the 53rd ceremony."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "All About My Mother",
           "expected_nomination_count": 4,
-          "source": "Wikipedia 53rd BAFTA"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "*All About My Mother* (Pedro Almodóvar) wins Best Film Not in the English Language alongside its Best Director win at the 53rd ceremony — a same-night double for Almodóvar. Aligns with the film's Oscar Best Foreign Language Film win.",
+          "winner_recipient": "Agustín Almodóvar, Pedro Almodóvar"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "East Is East",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 53rd BAFTA / pre-2021 era_override (5-6 nominee slate)"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "*East Is East* wins Outstanding British Film at the 53rd ceremony — a low-budget British comedy-drama about an Anglo-Pakistani family in 1970s Salford.",
+          "winner_recipient": "Leslee Udwin, Damien O'Donnell"
         },
         "bafta.best_original_score": {
           "winner_film": "American Beauty",
@@ -457,7 +476,9 @@
           "winner_film": "Ratcatcher",
           "winner_recipient": "Lynne Ramsay",
           "expected_nomination_count": 4,
-          "source": "Wikipedia 53rd BAFTA — Carl Foreman Award for Special Achievement by a British Director, Producer or Writer"
+          "source": "BAFTA press release 9 Apr 2000 / Wikipedia 53rd BAFTA",
+          "notable": true,
+          "note": "Lynne Ramsay's first BAFTA, taking Outstanding Debut for *Ratcatcher* at the 53rd ceremony — the first female Outstanding Debut winner in the truth-file record."
         }
       }
     },
@@ -468,50 +489,68 @@
         "bafta.best_film": {
           "winner_film": "Gladiator",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "*Gladiator* (Ridley Scott) wins Best Film at the 54th ceremony in 2001; aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Douglas Wick, David Franzoni, Branko Lustig"
         },
         "bafta.best_director": {
           "winner_film": "Crouching Tiger, Hidden Dragon",
           "winner_recipient": "Ang Lee",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA — David Lean Award for Direction",
-          "notes": "Best Film and Best Director split: Ridley Scott directed Gladiator (Best Film) but Ang Lee won Best Director for Crouching Tiger, Hidden Dragon."
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notes": "Best Film and Best Director split: Ridley Scott directed Gladiator (Best Film) but Ang Lee won Best Director for Crouching Tiger, Hidden Dragon.",
+          "notable": true,
+          "note": "Ang Lee's first BAFTA Best Director, for *Crouching Tiger, Hidden Dragon* — a Mandarin-language wuxia film. A BAFTA Best Film/Best Director split with *Gladiator*; Steven Soderbergh took the Oscar Best Director for *Traffic*. Lee also won Best Film Not in the English Language at this ceremony — a same-night double. He would return to win Best Director again at the 59th for *Brokeback Mountain*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Billy Elliot",
           "winner_recipient": "Jamie Bell",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / Variety",
-          "notes": "Jamie Bell won at age 14 — youngest BAFTA Best Leading Actor winner."
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notes": "Jamie Bell won at age 14 — youngest BAFTA Best Leading Actor winner.",
+          "notable": true,
+          "note": "Jamie Bell wins Best Leading Actor for *Billy Elliot* at age 14 — the youngest BAFTA Best Leading Actor in the truth-file record. A BAFTA/Oscar split: Russell Crowe took the Oscar Best Actor for *Gladiator*."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Erin Brockovich",
           "winner_recipient": "Julia Roberts",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / Variety"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "Julia Roberts's first BAFTA, for *Erin Brockovich*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Traffic",
           "winner_recipient": "Benicio del Toro",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / Variety"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "Benicio del Toro's first BAFTA, for *Traffic*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Billy Elliot",
           "winner_recipient": "Julie Walters",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / Variety"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "Julie Walters wins Best Supporting Actress for *Billy Elliot* — alongside Jamie Bell's Best Leading Actor win for the same film at the 54th ceremony."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Crouching Tiger, Hidden Dragon",
-          "winner_recipient": "Ang Lee",
+          "winner_recipient": "Bill Kong, Hsu Li Kong, Ang Lee",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "*Crouching Tiger, Hidden Dragon* wins Best Film Not in the English Language alongside its Best Director win — a same-night double for Ang Lee."
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Billy Elliot",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "*Billy Elliot* (Stephen Daldry) wins Outstanding British Film at the 54th ceremony — a low-budget Working Title production set in a 1980s mining village.",
+          "winner_recipient": "Greg Brenman, Stephen Daldry"
         },
         "bafta.best_original_score": {
           "winner_film": "Crouching Tiger, Hidden Dragon",
@@ -523,7 +562,9 @@
           "winner_film": "Last Resort",
           "winner_recipient": "Paweł Pawlikowski",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 54th BAFTA"
+          "source": "BAFTA press release 25 Feb 2001 / Wikipedia 54th BAFTA",
+          "notable": true,
+          "note": "Paweł Pawlikowski's first BAFTA, taking Outstanding Debut for *Last Resort* at the 54th ceremony; he would return to win Outstanding British Film at the 58th for *My Summer of Love* and Best Film Not in English at the 68th for *Ida*."
         }
       }
     },
@@ -534,47 +575,66 @@
         "bafta.best_film": {
           "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "*The Lord of the Rings: The Fellowship of the Ring* (Peter Jackson) wins Best Film at the 55th ceremony — the first instalment of the Tolkien trilogy, and Jackson's first BAFTA. Aligns with no Oscar Best Picture (which went to *A Beautiful Mind*) — a BAFTA/Oscar split.",
+          "winner_recipient": "Peter Jackson, Barrie M. Osborne, Fran Walsh, Tim Sanders"
         },
         "bafta.best_director": {
           "winner_film": "The Lord of the Rings: The Fellowship of the Ring",
           "winner_recipient": "Peter Jackson",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA — David Lean Award for Direction"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "Peter Jackson's first BAFTA Best Director, for *The Lord of the Rings: The Fellowship of the Ring*. He would return to win Best Film again at the 57th for *The Return of the King*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "A Beautiful Mind",
           "winner_recipient": "Russell Crowe",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / Variety"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "Russell Crowe's first BAFTA Best Leading Actor in the truth-file record, for *A Beautiful Mind*. A BAFTA/Oscar split with Best Picture: *A Beautiful Mind* won Oscar Best Picture, Director and Adapted Screenplay; Crowe lost Oscar Best Actor to Denzel Washington for *Training Day*."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Iris",
           "winner_recipient": "Judi Dench",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / Variety"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "Judi Dench wins Best Leading Actress for her Iris Murdoch performance in *Iris* — her first BAFTA Best Leading Actress in the truth-file record."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Moulin Rouge!",
           "winner_recipient": "Jim Broadbent",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / Variety"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "Jim Broadbent's first BAFTA, for *Moulin Rouge!* at the 55th ceremony — notably he won the Oscar Best Supporting Actor the same season for a different film, *Iris*, where he played opposite Judi Dench."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "A Beautiful Mind",
           "winner_recipient": "Jennifer Connelly",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / Variety"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "Jennifer Connelly's first BAFTA, for *A Beautiful Mind*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Amores perros",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "*Amores perros* (Alejandro González Iñárritu) wins Best Film Not in the English Language at the 55th ceremony — Iñárritu's first BAFTA. He would return to win Best Film and Best Director at the 69th for *The Revenant*.",
+          "winner_recipient": "Alejandro González Iñárritu"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Gosford Park",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 55th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 24 Feb 2002 / Wikipedia 55th BAFTA",
+          "notable": true,
+          "note": "*Gosford Park* (Robert Altman) wins Outstanding British Film at the 55th ceremony — an American director's English country-house ensemble piece qualifying via UK production.",
+          "winner_recipient": "Robert Altman, Bob Balaban"
         },
         "bafta.best_original_screenplay": {
           "winner_film": "Amélie",
@@ -611,49 +671,66 @@
         "bafta.best_film": {
           "winner_film": "The Pianist",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "*The Pianist* (Roman Polanski) wins Best Film at the 56th ceremony — Polanski's first BAFTA. Aligns with his Oscar Best Director win the same season, though Polanski's outstanding US legal issues (1977 fugitive status) meant he could not collect the Oscar in person.",
+          "winner_recipient": "Roman Polanski, Alain Sarde"
         },
         "bafta.best_director": {
           "winner_film": "The Pianist",
           "winner_recipient": "Roman Polanski",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA — David Lean Award for Direction"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Roman Polanski wins Best Director for *The Pianist* alongside its Best Film win at the 56th ceremony. Aligns with his Oscar Best Director win the same season — a Holocaust drama based on Władysław Szpilman's memoir."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Gangs of New York",
           "winner_recipient": "Daniel Day-Lewis",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / Variety"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Daniel Day-Lewis's first BAFTA Best Leading Actor in the truth-file record, for his Bill the Butcher performance in *Gangs of New York*. He would return to win the same category twice more — at the 61st for *There Will Be Blood* and the 66th for *Lincoln* — making three BAFTA Best Actor wins in total."
         },
         "bafta.best_leading_actress": {
           "winner_film": "The Hours",
           "winner_recipient": "Nicole Kidman",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / Variety"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Nicole Kidman's first BAFTA in the truth-file record, for her Virginia Woolf performance in *The Hours*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Catch Me If You Can",
           "winner_recipient": "Christopher Walken",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / Variety"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Christopher Walken's first BAFTA, for *Catch Me If You Can* — a BAFTA/Oscar split, as Chris Cooper took the Oscar Best Supporting Actor for *Adaptation* the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Chicago",
           "winner_recipient": "Catherine Zeta-Jones",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / Variety"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Catherine Zeta-Jones's first BAFTA, for *Chicago*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Talk to Her",
-          "winner_recipient": "Pedro Almodóvar",
+          "winner_recipient": "Agustín Almodóvar, Pedro Almodóvar",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "*Talk to Her* (Pedro Almodóvar) wins Best Film Not in the English Language at the 56th ceremony — Almodóvar's third BAFTA, after his cer 53 Director/BFNiE double for *All About My Mother*. He also took Best Original Screenplay at this ceremony."
         },
         "bafta.outstanding_british_film": {
           "winner_film": "The Warrior",
           "winner_recipient": "Asif Kapadia",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 56th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Asif Kapadia's first BAFTA, taking Outstanding British Film for *The Warrior* — and Outstanding Debut at the same ceremony for the same film, a same-night double. He would return to win Best Documentary at the 65th for *Senna* and the 69th for *Amy*."
         },
         "bafta.best_original_score": {
           "winner_film": "The Hours",
@@ -665,7 +742,9 @@
           "winner_film": "The Warrior",
           "winner_recipient": "Asif Kapadia",
           "expected_nomination_count": 4,
-          "source": "Wikipedia 56th BAFTA — Carl Foreman Award"
+          "source": "BAFTA press release 23 Feb 2003 / Wikipedia 56th BAFTA",
+          "notable": true,
+          "note": "Asif Kapadia takes Outstanding Debut for *The Warrior* alongside Outstanding British Film for the same film at the 56th ceremony — a rare same-night double for one director on one feature."
         }
       }
     },
@@ -676,48 +755,67 @@
         "bafta.best_film": {
           "winner_film": "The Lord of the Rings: The Return of the King",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "*The Lord of the Rings: The Return of the King* (Peter Jackson) wins Best Film at the 57th ceremony — Jackson's second BAFTA Best Film for the trilogy, after *The Fellowship of the Ring* at the 55th. Aligns with the film's Oscar Best Picture in its 11-Oscar sweep.",
+          "winner_recipient": "Barrie M. Osborne, Fran Walsh, Peter Jackson"
         },
         "bafta.best_director": {
           "winner_film": "Master and Commander: The Far Side of the World",
           "winner_recipient": "Peter Weir",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / Variety",
-          "notes": "Notable Best Film/Best Director split: Peter Jackson directed LOTR: The Return of the King (Best Film) but Peter Weir won Best Director for Master and Commander — flagged as a major surprise of the ceremony in contemporaneous press coverage."
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notes": "Notable Best Film/Best Director split: Peter Jackson directed LOTR: The Return of the King (Best Film) but Peter Weir won Best Director for Master and Commander — flagged as a major surprise of the ceremony in contemporaneous press coverage.",
+          "notable": true,
+          "note": "Peter Weir wins Best Director for *Master and Commander: The Far Side of the World* — a striking BAFTA Best Film/Best Director split, as *The Return of the King* won Best Film here but lost Best Director, while Jackson took the Oscar Best Director for the same film in its 11-Oscar sweep."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Lost in Translation",
           "winner_recipient": "Bill Murray",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 57th BAFTA / Variety"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "Bill Murray's first BAFTA, for *Lost in Translation* — a BAFTA/Oscar split, as Sean Penn took the Oscar Best Actor for *Mystic River* the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Lost in Translation",
           "winner_recipient": "Scarlett Johansson",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / Variety"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "Scarlett Johansson's first BAFTA, for *Lost in Translation* — a BAFTA/Oscar split, as Charlize Theron took the Oscar Best Actress for *Monster* the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Love Actually",
           "winner_recipient": "Bill Nighy",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / Variety"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "Bill Nighy's first BAFTA, for *Love Actually*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Cold Mountain",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / Variety"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "Renée Zellweger's first BAFTA, for *Cold Mountain*; aligns with her Oscar Best Supporting Actress win the same season. She would return to win Best Leading Actress at the 73rd for *Judy* — a 16-year gap between BAFTA wins."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "In This World",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 57th BAFTA"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "*In This World* (Michael Winterbottom) wins Best Film Not in the English Language — a British production filmed largely in Pashto and Persian, following Afghan refugees travelling overland to London.",
+          "winner_recipient": "Andrew Eaton, Michael Winterbottom"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Touching the Void",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 57th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 15 Feb 2004 / Wikipedia 57th BAFTA",
+          "notable": true,
+          "note": "*Touching the Void* (Kevin Macdonald) wins Outstanding British Film — a documentary feature taking the category, an unusual outcome. Macdonald's first BAFTA; he would return to win Outstanding British Film again at the 60th for *The Last King of Scotland*.",
+          "winner_recipient": "John Smithson, Kevin Macdonald"
         },
         "bafta.best_original_score": {
           "winner_film": "Cold Mountain",
@@ -739,48 +837,67 @@
         "bafta.best_film": {
           "winner_film": "The Aviator",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "*The Aviator* (Martin Scorsese) wins Best Film at the 58th ceremony — a Howard Hughes biopic. A BAFTA/Oscar split: *Million Dollar Baby* took the Oscar Best Picture the same season.",
+          "winner_recipient": "Michael Mann, Sandy Climan, Graham King, Charles Evans Jr."
         },
         "bafta.best_director": {
           "winner_film": "Vera Drake",
           "winner_recipient": "Mike Leigh",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA — David Lean Award for Direction",
-          "notes": "Best Film and Best Director split: Martin Scorsese directed The Aviator (Best Film) but Mike Leigh won Best Director for Vera Drake."
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notes": "Best Film and Best Director split: Martin Scorsese directed The Aviator (Best Film) but Mike Leigh won Best Director for Vera Drake.",
+          "notable": true,
+          "note": "Mike Leigh's first BAFTA Best Director in the truth-file record, for *Vera Drake* — a BAFTA Best Film/Best Director split with *The Aviator*. Clint Eastwood took the Oscar Best Director for *Million Dollar Baby* the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Ray",
           "winner_recipient": "Jamie Foxx",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "Jamie Foxx's first BAFTA, for his Ray Charles performance in *Ray*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Vera Drake",
           "winner_recipient": "Imelda Staunton",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "Imelda Staunton's first BAFTA, for *Vera Drake* — a BAFTA/Oscar split, as Hilary Swank took the Oscar Best Actress for *Million Dollar Baby* the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Closer",
           "winner_recipient": "Clive Owen",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "Clive Owen's first BAFTA, for *Closer* — a BAFTA/Oscar split, as Morgan Freeman took the Oscar Best Supporting Actor for *Million Dollar Baby* the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The Aviator",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "Cate Blanchett's first BAFTA, for her Katharine Hepburn performance in *The Aviator*; aligns with her Oscar Best Supporting Actress win — her first Oscar. She would return to win Best Leading Actress at the 67th for *Blue Jasmine* and the 76th for *Tár*."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Motorcycle Diaries",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "*The Motorcycle Diaries* (Walter Salles) wins Best Film Not in the English Language — a Spanish-language road-trip film about the young Che Guevara.",
+          "winner_recipient": "Michael Nozik, Walter Salles"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "My Summer of Love",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 58th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 12 Feb 2005 / Wikipedia 58th BAFTA",
+          "notable": true,
+          "note": "*My Summer of Love* (Paweł Pawlikowski) wins Outstanding British Film at the 58th ceremony — Pawlikowski's second BAFTA after Outstanding Debut at the 54th for *Last Resort*.",
+          "winner_recipient": "Tanya Seghatchian, Paweł Pawlikowski"
         },
         "bafta.best_original_score": {
           "winner_film": "The Motorcycle Diaries",
@@ -803,49 +920,67 @@
         "bafta.best_film": {
           "winner_film": "Brokeback Mountain",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / BAFTA press release / Variety / IndieWire"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "*Brokeback Mountain* (Ang Lee) wins Best Film at the 59th ceremony with 4 BAFTAs total — a notable BAFTA/Oscar split, as *Crash* took the Oscar Best Picture the same season in a famously-debated upset.",
+          "winner_recipient": "Diana Ossana, James Schamus"
         },
         "bafta.best_director": {
           "winner_film": "Brokeback Mountain",
           "winner_recipient": "Ang Lee",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / Variety"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "Ang Lee's second BAFTA Best Director, for *Brokeback Mountain* — first was the 54th for *Crouching Tiger, Hidden Dragon*. Aligns with his Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Capote",
           "winner_recipient": "Philip Seymour Hoffman",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / Variety"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "Philip Seymour Hoffman's first BAFTA, for his Truman Capote performance in *Capote*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Walk the Line",
           "winner_recipient": "Reese Witherspoon",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / Variety"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "Reese Witherspoon's first BAFTA, for her June Carter Cash performance in *Walk the Line*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Brokeback Mountain",
           "winner_recipient": "Jake Gyllenhaal",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / Variety"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "Jake Gyllenhaal's first BAFTA, for *Brokeback Mountain* — a BAFTA/Oscar split, as George Clooney took the Oscar Best Supporting Actor for *Syriana* the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Crash",
           "winner_recipient": "Thandiwe Newton",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / Variety",
-          "notes": "Spelling 'Thandiwe Newton' matches scraped CSV (current canonical spelling, adopted by the actress in 2021). External outlets at the time (2006) wrote 'Thandie Newton'; same person."
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notes": "Spelling 'Thandiwe Newton' matches scraped CSV (current canonical spelling, adopted by the actress in 2021). External outlets at the time (2006) wrote 'Thandie Newton'; same person.",
+          "notable": true,
+          "note": "Thandiwe Newton's first BAFTA, for *Crash* — notably for the same Oscar-Best-Picture-winning film whose Best Picture win was widely debated."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Beat That My Heart Skipped",
           "winner_recipient": "Jacques Audiard",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "*The Beat That My Heart Skipped* (Jacques Audiard) wins Best Film Not in the English Language — Audiard's first BAFTA. He would return to win the same category at the 63rd for *A Prophet* and the 78th for *Emilia Pérez*."
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Wallace & Gromit: The Curse of the Were-Rabbit",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "*Wallace & Gromit: The Curse of the Were-Rabbit* wins Outstanding British Film at the 59th ceremony — an Aardman Animations stop-motion feature taking the category, an unusual outcome for an animated film. Aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "David Sproxton, Nick Park, Steve Box, Mark Burton, Bob Baker"
         },
         "bafta.best_original_score": {
           "winner_film": "Memoirs of a Geisha",
@@ -857,13 +992,18 @@
           "winner_film": "Pride & Prejudice",
           "winner_recipient": "Joe Wright",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA — Carl Foreman Award"
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notable": true,
+          "note": "Joe Wright's first BAFTA, taking Outstanding Debut for *Pride & Prejudice* at the 59th ceremony; he would return to win Best Film at the 61st for *Atonement*."
         },
         "bafta.ee_rising_star": {
           "winner_recipient": "James McAvoy",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 59th BAFTA / BAFTA heritage page",
-          "notes": "Inaugural year for the Rising Star Award (first_year=2006 per scope v1.4). Originally branded 'Orange Rising Star Award' under Orange's title sponsorship; renamed 'EE Rising Star Award' after EE acquired Orange UK. Slug bafta.ee_rising_star is canonical (current name). Wikipedia 59th BAFTA article explicitly documents James McAvoy as the Orange Rising Star Award winner — first ever recipient of this category."
+          "source": "BAFTA press release 19 Feb 2006 / Wikipedia 59th BAFTA",
+          "notes": "Inaugural year for the Rising Star Award (first_year=2006 per scope v1.4). Originally branded 'Orange Rising Star Award' under Orange's title sponsorship; renamed 'EE Rising Star Award' after EE acquired Orange UK. Slug bafta.ee_rising_star is canonical (current name). Wikipedia 59th BAFTA article explicitly documents James McAvoy as the Orange Rising Star Award winner — first ever recipient of this category.",
+          "notable": true,
+          "note": "James McAvoy wins the inaugural Rising Star Award (originally branded the Orange Rising Star Award before becoming EE Rising Star) at the 59th ceremony — the first public-vote recipient in the category.",
+          "winner_film": ""
         }
       }
     },
