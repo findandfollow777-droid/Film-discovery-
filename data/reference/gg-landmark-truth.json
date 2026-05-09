@@ -1842,82 +1842,115 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Power of the Dog",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "*The Power of the Dog* (Jane Campion) wins Best Motion Picture — Drama at the 79th Golden Globes in 2022, alongside Best Director. A GG/Oscar split as *CODA* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Jane Campion"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "West Side Story",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "*West Side Story* (Steven Spielberg) wins Best Motion Picture — Musical/Comedy at the 79th Golden Globes — Spielberg's musical remake of the 1961 original.",
+          "winner_recipient": "Steven Spielberg"
         },
         "gg.best_director": {
           "winner_film": "The Power of the Dog",
           "winner_recipient": "Jane Campion",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Jane Campion wins GG Best Director for *The Power of the Dog* — the second woman to win GG Best Director in the truth-file record, after Chloé Zhao at the 78th. Aligns with her Oscar Best Director win the same season."
         },
         "gg.best_actor_drama": {
           "winner_film": "King Richard",
           "winner_recipient": "Will Smith",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Will Smith's first GG Best Drama Actor in the truth-file record, for his Richard Williams performance in *King Richard*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Being the Ricardos",
           "winner_recipient": "Nicole Kidman",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Nicole Kidman's third GG win — first was Best Actress Musical/Comedy for *Moulin Rouge!* at the 59th, second Best Actress Drama for *The Hours* at the 60th. Two-decade gap between her second and third Globe."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "tick, tick... BOOM!",
           "winner_recipient": "Andrew Garfield",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Andrew Garfield's first GG, for his Jonathan Larson performance in *tick, tick... BOOM!*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "West Side Story",
           "winner_recipient": "Rachel Zegler",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Rachel Zegler's first GG, for her debut feature performance as Maria in Spielberg's *West Side Story*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "The Power of the Dog",
           "winner_recipient": "Kodi Smit-McPhee",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Kodi Smit-McPhee's first GG, for *The Power of the Dog*."
         },
         "gg.best_supporting_actress": {
           "winner_film": "West Side Story",
           "winner_recipient": "Ariana DeBose",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Ariana DeBose's first GG, for *West Side Story* — playing Anita, the same role for which Rita Moreno won the 1962 Oscar (and would win again at the Oscars the same season)."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Encanto",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "*Encanto* wins Best Motion Picture — Animated at the 79th Golden Globes — a Disney Animation feature set in Colombia.",
+          "winner_recipient": "Byron Howard, Jared Bush, Charise Castro Smith, Yvett Merino, Clark Spencer"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Drive My Car",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "*Drive My Car* (Ryusuke Hamaguchi) wins Best Motion Picture — Non-English Language at the 79th Golden Globes; would go on to win Oscar Best International Feature.",
+          "winner_recipient": "Ryusuke Hamaguchi"
         },
         "gg.best_screenplay": {
           "winner_film": "Belfast",
           "winner_recipient": "Kenneth Branagh",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Kenneth Branagh's first GG, for the autobiographical *Belfast*; aligns with his Oscar Best Original Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "Dune",
           "winner_recipient": "Hans Zimmer",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Hans Zimmer's second GG — first was the 58th for *Gladiator*. A 21-year gap between his two GG wins. Aligns with his Oscar Best Original Score win for *Dune*."
         },
         "gg.best_original_song": {
           "winner_film": "No Time to Die",
           "winner_song": "No Time to Die",
           "expected_nomination_count": 5,
-          "source": "79th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 9 Jan 2022 / Wikipedia 79th Golden Globes",
+          "notable": true,
+          "note": "Billie Eilish and Finneas O'Connell's first GG, for *No Time to Die* — both would return to win Best Original Song again at the 81st for *Barbie*.",
+          "winner_recipient": "Billie Eilish, Finneas O'Connell"
         }
       }
     },
@@ -1928,82 +1961,115 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Fabelmans",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "*The Fabelmans* (Steven Spielberg) wins Best Motion Picture — Drama at the 80th Golden Globes — a semi-autobiographical film about Spielberg's childhood and family.",
+          "winner_recipient": "Steven Spielberg, Kristie Macosko Krieger"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Banshees of Inisherin",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "*The Banshees of Inisherin* (Martin McDonagh) wins Best Motion Picture — Musical/Comedy with 3 GGs total, including Best Actor Musical/Comedy and Best Screenplay.",
+          "winner_recipient": "Martin McDonagh"
         },
         "gg.best_director": {
           "winner_film": "The Fabelmans",
           "winner_recipient": "Steven Spielberg",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Steven Spielberg's first GG Best Director in the truth-file record, for *The Fabelmans*; he had previously won Best Motion Picture — Musical/Comedy at the 79th as a producer of *West Side Story*."
         },
         "gg.best_actor_drama": {
           "winner_film": "Elvis",
           "winner_recipient": "Austin Butler",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Austin Butler's first GG, for his Elvis Presley performance in *Elvis*."
         },
         "gg.best_actress_drama": {
           "winner_film": "Tár",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Cate Blanchett's third GG — Best Supporting Actress for *I'm Not There* at the 65th, Best Drama Actress for *Blue Jasmine* at the 71st, and now *Tár*."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Banshees of Inisherin",
           "winner_recipient": "Colin Farrell",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Colin Farrell's first GG, for *The Banshees of Inisherin*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Everything Everywhere All at Once",
           "winner_recipient": "Michelle Yeoh",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Michelle Yeoh's first GG, for *Everything Everywhere All at Once*; she would become the first Asian woman to win Oscar Best Actress the same season."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Everything Everywhere All at Once",
           "winner_recipient": "Ke Huy Quan",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Ke Huy Quan's first GG, for *Everything Everywhere All at Once* — a comeback win decades after his child-actor roles in *Indiana Jones and the Temple of Doom* and *The Goonies*. Aligns with his Oscar Best Supporting Actor win."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Black Panther: Wakanda Forever",
           "winner_recipient": "Angela Bassett",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Angela Bassett's first GG, for *Black Panther: Wakanda Forever* — a rare win for a performance in a Marvel/superhero film at the Globes."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Guillermo del Toro's Pinocchio",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "*Guillermo del Toro's Pinocchio* wins Best Motion Picture — Animated at the 80th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Guillermo del Toro, Mark Gustafson"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Argentina, 1985",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "*Argentina, 1985* (Santiago Mitre) wins Best Motion Picture — Non-English Language — a courtroom drama dramatising the trial of Argentina's military junta.",
+          "winner_recipient": "Santiago Mitre"
         },
         "gg.best_screenplay": {
           "winner_film": "The Banshees of Inisherin",
           "winner_recipient": "Martin McDonagh",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Martin McDonagh's second GG Best Screenplay — first was the 75th for *Three Billboards Outside Ebbing, Missouri*."
         },
         "gg.best_original_score": {
           "winner_film": "Babylon",
           "winner_recipient": "Justin Hurwitz",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "Justin Hurwitz's third GG — first two were Best Original Score and Song for *La La Land* at the 74th, then Best Score for *First Man* at the 76th, and now *Babylon*. Hurwitz frequently scores Damien Chazelle films."
         },
         "gg.best_original_song": {
           "winner_film": "RRR",
           "winner_song": "Naatu Naatu",
           "expected_nomination_count": 5,
-          "source": "80th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2023 / Wikipedia 80th Golden Globes",
+          "notable": true,
+          "note": "*RRR*'s 'Naatu Naatu' wins Best Original Song at the 80th Golden Globes — the first song from an Indian film to win the category. Aligns with its Oscar Best Original Song win.",
+          "winner_recipient": "M. M. Keeravani, Chandrabose"
         }
       }
     },
@@ -2014,64 +2080,90 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Oppenheimer",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "*Oppenheimer* (Christopher Nolan) wins Best Motion Picture — Drama at the 81st Golden Globes with 5 GGs total — the night's leading haul, including Best Director, Best Drama Actor, Best Supporting Actor and Best Original Score.",
+          "winner_recipient": "Emma Thomas, Charles Roven, Christopher Nolan"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Poor Things",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "*Poor Things* (Yorgos Lanthimos) wins Best Motion Picture — Musical/Comedy at the 81st Golden Globes.",
+          "winner_recipient": "Ed Guiney, Andrew Lowe, Yorgos Lanthimos, Emma Stone"
         },
         "gg.best_director": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Christopher Nolan",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Christopher Nolan's first GG Best Director in the truth-file record, for *Oppenheimer*; aligns with his Oscar Best Director win the same season."
         },
         "gg.best_actor_drama": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Cillian Murphy",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Cillian Murphy's first GG, for his J. Robert Oppenheimer performance in *Oppenheimer*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Killers of the Flower Moon",
           "winner_recipient": "Lily Gladstone",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Lily Gladstone wins Best Drama Actress for *Killers of the Flower Moon* — the first Indigenous American performer to win the category at the Golden Globes."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Holdovers",
           "winner_recipient": "Paul Giamatti",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Paul Giamatti's second GG Best Actor — Musical/Comedy — first was the 68th for *Barney's Version*. A 13-year gap between his two GG wins."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Poor Things",
           "winner_recipient": "Emma Stone",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Emma Stone's second GG Best Actress — Musical/Comedy — first was the 74th for *La La Land*. Aligns with her Oscar Best Actress win for *Poor Things*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Robert Downey Jr.",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Robert Downey Jr.'s second GG — first was Best Actor Musical/Comedy for *Sherlock Holmes* at the 67th. Aligns with his Oscar Best Supporting Actor win for *Oppenheimer*."
         },
         "gg.best_supporting_actress": {
           "winner_film": "The Holdovers",
           "winner_recipient": "Da'Vine Joy Randolph",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Da'Vine Joy Randolph's first GG, for *The Holdovers*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "The Boy and the Heron",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "*The Boy and the Heron* (Hayao Miyazaki) wins Best Motion Picture — Animated at the 81st Golden Globes — Studio Ghibli's first GG win in the category.",
+          "winner_recipient": "Hayao Miyazaki, Toshio Suzuki"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Anatomy of a Fall",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "*Anatomy of a Fall* (Justine Triet) wins Best Motion Picture — Non-English Language at the 81st Golden Globes; the same film also took Best Screenplay at this ceremony.",
+          "winner_recipient": "Justine Triet"
         },
         "gg.best_screenplay": {
           "winner_film": "Anatomy of a Fall",
@@ -2080,25 +2172,36 @@
             "Arthur Harari"
           ],
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Justine Triet and Arthur Harari win Best Screenplay for *Anatomy of a Fall* — the same film also taking Best Motion Picture Non-English Language. Aligns with the film's Oscar Best Original Screenplay win.",
+          "winner_recipient": "Justine Triet, Arthur Harari"
         },
         "gg.best_original_score": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Ludwig Göransson",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Ludwig Göransson's first GG, for *Oppenheimer*; aligns with his Oscar Best Original Score win. He would return to win again at the 83rd for *Sinners*."
         },
         "gg.best_original_song": {
           "winner_film": "Barbie",
           "winner_song": "What Was I Made For?",
           "expected_nomination_count": 6,
-          "source": "81st Golden Globes Wikipedia article / Variety"
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notable": true,
+          "note": "Billie Eilish and Finneas O'Connell's second GG Best Original Song — first was the 79th for *No Time to Die*. *What Was I Made For?* aligns with their Oscar Best Original Song win.",
+          "winner_recipient": "Billie Eilish, Finneas O'Connell"
         },
         "gg.cinematic_box_office_achievement": {
           "winner_film": "Barbie",
           "expected_nomination_count": 8,
-          "source": "81st Golden Globes Wikipedia article / Variety / CNBC / Hypebeast",
-          "notes": "Inaugural year of the category. Slate of 8 nominees confirmed at first ceremony (continued at 82nd, 83rd)."
+          "source": "Golden Globes press release 7 Jan 2024 / Wikipedia 81st Golden Globes",
+          "notes": "Inaugural year of the category. Slate of 8 nominees confirmed at first ceremony (continued at 82nd, 83rd).",
+          "notable": true,
+          "note": "*Barbie* (Greta Gerwig) wins the inaugural Cinematic and Box Office Achievement award at the 81st Golden Globes — a category created in 2024 to recognise commercial blockbuster success.",
+          "winner_recipient": "Greta Gerwig"
         }
       }
     },
@@ -2109,34 +2212,50 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Brutalist",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article / Variety / Rolling Stone winners list"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*The Brutalist* (Brady Corbet) wins Best Motion Picture — Drama at the 82nd Golden Globes — a 215-minute mid-century period epic. A GG/Oscar split as *Anora* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Brady Corbet, Mona Fastvold, Nick Gordon, Brian Young, Andrew Lauren, D. J. Gugenheim"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Emilia Pérez",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*Emilia Pérez* (Jacques Audiard) wins Best Motion Picture — Musical/Comedy at the 82nd Golden Globes — a Spanish-language musical from a French director, marking an unusual category win for a non-English-language production.",
+          "winner_recipient": "Jacques Audiard"
         },
         "gg.best_director": {
           "winner_film": "The Brutalist",
           "winner_recipient": "Brady Corbet",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Brady Corbet's first GG Best Director, for *The Brutalist* — a GG/Oscar split as Sean Baker took the Oscar Best Director for *Anora* the same season."
         },
         "gg.best_screenplay": {
           "winner_film": "Conclave",
           "winner_recipient": "Peter Straughan",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Peter Straughan wins Best Screenplay for *Conclave*; aligns with his Oscar Best Adapted Screenplay win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Flow",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*Flow* (Gints Zilbalodis) wins Best Motion Picture — Animated at the 82nd Golden Globes — a dialogue-free Latvian animated feature, an unusual Globes choice over major-studio competition. Aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Gints Zilbalodis, Matīss Kaža"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Emilia Pérez",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article (France entry)"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*Emilia Pérez* takes Best Motion Picture — Non-English Language alongside its Best Musical/Comedy win — a same-night double, the same film winning both top-line picture categories.",
+          "winner_recipient": "Jacques Audiard"
         },
         "gg.best_original_score": {
           "winner_film": "Challengers",
@@ -2145,54 +2264,75 @@
             "Atticus Ross"
           ],
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Trent Reznor and Atticus Ross's third GG Best Original Score — first was the 68th for *The Social Network*, second the 78th for *Soul*.",
+          "winner_recipient": "Trent Reznor, Atticus Ross"
         },
         "gg.best_original_song": {
           "winner_film": "Emilia Pérez",
           "winner_song": "El Mal",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*Emilia Pérez*'s 'El Mal' wins Best Original Song at the 82nd Golden Globes — contributing to the film's three-Globe haul including Best Musical/Comedy and Best Non-English Language.",
+          "winner_recipient": "Clément Ducol, Camille, Jacques Audiard"
         },
         "gg.cinematic_box_office_achievement": {
           "winner_film": "Wicked",
           "expected_nomination_count": 8,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "*Wicked* wins the Cinematic and Box Office Achievement award at the 82nd Golden Globes — the second recipient of the category after *Barbie* the prior year.",
+          "winner_recipient": "Jon M. Chu"
         },
         "gg.best_actor_drama": {
           "winner_film": "The Brutalist",
           "winner_recipient": "Adrien Brody",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Adrien Brody's first GG, for *The Brutalist*; aligns with his Oscar Best Actor win the same season — Brody's second Oscar Best Actor (first was 2003 for *The Pianist*)."
         },
         "gg.best_actress_drama": {
           "winner_film": "I'm Still Here",
           "winner_recipient": "Fernanda Torres",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Fernanda Torres wins Best Drama Actress for *I'm Still Here* — the first Brazilian performer to win the category at the Golden Globes. Her mother Fernanda Montenegro was previously nominated in 1999 for *Central Station*."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "A Different Man",
           "winner_recipient": "Sebastian Stan",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Sebastian Stan's first GG, for *A Different Man*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "The Substance",
           "winner_recipient": "Demi Moore",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Demi Moore's first GG, for *The Substance* — recognised after a four-decade career, with the role contributing to her late-career renaissance."
         },
         "gg.best_supporting_actor": {
           "winner_film": "A Real Pain",
           "winner_recipient": "Kieran Culkin",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Kieran Culkin's first GG, for *A Real Pain*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Emilia Pérez",
           "winner_recipient": "Zoe Saldaña",
           "expected_nomination_count": 6,
-          "source": "82nd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 5 Jan 2025 / Wikipedia 82nd Golden Globes",
+          "notable": true,
+          "note": "Zoe Saldaña's first GG, for *Emilia Pérez*; aligns with her Oscar Best Supporting Actress win the same season."
         }
       }
     },
@@ -2203,57 +2343,83 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Hamnet",
           "expected_nomination_count": 6,
-          "source": "Rolling Stone / Gold Derby / Rotten Tomatoes 83rd GG winners list"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*Hamnet* (Chloé Zhao) wins Best Motion Picture — Drama at the 83rd Golden Globes in 2026 — Zhao's adaptation of Maggie O'Farrell's novel about the death of Shakespeare's son.",
+          "winner_recipient": "Chloé Zhao, Liza Marshall, Steven Spielberg, Sam Mendes, Pippa Harris"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "One Battle After Another",
           "expected_nomination_count": 6,
-          "source": "Rolling Stone / Rotten Tomatoes"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*One Battle After Another* (Paul Thomas Anderson) wins Best Motion Picture — Musical/Comedy at the 83rd Golden Globes — the same film also taking Best Director and Best Screenplay this night.",
+          "winner_recipient": "Paul Thomas Anderson, Sara Murphy, Adam Somner"
         },
         "gg.best_director": {
           "winner_film": "One Battle After Another",
           "winner_recipient": "Paul Thomas Anderson",
           "expected_nomination_count": 6,
-          "source": "Rotten Tomatoes 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "Paul Thomas Anderson's first GG Best Director, for *One Battle After Another* — alongside his Best Screenplay win for the same film at this ceremony."
         },
         "gg.best_screenplay": {
           "winner_film": "One Battle After Another",
           "winner_recipient": "Paul Thomas Anderson",
           "expected_nomination_count": 6,
-          "source": "Rotten Tomatoes 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "Paul Thomas Anderson takes Best Screenplay for *One Battle After Another* alongside Best Director — a same-night double for Anderson at the 83rd Golden Globes."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "KPop Demon Hunters",
           "expected_nomination_count": 6,
-          "source": "Gold Derby 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*KPop Demon Hunters* wins Best Motion Picture — Animated at the 83rd Golden Globes — a Sony Pictures Animation feature blending K-pop music and Korean folklore.",
+          "winner_recipient": "Maggie Kang, Chris Appelhans"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "The Secret Agent",
           "expected_nomination_count": 6,
-          "source": "Gold Derby 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*The Secret Agent* (Kleber Mendonça Filho) wins Best Motion Picture — Non-English Language at the 83rd Golden Globes — the same film winning Best Drama Actor for Wagner Moura.",
+          "winner_recipient": "Kleber Mendonça Filho"
         },
         "gg.best_original_score": {
           "winner_film": "Sinners",
           "winner_recipient": "Ludwig Göransson",
           "expected_nomination_count": 6,
-          "source": "Rotten Tomatoes 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "Ludwig Göransson's second GG Best Original Score — first was the 81st for *Oppenheimer*. *Sinners* also took the Cinematic and Box Office Achievement award at this ceremony."
         },
         "gg.best_original_song": {
           "winner_film": "KPop Demon Hunters",
           "winner_song": "Golden",
           "expected_nomination_count": 6,
-          "source": "Gold Derby 83rd GG"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*KPop Demon Hunters*'s 'Golden' wins Best Original Song at the 83rd Golden Globes — alongside the same film's Best Animated Feature win.",
+          "winner_recipient": "Ejae, Mark Sonnenblick, Teddy"
         },
         "gg.cinematic_box_office_achievement": {
           "winner_film": "Sinners",
           "expected_nomination_count": 8,
-          "source": "Rotten Tomatoes 83rd GG (this category typically has 8 nominees)"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "*Sinners* (Ryan Coogler) wins the Cinematic and Box Office Achievement award at the 83rd Golden Globes — the third recipient of the category, after *Barbie* (81st) and *Wicked* (82nd).",
+          "winner_recipient": "Ryan Coogler"
         },
         "gg.best_actor_drama": {
           "winner_film": "The Secret Agent",
           "winner_recipient": "Wagner Moura",
           "expected_nomination_count": 6,
-          "source": "83rd Golden Globes Wikipedia article"
+          "source": "Golden Globes press release 11 Jan 2026 / Wikipedia 83rd Golden Globes",
+          "notable": true,
+          "note": "Wagner Moura wins Best Drama Actor for *The Secret Agent* — the first GG Best Drama Actor in the truth-file record (cer 57+) for a non-English-language performance, in this case Brazilian Portuguese."
         }
       }
     }
