@@ -909,80 +909,110 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Descendants",
           "expected_nomination_count": 6,
-          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than the typical 5 of this era)."
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than the typical 5 of this era).",
+          "notable": true,
+          "note": "*The Descendants* (Alexander Payne) wins Best Motion Picture — Drama at the 69th Golden Globes — a Hawaii-set family drama starring George Clooney.",
+          "winner_recipient": "Jim Burke, Alexander Payne, Jim Taylor"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Artist",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Silent-film win — The Artist was a black-and-white silent film and a notable atypical GG MC Picture winner. The film went on to win Best Picture at the Oscars."
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notes": "Silent-film win — The Artist was a black-and-white silent film and a notable atypical GG MC Picture winner. The film went on to win Best Picture at the Oscars.",
+          "notable": true,
+          "note": "*The Artist* (Michel Hazanavicius) wins Best Motion Picture — Musical/Comedy at the 69th Golden Globes — a black-and-white silent French production taking the GG Comedy prize, an unusual outcome. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Thomas Langmann"
         },
         "gg.best_director": {
           "winner_film": "Hugo",
           "winner_recipient": "Martin Scorsese",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Director split: Scorsese took GG Best Director for Hugo; Michel Hazanavicius took Oscar Best Director for The Artist."
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notes": "GG/Oscar Director split: Scorsese took GG Best Director for Hugo; Michel Hazanavicius took Oscar Best Director for The Artist.",
+          "notable": true,
+          "note": "Martin Scorsese's second GG Best Director in the truth-file record, for *Hugo* — first was the 60th for *Gangs of New York*."
         },
         "gg.best_actor_drama": {
           "winner_film": "The Descendants",
           "winner_recipient": "George Clooney",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "George Clooney's third GG, for *The Descendants* — first was Best Actor Musical/Comedy at the 58th for *O Brother, Where Art Thou?*, second Best Supporting Actor at the 63rd for *Syriana*."
         },
         "gg.best_actress_drama": {
           "winner_film": "The Iron Lady",
           "winner_recipient": "Meryl Streep",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Meryl Streep's third GG in the truth-file record, for her Margaret Thatcher performance in *The Iron Lady* — first was Best Supporting Actress at the 60th for *Adaptation.*, second Best Actress Musical/Comedy at the 67th for *Julie & Julia*. Aligns with her Oscar Best Actress win — her record-third Oscar."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Artist",
           "winner_recipient": "Jean Dujardin",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Dujardin was the first French actor to win GG Best Actor (Musical or Comedy). He went on to win the Oscar for the same role."
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notes": "Dujardin was the first French actor to win GG Best Actor (Musical or Comedy). He went on to win the Oscar for the same role.",
+          "notable": true,
+          "note": "Jean Dujardin's first GG, for the silent feature *The Artist*; aligns with his Oscar Best Actor win the same season — the first French actor to win Oscar Best Actor."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "My Week with Marilyn",
           "winner_recipient": "Michelle Williams",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Michelle Williams's first GG, for her Marilyn Monroe performance in *My Week with Marilyn*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Beginners",
           "winner_recipient": "Christopher Plummer",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Christopher Plummer's first GG, for *Beginners*, at age 82; aligns with his Oscar Best Supporting Actor win the same season — at the time the oldest competitive Oscar acting winner."
         },
         "gg.best_supporting_actress": {
           "winner_film": "The Help",
           "winner_recipient": "Octavia Spencer",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Octavia Spencer's first GG, for *The Help*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "The Adventures of Tintin: The Secret of the Unicorn",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "*The Adventures of Tintin* (Steven Spielberg) wins Best Motion Picture — Animated at the 69th Golden Globes — a motion-capture animated feature in the third year of the Globes' Best Animated Feature category.",
+          "winner_recipient": "Steven Spielberg"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "A Separation",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "*A Separation* (Asghar Farhadi) wins Best Motion Picture — Foreign Language at the 69th Golden Globes — the first Iranian film to win the category. Aligns with its Oscar Best Foreign Language Film win.",
+          "winner_recipient": "Asghar Farhadi"
         },
         "gg.best_screenplay": {
           "winner_film": "Midnight in Paris",
           "winner_recipient": "Woody Allen",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Woody Allen wins Best Screenplay for *Midnight in Paris*; aligns with his Oscar Best Original Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "The Artist",
           "winner_recipient": "Ludovic Bource",
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notable": true,
+          "note": "Ludovic Bource wins Best Original Score for *The Artist* — score being central to the silent feature's experience. Aligns with his Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "W.E.",
@@ -991,8 +1021,11 @@
             "Madonna"
           ],
           "expected_nomination_count": 5,
-          "source": "69th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipient_json corrupted for this row: ['music', 'lyrics by [[Madonna (entertainer'] due to scraper bug on wikilinks with parenthesized link targets and pipe display (same pattern as cer 71 Danger Mouse). Canonical sole-credit Madonna recorded here."
+          "source": "HFPA / Golden Globes press release 15 Jan 2012 / Wikipedia 69th Golden Globes",
+          "notes": "CSV recipient_json corrupted for this row: ['music', 'lyrics by [[Madonna (entertainer'] due to scraper bug on wikilinks with parenthesized link targets and pipe display (same pattern as cer 71 Danger Mouse). Canonical sole-credit Madonna recorded here.",
+          "notable": true,
+          "note": "*W.E.*'s 'Masterpiece' wins Best Original Song at the 69th Golden Globes — a controversial win as Madonna had also directed the film, raising eligibility-overlap concerns for HFPA.",
+          "winner_recipient": "Madonna, Julie Frost"
         }
       }
     },
@@ -1003,77 +1036,107 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Argo",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "*Argo* (Ben Affleck) wins Best Motion Picture — Drama at the 70th Golden Globes alongside Best Director — a notable result given Affleck's well-publicised Oscar Best Director snub the same season. Aligns with the film's Oscar Best Picture win.",
+          "winner_recipient": "Grant Heslov, Ben Affleck, George Clooney"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Les Misérables",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "*Les Misérables* (Tom Hooper) wins Best Motion Picture — Musical/Comedy at the 70th Golden Globes — the live-singing on-set adaptation of the Boublil-Schönberg stage musical.",
+          "winner_recipient": "Tim Bevan, Eric Fellner, Debra Hayward, Cameron Mackintosh"
         },
         "gg.best_director": {
           "winner_film": "Argo",
           "winner_recipient": "Ben Affleck",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Affleck's GG Best Director win was particularly notable because he had been infamously snubbed for an Oscar Best Director nomination for Argo that same year — yet Argo went on to win Best Picture at both the GGs and the Oscars."
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notes": "Affleck's GG Best Director win was particularly notable because he had been infamously snubbed for an Oscar Best Director nomination for Argo that same year — yet Argo went on to win Best Picture at both the GGs and the Oscars.",
+          "notable": true,
+          "note": "Ben Affleck's first GG, taking Best Director for *Argo* — a notable result given Affleck was famously not nominated for Oscar Best Director that season, despite *Argo* winning Oscar Best Picture."
         },
         "gg.best_actor_drama": {
           "winner_film": "Lincoln",
           "winner_recipient": "Daniel Day-Lewis",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Daniel Day-Lewis's second GG Best Drama Actor, for *Lincoln* — first was the 65th for *There Will Be Blood*. Aligns with his record-third Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Zero Dark Thirty",
           "winner_recipient": "Jessica Chastain",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Jessica Chastain's first GG, for her CIA-analyst performance in Kathryn Bigelow's *Zero Dark Thirty*."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Les Misérables",
           "winner_recipient": "Hugh Jackman",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Hugh Jackman's first GG film win, for his Jean Valjean performance in *Les Misérables*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Silver Linings Playbook",
           "winner_recipient": "Jennifer Lawrence",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Jennifer Lawrence's first GG, for *Silver Linings Playbook*; aligns with her Oscar Best Actress win the same season — the first of three Globes within four years (cer 70/71/73)."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Django Unchained",
           "winner_recipient": "Christoph Waltz",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Christoph Waltz's second GG Best Supporting Actor, for *Django Unchained* — first was the 67th for *Inglourious Basterds*. Both wins under Quentin Tarantino's direction. Aligns with his Oscar Best Supporting Actor win."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Les Misérables",
           "winner_recipient": "Anne Hathaway",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Anne Hathaway's first GG, for *Les Misérables*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Brave",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "*Brave* (Pixar) wins Best Motion Picture — Animated at the 70th Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Mark Andrews, Brenda Chapman"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Amour",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "*Amour* (Michael Haneke) wins Best Motion Picture — Foreign Language; aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Michael Haneke"
         },
         "gg.best_screenplay": {
           "winner_film": "Django Unchained",
           "winner_recipient": "Quentin Tarantino",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Quentin Tarantino's first GG Best Screenplay, for *Django Unchained*; aligns with his Oscar Best Original Screenplay win the same season. He would return to win the category at the 77th for *Once Upon a Time in Hollywood*."
         },
         "gg.best_original_score": {
           "winner_film": "Life of Pi",
           "winner_recipient": "Mychael Danna",
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Mychael Danna's first GG, for Ang Lee's *Life of Pi*; aligns with his Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "Skyfall",
@@ -1083,7 +1146,10 @@
             "Paul Epworth"
           ],
           "expected_nomination_count": 5,
-          "source": "70th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 13 Jan 2013 / Wikipedia 70th Golden Globes",
+          "notable": true,
+          "note": "Adele's first GG, for *Skyfall*'s title song — a James Bond theme winning Best Original Song. Aligns with her Oscar Best Original Song win the same season.",
+          "winner_recipient": "Adele, Paul Epworth"
         }
       }
     },
@@ -1094,77 +1160,107 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "12 Years a Slave",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "*12 Years a Slave* (Steve McQueen) wins Best Motion Picture — Drama at the 71st Golden Globes; aligns with its Oscar Best Picture win the same season.",
+          "winner_recipient": "Anthony Katagas, Brad Pitt, Dede Gardner, Jeremy Kleiner, Steve McQueen"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "American Hustle",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "*American Hustle* (David O. Russell) wins Best Motion Picture — Musical/Comedy at the 71st Golden Globes with 3 GGs total, including Best Comedy Actress and Best Supporting Actress.",
+          "winner_recipient": "Charles Roven, Richard Suckle, Megan Ellison, Jonathan Gordon"
         },
         "gg.best_director": {
           "winner_film": "Gravity",
           "winner_recipient": "Alfonso Cuarón",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Alfonso Cuarón's first GG Best Director, for *Gravity* — a notable Best Picture/Best Director split with *12 Years a Slave* taking Best Drama Picture. Aligns with his Oscar Best Director win. He would return to win Best Director at the 76th for *Roma*."
         },
         "gg.best_actor_drama": {
           "winner_film": "Dallas Buyers Club",
           "winner_recipient": "Matthew McConaughey",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Matthew McConaughey's first GG, for *Dallas Buyers Club*; aligns with his Oscar Best Actor win the same season — the culmination of the so-called 'McConaissance' transformation period."
         },
         "gg.best_actress_drama": {
           "winner_film": "Blue Jasmine",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Cate Blanchett's second GG, for *Blue Jasmine* — first was Best Supporting Actress at the 65th for *I'm Not There*. Aligns with her Oscar Best Actress win. She would return to win Best Drama Actress again at the 80th for *Tár*."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Wolf of Wall Street",
           "winner_recipient": "Leonardo DiCaprio",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Leonardo DiCaprio's second GG, for *The Wolf of Wall Street* — first was Best Drama Actor at the 62nd for *The Aviator*. He would return to win Best Drama Actor again at the 73rd for *The Revenant*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "American Hustle",
           "winner_recipient": "Amy Adams",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Amy Adams's first GG, for *American Hustle* — she would return to win the same category the following year at the 72nd for *Big Eyes*, an unusual back-to-back win."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Dallas Buyers Club",
           "winner_recipient": "Jared Leto",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Jared Leto's first GG, for his Rayon performance in *Dallas Buyers Club*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "American Hustle",
           "winner_recipient": "Jennifer Lawrence",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Jennifer Lawrence's second GG, for *American Hustle* — back-to-back wins after the prior year's Best Comedy Actress for *Silver Linings Playbook*."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Frozen",
           "expected_nomination_count": 3,
-          "source": "71st Golden Globes Wikipedia article",
-          "notes": "Animated slate at this ceremony was 3 nominees (Frozen winner, plus The Croods and Despicable Me 2) — smaller than the typical 5 of later years. Within expectations.json tolerance ±2."
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notes": "Animated slate at this ceremony was 3 nominees (Frozen winner, plus The Croods and Despicable Me 2) — smaller than the typical 5 of later years. Within expectations.json tolerance ±2.",
+          "notable": true,
+          "note": "*Frozen* (Disney Animation) wins Best Motion Picture — Animated at the 71st Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Chris Buck, Jennifer Lee, Peter Del Vecho"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "The Great Beauty",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "*The Great Beauty* (Paolo Sorrentino) wins Best Motion Picture — Foreign Language; aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Paolo Sorrentino, Nicola Giuliano, Francesca Cima"
         },
         "gg.best_screenplay": {
           "winner_film": "Her",
           "winner_recipient": "Spike Jonze",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Spike Jonze's first GG, for *Her*; aligns with his Oscar Best Original Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "All Is Lost",
           "winner_recipient": "Alex Ebert",
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notable": true,
+          "note": "Alex Ebert wins Best Original Score for *All Is Lost* — a surprise upset over major-name competition including Hans Zimmer (*12 Years a Slave*) and John Williams (*The Book Thief*)."
         },
         "gg.best_original_song": {
           "winner_film": "Mandela: Long Walk to Freedom",
@@ -1174,8 +1270,11 @@
             "Danger Mouse"
           ],
           "expected_nomination_count": 5,
-          "source": "71st Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipient parse for this row contains a malformed second recipient '[[Danger Mouse (musician' due to a parser bug on wikilinks with parentheses-bearing targets and pipe display text. Truth winner_recipients records canonical 2-credit form (U2 + Danger Mouse / Brian Burton)."
+          "source": "HFPA / Golden Globes press release 12 Jan 2014 / Wikipedia 71st Golden Globes",
+          "notes": "CSV recipient parse for this row contains a malformed second recipient '[[Danger Mouse (musician' due to a parser bug on wikilinks with parentheses-bearing targets and pipe display text. Truth winner_recipients records canonical 2-credit form (U2 + Danger Mouse / Brian Burton).",
+          "notable": true,
+          "note": "U2 win Best Original Song for *Mandela: Long Walk to Freedom*'s 'Ordinary Love' — Bono and the band's first GG.",
+          "winner_recipient": "U2"
         }
       }
     },
@@ -1186,66 +1285,92 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Boyhood",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Boyhood/Birdman split: Boyhood won Best Picture Drama and Best Director (Linklater) at the GGs, while Birdman went on to win Best Picture and Best Director at the Oscars — a notable GG/Oscar divergence."
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notes": "Boyhood/Birdman split: Boyhood won Best Picture Drama and Best Director (Linklater) at the GGs, while Birdman went on to win Best Picture and Best Director at the Oscars — a notable GG/Oscar divergence.",
+          "notable": true,
+          "note": "*Boyhood* (Richard Linklater) wins Best Motion Picture — Drama at the 72nd Golden Globes — Linklater's 12-year filmed-in-real-time project. A GG/Oscar split as *Birdman* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Richard Linklater, Cathleen Sutherland"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Grand Budapest Hotel",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "*The Grand Budapest Hotel* (Wes Anderson) wins Best Motion Picture — Musical/Comedy at the 72nd Golden Globes — Anderson's first GG film win for the category.",
+          "winner_recipient": "Wes Anderson, Steven Rales, Scott Rudin, Jeremy Dawson"
         },
         "gg.best_director": {
           "winner_film": "Boyhood",
           "winner_recipient": "Richard Linklater",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety",
-          "notes": "Linklater won Best Director at the GGs for Boyhood; Iñárritu won Best Director at the Oscars for Birdman that same year."
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notes": "Linklater won Best Director at the GGs for Boyhood; Iñárritu won Best Director at the Oscars for Birdman that same year.",
+          "notable": true,
+          "note": "Richard Linklater's first GG Best Director, for *Boyhood* and its 12-year filming schedule. A GG/Oscar split as Iñárritu took the Oscar Best Director for *Birdman*."
         },
         "gg.best_actor_drama": {
           "winner_film": "The Theory of Everything",
           "winner_recipient": "Eddie Redmayne",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Eddie Redmayne's first GG, for his Stephen Hawking performance in *The Theory of Everything*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Still Alice",
           "winner_recipient": "Julianne Moore",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Julianne Moore's first GG, for *Still Alice*; aligns with her Oscar Best Actress win the same season — her first Oscar after multiple prior nominations."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Birdman",
           "winner_recipient": "Michael Keaton",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Michael Keaton's first GG, for *Birdman* — a comeback role recognised after decades since his Batman/Beetlejuice peak. The film would go on to take Oscar Best Picture and Best Director."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Big Eyes",
           "winner_recipient": "Amy Adams",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Amy Adams's second GG Best Actress Musical/Comedy — back-to-back wins after the 71st for *American Hustle*. An unusual same-category two-year run."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Whiplash",
           "winner_recipient": "J. K. Simmons",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "J. K. Simmons's first GG, for *Whiplash*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Boyhood",
           "winner_recipient": "Patricia Arquette",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Patricia Arquette's first GG, for *Boyhood*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "How to Train Your Dragon 2",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "*How to Train Your Dragon 2* (DreamWorks) wins Best Motion Picture — Animated at the 72nd Golden Globes — a GG/Oscar split, with *Big Hero 6* taking the Oscar Best Animated Feature.",
+          "winner_recipient": "Dean DeBlois, Bonnie Arnold"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Leviathan",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "*Leviathan* (Andrey Zvyagintsev) wins Best Motion Picture — Foreign Language at the 72nd Golden Globes — a Russian production with sharply political subject matter.",
+          "winner_recipient": "Andrey Zvyagintsev, Alexander Rodnyansky"
         },
         "gg.best_screenplay": {
           "winner_film": "Birdman",
@@ -1256,14 +1381,19 @@
             "Armando Bo"
           ],
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety",
-          "notes": "Four-author screenplay credit. Birdman was nominated for Best Picture Drama but did not win; it took screenplay and Best Actor MC (Keaton) at the GGs."
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notes": "Four-author screenplay credit. Birdman was nominated for Best Picture Drama but did not win; it took screenplay and Best Actor MC (Keaton) at the GGs.",
+          "notable": true,
+          "note": "*Birdman*'s screenwriting team wins Best Screenplay at the 72nd Golden Globes — Alejandro González Iñárritu's first GG. He would return to win Best Director at the 73rd for *The Revenant*.",
+          "winner_recipient": "Alejandro G. Iñárritu, Nicolás Giacobone, Alexander Dinelaris Jr., Armando Bo"
         },
         "gg.best_original_score": {
           "winner_film": "The Theory of Everything",
           "winner_recipient": "Jóhann Jóhannsson",
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "Jóhann Jóhannsson's first GG, for *The Theory of Everything* — the Icelandic composer's first major US awards win. He would die unexpectedly four years later in 2018."
         },
         "gg.best_original_song": {
           "winner_film": "Selma",
@@ -1273,7 +1403,10 @@
             "Common"
           ],
           "expected_nomination_count": 5,
-          "source": "72nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 11 Jan 2015 / Wikipedia 72nd Golden Globes",
+          "notable": true,
+          "note": "John Legend and Common win Best Original Song for *Selma*'s 'Glory' — both artists' first GG; aligns with their Oscar Best Original Song win the same season.",
+          "winner_recipient": "John Legend, Common"
         }
       }
     },
@@ -1284,78 +1417,108 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Revenant",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "*The Revenant* (Alejandro González Iñárritu) wins Best Motion Picture — Drama at the 73rd Golden Globes with 3 GGs total, including Best Director and Best Drama Actor. A GG/Oscar split as *Spotlight* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Steve Golin, Alejandro González Iñárritu, Arnon Milchan, Mary Parent, Keith Redmon"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "The Martian",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "*The Martian* (Ridley Scott) wins Best Motion Picture — Musical/Comedy at the 73rd Golden Globes — a controversial classification, as the science-fiction survival drama was widely-noted as not meaningfully a comedy. Sparked debate about HFPA category-placement criteria.",
+          "winner_recipient": "Simon Kinberg, Ridley Scott, Aditya Sood, Mark Huffam, Michael Schaefer"
         },
         "gg.best_director": {
           "winner_film": "The Revenant",
-          "winner_recipient": "Alejandro G. Iñárritu",
+          "winner_recipient": "Alejandro González Iñárritu",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Alejandro González Iñárritu's second GG, taking Best Director for *The Revenant* — first was Best Screenplay at the 72nd for *Birdman*. Aligns with his Oscar Best Director win — back-to-back Oscar Director wins after *Birdman* the prior year."
         },
         "gg.best_actor_drama": {
           "winner_film": "The Revenant",
           "winner_recipient": "Leonardo DiCaprio",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Leonardo DiCaprio's third GG, for *The Revenant* — first was Best Drama Actor at the 62nd for *The Aviator*, second Best Comedy Actor at the 71st for *The Wolf of Wall Street*. Aligns with his first Oscar Best Actor win, after multiple prior nominations across his career."
         },
         "gg.best_actress_drama": {
           "winner_film": "Room",
           "winner_recipient": "Brie Larson",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Brie Larson's first GG, for *Room*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Martian",
           "winner_recipient": "Matt Damon",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Matt Damon's first GG film acting win, for *The Martian*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Joy",
           "winner_recipient": "Jennifer Lawrence",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Jennifer Lawrence's third GG within four years, for *Joy* — following *Silver Linings Playbook* (cer 70 Comedy) and *American Hustle* (cer 71 Supporting). All three GGs collaborations with director David O. Russell."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Creed",
           "winner_recipient": "Sylvester Stallone",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Stallone's first GG win since 1976 (for Rocky). His Creed nomination/win was a notable late-career return-to-Rocky-franchise comeback story."
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notes": "Stallone's first GG win since 1976 (for Rocky). His Creed nomination/win was a notable late-career return-to-Rocky-franchise comeback story.",
+          "notable": true,
+          "note": "Sylvester Stallone's first GG since long pre-truth-file career wins, for reprising Rocky Balboa in *Creed* — a comeback role 39 years after the original *Rocky*. A BAFTA/Oscar split: Mark Rylance took the Oscar Best Supporting Actor for *Bridge of Spies*."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Steve Jobs",
           "winner_recipient": "Kate Winslet",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Kate Winslet's first GG film win in the truth-file record, for *Steve Jobs*. A GG/Oscar split: Alicia Vikander took the Oscar Best Supporting Actress for *The Danish Girl*."
         },
         "gg.best_motion_picture_animated": {
           "winner_film": "Inside Out",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "*Inside Out* (Pixar) wins Best Motion Picture — Animated at the 73rd Golden Globes; aligns with its Oscar Best Animated Feature win.",
+          "winner_recipient": "Pete Docter, Jonas Rivera"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Son of Saul",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "*Son of Saul* (László Nemes) wins Best Motion Picture — Foreign Language — a Hungarian Holocaust drama and Nemes's debut feature. Aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "László Nemes"
         },
         "gg.best_screenplay": {
           "winner_film": "Steve Jobs",
           "winner_recipient": "Aaron Sorkin",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Aaron Sorkin's second GG Best Screenplay, for *Steve Jobs* — first was the 68th for *The Social Network*. He would return to win again at the 78th for *The Trial of the Chicago 7*."
         },
         "gg.best_original_score": {
           "winner_film": "The Hateful Eight",
           "winner_recipient": "Ennio Morricone",
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Morricone's only Golden Globe win in a career spanning 60+ years. He went on to win the Oscar for the same score that year — his first competitive Oscar after an honorary Academy Award in 2007."
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notes": "Morricone's only Golden Globe win in a career spanning 60+ years. He went on to win the Oscar for the same score that year — his first competitive Oscar after an honorary Academy Award in 2007.",
+          "notable": true,
+          "note": "Ennio Morricone's first GG, for Tarantino's *The Hateful Eight* — recognition for the legendary Italian composer late in his career. Aligns with his first competitive Oscar Best Original Score win the same season at age 87."
         },
         "gg.best_original_song": {
           "winner_film": "Spectre",
@@ -1365,7 +1528,10 @@
             "Jimmy Napes"
           ],
           "expected_nomination_count": 5,
-          "source": "73rd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes press release 10 Jan 2016 / Wikipedia 73rd Golden Globes",
+          "notable": true,
+          "note": "Sam Smith and Jimmy Napes win Best Original Song for *Spectre*'s 'Writing's on the Wall' — the second consecutive James Bond theme to win the GG category, after Adele's *Skyfall* at the 70th.",
+          "winner_recipient": "Sam Smith, Jimmy Napes"
         }
       }
     },
