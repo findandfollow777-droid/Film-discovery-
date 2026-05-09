@@ -1,9 +1,9 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2002","berlin.golden_bear","won","[{""name"": ""Paul Greengrass"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Bloody Sunday","","true","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.golden_bear","won","[{""name"": ""Hayao Miyazaki"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Spirited Away","","true","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.silver_bear_grand_jury","won","[{""name"": ""Andreas Dresen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Grill Point","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.silver_bear_best_director","won","[{""name"": ""Otar Iosseliani"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Monday Morning","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.silver_bear_best_actor","won","[{""name"": ""Jacques Gamblin"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Safe Conduct","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.silver_bear_best_actress","won","[{""name"": ""Halle Berry"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Monster's Ball","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.silver_bear_outstanding_artistic_contribution","won","[{""name"": ""Ensemble of actresses"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","8 Women","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
-"2002","berlin.alfred_bauer_prize","won","[{""name"": ""Christopher Roth"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Baader","","false","auto_verified","","2026-05-04T07:01:50.213604+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2002,berlin.golden_bear,won,"[{""name"": ""Paul Greengrass"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Bloody Sunday,4107,true,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.golden_bear,won,"[{""name"": ""Hayao Miyazaki"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Spirited Away,129,true,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.silver_bear_grand_jury,won,"[{""name"": ""Andreas Dresen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Grill Point,316,false,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.silver_bear_best_director,won,"[{""name"": ""Otar Iosseliani"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Monday Morning,49696,false,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.silver_bear_best_actor,won,"[{""name"": ""Jacques Gamblin"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Safe Conduct,70443,false,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.silver_bear_best_actress,won,"[{""name"": ""Halle Berry"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Monster's Ball,1365,false,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.silver_bear_outstanding_artistic_contribution,won,"[{""name"": ""Ensemble of actresses"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",8 Women,1958,false,auto_verified,,2026-05-04T09:21:43.928471+00:00
+2002,berlin.alfred_bauer_prize,won,"[{""name"": ""Christopher Roth"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Baader,9097,false,auto_verified,,2026-05-04T09:21:43.928471+00:00

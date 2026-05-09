@@ -1,0 +1,64 @@
+# TMDB film resolution unresolved titles (61)
+# Format: title|honours_year  (searched years: ...)
+
+(A) Torzija [(A) Torsion]&nbsp;|2003
+(Il Supplente) The Substitute&nbsp;|2007
+3 Misses&nbsp;|1999
+A Man Thing (Meska Sprawa)&nbsp;|2001
+A Soccer Story&nbsp;|2000
+Alberto Iglesias|2007
+Anthony Minghella|1999
+Bror, Min Bror&nbsp;|1999
+By Courier&nbsp;|2000
+Catherine Keener|1999
+Colin Farrell|2008
+Copy Shop&nbsp;|2001
+Dario Marianelli|2007
+Diablo Cody|2007
+Die Rote Jacke (The Red Jacket)&nbsp;|2003
+Everything in This Country Must&nbsp;|2004
+Fait D'Hiver&nbsp;|2002
+Fifty Percent Grey&nbsp;|2001
+Forest Whitaker|2006
+George Harrison: Living in the Material World|2011
+Give Up Yer Aul Sins&nbsp;|2001
+Gregor's Greatest Invention&nbsp;|2001
+Haley Joel Osment|1999
+Hilary Swank|1999
+Himalaya: Caravan|1999
+Inja (Dog)&nbsp;|2002
+Janet McTeer|1999
+Joe Wright|2007
+Joel Coen and Ethan Coen|2007
+José Prats, Natalia Kyriacou, and Bernardo Angeletti|2024
+Joy Enriquez|1999
+Jude Law|1999
+Julianne Moore|1999
+Kavi&nbsp;|2009
+Kevin Spacey|1999
+Killing Joe&nbsp;|1999
+Kissing, Ticking and Being Bored|2006
+Kleingeld&nbsp;|1999
+Major and Minor Miracles&nbsp;|1999
+Michael Brook|2007
+Michael Clarke Duncan|1999
+Money Love Experiments|2014
+Neil Jordan|1999
+One Day Crossing&nbsp;|2000
+Richard Farnsworth|1999
+Ronald Harwood|2007
+Rupert Everett|1999
+Sally Hawkins|2008
+Sam Mendes|1999
+Samantha Morton|1999
+Saria&nbsp;|2019
+Seraglio&nbsp;|2000
+Speed for Thespians&nbsp;|2001
+Tanghi Argentini&nbsp;|2007
+The Door&nbsp;|2009
+The Tonto Woman&nbsp;|2007
+Vic and Flo Saw a Bear|2013
+[[Cross-Country (2011 film)|Cross-Country]] (Крос)|2011
+[[Of Gods and Men (film)|Of Gods and Men]]|2010
+from Walk Hard: The Dewey Cox Story|2007
+Éramos pocos (One Too Many)&nbsp;|2006

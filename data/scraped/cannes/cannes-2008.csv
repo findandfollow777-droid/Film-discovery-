@@ -1,11 +1,11 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2008","cannes.palme_dor","won","[{""name"": ""Laurent Cantet"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Palme d'Or","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.grand_prix","won","[{""name"": ""Matteo Garrone"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Gomorra","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.jury_prize","won","[{""name"": ""Paolo Sorrentino"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Il Divo","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.jury_prize","won","[{""name"": ""Julius Avery"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Jerrycan","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.best_director","won","[{""name"": ""Nuri Bilge Ceylan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Three Monkeys","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.best_actor","won","[{""name"": ""Benicio del Toro"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Che","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.best_actress","won","[{""name"": ""Sandra Corveloni"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Linha de Passe","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.best_screenplay","won","[{""name"": ""Luc and Jean-Pierre Dardenne"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Lorna's Silence","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.camera_dor","won","[{""name"": ""Steve McQueen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Hunger","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
-"2008","cannes.short_film_palme_dor","won","[{""name"": ""Marian Crişan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Megatron","","false","auto_verified","","2026-05-03T12:51:42.829310+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2008,cannes.palme_dor,won,"[{""name"": ""Laurent Cantet"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Class,63193,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.grand_prix,won,"[{""name"": ""Matteo Garrone"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Gomorra,8882,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.jury_prize,won,"[{""name"": ""Paolo Sorrentino"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Il Divo,8832,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.jury_prize,won,"[{""name"": ""Julius Avery"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Jerrycan,298543,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.best_director,won,"[{""name"": ""Nuri Bilge Ceylan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Three Monkeys,8905,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.best_actor,won,"[{""name"": ""Benicio del Toro"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Che,8880,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.best_actress,won,"[{""name"": ""Sandra Corveloni"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Linha de Passe,8902,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.best_screenplay,won,"[{""name"": ""Luc and Jean-Pierre Dardenne"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Lorna's Silence,8899,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.camera_dor,won,"[{""name"": ""Steve McQueen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Hunger,10360,false,auto_verified,,2026-05-03T12:51:42.829310+00:00
+2008,cannes.short_film_palme_dor,won,"[{""name"": ""Marian Crişan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Megatron,242521,false,auto_verified,,2026-05-03T12:51:42.829310+00:00

@@ -1,11 +1,11 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2003","cannes.palme_dor","won","[{""name"": ""Gus Van Sant"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Elephant","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.grand_prix","won","[{""name"": ""Nuri Bilge Ceylan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Uzak","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.jury_prize","won","[{""name"": ""Samira Makhmalbaf"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","At Five in the Afternoon","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.best_director","won","[{""name"": ""Gus Van Sant"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Elephant","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.best_actor","won","[{""name"": ""Muzaffer Özdemir"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Uzak","","true","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.best_actor","won","[{""name"": ""Emin Toprak"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Uzak","","true","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.best_actress","won","[{""name"": ""Marie-Josée Croze"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Barbarian Invasions","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.best_screenplay","won","[{""name"": ""Denys Arcand"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Barbarian Invasions","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.camera_dor","won","[{""name"": ""Christoffer Boe"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Reconstruction","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
-"2003","cannes.short_film_palme_dor","won","[{""name"": ""Glendyn Ivin"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Cracker Bag","","false","auto_verified","","2026-05-03T12:51:32.402536+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2003,cannes.palme_dor,won,"[{""name"": ""Gus Van Sant"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Elephant,1807,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.grand_prix,won,"[{""name"": ""Nuri Bilge Ceylan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Uzak,31026,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.jury_prize,won,"[{""name"": ""Samira Makhmalbaf"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",At Five in the Afternoon,43969,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.best_director,won,"[{""name"": ""Gus Van Sant"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Elephant,1807,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.best_actor,won,"[{""name"": ""Muzaffer Özdemir"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Uzak,31026,true,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.best_actor,won,"[{""name"": ""Emin Toprak"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Uzak,31026,true,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.best_actress,won,"[{""name"": ""Marie-Josée Croze"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Barbarian Invasions,11042,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.best_screenplay,won,"[{""name"": ""Denys Arcand"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Barbarian Invasions,11042,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.camera_dor,won,"[{""name"": ""Christoffer Boe"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Reconstruction,29456,false,auto_verified,,2026-05-03T12:51:32.402536+00:00
+2003,cannes.short_film_palme_dor,won,"[{""name"": ""Glendyn Ivin"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Cracker Bag,335170,false,auto_verified,,2026-05-03T12:51:32.402536+00:00

@@ -1,7 +1,7 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2007","berlin.golden_bear","won","[{""name"": ""Wang Quan'an"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Tuya's Marriage","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
-"2007","berlin.silver_bear_grand_jury","won","[{""name"": ""Ariel Rotter"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Other","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
-"2007","berlin.silver_bear_best_director","won","[{""name"": ""Joseph Cedar"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Beaufort","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
-"2007","berlin.silver_bear_best_actor","won","[{""name"": ""Julio Chávez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Other","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
-"2007","berlin.silver_bear_best_actress","won","[{""name"": ""Nina Hoss"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Yella","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
-"2007","berlin.alfred_bauer_prize","won","[{""name"": ""Park Chan-wook"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","I'm a Cyborg, But That's OK","","false","auto_verified","","2026-05-04T07:02:00.351149+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2007,berlin.golden_bear,won,"[{""name"": ""Wang Quan'an"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Tuya's Marriage,2694,false,auto_verified,,2026-05-04T09:21:53.990344+00:00
+2007,berlin.silver_bear_grand_jury,won,"[{""name"": ""Ariel Rotter"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Other,51465,false,auto_verified,,2026-05-04T09:21:53.990344+00:00
+2007,berlin.silver_bear_best_director,won,"[{""name"": ""Joseph Cedar"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Beaufort,15048,false,auto_verified,,2026-05-04T09:21:53.990344+00:00
+2007,berlin.silver_bear_best_actor,won,"[{""name"": ""Julio Chávez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Other,51465,false,auto_verified,,2026-05-04T09:21:53.990344+00:00
+2007,berlin.silver_bear_best_actress,won,"[{""name"": ""Nina Hoss"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Yella,3037,false,auto_verified,,2026-05-04T09:21:53.990344+00:00
+2007,berlin.alfred_bauer_prize,won,"[{""name"": ""Park Chan-wook"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","I'm a Cyborg, But That's OK",5488,false,auto_verified,,2026-05-04T09:21:53.990344+00:00

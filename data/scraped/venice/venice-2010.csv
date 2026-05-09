@@ -1,9 +1,9 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2010","venice.golden_lion","won","[{""name"": ""Sofia Coppola"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Somewhere","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.silver_lion_grand_jury","won","[{""name"": ""Jerzy Skolimowski"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Essential Killing","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.silver_lion_best_director","won","[{""name"": ""Álex de la Iglesia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Last Circus","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.volpi_cup_best_actor","won","[{""name"": ""Vincent Gallo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Essential Killing","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.volpi_cup_best_actress","won","[{""name"": ""Ariane Labed"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Attenberg","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.best_screenplay","won","[{""name"": ""Álex de la Iglesia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Last Circus","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.marcello_mastroianni_award","won","[{""name"": ""Mila Kunis"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Black Swan","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
-"2010","venice.lion_of_the_future","won","[{""name"": ""Seren Yüce"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Majority","","false","auto_verified","","2026-05-03T23:52:27.619994+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2010,venice.golden_lion,won,"[{""name"": ""Sofia Coppola"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Somewhere,39210,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.silver_lion_grand_jury,won,"[{""name"": ""Jerzy Skolimowski"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Essential Killing,48243,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.silver_lion_best_director,won,"[{""name"": ""Álex de la Iglesia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Last Circus,56812,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.volpi_cup_best_actor,won,"[{""name"": ""Vincent Gallo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Essential Killing,48243,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.volpi_cup_best_actress,won,"[{""name"": ""Ariane Labed"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Attenberg,62321,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.best_screenplay,won,"[{""name"": ""Álex de la Iglesia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Last Circus,56812,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.marcello_mastroianni_award,won,"[{""name"": ""Mila Kunis"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Black Swan,44214,false,auto_verified,,2026-05-03T23:52:27.619994+00:00
+2010,venice.lion_of_the_future,won,"[{""name"": ""Seren Yüce"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Majority,54424,false,auto_verified,,2026-05-03T23:52:27.619994+00:00

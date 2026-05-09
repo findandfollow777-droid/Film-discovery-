@@ -1,11 +1,11 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2002","cannes.palme_dor","won","[{""name"": ""Roman Polanski"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Pianist","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.grand_prix","won","[{""name"": ""Aki Kaurismäki"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Man Without a Past","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.jury_prize","won","[{""name"": ""Elia Suleiman"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Divine Intervention","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.best_director","won","[{""name"": ""Im Kwon-taek"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Chi-hwa-seon","","true","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.best_director","won","[{""name"": ""Paul Thomas Anderson"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Punch-Drunk Love","","true","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.best_actor","won","[{""name"": ""Olivier Gourmet"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Son","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.best_actress","won","[{""name"": ""Kati Outinen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Man Without a Past","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.best_screenplay","won","[{""name"": ""Paul Laverty"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Sweet Sixteen","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.camera_dor","won","[{""name"": ""Julie Lopes-Curval"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Seaside","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
-"2002","cannes.short_film_palme_dor","won","[{""name"": ""Péter Mészáros"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","After Rain","","false","auto_verified","","2026-05-03T12:51:30.262887+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2002,cannes.palme_dor,won,"[{""name"": ""Roman Polanski"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Pianist,423,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.grand_prix,won,"[{""name"": ""Aki Kaurismäki"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Man Without a Past,7294,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.jury_prize,won,"[{""name"": ""Elia Suleiman"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Divine Intervention,27744,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.best_director,won,"[{""name"": ""Im Kwon-taek"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Chi-hwa-seon,18302,true,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.best_director,won,"[{""name"": ""Paul Thomas Anderson"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Punch-Drunk Love,8051,true,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.best_actor,won,"[{""name"": ""Olivier Gourmet"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Son,35172,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.best_actress,won,"[{""name"": ""Kati Outinen"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Man Without a Past,7294,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.best_screenplay,won,"[{""name"": ""Paul Laverty"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Sweet Sixteen,1376,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.camera_dor,won,"[{""name"": ""Julie Lopes-Curval"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Seaside,125952,false,auto_verified,,2026-05-03T12:51:30.262887+00:00
+2002,cannes.short_film_palme_dor,won,"[{""name"": ""Péter Mészáros"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",After Rain,553310,false,auto_verified,,2026-05-03T12:51:30.262887+00:00

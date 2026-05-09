@@ -1,20 +1,20 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2006","cannes.palme_dor","won","[{""name"": ""Ken Loach"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Wind That Shakes the Barley","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.grand_prix","won","[{""name"": ""Bruno Dumont"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Flanders","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.jury_prize","won","[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Red Road","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.jury_prize","won","[{""name"": ""Pablo Aguero"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Primera nieve","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_director","won","[{""name"": ""Alejandro González Iñárritu"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Babel","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actor","won","[{""name"": ""Jamel Debbouze"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Days of Glory","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actor","won","[{""name"": ""Samy Naceri"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Days of Glory","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actor","won","[{""name"": ""Sami Bouajila"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Days of Glory","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actor","won","[{""name"": ""Roschdy Zem"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Days of Glory","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actor","won","[{""name"": ""Bernard Blancan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Days of Glory","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Chus Lampreave"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Yohana Cobo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Carmen Maura"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Lola Dueñas"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Blanca Portillo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_actress","won","[{""name"": ""Penélope Cruz"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","true","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.best_screenplay","won","[{""name"": ""Pedro Almodóvar"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Volver","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.camera_dor","won","[{""name"": ""Corneliu Porumboiu"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","12:08 East of Bucharest","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
-"2006","cannes.short_film_palme_dor","won","[{""name"": ""Bobbie Peers"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Sniffer","","false","auto_verified","","2026-05-03T12:51:38.683599+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2006,cannes.palme_dor,won,"[{""name"": ""Ken Loach"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Wind That Shakes the Barley,1116,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.grand_prix,won,"[{""name"": ""Bruno Dumont"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Flanders,36143,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.jury_prize,won,"[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Red Road,11705,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.jury_prize,won,"[{""name"": ""Pablo Aguero"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Primera nieve,371807,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_director,won,"[{""name"": ""Alejandro González Iñárritu"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Babel,1164,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actor,won,"[{""name"": ""Jamel Debbouze"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Days of Glory,2016,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actor,won,"[{""name"": ""Samy Naceri"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Days of Glory,2016,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actor,won,"[{""name"": ""Sami Bouajila"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Days of Glory,2016,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actor,won,"[{""name"": ""Roschdy Zem"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Days of Glory,2016,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actor,won,"[{""name"": ""Bernard Blancan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Days of Glory,2016,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Chus Lampreave"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Yohana Cobo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Carmen Maura"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Lola Dueñas"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Blanca Portillo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_actress,won,"[{""name"": ""Penélope Cruz"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,true,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.best_screenplay,won,"[{""name"": ""Pedro Almodóvar"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Volver,219,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.camera_dor,won,"[{""name"": ""Corneliu Porumboiu"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",12:08 East of Bucharest,24159,false,auto_verified,,2026-05-03T12:51:38.683599+00:00
+2006,cannes.short_film_palme_dor,won,"[{""name"": ""Bobbie Peers"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Sniffer,49484,false,auto_verified,,2026-05-03T12:51:38.683599+00:00

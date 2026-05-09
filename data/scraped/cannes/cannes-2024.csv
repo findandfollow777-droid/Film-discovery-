@@ -1,13 +1,13 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2024","cannes.palme_dor","won","[{""name"": ""Sean Baker"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Anora","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.grand_prix","won","[{""name"": ""Payal Kapadia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","All We Imagine as Light","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.jury_prize","won","[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Emilia Pérez","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_director","won","[{""name"": ""Miguel Gomes"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Grand Tour","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_actor","won","[{""name"": ""Jesse Plemons"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Kinds of Kindness","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_actress","won","[{""name"": ""Adriana Paz"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Emilia Pérez","","true","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_actress","won","[{""name"": ""Karla Sofía Gascón"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Emilia Pérez","","true","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_actress","won","[{""name"": ""Selena Gomez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Emilia Pérez","","true","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_actress","won","[{""name"": ""Zoe Saldaña"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Emilia Pérez","","true","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.best_screenplay","won","[{""name"": ""Coralie Fargeat"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Substance","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.camera_dor","won","[{""name"": ""Halfdan Ullmann Tøndel"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Armand","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
-"2024","cannes.short_film_palme_dor","won","[{""name"": ""Nebojša Slijepčević"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","The Man Who Could Not Remain Silent","","false","auto_verified","","2026-05-03T12:52:17.267293+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2024,cannes.palme_dor,won,"[{""name"": ""Sean Baker"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Anora,1064213,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.grand_prix,won,"[{""name"": ""Payal Kapadia"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",All We Imagine as Light,927547,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.jury_prize,won,"[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Emilia Pérez,974950,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_director,won,"[{""name"": ""Miguel Gomes"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Grand Tour,1098709,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_actor,won,"[{""name"": ""Jesse Plemons"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Kinds of Kindness,1029955,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_actress,won,"[{""name"": ""Adriana Paz"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Emilia Pérez,974950,true,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_actress,won,"[{""name"": ""Karla Sofía Gascón"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Emilia Pérez,974950,true,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_actress,won,"[{""name"": ""Selena Gomez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Emilia Pérez,974950,true,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_actress,won,"[{""name"": ""Zoe Saldaña"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Emilia Pérez,974950,true,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.best_screenplay,won,"[{""name"": ""Coralie Fargeat"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Substance,933260,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.camera_dor,won,"[{""name"": ""Halfdan Ullmann Tøndel"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Armand,1144681,false,auto_verified,,2026-05-03T12:52:17.267293+00:00
+2024,cannes.short_film_palme_dor,won,"[{""name"": ""Nebojša Slijepčević"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Man Who Could Not Remain Silent,1279229,false,auto_verified,,2026-05-03T12:52:17.267293+00:00

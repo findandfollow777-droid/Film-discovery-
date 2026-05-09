@@ -1,9 +1,9 @@
-"year","category_id","result","recipients_json","film_title","film_tmdb_id","co_winner","verified_status","notes","scraped_at"
-"2001","venice.golden_lion","won","[{""name"": ""Mira Nair"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Monsoon Wedding","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.silver_lion_grand_jury","won","[{""name"": ""Ulrich Seidl"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Dog Days","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.silver_lion_best_director","won","[{""name"": ""Babak Payami"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Secret Ballot","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.volpi_cup_best_actor","won","[{""name"": ""Luigi Lo Cascio"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Light of My Eyes","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.volpi_cup_best_actress","won","[{""name"": ""Sandra Ceccarelli"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Light of My Eyes","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.marcello_mastroianni_award","won","[{""name"": ""Gael García Bernal"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Y tu mamá también","","true","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.marcello_mastroianni_award","won","[{""name"": ""Diego Luna"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Y tu mamá también","","true","auto_verified","","2026-05-03T23:52:05.932815+00:00"
-"2001","venice.lion_of_the_future","won","[{""name"": ""Jan Cvitkovic"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","Bread and Milk","","false","auto_verified","","2026-05-03T23:52:05.932815+00:00"
+year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
+2001,venice.golden_lion,won,"[{""name"": ""Mira Nair"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Monsoon Wedding,480,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.silver_lion_grand_jury,won,"[{""name"": ""Ulrich Seidl"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Dog Days,786942,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.silver_lion_best_director,won,"[{""name"": ""Babak Payami"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Secret Ballot,43772,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.volpi_cup_best_actor,won,"[{""name"": ""Luigi Lo Cascio"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Light of My Eyes,46098,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.volpi_cup_best_actress,won,"[{""name"": ""Sandra Ceccarelli"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Light of My Eyes,46098,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.marcello_mastroianni_award,won,"[{""name"": ""Gael García Bernal"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Y tu mamá también,1391,true,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.marcello_mastroianni_award,won,"[{""name"": ""Diego Luna"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Y tu mamá también,1391,true,auto_verified,,2026-05-03T23:52:05.932815+00:00
+2001,venice.lion_of_the_future,won,"[{""name"": ""Jan Cvitkovic"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Bread and Milk,125795,false,auto_verified,,2026-05-03T23:52:05.932815+00:00
