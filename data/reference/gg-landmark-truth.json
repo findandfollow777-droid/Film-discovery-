@@ -9,18 +9,27 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "American Beauty",
           "expected_nomination_count": 5,
-          "source": "57th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes 23 Jan 2000 / Wikipedia 57th Golden Globe Awards",
+          "notable": true,
+          "note": "*American Beauty* (Sam Mendes) wins Best Motion Picture — Drama at the 57th Golden Globes — Mendes's directorial debut. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Bruce Cohen, Dan Jinks"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Toy Story 2",
           "expected_nomination_count": 5,
-          "source": "57th Golden Globes Wikipedia article / Variety",
-          "notes": "Toy Story 2 took GG MC Picture — a notable animated-feature win in the MC Picture category, predating the dedicated Best Animated Feature category (introduced at cer 64, 2007)."
+          "source": "HFPA / Golden Globes 23 Jan 2000 / Wikipedia 57th Golden Globe Awards",
+          "notes": "Toy Story 2 took GG MC Picture — a notable animated-feature win in the MC Picture category, predating the dedicated Best Animated Feature category (introduced at cer 64, 2007).",
+          "notable": true,
+          "note": "*Toy Story 2* wins Best Motion Picture — Musical/Comedy at the 57th Golden Globes — the first animated film to win GG Best Motion Picture in either Picture category, an unusual outcome over live-action competition. (At the time, the GG Best Motion Picture Animated category did not yet exist; it would be inaugurated at the 64th in 2007.)",
+          "winner_recipient": "John Lasseter, Helene Plotkin, Karen Robert Jackson"
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "All About My Mother",
           "expected_nomination_count": 5,
-          "source": "57th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 23 Jan 2000 / Wikipedia 57th Golden Globe Awards",
+          "notable": true,
+          "note": "*All About My Mother* (Pedro Almodóvar) wins Best Motion Picture — Foreign Language at the 57th Golden Globes — the same Spanish-language film also took the Oscar Best Foreign Language Film the same season.",
+          "winner_recipient": "Pedro Almodóvar, Agustín Almodóvar"
         },
         "gg.best_screenplay": {
           "winner_film": "American Beauty",
@@ -28,8 +37,11 @@
             "Alan Ball"
           ],
           "expected_nomination_count": 5,
-          "source": "57th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipients_json empty for this won row; canonical sole-credit Alan Ball recorded here. winner_recipient (singular) field intentionally omitted to avoid wrapper Phase E failure on empty CSV recipients."
+          "source": "HFPA / Golden Globes 23 Jan 2000 / Wikipedia 57th Golden Globe Awards",
+          "notes": "CSV recipients_json empty for this won row; canonical sole-credit Alan Ball recorded here. winner_recipient (singular) field intentionally omitted to avoid wrapper Phase E failure on empty CSV recipients.",
+          "notable": true,
+          "note": "Alan Ball wins Best Screenplay for *American Beauty*; aligns with his Oscar Best Original Screenplay win the same season — Ball's debut feature script.",
+          "winner_recipient": "Alan Ball"
         },
         "gg.best_original_score": {
           "winner_film": "The Legend of 1900",
@@ -37,8 +49,11 @@
             "Ennio Morricone"
           ],
           "expected_nomination_count": 9,
-          "source": "57th Golden Globes Wikipedia article / Variety",
-          "notes": "Slate of 9 nominees — the larger pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not a parser artifact. CSV recipients_json empty for this won row; Ennio Morricone won via canonical credit (his only Globe — see also cer 73 for Hateful Eight). winner_recipient singular omitted; only winner_recipients array recorded."
+          "source": "HFPA / Golden Globes 23 Jan 2000 / Wikipedia 57th Golden Globe Awards",
+          "notes": "Slate of 9 nominees — the larger pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not a parser artifact. CSV recipients_json empty for this won row; Ennio Morricone won via canonical credit (his only Globe — see also cer 73 for Hateful Eight). winner_recipient singular omitted; only winner_recipients array recorded.",
+          "notable": true,
+          "note": "Ennio Morricone wins Best Original Score for *The Legend of 1900* at the 57th Golden Globes — the legendary Italian composer's first GG in the truth-file record (he had earlier honorary recognitions outside the cer 57+ window).",
+          "winner_recipient": "Ennio Morricone"
         }
       }
     },
@@ -49,66 +64,91 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "Gladiator",
           "expected_nomination_count": 6,
-          "source": "58th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "*Gladiator* (Ridley Scott) wins Best Motion Picture — Drama at the 58th Golden Globes; aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Douglas Wick, David Franzoni, Branko Lustig"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Almost Famous",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "*Almost Famous* (Cameron Crowe) wins Best Motion Picture — Musical/Comedy at the 58th Golden Globes — Crowe's autobiographical 1970s rock-journalism film.",
+          "winner_recipient": "Cameron Crowe, Ian Bryce"
         },
         "gg.best_director": {
           "winner_film": "Crouching Tiger, Hidden Dragon",
           "winner_recipient": "Ang Lee",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Director split: Lee took GG for Crouching Tiger; Steven Soderbergh took Oscar for Traffic. Lee's win was a major moment for non-English-language and Asian-cinema recognition at the GGs."
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notes": "GG/Oscar Director split: Lee took GG for Crouching Tiger; Steven Soderbergh took Oscar for Traffic. Lee's win was a major moment for non-English-language and Asian-cinema recognition at the GGs.",
+          "notable": true,
+          "note": "Ang Lee's first GG Best Director, for the Mandarin-language *Crouching Tiger, Hidden Dragon* — a notable Best Picture/Best Director split with *Gladiator*. Steven Soderbergh would take the Oscar Best Director for *Traffic*. Lee would return to win the same GG category at the 63rd for *Brokeback Mountain*."
         },
         "gg.best_actor_drama": {
           "winner_film": "Cast Away",
           "winner_recipient": "Tom Hanks",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Tom Hanks's first GG in the truth-file record, for *Cast Away* (he had earlier GG wins for *Forrest Gump* and *Philadelphia* outside the cer 57+ window)."
         },
         "gg.best_actress_drama": {
           "winner_film": "Erin Brockovich",
           "winner_recipient": "Julia Roberts",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Julia Roberts's first GG, for *Erin Brockovich*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "O Brother, Where Art Thou?",
           "winner_recipient": "George Clooney",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "George Clooney's first GG, for the Coen brothers' *O Brother, Where Art Thou?*. He would return to win Best Supporting Actor at the 63rd for *Syriana* and Best Drama Actor at the 69th for *The Descendants* — three GGs total."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Nurse Betty",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Renée Zellweger's first GG, for *Nurse Betty* — first of four GGs across her career: cer 58, cer 60 (*Chicago*), cer 61 (*Cold Mountain* Supporting), and cer 77 (*Judy* Drama)."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Traffic",
           "winner_recipient": "Benicio del Toro",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Benicio del Toro's first GG, for *Traffic*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Almost Famous",
           "winner_recipient": "Kate Hudson",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Kate Hudson's first GG, for *Almost Famous* — her breakout role as Penny Lane."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Crouching Tiger, Hidden Dragon",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "*Crouching Tiger, Hidden Dragon* wins Best Motion Picture — Foreign Language alongside Best Director — a same-night double for Ang Lee. Aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Ang Lee, Bill Kong, Hsu Li-kong"
         },
         "gg.best_screenplay": {
           "winner_film": "Traffic",
           "winner_recipient": "Stephen Gaghan",
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Stephen Gaghan wins Best Screenplay for *Traffic*; aligns with his Oscar Best Adapted Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "Gladiator",
@@ -117,7 +157,10 @@
             "Lisa Gerrard"
           ],
           "expected_nomination_count": 6,
-          "source": "58th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notable": true,
+          "note": "Hans Zimmer and Lisa Gerrard win Best Original Score for *Gladiator* — Zimmer's first GG. He would return to win the same category at the 79th for *Dune* — a 21-year gap between GG wins.",
+          "winner_recipient": "Hans Zimmer, Lisa Gerrard"
         },
         "gg.best_original_song": {
           "winner_film": "Wonder Boys",
@@ -126,8 +169,11 @@
             "Bob Dylan"
           ],
           "expected_nomination_count": 5,
-          "source": "58th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipients_json empty for this won row; canonical Bob Dylan credit recorded here."
+          "source": "HFPA / Golden Globes 21 Jan 2001 / Wikipedia 58th Golden Globe Awards",
+          "notes": "CSV recipients_json empty for this won row; canonical Bob Dylan credit recorded here.",
+          "notable": true,
+          "note": "Bob Dylan wins Best Original Song for *Wonder Boys*' 'Things Have Changed'; aligns with his Oscar Best Original Song win the same season.",
+          "winner_recipient": "Bob Dylan"
         }
       }
     },
@@ -138,74 +184,101 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "A Beautiful Mind",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "*A Beautiful Mind* (Ron Howard) wins Best Motion Picture — Drama at the 59th Golden Globes with 4 GGs total — the night's leading haul. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Brian Grazer, Ron Howard"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Moulin Rouge!",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety",
-          "notes": "Moulin Rouge! marked a major mid-2000s revival of the movie-musical form, foreshadowing Chicago's win the following year (cer 60)."
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notes": "Moulin Rouge! marked a major mid-2000s revival of the movie-musical form, foreshadowing Chicago's win the following year (cer 60).",
+          "notable": true,
+          "note": "*Moulin Rouge!* (Baz Luhrmann) wins Best Motion Picture — Musical/Comedy at the 59th Golden Globes — Luhrmann's jukebox-musical reimagining of fin-de-siècle Paris.",
+          "winner_recipient": "Martin Brown, Baz Luhrmann, Fred Baron"
         },
         "gg.best_director": {
           "winner_film": "Gosford Park",
           "winner_recipient": "Robert Altman",
           "expected_nomination_count": 6,
-          "source": "59th Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Director divergence: Altman took GG for Gosford Park; Ron Howard took Oscar for A Beautiful Mind. Director slate at this ceremony was 6."
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notes": "GG/Oscar Director divergence: Altman took GG for Gosford Park; Ron Howard took Oscar for A Beautiful Mind. Director slate at this ceremony was 6.",
+          "notable": true,
+          "note": "Robert Altman's first GG Best Director in the truth-file record, for *Gosford Park* — a notable Best Picture/Best Director split with *A Beautiful Mind*. Ron Howard took the Oscar Best Director."
         },
         "gg.best_actor_drama": {
           "winner_film": "A Beautiful Mind",
           "winner_recipient": "Russell Crowe",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Russell Crowe's first GG, for his John Nash performance in *A Beautiful Mind*. (He had previously won the Oscar Best Actor for *Gladiator* the prior season but was not GG-recognised that year.)"
         },
         "gg.best_actress_drama": {
           "winner_film": "In the Bedroom",
           "winner_recipient": "Sissy Spacek",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Sissy Spacek's first GG in the truth-file record, for *In the Bedroom* — her first GG-Drama win in decades."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "The Royal Tenenbaums",
           "winner_recipient": "Gene Hackman",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Gene Hackman's first GG in the truth-file record, for Wes Anderson's *The Royal Tenenbaums*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Moulin Rouge!",
           "winner_recipient": "Nicole Kidman",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Nicole Kidman's first GG, for *Moulin Rouge!* — first of three GGs across her career: cer 59 (Musical/Comedy), cer 60 (*The Hours* Drama), and cer 79 (*Being the Ricardos* Drama)."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Iris",
           "winner_recipient": "Jim Broadbent",
           "expected_nomination_count": 6,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Jim Broadbent's first GG, for *Iris*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "A Beautiful Mind",
           "winner_recipient": "Jennifer Connelly",
           "expected_nomination_count": 6,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Jennifer Connelly's first GG, for *A Beautiful Mind*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "No Man's Land",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "*No Man's Land* (Danis Tanović) wins Best Motion Picture — Foreign Language at the 59th Golden Globes — a Bosnian war satire. Aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Danis Tanović"
         },
         "gg.best_screenplay": {
           "winner_film": "A Beautiful Mind",
           "winner_recipient": "Akiva Goldsman",
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notable": true,
+          "note": "Akiva Goldsman wins Best Screenplay for *A Beautiful Mind*; aligns with his Oscar Best Adapted Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "Moulin Rouge!",
           "winner_recipient": "Craig Armstrong",
           "expected_nomination_count": 8,
-          "source": "59th Golden Globes Wikipedia article / Variety",
-          "notes": "Slate of 8 nominees — pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not parser artifact."
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notes": "Slate of 8 nominees — pre-2003 era_override range flagged by Phase 3 audit. Real Wikipedia data, not parser artifact.",
+          "notable": true,
+          "note": "Craig Armstrong wins Best Original Score for *Moulin Rouge!* — though the score was largely arranged from existing pop songs, the GG recognised Armstrong's underscore work."
         },
         "gg.best_original_song": {
           "winner_film": "Kate & Leopold",
@@ -214,8 +287,11 @@
             "Sting"
           ],
           "expected_nomination_count": 5,
-          "source": "59th Golden Globes Wikipedia article / Variety",
-          "notes": "CSV recipients_json empty for this won row; canonical Sting credit recorded here."
+          "source": "HFPA / Golden Globes 20 Jan 2002 / Wikipedia 59th Golden Globe Awards",
+          "notes": "CSV recipients_json empty for this won row; canonical Sting credit recorded here.",
+          "notable": true,
+          "note": "Sting wins Best Original Song for *Kate & Leopold*'s 'Until...'.",
+          "winner_recipient": "Sting"
         }
       }
     },
@@ -226,62 +302,85 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Hours",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety / Hollywood Reporter"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "*The Hours* (Stephen Daldry) wins Best Motion Picture — Drama at the 60th Golden Globes — a Virginia Woolf-themed triptych. A GG/Oscar split: *Chicago* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Robert Fox, Scott Rudin"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Chicago",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety",
-          "notes": "Chicago took GG MC Picture, then went on to win Oscar Best Picture — the first musical to win Oscar Best Picture since Oliver! (1968)."
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notes": "Chicago took GG MC Picture, then went on to win Oscar Best Picture — the first musical to win Oscar Best Picture since Oliver! (1968).",
+          "notable": true,
+          "note": "*Chicago* (Rob Marshall) wins Best Motion Picture — Musical/Comedy at the 60th Golden Globes — the first major film musical revival in decades, taking 3 GGs total. Aligns with the film's Oscar Best Picture win the same season.",
+          "winner_recipient": "Martin Richards"
         },
         "gg.best_director": {
           "winner_film": "Gangs of New York",
           "winner_recipient": "Martin Scorsese",
           "expected_nomination_count": 6,
-          "source": "60th Golden Globes Wikipedia article / Variety",
-          "notes": "Scorsese took GG Best Director for Gangs of New York — well before his eventual Oscar Best Director win (cer 64 GG / Oscar 2007 for The Departed). Director slate at this ceremony was 6."
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notes": "Scorsese took GG Best Director for Gangs of New York — well before his eventual Oscar Best Director win (cer 64 GG / Oscar 2007 for The Departed). Director slate at this ceremony was 6.",
+          "notable": true,
+          "note": "Martin Scorsese's first GG Best Director in the truth-file record, for *Gangs of New York* — a Best Picture/Best Director split with both Drama Picture (*The Hours*) and Comedy Picture (*Chicago*). Scorsese would return to win the same GG category at the 69th for *Hugo*. Roman Polanski took the Oscar Best Director for *The Pianist*."
         },
         "gg.best_actor_drama": {
           "winner_film": "About Schmidt",
           "winner_recipient": "Jack Nicholson",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Jack Nicholson's first GG in the truth-file record, for Alexander Payne's *About Schmidt* (Nicholson had multiple earlier GG wins outside the cer 57+ window)."
         },
         "gg.best_actress_drama": {
           "winner_film": "The Hours",
           "winner_recipient": "Nicole Kidman",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Nicole Kidman's second GG, for her Virginia Woolf performance in *The Hours* — first was Best Actress Musical/Comedy at the 59th for *Moulin Rouge!*. Back-to-back GG Best Actress wins. Aligns with her Oscar Best Actress win for *The Hours*."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Chicago",
           "winner_recipient": "Richard Gere",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Richard Gere's first GG, for his Billy Flynn performance in *Chicago*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Chicago",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Renée Zellweger's second GG, for *Chicago* — first was the 58th for *Nurse Betty*. Both wins in the Musical/Comedy Actress category."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Adaptation.",
           "winner_recipient": "Chris Cooper",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Chris Cooper's first GG, for *Adaptation.*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Adaptation.",
           "winner_recipient": "Meryl Streep",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety",
-          "notes": "Adaptation. took both supporting acting Globes (Cooper + Streep) — second single-film supporting sweep of the post-2000 era (after Closer at cer 62)."
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notes": "Adaptation. took both supporting acting Globes (Cooper + Streep) — second single-film supporting sweep of the post-2000 era (after Closer at cer 62).",
+          "notable": true,
+          "note": "Meryl Streep's first GG in the truth-file record, for *Adaptation.* — Streep had multiple earlier GG wins outside the cer 57+ window. She would return to win Musical/Comedy Actress at the 67th for *Julie & Julia* and Drama Actress at the 69th for *The Iron Lady*."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Talk to Her",
           "expected_nomination_count": 6,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "*Talk to Her* (Pedro Almodóvar) wins Best Motion Picture — Foreign Language at the 60th Golden Globes — Almodóvar's second BMP-Foreign GG (first was the 57th for *All About My Mother*).",
+          "winner_recipient": "Pedro Almodóvar, Agustín Almodóvar"
         },
         "gg.best_screenplay": {
           "winner_film": "About Schmidt",
@@ -290,13 +389,18 @@
             "Jim Taylor"
           ],
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Alexander Payne and Jim Taylor win Best Screenplay for *About Schmidt* — the first of two same-team GG Screenplay wins; they would return at the 62nd for *Sideways*.",
+          "winner_recipient": "Alexander Payne, Jim Taylor"
         },
         "gg.best_original_score": {
           "winner_film": "Frida",
           "winner_recipient": "Elliot Goldenthal",
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "Elliot Goldenthal wins Best Original Score for *Frida*; aligns with his Oscar Best Original Score win the same season."
         },
         "gg.best_original_song": {
           "winner_film": "Gangs of New York",
@@ -305,7 +409,10 @@
             "U2"
           ],
           "expected_nomination_count": 5,
-          "source": "60th Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 19 Jan 2003 / Wikipedia 60th Golden Globe Awards",
+          "notable": true,
+          "note": "U2 win Best Original Song for *Gangs of New York*'s 'The Hands That Built America' — Bono and the band's first GG. They would return to win the same category at the 71st for *Mandela: Long Walk to Freedom*'s 'Ordinary Love'.",
+          "winner_recipient": "U2"
         }
       }
     },
@@ -316,73 +423,100 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Lord of the Rings: The Return of the King",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Return of the King swept the 61st GGs (Drama Picture, Director, Original Score, Original Song) — the trilogy's culminating awards moment, foreshadowing its 11-Oscar sweep two months later."
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notes": "Return of the King swept the 61st GGs (Drama Picture, Director, Original Score, Original Song) — the trilogy's culminating awards moment, foreshadowing its 11-Oscar sweep two months later.",
+          "notable": true,
+          "note": "*The Lord of the Rings: The Return of the King* (Peter Jackson) wins Best Motion Picture — Drama at the 61st Golden Globes with 4 GGs total — the night's leading haul. Aligns with the film's Oscar Best Picture win in its 11-Oscar sweep.",
+          "winner_recipient": "Barrie M. Osborne, Peter Jackson, Fran Walsh"
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Lost in Translation",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "*Lost in Translation* (Sofia Coppola) wins Best Motion Picture — Musical/Comedy at the 61st Golden Globes — Coppola's Tokyo-set indie that took 3 GGs total.",
+          "winner_recipient": "Ross Katz, Sofia Coppola"
         },
         "gg.best_director": {
           "winner_film": "The Lord of the Rings: The Return of the King",
           "winner_recipient": "Peter Jackson",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Peter Jackson's first GG Best Director, for *The Lord of the Rings: The Return of the King*. Aligns with his Oscar Best Director win in the film's 11-Oscar sweep."
         },
         "gg.best_actor_drama": {
           "winner_film": "Mystic River",
           "winner_recipient": "Sean Penn",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Sean Penn's first GG, for *Mystic River*; aligns with his Oscar Best Actor win the same season."
         },
         "gg.best_actress_drama": {
           "winner_film": "Monster",
           "winner_recipient": "Charlize Theron",
           "expected_nomination_count": 6,
-          "source": "61st Golden Globes Wikipedia article / Variety",
-          "notes": "Actress Drama slate at this ceremony was 6. Theron's transformative performance was widely cited as a career-defining turn."
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notes": "Actress Drama slate at this ceremony was 6. Theron's transformative performance was widely cited as a career-defining turn.",
+          "notable": true,
+          "note": "Charlize Theron's first GG, for her Aileen Wuornos transformation performance in *Monster*; aligns with her Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Lost in Translation",
           "winner_recipient": "Bill Murray",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Bill Murray's first GG, for *Lost in Translation* — a BAFTA/GG/Oscar split: Murray took GG and BAFTA, Sean Penn took Oscar Best Actor for *Mystic River*."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Something's Gotta Give",
           "winner_recipient": "Diane Keaton",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Diane Keaton's first GG in the truth-file record, for *Something's Gotta Give* (she had an earlier GG for *Annie Hall* outside the cer 57+ window)."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Mystic River",
           "winner_recipient": "Tim Robbins",
           "expected_nomination_count": 6,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Tim Robbins's first GG, for *Mystic River*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Cold Mountain",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Renée Zellweger's third GG, for *Cold Mountain* — third win in four years (cer 58, 60, 61). Aligns with her Oscar Best Supporting Actress win the same season."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "Osama",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "*Osama* (Siddiq Barmak) wins Best Motion Picture — Foreign Language at the 61st Golden Globes — the first Afghan film made after the fall of the Taliban regime, an unusual outcome bringing Afghan cinema to international awards recognition.",
+          "winner_recipient": "Siddiq Barmak"
         },
         "gg.best_screenplay": {
           "winner_film": "Lost in Translation",
           "winner_recipient": "Sofia Coppola",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Sofia Coppola's first GG, for her *Lost in Translation* screenplay; aligns with her Oscar Best Original Screenplay win the same season."
         },
         "gg.best_original_score": {
           "winner_film": "The Lord of the Rings: The Return of the King",
           "winner_recipient": "Howard Shore",
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "Howard Shore wins Best Original Score for *The Lord of the Rings: The Return of the King*. He would return to win Best Score again at the 62nd for *The Aviator* — back-to-back GG Score wins. Aligns with his Oscar Best Original Score win for ROTK."
         },
         "gg.best_original_song": {
           "winner_film": "The Lord of the Rings: The Return of the King",
@@ -393,7 +527,10 @@
             "Howard Shore"
           ],
           "expected_nomination_count": 5,
-          "source": "61st Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 25 Jan 2004 / Wikipedia 61st Golden Globe Awards",
+          "notable": true,
+          "note": "*The Lord of the Rings: The Return of the King*'s 'Into the West' wins Best Original Song — Annie Lennox's first GG and Howard Shore's same-night Score+Song double. Aligns with the song's Oscar Best Original Song win in the film's 11-Oscar sweep.",
+          "winner_recipient": "Annie Lennox, Fran Walsh, Howard Shore"
         }
       }
     },
@@ -404,62 +541,85 @@
         "gg.best_motion_picture_drama": {
           "winner_film": "The Aviator",
           "expected_nomination_count": 6,
-          "source": "62nd Golden Globes Wikipedia article / Variety / Hollywood Reporter",
-          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era)."
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notes": "Drama Picture slate at this ceremony was 6 nominees (slightly larger than typical 5 of this era).",
+          "notable": true,
+          "note": "*The Aviator* (Martin Scorsese) wins Best Motion Picture — Drama at the 62nd Golden Globes — a Howard Hughes biopic. A GG/Oscar split: *Million Dollar Baby* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Michael Mann, Sandy Climan, Graham King, Charles Evans Jr."
         },
         "gg.best_motion_picture_musical_comedy": {
           "winner_film": "Sideways",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "*Sideways* (Alexander Payne) wins Best Motion Picture — Musical/Comedy at the 62nd Golden Globes — a Pinot-soaked road trip through California wine country.",
+          "winner_recipient": "Michael London"
         },
         "gg.best_director": {
           "winner_film": "Million Dollar Baby",
           "winner_recipient": "Clint Eastwood",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Clint Eastwood's first GG Best Director in the truth-file record, for *Million Dollar Baby* — a notable Best Picture/Best Director split with *The Aviator*. Aligns with his Oscar Best Director and Best Picture wins for *Million Dollar Baby* — his second Oscar Best Director after *Unforgiven*."
         },
         "gg.best_actor_drama": {
           "winner_film": "The Aviator",
           "winner_recipient": "Leonardo DiCaprio",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Leonardo DiCaprio's first GG, for his Howard Hughes performance in *The Aviator* — first of three GGs across his career: cer 62, cer 71 (*Wolf of Wall Street* Musical/Comedy), and cer 73 (*The Revenant* Drama)."
         },
         "gg.best_actress_drama": {
           "winner_film": "Million Dollar Baby",
           "winner_recipient": "Hilary Swank",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Hilary Swank's first GG, for *Million Dollar Baby*; aligns with her second Oscar Best Actress win the same season."
         },
         "gg.best_actor_musical_comedy": {
           "winner_film": "Ray",
           "winner_recipient": "Jamie Foxx",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Jamie Foxx's first GG, for his Ray Charles performance in *Ray* — placed in Musical/Comedy at the Globes due to its musical biopic content. Aligns with his Oscar Best Actor (Drama-equivalent) win the same season."
         },
         "gg.best_actress_musical_comedy": {
           "winner_film": "Being Julia",
           "winner_recipient": "Annette Bening",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Annette Bening's first GG, for *Being Julia*. She would return to win the same Musical/Comedy Actress category at the 68th for *The Kids Are All Right*."
         },
         "gg.best_supporting_actor": {
           "winner_film": "Closer",
           "winner_recipient": "Clive Owen",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety",
-          "notes": "GG/Oscar Supporting Actor split: Owen took GG for Closer; Morgan Freeman took Oscar for Million Dollar Baby."
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notes": "GG/Oscar Supporting Actor split: Owen took GG for Closer; Morgan Freeman took Oscar for Million Dollar Baby.",
+          "notable": true,
+          "note": "Clive Owen's first GG, for *Closer* (he had no other GG wins in the truth-file record)."
         },
         "gg.best_supporting_actress": {
           "winner_film": "Closer",
           "winner_recipient": "Natalie Portman",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety",
-          "notes": "Closer took both supporting acting Globes (Owen + Portman) — an unusual single-film sweep of the supporting categories."
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notes": "Closer took both supporting acting Globes (Owen + Portman) — an unusual single-film sweep of the supporting categories.",
+          "notable": true,
+          "note": "Natalie Portman's first GG, for *Closer* — first of two GGs (returns at cer 68 for *Black Swan* Best Drama Actress)."
         },
         "gg.best_motion_picture_non_english": {
           "winner_film": "The Sea Inside",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "*The Sea Inside* (Alejandro Amenábar) wins Best Motion Picture — Foreign Language at the 62nd Golden Globes — a Spanish euthanasia drama starring Javier Bardem. Aligns with its Oscar Best Foreign Language Film win the same season.",
+          "winner_recipient": "Alejandro Amenábar"
         },
         "gg.best_screenplay": {
           "winner_film": "Sideways",
@@ -468,13 +628,18 @@
             "Jim Taylor"
           ],
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Alexander Payne and Jim Taylor's second consecutive GG Best Screenplay, for *Sideways* — first was the 60th for *About Schmidt*. Aligns with their Oscar Best Adapted Screenplay win for *Sideways*.",
+          "winner_recipient": "Alexander Payne, Jim Taylor"
         },
         "gg.best_original_score": {
           "winner_film": "The Aviator",
           "winner_recipient": "Howard Shore",
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Howard Shore's second consecutive GG Best Original Score, for *The Aviator* — first was the 61st for *The Lord of the Rings: The Return of the King*. Back-to-back GG Score wins."
         },
         "gg.best_original_song": {
           "winner_film": "Alfie",
@@ -484,7 +649,10 @@
             "David A. Stewart"
           ],
           "expected_nomination_count": 5,
-          "source": "62nd Golden Globes Wikipedia article / Variety"
+          "source": "HFPA / Golden Globes 16 Jan 2005 / Wikipedia 62nd Golden Globe Awards",
+          "notable": true,
+          "note": "Mick Jagger and David A. Stewart win Best Original Song for *Alfie*'s 'Old Habits Die Hard' — Jagger's first GG.",
+          "winner_recipient": "Mick Jagger, David A. Stewart"
         }
       }
     },
