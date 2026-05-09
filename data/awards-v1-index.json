@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "schema_version": "v1.3",
+  "generated_at": "2026-05-09T11:05:42.990853Z",
+  "festivals": {
+    "oscar": {
+      "row_count": 3044,
+      "ceremony_count": 26,
+      "category_count": 26,
+      "year_range": {
+        "min": 2000,
+        "max": 2025
+      },
+      "file": "awards-v1-oscar.json"
+    },
+    "bafta": {
+      "row_count": 3143,
+      "ceremony_count": 27,
+      "category_count": 26,
+      "year_range": {
+        "min": 2000,
+        "max": 2026
+      },
+      "file": "awards-v1-bafta.json"
+    },
+    "gg": {
+      "row_count": 1936,
+      "ceremony_count": 27,
+      "category_count": 15,
+      "year_range": {
+        "min": 2000,
+        "max": 2026
+      },
+      "file": "awards-v1-gg.json"
+    },
+    "cannes": {
+      "row_count": 269,
+      "ceremony_count": 25,
+      "category_count": 9,
+      "year_range": {
+        "min": 2000,
+        "max": 2025
+      },
+      "file": "awards-v1-cannes.json"
+    },
+    "venice": {
+      "row_count": 223,
+      "ceremony_count": 26,
+      "category_count": 9,
+      "year_range": {
+        "min": 2000,
+        "max": 2025
+      },
+      "file": "awards-v1-venice.json"
+    },
+    "berlin": {
+      "row_count": 210,
+      "ceremony_count": 26,
+      "category_count": 11,
+      "year_range": {
+        "min": 2000,
+        "max": 2025
+      },
+      "file": "awards-v1-berlin.json"
+    }
+  }
+}

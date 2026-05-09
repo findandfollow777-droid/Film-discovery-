@@ -1,0 +1,6455 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "schema_version": "v1.3",
+    "generated_at": "2026-05-09T11:05:42.990853Z",
+    "row_count": 223,
+    "festival_count": 1,
+    "category_count": 9,
+    "ceremony_count": 26,
+    "year_range": {
+      "min": 2000,
+      "max": 2025
+    },
+    "tmdb_resolution_status": "partial_98.1pct",
+    "known_issues": [],
+    "csv_files_read": {
+      "oscar": 26,
+      "bafta": 27,
+      "gg": 27,
+      "cannes": 25,
+      "venice": 26,
+      "berlin": 26
+    }
+  },
+  "festivals": [
+    {
+      "id": "venice",
+      "display_name": "Venice International Film Festival",
+      "short_name": "Venice",
+      "country": "Italy",
+      "first_year": 1932
+    }
+  ],
+  "ceremonies": [
+    {
+      "id": "venice.2000",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2000,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2001",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2001,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2002",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2002,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2003",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2003,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2004",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2004,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2005",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2005,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2006",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2006,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2007",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2007,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2008",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2008,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2009",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2009,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2010",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2010,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2011",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2011,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2012",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2012,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2013",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2013,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2014",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2014,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2015",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2015,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2016",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2016,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2017",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2017,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2018",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2018,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2019",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2019,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2020",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2020,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2021",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2021,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2022",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2022,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2023",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2023,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2024",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2024,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "venice.2025",
+      "festival_id": "venice",
+      "ceremony_number": null,
+      "year": 2025,
+      "date": null,
+      "venue": null
+    }
+  ],
+  "categories": [
+    {
+      "id": "venice.golden_lion",
+      "festival_id": "venice",
+      "display_name": "Golden Lion",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury",
+      "festival_id": "venice",
+      "display_name": "Grand Jury Prize",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.silver_lion_best_director",
+      "festival_id": "venice",
+      "display_name": "Silver Lion",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.special_jury_prize",
+      "festival_id": "venice",
+      "display_name": "Special Jury Prize",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor",
+      "festival_id": "venice",
+      "display_name": "Volpi Cup for Best Actor",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "actor",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress",
+      "festival_id": "venice",
+      "display_name": "Volpi Cup for Best Actress",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "actress",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.best_screenplay",
+      "festival_id": "venice",
+      "display_name": "Best Screenplay",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "writer",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award",
+      "festival_id": "venice",
+      "display_name": "Marcello Mastroianni Award",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "actor",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "venice.lion_of_the_future",
+      "festival_id": "venice",
+      "display_name": "Lion of the Future — Luigi De Laurentiis Award",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    }
+  ],
+  "awards": [
+    {
+      "id": "venice.golden_lion.2000.jafar_panahi_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.golden_lion",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jafar Panahi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 13898,
+      "film_title": "The Circle",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2000.julian_schnabel_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Julian Schnabel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 5001,
+      "film_title": "Before Night Falls",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2000.buddhadev_dasgupta_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Buddhadev Dasgupta",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 125727,
+      "film_title": "Uttara",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2000.javier_bardem_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Javier Bardem",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 5001,
+      "film_title": "Before Night Falls",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2000.rose_byrne_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rose Byrne",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 46226,
+      "film_title": "The Goddess of 1967",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2000.claudio_fava_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.best_screenplay",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Claudio Fava",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Marco Tullio Giordana",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 29458,
+      "film_title": "One Hundred Steps",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2000.megan_burns_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Megan Burns",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 48834,
+      "film_title": "Liam",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2000.abdellatif_kechiche_unresolved",
+      "ceremony_id": "venice.2000",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Abdellatif Kechiche",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 72480,
+      "film_title": "Poetical Refugee",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:03.746896+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2001.mira_nair_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.golden_lion",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mira Nair",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 480,
+      "film_title": "Monsoon Wedding",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2001.ulrich_seidl_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ulrich Seidl",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 786942,
+      "film_title": "Dog Days",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2001.babak_payami_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Babak Payami",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 43772,
+      "film_title": "Secret Ballot",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2001.luigi_lo_cascio_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Luigi Lo Cascio",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 46098,
+      "film_title": "Light of My Eyes",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2001.sandra_ceccarelli_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sandra Ceccarelli",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 46098,
+      "film_title": "Light of My Eyes",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2001.gael_garc_a_bernal_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gael García Bernal",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1391,
+      "film_title": "Y tu mamá también",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2001.diego_luna_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Diego Luna",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1391,
+      "film_title": "Y tu mamá también",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2001.jan_cvitkovic_unresolved",
+      "ceremony_id": "venice.2001",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jan Cvitkovic",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 125795,
+      "film_title": "Bread and Milk",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:05.932815+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2002.peter_mullan_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.golden_lion",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Peter Mullan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 8094,
+      "film_title": "The Magdalene Sisters",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2002.andrei_konchalovsky_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrei Konchalovsky",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 72996,
+      "film_title": "House of Fools",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2002.lee_chang_dong_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lee Chang-dong",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 26955,
+      "film_title": "Oasis",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2002.stefano_accorsi_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Stefano Accorsi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 64389,
+      "film_title": "A Journey Called Love",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2002.julianne_moore_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Julianne Moore",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 10712,
+      "film_title": "Far from Heaven",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2002.moon_so_ri_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Moon So-ri",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 26955,
+      "film_title": "Oasis",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2002.francesco_sframeli_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Francesco Sframeli",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Spiro Scimone",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 131232,
+      "film_title": "Two Friends",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2002.dylan_kidd_unresolved",
+      "ceremony_id": "venice.2002",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dylan Kidd",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 13441,
+      "film_title": "Roger Dodger",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:08.167840+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2003.andrey_zvyagintsev_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.golden_lion",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrey Zvyagintsev",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 122,
+      "film_title": "The Return",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2003.randa_chahal_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Randa Chahal",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44086,
+      "film_title": "The Kite",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2003.takeshi_kitano_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Takeshi Kitano",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 246,
+      "film_title": "Zatōichi",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2003.sean_penn_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sean Penn",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 470,
+      "film_title": "21 Grams",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2003.katja_riemann_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Katja Riemann",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 6317,
+      "film_title": "Rosenstrasse",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2003.najat_benssallem_unresolved",
+      "ceremony_id": "venice.2003",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Najat Benssallem",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 50900,
+      "film_title": "Raja",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:10.458420+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2004.mike_leigh_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.golden_lion",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mike Leigh",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11109,
+      "film_title": "Vera Drake",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2004.alejandro_amen_bar_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alejandro Amenábar",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1913,
+      "film_title": "The Sea Inside",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2004.kim_ki_duk_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kim Ki-duk",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1280,
+      "film_title": "3-Iron",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2004.javier_bardem_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Javier Bardem",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1913,
+      "film_title": "The Sea Inside",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2004.imelda_staunton_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Imelda Staunton",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11109,
+      "film_title": "Vera Drake",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2004.tommaso_ramenghi_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tommaso Ramenghi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 57626,
+      "film_title": "Working Slowly (Radio Alice)",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2004.marco_luisi_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Marco Luisi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 57626,
+      "film_title": "Working Slowly (Radio Alice)",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2004.isma_l_ferroukhi_unresolved",
+      "ceremony_id": "venice.2004",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ismaël Ferroukhi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Humbert Balsan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44003,
+      "film_title": "The Great Journey",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:12.820246+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2005.ang_lee_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.golden_lion",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ang Lee",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 142,
+      "film_title": "Brokeback Mountain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2005.abel_ferrara_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Abel Ferrara",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 433,
+      "film_title": "Mary",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2005.philippe_garrel_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Philippe Garrel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 45126,
+      "film_title": "Regular Lovers",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2005.david_strathairn_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "David Strathairn",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 3291,
+      "film_title": "Good Night, and Good Luck",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2005.giovanna_mezzogiorno_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Giovanna Mezzogiorno",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 18219,
+      "film_title": "The Beast in the Heart",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2005.george_clooney_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.best_screenplay",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "George Clooney",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Grant Heslov",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 3291,
+      "film_title": "Good Night, and Good Luck",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2005.m_nothy_cesar_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ménothy Cesar",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1540,
+      "film_title": "Heading South",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2005.gela_babluani_unresolved",
+      "ceremony_id": "venice.2005",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gela Babluani",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 6077,
+      "film_title": "13 Tzameti",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:16.440577+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2006.jia_zhangke_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.golden_lion",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jia Zhangke",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 2346,
+      "film_title": "Still Life",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2006.mahamat_saleh_haroun_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mahamat-Saleh Haroun",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 24171,
+      "film_title": "Daratt",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2006.alain_resnais_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alain Resnais",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 24170,
+      "film_title": "Private Fears in Public Places",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2006.emanuele_crialese_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Emanuele Crialese",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1993,
+      "film_title": "Golden Door",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2006.ben_affleck_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ben Affleck",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1249,
+      "film_title": "Hollywoodland",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2006.helen_mirren_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Helen Mirren",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1165,
+      "film_title": "The Queen",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2006.peter_morgan_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.best_screenplay",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Peter Morgan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1165,
+      "film_title": "The Queen",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2006.isild_le_besco_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Isild Le Besco",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 99215,
+      "film_title": "The Untouchable",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2006.peter_brosens_unresolved",
+      "ceremony_id": "venice.2006",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Peter Brosens",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Jessica Woodworth",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 8093,
+      "film_title": "Khadak",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:18.582340+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2007.ang_lee_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.golden_lion",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ang Lee",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 4588,
+      "film_title": "Lust, Caution",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2007.brian_de_palma_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Brian De Palma",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11600,
+      "film_title": "Redacted",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2007.todd_haynes_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.special_jury_prize",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Todd Haynes",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 3902,
+      "film_title": "I'm Not There",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2007.abdellatif_kechiche_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.special_jury_prize",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Abdellatif Kechiche",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 8280,
+      "film_title": "The Secret of the Grain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2007.brad_pitt_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Brad Pitt",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 4512,
+      "film_title": "The Assassination of Jesse James by the Coward Robert Ford",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2007.cate_blanchett_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Cate Blanchett",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 3902,
+      "film_title": "I'm Not There",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2007.paul_laverty_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.best_screenplay",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Laverty",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7992,
+      "film_title": "It's a Free World...",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2007.hafsia_herzi_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hafsia Herzi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 8280,
+      "film_title": "The Secret of the Grain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2007.rodrigo_pl_unresolved",
+      "ceremony_id": "venice.2007",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rodrigo Plá",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 15865,
+      "film_title": "La Zona",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:20.849343+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2008.darren_aronofsky_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.golden_lion",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Darren Aronofsky",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12163,
+      "film_title": "The Wrestler",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2008.aleksei_alekseivich_german_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Aleksei Alekseivich German",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12428,
+      "film_title": "Paper Soldier",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2008.haile_gerima_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.special_jury_prize",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Haile Gerima",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12427,
+      "film_title": "Teza",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2008.silvio_orlando_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Silvio Orlando",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12424,
+      "film_title": "Giovanna's Father",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2008.dominique_blanc_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dominique Blanc",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12425,
+      "film_title": "The Other One",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2008.haile_gerima_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.best_screenplay",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Haile Gerima",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12427,
+      "film_title": "Teza",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2008.jennifer_lawrence_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jennifer Lawrence",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12165,
+      "film_title": "Burning Plain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2008.gianni_di_gregorio_unresolved",
+      "ceremony_id": "venice.2008",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gianni Di Gregorio",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 17631,
+      "film_title": "Mid-August Lunch",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:22.975381+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2009.samuel_maoz_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.golden_lion",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Samuel Maoz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 32084,
+      "film_title": "Lebanon",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2009.fatih_akin_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fatih Akin",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 31175,
+      "film_title": "Soul Kitchen",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2009.shirin_neshat_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Shirin Neshat",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44159,
+      "film_title": "Women Without Men",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2009.colin_firth_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Colin Firth",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 34653,
+      "film_title": "A Single Man",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2009.kseniya_rappoport_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kseniya Rappoport",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 42571,
+      "film_title": "The Double Hour",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2009.todd_solondz_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.best_screenplay",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Todd Solondz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39800,
+      "film_title": "Life During Wartime",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2009.jasmine_trinca_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jasmine Trinca",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 51477,
+      "film_title": "The Big Dream",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2009.pepe_diokno_unresolved",
+      "ceremony_id": "venice.2009",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pepe Diokno",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 108519,
+      "film_title": "Engkwentro",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:25.316036+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2010.sofia_coppola_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.golden_lion",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sofia Coppola",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39210,
+      "film_title": "Somewhere",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2010.jerzy_skolimowski_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jerzy Skolimowski",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 48243,
+      "film_title": "Essential Killing",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2010.lex_de_la_iglesia_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Álex de la Iglesia",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 56812,
+      "film_title": "The Last Circus",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2010.vincent_gallo_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Vincent Gallo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 48243,
+      "film_title": "Essential Killing",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2010.ariane_labed_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ariane Labed",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 62321,
+      "film_title": "Attenberg",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2010.lex_de_la_iglesia_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.best_screenplay",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Álex de la Iglesia",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 56812,
+      "film_title": "The Last Circus",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2010.mila_kunis_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mila Kunis",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44214,
+      "film_title": "Black Swan",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2010.seren_y_ce_unresolved",
+      "ceremony_id": "venice.2010",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Seren Yüce",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 54424,
+      "film_title": "Majority",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:27.619994+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2011.alexander_sokurov_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.golden_lion",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alexander Sokurov",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 77560,
+      "film_title": "Faust",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2011.emanuele_crialese_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Emanuele Crialese",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 73872,
+      "film_title": "Terraferma",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2011.cai_shangjun_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Cai Shangjun",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 102869,
+      "film_title": "People Mountain People Sea",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2011.michael_fassbender_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Michael Fassbender",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 76025,
+      "film_title": "Shame",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2011.deanie_ip_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Deanie Ip",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 91186,
+      "film_title": "A Simple Life",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2011.yorgos_lanthimos_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.best_screenplay",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yorgos Lanthimos",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Efthimis Filippou",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 81857,
+      "film_title": "Alps",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2011.shota_sometani_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Shota Sometani",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 98631,
+      "film_title": "Himizu",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2011.fumi_nikaido_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fumi Nikaido",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 98631,
+      "film_title": "Himizu",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2011.guido_lombardi_unresolved",
+      "ceremony_id": "venice.2011",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Guido Lombardi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 101843,
+      "film_title": "Là-bas: A Criminal Education",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:29.706369+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2012.kim_ki_duk_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.golden_lion",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kim Ki-duk",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 123377,
+      "film_title": "Pietà",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2012.ulrich_seidl_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ulrich Seidl",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 129734,
+      "film_title": "Paradise: Faith",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2012.paul_thomas_anderson_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Thomas Anderson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 68722,
+      "film_title": "The Master",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2012.philip_seymour_hoffman_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Philip Seymour Hoffman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 68722,
+      "film_title": "The Master",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2012.joaquin_phoenix_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Joaquin Phoenix",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 68722,
+      "film_title": "The Master",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2012.hadas_yaron_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hadas Yaron",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 122088,
+      "film_title": "Fill the Void",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2012.olivier_assayas_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.best_screenplay",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Olivier Assayas",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 122089,
+      "film_title": "Something in the Air",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2012.fabrizio_falco_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fabrizio Falco",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 110447,
+      "film_title": "Dormant Beauty",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2012.ali_ayd_n_unresolved",
+      "ceremony_id": "venice.2012",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ali Aydın",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 133176,
+      "film_title": "Mold",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:32.029847+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2013.gianfranco_rosi_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.golden_lion",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gianfranco Rosi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 216790,
+      "film_title": "Sacro GRA",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2013.tsai_ming_liang_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tsai Ming-liang",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 209840,
+      "film_title": "Stray Dogs",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2013.alexandros_avranas_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alexandros Avranas",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 211052,
+      "film_title": "Miss Violence",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2013.philip_gr_ning_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.special_jury_prize",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Philip Gröning",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 210228,
+      "film_title": "The Police Officer's Wife",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2013.themis_panou_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Themis Panou",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 211052,
+      "film_title": "Miss Violence",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2013.elena_cotta_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Elena Cotta",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 216788,
+      "film_title": "A Street in Palermo",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2013.steve_coogan_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.best_screenplay",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Steve Coogan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Jeff Pope",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 205220,
+      "film_title": "Philomena",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2013.tye_sheridan_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tye Sheridan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 73567,
+      "film_title": "Joe",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2013.noaz_deshe_unresolved",
+      "ceremony_id": "venice.2013",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Noaz Deshe",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 241220,
+      "film_title": "White Shadow",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:34.341612+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2014.roy_andersson_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.golden_lion",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Roy Andersson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 110390,
+      "film_title": "A Pigeon Sat on a Branch Reflecting on Existence",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2014.joshua_oppenheimer_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Joshua Oppenheimer",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 267480,
+      "film_title": "The Look of Silence",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2014.andrei_konchalovsky_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrei Konchalovsky",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283703,
+      "film_title": "The Postman's White Nights",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2014.kaan_m_jdeci_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.special_jury_prize",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kaan Müjdeci",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283706,
+      "film_title": "Sivas",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2014.adam_driver_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Adam Driver",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283698,
+      "film_title": "Hungry Hearts",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2014.alba_rohrwacher_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alba Rohrwacher",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283698,
+      "film_title": "Hungry Hearts",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2014.rakhsh_n_banietemad_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.best_screenplay",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rakhshān Banietemad",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Farid Mostafavi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 46581,
+      "film_title": "Tales",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2014.romain_paul_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Romain Paul",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283699,
+      "film_title": "The Last Hammer Blow",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2014.chaitanya_tamhane_unresolved",
+      "ceremony_id": "venice.2014",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Chaitanya Tamhane",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 290815,
+      "film_title": "Court",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:36.616258+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2015.lorenzo_vigas_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.golden_lion",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lorenzo Vigas",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 352162,
+      "film_title": "From Afar",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2015.charlie_kaufman_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Charlie Kaufman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Duke Johnson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 291270,
+      "film_title": "Anomalisa",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2015.pablo_trapero_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pablo Trapero",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 352161,
+      "film_title": "The Clan",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2015.emin_alper_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.special_jury_prize",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Emin Alper",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 352196,
+      "film_title": "Frenzy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2015.fabrice_luchini_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fabrice Luchini",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 329809,
+      "film_title": "Courted",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2015.valeria_golino_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Valeria Golino",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 352199,
+      "film_title": "Per amor vostro",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2015.christian_vincent_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.best_screenplay",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Christian Vincent",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 329809,
+      "film_title": "Courted",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2015.abraham_attah_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Abraham Attah",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 283587,
+      "film_title": "Beasts of No Nation",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2015.brady_corbet_unresolved",
+      "ceremony_id": "venice.2015",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Brady Corbet",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 330982,
+      "film_title": "''The Childhood of a Leader''",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:38.980850+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2016.lav_diaz_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.golden_lion",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lav Diaz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 408542,
+      "film_title": "The Woman Who Left",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2016.tom_ford_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tom Ford",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 340666,
+      "film_title": "Nocturnal Animals",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2016.amat_escalante_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Amat Escalante",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 387801,
+      "film_title": "The Untamed",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2016.andrei_konchalovsky_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrei Konchalovsky",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 255343,
+      "film_title": "Paradise",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2016.ana_lily_amirpour_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.special_jury_prize",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ana Lily Amirpour",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 316154,
+      "film_title": "The Bad Batch",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2016.oscar_mart_nez_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Oscar Martínez",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 408537,
+      "film_title": "The Distinguished Citizen",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2016.emma_stone_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Emma Stone",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 313369,
+      "film_title": "La La Land",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2016.noah_oppenheim_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.best_screenplay",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Noah Oppenheim",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 376866,
+      "film_title": "Jackie",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2016.paula_beer_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paula Beer",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 377263,
+      "film_title": "Frantz",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2016.ala_eddine_slim_unresolved",
+      "ceremony_id": "venice.2016",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ala Eddine Slim",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 408417,
+      "film_title": "The Last of Us",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:41.300055+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2017.guillermo_del_toro_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.golden_lion",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Guillermo del Toro",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 399055,
+      "film_title": "The Shape of Water",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2017.samuel_maoz_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Samuel Maoz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 444431,
+      "film_title": "Foxtrot",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2017.xavier_legrand_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Xavier Legrand",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 390401,
+      "film_title": "Custody",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2017.warwick_thornton_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.special_jury_prize",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Warwick Thornton",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 468210,
+      "film_title": "Sweet Country",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2017.kamel_el_basha_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kamel El Basha",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 468284,
+      "film_title": "The Insult",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2017.charlotte_rampling_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Charlotte Rampling",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 468287,
+      "film_title": "Hannah",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2017.martin_mcdonagh_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.best_screenplay",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Martin McDonagh",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 359940,
+      "film_title": "Three Billboards Outside Ebbing, Missouri",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2017.charlie_plummer_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Charlie Plummer",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 407890,
+      "film_title": "Lean on Pete",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2017.xavier_legrand_unresolved",
+      "ceremony_id": "venice.2017",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Xavier Legrand",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 390401,
+      "film_title": "Custody",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:43.638686+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2018.alfonso_cuar_n_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.golden_lion",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alfonso Cuarón",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 426426,
+      "film_title": "Roma",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2018.yorgos_lanthimos_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yorgos Lanthimos",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 375262,
+      "film_title": "The Favourite",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2018.jacques_audiard_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jacques Audiard",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 440161,
+      "film_title": "The Sisters Brothers",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2018.jennifer_kent_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.special_jury_prize",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jennifer Kent",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 400090,
+      "film_title": "The Nightingale",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2018.willem_dafoe_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Willem Dafoe",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 491472,
+      "film_title": "At Eternity's Gate",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2018.olivia_colman_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Olivia Colman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 375262,
+      "film_title": "The Favourite",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2018.joel_and_ethan_coen_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.best_screenplay",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Joel and Ethan Coen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 537996,
+      "film_title": "The Ballad of Buster Scruggs",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2018.baykali_ganambarr_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Baykali Ganambarr",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 400090,
+      "film_title": "The Nightingale",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2018.soudade_kaadan_unresolved",
+      "ceremony_id": "venice.2018",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Soudade Kaadan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 539046,
+      "film_title": "The Day I Lost My Shadow",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:45.728106+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2019.todd_phillips_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.golden_lion",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Todd Phillips",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 475557,
+      "film_title": "Joker",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2019.roman_polanski_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Roman Polanski",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 399121,
+      "film_title": "An Officer and a Spy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2019.roy_andersson_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Roy Andersson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 348672,
+      "film_title": "About Endlessness",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2019.franco_maresco_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.special_jury_prize",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Franco Maresco",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 618215,
+      "film_title": "The Mafia Is No Longer What It Used to Be",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2019.luca_marinelli_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Luca Marinelli",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 582873,
+      "film_title": "Martin Eden",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2019.ariane_ascaride_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ariane Ascaride",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 572521,
+      "film_title": "Gloria Mundi",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2019.yonfan_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.best_screenplay",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yonfan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 616020,
+      "film_title": "No.7 Cherry Lane",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2019.toby_wallace_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Toby Wallace",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 522098,
+      "film_title": "Babyteeth",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2019.amjad_abu_alala_unresolved",
+      "ceremony_id": "venice.2019",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Amjad Abu Alala",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 617710,
+      "film_title": "You Will Die at Twenty",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:47.798463+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2020.chlo_zhao_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.golden_lion",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Chloé Zhao",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 581734,
+      "film_title": "Nomadland",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2020.michel_franco_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Michel Franco",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 575446,
+      "film_title": "New Order",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2020.kiyoshi_kurosawa_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kiyoshi Kurosawa",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 688301,
+      "film_title": "Wife of a Spy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2020.andrei_konchalovsky_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.special_jury_prize",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrei Konchalovsky",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 587609,
+      "film_title": "Dear Comrades!",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2020.pierfrancesco_favino_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pierfrancesco Favino",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 669665,
+      "film_title": "Padrenostro",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2020.vanessa_kirby_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Vanessa Kirby",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 641662,
+      "film_title": "Pieces of a Woman",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2020.chaitanya_tamhane_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.best_screenplay",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Chaitanya Tamhane",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 728116,
+      "film_title": "The Disciple",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2020.rouhollah_zamani_unresolved",
+      "ceremony_id": "venice.2020",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rouhollah Zamani",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 670343,
+      "film_title": "Sun Children",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:49.994497+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2021.audrey_diwan_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.golden_lion",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Audrey Diwan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 793998,
+      "film_title": "Happening",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2021.paolo_sorrentino_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paolo Sorrentino",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 722778,
+      "film_title": "The Hand of God",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2021.jane_campion_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jane Campion",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 600583,
+      "film_title": "The Power of the Dog",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2021.michelangelo_frammartino_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.special_jury_prize",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Michelangelo Frammartino",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 660708,
+      "film_title": "Il buco",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2021.john_arcilla_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "John Arcilla",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 800368,
+      "film_title": "On the Job: The Missing 8",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2021.pen_lope_cruz_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Penélope Cruz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 766798,
+      "film_title": "Parallel Mothers",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2021.maggie_gyllenhaal_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.best_screenplay",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Maggie Gyllenhaal",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 554230,
+      "film_title": "The Lost Daughter",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2021.filippo_scotti_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Filippo Scotti",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 722778,
+      "film_title": "The Hand of God",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2021.george_chiper_lillemark_unresolved",
+      "ceremony_id": "venice.2021",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "George Chiper-Lillemark",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Monica Stan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 856351,
+      "film_title": "Immaculate",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:52.132179+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2022.laura_poitras_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.golden_lion",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Laura Poitras",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1004663,
+      "film_title": "All the Beauty and the Bloodshed",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2022.alice_diop_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alice Diop",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 925943,
+      "film_title": "Saint Omer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2022.luca_guadagnino_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Luca Guadagnino",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 791177,
+      "film_title": "Bones and All",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2022.jafar_panahi_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.special_jury_prize",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jafar Panahi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 974521,
+      "film_title": "No Bears",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2022.colin_farrell_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Colin Farrell",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 674324,
+      "film_title": "The Banshees of Inisherin",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2022.cate_blanchett_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Cate Blanchett",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 817758,
+      "film_title": "Tár",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2022.martin_mcdonagh_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.best_screenplay",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Martin McDonagh",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 674324,
+      "film_title": "The Banshees of Inisherin",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2022.taylor_russell_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Taylor Russell",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 791177,
+      "film_title": "Bones and All",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2022.alice_diop_unresolved",
+      "ceremony_id": "venice.2022",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alice Diop",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 925943,
+      "film_title": "Saint Omer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:54.266170+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2023.yorgos_lanthimos_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.golden_lion",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yorgos Lanthimos",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 792307,
+      "film_title": "Poor Things",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2023.ryusuke_hamaguchi_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ryusuke Hamaguchi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1156125,
+      "film_title": "Evil Does Not Exist",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2023.matteo_garrone_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Matteo Garrone",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 937746,
+      "film_title": "Io capitano",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2023.agnieszka_holland_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.special_jury_prize",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Agnieszka Holland",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1121956,
+      "film_title": "Green Border",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2023.peter_sarsgaard_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Peter Sarsgaard",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 818397,
+      "film_title": "Memory",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2023.cailee_spaeny_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Cailee Spaeny",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1020006,
+      "film_title": "Priscilla",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2023.guillermo_calder_n_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.best_screenplay",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Guillermo Calderón",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Pablo Larraín",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 991708,
+      "film_title": "El Conde",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2023.seydou_sarr_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Seydou Sarr",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 937746,
+      "film_title": "Io capitano",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2023.lee_hong_chi_unresolved",
+      "ceremony_id": "venice.2023",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lee Hong-chi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1155680,
+      "film_title": "Love Is a Gun",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:56.630185+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2024.pedro_almod_var_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.golden_lion",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pedro Almodóvar",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1088514,
+      "film_title": "The Room Next Door",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2024.maura_delpero_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Maura Delpero",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1151244,
+      "film_title": "Vermiglio",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2024.brady_corbet_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Brady Corbet",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 549509,
+      "film_title": "The Brutalist",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2024.dea_kulumbegashvili_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.special_jury_prize",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dea Kulumbegashvili",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1064021,
+      "film_title": "April",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2024.vincent_lindon_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Vincent Lindon",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1118848,
+      "film_title": "The Quiet Son",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2024.nicole_kidman_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nicole Kidman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1097549,
+      "film_title": "Babygirl",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2024.murilo_hauser_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.best_screenplay",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Murilo Hauser",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Heitor Lorega",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1000837,
+      "film_title": "I'm Still Here",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2024.paul_kircher_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Kircher",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1103678,
+      "film_title": "And Their Children After Them",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2024.sarah_friedland_unresolved",
+      "ceremony_id": "venice.2024",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sarah Friedland",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1265717,
+      "film_title": "Familiar Touch",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:52:59.024781+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.golden_lion.2025.jim_jarmusch_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.golden_lion",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jim Jarmusch",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1159206,
+      "film_title": "Father Mother Sister Brother",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_grand_jury.2025.kaouther_ben_hania_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.silver_lion_grand_jury",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kaouther Ben Hania",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1480382,
+      "film_title": "The Voice of Hind Rajab",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.silver_lion_best_director.2025.benny_safdie_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.silver_lion_best_director",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Benny Safdie",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 760329,
+      "film_title": "The Smashing Machine",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.special_jury_prize.2025.gianfranco_rosi_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.special_jury_prize",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gianfranco Rosi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1457188,
+      "film_title": "Below the Clouds",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actor.2025.toni_servillo_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.volpi_cup_best_actor",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Toni Servillo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1397364,
+      "film_title": "La grazia",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.volpi_cup_best_actress.2025.xin_zhilei_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.volpi_cup_best_actress",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Xin Zhilei",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1329673,
+      "film_title": "The Sun Rises on Us All",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.best_screenplay.2025.val_rie_donzelli_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.best_screenplay",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Valérie Donzelli",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Gilles Marchand",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1303162,
+      "film_title": "At Work",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.marcello_mastroianni_award.2025.luna_wedler_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.marcello_mastroianni_award",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Luna Wedler",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1168719,
+      "film_title": "Silent Friend",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "venice.lion_of_the_future.2025.nastia_korkia_unresolved",
+      "ceremony_id": "venice.2025",
+      "category_id": "venice.lion_of_the_future",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nastia Korkia",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1394398,
+      "film_title": "Short Summer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-03T23:53:01.408966+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    }
+  ]
+}

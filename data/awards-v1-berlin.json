@@ -1,0 +1,6176 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "schema_version": "v1.3",
+    "generated_at": "2026-05-09T11:05:42.990853Z",
+    "row_count": 210,
+    "festival_count": 1,
+    "category_count": 11,
+    "ceremony_count": 26,
+    "year_range": {
+      "min": 2000,
+      "max": 2025
+    },
+    "tmdb_resolution_status": "partial_98.1pct",
+    "known_issues": [],
+    "csv_files_read": {
+      "oscar": 26,
+      "bafta": 27,
+      "gg": 27,
+      "cannes": 25,
+      "venice": 26,
+      "berlin": 26
+    }
+  },
+  "festivals": [
+    {
+      "id": "berlin",
+      "display_name": "Berlin International Film Festival",
+      "short_name": "Berlin",
+      "country": "Germany",
+      "first_year": 1951
+    }
+  ],
+  "ceremonies": [
+    {
+      "id": "berlin.2000",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2000,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2001",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2001,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2002",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2002,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2003",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2003,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2004",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2004,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2005",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2005,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2006",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2006,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2007",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2007,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2008",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2008,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2009",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2009,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2010",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2010,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2011",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2011,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2012",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2012,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2013",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2013,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2014",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2014,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2015",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2015,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2016",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2016,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2017",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2017,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2018",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2018,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2019",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2019,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2020",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2020,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2021",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2021,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2022",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2022,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2023",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2023,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2024",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2024,
+      "date": null,
+      "venue": null
+    },
+    {
+      "id": "berlin.2025",
+      "festival_id": "berlin",
+      "ceremony_number": null,
+      "year": 2025,
+      "date": null,
+      "venue": null
+    }
+  ],
+  "categories": [
+    {
+      "id": "berlin.golden_bear",
+      "festival_id": "berlin",
+      "display_name": "Golden Bear",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear Grand Jury Prize",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Director",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Actor",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2020,
+      "tile_type": "person",
+      "recipient_type": "actor",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Actress",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2020,
+      "tile_type": "person",
+      "recipient_type": "actress",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Leading Performance",
+      "historical_names": [],
+      "first_year": 2021,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "actor",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Supporting Performance",
+      "historical_names": [],
+      "first_year": 2021,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "actor",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Best Screenplay",
+      "historical_names": [],
+      "first_year": 2008,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "writer",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "festival_id": "berlin",
+      "display_name": "Silver Bear for Outstanding Artistic Contribution",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2025,
+      "tile_type": "person",
+      "recipient_type": "craft",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize",
+      "festival_id": "berlin",
+      "display_name": "Alfred Bauer Prize",
+      "historical_names": [],
+      "first_year": 2000,
+      "last_year": 2019,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    },
+    {
+      "id": "berlin.best_first_feature",
+      "festival_id": "berlin",
+      "display_name": "Best First Feature Award",
+      "historical_names": [],
+      "first_year": 2006,
+      "last_year": 2025,
+      "tile_type": "film",
+      "recipient_type": "director",
+      "merged_from": null,
+      "merged_into": null
+    }
+  ],
+  "awards": [
+    {
+      "id": "berlin.golden_bear.2000.paul_thomas_anderson_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.golden_bear",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Thomas Anderson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 334,
+      "film_title": "Magnolia",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2000.zhang_yimou_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Zhang Yimou",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12276,
+      "film_title": "The Road Home",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2000.milo_forman_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Miloš Forman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1850,
+      "film_title": "Man on the Moon",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2000.denzel_washington_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Denzel Washington",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 10400,
+      "film_title": "The Hurricane",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2000.bibiana_beglau_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Bibiana Beglau",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 10499,
+      "film_title": "The Legend of Rita",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2000.nadja_uhl_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nadja Uhl",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 10499,
+      "film_title": "The Legend of Rita",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2000.akira_ogata_unresolved",
+      "ceremony_id": "berlin.2000",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2000,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Akira Ogata",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 254050,
+      "film_title": "Boy's Choir",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:39.932027+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2001.patrice_ch_reau_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.golden_bear",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Patrice Chéreau",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11845,
+      "film_title": "Intimacy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2001.wang_xiaoshuai_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wang Xiaoshuai",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 12659,
+      "film_title": "Beijing Bicycle",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2001.lin_cheng_sheng_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lin Cheng-sheng",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44704,
+      "film_title": "Betelnut Beauty",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2001.benicio_del_toro_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Benicio del Toro",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1900,
+      "film_title": "Traffic",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2001.kerry_fox_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kerry Fox",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11845,
+      "film_title": "Intimacy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2001.ra_l_p_rez_cubero_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Raúl Pérez Cubero",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 59988,
+      "film_title": "You're the One",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2001.lucrecia_martel_unresolved",
+      "ceremony_id": "berlin.2001",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2001,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lucrecia Martel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 58429,
+      "film_title": "La Ciénaga",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:41.770485+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2002.paul_greengrass_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.golden_bear",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Greengrass",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 4107,
+      "film_title": "Bloody Sunday",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2002.hayao_miyazaki_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.golden_bear",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hayao Miyazaki",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 129,
+      "film_title": "Spirited Away",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2002.andreas_dresen_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andreas Dresen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 316,
+      "film_title": "Grill Point",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2002.otar_iosseliani_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Otar Iosseliani",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 49696,
+      "film_title": "Monday Morning",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2002.jacques_gamblin_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jacques Gamblin",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 70443,
+      "film_title": "Safe Conduct",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2002.halle_berry_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Halle Berry",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1365,
+      "film_title": "Monster's Ball",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2002.ensemble_of_actresses_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ensemble of actresses",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1958,
+      "film_title": "8 Women",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2002.christopher_roth_unresolved",
+      "ceremony_id": "berlin.2002",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2002,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Christopher Roth",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 9097,
+      "film_title": "Baader",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:43.928471+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2003.michael_winterbottom_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.golden_bear",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Michael Winterbottom",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 36791,
+      "film_title": "In This World",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2003.spike_jonze_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Spike Jonze",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 2757,
+      "film_title": "Adaptation",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2003.patrice_ch_reau_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Patrice Chéreau",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 78208,
+      "film_title": "His Brother",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2003.sam_rockwell_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sam Rockwell",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 4912,
+      "film_title": "Confessions of a Dangerous Mind",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2003.meryl_streep_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Meryl Streep",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 590,
+      "film_title": "The Hours",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2003.nicole_kidman_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nicole Kidman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 590,
+      "film_title": "The Hours",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2003.julianne_moore_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Julianne Moore",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 590,
+      "film_title": "The Hours",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2003.yang_li_unresolved",
+      "ceremony_id": "berlin.2003",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2003,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yang Li",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11492,
+      "film_title": "Blind Shaft",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:46.026445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2004.fatih_ak_n_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.golden_bear",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fatih Akın",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 363,
+      "film_title": "Head-On",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2004.daniel_burman_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Daniel Burman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 49681,
+      "film_title": "Lost Embrace",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2004.kim_ki_duk_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kim Ki-duk",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1279,
+      "film_title": "Samaritan Girl",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2004.daniel_hendler_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Daniel Hendler",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 49681,
+      "film_title": "Lost Embrace",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2004.catalina_sandino_moreno_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Catalina Sandino Moreno",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 436,
+      "film_title": "Maria Full of Grace",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2004.charlize_theron_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Charlize Theron",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 504,
+      "film_title": "Monster",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2004.leif_andr_e_unresolved",
+      "ceremony_id": "berlin.2004",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2004,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Leif Andrée",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Pernilla August",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Jan Coster",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Jakob Eklund",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Ingvar Hirdwall",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Magnus Krepper",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Johan Kvarnström",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Camilla Larsson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Marika Lindström",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Peter Lorentzon",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Hampus Penttinen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Ann Petrén",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Marie Richardson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Jenny Svärdsäter",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Claes-Göran Turesson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 25157,
+      "film_title": "Daybreak",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:48.101820+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2005.mark_dornford_may_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.golden_bear",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mark Dornford-May",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 79706,
+      "film_title": "U-Carmen eKhayelitsha",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2005.gu_changwei_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gu Changwei",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11728,
+      "film_title": "Peacock",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2005.marc_rothemund_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Marc Rothemund",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 2117,
+      "film_title": "Sophie Scholl – The Final Days",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2005.lou_taylor_pucci_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lou Taylor Pucci",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1546,
+      "film_title": "Thumbsucker",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2005.julia_jentsch_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Julia Jentsch",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 2117,
+      "film_title": "Sophie Scholl – The Final Days",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2005.tsai_ming_liang_unresolved",
+      "ceremony_id": "berlin.2005",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2005,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tsai Ming-liang",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 36253,
+      "film_title": "The Wayward Cloud",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:50.031933+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2006.jasmila_bani_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.golden_bear",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jasmila Žbanić",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 317,
+      "film_title": "Grbavica: The Land of My Dreams",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2006.jafar_panahi_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jafar Panahi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 52967,
+      "film_title": "Offside",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2006.pernille_fischer_christensen_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pernille Fischer Christensen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 15845,
+      "film_title": "En soap",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2006.michael_winterbottom_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Michael Winterbottom",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7872,
+      "film_title": "The Road to Guantanamo",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2006.mat_whitecross_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mat Whitecross",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7872,
+      "film_title": "The Road to Guantanamo",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2006.moritz_bleibtreu_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Moritz Bleibtreu",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 86,
+      "film_title": "The Elementary Particles",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2006.sandra_h_ller_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sandra Hüller",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 523,
+      "film_title": "Requiem",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2006.j_rgen_vogel_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jürgen Vogel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 9999,
+      "film_title": "The Free Will",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2006.rodrigo_moreno_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rodrigo Moreno",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 99896,
+      "film_title": "The Minder",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2006.pernille_fischer_christensen_unresolved",
+      "ceremony_id": "berlin.2006",
+      "category_id": "berlin.best_first_feature",
+      "year": 2006,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pernille Fischer Christensen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 15845,
+      "film_title": "En soap",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:52.103785+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2007.wang_quan_an_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.golden_bear",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wang Quan'an",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 2694,
+      "film_title": "Tuya's Marriage",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2007.ariel_rotter_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ariel Rotter",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 51465,
+      "film_title": "The Other",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2007.joseph_cedar_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Joseph Cedar",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 15048,
+      "film_title": "Beaufort",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2007.julio_ch_vez_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Julio Chávez",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 51465,
+      "film_title": "The Other",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2007.nina_hoss_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nina Hoss",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 3037,
+      "film_title": "Yella",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2007.park_chan_wook_unresolved",
+      "ceremony_id": "berlin.2007",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2007,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Park Chan-wook",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 5488,
+      "film_title": "I'm a Cyborg, But That's OK",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:53.990344+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2008.jos_padilha_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.golden_bear",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "José Padilha",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7347,
+      "film_title": "Elite Squad",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2008.errol_morris_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Errol Morris",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 8847,
+      "film_title": "Standard Operating Procedure",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2008.paul_thomas_anderson_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paul Thomas Anderson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7345,
+      "film_title": "There Will Be Blood",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2008.reza_naji_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Reza Naji",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 54254,
+      "film_title": "The Song of Sparrows",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2008.sally_hawkins_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sally Hawkins",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 10503,
+      "film_title": "Happy-Go-Lucky",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2008.wang_xiaoshuai_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wang Xiaoshuai",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 31205,
+      "film_title": "In Love We Trust",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2008.jonny_greenwood_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jonny Greenwood",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 7345,
+      "film_title": "There Will Be Blood",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2008.fernando_eimbcke_unresolved",
+      "ceremony_id": "berlin.2008",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2008,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Fernando Eimbcke",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 65726,
+      "film_title": "Lake Tahoe",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:55.895914+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2009.claudia_llosa_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.golden_bear",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Claudia Llosa",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 28644,
+      "film_title": "The Milk of Sorrow",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2009.adri_n_biniez_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Adrián Biniez",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39488,
+      "film_title": "Giant",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2009.maren_ade_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Maren Ade",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 33809,
+      "film_title": "Everyone Else",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2009.asghar_farhadi_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Asghar Farhadi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 37181,
+      "film_title": "About Elly",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2009.sotigui_kouyat_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sotigui Kouyaté",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39358,
+      "film_title": "London River",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2009.birgit_minichmayr_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Birgit Minichmayr",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 33809,
+      "film_title": "Everyone Else",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2009.oren_moverman_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Oren Moverman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Alessandro Camon",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 28089,
+      "film_title": "The Messenger",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2009.gy_rgy_kov_cs_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "György Kovács",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Gábor ifj. Erdélyi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Tamás Székely",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 34208,
+      "film_title": "Katalin Varga",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2009.andrzej_wajda_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrzej Wajda",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 51010,
+      "film_title": "Tatarak",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2009.adri_n_biniez_unresolved",
+      "ceremony_id": "berlin.2009",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2009,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Adrián Biniez",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39488,
+      "film_title": "Giant",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:57.829276+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2010.semih_kaplano_lu_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.golden_bear",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Semih Kaplanoğlu",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 44160,
+      "film_title": "Bal",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2010.florin_erban_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Florin Șerban",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39840,
+      "film_title": "If I Want to Whistle, I Whistle",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2010.roman_polanski_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Roman Polanski",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 11439,
+      "film_title": "The Ghost Writer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2010.grigoriy_dobrygin_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Grigoriy Dobrygin",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 38325,
+      "film_title": "How I Ended This Summer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2010.sergei_puskepalis_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sergei Puskepalis",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 38325,
+      "film_title": "How I Ended This Summer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2010.shinobu_terajima_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Shinobu Terajima",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 46106,
+      "film_title": "Caterpillar",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2010.jin_na_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jin Na",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Wang Quan'an",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 129955,
+      "film_title": "Apart Together",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2010.pavel_kostomarov_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pavel Kostomarov",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 38325,
+      "film_title": "How I Ended This Summer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2010.florin_erban_unresolved",
+      "ceremony_id": "berlin.2010",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2010,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Florin Șerban",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 39840,
+      "film_title": "If I Want to Whistle, I Whistle",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:21:59.762121+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2011.asghar_farhadi_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.golden_bear",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Asghar Farhadi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 60243,
+      "film_title": "A Separation",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2011.b_la_tarr_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Béla Tarr",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 81401,
+      "film_title": "The Turin Horse",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2011.ulrich_k_hler_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ulrich Köhler",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 70768,
+      "film_title": "Sleeping Sickness",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2011.joshua_marston_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Joshua Marston",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 82624,
+      "film_title": "The Forgiveness of Blood",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2011.barbara_enriquez_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Barbara Enriquez",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 107073,
+      "film_title": "The Prize",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2011.wojciech_staro_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wojciech Staroń",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 107073,
+      "film_title": "The Prize",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2011.andres_veiel_unresolved",
+      "ceremony_id": "berlin.2011",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2011,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andres Veiel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 73132,
+      "film_title": "If Not Us, Who?",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:01.856777+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2012.paolo_and_vittorio_taviani_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.golden_bear",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paolo and Vittorio Taviani",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 96821,
+      "film_title": "Caesar Must Die",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2012.benedek_fliegauf_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Benedek Fliegauf",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 110383,
+      "film_title": "Just the Wind",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2012.christian_petzold_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Christian Petzold",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 88284,
+      "film_title": "Barbara",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2012.mikkel_boe_f_lsgaard_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mikkel Boe Følsgaard",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 88273,
+      "film_title": "A Royal Affair",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2012.rachel_mwanza_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rachel Mwanza",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 98205,
+      "film_title": "War Witch",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2012.nikolaj_arcel_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nikolaj Arcel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 88273,
+      "film_title": "A Royal Affair",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2012.lutz_reitemeier_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lutz Reitemeier",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 139162,
+      "film_title": "White Deer Plain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2012.miguel_gomes_unresolved",
+      "ceremony_id": "berlin.2012",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2012,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Miguel Gomes",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 93858,
+      "film_title": "Tabu",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:03.945098+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2013.c_lin_peter_netzer_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.golden_bear",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Călin Peter Netzer",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 160118,
+      "film_title": "Child's Pose",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2013.danis_tanovi_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Danis Tanović",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 159942,
+      "film_title": "An Episode in the Life of an Iron Picker",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2013.david_gordon_green_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "David Gordon Green",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 113148,
+      "film_title": "Prince Avalanche",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2013.nazif_muji_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nazif Mujić",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 159942,
+      "film_title": "An Episode in the Life of an Iron Picker",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2013.paulina_garc_a_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paulina García",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 160068,
+      "film_title": "Gloria",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2013.jafar_panahi_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jafar Panahi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 160171,
+      "film_title": "Closed Curtain",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2013.aziz_zhambakiyev_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Aziz Zhambakiyev",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 160156,
+      "film_title": "Harmony Lessons",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2013.denis_c_t_unresolved",
+      "ceremony_id": "berlin.2013",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2013,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Denis Côté",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": null,
+      "film_title": "Vic and Flo Saw a Bear",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:06.094899+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2014.diao_yinan_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.golden_bear",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Diao Yinan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 255756,
+      "film_title": "Black Coal, Thin Ice",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2014.wes_anderson_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wes Anderson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 120467,
+      "film_title": "The Grand Budapest Hotel",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2014.richard_linklater_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Richard Linklater",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 85350,
+      "film_title": "Boyhood",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2014.liao_fan_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Liao Fan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 255756,
+      "film_title": "Black Coal, Thin Ice",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2014.haru_kuroki_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Haru Kuroki",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 254679,
+      "film_title": "The Little House",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2014.dietrich_br_ggemann_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dietrich Brüggemann",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 254721,
+      "film_title": "Stations of the Cross",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2014.lou_ye_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lou Ye",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 256106,
+      "film_title": "Blind Massage",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2014.alain_resnais_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alain Resnais",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 255824,
+      "film_title": "Life of Riley",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2014.alonso_ruizpalacios_unresolved",
+      "ceremony_id": "berlin.2014",
+      "category_id": "berlin.best_first_feature",
+      "year": 2014,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alonso Ruizpalacios",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 256057,
+      "film_title": "Güeros",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:08.207417+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2015.jafar_panahi_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.golden_bear",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jafar Panahi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 103,
+      "film_title": "Taxi",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2015.pablo_larra_n_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Pablo Larraín",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 270302,
+      "film_title": "The Club",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2015.radu_jude_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Radu Jude",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 319993,
+      "film_title": "Aferim!",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2015.ma_gorzata_szumowska_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Małgorzata Szumowska",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1468107,
+      "film_title": "Body",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2015.tom_courtenay_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Tom Courtenay",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 311291,
+      "film_title": "45 Years",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2015.charlotte_rampling_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Charlotte Rampling",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 311291,
+      "film_title": "45 Years",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2015.patricio_guzm_n_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Patricio Guzmán",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 319994,
+      "film_title": "The Pearl Button",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2015.sturla_brandth_gr_vlen_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sturla Brandth Grøvlen",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 320007,
+      "film_title": "Victoria",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2015.sergey_mikhalchuk_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sergey Mikhalchuk",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Evgeniy Privin",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 320005,
+      "film_title": "Under Electric Clouds",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2015.jayro_bustamante_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jayro Bustamante",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 320001,
+      "film_title": "Ixcanul",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2015.gabriel_ripstein_unresolved",
+      "ceremony_id": "berlin.2015",
+      "category_id": "berlin.best_first_feature",
+      "year": 2015,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gabriel Ripstein",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 321666,
+      "film_title": "600 Miles",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:10.372240+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2016.gianfranco_rosi_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.golden_bear",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gianfranco Rosi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 377151,
+      "film_title": "Fire at Sea",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2016.danis_tanovi_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Danis Tanović",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 377156,
+      "film_title": "Death in Sarajevo",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2016.mia_hansen_l_ve_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mia Hansen-Løve",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 374465,
+      "film_title": "Things to Come",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2016.majd_mastoura_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Majd Mastoura",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 378697,
+      "film_title": "Hedi",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2016.trine_dyrholm_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Trine Dyrholm",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 308409,
+      "film_title": "The Commune",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2016.mark_lee_ping_bin_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mark Lee Ping Bin",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 378696,
+      "film_title": "Crosscurrent",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2016.lav_diaz_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lav Diaz",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 377153,
+      "film_title": "A Lullaby to the Sorrowful Mystery",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2016.mohamed_ben_attia_unresolved",
+      "ceremony_id": "berlin.2016",
+      "category_id": "berlin.best_first_feature",
+      "year": 2016,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mohamed Ben Attia",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 378697,
+      "film_title": "Hedi",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:12.620625+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2017.ildik_enyedi_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.golden_bear",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ildikó Enyedi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 436343,
+      "film_title": "On Body and Soul",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2017.alain_gomis_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alain Gomis",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 436340,
+      "film_title": "Félicité",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2017.aki_kaurism_ki_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Aki Kaurismäki",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 429199,
+      "film_title": "The Other Side of Hope",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2017.georg_friedrich_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Georg Friedrich",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 436345,
+      "film_title": "Bright Nights",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2017.kim_min_hee_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kim Min-hee",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 434773,
+      "film_title": "On the Beach at Night Alone",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2017.sebasti_n_lelio_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sebastián Lelio",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 429191,
+      "film_title": "A Fantastic Woman",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2017.dana_bunescu_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dana Bunescu",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 429732,
+      "film_title": "Ana, mon amour",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2017.agnieszka_holland_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Agnieszka Holland",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 432799,
+      "film_title": "Spoor",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2017.carla_sim_n_unresolved",
+      "ceremony_id": "berlin.2017",
+      "category_id": "berlin.best_first_feature",
+      "year": 2017,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Carla Simón",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 438634,
+      "film_title": "Estiu 1993",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:14.827231+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2018.adina_pintilie_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.golden_bear",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Adina Pintilie",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 499155,
+      "film_title": "Touch Me Not",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2018.ma_gorzata_szumowska_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Małgorzata Szumowska",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 444400,
+      "film_title": "Mug",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2018.wes_anderson_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wes Anderson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 399174,
+      "film_title": "Isle of Dogs",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2018.anthony_bajon_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Anthony Bajon",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 560766,
+      "film_title": "The Prayer",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2018.ana_brun_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ana Brun",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 499152,
+      "film_title": "The Heiresses",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2018.alonso_ruizpalacios_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Alonso Ruizpalacios",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 128133,
+      "film_title": "Museum",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2018.elena_okopnaya_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Elena Okopnaya",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 493655,
+      "film_title": "Dovlatov",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2018.marcelo_martinessi_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Marcelo Martinessi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 499152,
+      "film_title": "The Heiresses",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2018.adina_pintilie_unresolved",
+      "ceremony_id": "berlin.2018",
+      "category_id": "berlin.best_first_feature",
+      "year": 2018,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Adina Pintilie",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 499155,
+      "film_title": "Touch Me Not",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:16.924736+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2019.nadav_lapid_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.golden_bear",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nadav Lapid",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 501590,
+      "film_title": "Synonyms",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2019.fran_ois_ozon_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "François Ozon",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 509364,
+      "film_title": "By the Grace of God",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2019.angela_schanelec_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Angela Schanelec",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 500895,
+      "film_title": "I Was at Home, But",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2019.wang_jingchun_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Wang Jingchun",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 493899,
+      "film_title": "So Long, My Son",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2019.yong_mei_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yong Mei",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 493899,
+      "film_title": "So Long, My Son",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2019.claudio_giovannesi_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Claudio Giovannesi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Roberto Saviano",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 574436,
+      "film_title": "Piranhas",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2019.rasmus_videb_k_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rasmus Videbæk",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 512603,
+      "film_title": "Out Stealing Horses",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.alfred_bauer_prize.2019.nora_fingscheidt_unresolved",
+      "ceremony_id": "berlin.2019",
+      "category_id": "berlin.alfred_bauer_prize",
+      "year": 2019,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nora Fingscheidt",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 567410,
+      "film_title": "System Crasher",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:19.071738+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2020.mohammad_rasoulof_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.golden_bear",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mohammad Rasoulof",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 667935,
+      "film_title": "There Is No Evil",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2020.eliza_hittman_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Eliza Hittman",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 595671,
+      "film_title": "Never Rarely Sometimes Always",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2020.hong_sang_soo_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hong Sang-soo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 662401,
+      "film_title": "The Woman Who Ran",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actor.2020.elio_germano_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_best_actor",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Elio Germano",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 608317,
+      "film_title": "Hidden Away",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_actress.2020.paula_beer_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_best_actress",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Paula Beer",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 615761,
+      "film_title": "Undine",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2020.damiano_and_fabio_d_innocenzo_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Damiano and Fabio D'Innocenzo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 614292,
+      "film_title": "Bad Tales",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2020.j_rgen_j_rges_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Jürgen Jürges",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 667995,
+      "film_title": "DAU. Natasha",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2020.camilo_restrepo_unresolved",
+      "ceremony_id": "berlin.2020",
+      "category_id": "berlin.best_first_feature",
+      "year": 2020,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Camilo Restrepo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 664572,
+      "film_title": "Los conductos",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:21.240445+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2021.radu_jude_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.golden_bear",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Radu Jude",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 790496,
+      "film_title": "Bad Luck Banging or Loony Porn",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2021.ryusuke_hamaguchi_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ryusuke Hamaguchi",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 795811,
+      "film_title": "Wheel of Fortune and Fantasy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2021.d_nes_nagy_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dénes Nagy",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 669661,
+      "film_title": "Natural Light",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance.2021.maren_eggert_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_best_leading_performance",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Maren Eggert",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 795813,
+      "film_title": "I'm Your Man",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance.2021.lilla_kizlinger_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_best_supporting_performance",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lilla Kizlinger",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 795818,
+      "film_title": "Forest - I See You Everywhere",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2021.hong_sang_soo_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hong Sang-soo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 795797,
+      "film_title": "Introduction",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2021.yibr_n_asuad_unresolved",
+      "ceremony_id": "berlin.2021",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2021,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Yibrán Asuad",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 701524,
+      "film_title": "A Cop Movie",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:23.408210+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2022.carla_sim_n_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.golden_bear",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Carla Simón",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 804251,
+      "film_title": "Alcarràs",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2022.hong_sang_soo_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hong Sang-soo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 928713,
+      "film_title": "The Novelist's Film",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2022.claire_denis_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Claire Denis",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 768757,
+      "film_title": "Both Sides of the Blade",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance.2022.meltem_kaptan_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_best_leading_performance",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Meltem Kaptan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 915960,
+      "film_title": "Rabiye Kurnaz vs. George W. Bush",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance.2022.laura_basuki_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_best_supporting_performance",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Laura Basuki",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 859933,
+      "film_title": "Before, Now & Then",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2022.laila_stieler_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Laila Stieler",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 915960,
+      "film_title": "Rabiye Kurnaz vs. George W. Bush",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2022.rithy_panh_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rithy Panh",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1265627,
+      "film_title": "Everything Will Be Ok",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2022.kurdwin_ayub_unresolved",
+      "ceremony_id": "berlin.2022",
+      "category_id": "berlin.best_first_feature",
+      "year": 2022,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Kurdwin Ayub",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 928735,
+      "film_title": "Sonne",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:25.789871+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2023.nicolas_philibert_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.golden_bear",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nicolas Philibert",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1070449,
+      "film_title": "On the Adamant",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2023.christian_petzold_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Christian Petzold",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 900379,
+      "film_title": "Afire",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2023.philippe_garrel_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Philippe Garrel",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 920767,
+      "film_title": "The Plough",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance.2023.sof_a_otero_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_best_leading_performance",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sofía Otero",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1053600,
+      "film_title": "20,000 Species of Bees",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance.2023.thea_ehre_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_best_supporting_performance",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Thea Ehre",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1069164,
+      "film_title": "Till the End of the Night",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2023.angela_schanelec_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Angela Schanelec",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 15121,
+      "film_title": "Music",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2023.h_l_ne_louvart_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hélène Louvart",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 922830,
+      "film_title": "Disco Boy",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2023.leandro_koch_unresolved",
+      "ceremony_id": "berlin.2023",
+      "category_id": "berlin.best_first_feature",
+      "year": 2023,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Leandro Koch",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        },
+        {
+          "name": "Paloma Schachmann",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1077675,
+      "film_title": "The Klezmer Project",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:28.216814+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2024.mati_diop_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.golden_bear",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Mati Diop",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1101256,
+      "film_title": "Dahomey",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2024.hong_sang_soo_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Hong Sang-soo",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1146410,
+      "film_title": "A Traveler's Needs",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2024.nelson_carlo_de_los_santos_arias_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Nelson Carlo De Los Santos Arias",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1172241,
+      "film_title": "Pepe",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance.2024.sebastian_stan_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_best_leading_performance",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Sebastian Stan",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 989662,
+      "film_title": "A Different Man",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance.2024.emily_watson_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_best_supporting_performance",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Emily Watson",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1102493,
+      "film_title": "Small Things Like These",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2024.matthias_glasner_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Matthias Glasner",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1232781,
+      "film_title": "Dying",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2024.martin_gschlacht_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Martin Gschlacht",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 931944,
+      "film_title": "The Devil's Bath",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2024.ph_m_ng_c_l_n_unresolved",
+      "ceremony_id": "berlin.2024",
+      "category_id": "berlin.best_first_feature",
+      "year": 2024,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Phạm Ngọc Lân",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 643776,
+      "film_title": "Cu Li Never Cries",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:30.533415+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.golden_bear.2025.dag_johan_haugerud_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.golden_bear",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Dag Johan Haugerud",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1228682,
+      "film_title": "Dreams (Sex Love)",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_grand_jury.2025.gabriel_mascaro_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_grand_jury",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Gabriel Mascaro",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1172265,
+      "film_title": "The Blue Trail",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_director.2025.huo_meng_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_best_director",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Huo Meng",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1421153,
+      "film_title": "Living the Land",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_leading_performance.2025.rose_byrne_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_best_leading_performance",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Rose Byrne",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1160360,
+      "film_title": "If I Had Legs I'd Kick You",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_supporting_performance.2025.andrew_scott_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_best_supporting_performance",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Andrew Scott",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1299655,
+      "film_title": "Blue Moon",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_best_screenplay.2025.radu_jude_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_best_screenplay",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Radu Jude",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1410189,
+      "film_title": "Kontinental '25",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.silver_bear_outstanding_artistic_contribution.2025.lucile_had_ihalilovi_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.silver_bear_outstanding_artistic_contribution",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Lucile Hadžihalilović",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1143440,
+      "film_title": "The Ice Tower",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    },
+    {
+      "id": "berlin.best_first_feature.2025.ernesto_mart_nez_bucio_unresolved",
+      "ceremony_id": "berlin.2025",
+      "category_id": "berlin.best_first_feature",
+      "year": 2025,
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Ernesto Martínez Bucio",
+          "role": null,
+          "tmdb_person_id": null,
+          "profile_path": null
+        }
+      ],
+      "film_tmdb_id": 1338552,
+      "film_title": "The Devil Smokes (and Saves the Burnt Matches in the Same Box)",
+      "subject_title": null,
+      "film_release_year": null,
+      "film_poster_path": null,
+      "source_url": null,
+      "source_citation": null,
+      "scraped_at": "2026-05-04T09:22:32.982679+00:00",
+      "scrape_version": null,
+      "verified_status": "auto_verified",
+      "flags": [],
+      "notes": null
+    }
+  ]
+}
