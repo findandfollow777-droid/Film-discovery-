@@ -1219,37 +1219,49 @@
           "winner_film": "The Artist",
           "winner_recipient": "Thomas Langmann",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "*The Artist* (Michel Hazanavicius) wins Best Film at the 65th ceremony with a leading 7-BAFTA haul — a black-and-white silent feature taking the top prize, an unusual outcome in the modern BAFTA era. Aligns with its Oscar Best Picture win the same season."
         },
         "bafta.best_director": {
           "winner_film": "The Artist",
           "winner_recipient": "Michel Hazanavicius",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "Michel Hazanavicius's first BAFTA Best Director, for the silent feature *The Artist*; aligns with his Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Artist",
           "winner_recipient": "Jean Dujardin",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "Jean Dujardin's first BAFTA Best Leading Actor, for *The Artist* — a near-silent performance; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "The Iron Lady",
           "winner_recipient": "Meryl Streep",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "Meryl Streep wins Best Leading Actress for her Margaret Thatcher performance in *The Iron Lady*; aligns with her Oscar Best Actress win — her record-third Oscar."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Beginners",
           "winner_recipient": "Christopher Plummer",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "Christopher Plummer's first BAFTA, for *Beginners*; aligns with his Oscar Best Supporting Actor win the same season — at age 82, he became one of the oldest competitive Oscar acting winners."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The Help",
           "winner_recipient": "Octavia Spencer",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 65th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notable": true,
+          "note": "Octavia Spencer's first BAFTA, for *The Help*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Skin I Live In",
@@ -1264,8 +1276,11 @@
         "bafta.best_documentary": {
           "winner_film": "Senna",
           "expected_nomination_count": 3,
-          "source": "Wikipedia 65th BAFTA / FilmAffinity",
-          "notes": "Inaugural year for the revived Best Documentary category. Slate of 3 nominees per era_override in expectations.json (era 2012-2012 ⇒ typ=3, tol=0). Subsequent ceremonies revert to standard 5-nominee slate."
+          "source": "BAFTA press release 12 Feb 2012 / Wikipedia 65th BAFTA",
+          "notes": "Inaugural year for the revived Best Documentary category. Slate of 3 nominees per era_override in expectations.json (era 2012-2012 ⇒ typ=3, tol=0). Subsequent ceremonies revert to standard 5-nominee slate.",
+          "notable": true,
+          "note": "Asif Kapadia's *Senna* takes the inaugural BAFTA Best Documentary at the 65th ceremony — Kapadia would return to win the same category at the 69th for *Amy*.",
+          "winner_recipient": "Tim Bevan, Eric Fellner, James Gay-Rees, Asif Kapadia"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Tinker Tailor Soldier Spy",
@@ -1299,43 +1314,58 @@
         "bafta.best_film": {
           "winner_film": "Argo",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "*Argo* (Ben Affleck) wins Best Film at the 66th ceremony alongside Best Director — a notable result given Affleck's well-publicised Oscar Best Director snub the same season. The film went on to win Oscar Best Picture.",
+          "winner_recipient": "Grant Heslov, Ben Affleck, George Clooney"
         },
         "bafta.best_director": {
           "winner_film": "Argo",
           "winner_recipient": "Ben Affleck",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Ben Affleck wins BAFTA Best Director for *Argo* — a striking BAFTA/Oscar divergence as Affleck was famously not nominated for the Oscar Best Director that season, despite *Argo* winning Oscar Best Picture."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Lincoln",
           "winner_recipient": "Daniel Day-Lewis",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Daniel Day-Lewis's third BAFTA Best Leading Actor, for *Lincoln* — joining his wins for *Gangs of New York* (cer 56) and *There Will Be Blood* (cer 61). Aligns with his record-third Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Amour",
           "winner_recipient": "Emmanuelle Riva",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Emmanuelle Riva wins Best Leading Actress for *Amour* at age 85, while *Amour* also takes Best Film Not in the English Language at the same ceremony — a rare cross-category recognition."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Django Unchained",
           "winner_recipient": "Christoph Waltz",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Christoph Waltz's second BAFTA Best Supporting Actor (first was *Inglourious Basterds* at the 63rd) — both wins under Quentin Tarantino's direction. Aligns with his Oscar Best Supporting Actor win."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Les Misérables",
           "winner_recipient": "Anne Hathaway",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Anne Hathaway's first BAFTA, for *Les Misérables*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Amour",
-          "winner_recipient": "Michael Haneke",
+          "winner_recipient": "Michael Haneke, Margaret Ménégoz",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Michael Haneke's *Amour* takes Best Film Not in the English Language alongside its Best Leading Actress win for Emmanuelle Riva. The film went on to win Oscar Best Foreign Language Film."
         },
         "bafta.best_animated_film": {
           "winner_film": "Brave",
@@ -1349,9 +1379,11 @@
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Skyfall",
-          "winner_recipient": "Sam Mendes",
+          "winner_recipient": "Sam Mendes, Michael G. Wilson, Barbara Broccoli, Neal Purvis, Robert Wade, John Logan",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "*Skyfall* wins Outstanding British Film at the 66th ceremony — the first James Bond film to take the category in the truth-file record. Sam Mendes would return to win Outstanding British Film again for *1917* at the 73rd."
         },
         "bafta.best_original_score": {
           "winner_film": "Skyfall",
@@ -1369,7 +1401,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Juno Temple",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 66th BAFTA"
+          "source": "BAFTA press release 10 Feb 2013 / Wikipedia 66th BAFTA",
+          "notable": true,
+          "note": "Juno Temple wins EE Rising Star at the 66th ceremony, voted by the British public.",
+          "winner_film": ""
         }
       }
     },
@@ -1380,37 +1415,50 @@
         "bafta.best_film": {
           "winner_film": "12 Years a Slave",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "*12 Years a Slave* (Steve McQueen) wins Best Film at the 67th ceremony — the first BAFTA Best Film for a Black director in the truth-file record. McQueen had previously won Outstanding Debut at the 62nd for *Hunger*. Aligns with the film's Oscar Best Picture win.",
+          "winner_recipient": "Anthony Katagas, Brad Pitt, Dede Gardner, Jeremy Kleiner, Steve McQueen"
         },
         "bafta.best_director": {
           "winner_film": "Gravity",
           "winner_recipient": "Alfonso Cuarón",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "Alfonso Cuarón's first BAFTA Best Director, for *Gravity* — a BAFTA Best Film/Best Director split with *12 Years a Slave*. Cuarón would return to win Best Director at the 72nd for *Roma*. Aligns with his Oscar Best Director win."
         },
         "bafta.best_leading_actor": {
           "winner_film": "12 Years a Slave",
           "winner_recipient": "Chiwetel Ejiofor",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "Chiwetel Ejiofor wins Best Leading Actor for *12 Years a Slave* at the 67th ceremony — the same film also taking Best Film. (Matthew McConaughey took the Oscar Best Actor for *Dallas Buyers Club* the same season — a BAFTA/Oscar split.)"
         },
         "bafta.best_leading_actress": {
           "winner_film": "Blue Jasmine",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "Cate Blanchett's second BAFTA, for *Blue Jasmine* — first was Best Supporting Actress at the 58th for *The Aviator*. She would return to win Best Leading Actress again at the 76th for *Tár*. Aligns with her Oscar Best Actress win."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Captain Phillips",
           "winner_recipient": "Barkhad Abdi",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "Barkhad Abdi's first BAFTA, for his debut performance in *Captain Phillips* — a former Somali-born Minneapolis driver cast as a first-time actor."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "American Hustle",
           "winner_recipient": "Jennifer Lawrence",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 67th BAFTA / Variety"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "Jennifer Lawrence's first BAFTA, for *American Hustle* — one year after losing the BAFTA Best Leading Actress nomination for *Silver Linings Playbook*."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Great Beauty",
@@ -1431,7 +1479,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Gravity",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 67th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 16 Feb 2014 / Wikipedia 67th BAFTA",
+          "notable": true,
+          "note": "*Gravity* wins Outstanding British Film alongside its Best Director win — recognition of the film's UK production at Shepperton Studios despite its Mexican director and American leads.",
+          "winner_recipient": "Alfonso Cuarón, David Heyman, Jonás Cuarón"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Kelly + Victor",
@@ -1453,38 +1504,51 @@
         "bafta.best_film": {
           "winner_film": "Boyhood",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "*Boyhood* (Richard Linklater) wins Best Film at the 68th ceremony — Linklater's 12-year filming project. A BAFTA/Oscar split as *Birdman* would take Oscar Best Picture the same season.",
+          "winner_recipient": "Richard Linklater, Cathleen Sutherland"
         },
         "bafta.best_director": {
           "winner_film": "Boyhood",
           "winner_recipient": "Richard Linklater",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "Richard Linklater's first BAFTA Best Director, for *Boyhood* — his unprecedented 12-year shooting schedule. Iñárritu would take the Oscar Best Director for *Birdman*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Theory of Everything",
           "winner_recipient": "Eddie Redmayne",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "Eddie Redmayne's first BAFTA, for his Stephen Hawking performance in *The Theory of Everything*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Still Alice",
           "winner_recipient": "Julianne Moore",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "Julianne Moore's first BAFTA, for *Still Alice*; aligns with her Oscar Best Actress win the same season — her first Oscar after multiple nominations across her career."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Whiplash",
           "winner_recipient": "J. K. Simmons",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / Variety",
-          "notes": "Spaced form 'J. K. Simmons' matches scraped CSV. External outlets often render as 'J.K. Simmons'; same person."
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notes": "Spaced form 'J. K. Simmons' matches scraped CSV. External outlets often render as 'J.K. Simmons'; same person.",
+          "notable": true,
+          "note": "J. K. Simmons's first BAFTA, for *Whiplash*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Boyhood",
           "winner_recipient": "Patricia Arquette",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA / Variety"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "Patricia Arquette's first BAFTA, for *Boyhood*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Ida",
@@ -1504,7 +1568,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "The Theory of Everything",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 68th BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "*The Theory of Everything* wins Outstanding British Film alongside Best Leading Actor for Eddie Redmayne — a Working Title production directed by James Marsh.",
+          "winner_recipient": "James Marsh, Tim Bevan, Eric Fellner, Lisa Bruce, Anthony McCarten"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Pride",
@@ -1515,7 +1582,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Jack O'Connell",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 68th BAFTA"
+          "source": "BAFTA press release 8 Feb 2015 / Wikipedia 68th BAFTA",
+          "notable": true,
+          "note": "Jack O'Connell wins EE Rising Star at the 68th ceremony, recognised for *'71*, *Starred Up* and *Unbroken*.",
+          "winner_film": ""
         }
       }
     },
@@ -1526,38 +1596,51 @@
         "bafta.best_film": {
           "winner_film": "The Revenant",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / BAFTA press release / Variety"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "*The Revenant* (Alejandro González Iñárritu) wins Best Film at the 69th ceremony with 5 BAFTAs total, including Best Director and Best Leading Actor. *Spotlight* would take Oscar Best Picture the same season — a BAFTA/Oscar split.",
+          "winner_recipient": "Steve Golin, Alejandro González Iñárritu, Arnon Milchan, Mary Parent, Keith Redmon"
         },
         "bafta.best_director": {
           "winner_film": "The Revenant",
           "winner_recipient": "Alejandro González Iñárritu",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / Variety",
-          "notes": "Full name 'Alejandro González Iñárritu' matches scraped CSV (Wikipedia source). External outlets often shorten to 'Alejandro G. Iñárritu'; same person."
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notes": "Full name 'Alejandro González Iñárritu' matches scraped CSV (Wikipedia source). External outlets often shorten to 'Alejandro G. Iñárritu'; same person.",
+          "notable": true,
+          "note": "Alejandro González Iñárritu's first BAFTA Best Director, for *The Revenant* — he had previously won Best Film Not in the English Language at the 55th for *Amores perros*. Aligns with his second consecutive Oscar Best Director win, after *Birdman*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Revenant",
           "winner_recipient": "Leonardo DiCaprio",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / Variety"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "Leonardo DiCaprio's first BAFTA Best Leading Actor, for *The Revenant*, after multiple nominations across his career; aligns with his first Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Room",
           "winner_recipient": "Brie Larson",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / Variety"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "Brie Larson's first BAFTA, for *Room*; aligns with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Bridge of Spies",
           "winner_recipient": "Mark Rylance",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / Variety"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "Mark Rylance's first BAFTA, for *Bridge of Spies*; aligns with his Oscar Best Supporting Actor win the same season — a famous upset over Sylvester Stallone for *Creed*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Steve Jobs",
           "winner_recipient": "Kate Winslet",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA / Variety"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "Kate Winslet's second BAFTA — first was Best Leading Actress at the 62nd for *The Reader*. A BAFTA/Oscar split as Alicia Vikander took the Oscar Best Supporting Actress for *The Danish Girl*."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Wild Tales",
@@ -1573,7 +1656,10 @@
         "bafta.best_documentary": {
           "winner_film": "Amy",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "Asif Kapadia's second BAFTA Best Documentary, for *Amy* — following *Senna* at the 65th. Aligns with the film's Oscar Best Documentary Feature win.",
+          "winner_recipient": "James Gay-Rees, Asif Kapadia"
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Brooklyn",
@@ -1589,7 +1675,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "John Boyega",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 69th BAFTA"
+          "source": "BAFTA press release 14 Feb 2016 / Wikipedia 69th BAFTA",
+          "notable": true,
+          "note": "John Boyega wins EE Rising Star at the 69th ceremony, recognised for *Star Wars: The Force Awakens*.",
+          "winner_film": ""
         }
       }
     },
