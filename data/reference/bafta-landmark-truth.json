@@ -10,31 +10,41 @@
           "winner_film": "One Battle After Another",
           "winner_recipient": "Adam Somner",
           "expected_nomination_count": 5,
-          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/"
+          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+          "notable": true,
+          "note": "*One Battle After Another* (Paul Thomas Anderson) wins BAFTA Best Film at the 79th ceremony in 2026 with 6 BAFTAs overall, including Best Director, Best Supporting Actor (Sean Penn), Best Adapted Screenplay, Best Cinematography, and Best Editing."
         },
         "bafta.best_director": {
           "winner_film": "One Battle After Another",
           "winner_recipient": "Paul Thomas Anderson",
           "expected_nomination_count": 6,
-          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/"
+          "source": "https://www.bafta.org/media-centre/press-releases/winners-announced-2026-film-awards/",
+          "notable": true,
+          "note": "Paul Thomas Anderson wins BAFTA Best Director for *One Battle After Another* at the 79th ceremony in 2026 — his first BAFTA Best Director win in the truth-file record (2000–2026)."
         },
         "bafta.best_leading_actor": {
           "winner_film": "I Swear",
           "winner_recipient": "Robert Aramayo",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 22 Feb 2026"
+          "source": "BAFTA press release 22 Feb 2026",
+          "notable": true,
+          "note": "Robert Aramayo wins BAFTA Best Leading Actor for *I Swear* at the 79th ceremony in 2026; Aramayo also takes EE Rising Star at the same ceremony — a rare same-ceremony double."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Hamnet",
           "winner_recipient": "Jessie Buckley",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 22 Feb 2026"
+          "source": "BAFTA press release 22 Feb 2026",
+          "notable": true,
+          "note": "Jessie Buckley wins BAFTA Best Leading Actress for *Hamnet* at the 79th ceremony in 2026; the same film also takes Outstanding British Film at this ceremony."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "One Battle After Another",
           "winner_recipient": "Sean Penn",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 22 Feb 2026"
+          "source": "BAFTA press release 22 Feb 2026",
+          "notable": true,
+          "note": "Sean Penn wins BAFTA Best Supporting Actor for *One Battle After Another* at the 79th ceremony in 2026 — Penn's first BAFTA win in the truth-file record (2000–2026)."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Sinners",
@@ -66,7 +76,9 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Hamnet",
           "expected_nomination_count": 10,
-          "source": "BAFTA press release 22 Feb 2026"
+          "source": "BAFTA press release 22 Feb 2026",
+          "notable": true,
+          "note": "*Hamnet* (Chloé Zhao) wins Outstanding British Film at the 79th BAFTAs in 2026; the same film also takes BAFTA Best Leading Actress for Jessie Buckley at this ceremony."
         },
         "bafta.outstanding_debut": {
           "winner_film": "My Father's Shadow",
@@ -77,7 +89,9 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Robert Aramayo",
           "expected_nomination_count": 5,
-          "source": "BAFTA press release 22 Feb 2026"
+          "source": "BAFTA press release 22 Feb 2026",
+          "notable": true,
+          "note": "Robert Aramayo wins EE Rising Star at the 79th BAFTAs in 2026; Aramayo also takes BAFTA Best Leading Actor at the same ceremony — a rare same-ceremony double of public-vote and competitive prize."
         }
       }
     },
@@ -89,37 +103,49 @@
           "winner_film": "Conclave",
           "winner_recipient": "Tessa Ross",
           "expected_nomination_count": 5,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "*Conclave* wins BAFTA Best Film at the 78th ceremony in 2025; Oscar Best Picture the same season went instead to *Anora*. BAFTA/Oscar Best Film split."
         },
         "bafta.best_director": {
           "winner_film": "The Brutalist",
           "winner_recipient": "Brady Corbet",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "Brady Corbet wins BAFTA Best Director for *The Brutalist* at the 78th ceremony in 2025; Oscar Best Director the same season went to Sean Baker for *Anora*. BAFTA/Oscar split."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Brutalist",
           "winner_recipient": "Adrien Brody",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "Adrien Brody wins BAFTA Best Leading Actor for *The Brutalist* at the 78th ceremony in 2025, aligning with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Anora",
           "winner_recipient": "Mikey Madison",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "Mikey Madison wins BAFTA Best Leading Actress for *Anora* at the 78th ceremony in 2025, aligning with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "A Real Pain",
           "winner_recipient": "Kieran Culkin",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "Kieran Culkin wins BAFTA Best Supporting Actor for *A Real Pain* at the 78th ceremony in 2025, aligning with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Emilia Pérez",
           "winner_recipient": "Zoe Saldaña",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "Zoe Saldaña wins BAFTA Best Supporting Actress for *Emilia Pérez* at the 78th ceremony in 2025, aligning with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Emilia Pérez",
@@ -136,19 +162,25 @@
           "winner_film": "Wallace & Gromit: Vengeance Most Fowl",
           "winner_recipient": "Nick Park",
           "expected_nomination_count": 4,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "*Wallace & Gromit: Vengeance Most Fowl* (Aardman) wins BAFTA Best Animated Film at the 78th ceremony in 2025; the same film also takes Best Children's Film at this ceremony."
         },
         "bafta.best_childrens_film": {
           "winner_film": "Wallace & Gromit: Vengeance Most Fowl",
           "winner_recipient": "Nick Park",
           "expected_nomination_count": 4,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "*Wallace & Gromit: Vengeance Most Fowl* (Aardman) wins BAFTA Best Children's Film at the 78th ceremony in 2025; the same film also takes Best Animated Film at this ceremony."
         },
         "bafta.outstanding_british_film": {
           "winner_film": "Conclave",
           "winner_recipient": "Edward Berger",
           "expected_nomination_count": 10,
-          "source": "BAFTA press release 16 Feb 2025"
+          "source": "BAFTA press release 16 Feb 2025",
+          "notable": true,
+          "note": "*Conclave* wins Outstanding British Film at the 78th BAFTAs in 2025 — the same film also takes BAFTA Best Film at this ceremony."
         },
         "bafta.outstanding_debut": {
           "winner_film": "Kneecap",
@@ -180,43 +212,57 @@
           "winner_film": "Oppenheimer",
           "winner_recipient": "Christopher Nolan",
           "expected_nomination_count": 5,
-          "source": "BAFTA press release 18 Feb 2024 / Variety / NPR"
+          "source": "BAFTA press release 18 Feb 2024 / Variety / NPR",
+          "notable": true,
+          "note": "*Oppenheimer* wins BAFTA Best Film at the 77th ceremony in 2024 with 7 BAFTAs overall, aligning with Oscar Best Picture the same season."
         },
         "bafta.best_director": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Christopher Nolan",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024 (parity rule applied; 6 nominees per Wikipedia)"
+          "source": "BAFTA press release 18 Feb 2024 (parity rule applied; 6 nominees per Wikipedia)",
+          "notable": true,
+          "note": "Christopher Nolan wins BAFTA Best Director for *Oppenheimer* at the 77th ceremony in 2024, aligning with his Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Cillian Murphy",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "Cillian Murphy wins BAFTA Best Leading Actor for *Oppenheimer* at the 77th ceremony in 2024, aligning with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Poor Things",
           "winner_recipient": "Emma Stone",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "Emma Stone wins BAFTA Best Leading Actress for *Poor Things* at the 77th ceremony in 2024 — her second BAFTA Best Leading Actress after *La La Land* in 2017, aligning with her Oscar Best Actress win the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Oppenheimer",
           "winner_recipient": "Robert Downey Jr.",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "Robert Downey Jr. wins BAFTA Best Supporting Actor for *Oppenheimer* at the 77th ceremony in 2024, aligning with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The Holdovers",
           "winner_recipient": "Da'Vine Joy Randolph",
           "expected_nomination_count": 6,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "Da'Vine Joy Randolph wins BAFTA Best Supporting Actress for *The Holdovers* at the 77th ceremony in 2024, aligning with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Zone of Interest",
           "winner_recipient": "Jonathan Glazer",
           "expected_nomination_count": 5,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "*The Zone of Interest* (Jonathan Glazer) wins BAFTA Best Film Not in English Language at the 77th ceremony in 2024 — a UK production performed in German and Polish. The same film also takes Outstanding British Film and Best Sound at this ceremony."
         },
         "bafta.best_documentary": {
           "winner_film": "20 Days In Mariupol",
@@ -232,7 +278,9 @@
           "winner_film": "The Zone of Interest",
           "winner_recipient": "Jonathan Glazer",
           "expected_nomination_count": 10,
-          "source": "BAFTA press release 18 Feb 2024"
+          "source": "BAFTA press release 18 Feb 2024",
+          "notable": true,
+          "note": "*The Zone of Interest* wins Outstanding British Film at the 77th BAFTAs in 2024 — a UK production performed in German and Polish, also taking Best Film Not in English Language at the same ceremony."
         },
         "bafta.outstanding_debut": {
           "winner_film": "Earth Mama",
@@ -254,26 +302,34 @@
         "bafta.best_film": {
           "winner_film": "All Quiet on the Western Front",
           "expected_nomination_count": 5,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "*All Quiet on the Western Front* (a German-language production) wins BAFTA Best Film at the 76th ceremony in 2023, with 7 BAFTAs in total including Best Director, Best Adapted Screenplay, and Best Film Not in English Language. Oscar Best Picture the same season went to *Everything Everywhere All at Once*."
         },
         "bafta.best_director": {
           "winner_film": "All Quiet on the Western Front",
           "winner_recipient": "Edward Berger",
           "expected_nomination_count": 6,
           "source": "Wikipedia / parity rule (7 nominees per Wikipedia 76th BAFTA)",
-          "notes": "Pre-fix count was 7 due to Daniels (Kwan + Scheinert) being mis-split into 2 rows. Post-architectural-fix the team consolidates to 1 row, total nominees: 6 (5 solo directors + 1 Daniels-as-team)."
+          "notes": "Pre-fix count was 7 due to Daniels (Kwan + Scheinert) being mis-split into 2 rows. Post-architectural-fix the team consolidates to 1 row, total nominees: 6 (5 solo directors + 1 Daniels-as-team).",
+          "notable": true,
+          "note": "Edward Berger wins BAFTA Best Director for *All Quiet on the Western Front* at the 76th ceremony in 2023, part of the film's 7-BAFTA sweep. Oscar Best Director the same season went to Daniel Kwan and Daniel Scheinert for *Everything Everywhere All at Once*. BAFTA/Oscar split."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Elvis",
           "winner_recipient": "Austin Butler",
           "expected_nomination_count": 6,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "Austin Butler wins BAFTA Best Leading Actor for *Elvis* at the 76th ceremony in 2023; Oscar Best Actor the same season went to Brendan Fraser for *The Whale*. BAFTA/Oscar split."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Tár",
           "winner_recipient": "Cate Blanchett",
           "expected_nomination_count": 6,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "Cate Blanchett wins BAFTA Best Leading Actress for *Tár* at the 76th ceremony in 2023 — her second BAFTA Best Leading Actress after *Blue Jasmine* in 2014. Oscar Best Actress the same season went to Michelle Yeoh for *Everything Everywhere All at Once*. BAFTA/Oscar split."
         },
         "bafta.outstanding_british_film": {
           "winner_film": "The Banshees of Inisherin",
@@ -300,25 +356,33 @@
         "bafta.best_film": {
           "winner_film": "The Power of the Dog",
           "expected_nomination_count": 5,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "*The Power of the Dog* takes BAFTA Best Film at the 75th ceremony in 2022; Oscar Best Picture the same season went instead to *CODA*. BAFTA/Oscar Best Film split."
         },
         "bafta.best_director": {
           "winner_film": "The Power of the Dog",
           "winner_recipient": "Jane Campion",
           "expected_nomination_count": 6,
-          "source": "Wikipedia / parity rule"
+          "source": "Wikipedia / parity rule",
+          "notable": true,
+          "note": "Jane Campion wins BAFTA Best Director for *The Power of the Dog* at the 75th ceremony in 2022, aligning with her Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "King Richard",
           "winner_recipient": "Will Smith",
           "expected_nomination_count": 6,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "Will Smith wins BAFTA Best Leading Actor for *King Richard* at the 75th ceremony in 2022, aligning with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "After Love",
           "winner_recipient": "Joanna Scanlan",
           "expected_nomination_count": 6,
-          "source": "Wikipedia / multiple"
+          "source": "Wikipedia / multiple",
+          "notable": true,
+          "note": "Joanna Scanlan wins BAFTA Best Leading Actress for *After Love* at the 75th ceremony in 2022; Oscar Best Actress the same season went to Jessica Chastain for *The Eyes of Tammy Faye*. BAFTA/Oscar Best Actress split."
         },
         "bafta.outstanding_debut": {
           "winner_film": "The Harder They Fall",
@@ -530,7 +594,10 @@
         },
         "bafta.outstanding_debut": {
           "winner_film": "Jump Tomorrow",
-          "winner_recipients": ["Joel Hopkins", "Nicola Usborne"],
+          "winner_recipients": [
+            "Joel Hopkins",
+            "Nicola Usborne"
+          ],
           "expected_nomination_count": 6,
           "source": "Wikipedia 55th BAFTA — Carl Foreman Award",
           "notes": "Team-credited award: Joel Hopkins (Director) + Nicola Usborne (Writer/Producer). Same architectural class as cer 61 Coens — CSV captured 'Joel Hopkins' only (Usborne dropped pre-architectural-fix). Truth file documents reality via winner_recipients array form. Wrapper currently validates only winner_recipient singular; recipient check effectively skipped on this row pending wrapper enhancement or post-Batch-D re-scrape. Tracked under bafta-outstanding-debut-co-recipients-dropped class."
@@ -880,7 +947,10 @@
         },
         "bafta.best_director": {
           "winner_film": "No Country for Old Men",
-          "winner_recipients": ["Joel Coen", "Ethan Coen"],
+          "winner_recipients": [
+            "Joel Coen",
+            "Ethan Coen"
+          ],
           "expected_nomination_count": 5,
           "source": "Wikipedia 61st BAFTA — explicitly states 'Coen brothers, Joel and Ethan, won Best Director'",
           "notes": "Team-credited award (Joel Coen + Ethan Coen). Architectural fix landed today should produce a single row with both atomic recipients[], but ceremony 61 CSV was scraped pre-fix and currently captures only 'Joel Coen'. Truth file records the team credit (winner_recipients array form); wrapper currently validates only winner_recipient singular so recipient check is effectively skipped on this row pending wrapper enhancement to read winner_recipients[]. Tracked under bafta-outstanding-debut-co-recipients-dropped class (analogous: this is best_director, but same architectural pattern; resolution path is re-scrape post-fix)."
@@ -1530,37 +1600,50 @@
         "bafta.best_film": {
           "winner_film": "La La Land",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "*La La Land* (Damien Chazelle) wins Best Film at the 70th ceremony with 5 BAFTAs total — including Best Director, Best Leading Actress, Cinematography and Original Music — the same season the Oscar Best Picture mix-up handed the award to *Moonlight* on the night.",
+          "winner_recipient": "Fred Berger, Jordan Horowitz, Marc Platt"
         },
         "bafta.best_director": {
           "winner_film": "La La Land",
           "winner_recipient": "Damien Chazelle",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "Damien Chazelle's first BAFTA Best Director, for *La La Land*; aligns with his Oscar Best Director win the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Manchester by the Sea",
           "winner_recipient": "Casey Affleck",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "Casey Affleck's first BAFTA, for *Manchester by the Sea*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "La La Land",
           "winner_recipient": "Emma Stone",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "Emma Stone's first BAFTA Best Leading Actress, for *La La Land*; aligns with her Oscar win. She would win again at the 77th ceremony for *Poor Things*."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Lion",
           "winner_recipient": "Dev Patel",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "Dev Patel's first BAFTA, for *Lion* — eight years after appearing in *Slumdog Millionaire*, which won Best Film at the 62nd ceremony."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Fences",
           "winner_recipient": "Viola Davis",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 70th BAFTA / Variety"
+          "source": "BAFTA press release 12 Feb 2017 / Wikipedia 70th BAFTA",
+          "notable": true,
+          "note": "Viola Davis's first BAFTA, for *Fences*; aligns with her Oscar win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Son of Saul",
@@ -1603,37 +1686,50 @@
         "bafta.best_film": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "*Three Billboards Outside Ebbing, Missouri* wins Best Film at the 71st ceremony with 5 BAFTAs total, including Outstanding British Film — a BAFTA/Oscar split as *The Shape of Water* took the Oscar Best Picture the same season.",
+          "winner_recipient": "Graham Broadbent, Peter Czernin, Martin McDonagh"
         },
         "bafta.best_director": {
           "winner_film": "The Shape of Water",
           "winner_recipient": "Guillermo del Toro",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Guillermo del Toro wins Best Director for *The Shape of Water* while *Three Billboards* takes Best Film — an internal BAFTA split. Del Toro went on to win Oscar Best Director and Best Picture the same season."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Darkest Hour",
           "winner_recipient": "Gary Oldman",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Gary Oldman's first BAFTA Best Leading Actor, for his Churchill performance in *Darkest Hour*; aligns with his Oscar win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "winner_recipient": "Frances McDormand",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Frances McDormand's first BAFTA, for *Three Billboards*; aligns with her Oscar Best Actress win. She would sweep again at the 74th ceremony with *Nomadland*."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "winner_recipient": "Sam Rockwell",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Sam Rockwell's first BAFTA, for *Three Billboards*; aligns with his Oscar Best Supporting Actor win."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "I, Tonya",
           "winner_recipient": "Allison Janney",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA / Variety"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Allison Janney's first BAFTA, for *I, Tonya*; aligns with her Oscar Best Supporting Actress win."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "The Handmaiden",
@@ -1653,7 +1749,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Three Billboards Outside Ebbing, Missouri",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 71st BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "*Three Billboards* wins Outstanding British Film — qualifying via Anglo-Irish writer-director McDonagh and UK production financing — the same night it wins Best Film.",
+          "winner_recipient": "Martin McDonagh, Graham Broadbent, Peter Czernin"
         },
         "bafta.outstanding_debut": {
           "winner_film": "I Am Not a Witch",
@@ -1664,7 +1763,10 @@
         "bafta.ee_rising_star": {
           "winner_recipient": "Daniel Kaluuya",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 71st BAFTA"
+          "source": "BAFTA press release 18 Feb 2018 / Wikipedia 71st BAFTA",
+          "notable": true,
+          "note": "Daniel Kaluuya wins EE Rising Star at the 71st ceremony; he would return to win BAFTA Best Supporting Actor at the 74th for *Judas and the Black Messiah*.",
+          "winner_film": ""
         }
       }
     },
@@ -1675,42 +1777,58 @@
         "bafta.best_film": {
           "winner_film": "Roma",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "*Roma* (Alfonso Cuarón) wins Best Film at the 72nd ceremony AND Best Film Not in the English Language the same night — an unusual double for the same title. *Green Book* took Oscar Best Picture the same season.",
+          "winner_recipient": "Alfonso Cuarón, Gabriela Rodríguez"
         },
         "bafta.best_director": {
           "winner_film": "Roma",
           "winner_recipient": "Alfonso Cuarón",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "Alfonso Cuarón's second BAFTA Best Director (first was *Gravity* at the 67th); aligns with his Oscar Best Director win for *Roma*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Bohemian Rhapsody",
           "winner_recipient": "Rami Malek",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "Rami Malek's first BAFTA, for *Bohemian Rhapsody*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "The Favourite",
           "winner_recipient": "Olivia Colman",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "Olivia Colman's first BAFTA Best Leading Actress, for *The Favourite*; she would also win the Oscar the same season."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Green Book",
           "winner_recipient": "Mahershala Ali",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "Mahershala Ali wins for *Green Book*; aligns with his Oscar Best Supporting Actor win the same season."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "The Favourite",
           "winner_recipient": "Rachel Weisz",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA / Variety"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "Rachel Weisz wins Best Supporting Actress for *The Favourite*, contributing to that film's leading 7-BAFTA haul at the 72nd ceremony."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Roma",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 72nd BAFTA (Roma also won Best Film)"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "*Roma* wins Best Film Not in the English Language alongside its Best Film victory — the rare same-ceremony double. It also won Oscar Best International Feature and Best Director.",
+          "winner_recipient": "Alfonso Cuarón, Gabriela Rodríguez"
         },
         "bafta.best_animated_film": {
           "winner_film": "Spider-Man: Into the Spider-Verse",
@@ -1725,7 +1843,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "The Favourite",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 72nd BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 10 Feb 2019 / Wikipedia 72nd BAFTA",
+          "notable": true,
+          "note": "*The Favourite* leads the night with 7 BAFTAs including Outstanding British Film, but loses the top prize to *Roma*.",
+          "winner_recipient": "Yorgos Lanthimos, Ed Guiney, Tony McNamara"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Beast",
@@ -1747,43 +1868,58 @@
         "bafta.best_film": {
           "winner_film": "1917",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "*1917* (Sam Mendes) wins Best Film at the 73rd ceremony with 7 BAFTAs total — the night's leader — while *Parasite* would go on to win Oscar Best Picture in a historic upset.",
+          "winner_recipient": "Pippa Harris, Sam Mendes"
         },
         "bafta.best_director": {
           "winner_film": "1917",
           "winner_recipient": "Sam Mendes",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "Sam Mendes's first BAFTA Best Director, for *1917*; he had previously won Outstanding British Film at the 66th ceremony for *Skyfall*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "Joker",
           "winner_recipient": "Joaquin Phoenix",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "Joaquin Phoenix's first BAFTA Best Leading Actor, for *Joker*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Judy",
           "winner_recipient": "Renée Zellweger",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "Renée Zellweger's second BAFTA — a 16-year gap since her 57th-ceremony Best Supporting Actress win for *Cold Mountain*. Aligns with her Oscar Best Actress win for *Judy*."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Once Upon a Time in Hollywood",
           "winner_recipient": "Brad Pitt",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "Brad Pitt's first BAFTA acting win, for *Once Upon a Time in Hollywood*; he previously shared the 67th-ceremony Best Film prize as a producer of *12 Years a Slave*. Aligns with his Oscar Best Supporting Actor win."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Marriage Story",
           "winner_recipient": "Laura Dern",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "Laura Dern wins for *Marriage Story*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Parasite",
           "winner_recipient": "Bong Joon-ho",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 73rd BAFTA / Variety"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "*Parasite* wins Best Film Not in the English Language at the 73rd ceremony — BAFTA recognition that preceded its historic Oscar sweep including Best Picture, the first non-English-language film to take the top Oscar prize."
         },
         "bafta.best_animated_film": {
           "winner_film": "Klaus",
@@ -1798,7 +1934,10 @@
         "bafta.outstanding_british_film": {
           "winner_film": "1917",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 73rd BAFTA / pre-2021 era_override"
+          "source": "BAFTA press release 2 Feb 2020 / Wikipedia 73rd BAFTA",
+          "notable": true,
+          "note": "*1917* wins Outstanding British Film alongside its Best Film victory — part of its 7-BAFTA night.",
+          "winner_recipient": "Sam Mendes, Pippa Harris, Krysty Wilson-Cairns"
         },
         "bafta.outstanding_debut": {
           "winner_film": "Bait",
@@ -1834,38 +1973,51 @@
         "bafta.best_film": {
           "winner_film": "Nomadland",
           "expected_nomination_count": 5,
-          "source": "Wikipedia 74th BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notable": true,
+          "note": "*Nomadland* (Chloé Zhao) wins Best Film at the 74th ceremony with 4 BAFTAs total at the COVID-delayed two-night event held in April 2021. Aligns with its Oscar Best Picture win the same season.",
+          "winner_recipient": "Mollye Asher, Frances McDormand, Peter Spears, Chloé Zhao"
         },
         "bafta.best_director": {
           "winner_film": "Nomadland",
           "winner_recipient": "Chloé Zhao",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 74th BAFTA / Variety / Gold Derby"
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notable": true,
+          "note": "Chloé Zhao becomes the second woman to win BAFTA Best Director, after Kathryn Bigelow at the 63rd ceremony for *The Hurt Locker*. Aligns with her Oscar Best Director win for *Nomadland*."
         },
         "bafta.best_leading_actor": {
           "winner_film": "The Father",
           "winner_recipient": "Anthony Hopkins",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 74th BAFTA / Variety"
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notable": true,
+          "note": "Anthony Hopkins wins for *The Father*; aligns with his Oscar Best Actor win the same season."
         },
         "bafta.best_leading_actress": {
           "winner_film": "Nomadland",
           "winner_recipient": "Frances McDormand",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 74th BAFTA / Variety"
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notable": true,
+          "note": "Frances McDormand's second BAFTA Best Leading Actress (first was the 71st for *Three Billboards*); aligns with her Oscar Best Actress win for *Nomadland*."
         },
         "bafta.best_supporting_actor": {
           "winner_film": "Judas and the Black Messiah",
           "winner_recipient": "Daniel Kaluuya",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 74th BAFTA / Variety"
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notable": true,
+          "note": "Daniel Kaluuya completes the EE Rising Star → Best Supporting Actor progression — having won Rising Star at the 71st ceremony three years earlier. Aligns with his Oscar Best Supporting Actor win for *Judas and the Black Messiah*."
         },
         "bafta.best_supporting_actress": {
           "winner_film": "Minari",
           "winner_recipient": "Youn Yuh-jung",
           "expected_nomination_count": 6,
-          "source": "Wikipedia 74th BAFTA / Variety",
-          "notes": "Korean family-name-first form 'Youn Yuh-jung' matches scraped CSV (Wikipedia source). External outlets often anglicise to 'Yuh-Jung Youn'; same person."
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notes": "Korean family-name-first form 'Youn Yuh-jung' matches scraped CSV (Wikipedia source). External outlets often anglicise to 'Yuh-Jung Youn'; same person.",
+          "notable": true,
+          "note": "Youn Yuh-jung wins for *Minari*; aligns with her Oscar Best Supporting Actress win the same season."
         },
         "bafta.best_film_not_in_english": {
           "winner_film": "Another Round",
@@ -1885,8 +2037,11 @@
         "bafta.outstanding_british_film": {
           "winner_film": "Promising Young Woman",
           "expected_nomination_count": 10,
-          "source": "Wikipedia 74th BAFTA",
-          "notes": "First ceremony of the expanded 10-nominee slate."
+          "source": "BAFTA press release 10–11 Apr 2021 / Wikipedia 74th BAFTA",
+          "notes": "First ceremony of the expanded 10-nominee slate.",
+          "notable": true,
+          "note": "*Promising Young Woman* wins Outstanding British Film for writer-director Emerald Fennell; she would also win the Oscar for Best Original Screenplay the same season.",
+          "winner_recipient": "Emerald Fennell"
         },
         "bafta.outstanding_debut": {
           "winner_film": "His House",
