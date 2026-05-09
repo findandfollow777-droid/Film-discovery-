@@ -8,4 +8,4 @@ year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verifi
 2011,cannes.best_actress,won,"[{""name"": ""Kirsten Dunst"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Melancholia,62215,false,auto_verified,,2026-05-03T12:51:49.697320+00:00
 2011,cannes.best_screenplay,won,"[{""name"": ""Joseph Cedar"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Footnote,72551,false,auto_verified,,2026-05-03T12:51:49.697320+00:00
 2011,cannes.camera_dor,won,"[{""name"": ""Pablo Giorgelli"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Las Acacias,85549,false,auto_verified,,2026-05-03T12:51:49.697320+00:00
-2011,cannes.short_film_palme_dor,won,"[{""name"": ""Maryna Vroda"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",[[Cross-Country (2011 film)|Cross-Country]] (Крос),,false,auto_verified,,2026-05-03T12:51:49.697320+00:00
+2011,cannes.short_film_palme_dor,won,"[{""name"": ""Maryna Vroda"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",[[Cross-Country (2011 film)|Cross-Country]] (Крос),277647,false,auto_verified,,2026-05-03T12:51:49.697320+00:00

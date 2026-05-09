@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "schema_version": "v1.3",
-    "generated_at": "2026-05-09T11:05:42.990853Z",
+    "generated_at": "2026-05-09T20:57:57.429458Z",
     "row_count": 1936,
     "festival_count": 1,
     "category_count": 15,
@@ -11,7 +11,7 @@
       "min": 2000,
       "max": 2026
     },
-    "tmdb_resolution_status": "partial_98.1pct",
+    "tmdb_resolution_status": "partial_98.4pct",
     "known_issues": [],
     "csv_files_read": {
       "oscar": 26,
@@ -16908,11 +16908,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 6575,
       "film_title": "from Walk Hard: The Dewey Cox Story",
       "subject_title": "Walk Hard",
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2007,
+      "film_poster_path": "/Aa1IQ4Cuin3d7qIahvPheMmR4E5.jpg",
       "source_url": "https://en.wikipedia.org/wiki/65th_Golden_Globe_Awards",
       "source_citation": "65th Golden Globe Awards Wikipedia article, Best Original Song section",
       "scraped_at": "2026-04-30T04:20:57.225941+00:00",

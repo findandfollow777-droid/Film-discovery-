@@ -1,6 +1,6 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
 2010,cannes.palme_dor,won,"[{""name"": ""Apichatpong Weerasethakul"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Uncle Boonmee Who Can Recall His Past Lives,38368,false,auto_verified,,2026-05-03T12:51:47.173679+00:00
-2010,cannes.grand_prix,won,"[{""name"": ""Xavier Beauvois"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",[[Of Gods and Men (film)|Of Gods and Men]],,false,auto_verified,,2026-05-03T12:51:47.173679+00:00
+2010,cannes.grand_prix,won,"[{""name"": ""Xavier Beauvois"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",[[Of Gods and Men (film)|Of Gods and Men]],46332,false,auto_verified,,2026-05-03T12:51:47.173679+00:00
 2010,cannes.jury_prize,won,"[{""name"": ""Mahamat-Saleh Haroun"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",A Screaming Man,57602,false,auto_verified,,2026-05-03T12:51:47.173679+00:00
 2010,cannes.best_director,won,"[{""name"": ""Mathieu Amalric"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",On Tour,41273,false,auto_verified,,2026-05-03T12:51:47.173679+00:00
 2010,cannes.best_actor,won,"[{""name"": ""Javier Bardem"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Biutiful,45958,true,auto_verified,,2026-05-03T12:51:47.173679+00:00

@@ -9,8 +9,16 @@
     "release_year": 2009,
     "tmdb_id": 19913
   },
-  "(A) Torzija [(A) Torsion]&nbsp;|2003": null,
-  "(Il Supplente) The Substitute&nbsp;|2007": null,
+  "(A) Torzija [(A) Torsion]&nbsp;|2003": {
+    "poster_path": "/gOxhnl80yIwq4q8LXVIr9skBE5T.jpg",
+    "release_year": 2003,
+    "tmdb_id": 244987
+  },
+  "(Il Supplente) The Substitute&nbsp;|2007": {
+    "poster_path": "/oLgIuXSDlhecGOlPuj2QG4iwcIS.jpg",
+    "release_year": 2007,
+    "tmdb_id": 245023
+  },
   "102 Dalmatians|2000": {
     "poster_path": "/ueE6u2GTECzGBtas6PFx7wwi9y0.jpg",
     "release_year": 2000,
@@ -116,7 +124,11 @@
     "release_year": 2018,
     "tmdb_id": 517731
   },
-  "3 Misses&nbsp;|1999": null,
+  "3 Misses&nbsp;|1999": {
+    "poster_path": "/eHgLegxA4HDNwu8d4E5sy7GqbJm.jpg",
+    "release_year": 1998,
+    "tmdb_id": 2751
+  },
   "3-Iron|2004": {
     "poster_path": "/mejeTOe8aGWyAAjaGj7Mi66Vtfc.jpg",
     "release_year": 2004,
@@ -332,7 +344,11 @@
     "release_year": 2015,
     "tmdb_id": 348678
   },
-  "A Man Thing (Meska Sprawa)&nbsp;|2001": null,
+  "A Man Thing (Meska Sprawa)&nbsp;|2001": {
+    "poster_path": "/lTDCP7PSx4RV2vvTDAW2J950MtN.jpg",
+    "release_year": 2001,
+    "tmdb_id": 122388
+  },
   "A Matter of Loaf and Death|2008": {
     "poster_path": "/aCRoffkRpWRlArR7dAkxabaimLr.jpg",
     "release_year": 2008,
@@ -458,7 +474,11 @@
     "release_year": 2018,
     "tmdb_id": 540899
   },
-  "A Soccer Story&nbsp;|2000": null,
+  "A Soccer Story&nbsp;|2000": {
+    "poster_path": "/z8cDrdPEsRNu66HE4CCeZSwVgfF.jpg",
+    "release_year": 1998,
+    "tmdb_id": 244962
+  },
   "A Star Is Born|2018": {
     "poster_path": "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
     "release_year": 2018,
@@ -2081,7 +2101,11 @@
     "release_year": 1999,
     "tmdb_id": 244943
   },
-  "Bror, Min Bror&nbsp;|1999": null,
+  "Bror, Min Bror&nbsp;|1999": {
+    "poster_path": "/1hvLAF7ZyQ2nrv0pN9T4XJ4ohka.jpg",
+    "release_year": 1999,
+    "tmdb_id": 244943
+  },
   "Brother Bear|2003": {
     "poster_path": "/otptPbEY0vBostmo95xwiiumMJm.jpg",
     "release_year": 2003,
@@ -2162,7 +2186,11 @@
     "release_year": 2012,
     "tmdb_id": 146892
   },
-  "By Courier&nbsp;|2000": null,
+  "By Courier&nbsp;|2000": {
+    "poster_path": "/1KZVe2bxClnvd3aUVZeRY800GuA.jpg",
+    "release_year": 2000,
+    "tmdb_id": 1661171
+  },
   "By the Grace of God|2019": {
     "poster_path": "/qbwcnAdBkfGBIbQ1xdQZtiUg2lf.jpg",
     "release_year": 2019,
@@ -2660,7 +2688,11 @@
     "release_year": 2007,
     "tmdb_id": 5708
   },
-  "Copy Shop&nbsp;|2001": null,
+  "Copy Shop&nbsp;|2001": {
+    "poster_path": "/4jsofyCCHcEEdQ7iYK98v4n5ZOP.jpg",
+    "release_year": 2001,
+    "tmdb_id": 53981
+  },
   "Coraline|2009": {
     "poster_path": "/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
     "release_year": 2009,
@@ -3088,7 +3120,11 @@
     "release_year": 2025,
     "tmdb_id": 1033148
   },
-  "Die Rote Jacke (The Red Jacket)&nbsp;|2003": null,
+  "Die Rote Jacke (The Red Jacket)&nbsp;|2003": {
+    "poster_path": "/dzLOn0G5wWKbK5NIj2Mehr7sdsK.jpg",
+    "release_year": 2002,
+    "tmdb_id": 244991
+  },
   "Diego Maradona|2019": {
     "poster_path": "/3eBZxi0xcXBnEYq4m4YTVf0eHWX.jpg",
     "release_year": 2019,
@@ -3594,7 +3630,11 @@
     "release_year": 2022,
     "tmdb_id": 1265627
   },
-  "Everything in This Country Must&nbsp;|2004": null,
+  "Everything in This Country Must&nbsp;|2004": {
+    "poster_path": "/lNKreKYN0DHWhCqz20ilvwcWARA.jpg",
+    "release_year": 2004,
+    "tmdb_id": 245004
+  },
   "Everything|2005": {
     "poster_path": "/gk469Y3fJTlbcAkSNMZc4OtETOK.jpg",
     "release_year": 2005,
@@ -3675,7 +3715,11 @@
     "release_year": 2004,
     "tmdb_id": 1777
   },
-  "Fait D'Hiver&nbsp;|2002": null,
+  "Fait D'Hiver&nbsp;|2002": {
+    "poster_path": "/joaiPH3i6zjVP1jLs0mLFxgRNUl.jpg",
+    "release_year": 2001,
+    "tmdb_id": 121966
+  },
   "Fallen Art|2005": {
     "poster_path": null,
     "release_year": 2005,
@@ -3791,7 +3835,11 @@
     "release_year": 2005,
     "tmdb_id": 77517
   },
-  "Fifty Percent Grey&nbsp;|2001": null,
+  "Fifty Percent Grey&nbsp;|2001": {
+    "poster_path": "/379qWaj3ye3kleE583rYXQKgrkc.jpg",
+    "release_year": 2001,
+    "tmdb_id": 85358
+  },
   "Fifty Shades of Grey|2015": {
     "poster_path": "/63kGofUkt1Mx0SIL4XI4Z5AoSgt.jpg",
     "release_year": 2015,
@@ -4194,7 +4242,11 @@
     "release_year": 2014,
     "tmdb_id": 210577
   },
-  "Give Up Yer Aul Sins&nbsp;|2001": null,
+  "Give Up Yer Aul Sins&nbsp;|2001": {
+    "poster_path": "/x0OZlfJvRaSoCEBS6Xzjin50Qt9.jpg",
+    "release_year": 2002,
+    "tmdb_id": 89671
+  },
   "Gladiator II|2024": {
     "poster_path": "/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
     "release_year": 2024,
@@ -4420,7 +4472,11 @@
     "release_year": 2023,
     "tmdb_id": 1121956
   },
-  "Gregor's Greatest Invention&nbsp;|2001": null,
+  "Gregor's Greatest Invention&nbsp;|2001": {
+    "poster_path": "/b4m9KH7lY3wb0uCUEaNGcXCx2Ug.jpg",
+    "release_year": 2001,
+    "tmdb_id": 244973
+  },
   "Greyhound|2020": {
     "poster_path": "/kjMbDciooTbJPofVXgAoFjfX8Of.jpg",
     "release_year": 2020,
@@ -5374,7 +5430,11 @@
     "release_year": 2014,
     "tmdb_id": 171274
   },
-  "Inja (Dog)&nbsp;|2002": null,
+  "Inja (Dog)&nbsp;|2002": {
+    "poster_path": "/s8aj2ZBaypBFmZLvzxw7MbI82L8.jpg",
+    "release_year": 2002,
+    "tmdb_id": 165664
+  },
   "Inocente|2012": {
     "poster_path": "/AnI4Ppv2OF55o8uHP67EElKK9oj.jpg",
     "release_year": 2012,
@@ -5792,7 +5852,11 @@
     "release_year": 2007,
     "tmdb_id": 13614
   },
-  "Kavi&nbsp;|2009": null,
+  "Kavi&nbsp;|2009": {
+    "poster_path": "/8GDjTFqaPYrO4cLjqaBNOcN2Hp3.jpg",
+    "release_year": 2009,
+    "tmdb_id": 122385
+  },
   "Keeping Up with the Joneses|2013": {
     "poster_path": "/oa7PjGHxOBW6NkzZY0c6FKhxlsR.jpg",
     "release_year": 2013,
@@ -5834,7 +5898,11 @@
     "release_year": 2023,
     "tmdb_id": 466420
   },
-  "Killing Joe&nbsp;|1999": null,
+  "Killing Joe&nbsp;|1999": {
+    "poster_path": null,
+    "release_year": 1999,
+    "tmdb_id": 244945
+  },
   "Killing in the Name|2010": {
     "poster_path": "/hzTSb0xHGycnArEEGu4RJCuivFa.jpg",
     "release_year": 2010,
@@ -5911,7 +5979,11 @@
     "release_year": 2019,
     "tmdb_id": 508965
   },
-  "Kleingeld&nbsp;|1999": null,
+  "Kleingeld&nbsp;|1999": {
+    "poster_path": "/gnOAFHuRyaawHx1Uqkcfvx4QJF0.jpg",
+    "release_year": 1999,
+    "tmdb_id": 244946
+  },
   "Kneecap|2024": {
     "poster_path": "/gEbQi5QWUg3CQ9R5dwvPBvbOX17.jpg",
     "release_year": 2024,
@@ -6632,7 +6704,11 @@
     "release_year": 2009,
     "tmdb_id": 24271
   },
-  "Major and Minor Miracles&nbsp;|1999": null,
+  "Major and Minor Miracles&nbsp;|1999": {
+    "poster_path": "/n9M49SEMLMaiNTrYFgM3TUttBkO.jpg",
+    "release_year": 1999,
+    "tmdb_id": 244948
+  },
   "Majority|2010": {
     "poster_path": "/dQ82V5nm0xRrcnsm1hWdzUE3sBc.jpg",
     "release_year": 2010,
@@ -7912,7 +7988,11 @@
     "release_year": 2013,
     "tmdb_id": 209361
   },
-  "One Day Crossing&nbsp;|2000": null,
+  "One Day Crossing&nbsp;|2000": {
+    "poster_path": "/tl3n1zipsMPWgOF4Prekk4x09qU.jpg",
+    "release_year": 2001,
+    "tmdb_id": 244958
+  },
   "One Day in September|1999": {
     "poster_path": "/vsxtkcidi7flgxWERBSnwtyH1JJ.jpg",
     "release_year": 1999,
@@ -9044,7 +9124,11 @@
     "release_year": 2006,
     "tmdb_id": 245031
   },
-  "Saria&nbsp;|2019": null,
+  "Saria&nbsp;|2019": {
+    "poster_path": "/qUtMBksjjJLM4Eid2fm5oTUWck2.jpg",
+    "release_year": 2019,
+    "tmdb_id": 656190
+  },
   "Saturday Night|2024": {
     "poster_path": "/oCf5O6uxooTvRwKVnLHwGqZUifq.jpg",
     "release_year": 2024,
@@ -9170,7 +9254,11 @@
     "release_year": 2007,
     "tmdb_id": 14877
   },
-  "Seraglio&nbsp;|2000": null,
+  "Seraglio&nbsp;|2000": {
+    "poster_path": "/9k4AnP9gRTKaoBq3EzjfDVamxNq.jpg",
+    "release_year": 2000,
+    "tmdb_id": 244960
+  },
   "Seven Psychopaths|2012": {
     "poster_path": "/4ukEYAxlSivFcDG6vLxJB6PjTjg.jpg",
     "release_year": 2012,
@@ -9681,7 +9769,11 @@
     "release_year": 2015,
     "tmdb_id": 206647
   },
-  "Speed for Thespians&nbsp;|2001": null,
+  "Speed for Thespians&nbsp;|2001": {
+    "poster_path": "/9ZsmwnMcjARCTpMbWRMnG3QXmqR.jpg",
+    "release_year": 2000,
+    "tmdb_id": 244975
+  },
   "Spellbound|2002": {
     "poster_path": "/dPAox7jGScLBvxKLeRptJIBF7v.jpg",
     "release_year": 1945,
@@ -10102,7 +10194,11 @@
     "release_year": 2013,
     "tmdb_id": 238628
   },
-  "Tanghi Argentini&nbsp;|2007": null,
+  "Tanghi Argentini&nbsp;|2007": {
+    "poster_path": "/mtTzIOfEuoaY1PS8exgFjhfI645.jpg",
+    "release_year": 2006,
+    "tmdb_id": 162656
+  },
   "Tangled|2010": {
     "poster_path": "/ym7Kst6a4uodryxqbGOxmewF235.jpg",
     "release_year": 2010,
@@ -12504,7 +12600,11 @@
     "release_year": 2002,
     "tmdb_id": 2135
   },
-  "The Tonto Woman&nbsp;|2007": null,
+  "The Tonto Woman&nbsp;|2007": {
+    "poster_path": "/3w43CdeCCbz1avfjyfplu1LTDqG.jpg",
+    "release_year": 2008,
+    "tmdb_id": 245024
+  },
   "The Tourist|2010": {
     "poster_path": "/oXe1nw4HcS32YVpvxwsWEVdvEXA.jpg",
     "release_year": 2010,
@@ -14046,25 +14146,41 @@
     "release_year": 2024,
     "tmdb_id": 927547
   },
-  "[[Cross-Country (2011 film)|Cross-Country]] (Крос)|2011": null,
+  "[[Cross-Country (2011 film)|Cross-Country]] (Крос)|2011": {
+    "poster_path": "/kiVILIf1218um5QgNF3UUCBMvF0.jpg",
+    "release_year": 2011,
+    "tmdb_id": 277647
+  },
   "[[Life|2001": {
     "poster_path": "/saWYpX3ADdmdByQZVrSYUNbQ9GC.jpg",
     "release_year": 1999,
     "tmdb_id": 6522
   },
-  "[[Of Gods and Men (film)|Of Gods and Men]]|2010": null,
+  "[[Of Gods and Men (film)|Of Gods and Men]]|2010": {
+    "poster_path": "/fgrC0w62MCc7Fn77l5RVY0WKv0t.jpg",
+    "release_year": 2010,
+    "tmdb_id": 46332
+  },
   "from Enchanted|2007": {
     "poster_path": null,
     "release_year": 2007,
     "tmdb_id": 188603
   },
-  "from Walk Hard: The Dewey Cox Story|2007": null,
+  "from Walk Hard: The Dewey Cox Story|2007": {
+    "poster_path": "/Aa1IQ4Cuin3d7qIahvPheMmR4E5.jpg",
+    "release_year": 2007,
+    "tmdb_id": 6575
+  },
   "tick, tick... BOOM!|2021": {
     "poster_path": "/DPmfcuR8fh8ROYXgdjrAjSGA0o.jpg",
     "release_year": 2021,
     "tmdb_id": 537116
   },
-  "Éramos pocos (One Too Many)&nbsp;|2006": null,
+  "Éramos pocos (One Too Many)&nbsp;|2006": {
+    "poster_path": "/wvOJVicEJVbdKUecxo04KFQstpS.jpg",
+    "release_year": 2005,
+    "tmdb_id": 189433
+  },
   "Želary|2003": {
     "poster_path": "/s4jFr3bnf8d5WYCSrf0N3e7G9ez.jpg",
     "release_year": 2003,

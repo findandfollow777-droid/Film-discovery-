@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "schema_version": "v1.3",
-    "generated_at": "2026-05-09T11:05:42.990853Z",
+    "generated_at": "2026-05-09T20:57:57.429458Z",
     "row_count": 3044,
     "festival_count": 1,
     "category_count": 26,
@@ -11,7 +11,7 @@
       "min": 2000,
       "max": 2025
     },
-    "tmdb_resolution_status": "partial_98.1pct",
+    "tmdb_resolution_status": "partial_98.4pct",
     "known_issues": [],
     "csv_files_read": {
       "oscar": 26,
@@ -2088,11 +2088,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 2751,
       "film_title": "3 Misses&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 1998,
+      "film_poster_path": "/eHgLegxA4HDNwu8d4E5sy7GqbJm.jpg",
       "source_url": "https://en.wikipedia.org/wiki/72nd_Academy_Awards",
       "source_citation": "72nd Academy Awards Wikipedia article, Best Animated Short Film section",
       "scraped_at": "2026-05-03T07:07:42.639804+00:00",
@@ -2233,11 +2233,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244943,
       "film_title": "Bror, Min Bror&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 1999,
+      "film_poster_path": "/1hvLAF7ZyQ2nrv0pN9T4XJ4ohka.jpg",
       "source_url": "https://en.wikipedia.org/wiki/72nd_Academy_Awards",
       "source_citation": "72nd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:42.640036+00:00",
@@ -2262,10 +2262,10 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244945,
       "film_title": "Killing Joe&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
+      "film_release_year": 1999,
       "film_poster_path": null,
       "source_url": "https://en.wikipedia.org/wiki/72nd_Academy_Awards",
       "source_citation": "72nd Academy Awards Wikipedia article, Best Live Action Short Film section",
@@ -2291,11 +2291,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244946,
       "film_title": "Kleingeld&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 1999,
+      "film_poster_path": "/gnOAFHuRyaawHx1Uqkcfvx4QJF0.jpg",
       "source_url": "https://en.wikipedia.org/wiki/72nd_Academy_Awards",
       "source_citation": "72nd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:42.640036+00:00",
@@ -2320,11 +2320,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244948,
       "film_title": "Major and Minor Miracles&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 1999,
+      "film_poster_path": "/n9M49SEMLMaiNTrYFgM3TUttBkO.jpg",
       "source_url": "https://en.wikipedia.org/wiki/72nd_Academy_Awards",
       "source_citation": "72nd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:42.640036+00:00",
@@ -5888,11 +5888,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 1661171,
       "film_title": "By Courier&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2000,
+      "film_poster_path": "/1KZVe2bxClnvd3aUVZeRY800GuA.jpg",
       "source_url": "https://en.wikipedia.org/wiki/73rd_Academy_Awards",
       "source_citation": "73rd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:43.973649+00:00",
@@ -5917,11 +5917,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244958,
       "film_title": "One Day Crossing&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/tl3n1zipsMPWgOF4Prekk4x09qU.jpg",
       "source_url": "https://en.wikipedia.org/wiki/73rd_Academy_Awards",
       "source_citation": "73rd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:43.973649+00:00",
@@ -5946,11 +5946,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244960,
       "film_title": "Seraglio&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2000,
+      "film_poster_path": "/9k4AnP9gRTKaoBq3EzjfDVamxNq.jpg",
       "source_url": "https://en.wikipedia.org/wiki/73rd_Academy_Awards",
       "source_citation": "73rd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:43.973649+00:00",
@@ -5975,11 +5975,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244962,
       "film_title": "A Soccer Story&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 1998,
+      "film_poster_path": "/z8cDrdPEsRNu66HE4CCeZSwVgfF.jpg",
       "source_url": "https://en.wikipedia.org/wiki/73rd_Academy_Awards",
       "source_citation": "73rd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:43.973649+00:00",
@@ -9180,11 +9180,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 85358,
       "film_title": "Fifty Percent Grey&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/379qWaj3ye3kleE583rYXQKgrkc.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Animated Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373186+00:00",
@@ -9209,11 +9209,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 89671,
       "film_title": "Give Up Yer Aul Sins&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2002,
+      "film_poster_path": "/x0OZlfJvRaSoCEBS6Xzjin50Qt9.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Animated Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373186+00:00",
@@ -9331,11 +9331,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 53981,
       "film_title": "Copy Shop&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/4jsofyCCHcEEdQ7iYK98v4n5ZOP.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373426+00:00",
@@ -9360,11 +9360,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244973,
       "film_title": "Gregor's Greatest Invention&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/b4m9KH7lY3wb0uCUEaNGcXCx2Ug.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373426+00:00",
@@ -9389,11 +9389,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 122388,
       "film_title": "A Man Thing (Meska Sprawa)&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/lTDCP7PSx4RV2vvTDAW2J950MtN.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373426+00:00",
@@ -9418,11 +9418,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244975,
       "film_title": "Speed for Thespians&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2000,
+      "film_poster_path": "/9ZsmwnMcjARCTpMbWRMnG3QXmqR.jpg",
       "source_url": "https://en.wikipedia.org/wiki/74th_Academy_Awards",
       "source_citation": "74th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:45.373426+00:00",
@@ -12915,11 +12915,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 121966,
       "film_title": "Fait D'Hiver&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2001,
+      "film_poster_path": "/joaiPH3i6zjVP1jLs0mLFxgRNUl.jpg",
       "source_url": "https://en.wikipedia.org/wiki/75th_Academy_Awards",
       "source_citation": "75th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:46.876830+00:00",
@@ -12973,11 +12973,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 165664,
       "film_title": "Inja (Dog)&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2002,
+      "film_poster_path": "/s8aj2ZBaypBFmZLvzxw7MbI82L8.jpg",
       "source_url": "https://en.wikipedia.org/wiki/75th_Academy_Awards",
       "source_citation": "75th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:46.876830+00:00",
@@ -16407,11 +16407,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244991,
       "film_title": "Die Rote Jacke (The Red Jacket)&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2002,
+      "film_poster_path": "/dzLOn0G5wWKbK5NIj2Mehr7sdsK.jpg",
       "source_url": "https://en.wikipedia.org/wiki/76th_Academy_Awards",
       "source_citation": "76th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:48.458375+00:00",
@@ -16494,11 +16494,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 244987,
       "film_title": "(A) Torzija [(A) Torsion]&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2003,
+      "film_poster_path": "/gOxhnl80yIwq4q8LXVIr9skBE5T.jpg",
       "source_url": "https://en.wikipedia.org/wiki/76th_Academy_Awards",
       "source_citation": "76th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:48.458375+00:00",
@@ -19989,11 +19989,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 245004,
       "film_title": "Everything in This Country Must&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2004,
+      "film_poster_path": "/lNKreKYN0DHWhCqz20ilvwcWARA.jpg",
       "source_url": "https://en.wikipedia.org/wiki/77th_Academy_Awards",
       "source_citation": "77th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:49.874578+00:00",
@@ -27084,11 +27084,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 189433,
       "film_title": "Éramos pocos (One Too Many)&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2005,
+      "film_poster_path": "/wvOJVicEJVbdKUecxo04KFQstpS.jpg",
       "source_url": "https://en.wikipedia.org/wiki/79th_Academy_Awards",
       "source_citation": "79th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:52.814103+00:00",
@@ -30746,11 +30746,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 245023,
       "film_title": "(Il Supplente) The Substitute&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2007,
+      "film_poster_path": "/oLgIuXSDlhecGOlPuj2QG4iwcIS.jpg",
       "source_url": "https://en.wikipedia.org/wiki/80th_Academy_Awards",
       "source_citation": "80th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:54.247503+00:00",
@@ -30775,11 +30775,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 162656,
       "film_title": "Tanghi Argentini&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2006,
+      "film_poster_path": "/mtTzIOfEuoaY1PS8exgFjhfI645.jpg",
       "source_url": "https://en.wikipedia.org/wiki/80th_Academy_Awards",
       "source_citation": "80th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:54.247503+00:00",
@@ -30804,11 +30804,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 245024,
       "film_title": "The Tonto Woman&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2008,
+      "film_poster_path": "/3w43CdeCCbz1avfjyfplu1LTDqG.jpg",
       "source_url": "https://en.wikipedia.org/wiki/80th_Academy_Awards",
       "source_citation": "80th Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:54.247503+00:00",
@@ -38129,11 +38129,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 122385,
       "film_title": "Kavi&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2009,
+      "film_poster_path": "/8GDjTFqaPYrO4cLjqaBNOcN2Hp3.jpg",
       "source_url": "https://en.wikipedia.org/wiki/82nd_Academy_Awards",
       "source_citation": "82nd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:07:56.713498+00:00",
@@ -78298,11 +78298,11 @@
           "profile_path": null
         }
       ],
-      "film_tmdb_id": null,
+      "film_tmdb_id": 656190,
       "film_title": "Saria&nbsp;",
       "subject_title": null,
-      "film_release_year": null,
-      "film_poster_path": null,
+      "film_release_year": 2019,
+      "film_poster_path": "/qUtMBksjjJLM4Eid2fm5oTUWck2.jpg",
       "source_url": "https://en.wikipedia.org/wiki/92nd_Academy_Awards",
       "source_citation": "92nd Academy Awards Wikipedia article, Best Live Action Short Film section",
       "scraped_at": "2026-05-03T07:08:11.874549+00:00",
