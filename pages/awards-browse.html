@@ -7,9 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="awards-browse.css">
+  <link rel="stylesheet" href="../components/award-badges.css">
   <link rel="stylesheet" href="../components/moviecube.css">
   <link rel="stylesheet" href="../components/people-cube.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="stylesheet" href="../components/shortlist-badge.css">
 </head>
 <body>
@@ -91,17 +94,17 @@
 
   <!-- INFO PANEL (slide-in from right) -->
   <div class="info-panel-overlay" id="infoPanelOverlay" hidden></div>
-  <div class="info-panel" id="infoPanel">
-    <button class="info-panel-close" id="infoPanelClose">&times;</button>
+  <div class="info-panel" id="infoPanel" data-orbit-popup>
+    <button class="info-panel-close orbit-close" id="infoPanelClose" aria-label="Close">&times;</button>
     <div class="info-panel-content" id="infoPanelContent">
       <!-- JS-populated -->
     </div>
   </div>
 
   <!-- GUIDE MODAL -->
-  <div class="modal-overlay" id="guideModal" hidden>
+  <div class="modal-overlay" id="guideModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="guideModalClose">&times;</button>
+      <button class="modal-close orbit-close" id="guideModalClose" aria-label="Close">&times;</button>
       <h2 class="modal-title">AWARDS ARCHIVE</h2>
       <div class="guide-body">
         <p>Browse award-winning and nominated films from the world's most prestigious film festivals and ceremonies.</p>
@@ -128,7 +131,6 @@
   <script src="../config.js"></script>
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
-  <script src="../data/awards-data.js"></script>
   <script>
     // Preview mode: load preview data when ?preview=true
     if (new URLSearchParams(window.location.search).get('preview') === 'true') {
@@ -140,6 +142,7 @@
   <script src="../components/trivia-stats.js"></script>
   <script src="../components/moviecube.js"></script>
   <script src="../components/people-cube.js"></script>
+  <script src="../components/award-badges.js"></script>
   <script src="awards-browse.js"></script>
   <script src="../components/shortlist-badge.js"></script>
 </body>

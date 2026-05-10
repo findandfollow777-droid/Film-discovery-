@@ -13,8 +13,11 @@
     window.AWARDS_BROWSE_DATABASE = AWARDS_BROWSE_DATABASE_PREVIEW;
   }
 
-  /* Legacy data source. v1 lazy per-festival fetch is a separate follow-on. */
-  const AWARDS_DB = window.AWARDS_BROWSE_DATABASE;
+  /* All 6 festivals are now served by v1 lazy fetch (see V1_FESTIVAL_MAP).
+     awards-browse.html no longer script-tags awards-data.js, so this slot
+     starts empty and is populated on demand. The `|| {}` keeps it
+     mutable-by-reference even when no legacy global is present. */
+  const AWARDS_DB = window.AWARDS_BROWSE_DATABASE || {};
   const PERSON_LOOKUP = window.PERSON_AWARD_LOOKUP;
 
   /* ---------- STATE ---------- */
@@ -80,16 +83,19 @@
   };
 
   /* ============================================================
-     V1 LAZY FETCH — Cannes / Venice / Berlin (added May 7, 2026)
-     Legacy AWARDS_BROWSE_DATABASE has no rows for these three winners-only
-     festivals. Their data lives in per-festival v1 JSON files (~180–220KB
-     each) loaded on demand. Oscar / BAFTA / GoldenGlobe continue using the
-     legacy in-script DB unchanged.
+     V1 LAZY FETCH — all 6 festivals (Phase 3, 2026-05-11)
+     Per-festival v1 JSON files are the single source of truth for awards
+     data on this page. Cannes / Venice / Berlin are ~210KB each
+     (winners-only); Oscar / BAFTA / GG are 1.8–3.3MB each (winners +
+     nominees). The legacy awards-data.js is no longer loaded here.
      ============================================================ */
   const V1_FESTIVAL_MAP = {
-    Cannes: 'cannes',
-    Venice: 'venice',
-    Berlin: 'berlin'
+    Oscar:       'oscar',
+    BAFTA:       'bafta',
+    GoldenGlobe: 'gg',
+    Cannes:      'cannes',
+    Venice:      'venice',
+    Berlin:      'berlin'
   };
   const V1_FESTIVAL_CACHE = {};   // legacyKey → reshaped festival object
   const V1_PENDING = {};          // legacyKey → in-flight Promise (dedupes)
@@ -113,12 +119,9 @@
       document.body.prepend(banner);
     }
 
-    buildMovieAwardsIndex();
     ensureLandmarkUI();
     renderFestivalTabs();
-    renderCategorySidebar();
-    renderDecadeBar();
-    renderYearPills();
+    refreshDerivedUI();
     renderResults();
     bindGuideModal();
     bindInfoPanel();
@@ -491,11 +494,8 @@
       .then(data => {
         const reshaped = buildLegacyFestivalDB(data);
         V1_FESTIVAL_CACHE[festivalKey] = reshaped;
-        // Only populate slot if legacy didn't supply one (defensive — these
-        // three festivals have no legacy rows today, but guard anyway).
-        if (!AWARDS_DB[festivalKey] || Object.keys(AWARDS_DB[festivalKey]).length === 0) {
-          AWARDS_DB[festivalKey] = reshaped;
-        }
+        // v1 is canonical — overwrite unconditionally.
+        AWARDS_DB[festivalKey] = reshaped;
         delete V1_PENDING[festivalKey];
         return reshaped;
       })
@@ -529,35 +529,64 @@
     return needed;
   }
 
+  /* Re-run every AWARDS_DB-dependent renderer. Called at init and after
+     each v1 fetch resolves, so the tooltip index, sidebar categories,
+     decade bar, and year pills all stay in sync with whatever is cached.
+     Festival tabs are not in here — they're driven by FESTIVAL_KEYS, not
+     by cached data — and ensureLandmarkUI is a one-time DOM setup. */
+  function refreshDerivedUI() {
+    buildMovieAwardsIndex();
+    renderCategorySidebar();
+    renderDecadeBar();
+    renderYearPills();
+  }
+
   /* ==============================================
      RENDER RESULTS
   ============================================== */
   function renderResults() {
-    // V1 lazy-fetch gate: if any in-scope festival needs its v1 file,
-    // kick off the fetches and re-render once they resolve. Show the
-    // loading placeholder only when nothing is cached yet — avoids a
-    // flash on cached data. (Year/category/decade clicks all funnel
-    // through here, so this single gate covers every re-render path.)
-    const needed = v1FestivalsNeedingFetch();
-    if (needed.length > 0) {
-      // Loading flashes only when the current selection has nothing to
-      // render yet. "All" view always has legacy Oscar/BAFTA/GG; a single
-      // already-cached v1 festival also counts.
-      const inScope = selectedFestivals.size === 0
-        ? FESTIVAL_KEYS
-        : Array.from(selectedFestivals);
-      const haveDataForSelection = inScope.some(f =>
-        AWARDS_DB && AWARDS_DB[f] && Object.keys(AWARDS_DB[f]).length > 0
-      );
-      if (!haveDataForSelection) {
-        resultsContainer.innerHTML = `<div class="results-empty">
-          <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg></div>
-          <h3>Loading…</h3>
-          <p>Fetching festival data.</p>
-        </div>`;
-      }
-      Promise.all(needed.map(fetchFestivalV1)).then(() => renderResults());
+    const isAllView = selectedFestivals.size === 0;
+    const cachedCount = Object.keys(V1_FESTIVAL_CACHE).length;
+
+    // All-view + cold cache: prompt the user to pick a festival rather
+    // than eagerly fetching all 6 v1 files (~8MB combined). Once any
+    // festival is in V1_FESTIVAL_CACHE, the All view shows the union of
+    // cached festivals and never triggers additional fetches itself —
+    // missing festivals are simply absent from the union until visited.
+    if (isAllView && cachedCount === 0) {
+      resultsContainer.innerHTML = `<div class="results-empty">
+        <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg></div>
+        <h3>Select a Festival</h3>
+        <p>Choose a festival above to browse awards.</p>
+      </div>`;
       return;
+    }
+
+    // Lazy-fetch only on explicit single-festival selections. The All
+    // view never auto-fetches uncached festivals — see comment above.
+    if (!isAllView) {
+      const needed = v1FestivalsNeedingFetch();
+      if (needed.length > 0) {
+        const inScopeFestivals = Array.from(selectedFestivals);
+        const haveDataForSelection = inScopeFestivals.every(fKey => {
+          if (V1_FESTIVAL_MAP[fKey]) return !!V1_FESTIVAL_CACHE[fKey];
+          // Defensive: any festival not in V1_FESTIVAL_MAP would need a
+          // populated AWARDS_DB slot. None today, kept for safety.
+          return AWARDS_DB[fKey] && Object.keys(AWARDS_DB[fKey]).length > 0;
+        });
+        if (!haveDataForSelection) {
+          resultsContainer.innerHTML = `<div class="results-empty">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg></div>
+            <h3>Loading…</h3>
+            <p>Fetching festival data.</p>
+          </div>`;
+        }
+        Promise.all(needed.map(fetchFestivalV1)).then(() => {
+          refreshDerivedUI();
+          renderResults();
+        });
+        return;
+      }
     }
 
     if (!AWARDS_DB) {
