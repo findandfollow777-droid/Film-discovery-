@@ -13,6 +13,10 @@
     window.AWARDS_BROWSE_DATABASE = AWARDS_BROWSE_DATABASE_PREVIEW;
   }
 
+  /* Legacy data source. v1 lazy per-festival fetch is a separate follow-on. */
+  const AWARDS_DB = window.AWARDS_BROWSE_DATABASE;
+  const PERSON_LOOKUP = window.PERSON_AWARD_LOOKUP;
+
   /* ---------- STATE ---------- */
   let selectedFestivals = new Set(); // empty = All festivals
   let currentCategory = "All";   // "All" | category name
@@ -43,6 +47,28 @@
     "Best Actress (Drama)", "Best Actress (Comedy/Musical)"
   ]);
 
+  /* Phase 1 scope cap (ORBIT-AWARDS-SCOPE-v1.md): UI surfaces 2000-present
+     only. DB may contain pre-2000 entries (e.g. Venice Best Actor 1970,
+     1987) — those are deferred to phase 4 and filtered at the UI boundary,
+     not deleted from data. */
+  const MIN_YEAR = 2000;
+  function inScope(year) { return year >= MIN_YEAR; }
+
+  /* Film-tier categories — poster-bleed tile treatment (Prompt 2) */
+  const FILM_CATEGORIES = new Set([
+    'Best Picture', 'Best Film', "Palme d'Or", 'Golden Lion', 'Golden Bear',
+    'Best Drama', 'Best Comedy/Musical'
+  ]);
+
+  /* Sidebar groups (Prompt 2) — order here is the render order.
+     Categories not present in any group are skipped silently. */
+  const CATEGORY_GROUPS = [
+    { label: 'Top Prizes', categories: ['Best Picture', 'Best Film', "Palme d'Or", 'Golden Lion', 'Golden Bear', 'Best Drama', 'Best Comedy/Musical'] },
+    { label: 'Direction',  categories: ['Best Director', 'Silver Lion (Director)', 'Silver Bear (Director)'] },
+    { label: 'Performance',categories: ['Best Actor', 'Best Actress'] },
+    { label: 'Other Awards', categories: ['Grand Prix', 'Jury Prize', 'Silver Lion (Grand Jury)', 'Silver Bear (Grand Jury)'] }
+  ];
+
   /* Festival → valid category mapping (for greying out incompatible sidebar options) */
   const FESTIVAL_CATEGORIES = {
     Oscar: ["Best Picture", "Best Director", "Best Actor", "Best Actress"],
@@ -52,6 +78,22 @@
     Venice: ["Golden Lion", "Silver Lion (Grand Jury)", "Silver Lion (Director)", "Best Director"],
     Berlin: ["Golden Bear", "Silver Bear (Grand Jury)", "Silver Bear (Director)", "Best Actor", "Best Actress"]
   };
+
+  /* ============================================================
+     V1 LAZY FETCH — Cannes / Venice / Berlin (added May 7, 2026)
+     Legacy AWARDS_BROWSE_DATABASE has no rows for these three winners-only
+     festivals. Their data lives in per-festival v1 JSON files (~180–220KB
+     each) loaded on demand. Oscar / BAFTA / GoldenGlobe continue using the
+     legacy in-script DB unchanged.
+     ============================================================ */
+  const V1_FESTIVAL_MAP = {
+    Cannes: 'cannes',
+    Venice: 'venice',
+    Berlin: 'berlin'
+  };
+  const V1_FESTIVAL_CACHE = {};   // legacyKey → reshaped festival object
+  const V1_PENDING = {};          // legacyKey → in-flight Promise (dedupes)
+  const V1_FAILED = {};           // legacyKey → true (no re-fetch loop)
 
   /* ---------- AWARDS INDEX (built once at init) ---------- */
   let movieAwardsIndex = {};  // tmdb_id → [{ festival, category, year, isWinner, person }]
@@ -72,6 +114,7 @@
     }
 
     buildMovieAwardsIndex();
+    ensureLandmarkUI();
     renderFestivalTabs();
     renderCategorySidebar();
     renderDecadeBar();
@@ -94,7 +137,7 @@
         onAnchorClick: (movie) => {
           localStorage.setItem("anchorMovie", JSON.stringify(movie));
           localStorage.removeItem("anchorFromResults");
-          window.location.href = "../games/constellation.html";
+          window.location.href = "anchor-point.html";
         }
       });
     }
@@ -117,17 +160,21 @@
     </button>`;
 
     FESTIVAL_KEYS.forEach(key => {
-      const svg = (typeof AWARD_SVGS !== "undefined" && AWARD_SVGS[key]) || "";
+      const festivalId = window.detectFestivalId ? window.detectFestivalId(key) : null;
       const info = (typeof FESTIVAL_INFO !== "undefined" && FESTIVAL_INFO[key]) || {};
       const label = info.name || key;
+      const badgeHtml = festivalId
+        ? `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="winner" data-size="18" title="${label}"></div>`
+        : "";
       html += `<button class="festival-tab" data-festival="${key}">
-        ${svg}
+        ${badgeHtml}
         ${label}
         <button class="tab-info-btn" data-info-festival="${key}" title="About ${label}">i</button>
       </button>`;
     });
 
     tabsContainer.innerHTML = html;
+    if (window.renderAwardBadges) window.renderAwardBadges(tabsContainer);
 
     // Click delegation
     tabsContainer.addEventListener("click", (e) => {
@@ -177,34 +224,29 @@
       currentYear = null;
     }
 
-    // Identify which categories are parent groups (have subcategories with parenthetical suffixes)
-    const parentGroups = new Set();
-    categories.forEach(cat => {
-      const m = cat.match(/^(.+?)\s*\(/);
-      if (m) {
-        const base = m[1].trim();
-        if (categories.includes(base)) parentGroups.add(base);
-      }
-    });
-
     let html = `<div class="sidebar-title">CATEGORIES</div>`;
     html += `<button class="category-item${currentCategory === "All" ? " active" : ""}" data-category="All">All Categories</button>`;
 
     const festsToCheck = selectedFestivals.size > 0 ? Array.from(selectedFestivals) : [];
-    categories.forEach(cat => {
+    const available = new Set(categories);
+
+    function buttonHtml(cat) {
       const hasInfo = typeof CATEGORY_INFO !== "undefined" &&
         festsToCheck.some(f => CATEGORY_INFO[f] && CATEGORY_INFO[f][cat]);
-      // Check if this is a subcategory (has a parenthetical and its parent exists)
-      const m = cat.match(/^(.+?)\s*\((.+)\)$/);
-      const isChild = m && parentGroups.has(m[1].trim());
-      const childClass = isChild ? " category-child" : "";
-      const childLabel = isChild ? m[2].replace(/\)$/, "") : cat;
       const isDisabled = validCats !== null && !validCats.has(cat);
       const disabledClass = isDisabled ? " filter-disabled" : "";
-      html += `<button class="category-item${currentCategory === cat ? " active" : ""}${childClass}${disabledClass}" data-category="${cat}">
-        <span>${childLabel}</span>
-        ${hasInfo ? `<button class="cat-info-btn" data-info-cat="${cat}" title="About ${cat}">i</button>` : ""}
+      return `<button class="category-item${currentCategory === cat ? " active" : ""}${disabledClass}" data-category="${escapeAttr(cat)}">
+        <span>${escapeHtml(cat)}</span>
+        ${hasInfo ? `<button class="cat-info-btn" data-info-cat="${escapeAttr(cat)}" title="About ${escapeAttr(cat)}">i</button>` : ""}
       </button>`;
+    }
+
+    // Render grouped categories — only groups with at least one available category
+    CATEGORY_GROUPS.forEach(group => {
+      const present = group.categories.filter(c => available.has(c));
+      if (!present.length) return;
+      html += `<div class="cat-group-label">${escapeHtml(group.label)}</div>`;
+      present.forEach(cat => { html += buttonHtml(cat); });
     });
 
     sidebar.innerHTML = html;
@@ -214,10 +256,10 @@
      Returns categories with parent groups — e.g. "Silver Lion" is added
      when both "Silver Lion (Director)" and "Silver Lion (Grand Jury)" exist. */
   function getAllCategories() {
-    if (typeof AWARDS_BROWSE_DATABASE === "undefined") return [];
+    if (!AWARDS_DB) return [];
     const cats = new Set();
     FESTIVAL_KEYS.forEach(fKey => {
-      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      const fest = AWARDS_DB[fKey];
       if (fest) Object.keys(fest).forEach(c => cats.add(c));
     });
 
@@ -268,7 +310,7 @@
     if (selectedCat === "All") return null; // null = all categories
     const allCats = new Set();
     festivalKeys.forEach(fKey => {
-      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      const fest = AWARDS_DB[fKey];
       if (fest) Object.keys(fest).forEach(c => allCats.add(c));
     });
     // If the selected category exists as-is in the database, check if it's also a parent
@@ -300,18 +342,21 @@
 
   /* Get distinct years for current festival+category */
   function getYears() {
-    if (typeof AWARDS_BROWSE_DATABASE === "undefined") return [];
+    if (!AWARDS_DB) return [];
     const years = new Set();
     const festivals = selectedFestivals.size === 0 ? FESTIVAL_KEYS : Array.from(selectedFestivals);
     const expanded = expandCategory(currentCategory, festivals);
 
     festivals.forEach(fKey => {
-      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      const fest = AWARDS_DB[fKey];
       if (!fest) return;
       const cats = expanded === null ? Object.keys(fest) : expanded;
       cats.forEach(cat => {
         const catData = fest[cat];
-        if (catData) Object.keys(catData).forEach(y => years.add(parseInt(y, 10)));
+        if (catData) Object.keys(catData).forEach(y => {
+          const yr = parseInt(y, 10);
+          if (inScope(yr)) years.add(yr);
+        });
       });
     });
 
@@ -331,7 +376,7 @@
     years.forEach(y => decades.add(Math.floor(y / 10) * 10));
     const sorted = Array.from(decades).sort((a, b) => b - a);
 
-    let html = `<button class="decade-btn${currentDecade === null ? " active" : ""}" data-decade="all">All</button>`;
+    let html = '';
     sorted.forEach(d => {
       html += `<button class="decade-btn${currentDecade === d ? " active" : ""}" data-decade="${d}">${d}s</button>`;
     });
@@ -352,10 +397,170 @@
   }
 
   /* ==============================================
+     V1 FETCH + LEGACY-SHAPE BUILDER
+     (Cannes / Venice / Berlin only — see V1_FESTIVAL_MAP above.)
+  ============================================== */
+
+  /* Convert a v1 awards file into the legacy AWARDS_DB festival shape:
+       { [categoryDisplayName]: { [year]: { winner | winners[], nominees[] } } }
+     v1 stores each row separately. For a (category, year) bucket:
+       - N won rows → N-way co-win (e.g. Cannes Best Actress 2024 — Emilia
+         Pérez ensemble). Emit `winners: [...]` when N ≥ 2, else `winner: X`.
+         If N === 0 (nominees-only bucket), emit `winner: null`.
+       - Nominated rows fill the `nominees` array.
+     Winners-only festivals (Cannes/Venice/Berlin) have zero nominated rows
+     in their v1 files, so their `nominees` arrays come out empty — correct. */
+  function buildLegacyFestivalDB(v1Data) {
+    const db = {};
+    if (!v1Data || !Array.isArray(v1Data.awards) || !Array.isArray(v1Data.categories)) return db;
+
+    const catById = {};
+    v1Data.categories.forEach(c => { catById[c.id] = c; });
+
+    function buildEntry(award) {
+      const recipients = Array.isArray(award.recipients) ? award.recipients : [];
+      const recipientNames = recipients.map(r => r && r.name).filter(Boolean).join(', ');
+      const firstPid = recipients.find(r => r && r.tmdb_person_id);
+      const personId = firstPid ? firstPid.tmdb_person_id : 0;
+      return {
+        title: award.film_title || recipientNames || '',
+        tmdb_id: award.film_tmdb_id || 0,
+        poster_path: award.film_poster_path || null,
+        person_name: recipientNames || null,
+        person_id: personId
+      };
+    }
+
+    // Parallel buckets: catName → year → array of entries (in source order).
+    const winBuckets = {};
+    const nomBuckets = {};
+    for (const award of v1Data.awards) {
+      let target;
+      if (award.result === 'won') target = winBuckets;
+      else if (award.result === 'nominated') target = nomBuckets;
+      else continue;                                   // skip e.g. special_prize
+
+      const cat = catById[award.category_id];
+      if (!cat) continue;
+      const catName = cat.display_name;
+      const year = String(award.year);
+
+      if (!target[catName]) target[catName] = {};
+      if (!target[catName][year]) target[catName][year] = [];
+      target[catName][year].push(buildEntry(award));
+    }
+
+    // Collapse to legacy shape — union of (cat, year) keys across both buckets.
+    const allCats = new Set([...Object.keys(winBuckets), ...Object.keys(nomBuckets)]);
+    allCats.forEach(catName => {
+      db[catName] = {};
+      const winYears = winBuckets[catName] || {};
+      const nomYears = nomBuckets[catName] || {};
+      const allYears = new Set([...Object.keys(winYears), ...Object.keys(nomYears)]);
+      allYears.forEach(year => {
+        const wins = winYears[year] || [];
+        const nominees = nomYears[year] || [];
+        if (wins.length === 1) {
+          db[catName][year] = { winner: wins[0], nominees };
+        } else if (wins.length >= 2) {
+          db[catName][year] = { winners: wins, nominees };
+        } else {
+          db[catName][year] = { winner: null, nominees };
+        }
+      });
+    });
+
+    return db;
+  }
+
+  /* Fetch a single festival's v1 file. Returns Promise<festivalObject|null>.
+     Populates AWARDS_DB[festivalKey] on success so all downstream readers
+     (getAllCategories, getYears, renderResults, etc.) see it natively. */
+  function fetchFestivalV1(festivalKey) {
+    const slug = V1_FESTIVAL_MAP[festivalKey];
+    if (!slug) return Promise.resolve(null);
+    if (V1_FESTIVAL_CACHE[festivalKey]) return Promise.resolve(V1_FESTIVAL_CACHE[festivalKey]);
+    if (V1_FAILED[festivalKey]) return Promise.resolve(null);
+    if (V1_PENDING[festivalKey]) return V1_PENDING[festivalKey];
+
+    const p = fetch(`../data/awards-v1-${slug}.json`)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        const reshaped = buildLegacyFestivalDB(data);
+        V1_FESTIVAL_CACHE[festivalKey] = reshaped;
+        // Only populate slot if legacy didn't supply one (defensive — these
+        // three festivals have no legacy rows today, but guard anyway).
+        if (!AWARDS_DB[festivalKey] || Object.keys(AWARDS_DB[festivalKey]).length === 0) {
+          AWARDS_DB[festivalKey] = reshaped;
+        }
+        delete V1_PENDING[festivalKey];
+        return reshaped;
+      })
+      .catch(err => {
+        console.warn(`[awards-browse] failed to load v1 ${slug}:`, err);
+        V1_FAILED[festivalKey] = true;
+        // Mark slot as empty object so downstream code treats it as
+        // "no data" rather than re-triggering the fetch.
+        if (!AWARDS_DB[festivalKey]) AWARDS_DB[festivalKey] = {};
+        delete V1_PENDING[festivalKey];
+        return null;
+      });
+
+    V1_PENDING[festivalKey] = p;
+    return p;
+  }
+
+  /* Determine which v1 festivals are in scope for the current selection
+     and still need fetching. Returns array of legacy festival keys. */
+  function v1FestivalsNeedingFetch() {
+    const inScopeFestivals = selectedFestivals.size === 0
+      ? FESTIVAL_KEYS
+      : Array.from(selectedFestivals);
+    const needed = [];
+    inScopeFestivals.forEach(fKey => {
+      if (!V1_FESTIVAL_MAP[fKey]) return;            // not a v1 festival
+      if (V1_FESTIVAL_CACHE[fKey]) return;            // already cached
+      if (V1_FAILED[fKey]) return;                    // gave up — don't loop
+      needed.push(fKey);
+    });
+    return needed;
+  }
+
+  /* ==============================================
      RENDER RESULTS
   ============================================== */
   function renderResults() {
-    if (typeof AWARDS_BROWSE_DATABASE === "undefined") {
+    // V1 lazy-fetch gate: if any in-scope festival needs its v1 file,
+    // kick off the fetches and re-render once they resolve. Show the
+    // loading placeholder only when nothing is cached yet — avoids a
+    // flash on cached data. (Year/category/decade clicks all funnel
+    // through here, so this single gate covers every re-render path.)
+    const needed = v1FestivalsNeedingFetch();
+    if (needed.length > 0) {
+      // Loading flashes only when the current selection has nothing to
+      // render yet. "All" view always has legacy Oscar/BAFTA/GG; a single
+      // already-cached v1 festival also counts.
+      const inScope = selectedFestivals.size === 0
+        ? FESTIVAL_KEYS
+        : Array.from(selectedFestivals);
+      const haveDataForSelection = inScope.some(f =>
+        AWARDS_DB && AWARDS_DB[f] && Object.keys(AWARDS_DB[f]).length > 0
+      );
+      if (!haveDataForSelection) {
+        resultsContainer.innerHTML = `<div class="results-empty">
+          <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/><path d="M12 3a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="2"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg></div>
+          <h3>Loading…</h3>
+          <p>Fetching festival data.</p>
+        </div>`;
+      }
+      Promise.all(needed.map(fetchFestivalV1)).then(() => renderResults());
+      return;
+    }
+
+    if (!AWARDS_DB) {
       resultsContainer.innerHTML = `<div class="results-empty">
         <div class="empty-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg></div>
         <h3>Data Not Available</h3>
@@ -370,13 +575,13 @@
     const expanded = expandCategory(currentCategory, festivals);
 
     festivals.forEach(fKey => {
-      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      const fest = AWARDS_DB[fKey];
       if (!fest) return;
       const cats = expanded === null ? Object.keys(fest) : expanded;
       cats.forEach(cat => {
         const catData = fest[cat];
         if (!catData) return;
-        let years = currentYear ? [currentYear] : Object.keys(catData).map(Number);
+        let years = currentYear ? [currentYear] : Object.keys(catData).map(Number).filter(inScope);
         if (!currentYear && currentDecade !== null) {
           years = years.filter(y => y >= currentDecade && y < currentDecade + 10);
         }
@@ -451,7 +656,10 @@
     }
 
     function buildMovieTileHtml(entry, m, personName, personId, posterSrc, badgeClass, badgeHtml) {
-      const tileClass = entry.isWinner ? "award-tile winner-tile" : "award-tile";
+      const festSlug = getFestivalGlowSlug(entry.festival);
+      const festClass = festSlug ? ` fest-${festSlug}` : '';
+      const filmCatClass = FILM_CATEGORIES.has(entry.category) ? ' is-film-cat' : '';
+      const tileClass = (entry.isWinner ? "award-tile winner-tile" : "award-tile") + festClass + filmCatClass;
       const fallbackHtml = `<div class="no-poster"><span class="og og-film"></span><span class="no-poster-title">${escapeHtml(m.title)}</span></div>`;
       const fallbackEscaped = fallbackHtml.replace(/'/g, "\\'").replace(/"/g, "&quot;");
       const metaParts = [];
@@ -465,7 +673,7 @@
       // Oscar/BAFTA/GoldenGlobe honour prior-year films; Cannes/Venice/Berlin honour same-year films
       const ceremonyOffsetFests = new Set(["Oscar", "BAFTA", "GoldenGlobe"]);
       const filmYear = ceremonyOffsetFests.has(entry.festival) ? entry.year - 1 : entry.year;
-      return `<div class="${tileClass}" data-tmdb-id="${m.tmdb_id}" data-person-id="${personId}" data-film-year="${filmYear}">
+      return `<div class="${tileClass}" data-tmdb-id="${m.tmdb_id}" data-person-id="${personId}" data-film-year="${filmYear}" data-festival="${entry.festival}" data-category="${escapeAttr(entry.category)}" data-year="${entry.year}">
         <div class="award-tile-poster">
           ${posterSrc
             ? `<img src="${posterSrc}" alt="${escapeAttr(m.title)}" loading="lazy" onerror="this.outerHTML='${fallbackEscaped}'">`
@@ -483,7 +691,9 @@
     function buildPersonTileHtml(entry, m, personName, personId, badgeClass, badgeHtml) {
       const roleInfo = getPersonTileRole(entry.category);
       const glowNom = !entry.isWinner ? ' glow-nominee' : '';
-      return `<div class="award-tile ${roleInfo.glowClass}${glowNom}" data-tmdb-id="0" data-person-id="${personId}">
+      const festSlug = getFestivalGlowSlug(entry.festival);
+      const festClass = festSlug ? ` fest-${festSlug}` : '';
+      return `<div class="award-tile ${roleInfo.glowClass}${glowNom}${festClass}" data-tmdb-id="0" data-person-id="${personId}" data-festival="${entry.festival}" data-category="${escapeAttr(entry.category)}" data-year="${entry.year}">
         <div class="award-tile-poster">
           <div class="no-poster person-tile-bg">
             <div class="person-tile-inner">
@@ -501,9 +711,11 @@
       const roleInfo = getPersonTileRole(entry.category);
       const glowNom = !entry.isWinner ? ' glow-nominee' : '';
       const winnerClass = entry.isWinner ? ' winner-tile' : '';
+      const festSlug = getFestivalGlowSlug(entry.festival);
+      const festClass = festSlug ? ` fest-${festSlug}` : '';
       const fallbackHtml = `<div class="no-poster"><span class="og og-film"></span><span class="no-poster-title">${escapeHtml(m.title)}</span></div>`;
       const fallbackEscaped = fallbackHtml.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-      return `<div class="award-tile tile-wrap${winnerClass} ${roleInfo.glowClass}${glowNom}" data-tmdb-id="${m.tmdb_id}" data-person-id="${personId}">
+      return `<div class="award-tile tile-wrap${winnerClass} ${roleInfo.glowClass}${glowNom}${festClass}" data-tmdb-id="${m.tmdb_id}" data-person-id="${personId}" data-festival="${entry.festival}" data-category="${escapeAttr(entry.category)}" data-year="${entry.year}">
         <div class="tile-inner">
           <div class="tile-face tile-front">
             ${posterSrc
@@ -586,7 +798,10 @@
     });
 
     resultsContainer.innerHTML = html;
+    if (window.renderAwardBadges) window.renderAwardBadges(resultsContainer);
     lazyLoadPersonPortraits();
+    updateLandmarkUI();
+    decorateTilesWithLandmarks();
   }
 
   /* ==============================================
@@ -652,9 +867,12 @@
 
     if (type === "festival" && typeof FESTIVAL_INFO !== "undefined" && FESTIVAL_INFO[key]) {
       const f = FESTIVAL_INFO[key];
-      const svg = (typeof AWARD_SVGS_DETAIL !== "undefined" && AWARD_SVGS_DETAIL[key]) || (typeof AWARD_SVGS !== "undefined" && AWARD_SVGS[key]) || "";
+      const festivalId = window.detectFestivalId ? window.detectFestivalId(key) : null;
+      const badgeHtml = festivalId
+        ? `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="winner" data-size="76" title="${escapeHtml(f.name)}"></div>`
+        : "";
       html = `
-        <div class="info-panel-glyph">${svg}</div>
+        <div class="info-panel-glyph">${badgeHtml}</div>
         <div class="info-panel-name">${escapeHtml(f.name)}</div>
         <div class="info-panel-subtitle">${escapeHtml(f.location || "")}</div>
         <div class="info-stat-grid">
@@ -717,6 +935,7 @@
     </div>`;
 
     infoPanelContent.innerHTML = html;
+    if (window.renderAwardBadges) window.renderAwardBadges(infoPanelContent);
     infoPanel.classList.add("open");
     infoPanelOverlay.hidden = false;
     infoPanelOverlay.classList.add("open");
@@ -728,19 +947,45 @@
     setTimeout(() => { infoPanelOverlay.hidden = true; }, 300);
   }
 
+  /* Rule 17: Black Hole exit helpers. */
+  function triggerOrbitClose(overlay, btn, teardownFn) {
+    if (!overlay) { if (teardownFn) teardownFn(); return; }
+    if (overlay.classList.contains('orbit-popup-closing')) return;
+    if (btn) btn.classList.add('closing');
+    overlay.classList.add('orbit-popup-closing');
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      if (btn) btn.classList.remove('closing');
+      overlay.classList.remove('orbit-popup-closing');
+      if (teardownFn) teardownFn();
+    }, reduced ? 200 : 600);
+  }
+
   function bindInfoPanel() {
-    infoPanelClose.addEventListener("click", closeInfoPanel);
-    infoPanelOverlay.addEventListener("click", closeInfoPanel);
+    infoPanelClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(infoPanel, infoPanelClose, closeInfoPanel);
+    });
+    infoPanelOverlay.addEventListener("click", () => {
+      triggerOrbitClose(infoPanel, infoPanelClose, closeInfoPanel);
+    });
   }
 
   /* ==============================================
      GUIDE MODAL
   ============================================== */
   function bindGuideModal() {
+    const closeGuide = () => { guideModal.hidden = true; };
     guideBtn.addEventListener("click", () => { guideModal.hidden = false; });
-    guideModalClose.addEventListener("click", () => { guideModal.hidden = true; });
+    guideModalClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(guideModal, guideModalClose, closeGuide);
+    });
     guideModal.addEventListener("click", (e) => {
-      if (e.target === guideModal) guideModal.hidden = true;
+      if (e.target === guideModal) triggerOrbitClose(guideModal, guideModalClose, closeGuide);
     });
   }
 
@@ -818,11 +1063,11 @@
      AWARDS INDEX (one-time scan of full database)
   ============================================== */
   function buildMovieAwardsIndex() {
-    if (typeof AWARDS_BROWSE_DATABASE === "undefined") return;
+    if (!AWARDS_DB) return;
     const idx = {};
 
     FESTIVAL_KEYS.forEach(fKey => {
-      const fest = AWARDS_BROWSE_DATABASE[fKey];
+      const fest = AWARDS_DB[fKey];
       if (!fest) return;
       Object.keys(fest).forEach(cat => {
         const catData = fest[cat];
@@ -831,6 +1076,7 @@
           const yearData = catData[yr];
           if (!yearData) return;
           const year = parseInt(yr, 10);
+          if (!inScope(year)) return;
 
           const winnerList = yearData.winners ? yearData.winners : yearData.winner ? [yearData.winner] : [];
           winnerList.forEach(w => {
@@ -893,6 +1139,7 @@
 
     const tip = ensureTooltip();
     tip.innerHTML = buildTooltipHtml(awards);
+    if (window.renderAwardBadges) window.renderAwardBadges(tip);
     tip.classList.add("visible");
     positionTooltip(e);
   }
@@ -945,12 +1192,16 @@
 
     awards.forEach(a => {
       const rowClass = a.isWinner ? "win" : "nom";
-      const svg = (typeof AWARD_SVGS !== "undefined" && AWARD_SVGS[a.festival]) || "";
+      const festivalId = window.detectFestivalId ? window.detectFestivalId(a.festival) : null;
+      const status = a.isWinner ? "winner" : "nominee";
+      const badgeHtml = festivalId
+        ? `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="${status}" data-size="14" title="${getFestivalShortName(a.festival)} ${a.isWinner ? 'Winner' : 'Nominee'}"></div>`
+        : "";
       const festName = getFestivalShortName(a.festival);
       const badgeLabel = a.isWinner ? "Winner" : "Nom";
 
       html += `<div class="awards-tooltip-row ${rowClass}">
-        ${svg}
+        ${badgeHtml}
         <div class="awards-tooltip-row-text">
           <span class="awards-tooltip-cat">${escapeHtml(festName)} — ${escapeHtml(a.category)}</span>
           <span class="awards-tooltip-year">(${a.year})</span>
@@ -1018,15 +1269,16 @@
     return { glowClass: 'glow-director', tagClass: 'director', label: 'Director' };
   }
 
-  /* Build orbit-style badge HTML: concentric rings + SVG core */
+  /* Build orbit-style badge HTML using the new award-badge component */
   function buildBadge(isWinner, festivalKey) {
-    const rings = `<div class="badge-ring-outer"></div><div class="badge-ring-inner"></div>`;
-    if (isWinner) {
-      // Use the festival-specific glyph SVG for winners
-      const festSvg = (typeof AWARD_SVGS !== "undefined" && AWARD_SVGS[festivalKey]) || "";
-      return `${rings}<div class="badge-core">${festSvg}</div>`;
+    const festivalId = window.detectFestivalId ? window.detectFestivalId(festivalKey) : null;
+    const status = isWinner ? "winner" : "nominee";
+    const size = isWinner ? "32" : "24";
+    if (festivalId) {
+      return `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="${status}" data-size="${size}" title="${festivalKey} ${isWinner ? 'Winner' : 'Nominee'}"></div>`;
     }
-    // Nominees get a simple dot
+    // Fallback: simple dot
+    const rings = `<div class="badge-ring-outer"></div><div class="badge-ring-inner"></div>`;
     return `${rings}<div class="badge-core"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg></div>`;
   }
 
@@ -1084,6 +1336,337 @@
   function escapeAttr(str) {
     if (!str) return "";
     return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  /* ============================================================
+     LANDMARK FEATURES — Added 2026-05-05 (Prompt 1)
+     Cannes-Amber identity layer:
+       • Ceremony banner with landmark count
+       • Toggleable landmark prose strip
+       • Notable dots on landmark wins
+       • Role-tag overlay on movie tiles (picture/director/actor/craft)
+       • Festival-specific tile glow
+     Truth files at ../data/reference/{slug}-landmark-truth.json
+     handle two ceremony schemas:
+       (a) Ceremony-numbered (Oscar / BAFTA / GG): keys "72", "73"…
+       (b) Year-keyed (Cannes / Venice / Berlin): keys "2000", "2001"…
+     ============================================================ */
+
+  const truthCache = {};
+  let landmarkStripVisible = false;
+  let landmarkUpdateToken = 0;
+
+  function getFestivalTruthSlug(key) {
+    const map = { Oscar: 'oscar', BAFTA: 'bafta', GoldenGlobe: 'gg', Cannes: 'cannes', Venice: 'venice', Berlin: 'berlin' };
+    return map[key] || '';
+  }
+
+  function getFestivalGlowSlug(key) {
+    const map = { Oscar: 'oscar', Cannes: 'cannes', Venice: 'venice', Berlin: 'berlin', BAFTA: 'bafta', GoldenGlobe: 'globe' };
+    return map[key] || '';
+  }
+
+  function getCeremonyName(key) {
+    const map = {
+      Oscar: 'Academy Awards',
+      BAFTA: 'BAFTA Film Awards',
+      GoldenGlobe: 'Golden Globes',
+      Cannes: 'Cannes Film Festival',
+      Venice: 'Venice Film Festival',
+      Berlin: 'Berlin Film Festival'
+    };
+    return map[key] || key;
+  }
+
+  function ordinalSuffix(n) {
+    const v = n % 100;
+    if (v >= 11 && v <= 13) return n + 'th';
+    switch (n % 10) {
+      case 1: return n + 'st';
+      case 2: return n + 'nd';
+      case 3: return n + 'rd';
+      default: return n + 'th';
+    }
+  }
+
+  function slugifyCategory(cat) {
+    if (!cat) return '';
+    return cat.toLowerCase()
+      .replace(/['‘’ʼ]/g, '')
+      .replace(/[^a-z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '');
+  }
+
+  async function getFestivalTruth(festivalKey) {
+    const slug = getFestivalTruthSlug(festivalKey);
+    if (!slug) return null;
+    if (truthCache[slug] !== undefined) return truthCache[slug];
+    try {
+      const resp = await fetch(`../data/reference/${slug}-landmark-truth.json`);
+      if (!resp.ok) {
+        console.warn(`[awards-browse] Landmark truth not found for ${festivalKey} (${slug})`);
+        truthCache[slug] = null;
+        return null;
+      }
+      truthCache[slug] = await resp.json();
+      return truthCache[slug];
+    } catch (err) {
+      console.error(`[awards-browse] Error loading truth for ${festivalKey}:`, err);
+      truthCache[slug] = null;
+      return null;
+    }
+  }
+
+  /* Find a ceremony entry for the given year, handling both schema shapes:
+       (a) keys are ceremony numbers — match by ceremony.ceremony_year
+       (b) keys are years — direct lookup
+     Returns { ceremonyKey, ceremony } or null. */
+  function findCeremonyByYear(truth, year) {
+    if (!truth || !truth.ceremonies) return null;
+    const direct = truth.ceremonies[String(year)];
+    if (direct && (direct.ceremony_year === year || !direct.ceremony_year)) {
+      return { ceremonyKey: String(year), ceremony: direct };
+    }
+    for (const [k, v] of Object.entries(truth.ceremonies)) {
+      if (v && v.ceremony_year === year) {
+        return { ceremonyKey: k, ceremony: v };
+      }
+    }
+    return null;
+  }
+
+  /* Returns { ceremony, ordinal, landmarks: [{key, catSlug, note, winner_film, winner_recipient}] }
+     ordinal is the formatted ceremony ordinal (e.g. "96th") for ceremony-numbered
+     festivals; null otherwise. */
+  async function loadLandmarks(festivalKey, year) {
+    const truth = await getFestivalTruth(festivalKey);
+    if (!truth) return null;
+    const found = findCeremonyByYear(truth, year);
+    if (!found) return { ceremony: null, ordinal: null, landmarks: [] };
+
+    const { ceremonyKey, ceremony } = found;
+    const isCeremonyNumbered = /^\d+$/.test(ceremonyKey) && parseInt(ceremonyKey, 10) < 200;
+    const ordinal = isCeremonyNumbered ? ordinalSuffix(parseInt(ceremonyKey, 10)) : null;
+
+    const landmarks = [];
+    if (ceremony.landmarks) {
+      Object.entries(ceremony.landmarks).forEach(([key, data]) => {
+        if (data && data.notable && data.note) {
+          const dotIdx = key.indexOf('.');
+          const catSlug = dotIdx >= 0 ? key.slice(dotIdx + 1) : key;
+          landmarks.push({
+            key,
+            catSlug,
+            note: data.note,
+            winner_film: data.winner_film || null,
+            winner_recipient: data.winner_recipient || null
+          });
+        }
+      });
+    }
+    return { ceremony, ordinal, landmarks };
+  }
+
+  /* Map an award category label to a role-tag class. */
+  function getCategoryRole(category) {
+    if (!category) return 'role-craft';
+    if (/Picture|Film|Drama|Comedy\/Musical|Palme|Lion|Bear/i.test(category)) return 'role-picture';
+    if (/Director/i.test(category)) return 'role-director';
+    if (/Actor|Actress/i.test(category)) return 'role-actor';
+    return 'role-craft';
+  }
+
+  function roleLabelFromClass(roleClass) {
+    switch (roleClass) {
+      case 'role-picture': return 'Picture';
+      case 'role-director': return 'Director';
+      case 'role-actor': return 'Actor';
+      default: return 'Craft';
+    }
+  }
+
+  /* Combine landmark notes into prose. Each note is wrapped as a sentence. */
+  function combineLandmarkNotes(landmarks) {
+    if (!landmarks || !landmarks.length) return '';
+    return landmarks.map(lm => {
+      let txt = (lm.note || '').trim();
+      if (!txt) return '';
+      if (!/[.!?]$/.test(txt)) txt += '.';
+      return escapeHtml(txt);
+    }).filter(Boolean).join(' ');
+  }
+
+  /* Create the ceremony banner and landmark strip elements once,
+     inserting them above resultsContainer inside .results-area. */
+  function ensureLandmarkUI() {
+    const awardsLayout = document.querySelector('.awards-layout');
+    if (!awardsLayout || document.getElementById('ceremonyBanner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'ceremonyBanner';
+    banner.className = 'ceremony-banner';
+    banner.style.display = 'none';
+    banner.innerHTML = `
+      <div class="ceremony-banner-info">
+        <div class="ceremony-banner-title"></div>
+        <div class="ceremony-banner-meta"></div>
+      </div>
+      <button class="landmark-btn" type="button" aria-expanded="false">
+        <span class="og og-sparkle landmark-btn-glyph" aria-hidden="true"></span>
+        <span class="landmark-btn-count">0</span>
+        <span class="landmark-btn-label">Landmark Moments</span>
+      </button>`;
+
+    const strip = document.createElement('div');
+    strip.id = 'landmarkStrip';
+    strip.className = 'landmark-strip';
+    strip.innerHTML = `
+      <span class="og og-sparkle landmark-strip-icon" aria-hidden="true"></span>
+      <div class="landmark-strip-prose"></div>`;
+
+    awardsLayout.parentNode.insertBefore(banner, awardsLayout);
+    awardsLayout.parentNode.insertBefore(strip, awardsLayout);
+
+    banner.querySelector('.landmark-btn').addEventListener('click', () => {
+      const btn = banner.querySelector('.landmark-btn');
+      if (btn.classList.contains('is-empty')) return;
+      landmarkStripVisible = !landmarkStripVisible;
+      strip.classList.toggle('is-visible', landmarkStripVisible);
+      btn.setAttribute('aria-expanded', String(landmarkStripVisible));
+    });
+  }
+
+  /* Show/hide the ceremony banner + landmark strip.
+     Visible only when exactly 1 festival is selected AND a specific year is chosen. */
+  async function updateLandmarkUI() {
+    const banner = document.getElementById('ceremonyBanner');
+    const strip = document.getElementById('landmarkStrip');
+    if (!banner || !strip) return;
+
+    const token = ++landmarkUpdateToken;
+
+    const oneFest = selectedFestivals.size === 1;
+    const oneYear = currentYear !== null;
+    if (!oneFest || !oneYear) {
+      banner.style.display = 'none';
+      strip.classList.remove('is-visible');
+      landmarkStripVisible = false;
+      return;
+    }
+
+    const fest = Array.from(selectedFestivals)[0];
+    const year = currentYear;
+
+    // Hide banner during load so a stale ceremony never flashes between selections
+    banner.style.display = 'none';
+    strip.classList.remove('is-visible');
+
+    const result = await loadLandmarks(fest, year);
+    if (token !== landmarkUpdateToken) return; // a newer call superseded this one
+    if (!result) {
+      banner.style.display = 'none';
+      strip.classList.remove('is-visible');
+      return;
+    }
+
+    const { ceremony, ordinal, landmarks } = result;
+    const titleEl = banner.querySelector('.ceremony-banner-title');
+    const metaEl = banner.querySelector('.ceremony-banner-meta');
+    const countEl = banner.querySelector('.landmark-btn-count');
+    const labelEl = banner.querySelector('.landmark-btn-label');
+    const btn = banner.querySelector('.landmark-btn');
+
+    const festName = getFestivalShortName(fest);
+    const refYear = (ceremony && ceremony.ceremony_year) || year;
+    titleEl.textContent = ordinal
+      ? `${ordinal} ${getCeremonyName(fest)} — ${festName} ${refYear}`
+      : `${getCeremonyName(fest)} — ${festName} ${refYear}`;
+
+    const metaParts = [];
+    if (ceremony && ceremony.date) metaParts.push(ceremony.date);
+    if (ceremony && ceremony.venue) metaParts.push(ceremony.venue);
+    metaEl.textContent = metaParts.join(' · ');
+    metaEl.style.display = metaParts.length ? '' : 'none';
+
+    const count = landmarks.length;
+    countEl.textContent = String(count);
+    labelEl.textContent = count === 1 ? 'Landmark Moment' : 'Landmark Moments';
+    btn.classList.toggle('is-empty', count === 0);
+    btn.setAttribute('aria-expanded', String(landmarkStripVisible && count > 0));
+
+    banner.style.display = 'flex';
+
+    const proseEl = strip.querySelector('.landmark-strip-prose');
+    proseEl.innerHTML = combineLandmarkNotes(landmarks);
+
+    if (count === 0) {
+      strip.classList.remove('is-visible');
+      landmarkStripVisible = false;
+    } else {
+      strip.classList.toggle('is-visible', landmarkStripVisible);
+    }
+  }
+
+  /* Walk rendered tiles and apply notable dots + role-tag overlays.
+     Batches truth-file lookups per festival+year. */
+  async function decorateTilesWithLandmarks() {
+    if (!resultsContainer) return;
+    const tiles = resultsContainer.querySelectorAll('.award-tile[data-festival][data-year]');
+    if (!tiles.length) return;
+
+    // Add role tags to movie tiles (skip person tiles which already carry .role-tag)
+    tiles.forEach(tile => {
+      if (tile.querySelector('.role-tag')) return;
+      const cat = tile.dataset.category || '';
+      const roleClass = getCategoryRole(cat);
+      const tag = document.createElement('div');
+      tag.className = `role-tag ${roleClass}`;
+      tag.textContent = roleLabelFromClass(roleClass);
+      const host = tile.querySelector('.award-tile-poster') || tile;
+      const cs = window.getComputedStyle(host);
+      if (cs.position === 'static') host.style.position = 'relative';
+      host.appendChild(tag);
+    });
+
+    // Group tiles by festival+year for batched landmark lookups
+    const groups = new Map();
+    tiles.forEach(tile => {
+      const fest = tile.dataset.festival;
+      const year = parseInt(tile.dataset.year, 10);
+      if (!fest || !year) return;
+      const key = `${fest}|${year}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(tile);
+    });
+
+    for (const [key, list] of groups.entries()) {
+      const [fest, yearStr] = key.split('|');
+      const year = parseInt(yearStr, 10);
+      const result = await loadLandmarks(fest, year);
+      if (!result || !result.landmarks.length) continue;
+
+      const landmarkMap = {};
+      result.landmarks.forEach(lm => { landmarkMap[lm.catSlug] = lm; });
+
+      list.forEach(tile => {
+        // Notable dot only on winner tiles whose category has a landmark note
+        const isWinner = tile.classList.contains('winner-tile');
+        if (!isWinner) return;
+        const catSlug = slugifyCategory(tile.dataset.category || '');
+        const lm = landmarkMap[catSlug];
+        if (!lm) return;
+        if (tile.querySelector('.tile-notable-dot')) return;
+        const dot = document.createElement('div');
+        dot.className = 'tile-notable-dot';
+        dot.title = lm.note;
+        const host = tile.querySelector('.award-tile-poster') || tile;
+        const cs = window.getComputedStyle(host);
+        if (cs.position === 'static') host.style.position = 'relative';
+        // Avoid colliding with the role-tag which also anchors top-left
+        if (host.querySelector('.role-tag')) dot.style.top = '28px';
+        host.appendChild(dot);
+      });
+    }
   }
 
 })();
