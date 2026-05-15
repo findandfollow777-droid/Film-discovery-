@@ -1377,6 +1377,11 @@
     "known_for_department": "Directing",
     "profile_path": "/6WmZv2DQyCfgbAN6grf3nXGDogR.jpg"
   },
+  "Andrea Remanda": {
+    "id": 6096941,
+    "known_for_department": "Sound",
+    "profile_path": null
+  },
   "Andrea Riseborough": {
     "id": 127558,
     "known_for_department": null,
@@ -5161,6 +5166,11 @@
     "known_for_department": "Sound",
     "profile_path": "/tRNZcb36mHpVcVXsP1KFEEHJVK1.jpg"
   },
+  "Christopher Bruce": {
+    "id": 1635506,
+    "known_for_department": "Art",
+    "profile_path": null
+  },
   "Christopher Greenbury": {
     "id": 7414,
     "known_for_department": "Editing",
@@ -8168,6 +8178,11 @@
   "Elio Germano": {
     "id": 59269,
     "known_for_department": null,
+    "profile_path": null
+  },
+  "Eliot Kennedy": {
+    "id": 6056776,
+    "known_for_department": "Acting",
     "profile_path": null
   },
   "Elisa Miller": {
@@ -23014,6 +23029,11 @@
     "known_for_department": "Acting",
     "profile_path": "/eJyqt5uHRp5by1qilQMlDNvzCaj.jpg"
   },
+  "Prince": {
+    "id": 1704640,
+    "known_for_department": "Acting",
+    "profile_path": "/k9oSIk7V8Sbgs0Dw8tX71f9YeXi.jpg"
+  },
   "Péter Mészáros": {
     "id": 2147562,
     "known_for_department": "Directing",
@@ -25531,6 +25551,11 @@
     "known_for_department": "Writing",
     "profile_path": "/9MW15WXIrGDDXvz0fabmyUhc1qB.jpg"
   },
+  "Seal": {
+    "id": 131666,
+    "known_for_department": "Acting",
+    "profile_path": "/mc5nlZMOVz8FkuQ1v1y5WVZ7pto.jpg"
+  },
   "Seamus McGarvey": {
     "id": 3285,
     "known_for_department": "Camera",
@@ -25945,6 +25970,11 @@
     "id": 7632,
     "known_for_department": null,
     "profile_path": null
+  },
+  "Sheryl Crow": {
+    "id": 10750,
+    "known_for_department": "Acting",
+    "profile_path": "/vrZwBJ4iiolbkbgEUpi154e3vFK.jpg"
   },
   "Shia LaBeouf": {
     "id": 10959,

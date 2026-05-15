@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "schema_version": "v1.3",
-    "generated_at": "2026-05-15T21:02:33.815235Z",
+    "generated_at": "2026-05-15T21:34:03.718575Z",
     "row_count": 1936,
     "festival_count": 1,
     "category_count": 15,
@@ -13252,7 +13252,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_motion_picture_drama",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [],
       "film_tmdb_id": 1164,
       "film_title": "Babel",
@@ -13362,7 +13362,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_motion_picture_musical_comedy",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [],
       "film_tmdb_id": 1125,
       "film_title": "Dreamgirls",
@@ -13472,7 +13472,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_motion_picture_animated",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
           "name": "John Lasseter",
@@ -13565,7 +13565,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_motion_picture_non_english",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
           "name": "Clint Eastwood",
@@ -13710,23 +13710,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_actor_drama",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "The Last King of Scotland",
-          "role": null,
-          "tmdb_person_id": null,
+          "name": "Forest Whitaker",
+          "role": "Idi Amin",
+          "tmdb_person_id": 2178,
           "profile_path": null
-        },
-        {
-          "name": "Idi Amin",
-          "role": null,
-          "tmdb_person_id": 115862,
-          "profile_path": "/jSZf3zN6Z8lX3VCU6PJSObZUGhM.jpg"
         }
       ],
       "film_tmdb_id": null,
-      "film_title": "Forest Whitaker",
+      "film_title": "The Last King of Scotland",
       "subject_title": null,
       "film_release_year": null,
       "film_poster_path": null,
@@ -13861,17 +13855,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_actress_drama",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "The Queen",
-          "role": null,
-          "tmdb_person_id": 5925098,
+          "name": "Helen Mirren",
+          "role": "The Queen",
+          "tmdb_person_id": 15735,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 1123935,
-      "film_title": "Helen Mirren",
+      "film_title": "The Queen",
       "subject_title": null,
       "film_release_year": 2023,
       "film_poster_path": "/8dXlrrxl3e6vlxqZgEXzUdRtUWj.jpg",
@@ -14006,23 +14000,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_actor_musical_comedy",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
-          "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
-        },
-        {
-          "name": "Borat Sagdiyev",
-          "role": null,
-          "tmdb_person_id": null,
+          "name": "Sacha Baron Cohen",
+          "role": "Borat Sagdiyev",
+          "tmdb_person_id": 6730,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 1157470,
-      "film_title": "Sacha Baron Cohen",
+      "film_title": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
       "subject_title": null,
       "film_release_year": 2012,
       "film_poster_path": "/l4MUsqBBteiQc0CdA9Gt3HgzPHt.jpg",
@@ -14157,23 +14145,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_actress_musical_comedy",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "The Devil Wears Prada",
-          "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
-        },
-        {
-          "name": "Miranda Priestly",
-          "role": null,
-          "tmdb_person_id": null,
+          "name": "Meryl Streep",
+          "role": "Miranda Priestly",
+          "tmdb_person_id": 5064,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 733984,
-      "film_title": "Meryl Streep",
+      "film_title": "The Devil Wears Prada",
       "subject_title": null,
       "film_release_year": 2020,
       "film_poster_path": "/dFkZVsaCyE2Tgfgr9qt0HBH3eNi.jpg",
@@ -14308,17 +14290,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_supporting_actor",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "Dreamgirls",
-          "role": null,
-          "tmdb_person_id": null,
+          "name": "Eddie Murphy",
+          "role": "Jimmy \"Thunder\" Early",
+          "tmdb_person_id": 776,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 17159,
-      "film_title": "Eddie Murphy",
+      "film_title": "Dreamgirls",
       "subject_title": null,
       "film_release_year": 1987,
       "film_poster_path": "/irVU3PHIdg36Rh8tSKnKCdmHLEO.jpg",
@@ -14453,17 +14435,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_supporting_actress",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "Dreamgirls",
-          "role": null,
-          "tmdb_person_id": null,
+          "name": "Jennifer Hudson",
+          "role": "Effie Melody White",
+          "tmdb_person_id": 15565,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 1323468,
-      "film_title": "Jennifer Hudson",
+      "film_title": "Dreamgirls",
       "subject_title": null,
       "film_release_year": 2009,
       "film_poster_path": null,
@@ -14598,17 +14580,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_director",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
-          "name": "The Departed",
+          "name": "Martin Scorsese",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1032,
           "profile_path": null
         }
       ],
       "film_tmdb_id": 216657,
-      "film_title": "Martin Scorsese",
+      "film_title": "The Departed",
       "subject_title": null,
       "film_release_year": 2005,
       "film_poster_path": "/mWg42yeXSJi987B0DipVpu1vXRz.jpg",
@@ -14743,7 +14725,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_screenplay",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
           "name": "Peter Morgan",
@@ -14894,7 +14876,7 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_original_score",
       "year": 2007,
-      "result": "nominated",
+      "result": "won",
       "recipients": [
         {
           "name": "Alexandre Desplat",
@@ -15039,10 +15021,17 @@
       "ceremony_id": "gg.2007",
       "category_id": "gg.best_original_song",
       "year": 2007,
-      "result": "nominated",
-      "recipients": [],
+      "result": "won",
+      "recipients": [
+        {
+          "name": "Prince",
+          "role": "The Song of the Heart",
+          "tmdb_person_id": 1704640,
+          "profile_path": "/k9oSIk7V8Sbgs0Dw8tX71f9YeXi.jpg"
+        }
+      ],
       "film_tmdb_id": 331877,
-      "film_title": "The Song of the Heart",
+      "film_title": "Happy Feet",
       "subject_title": "Happy Feet",
       "film_release_year": 1953,
       "film_poster_path": "/sNZmiAkMPYFyphh4LGy6D52Nzz8.jpg",
@@ -15054,7 +15043,7 @@
       "flags": [
         "single_source_wikipedia_only"
       ],
-      "notes": null
+      "notes": "Song: \"The Song of the Heart\""
     },
     {
       "id": "gg.best_original_song.2007.bryan_adams_unresolved",
@@ -15062,9 +15051,28 @@
       "category_id": "gg.best_original_song",
       "year": 2007,
       "result": "nominated",
-      "recipients": [],
+      "recipients": [
+        {
+          "name": "Bryan Adams",
+          "role": "Never Gonna Break My Faith",
+          "tmdb_person_id": 56683,
+          "profile_path": "/dBS0vhq0BdcAryV5NqoXIEqs5v.jpg"
+        },
+        {
+          "name": "Eliot Kennedy",
+          "role": "Never Gonna Break My Faith",
+          "tmdb_person_id": 6056776,
+          "profile_path": null
+        },
+        {
+          "name": "Andrea Remanda",
+          "role": "Never Gonna Break My Faith",
+          "tmdb_person_id": 6096941,
+          "profile_path": null
+        }
+      ],
       "film_tmdb_id": 54881,
-      "film_title": "Bryan Adams",
+      "film_title": "Bobby",
       "subject_title": "Bobby",
       "film_release_year": 2005,
       "film_poster_path": "/1vSez4MCQZcJ6fP5lNFbDSeOGzB.jpg",
@@ -15076,7 +15084,7 @@
       "flags": [
         "single_source_wikipedia_only"
       ],
-      "notes": null
+      "notes": "Song: \"Never Gonna Break My Faith\""
     },
     {
       "id": "gg.best_original_song.2007.listen_unresolved",
@@ -15084,9 +15092,34 @@
       "category_id": "gg.best_original_song",
       "year": 2007,
       "result": "nominated",
-      "recipients": [],
+      "recipients": [
+        {
+          "name": "Scott Cutler",
+          "role": "Listen",
+          "tmdb_person_id": 5974758,
+          "profile_path": null
+        },
+        {
+          "name": "Beyoncé",
+          "role": "Listen",
+          "tmdb_person_id": 14386,
+          "profile_path": "/2HbjNtiCtmbArEnELuDFU7knaVK.jpg"
+        },
+        {
+          "name": "Henry Krieger",
+          "role": "Listen",
+          "tmdb_person_id": 15571,
+          "profile_path": null
+        },
+        {
+          "name": "Anne Preven",
+          "role": "Listen",
+          "tmdb_person_id": 4786823,
+          "profile_path": null
+        }
+      ],
       "film_tmdb_id": 9782,
-      "film_title": "Listen",
+      "film_title": "Dreamgirls",
       "subject_title": "Dreamgirls",
       "film_release_year": 2006,
       "film_poster_path": "/xIQgviGRTxZ6o0iPooGUSn4Q1PW.jpg",
@@ -15098,7 +15131,7 @@
       "flags": [
         "single_source_wikipedia_only"
       ],
-      "notes": null
+      "notes": "Song: \"Listen\""
     },
     {
       "id": "gg.best_original_song.2007.sheryl_crow_unresolved",
@@ -15106,9 +15139,16 @@
       "category_id": "gg.best_original_song",
       "year": 2007,
       "result": "nominated",
-      "recipients": [],
+      "recipients": [
+        {
+          "name": "Sheryl Crow",
+          "role": "Try Not to Remember",
+          "tmdb_person_id": 10750,
+          "profile_path": "/vrZwBJ4iiolbkbgEUpi154e3vFK.jpg"
+        }
+      ],
       "film_tmdb_id": 75648,
-      "film_title": "Sheryl Crow",
+      "film_title": "Home of the Brave",
       "subject_title": "Home of the Brave",
       "film_release_year": 2005,
       "film_poster_path": "/hdVhveSPEAuvDp0DHAsOwXflIg4.jpg",
@@ -15120,7 +15160,7 @@
       "flags": [
         "single_source_wikipedia_only"
       ],
-      "notes": null
+      "notes": "Song: \"Try Not to Remember\""
     },
     {
       "id": "gg.best_original_song.2007.seal_unresolved",
@@ -15128,9 +15168,22 @@
       "category_id": "gg.best_original_song",
       "year": 2007,
       "result": "nominated",
-      "recipients": [],
+      "recipients": [
+        {
+          "name": "Seal",
+          "role": "A Father's Way",
+          "tmdb_person_id": 131666,
+          "profile_path": "/mc5nlZMOVz8FkuQ1v1y5WVZ7pto.jpg"
+        },
+        {
+          "name": "Christopher Bruce",
+          "role": "A Father's Way",
+          "tmdb_person_id": 1635506,
+          "profile_path": null
+        }
+      ],
       "film_tmdb_id": 356521,
-      "film_title": "Seal",
+      "film_title": "The Pursuit of Happyness",
       "subject_title": "The Pursuit of Happyness",
       "film_release_year": 2006,
       "film_poster_path": "/tT2JVu6RvJuaOy3qGwn0BHRyEVA.jpg",
@@ -15142,7 +15195,7 @@
       "flags": [
         "single_source_wikipedia_only"
       ],
-      "notes": null
+      "notes": "Song: \"A Father's Way\""
     },
     {
       "id": "gg.best_motion_picture_drama.2008.atonement_unresolved",

@@ -24406,14 +24406,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Last King of Scotland",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Forest Whitaker"
+        },
         "nominees": [
-          {
-            "title": "Forest Whitaker",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "The Last King of Scotland"
-          },
           {
             "title": "The Departed",
             "tmdb_id": 0,
@@ -25300,14 +25299,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Sacha Baron Cohen"
+        },
         "nominees": [
-          {
-            "title": "Sacha Baron Cohen",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan"
-          },
           {
             "title": "Pirates of the Caribbean: Dead Man's Chest",
             "tmdb_id": 0,
@@ -26200,14 +26198,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Queen",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Helen Mirren"
+        },
         "nominees": [
-          {
-            "title": "Helen Mirren",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "The Queen"
-          },
           {
             "title": "Volver",
             "tmdb_id": 0,
@@ -27100,14 +27097,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Devil Wears Prada",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Meryl Streep"
+        },
         "nominees": [
-          {
-            "title": "Meryl Streep",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "The Devil Wears Prada"
-          },
           {
             "title": "Running with Scissors",
             "tmdb_id": 0,
@@ -28029,14 +28025,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Departed",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Martin Scorsese"
+        },
         "nominees": [
-          {
-            "title": "Martin Scorsese",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "The Departed"
-          },
           {
             "title": "Flags of Our Fathers",
             "tmdb_id": 0,
@@ -28807,13 +28802,12 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Letters from Iwo Jima",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
-          {
-            "title": "Letters from Iwo Jima",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
           {
             "title": "Apocalypto",
             "tmdb_id": 0,
@@ -29667,13 +29661,12 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Cars",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
-          {
-            "title": "Cars",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
           {
             "title": "Happy Feet",
             "tmdb_id": 0,
@@ -30270,13 +30263,12 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Babel",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
-          {
-            "title": "Babel",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
           {
             "title": "Bobby",
             "tmdb_id": 0,
@@ -31081,13 +31073,12 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Dreamgirls",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
-          {
-            "title": "Dreamgirls",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
           {
             "title": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
             "tmdb_id": 0,
@@ -32137,14 +32128,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Painted Veil",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Alexandre Desplat"
+        },
         "nominees": [
-          {
-            "title": "The Painted Veil",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "Alexandre Desplat"
-          },
           {
             "title": "Babel",
             "tmdb_id": 0,
@@ -33017,30 +33007,29 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Happy Feet",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
           {
-            "title": "The Song of the Heart",
+            "title": "Bobby",
             "tmdb_id": 0,
             "poster_path": null
           },
           {
-            "title": "Bryan Adams",
+            "title": "Dreamgirls",
             "tmdb_id": 0,
             "poster_path": null
           },
           {
-            "title": "Listen",
+            "title": "Home of the Brave",
             "tmdb_id": 0,
             "poster_path": null
           },
           {
-            "title": "Sheryl Crow",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
-          {
-            "title": "Seal",
+            "title": "The Pursuit of Happyness",
             "tmdb_id": 0,
             "poster_path": null
           }
@@ -33818,13 +33807,12 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "The Queen",
+          "tmdb_id": 0,
+          "poster_path": null
+        },
         "nominees": [
-          {
-            "title": "The Queen",
-            "tmdb_id": 0,
-            "poster_path": null
-          },
           {
             "title": "Babel",
             "tmdb_id": 0,
@@ -34677,14 +34665,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Dreamgirls",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Eddie Murphy"
+        },
         "nominees": [
-          {
-            "title": "Eddie Murphy",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "Dreamgirls"
-          },
           {
             "title": "Hollywoodland",
             "tmdb_id": 0,
@@ -35583,14 +35570,13 @@ var AWARDS_BROWSE_DATABASE_V1 = {
         ]
       },
       "2007": {
-        "winner": null,
+        "winner": {
+          "title": "Dreamgirls",
+          "tmdb_id": 0,
+          "poster_path": null,
+          "person": "Jennifer Hudson"
+        },
         "nominees": [
-          {
-            "title": "Jennifer Hudson",
-            "tmdb_id": 0,
-            "poster_path": null,
-            "person": "Dreamgirls"
-          },
           {
             "title": "Babel",
             "tmdb_id": 0,
@@ -63041,13 +63027,13 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Leonardo DiCaprio",
     "person_id": 6193
   },
-  "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|forest whitaker": {
-    "person_name": "The Last King of Scotland",
-    "person_id": null
-  },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|the departed": {
     "person_name": "Leonardo DiCaprio",
     "person_id": 6193
+  },
+  "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|the last king of scotland": {
+    "person_name": "Forest Whitaker",
+    "person_id": 2178
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|the pursuit of happyness": {
     "person_name": "Will Smith",
@@ -63549,6 +63535,10 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Joaquin Phoenix",
     "person_id": 73421
   },
+  "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|borat: cultural learnings of america for make benefit glorious nation of kazakhstan": {
+    "person_name": "Sacha Baron Cohen",
+    "person_id": 6730
+  },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|kinky boots": {
     "person_name": "Chiwetel Ejiofor",
     "person_id": 5294
@@ -63556,10 +63546,6 @@ var PERSON_AWARD_LOOKUP_V1 = {
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|pirates of the caribbean: dead man's chest": {
     "person_name": "Johnny Depp",
     "person_id": 85
-  },
-  "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|sacha baron cohen": {
-    "person_name": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
-    "person_id": null
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|stranger than fiction": {
     "person_name": "Will Ferrell",
@@ -64053,10 +64039,6 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Felicity Huffman",
     "person_id": 7427
   },
-  "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|helen mirren": {
-    "person_name": "The Queen",
-    "person_id": 5925098
-  },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|little children": {
     "person_name": "Kate Winslet",
     "person_id": 204
@@ -64068,6 +64050,10 @@ var PERSON_AWARD_LOOKUP_V1 = {
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|sherrybaby": {
     "person_name": "Maggie Gyllenhaal",
     "person_id": 1579
+  },
+  "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|the queen": {
+    "person_name": "Helen Mirren",
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|volver": {
     "person_name": "Penélope Cruz",
@@ -64561,10 +64547,6 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Toni Collette",
     "person_id": 3051
   },
-  "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|meryl streep": {
-    "person_name": "The Devil Wears Prada",
-    "person_id": null
-  },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|miss potter": {
     "person_name": "Renée Zellweger",
     "person_id": 9137
@@ -64572,6 +64554,10 @@ var PERSON_AWARD_LOOKUP_V1 = {
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|running with scissors": {
     "person_name": "Annette Bening",
     "person_id": 516
+  },
+  "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|the devil wears prada": {
+    "person_name": "Meryl Streep",
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|enchanted": {
     "person_name": "Amy Adams",
@@ -65077,9 +65063,9 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Clint Eastwood",
     "person_id": 190
   },
-  "GoldenGlobe|Best Director|2007|martin scorsese": {
-    "person_name": "The Departed",
-    "person_id": null
+  "GoldenGlobe|Best Director|2007|the departed": {
+    "person_name": "Martin Scorsese",
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2007|the queen": {
     "person_name": "Stephen Frears",
@@ -66213,9 +66199,9 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Brad Pitt",
     "person_id": 287
   },
-  "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|eddie murphy": {
-    "person_name": "Dreamgirls",
-    "person_id": null
+  "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|dreamgirls": {
+    "person_name": "Eddie Murphy",
+    "person_id": 776
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|hollywoodland": {
     "person_name": "Ben Affleck",
@@ -66689,9 +66675,9 @@ var PERSON_AWARD_LOOKUP_V1 = {
     "person_name": "Rinko Kikuchi",
     "person_id": 18054
   },
-  "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|jennifer hudson": {
-    "person_name": "Dreamgirls",
-    "person_id": null
+  "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|dreamgirls": {
+    "person_name": "Jennifer Hudson",
+    "person_id": 15565
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|notes on a scandal": {
     "person_name": "Cate Blanchett",
