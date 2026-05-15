@@ -1,0 +1,134 @@
+TMDB 126: Fran Walsh | Fran Walsh; Philippa Boyens; Peter Jackson
+TMDB 223: Alejandro G. Inarritu | Alejandro G. Iñárritu | Alejandro Gonzalez Inarritu | Alejandro González Iñárritu
+TMDB 309: Pedro Almodovar | Pedro Almodóvar
+TMDB 496: Rick Carter | Rick Carter; Jim Erickson | Rick Carter; Robert Stromberg
+TMDB 793: Luis Bunuel | Luis Buñuel
+TMDB 955: Penelope Cruz | Penélope Cruz
+TMDB 1095: Donald M. McAlpine | Donald McAlpine
+TMDB 1126: Krzysztof Kieslowski | Krzysztof Kieślowski
+TMDB 1223: Joel Coen | Roderick Jaynes
+TMDB 1339: Zhang Ziyi | Ziyi Zhang
+TMDB 1350: Irene Jacob | Irène Jacob
+TMDB 1614: Ang Lee | Ang Lee; James Schamus
+TMDB 1636: Tim Yip | Timmy Yip
+TMDB 1650: Francois Truffaut | François Truffaut
+TMDB 1705: Ted Elliott | Ted Elliott; Terry Rossio; Joe Stillman; Roger S.H. Schulman
+TMDB 1807: Larry McMurtry | Larry McMurtry; Diana Ossana
+TMDB 2366: Dante Ferretti | Dante Ferretti; Francesca Lo Schiavo
+TMDB 3358: Lyle R. Wheeler | Lyle R. Wheeler; George Davis | Lyle R. Wheeler; John DeCuir
+TMDB 3974: Milos Forman | Miloš Forman
+TMDB 4238: Common | Lonnie Lynn
+TMDB 4581: Steve Coogan | Steve Coogan; Jeff Pope
+TMDB 4634: Jasmila Zbanic | Jasmila Žbanić
+TMDB 5125: Fatih Akin | Fatih Akın
+TMDB 5335: Elizabeth Yianni-Georgiou | Lizzie Yianni Georgiou
+TMDB 5491: Stuart Craig | Stuart Craig; Robert W. Laing
+TMDB 5585: Barbara Ling | Barbara Ling; Nancy Haigh
+TMDB 5682: Anouk Aimee | Anouk Aimée
+TMDB 5779: David Wasco | David Wasco; Sandy Reynolds-Wasco
+TMDB 6097: Christian M. Goldbeck | Christian M. Goldbeck; Ernestine Hipper
+TMDB 6189: Dan Hanley | Daniel P. Hanley
+TMDB 6201: Baz Luhrmann | Baz Luhrmann; Craig Pearce
+TMDB 6203: Catherine Martin | Catherine Martin; Brigitte Broch
+TMDB 7152: Sandra Huller | Sandra Hüller
+TMDB 7499: Jared | Jared Leto
+TMDB 8376: Mark A. Mangini | Mark Mangini
+TMDB 8577: Cesar Charlone | César Charlone
+TMDB 8622: Hans Dreier; Ernst Fegté | Hans Dreier; John Meehan | Hans Dreier; Walter H. Tyler
+TMDB 8965: Roland Joffe | Roland Joffé
+TMDB 9060: William A. Horning; E. Preston Ames | William A. Horning; Edward Carfagno
+TMDB 9062: Cedric Gibbons | Cedric Gibbons; Fredric Hope | Cedric Gibbons; Malcolm Brown | Cedric Gibbons; Paul Groesse | Cedric Gibbons; Urie McCleary | Cedric Gibbons; William Ferrari
+TMDB 9137: Renee Zellweger | Renée Zellweger
+TMDB 9747: Jean-Claude Carrière | Jean-Claude Carrière; Philip Kaufman
+TMDB 9869: Ken Adam | Ken Adam; Roy Walker
+TMDB 11002: John Myhre | John Myhre; Gordon Sim
+TMDB 11004: Tamara Deverell | Tamara Deverell; Shane Vieau
+TMDB 11218: Alfonso Cuaron | Alfonso Cuarón
+TMDB 11271: Sammy Sheldon | Sammy Sheldon Differ
+TMDB 12346: Alexander Golitzen; Eric Orbom | Alexander Golitzen; Henry Bumstead | Alexander Golitzen; John B. Goodman
+TMDB 12453: Wong Kar-Wai | Wong Kar-wai
+TMDB 12952: Christopher Hampton | Christopher Hampton; Florian Zeller
+TMDB 13235: Alexander Payne | Alexander Payne; Jim Taylor | Alexander Payne; Nat Faxon; Jim Rash
+TMDB 13321: John Box; Ernest Archer; Jack Maxsted; Gil Parrondo | John Box; John Stoll | John Box; Terence Marsh
+TMDB 14386: Beyoncé | Beyoncé Knowles-Carter
+TMDB 14878: Harry Horner | Harry Horner; John Meehan
+TMDB 15226: Scott A. Hecker | Scott Hecker
+TMDB 15327: Nathan Crowley | Nathan Crowley; Lee Sandales
+TMDB 15332: Mark P. Stoeckinger | Mark Stoeckinger
+TMDB 16767: Aki Kaurismaki | Aki Kaurismäki
+TMDB 17992: Tod A. Maitland | Tod Maitland
+TMDB 18999: J. K. Simmons | J.K. Simmons
+TMDB 19092: Stephane Audran | Stéphane Audran
+TMDB 20209: Donald Graham Burt | Donald Graham Burt; Jan Pascale
+TMDB 20666: Sami Naceri | Samy Naceri
+TMDB 21684: Bong Joon Ho | Bong Joon-ho | Bong Joon-ho; Han Jin-won
+TMDB 23724: Patrice Chereau | Patrice Chéreau
+TMDB 25645: Hirokazu Kore-eda | Hirokazu Koreeda
+TMDB 25648: Yuya Yagira | Yūya Yagira
+TMDB 27578: Ellen Page | Elliot Page
+TMDB 28401: Stuart Besser | Stuart M. Besser
+TMDB 33684: Bono | Paul Hewson
+TMDB 40357: Ulrich Kohler | Ulrich Köhler
+TMDB 40835: Paul D. Austerberry; Jeff Melvin; Shane Vieau | Paul Denham Austerberry
+TMDB 43980: Bobby Houston | Robert Houston
+TMDB 54474: Pete Czernin | Peter Czernin
+TMDB 55493: Brady Corbet | Brady Corbet; Mona Fastvold
+TMDB 57865: Alex de la Iglesia | Álex de la Iglesia
+TMDB 62946: Jesse Armstrong | Jesse Armstrong; Simon Blackwell; Armando Iannucci; Tony Roche
+TMDB 64194: Pawel Pawlikowski | Paweł Pawlikowski
+TMDB 64954: Mikkel E. G. Nielsen | Mikkel E.G. Nielsen
+TMDB 65357: Hsu Li Kong | Hsu Li-kong
+TMDB 80577: Tomasz Bagiński | Tomek Baginski
+TMDB 82923: Berenice Bejo | Bérénice Bejo
+TMDB 83091: Dean A. Zupancic | Dean Zupancic
+TMDB 97967: Ismael Rodriguez | Ismael Rodríguez
+TMDB 102873: Patrice Vermette | Patrice Vermette; Zsuzsanna Sipos
+TMDB 107522: Emin Toprak | Mehmet Emin Toprak
+TMDB 107722: Grigoriy Dobrygin | Grigory Dobrygin
+TMDB 136427: Efthimis Filippou | Efthymis Filippou
+TMDB 137064: Bobby Moresco | Robert Moresco
+TMDB 138618: Gary A. Rizzo | Gary Rizzo
+TMDB 222686: Mia Hansen-Love | Mia Hansen-Løve
+TMDB 223239: Peter F. Kurland | Peter Kurland
+TMDB 239672: Felix Van Groeningen | Felix van Groeningen
+TMDB 449538: Adele | Adele Adkins
+TMDB 661870: Armando Bo | Armando Bó
+TMDB 939990: Colin Gibson | Colin Gibson; Lisa Thompson
+TMDB 990139: Hannah Beachler | Hannah Beachler; Jay Hart
+TMDB 996701: Miles Teller | Teller
+TMDB 1023711: Adam Stockhausen | Adam Stockhausen; Anna Pinnock
+TMDB 1032536: Robert Stromberg | Robert Stromberg; Karen O'Hara
+TMDB 1080935: Youn Yuh-jung | Yuh-jung Youn
+TMDB 1081568: Buddhadeb Dasgupta | Buddhadev Dasgupta
+TMDB 1096786: William S. Darling | William S. Darling; Lyle R. Wheeler
+TMDB 1118257: John DeCuir; Jack Martin Smith; Herman A. Blumenthal | John DeCuir; Jack Martin Smith; Hilyard M. Brown
+TMDB 1120776: Gaelle Denis | Gaëlle Denis
+TMDB 1200864: LaKeith Stanfield | Lakeith Stanfield
+TMDB 1213124: Richard Day | Richard Day; Joseph C. Wright | Richard Day; Nathan Juran
+TMDB 1323090: Edouard F. Henriques | Edouard Henriques III
+TMDB 1323533: Matt Charman | Matt Charman; Joel Coen; Ethan Coen
+TMDB 1327025: Stephane Ceretti | Stéphane Ceretti
+TMDB 1341726: Mica Levi | Micachu
+TMDB 1342626: John Reitz | John T. Reitz
+TMDB 1377220: D.M. Hemphill | Doug Hemphill
+TMDB 1395183: Chloe Zhao | Chloé Zhao
+TMDB 1402031: Rob Legato | Robert Legato
+TMDB 1413169: Dennis S. Sands | Dennis Sands
+TMDB 1415341: Kazu Hiro | Kazuhiro Tsuji
+TMDB 1418464: Sean Andrew Faden | Sean Faden
+TMDB 1461612: Dave Shirk | David Shirk
+TMDB 1463387: Benjamin A. Burtt | Benny Burtt
+TMDB 1466245: Steve Morrow | Steven A. Morrow
+TMDB 1485788: Nicole Grindle | Nicole Paradis Grindle
+TMDB 1505938: Karla Sofia Gascon | Karla Sofía Gascón
+TMDB 1521847: Denes Nagy | Dénes Nagy
+TMDB 1546115: Willie Burton | Willie D. Burton
+TMDB 1546442: John Patrick Pritchett | John Pritchett
+TMDB 1556401: Deborah Davis | Deborah Davis; Tony McNamara
+TMDB 1925531: Chau Siu Mui | Chau Siu-Mui
+TMDB 2045768: Mark Ardington | Mark Williams Ardington
+TMDB 2504167: Sergio Lopez-Rivera | Sergio López-Rivera
+TMDB 2807817: Akinola Davies | Akinola Davies Jr.
+TMDB 3065499: Hui-Ling Wang | Wang Hui-Ling
+TMDB 3925017: Sofia Otero | Sofía Otero
+TMDB 5394140: D'Mile | Dernst Emile II

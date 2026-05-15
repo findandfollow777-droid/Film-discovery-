@@ -5745,7 +5745,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "The Apprentice",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Stephanie Gorin and Carmen Cuba"
+            "person": "Stephanie Gorin"
           },
           {
             "title": "A Complete Unknown",
@@ -5806,7 +5806,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
           "title": "Elvis",
           "tmdb_id": 0,
           "poster_path": null,
-          "person": "Nikki Barrett and Denise Chamian"
+          "person": "Nikki Barrett"
         },
         "nominees": [
           {
@@ -5859,7 +5859,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "The Hand of God",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Massimo Appolloni and Annamaria Sambucco"
+            "person": "Massimo Appolloni"
           },
           {
             "title": "King Richard",
@@ -5899,7 +5899,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "Promising Young Woman",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Lindsay Graham-Ahanonu and Mary Vernieu"
+            "person": "Lindsay Graham-Ahanonu"
           }
         ]
       },
@@ -5915,7 +5915,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "Marriage Story",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Douglas Aibel and Francine Maisler"
+            "person": "Douglas Aibel"
           },
           {
             "title": "Once Upon a Time in Hollywood",
@@ -19952,7 +19952,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
           "title": "Caesar Must Die",
           "tmdb_id": 0,
           "poster_path": null,
-          "person": "Paolo and Vittorio Taviani"
+          "person": "Paolo"
         },
         "nominees": []
       },
@@ -22024,7 +22024,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "Once Upon a Time in Gaza",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Tarzan and Arab Nasser",
+            "person": "Tarzan",
             "co_winner": true
           }
         ]
@@ -22070,7 +22070,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
           "title": "Young Ahmed",
           "tmdb_id": 0,
           "poster_path": null,
-          "person": "Jean-Pierre and Luc Dardenne"
+          "person": "Jean-Pierre"
         },
         "nominees": [
           {
@@ -22865,7 +22865,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
           "title": "Inside Llewyn Davis",
           "tmdb_id": 0,
           "poster_path": null,
-          "person": "Joel & Ethan Coen"
+          "person": "Joel"
         },
         "nominees": []
       },
@@ -22890,7 +22890,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
             "title": "The Kid with a Bike",
             "tmdb_id": 0,
             "poster_path": null,
-            "person": "Jean-Pierre and Luc Dardenne",
+            "person": "Jean-Pierre",
             "co_winner": true
           }
         ]
@@ -23501,7 +23501,7 @@ var AWARDS_BROWSE_DATABASE_V1 = {
           "title": "L'Enfant",
           "tmdb_id": 0,
           "poster_path": null,
-          "person": "Jean-Pierre and Luc Dardenne"
+          "person": "Jean-Pierre"
         },
         "nominees": []
       },
@@ -56871,5095 +56871,5095 @@ var AWARDS_BROWSE_DATABASE_V1 = {
 var PERSON_AWARD_LOOKUP_V1 = {
   "BAFTA|Best Actor in a Leading Role|2000|american beauty": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "BAFTA|Best Actor in a Leading Role|2000|east is east": {
     "person_name": "Om Puri",
-    "person_id": null
+    "person_id": 11851
   },
   "BAFTA|Best Actor in a Leading Role|2000|the end of the affair": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "BAFTA|Best Actor in a Leading Role|2000|the insider": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "BAFTA|Best Actor in a Leading Role|2000|topsy-turvy": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "BAFTA|Best Actor in a Leading Role|2001|billy elliot": {
     "person_name": "Jamie Bell",
-    "person_id": null
+    "person_id": 478
   },
   "BAFTA|Best Actor in a Leading Role|2001|cast away": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "BAFTA|Best Actor in a Leading Role|2001|gladiator": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "BAFTA|Best Actor in a Leading Role|2001|quills": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "BAFTA|Best Actor in a Leading Role|2001|wonder boys": {
     "person_name": "Michael Douglas",
-    "person_id": null
+    "person_id": 3392
   },
   "BAFTA|Best Actor in a Leading Role|2002|a beautiful mind": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "BAFTA|Best Actor in a Leading Role|2002|in the bedroom": {
     "person_name": "Tom Wilkinson",
-    "person_id": null
+    "person_id": 207
   },
   "BAFTA|Best Actor in a Leading Role|2002|iris": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "BAFTA|Best Actor in a Leading Role|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Ian McKellen",
-    "person_id": null
+    "person_id": 1327
   },
   "BAFTA|Best Actor in a Leading Role|2002|the shipping news": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "BAFTA|Best Actor in a Leading Role|2003|about schmidt": {
     "person_name": "Jack Nicholson",
-    "person_id": null
+    "person_id": 514
   },
   "BAFTA|Best Actor in a Leading Role|2003|adaptation": {
     "person_name": "Nicolas Cage",
-    "person_id": null
+    "person_id": 2963
   },
   "BAFTA|Best Actor in a Leading Role|2003|gangs of new york": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "BAFTA|Best Actor in a Leading Role|2003|the pianist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "BAFTA|Best Actor in a Leading Role|2003|the quiet american": {
     "person_name": "Michael Caine",
-    "person_id": null
+    "person_id": 3895
   },
   "BAFTA|Best Actor in a Leading Role|2004|21 grams": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "BAFTA|Best Actor in a Leading Role|2004|cold mountain": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "BAFTA|Best Actor in a Leading Role|2004|lost in translation": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "BAFTA|Best Actor in a Leading Role|2004|mystic river": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "BAFTA|Best Actor in a Leading Role|2004|pirates of the caribbean: the curse of the black pearl": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "BAFTA|Best Actor in a Leading Role|2005|eternal sunshine of the spotless mind": {
     "person_name": "Jim Carrey",
-    "person_id": null
+    "person_id": 206
   },
   "BAFTA|Best Actor in a Leading Role|2005|finding neverland": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "BAFTA|Best Actor in a Leading Role|2005|ray": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "BAFTA|Best Actor in a Leading Role|2005|the aviator": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2005|the motorcycle diaries": {
     "person_name": "Gael García Bernal",
-    "person_id": null
+    "person_id": 258
   },
   "BAFTA|Best Actor in a Leading Role|2006|brokeback mountain": {
     "person_name": "Heath Ledger",
-    "person_id": null
+    "person_id": 1810
   },
   "BAFTA|Best Actor in a Leading Role|2006|capote": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "BAFTA|Best Actor in a Leading Role|2006|good night, and good luck": {
     "person_name": "David Strathairn",
-    "person_id": null
+    "person_id": 11064
   },
   "BAFTA|Best Actor in a Leading Role|2006|the constant gardener": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "BAFTA|Best Actor in a Leading Role|2006|walk the line": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "BAFTA|Best Actor in a Leading Role|2007|casino royale": {
     "person_name": "Daniel Craig",
-    "person_id": null
+    "person_id": 8784
   },
   "BAFTA|Best Actor in a Leading Role|2007|the departed": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2007|the history boys": {
     "person_name": "Richard Griffiths",
-    "person_id": null
+    "person_id": 10983
   },
   "BAFTA|Best Actor in a Leading Role|2007|the last king of scotland": {
     "person_name": "Forest Whitaker",
-    "person_id": null
+    "person_id": 2178
   },
   "BAFTA|Best Actor in a Leading Role|2007|venus": {
     "person_name": "Peter O'Toole",
-    "person_id": null
+    "person_id": 11390
   },
   "BAFTA|Best Actor in a Leading Role|2008|atonement": {
     "person_name": "James McAvoy",
-    "person_id": null
+    "person_id": 5530
   },
   "BAFTA|Best Actor in a Leading Role|2008|eastern promises": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "BAFTA|Best Actor in a Leading Role|2008|michael clayton": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Actor in a Leading Role|2008|the lives of others": {
     "person_name": "Ulrich Mühe",
-    "person_id": null
+    "person_id": 8196
   },
   "BAFTA|Best Actor in a Leading Role|2008|there will be blood": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "BAFTA|Best Actor in a Leading Role|2009|frost/nixon": {
     "person_name": "Frank Langella",
-    "person_id": null
+    "person_id": 8924
   },
   "BAFTA|Best Actor in a Leading Role|2009|milk": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "BAFTA|Best Actor in a Leading Role|2009|slumdog millionaire": {
     "person_name": "Dev Patel",
-    "person_id": null
+    "person_id": 76788
   },
   "BAFTA|Best Actor in a Leading Role|2009|the curious case of benjamin button": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "BAFTA|Best Actor in a Leading Role|2009|the wrestler": {
     "person_name": "Mickey Rourke",
-    "person_id": null
+    "person_id": 2295
   },
   "BAFTA|Best Actor in a Leading Role|2010|a single man": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "BAFTA|Best Actor in a Leading Role|2010|crazy heart": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "BAFTA|Best Actor in a Leading Role|2010|sex & drugs & rock & roll": {
     "person_name": "Andy Serkis",
-    "person_id": null
+    "person_id": 1333
   },
   "BAFTA|Best Actor in a Leading Role|2010|the hurt locker": {
     "person_name": "Jeremy Renner",
-    "person_id": null
+    "person_id": 17604
   },
   "BAFTA|Best Actor in a Leading Role|2010|up in the air": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Actor in a Leading Role|2011|127 hours": {
     "person_name": "James Franco",
-    "person_id": null
+    "person_id": 17051
   },
   "BAFTA|Best Actor in a Leading Role|2011|biutiful": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "BAFTA|Best Actor in a Leading Role|2011|the king's speech": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "BAFTA|Best Actor in a Leading Role|2011|the social network": {
     "person_name": "Jesse Eisenberg",
-    "person_id": null
+    "person_id": 44735
   },
   "BAFTA|Best Actor in a Leading Role|2011|true grit": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "BAFTA|Best Actor in a Leading Role|2012|moneyball": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "BAFTA|Best Actor in a Leading Role|2012|shame": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "BAFTA|Best Actor in a Leading Role|2012|the artist": {
     "person_name": "Jean Dujardin",
-    "person_id": null
+    "person_id": 56024
   },
   "BAFTA|Best Actor in a Leading Role|2012|the descendants": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Actor in a Leading Role|2012|tinker tailor soldier spy": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "BAFTA|Best Actor in a Leading Role|2013|argo": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "BAFTA|Best Actor in a Leading Role|2013|les misérables": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "BAFTA|Best Actor in a Leading Role|2013|lincoln": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "BAFTA|Best Actor in a Leading Role|2013|silver linings playbook": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Actor in a Leading Role|2013|the master": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "BAFTA|Best Actor in a Leading Role|2014|12 years a slave": {
     "person_name": "Chiwetel Ejiofor",
-    "person_id": null
+    "person_id": 5294
   },
   "BAFTA|Best Actor in a Leading Role|2014|american hustle": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "BAFTA|Best Actor in a Leading Role|2014|captain phillips": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "BAFTA|Best Actor in a Leading Role|2014|nebraska": {
     "person_name": "Bruce Dern",
-    "person_id": null
+    "person_id": 6905
   },
   "BAFTA|Best Actor in a Leading Role|2014|the wolf of wall street": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2015|birdman": {
     "person_name": "Michael Keaton",
-    "person_id": null
+    "person_id": 2232
   },
   "BAFTA|Best Actor in a Leading Role|2015|nightcrawler": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "BAFTA|Best Actor in a Leading Role|2015|the grand budapest hotel": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "BAFTA|Best Actor in a Leading Role|2015|the imitation game": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "BAFTA|Best Actor in a Leading Role|2015|the theory of everything": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "BAFTA|Best Actor in a Leading Role|2016|steve jobs": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "BAFTA|Best Actor in a Leading Role|2016|the danish girl": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "BAFTA|Best Actor in a Leading Role|2016|the martian": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "BAFTA|Best Actor in a Leading Role|2016|the revenant": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2016|trumbo": {
     "person_name": "Bryan Cranston",
-    "person_id": null
+    "person_id": 17419
   },
   "BAFTA|Best Actor in a Leading Role|2017|captain fantastic": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "BAFTA|Best Actor in a Leading Role|2017|hacksaw ridge": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "BAFTA|Best Actor in a Leading Role|2017|la la land": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "BAFTA|Best Actor in a Leading Role|2017|manchester by the sea": {
     "person_name": "Casey Affleck",
-    "person_id": null
+    "person_id": 1893
   },
   "BAFTA|Best Actor in a Leading Role|2017|nocturnal animals": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "BAFTA|Best Actor in a Leading Role|2018|call me by your name": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "BAFTA|Best Actor in a Leading Role|2018|darkest hour": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "BAFTA|Best Actor in a Leading Role|2018|film stars don't die in liverpool": {
     "person_name": "Jamie Bell",
-    "person_id": null
+    "person_id": 478
   },
   "BAFTA|Best Actor in a Leading Role|2018|get out": {
     "person_name": "Daniel Kaluuya",
-    "person_id": null
+    "person_id": 206919
   },
   "BAFTA|Best Actor in a Leading Role|2018|phantom thread": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "BAFTA|Best Actor in a Leading Role|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Actor in a Leading Role|2019|bohemian rhapsody": {
     "person_name": "Rami Malek",
-    "person_id": null
+    "person_id": 17838
   },
   "BAFTA|Best Actor in a Leading Role|2019|green book": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "BAFTA|Best Actor in a Leading Role|2019|stan & ollie": {
     "person_name": "Steve Coogan",
-    "person_id": null
+    "person_id": 4581
   },
   "BAFTA|Best Actor in a Leading Role|2019|vice": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "BAFTA|Best Actor in a Leading Role|2020|joker": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "BAFTA|Best Actor in a Leading Role|2020|marriage story": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "BAFTA|Best Actor in a Leading Role|2020|once upon a time in hollywood": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2020|rocketman": {
     "person_name": "Taron Egerton",
-    "person_id": null
+    "person_id": 1303037
   },
   "BAFTA|Best Actor in a Leading Role|2020|the two popes": {
     "person_name": "Jonathan Pryce",
-    "person_id": null
+    "person_id": 378
   },
   "BAFTA|Best Actor in a Leading Role|2021|another round": {
     "person_name": "Mads Mikkelsen",
-    "person_id": null
+    "person_id": 1019
   },
   "BAFTA|Best Actor in a Leading Role|2021|ma rainey's black bottom": {
     "person_name": "Chadwick Boseman",
-    "person_id": null
+    "person_id": 172069
   },
   "BAFTA|Best Actor in a Leading Role|2021|sound of metal": {
     "person_name": "Riz Ahmed",
-    "person_id": null
+    "person_id": 53240
   },
   "BAFTA|Best Actor in a Leading Role|2021|the father": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "BAFTA|Best Actor in a Leading Role|2021|the mauritanian": {
     "person_name": "Tahar Rahim",
-    "person_id": null
+    "person_id": 81051
   },
   "BAFTA|Best Actor in a Leading Role|2021|the white tiger": {
     "person_name": "Adarsh Gourav",
-    "person_id": null
+    "person_id": 1605786
   },
   "BAFTA|Best Actor in a Leading Role|2022|ali & ava": {
     "person_name": "Adeel Akhtar",
-    "person_id": null
+    "person_id": 81840
   },
   "BAFTA|Best Actor in a Leading Role|2022|boiling point": {
     "person_name": "Stephen Graham",
-    "person_id": null
+    "person_id": 1115
   },
   "BAFTA|Best Actor in a Leading Role|2022|don't look up": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2022|king richard": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "BAFTA|Best Actor in a Leading Role|2022|swan song": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "BAFTA|Best Actor in a Leading Role|2022|the power of the dog": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "BAFTA|Best Actor in a Leading Role|2023|aftersun": {
     "person_name": "Paul Mescal",
-    "person_id": null
+    "person_id": 2326151
   },
   "BAFTA|Best Actor in a Leading Role|2023|elvis": {
     "person_name": "Austin Butler",
-    "person_id": null
+    "person_id": 86654
   },
   "BAFTA|Best Actor in a Leading Role|2023|good luck to you, leo grande": {
     "person_name": "Daryl McCormack",
-    "person_id": null
+    "person_id": 1829245
   },
   "BAFTA|Best Actor in a Leading Role|2023|living": {
     "person_name": "Bill Nighy",
-    "person_id": null
+    "person_id": 2440
   },
   "BAFTA|Best Actor in a Leading Role|2023|the banshees of inisherin": {
     "person_name": "Colin Farrell",
-    "person_id": null
+    "person_id": 72466
   },
   "BAFTA|Best Actor in a Leading Role|2023|the whale": {
     "person_name": "Brendan Fraser",
-    "person_id": null
+    "person_id": 18269
   },
   "BAFTA|Best Actor in a Leading Role|2024|maestro": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Actor in a Leading Role|2024|oppenheimer": {
     "person_name": "Cillian Murphy",
-    "person_id": null
+    "person_id": 2037
   },
   "BAFTA|Best Actor in a Leading Role|2024|past lives": {
     "person_name": "Teo Yoo",
-    "person_id": null
+    "person_id": 1387126
   },
   "BAFTA|Best Actor in a Leading Role|2024|rustin": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "BAFTA|Best Actor in a Leading Role|2024|saltburn": {
     "person_name": "Barry Keoghan",
-    "person_id": null
+    "person_id": 1290466
   },
   "BAFTA|Best Actor in a Leading Role|2024|the holdovers": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "BAFTA|Best Actor in a Leading Role|2025|a complete unknown": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "BAFTA|Best Actor in a Leading Role|2025|conclave": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "BAFTA|Best Actor in a Leading Role|2025|heretic": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "BAFTA|Best Actor in a Leading Role|2025|sing sing": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "BAFTA|Best Actor in a Leading Role|2025|the apprentice": {
     "person_name": "Sebastian Stan",
-    "person_id": null
+    "person_id": 60898
   },
   "BAFTA|Best Actor in a Leading Role|2025|the brutalist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "BAFTA|Best Actor in a Leading Role|2026|blue moon": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "BAFTA|Best Actor in a Leading Role|2026|bugonia": {
     "person_name": "Jesse Plemons",
-    "person_id": null
+    "person_id": 88124
   },
   "BAFTA|Best Actor in a Leading Role|2026|i swear": {
     "person_name": "Robert Aramayo",
-    "person_id": null
+    "person_id": 1648346
   },
   "BAFTA|Best Actor in a Leading Role|2026|marty supreme": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "BAFTA|Best Actor in a Leading Role|2026|one battle after another": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "BAFTA|Best Actor in a Leading Role|2026|sinners": {
     "person_name": "Michael B. Jordan",
-    "person_id": null
+    "person_id": 135651
   },
   "BAFTA|Best Actor in a Supporting Role|2000|american beauty": {
     "person_name": "Wes Bentley",
-    "person_id": null
+    "person_id": 8210
   },
   "BAFTA|Best Actor in a Supporting Role|2000|notting hill": {
     "person_name": "Rhys Ifans",
-    "person_id": null
+    "person_id": 7026
   },
   "BAFTA|Best Actor in a Supporting Role|2000|the cider house rules": {
     "person_name": "Michael Caine",
-    "person_id": null
+    "person_id": 3895
   },
   "BAFTA|Best Actor in a Supporting Role|2000|the talented mr. ripley": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "BAFTA|Best Actor in a Supporting Role|2000|topsy-turvy": {
     "person_name": "Timothy Spall",
-    "person_id": null
+    "person_id": 9191
   },
   "BAFTA|Best Actor in a Supporting Role|2001|billy elliot": {
     "person_name": "Gary Lewis",
-    "person_id": null
+    "person_id": 480
   },
   "BAFTA|Best Actor in a Supporting Role|2001|erin brockovich": {
     "person_name": "Albert Finney",
-    "person_id": null
+    "person_id": 3926
   },
   "BAFTA|Best Actor in a Supporting Role|2001|gladiator": {
     "person_name": "Oliver Reed",
-    "person_id": null
+    "person_id": 936
   },
   "BAFTA|Best Actor in a Supporting Role|2001|traffic": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "BAFTA|Best Actor in a Supporting Role|2002|bridget jones's diary": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "BAFTA|Best Actor in a Supporting Role|2002|harry potter and the philosopher's stone": {
     "person_name": "Robbie Coltrane",
-    "person_id": null
+    "person_id": 1923
   },
   "BAFTA|Best Actor in a Supporting Role|2002|iris": {
     "person_name": "Hugh Bonneville",
-    "person_id": null
+    "person_id": 19923
   },
   "BAFTA|Best Actor in a Supporting Role|2002|moulin rouge!": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "BAFTA|Best Actor in a Supporting Role|2002|shrek": {
     "person_name": "Eddie Murphy",
-    "person_id": null
+    "person_id": 776
   },
   "BAFTA|Best Actor in a Supporting Role|2003|adaptation": {
     "person_name": "Chris Cooper",
-    "person_id": null
+    "person_id": 2955
   },
   "BAFTA|Best Actor in a Supporting Role|2003|catch me if you can": {
     "person_name": "Christopher Walken",
-    "person_id": null
+    "person_id": 4690
   },
   "BAFTA|Best Actor in a Supporting Role|2003|frida": {
     "person_name": "Alfred Molina",
-    "person_id": null
+    "person_id": 658
   },
   "BAFTA|Best Actor in a Supporting Role|2003|road to perdition": {
     "person_name": "Paul Newman",
-    "person_id": null
+    "person_id": 3636
   },
   "BAFTA|Best Actor in a Supporting Role|2003|the hours": {
     "person_name": "Ed Harris",
-    "person_id": null
+    "person_id": 228
   },
   "BAFTA|Best Actor in a Supporting Role|2004|big fish": {
     "person_name": "Albert Finney",
-    "person_id": null
+    "person_id": 3926
   },
   "BAFTA|Best Actor in a Supporting Role|2004|love actually": {
     "person_name": "Bill Nighy",
-    "person_id": null
+    "person_id": 2440
   },
   "BAFTA|Best Actor in a Supporting Role|2004|master and commander: the far side of the world": {
     "person_name": "Paul Bettany",
-    "person_id": null
+    "person_id": 6162
   },
   "BAFTA|Best Actor in a Supporting Role|2004|mystic river": {
     "person_name": "Tim Robbins",
-    "person_id": null
+    "person_id": 504
   },
   "BAFTA|Best Actor in a Supporting Role|2004|the lord of the rings: the return of the king": {
     "person_name": "Ian McKellen",
-    "person_id": null
+    "person_id": 1327
   },
   "BAFTA|Best Actor in a Supporting Role|2005|closer": {
     "person_name": "Clive Owen",
-    "person_id": null
+    "person_id": 2296
   },
   "BAFTA|Best Actor in a Supporting Role|2005|collateral": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "BAFTA|Best Actor in a Supporting Role|2005|the aviator": {
     "person_name": "Alan Alda",
-    "person_id": null
+    "person_id": 21278
   },
   "BAFTA|Best Actor in a Supporting Role|2005|the motorcycle diaries": {
     "person_name": "Rodrigo de la Serna",
-    "person_id": null
+    "person_id": 18478
   },
   "BAFTA|Best Actor in a Supporting Role|2005|vera drake": {
     "person_name": "Phil Davis",
-    "person_id": null
+    "person_id": 26854
   },
   "BAFTA|Best Actor in a Supporting Role|2006|brokeback mountain": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "BAFTA|Best Actor in a Supporting Role|2006|crash": {
     "person_name": "Matt Dillon",
-    "person_id": null
+    "person_id": 2876
   },
   "BAFTA|Best Actor in a Supporting Role|2006|good night, and good luck": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Actor in a Supporting Role|2006|syriana": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Actor in a Supporting Role|2007|little miss sunshine": {
     "person_name": "Alan Arkin",
-    "person_id": null
+    "person_id": 1903
   },
   "BAFTA|Best Actor in a Supporting Role|2007|the departed": {
     "person_name": "Jack Nicholson",
-    "person_id": null
+    "person_id": 514
   },
   "BAFTA|Best Actor in a Supporting Role|2007|the last king of scotland": {
     "person_name": "James McAvoy",
-    "person_id": null
+    "person_id": 5530
   },
   "BAFTA|Best Actor in a Supporting Role|2007|the queen": {
     "person_name": "Michael Sheen",
-    "person_id": null
+    "person_id": 3968
   },
   "BAFTA|Best Actor in a Supporting Role|2007|venus": {
     "person_name": "Leslie Phillips",
-    "person_id": null
+    "person_id": 10655
   },
   "BAFTA|Best Actor in a Supporting Role|2008|charlie wilson's war": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "BAFTA|Best Actor in a Supporting Role|2008|michael clayton": {
     "person_name": "Tom Wilkinson",
-    "person_id": null
+    "person_id": 207
   },
   "BAFTA|Best Actor in a Supporting Role|2008|no country for old men": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "BAFTA|Best Actor in a Supporting Role|2008|there will be blood": {
     "person_name": "Paul Dano",
-    "person_id": null
+    "person_id": 17142
   },
   "BAFTA|Best Actor in a Supporting Role|2009|burn after reading": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "BAFTA|Best Actor in a Supporting Role|2009|doubt": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "BAFTA|Best Actor in a Supporting Role|2009|in bruges": {
     "person_name": "Brendan Gleeson",
-    "person_id": null
+    "person_id": 2039
   },
   "BAFTA|Best Actor in a Supporting Role|2009|the dark knight": {
     "person_name": "Heath Ledger",
-    "person_id": null
+    "person_id": 1810
   },
   "BAFTA|Best Actor in a Supporting Role|2009|tropic thunder": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "BAFTA|Best Actor in a Supporting Role|2010|an education": {
     "person_name": "Alfred Molina",
-    "person_id": null
+    "person_id": 658
   },
   "BAFTA|Best Actor in a Supporting Role|2010|inglourious basterds": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "BAFTA|Best Actor in a Supporting Role|2010|it's complicated": {
     "person_name": "Alec Baldwin",
-    "person_id": null
+    "person_id": 7447
   },
   "BAFTA|Best Actor in a Supporting Role|2010|me and orson welles": {
     "person_name": "Christian McKay",
-    "person_id": null
+    "person_id": 28478
   },
   "BAFTA|Best Actor in a Supporting Role|2010|the lovely bones": {
     "person_name": "Stanley Tucci",
-    "person_id": null
+    "person_id": 2283
   },
   "BAFTA|Best Actor in a Supporting Role|2011|the fighter": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "BAFTA|Best Actor in a Supporting Role|2011|the kids are all right": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "BAFTA|Best Actor in a Supporting Role|2011|the king's speech": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "BAFTA|Best Actor in a Supporting Role|2011|the social network": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "BAFTA|Best Actor in a Supporting Role|2011|the town": {
     "person_name": "Pete Postlethwaite",
-    "person_id": null
+    "person_id": 4935
   },
   "BAFTA|Best Actor in a Supporting Role|2012|beginners": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "BAFTA|Best Actor in a Supporting Role|2012|moneyball": {
     "person_name": "Jonah Hill",
-    "person_id": null
+    "person_id": 21007
   },
   "BAFTA|Best Actor in a Supporting Role|2012|my week with marilyn": {
     "person_name": "Kenneth Branagh",
-    "person_id": null
+    "person_id": 11181
   },
   "BAFTA|Best Actor in a Supporting Role|2012|the ides of march": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "BAFTA|Best Actor in a Supporting Role|2012|the iron lady": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "BAFTA|Best Actor in a Supporting Role|2013|argo": {
     "person_name": "Alan Arkin",
-    "person_id": null
+    "person_id": 1903
   },
   "BAFTA|Best Actor in a Supporting Role|2013|django unchained": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "BAFTA|Best Actor in a Supporting Role|2013|lincoln": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "BAFTA|Best Actor in a Supporting Role|2013|skyfall": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "BAFTA|Best Actor in a Supporting Role|2013|the master": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "BAFTA|Best Actor in a Supporting Role|2014|12 years a slave": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "BAFTA|Best Actor in a Supporting Role|2014|american hustle": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Actor in a Supporting Role|2014|behind the candelabra": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "BAFTA|Best Actor in a Supporting Role|2014|captain phillips": {
     "person_name": "Barkhad Abdi",
-    "person_id": null
+    "person_id": 1261694
   },
   "BAFTA|Best Actor in a Supporting Role|2014|rush": {
     "person_name": "Daniel Brühl",
-    "person_id": null
+    "person_id": 3872
   },
   "BAFTA|Best Actor in a Supporting Role|2015|birdman": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "BAFTA|Best Actor in a Supporting Role|2015|boyhood": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "BAFTA|Best Actor in a Supporting Role|2015|foxcatcher": {
     "person_name": "Steve Carell",
-    "person_id": null
+    "person_id": 4495
   },
   "BAFTA|Best Actor in a Supporting Role|2015|whiplash": {
     "person_name": "J. K. Simmons",
-    "person_id": null
+    "person_id": 18999
   },
   "BAFTA|Best Actor in a Supporting Role|2016|beasts of no nation": {
     "person_name": "Idris Elba",
-    "person_id": null
+    "person_id": 17605
   },
   "BAFTA|Best Actor in a Supporting Role|2016|bridge of spies": {
     "person_name": "Mark Rylance",
-    "person_id": null
+    "person_id": 40900
   },
   "BAFTA|Best Actor in a Supporting Role|2016|sicario": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "BAFTA|Best Actor in a Supporting Role|2016|spotlight": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "BAFTA|Best Actor in a Supporting Role|2016|the big short": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "BAFTA|Best Actor in a Supporting Role|2017|florence foster jenkins": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "BAFTA|Best Actor in a Supporting Role|2017|hell or high water": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "BAFTA|Best Actor in a Supporting Role|2017|lion": {
     "person_name": "Dev Patel",
-    "person_id": null
+    "person_id": 76788
   },
   "BAFTA|Best Actor in a Supporting Role|2017|moonlight": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "BAFTA|Best Actor in a Supporting Role|2017|nocturnal animals": {
     "person_name": "Aaron Taylor-Johnson",
-    "person_id": null
+    "person_id": 27428
   },
   "BAFTA|Best Actor in a Supporting Role|2018|all the money in the world": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "BAFTA|Best Actor in a Supporting Role|2018|paddington 2": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "BAFTA|Best Actor in a Supporting Role|2018|the florida project": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "BAFTA|Best Actor in a Supporting Role|2018|three billboards outside ebbing, missouri": {
     "person_name": "Woody Harrelson",
-    "person_id": null
+    "person_id": 57755
   },
   "BAFTA|Best Actor in a Supporting Role|2019|beautiful boy": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "BAFTA|Best Actor in a Supporting Role|2019|blackkklansman": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "BAFTA|Best Actor in a Supporting Role|2019|can you ever forgive me?": {
     "person_name": "Richard E. Grant",
-    "person_id": null
+    "person_id": 20766
   },
   "BAFTA|Best Actor in a Supporting Role|2019|green book": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "BAFTA|Best Actor in a Supporting Role|2019|vice": {
     "person_name": "Sam Rockwell",
-    "person_id": null
+    "person_id": 6807
   },
   "BAFTA|Best Actor in a Supporting Role|2020|a beautiful day in the neighborhood": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "BAFTA|Best Actor in a Supporting Role|2020|once upon a time in hollywood": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "BAFTA|Best Actor in a Supporting Role|2020|the irishman": {
     "person_name": "Joe Pesci",
-    "person_id": null
+    "person_id": 4517
   },
   "BAFTA|Best Actor in a Supporting Role|2020|the two popes": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "BAFTA|Best Actor in a Supporting Role|2021|calm with horses": {
     "person_name": "Barry Keoghan",
-    "person_id": null
+    "person_id": 1290466
   },
   "BAFTA|Best Actor in a Supporting Role|2021|da 5 bloods": {
     "person_name": "Clarke Peters",
-    "person_id": null
+    "person_id": 61011
   },
   "BAFTA|Best Actor in a Supporting Role|2021|judas and the black messiah": {
     "person_name": "Daniel Kaluuya",
-    "person_id": null
+    "person_id": 206919
   },
   "BAFTA|Best Actor in a Supporting Role|2021|minari": {
     "person_name": "Alan Kim",
-    "person_id": null
+    "person_id": 2476742
   },
   "BAFTA|Best Actor in a Supporting Role|2021|one night in miami...": {
     "person_name": "Leslie Odom Jr.",
-    "person_id": null
+    "person_id": 1254614
   },
   "BAFTA|Best Actor in a Supporting Role|2021|sound of metal": {
     "person_name": "Paul Raci",
-    "person_id": null
+    "person_id": 1216195
   },
   "BAFTA|Best Actor in a Supporting Role|2022|belfast": {
     "person_name": "Ciarán Hinds",
-    "person_id": null
+    "person_id": 8785
   },
   "BAFTA|Best Actor in a Supporting Role|2022|c'mon c'mon": {
     "person_name": "Woody Norman",
-    "person_id": null
+    "person_id": 1945369
   },
   "BAFTA|Best Actor in a Supporting Role|2022|coda": {
     "person_name": "Troy Kotsur",
-    "person_id": null
+    "person_id": 1571661
   },
   "BAFTA|Best Actor in a Supporting Role|2022|the power of the dog": {
     "person_name": "Kodi Smit-McPhee",
-    "person_id": null
+    "person_id": 113505
   },
   "BAFTA|Best Actor in a Supporting Role|2022|west side story": {
     "person_name": "Mike Faist",
-    "person_id": null
+    "person_id": 1423520
   },
   "BAFTA|Best Actor in a Supporting Role|2023|all quiet on the western front": {
     "person_name": "Albrecht Schuch",
-    "person_id": null
+    "person_id": 1111158
   },
   "BAFTA|Best Actor in a Supporting Role|2023|empire of light": {
     "person_name": "Micheal Ward",
-    "person_id": null
+    "person_id": 2380397
   },
   "BAFTA|Best Actor in a Supporting Role|2023|everything everywhere all at once": {
     "person_name": "Ke Huy Quan",
-    "person_id": null
+    "person_id": 690
   },
   "BAFTA|Best Actor in a Supporting Role|2023|the banshees of inisherin": {
     "person_name": "Brendan Gleeson",
-    "person_id": null
+    "person_id": 2039
   },
   "BAFTA|Best Actor in a Supporting Role|2023|the good nurse": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "BAFTA|Best Actor in a Supporting Role|2024|all of us strangers": {
     "person_name": "Paul Mescal",
-    "person_id": null
+    "person_id": 2326151
   },
   "BAFTA|Best Actor in a Supporting Role|2024|barbie": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "BAFTA|Best Actor in a Supporting Role|2024|killers of the flower moon": {
     "person_name": "Robert De Niro",
-    "person_id": null
+    "person_id": 380
   },
   "BAFTA|Best Actor in a Supporting Role|2024|oppenheimer": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "BAFTA|Best Actor in a Supporting Role|2024|saltburn": {
     "person_name": "Jacob Elordi",
-    "person_id": null
+    "person_id": 2034418
   },
   "BAFTA|Best Actor in a Supporting Role|2024|the holdovers": {
     "person_name": "Dominic Sessa",
-    "person_id": null
+    "person_id": 3918497
   },
   "BAFTA|Best Actor in a Supporting Role|2025|a complete unknown": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "BAFTA|Best Actor in a Supporting Role|2025|a real pain": {
     "person_name": "Kieran Culkin",
-    "person_id": null
+    "person_id": 18793
   },
   "BAFTA|Best Actor in a Supporting Role|2025|anora": {
     "person_name": "Yura Borisov",
-    "person_id": null
+    "person_id": 1266686
   },
   "BAFTA|Best Actor in a Supporting Role|2025|sing sing": {
     "person_name": "Clarence Maclin",
-    "person_id": null
+    "person_id": 4178063
   },
   "BAFTA|Best Actor in a Supporting Role|2025|the apprentice": {
     "person_name": "Jeremy Strong",
-    "person_id": null
+    "person_id": 239271
   },
   "BAFTA|Best Actor in a Supporting Role|2025|the brutalist": {
     "person_name": "Guy Pearce",
-    "person_id": null
+    "person_id": 529
   },
   "BAFTA|Best Actor in a Supporting Role|2026|frankenstein": {
     "person_name": "Jacob Elordi",
-    "person_id": null
+    "person_id": 2034418
   },
   "BAFTA|Best Actor in a Supporting Role|2026|hamnet": {
     "person_name": "Paul Mescal",
-    "person_id": null
+    "person_id": 2326151
   },
   "BAFTA|Best Actor in a Supporting Role|2026|i swear": {
     "person_name": "Peter Mullan",
-    "person_id": null
+    "person_id": 3064
   },
   "BAFTA|Best Actor in a Supporting Role|2026|one battle after another": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "BAFTA|Best Actor in a Supporting Role|2026|sentimental value": {
     "person_name": "Stellan Skarsgård",
-    "person_id": null
+    "person_id": 1640
   },
   "BAFTA|Best Actress in a Leading Role|2000|american beauty": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "BAFTA|Best Actress in a Leading Role|2000|angela's ashes": {
     "person_name": "Emily Watson",
-    "person_id": null
+    "person_id": 1639
   },
   "BAFTA|Best Actress in a Leading Role|2000|east is east": {
     "person_name": "Linda Bassett",
-    "person_id": null
+    "person_id": 8443
   },
   "BAFTA|Best Actress in a Leading Role|2000|the end of the affair": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "BAFTA|Best Actress in a Leading Role|2001|almost famous": {
     "person_name": "Kate Hudson",
-    "person_id": null
+    "person_id": 11661
   },
   "BAFTA|Best Actress in a Leading Role|2001|boys don't cry": {
     "person_name": "Hilary Swank",
-    "person_id": null
+    "person_id": 448
   },
   "BAFTA|Best Actress in a Leading Role|2001|chocolat": {
     "person_name": "Juliette Binoche",
-    "person_id": null
+    "person_id": 1137
   },
   "BAFTA|Best Actress in a Leading Role|2001|crouching tiger, hidden dragon": {
     "person_name": "Michelle Yeoh",
-    "person_id": null
+    "person_id": 1620
   },
   "BAFTA|Best Actress in a Leading Role|2001|erin brockovich": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "BAFTA|Best Actress in a Leading Role|2002|amélie": {
     "person_name": "Audrey Tautou",
-    "person_id": null
+    "person_id": 2405
   },
   "BAFTA|Best Actress in a Leading Role|2002|bridget jones's diary": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "BAFTA|Best Actress in a Leading Role|2002|in the bedroom": {
     "person_name": "Sissy Spacek",
-    "person_id": null
+    "person_id": 5606
   },
   "BAFTA|Best Actress in a Leading Role|2002|iris": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Leading Role|2002|the others": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "BAFTA|Best Actress in a Leading Role|2003|chicago": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "BAFTA|Best Actress in a Leading Role|2003|frida": {
     "person_name": "Salma Hayek",
-    "person_id": null
+    "person_id": 3136
   },
   "BAFTA|Best Actress in a Leading Role|2003|monster's ball": {
     "person_name": "Halle Berry",
-    "person_id": null
+    "person_id": 4587
   },
   "BAFTA|Best Actress in a Leading Role|2003|the hours": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2004|21 grams": {
     "person_name": "Naomi Watts",
-    "person_id": null
+    "person_id": 3489
   },
   "BAFTA|Best Actress in a Leading Role|2004|girl with a pearl earring": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "BAFTA|Best Actress in a Leading Role|2004|kill bill: volume 1": {
     "person_name": "Uma Thurman",
-    "person_id": null
+    "person_id": 139
   },
   "BAFTA|Best Actress in a Leading Role|2004|lost in translation": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "BAFTA|Best Actress in a Leading Role|2004|the mother": {
     "person_name": "Anne Reid",
-    "person_id": null
+    "person_id": 77287
   },
   "BAFTA|Best Actress in a Leading Role|2005|eternal sunshine of the spotless mind": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Leading Role|2005|finding neverland": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Leading Role|2005|house of flying daggers": {
     "person_name": "Zhang Ziyi",
-    "person_id": null
+    "person_id": 1339
   },
   "BAFTA|Best Actress in a Leading Role|2005|monster": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "BAFTA|Best Actress in a Leading Role|2005|vera drake": {
     "person_name": "Imelda Staunton",
-    "person_id": null
+    "person_id": 11356
   },
   "BAFTA|Best Actress in a Leading Role|2006|memoirs of a geisha": {
     "person_name": "Ziyi Zhang",
-    "person_id": null
+    "person_id": 1339
   },
   "BAFTA|Best Actress in a Leading Role|2006|mrs henderson presents": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Leading Role|2006|north country": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "BAFTA|Best Actress in a Leading Role|2006|the constant gardener": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "BAFTA|Best Actress in a Leading Role|2006|walk the line": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "BAFTA|Best Actress in a Leading Role|2007|little children": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Leading Role|2007|notes on a scandal": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Leading Role|2007|the devil wears prada": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2007|the queen": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "BAFTA|Best Actress in a Leading Role|2007|volver": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "BAFTA|Best Actress in a Leading Role|2008|atonement": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "BAFTA|Best Actress in a Leading Role|2008|away from her": {
     "person_name": "Julie Christie",
-    "person_id": null
+    "person_id": 1666
   },
   "BAFTA|Best Actress in a Leading Role|2008|elizabeth: the golden age": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Leading Role|2008|juno": {
     "person_name": "Elliot Page",
-    "person_id": null
+    "person_id": 27578
   },
   "BAFTA|Best Actress in a Leading Role|2008|la vie en rose": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "BAFTA|Best Actress in a Leading Role|2009|changeling": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "BAFTA|Best Actress in a Leading Role|2009|doubt": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2009|i've loved you so long": {
     "person_name": "Kristin Scott Thomas",
-    "person_id": null
+    "person_id": 5470
   },
   "BAFTA|Best Actress in a Leading Role|2009|revolutionary road": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Leading Role|2009|the reader": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Leading Role|2010|an education": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "BAFTA|Best Actress in a Leading Role|2010|coco before chanel": {
     "person_name": "Audrey Tautou",
-    "person_id": null
+    "person_id": 2405
   },
   "BAFTA|Best Actress in a Leading Role|2010|julie & julia": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2010|precious": {
     "person_name": "Gabourey Sidibe",
-    "person_id": null
+    "person_id": 109560
   },
   "BAFTA|Best Actress in a Leading Role|2010|the lovely bones": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Leading Role|2011|black swan": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "BAFTA|Best Actress in a Leading Role|2011|the girl with the dragon tattoo": {
     "person_name": "Noomi Rapace",
-    "person_id": null
+    "person_id": 87722
   },
   "BAFTA|Best Actress in a Leading Role|2011|the kids are all right": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "BAFTA|Best Actress in a Leading Role|2011|true grit": {
     "person_name": "Hailee Steinfeld",
-    "person_id": null
+    "person_id": 130640
   },
   "BAFTA|Best Actress in a Leading Role|2012|my week with marilyn": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "BAFTA|Best Actress in a Leading Role|2012|the artist": {
     "person_name": "Bérénice Bejo",
-    "person_id": null
+    "person_id": 82923
   },
   "BAFTA|Best Actress in a Leading Role|2012|the help": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "BAFTA|Best Actress in a Leading Role|2012|the iron lady": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2012|we need to talk about kevin": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "BAFTA|Best Actress in a Leading Role|2013|amour": {
     "person_name": "Emmanuelle Riva",
-    "person_id": null
+    "person_id": 267962
   },
   "BAFTA|Best Actress in a Leading Role|2013|hitchcock": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "BAFTA|Best Actress in a Leading Role|2013|rust and bone": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "BAFTA|Best Actress in a Leading Role|2013|silver linings playbook": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "BAFTA|Best Actress in a Leading Role|2013|zero dark thirty": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "BAFTA|Best Actress in a Leading Role|2014|american hustle": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Leading Role|2014|blue jasmine": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Leading Role|2014|gravity": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "BAFTA|Best Actress in a Leading Role|2014|philomena": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Leading Role|2014|saving mr. banks": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "BAFTA|Best Actress in a Leading Role|2015|big eyes": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Leading Role|2015|gone girl": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "BAFTA|Best Actress in a Leading Role|2015|still alice": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "BAFTA|Best Actress in a Leading Role|2015|the theory of everything": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "BAFTA|Best Actress in a Leading Role|2015|wild": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "BAFTA|Best Actress in a Leading Role|2016|brooklyn": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Leading Role|2016|carol": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Leading Role|2016|room": {
     "person_name": "Brie Larson",
-    "person_id": null
+    "person_id": 60073
   },
   "BAFTA|Best Actress in a Leading Role|2016|the danish girl": {
     "person_name": "Alicia Vikander",
-    "person_id": null
+    "person_id": 227454
   },
   "BAFTA|Best Actress in a Leading Role|2016|the lady in the van": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "BAFTA|Best Actress in a Leading Role|2017|arrival": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Leading Role|2017|florence foster jenkins": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Leading Role|2017|jackie": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "BAFTA|Best Actress in a Leading Role|2017|la la land": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "BAFTA|Best Actress in a Leading Role|2017|the girl on the train": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "BAFTA|Best Actress in a Leading Role|2018|film stars don't die in liverpool": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "BAFTA|Best Actress in a Leading Role|2018|i, tonya": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "BAFTA|Best Actress in a Leading Role|2018|lady bird": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Leading Role|2018|the shape of water": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "BAFTA|Best Actress in a Leading Role|2018|three billboards outside ebbing, missouri": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "BAFTA|Best Actress in a Leading Role|2019|a star is born": {
     "person_name": "Lady Gaga",
-    "person_id": null
+    "person_id": 237405
   },
   "BAFTA|Best Actress in a Leading Role|2019|can you ever forgive me?": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "BAFTA|Best Actress in a Leading Role|2019|the favourite": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "BAFTA|Best Actress in a Leading Role|2019|the wife": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "BAFTA|Best Actress in a Leading Role|2019|widows": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "BAFTA|Best Actress in a Leading Role|2020|bombshell": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "BAFTA|Best Actress in a Leading Role|2020|judy": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "BAFTA|Best Actress in a Leading Role|2020|little women": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Leading Role|2020|marriage story": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "BAFTA|Best Actress in a Leading Role|2020|wild rose": {
     "person_name": "Jessie Buckley",
-    "person_id": null
+    "person_id": 1498158
   },
   "BAFTA|Best Actress in a Leading Role|2021|clemency": {
     "person_name": "Alfre Woodard",
-    "person_id": null
+    "person_id": 1981
   },
   "BAFTA|Best Actress in a Leading Role|2021|his house": {
     "person_name": "Wunmi Mosaku",
-    "person_id": null
+    "person_id": 134774
   },
   "BAFTA|Best Actress in a Leading Role|2021|nomadland": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "BAFTA|Best Actress in a Leading Role|2021|pieces of a woman": {
     "person_name": "Vanessa Kirby",
-    "person_id": null
+    "person_id": 556356
   },
   "BAFTA|Best Actress in a Leading Role|2021|rocks": {
     "person_name": "Bukky Bakray",
-    "person_id": null
+    "person_id": 2381123
   },
   "BAFTA|Best Actress in a Leading Role|2021|the forty-year-old version": {
     "person_name": "Radha Blank",
-    "person_id": null
+    "person_id": 2379700
   },
   "BAFTA|Best Actress in a Leading Role|2022|after love": {
     "person_name": "Joanna Scanlan",
-    "person_id": null
+    "person_id": 33450
   },
   "BAFTA|Best Actress in a Leading Role|2022|coda": {
     "person_name": "Emilia Jones",
-    "person_id": null
+    "person_id": 1331023
   },
   "BAFTA|Best Actress in a Leading Role|2022|house of gucci": {
     "person_name": "Lady Gaga",
-    "person_id": null
+    "person_id": 237405
   },
   "BAFTA|Best Actress in a Leading Role|2022|licorice pizza": {
     "person_name": "Alana Haim",
-    "person_id": null
+    "person_id": 1741367
   },
   "BAFTA|Best Actress in a Leading Role|2022|passing": {
     "person_name": "Tessa Thompson",
-    "person_id": null
+    "person_id": 62561
   },
   "BAFTA|Best Actress in a Leading Role|2022|the worst person in the world": {
     "person_name": "Renate Reinsve",
-    "person_id": null
+    "person_id": 1576786
   },
   "BAFTA|Best Actress in a Leading Role|2023|blonde": {
     "person_name": "Ana de Armas",
-    "person_id": null
+    "person_id": 224513
   },
   "BAFTA|Best Actress in a Leading Role|2023|everything everywhere all at once": {
     "person_name": "Michelle Yeoh",
-    "person_id": null
+    "person_id": 1620
   },
   "BAFTA|Best Actress in a Leading Role|2023|good luck to you, leo grande": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "BAFTA|Best Actress in a Leading Role|2023|the woman king": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "BAFTA|Best Actress in a Leading Role|2023|till": {
     "person_name": "Danielle Deadwyler",
-    "person_id": null
+    "person_id": 1853909
   },
   "BAFTA|Best Actress in a Leading Role|2023|tár": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Leading Role|2024|anatomy of a fall": {
     "person_name": "Sandra Hüller",
-    "person_id": null
+    "person_id": 7152
   },
   "BAFTA|Best Actress in a Leading Role|2024|barbie": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "BAFTA|Best Actress in a Leading Role|2024|maestro": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "BAFTA|Best Actress in a Leading Role|2024|poor things": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "BAFTA|Best Actress in a Leading Role|2024|rye lane": {
     "person_name": "Vivian Oparah",
-    "person_id": null
+    "person_id": 1675593
   },
   "BAFTA|Best Actress in a Leading Role|2024|the color purple": {
     "person_name": "Fantasia Barrino",
-    "person_id": null
+    "person_id": 165909
   },
   "BAFTA|Best Actress in a Leading Role|2025|anora": {
     "person_name": "Mikey Madison",
-    "person_id": null
+    "person_id": 1640439
   },
   "BAFTA|Best Actress in a Leading Role|2025|emilia pérez": {
     "person_name": "Karla Sofía Gascón",
-    "person_id": null
+    "person_id": 1505938
   },
   "BAFTA|Best Actress in a Leading Role|2025|hard truths": {
     "person_name": "Marianne Jean-Baptiste",
-    "person_id": null
+    "person_id": 17352
   },
   "BAFTA|Best Actress in a Leading Role|2025|the outrun": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Leading Role|2025|the substance": {
     "person_name": "Demi Moore",
-    "person_id": null
+    "person_id": 3416
   },
   "BAFTA|Best Actress in a Leading Role|2025|wicked": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "BAFTA|Best Actress in a Leading Role|2026|bugonia": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "BAFTA|Best Actress in a Leading Role|2026|hamnet": {
     "person_name": "Jessie Buckley",
-    "person_id": null
+    "person_id": 1498158
   },
   "BAFTA|Best Actress in a Leading Role|2026|if i had legs i'd kick you": {
     "person_name": "Rose Byrne",
-    "person_id": null
+    "person_id": 9827
   },
   "BAFTA|Best Actress in a Leading Role|2026|one battle after another": {
     "person_name": "Chase Infiniti",
-    "person_id": null
+    "person_id": 3914706
   },
   "BAFTA|Best Actress in a Leading Role|2026|sentimental value": {
     "person_name": "Renate Reinsve",
-    "person_id": null
+    "person_id": 1576786
   },
   "BAFTA|Best Actress in a Leading Role|2026|song sung blue": {
     "person_name": "Kate Hudson",
-    "person_id": null
+    "person_id": 11661
   },
   "BAFTA|Best Actress in a Supporting Role|2000|american beauty": {
     "person_name": "Thora Birch",
-    "person_id": null
+    "person_id": 2155
   },
   "BAFTA|Best Actress in a Supporting Role|2000|being john malkovich": {
     "person_name": "Cameron Diaz",
-    "person_id": null
+    "person_id": 6941
   },
   "BAFTA|Best Actress in a Supporting Role|2000|tea with mussolini": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "BAFTA|Best Actress in a Supporting Role|2000|the talented mr. ripley": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Supporting Role|2001|almost famous": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "BAFTA|Best Actress in a Supporting Role|2001|billy elliot": {
     "person_name": "Julie Walters",
-    "person_id": null
+    "person_id": 477
   },
   "BAFTA|Best Actress in a Supporting Role|2001|chocolat": {
     "person_name": "Lena Olin",
-    "person_id": null
+    "person_id": 5313
   },
   "BAFTA|Best Actress in a Supporting Role|2001|crouching tiger, hidden dragon": {
     "person_name": "Zhang Ziyi",
-    "person_id": null
+    "person_id": 1339
   },
   "BAFTA|Best Actress in a Supporting Role|2002|a beautiful mind": {
     "person_name": "Jennifer Connelly",
-    "person_id": null
+    "person_id": 6161
   },
   "BAFTA|Best Actress in a Supporting Role|2002|gosford park": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "BAFTA|Best Actress in a Supporting Role|2002|iris": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Supporting Role|2002|the shipping news": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Supporting Role|2003|about a boy": {
     "person_name": "Toni Collette",
-    "person_id": null
+    "person_id": 3051
   },
   "BAFTA|Best Actress in a Supporting Role|2003|adaptation": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Supporting Role|2003|chicago": {
     "person_name": "Queen Latifah",
-    "person_id": null
+    "person_id": 15758
   },
   "BAFTA|Best Actress in a Supporting Role|2003|the hours": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "BAFTA|Best Actress in a Supporting Role|2004|cold mountain": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "BAFTA|Best Actress in a Supporting Role|2004|girl with a pearl earring": {
     "person_name": "Judy Parfitt",
-    "person_id": null
+    "person_id": 33448
   },
   "BAFTA|Best Actress in a Supporting Role|2004|love actually": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "BAFTA|Best Actress in a Supporting Role|2004|mystic river": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "BAFTA|Best Actress in a Supporting Role|2004|thirteen": {
     "person_name": "Holly Hunter",
-    "person_id": null
+    "person_id": 18686
   },
   "BAFTA|Best Actress in a Supporting Role|2005|closer": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "BAFTA|Best Actress in a Supporting Role|2005|finding neverland": {
     "person_name": "Julie Christie",
-    "person_id": null
+    "person_id": 1666
   },
   "BAFTA|Best Actress in a Supporting Role|2005|the aviator": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Supporting Role|2005|the manchurian candidate": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "BAFTA|Best Actress in a Supporting Role|2005|vera drake": {
     "person_name": "Heather Craney",
-    "person_id": null
+    "person_id": 209994
   },
   "BAFTA|Best Actress in a Supporting Role|2006|brokeback mountain": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "BAFTA|Best Actress in a Supporting Role|2006|capote": {
     "person_name": "Catherine Keener",
-    "person_id": null
+    "person_id": 2229
   },
   "BAFTA|Best Actress in a Supporting Role|2006|crash": {
     "person_name": "Thandiwe Newton",
-    "person_id": null
+    "person_id": 9030
   },
   "BAFTA|Best Actress in a Supporting Role|2006|north country": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "BAFTA|Best Actress in a Supporting Role|2006|pride & prejudice": {
     "person_name": "Brenda Blethyn",
-    "person_id": null
+    "person_id": 4154
   },
   "BAFTA|Best Actress in a Supporting Role|2007|dreamgirls": {
     "person_name": "Jennifer Hudson",
-    "person_id": null
+    "person_id": 15565
   },
   "BAFTA|Best Actress in a Supporting Role|2007|little miss sunshine": {
     "person_name": "Toni Collette",
-    "person_id": null
+    "person_id": 3051
   },
   "BAFTA|Best Actress in a Supporting Role|2007|the devil wears prada": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "BAFTA|Best Actress in a Supporting Role|2007|the history boys": {
     "person_name": "Frances de la Tour",
-    "person_id": null
+    "person_id": 47468
   },
   "BAFTA|Best Actress in a Supporting Role|2008|atonement": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "BAFTA|Best Actress in a Supporting Role|2008|control": {
     "person_name": "Samantha Morton",
-    "person_id": null
+    "person_id": 2206
   },
   "BAFTA|Best Actress in a Supporting Role|2008|i'm not there": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "BAFTA|Best Actress in a Supporting Role|2008|michael clayton": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "BAFTA|Best Actress in a Supporting Role|2008|no country for old men": {
     "person_name": "Kelly Macdonald",
-    "person_id": null
+    "person_id": 9015
   },
   "BAFTA|Best Actress in a Supporting Role|2009|burn after reading": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "BAFTA|Best Actress in a Supporting Role|2009|doubt": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Supporting Role|2009|slumdog millionaire": {
     "person_name": "Freida Pinto",
-    "person_id": null
+    "person_id": 76792
   },
   "BAFTA|Best Actress in a Supporting Role|2009|the wrestler": {
     "person_name": "Marisa Tomei",
-    "person_id": null
+    "person_id": 3141
   },
   "BAFTA|Best Actress in a Supporting Role|2009|vicky cristina barcelona": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "BAFTA|Best Actress in a Supporting Role|2010|nowhere boy": {
     "person_name": "Kristin Scott Thomas",
-    "person_id": null
+    "person_id": 5470
   },
   "BAFTA|Best Actress in a Supporting Role|2010|precious": {
     "person_name": "Mo'Nique",
-    "person_id": null
+    "person_id": 60561
   },
   "BAFTA|Best Actress in a Supporting Role|2010|up in the air": {
     "person_name": "Vera Farmiga",
-    "person_id": null
+    "person_id": 21657
   },
   "BAFTA|Best Actress in a Supporting Role|2011|another year": {
     "person_name": "Lesley Manville",
-    "person_id": null
+    "person_id": 72305
   },
   "BAFTA|Best Actress in a Supporting Role|2011|black swan": {
     "person_name": "Barbara Hershey",
-    "person_id": null
+    "person_id": 10767
   },
   "BAFTA|Best Actress in a Supporting Role|2011|made in dagenham": {
     "person_name": "Miranda Richardson",
-    "person_id": null
+    "person_id": 8436
   },
   "BAFTA|Best Actress in a Supporting Role|2011|the fighter": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Supporting Role|2011|the king's speech": {
     "person_name": "Helena Bonham Carter",
-    "person_id": null
+    "person_id": 1283
   },
   "BAFTA|Best Actress in a Supporting Role|2012|bridesmaids": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "BAFTA|Best Actress in a Supporting Role|2012|drive": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "BAFTA|Best Actress in a Supporting Role|2012|my week with marilyn": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Supporting Role|2012|the help": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "BAFTA|Best Actress in a Supporting Role|2013|les misérables": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "BAFTA|Best Actress in a Supporting Role|2013|lincoln": {
     "person_name": "Sally Field",
-    "person_id": null
+    "person_id": 35
   },
   "BAFTA|Best Actress in a Supporting Role|2013|skyfall": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "BAFTA|Best Actress in a Supporting Role|2013|the master": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Supporting Role|2013|the sessions": {
     "person_name": "Helen Hunt",
-    "person_id": null
+    "person_id": 9994
   },
   "BAFTA|Best Actress in a Supporting Role|2014|12 years a slave": {
     "person_name": "Lupita Nyong'o",
-    "person_id": null
+    "person_id": 1267329
   },
   "BAFTA|Best Actress in a Supporting Role|2014|american hustle": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "BAFTA|Best Actress in a Supporting Role|2014|august: osage county": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "BAFTA|Best Actress in a Supporting Role|2014|blue jasmine": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "BAFTA|Best Actress in a Supporting Role|2014|the butler": {
     "person_name": "Oprah Winfrey",
-    "person_id": null
+    "person_id": 13309
   },
   "BAFTA|Best Actress in a Supporting Role|2015|birdman": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "BAFTA|Best Actress in a Supporting Role|2015|boyhood": {
     "person_name": "Patricia Arquette",
-    "person_id": null
+    "person_id": 4687
   },
   "BAFTA|Best Actress in a Supporting Role|2015|nightcrawler": {
     "person_name": "Rene Russo",
-    "person_id": null
+    "person_id": 14343
   },
   "BAFTA|Best Actress in a Supporting Role|2015|pride": {
     "person_name": "Imelda Staunton",
-    "person_id": null
+    "person_id": 11356
   },
   "BAFTA|Best Actress in a Supporting Role|2015|the imitation game": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "BAFTA|Best Actress in a Supporting Role|2016|brooklyn": {
     "person_name": "Julie Walters",
-    "person_id": null
+    "person_id": 477
   },
   "BAFTA|Best Actress in a Supporting Role|2016|carol": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "BAFTA|Best Actress in a Supporting Role|2016|ex machina": {
     "person_name": "Alicia Vikander",
-    "person_id": null
+    "person_id": 227454
   },
   "BAFTA|Best Actress in a Supporting Role|2016|steve jobs": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "BAFTA|Best Actress in a Supporting Role|2016|the hateful eight": {
     "person_name": "Jennifer Jason Leigh",
-    "person_id": null
+    "person_id": 10431
   },
   "BAFTA|Best Actress in a Supporting Role|2017|fences": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "BAFTA|Best Actress in a Supporting Role|2017|i, daniel blake": {
     "person_name": "Hayley Squires",
-    "person_id": null
+    "person_id": 1182598
   },
   "BAFTA|Best Actress in a Supporting Role|2017|lion": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "BAFTA|Best Actress in a Supporting Role|2017|manchester by the sea": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "BAFTA|Best Actress in a Supporting Role|2017|moonlight": {
     "person_name": "Naomie Harris",
-    "person_id": null
+    "person_id": 2038
   },
   "BAFTA|Best Actress in a Supporting Role|2018|darkest hour": {
     "person_name": "Kristin Scott Thomas",
-    "person_id": null
+    "person_id": 5470
   },
   "BAFTA|Best Actress in a Supporting Role|2018|i, tonya": {
     "person_name": "Allison Janney",
-    "person_id": null
+    "person_id": 19
   },
   "BAFTA|Best Actress in a Supporting Role|2018|lady bird": {
     "person_name": "Laurie Metcalf",
-    "person_id": null
+    "person_id": 12133
   },
   "BAFTA|Best Actress in a Supporting Role|2018|phantom thread": {
     "person_name": "Lesley Manville",
-    "person_id": null
+    "person_id": 72305
   },
   "BAFTA|Best Actress in a Supporting Role|2018|the shape of water": {
     "person_name": "Octavia Spencer",
-    "person_id": null
+    "person_id": 6944
   },
   "BAFTA|Best Actress in a Supporting Role|2019|first man": {
     "person_name": "Claire Foy",
-    "person_id": null
+    "person_id": 120932
   },
   "BAFTA|Best Actress in a Supporting Role|2019|mary queen of scots": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "BAFTA|Best Actress in a Supporting Role|2019|the favourite": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "BAFTA|Best Actress in a Supporting Role|2019|vice": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "BAFTA|Best Actress in a Supporting Role|2020|bombshell": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "BAFTA|Best Actress in a Supporting Role|2020|jojo rabbit": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "BAFTA|Best Actress in a Supporting Role|2020|little women": {
     "person_name": "Florence Pugh",
-    "person_id": null
+    "person_id": 1373737
   },
   "BAFTA|Best Actress in a Supporting Role|2020|marriage story": {
     "person_name": "Laura Dern",
-    "person_id": null
+    "person_id": 4784
   },
   "BAFTA|Best Actress in a Supporting Role|2020|once upon a time in hollywood": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "BAFTA|Best Actress in a Supporting Role|2021|borat subsequent moviefilm": {
     "person_name": "Maria Bakalova",
-    "person_id": null
+    "person_id": 4877640
   },
   "BAFTA|Best Actress in a Supporting Role|2021|calm with horses": {
     "person_name": "Niamh Algar",
-    "person_id": null
+    "person_id": 1362813
   },
   "BAFTA|Best Actress in a Supporting Role|2021|county lines": {
     "person_name": "Ashley Madekwe",
-    "person_id": null
+    "person_id": 75061
   },
   "BAFTA|Best Actress in a Supporting Role|2021|judas and the black messiah": {
     "person_name": "Dominique Fishback",
-    "person_id": null
+    "person_id": 1676520
   },
   "BAFTA|Best Actress in a Supporting Role|2021|minari": {
     "person_name": "Youn Yuh-jung",
-    "person_id": null
+    "person_id": 1080935
   },
   "BAFTA|Best Actress in a Supporting Role|2021|rocks": {
     "person_name": "Kosar Ali",
-    "person_id": null
+    "person_id": 2381125
   },
   "BAFTA|Best Actress in a Supporting Role|2022|belfast": {
     "person_name": "Caitríona Balfe",
-    "person_id": null
+    "person_id": 147056
   },
   "BAFTA|Best Actress in a Supporting Role|2022|king richard": {
     "person_name": "Aunjanue Ellis-Taylor",
-    "person_id": null
+    "person_id": 53923
   },
   "BAFTA|Best Actress in a Supporting Role|2022|mass": {
     "person_name": "Ann Dowd",
-    "person_id": null
+    "person_id": 43366
   },
   "BAFTA|Best Actress in a Supporting Role|2022|passing": {
     "person_name": "Ruth Negga",
-    "person_id": null
+    "person_id": 17018
   },
   "BAFTA|Best Actress in a Supporting Role|2022|the lost daughter": {
     "person_name": "Jessie Buckley",
-    "person_id": null
+    "person_id": 1498158
   },
   "BAFTA|Best Actress in a Supporting Role|2022|west side story": {
     "person_name": "Ariana DeBose",
-    "person_id": null
+    "person_id": 1437491
   },
   "BAFTA|Best Actress in a Supporting Role|2023|black panther: wakanda forever": {
     "person_name": "Angela Bassett",
-    "person_id": null
+    "person_id": 9780
   },
   "BAFTA|Best Actress in a Supporting Role|2023|everything everywhere all at once": {
     "person_name": "Jamie Lee Curtis",
-    "person_id": null
+    "person_id": 8944
   },
   "BAFTA|Best Actress in a Supporting Role|2023|she said": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "BAFTA|Best Actress in a Supporting Role|2023|the banshees of inisherin": {
     "person_name": "Kerry Condon",
-    "person_id": null
+    "person_id": 62105
   },
   "BAFTA|Best Actress in a Supporting Role|2023|the whale": {
     "person_name": "Hong Chau",
-    "person_id": null
+    "person_id": 1360317
   },
   "BAFTA|Best Actress in a Supporting Role|2023|triangle of sadness": {
     "person_name": "Dolly de Leon",
-    "person_id": null
+    "person_id": 1513304
   },
   "BAFTA|Best Actress in a Supporting Role|2024|all of us strangers": {
     "person_name": "Claire Foy",
-    "person_id": null
+    "person_id": 120932
   },
   "BAFTA|Best Actress in a Supporting Role|2024|oppenheimer": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "BAFTA|Best Actress in a Supporting Role|2024|saltburn": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "BAFTA|Best Actress in a Supporting Role|2024|the color purple": {
     "person_name": "Danielle Brooks",
-    "person_id": null
+    "person_id": 1075037
   },
   "BAFTA|Best Actress in a Supporting Role|2024|the holdovers": {
     "person_name": "Da'Vine Joy Randolph",
-    "person_id": null
+    "person_id": 1180099
   },
   "BAFTA|Best Actress in a Supporting Role|2024|the zone of interest": {
     "person_name": "Sandra Hüller",
-    "person_id": null
+    "person_id": 7152
   },
   "BAFTA|Best Actress in a Supporting Role|2025|conclave": {
     "person_name": "Isabella Rossellini",
-    "person_id": null
+    "person_id": 6588
   },
   "BAFTA|Best Actress in a Supporting Role|2025|emilia pérez": {
     "person_name": "Selena Gomez",
-    "person_id": null
+    "person_id": 77948
   },
   "BAFTA|Best Actress in a Supporting Role|2025|the brutalist": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "BAFTA|Best Actress in a Supporting Role|2025|the last showgirl": {
     "person_name": "Jamie Lee Curtis",
-    "person_id": null
+    "person_id": 8944
   },
   "BAFTA|Best Actress in a Supporting Role|2025|wicked": {
     "person_name": "Ariana Grande",
-    "person_id": null
+    "person_id": 226001
   },
   "BAFTA|Best Actress in a Supporting Role|2026|hamnet": {
     "person_name": "Emily Watson",
-    "person_id": null
+    "person_id": 1639
   },
   "BAFTA|Best Actress in a Supporting Role|2026|marty supreme": {
     "person_name": "Odessa A'zion",
-    "person_id": null
+    "person_id": 1972166
   },
   "BAFTA|Best Actress in a Supporting Role|2026|one battle after another": {
     "person_name": "Teyana Taylor",
-    "person_id": null
+    "person_id": 964679
   },
   "BAFTA|Best Actress in a Supporting Role|2026|sentimental value": {
     "person_name": "Inga Ibsdotter Lilleaas",
-    "person_id": null
+    "person_id": 1421850
   },
   "BAFTA|Best Actress in a Supporting Role|2026|sinners": {
     "person_name": "Wunmi Mosaku",
-    "person_id": null
+    "person_id": 134774
   },
   "BAFTA|Best Actress in a Supporting Role|2026|the ballad of wallis island": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "BAFTA|Best Casting|2020|joker": {
     "person_name": "Shayna Markowitz",
-    "person_id": null
+    "person_id": 1594606
   },
   "BAFTA|Best Casting|2020|marriage story": {
-    "person_name": "Douglas Aibel and Francine Maisler",
-    "person_id": null
+    "person_name": "Douglas Aibel",
+    "person_id": 5669
   },
   "BAFTA|Best Casting|2020|once upon a time in hollywood": {
     "person_name": "Victoria Thomas",
-    "person_id": null
+    "person_id": 547
   },
   "BAFTA|Best Casting|2020|the personal history of david copperfield": {
     "person_name": "Sarah Crowe",
-    "person_id": null
+    "person_id": 62957
   },
   "BAFTA|Best Casting|2020|the two popes": {
     "person_name": "Nina Gold",
-    "person_id": null
+    "person_id": 16363
   },
   "BAFTA|Best Casting|2021|calm with horses": {
     "person_name": "Shaheen Baig",
-    "person_id": null
+    "person_id": 2635
   },
   "BAFTA|Best Casting|2021|judas and the black messiah": {
     "person_name": "Alexa L. Fogel",
-    "person_id": null
+    "person_id": 53360
   },
   "BAFTA|Best Casting|2021|minari": {
     "person_name": "Julia Kim",
-    "person_id": null
+    "person_id": 1196709
   },
   "BAFTA|Best Casting|2021|promising young woman": {
-    "person_name": "Lindsay Graham-Ahanonu and Mary Vernieu",
-    "person_id": null
+    "person_name": "Lindsay Graham-Ahanonu",
+    "person_id": 1024910
   },
   "BAFTA|Best Casting|2021|rocks": {
     "person_name": "Lucy Pardee",
-    "person_id": null
+    "person_id": 1623709
   },
   "BAFTA|Best Casting|2022|boiling point": {
     "person_name": "Carolyn McLeod",
-    "person_id": null
+    "person_id": 1193192
   },
   "BAFTA|Best Casting|2022|dune": {
     "person_name": "Francine Maisler",
-    "person_id": null
+    "person_id": 6410
   },
   "BAFTA|Best Casting|2022|king richard": {
     "person_name": "Avy Kaufman",
-    "person_id": null
+    "person_id": 2952
   },
   "BAFTA|Best Casting|2022|the hand of god": {
-    "person_name": "Massimo Appolloni and Annamaria Sambucco",
-    "person_id": null
+    "person_name": "Massimo Appolloni",
+    "person_id": 2161390
   },
   "BAFTA|Best Casting|2022|west side story": {
     "person_name": "Cindy Tolan",
-    "person_id": null
+    "person_id": 119179
   },
   "BAFTA|Best Casting|2023|aftersun": {
     "person_name": "Lucy Pardee",
-    "person_id": null
+    "person_id": 1623709
   },
   "BAFTA|Best Casting|2023|all quiet on the western front": {
     "person_name": "Simone Bär",
-    "person_id": null
+    "person_id": 4222
   },
   "BAFTA|Best Casting|2023|elvis": {
-    "person_name": "Nikki Barrett and Denise Chamian",
-    "person_id": null
+    "person_name": "Nikki Barrett",
+    "person_id": 37281
   },
   "BAFTA|Best Casting|2023|everything everywhere all at once": {
     "person_name": "Sarah Halley Finn",
-    "person_id": null
+    "person_id": 7232
   },
   "BAFTA|Best Casting|2023|triangle of sadness": {
     "person_name": "Pauline Hansson",
-    "person_id": null
+    "person_id": 1999126
   },
   "BAFTA|Best Casting|2024|all of us strangers": {
     "person_name": "Kahleen Crawford",
-    "person_id": null
+    "person_id": 16899
   },
   "BAFTA|Best Casting|2024|anatomy of a fall": {
     "person_name": "Cynthia Arra",
-    "person_id": null
+    "person_id": 1959664
   },
   "BAFTA|Best Casting|2024|how to have sex": {
     "person_name": "Isabella Odoffin",
-    "person_id": null
+    "person_id": 1746036
   },
   "BAFTA|Best Casting|2024|killers of the flower moon": {
     "person_name": "Ellen Lewis",
-    "person_id": null
+    "person_id": 2242
   },
   "BAFTA|Best Casting|2024|the holdovers": {
     "person_name": "Susan Shopmaker",
-    "person_id": null
+    "person_id": 32604
   },
   "BAFTA|Best Casting|2025|a complete unknown": {
     "person_name": "Yesi Ramirez",
-    "person_id": null
+    "person_id": 1155432
   },
   "BAFTA|Best Casting|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "BAFTA|Best Casting|2025|conclave": {
     "person_name": "Nina Gold",
-    "person_id": null
+    "person_id": 16363
   },
   "BAFTA|Best Casting|2025|kneecap": {
     "person_name": "Carla Stronge",
-    "person_id": null
+    "person_id": 1728038
   },
   "BAFTA|Best Casting|2025|the apprentice": {
-    "person_name": "Stephanie Gorin and Carmen Cuba",
-    "person_id": null
+    "person_name": "Stephanie Gorin",
+    "person_id": 2678
   },
   "BAFTA|Best Casting|2026|i swear": {
     "person_name": "Lauren Evans",
-    "person_id": null
+    "person_id": 1746702
   },
   "BAFTA|Best Casting|2026|marty supreme": {
     "person_name": "Jennifer Venditti",
-    "person_id": null
+    "person_id": 549480
   },
   "BAFTA|Best Casting|2026|one battle after another": {
     "person_name": "Cassandra Kulukundis",
-    "person_id": null
+    "person_id": 4772
   },
   "BAFTA|Best Casting|2026|sentimental value": {
     "person_name": "Avy Kaufman",
-    "person_id": null
+    "person_id": 2952
   },
   "BAFTA|Best Casting|2026|sinners": {
     "person_name": "Francine Maisler",
-    "person_id": null
+    "person_id": 6410
   },
   "BAFTA|Best Cinematography|2000|american beauty": {
     "person_name": "Conrad Hall",
-    "person_id": null
+    "person_id": 8217
   },
   "BAFTA|Best Cinematography|2000|angela's ashes": {
     "person_name": "Michael Seresin",
-    "person_id": null
+    "person_id": 9165
   },
   "BAFTA|Best Cinematography|2000|the end of the affair": {
     "person_name": "Roger Pratt",
-    "person_id": null
+    "person_id": 293
   },
   "BAFTA|Best Cinematography|2000|the matrix": {
     "person_name": "Bill Pope",
-    "person_id": null
+    "person_id": 9341
   },
   "BAFTA|Best Cinematography|2000|the talented mr. ripley": {
     "person_name": "John Seale",
-    "person_id": null
+    "person_id": 2702
   },
   "BAFTA|Best Cinematography|2001|billy elliot": {
     "person_name": "Brian Tufano",
-    "person_id": null
+    "person_id": 473
   },
   "BAFTA|Best Cinematography|2001|chocolat": {
     "person_name": "Roger Pratt",
-    "person_id": null
+    "person_id": 293
   },
   "BAFTA|Best Cinematography|2001|crouching tiger, hidden dragon": {
     "person_name": "Peter Pau",
-    "person_id": null
+    "person_id": 2365113
   },
   "BAFTA|Best Cinematography|2001|gladiator": {
     "person_name": "John Mathieson",
-    "person_id": null
+    "person_id": 943
   },
   "BAFTA|Best Cinematography|2001|o brother, where art thou?": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2002|amélie": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "BAFTA|Best Cinematography|2002|black hawk down": {
     "person_name": "Sławomir Idziak",
-    "person_id": null
+    "person_id": 1129
   },
   "BAFTA|Best Cinematography|2002|moulin rouge!": {
     "person_name": "Donald McAlpine",
-    "person_id": null
+    "person_id": 1095
   },
   "BAFTA|Best Cinematography|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Andrew Lesnie",
-    "person_id": null
+    "person_id": 1313
   },
   "BAFTA|Best Cinematography|2002|the man who wasn't there": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2003|chicago": {
     "person_name": "Dion Beebe",
-    "person_id": null
+    "person_id": 647
   },
   "BAFTA|Best Cinematography|2003|gangs of new york": {
     "person_name": "Michael Ballhaus",
-    "person_id": null
+    "person_id": 3769
   },
   "BAFTA|Best Cinematography|2003|road to perdition": {
     "person_name": "Conrad Hall",
-    "person_id": null
+    "person_id": 8217
   },
   "BAFTA|Best Cinematography|2003|the lord of the rings: the two towers": {
     "person_name": "Andrew Lesnie",
-    "person_id": null
+    "person_id": 1313
   },
   "BAFTA|Best Cinematography|2003|the pianist": {
     "person_name": "Paweł Edelman",
-    "person_id": null
+    "person_id": 3561
   },
   "BAFTA|Best Cinematography|2004|cold mountain": {
     "person_name": "John Seale",
-    "person_id": null
+    "person_id": 2702
   },
   "BAFTA|Best Cinematography|2004|girl with a pearl earring": {
     "person_name": "Eduardo Serra",
-    "person_id": null
+    "person_id": 16732
   },
   "BAFTA|Best Cinematography|2004|lost in translation": {
     "person_name": "Lance Acord",
-    "person_id": null
+    "person_id": 1781
   },
   "BAFTA|Best Cinematography|2004|master and commander: the far side of the world": {
     "person_name": "Russell Boyd",
-    "person_id": null
+    "person_id": 31027
   },
   "BAFTA|Best Cinematography|2004|the lord of the rings: the return of the king": {
     "person_name": "Andrew Lesnie",
-    "person_id": null
+    "person_id": 1313
   },
   "BAFTA|Best Cinematography|2005|collateral": {
     "person_name": "Dion Beebe",
-    "person_id": null
+    "person_id": 647
   },
   "BAFTA|Best Cinematography|2005|finding neverland": {
     "person_name": "Roberto Schaefer",
-    "person_id": null
+    "person_id": 13000
   },
   "BAFTA|Best Cinematography|2005|house of flying daggers": {
     "person_name": "Zhao Xiaoding",
-    "person_id": null
+    "person_id": 57913
   },
   "BAFTA|Best Cinematography|2005|the aviator": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "BAFTA|Best Cinematography|2005|the motorcycle diaries": {
     "person_name": "Éric Gautier",
-    "person_id": null
+    "person_id": 18494
   },
   "BAFTA|Best Cinematography|2006|brokeback mountain": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "BAFTA|Best Cinematography|2006|crash": {
     "person_name": "J. Michael Muro",
-    "person_id": null
+    "person_id": 21118
   },
   "BAFTA|Best Cinematography|2006|march of the penguins": {
     "person_name": "Laurent Chalet",
-    "person_id": null
+    "person_id": 18530
   },
   "BAFTA|Best Cinematography|2006|memoirs of a geisha": {
     "person_name": "Dion Beebe",
-    "person_id": null
+    "person_id": 647
   },
   "BAFTA|Best Cinematography|2006|the constant gardener": {
     "person_name": "César Charlone",
-    "person_id": null
+    "person_id": 8577
   },
   "BAFTA|Best Cinematography|2007|babel": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "BAFTA|Best Cinematography|2007|casino royale": {
     "person_name": "Phil Méheux",
-    "person_id": null
+    "person_id": 10709
   },
   "BAFTA|Best Cinematography|2007|children of men": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "BAFTA|Best Cinematography|2007|pan's labyrinth": {
     "person_name": "Guillermo Navarro",
-    "person_id": null
+    "person_id": 3113
   },
   "BAFTA|Best Cinematography|2007|united 93": {
     "person_name": "Barry Ackroyd",
-    "person_id": null
+    "person_id": 15493
   },
   "BAFTA|Best Cinematography|2008|american gangster": {
     "person_name": "Harris Savides",
-    "person_id": null
+    "person_id": 10688
   },
   "BAFTA|Best Cinematography|2008|atonement": {
     "person_name": "Seamus McGarvey",
-    "person_id": null
+    "person_id": 3285
   },
   "BAFTA|Best Cinematography|2008|no country for old men": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2008|the bourne ultimatum": {
     "person_name": "Oliver Wood",
-    "person_id": null
+    "person_id": 11409
   },
   "BAFTA|Best Cinematography|2008|there will be blood": {
     "person_name": "Robert Elswit",
-    "person_id": null
+    "person_id": 2950
   },
   "BAFTA|Best Cinematography|2009|changeling": {
     "person_name": "Tom Stern",
-    "person_id": null
+    "person_id": 223349
   },
   "BAFTA|Best Cinematography|2009|slumdog millionaire": {
     "person_name": "Anthony Dod Mantle",
-    "person_id": null
+    "person_id": 1570
   },
   "BAFTA|Best Cinematography|2009|the curious case of benjamin button": {
     "person_name": "Claudio Miranda",
-    "person_id": null
+    "person_id": 51333
   },
   "BAFTA|Best Cinematography|2009|the dark knight": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "BAFTA|Best Cinematography|2009|the reader": {
     "person_name": "Chris Menges",
-    "person_id": null
+    "person_id": 8969
   },
   "BAFTA|Best Cinematography|2010|avatar": {
     "person_name": "Mauro Fiore",
-    "person_id": null
+    "person_id": 18265
   },
   "BAFTA|Best Cinematography|2010|district 9": {
     "person_name": "Trent Opaloch",
-    "person_id": null
+    "person_id": 967026
   },
   "BAFTA|Best Cinematography|2010|inglourious basterds": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "BAFTA|Best Cinematography|2010|the hurt locker": {
     "person_name": "Barry Ackroyd",
-    "person_id": null
+    "person_id": 15493
   },
   "BAFTA|Best Cinematography|2010|the road": {
     "person_name": "Javier Aguirresarobe",
-    "person_id": null
+    "person_id": 403
   },
   "BAFTA|Best Cinematography|2011|127 hours": {
     "person_name": "Anthony Dod Mantle",
-    "person_id": null
+    "person_id": 1570
   },
   "BAFTA|Best Cinematography|2011|black swan": {
     "person_name": "Matthew Libatique",
-    "person_id": null
+    "person_id": 4867
   },
   "BAFTA|Best Cinematography|2011|inception": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "BAFTA|Best Cinematography|2011|the king's speech": {
     "person_name": "Danny Cohen",
-    "person_id": null
+    "person_id": 56021
   },
   "BAFTA|Best Cinematography|2011|true grit": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2012|hugo": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "BAFTA|Best Cinematography|2012|the artist": {
     "person_name": "Guillaume Schiffman",
-    "person_id": null
+    "person_id": 20593
   },
   "BAFTA|Best Cinematography|2012|the girl with the dragon tattoo": {
     "person_name": "Jeff Cronenweth",
-    "person_id": null
+    "person_id": 7479
   },
   "BAFTA|Best Cinematography|2012|tinker tailor soldier spy": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "BAFTA|Best Cinematography|2012|war horse": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "BAFTA|Best Cinematography|2013|anna karenina": {
     "person_name": "Seamus McGarvey",
-    "person_id": null
+    "person_id": 3285
   },
   "BAFTA|Best Cinematography|2013|les misérables": {
     "person_name": "Danny Cohen",
-    "person_id": null
+    "person_id": 56021
   },
   "BAFTA|Best Cinematography|2013|life of pi": {
     "person_name": "Claudio Miranda",
-    "person_id": null
+    "person_id": 51333
   },
   "BAFTA|Best Cinematography|2013|lincoln": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "BAFTA|Best Cinematography|2013|skyfall": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2014|12 years a slave": {
     "person_name": "Sean Bobbitt",
-    "person_id": null
+    "person_id": 54926
   },
   "BAFTA|Best Cinematography|2014|captain phillips": {
     "person_name": "Barry Ackroyd",
-    "person_id": null
+    "person_id": 15493
   },
   "BAFTA|Best Cinematography|2014|gravity": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "BAFTA|Best Cinematography|2014|inside llewyn davis": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "BAFTA|Best Cinematography|2014|nebraska": {
     "person_name": "Phedon Papamichael",
-    "person_id": null
+    "person_id": 432
   },
   "BAFTA|Best Cinematography|2015|birdman": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "BAFTA|Best Cinematography|2015|ida": {
     "person_name": "Łukasz Żal",
-    "person_id": null
+    "person_id": 1609221
   },
   "BAFTA|Best Cinematography|2015|interstellar": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "BAFTA|Best Cinematography|2015|mr. turner": {
     "person_name": "Dick Pope",
-    "person_id": null
+    "person_id": 60085
   },
   "BAFTA|Best Cinematography|2015|the grand budapest hotel": {
     "person_name": "Robert Yeoman",
-    "person_id": null
+    "person_id": 4506891
   },
   "BAFTA|Best Cinematography|2016|bridge of spies": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "BAFTA|Best Cinematography|2016|carol": {
     "person_name": "Edward Lachman",
-    "person_id": null
+    "person_id": 6345
   },
   "BAFTA|Best Cinematography|2016|mad max: fury road": {
     "person_name": "John Seale",
-    "person_id": null
+    "person_id": 2702
   },
   "BAFTA|Best Cinematography|2016|sicario": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2016|the revenant": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "BAFTA|Best Cinematography|2017|arrival": {
     "person_name": "Bradford Young",
-    "person_id": null
+    "person_id": 1046612
   },
   "BAFTA|Best Cinematography|2017|hell or high water": {
     "person_name": "Giles Nuttgens",
-    "person_id": null
+    "person_id": 3079
   },
   "BAFTA|Best Cinematography|2017|la la land": {
     "person_name": "Linus Sandgren",
-    "person_id": null
+    "person_id": 969171
   },
   "BAFTA|Best Cinematography|2017|lion": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "BAFTA|Best Cinematography|2017|nocturnal animals": {
     "person_name": "Seamus McGarvey",
-    "person_id": null
+    "person_id": 3285
   },
   "BAFTA|Best Cinematography|2018|blade runner 2049": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2018|darkest hour": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "BAFTA|Best Cinematography|2018|dunkirk": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "BAFTA|Best Cinematography|2018|the shape of water": {
     "person_name": "Dan Laustsen",
-    "person_id": null
+    "person_id": 40268
   },
   "BAFTA|Best Cinematography|2018|three billboards outside ebbing, missouri": {
     "person_name": "Ben Davis",
-    "person_id": null
+    "person_id": 22161
   },
   "BAFTA|Best Cinematography|2019|bohemian rhapsody": {
     "person_name": "Newton Thomas Sigel",
-    "person_id": null
+    "person_id": 9040
   },
   "BAFTA|Best Cinematography|2019|cold war": {
     "person_name": "Łukasz Żal",
-    "person_id": null
+    "person_id": 1609221
   },
   "BAFTA|Best Cinematography|2019|first man": {
     "person_name": "Linus Sandgren",
-    "person_id": null
+    "person_id": 969171
   },
   "BAFTA|Best Cinematography|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "BAFTA|Best Cinematography|2019|the favourite": {
     "person_name": "Robbie Ryan",
-    "person_id": null
+    "person_id": 71086
   },
   "BAFTA|Best Cinematography|2020|1917": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2020|ford v ferrari": {
     "person_name": "Phedon Papamichael",
-    "person_id": null
+    "person_id": 432
   },
   "BAFTA|Best Cinematography|2020|joker": {
     "person_name": "Lawrence Sher",
-    "person_id": null
+    "person_id": 5387
   },
   "BAFTA|Best Cinematography|2020|the irishman": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "BAFTA|Best Cinematography|2020|the lighthouse": {
     "person_name": "Jarin Blaschke",
-    "person_id": null
+    "person_id": 1135102
   },
   "BAFTA|Best Cinematography|2021|judas and the black messiah": {
     "person_name": "Sean Bobbitt",
-    "person_id": null
+    "person_id": 54926
   },
   "BAFTA|Best Cinematography|2021|mank": {
     "person_name": "Erik Messerschmidt",
-    "person_id": null
+    "person_id": 1519399
   },
   "BAFTA|Best Cinematography|2021|news of the world": {
     "person_name": "Dariusz Wolski",
-    "person_id": null
+    "person_id": 120
   },
   "BAFTA|Best Cinematography|2021|nomadland": {
     "person_name": "Joshua James Richards",
-    "person_id": null
+    "person_id": 1313754
   },
   "BAFTA|Best Cinematography|2021|the mauritanian": {
     "person_name": "Alwin H. Küchler",
-    "person_id": null
+    "person_id": 26192
   },
   "BAFTA|Best Cinematography|2022|dune": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "BAFTA|Best Cinematography|2022|nightmare alley": {
     "person_name": "Dan Laustsen",
-    "person_id": null
+    "person_id": 40268
   },
   "BAFTA|Best Cinematography|2022|no time to die": {
     "person_name": "Linus Sandgren",
-    "person_id": null
+    "person_id": 969171
   },
   "BAFTA|Best Cinematography|2022|the power of the dog": {
     "person_name": "Ari Wegner",
-    "person_id": null
+    "person_id": 1615123
   },
   "BAFTA|Best Cinematography|2022|the tragedy of macbeth": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "BAFTA|Best Cinematography|2023|all quiet on the western front": {
     "person_name": "James Friend",
-    "person_id": null
+    "person_id": 1103587
   },
   "BAFTA|Best Cinematography|2023|elvis": {
     "person_name": "Mandy Walker",
-    "person_id": null
+    "person_id": 57849
   },
   "BAFTA|Best Cinematography|2023|empire of light": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "BAFTA|Best Cinematography|2023|the batman": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "BAFTA|Best Cinematography|2023|top gun: maverick": {
     "person_name": "Claudio Miranda",
-    "person_id": null
+    "person_id": 51333
   },
   "BAFTA|Best Cinematography|2024|killers of the flower moon": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "BAFTA|Best Cinematography|2024|maestro": {
     "person_name": "Matthew Libatique",
-    "person_id": null
+    "person_id": 4867
   },
   "BAFTA|Best Cinematography|2024|oppenheimer": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "BAFTA|Best Cinematography|2024|poor things": {
     "person_name": "Robbie Ryan",
-    "person_id": null
+    "person_id": 71086
   },
   "BAFTA|Best Cinematography|2024|the zone of interest": {
     "person_name": "Łukasz Żal",
-    "person_id": null
+    "person_id": 1609221
   },
   "BAFTA|Best Cinematography|2025|conclave": {
     "person_name": "Stéphane Fontaine",
-    "person_id": null
+    "person_id": 19113
   },
   "BAFTA|Best Cinematography|2025|dune: part two": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "BAFTA|Best Cinematography|2025|emilia pérez": {
     "person_name": "Paul Guilhaume",
-    "person_id": null
+    "person_id": 1665518
   },
   "BAFTA|Best Cinematography|2025|nosferatu": {
     "person_name": "Jarin Blaschke",
-    "person_id": null
+    "person_id": 1135102
   },
   "BAFTA|Best Cinematography|2025|the brutalist": {
     "person_name": "Lol Crawley",
-    "person_id": null
+    "person_id": 93188
   },
   "BAFTA|Best Cinematography|2026|frankenstein": {
     "person_name": "Dan Laustsen",
-    "person_id": null
+    "person_id": 40268
   },
   "BAFTA|Best Cinematography|2026|marty supreme": {
     "person_name": "Darius Khondji",
-    "person_id": null
+    "person_id": 2240
   },
   "BAFTA|Best Cinematography|2026|one battle after another": {
     "person_name": "Michael Bauman",
-    "person_id": null
+    "person_id": 1435657
   },
   "BAFTA|Best Cinematography|2026|sinners": {
     "person_name": "Autumn Durald Arkapaw",
-    "person_id": null
+    "person_id": 1385904
   },
   "BAFTA|Best Cinematography|2026|train dreams": {
     "person_name": "Adolpho Veloso",
-    "person_id": null
+    "person_id": 1896957
   },
   "BAFTA|Best Direction|2000|all about my mother": {
     "person_name": "Pedro Almodóvar",
-    "person_id": null
+    "person_id": 309
   },
   "BAFTA|Best Direction|2000|american beauty": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "BAFTA|Best Direction|2000|the end of the affair": {
     "person_name": "Neil Jordan",
-    "person_id": null
+    "person_id": 17016
   },
   "BAFTA|Best Direction|2000|the sixth sense": {
     "person_name": "M. Night Shyamalan",
-    "person_id": null
+    "person_id": 11614
   },
   "BAFTA|Best Direction|2000|the talented mr. ripley": {
     "person_name": "Anthony Minghella",
-    "person_id": null
+    "person_id": 2239
   },
   "BAFTA|Best Direction|2001|billy elliot": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "BAFTA|Best Direction|2001|crouching tiger, hidden dragon": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "BAFTA|Best Direction|2001|erin brockovich": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "BAFTA|Best Direction|2001|gladiator": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "BAFTA|Best Direction|2001|traffic": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "BAFTA|Best Direction|2002|a beautiful mind": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "BAFTA|Best Direction|2002|amélie": {
     "person_name": "Jean-Pierre Jeunet",
-    "person_id": null
+    "person_id": 2419
   },
   "BAFTA|Best Direction|2002|gosford park": {
     "person_name": "Robert Altman",
-    "person_id": null
+    "person_id": 9789
   },
   "BAFTA|Best Direction|2002|moulin rouge!": {
     "person_name": "Baz Luhrmann",
-    "person_id": null
+    "person_id": 6201
   },
   "BAFTA|Best Direction|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "BAFTA|Best Direction|2003|chicago": {
     "person_name": "Rob Marshall",
-    "person_id": null
+    "person_id": 17633
   },
   "BAFTA|Best Direction|2003|gangs of new york": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Direction|2003|the hours": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "BAFTA|Best Direction|2003|the lord of the rings: the two towers": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "BAFTA|Best Direction|2003|the pianist": {
     "person_name": "Roman Polanski",
-    "person_id": null
+    "person_id": 3556
   },
   "BAFTA|Best Direction|2004|big fish": {
     "person_name": "Tim Burton",
-    "person_id": null
+    "person_id": 510
   },
   "BAFTA|Best Direction|2004|cold mountain": {
     "person_name": "Anthony Minghella",
-    "person_id": null
+    "person_id": 2239
   },
   "BAFTA|Best Direction|2004|lost in translation": {
     "person_name": "Sofia Coppola",
-    "person_id": null
+    "person_id": 1769
   },
   "BAFTA|Best Direction|2004|master and commander: the far side of the world": {
     "person_name": "Peter Weir",
-    "person_id": null
+    "person_id": 2690
   },
   "BAFTA|Best Direction|2004|the lord of the rings: the return of the king": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "BAFTA|Best Direction|2005|collateral": {
     "person_name": "Michael Mann",
-    "person_id": null
+    "person_id": 638
   },
   "BAFTA|Best Direction|2005|eternal sunshine of the spotless mind": {
     "person_name": "Michel Gondry",
-    "person_id": null
+    "person_id": 201
   },
   "BAFTA|Best Direction|2005|finding neverland": {
     "person_name": "Marc Forster",
-    "person_id": null
+    "person_id": 12995
   },
   "BAFTA|Best Direction|2005|the aviator": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Direction|2005|vera drake": {
     "person_name": "Mike Leigh",
-    "person_id": null
+    "person_id": 65452
   },
   "BAFTA|Best Direction|2006|brokeback mountain": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "BAFTA|Best Direction|2006|capote": {
     "person_name": "Bennett Miller",
-    "person_id": null
+    "person_id": 5345
   },
   "BAFTA|Best Direction|2006|crash": {
     "person_name": "Paul Haggis",
-    "person_id": null
+    "person_id": 455
   },
   "BAFTA|Best Direction|2006|good night, and good luck": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "BAFTA|Best Direction|2006|the constant gardener": {
     "person_name": "Fernando Meirelles",
-    "person_id": null
+    "person_id": 8557
   },
   "BAFTA|Best Direction|2007|babel": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "BAFTA|Best Direction|2007|little miss sunshine": {
     "person_name": "Jonathan Dayton",
-    "person_id": null
+    "person_id": 16959
   },
   "BAFTA|Best Direction|2007|the departed": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Direction|2007|the queen": {
     "person_name": "Stephen Frears",
-    "person_id": null
+    "person_id": 3224
   },
   "BAFTA|Best Direction|2007|united 93": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "BAFTA|Best Direction|2008|atonement": {
     "person_name": "Joe Wright",
-    "person_id": null
+    "person_id": 36588
   },
   "BAFTA|Best Direction|2008|no country for old men": {
     "person_name": "Joel Coen",
-    "person_id": null
+    "person_id": 1223
   },
   "BAFTA|Best Direction|2008|the bourne ultimatum": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "BAFTA|Best Direction|2008|the lives of others": {
     "person_name": "Florian Henckel von Donnersmarck",
-    "person_id": null
+    "person_id": 8193
   },
   "BAFTA|Best Direction|2008|there will be blood": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "BAFTA|Best Direction|2009|changeling": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "BAFTA|Best Direction|2009|frost/nixon": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "BAFTA|Best Direction|2009|slumdog millionaire": {
     "person_name": "Danny Boyle",
-    "person_id": null
+    "person_id": 2034
   },
   "BAFTA|Best Direction|2009|the curious case of benjamin button": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "BAFTA|Best Direction|2009|the reader": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "BAFTA|Best Direction|2010|an education": {
     "person_name": "Lone Scherfig",
-    "person_id": null
+    "person_id": 1176
   },
   "BAFTA|Best Direction|2010|avatar": {
     "person_name": "James Cameron",
-    "person_id": null
+    "person_id": 2710
   },
   "BAFTA|Best Direction|2010|district 9": {
     "person_name": "Neill Blomkamp",
-    "person_id": null
+    "person_id": 82194
   },
   "BAFTA|Best Direction|2010|inglourious basterds": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "BAFTA|Best Direction|2010|the hurt locker": {
     "person_name": "Kathryn Bigelow",
-    "person_id": null
+    "person_id": 14392
   },
   "BAFTA|Best Direction|2011|127 hours": {
     "person_name": "Danny Boyle",
-    "person_id": null
+    "person_id": 2034
   },
   "BAFTA|Best Direction|2011|black swan": {
     "person_name": "Darren Aronofsky",
-    "person_id": null
+    "person_id": 6431
   },
   "BAFTA|Best Direction|2011|inception": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "BAFTA|Best Direction|2011|the king's speech": {
     "person_name": "Tom Hooper",
-    "person_id": null
+    "person_id": 70500
   },
   "BAFTA|Best Direction|2011|the social network": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "BAFTA|Best Direction|2012|drive": {
     "person_name": "Nicolas Winding Refn",
-    "person_id": null
+    "person_id": 21183
   },
   "BAFTA|Best Direction|2012|hugo": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Direction|2012|the artist": {
     "person_name": "Michel Hazanavicius",
-    "person_id": null
+    "person_id": 67717
   },
   "BAFTA|Best Direction|2012|tinker tailor soldier spy": {
     "person_name": "Tomas Alfredson",
-    "person_id": null
+    "person_id": 74396
   },
   "BAFTA|Best Direction|2012|we need to talk about kevin": {
     "person_name": "Lynne Ramsay",
-    "person_id": null
+    "person_id": 83287
   },
   "BAFTA|Best Director|2013|amour": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "BAFTA|Best Director|2013|argo": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "BAFTA|Best Director|2013|django unchained": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "BAFTA|Best Director|2013|life of pi": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "BAFTA|Best Director|2013|zero dark thirty": {
     "person_name": "Kathryn Bigelow",
-    "person_id": null
+    "person_id": 14392
   },
   "BAFTA|Best Director|2014|12 years a slave": {
     "person_name": "Steve McQueen",
-    "person_id": null
+    "person_id": 13565
   },
   "BAFTA|Best Director|2014|american hustle": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "BAFTA|Best Director|2014|captain phillips": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "BAFTA|Best Director|2014|gravity": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "BAFTA|Best Director|2014|the wolf of wall street": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Director|2015|birdman": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "BAFTA|Best Director|2015|boyhood": {
     "person_name": "Richard Linklater",
-    "person_id": null
+    "person_id": 564
   },
   "BAFTA|Best Director|2015|the grand budapest hotel": {
     "person_name": "Wes Anderson",
-    "person_id": null
+    "person_id": 5655
   },
   "BAFTA|Best Director|2015|the theory of everything": {
     "person_name": "James Marsh",
-    "person_id": null
+    "person_id": 76998
   },
   "BAFTA|Best Director|2015|whiplash": {
     "person_name": "Damien Chazelle",
-    "person_id": null
+    "person_id": 136495
   },
   "BAFTA|Best Director|2016|bridge of spies": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "BAFTA|Best Director|2016|carol": {
     "person_name": "Todd Haynes",
-    "person_id": null
+    "person_id": 16863
   },
   "BAFTA|Best Director|2016|the big short": {
     "person_name": "Adam McKay",
-    "person_id": null
+    "person_id": 55710
   },
   "BAFTA|Best Director|2016|the martian": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "BAFTA|Best Director|2016|the revenant": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "BAFTA|Best Director|2017|arrival": {
     "person_name": "Denis Villeneuve",
-    "person_id": null
+    "person_id": 137427
   },
   "BAFTA|Best Director|2017|i, daniel blake": {
     "person_name": "Ken Loach",
-    "person_id": null
+    "person_id": 15488
   },
   "BAFTA|Best Director|2017|la la land": {
     "person_name": "Damien Chazelle",
-    "person_id": null
+    "person_id": 136495
   },
   "BAFTA|Best Director|2017|manchester by the sea": {
     "person_name": "Kenneth Lonergan",
-    "person_id": null
+    "person_id": 30711
   },
   "BAFTA|Best Director|2017|nocturnal animals": {
     "person_name": "Tom Ford",
-    "person_id": null
+    "person_id": 120615
   },
   "BAFTA|Best Director|2018|blade runner 2049": {
     "person_name": "Denis Villeneuve",
-    "person_id": null
+    "person_id": 137427
   },
   "BAFTA|Best Director|2018|call me by your name": {
     "person_name": "Luca Guadagnino",
-    "person_id": null
+    "person_id": 78160
   },
   "BAFTA|Best Director|2018|dunkirk": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "BAFTA|Best Director|2018|the shape of water": {
     "person_name": "Guillermo del Toro",
-    "person_id": null
+    "person_id": 10828
   },
   "BAFTA|Best Director|2018|three billboards outside ebbing, missouri": {
     "person_name": "Martin McDonagh",
-    "person_id": null
+    "person_id": 54472
   },
   "BAFTA|Best Director|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Director|2019|blackkklansman": {
     "person_name": "Spike Lee",
-    "person_id": null
+    "person_id": 5281
   },
   "BAFTA|Best Director|2019|cold war": {
     "person_name": "Paweł Pawlikowski",
-    "person_id": null
+    "person_id": 64194
   },
   "BAFTA|Best Director|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "BAFTA|Best Director|2019|the favourite": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "BAFTA|Best Director|2020|1917": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "BAFTA|Best Director|2020|joker": {
     "person_name": "Todd Phillips",
-    "person_id": null
+    "person_id": 57130
   },
   "BAFTA|Best Director|2020|once upon a time in hollywood": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "BAFTA|Best Director|2020|parasite": {
     "person_name": "Bong Joon-ho",
-    "person_id": null
+    "person_id": 21684
   },
   "BAFTA|Best Director|2020|the irishman": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "BAFTA|Best Director|2021|another round": {
     "person_name": "Thomas Vinterberg",
-    "person_id": null
+    "person_id": 4453
   },
   "BAFTA|Best Director|2021|babyteeth": {
     "person_name": "Shannon Murphy",
-    "person_id": null
+    "person_id": 1457482
   },
   "BAFTA|Best Director|2021|minari": {
     "person_name": "Lee Isaac Chung",
-    "person_id": null
+    "person_id": 931952
   },
   "BAFTA|Best Director|2021|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "BAFTA|Best Director|2021|quo vadis, aida?": {
     "person_name": "Jasmila Žbanić",
-    "person_id": null
+    "person_id": 4634
   },
   "BAFTA|Best Director|2021|rocks": {
     "person_name": "Sarah Gavron",
-    "person_id": null
+    "person_id": 93288
   },
   "BAFTA|Best Director|2022|after love": {
     "person_name": "Aleem Khan",
-    "person_id": null
+    "person_id": 1361417
   },
   "BAFTA|Best Director|2022|drive my car": {
     "person_name": "Ryusuke Hamaguchi",
-    "person_id": null
+    "person_id": 1487492
   },
   "BAFTA|Best Director|2022|happening": {
     "person_name": "Audrey Diwan",
-    "person_id": null
+    "person_id": 1017274
   },
   "BAFTA|Best Director|2022|licorice pizza": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "BAFTA|Best Director|2022|the power of the dog": {
     "person_name": "Jane Campion",
-    "person_id": null
+    "person_id": 10757
   },
   "BAFTA|Best Director|2022|titane": {
     "person_name": "Julia Ducournau",
-    "person_id": null
+    "person_id": 1392433
   },
   "BAFTA|Best Director|2023|all quiet on the western front": {
     "person_name": "Edward Berger",
-    "person_id": null
+    "person_id": 221522
   },
   "BAFTA|Best Director|2023|decision to leave": {
     "person_name": "Park Chan-wook",
-    "person_id": null
+    "person_id": 10099
   },
   "BAFTA|Best Director|2023|everything everywhere all at once": {
     "person_name": "Daniel Kwan",
-    "person_id": null
+    "person_id": 1383612
   },
   "BAFTA|Best Director|2023|the banshees of inisherin": {
     "person_name": "Martin McDonagh",
-    "person_id": null
+    "person_id": 54472
   },
   "BAFTA|Best Director|2023|the woman king": {
     "person_name": "Gina Prince-Bythewood",
-    "person_id": null
+    "person_id": 71947
   },
   "BAFTA|Best Director|2023|tár": {
     "person_name": "Todd Field",
-    "person_id": null
+    "person_id": 5010
   },
   "BAFTA|Best Director|2024|all of us strangers": {
     "person_name": "Andrew Haigh",
-    "person_id": null
+    "person_id": 586002
   },
   "BAFTA|Best Director|2024|anatomy of a fall": {
     "person_name": "Justine Triet",
-    "person_id": null
+    "person_id": 1175620
   },
   "BAFTA|Best Director|2024|maestro": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Director|2024|oppenheimer": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "BAFTA|Best Director|2024|the holdovers": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "BAFTA|Best Director|2024|the zone of interest": {
     "person_name": "Jonathan Glazer",
-    "person_id": null
+    "person_id": 66728
   },
   "BAFTA|Best Director|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "BAFTA|Best Director|2025|conclave": {
     "person_name": "Edward Berger",
-    "person_id": null
+    "person_id": 221522
   },
   "BAFTA|Best Director|2025|dune: part two": {
     "person_name": "Denis Villeneuve",
-    "person_id": null
+    "person_id": 137427
   },
   "BAFTA|Best Director|2025|emilia pérez": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "BAFTA|Best Director|2025|the brutalist": {
     "person_name": "Brady Corbet",
-    "person_id": null
+    "person_id": 55493
   },
   "BAFTA|Best Director|2025|the substance": {
     "person_name": "Coralie Fargeat",
-    "person_id": null
+    "person_id": 1607016
   },
   "BAFTA|Best Director|2026|bugonia": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "BAFTA|Best Director|2026|hamnet": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "BAFTA|Best Director|2026|marty supreme": {
     "person_name": "Josh Safdie",
-    "person_id": null
+    "person_id": 129561
   },
   "BAFTA|Best Director|2026|one battle after another": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "BAFTA|Best Director|2026|sentimental value": {
     "person_name": "Joachim Trier",
-    "person_id": null
+    "person_id": 71609
   },
   "BAFTA|Best Director|2026|sinners": {
     "person_name": "Ryan Coogler",
-    "person_id": null
+    "person_id": 1056121
   },
   "BAFTA|Best Editing|2000|american beauty": {
     "person_name": "Tariq Anwar",
-    "person_id": null
+    "person_id": 8219
   },
   "BAFTA|Best Editing|2000|being john malkovich": {
     "person_name": "Eric Zumbrunnen",
-    "person_id": null
+    "person_id": 6958
   },
   "BAFTA|Best Editing|2000|the matrix": {
     "person_name": "Zach Staenberg",
-    "person_id": null
+    "person_id": 4671
   },
   "BAFTA|Best Editing|2000|the sixth sense": {
     "person_name": "Andrew Mondshein",
-    "person_id": null
+    "person_id": 5327
   },
   "BAFTA|Best Editing|2001|billy elliot": {
     "person_name": "John Wilson",
-    "person_id": null
+    "person_id": 2777256
   },
   "BAFTA|Best Editing|2001|crouching tiger, hidden dragon": {
     "person_name": "Tim Squyres",
-    "person_id": null
+    "person_id": 1635
   },
   "BAFTA|Best Editing|2001|erin brockovich": {
     "person_name": "Anne V. Coates",
-    "person_id": null
+    "person_id": 6346
   },
   "BAFTA|Best Editing|2001|gladiator": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "BAFTA|Best Editing|2001|traffic": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2002|amélie": {
     "person_name": "Hervé Schneid",
-    "person_id": null
+    "person_id": 2425
   },
   "BAFTA|Best Editing|2002|black hawk down": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "BAFTA|Best Editing|2002|moulin rouge!": {
     "person_name": "Jill Bilcock",
-    "person_id": null
+    "person_id": 3050
   },
   "BAFTA|Best Editing|2002|mulholland drive": {
     "person_name": "Mary Sweeney",
-    "person_id": null
+    "person_id": 5604
   },
   "BAFTA|Best Editing|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "John Gilbert",
-    "person_id": null
+    "person_id": 1315
   },
   "BAFTA|Best Editing|2003|chicago": {
     "person_name": "Martin Walsh",
-    "person_id": null
+    "person_id": 9154
   },
   "BAFTA|Best Editing|2003|city of god": {
     "person_name": "Daniel Rezende",
-    "person_id": null
+    "person_id": 8578
   },
   "BAFTA|Best Editing|2003|gangs of new york": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2003|the hours": {
     "person_name": "Peter Boyle",
-    "person_id": null
+    "person_id": 8307
   },
   "BAFTA|Best Editing|2003|the lord of the rings: the two towers": {
     "person_name": "Michael J. Horton",
-    "person_id": null
+    "person_id": 1376
   },
   "BAFTA|Best Editing|2004|21 grams": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2004|cold mountain": {
     "person_name": "Walter Murch",
-    "person_id": null
+    "person_id": 154
   },
   "BAFTA|Best Editing|2004|kill bill: volume 1": {
     "person_name": "Sally Menke",
-    "person_id": null
+    "person_id": 156
   },
   "BAFTA|Best Editing|2004|lost in translation": {
     "person_name": "Sarah Flack",
-    "person_id": null
+    "person_id": 1782
   },
   "BAFTA|Best Editing|2004|the lord of the rings: the return of the king": {
     "person_name": "Jamie Selkirk",
-    "person_id": null
+    "person_id": 1390
   },
   "BAFTA|Best Editing|2005|collateral": {
     "person_name": "Jim Miller",
-    "person_id": null
+    "person_id": 2053983
   },
   "BAFTA|Best Editing|2005|eternal sunshine of the spotless mind": {
     "person_name": "Valdís Óskarsdóttir",
-    "person_id": null
+    "person_id": 4475
   },
   "BAFTA|Best Editing|2005|house of flying daggers": {
     "person_name": "Long Cheng",
-    "person_id": null
+    "person_id": 17379
   },
   "BAFTA|Best Editing|2005|the aviator": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2005|vera drake": {
     "person_name": "Jim Clark",
-    "person_id": null
+    "person_id": 1346872
   },
   "BAFTA|Best Editing|2006|brokeback mountain": {
     "person_name": "Geraldine Peroni",
-    "person_id": null
+    "person_id": 1808
   },
   "BAFTA|Best Editing|2006|crash": {
     "person_name": "Hughes Winborne",
-    "person_id": null
+    "person_id": 20649
   },
   "BAFTA|Best Editing|2006|good night, and good luck": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2006|march of the penguins": {
     "person_name": "Sabine Emiliani",
-    "person_id": null
+    "person_id": 2274431
   },
   "BAFTA|Best Editing|2006|the constant gardener": {
     "person_name": "Claire Simpson",
-    "person_id": null
+    "person_id": 11880
   },
   "BAFTA|Best Editing|2007|babel": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2007|casino royale": {
     "person_name": "Stuart Baird",
-    "person_id": null
+    "person_id": 2523
   },
   "BAFTA|Best Editing|2007|the departed": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2007|the queen": {
     "person_name": "Lucia Zucchetti",
-    "person_id": null
+    "person_id": 15731
   },
   "BAFTA|Best Editing|2007|united 93": {
     "person_name": "Clare Douglas",
-    "person_id": null
+    "person_id": 59680
   },
   "BAFTA|Best Editing|2008|american gangster": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "BAFTA|Best Editing|2008|atonement": {
     "person_name": "Paul Tothill",
-    "person_id": null
+    "person_id": 36590
   },
   "BAFTA|Best Editing|2008|michael clayton": {
     "person_name": "John Gilroy",
-    "person_id": null
+    "person_id": 67810
   },
   "BAFTA|Best Editing|2008|no country for old men": {
     "person_name": "Joel Coen",
-    "person_id": null
+    "person_id": 1223
   },
   "BAFTA|Best Editing|2008|the bourne ultimatum": {
     "person_name": "Christopher Rouse",
-    "person_id": null
+    "person_id": 29405
   },
   "BAFTA|Best Editing|2009|changeling": {
     "person_name": "Joel Cox",
-    "person_id": null
+    "person_id": 384
   },
   "BAFTA|Best Editing|2009|frost/nixon": {
     "person_name": "Mike Hill",
-    "person_id": null
+    "person_id": 1674252
   },
   "BAFTA|Best Editing|2009|in bruges": {
     "person_name": "Jon Gregory",
-    "person_id": null
+    "person_id": 10725
   },
   "BAFTA|Best Editing|2009|slumdog millionaire": {
     "person_name": "Chris Dickens",
-    "person_id": null
+    "person_id": 11114
   },
   "BAFTA|Best Editing|2009|the curious case of benjamin button": {
     "person_name": "Kirk Baxter",
-    "person_id": null
+    "person_id": 964726
   },
   "BAFTA|Best Editing|2009|the dark knight": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "BAFTA|Best Editing|2010|avatar": {
     "person_name": "Stephen E. Rivkin",
-    "person_id": null
+    "person_id": 1721
   },
   "BAFTA|Best Editing|2010|district 9": {
     "person_name": "Julian Clarke",
-    "person_id": null
+    "person_id": 62907
   },
   "BAFTA|Best Editing|2010|inglourious basterds": {
     "person_name": "Sally Menke",
-    "person_id": null
+    "person_id": 156
   },
   "BAFTA|Best Editing|2010|the hurt locker": {
     "person_name": "Bob Murawski",
-    "person_id": null
+    "person_id": 7712
   },
   "BAFTA|Best Editing|2010|up in the air": {
     "person_name": "Dana E. Glauberman",
-    "person_id": null
+    "person_id": 52450
   },
   "BAFTA|Best Editing|2011|127 hours": {
     "person_name": "Jon Harris",
-    "person_id": null
+    "person_id": 2718659
   },
   "BAFTA|Best Editing|2011|black swan": {
     "person_name": "Andrew Weisblum",
-    "person_id": null
+    "person_id": 38805
   },
   "BAFTA|Best Editing|2011|inception": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "BAFTA|Best Editing|2011|the king's speech": {
     "person_name": "Tariq Anwar",
-    "person_id": null
+    "person_id": 8219
   },
   "BAFTA|Best Editing|2011|the social network": {
     "person_name": "Angus Wall",
-    "person_id": null
+    "person_id": 17455
   },
   "BAFTA|Best Editing|2012|drive": {
     "person_name": "Mat Newman",
-    "person_id": null
+    "person_id": 966286
   },
   "BAFTA|Best Editing|2012|hugo": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2012|senna": {
     "person_name": "Gregers Sall",
-    "person_id": null
+    "person_id": 1607188
   },
   "BAFTA|Best Editing|2012|the artist": {
     "person_name": "Anne-Sophie Bion",
-    "person_id": null
+    "person_id": 937652
   },
   "BAFTA|Best Editing|2012|tinker tailor soldier spy": {
     "person_name": "Dino Jonsater",
-    "person_id": null
+    "person_id": 74403
   },
   "BAFTA|Best Editing|2013|argo": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "BAFTA|Best Editing|2013|django unchained": {
     "person_name": "Fred Raskin",
-    "person_id": null
+    "person_id": 58194
   },
   "BAFTA|Best Editing|2013|life of pi": {
     "person_name": "Tim Squyres",
-    "person_id": null
+    "person_id": 1635
   },
   "BAFTA|Best Editing|2013|skyfall": {
     "person_name": "Stuart Baird",
-    "person_id": null
+    "person_id": 2523
   },
   "BAFTA|Best Editing|2013|zero dark thirty": {
     "person_name": "Dylan Tichenor",
-    "person_id": null
+    "person_id": 1809
   },
   "BAFTA|Best Editing|2014|12 years a slave": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "BAFTA|Best Editing|2014|captain phillips": {
     "person_name": "Christopher Rouse",
-    "person_id": null
+    "person_id": 29405
   },
   "BAFTA|Best Editing|2014|gravity": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "BAFTA|Best Editing|2014|rush": {
     "person_name": "Daniel P. Hanley",
-    "person_id": null
+    "person_id": 6189
   },
   "BAFTA|Best Editing|2014|the wolf of wall street": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2015|birdman": {
     "person_name": "Douglas Crise",
-    "person_id": null
+    "person_id": 17115
   },
   "BAFTA|Best Editing|2015|nightcrawler": {
     "person_name": "John Gilroy",
-    "person_id": null
+    "person_id": 67810
   },
   "BAFTA|Best Editing|2015|the grand budapest hotel": {
     "person_name": "Barney Pilling",
-    "person_id": null
+    "person_id": 71534
   },
   "BAFTA|Best Editing|2015|the imitation game": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "BAFTA|Best Editing|2015|the theory of everything": {
     "person_name": "Jinx Godfrey",
-    "person_id": null
+    "person_id": 1001393
   },
   "BAFTA|Best Editing|2015|whiplash": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "BAFTA|Best Editing|2016|bridge of spies": {
     "person_name": "Michael Kahn",
-    "person_id": null
+    "person_id": 493
   },
   "BAFTA|Best Editing|2016|mad max: fury road": {
     "person_name": "Margaret Sixel",
-    "person_id": null
+    "person_id": 58067
   },
   "BAFTA|Best Editing|2016|the big short": {
     "person_name": "Hank Corwin",
-    "person_id": null
+    "person_id": 3190
   },
   "BAFTA|Best Editing|2016|the martian": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "BAFTA|Best Editing|2016|the revenant": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2017|arrival": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "BAFTA|Best Editing|2017|hacksaw ridge": {
     "person_name": "John Gilbert",
-    "person_id": null
+    "person_id": 1315
   },
   "BAFTA|Best Editing|2017|la la land": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "BAFTA|Best Editing|2017|manchester by the sea": {
     "person_name": "Jennifer Lame",
-    "person_id": null
+    "person_id": 1113553
   },
   "BAFTA|Best Editing|2017|nocturnal animals": {
     "person_name": "Joan Sobel",
-    "person_id": null
+    "person_id": 59473
   },
   "BAFTA|Best Editing|2018|baby driver": {
     "person_name": "Jonathan Amos",
-    "person_id": null
+    "person_id": 969704
   },
   "BAFTA|Best Editing|2018|blade runner 2049": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "BAFTA|Best Editing|2018|dunkirk": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "BAFTA|Best Editing|2018|the shape of water": {
     "person_name": "Sidney Wolinsky",
-    "person_id": null
+    "person_id": 22483
   },
   "BAFTA|Best Editing|2018|three billboards outside ebbing, missouri": {
     "person_name": "Jon Gregory",
-    "person_id": null
+    "person_id": 10725
   },
   "BAFTA|Best Editing|2019|bohemian rhapsody": {
     "person_name": "John Ottman",
-    "person_id": null
+    "person_id": 9039
   },
   "BAFTA|Best Editing|2019|first man": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "BAFTA|Best Editing|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "BAFTA|Best Editing|2019|the favourite": {
     "person_name": "Yorgos Mavropsaridis",
-    "person_id": null
+    "person_id": 3361245
   },
   "BAFTA|Best Editing|2019|vice": {
     "person_name": "Hank Corwin",
-    "person_id": null
+    "person_id": 3190
   },
   "BAFTA|Best Editing|2020|ford v ferrari": {
     "person_name": "Andrew Buckland",
-    "person_id": null
+    "person_id": 1533060
   },
   "BAFTA|Best Editing|2020|jojo rabbit": {
     "person_name": "Tom Eagles",
-    "person_id": null
+    "person_id": 1409489
   },
   "BAFTA|Best Editing|2020|joker": {
     "person_name": "Jeff Groth",
-    "person_id": null
+    "person_id": 961610
   },
   "BAFTA|Best Editing|2020|once upon a time in hollywood": {
     "person_name": "Fred Raskin",
-    "person_id": null
+    "person_id": 58194
   },
   "BAFTA|Best Editing|2020|the irishman": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2021|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "BAFTA|Best Editing|2021|promising young woman": {
     "person_name": "Frédéric Thoraval",
-    "person_id": null
+    "person_id": 62434
   },
   "BAFTA|Best Editing|2021|sound of metal": {
     "person_name": "Mikkel E.G. Nielsen",
-    "person_id": null
+    "person_id": 64954
   },
   "BAFTA|Best Editing|2021|the father": {
     "person_name": "Yorgos Lamprinos",
-    "person_id": null
+    "person_id": 1273514
   },
   "BAFTA|Best Editing|2021|the trial of the chicago 7": {
     "person_name": "Alan Baumgarten",
-    "person_id": null
+    "person_id": 10393
   },
   "BAFTA|Best Editing|2022|belfast": {
     "person_name": "Úna Ní Dhonghaíle",
-    "person_id": null
+    "person_id": 94469
   },
   "BAFTA|Best Editing|2022|dune": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "BAFTA|Best Editing|2022|licorice pizza": {
     "person_name": "Andy Jurgensen",
-    "person_id": null
+    "person_id": 1517940
   },
   "BAFTA|Best Editing|2022|no time to die": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "BAFTA|Best Editing|2022|summer of soul (...or, when the revolution could not be televised)": {
     "person_name": "Joshua L. Pearson",
-    "person_id": null
+    "person_id": 1416398
   },
   "BAFTA|Best Editing|2023|all quiet on the western front": {
     "person_name": "Sven Budelmann",
-    "person_id": null
+    "person_id": 1519283
   },
   "BAFTA|Best Editing|2023|elvis": {
     "person_name": "Jonathan Redmond",
-    "person_id": null
+    "person_id": 2001193
   },
   "BAFTA|Best Editing|2023|everything everywhere all at once": {
     "person_name": "Paul Rogers",
-    "person_id": null
+    "person_id": 42840
   },
   "BAFTA|Best Editing|2023|the banshees of inisherin": {
     "person_name": "Mikkel E. G. Nielsen",
-    "person_id": null
+    "person_id": 64954
   },
   "BAFTA|Best Editing|2023|top gun: maverick": {
     "person_name": "Eddie Hamilton",
-    "person_id": null
+    "person_id": 49809
   },
   "BAFTA|Best Editing|2024|anatomy of a fall": {
     "person_name": "Laurent Sénéchal",
-    "person_id": null
+    "person_id": 1616357
   },
   "BAFTA|Best Editing|2024|killers of the flower moon": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "BAFTA|Best Editing|2024|oppenheimer": {
     "person_name": "Jennifer Lame",
-    "person_id": null
+    "person_id": 1113553
   },
   "BAFTA|Best Editing|2024|poor things": {
     "person_name": "Yorgos Mavropsaridis",
-    "person_id": null
+    "person_id": 3361245
   },
   "BAFTA|Best Editing|2024|the zone of interest": {
     "person_name": "Paul Watts",
-    "person_id": null
+    "person_id": 2649441
   },
   "BAFTA|Best Editing|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "BAFTA|Best Editing|2025|conclave": {
     "person_name": "Nick Emerson",
-    "person_id": null
+    "person_id": 1155165
   },
   "BAFTA|Best Editing|2025|dune: part two": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "BAFTA|Best Editing|2025|emilia pérez": {
     "person_name": "Juliette Welfling",
-    "person_id": null
+    "person_id": 4280
   },
   "BAFTA|Best Editing|2025|kneecap": {
     "person_name": "Julian Ulrichs",
-    "person_id": null
+    "person_id": 1539218
   },
   "BAFTA|Best Editing|2026|a house of dynamite": {
     "person_name": "Kirk Baxter",
-    "person_id": null
+    "person_id": 964726
   },
   "BAFTA|Best Editing|2026|f1": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "BAFTA|Best Editing|2026|marty supreme": {
     "person_name": "Ronald Bronstein",
-    "person_id": null
+    "person_id": 227565
   },
   "BAFTA|Best Editing|2026|one battle after another": {
     "person_name": "Andy Jurgensen",
-    "person_id": null
+    "person_id": 1517940
   },
   "BAFTA|Best Editing|2026|sinners": {
     "person_name": "Michael P. Shawver",
-    "person_id": null
+    "person_id": 1141734
   },
   "BAFTA|Best Original Music|2000|american beauty": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Music|2000|buena vista social club": {
     "person_name": "Ry Cooder",
-    "person_id": null
+    "person_id": 6918
   },
   "BAFTA|Best Original Music|2000|the end of the affair": {
     "person_name": "Michael Nyman",
-    "person_id": null
+    "person_id": 10759
   },
   "BAFTA|Best Original Music|2000|the talented mr. ripley": {
     "person_name": "Gabriel Yared",
-    "person_id": null
+    "person_id": 5488
   },
   "BAFTA|Best Original Music|2001|almost famous": {
     "person_name": "Nancy Wilson",
-    "person_id": null
+    "person_id": 11656
   },
   "BAFTA|Best Original Music|2001|billy elliot": {
     "person_name": "Stephen Warbeck",
-    "person_id": null
+    "person_id": 469
   },
   "BAFTA|Best Original Music|2001|crouching tiger, hidden dragon": {
     "person_name": "Tan Dun",
-    "person_id": null
+    "person_id": 1360
   },
   "BAFTA|Best Original Music|2001|gladiator": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Music|2001|o brother, where art thou?": {
     "person_name": "T Bone Burnett",
-    "person_id": null
+    "person_id": 1483
   },
   "BAFTA|Best Original Music|2002|amélie": {
     "person_name": "Yann Tiersen",
-    "person_id": null
+    "person_id": 2422
   },
   "BAFTA|Best Original Music|2002|moulin rouge!": {
     "person_name": "Craig Armstrong",
-    "person_id": null
+    "person_id": 7045
   },
   "BAFTA|Best Original Music|2002|mulholland drive": {
     "person_name": "Angelo Badalamenti",
-    "person_id": null
+    "person_id": 5628
   },
   "BAFTA|Best Original Music|2002|shrek": {
     "person_name": "Harry Gregson-Williams",
-    "person_id": null
+    "person_id": 5553
   },
   "BAFTA|Best Original Music|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "BAFTA|Best Original Music|2003|catch me if you can": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Music|2003|chicago": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "BAFTA|Best Original Music|2003|gangs of new york": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "BAFTA|Best Original Music|2003|the hours": {
     "person_name": "Philip Glass",
-    "person_id": null
+    "person_id": 1551
   },
   "BAFTA|Best Original Music|2003|the pianist": {
     "person_name": "Wojciech Kilar",
-    "person_id": null
+    "person_id": 1400
   },
   "BAFTA|Best Original Music|2004|cold mountain": {
     "person_name": "Gabriel Yared",
-    "person_id": null
+    "person_id": 5488
   },
   "BAFTA|Best Original Music|2004|girl with a pearl earring": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2004|kill bill: volume 1": {
     "person_name": "The RZA",
-    "person_id": null
+    "person_id": 150
   },
   "BAFTA|Best Original Music|2004|lost in translation": {
     "person_name": "Kevin Shields",
-    "person_id": null
+    "person_id": 1779
   },
   "BAFTA|Best Original Music|2004|the lord of the rings: the return of the king": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "BAFTA|Best Original Music|2005|finding neverland": {
     "person_name": "Jan A. P. Kaczmarek",
-    "person_id": null
+    "person_id": 22680
   },
   "BAFTA|Best Original Music|2005|ray": {
     "person_name": "Craig Armstrong",
-    "person_id": null
+    "person_id": 7045
   },
   "BAFTA|Best Original Music|2005|the aviator": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "BAFTA|Best Original Music|2005|the chorus": {
     "person_name": "Bruno Coulais",
-    "person_id": null
+    "person_id": 35073
   },
   "BAFTA|Best Original Music|2005|the motorcycle diaries": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "BAFTA|Best Original Music|2006|brokeback mountain": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "BAFTA|Best Original Music|2006|memoirs of a geisha": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Music|2006|mrs henderson presents": {
     "person_name": "George Fenton",
-    "person_id": null
+    "person_id": 1528
   },
   "BAFTA|Best Original Music|2006|the constant gardener": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "BAFTA|Best Original Music|2006|walk the line": {
     "person_name": "T Bone Burnett",
-    "person_id": null
+    "person_id": 1483
   },
   "BAFTA|Best Original Music|2007|babel": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "BAFTA|Best Original Music|2007|casino royale": {
     "person_name": "David Arnold",
-    "person_id": null
+    "person_id": 2848312
   },
   "BAFTA|Best Original Music|2007|dreamgirls": {
     "person_name": "Henry Krieger",
-    "person_id": null
+    "person_id": 15571
   },
   "BAFTA|Best Original Music|2007|happy feet": {
     "person_name": "John Powell",
-    "person_id": null
+    "person_id": 11098
   },
   "BAFTA|Best Original Music|2007|the queen": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2008|american gangster": {
     "person_name": "Marc Streitenfeld",
-    "person_id": null
+    "person_id": 63421
   },
   "BAFTA|Best Original Music|2008|atonement": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "BAFTA|Best Original Music|2008|la vie en rose": {
     "person_name": "Christopher Gunning",
-    "person_id": null
+    "person_id": 16929
   },
   "BAFTA|Best Original Music|2008|the kite runner": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "BAFTA|Best Original Music|2008|there will be blood": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "BAFTA|Best Original Music|2009|mamma mia!": {
     "person_name": "Benny Andersson",
-    "person_id": null
+    "person_id": 45799
   },
   "BAFTA|Best Original Music|2009|slumdog millionaire": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "BAFTA|Best Original Music|2009|the curious case of benjamin button": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2009|the dark knight": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Music|2009|wall-e": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Music|2010|avatar": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "BAFTA|Best Original Music|2010|crazy heart": {
     "person_name": "T Bone Burnett",
-    "person_id": null
+    "person_id": 1483
   },
   "BAFTA|Best Original Music|2010|fantastic mr. fox": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2010|sex & drugs & rock & roll": {
     "person_name": "Chaz Jankel",
-    "person_id": null
+    "person_id": 58864
   },
   "BAFTA|Best Original Music|2010|up": {
     "person_name": "Michael Giacchino",
-    "person_id": null
+    "person_id": 15347
   },
   "BAFTA|Best Original Music|2011|127 hours": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "BAFTA|Best Original Music|2011|alice in wonderland": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "BAFTA|Best Original Music|2011|how to train your dragon": {
     "person_name": "John Powell",
-    "person_id": null
+    "person_id": 11098
   },
   "BAFTA|Best Original Music|2011|inception": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Music|2011|the king's speech": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2012|hugo": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "BAFTA|Best Original Music|2012|the artist": {
     "person_name": "Ludovic Bource",
-    "person_id": null
+    "person_id": 472101
   },
   "BAFTA|Best Original Music|2012|the girl with the dragon tattoo": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "BAFTA|Best Original Music|2012|tinker tailor soldier spy": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "BAFTA|Best Original Music|2012|war horse": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Music|2013|anna karenina": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "BAFTA|Best Original Music|2013|argo": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Music|2013|life of pi": {
     "person_name": "Mychael Danna",
-    "person_id": null
+    "person_id": 5359
   },
   "BAFTA|Best Original Music|2013|lincoln": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Music|2013|skyfall": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Music|2014|12 years a slave": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Music|2014|captain phillips": {
     "person_name": "Henry Jackman",
-    "person_id": null
+    "person_id": 227440
   },
   "BAFTA|Best Original Music|2014|gravity": {
     "person_name": "Steven Price",
-    "person_id": null
+    "person_id": 16368
   },
   "BAFTA|Best Original Music|2014|saving mr. banks": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Music|2014|the book thief": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Score|2015|birdman": {
     "person_name": "Antonio Sánchez",
-    "person_id": null
+    "person_id": 1167113
   },
   "BAFTA|Best Original Score|2015|interstellar": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Score|2015|the grand budapest hotel": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2015|the theory of everything": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "BAFTA|Best Original Score|2015|under the skin": {
     "person_name": "Micachu",
-    "person_id": null
+    "person_id": 1341726
   },
   "BAFTA|Best Original Score|2016|bridge of spies": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Score|2016|sicario": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "BAFTA|Best Original Score|2016|star wars: the force awakens": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Score|2016|the hateful eight": {
     "person_name": "Ennio Morricone",
-    "person_id": null
+    "person_id": 1259
   },
   "BAFTA|Best Original Score|2016|the revenant": {
     "person_name": "Ryuichi Sakamoto",
-    "person_id": null
+    "person_id": 3394338
   },
   "BAFTA|Best Original Score|2017|arrival": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "BAFTA|Best Original Score|2017|jackie": {
     "person_name": "Micachu",
-    "person_id": null
+    "person_id": 1341726
   },
   "BAFTA|Best Original Score|2017|la la land": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "BAFTA|Best Original Score|2017|lion": {
     "person_name": "Dustin O'Halloran",
-    "person_id": null
+    "person_id": 233130
   },
   "BAFTA|Best Original Score|2017|nocturnal animals": {
     "person_name": "Abel Korzeniowski",
-    "person_id": null
+    "person_id": 558016
   },
   "BAFTA|Best Original Score|2018|blade runner 2049": {
     "person_name": "Benjamin Wallfisch",
-    "person_id": null
+    "person_id": 40825
   },
   "BAFTA|Best Original Score|2018|darkest hour": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "BAFTA|Best Original Score|2018|dunkirk": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Score|2018|phantom thread": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "BAFTA|Best Original Score|2018|the shape of water": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "BAFTA|Best Original Score|2019|blackkklansman": {
     "person_name": "Terence Blanchard",
-    "person_id": null
+    "person_id": 5287
   },
   "BAFTA|Best Original Score|2019|if beale street could talk": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "BAFTA|Best Original Score|2019|isle of dogs": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2019|mary poppins returns": {
     "person_name": "Marc Shaiman",
-    "person_id": null
+    "person_id": 9251
   },
   "BAFTA|Best Original Score|2020|1917": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "BAFTA|Best Original Score|2020|jojo rabbit": {
     "person_name": "Michael Giacchino",
-    "person_id": null
+    "person_id": 15347
   },
   "BAFTA|Best Original Score|2020|joker": {
     "person_name": "Hildur Guðnadóttir",
-    "person_id": null
+    "person_id": 1178828
   },
   "BAFTA|Best Original Score|2020|little women": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2020|star wars: the rise of skywalker": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "BAFTA|Best Original Score|2021|mank": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "BAFTA|Best Original Score|2021|minari": {
     "person_name": "Emile Mosseri",
-    "person_id": null
+    "person_id": 2188183
   },
   "BAFTA|Best Original Score|2021|news of the world": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "BAFTA|Best Original Score|2021|promising young woman": {
     "person_name": "Anthony Willis",
-    "person_id": null
+    "person_id": 2414062
   },
   "BAFTA|Best Original Score|2021|soul": {
     "person_name": "Jon Batiste",
-    "person_id": null
+    "person_id": 1513968
   },
   "BAFTA|Best Original Score|2022|being the ricardos": {
     "person_name": "Daniel Pemberton",
-    "person_id": null
+    "person_id": 582922
   },
   "BAFTA|Best Original Score|2022|don't look up": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "BAFTA|Best Original Score|2022|dune": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "BAFTA|Best Original Score|2022|the french dispatch": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2022|the power of the dog": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "BAFTA|Best Original Score|2023|all quiet on the western front": {
     "person_name": "Volker Bertelmann",
-    "person_id": null
+    "person_id": 1023809
   },
   "BAFTA|Best Original Score|2023|babylon": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "BAFTA|Best Original Score|2023|everything everywhere all at once": {
     "person_name": "Son Lux",
-    "person_id": null
+    "person_id": 3555893
   },
   "BAFTA|Best Original Score|2023|guillermo del toro's pinocchio": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2023|the banshees of inisherin": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "BAFTA|Best Original Score|2024|killers of the flower moon": {
     "person_name": "Robbie Robertson",
-    "person_id": null
+    "person_id": 72861
   },
   "BAFTA|Best Original Score|2024|oppenheimer": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "BAFTA|Best Original Score|2024|poor things": {
     "person_name": "Jerskin Fendrix",
-    "person_id": null
+    "person_id": 4091704
   },
   "BAFTA|Best Original Score|2024|saltburn": {
     "person_name": "Anthony Willis",
-    "person_id": null
+    "person_id": 2414062
   },
   "BAFTA|Best Original Score|2024|spider-man: across the spider-verse": {
     "person_name": "Daniel Pemberton",
-    "person_id": null
+    "person_id": 582922
   },
   "BAFTA|Best Original Score|2025|conclave": {
     "person_name": "Volker Bertelmann",
-    "person_id": null
+    "person_id": 1023809
   },
   "BAFTA|Best Original Score|2025|emilia pérez": {
     "person_name": "Camille",
-    "person_id": null
+    "person_id": 81106
   },
   "BAFTA|Best Original Score|2025|nosferatu": {
     "person_name": "Robin Carolan",
-    "person_id": null
+    "person_id": 3062522
   },
   "BAFTA|Best Original Score|2025|the brutalist": {
     "person_name": "Daniel Blumberg",
-    "person_id": null
+    "person_id": 1711289
   },
   "BAFTA|Best Original Score|2025|the wild robot": {
     "person_name": "Kris Bowers",
-    "person_id": null
+    "person_id": 1802871
   },
   "BAFTA|Best Original Score|2026|bugonia": {
     "person_name": "Jerskin Fendrix",
-    "person_id": null
+    "person_id": 4091704
   },
   "BAFTA|Best Original Score|2026|frankenstein": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "BAFTA|Best Original Score|2026|hamnet": {
     "person_name": "Max Richter",
-    "person_id": null
+    "person_id": 46266
   },
   "BAFTA|Best Original Score|2026|one battle after another": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "BAFTA|Best Original Score|2026|sinners": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "Berlin|Alfred Bauer Prize|2000|boy's choir": {
     "person_name": "Akira Ogata",
-    "person_id": null
+    "person_id": 5055769
   },
   "Berlin|Alfred Bauer Prize|2001|la ciénaga": {
     "person_name": "Lucrecia Martel",
-    "person_id": null
+    "person_id": 56208
   },
   "Berlin|Alfred Bauer Prize|2002|baader": {
     "person_name": "Christopher Roth",
-    "person_id": null
+    "person_id": 1630117
   },
   "Berlin|Alfred Bauer Prize|2006|the minder": {
     "person_name": "Rodrigo Moreno",
-    "person_id": null
+    "person_id": 1022649
   },
   "Berlin|Alfred Bauer Prize|2007|i'm a cyborg, but that's ok": {
     "person_name": "Park Chan-wook",
-    "person_id": null
+    "person_id": 10099
   },
   "Berlin|Alfred Bauer Prize|2008|lake tahoe": {
     "person_name": "Fernando Eimbcke",
-    "person_id": null
+    "person_id": 112132
   },
   "Berlin|Alfred Bauer Prize|2009|giant": {
     "person_name": "Adrián Biniez",
-    "person_id": null
+    "person_id": 548836
   },
   "Berlin|Alfred Bauer Prize|2009|tatarak": {
     "person_name": "Andrzej Wajda",
-    "person_id": null
+    "person_id": 2801
   },
   "Berlin|Alfred Bauer Prize|2010|if i want to whistle, i whistle": {
     "person_name": "Florin Șerban",
-    "person_id": null
+    "person_id": 125281
   },
   "Berlin|Alfred Bauer Prize|2011|if not us, who?": {
     "person_name": "Andres Veiel",
-    "person_id": null
+    "person_id": 68002
   },
   "Berlin|Alfred Bauer Prize|2012|tabu": {
     "person_name": "Miguel Gomes",
-    "person_id": null
+    "person_id": 150512
   },
   "Berlin|Alfred Bauer Prize|2013|vic and flo saw a bear": {
     "person_name": "Denis Côté",
-    "person_id": null
+    "person_id": 236421
   },
   "Berlin|Alfred Bauer Prize|2014|life of riley": {
     "person_name": "Alain Resnais",
-    "person_id": null
+    "person_id": 11983
   },
   "Berlin|Alfred Bauer Prize|2015|ixcanul": {
     "person_name": "Jayro Bustamante",
-    "person_id": null
+    "person_id": 1416379
   },
   "Berlin|Alfred Bauer Prize|2016|a lullaby to the sorrowful mystery": {
     "person_name": "Lav Diaz",
-    "person_id": null
+    "person_id": 1051381
   },
   "Berlin|Alfred Bauer Prize|2017|spoor": {
     "person_name": "Agnieszka Holland",
-    "person_id": null
+    "person_id": 1128
   },
   "Berlin|Alfred Bauer Prize|2018|the heiresses": {
     "person_name": "Marcelo Martinessi",
-    "person_id": null
+    "person_id": 1623016
   },
   "Berlin|Alfred Bauer Prize|2019|system crasher": {
     "person_name": "Nora Fingscheidt",
-    "person_id": null
+    "person_id": 1304847
   },
   "Berlin|Best First Feature Award|2006|en soap": {
     "person_name": "Pernille Fischer Christensen",
-    "person_id": null
+    "person_id": 110601
   },
   "Berlin|Best First Feature Award|2014|güeros": {
     "person_name": "Alonso Ruizpalacios",
-    "person_id": null
+    "person_id": 1305360
   },
   "Berlin|Best First Feature Award|2015|600 miles": {
     "person_name": "Gabriel Ripstein",
-    "person_id": null
+    "person_id": 1223306
   },
   "Berlin|Best First Feature Award|2016|hedi": {
     "person_name": "Mohamed Ben Attia",
-    "person_id": null
+    "person_id": 1566818
   },
   "Berlin|Best First Feature Award|2017|estiu 1993": {
     "person_name": "Carla Simón",
-    "person_id": null
+    "person_id": 1748697
   },
   "Berlin|Best First Feature Award|2018|touch me not": {
     "person_name": "Adina Pintilie",
-    "person_id": null
+    "person_id": 1961679
   },
   "Berlin|Best First Feature Award|2020|los conductos": {
     "person_name": "Camilo Restrepo",
-    "person_id": null
+    "person_id": 1585802
   },
   "Berlin|Best First Feature Award|2022|sonne": {
     "person_name": "Kurdwin Ayub",
-    "person_id": null
+    "person_id": 1685215
   },
   "Berlin|Best First Feature Award|2023|the klezmer project": {
     "person_name": "Leandro Koch",
-    "person_id": null
+    "person_id": 2774251
   },
   "Berlin|Best First Feature Award|2024|cu li never cries": {
     "person_name": "Phạm Ngọc Lân",
-    "person_id": null
+    "person_id": 1627700
   },
   "Berlin|Best First Feature Award|2025|the devil smokes (and saves the burnt matches in the same box)": {
     "person_name": "Ernesto Martínez Bucio",
-    "person_id": null
+    "person_id": 1303712
   },
   "Berlin|Golden Bear|2000|magnolia": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Berlin|Golden Bear|2001|intimacy": {
     "person_name": "Patrice Chéreau",
-    "person_id": null
+    "person_id": 23724
   },
   "Berlin|Golden Bear|2002|bloody sunday": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "Berlin|Golden Bear|2002|spirited away": {
     "person_name": "Hayao Miyazaki",
-    "person_id": null
+    "person_id": 608
   },
   "Berlin|Golden Bear|2003|in this world": {
     "person_name": "Michael Winterbottom",
-    "person_id": null
+    "person_id": 172
   },
   "Berlin|Golden Bear|2004|head-on": {
     "person_name": "Fatih Akın",
-    "person_id": null
+    "person_id": 5125
   },
   "Berlin|Golden Bear|2005|u-carmen ekhayelitsha": {
     "person_name": "Mark Dornford-May",
-    "person_id": null
+    "person_id": 587860
   },
   "Berlin|Golden Bear|2006|grbavica: the land of my dreams": {
     "person_name": "Jasmila Žbanić",
-    "person_id": null
+    "person_id": 4634
   },
   "Berlin|Golden Bear|2007|tuya's marriage": {
     "person_name": "Wang Quan'an",
-    "person_id": null
+    "person_id": 27073
   },
   "Berlin|Golden Bear|2008|elite squad": {
     "person_name": "José Padilha",
-    "person_id": null
+    "person_id": 52576
   },
   "Berlin|Golden Bear|2009|the milk of sorrow": {
     "person_name": "Claudia Llosa",
-    "person_id": null
+    "person_id": 101399
   },
   "Berlin|Golden Bear|2010|bal": {
     "person_name": "Semih Kaplanoğlu",
-    "person_id": null
+    "person_id": 130402
   },
   "Berlin|Golden Bear|2011|a separation": {
     "person_name": "Asghar Farhadi",
-    "person_id": null
+    "person_id": 229931
   },
   "Berlin|Golden Bear|2012|caesar must die": {
-    "person_name": "Paolo and Vittorio Taviani",
-    "person_id": null
+    "person_name": "Paolo",
+    "person_id": 27384
   },
   "Berlin|Golden Bear|2013|child's pose": {
     "person_name": "Călin Peter Netzer",
-    "person_id": null
+    "person_id": 1137536
   },
   "Berlin|Golden Bear|2014|black coal, thin ice": {
     "person_name": "Diao Yinan",
-    "person_id": null
+    "person_id": 123552
   },
   "Berlin|Golden Bear|2015|taxi": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "Berlin|Golden Bear|2016|fire at sea": {
     "person_name": "Gianfranco Rosi",
-    "person_id": null
+    "person_id": 224452
   },
   "Berlin|Golden Bear|2017|on body and soul": {
     "person_name": "Ildikó Enyedi",
-    "person_id": null
+    "person_id": 1059880
   },
   "Berlin|Golden Bear|2018|touch me not": {
     "person_name": "Adina Pintilie",
-    "person_id": null
+    "person_id": 1961679
   },
   "Berlin|Golden Bear|2019|synonyms": {
     "person_name": "Nadav Lapid",
-    "person_id": null
+    "person_id": 1011135
   },
   "Berlin|Golden Bear|2020|there is no evil": {
     "person_name": "Mohammad Rasoulof",
-    "person_id": null
+    "person_id": 935123
   },
   "Berlin|Golden Bear|2021|bad luck banging or loony porn": {
     "person_name": "Radu Jude",
-    "person_id": null
+    "person_id": 588822
   },
   "Berlin|Golden Bear|2022|alcarràs": {
     "person_name": "Carla Simón",
-    "person_id": null
+    "person_id": 1748697
   },
   "Berlin|Golden Bear|2023|on the adamant": {
     "person_name": "Nicolas Philibert",
-    "person_id": null
+    "person_id": 41788
   },
   "Berlin|Golden Bear|2024|dahomey": {
     "person_name": "Mati Diop",
-    "person_id": null
+    "person_id": 136168
   },
   "Berlin|Golden Bear|2025|dreams (sex love)": {
     "person_name": "Dag Johan Haugerud",
-    "person_id": null
+    "person_id": 1097147
   },
   "Berlin|Silver Bear Grand Jury Prize|2000|the road home": {
     "person_name": "Zhang Yimou",
-    "person_id": null
+    "person_id": 607
   },
   "Berlin|Silver Bear Grand Jury Prize|2001|beijing bicycle": {
     "person_name": "Wang Xiaoshuai",
-    "person_id": null
+    "person_id": 1016305
   },
   "Berlin|Silver Bear Grand Jury Prize|2002|grill point": {
     "person_name": "Andreas Dresen",
-    "person_id": null
+    "person_id": 4617
   },
   "Berlin|Silver Bear Grand Jury Prize|2003|adaptation": {
     "person_name": "Spike Jonze",
-    "person_id": null
+    "person_id": 5953
   },
   "Berlin|Silver Bear Grand Jury Prize|2004|lost embrace": {
     "person_name": "Daniel Burman",
-    "person_id": null
+    "person_id": 584335
   },
   "Berlin|Silver Bear Grand Jury Prize|2005|peacock": {
     "person_name": "Gu Changwei",
-    "person_id": null
+    "person_id": 66169
   },
   "Berlin|Silver Bear Grand Jury Prize|2006|en soap": {
     "person_name": "Pernille Fischer Christensen",
-    "person_id": null
+    "person_id": 110601
   },
   "Berlin|Silver Bear Grand Jury Prize|2006|offside": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "Berlin|Silver Bear Grand Jury Prize|2007|the other": {
     "person_name": "Ariel Rotter",
-    "person_id": null
+    "person_id": 583125
   },
   "Berlin|Silver Bear Grand Jury Prize|2008|standard operating procedure": {
     "person_name": "Errol Morris",
-    "person_id": null
+    "person_id": 18533
   },
   "Berlin|Silver Bear Grand Jury Prize|2009|everyone else": {
     "person_name": "Maren Ade",
-    "person_id": null
+    "person_id": 40476
   },
   "Berlin|Silver Bear Grand Jury Prize|2009|giant": {
     "person_name": "Adrián Biniez",
-    "person_id": null
+    "person_id": 548836
   },
   "Berlin|Silver Bear Grand Jury Prize|2010|if i want to whistle, i whistle": {
     "person_name": "Florin Șerban",
-    "person_id": null
+    "person_id": 125281
   },
   "Berlin|Silver Bear Grand Jury Prize|2011|the turin horse": {
     "person_name": "Béla Tarr",
-    "person_id": null
+    "person_id": 85637
   },
   "Berlin|Silver Bear Grand Jury Prize|2012|just the wind": {
     "person_name": "Benedek Fliegauf",
-    "person_id": null
+    "person_id": 227936
   },
   "Berlin|Silver Bear Grand Jury Prize|2013|an episode in the life of an iron picker": {
     "person_name": "Danis Tanović",
-    "person_id": null
+    "person_id": 20028
   },
   "Berlin|Silver Bear Grand Jury Prize|2014|the grand budapest hotel": {
     "person_name": "Wes Anderson",
-    "person_id": null
+    "person_id": 5655
   },
   "Berlin|Silver Bear Grand Jury Prize|2015|the club": {
     "person_name": "Pablo Larraín",
-    "person_id": null
+    "person_id": 225009
   },
   "Berlin|Silver Bear Grand Jury Prize|2016|death in sarajevo": {
     "person_name": "Danis Tanović",
-    "person_id": null
+    "person_id": 20028
   },
   "Berlin|Silver Bear Grand Jury Prize|2017|félicité": {
     "person_name": "Alain Gomis",
-    "person_id": null
+    "person_id": 235932
   },
   "Berlin|Silver Bear Grand Jury Prize|2018|mug": {
     "person_name": "Małgorzata Szumowska",
-    "person_id": null
+    "person_id": 932317
   },
   "Berlin|Silver Bear Grand Jury Prize|2019|by the grace of god": {
     "person_name": "François Ozon",
-    "person_id": null
+    "person_id": 4387
   },
   "Berlin|Silver Bear Grand Jury Prize|2020|never rarely sometimes always": {
     "person_name": "Eliza Hittman",
-    "person_id": null
+    "person_id": 1134669
   },
   "Berlin|Silver Bear Grand Jury Prize|2021|wheel of fortune and fantasy": {
     "person_name": "Ryusuke Hamaguchi",
-    "person_id": null
+    "person_id": 1487492
   },
   "Berlin|Silver Bear Grand Jury Prize|2022|the novelist's film": {
     "person_name": "Hong Sang-soo",
-    "person_id": null
+    "person_id": 150975
   },
   "Berlin|Silver Bear Grand Jury Prize|2023|afire": {
     "person_name": "Christian Petzold",
-    "person_id": null
+    "person_id": 3953898
   },
   "Berlin|Silver Bear Grand Jury Prize|2024|a traveler's needs": {
     "person_name": "Hong Sang-soo",
-    "person_id": null
+    "person_id": 150975
   },
   "Berlin|Silver Bear Grand Jury Prize|2025|the blue trail": {
     "person_name": "Gabriel Mascaro",
-    "person_id": null
+    "person_id": 1135710
   },
   "Berlin|Silver Bear for Best Actor|2000|the hurricane": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Berlin|Silver Bear for Best Actor|2001|traffic": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "Berlin|Silver Bear for Best Actor|2002|safe conduct": {
     "person_name": "Jacques Gamblin",
-    "person_id": null
+    "person_id": 77860
   },
   "Berlin|Silver Bear for Best Actor|2003|confessions of a dangerous mind": {
     "person_name": "Sam Rockwell",
-    "person_id": null
+    "person_id": 6807
   },
   "Berlin|Silver Bear for Best Actor|2004|lost embrace": {
     "person_name": "Daniel Hendler",
-    "person_id": null
+    "person_id": 131867
   },
   "Berlin|Silver Bear for Best Actor|2005|thumbsucker": {
     "person_name": "Lou Taylor Pucci",
-    "person_id": null
+    "person_id": 17441
   },
   "Berlin|Silver Bear for Best Actor|2006|the elementary particles": {
     "person_name": "Moritz Bleibtreu",
-    "person_id": null
+    "person_id": 677
   },
   "Berlin|Silver Bear for Best Actor|2007|the other": {
     "person_name": "Julio Chávez",
-    "person_id": null
+    "person_id": 1763729
   },
   "Berlin|Silver Bear for Best Actor|2008|the song of sparrows": {
     "person_name": "Reza Naji",
-    "person_id": null
+    "person_id": 87388
   },
   "Berlin|Silver Bear for Best Actor|2009|london river": {
     "person_name": "Sotigui Kouyaté",
-    "person_id": null
+    "person_id": 125970
   },
   "Berlin|Silver Bear for Best Actor|2010|how i ended this summer": {
     "person_name": "Sergei Puskepalis",
-    "person_id": null
+    "person_id": 590133
   },
   "Berlin|Silver Bear for Best Actor|2012|a royal affair": {
     "person_name": "Mikkel Boe Følsgaard",
-    "person_id": null
+    "person_id": 1013156
   },
   "Berlin|Silver Bear for Best Actor|2013|an episode in the life of an iron picker": {
     "person_name": "Nazif Mujić",
-    "person_id": null
+    "person_id": 1141853
   },
   "Berlin|Silver Bear for Best Actor|2014|black coal, thin ice": {
     "person_name": "Liao Fan",
-    "person_id": null
+    "person_id": 99692
   },
   "Berlin|Silver Bear for Best Actor|2015|45 years": {
     "person_name": "Tom Courtenay",
-    "person_id": null
+    "person_id": 14011
   },
   "Berlin|Silver Bear for Best Actor|2016|hedi": {
     "person_name": "Majd Mastoura",
-    "person_id": null
+    "person_id": 1576595
   },
   "Berlin|Silver Bear for Best Actor|2017|bright nights": {
     "person_name": "Georg Friedrich",
-    "person_id": null
+    "person_id": 40526
   },
   "Berlin|Silver Bear for Best Actor|2018|the prayer": {
     "person_name": "Anthony Bajon",
-    "person_id": null
+    "person_id": 1660839
   },
   "Berlin|Silver Bear for Best Actor|2019|so long, my son": {
     "person_name": "Wang Jingchun",
-    "person_id": null
+    "person_id": 1288449
   },
   "Berlin|Silver Bear for Best Actor|2020|hidden away": {
     "person_name": "Elio Germano",
-    "person_id": null
+    "person_id": 59269
   },
   "Berlin|Silver Bear for Best Actress|2000|the legend of rita": {
     "person_name": "Nadja Uhl",
-    "person_id": null
+    "person_id": 5511
   },
   "Berlin|Silver Bear for Best Actress|2001|intimacy": {
     "person_name": "Kerry Fox",
-    "person_id": null
+    "person_id": 17258
   },
   "Berlin|Silver Bear for Best Actress|2002|monster's ball": {
     "person_name": "Halle Berry",
-    "person_id": null
+    "person_id": 4587
   },
   "Berlin|Silver Bear for Best Actress|2003|the hours": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Berlin|Silver Bear for Best Actress|2004|maria full of grace": {
     "person_name": "Catalina Sandino Moreno",
-    "person_id": null
+    "person_id": 5887
   },
   "Berlin|Silver Bear for Best Actress|2004|monster": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "Berlin|Silver Bear for Best Actress|2005|sophie scholl – the final days": {
     "person_name": "Julia Jentsch",
-    "person_id": null
+    "person_id": 3932
   },
   "Berlin|Silver Bear for Best Actress|2006|requiem": {
     "person_name": "Sandra Hüller",
-    "person_id": null
+    "person_id": 7152
   },
   "Berlin|Silver Bear for Best Actress|2007|yella": {
     "person_name": "Nina Hoss",
-    "person_id": null
+    "person_id": 681
   },
   "Berlin|Silver Bear for Best Actress|2008|happy-go-lucky": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "Berlin|Silver Bear for Best Actress|2009|everyone else": {
     "person_name": "Birgit Minichmayr",
-    "person_id": null
+    "person_id": 8800
   },
   "Berlin|Silver Bear for Best Actress|2010|caterpillar": {
     "person_name": "Shinobu Terajima",
-    "person_id": null
+    "person_id": 83527
   },
   "Berlin|Silver Bear for Best Actress|2012|war witch": {
     "person_name": "Rachel Mwanza",
-    "person_id": null
+    "person_id": 1106979
   },
   "Berlin|Silver Bear for Best Actress|2013|gloria": {
     "person_name": "Paulina García",
-    "person_id": null
+    "person_id": 1532436
   },
   "Berlin|Silver Bear for Best Actress|2014|the little house": {
     "person_name": "Haru Kuroki",
-    "person_id": null
+    "person_id": 1054260
   },
   "Berlin|Silver Bear for Best Actress|2015|45 years": {
     "person_name": "Charlotte Rampling",
-    "person_id": null
+    "person_id": 44079
   },
   "Berlin|Silver Bear for Best Actress|2016|the commune": {
     "person_name": "Trine Dyrholm",
-    "person_id": null
+    "person_id": 4460
   },
   "Berlin|Silver Bear for Best Actress|2017|on the beach at night alone": {
     "person_name": "Kim Min-hee",
-    "person_id": null
+    "person_id": 3248912
   },
   "Berlin|Silver Bear for Best Actress|2018|the heiresses": {
     "person_name": "Ana Brun",
-    "person_id": null
+    "person_id": 1961671
   },
   "Berlin|Silver Bear for Best Actress|2019|so long, my son": {
     "person_name": "Yong Mei",
-    "person_id": null
+    "person_id": 572086
   },
   "Berlin|Silver Bear for Best Actress|2020|undine": {
     "person_name": "Paula Beer",
-    "person_id": null
+    "person_id": 894116
   },
   "Berlin|Silver Bear for Best Director|2000|man on the moon": {
     "person_name": "Miloš Forman",
-    "person_id": null
+    "person_id": 3974
   },
   "Berlin|Silver Bear for Best Director|2001|betelnut beauty": {
     "person_name": "Lin Cheng-sheng",
-    "person_id": null
+    "person_id": 131288
   },
   "Berlin|Silver Bear for Best Director|2002|monday morning": {
     "person_name": "Otar Iosseliani",
-    "person_id": null
+    "person_id": 40260
   },
   "Berlin|Silver Bear for Best Director|2003|his brother": {
     "person_name": "Patrice Chéreau",
-    "person_id": null
+    "person_id": 23724
   },
   "Berlin|Silver Bear for Best Director|2004|samaritan girl": {
     "person_name": "Kim Ki-duk",
-    "person_id": null
+    "person_id": 4129625
   },
   "Berlin|Silver Bear for Best Director|2005|sophie scholl – the final days": {
     "person_name": "Marc Rothemund",
-    "person_id": null
+    "person_id": 21737
   },
   "Berlin|Silver Bear for Best Director|2006|the road to guantanamo": {
     "person_name": "Mat Whitecross",
-    "person_id": null
+    "person_id": 182
   },
   "Berlin|Silver Bear for Best Director|2007|beaufort": {
     "person_name": "Joseph Cedar",
-    "person_id": null
+    "person_id": 77815
   },
   "Berlin|Silver Bear for Best Director|2008|there will be blood": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Berlin|Silver Bear for Best Director|2009|about elly": {
     "person_name": "Asghar Farhadi",
-    "person_id": null
+    "person_id": 229931
   },
   "Berlin|Silver Bear for Best Director|2010|the ghost writer": {
     "person_name": "Roman Polanski",
-    "person_id": null
+    "person_id": 3556
   },
   "Berlin|Silver Bear for Best Director|2011|sleeping sickness": {
     "person_name": "Ulrich Köhler",
-    "person_id": null
+    "person_id": 40357
   },
   "Berlin|Silver Bear for Best Director|2012|barbara": {
     "person_name": "Christian Petzold",
-    "person_id": null
+    "person_id": 3953898
   },
   "Berlin|Silver Bear for Best Director|2013|prince avalanche": {
     "person_name": "David Gordon Green",
-    "person_id": null
+    "person_id": 64141
   },
   "Berlin|Silver Bear for Best Director|2014|boyhood": {
     "person_name": "Richard Linklater",
-    "person_id": null
+    "person_id": 564
   },
   "Berlin|Silver Bear for Best Director|2015|aferim!": {
     "person_name": "Radu Jude",
-    "person_id": null
+    "person_id": 588822
   },
   "Berlin|Silver Bear for Best Director|2015|body": {
     "person_name": "Małgorzata Szumowska",
-    "person_id": null
+    "person_id": 932317
   },
   "Berlin|Silver Bear for Best Director|2016|things to come": {
     "person_name": "Mia Hansen-Løve",
-    "person_id": null
+    "person_id": 222686
   },
   "Berlin|Silver Bear for Best Director|2017|the other side of hope": {
     "person_name": "Aki Kaurismäki",
-    "person_id": null
+    "person_id": 16767
   },
   "Berlin|Silver Bear for Best Director|2018|isle of dogs": {
     "person_name": "Wes Anderson",
-    "person_id": null
+    "person_id": 5655
   },
   "Berlin|Silver Bear for Best Director|2019|i was at home, but": {
     "person_name": "Angela Schanelec",
-    "person_id": null
+    "person_id": 40485
   },
   "Berlin|Silver Bear for Best Director|2020|the woman who ran": {
     "person_name": "Hong Sang-soo",
-    "person_id": null
+    "person_id": 150975
   },
   "Berlin|Silver Bear for Best Director|2021|natural light": {
     "person_name": "Dénes Nagy",
-    "person_id": null
+    "person_id": 1521847
   },
   "Berlin|Silver Bear for Best Director|2022|both sides of the blade": {
     "person_name": "Claire Denis",
-    "person_id": null
+    "person_id": 9888
   },
   "Berlin|Silver Bear for Best Director|2023|the plough": {
     "person_name": "Philippe Garrel",
-    "person_id": null
+    "person_id": 56207
   },
   "Berlin|Silver Bear for Best Director|2024|pepe": {
     "person_name": "Nelson Carlo De Los Santos Arias",
@@ -61967,759 +61967,759 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Berlin|Silver Bear for Best Director|2025|living the land": {
     "person_name": "Huo Meng",
-    "person_id": null
+    "person_id": 2305455
   },
   "Berlin|Silver Bear for Best Leading Performance|2021|i'm your man": {
     "person_name": "Maren Eggert",
-    "person_id": null
+    "person_id": 7827
   },
   "Berlin|Silver Bear for Best Leading Performance|2022|rabiye kurnaz vs. george w. bush": {
     "person_name": "Meltem Kaptan",
-    "person_id": null
+    "person_id": 1962697
   },
   "Berlin|Silver Bear for Best Leading Performance|2023|20,000 species of bees": {
     "person_name": "Sofía Otero",
-    "person_id": null
+    "person_id": 3925017
   },
   "Berlin|Silver Bear for Best Leading Performance|2024|a different man": {
     "person_name": "Sebastian Stan",
-    "person_id": null
+    "person_id": 60898
   },
   "Berlin|Silver Bear for Best Leading Performance|2025|if i had legs i'd kick you": {
     "person_name": "Rose Byrne",
-    "person_id": null
+    "person_id": 9827
   },
   "Berlin|Silver Bear for Best Supporting Performance|2021|forest - i see you everywhere": {
     "person_name": "Lilla Kizlinger",
-    "person_id": null
+    "person_id": 2973366
   },
   "Berlin|Silver Bear for Best Supporting Performance|2022|before, now & then": {
     "person_name": "Laura Basuki",
-    "person_id": null
+    "person_id": 1433802
   },
   "Berlin|Silver Bear for Best Supporting Performance|2023|till the end of the night": {
     "person_name": "Thea Ehre",
-    "person_id": null
+    "person_id": 3846249
   },
   "Berlin|Silver Bear for Best Supporting Performance|2024|small things like these": {
     "person_name": "Emily Watson",
-    "person_id": null
+    "person_id": 1639
   },
   "Berlin|Silver Bear for Best Supporting Performance|2025|blue moon": {
     "person_name": "Andrew Scott",
-    "person_id": null
+    "person_id": 125660
   },
   "Cannes|Best Actor|2000|in the mood for love": {
     "person_name": "Tony Leung Chiu-wai",
-    "person_id": null
+    "person_id": 1337
   },
   "Cannes|Best Actor|2001|the piano teacher": {
     "person_name": "Benoît Magimel",
-    "person_id": null
+    "person_id": 5442
   },
   "Cannes|Best Actor|2002|the son": {
     "person_name": "Olivier Gourmet",
-    "person_id": null
+    "person_id": 45152
   },
   "Cannes|Best Actor|2003|uzak": {
     "person_name": "Emin Toprak",
-    "person_id": null
+    "person_id": 107522
   },
   "Cannes|Best Actor|2004|nobody knows": {
     "person_name": "Yūya Yagira",
-    "person_id": null
+    "person_id": 25648
   },
   "Cannes|Best Actor|2005|the three burials of melquiades estrada": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "Cannes|Best Actor|2006|days of glory": {
     "person_name": "Bernard Blancan",
-    "person_id": null
+    "person_id": 20668
   },
   "Cannes|Best Actor|2007|the banishment": {
     "person_name": "Konstantin Lavronenko",
-    "person_id": null
+    "person_id": 68517
   },
   "Cannes|Best Actor|2008|che": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "Cannes|Best Actor|2009|inglourious basterds": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "Cannes|Best Actor|2010|biutiful": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Cannes|Best Actor|2010|our life": {
     "person_name": "Elio Germano",
-    "person_id": null
+    "person_id": 59269
   },
   "Cannes|Best Actor|2011|the artist": {
     "person_name": "Jean Dujardin",
-    "person_id": null
+    "person_id": 56024
   },
   "Cannes|Best Actor|2012|the hunt": {
     "person_name": "Mads Mikkelsen",
-    "person_id": null
+    "person_id": 1019
   },
   "Cannes|Best Actor|2013|nebraska": {
     "person_name": "Bruce Dern",
-    "person_id": null
+    "person_id": 6905
   },
   "Cannes|Best Actor|2014|mr. turner": {
     "person_name": "Timothy Spall",
-    "person_id": null
+    "person_id": 9191
   },
   "Cannes|Best Actor|2015|the measure of a man": {
     "person_name": "Vincent Lindon",
-    "person_id": null
+    "person_id": 5443
   },
   "Cannes|Best Actor|2016|the salesman": {
     "person_name": "Shahab Hosseini",
-    "person_id": null
+    "person_id": 229933
   },
   "Cannes|Best Actor|2017|you were never really here": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Cannes|Best Actor|2018|dogman": {
     "person_name": "Marcello Fonte",
-    "person_id": null
+    "person_id": 1699129
   },
   "Cannes|Best Actor|2019|pain and glory": {
     "person_name": "Antonio Banderas",
-    "person_id": null
+    "person_id": 3131
   },
   "Cannes|Best Actor|2021|nitram": {
     "person_name": "Caleb Landry Jones",
-    "person_id": null
+    "person_id": 572541
   },
   "Cannes|Best Actor|2022|broker": {
     "person_name": "Song Kang-ho",
-    "person_id": null
+    "person_id": 20738
   },
   "Cannes|Best Actor|2023|perfect days": {
     "person_name": "Kōji Yakusho",
-    "person_id": null
+    "person_id": 18056
   },
   "Cannes|Best Actor|2024|kinds of kindness": {
     "person_name": "Jesse Plemons",
-    "person_id": null
+    "person_id": 88124
   },
   "Cannes|Best Actor|2025|the secret agent": {
     "person_name": "Wagner Moura",
-    "person_id": null
+    "person_id": 52583
   },
   "Cannes|Best Actor|2025|urchin": {
     "person_name": "Frank Dillane",
-    "person_id": null
+    "person_id": 964834
   },
   "Cannes|Best Actress|2000|dancer in the dark": {
     "person_name": "Björk",
-    "person_id": null
+    "person_id": 47
   },
   "Cannes|Best Actress|2001|the piano teacher": {
     "person_name": "Isabelle Huppert",
-    "person_id": null
+    "person_id": 17882
   },
   "Cannes|Best Actress|2002|the man without a past": {
     "person_name": "Kati Outinen",
-    "person_id": null
+    "person_id": 5999
   },
   "Cannes|Best Actress|2003|the barbarian invasions": {
     "person_name": "Marie-Josée Croze",
-    "person_id": null
+    "person_id": 8791
   },
   "Cannes|Best Actress|2004|clean": {
     "person_name": "Maggie Cheung",
-    "person_id": null
+    "person_id": 1338
   },
   "Cannes|Best Actress|2005|free zone": {
     "person_name": "Hanna Laslo",
-    "person_id": null
+    "person_id": 52684
   },
   "Cannes|Best Actress|2006|volver": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Cannes|Best Actress|2007|secret sunshine": {
     "person_name": "Jeon Do-yeon",
-    "person_id": null
+    "person_id": 20737
   },
   "Cannes|Best Actress|2008|linha de passe": {
     "person_name": "Sandra Corveloni",
-    "person_id": null
+    "person_id": 930309
   },
   "Cannes|Best Actress|2009|antichrist": {
     "person_name": "Charlotte Gainsbourg",
-    "person_id": null
+    "person_id": 4273
   },
   "Cannes|Best Actress|2010|certified copy": {
     "person_name": "Juliette Binoche",
-    "person_id": null
+    "person_id": 1137
   },
   "Cannes|Best Actress|2011|melancholia": {
     "person_name": "Kirsten Dunst",
-    "person_id": null
+    "person_id": 205
   },
   "Cannes|Best Actress|2012|beyond the hills": {
     "person_name": "Cosmina Stratan",
-    "person_id": null
+    "person_id": 1034685
   },
   "Cannes|Best Actress|2013|the past": {
     "person_name": "Bérénice Bejo",
-    "person_id": null
+    "person_id": 82923
   },
   "Cannes|Best Actress|2014|maps to the stars": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Cannes|Best Actress|2015|carol": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "Cannes|Best Actress|2015|mon roi": {
     "person_name": "Emmanuelle Bercot",
-    "person_id": null
+    "person_id": 25340
   },
   "Cannes|Best Actress|2016|ma' rosa": {
     "person_name": "Jaclyn Jose",
-    "person_id": null
+    "person_id": 1191698
   },
   "Cannes|Best Actress|2017|in the fade": {
     "person_name": "Diane Kruger",
-    "person_id": null
+    "person_id": 9824
   },
   "Cannes|Best Actress|2018|ayka": {
     "person_name": "Samal Yeslyamova",
-    "person_id": null
+    "person_id": 584306
   },
   "Cannes|Best Actress|2019|little joe": {
     "person_name": "Emily Beecham",
-    "person_id": null
+    "person_id": 130414
   },
   "Cannes|Best Actress|2021|the worst person in the world": {
     "person_name": "Renate Reinsve",
-    "person_id": null
+    "person_id": 1576786
   },
   "Cannes|Best Actress|2022|holy spider": {
     "person_name": "Zar Amir Ebrahimi",
-    "person_id": null
+    "person_id": 1236122
   },
   "Cannes|Best Actress|2023|about dry grasses": {
     "person_name": "Merve Dizdar",
-    "person_id": null
+    "person_id": 1064167
   },
   "Cannes|Best Actress|2024|emilia pérez": {
     "person_name": "Zoe Saldaña",
-    "person_id": null
+    "person_id": 8691
   },
   "Cannes|Best Actress|2025|i only rest in the storm": {
     "person_name": "Cleo Diára",
-    "person_id": null
+    "person_id": 1872185
   },
   "Cannes|Best Actress|2025|the little sister": {
     "person_name": "Nadia Melliti",
-    "person_id": null
+    "person_id": 5375369
   },
   "Cannes|Best Director|2000|yi yi": {
     "person_name": "Edward Yang",
-    "person_id": null
+    "person_id": 143035
   },
   "Cannes|Best Director|2001|mulholland dr.": {
     "person_name": "David Lynch",
-    "person_id": null
+    "person_id": 5602
   },
   "Cannes|Best Director|2001|the man who wasn't there": {
     "person_name": "Joel Coen",
-    "person_id": null
+    "person_id": 1223
   },
   "Cannes|Best Director|2002|chi-hwa-seon": {
     "person_name": "Im Kwon-taek",
-    "person_id": null
+    "person_id": 87554
   },
   "Cannes|Best Director|2002|punch-drunk love": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Cannes|Best Director|2003|elephant": {
     "person_name": "Gus Van Sant",
-    "person_id": null
+    "person_id": 5216
   },
   "Cannes|Best Director|2004|exils": {
     "person_name": "Tony Gatlif",
-    "person_id": null
+    "person_id": 41040
   },
   "Cannes|Best Director|2005|caché": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "Cannes|Best Director|2006|babel": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "Cannes|Best Director|2007|the diving bell and the butterfly": {
     "person_name": "Julian Schnabel",
-    "person_id": null
+    "person_id": 7482
   },
   "Cannes|Best Director|2008|three monkeys": {
     "person_name": "Nuri Bilge Ceylan",
-    "person_id": null
+    "person_id": 56214
   },
   "Cannes|Best Director|2009|kinatay": {
     "person_name": "Brillante Mendoza",
-    "person_id": null
+    "person_id": 56213
   },
   "Cannes|Best Director|2010|on tour": {
     "person_name": "Mathieu Amalric",
-    "person_id": null
+    "person_id": 8789
   },
   "Cannes|Best Director|2011|drive": {
     "person_name": "Nicolas Winding Refn",
-    "person_id": null
+    "person_id": 21183
   },
   "Cannes|Best Director|2012|post tenebras lux": {
     "person_name": "Carlos Reygadas",
-    "person_id": null
+    "person_id": 20660
   },
   "Cannes|Best Director|2013|heli": {
     "person_name": "Amat Escalante",
-    "person_id": null
+    "person_id": 56375
   },
   "Cannes|Best Director|2014|foxcatcher": {
     "person_name": "Bennett Miller",
-    "person_id": null
+    "person_id": 5345
   },
   "Cannes|Best Director|2015|the assassin": {
     "person_name": "Hou Hsiao-hsien",
-    "person_id": null
+    "person_id": 64992
   },
   "Cannes|Best Director|2016|graduation": {
     "person_name": "Cristian Mungiu",
-    "person_id": null
+    "person_id": 20657
   },
   "Cannes|Best Director|2016|personal shopper": {
     "person_name": "Olivier Assayas",
-    "person_id": null
+    "person_id": 21678
   },
   "Cannes|Best Director|2017|the beguiled": {
     "person_name": "Sofia Coppola",
-    "person_id": null
+    "person_id": 1769
   },
   "Cannes|Best Director|2018|cold war": {
     "person_name": "Paweł Pawlikowski",
-    "person_id": null
+    "person_id": 64194
   },
   "Cannes|Best Director|2019|beanpole": {
     "person_name": "Kantemir Balagov",
-    "person_id": null
+    "person_id": 1705624
   },
   "Cannes|Best Director|2019|young ahmed": {
-    "person_name": "Jean-Pierre and Luc Dardenne",
-    "person_id": null
+    "person_name": "Jean-Pierre",
+    "person_id": 2512574
   },
   "Cannes|Best Director|2021|annette": {
     "person_name": "Leos Carax",
-    "person_id": null
+    "person_id": 27977
   },
   "Cannes|Best Director|2022|decision to leave": {
     "person_name": "Park Chan-wook",
-    "person_id": null
+    "person_id": 10099
   },
   "Cannes|Best Director|2023|the taste of things": {
     "person_name": "Tran Anh Hung",
-    "person_id": null
+    "person_id": 107730
   },
   "Cannes|Best Director|2024|grand tour": {
     "person_name": "Miguel Gomes",
-    "person_id": null
+    "person_id": 150512
   },
   "Cannes|Best Director|2025|once upon a time in gaza": {
-    "person_name": "Tarzan and Arab Nasser",
-    "person_id": null
+    "person_name": "Tarzan",
+    "person_id": 3482590
   },
   "Cannes|Best Director|2025|the secret agent": {
     "person_name": "Kleber Mendonça Filho",
-    "person_id": null
+    "person_id": 1016214
   },
   "Cannes|Caméra d'Or|2000|a time for drunken horses": {
     "person_name": "Bahman Ghobadi",
-    "person_id": null
+    "person_id": 54607
   },
   "Cannes|Caméra d'Or|2000|djomeh": {
     "person_name": "Hassan Yektapanah",
-    "person_id": null
+    "person_id": 1327119
   },
   "Cannes|Caméra d'Or|2001|atanarjuat: the fast runner": {
     "person_name": "Zacharias Kunuk",
-    "person_id": null
+    "person_id": 97296
   },
   "Cannes|Caméra d'Or|2002|seaside": {
     "person_name": "Julie Lopes-Curval",
-    "person_id": null
+    "person_id": 230167
   },
   "Cannes|Caméra d'Or|2003|reconstruction": {
     "person_name": "Christoffer Boe",
-    "person_id": null
+    "person_id": 144195
   },
   "Cannes|Caméra d'Or|2004|or (my treasure)": {
     "person_name": "Keren Yedaya",
-    "person_id": null
+    "person_id": 19939
   },
   "Cannes|Caméra d'Or|2005|me and you and everyone we know": {
     "person_name": "Miranda July",
-    "person_id": null
+    "person_id": 16860
   },
   "Cannes|Caméra d'Or|2005|the forsaken land": {
     "person_name": "Vimukthi Jayasundara",
-    "person_id": null
+    "person_id": 929363
   },
   "Cannes|Caméra d'Or|2006|12:08 east of bucharest": {
     "person_name": "Corneliu Porumboiu",
-    "person_id": null
+    "person_id": 109293
   },
   "Cannes|Caméra d'Or|2007|jellyfish": {
     "person_name": "Etgar Keret",
-    "person_id": null
+    "person_id": 55046
   },
   "Cannes|Caméra d'Or|2008|hunger": {
     "person_name": "Steve McQueen",
-    "person_id": null
+    "person_id": 13565
   },
   "Cannes|Caméra d'Or|2009|samson and delilah": {
     "person_name": "Warwick Thornton",
-    "person_id": null
+    "person_id": 94342
   },
   "Cannes|Caméra d'Or|2010|año bisiesto": {
     "person_name": "Michael Rowe",
-    "person_id": null
+    "person_id": 1467737
   },
   "Cannes|Caméra d'Or|2011|las acacias": {
     "person_name": "Pablo Giorgelli",
-    "person_id": null
+    "person_id": 932318
   },
   "Cannes|Caméra d'Or|2012|beasts of the southern wild": {
     "person_name": "Benh Zeitlin",
-    "person_id": null
+    "person_id": 223516
   },
   "Cannes|Caméra d'Or|2013|ilo ilo": {
     "person_name": "Anthony Chen",
-    "person_id": null
+    "person_id": 4611471
   },
   "Cannes|Caméra d'Or|2014|party girl": {
     "person_name": "Marie Amachoukeli",
-    "person_id": null
+    "person_id": 1312056
   },
   "Cannes|Caméra d'Or|2015|land and shade": {
     "person_name": "César Augusto Acevedo",
-    "person_id": null
+    "person_id": 1466330
   },
   "Cannes|Caméra d'Or|2016|divines": {
     "person_name": "Houda Benyamina",
-    "person_id": null
+    "person_id": 1609917
   },
   "Cannes|Caméra d'Or|2017|montparnasse bienvenue": {
     "person_name": "Léonor Serraille",
-    "person_id": null
+    "person_id": 1806870
   },
   "Cannes|Caméra d'Or|2018|girl": {
     "person_name": "Lukas Dhont",
-    "person_id": null
+    "person_id": 1274468
   },
   "Cannes|Caméra d'Or|2019|our mothers": {
     "person_name": "César Díaz",
-    "person_id": null
+    "person_id": 1651890
   },
   "Cannes|Caméra d'Or|2021|murina": {
     "person_name": "Antoneta Alamat Kusijanović",
-    "person_id": null
+    "person_id": 1753059
   },
   "Cannes|Caméra d'Or|2022|war pony": {
     "person_name": "Riley Keough",
-    "person_id": null
+    "person_id": 98522
   },
   "Cannes|Caméra d'Or|2023|inside the yellow cocoon shell": {
     "person_name": "Pham Thien An",
-    "person_id": null
+    "person_id": 2295123
   },
   "Cannes|Caméra d'Or|2024|armand": {
     "person_name": "Halfdan Ullmann Tøndel",
-    "person_id": null
+    "person_id": 1502652
   },
   "Cannes|Caméra d'Or|2025|the president's cake": {
     "person_name": "Hasan Hadi",
-    "person_id": null
+    "person_id": 2834376
   },
   "Cannes|Grand Prix|2000|devils on the doorstep": {
     "person_name": "Jiang Wen",
-    "person_id": null
+    "person_id": 77301
   },
   "Cannes|Grand Prix|2001|the piano teacher": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "Cannes|Grand Prix|2002|the man without a past": {
     "person_name": "Aki Kaurismäki",
-    "person_id": null
+    "person_id": 16767
   },
   "Cannes|Grand Prix|2003|uzak": {
     "person_name": "Nuri Bilge Ceylan",
-    "person_id": null
+    "person_id": 56214
   },
   "Cannes|Grand Prix|2004|oldboy": {
     "person_name": "Park Chan-wook",
-    "person_id": null
+    "person_id": 10099
   },
   "Cannes|Grand Prix|2005|broken flowers": {
     "person_name": "Jim Jarmusch",
-    "person_id": null
+    "person_id": 4429
   },
   "Cannes|Grand Prix|2006|flanders": {
     "person_name": "Bruno Dumont",
-    "person_id": null
+    "person_id": 95901
   },
   "Cannes|Grand Prix|2007|the mourning forest": {
     "person_name": "Naomi Kawase",
-    "person_id": null
+    "person_id": 20658
   },
   "Cannes|Grand Prix|2008|gomorra": {
     "person_name": "Matteo Garrone",
-    "person_id": null
+    "person_id": 63973
   },
   "Cannes|Grand Prix|2009|a prophet": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "Cannes|Grand Prix|2010|[[of gods and men (film)|of gods and men]]": {
     "person_name": "Xavier Beauvois",
-    "person_id": null
+    "person_id": 72320
   },
   "Cannes|Grand Prix|2011|once upon a time in anatolia": {
     "person_name": "Nuri Bilge Ceylan",
-    "person_id": null
+    "person_id": 56214
   },
   "Cannes|Grand Prix|2011|the kid with a bike": {
-    "person_name": "Jean-Pierre and Luc Dardenne",
-    "person_id": null
+    "person_name": "Jean-Pierre",
+    "person_id": 2512574
   },
   "Cannes|Grand Prix|2012|reality": {
     "person_name": "Matteo Garrone",
-    "person_id": null
+    "person_id": 63973
   },
   "Cannes|Grand Prix|2013|inside llewyn davis": {
-    "person_name": "Joel & Ethan Coen",
-    "person_id": null
+    "person_name": "Joel",
+    "person_id": 92404
   },
   "Cannes|Grand Prix|2014|the wonders": {
     "person_name": "Alice Rohrwacher",
-    "person_id": null
+    "person_id": 931211
   },
   "Cannes|Grand Prix|2015|son of saul": {
     "person_name": "László Nemes",
-    "person_id": null
+    "person_id": 1454941
   },
   "Cannes|Grand Prix|2016|it's only the end of the world": {
     "person_name": "Xavier Dolan",
-    "person_id": null
+    "person_id": 143593
   },
   "Cannes|Grand Prix|2017|bpm (beats per minute)": {
     "person_name": "Robin Campillo",
-    "person_id": null
+    "person_id": 17387
   },
   "Cannes|Grand Prix|2018|blackkklansman": {
     "person_name": "Spike Lee",
-    "person_id": null
+    "person_id": 5281
   },
   "Cannes|Grand Prix|2019|atlantics": {
     "person_name": "Mati Diop",
-    "person_id": null
+    "person_id": 136168
   },
   "Cannes|Grand Prix|2021|a hero": {
     "person_name": "Asghar Farhadi",
-    "person_id": null
+    "person_id": 229931
   },
   "Cannes|Grand Prix|2021|compartment no. 6": {
     "person_name": "Juho Kuosmanen",
-    "person_id": null
+    "person_id": 1364534
   },
   "Cannes|Grand Prix|2022|close": {
     "person_name": "Lukas Dhont",
-    "person_id": null
+    "person_id": 1274468
   },
   "Cannes|Grand Prix|2022|stars at noon": {
     "person_name": "Claire Denis",
-    "person_id": null
+    "person_id": 9888
   },
   "Cannes|Grand Prix|2023|the zone of interest": {
     "person_name": "Jonathan Glazer",
-    "person_id": null
+    "person_id": 66728
   },
   "Cannes|Grand Prix|2024|all we imagine as light": {
     "person_name": "Payal Kapadia",
-    "person_id": null
+    "person_id": 1467320
   },
   "Cannes|Grand Prix|2025|sentimental value": {
     "person_name": "Joachim Trier",
-    "person_id": null
+    "person_id": 71609
   },
   "Cannes|Jury Prize|2000|blackboards": {
     "person_name": "Samira Makhmalbaf",
-    "person_id": null
+    "person_id": 20026
   },
   "Cannes|Jury Prize|2000|songs from the second floor": {
     "person_name": "Roy Andersson",
-    "person_id": null
+    "person_id": 45791
   },
   "Cannes|Jury Prize|2001|distance": {
     "person_name": "Hirokazu Kore-eda",
-    "person_id": null
+    "person_id": 25645
   },
   "Cannes|Jury Prize|2002|divine intervention": {
     "person_name": "Elia Suleiman",
-    "person_id": null
+    "person_id": 131685
   },
   "Cannes|Jury Prize|2003|at five in the afternoon": {
     "person_name": "Samira Makhmalbaf",
-    "person_id": null
+    "person_id": 20026
   },
   "Cannes|Jury Prize|2004|the ladykillers": {
     "person_name": "Irma P. Hall",
-    "person_id": null
+    "person_id": 43853
   },
   "Cannes|Jury Prize|2004|tropical malady": {
     "person_name": "Apichatpong Weerasethakul",
-    "person_id": null
+    "person_id": 69759
   },
   "Cannes|Jury Prize|2005|shanghai dreams": {
     "person_name": "Wang Xiaoshuai",
-    "person_id": null
+    "person_id": 1016305
   },
   "Cannes|Jury Prize|2006|primera nieve": {
     "person_name": "Pablo Aguero",
-    "person_id": null
+    "person_id": 928786
   },
   "Cannes|Jury Prize|2006|red road": {
     "person_name": "Andrea Arnold",
-    "person_id": null
+    "person_id": 71082
   },
   "Cannes|Jury Prize|2007|persepolis": {
     "person_name": "Vincent Paronnaud",
-    "person_id": null
+    "person_id": 20709
   },
   "Cannes|Jury Prize|2007|silent light": {
     "person_name": "Carlos Reygadas",
-    "person_id": null
+    "person_id": 20660
   },
   "Cannes|Jury Prize|2008|il divo": {
     "person_name": "Paolo Sorrentino",
-    "person_id": null
+    "person_id": 56194
   },
   "Cannes|Jury Prize|2008|jerrycan": {
     "person_name": "Julius Avery",
-    "person_id": null
+    "person_id": 1299642
   },
   "Cannes|Jury Prize|2009|fish tank": {
     "person_name": "Andrea Arnold",
-    "person_id": null
+    "person_id": 71082
   },
   "Cannes|Jury Prize|2009|thirst": {
     "person_name": "Park Chan-wook",
-    "person_id": null
+    "person_id": 10099
   },
   "Cannes|Jury Prize|2010|a screaming man": {
     "person_name": "Mahamat-Saleh Haroun",
-    "person_id": null
+    "person_id": 226553
   },
   "Cannes|Jury Prize|2011|polisse": {
     "person_name": "Maïwenn",
-    "person_id": null
+    "person_id": 64210
   },
   "Cannes|Jury Prize|2012|the angels' share": {
     "person_name": "Ken Loach",
-    "person_id": null
+    "person_id": 15488
   },
   "Cannes|Jury Prize|2013|like father, like son": {
     "person_name": "Hirokazu Koreeda",
-    "person_id": null
+    "person_id": 25645
   },
   "Cannes|Jury Prize|2014|goodbye to language": {
     "person_name": "Jean-Luc Godard",
-    "person_id": null
+    "person_id": 3776
   },
   "Cannes|Jury Prize|2014|mommy": {
     "person_name": "Xavier Dolan",
-    "person_id": null
+    "person_id": 143593
   },
   "Cannes|Jury Prize|2015|the lobster": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "Cannes|Jury Prize|2016|american honey": {
     "person_name": "Andrea Arnold",
-    "person_id": null
+    "person_id": 71082
   },
   "Cannes|Jury Prize|2017|loveless": {
     "person_name": "Andrey Zvyagintsev",
-    "person_id": null
+    "person_id": 68519
   },
   "Cannes|Jury Prize|2018|capernaum": {
     "person_name": "Nadine Labaki",
-    "person_id": null
+    "person_id": 53431
   },
   "Cannes|Jury Prize|2019|bacurau": {
     "person_name": "Kleber Mendonça Filho",
-    "person_id": null
+    "person_id": 1016214
   },
   "Cannes|Jury Prize|2019|fire will come": {
     "person_name": "Oliver Laxe",
-    "person_id": null
+    "person_id": 1048523
   },
   "Cannes|Jury Prize|2019|les misérables": {
     "person_name": "Ladj Ly",
-    "person_id": null
+    "person_id": 144817
   },
   "Cannes|Jury Prize|2021|ahed's knee": {
     "person_name": "Nadav Lapid",
-    "person_id": null
+    "person_id": 1011135
   },
   "Cannes|Jury Prize|2021|memoria": {
     "person_name": "Apichatpong Weerasethakul",
-    "person_id": null
+    "person_id": 69759
   },
   "Cannes|Jury Prize|2022|eo": {
     "person_name": "Jerzy Skolimowski",
-    "person_id": null
+    "person_id": 43553
   },
   "Cannes|Jury Prize|2022|the eight mountains": {
     "person_name": "Felix van Groeningen",
-    "person_id": null
+    "person_id": 239672
   },
   "Cannes|Jury Prize|2023|fallen leaves": {
     "person_name": "Aki Kaurismäki",
-    "person_id": null
+    "person_id": 16767
   },
   "Cannes|Jury Prize|2024|emilia pérez": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "Cannes|Jury Prize|2025|a poet": {
     "person_name": "Simón Mesa Soto",
-    "person_id": null
+    "person_id": 1488620
   },
   "Cannes|Jury Prize|2025|sirāt": {
     "person_name": "Oliver Laxe",
-    "person_id": null
+    "person_id": 1048523
   },
   "Cannes|Jury Prize|2025|sound of falling": {
     "person_name": "Mascha Schilinski",
-    "person_id": null
+    "person_id": 1756497
   },
   "Cannes|Palme d'Or|2000|dancer in the dark": {
     "person_name": "Lars von Trier",
-    "person_id": null
+    "person_id": 42
   },
   "Cannes|Palme d'Or|2001|the son's room": {
     "person_name": "The Son's Room",
@@ -62727,147 +62727,147 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Cannes|Palme d'Or|2002|the pianist": {
     "person_name": "Roman Polanski",
-    "person_id": null
+    "person_id": 3556
   },
   "Cannes|Palme d'Or|2003|elephant": {
     "person_name": "Gus Van Sant",
-    "person_id": null
+    "person_id": 5216
   },
   "Cannes|Palme d'Or|2004|fahrenheit 9/11": {
     "person_name": "Michael Moore",
-    "person_id": null
+    "person_id": 17087
   },
   "Cannes|Palme d'Or|2005|l'enfant": {
-    "person_name": "Jean-Pierre and Luc Dardenne",
-    "person_id": null
+    "person_name": "Jean-Pierre",
+    "person_id": 2512574
   },
   "Cannes|Palme d'Or|2006|the wind that shakes the barley": {
     "person_name": "Ken Loach",
-    "person_id": null
+    "person_id": 15488
   },
   "Cannes|Palme d'Or|2007|4 months, 3 weeks and 2 days": {
     "person_name": "Cristian Mungiu",
-    "person_id": null
+    "person_id": 20657
   },
   "Cannes|Palme d'Or|2008|the class": {
     "person_name": "Laurent Cantet",
-    "person_id": null
+    "person_id": 17386
   },
   "Cannes|Palme d'Or|2009|the white ribbon": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "Cannes|Palme d'Or|2010|uncle boonmee who can recall his past lives": {
     "person_name": "Apichatpong Weerasethakul",
-    "person_id": null
+    "person_id": 69759
   },
   "Cannes|Palme d'Or|2011|the tree of life": {
     "person_name": "Terrence Malick",
-    "person_id": null
+    "person_id": 30715
   },
   "Cannes|Palme d'Or|2012|amour": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "Cannes|Palme d'Or|2013|blue is the warmest colour": {
     "person_name": "Abdellatif Kechiche",
-    "person_id": null
+    "person_id": 17458
   },
   "Cannes|Palme d'Or|2014|winter sleep": {
     "person_name": "Nuri Bilge Ceylan",
-    "person_id": null
+    "person_id": 56214
   },
   "Cannes|Palme d'Or|2015|dheepan": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "Cannes|Palme d'Or|2016|i, daniel blake": {
     "person_name": "Ken Loach",
-    "person_id": null
+    "person_id": 15488
   },
   "Cannes|Palme d'Or|2017|the square": {
     "person_name": "Ruben Östlund",
-    "person_id": null
+    "person_id": 56370
   },
   "Cannes|Palme d'Or|2018|shoplifters": {
     "person_name": "Hirokazu Kore-eda",
-    "person_id": null
+    "person_id": 25645
   },
   "Cannes|Palme d'Or|2019|parasite": {
     "person_name": "Bong Joon-ho",
-    "person_id": null
+    "person_id": 21684
   },
   "Cannes|Palme d'Or|2021|titane": {
     "person_name": "Julia Ducournau",
-    "person_id": null
+    "person_id": 1392433
   },
   "Cannes|Palme d'Or|2022|triangle of sadness": {
     "person_name": "Ruben Östlund",
-    "person_id": null
+    "person_id": 56370
   },
   "Cannes|Palme d'Or|2023|anatomy of a fall": {
     "person_name": "Justine Triet",
-    "person_id": null
+    "person_id": 1175620
   },
   "Cannes|Palme d'Or|2024|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "Cannes|Palme d'Or|2025|it was just an accident": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "Cannes|Short Film Palme d'Or|2000|shadows": {
     "person_name": "Raymond Red",
-    "person_id": null
+    "person_id": 1129330
   },
   "Cannes|Short Film Palme d'Or|2001|bean cake": {
     "person_name": "David Greenspan",
-    "person_id": null
+    "person_id": 2318989
   },
   "Cannes|Short Film Palme d'Or|2002|after rain": {
     "person_name": "Péter Mészáros",
-    "person_id": null
+    "person_id": 2147562
   },
   "Cannes|Short Film Palme d'Or|2003|cracker bag": {
     "person_name": "Glendyn Ivin",
-    "person_id": null
+    "person_id": 98553
   },
   "Cannes|Short Film Palme d'Or|2004|trafic": {
     "person_name": "Cătălin Mitulescu",
-    "person_id": null
+    "person_id": 125282
   },
   "Cannes|Short Film Palme d'Or|2005|wayfarers": {
     "person_name": "Igor Strembitskyy",
-    "person_id": null
+    "person_id": 1382516
   },
   "Cannes|Short Film Palme d'Or|2006|sniffer": {
     "person_name": "Bobbie Peers",
-    "person_id": null
+    "person_id": 1289212
   },
   "Cannes|Short Film Palme d'Or|2007|ver llover": {
     "person_name": "Elisa Miller",
-    "person_id": null
+    "person_id": 1315560
   },
   "Cannes|Short Film Palme d'Or|2008|megatron": {
     "person_name": "Marian Crişan",
-    "person_id": null
+    "person_id": 558002
   },
   "Cannes|Short Film Palme d'Or|2009|arena": {
     "person_name": "João Salaviza",
-    "person_id": null
+    "person_id": 1081027
   },
   "Cannes|Short Film Palme d'Or|2010|barking island": {
     "person_name": "Serge Avédikian",
-    "person_id": null
+    "person_id": 134743
   },
   "Cannes|Short Film Palme d'Or|2011|[[cross-country (2011 film)|cross-country]] (крос)": {
     "person_name": "Maryna Vroda",
-    "person_id": null
+    "person_id": 1343396
   },
   "Cannes|Short Film Palme d'Or|2012|silent": {
     "person_name": "L. Rezan Yesilbas",
-    "person_id": null
+    "person_id": 1182552
   },
   "Cannes|Short Film Palme d'Or|2013|safe": {
     "person_name": "Moon Byoung-gon",
@@ -62875,31 +62875,31 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Cannes|Short Film Palme d'Or|2014|leidi": {
     "person_name": "Simón Mesa Soto",
-    "person_id": null
+    "person_id": 1488620
   },
   "Cannes|Short Film Palme d'Or|2015|waves '98": {
     "person_name": "Ely Dagher",
-    "person_id": null
+    "person_id": 1470329
   },
   "Cannes|Short Film Palme d'Or|2016|timecode": {
     "person_name": "Juanjo Giménez",
-    "person_id": null
+    "person_id": 1459948
   },
   "Cannes|Short Film Palme d'Or|2017|a gentle night": {
     "person_name": "Qiu Yang",
-    "person_id": null
+    "person_id": 1598541
   },
   "Cannes|Short Film Palme d'Or|2018|all these creatures": {
     "person_name": "Charles Williams",
-    "person_id": null
+    "person_id": 65432
   },
   "Cannes|Short Film Palme d'Or|2019|the distance between us and the sky": {
     "person_name": "Vasilis Kekatos",
-    "person_id": null
+    "person_id": 2092674
   },
   "Cannes|Short Film Palme d'Or|2021|all the crows in the world": {
     "person_name": "Tang Yi",
-    "person_id": null
+    "person_id": 2806296
   },
   "Cannes|Short Film Palme d'Or|2022|the water murmurs": {
     "person_name": "Jianying Chen",
@@ -62907,139 +62907,139 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Cannes|Short Film Palme d'Or|2023|27": {
     "person_name": "Flóra Anna Buda",
-    "person_id": null
+    "person_id": 2205286
   },
   "Cannes|Short Film Palme d'Or|2024|the man who could not remain silent": {
     "person_name": "Nebojša Slijepčević",
-    "person_id": null
+    "person_id": 1330467
   },
   "Cannes|Short Film Palme d'Or|2025|i'm glad you're dead now": {
     "person_name": "Tawfeek Barhom",
-    "person_id": null
+    "person_id": 1260004
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2001|before night falls": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2001|cast away": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2001|gladiator": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2001|quills": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2001|wonder boys": {
     "person_name": "Michael Douglas",
-    "person_id": null
+    "person_id": 3392
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2002|a beautiful mind": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2002|ali": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2002|the man who wasn't there": {
     "person_name": "Billy Bob Thornton",
-    "person_id": null
+    "person_id": 879
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2002|the shipping news": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2002|training day": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2003|about schmidt": {
     "person_name": "Jack Nicholson",
-    "person_id": null
+    "person_id": 514
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2003|catch me if you can": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2003|gangs of new york": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2003|the pianist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2003|the quiet american": {
     "person_name": "Michael Caine",
-    "person_id": null
+    "person_id": 3895
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2004|cold mountain": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2004|house of sand and fog": {
     "person_name": "Ben Kingsley",
-    "person_id": null
+    "person_id": 2282
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2004|master and commander: the far side of the world": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2004|mystic river": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2004|the last samurai": {
     "person_name": "Tom Cruise",
-    "person_id": null
+    "person_id": 500
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2005|finding neverland": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2005|hotel rwanda": {
     "person_name": "Don Cheadle",
-    "person_id": null
+    "person_id": 1896
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2005|kinsey": {
     "person_name": "Liam Neeson",
-    "person_id": null
+    "person_id": 3896
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2005|the aviator": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2005|the sea inside": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2006|brokeback mountain": {
     "person_name": "Heath Ledger",
-    "person_id": null
+    "person_id": 1810
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2006|capote": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2006|cinderella man": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2006|good night, and good luck": {
     "person_name": "David Strathairn",
-    "person_id": null
+    "person_id": 11064
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2006|hustle & flow": {
     "person_name": "Terrence Howard",
-    "person_id": null
+    "person_id": 18288
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|blood diamond": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|forest whitaker": {
     "person_name": "The Last King of Scotland",
@@ -63047,515 +63047,515 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|the departed": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|the pursuit of happyness": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2007|venus": {
     "person_name": "Peter O'Toole",
-    "person_id": null
+    "person_id": 11390
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2008|american gangster": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2008|atonement": {
     "person_name": "James McAvoy",
-    "person_id": null
+    "person_id": 5530
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2008|eastern promises": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2008|michael clayton": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2008|there will be blood": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2009|frost/nixon": {
     "person_name": "Frank Langella",
-    "person_id": null
+    "person_id": 8924
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2009|milk": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2009|revolutionary road": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2009|the curious case of benjamin button": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2009|the wrestler": {
     "person_name": "Mickey Rourke",
-    "person_id": null
+    "person_id": 2295
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2010|a single man": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2010|brothers": {
     "person_name": "Tobey Maguire",
-    "person_id": null
+    "person_id": 2219
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2010|crazy heart": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2010|invictus": {
     "person_name": "Morgan Freeman",
-    "person_id": null
+    "person_id": 192
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2010|up in the air": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2011|127 hours": {
     "person_name": "James Franco",
-    "person_id": null
+    "person_id": 17051
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2011|blue valentine": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2011|the fighter": {
     "person_name": "Mark Wahlberg",
-    "person_id": null
+    "person_id": 13240
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2011|the king's speech": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2011|the social network": {
     "person_name": "Jesse Eisenberg",
-    "person_id": null
+    "person_id": 44735
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2012|j. edgar": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2012|moneyball": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2012|shame": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2012|the descendants": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2012|the ides of march": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2013|arbitrage": {
     "person_name": "Richard Gere",
-    "person_id": null
+    "person_id": 1205
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2013|flight": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2013|lincoln": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2013|the master": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2013|the sessions": {
     "person_name": "John Hawkes",
-    "person_id": null
+    "person_id": 16861
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2014|12 years a slave": {
     "person_name": "Chiwetel Ejiofor",
-    "person_id": null
+    "person_id": 5294
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2014|all is lost": {
     "person_name": "Robert Redford",
-    "person_id": null
+    "person_id": 4135
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2014|captain phillips": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2014|dallas buyers club": {
     "person_name": "Matthew McConaughey",
-    "person_id": null
+    "person_id": 10297
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2014|mandela: long walk to freedom": {
     "person_name": "Idris Elba",
-    "person_id": null
+    "person_id": 17605
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2015|foxcatcher": {
     "person_name": "Steve Carell",
-    "person_id": null
+    "person_id": 4495
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2015|nightcrawler": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2015|selma": {
     "person_name": "David Oyelowo",
-    "person_id": null
+    "person_id": 35013
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2015|the imitation game": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2015|the theory of everything": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2016|concussion": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2016|steve jobs": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2016|the danish girl": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2016|the revenant": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2016|trumbo": {
     "person_name": "Bryan Cranston",
-    "person_id": null
+    "person_id": 17419
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2017|captain fantastic": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2017|fences": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2017|hacksaw ridge": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2017|loving": {
     "person_name": "Joel Edgerton",
-    "person_id": null
+    "person_id": 33192
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2017|manchester by the sea": {
     "person_name": "Casey Affleck",
-    "person_id": null
+    "person_id": 1893
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2018|call me by your name": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2018|darkest hour": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2018|phantom thread": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2018|roman j. israel, esq.": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2018|the post": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2019|at eternity's gate": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2019|blackkklansman": {
     "person_name": "John David Washington",
-    "person_id": null
+    "person_id": 1117313
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2019|bohemian rhapsody": {
     "person_name": "Rami Malek",
-    "person_id": null
+    "person_id": 17838
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2019|boy erased": {
     "person_name": "Lucas Hedges",
-    "person_id": null
+    "person_id": 1105079
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2020|ford v ferrari": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2020|joker": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2020|marriage story": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2020|pain and glory": {
     "person_name": "Antonio Banderas",
-    "person_id": null
+    "person_id": 3131
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2020|the two popes": {
     "person_name": "Jonathan Pryce",
-    "person_id": null
+    "person_id": 378
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2021|ma rainey's black bottom": {
     "person_name": "Chadwick Boseman",
-    "person_id": null
+    "person_id": 172069
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2021|mank": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2021|sound of metal": {
     "person_name": "Riz Ahmed",
-    "person_id": null
+    "person_id": 53240
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2021|the father": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2021|the mauritanian": {
     "person_name": "Tahar Rahim",
-    "person_id": null
+    "person_id": 81051
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2022|being the ricardos": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2022|king richard": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2022|swan song": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2022|the power of the dog": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2022|the tragedy of macbeth": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2023|elvis": {
     "person_name": "Austin Butler",
-    "person_id": null
+    "person_id": 86654
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2023|living": {
     "person_name": "Bill Nighy",
-    "person_id": null
+    "person_id": 2440
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2023|the inspection": {
     "person_name": "Jeremy Pope",
-    "person_id": null
+    "person_id": 1974324
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2023|the son": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2023|the whale": {
     "person_name": "Brendan Fraser",
-    "person_id": null
+    "person_id": 18269
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|all of us strangers": {
     "person_name": "Andrew Scott",
-    "person_id": null
+    "person_id": 125660
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|killers of the flower moon": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|maestro": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|oppenheimer": {
     "person_name": "Cillian Murphy",
-    "person_id": null
+    "person_id": 2037
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|rustin": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2024|saltburn": {
     "person_name": "Barry Keoghan",
-    "person_id": null
+    "person_id": 1290466
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|a complete unknown": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|conclave": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|queer": {
     "person_name": "Daniel Craig",
-    "person_id": null
+    "person_id": 8784
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|sing sing": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|the apprentice": {
     "person_name": "Sebastian Stan",
-    "person_id": null
+    "person_id": 60898
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Drama|2025|the brutalist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2001|high fidelity": {
     "person_name": "John Cusack",
-    "person_id": null
+    "person_id": 3036
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2001|how the grinch stole christmas": {
     "person_name": "Jim Carrey",
-    "person_id": null
+    "person_id": 206
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2001|meet the parents": {
     "person_name": "Robert De Niro",
-    "person_id": null
+    "person_id": 380
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2001|o brother, where art thou?": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2001|what women want": {
     "person_name": "Mel Gibson",
-    "person_id": null
+    "person_id": 2461
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2002|bandits": {
     "person_name": "Billy Bob Thornton",
-    "person_id": null
+    "person_id": 879
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2002|hedwig and the angry inch": {
     "person_name": "John Cameron Mitchell",
-    "person_id": null
+    "person_id": 17114
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2002|kate & leopold": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2002|moulin rouge!": {
     "person_name": "Ewan McGregor",
-    "person_id": null
+    "person_id": 3061
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2002|the royal tenenbaums": {
     "person_name": "Gene Hackman",
-    "person_id": null
+    "person_id": 193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2003|about a boy": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2003|adaptation.": {
     "person_name": "Nicolas Cage",
-    "person_id": null
+    "person_id": 2963
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2003|chicago": {
     "person_name": "Richard Gere",
-    "person_id": null
+    "person_id": 1205
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2003|igby goes down": {
     "person_name": "Kieran Culkin",
-    "person_id": null
+    "person_id": 18793
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2003|punch-drunk love": {
     "person_name": "Adam Sandler",
-    "person_id": null
+    "person_id": 19292
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2004|bad santa": {
     "person_name": "Billy Bob Thornton",
-    "person_id": null
+    "person_id": 879
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2004|lost in translation": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2004|pirates of the caribbean: the curse of the black pearl": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2004|school of rock": {
     "person_name": "Jack Black",
-    "person_id": null
+    "person_id": 70851
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2004|something's gotta give": {
     "person_name": "Jack Nicholson",
-    "person_id": null
+    "person_id": 514
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2005|beyond the sea": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2005|de-lovely": {
     "person_name": "Kevin Kline",
-    "person_id": null
+    "person_id": 8945
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2005|eternal sunshine of the spotless mind": {
     "person_name": "Jim Carrey",
-    "person_id": null
+    "person_id": 206
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2005|ray": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2005|sideways": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|breakfast on pluto": {
     "person_name": "Cillian Murphy",
-    "person_id": null
+    "person_id": 2037
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|charlie and the chocolate factory": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|the matador": {
     "person_name": "Pierce Brosnan",
-    "person_id": null
+    "person_id": 517
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|the producers": {
     "person_name": "Nathan Lane",
-    "person_id": null
+    "person_id": 78729
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|the squid and the whale": {
     "person_name": "Jeff Daniels",
-    "person_id": null
+    "person_id": 8447
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2006|walk the line": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|kinky boots": {
     "person_name": "Chiwetel Ejiofor",
-    "person_id": null
+    "person_id": 5294
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|pirates of the caribbean: dead man's chest": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|sacha baron cohen": {
     "person_name": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan",
@@ -63563,31 +63563,31 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|stranger than fiction": {
     "person_name": "Will Ferrell",
-    "person_id": null
+    "person_id": 23659
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2007|thank you for smoking": {
     "person_name": "Aaron Eckhart",
-    "person_id": null
+    "person_id": 6383
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2008|charlie wilson's war": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2008|lars and the real girl": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2008|sweeney todd: the demon barber of fleet street": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2008|the savages": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2008|walk hard: the dewey cox story": {
     "person_name": "John C. Reilly",
-    "person_id": null
+    "person_id": 4764
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2009|colin farrell": {
     "person_name": "In Bruges",
@@ -63595,515 +63595,515 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2009|in bruges": {
     "person_name": "Brendan Gleeson",
-    "person_id": null
+    "person_id": 2039
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2009|last chance harvey": {
     "person_name": "Dustin Hoffman",
-    "person_id": null
+    "person_id": 4483
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2009|pineapple express": {
     "person_name": "James Franco",
-    "person_id": null
+    "person_id": 17051
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2009|vicky cristina barcelona": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2010|(500) days of summer": {
     "person_name": "Joseph Gordon-Levitt",
-    "person_id": null
+    "person_id": 24045
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2010|a serious man": {
     "person_name": "Michael Stuhlbarg",
-    "person_id": null
+    "person_id": 72873
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2010|nine": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2010|sherlock holmes": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2010|the informant!": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2011|alice in wonderland": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2011|barney's version": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2011|casino jack": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2011|love & other drugs": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2011|the tourist": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2012|50/50": {
     "person_name": "Joseph Gordon-Levitt",
-    "person_id": null
+    "person_id": 24045
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2012|crazy, stupid, love": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2012|midnight in paris": {
     "person_name": "Owen Wilson",
-    "person_id": null
+    "person_id": 887
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2012|the artist": {
     "person_name": "Jean Dujardin",
-    "person_id": null
+    "person_id": 56024
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2012|the guard": {
     "person_name": "Brendan Gleeson",
-    "person_id": null
+    "person_id": 2039
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2013|bernie": {
     "person_name": "Jack Black",
-    "person_id": null
+    "person_id": 70851
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2013|hyde park on hudson": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2013|les misérables": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2013|salmon fishing in the yemen": {
     "person_name": "Ewan McGregor",
-    "person_id": null
+    "person_id": 3061
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2013|silver linings playbook": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2014|american hustle": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2014|her": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2014|inside llewyn davis": {
     "person_name": "Oscar Isaac",
-    "person_id": null
+    "person_id": 25072
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2014|nebraska": {
     "person_name": "Bruce Dern",
-    "person_id": null
+    "person_id": 6905
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2014|the wolf of wall street": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2015|big eyes": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2015|birdman": {
     "person_name": "Michael Keaton",
-    "person_id": null
+    "person_id": 2232
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2015|inherent vice": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2015|st. vincent": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2015|the grand budapest hotel": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2016|danny collins": {
     "person_name": "Al Pacino",
-    "person_id": null
+    "person_id": 1158
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2016|infinitely polar bear": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2016|the big short": {
     "person_name": "Steve Carell",
-    "person_id": null
+    "person_id": 4495
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2016|the martian": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2017|deadpool": {
     "person_name": "Ryan Reynolds",
-    "person_id": null
+    "person_id": 10859
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2017|florence foster jenkins": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2017|la la land": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2017|the lobster": {
     "person_name": "Colin Farrell",
-    "person_id": null
+    "person_id": 72466
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2017|war dogs": {
     "person_name": "Jonah Hill",
-    "person_id": null
+    "person_id": 21007
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2018|baby driver": {
     "person_name": "Ansel Elgort",
-    "person_id": null
+    "person_id": 1159982
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2018|battle of the sexes": {
     "person_name": "Steve Carell",
-    "person_id": null
+    "person_id": 4495
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2018|get out": {
     "person_name": "Daniel Kaluuya",
-    "person_id": null
+    "person_id": 206919
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2018|the disaster artist": {
     "person_name": "James Franco",
-    "person_id": null
+    "person_id": 17051
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2018|the greatest showman": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2019|green book": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2019|mary poppins returns": {
     "person_name": "Lin-Manuel Miranda",
-    "person_id": null
+    "person_id": 1179651
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2019|stan & ollie": {
     "person_name": "John C. Reilly",
-    "person_id": null
+    "person_id": 4764
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2019|the old man & the gun": {
     "person_name": "Robert Redford",
-    "person_id": null
+    "person_id": 4135
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2019|vice": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2020|dolemite is my name": {
     "person_name": "Eddie Murphy",
-    "person_id": null
+    "person_id": 776
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2020|jojo rabbit": {
     "person_name": "Roman Griffin Davis",
-    "person_id": null
+    "person_id": 2054851
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2020|knives out": {
     "person_name": "Daniel Craig",
-    "person_id": null
+    "person_id": 8784
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2020|once upon a time in hollywood": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2020|rocketman": {
     "person_name": "Taron Egerton",
-    "person_id": null
+    "person_id": 1303037
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2021|borat subsequent moviefilm": {
     "person_name": "Sacha Baron Cohen",
-    "person_id": null
+    "person_id": 6730
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2021|hamilton": {
     "person_name": "Lin-Manuel Miranda",
-    "person_id": null
+    "person_id": 1179651
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2021|palm springs": {
     "person_name": "Andy Samberg",
-    "person_id": null
+    "person_id": 62861
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2021|the personal history of david copperfield": {
     "person_name": "Dev Patel",
-    "person_id": null
+    "person_id": 76788
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2021|the prom": {
     "person_name": "James Corden",
-    "person_id": null
+    "person_id": 55466
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2022|cyrano": {
     "person_name": "Peter Dinklage",
-    "person_id": null
+    "person_id": 22970
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2022|don't look up": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2022|in the heights": {
     "person_name": "Anthony Ramos",
-    "person_id": null
+    "person_id": 1560244
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2022|licorice pizza": {
     "person_name": "Cooper Hoffman",
-    "person_id": null
+    "person_id": 2764542
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2022|tick, tick... boom!": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2023|babylon": {
     "person_name": "Diego Calva",
-    "person_id": null
+    "person_id": 1413390
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2023|glass onion: a knives out mystery": {
     "person_name": "Daniel Craig",
-    "person_id": null
+    "person_id": 8784
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2023|the banshees of inisherin": {
     "person_name": "Colin Farrell",
-    "person_id": null
+    "person_id": 72466
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2023|the menu": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2023|white noise": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|air": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|american fiction": {
     "person_name": "Jeffrey Wright",
-    "person_id": null
+    "person_id": 2954
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|beau is afraid": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|dream scenario": {
     "person_name": "Nicolas Cage",
-    "person_id": null
+    "person_id": 2963
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|the holdovers": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2024|wonka": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|a different man": {
     "person_name": "Sebastian Stan",
-    "person_id": null
+    "person_id": 60898
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|a real pain": {
     "person_name": "Jesse Eisenberg",
-    "person_id": null
+    "person_id": 44735
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|heretic": {
     "person_name": "Hugh Grant",
-    "person_id": null
+    "person_id": 3291
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|hit man": {
     "person_name": "Glen Powell",
-    "person_id": null
+    "person_id": 83271
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|kinds of kindness": {
     "person_name": "Jesse Plemons",
-    "person_id": null
+    "person_id": 88124
   },
   "GoldenGlobe|Best Actor in a Motion Picture – Musical or Comedy|2025|saturday night": {
     "person_name": "Gabriel LaBelle",
-    "person_id": null
+    "person_id": 1476330
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2001|dancer in the dark": {
     "person_name": "Björk",
-    "person_id": null
+    "person_id": 47
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2001|erin brockovich": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2001|requiem for a dream": {
     "person_name": "Ellen Burstyn",
-    "person_id": null
+    "person_id": 9560
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2001|the contender": {
     "person_name": "Joan Allen",
-    "person_id": null
+    "person_id": 11148
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2001|you can count on me": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2002|in the bedroom": {
     "person_name": "Sissy Spacek",
-    "person_id": null
+    "person_id": 5606
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2002|iris": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2002|monster's ball": {
     "person_name": "Halle Berry",
-    "person_id": null
+    "person_id": 4587
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2002|the deep end": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2002|the others": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2003|far from heaven": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2003|frida": {
     "person_name": "Salma Hayek",
-    "person_id": null
+    "person_id": 3136
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2003|the hours": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2003|unfaithful": {
     "person_name": "Diane Lane",
-    "person_id": null
+    "person_id": 2882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|cold mountain": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|girl with a pearl earring": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|kill bill: volume 1": {
     "person_name": "Uma Thurman",
-    "person_id": null
+    "person_id": 139
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|monster": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|thirteen": {
     "person_name": "Evan Rachel Wood",
-    "person_id": null
+    "person_id": 38940
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2004|veronica guerin": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2005|a love song for bobby long": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2005|birth": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2005|kill bill: volume 2": {
     "person_name": "Uma Thurman",
-    "person_id": null
+    "person_id": 139
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2005|million dollar baby": {
     "person_name": "Hilary Swank",
-    "person_id": null
+    "person_id": 448
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2005|vera drake": {
     "person_name": "Imelda Staunton",
-    "person_id": null
+    "person_id": 11356
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2006|a history of violence": {
     "person_name": "Maria Bello",
-    "person_id": null
+    "person_id": 49
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2006|memoirs of a geisha": {
     "person_name": "Ziyi Zhang",
-    "person_id": null
+    "person_id": 1339
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2006|north country": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2006|proof": {
     "person_name": "Gwyneth Paltrow",
-    "person_id": null
+    "person_id": 12052
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2006|transamerica": {
     "person_name": "Felicity Huffman",
-    "person_id": null
+    "person_id": 7427
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|helen mirren": {
     "person_name": "The Queen",
-    "person_id": null
+    "person_id": 5925098
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|little children": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|notes on a scandal": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|sherrybaby": {
     "person_name": "Maggie Gyllenhaal",
-    "person_id": null
+    "person_id": 1579
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2007|volver": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2008|a mighty heart": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2008|atonement": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2008|away from her": {
     "person_name": "Julie Christie",
-    "person_id": null
+    "person_id": 1666
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2008|elizabeth: the golden age": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2008|the brave one": {
     "person_name": "Jodie Foster",
-    "person_id": null
+    "person_id": 1038
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2009|changeling": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2009|doubt": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2009|i've loved you so long (il y a longtemps que je t'aime)": {
     "person_name": "Kristin Scott Thomas",
-    "person_id": null
+    "person_id": 5470
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2009|kate winslet": {
     "person_name": "Revolutionary Road",
@@ -64111,455 +64111,455 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2009|rachel getting married": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2010|an education": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2010|precious": {
     "person_name": "Gabourey Sidibe",
-    "person_id": null
+    "person_id": 109560
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2010|the blind side": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2010|the last station": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2010|the young victoria": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2011|black swan": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2011|blue valentine": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2011|frankie & alice": {
     "person_name": "Halle Berry",
-    "person_id": null
+    "person_id": 4587
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2011|rabbit hole": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2011|winter's bone": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2012|albert nobbs": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2012|the girl with the dragon tattoo": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2012|the help": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2012|the iron lady": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2012|we need to talk about kevin": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2013|hitchcock": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2013|rust and bone": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2013|the deep blue sea": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2013|the impossible": {
     "person_name": "Naomi Watts",
-    "person_id": null
+    "person_id": 3489
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2013|zero dark thirty": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2014|blue jasmine": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2014|gravity": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2014|labor day": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2014|philomena": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2014|saving mr. banks": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2015|cake": {
     "person_name": "Jennifer Aniston",
-    "person_id": null
+    "person_id": 4491
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2015|gone girl": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2015|still alice": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2015|the theory of everything": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2015|wild": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2016|brooklyn": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2016|carol": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2016|room": {
     "person_name": "Brie Larson",
-    "person_id": null
+    "person_id": 60073
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2016|the danish girl": {
     "person_name": "Alicia Vikander",
-    "person_id": null
+    "person_id": 227454
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2017|arrival": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2017|elle": {
     "person_name": "Isabelle Huppert",
-    "person_id": null
+    "person_id": 17882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2017|jackie": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2017|loving": {
     "person_name": "Ruth Negga",
-    "person_id": null
+    "person_id": 17018
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2017|miss sloane": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2018|all the money in the world": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2018|molly's game": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2018|the post": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2018|the shape of water": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2018|three billboards outside ebbing, missouri": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2019|a private war": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2019|a star is born": {
     "person_name": "Lady Gaga",
-    "person_id": null
+    "person_id": 237405
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2019|can you ever forgive me?": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2019|destroyer": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2019|the wife": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2020|bombshell": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2020|harriet": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2020|judy": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2020|little women": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2020|marriage story": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2021|ma rainey's black bottom": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2021|nomadland": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2021|pieces of a woman": {
     "person_name": "Vanessa Kirby",
-    "person_id": null
+    "person_id": 556356
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2021|promising young woman": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2021|the united states vs. billie holiday": {
     "person_name": "Andra Day",
-    "person_id": null
+    "person_id": 1658802
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2022|being the ricardos": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2022|house of gucci": {
     "person_name": "Lady Gaga",
-    "person_id": null
+    "person_id": 237405
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2022|spencer": {
     "person_name": "Kristen Stewart",
-    "person_id": null
+    "person_id": 37917
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2022|the eyes of tammy faye": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2022|the lost daughter": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2023|blonde": {
     "person_name": "Ana de Armas",
-    "person_id": null
+    "person_id": 224513
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2023|empire of light": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2023|the fabelmans": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2023|the woman king": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2023|tár": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|anatomy of a fall": {
     "person_name": "Sandra Hüller",
-    "person_id": null
+    "person_id": 7152
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|killers of the flower moon": {
     "person_name": "Lily Gladstone",
-    "person_id": null
+    "person_id": 1183917
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|maestro": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|nyad": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|past lives": {
     "person_name": "Greta Lee",
-    "person_id": null
+    "person_id": 1260481
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2024|priscilla": {
     "person_name": "Cailee Spaeny",
-    "person_id": null
+    "person_id": 1683343
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|babygirl": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|i'm still here": {
     "person_name": "Fernanda Torres",
-    "person_id": null
+    "person_id": 87335
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|lee": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|maria": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|the last showgirl": {
     "person_name": "Pamela Anderson",
-    "person_id": null
+    "person_id": 6736
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Drama|2025|the room next door": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2001|chocolat": {
     "person_name": "Juliette Binoche",
-    "person_id": null
+    "person_id": 1137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2001|miss congeniality": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2001|nurse betty": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2001|saving grace": {
     "person_name": "Brenda Blethyn",
-    "person_id": null
+    "person_id": 4154
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2001|small time crooks": {
     "person_name": "Tracey Ullman",
-    "person_id": null
+    "person_id": 30364
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2002|bandits": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2002|bridget jones's diary": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2002|ghost world": {
     "person_name": "Thora Birch",
-    "person_id": null
+    "person_id": 2155
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2002|legally blonde": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2002|moulin rouge!": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2003|chicago": {
     "person_name": "Catherine Zeta-Jones",
-    "person_id": null
+    "person_id": 1922
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2003|my big fat greek wedding": {
     "person_name": "Nia Vardalos",
-    "person_id": null
+    "person_id": 54645
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2003|secretary": {
     "person_name": "Maggie Gyllenhaal",
-    "person_id": null
+    "person_id": 1579
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2003|the banger sisters": {
     "person_name": "Goldie Hawn",
-    "person_id": null
+    "person_id": 18892
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2004|calendar girls": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2004|freaky friday": {
     "person_name": "Jamie Lee Curtis",
-    "person_id": null
+    "person_id": 8944
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2004|lost in translation": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2004|something's gotta give": {
     "person_name": "Diane Keaton",
-    "person_id": null
+    "person_id": 3092
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2004|under the tuscan sun": {
     "person_name": "Diane Lane",
-    "person_id": null
+    "person_id": 2882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2005|being julia": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2005|bridget jones: the edge of reason": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2005|de-lovely": {
     "person_name": "Ashley Judd",
-    "person_id": null
+    "person_id": 15852
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2005|eternal sunshine of the spotless mind": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2005|the phantom of the opera": {
     "person_name": "Emmy Rossum",
-    "person_id": null
+    "person_id": 4730
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2006|mrs henderson presents": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2006|pride & prejudice": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2006|the family stone": {
     "person_name": "Sarah Jessica Parker",
-    "person_id": null
+    "person_id": 520
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2006|the squid and the whale": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2006|walk the line": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|dreamgirls": {
     "person_name": "Beyoncé",
-    "person_id": null
+    "person_id": 14386
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|little miss sunshine": {
     "person_name": "Toni Collette",
-    "person_id": null
+    "person_id": 3051
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|meryl streep": {
     "person_name": "The Devil Wears Prada",
@@ -64567,43 +64567,43 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|miss potter": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2007|running with scissors": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|enchanted": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|hairspray": {
     "person_name": "Nikki Blonsky",
-    "person_id": null
+    "person_id": 29224
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|juno": {
     "person_name": "Elliot Page",
-    "person_id": null
+    "person_id": 27578
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|la vie en rose": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2008|sweeney todd: the demon barber of fleet street": {
     "person_name": "Helena Bonham Carter",
-    "person_id": null
+    "person_id": 1283
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2009|burn after reading": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2009|last chance harvey": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2009|mamma mia!": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2009|sally hawkins": {
     "person_name": "Happy-Go-Lucky",
@@ -64611,471 +64611,471 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2009|vicky cristina barcelona": {
     "person_name": "Rebecca Hall",
-    "person_id": null
+    "person_id": 15556
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2010|duplicity": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2010|it's complicated": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2010|julie & julia": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2010|nine": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2010|the proposal": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2011|easy a": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2011|love & other drugs": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2011|the kids are all right": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2011|the tourist": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2012|bridesmaids": {
     "person_name": "Kristen Wiig",
-    "person_id": null
+    "person_id": 41091
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2012|carnage": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2012|my week with marilyn": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2012|young adult": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2013|hope springs": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2013|quartet": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2013|salmon fishing in the yemen": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2013|silver linings playbook": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2013|the best exotic marigold hotel": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2014|american hustle": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2014|august: osage county": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2014|before midnight": {
     "person_name": "Julie Delpy",
-    "person_id": null
+    "person_id": 1146
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2014|enough said": {
     "person_name": "Julia Louis-Dreyfus",
-    "person_id": null
+    "person_id": 15886
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2014|frances ha": {
     "person_name": "Greta Gerwig",
-    "person_id": null
+    "person_id": 45400
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2015|annie": {
     "person_name": "Quvenzhané Wallis",
-    "person_id": null
+    "person_id": 1055235
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2015|big eyes": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2015|into the woods": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2015|maps to the stars": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2015|the hundred-foot journey": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2016|grandma": {
     "person_name": "Lily Tomlin",
-    "person_id": null
+    "person_id": 10437
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2016|joy": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2016|spy": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2016|the lady in the van": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2016|trainwreck": {
     "person_name": "Amy Schumer",
-    "person_id": null
+    "person_id": 440414
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2017|20th century women": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2017|florence foster jenkins": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2017|la la land": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2017|rules don't apply": {
     "person_name": "Lily Collins",
-    "person_id": null
+    "person_id": 112561
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2017|the edge of seventeen": {
     "person_name": "Hailee Steinfeld",
-    "person_id": null
+    "person_id": 130640
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2018|battle of the sexes": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2018|i, tonya": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2018|lady bird": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2018|the leisure seeker": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2018|victoria & abdul": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2019|crazy rich asians": {
     "person_name": "Constance Wu",
-    "person_id": null
+    "person_id": 206444
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2019|eighth grade": {
     "person_name": "Elsie Fisher",
-    "person_id": null
+    "person_id": 122851
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2019|mary poppins returns": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2019|the favourite": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2019|tully": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2020|booksmart": {
     "person_name": "Beanie Feldstein",
-    "person_id": null
+    "person_id": 1496393
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2020|knives out": {
     "person_name": "Ana de Armas",
-    "person_id": null
+    "person_id": 224513
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2020|late night": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2020|the farewell": {
     "person_name": "Awkwafina",
-    "person_id": null
+    "person_id": 1625558
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2020|where'd you go, bernadette": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2021|borat subsequent moviefilm": {
     "person_name": "Maria Bakalova",
-    "person_id": null
+    "person_id": 4877640
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2021|emma": {
     "person_name": "Anya Taylor-Joy",
-    "person_id": null
+    "person_id": 1397778
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2021|french exit": {
     "person_name": "Michelle Pfeiffer",
-    "person_id": null
+    "person_id": 1160
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2021|i care a lot": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2021|music": {
     "person_name": "Kate Hudson",
-    "person_id": null
+    "person_id": 11661
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2022|annette": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2022|cruella": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2022|don't look up": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2022|licorice pizza": {
     "person_name": "Alana Haim",
-    "person_id": null
+    "person_id": 1741367
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2022|west side story": {
     "person_name": "Rachel Zegler",
-    "person_id": null
+    "person_id": 2217977
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2023|babylon": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2023|everything everywhere all at once": {
     "person_name": "Michelle Yeoh",
-    "person_id": null
+    "person_id": 1620
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2023|good luck to you, leo grande": {
     "person_name": "Emma Thompson",
-    "person_id": null
+    "person_id": 7056
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2023|mrs. harris goes to paris": {
     "person_name": "Lesley Manville",
-    "person_id": null
+    "person_id": 72305
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2023|the menu": {
     "person_name": "Anya Taylor-Joy",
-    "person_id": null
+    "person_id": 1397778
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|barbie": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|fallen leaves": {
     "person_name": "Alma Pöysti",
-    "person_id": null
+    "person_id": 1364782
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|may december": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|no hard feelings": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|poor things": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2024|the color purple": {
     "person_name": "Fantasia Barrino",
-    "person_id": null
+    "person_id": 165909
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|anora": {
     "person_name": "Mikey Madison",
-    "person_id": null
+    "person_id": 1640439
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|challengers": {
     "person_name": "Zendaya",
-    "person_id": null
+    "person_id": 505710
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|emilia pérez": {
     "person_name": "Karla Sofía Gascón",
-    "person_id": null
+    "person_id": 1505938
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|nightbitch": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|the substance": {
     "person_name": "Demi Moore",
-    "person_id": null
+    "person_id": 3416
   },
   "GoldenGlobe|Best Actress in a Motion Picture – Musical or Comedy|2025|wicked": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "GoldenGlobe|Best Director|2001|crouching tiger, hidden dragon (wo hu cang long)": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "GoldenGlobe|Best Director|2001|erin brockovich": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "GoldenGlobe|Best Director|2001|gladiator": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "GoldenGlobe|Best Director|2001|sunshine": {
     "person_name": "Istvan Szabo",
-    "person_id": null
+    "person_id": 3484906
   },
   "GoldenGlobe|Best Director|2001|traffic": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "GoldenGlobe|Best Director|2002|a beautiful mind": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "GoldenGlobe|Best Director|2002|a.i. artificial intelligence": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2002|gosford park": {
     "person_name": "Robert Altman",
-    "person_id": null
+    "person_id": 9789
   },
   "GoldenGlobe|Best Director|2002|moulin rouge!": {
     "person_name": "Baz Luhrmann",
-    "person_id": null
+    "person_id": 6201
   },
   "GoldenGlobe|Best Director|2002|mulholland drive": {
     "person_name": "David Lynch",
-    "person_id": null
+    "person_id": 5602
   },
   "GoldenGlobe|Best Director|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "GoldenGlobe|Best Director|2003|about schmidt": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "GoldenGlobe|Best Director|2003|adaptation.": {
     "person_name": "Spike Jonze",
-    "person_id": null
+    "person_id": 5953
   },
   "GoldenGlobe|Best Director|2003|chicago": {
     "person_name": "Rob Marshall",
-    "person_id": null
+    "person_id": 17633
   },
   "GoldenGlobe|Best Director|2003|gangs of new york": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2003|the hours": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "GoldenGlobe|Best Director|2003|the lord of the rings: the two towers": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "GoldenGlobe|Best Director|2004|cold mountain": {
     "person_name": "Anthony Minghella",
-    "person_id": null
+    "person_id": 2239
   },
   "GoldenGlobe|Best Director|2004|lost in translation": {
     "person_name": "Sofia Coppola",
-    "person_id": null
+    "person_id": 1769
   },
   "GoldenGlobe|Best Director|2004|master and commander: the far side of the world": {
     "person_name": "Peter Weir",
-    "person_id": null
+    "person_id": 2690
   },
   "GoldenGlobe|Best Director|2004|mystic river": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Director|2004|the lord of the rings: the return of the king": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "GoldenGlobe|Best Director|2005|closer": {
     "person_name": "Mike Nichols",
-    "person_id": null
+    "person_id": 5342
   },
   "GoldenGlobe|Best Director|2005|finding neverland": {
     "person_name": "Marc Forster",
-    "person_id": null
+    "person_id": 12995
   },
   "GoldenGlobe|Best Director|2005|million dollar baby": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Director|2005|sideways": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "GoldenGlobe|Best Director|2005|the aviator": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2006|brokeback mountain": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "GoldenGlobe|Best Director|2006|good night, and good luck": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Director|2006|king kong": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "GoldenGlobe|Best Director|2006|match point": {
     "person_name": "Woody Allen",
-    "person_id": null
+    "person_id": 1243
   },
   "GoldenGlobe|Best Director|2006|munich": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2006|the constant gardener": {
     "person_name": "Fernando Meirelles",
-    "person_id": null
+    "person_id": 8557
   },
   "GoldenGlobe|Best Director|2007|babel": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "GoldenGlobe|Best Director|2007|flags of our fathers": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Director|2007|letters from iwo jima": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Director|2007|martin scorsese": {
     "person_name": "The Departed",
@@ -65083,7 +65083,7 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Director|2007|the queen": {
     "person_name": "Stephen Frears",
-    "person_id": null
+    "person_id": 3224
   },
   "GoldenGlobe|Best Director|2009|danny boyle": {
     "person_name": "Slumdog Millionaire",
@@ -65091,1127 +65091,1127 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Director|2009|frost/nixon": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "GoldenGlobe|Best Director|2009|revolutionary road": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "GoldenGlobe|Best Director|2009|the curious case of benjamin button": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "GoldenGlobe|Best Director|2009|the reader": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "GoldenGlobe|Best Director|2010|avatar": {
     "person_name": "James Cameron",
-    "person_id": null
+    "person_id": 2710
   },
   "GoldenGlobe|Best Director|2010|inglourious basterds": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "GoldenGlobe|Best Director|2010|invictus": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Director|2010|the hurt locker": {
     "person_name": "Kathryn Bigelow",
-    "person_id": null
+    "person_id": 14392
   },
   "GoldenGlobe|Best Director|2010|up in the air": {
     "person_name": "Jason Reitman",
-    "person_id": null
+    "person_id": 52443
   },
   "GoldenGlobe|Best Director|2011|black swan": {
     "person_name": "Darren Aronofsky",
-    "person_id": null
+    "person_id": 6431
   },
   "GoldenGlobe|Best Director|2011|inception": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "GoldenGlobe|Best Director|2011|the fighter": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "GoldenGlobe|Best Director|2011|the king's speech": {
     "person_name": "Tom Hooper",
-    "person_id": null
+    "person_id": 70500
   },
   "GoldenGlobe|Best Director|2011|the social network": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "GoldenGlobe|Best Director|2012|hugo": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2012|midnight in paris": {
     "person_name": "Woody Allen",
-    "person_id": null
+    "person_id": 1243
   },
   "GoldenGlobe|Best Director|2012|the artist": {
     "person_name": "Michel Hazanavicius",
-    "person_id": null
+    "person_id": 67717
   },
   "GoldenGlobe|Best Director|2012|the descendants": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "GoldenGlobe|Best Director|2012|the ides of march": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Director|2013|argo": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "GoldenGlobe|Best Director|2013|django unchained": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "GoldenGlobe|Best Director|2013|life of pi": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "GoldenGlobe|Best Director|2013|lincoln": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2013|zero dark thirty": {
     "person_name": "Kathryn Bigelow",
-    "person_id": null
+    "person_id": 14392
   },
   "GoldenGlobe|Best Director|2014|12 years a slave": {
     "person_name": "Steve McQueen",
-    "person_id": null
+    "person_id": 13565
   },
   "GoldenGlobe|Best Director|2014|american hustle": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "GoldenGlobe|Best Director|2014|captain phillips": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "GoldenGlobe|Best Director|2014|gravity": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "GoldenGlobe|Best Director|2014|nebraska": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "GoldenGlobe|Best Director|2015|birdman": {
     "person_name": "Alejandro G. Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "GoldenGlobe|Best Director|2015|boyhood": {
     "person_name": "Richard Linklater",
-    "person_id": null
+    "person_id": 564
   },
   "GoldenGlobe|Best Director|2015|gone girl": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "GoldenGlobe|Best Director|2015|selma": {
     "person_name": "Ava DuVernay",
-    "person_id": null
+    "person_id": 929825
   },
   "GoldenGlobe|Best Director|2015|the grand budapest hotel": {
     "person_name": "Wes Anderson",
-    "person_id": null
+    "person_id": 5655
   },
   "GoldenGlobe|Best Director|2016|carol": {
     "person_name": "Todd Haynes",
-    "person_id": null
+    "person_id": 16863
   },
   "GoldenGlobe|Best Director|2016|mad max: fury road": {
     "person_name": "George Miller",
-    "person_id": null
+    "person_id": 20629
   },
   "GoldenGlobe|Best Director|2016|spotlight": {
     "person_name": "Tom McCarthy",
-    "person_id": null
+    "person_id": 17867
   },
   "GoldenGlobe|Best Director|2016|the martian": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "GoldenGlobe|Best Director|2016|the revenant": {
     "person_name": "Alejandro G. Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "GoldenGlobe|Best Director|2017|hacksaw ridge": {
     "person_name": "Mel Gibson",
-    "person_id": null
+    "person_id": 2461
   },
   "GoldenGlobe|Best Director|2017|la la land": {
     "person_name": "Damien Chazelle",
-    "person_id": null
+    "person_id": 136495
   },
   "GoldenGlobe|Best Director|2017|manchester by the sea": {
     "person_name": "Kenneth Lonergan",
-    "person_id": null
+    "person_id": 30711
   },
   "GoldenGlobe|Best Director|2017|moonlight": {
     "person_name": "Barry Jenkins",
-    "person_id": null
+    "person_id": 92784
   },
   "GoldenGlobe|Best Director|2017|nocturnal animals": {
     "person_name": "Tom Ford",
-    "person_id": null
+    "person_id": 120615
   },
   "GoldenGlobe|Best Director|2018|all the money in the world": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "GoldenGlobe|Best Director|2018|dunkirk": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "GoldenGlobe|Best Director|2018|the post": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2018|the shape of water": {
     "person_name": "Guillermo del Toro",
-    "person_id": null
+    "person_id": 10828
   },
   "GoldenGlobe|Best Director|2018|three billboards outside ebbing, missouri": {
     "person_name": "Martin McDonagh",
-    "person_id": null
+    "person_id": 54472
   },
   "GoldenGlobe|Best Director|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Director|2019|blackkklansman": {
     "person_name": "Spike Lee",
-    "person_id": null
+    "person_id": 5281
   },
   "GoldenGlobe|Best Director|2019|green book": {
     "person_name": "Peter Farrelly",
-    "person_id": null
+    "person_id": 7396
   },
   "GoldenGlobe|Best Director|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "GoldenGlobe|Best Director|2019|vice": {
     "person_name": "Adam McKay",
-    "person_id": null
+    "person_id": 55710
   },
   "GoldenGlobe|Best Director|2020|1917": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "GoldenGlobe|Best Director|2020|joker": {
     "person_name": "Todd Phillips",
-    "person_id": null
+    "person_id": 57130
   },
   "GoldenGlobe|Best Director|2020|once upon a time in hollywood": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "GoldenGlobe|Best Director|2020|parasite": {
     "person_name": "Bong Joon Ho",
-    "person_id": null
+    "person_id": 21684
   },
   "GoldenGlobe|Best Director|2020|the irishman": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2021|mank": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "GoldenGlobe|Best Director|2021|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "GoldenGlobe|Best Director|2021|one night in miami...": {
     "person_name": "Regina King",
-    "person_id": null
+    "person_id": 9788
   },
   "GoldenGlobe|Best Director|2021|promising young woman": {
     "person_name": "Emerald Fennell",
-    "person_id": null
+    "person_id": 1252934
   },
   "GoldenGlobe|Best Director|2021|the trial of the chicago 7": {
     "person_name": "Aaron Sorkin",
-    "person_id": null
+    "person_id": 13520
   },
   "GoldenGlobe|Best Director|2022|belfast": {
     "person_name": "Kenneth Branagh",
-    "person_id": null
+    "person_id": 11181
   },
   "GoldenGlobe|Best Director|2022|dune": {
     "person_name": "Denis Villeneuve",
-    "person_id": null
+    "person_id": 137427
   },
   "GoldenGlobe|Best Director|2022|the lost daughter": {
     "person_name": "Maggie Gyllenhaal",
-    "person_id": null
+    "person_id": 1579
   },
   "GoldenGlobe|Best Director|2022|the power of the dog": {
     "person_name": "Jane Campion",
-    "person_id": null
+    "person_id": 10757
   },
   "GoldenGlobe|Best Director|2022|west side story": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2023|avatar: the way of water": {
     "person_name": "James Cameron",
-    "person_id": null
+    "person_id": 2710
   },
   "GoldenGlobe|Best Director|2023|elvis": {
     "person_name": "Baz Luhrmann",
-    "person_id": null
+    "person_id": 6201
   },
   "GoldenGlobe|Best Director|2023|everything everywhere all at once": {
     "person_name": "Daniel Kwan",
-    "person_id": null
+    "person_id": 1383612
   },
   "GoldenGlobe|Best Director|2023|the banshees of inisherin": {
     "person_name": "Martin McDonagh",
-    "person_id": null
+    "person_id": 54472
   },
   "GoldenGlobe|Best Director|2023|the fabelmans": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "GoldenGlobe|Best Director|2024|barbie": {
     "person_name": "Greta Gerwig",
-    "person_id": null
+    "person_id": 45400
   },
   "GoldenGlobe|Best Director|2024|killers of the flower moon": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "GoldenGlobe|Best Director|2024|maestro": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Director|2024|oppenheimer": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "GoldenGlobe|Best Director|2024|past lives": {
     "person_name": "Celine Song",
-    "person_id": null
+    "person_id": 2518227
   },
   "GoldenGlobe|Best Director|2024|poor things": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "GoldenGlobe|Best Director|2025|[[all we imagine": {
     "person_name": "Payal Kapadia",
-    "person_id": null
+    "person_id": 1467320
   },
   "GoldenGlobe|Best Director|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "GoldenGlobe|Best Director|2025|conclave": {
     "person_name": "Edward Berger",
-    "person_id": null
+    "person_id": 221522
   },
   "GoldenGlobe|Best Director|2025|emilia pérez": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "GoldenGlobe|Best Director|2025|the brutalist": {
     "person_name": "Brady Corbet",
-    "person_id": null
+    "person_id": 55493
   },
   "GoldenGlobe|Best Director|2025|the substance": {
     "person_name": "Coralie Fargeat",
-    "person_id": null
+    "person_id": 1607016
   },
   "GoldenGlobe|Best Director|2026|frankenstein": {
     "person_name": "Guillermo del Toro",
-    "person_id": null
+    "person_id": 10828
   },
   "GoldenGlobe|Best Director|2026|hamnet": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "GoldenGlobe|Best Director|2026|it was just an accident": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "GoldenGlobe|Best Director|2026|one battle after another": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "GoldenGlobe|Best Director|2026|sentimental value": {
     "person_name": "Joachim Trier",
-    "person_id": null
+    "person_id": 71609
   },
   "GoldenGlobe|Best Director|2026|sinners": {
     "person_name": "Ryan Coogler",
-    "person_id": null
+    "person_id": 1056121
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|after the hunt": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|die my love": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|hamnet": {
     "person_name": "Jessie Buckley",
-    "person_id": null
+    "person_id": 1498158
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|hedda": {
     "person_name": "Tessa Thompson",
-    "person_id": null
+    "person_id": 62561
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|sentimental value": {
     "person_name": "Renate Reinsve",
-    "person_id": null
+    "person_id": 1576786
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Drama|2026|sorry, baby": {
     "person_name": "Eva Victor",
-    "person_id": null
+    "person_id": 2425998
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|bugonia": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|if i had legs i'd kick you": {
     "person_name": "Rose Byrne",
-    "person_id": null
+    "person_id": 9827
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|one battle after another": {
     "person_name": "Chase Infiniti",
-    "person_id": null
+    "person_id": 3914706
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|song sung blue": {
     "person_name": "Kate Hudson",
-    "person_id": null
+    "person_id": 11661
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|the testament of ann lee": {
     "person_name": "Amanda Seyfried",
-    "person_id": null
+    "person_id": 71070
   },
   "GoldenGlobe|Best Female Actor in a Motion Picture – Musical or Comedy|2026|wicked: for good": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|frankenstein": {
     "person_name": "Oscar Isaac",
-    "person_id": null
+    "person_id": 25072
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|sinners": {
     "person_name": "Michael B. Jordan",
-    "person_id": null
+    "person_id": 135651
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|springsteen: deliver me from nowhere": {
     "person_name": "Jeremy Allen White",
-    "person_id": null
+    "person_id": 206905
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|the secret agent": {
     "person_name": "Wagner Moura",
-    "person_id": null
+    "person_id": 52583
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|the smashing machine": {
     "person_name": "Dwayne Johnson",
-    "person_id": null
+    "person_id": 18918
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Drama|2026|train dreams": {
     "person_name": "Joel Edgerton",
-    "person_id": null
+    "person_id": 33192
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|blue moon": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|bugonia": {
     "person_name": "Jesse Plemons",
-    "person_id": null
+    "person_id": 88124
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|jay kelly": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|marty supreme": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|no other choice": {
     "person_name": "Lee Byung-hun",
-    "person_id": null
+    "person_id": 25002
   },
   "GoldenGlobe|Best Male Actor in a Motion Picture – Musical or Comedy|2026|one battle after another": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Original Score|2001|all the pretty horses": {
     "person_name": "Larry Paxton",
-    "person_id": null
+    "person_id": 2241187
   },
   "GoldenGlobe|Best Original Score|2001|chocolat": {
     "person_name": "Rachel Portman",
-    "person_id": null
+    "person_id": 3562
   },
   "GoldenGlobe|Best Original Score|2001|gladiator": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2001|malèna": {
     "person_name": "Ennio Morricone",
-    "person_id": null
+    "person_id": 1259
   },
   "GoldenGlobe|Best Original Score|2001|sunshine": {
     "person_name": "Maurice Jarre",
-    "person_id": null
+    "person_id": 2704
   },
   "GoldenGlobe|Best Original Score|2001|wo hu cang long (crouching tiger, hidden dragon)": {
     "person_name": "Tan Dun",
-    "person_id": null
+    "person_id": 1360
   },
   "GoldenGlobe|Best Original Score|2002|a beautiful mind": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "GoldenGlobe|Best Original Score|2002|a.i. artificial intelligence": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2002|ali": {
     "person_name": "Pieter Bourke",
-    "person_id": null
+    "person_id": 55998
   },
   "GoldenGlobe|Best Original Score|2002|moulin rouge!": {
     "person_name": "Craig Armstrong",
-    "person_id": null
+    "person_id": 7045
   },
   "GoldenGlobe|Best Original Score|2002|mulholland drive": {
     "person_name": "Angelo Badalamenti",
-    "person_id": null
+    "person_id": 5628
   },
   "GoldenGlobe|Best Original Score|2002|pearl harbor": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "GoldenGlobe|Best Original Score|2002|the shipping news": {
     "person_name": "Christopher Young",
-    "person_id": null
+    "person_id": 19155
   },
   "GoldenGlobe|Best Original Score|2003|25th hour": {
     "person_name": "Terence Blanchard",
-    "person_id": null
+    "person_id": 5287
   },
   "GoldenGlobe|Best Original Score|2003|far from heaven": {
     "person_name": "Elmer Bernstein",
-    "person_id": null
+    "person_id": 7182
   },
   "GoldenGlobe|Best Original Score|2003|frida": {
     "person_name": "Elliot Goldenthal",
-    "person_id": null
+    "person_id": 5581
   },
   "GoldenGlobe|Best Original Score|2003|rabbit-proof fence": {
     "person_name": "Peter Gabriel",
-    "person_id": null
+    "person_id": 39624
   },
   "GoldenGlobe|Best Original Score|2003|the hours": {
     "person_name": "Philip Glass",
-    "person_id": null
+    "person_id": 1551
   },
   "GoldenGlobe|Best Original Score|2004|big fish": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "GoldenGlobe|Best Original Score|2004|cold mountain": {
     "person_name": "Gabriel Yared",
-    "person_id": null
+    "person_id": 5488
   },
   "GoldenGlobe|Best Original Score|2004|girl with a pearl earring": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2004|the last samurai": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2004|the lord of the rings: the return of the king": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "GoldenGlobe|Best Original Score|2005|finding neverland": {
     "person_name": "Jan A. P. Kaczmarek",
-    "person_id": null
+    "person_id": 22680
   },
   "GoldenGlobe|Best Original Score|2005|million dollar baby": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Original Score|2005|sideways": {
     "person_name": "Rolfe Kent",
-    "person_id": null
+    "person_id": 24190
   },
   "GoldenGlobe|Best Original Score|2005|spanglish": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2005|the aviator": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "GoldenGlobe|Best Original Score|2006|brokeback mountain": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "GoldenGlobe|Best Original Score|2006|king kong": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "GoldenGlobe|Best Original Score|2006|memoirs of a geisha": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2006|syriana": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2006|the chronicles of narnia: the lion, the witch and the wardrobe": {
     "person_name": "Harry Gregson-Williams",
-    "person_id": null
+    "person_id": 5553
   },
   "GoldenGlobe|Best Original Score|2007|babel": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "GoldenGlobe|Best Original Score|2007|nomad": {
     "person_name": "Carlo Siliotto",
-    "person_id": null
+    "person_id": 27181
   },
   "GoldenGlobe|Best Original Score|2007|the da vinci code": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2007|the fountain": {
     "person_name": "Clint Mansell",
-    "person_id": null
+    "person_id": 6377
   },
   "GoldenGlobe|Best Original Score|2007|the painted veil": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2009|changeling": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "GoldenGlobe|Best Original Score|2009|defiance": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "GoldenGlobe|Best Original Score|2009|frost/nixon": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2009|slumdog millionaire": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "GoldenGlobe|Best Original Score|2009|the curious case of benjamin button": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2010|a single man": {
     "person_name": "Abel Korzeniowski",
-    "person_id": null
+    "person_id": 558016
   },
   "GoldenGlobe|Best Original Score|2010|avatar": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "GoldenGlobe|Best Original Score|2010|the informant!": {
     "person_name": "Marvin Hamlisch",
-    "person_id": null
+    "person_id": 10468
   },
   "GoldenGlobe|Best Original Score|2010|up": {
     "person_name": "Michael Giacchino",
-    "person_id": null
+    "person_id": 15347
   },
   "GoldenGlobe|Best Original Score|2010|where the wild things are": {
     "person_name": "Karen O",
-    "person_id": null
+    "person_id": 1187023
   },
   "GoldenGlobe|Best Original Score|2011|127 hours": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "GoldenGlobe|Best Original Score|2011|alice in wonderland": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "GoldenGlobe|Best Original Score|2011|inception": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2011|the king's speech": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2011|the social network": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "GoldenGlobe|Best Original Score|2012|hugo": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "GoldenGlobe|Best Original Score|2012|the artist": {
     "person_name": "Ludovic Bource",
-    "person_id": null
+    "person_id": 472101
   },
   "GoldenGlobe|Best Original Score|2012|the girl with the dragon tattoo": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "GoldenGlobe|Best Original Score|2012|w.e.": {
     "person_name": "Abel Korzeniowski",
-    "person_id": null
+    "person_id": 558016
   },
   "GoldenGlobe|Best Original Score|2012|war horse": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2013|anna karenina": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "GoldenGlobe|Best Original Score|2013|argo": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2013|cloud atlas": {
     "person_name": "Tom Tykwer",
-    "person_id": null
+    "person_id": 1071
   },
   "GoldenGlobe|Best Original Score|2013|life of pi": {
     "person_name": "Mychael Danna",
-    "person_id": null
+    "person_id": 5359
   },
   "GoldenGlobe|Best Original Score|2013|lincoln": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2014|12 years a slave": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2014|all is lost": {
     "person_name": "Alex Ebert",
-    "person_id": null
+    "person_id": 1059009
   },
   "GoldenGlobe|Best Original Score|2014|gravity": {
     "person_name": "Steven Price",
-    "person_id": null
+    "person_id": 16368
   },
   "GoldenGlobe|Best Original Score|2014|mandela: long walk to freedom": {
     "person_name": "Alex Heffes",
-    "person_id": null
+    "person_id": 22047
   },
   "GoldenGlobe|Best Original Score|2014|the book thief": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2015|birdman": {
     "person_name": "Antonio Sánchez",
-    "person_id": null
+    "person_id": 1167113
   },
   "GoldenGlobe|Best Original Score|2015|gone girl": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "GoldenGlobe|Best Original Score|2015|interstellar": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2015|the imitation game": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2015|the theory of everything": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "GoldenGlobe|Best Original Score|2016|carol": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "GoldenGlobe|Best Original Score|2016|steve jobs": {
     "person_name": "Daniel Pemberton",
-    "person_id": null
+    "person_id": 582922
   },
   "GoldenGlobe|Best Original Score|2016|the danish girl": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2016|the hateful eight": {
     "person_name": "Ennio Morricone",
-    "person_id": null
+    "person_id": 1259
   },
   "GoldenGlobe|Best Original Score|2016|the revenant": {
     "person_name": "Ryuichi Sakamoto",
-    "person_id": null
+    "person_id": 3394338
   },
   "GoldenGlobe|Best Original Score|2017|arrival": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "GoldenGlobe|Best Original Score|2017|hidden figures": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2017|la la land": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "GoldenGlobe|Best Original Score|2017|lion": {
     "person_name": "Dustin O'Halloran",
-    "person_id": null
+    "person_id": 233130
   },
   "GoldenGlobe|Best Original Score|2017|moonlight": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "GoldenGlobe|Best Original Score|2018|dunkirk": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2018|phantom thread": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "GoldenGlobe|Best Original Score|2018|the post": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2018|the shape of water": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2018|three billboards outside ebbing, missouri": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "GoldenGlobe|Best Original Score|2019|a quiet place": {
     "person_name": "Marco Beltrami",
-    "person_id": null
+    "person_id": 7229
   },
   "GoldenGlobe|Best Original Score|2019|black panther": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "GoldenGlobe|Best Original Score|2019|first man": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "GoldenGlobe|Best Original Score|2019|isle of dogs": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2019|mary poppins returns": {
     "person_name": "Marc Shaiman",
-    "person_id": null
+    "person_id": 9251
   },
   "GoldenGlobe|Best Original Score|2020|1917": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "GoldenGlobe|Best Original Score|2020|joker": {
     "person_name": "Hildur Guðnadóttir",
-    "person_id": null
+    "person_id": 1178828
   },
   "GoldenGlobe|Best Original Score|2020|little women": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2020|marriage story": {
     "person_name": "Randy Newman",
-    "person_id": null
+    "person_id": 7885
   },
   "GoldenGlobe|Best Original Score|2020|motherless brooklyn": {
     "person_name": "Daniel Pemberton",
-    "person_id": null
+    "person_id": 582922
   },
   "GoldenGlobe|Best Original Score|2021|mank": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "GoldenGlobe|Best Original Score|2021|news of the world": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "GoldenGlobe|Best Original Score|2021|soul": {
     "person_name": "Jon Batiste",
-    "person_id": null
+    "person_id": 1513968
   },
   "GoldenGlobe|Best Original Score|2021|tenet": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "GoldenGlobe|Best Original Score|2021|the midnight sky": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2022|dune": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2022|encanto": {
     "person_name": "Germaine Franco",
-    "person_id": null
+    "person_id": 1108963
   },
   "GoldenGlobe|Best Original Score|2022|parallel mothers": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "GoldenGlobe|Best Original Score|2022|the french dispatch": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2022|the power of the dog": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "GoldenGlobe|Best Original Score|2023|babylon": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "GoldenGlobe|Best Original Score|2023|guillermo del toro's pinocchio": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2023|the banshees of inisherin": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "GoldenGlobe|Best Original Score|2023|the fabelmans": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "GoldenGlobe|Best Original Score|2023|women talking": {
     "person_name": "Hildur Guðnadóttir",
-    "person_id": null
+    "person_id": 1178828
   },
   "GoldenGlobe|Best Original Score|2024|killers of the flower moon": {
     "person_name": "Robbie Robertson",
-    "person_id": null
+    "person_id": 72861
   },
   "GoldenGlobe|Best Original Score|2024|oppenheimer": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "GoldenGlobe|Best Original Score|2024|poor things": {
     "person_name": "Jerskin Fendrix",
-    "person_id": null
+    "person_id": 4091704
   },
   "GoldenGlobe|Best Original Score|2024|spider-man: across the spider-verse": {
     "person_name": "Daniel Pemberton",
-    "person_id": null
+    "person_id": 582922
   },
   "GoldenGlobe|Best Original Score|2024|the boy and the heron": {
     "person_name": "Joe Hisaishi",
-    "person_id": null
+    "person_id": 636
   },
   "GoldenGlobe|Best Original Score|2024|the zone of interest": {
     "person_name": "Mica Levi",
-    "person_id": null
+    "person_id": 1341726
   },
   "GoldenGlobe|Best Original Score|2025|challengers": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "GoldenGlobe|Best Original Score|2025|conclave": {
     "person_name": "Volker Bertelmann",
-    "person_id": null
+    "person_id": 1023809
   },
   "GoldenGlobe|Best Original Score|2025|dune: part two": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2025|emilia pérez": {
     "person_name": "Clément Ducol",
-    "person_id": null
+    "person_id": 2006056
   },
   "GoldenGlobe|Best Original Score|2025|the brutalist": {
     "person_name": "Daniel Blumberg",
-    "person_id": null
+    "person_id": 1711289
   },
   "GoldenGlobe|Best Original Score|2025|the wild robot": {
     "person_name": "Kris Bowers",
-    "person_id": null
+    "person_id": 1802871
   },
   "GoldenGlobe|Best Original Score|2026|f1": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "GoldenGlobe|Best Original Score|2026|frankenstein": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "GoldenGlobe|Best Original Score|2026|hamnet": {
     "person_name": "Max Richter",
-    "person_id": null
+    "person_id": 46266
   },
   "GoldenGlobe|Best Original Score|2026|one battle after another": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "GoldenGlobe|Best Original Score|2026|sinners": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "GoldenGlobe|Best Original Score|2026|sirāt": {
     "person_name": "Kangding Ray",
-    "person_id": null
+    "person_id": 4985318
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2001|erin brockovich": {
     "person_name": "Albert Finney",
-    "person_id": null
+    "person_id": 3926
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2001|gladiator": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2001|shadow of the vampire": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2001|the contender": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2001|traffic": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|[[life": {
     "person_name": "Hayden Christensen",
-    "person_id": null
+    "person_id": 17244
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|a.i. artificial intelligence": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|ali": {
     "person_name": "Jon Voight",
-    "person_id": null
+    "person_id": 10127
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|ghost world": {
     "person_name": "Steve Buscemi",
-    "person_id": null
+    "person_id": 884
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|iris": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2002|sexy beast": {
     "person_name": "Ben Kingsley",
-    "person_id": null
+    "person_id": 2282
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2003|adaptation.": {
     "person_name": "Chris Cooper",
-    "person_id": null
+    "person_id": 2955
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2003|chicago": {
     "person_name": "John C. Reilly",
-    "person_id": null
+    "person_id": 4764
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2003|far from heaven": {
     "person_name": "Dennis Quaid",
-    "person_id": null
+    "person_id": 6065
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2003|road to perdition": {
     "person_name": "Paul Newman",
-    "person_id": null
+    "person_id": 3636
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2003|the hours": {
     "person_name": "Ed Harris",
-    "person_id": null
+    "person_id": 228
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|big fish": {
     "person_name": "Albert Finney",
-    "person_id": null
+    "person_id": 3926
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|mystic river": {
     "person_name": "Tim Robbins",
-    "person_id": null
+    "person_id": 504
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|seabiscuit": {
     "person_name": "William H. Macy",
-    "person_id": null
+    "person_id": 3905
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|shattered glass": {
     "person_name": "Peter Sarsgaard",
-    "person_id": null
+    "person_id": 133
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|the cooler": {
     "person_name": "Alec Baldwin",
-    "person_id": null
+    "person_id": 7447
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2004|the last samurai": {
     "person_name": "Ken Watanabe",
-    "person_id": null
+    "person_id": 3899
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2005|closer": {
     "person_name": "Clive Owen",
-    "person_id": null
+    "person_id": 2296
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2005|collateral": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2005|kill bill: volume 2": {
     "person_name": "David Carradine",
-    "person_id": null
+    "person_id": 141
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2005|million dollar baby": {
     "person_name": "Morgan Freeman",
-    "person_id": null
+    "person_id": 192
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2005|sideways": {
     "person_name": "Thomas Haden Church",
-    "person_id": null
+    "person_id": 19159
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2006|cinderella man": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2006|crash": {
     "person_name": "Matt Dillon",
-    "person_id": null
+    "person_id": 2876
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2006|mrs henderson presents": {
     "person_name": "Bob Hoskins",
-    "person_id": null
+    "person_id": 382
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2006|syriana": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2006|the producers": {
     "person_name": "Will Ferrell",
-    "person_id": null
+    "person_id": 23659
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|babel": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|eddie murphy": {
     "person_name": "Dreamgirls",
@@ -66219,35 +66219,35 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|hollywoodland": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2007|the departed": {
     "person_name": "Mark Wahlberg",
-    "person_id": null
+    "person_id": 13240
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2008|charlie wilson's war": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2008|hairspray": {
     "person_name": "John Travolta",
-    "person_id": null
+    "person_id": 8891
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2008|michael clayton": {
     "person_name": "Tom Wilkinson",
-    "person_id": null
+    "person_id": 207
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2008|no country for old men": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2008|the assassination of jesse james by the coward robert ford": {
     "person_name": "Casey Affleck",
-    "person_id": null
+    "person_id": 1893
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2009|doubt": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2009|heath ledger": {
     "person_name": "The Dark Knight",
@@ -66255,439 +66255,439 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2009|the duchess": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2009|tropic thunder": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2010|inglourious basterds": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2010|invictus": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2010|the last station": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2010|the lovely bones": {
     "person_name": "Stanley Tucci",
-    "person_id": null
+    "person_id": 2283
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2010|the messenger": {
     "person_name": "Woody Harrelson",
-    "person_id": null
+    "person_id": 57755
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2011|the fighter": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2011|the king's speech": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2011|the social network": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2011|the town": {
     "person_name": "Jeremy Renner",
-    "person_id": null
+    "person_id": 17604
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2011|wall street: money never sleeps": {
     "person_name": "Michael Douglas",
-    "person_id": null
+    "person_id": 3392
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2012|a dangerous method": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2012|beginners": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2012|drive": {
     "person_name": "Albert Brooks",
-    "person_id": null
+    "person_id": 13
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2012|moneyball": {
     "person_name": "Jonah Hill",
-    "person_id": null
+    "person_id": 21007
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2012|my week with marilyn": {
     "person_name": "Kenneth Branagh",
-    "person_id": null
+    "person_id": 11181
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2013|argo": {
     "person_name": "Alan Arkin",
-    "person_id": null
+    "person_id": 1903
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2013|django unchained": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2013|lincoln": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2013|the master": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2014|12 years a slave": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2014|american hustle": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2014|captain phillips": {
     "person_name": "Barkhad Abdi",
-    "person_id": null
+    "person_id": 1261694
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2014|dallas buyers club": {
     "person_name": "Jared Leto",
-    "person_id": null
+    "person_id": 7499
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2014|rush": {
     "person_name": "Daniel Brühl",
-    "person_id": null
+    "person_id": 3872
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2015|birdman": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2015|boyhood": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2015|foxcatcher": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2015|the judge": {
     "person_name": "Robert Duvall",
-    "person_id": null
+    "person_id": 3087
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2015|whiplash": {
     "person_name": "J. K. Simmons",
-    "person_id": null
+    "person_id": 18999
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2016|99 homes": {
     "person_name": "Michael Shannon",
-    "person_id": null
+    "person_id": 335
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2016|beasts of no nation": {
     "person_name": "Idris Elba",
-    "person_id": null
+    "person_id": 17605
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2016|bridge of spies": {
     "person_name": "Mark Rylance",
-    "person_id": null
+    "person_id": 40900
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2016|creed": {
     "person_name": "Sylvester Stallone",
-    "person_id": null
+    "person_id": 16483
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2016|love & mercy": {
     "person_name": "Paul Dano",
-    "person_id": null
+    "person_id": 17142
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2017|florence foster jenkins": {
     "person_name": "Simon Helberg",
-    "person_id": null
+    "person_id": 53863
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2017|hell or high water": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2017|lion": {
     "person_name": "Dev Patel",
-    "person_id": null
+    "person_id": 76788
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2017|moonlight": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2017|nocturnal animals": {
     "person_name": "Aaron Taylor-Johnson",
-    "person_id": null
+    "person_id": 27428
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2018|all the money in the world": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2018|call me by your name": {
     "person_name": "Armie Hammer",
-    "person_id": null
+    "person_id": 53807
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2018|the florida project": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2018|the shape of water": {
     "person_name": "Richard Jenkins",
-    "person_id": null
+    "person_id": 28633
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2018|three billboards outside ebbing, missouri": {
     "person_name": "Sam Rockwell",
-    "person_id": null
+    "person_id": 6807
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2019|beautiful boy": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2019|blackkklansman": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2019|can you ever forgive me?": {
     "person_name": "Richard E. Grant",
-    "person_id": null
+    "person_id": 20766
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2019|green book": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2019|vice": {
     "person_name": "Sam Rockwell",
-    "person_id": null
+    "person_id": 6807
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2020|a beautiful day in the neighborhood": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2020|once upon a time in hollywood": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2020|the irishman": {
     "person_name": "Joe Pesci",
-    "person_id": null
+    "person_id": 4517
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2020|the two popes": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2021|judas and the black messiah": {
     "person_name": "Daniel Kaluuya",
-    "person_id": null
+    "person_id": 206919
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2021|on the rocks": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2021|one night in miami...": {
     "person_name": "Leslie Odom Jr.",
-    "person_id": null
+    "person_id": 1254614
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2021|the little things": {
     "person_name": "Jared Leto",
-    "person_id": null
+    "person_id": 7499
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2021|the trial of the chicago 7": {
     "person_name": "Sacha Baron Cohen",
-    "person_id": null
+    "person_id": 6730
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2022|belfast": {
     "person_name": "Ciarán Hinds",
-    "person_id": null
+    "person_id": 8785
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2022|coda": {
     "person_name": "Troy Kotsur",
-    "person_id": null
+    "person_id": 1571661
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2022|the power of the dog": {
     "person_name": "Kodi Smit-McPhee",
-    "person_id": null
+    "person_id": 113505
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2022|the tender bar": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2023|babylon": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2023|everything everywhere all at once": {
     "person_name": "Ke Huy Quan",
-    "person_id": null
+    "person_id": 690
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2023|the banshees of inisherin": {
     "person_name": "Barry Keoghan",
-    "person_id": null
+    "person_id": 1290466
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2023|the good nurse": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2024|barbie": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2024|killers of the flower moon": {
     "person_name": "Robert De Niro",
-    "person_id": null
+    "person_id": 380
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2024|may december": {
     "person_name": "Charles Melton",
-    "person_id": null
+    "person_id": 1907002
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2024|oppenheimer": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2024|poor things": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|a complete unknown": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|a real pain": {
     "person_name": "Kieran Culkin",
-    "person_id": null
+    "person_id": 18793
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|anora": {
     "person_name": "Yura Borisov",
-    "person_id": null
+    "person_id": 1266686
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|gladiator ii": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|the apprentice": {
     "person_name": "Jeremy Strong",
-    "person_id": null
+    "person_id": 239271
   },
   "GoldenGlobe|Best Supporting Actor in a Motion Picture|2025|the brutalist": {
     "person_name": "Guy Pearce",
-    "person_id": null
+    "person_id": 529
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2001|almost famous": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2001|billy elliot": {
     "person_name": "Julie Walters",
-    "person_id": null
+    "person_id": 477
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2001|chocolat": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2001|traffic": {
     "person_name": "Catherine Zeta-Jones",
-    "person_id": null
+    "person_id": 1922
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2002|a beautiful mind": {
     "person_name": "Jennifer Connelly",
-    "person_id": null
+    "person_id": 6161
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2002|gosford park": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2002|in the bedroom": {
     "person_name": "Marisa Tomei",
-    "person_id": null
+    "person_id": 3141
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2002|iris": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2002|vanilla sky": {
     "person_name": "Cameron Diaz",
-    "person_id": null
+    "person_id": 6941
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2003|about schmidt": {
     "person_name": "Kathy Bates",
-    "person_id": null
+    "person_id": 8534
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2003|adaptation.": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2003|chicago": {
     "person_name": "Queen Latifah",
-    "person_id": null
+    "person_id": 15758
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2003|gangs of new york": {
     "person_name": "Cameron Diaz",
-    "person_id": null
+    "person_id": 6941
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2003|igby goes down": {
     "person_name": "Susan Sarandon",
-    "person_id": null
+    "person_id": 4038
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2004|american splendor": {
     "person_name": "Hope Davis",
-    "person_id": null
+    "person_id": 15250
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2004|cold mountain": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2004|pieces of april": {
     "person_name": "Patricia Clarkson",
-    "person_id": null
+    "person_id": 1276
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2004|the cooler": {
     "person_name": "Maria Bello",
-    "person_id": null
+    "person_id": 49
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2004|thirteen": {
     "person_name": "Holly Hunter",
-    "person_id": null
+    "person_id": 18686
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2005|closer": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2005|kinsey": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2005|sideways": {
     "person_name": "Virginia Madsen",
-    "person_id": null
+    "person_id": 12519
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2005|the aviator": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2005|the manchurian candidate": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2006|brokeback mountain": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2006|in her shoes": {
     "person_name": "Shirley MacLaine",
-    "person_id": null
+    "person_id": 4090
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2006|match point": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2006|north country": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2006|the constant gardener": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|babel": {
     "person_name": "Rinko Kikuchi",
-    "person_id": null
+    "person_id": 18054
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|jennifer hudson": {
     "person_name": "Dreamgirls",
@@ -66695,3747 +66695,3747 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|notes on a scandal": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2007|the devil wears prada": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2008|atonement": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2008|charlie wilson's war": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2008|gone baby gone": {
     "person_name": "Amy Ryan",
-    "person_id": null
+    "person_id": 39388
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2008|i'm not there": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2008|michael clayton": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2009|doubt": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2009|kate winslet": {
     "person_name": "The Reader",
-    "person_id": null
+    "person_id": 4043178
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2009|the wrestler": {
     "person_name": "Marisa Tomei",
-    "person_id": null
+    "person_id": 3141
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2009|vicky cristina barcelona": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2010|a single man": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2010|nine": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2010|precious": {
     "person_name": "Mo'Nique",
-    "person_id": null
+    "person_id": 60561
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2010|up in the air": {
     "person_name": "Anna Kendrick",
-    "person_id": null
+    "person_id": 84223
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2011|animal kingdom": {
     "person_name": "Jacki Weaver",
-    "person_id": null
+    "person_id": 67837
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2011|black swan": {
     "person_name": "Mila Kunis",
-    "person_id": null
+    "person_id": 18973
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2011|the fighter": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2011|the king's speech": {
     "person_name": "Helena Bonham Carter",
-    "person_id": null
+    "person_id": 1283
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2012|albert nobbs": {
     "person_name": "Janet McTeer",
-    "person_id": null
+    "person_id": 47627
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2012|the artist": {
     "person_name": "Bérénice Bejo",
-    "person_id": null
+    "person_id": 82923
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2012|the descendants": {
     "person_name": "Shailene Woodley",
-    "person_id": null
+    "person_id": 94185
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2012|the help": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2013|les misérables": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2013|lincoln": {
     "person_name": "Sally Field",
-    "person_id": null
+    "person_id": 35
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2013|the master": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2013|the paperboy": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2013|the sessions": {
     "person_name": "Helen Hunt",
-    "person_id": null
+    "person_id": 9994
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2014|12 years a slave": {
     "person_name": "Lupita Nyong'o",
-    "person_id": null
+    "person_id": 1267329
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2014|american hustle": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2014|august: osage county": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2014|blue jasmine": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2014|nebraska": {
     "person_name": "June Squibb",
-    "person_id": null
+    "person_id": 35515
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2015|a most violent year": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2015|birdman": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2015|boyhood": {
     "person_name": "Patricia Arquette",
-    "person_id": null
+    "person_id": 4687
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2015|into the woods": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2015|the imitation game": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2016|ex machina": {
     "person_name": "Alicia Vikander",
-    "person_id": null
+    "person_id": 227454
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2016|steve jobs": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2016|the hateful eight": {
     "person_name": "Jennifer Jason Leigh",
-    "person_id": null
+    "person_id": 10431
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2016|trumbo": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2016|youth": {
     "person_name": "Jane Fonda",
-    "person_id": null
+    "person_id": 6352
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2017|fences": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2017|hidden figures": {
     "person_name": "Octavia Spencer",
-    "person_id": null
+    "person_id": 6944
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2017|lion": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2017|manchester by the sea": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2017|moonlight": {
     "person_name": "Naomie Harris",
-    "person_id": null
+    "person_id": 2038
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2018|downsizing": {
     "person_name": "Hong Chau",
-    "person_id": null
+    "person_id": 1360317
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2018|i, tonya": {
     "person_name": "Allison Janney",
-    "person_id": null
+    "person_id": 19
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2018|lady bird": {
     "person_name": "Laurie Metcalf",
-    "person_id": null
+    "person_id": 12133
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2018|mudbound": {
     "person_name": "Mary J. Blige",
-    "person_id": null
+    "person_id": 84933
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2018|the shape of water": {
     "person_name": "Octavia Spencer",
-    "person_id": null
+    "person_id": 6944
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2019|first man": {
     "person_name": "Claire Foy",
-    "person_id": null
+    "person_id": 120932
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2019|if beale street could talk": {
     "person_name": "Regina King",
-    "person_id": null
+    "person_id": 9788
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2019|the favourite": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2019|vice": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2020|bombshell": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2020|hustlers": {
     "person_name": "Jennifer Lopez",
-    "person_id": null
+    "person_id": 16866
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2020|marriage story": {
     "person_name": "Laura Dern",
-    "person_id": null
+    "person_id": 4784
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2020|richard jewell": {
     "person_name": "Kathy Bates",
-    "person_id": null
+    "person_id": 8534
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2020|the report": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2021|hillbilly elegy": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2021|mank": {
     "person_name": "Amanda Seyfried",
-    "person_id": null
+    "person_id": 71070
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2021|news of the world": {
     "person_name": "Helena Zengel",
-    "person_id": null
+    "person_id": 1756490
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2021|the father": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2021|the mauritanian": {
     "person_name": "Jodie Foster",
-    "person_id": null
+    "person_id": 1038
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2022|belfast": {
     "person_name": "Caitríona Balfe",
-    "person_id": null
+    "person_id": 147056
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2022|king richard": {
     "person_name": "Aunjanue Ellis-Taylor",
-    "person_id": null
+    "person_id": 53923
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2022|passing": {
     "person_name": "Ruth Negga",
-    "person_id": null
+    "person_id": 17018
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2022|the power of the dog": {
     "person_name": "Kirsten Dunst",
-    "person_id": null
+    "person_id": 205
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2022|west side story": {
     "person_name": "Ariana DeBose",
-    "person_id": null
+    "person_id": 1437491
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2023|black panther: wakanda forever": {
     "person_name": "Angela Bassett",
-    "person_id": null
+    "person_id": 9780
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2023|everything everywhere all at once": {
     "person_name": "Jamie Lee Curtis",
-    "person_id": null
+    "person_id": 8944
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2023|she said": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2023|the banshees of inisherin": {
     "person_name": "Kerry Condon",
-    "person_id": null
+    "person_id": 62105
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2023|triangle of sadness": {
     "person_name": "Dolly de Leon",
-    "person_id": null
+    "person_id": 1513304
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|may december": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|nyad": {
     "person_name": "Jodie Foster",
-    "person_id": null
+    "person_id": 1038
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|oppenheimer": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|saltburn": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|the color purple": {
     "person_name": "Danielle Brooks",
-    "person_id": null
+    "person_id": 1075037
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2024|the holdovers": {
     "person_name": "Da'Vine Joy Randolph",
-    "person_id": null
+    "person_id": 1180099
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2025|conclave": {
     "person_name": "Isabella Rossellini",
-    "person_id": null
+    "person_id": 6588
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2025|emilia pérez": {
     "person_name": "Selena Gomez",
-    "person_id": null
+    "person_id": 77948
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2025|the brutalist": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2025|the substance": {
     "person_name": "Margaret Qualley",
-    "person_id": null
+    "person_id": 1392137
   },
   "GoldenGlobe|Best Supporting Actress in a Motion Picture|2025|wicked": {
     "person_name": "Ariana Grande",
-    "person_id": null
+    "person_id": 226001
   },
   "GoldenGlobe|Best Supporting Female Actor in a Motion Picture|2026|one battle after another": {
     "person_name": "Teyana Taylor",
-    "person_id": null
+    "person_id": 964679
   },
   "GoldenGlobe|Best Supporting Female Actor in a Motion Picture|2026|sentimental value": {
     "person_name": "Inga Ibsdotter Lilleaas",
-    "person_id": null
+    "person_id": 1421850
   },
   "GoldenGlobe|Best Supporting Female Actor in a Motion Picture|2026|the smashing machine": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "GoldenGlobe|Best Supporting Female Actor in a Motion Picture|2026|weapons": {
     "person_name": "Amy Madigan",
-    "person_id": null
+    "person_id": 23882
   },
   "GoldenGlobe|Best Supporting Female Actor in a Motion Picture|2026|wicked: for good": {
     "person_name": "Ariana Grande",
-    "person_id": null
+    "person_id": 226001
   },
   "GoldenGlobe|Best Supporting Male Actor in a Motion Picture|2026|frankenstein": {
     "person_name": "Jacob Elordi",
-    "person_id": null
+    "person_id": 2034418
   },
   "GoldenGlobe|Best Supporting Male Actor in a Motion Picture|2026|hamnet": {
     "person_name": "Paul Mescal",
-    "person_id": null
+    "person_id": 2326151
   },
   "GoldenGlobe|Best Supporting Male Actor in a Motion Picture|2026|jay kelly": {
     "person_name": "Adam Sandler",
-    "person_id": null
+    "person_id": 19292
   },
   "GoldenGlobe|Best Supporting Male Actor in a Motion Picture|2026|one battle after another": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "GoldenGlobe|Best Supporting Male Actor in a Motion Picture|2026|sentimental value": {
     "person_name": "Stellan Skarsgård",
-    "person_id": null
+    "person_id": 1640
   },
   "Oscar|Best Actor in a Leading Role|2000|american beauty": {
     "person_name": "Kevin Spacey",
-    "person_id": null
+    "person_id": 1979
   },
   "Oscar|Best Actor in a Leading Role|2000|sweet and lowdown": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "Oscar|Best Actor in a Leading Role|2000|the hurricane": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2000|the insider": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "Oscar|Best Actor in a Leading Role|2000|the straight story": {
     "person_name": "Richard Farnsworth",
-    "person_id": null
+    "person_id": 5605
   },
   "Oscar|Best Actor in a Leading Role|2001|before night falls": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Oscar|Best Actor in a Leading Role|2001|cast away": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "Oscar|Best Actor in a Leading Role|2001|gladiator": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "Oscar|Best Actor in a Leading Role|2001|pollock": {
     "person_name": "Ed Harris",
-    "person_id": null
+    "person_id": 228
   },
   "Oscar|Best Actor in a Leading Role|2001|quills": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "Oscar|Best Actor in a Leading Role|2002|a beautiful mind": {
     "person_name": "Russell Crowe",
-    "person_id": null
+    "person_id": 934
   },
   "Oscar|Best Actor in a Leading Role|2002|ali": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "Oscar|Best Actor in a Leading Role|2002|i am sam": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "Oscar|Best Actor in a Leading Role|2002|in the bedroom": {
     "person_name": "Tom Wilkinson",
-    "person_id": null
+    "person_id": 207
   },
   "Oscar|Best Actor in a Leading Role|2002|training day": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2003|about schmidt": {
     "person_name": "Jack Nicholson",
-    "person_id": null
+    "person_id": 514
   },
   "Oscar|Best Actor in a Leading Role|2003|adaptation": {
     "person_name": "Nicolas Cage",
-    "person_id": null
+    "person_id": 2963
   },
   "Oscar|Best Actor in a Leading Role|2003|gangs of new york": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "Oscar|Best Actor in a Leading Role|2003|the pianist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "Oscar|Best Actor in a Leading Role|2003|the quiet american": {
     "person_name": "Michael Caine",
-    "person_id": null
+    "person_id": 3895
   },
   "Oscar|Best Actor in a Leading Role|2004|cold mountain": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "Oscar|Best Actor in a Leading Role|2004|house of sand and fog": {
     "person_name": "Ben Kingsley",
-    "person_id": null
+    "person_id": 2282
   },
   "Oscar|Best Actor in a Leading Role|2004|lost in translation": {
     "person_name": "Bill Murray",
-    "person_id": null
+    "person_id": 1532
   },
   "Oscar|Best Actor in a Leading Role|2004|mystic river": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "Oscar|Best Actor in a Leading Role|2004|pirates of the caribbean: the curse of the black pearl": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "Oscar|Best Actor in a Leading Role|2005|finding neverland": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "Oscar|Best Actor in a Leading Role|2005|hotel rwanda": {
     "person_name": "Don Cheadle",
-    "person_id": null
+    "person_id": 1896
   },
   "Oscar|Best Actor in a Leading Role|2005|million dollar baby": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "Oscar|Best Actor in a Leading Role|2005|ray": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "Oscar|Best Actor in a Leading Role|2005|the aviator": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "Oscar|Best Actor in a Leading Role|2006|brokeback mountain": {
     "person_name": "Heath Ledger",
-    "person_id": null
+    "person_id": 1810
   },
   "Oscar|Best Actor in a Leading Role|2006|capote": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "Oscar|Best Actor in a Leading Role|2006|good night, and good luck": {
     "person_name": "David Strathairn",
-    "person_id": null
+    "person_id": 11064
   },
   "Oscar|Best Actor in a Leading Role|2006|hustle & flow": {
     "person_name": "Terrence Howard",
-    "person_id": null
+    "person_id": 18288
   },
   "Oscar|Best Actor in a Leading Role|2006|walk the line": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Oscar|Best Actor in a Leading Role|2007|blood diamond": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "Oscar|Best Actor in a Leading Role|2007|half nelson": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "Oscar|Best Actor in a Leading Role|2007|the last king of scotland": {
     "person_name": "Forest Whitaker",
-    "person_id": null
+    "person_id": 2178
   },
   "Oscar|Best Actor in a Leading Role|2007|the pursuit of happyness": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "Oscar|Best Actor in a Leading Role|2007|venus": {
     "person_name": "Peter O'Toole",
-    "person_id": null
+    "person_id": 11390
   },
   "Oscar|Best Actor in a Leading Role|2008|eastern promises": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "Oscar|Best Actor in a Leading Role|2008|in the valley of elah": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "Oscar|Best Actor in a Leading Role|2008|michael clayton": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "Oscar|Best Actor in a Leading Role|2008|sweeney todd: the demon barber of fleet street": {
     "person_name": "Johnny Depp",
-    "person_id": null
+    "person_id": 85
   },
   "Oscar|Best Actor in a Leading Role|2008|there will be blood": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "Oscar|Best Actor in a Leading Role|2009|frost/nixon": {
     "person_name": "Frank Langella",
-    "person_id": null
+    "person_id": 8924
   },
   "Oscar|Best Actor in a Leading Role|2009|milk": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "Oscar|Best Actor in a Leading Role|2009|the curious case of benjamin button": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "Oscar|Best Actor in a Leading Role|2009|the visitor": {
     "person_name": "Richard Jenkins",
-    "person_id": null
+    "person_id": 28633
   },
   "Oscar|Best Actor in a Leading Role|2009|the wrestler": {
     "person_name": "Mickey Rourke",
-    "person_id": null
+    "person_id": 2295
   },
   "Oscar|Best Actor in a Leading Role|2010|a single man": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "Oscar|Best Actor in a Leading Role|2010|crazy heart": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "Oscar|Best Actor in a Leading Role|2010|invictus": {
     "person_name": "Morgan Freeman",
-    "person_id": null
+    "person_id": 192
   },
   "Oscar|Best Actor in a Leading Role|2010|the hurt locker": {
     "person_name": "Jeremy Renner",
-    "person_id": null
+    "person_id": 17604
   },
   "Oscar|Best Actor in a Leading Role|2010|up in the air": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "Oscar|Best Actor in a Leading Role|2011|127 hours": {
     "person_name": "James Franco",
-    "person_id": null
+    "person_id": 17051
   },
   "Oscar|Best Actor in a Leading Role|2011|biutiful": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Oscar|Best Actor in a Leading Role|2011|the king's speech": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "Oscar|Best Actor in a Leading Role|2011|the social network": {
     "person_name": "Jesse Eisenberg",
-    "person_id": null
+    "person_id": 44735
   },
   "Oscar|Best Actor in a Leading Role|2011|true grit": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "Oscar|Best Actor in a Leading Role|2012|a better life": {
     "person_name": "Demián Bichir",
-    "person_id": null
+    "person_id": 76961
   },
   "Oscar|Best Actor in a Leading Role|2012|moneyball": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "Oscar|Best Actor in a Leading Role|2012|the artist": {
     "person_name": "Jean Dujardin",
-    "person_id": null
+    "person_id": 56024
   },
   "Oscar|Best Actor in a Leading Role|2012|the descendants": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "Oscar|Best Actor in a Leading Role|2012|tinker tailor soldier spy": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "Oscar|Best Actor in a Leading Role|2013|flight": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2013|les misérables": {
     "person_name": "Hugh Jackman",
-    "person_id": null
+    "person_id": 6968
   },
   "Oscar|Best Actor in a Leading Role|2013|lincoln": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "Oscar|Best Actor in a Leading Role|2013|silver linings playbook": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "Oscar|Best Actor in a Leading Role|2013|the master": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Oscar|Best Actor in a Leading Role|2014|12 years a slave": {
     "person_name": "Chiwetel Ejiofor",
-    "person_id": null
+    "person_id": 5294
   },
   "Oscar|Best Actor in a Leading Role|2014|american hustle": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "Oscar|Best Actor in a Leading Role|2014|dallas buyers club": {
     "person_name": "Matthew McConaughey",
-    "person_id": null
+    "person_id": 10297
   },
   "Oscar|Best Actor in a Leading Role|2014|nebraska": {
     "person_name": "Bruce Dern",
-    "person_id": null
+    "person_id": 6905
   },
   "Oscar|Best Actor in a Leading Role|2014|the wolf of wall street": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "Oscar|Best Actor in a Leading Role|2015|american sniper": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "Oscar|Best Actor in a Leading Role|2015|birdman or (the unexpected virtue of ignorance)": {
     "person_name": "Michael Keaton",
-    "person_id": null
+    "person_id": 2232
   },
   "Oscar|Best Actor in a Leading Role|2015|foxcatcher": {
     "person_name": "Steve Carell",
-    "person_id": null
+    "person_id": 4495
   },
   "Oscar|Best Actor in a Leading Role|2015|the imitation game": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "Oscar|Best Actor in a Leading Role|2015|the theory of everything": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "Oscar|Best Actor in a Leading Role|2016|steve jobs": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "Oscar|Best Actor in a Leading Role|2016|the danish girl": {
     "person_name": "Eddie Redmayne",
-    "person_id": null
+    "person_id": 37632
   },
   "Oscar|Best Actor in a Leading Role|2016|the martian": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "Oscar|Best Actor in a Leading Role|2016|the revenant": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "Oscar|Best Actor in a Leading Role|2016|trumbo": {
     "person_name": "Bryan Cranston",
-    "person_id": null
+    "person_id": 17419
   },
   "Oscar|Best Actor in a Leading Role|2017|captain fantastic": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "Oscar|Best Actor in a Leading Role|2017|fences": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2017|hacksaw ridge": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "Oscar|Best Actor in a Leading Role|2017|la la land": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "Oscar|Best Actor in a Leading Role|2017|manchester by the sea": {
     "person_name": "Casey Affleck",
-    "person_id": null
+    "person_id": 1893
   },
   "Oscar|Best Actor in a Leading Role|2018|call me by your name": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "Oscar|Best Actor in a Leading Role|2018|darkest hour": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "Oscar|Best Actor in a Leading Role|2018|get out": {
     "person_name": "Daniel Kaluuya",
-    "person_id": null
+    "person_id": 206919
   },
   "Oscar|Best Actor in a Leading Role|2018|phantom thread": {
     "person_name": "Daniel Day-Lewis",
-    "person_id": null
+    "person_id": 11856
   },
   "Oscar|Best Actor in a Leading Role|2018|roman j. israel, esq.": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2019|a star is born": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "Oscar|Best Actor in a Leading Role|2019|at eternity's gate": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "Oscar|Best Actor in a Leading Role|2019|bohemian rhapsody": {
     "person_name": "Rami Malek",
-    "person_id": null
+    "person_id": 17838
   },
   "Oscar|Best Actor in a Leading Role|2019|green book": {
     "person_name": "Viggo Mortensen",
-    "person_id": null
+    "person_id": 110
   },
   "Oscar|Best Actor in a Leading Role|2019|vice": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "Oscar|Best Actor in a Leading Role|2020|joker": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Oscar|Best Actor in a Leading Role|2020|marriage story": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "Oscar|Best Actor in a Leading Role|2020|once upon a time in hollywood": {
     "person_name": "Leonardo DiCaprio",
-    "person_id": null
+    "person_id": 6193
   },
   "Oscar|Best Actor in a Leading Role|2020|pain and glory": {
     "person_name": "Antonio Banderas",
-    "person_id": null
+    "person_id": 3131
   },
   "Oscar|Best Actor in a Leading Role|2020|the two popes": {
     "person_name": "Jonathan Pryce",
-    "person_id": null
+    "person_id": 378
   },
   "Oscar|Best Actor in a Leading Role|2021|ma rainey's black bottom": {
     "person_name": "Chadwick Boseman",
-    "person_id": null
+    "person_id": 172069
   },
   "Oscar|Best Actor in a Leading Role|2021|mank": {
     "person_name": "Gary Oldman",
-    "person_id": null
+    "person_id": 64
   },
   "Oscar|Best Actor in a Leading Role|2021|minari": {
     "person_name": "Steven Yeun",
-    "person_id": null
+    "person_id": 215055
   },
   "Oscar|Best Actor in a Leading Role|2021|sound of metal": {
     "person_name": "Riz Ahmed",
-    "person_id": null
+    "person_id": 53240
   },
   "Oscar|Best Actor in a Leading Role|2021|the father": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "Oscar|Best Actor in a Leading Role|2022|being the ricardos": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Oscar|Best Actor in a Leading Role|2022|king richard": {
     "person_name": "Will Smith",
-    "person_id": null
+    "person_id": 2888
   },
   "Oscar|Best Actor in a Leading Role|2022|the power of the dog": {
     "person_name": "Benedict Cumberbatch",
-    "person_id": null
+    "person_id": 71580
   },
   "Oscar|Best Actor in a Leading Role|2022|the tragedy of macbeth": {
     "person_name": "Denzel Washington",
-    "person_id": null
+    "person_id": 5292
   },
   "Oscar|Best Actor in a Leading Role|2022|tick, tick... boom!": {
     "person_name": "Andrew Garfield",
-    "person_id": null
+    "person_id": 37625
   },
   "Oscar|Best Actor in a Leading Role|2023|aftersun": {
     "person_name": "Paul Mescal",
-    "person_id": null
+    "person_id": 2326151
   },
   "Oscar|Best Actor in a Leading Role|2023|elvis": {
     "person_name": "Austin Butler",
-    "person_id": null
+    "person_id": 86654
   },
   "Oscar|Best Actor in a Leading Role|2023|living": {
     "person_name": "Bill Nighy",
-    "person_id": null
+    "person_id": 2440
   },
   "Oscar|Best Actor in a Leading Role|2023|the banshees of inisherin": {
     "person_name": "Colin Farrell",
-    "person_id": null
+    "person_id": 72466
   },
   "Oscar|Best Actor in a Leading Role|2023|the whale": {
     "person_name": "Brendan Fraser",
-    "person_id": null
+    "person_id": 18269
   },
   "Oscar|Best Actor in a Leading Role|2024|american fiction": {
     "person_name": "Jeffrey Wright",
-    "person_id": null
+    "person_id": 2954
   },
   "Oscar|Best Actor in a Leading Role|2024|maestro": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "Oscar|Best Actor in a Leading Role|2024|oppenheimer": {
     "person_name": "Cillian Murphy",
-    "person_id": null
+    "person_id": 2037
   },
   "Oscar|Best Actor in a Leading Role|2024|rustin": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "Oscar|Best Actor in a Leading Role|2024|the holdovers": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "Oscar|Best Actor in a Leading Role|2025|a complete unknown": {
     "person_name": "Timothée Chalamet",
-    "person_id": null
+    "person_id": 1190668
   },
   "Oscar|Best Actor in a Leading Role|2025|conclave": {
     "person_name": "Ralph Fiennes",
-    "person_id": null
+    "person_id": 5469
   },
   "Oscar|Best Actor in a Leading Role|2025|sing sing": {
     "person_name": "Colman Domingo",
-    "person_id": null
+    "person_id": 91671
   },
   "Oscar|Best Actor in a Leading Role|2025|the apprentice": {
     "person_name": "Sebastian Stan",
-    "person_id": null
+    "person_id": 60898
   },
   "Oscar|Best Actor in a Leading Role|2025|the brutalist": {
     "person_name": "Adrien Brody",
-    "person_id": null
+    "person_id": 3490
   },
   "Oscar|Best Actor in a Supporting Role|2000|magnolia": {
     "person_name": "Tom Cruise",
-    "person_id": null
+    "person_id": 500
   },
   "Oscar|Best Actor in a Supporting Role|2000|the cider house rules": {
     "person_name": "Michael Caine",
-    "person_id": null
+    "person_id": 3895
   },
   "Oscar|Best Actor in a Supporting Role|2000|the green mile": {
     "person_name": "Michael Clarke Duncan",
-    "person_id": null
+    "person_id": 61981
   },
   "Oscar|Best Actor in a Supporting Role|2000|the sixth sense": {
     "person_name": "Haley Joel Osment",
-    "person_id": null
+    "person_id": 9640
   },
   "Oscar|Best Actor in a Supporting Role|2000|the talented mr. ripley": {
     "person_name": "Jude Law",
-    "person_id": null
+    "person_id": 9642
   },
   "Oscar|Best Actor in a Supporting Role|2001|erin brockovich": {
     "person_name": "Albert Finney",
-    "person_id": null
+    "person_id": 3926
   },
   "Oscar|Best Actor in a Supporting Role|2001|gladiator": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Oscar|Best Actor in a Supporting Role|2001|shadow of the vampire": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "Oscar|Best Actor in a Supporting Role|2001|the contender": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "Oscar|Best Actor in a Supporting Role|2001|traffic": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "Oscar|Best Actor in a Supporting Role|2002|ali": {
     "person_name": "Jon Voight",
-    "person_id": null
+    "person_id": 10127
   },
   "Oscar|Best Actor in a Supporting Role|2002|iris": {
     "person_name": "Jim Broadbent",
-    "person_id": null
+    "person_id": 388
   },
   "Oscar|Best Actor in a Supporting Role|2002|sexy beast": {
     "person_name": "Ben Kingsley",
-    "person_id": null
+    "person_id": 2282
   },
   "Oscar|Best Actor in a Supporting Role|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Ian McKellen",
-    "person_id": null
+    "person_id": 1327
   },
   "Oscar|Best Actor in a Supporting Role|2002|training day": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "Oscar|Best Actor in a Supporting Role|2003|adaptation": {
     "person_name": "Chris Cooper",
-    "person_id": null
+    "person_id": 2955
   },
   "Oscar|Best Actor in a Supporting Role|2003|catch me if you can": {
     "person_name": "Christopher Walken",
-    "person_id": null
+    "person_id": 4690
   },
   "Oscar|Best Actor in a Supporting Role|2003|chicago": {
     "person_name": "John C. Reilly",
-    "person_id": null
+    "person_id": 4764
   },
   "Oscar|Best Actor in a Supporting Role|2003|road to perdition": {
     "person_name": "Paul Newman",
-    "person_id": null
+    "person_id": 3636
   },
   "Oscar|Best Actor in a Supporting Role|2003|the hours": {
     "person_name": "Ed Harris",
-    "person_id": null
+    "person_id": 228
   },
   "Oscar|Best Actor in a Supporting Role|2004|21 grams": {
     "person_name": "Benicio del Toro",
-    "person_id": null
+    "person_id": 1121
   },
   "Oscar|Best Actor in a Supporting Role|2004|in america": {
     "person_name": "Djimon Hounsou",
-    "person_id": null
+    "person_id": 938
   },
   "Oscar|Best Actor in a Supporting Role|2004|mystic river": {
     "person_name": "Tim Robbins",
-    "person_id": null
+    "person_id": 504
   },
   "Oscar|Best Actor in a Supporting Role|2004|the cooler": {
     "person_name": "Alec Baldwin",
-    "person_id": null
+    "person_id": 7447
   },
   "Oscar|Best Actor in a Supporting Role|2004|the last samurai": {
     "person_name": "Ken Watanabe",
-    "person_id": null
+    "person_id": 3899
   },
   "Oscar|Best Actor in a Supporting Role|2005|closer": {
     "person_name": "Clive Owen",
-    "person_id": null
+    "person_id": 2296
   },
   "Oscar|Best Actor in a Supporting Role|2005|collateral": {
     "person_name": "Jamie Foxx",
-    "person_id": null
+    "person_id": 134
   },
   "Oscar|Best Actor in a Supporting Role|2005|million dollar baby": {
     "person_name": "Morgan Freeman",
-    "person_id": null
+    "person_id": 192
   },
   "Oscar|Best Actor in a Supporting Role|2005|sideways": {
     "person_name": "Thomas Haden Church",
-    "person_id": null
+    "person_id": 19159
   },
   "Oscar|Best Actor in a Supporting Role|2005|the aviator": {
     "person_name": "Alan Alda",
-    "person_id": null
+    "person_id": 21278
   },
   "Oscar|Best Actor in a Supporting Role|2006|a history of violence": {
     "person_name": "William Hurt",
-    "person_id": null
+    "person_id": 227
   },
   "Oscar|Best Actor in a Supporting Role|2006|brokeback mountain": {
     "person_name": "Jake Gyllenhaal",
-    "person_id": null
+    "person_id": 131
   },
   "Oscar|Best Actor in a Supporting Role|2006|cinderella man": {
     "person_name": "Paul Giamatti",
-    "person_id": null
+    "person_id": 13242
   },
   "Oscar|Best Actor in a Supporting Role|2006|crash": {
     "person_name": "Matt Dillon",
-    "person_id": null
+    "person_id": 2876
   },
   "Oscar|Best Actor in a Supporting Role|2006|syriana": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "Oscar|Best Actor in a Supporting Role|2007|blood diamond": {
     "person_name": "Djimon Hounsou",
-    "person_id": null
+    "person_id": 938
   },
   "Oscar|Best Actor in a Supporting Role|2007|dreamgirls": {
     "person_name": "Eddie Murphy",
-    "person_id": null
+    "person_id": 776
   },
   "Oscar|Best Actor in a Supporting Role|2007|little children": {
     "person_name": "Jackie Earle Haley",
-    "person_id": null
+    "person_id": 17183
   },
   "Oscar|Best Actor in a Supporting Role|2007|little miss sunshine": {
     "person_name": "Alan Arkin",
-    "person_id": null
+    "person_id": 1903
   },
   "Oscar|Best Actor in a Supporting Role|2007|the departed": {
     "person_name": "Mark Wahlberg",
-    "person_id": null
+    "person_id": 13240
   },
   "Oscar|Best Actor in a Supporting Role|2008|charlie wilson's war": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "Oscar|Best Actor in a Supporting Role|2008|into the wild": {
     "person_name": "Hal Holbrook",
-    "person_id": null
+    "person_id": 11066
   },
   "Oscar|Best Actor in a Supporting Role|2008|michael clayton": {
     "person_name": "Tom Wilkinson",
-    "person_id": null
+    "person_id": 207
   },
   "Oscar|Best Actor in a Supporting Role|2008|no country for old men": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Oscar|Best Actor in a Supporting Role|2008|the assassination of jesse james by the coward robert ford": {
     "person_name": "Casey Affleck",
-    "person_id": null
+    "person_id": 1893
   },
   "Oscar|Best Actor in a Supporting Role|2009|doubt": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "Oscar|Best Actor in a Supporting Role|2009|milk": {
     "person_name": "Josh Brolin",
-    "person_id": null
+    "person_id": 16851
   },
   "Oscar|Best Actor in a Supporting Role|2009|revolutionary road": {
     "person_name": "Michael Shannon",
-    "person_id": null
+    "person_id": 335
   },
   "Oscar|Best Actor in a Supporting Role|2009|the dark knight": {
     "person_name": "Heath Ledger",
-    "person_id": null
+    "person_id": 1810
   },
   "Oscar|Best Actor in a Supporting Role|2009|tropic thunder": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "Oscar|Best Actor in a Supporting Role|2010|inglourious basterds": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "Oscar|Best Actor in a Supporting Role|2010|invictus": {
     "person_name": "Matt Damon",
-    "person_id": null
+    "person_id": 1892
   },
   "Oscar|Best Actor in a Supporting Role|2010|the last station": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "Oscar|Best Actor in a Supporting Role|2010|the lovely bones": {
     "person_name": "Stanley Tucci",
-    "person_id": null
+    "person_id": 2283
   },
   "Oscar|Best Actor in a Supporting Role|2010|the messenger": {
     "person_name": "Woody Harrelson",
-    "person_id": null
+    "person_id": 57755
   },
   "Oscar|Best Actor in a Supporting Role|2011|the fighter": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "Oscar|Best Actor in a Supporting Role|2011|the kids are all right": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "Oscar|Best Actor in a Supporting Role|2011|the king's speech": {
     "person_name": "Geoffrey Rush",
-    "person_id": null
+    "person_id": 118
   },
   "Oscar|Best Actor in a Supporting Role|2011|the town": {
     "person_name": "Jeremy Renner",
-    "person_id": null
+    "person_id": 17604
   },
   "Oscar|Best Actor in a Supporting Role|2011|winter's bone": {
     "person_name": "John Hawkes",
-    "person_id": null
+    "person_id": 16861
   },
   "Oscar|Best Actor in a Supporting Role|2012|beginners": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "Oscar|Best Actor in a Supporting Role|2012|extremely loud & incredibly close": {
     "person_name": "Max von Sydow",
-    "person_id": null
+    "person_id": 2201
   },
   "Oscar|Best Actor in a Supporting Role|2012|moneyball": {
     "person_name": "Jonah Hill",
-    "person_id": null
+    "person_id": 21007
   },
   "Oscar|Best Actor in a Supporting Role|2012|my week with marilyn": {
     "person_name": "Kenneth Branagh",
-    "person_id": null
+    "person_id": 11181
   },
   "Oscar|Best Actor in a Supporting Role|2012|warrior": {
     "person_name": "Nick Nolte",
-    "person_id": null
+    "person_id": 1733
   },
   "Oscar|Best Actor in a Supporting Role|2013|argo": {
     "person_name": "Alan Arkin",
-    "person_id": null
+    "person_id": 1903
   },
   "Oscar|Best Actor in a Supporting Role|2013|django unchained": {
     "person_name": "Christoph Waltz",
-    "person_id": null
+    "person_id": 27319
   },
   "Oscar|Best Actor in a Supporting Role|2013|lincoln": {
     "person_name": "Tommy Lee Jones",
-    "person_id": null
+    "person_id": 2176
   },
   "Oscar|Best Actor in a Supporting Role|2013|silver linings playbook": {
     "person_name": "Robert De Niro",
-    "person_id": null
+    "person_id": 380
   },
   "Oscar|Best Actor in a Supporting Role|2013|the master": {
     "person_name": "Philip Seymour Hoffman",
-    "person_id": null
+    "person_id": 1233
   },
   "Oscar|Best Actor in a Supporting Role|2014|12 years a slave": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "Oscar|Best Actor in a Supporting Role|2014|american hustle": {
     "person_name": "Bradley Cooper",
-    "person_id": null
+    "person_id": 51329
   },
   "Oscar|Best Actor in a Supporting Role|2014|captain phillips": {
     "person_name": "Barkhad Abdi",
-    "person_id": null
+    "person_id": 1261694
   },
   "Oscar|Best Actor in a Supporting Role|2014|dallas buyers club": {
     "person_name": "Jared Leto",
-    "person_id": null
+    "person_id": 7499
   },
   "Oscar|Best Actor in a Supporting Role|2014|the wolf of wall street": {
     "person_name": "Jonah Hill",
-    "person_id": null
+    "person_id": 21007
   },
   "Oscar|Best Actor in a Supporting Role|2015|birdman or (the unexpected virtue of ignorance)": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "Oscar|Best Actor in a Supporting Role|2015|boyhood": {
     "person_name": "Ethan Hawke",
-    "person_id": null
+    "person_id": 569
   },
   "Oscar|Best Actor in a Supporting Role|2015|foxcatcher": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "Oscar|Best Actor in a Supporting Role|2015|the judge": {
     "person_name": "Robert Duvall",
-    "person_id": null
+    "person_id": 3087
   },
   "Oscar|Best Actor in a Supporting Role|2015|whiplash": {
     "person_name": "J. K. Simmons",
-    "person_id": null
+    "person_id": 18999
   },
   "Oscar|Best Actor in a Supporting Role|2016|bridge of spies": {
     "person_name": "Mark Rylance",
-    "person_id": null
+    "person_id": 40900
   },
   "Oscar|Best Actor in a Supporting Role|2016|creed": {
     "person_name": "Sylvester Stallone",
-    "person_id": null
+    "person_id": 16483
   },
   "Oscar|Best Actor in a Supporting Role|2016|spotlight": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "Oscar|Best Actor in a Supporting Role|2016|the big short": {
     "person_name": "Christian Bale",
-    "person_id": null
+    "person_id": 3894
   },
   "Oscar|Best Actor in a Supporting Role|2016|the revenant": {
     "person_name": "Tom Hardy",
-    "person_id": null
+    "person_id": 2524
   },
   "Oscar|Best Actor in a Supporting Role|2017|hell or high water": {
     "person_name": "Jeff Bridges",
-    "person_id": null
+    "person_id": 1229
   },
   "Oscar|Best Actor in a Supporting Role|2017|lion": {
     "person_name": "Dev Patel",
-    "person_id": null
+    "person_id": 76788
   },
   "Oscar|Best Actor in a Supporting Role|2017|manchester by the sea": {
     "person_name": "Lucas Hedges",
-    "person_id": null
+    "person_id": 1105079
   },
   "Oscar|Best Actor in a Supporting Role|2017|moonlight": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "Oscar|Best Actor in a Supporting Role|2017|nocturnal animals": {
     "person_name": "Michael Shannon",
-    "person_id": null
+    "person_id": 335
   },
   "Oscar|Best Actor in a Supporting Role|2018|all the money in the world": {
     "person_name": "Christopher Plummer",
-    "person_id": null
+    "person_id": 290
   },
   "Oscar|Best Actor in a Supporting Role|2018|the florida project": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "Oscar|Best Actor in a Supporting Role|2018|the shape of water": {
     "person_name": "Richard Jenkins",
-    "person_id": null
+    "person_id": 28633
   },
   "Oscar|Best Actor in a Supporting Role|2018|three billboards outside ebbing, missouri": {
     "person_name": "Woody Harrelson",
-    "person_id": null
+    "person_id": 57755
   },
   "Oscar|Best Actor in a Supporting Role|2019|a star is born": {
     "person_name": "Sam Elliott",
-    "person_id": null
+    "person_id": 16431
   },
   "Oscar|Best Actor in a Supporting Role|2019|blackkklansman": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "Oscar|Best Actor in a Supporting Role|2019|can you ever forgive me?": {
     "person_name": "Richard E. Grant",
-    "person_id": null
+    "person_id": 20766
   },
   "Oscar|Best Actor in a Supporting Role|2019|green book": {
     "person_name": "Mahershala Ali",
-    "person_id": null
+    "person_id": 932967
   },
   "Oscar|Best Actor in a Supporting Role|2019|vice": {
     "person_name": "Sam Rockwell",
-    "person_id": null
+    "person_id": 6807
   },
   "Oscar|Best Actor in a Supporting Role|2020|a beautiful day in the neighborhood": {
     "person_name": "Tom Hanks",
-    "person_id": null
+    "person_id": 31
   },
   "Oscar|Best Actor in a Supporting Role|2020|once upon a time in hollywood": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "Oscar|Best Actor in a Supporting Role|2020|the irishman": {
     "person_name": "Joe Pesci",
-    "person_id": null
+    "person_id": 4517
   },
   "Oscar|Best Actor in a Supporting Role|2020|the two popes": {
     "person_name": "Anthony Hopkins",
-    "person_id": null
+    "person_id": 4173
   },
   "Oscar|Best Actor in a Supporting Role|2021|judas and the black messiah": {
     "person_name": "LaKeith Stanfield",
-    "person_id": null
+    "person_id": 1200864
   },
   "Oscar|Best Actor in a Supporting Role|2021|one night in miami...": {
     "person_name": "Leslie Odom Jr.",
-    "person_id": null
+    "person_id": 1254614
   },
   "Oscar|Best Actor in a Supporting Role|2021|sound of metal": {
     "person_name": "Paul Raci",
-    "person_id": null
+    "person_id": 1216195
   },
   "Oscar|Best Actor in a Supporting Role|2021|the trial of the chicago 7": {
     "person_name": "Sacha Baron Cohen",
-    "person_id": null
+    "person_id": 6730
   },
   "Oscar|Best Actor in a Supporting Role|2022|being the ricardos": {
     "person_name": "J. K. Simmons",
-    "person_id": null
+    "person_id": 18999
   },
   "Oscar|Best Actor in a Supporting Role|2022|belfast": {
     "person_name": "Ciarán Hinds",
-    "person_id": null
+    "person_id": 8785
   },
   "Oscar|Best Actor in a Supporting Role|2022|coda": {
     "person_name": "Troy Kotsur",
-    "person_id": null
+    "person_id": 1571661
   },
   "Oscar|Best Actor in a Supporting Role|2022|the power of the dog": {
     "person_name": "Kodi Smit-McPhee",
-    "person_id": null
+    "person_id": 113505
   },
   "Oscar|Best Actor in a Supporting Role|2023|causeway": {
     "person_name": "Brian Tyree Henry",
-    "person_id": null
+    "person_id": 226366
   },
   "Oscar|Best Actor in a Supporting Role|2023|everything everywhere all at once": {
     "person_name": "Ke Huy Quan",
-    "person_id": null
+    "person_id": 690
   },
   "Oscar|Best Actor in a Supporting Role|2023|the banshees of inisherin": {
     "person_name": "Barry Keoghan",
-    "person_id": null
+    "person_id": 1290466
   },
   "Oscar|Best Actor in a Supporting Role|2023|the fabelmans": {
     "person_name": "Judd Hirsch",
-    "person_id": null
+    "person_id": 6167
   },
   "Oscar|Best Actor in a Supporting Role|2024|american fiction": {
     "person_name": "Sterling K. Brown",
-    "person_id": null
+    "person_id": 1225953
   },
   "Oscar|Best Actor in a Supporting Role|2024|barbie": {
     "person_name": "Ryan Gosling",
-    "person_id": null
+    "person_id": 30614
   },
   "Oscar|Best Actor in a Supporting Role|2024|killers of the flower moon": {
     "person_name": "Robert De Niro",
-    "person_id": null
+    "person_id": 380
   },
   "Oscar|Best Actor in a Supporting Role|2024|oppenheimer": {
     "person_name": "Robert Downey Jr.",
-    "person_id": null
+    "person_id": 3223
   },
   "Oscar|Best Actor in a Supporting Role|2024|poor things": {
     "person_name": "Mark Ruffalo",
-    "person_id": null
+    "person_id": 103
   },
   "Oscar|Best Actor in a Supporting Role|2025|a complete unknown": {
     "person_name": "Edward Norton",
-    "person_id": null
+    "person_id": 819
   },
   "Oscar|Best Actor in a Supporting Role|2025|a real pain": {
     "person_name": "Kieran Culkin",
-    "person_id": null
+    "person_id": 18793
   },
   "Oscar|Best Actor in a Supporting Role|2025|anora": {
     "person_name": "Yura Borisov",
-    "person_id": null
+    "person_id": 1266686
   },
   "Oscar|Best Actor in a Supporting Role|2025|the apprentice": {
     "person_name": "Jeremy Strong",
-    "person_id": null
+    "person_id": 239271
   },
   "Oscar|Best Actor in a Supporting Role|2025|the brutalist": {
     "person_name": "Guy Pearce",
-    "person_id": null
+    "person_id": 529
   },
   "Oscar|Best Actress in a Leading Role|2000|american beauty": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "Oscar|Best Actress in a Leading Role|2000|boys don't cry": {
     "person_name": "Hilary Swank",
-    "person_id": null
+    "person_id": 448
   },
   "Oscar|Best Actress in a Leading Role|2000|music of the heart": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2000|the end of the affair": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Oscar|Best Actress in a Leading Role|2000|tumbleweeds": {
     "person_name": "Janet McTeer",
-    "person_id": null
+    "person_id": 47627
   },
   "Oscar|Best Actress in a Leading Role|2001|chocolat": {
     "person_name": "Juliette Binoche",
-    "person_id": null
+    "person_id": 1137
   },
   "Oscar|Best Actress in a Leading Role|2001|erin brockovich": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "Oscar|Best Actress in a Leading Role|2001|requiem for a dream": {
     "person_name": "Ellen Burstyn",
-    "person_id": null
+    "person_id": 9560
   },
   "Oscar|Best Actress in a Leading Role|2001|the contender": {
     "person_name": "Joan Allen",
-    "person_id": null
+    "person_id": 11148
   },
   "Oscar|Best Actress in a Leading Role|2001|you can count on me": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "Oscar|Best Actress in a Leading Role|2002|bridget jones's diary": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "Oscar|Best Actress in a Leading Role|2002|in the bedroom": {
     "person_name": "Sissy Spacek",
-    "person_id": null
+    "person_id": 5606
   },
   "Oscar|Best Actress in a Leading Role|2002|iris": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Leading Role|2002|monster's ball": {
     "person_name": "Halle Berry",
-    "person_id": null
+    "person_id": 4587
   },
   "Oscar|Best Actress in a Leading Role|2002|moulin rouge!": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Oscar|Best Actress in a Leading Role|2003|chicago": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "Oscar|Best Actress in a Leading Role|2003|far from heaven": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Oscar|Best Actress in a Leading Role|2003|frida": {
     "person_name": "Salma Hayek",
-    "person_id": null
+    "person_id": 3136
   },
   "Oscar|Best Actress in a Leading Role|2003|the hours": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Oscar|Best Actress in a Leading Role|2003|unfaithful": {
     "person_name": "Diane Lane",
-    "person_id": null
+    "person_id": 2882
   },
   "Oscar|Best Actress in a Leading Role|2004|21 grams": {
     "person_name": "Naomi Watts",
-    "person_id": null
+    "person_id": 3489
   },
   "Oscar|Best Actress in a Leading Role|2004|in america": {
     "person_name": "Samantha Morton",
-    "person_id": null
+    "person_id": 2206
   },
   "Oscar|Best Actress in a Leading Role|2004|monster": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "Oscar|Best Actress in a Leading Role|2004|something's gotta give": {
     "person_name": "Diane Keaton",
-    "person_id": null
+    "person_id": 3092
   },
   "Oscar|Best Actress in a Leading Role|2004|whale rider": {
     "person_name": "Keisha Castle-Hughes",
-    "person_id": null
+    "person_id": 15293
   },
   "Oscar|Best Actress in a Leading Role|2005|being julia": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "Oscar|Best Actress in a Leading Role|2005|eternal sunshine of the spotless mind": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "Oscar|Best Actress in a Leading Role|2005|maria full of grace": {
     "person_name": "Catalina Sandino Moreno",
-    "person_id": null
+    "person_id": 5887
   },
   "Oscar|Best Actress in a Leading Role|2005|million dollar baby": {
     "person_name": "Hilary Swank",
-    "person_id": null
+    "person_id": 448
   },
   "Oscar|Best Actress in a Leading Role|2005|vera drake": {
     "person_name": "Imelda Staunton",
-    "person_id": null
+    "person_id": 11356
   },
   "Oscar|Best Actress in a Leading Role|2006|mrs henderson presents": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Leading Role|2006|north country": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "Oscar|Best Actress in a Leading Role|2006|pride & prejudice": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "Oscar|Best Actress in a Leading Role|2006|transamerica": {
     "person_name": "Felicity Huffman",
-    "person_id": null
+    "person_id": 7427
   },
   "Oscar|Best Actress in a Leading Role|2006|walk the line": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "Oscar|Best Actress in a Leading Role|2007|little children": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "Oscar|Best Actress in a Leading Role|2007|notes on a scandal": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Leading Role|2007|the devil wears prada": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2007|the queen": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "Oscar|Best Actress in a Leading Role|2007|volver": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Oscar|Best Actress in a Leading Role|2008|away from her": {
     "person_name": "Julie Christie",
-    "person_id": null
+    "person_id": 1666
   },
   "Oscar|Best Actress in a Leading Role|2008|elizabeth: the golden age": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Leading Role|2008|juno": {
     "person_name": "Elliot Page",
-    "person_id": null
+    "person_id": 27578
   },
   "Oscar|Best Actress in a Leading Role|2008|la vie en rose": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "Oscar|Best Actress in a Leading Role|2008|the savages": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "Oscar|Best Actress in a Leading Role|2009|changeling": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "Oscar|Best Actress in a Leading Role|2009|doubt": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2009|frozen river": {
     "person_name": "Melissa Leo",
-    "person_id": null
+    "person_id": 6832
   },
   "Oscar|Best Actress in a Leading Role|2009|rachel getting married": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "Oscar|Best Actress in a Leading Role|2009|the reader": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "Oscar|Best Actress in a Leading Role|2010|an education": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "Oscar|Best Actress in a Leading Role|2010|julie & julia": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2010|precious: based on the novel 'push' by sapphire": {
     "person_name": "Gabourey Sidibe",
-    "person_id": null
+    "person_id": 109560
   },
   "Oscar|Best Actress in a Leading Role|2010|the blind side": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "Oscar|Best Actress in a Leading Role|2010|the last station": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "Oscar|Best Actress in a Leading Role|2011|black swan": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "Oscar|Best Actress in a Leading Role|2011|blue valentine": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "Oscar|Best Actress in a Leading Role|2011|rabbit hole": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Oscar|Best Actress in a Leading Role|2011|the kids are all right": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "Oscar|Best Actress in a Leading Role|2011|winter's bone": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "Oscar|Best Actress in a Leading Role|2012|albert nobbs": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "Oscar|Best Actress in a Leading Role|2012|my week with marilyn": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "Oscar|Best Actress in a Leading Role|2012|the girl with the dragon tattoo": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "Oscar|Best Actress in a Leading Role|2012|the help": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "Oscar|Best Actress in a Leading Role|2012|the iron lady": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2013|amour": {
     "person_name": "Emmanuelle Riva",
-    "person_id": null
+    "person_id": 267962
   },
   "Oscar|Best Actress in a Leading Role|2013|beasts of the southern wild": {
     "person_name": "Quvenzhané Wallis",
-    "person_id": null
+    "person_id": 1055235
   },
   "Oscar|Best Actress in a Leading Role|2013|silver linings playbook": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "Oscar|Best Actress in a Leading Role|2013|the impossible": {
     "person_name": "Naomi Watts",
-    "person_id": null
+    "person_id": 3489
   },
   "Oscar|Best Actress in a Leading Role|2013|zero dark thirty": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "Oscar|Best Actress in a Leading Role|2014|american hustle": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "Oscar|Best Actress in a Leading Role|2014|august: osage county": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2014|blue jasmine": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Leading Role|2014|gravity": {
     "person_name": "Sandra Bullock",
-    "person_id": null
+    "person_id": 18277
   },
   "Oscar|Best Actress in a Leading Role|2014|philomena": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Leading Role|2015|gone girl": {
     "person_name": "Rosamund Pike",
-    "person_id": null
+    "person_id": 10882
   },
   "Oscar|Best Actress in a Leading Role|2015|still alice": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Oscar|Best Actress in a Leading Role|2015|the theory of everything": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "Oscar|Best Actress in a Leading Role|2015|two days, one night": {
     "person_name": "Marion Cotillard",
-    "person_id": null
+    "person_id": 8293
   },
   "Oscar|Best Actress in a Leading Role|2015|wild": {
     "person_name": "Reese Witherspoon",
-    "person_id": null
+    "person_id": 368
   },
   "Oscar|Best Actress in a Leading Role|2016|45 years": {
     "person_name": "Charlotte Rampling",
-    "person_id": null
+    "person_id": 44079
   },
   "Oscar|Best Actress in a Leading Role|2016|brooklyn": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "Oscar|Best Actress in a Leading Role|2016|carol": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Leading Role|2016|joy": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "Oscar|Best Actress in a Leading Role|2016|room": {
     "person_name": "Brie Larson",
-    "person_id": null
+    "person_id": 60073
   },
   "Oscar|Best Actress in a Leading Role|2017|elle": {
     "person_name": "Isabelle Huppert",
-    "person_id": null
+    "person_id": 17882
   },
   "Oscar|Best Actress in a Leading Role|2017|florence foster jenkins": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2017|jackie": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "Oscar|Best Actress in a Leading Role|2017|la la land": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "Oscar|Best Actress in a Leading Role|2017|loving": {
     "person_name": "Ruth Negga",
-    "person_id": null
+    "person_id": 17018
   },
   "Oscar|Best Actress in a Leading Role|2018|i, tonya": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "Oscar|Best Actress in a Leading Role|2018|lady bird": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "Oscar|Best Actress in a Leading Role|2018|the post": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Leading Role|2018|the shape of water": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "Oscar|Best Actress in a Leading Role|2018|three billboards outside ebbing, missouri": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "Oscar|Best Actress in a Leading Role|2019|a star is born": {
     "person_name": "Lady Gaga",
-    "person_id": null
+    "person_id": 237405
   },
   "Oscar|Best Actress in a Leading Role|2019|can you ever forgive me?": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "Oscar|Best Actress in a Leading Role|2019|roma": {
     "person_name": "Yalitza Aparicio",
-    "person_id": null
+    "person_id": 1775557
   },
   "Oscar|Best Actress in a Leading Role|2019|the favourite": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "Oscar|Best Actress in a Leading Role|2019|the wife": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "Oscar|Best Actress in a Leading Role|2020|bombshell": {
     "person_name": "Charlize Theron",
-    "person_id": null
+    "person_id": 6885
   },
   "Oscar|Best Actress in a Leading Role|2020|harriet": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "Oscar|Best Actress in a Leading Role|2020|judy": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "Oscar|Best Actress in a Leading Role|2020|little women": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "Oscar|Best Actress in a Leading Role|2020|marriage story": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "Oscar|Best Actress in a Leading Role|2021|ma rainey's black bottom": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "Oscar|Best Actress in a Leading Role|2021|nomadland": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "Oscar|Best Actress in a Leading Role|2021|pieces of a woman": {
     "person_name": "Vanessa Kirby",
-    "person_id": null
+    "person_id": 556356
   },
   "Oscar|Best Actress in a Leading Role|2021|promising young woman": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "Oscar|Best Actress in a Leading Role|2021|the united states vs. billie holiday": {
     "person_name": "Andra Day",
-    "person_id": null
+    "person_id": 1658802
   },
   "Oscar|Best Actress in a Leading Role|2022|being the ricardos": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Oscar|Best Actress in a Leading Role|2022|parallel mothers": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Oscar|Best Actress in a Leading Role|2022|spencer": {
     "person_name": "Kristen Stewart",
-    "person_id": null
+    "person_id": 37917
   },
   "Oscar|Best Actress in a Leading Role|2022|the eyes of tammy faye": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "Oscar|Best Actress in a Leading Role|2022|the lost daughter": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "Oscar|Best Actress in a Leading Role|2023|blonde": {
     "person_name": "Ana de Armas",
-    "person_id": null
+    "person_id": 224513
   },
   "Oscar|Best Actress in a Leading Role|2023|everything everywhere all at once": {
     "person_name": "Michelle Yeoh",
-    "person_id": null
+    "person_id": 1620
   },
   "Oscar|Best Actress in a Leading Role|2023|the fabelmans": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "Oscar|Best Actress in a Leading Role|2023|to leslie": {
     "person_name": "Andrea Riseborough",
-    "person_id": null
+    "person_id": 127558
   },
   "Oscar|Best Actress in a Leading Role|2023|tár": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Leading Role|2024|anatomy of a fall": {
     "person_name": "Sandra Hüller",
-    "person_id": null
+    "person_id": 7152
   },
   "Oscar|Best Actress in a Leading Role|2024|killers of the flower moon": {
     "person_name": "Lily Gladstone",
-    "person_id": null
+    "person_id": 1183917
   },
   "Oscar|Best Actress in a Leading Role|2024|maestro": {
     "person_name": "Carey Mulligan",
-    "person_id": null
+    "person_id": 36662
   },
   "Oscar|Best Actress in a Leading Role|2024|nyad": {
     "person_name": "Annette Bening",
-    "person_id": null
+    "person_id": 516
   },
   "Oscar|Best Actress in a Leading Role|2024|poor things": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "Oscar|Best Actress in a Leading Role|2025|anora": {
     "person_name": "Mikey Madison",
-    "person_id": null
+    "person_id": 1640439
   },
   "Oscar|Best Actress in a Leading Role|2025|emilia pérez": {
     "person_name": "Karla Sofía Gascón",
-    "person_id": null
+    "person_id": 1505938
   },
   "Oscar|Best Actress in a Leading Role|2025|i'm still here": {
     "person_name": "Fernanda Torres",
-    "person_id": null
+    "person_id": 87335
   },
   "Oscar|Best Actress in a Leading Role|2025|the substance": {
     "person_name": "Demi Moore",
-    "person_id": null
+    "person_id": 3416
   },
   "Oscar|Best Actress in a Leading Role|2025|wicked": {
     "person_name": "Cynthia Erivo",
-    "person_id": null
+    "person_id": 1765068
   },
   "Oscar|Best Actress in a Supporting Role|2000|being john malkovich": {
     "person_name": "Catherine Keener",
-    "person_id": null
+    "person_id": 2229
   },
   "Oscar|Best Actress in a Supporting Role|2000|boys don't cry": {
     "person_name": "Chloë Sevigny",
-    "person_id": null
+    "person_id": 2838
   },
   "Oscar|Best Actress in a Supporting Role|2000|girl, interrupted": {
     "person_name": "Angelina Jolie",
-    "person_id": null
+    "person_id": 11701
   },
   "Oscar|Best Actress in a Supporting Role|2000|sweet and lowdown": {
     "person_name": "Samantha Morton",
-    "person_id": null
+    "person_id": 2206
   },
   "Oscar|Best Actress in a Supporting Role|2000|the sixth sense": {
     "person_name": "Toni Collette",
-    "person_id": null
+    "person_id": 3051
   },
   "Oscar|Best Actress in a Supporting Role|2001|almost famous": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "Oscar|Best Actress in a Supporting Role|2001|billy elliot": {
     "person_name": "Julie Walters",
-    "person_id": null
+    "person_id": 477
   },
   "Oscar|Best Actress in a Supporting Role|2001|chocolat": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Supporting Role|2001|pollock": {
     "person_name": "Marcia Gay Harden",
-    "person_id": null
+    "person_id": 4726
   },
   "Oscar|Best Actress in a Supporting Role|2002|a beautiful mind": {
     "person_name": "Jennifer Connelly",
-    "person_id": null
+    "person_id": 6161
   },
   "Oscar|Best Actress in a Supporting Role|2002|gosford park": {
     "person_name": "Maggie Smith",
-    "person_id": null
+    "person_id": 10978
   },
   "Oscar|Best Actress in a Supporting Role|2002|in the bedroom": {
     "person_name": "Marisa Tomei",
-    "person_id": null
+    "person_id": 3141
   },
   "Oscar|Best Actress in a Supporting Role|2002|iris": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "Oscar|Best Actress in a Supporting Role|2003|about schmidt": {
     "person_name": "Kathy Bates",
-    "person_id": null
+    "person_id": 8534
   },
   "Oscar|Best Actress in a Supporting Role|2003|adaptation": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Supporting Role|2003|chicago": {
     "person_name": "Queen Latifah",
-    "person_id": null
+    "person_id": 15758
   },
   "Oscar|Best Actress in a Supporting Role|2003|the hours": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Oscar|Best Actress in a Supporting Role|2004|cold mountain": {
     "person_name": "Renée Zellweger",
-    "person_id": null
+    "person_id": 9137
   },
   "Oscar|Best Actress in a Supporting Role|2004|house of sand and fog": {
     "person_name": "Shohreh Aghdashloo",
-    "person_id": null
+    "person_id": 21041
   },
   "Oscar|Best Actress in a Supporting Role|2004|mystic river": {
     "person_name": "Marcia Gay Harden",
-    "person_id": null
+    "person_id": 4726
   },
   "Oscar|Best Actress in a Supporting Role|2004|pieces of april": {
     "person_name": "Patricia Clarkson",
-    "person_id": null
+    "person_id": 1276
   },
   "Oscar|Best Actress in a Supporting Role|2004|thirteen": {
     "person_name": "Holly Hunter",
-    "person_id": null
+    "person_id": 18686
   },
   "Oscar|Best Actress in a Supporting Role|2005|closer": {
     "person_name": "Natalie Portman",
-    "person_id": null
+    "person_id": 524
   },
   "Oscar|Best Actress in a Supporting Role|2005|hotel rwanda": {
     "person_name": "Sophie Okonedo",
-    "person_id": null
+    "person_id": 2598
   },
   "Oscar|Best Actress in a Supporting Role|2005|kinsey": {
     "person_name": "Laura Linney",
-    "person_id": null
+    "person_id": 350
   },
   "Oscar|Best Actress in a Supporting Role|2005|sideways": {
     "person_name": "Virginia Madsen",
-    "person_id": null
+    "person_id": 12519
   },
   "Oscar|Best Actress in a Supporting Role|2005|the aviator": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Supporting Role|2006|brokeback mountain": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "Oscar|Best Actress in a Supporting Role|2006|capote": {
     "person_name": "Catherine Keener",
-    "person_id": null
+    "person_id": 2229
   },
   "Oscar|Best Actress in a Supporting Role|2006|junebug": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "Oscar|Best Actress in a Supporting Role|2006|north country": {
     "person_name": "Frances McDormand",
-    "person_id": null
+    "person_id": 3910
   },
   "Oscar|Best Actress in a Supporting Role|2006|the constant gardener": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "Oscar|Best Actress in a Supporting Role|2007|babel": {
     "person_name": "Rinko Kikuchi",
-    "person_id": null
+    "person_id": 18054
   },
   "Oscar|Best Actress in a Supporting Role|2007|dreamgirls": {
     "person_name": "Jennifer Hudson",
-    "person_id": null
+    "person_id": 15565
   },
   "Oscar|Best Actress in a Supporting Role|2007|little miss sunshine": {
     "person_name": "Abigail Breslin",
-    "person_id": null
+    "person_id": 17140
   },
   "Oscar|Best Actress in a Supporting Role|2007|notes on a scandal": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Supporting Role|2008|american gangster": {
     "person_name": "Ruby Dee",
-    "person_id": null
+    "person_id": 15532
   },
   "Oscar|Best Actress in a Supporting Role|2008|atonement": {
     "person_name": "Saoirse Ronan",
-    "person_id": null
+    "person_id": 36592
   },
   "Oscar|Best Actress in a Supporting Role|2008|gone baby gone": {
     "person_name": "Amy Ryan",
-    "person_id": null
+    "person_id": 39388
   },
   "Oscar|Best Actress in a Supporting Role|2008|i'm not there": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Oscar|Best Actress in a Supporting Role|2008|michael clayton": {
     "person_name": "Tilda Swinton",
-    "person_id": null
+    "person_id": 3063
   },
   "Oscar|Best Actress in a Supporting Role|2009|doubt": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "Oscar|Best Actress in a Supporting Role|2009|the curious case of benjamin button": {
     "person_name": "Taraji P. Henson",
-    "person_id": null
+    "person_id": 40036
   },
   "Oscar|Best Actress in a Supporting Role|2009|the wrestler": {
     "person_name": "Marisa Tomei",
-    "person_id": null
+    "person_id": 3141
   },
   "Oscar|Best Actress in a Supporting Role|2009|vicky cristina barcelona": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Oscar|Best Actress in a Supporting Role|2010|crazy heart": {
     "person_name": "Maggie Gyllenhaal",
-    "person_id": null
+    "person_id": 1579
   },
   "Oscar|Best Actress in a Supporting Role|2010|nine": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Oscar|Best Actress in a Supporting Role|2010|precious: based on the novel 'push' by sapphire": {
     "person_name": "Mo'Nique",
-    "person_id": null
+    "person_id": 60561
   },
   "Oscar|Best Actress in a Supporting Role|2010|up in the air": {
     "person_name": "Anna Kendrick",
-    "person_id": null
+    "person_id": 84223
   },
   "Oscar|Best Actress in a Supporting Role|2011|animal kingdom": {
     "person_name": "Jacki Weaver",
-    "person_id": null
+    "person_id": 67837
   },
   "Oscar|Best Actress in a Supporting Role|2011|the fighter": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "Oscar|Best Actress in a Supporting Role|2011|the king's speech": {
     "person_name": "Helena Bonham Carter",
-    "person_id": null
+    "person_id": 1283
   },
   "Oscar|Best Actress in a Supporting Role|2011|true grit": {
     "person_name": "Hailee Steinfeld",
-    "person_id": null
+    "person_id": 130640
   },
   "Oscar|Best Actress in a Supporting Role|2012|albert nobbs": {
     "person_name": "Janet McTeer",
-    "person_id": null
+    "person_id": 47627
   },
   "Oscar|Best Actress in a Supporting Role|2012|bridesmaids": {
     "person_name": "Melissa McCarthy",
-    "person_id": null
+    "person_id": 55536
   },
   "Oscar|Best Actress in a Supporting Role|2012|the artist": {
     "person_name": "Bérénice Bejo",
-    "person_id": null
+    "person_id": 82923
   },
   "Oscar|Best Actress in a Supporting Role|2012|the help": {
     "person_name": "Jessica Chastain",
-    "person_id": null
+    "person_id": 83002
   },
   "Oscar|Best Actress in a Supporting Role|2013|les misérables": {
     "person_name": "Anne Hathaway",
-    "person_id": null
+    "person_id": 1813
   },
   "Oscar|Best Actress in a Supporting Role|2013|lincoln": {
     "person_name": "Sally Field",
-    "person_id": null
+    "person_id": 35
   },
   "Oscar|Best Actress in a Supporting Role|2013|silver linings playbook": {
     "person_name": "Jacki Weaver",
-    "person_id": null
+    "person_id": 67837
   },
   "Oscar|Best Actress in a Supporting Role|2013|the master": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "Oscar|Best Actress in a Supporting Role|2013|the sessions": {
     "person_name": "Helen Hunt",
-    "person_id": null
+    "person_id": 9994
   },
   "Oscar|Best Actress in a Supporting Role|2014|12 years a slave": {
     "person_name": "Lupita Nyong'o",
-    "person_id": null
+    "person_id": 1267329
   },
   "Oscar|Best Actress in a Supporting Role|2014|american hustle": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "Oscar|Best Actress in a Supporting Role|2014|august: osage county": {
     "person_name": "Julia Roberts",
-    "person_id": null
+    "person_id": 1204
   },
   "Oscar|Best Actress in a Supporting Role|2014|blue jasmine": {
     "person_name": "Sally Hawkins",
-    "person_id": null
+    "person_id": 39658
   },
   "Oscar|Best Actress in a Supporting Role|2014|nebraska": {
     "person_name": "June Squibb",
-    "person_id": null
+    "person_id": 35515
   },
   "Oscar|Best Actress in a Supporting Role|2015|birdman or (the unexpected virtue of ignorance)": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "Oscar|Best Actress in a Supporting Role|2015|boyhood": {
     "person_name": "Patricia Arquette",
-    "person_id": null
+    "person_id": 4687
   },
   "Oscar|Best Actress in a Supporting Role|2015|into the woods": {
     "person_name": "Meryl Streep",
-    "person_id": null
+    "person_id": 5064
   },
   "Oscar|Best Actress in a Supporting Role|2015|the imitation game": {
     "person_name": "Keira Knightley",
-    "person_id": null
+    "person_id": 116
   },
   "Oscar|Best Actress in a Supporting Role|2015|wild": {
     "person_name": "Laura Dern",
-    "person_id": null
+    "person_id": 4784
   },
   "Oscar|Best Actress in a Supporting Role|2016|carol": {
     "person_name": "Rooney Mara",
-    "person_id": null
+    "person_id": 108916
   },
   "Oscar|Best Actress in a Supporting Role|2016|spotlight": {
     "person_name": "Rachel McAdams",
-    "person_id": null
+    "person_id": 53714
   },
   "Oscar|Best Actress in a Supporting Role|2016|steve jobs": {
     "person_name": "Kate Winslet",
-    "person_id": null
+    "person_id": 204
   },
   "Oscar|Best Actress in a Supporting Role|2016|the danish girl": {
     "person_name": "Alicia Vikander",
-    "person_id": null
+    "person_id": 227454
   },
   "Oscar|Best Actress in a Supporting Role|2016|the hateful eight": {
     "person_name": "Jennifer Jason Leigh",
-    "person_id": null
+    "person_id": 10431
   },
   "Oscar|Best Actress in a Supporting Role|2017|fences": {
     "person_name": "Viola Davis",
-    "person_id": null
+    "person_id": 19492
   },
   "Oscar|Best Actress in a Supporting Role|2017|hidden figures": {
     "person_name": "Octavia Spencer",
-    "person_id": null
+    "person_id": 6944
   },
   "Oscar|Best Actress in a Supporting Role|2017|lion": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Oscar|Best Actress in a Supporting Role|2017|manchester by the sea": {
     "person_name": "Michelle Williams",
-    "person_id": null
+    "person_id": 1812
   },
   "Oscar|Best Actress in a Supporting Role|2017|moonlight": {
     "person_name": "Naomie Harris",
-    "person_id": null
+    "person_id": 2038
   },
   "Oscar|Best Actress in a Supporting Role|2018|i, tonya": {
     "person_name": "Allison Janney",
-    "person_id": null
+    "person_id": 19
   },
   "Oscar|Best Actress in a Supporting Role|2018|lady bird": {
     "person_name": "Laurie Metcalf",
-    "person_id": null
+    "person_id": 12133
   },
   "Oscar|Best Actress in a Supporting Role|2018|mudbound": {
     "person_name": "Mary J. Blige",
-    "person_id": null
+    "person_id": 84933
   },
   "Oscar|Best Actress in a Supporting Role|2018|phantom thread": {
     "person_name": "Lesley Manville",
-    "person_id": null
+    "person_id": 72305
   },
   "Oscar|Best Actress in a Supporting Role|2018|the shape of water": {
     "person_name": "Octavia Spencer",
-    "person_id": null
+    "person_id": 6944
   },
   "Oscar|Best Actress in a Supporting Role|2019|if beale street could talk": {
     "person_name": "Regina King",
-    "person_id": null
+    "person_id": 9788
   },
   "Oscar|Best Actress in a Supporting Role|2019|roma": {
     "person_name": "Marina de Tavira",
-    "person_id": null
+    "person_id": 78883
   },
   "Oscar|Best Actress in a Supporting Role|2019|the favourite": {
     "person_name": "Rachel Weisz",
-    "person_id": null
+    "person_id": 3293
   },
   "Oscar|Best Actress in a Supporting Role|2019|vice": {
     "person_name": "Amy Adams",
-    "person_id": null
+    "person_id": 9273
   },
   "Oscar|Best Actress in a Supporting Role|2020|bombshell": {
     "person_name": "Margot Robbie",
-    "person_id": null
+    "person_id": 234352
   },
   "Oscar|Best Actress in a Supporting Role|2020|jojo rabbit": {
     "person_name": "Scarlett Johansson",
-    "person_id": null
+    "person_id": 1245
   },
   "Oscar|Best Actress in a Supporting Role|2020|little women": {
     "person_name": "Florence Pugh",
-    "person_id": null
+    "person_id": 1373737
   },
   "Oscar|Best Actress in a Supporting Role|2020|marriage story": {
     "person_name": "Laura Dern",
-    "person_id": null
+    "person_id": 4784
   },
   "Oscar|Best Actress in a Supporting Role|2020|richard jewell": {
     "person_name": "Kathy Bates",
-    "person_id": null
+    "person_id": 8534
   },
   "Oscar|Best Actress in a Supporting Role|2021|borat subsequent moviefilm": {
     "person_name": "Maria Bakalova",
-    "person_id": null
+    "person_id": 4877640
   },
   "Oscar|Best Actress in a Supporting Role|2021|hillbilly elegy": {
     "person_name": "Glenn Close",
-    "person_id": null
+    "person_id": 515
   },
   "Oscar|Best Actress in a Supporting Role|2021|mank": {
     "person_name": "Amanda Seyfried",
-    "person_id": null
+    "person_id": 71070
   },
   "Oscar|Best Actress in a Supporting Role|2021|minari": {
     "person_name": "Yuh-jung Youn",
-    "person_id": null
+    "person_id": 1080935
   },
   "Oscar|Best Actress in a Supporting Role|2021|the father": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "Oscar|Best Actress in a Supporting Role|2022|belfast": {
     "person_name": "Judi Dench",
-    "person_id": null
+    "person_id": 5309
   },
   "Oscar|Best Actress in a Supporting Role|2022|king richard": {
     "person_name": "Aunjanue Ellis-Taylor",
-    "person_id": null
+    "person_id": 53923
   },
   "Oscar|Best Actress in a Supporting Role|2022|the lost daughter": {
     "person_name": "Jessie Buckley",
-    "person_id": null
+    "person_id": 1498158
   },
   "Oscar|Best Actress in a Supporting Role|2022|the power of the dog": {
     "person_name": "Kirsten Dunst",
-    "person_id": null
+    "person_id": 205
   },
   "Oscar|Best Actress in a Supporting Role|2022|west side story": {
     "person_name": "Ariana DeBose",
-    "person_id": null
+    "person_id": 1437491
   },
   "Oscar|Best Actress in a Supporting Role|2023|black panther: wakanda forever": {
     "person_name": "Angela Bassett",
-    "person_id": null
+    "person_id": 9780
   },
   "Oscar|Best Actress in a Supporting Role|2023|everything everywhere all at once": {
     "person_name": "Stephanie Hsu",
-    "person_id": null
+    "person_id": 1381186
   },
   "Oscar|Best Actress in a Supporting Role|2023|the banshees of inisherin": {
     "person_name": "Kerry Condon",
-    "person_id": null
+    "person_id": 62105
   },
   "Oscar|Best Actress in a Supporting Role|2023|the whale": {
     "person_name": "Hong Chau",
-    "person_id": null
+    "person_id": 1360317
   },
   "Oscar|Best Actress in a Supporting Role|2024|barbie": {
     "person_name": "America Ferrera",
-    "person_id": null
+    "person_id": 59174
   },
   "Oscar|Best Actress in a Supporting Role|2024|nyad": {
     "person_name": "Jodie Foster",
-    "person_id": null
+    "person_id": 1038
   },
   "Oscar|Best Actress in a Supporting Role|2024|oppenheimer": {
     "person_name": "Emily Blunt",
-    "person_id": null
+    "person_id": 5081
   },
   "Oscar|Best Actress in a Supporting Role|2024|the color purple": {
     "person_name": "Danielle Brooks",
-    "person_id": null
+    "person_id": 1075037
   },
   "Oscar|Best Actress in a Supporting Role|2024|the holdovers": {
     "person_name": "Da'Vine Joy Randolph",
-    "person_id": null
+    "person_id": 1180099
   },
   "Oscar|Best Actress in a Supporting Role|2025|a complete unknown": {
     "person_name": "Monica Barbaro",
-    "person_id": null
+    "person_id": 1525043
   },
   "Oscar|Best Actress in a Supporting Role|2025|conclave": {
     "person_name": "Isabella Rossellini",
-    "person_id": null
+    "person_id": 6588
   },
   "Oscar|Best Actress in a Supporting Role|2025|emilia pérez": {
     "person_name": "Zoe Saldaña",
-    "person_id": null
+    "person_id": 8691
   },
   "Oscar|Best Actress in a Supporting Role|2025|the brutalist": {
     "person_name": "Felicity Jones",
-    "person_id": null
+    "person_id": 72855
   },
   "Oscar|Best Actress in a Supporting Role|2025|wicked": {
     "person_name": "Ariana Grande",
-    "person_id": null
+    "person_id": 226001
   },
   "Oscar|Best Cinematography|2000|american beauty": {
     "person_name": "Conrad Hall",
-    "person_id": null
+    "person_id": 8217
   },
   "Oscar|Best Cinematography|2000|sleepy hollow": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2000|snow falling on cedars": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2000|the end of the affair": {
     "person_name": "Roger Pratt",
-    "person_id": null
+    "person_id": 293
   },
   "Oscar|Best Cinematography|2000|the insider": {
     "person_name": "Dante Spinotti",
-    "person_id": null
+    "person_id": 11099
   },
   "Oscar|Best Cinematography|2001|crouching tiger, hidden dragon": {
     "person_name": "Peter Pau",
-    "person_id": null
+    "person_id": 2365113
   },
   "Oscar|Best Cinematography|2001|gladiator": {
     "person_name": "John Mathieson",
-    "person_id": null
+    "person_id": 943
   },
   "Oscar|Best Cinematography|2001|malèna": {
     "person_name": "Lajos Koltai",
-    "person_id": null
+    "person_id": 47275
   },
   "Oscar|Best Cinematography|2001|o brother, where art thou?": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2001|the patriot": {
     "person_name": "Caleb Deschanel",
-    "person_id": null
+    "person_id": 8750
   },
   "Oscar|Best Cinematography|2002|amélie": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2002|black hawk down": {
     "person_name": "Sławomir Idziak",
-    "person_id": null
+    "person_id": 1129
   },
   "Oscar|Best Cinematography|2002|moulin rouge!": {
     "person_name": "Donald M. McAlpine",
-    "person_id": null
+    "person_id": 1095
   },
   "Oscar|Best Cinematography|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Andrew Lesnie",
-    "person_id": null
+    "person_id": 1313
   },
   "Oscar|Best Cinematography|2002|the man who wasn't there": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2003|chicago": {
     "person_name": "Dion Beebe",
-    "person_id": null
+    "person_id": 647
   },
   "Oscar|Best Cinematography|2003|far from heaven": {
     "person_name": "Edward Lachman",
-    "person_id": null
+    "person_id": 6345
   },
   "Oscar|Best Cinematography|2003|gangs of new york": {
     "person_name": "Michael Ballhaus",
-    "person_id": null
+    "person_id": 3769
   },
   "Oscar|Best Cinematography|2003|road to perdition": {
     "person_name": "Conrad Hall",
-    "person_id": null
+    "person_id": 8217
   },
   "Oscar|Best Cinematography|2003|the pianist": {
     "person_name": "Paweł Edelman",
-    "person_id": null
+    "person_id": 3561
   },
   "Oscar|Best Cinematography|2004|city of god": {
     "person_name": "Cesar Charlone",
-    "person_id": null
+    "person_id": 8577
   },
   "Oscar|Best Cinematography|2004|cold mountain": {
     "person_name": "John Seale",
-    "person_id": null
+    "person_id": 2702
   },
   "Oscar|Best Cinematography|2004|girl with a pearl earring": {
     "person_name": "Eduardo Serra",
-    "person_id": null
+    "person_id": 16732
   },
   "Oscar|Best Cinematography|2004|master and commander: the far side of the world": {
     "person_name": "Russell Boyd",
-    "person_id": null
+    "person_id": 31027
   },
   "Oscar|Best Cinematography|2004|seabiscuit": {
     "person_name": "John Schwartzman",
-    "person_id": null
+    "person_id": 892
   },
   "Oscar|Best Cinematography|2005|a very long engagement": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2005|house of flying daggers": {
     "person_name": "Zhao Xiaoding",
-    "person_id": null
+    "person_id": 57913
   },
   "Oscar|Best Cinematography|2005|the aviator": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2005|the passion of the christ": {
     "person_name": "Caleb Deschanel",
-    "person_id": null
+    "person_id": 8750
   },
   "Oscar|Best Cinematography|2005|the phantom of the opera": {
     "person_name": "John Mathieson",
-    "person_id": null
+    "person_id": 943
   },
   "Oscar|Best Cinematography|2006|batman begins": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "Oscar|Best Cinematography|2006|brokeback mountain": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "Oscar|Best Cinematography|2006|good night, and good luck": {
     "person_name": "Robert Elswit",
-    "person_id": null
+    "person_id": 2950
   },
   "Oscar|Best Cinematography|2006|memoirs of a geisha": {
     "person_name": "Dion Beebe",
-    "person_id": null
+    "person_id": 647
   },
   "Oscar|Best Cinematography|2006|the new world": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2007|children of men": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2007|pan's labyrinth": {
     "person_name": "Guillermo Navarro",
-    "person_id": null
+    "person_id": 3113
   },
   "Oscar|Best Cinematography|2007|the black dahlia": {
     "person_name": "Vilmos Zsigmond",
-    "person_id": null
+    "person_id": 12235
   },
   "Oscar|Best Cinematography|2007|the illusionist": {
     "person_name": "Dick Pope",
-    "person_id": null
+    "person_id": 60085
   },
   "Oscar|Best Cinematography|2007|the prestige": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "Oscar|Best Cinematography|2008|atonement": {
     "person_name": "Seamus McGarvey",
-    "person_id": null
+    "person_id": 3285
   },
   "Oscar|Best Cinematography|2008|no country for old men": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2008|the assassination of jesse james by the coward robert ford": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2008|the diving bell and the butterfly": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "Oscar|Best Cinematography|2008|there will be blood": {
     "person_name": "Robert Elswit",
-    "person_id": null
+    "person_id": 2950
   },
   "Oscar|Best Cinematography|2009|changeling": {
     "person_name": "Tom Stern",
-    "person_id": null
+    "person_id": 223349
   },
   "Oscar|Best Cinematography|2009|slumdog millionaire": {
     "person_name": "Anthony Dod Mantle",
-    "person_id": null
+    "person_id": 1570
   },
   "Oscar|Best Cinematography|2009|the curious case of benjamin button": {
     "person_name": "Claudio Miranda",
-    "person_id": null
+    "person_id": 51333
   },
   "Oscar|Best Cinematography|2009|the dark knight": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "Oscar|Best Cinematography|2009|the reader": {
     "person_name": "Chris Menges",
-    "person_id": null
+    "person_id": 8969
   },
   "Oscar|Best Cinematography|2010|avatar": {
     "person_name": "Mauro Fiore",
-    "person_id": null
+    "person_id": 18265
   },
   "Oscar|Best Cinematography|2010|harry potter and the half-blood prince": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2010|inglourious basterds": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2010|the hurt locker": {
     "person_name": "Barry Ackroyd",
-    "person_id": null
+    "person_id": 15493
   },
   "Oscar|Best Cinematography|2010|the white ribbon": {
     "person_name": "Christian Berger",
-    "person_id": null
+    "person_id": 6027
   },
   "Oscar|Best Cinematography|2011|black swan": {
     "person_name": "Matthew Libatique",
-    "person_id": null
+    "person_id": 4867
   },
   "Oscar|Best Cinematography|2011|inception": {
     "person_name": "Wally Pfister",
-    "person_id": null
+    "person_id": 559
   },
   "Oscar|Best Cinematography|2011|the king's speech": {
     "person_name": "Danny Cohen",
-    "person_id": null
+    "person_id": 56021
   },
   "Oscar|Best Cinematography|2011|the social network": {
     "person_name": "Jeff Cronenweth",
-    "person_id": null
+    "person_id": 7479
   },
   "Oscar|Best Cinematography|2011|true grit": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2012|hugo": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2012|the artist": {
     "person_name": "Guillaume Schiffman",
-    "person_id": null
+    "person_id": 20593
   },
   "Oscar|Best Cinematography|2012|the girl with the dragon tattoo": {
     "person_name": "Jeff Cronenweth",
-    "person_id": null
+    "person_id": 7479
   },
   "Oscar|Best Cinematography|2012|the tree of life": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2012|war horse": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "Oscar|Best Cinematography|2013|anna karenina": {
     "person_name": "Seamus McGarvey",
-    "person_id": null
+    "person_id": 3285
   },
   "Oscar|Best Cinematography|2013|django unchained": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2013|life of pi": {
     "person_name": "Claudio Miranda",
-    "person_id": null
+    "person_id": 51333
   },
   "Oscar|Best Cinematography|2013|lincoln": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "Oscar|Best Cinematography|2013|skyfall": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2014|gravity": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2014|inside llewyn davis": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2014|nebraska": {
     "person_name": "Phedon Papamichael",
-    "person_id": null
+    "person_id": 432
   },
   "Oscar|Best Cinematography|2014|prisoners": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2014|the grandmaster": {
     "person_name": "Philippe Le Sourd",
-    "person_id": null
+    "person_id": 63422
   },
   "Oscar|Best Cinematography|2015|birdman or (the unexpected virtue of ignorance)": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2015|ida": {
     "person_name": "Łukasz Żal",
-    "person_id": null
+    "person_id": 1609221
   },
   "Oscar|Best Cinematography|2015|mr. turner": {
     "person_name": "Dick Pope",
-    "person_id": null
+    "person_id": 60085
   },
   "Oscar|Best Cinematography|2015|the grand budapest hotel": {
     "person_name": "Robert Yeoman",
-    "person_id": null
+    "person_id": 4506891
   },
   "Oscar|Best Cinematography|2015|unbroken": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2016|carol": {
     "person_name": "Edward Lachman",
-    "person_id": null
+    "person_id": 6345
   },
   "Oscar|Best Cinematography|2016|mad max: fury road": {
     "person_name": "John Seale",
-    "person_id": null
+    "person_id": 2702
   },
   "Oscar|Best Cinematography|2016|sicario": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2016|the hateful eight": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2016|the revenant": {
     "person_name": "Emmanuel Lubezki",
-    "person_id": null
+    "person_id": 4185
   },
   "Oscar|Best Cinematography|2017|arrival": {
     "person_name": "Bradford Young",
-    "person_id": null
+    "person_id": 1046612
   },
   "Oscar|Best Cinematography|2017|la la land": {
     "person_name": "Linus Sandgren",
-    "person_id": null
+    "person_id": 969171
   },
   "Oscar|Best Cinematography|2017|lion": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "Oscar|Best Cinematography|2017|moonlight": {
     "person_name": "James Laxton",
-    "person_id": null
+    "person_id": 960350
   },
   "Oscar|Best Cinematography|2017|silence": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "Oscar|Best Cinematography|2018|blade runner 2049": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2018|darkest hour": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2018|dunkirk": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "Oscar|Best Cinematography|2018|mudbound": {
     "person_name": "Rachel Morrison",
-    "person_id": null
+    "person_id": 984113
   },
   "Oscar|Best Cinematography|2018|the shape of water": {
     "person_name": "Dan Laustsen",
-    "person_id": null
+    "person_id": 40268
   },
   "Oscar|Best Cinematography|2019|a star is born": {
     "person_name": "Matthew Libatique",
-    "person_id": null
+    "person_id": 4867
   },
   "Oscar|Best Cinematography|2019|cold war": {
     "person_name": "Łukasz Żal",
-    "person_id": null
+    "person_id": 1609221
   },
   "Oscar|Best Cinematography|2019|never look away": {
     "person_name": "Caleb Deschanel",
-    "person_id": null
+    "person_id": 8750
   },
   "Oscar|Best Cinematography|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Oscar|Best Cinematography|2019|the favourite": {
     "person_name": "Robbie Ryan",
-    "person_id": null
+    "person_id": 71086
   },
   "Oscar|Best Cinematography|2020|1917": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2020|joker": {
     "person_name": "Lawrence Sher",
-    "person_id": null
+    "person_id": 5387
   },
   "Oscar|Best Cinematography|2020|once upon a time in hollywood": {
     "person_name": "Robert Richardson",
-    "person_id": null
+    "person_id": 149
   },
   "Oscar|Best Cinematography|2020|the irishman": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "Oscar|Best Cinematography|2020|the lighthouse": {
     "person_name": "Jarin Blaschke",
-    "person_id": null
+    "person_id": 1135102
   },
   "Oscar|Best Cinematography|2021|judas and the black messiah": {
     "person_name": "Sean Bobbitt",
-    "person_id": null
+    "person_id": 54926
   },
   "Oscar|Best Cinematography|2021|mank": {
     "person_name": "Erik Messerschmidt",
-    "person_id": null
+    "person_id": 1519399
   },
   "Oscar|Best Cinematography|2021|news of the world": {
     "person_name": "Dariusz Wolski",
-    "person_id": null
+    "person_id": 120
   },
   "Oscar|Best Cinematography|2021|nomadland": {
     "person_name": "Joshua James Richards",
-    "person_id": null
+    "person_id": 1313754
   },
   "Oscar|Best Cinematography|2021|the trial of the chicago 7": {
     "person_name": "Phedon Papamichael",
-    "person_id": null
+    "person_id": 432
   },
   "Oscar|Best Cinematography|2022|dune": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "Oscar|Best Cinematography|2022|nightmare alley": {
     "person_name": "Dan Laustsen",
-    "person_id": null
+    "person_id": 40268
   },
   "Oscar|Best Cinematography|2022|the power of the dog": {
     "person_name": "Ari Wegner",
-    "person_id": null
+    "person_id": 1615123
   },
   "Oscar|Best Cinematography|2022|the tragedy of macbeth": {
     "person_name": "Bruno Delbonnel",
-    "person_id": null
+    "person_id": 2423
   },
   "Oscar|Best Cinematography|2022|west side story": {
     "person_name": "Janusz Kamiński",
-    "person_id": null
+    "person_id": 492
   },
   "Oscar|Best Cinematography|2023|all quiet on the western front": {
     "person_name": "James Friend",
-    "person_id": null
+    "person_id": 1103587
   },
   "Oscar|Best Cinematography|2023|bardo, false chronicle of a handful of truths": {
     "person_name": "Darius Khondji",
-    "person_id": null
+    "person_id": 2240
   },
   "Oscar|Best Cinematography|2023|elvis": {
     "person_name": "Mandy Walker",
-    "person_id": null
+    "person_id": 57849
   },
   "Oscar|Best Cinematography|2023|empire of light": {
     "person_name": "Roger Deakins",
-    "person_id": null
+    "person_id": 151
   },
   "Oscar|Best Cinematography|2023|tár": {
     "person_name": "Florian Hoffmeister",
-    "person_id": null
+    "person_id": 10231
   },
   "Oscar|Best Cinematography|2024|el conde": {
     "person_name": "Edward Lachman",
-    "person_id": null
+    "person_id": 6345
   },
   "Oscar|Best Cinematography|2024|killers of the flower moon": {
     "person_name": "Rodrigo Prieto",
-    "person_id": null
+    "person_id": 275
   },
   "Oscar|Best Cinematography|2024|maestro": {
     "person_name": "Matthew Libatique",
-    "person_id": null
+    "person_id": 4867
   },
   "Oscar|Best Cinematography|2024|oppenheimer": {
     "person_name": "Hoyte van Hoytema",
-    "person_id": null
+    "person_id": 74401
   },
   "Oscar|Best Cinematography|2024|poor things": {
     "person_name": "Robbie Ryan",
-    "person_id": null
+    "person_id": 71086
   },
   "Oscar|Best Cinematography|2025|dune: part two": {
     "person_name": "Greig Fraser",
-    "person_id": null
+    "person_id": 67113
   },
   "Oscar|Best Cinematography|2025|emilia pérez": {
     "person_name": "Paul Guilhaume",
-    "person_id": null
+    "person_id": 1665518
   },
   "Oscar|Best Cinematography|2025|maria": {
     "person_name": "Edward Lachman",
-    "person_id": null
+    "person_id": 6345
   },
   "Oscar|Best Cinematography|2025|nosferatu": {
     "person_name": "Jarin Blaschke",
-    "person_id": null
+    "person_id": 1135102
   },
   "Oscar|Best Cinematography|2025|the brutalist": {
     "person_name": "Lol Crawley",
-    "person_id": null
+    "person_id": 93188
   },
   "Oscar|Best Director|2000|american beauty": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "Oscar|Best Director|2000|being john malkovich": {
     "person_name": "Spike Jonze",
-    "person_id": null
+    "person_id": 5953
   },
   "Oscar|Best Director|2000|the cider house rules": {
     "person_name": "Lasse Hallström",
-    "person_id": null
+    "person_id": 5306
   },
   "Oscar|Best Director|2000|the insider": {
     "person_name": "Michael Mann",
-    "person_id": null
+    "person_id": 638
   },
   "Oscar|Best Director|2000|the sixth sense": {
     "person_name": "M. Night Shyamalan",
-    "person_id": null
+    "person_id": 11614
   },
   "Oscar|Best Director|2001|billy elliot": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "Oscar|Best Director|2001|crouching tiger, hidden dragon": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "Oscar|Best Director|2001|erin brockovich": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "Oscar|Best Director|2001|gladiator": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "Oscar|Best Director|2001|traffic": {
     "person_name": "Steven Soderbergh",
-    "person_id": null
+    "person_id": 1884
   },
   "Oscar|Best Director|2002|a beautiful mind": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "Oscar|Best Director|2002|black hawk down": {
     "person_name": "Ridley Scott",
-    "person_id": null
+    "person_id": 578
   },
   "Oscar|Best Director|2002|gosford park": {
     "person_name": "Robert Altman",
-    "person_id": null
+    "person_id": 9789
   },
   "Oscar|Best Director|2002|mulholland drive": {
     "person_name": "David Lynch",
-    "person_id": null
+    "person_id": 5602
   },
   "Oscar|Best Director|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "Oscar|Best Director|2003|chicago": {
     "person_name": "Rob Marshall",
-    "person_id": null
+    "person_id": 17633
   },
   "Oscar|Best Director|2003|gangs of new york": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2003|talk to her": {
     "person_name": "Pedro Almodóvar",
-    "person_id": null
+    "person_id": 309
   },
   "Oscar|Best Director|2003|the hours": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "Oscar|Best Director|2003|the pianist": {
     "person_name": "Roman Polanski",
-    "person_id": null
+    "person_id": 3556
   },
   "Oscar|Best Director|2004|city of god": {
     "person_name": "Fernando Meirelles",
-    "person_id": null
+    "person_id": 8557
   },
   "Oscar|Best Director|2004|lost in translation": {
     "person_name": "Sofia Coppola",
-    "person_id": null
+    "person_id": 1769
   },
   "Oscar|Best Director|2004|master and commander: the far side of the world": {
     "person_name": "Peter Weir",
-    "person_id": null
+    "person_id": 2690
   },
   "Oscar|Best Director|2004|mystic river": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "Oscar|Best Director|2004|the lord of the rings: the return of the king": {
     "person_name": "Peter Jackson",
-    "person_id": null
+    "person_id": 108
   },
   "Oscar|Best Director|2005|million dollar baby": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "Oscar|Best Director|2005|ray": {
     "person_name": "Taylor Hackford",
-    "person_id": null
+    "person_id": 18596
   },
   "Oscar|Best Director|2005|sideways": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "Oscar|Best Director|2005|the aviator": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2005|vera drake": {
     "person_name": "Mike Leigh",
-    "person_id": null
+    "person_id": 65452
   },
   "Oscar|Best Director|2006|brokeback mountain": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "Oscar|Best Director|2006|capote": {
     "person_name": "Bennett Miller",
-    "person_id": null
+    "person_id": 5345
   },
   "Oscar|Best Director|2006|crash": {
     "person_name": "Paul Haggis",
-    "person_id": null
+    "person_id": 455
   },
   "Oscar|Best Director|2006|good night, and good luck": {
     "person_name": "George Clooney",
-    "person_id": null
+    "person_id": 1461
   },
   "Oscar|Best Director|2006|munich": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "Oscar|Best Director|2007|babel": {
     "person_name": "Alejandro González Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "Oscar|Best Director|2007|letters from iwo jima": {
     "person_name": "Clint Eastwood",
-    "person_id": null
+    "person_id": 190
   },
   "Oscar|Best Director|2007|the departed": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2007|the queen": {
     "person_name": "Stephen Frears",
-    "person_id": null
+    "person_id": 3224
   },
   "Oscar|Best Director|2007|united 93": {
     "person_name": "Paul Greengrass",
-    "person_id": null
+    "person_id": 25598
   },
   "Oscar|Best Director|2008|juno": {
     "person_name": "Jason Reitman",
-    "person_id": null
+    "person_id": 52443
   },
   "Oscar|Best Director|2008|michael clayton": {
     "person_name": "Tony Gilroy",
-    "person_id": null
+    "person_id": 19242
   },
   "Oscar|Best Director|2008|no country for old men": {
     "person_name": "Joel Coen",
-    "person_id": null
+    "person_id": 1223
   },
   "Oscar|Best Director|2008|the diving bell and the butterfly": {
     "person_name": "Julian Schnabel",
-    "person_id": null
+    "person_id": 7482
   },
   "Oscar|Best Director|2008|there will be blood": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Oscar|Best Director|2009|frost/nixon": {
     "person_name": "Ron Howard",
-    "person_id": null
+    "person_id": 6159
   },
   "Oscar|Best Director|2009|milk": {
     "person_name": "Gus Van Sant",
-    "person_id": null
+    "person_id": 5216
   },
   "Oscar|Best Director|2009|slumdog millionaire": {
     "person_name": "Danny Boyle",
-    "person_id": null
+    "person_id": 2034
   },
   "Oscar|Best Director|2009|the curious case of benjamin button": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "Oscar|Best Director|2009|the reader": {
     "person_name": "Stephen Daldry",
-    "person_id": null
+    "person_id": 468
   },
   "Oscar|Best Director|2010|avatar": {
     "person_name": "James Cameron",
-    "person_id": null
+    "person_id": 2710
   },
   "Oscar|Best Director|2010|inglourious basterds": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "Oscar|Best Director|2010|precious: based on the novel 'push' by sapphire": {
     "person_name": "Lee Daniels",
-    "person_id": null
+    "person_id": 20019
   },
   "Oscar|Best Director|2010|the hurt locker": {
     "person_name": "Kathryn Bigelow",
-    "person_id": null
+    "person_id": 14392
   },
   "Oscar|Best Director|2010|up in the air": {
     "person_name": "Jason Reitman",
-    "person_id": null
+    "person_id": 52443
   },
   "Oscar|Best Director|2011|black swan": {
     "person_name": "Darren Aronofsky",
-    "person_id": null
+    "person_id": 6431
   },
   "Oscar|Best Director|2011|the fighter": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "Oscar|Best Director|2011|the king's speech": {
     "person_name": "Tom Hooper",
-    "person_id": null
+    "person_id": 70500
   },
   "Oscar|Best Director|2011|the social network": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "Oscar|Best Director|2011|true grit": {
     "person_name": "Joel Coen",
-    "person_id": null
+    "person_id": 1223
   },
   "Oscar|Best Director|2012|hugo": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2012|midnight in paris": {
     "person_name": "Woody Allen",
-    "person_id": null
+    "person_id": 1243
   },
   "Oscar|Best Director|2012|the artist": {
     "person_name": "Michel Hazanavicius",
-    "person_id": null
+    "person_id": 67717
   },
   "Oscar|Best Director|2012|the descendants": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "Oscar|Best Director|2012|the tree of life": {
     "person_name": "Terrence Malick",
-    "person_id": null
+    "person_id": 30715
   },
   "Oscar|Best Director|2013|amour": {
     "person_name": "Michael Haneke",
-    "person_id": null
+    "person_id": 6011
   },
   "Oscar|Best Director|2013|beasts of the southern wild": {
     "person_name": "Benh Zeitlin",
-    "person_id": null
+    "person_id": 223516
   },
   "Oscar|Best Director|2013|life of pi": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "Oscar|Best Director|2013|lincoln": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "Oscar|Best Director|2013|silver linings playbook": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "Oscar|Best Director|2014|12 years a slave": {
     "person_name": "Steve McQueen",
-    "person_id": null
+    "person_id": 13565
   },
   "Oscar|Best Director|2014|american hustle": {
     "person_name": "David O. Russell",
-    "person_id": null
+    "person_id": 17883
   },
   "Oscar|Best Director|2014|gravity": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Oscar|Best Director|2014|nebraska": {
     "person_name": "Alexander Payne",
-    "person_id": null
+    "person_id": 13235
   },
   "Oscar|Best Director|2014|the wolf of wall street": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2015|birdman or (the unexpected virtue of ignorance)": {
     "person_name": "Alejandro G. Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "Oscar|Best Director|2015|boyhood": {
     "person_name": "Richard Linklater",
-    "person_id": null
+    "person_id": 564
   },
   "Oscar|Best Director|2015|foxcatcher": {
     "person_name": "Bennett Miller",
-    "person_id": null
+    "person_id": 5345
   },
   "Oscar|Best Director|2015|the grand budapest hotel": {
     "person_name": "Wes Anderson",
-    "person_id": null
+    "person_id": 5655
   },
   "Oscar|Best Director|2015|the imitation game": {
     "person_name": "Morten Tyldum",
-    "person_id": null
+    "person_id": 77965
   },
   "Oscar|Best Director|2016|mad max: fury road": {
     "person_name": "George Miller",
-    "person_id": null
+    "person_id": 20629
   },
   "Oscar|Best Director|2016|room": {
     "person_name": "Lenny Abrahamson",
-    "person_id": null
+    "person_id": 83281
   },
   "Oscar|Best Director|2016|spotlight": {
     "person_name": "Tom McCarthy",
-    "person_id": null
+    "person_id": 17867
   },
   "Oscar|Best Director|2016|the big short": {
     "person_name": "Adam McKay",
-    "person_id": null
+    "person_id": 55710
   },
   "Oscar|Best Director|2016|the revenant": {
     "person_name": "Alejandro G. Iñárritu",
-    "person_id": null
+    "person_id": 223
   },
   "Oscar|Best Director|2017|arrival": {
     "person_name": "Denis Villeneuve",
-    "person_id": null
+    "person_id": 137427
   },
   "Oscar|Best Director|2017|hacksaw ridge": {
     "person_name": "Mel Gibson",
-    "person_id": null
+    "person_id": 2461
   },
   "Oscar|Best Director|2017|la la land": {
     "person_name": "Damien Chazelle",
-    "person_id": null
+    "person_id": 136495
   },
   "Oscar|Best Director|2017|manchester by the sea": {
     "person_name": "Kenneth Lonergan",
-    "person_id": null
+    "person_id": 30711
   },
   "Oscar|Best Director|2017|moonlight": {
     "person_name": "Barry Jenkins",
-    "person_id": null
+    "person_id": 92784
   },
   "Oscar|Best Director|2018|dunkirk": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "Oscar|Best Director|2018|get out": {
     "person_name": "Jordan Peele",
-    "person_id": null
+    "person_id": 291263
   },
   "Oscar|Best Director|2018|lady bird": {
     "person_name": "Greta Gerwig",
-    "person_id": null
+    "person_id": 45400
   },
   "Oscar|Best Director|2018|phantom thread": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Oscar|Best Director|2018|the shape of water": {
     "person_name": "Guillermo del Toro",
-    "person_id": null
+    "person_id": 10828
   },
   "Oscar|Best Director|2019|blackkklansman": {
     "person_name": "Spike Lee",
-    "person_id": null
+    "person_id": 5281
   },
   "Oscar|Best Director|2019|cold war": {
     "person_name": "Paweł Pawlikowski",
-    "person_id": null
+    "person_id": 64194
   },
   "Oscar|Best Director|2019|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Oscar|Best Director|2019|the favourite": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "Oscar|Best Director|2019|vice": {
     "person_name": "Adam McKay",
-    "person_id": null
+    "person_id": 55710
   },
   "Oscar|Best Director|2020|1917": {
     "person_name": "Sam Mendes",
-    "person_id": null
+    "person_id": 39
   },
   "Oscar|Best Director|2020|joker": {
     "person_name": "Todd Phillips",
-    "person_id": null
+    "person_id": 57130
   },
   "Oscar|Best Director|2020|once upon a time in hollywood": {
     "person_name": "Quentin Tarantino",
-    "person_id": null
+    "person_id": 138
   },
   "Oscar|Best Director|2020|parasite": {
     "person_name": "Bong Joon-ho",
-    "person_id": null
+    "person_id": 21684
   },
   "Oscar|Best Director|2020|the irishman": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2021|another round": {
     "person_name": "Thomas Vinterberg",
-    "person_id": null
+    "person_id": 4453
   },
   "Oscar|Best Director|2021|mank": {
     "person_name": "David Fincher",
-    "person_id": null
+    "person_id": 7467
   },
   "Oscar|Best Director|2021|minari": {
     "person_name": "Lee Isaac Chung",
-    "person_id": null
+    "person_id": 931952
   },
   "Oscar|Best Director|2021|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "Oscar|Best Director|2021|promising young woman": {
     "person_name": "Emerald Fennell",
-    "person_id": null
+    "person_id": 1252934
   },
   "Oscar|Best Director|2022|belfast": {
     "person_name": "Kenneth Branagh",
-    "person_id": null
+    "person_id": 11181
   },
   "Oscar|Best Director|2022|drive my car": {
     "person_name": "Ryusuke Hamaguchi",
-    "person_id": null
+    "person_id": 1487492
   },
   "Oscar|Best Director|2022|licorice pizza": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Oscar|Best Director|2022|the power of the dog": {
     "person_name": "Jane Campion",
-    "person_id": null
+    "person_id": 10757
   },
   "Oscar|Best Director|2022|west side story": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "Oscar|Best Director|2023|everything everywhere all at once": {
     "person_name": "Daniel Kwan",
-    "person_id": null
+    "person_id": 1383612
   },
   "Oscar|Best Director|2023|the banshees of inisherin": {
     "person_name": "Martin McDonagh",
-    "person_id": null
+    "person_id": 54472
   },
   "Oscar|Best Director|2023|the fabelmans": {
     "person_name": "Steven Spielberg",
-    "person_id": null
+    "person_id": 488
   },
   "Oscar|Best Director|2023|triangle of sadness": {
     "person_name": "Ruben Östlund",
-    "person_id": null
+    "person_id": 56370
   },
   "Oscar|Best Director|2023|tár": {
     "person_name": "Todd Field",
-    "person_id": null
+    "person_id": 5010
   },
   "Oscar|Best Director|2024|anatomy of a fall": {
     "person_name": "Justine Triet",
-    "person_id": null
+    "person_id": 1175620
   },
   "Oscar|Best Director|2024|killers of the flower moon": {
     "person_name": "Martin Scorsese",
-    "person_id": null
+    "person_id": 1032
   },
   "Oscar|Best Director|2024|oppenheimer": {
     "person_name": "Christopher Nolan",
-    "person_id": null
+    "person_id": 525
   },
   "Oscar|Best Director|2024|poor things": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "Oscar|Best Director|2024|the zone of interest": {
     "person_name": "Jonathan Glazer",
-    "person_id": null
+    "person_id": 66728
   },
   "Oscar|Best Director|2025|a complete unknown": {
     "person_name": "James Mangold",
-    "person_id": null
+    "person_id": 366
   },
   "Oscar|Best Director|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "Oscar|Best Director|2025|emilia pérez": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "Oscar|Best Director|2025|the brutalist": {
     "person_name": "Brady Corbet",
-    "person_id": null
+    "person_id": 55493
   },
   "Oscar|Best Director|2025|the substance": {
     "person_name": "Coralie Fargeat",
-    "person_id": null
+    "person_id": 1607016
   },
   "Oscar|Best Film Editing|2000|american beauty": {
     "person_name": "Tariq Anwar",
-    "person_id": null
+    "person_id": 8219
   },
   "Oscar|Best Film Editing|2000|the cider house rules": {
     "person_name": "Lisa Zeno Churgin",
-    "person_id": null
+    "person_id": 11625
   },
   "Oscar|Best Film Editing|2000|the insider": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "Oscar|Best Film Editing|2000|the matrix": {
     "person_name": "Zach Staenberg",
-    "person_id": null
+    "person_id": 4671
   },
   "Oscar|Best Film Editing|2000|the sixth sense": {
     "person_name": "Andrew Mondshein",
-    "person_id": null
+    "person_id": 5327
   },
   "Oscar|Best Film Editing|2001|almost famous": {
     "person_name": "Joe Hutshing",
-    "person_id": null
+    "person_id": 4186
   },
   "Oscar|Best Film Editing|2001|crouching tiger, hidden dragon": {
     "person_name": "Tim Squyres",
-    "person_id": null
+    "person_id": 1635
   },
   "Oscar|Best Film Editing|2001|gladiator": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "Oscar|Best Film Editing|2001|traffic": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "Oscar|Best Film Editing|2001|wonder boys": {
     "person_name": "Dede Allen",
-    "person_id": null
+    "person_id": 6453
   },
   "Oscar|Best Film Editing|2002|a beautiful mind": {
     "person_name": "Mike Hill",
-    "person_id": null
+    "person_id": 1674252
   },
   "Oscar|Best Film Editing|2002|black hawk down": {
     "person_name": "Pietro Scalia",
-    "person_id": null
+    "person_id": 950
   },
   "Oscar|Best Film Editing|2002|memento": {
     "person_name": "Dody Dorn",
-    "person_id": null
+    "person_id": 563
   },
   "Oscar|Best Film Editing|2002|moulin rouge!": {
     "person_name": "Jill Bilcock",
-    "person_id": null
+    "person_id": 3050
   },
   "Oscar|Best Film Editing|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "John Gilbert",
-    "person_id": null
+    "person_id": 1315
   },
   "Oscar|Best Film Editing|2003|chicago": {
     "person_name": "Martin Walsh",
-    "person_id": null
+    "person_id": 9154
   },
   "Oscar|Best Film Editing|2003|gangs of new york": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2003|the hours": {
     "person_name": "Peter Boyle",
-    "person_id": null
+    "person_id": 8307
   },
   "Oscar|Best Film Editing|2003|the lord of the rings: the two towers": {
     "person_name": "Michael J. Horton",
-    "person_id": null
+    "person_id": 1376
   },
   "Oscar|Best Film Editing|2003|the pianist": {
     "person_name": "Hervé de Luze",
-    "person_id": null
+    "person_id": 3564
   },
   "Oscar|Best Film Editing|2004|city of god": {
     "person_name": "Daniel Rezende",
-    "person_id": null
+    "person_id": 8578
   },
   "Oscar|Best Film Editing|2004|cold mountain": {
     "person_name": "Walter Murch",
-    "person_id": null
+    "person_id": 154
   },
   "Oscar|Best Film Editing|2004|master and commander: the far side of the world": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "Oscar|Best Film Editing|2004|seabiscuit": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "Oscar|Best Film Editing|2004|the lord of the rings: the return of the king": {
     "person_name": "Jamie Selkirk",
-    "person_id": null
+    "person_id": 1390
   },
   "Oscar|Best Film Editing|2005|collateral": {
     "person_name": "Jim Miller",
-    "person_id": null
+    "person_id": 2053983
   },
   "Oscar|Best Film Editing|2005|finding neverland": {
     "person_name": "Matt Chessé",
-    "person_id": null
+    "person_id": 13005
   },
   "Oscar|Best Film Editing|2005|million dollar baby": {
     "person_name": "Joel Cox",
-    "person_id": null
+    "person_id": 384
   },
   "Oscar|Best Film Editing|2005|ray": {
     "person_name": "Paul Hirsch",
-    "person_id": null
+    "person_id": 10766
   },
   "Oscar|Best Film Editing|2005|the aviator": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2006|cinderella man": {
     "person_name": "Mike Hill",
-    "person_id": null
+    "person_id": 1674252
   },
   "Oscar|Best Film Editing|2006|crash": {
     "person_name": "Hughes Winborne",
-    "person_id": null
+    "person_id": 20649
   },
   "Oscar|Best Film Editing|2006|munich": {
     "person_name": "Michael Kahn",
-    "person_id": null
+    "person_id": 493
   },
   "Oscar|Best Film Editing|2006|the constant gardener": {
     "person_name": "Claire Simpson",
-    "person_id": null
+    "person_id": 11880
   },
   "Oscar|Best Film Editing|2006|walk the line": {
     "person_name": "Michael McCusker",
-    "person_id": null
+    "person_id": 433
   },
   "Oscar|Best Film Editing|2007|babel": {
     "person_name": "Douglas Crise",
-    "person_id": null
+    "person_id": 17115
   },
   "Oscar|Best Film Editing|2007|blood diamond": {
     "person_name": "Steven Rosenblum",
-    "person_id": null
+    "person_id": 2484
   },
   "Oscar|Best Film Editing|2007|children of men": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Oscar|Best Film Editing|2007|the departed": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2007|united 93": {
     "person_name": "Clare Douglas",
-    "person_id": null
+    "person_id": 59680
   },
   "Oscar|Best Film Editing|2008|into the wild": {
     "person_name": "Jay Cassidy",
-    "person_id": null
+    "person_id": 13227
   },
   "Oscar|Best Film Editing|2008|no country for old men": {
     "person_name": "Roderick Jaynes",
-    "person_id": null
+    "person_id": 1223
   },
   "Oscar|Best Film Editing|2008|the bourne ultimatum": {
     "person_name": "Christopher Rouse",
-    "person_id": null
+    "person_id": 29405
   },
   "Oscar|Best Film Editing|2008|the diving bell and the butterfly": {
     "person_name": "Juliette Welfling",
-    "person_id": null
+    "person_id": 4280
   },
   "Oscar|Best Film Editing|2008|there will be blood": {
     "person_name": "Dylan Tichenor",
-    "person_id": null
+    "person_id": 1809
   },
   "Oscar|Best Film Editing|2009|frost/nixon": {
     "person_name": "Mike Hill",
-    "person_id": null
+    "person_id": 1674252
   },
   "Oscar|Best Film Editing|2009|milk": {
     "person_name": "Elliot Graham",
-    "person_id": null
+    "person_id": 11017
   },
   "Oscar|Best Film Editing|2009|slumdog millionaire": {
     "person_name": "Chris Dickens",
-    "person_id": null
+    "person_id": 11114
   },
   "Oscar|Best Film Editing|2009|the curious case of benjamin button": {
     "person_name": "Kirk Baxter",
-    "person_id": null
+    "person_id": 964726
   },
   "Oscar|Best Film Editing|2009|the dark knight": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "Oscar|Best Film Editing|2010|avatar": {
     "person_name": "Stephen E. Rivkin",
-    "person_id": null
+    "person_id": 1721
   },
   "Oscar|Best Film Editing|2010|district 9": {
     "person_name": "Julian Clarke",
-    "person_id": null
+    "person_id": 62907
   },
   "Oscar|Best Film Editing|2010|inglourious basterds": {
     "person_name": "Sally Menke",
-    "person_id": null
+    "person_id": 156
   },
   "Oscar|Best Film Editing|2010|precious: based on the novel 'push' by sapphire": {
     "person_name": "Joe Klotz",
-    "person_id": null
+    "person_id": 68392
   },
   "Oscar|Best Film Editing|2010|the hurt locker": {
     "person_name": "Bob Murawski",
-    "person_id": null
+    "person_id": 7712
   },
   "Oscar|Best Film Editing|2011|127 hours": {
     "person_name": "Jon Harris",
-    "person_id": null
+    "person_id": 2718659
   },
   "Oscar|Best Film Editing|2011|black swan": {
     "person_name": "Andrew Weisblum",
-    "person_id": null
+    "person_id": 38805
   },
   "Oscar|Best Film Editing|2011|the fighter": {
     "person_name": "Pamela Martin",
-    "person_id": null
+    "person_id": 1502742
   },
   "Oscar|Best Film Editing|2011|the king's speech": {
     "person_name": "Tariq Anwar",
-    "person_id": null
+    "person_id": 8219
   },
   "Oscar|Best Film Editing|2011|the social network": {
     "person_name": "Angus Wall",
-    "person_id": null
+    "person_id": 17455
   },
   "Oscar|Best Film Editing|2012|hugo": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2012|moneyball": {
     "person_name": "Christopher Tellefsen",
-    "person_id": null
+    "person_id": 5361
   },
   "Oscar|Best Film Editing|2012|the artist": {
     "person_name": "Anne-Sophie Bion",
-    "person_id": null
+    "person_id": 937652
   },
   "Oscar|Best Film Editing|2012|the descendants": {
     "person_name": "Kevin Tent",
-    "person_id": null
+    "person_id": 32796
   },
   "Oscar|Best Film Editing|2012|the girl with the dragon tattoo": {
     "person_name": "Angus Wall",
-    "person_id": null
+    "person_id": 17455
   },
   "Oscar|Best Film Editing|2013|argo": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "Oscar|Best Film Editing|2013|life of pi": {
     "person_name": "Tim Squyres",
-    "person_id": null
+    "person_id": 1635
   },
   "Oscar|Best Film Editing|2013|lincoln": {
     "person_name": "Michael Kahn",
-    "person_id": null
+    "person_id": 493
   },
   "Oscar|Best Film Editing|2013|silver linings playbook": {
     "person_name": "Jay Cassidy",
-    "person_id": null
+    "person_id": 13227
   },
   "Oscar|Best Film Editing|2013|zero dark thirty": {
     "person_name": "Dylan Tichenor",
-    "person_id": null
+    "person_id": 1809
   },
   "Oscar|Best Film Editing|2014|12 years a slave": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "Oscar|Best Film Editing|2014|american hustle": {
     "person_name": "Jay Cassidy",
-    "person_id": null
+    "person_id": 13227
   },
   "Oscar|Best Film Editing|2014|captain phillips": {
     "person_name": "Christopher Rouse",
-    "person_id": null
+    "person_id": 29405
   },
   "Oscar|Best Film Editing|2014|dallas buyers club": {
     "person_name": "John Mac McMurphy",
@@ -70443,1187 +70443,1187 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Oscar|Best Film Editing|2014|gravity": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Oscar|Best Film Editing|2015|american sniper": {
     "person_name": "Joel Cox",
-    "person_id": null
+    "person_id": 384
   },
   "Oscar|Best Film Editing|2015|boyhood": {
     "person_name": "Sandra Adair",
-    "person_id": null
+    "person_id": 580
   },
   "Oscar|Best Film Editing|2015|the grand budapest hotel": {
     "person_name": "Barney Pilling",
-    "person_id": null
+    "person_id": 71534
   },
   "Oscar|Best Film Editing|2015|the imitation game": {
     "person_name": "William Goldenberg",
-    "person_id": null
+    "person_id": 15841
   },
   "Oscar|Best Film Editing|2015|whiplash": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "Oscar|Best Film Editing|2016|mad max: fury road": {
     "person_name": "Margaret Sixel",
-    "person_id": null
+    "person_id": 58067
   },
   "Oscar|Best Film Editing|2016|spotlight": {
     "person_name": "Tom McArdle",
-    "person_id": null
+    "person_id": 21267
   },
   "Oscar|Best Film Editing|2016|star wars: the force awakens": {
     "person_name": "Maryann Brandon",
-    "person_id": null
+    "person_id": 15349
   },
   "Oscar|Best Film Editing|2016|the big short": {
     "person_name": "Hank Corwin",
-    "person_id": null
+    "person_id": 3190
   },
   "Oscar|Best Film Editing|2016|the revenant": {
     "person_name": "Stephen Mirrione",
-    "person_id": null
+    "person_id": 1891
   },
   "Oscar|Best Film Editing|2017|arrival": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "Oscar|Best Film Editing|2017|hacksaw ridge": {
     "person_name": "John Gilbert",
-    "person_id": null
+    "person_id": 1315
   },
   "Oscar|Best Film Editing|2017|hell or high water": {
     "person_name": "Jake Roberts",
-    "person_id": null
+    "person_id": 1353255
   },
   "Oscar|Best Film Editing|2017|la la land": {
     "person_name": "Tom Cross",
-    "person_id": null
+    "person_id": 1156888
   },
   "Oscar|Best Film Editing|2017|moonlight": {
     "person_name": "Nat Sanders",
-    "person_id": null
+    "person_id": 148737
   },
   "Oscar|Best Film Editing|2018|baby driver": {
     "person_name": "Paul Machliss",
-    "person_id": null
+    "person_id": 969705
   },
   "Oscar|Best Film Editing|2018|dunkirk": {
     "person_name": "Lee Smith",
-    "person_id": null
+    "person_id": 52394
   },
   "Oscar|Best Film Editing|2018|i, tonya": {
     "person_name": "Tatiana S. Riegel",
-    "person_id": null
+    "person_id": 33685
   },
   "Oscar|Best Film Editing|2018|the shape of water": {
     "person_name": "Sidney Wolinsky",
-    "person_id": null
+    "person_id": 22483
   },
   "Oscar|Best Film Editing|2018|three billboards outside ebbing, missouri": {
     "person_name": "Jon Gregory",
-    "person_id": null
+    "person_id": 10725
   },
   "Oscar|Best Film Editing|2019|blackkklansman": {
     "person_name": "Barry Alexander Brown",
-    "person_id": null
+    "person_id": 5289
   },
   "Oscar|Best Film Editing|2019|bohemian rhapsody": {
     "person_name": "John Ottman",
-    "person_id": null
+    "person_id": 9039
   },
   "Oscar|Best Film Editing|2019|green book": {
     "person_name": "Patrick J. Don Vito",
-    "person_id": null
+    "person_id": 69670
   },
   "Oscar|Best Film Editing|2019|the favourite": {
     "person_name": "Yorgos Mavropsaridis",
-    "person_id": null
+    "person_id": 3361245
   },
   "Oscar|Best Film Editing|2019|vice": {
     "person_name": "Hank Corwin",
-    "person_id": null
+    "person_id": 3190
   },
   "Oscar|Best Film Editing|2020|ford v ferrari": {
     "person_name": "Andrew Buckland",
-    "person_id": null
+    "person_id": 1533060
   },
   "Oscar|Best Film Editing|2020|jojo rabbit": {
     "person_name": "Tom Eagles",
-    "person_id": null
+    "person_id": 1409489
   },
   "Oscar|Best Film Editing|2020|joker": {
     "person_name": "Jeff Groth",
-    "person_id": null
+    "person_id": 961610
   },
   "Oscar|Best Film Editing|2020|parasite": {
     "person_name": "Yang Jin-mo",
-    "person_id": null
+    "person_id": 1674268
   },
   "Oscar|Best Film Editing|2020|the irishman": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2021|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "Oscar|Best Film Editing|2021|promising young woman": {
     "person_name": "Frédéric Thoraval",
-    "person_id": null
+    "person_id": 62434
   },
   "Oscar|Best Film Editing|2021|sound of metal": {
     "person_name": "Mikkel E. G. Nielsen",
-    "person_id": null
+    "person_id": 64954
   },
   "Oscar|Best Film Editing|2021|the father": {
     "person_name": "Yorgos Lamprinos",
-    "person_id": null
+    "person_id": 1273514
   },
   "Oscar|Best Film Editing|2021|the trial of the chicago 7": {
     "person_name": "Alan Baumgarten",
-    "person_id": null
+    "person_id": 10393
   },
   "Oscar|Best Film Editing|2022|don't look up": {
     "person_name": "Hank Corwin",
-    "person_id": null
+    "person_id": 3190
   },
   "Oscar|Best Film Editing|2022|dune": {
     "person_name": "Joe Walker",
-    "person_id": null
+    "person_id": 999565
   },
   "Oscar|Best Film Editing|2022|king richard": {
     "person_name": "Pamela Martin",
-    "person_id": null
+    "person_id": 1502742
   },
   "Oscar|Best Film Editing|2022|the power of the dog": {
     "person_name": "Peter Sciberras",
-    "person_id": null
+    "person_id": 1363758
   },
   "Oscar|Best Film Editing|2022|tick, tick... boom!": {
     "person_name": "Myron Kerstein",
-    "person_id": null
+    "person_id": 5388
   },
   "Oscar|Best Film Editing|2023|elvis": {
     "person_name": "Matt Villa",
-    "person_id": null
+    "person_id": 966022
   },
   "Oscar|Best Film Editing|2023|everything everywhere all at once": {
     "person_name": "Paul Rogers",
-    "person_id": null
+    "person_id": 42840
   },
   "Oscar|Best Film Editing|2023|the banshees of inisherin": {
     "person_name": "Mikkel E. G. Nielsen",
-    "person_id": null
+    "person_id": 64954
   },
   "Oscar|Best Film Editing|2023|top gun: maverick": {
     "person_name": "Eddie Hamilton",
-    "person_id": null
+    "person_id": 49809
   },
   "Oscar|Best Film Editing|2023|tár": {
     "person_name": "Monika Willi",
-    "person_id": null
+    "person_id": 55491
   },
   "Oscar|Best Film Editing|2024|anatomy of a fall": {
     "person_name": "Laurent Sénéchal",
-    "person_id": null
+    "person_id": 1616357
   },
   "Oscar|Best Film Editing|2024|killers of the flower moon": {
     "person_name": "Thelma Schoonmaker",
-    "person_id": null
+    "person_id": 3661
   },
   "Oscar|Best Film Editing|2024|oppenheimer": {
     "person_name": "Jennifer Lame",
-    "person_id": null
+    "person_id": 1113553
   },
   "Oscar|Best Film Editing|2024|poor things": {
     "person_name": "Yorgos Mavropsaridis",
-    "person_id": null
+    "person_id": 3361245
   },
   "Oscar|Best Film Editing|2024|the holdovers": {
     "person_name": "Kevin Tent",
-    "person_id": null
+    "person_id": 32796
   },
   "Oscar|Best Film Editing|2025|anora": {
     "person_name": "Sean Baker",
-    "person_id": null
+    "person_id": 118415
   },
   "Oscar|Best Film Editing|2025|conclave": {
     "person_name": "Nick Emerson",
-    "person_id": null
+    "person_id": 1155165
   },
   "Oscar|Best Film Editing|2025|emilia pérez": {
     "person_name": "Juliette Welfling",
-    "person_id": null
+    "person_id": 4280
   },
   "Oscar|Best Film Editing|2025|the brutalist": {
     "person_name": "Dávid Jancsó",
-    "person_id": null
+    "person_id": 1037857
   },
   "Oscar|Best Film Editing|2025|wicked": {
     "person_name": "Myron Kerstein",
-    "person_id": null
+    "person_id": 5388
   },
   "Oscar|Best Original Score|2000|american beauty": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2000|angela's ashes": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2000|the cider house rules": {
     "person_name": "Rachel Portman",
-    "person_id": null
+    "person_id": 3562
   },
   "Oscar|Best Original Score|2000|the red violin": {
     "person_name": "John Corigliano",
-    "person_id": null
+    "person_id": 69792
   },
   "Oscar|Best Original Score|2000|the talented mr. ripley": {
     "person_name": "Gabriel Yared",
-    "person_id": null
+    "person_id": 5488
   },
   "Oscar|Best Original Score|2001|chocolat": {
     "person_name": "Rachel Portman",
-    "person_id": null
+    "person_id": 3562
   },
   "Oscar|Best Original Score|2001|crouching tiger, hidden dragon": {
     "person_name": "Tan Dun",
-    "person_id": null
+    "person_id": 1360
   },
   "Oscar|Best Original Score|2001|gladiator": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2001|malèna": {
     "person_name": "Ennio Morricone",
-    "person_id": null
+    "person_id": 1259
   },
   "Oscar|Best Original Score|2001|the patriot": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2002|a beautiful mind": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "Oscar|Best Original Score|2002|a.i. artificial intelligence": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2002|harry potter and the sorcerer's stone": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2002|monsters, inc.": {
     "person_name": "Randy Newman",
-    "person_id": null
+    "person_id": 7885
   },
   "Oscar|Best Original Score|2002|the lord of the rings: the fellowship of the ring": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "Oscar|Best Original Score|2003|catch me if you can": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2003|far from heaven": {
     "person_name": "Elmer Bernstein",
-    "person_id": null
+    "person_id": 7182
   },
   "Oscar|Best Original Score|2003|frida": {
     "person_name": "Elliot Goldenthal",
-    "person_id": null
+    "person_id": 5581
   },
   "Oscar|Best Original Score|2003|road to perdition": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2003|the hours": {
     "person_name": "Philip Glass",
-    "person_id": null
+    "person_id": 1551
   },
   "Oscar|Best Original Score|2004|big fish": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "Oscar|Best Original Score|2004|cold mountain": {
     "person_name": "Gabriel Yared",
-    "person_id": null
+    "person_id": 5488
   },
   "Oscar|Best Original Score|2004|finding nemo": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2004|house of sand and fog": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "Oscar|Best Original Score|2004|the lord of the rings: the return of the king": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "Oscar|Best Original Score|2005|finding neverland": {
     "person_name": "Jan A. P. Kaczmarek",
-    "person_id": null
+    "person_id": 22680
   },
   "Oscar|Best Original Score|2005|harry potter and the prisoner of azkaban": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2005|lemony snicket's a series of unfortunate events": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2005|the passion of the christ": {
     "person_name": "John Debney",
-    "person_id": null
+    "person_id": 4500
   },
   "Oscar|Best Original Score|2005|the village": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "Oscar|Best Original Score|2006|brokeback mountain": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "Oscar|Best Original Score|2006|memoirs of a geisha": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2006|munich": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2006|pride & prejudice": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "Oscar|Best Original Score|2006|the constant gardener": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "Oscar|Best Original Score|2007|babel": {
     "person_name": "Gustavo Santaolalla",
-    "person_id": null
+    "person_id": 278
   },
   "Oscar|Best Original Score|2007|notes on a scandal": {
     "person_name": "Philip Glass",
-    "person_id": null
+    "person_id": 1551
   },
   "Oscar|Best Original Score|2007|pan's labyrinth": {
     "person_name": "Javier Navarrete",
-    "person_id": null
+    "person_id": 17004
   },
   "Oscar|Best Original Score|2007|the good german": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2007|the queen": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2008|3:10 to yuma": {
     "person_name": "Marco Beltrami",
-    "person_id": null
+    "person_id": 7229
   },
   "Oscar|Best Original Score|2008|atonement": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "Oscar|Best Original Score|2008|michael clayton": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "Oscar|Best Original Score|2008|ratatouille": {
     "person_name": "Michael Giacchino",
-    "person_id": null
+    "person_id": 15347
   },
   "Oscar|Best Original Score|2008|the kite runner": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "Oscar|Best Original Score|2009|defiance": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "Oscar|Best Original Score|2009|milk": {
     "person_name": "Danny Elfman",
-    "person_id": null
+    "person_id": 531
   },
   "Oscar|Best Original Score|2009|slumdog millionaire": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "Oscar|Best Original Score|2009|the curious case of benjamin button": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2009|wall-e": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2010|avatar": {
     "person_name": "James Horner",
-    "person_id": null
+    "person_id": 1729
   },
   "Oscar|Best Original Score|2010|fantastic mr. fox": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2010|sherlock holmes": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2010|the hurt locker": {
     "person_name": "Marco Beltrami",
-    "person_id": null
+    "person_id": 7229
   },
   "Oscar|Best Original Score|2010|up": {
     "person_name": "Michael Giacchino",
-    "person_id": null
+    "person_id": 15347
   },
   "Oscar|Best Original Score|2011|127 hours": {
     "person_name": "A. R. Rahman",
-    "person_id": null
+    "person_id": 5288
   },
   "Oscar|Best Original Score|2011|how to train your dragon": {
     "person_name": "John Powell",
-    "person_id": null
+    "person_id": 11098
   },
   "Oscar|Best Original Score|2011|inception": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2011|the king's speech": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2011|the social network": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "Oscar|Best Original Score|2012|hugo": {
     "person_name": "Howard Shore",
-    "person_id": null
+    "person_id": 117
   },
   "Oscar|Best Original Score|2012|the adventures of tintin": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2012|the artist": {
     "person_name": "Ludovic Bource",
-    "person_id": null
+    "person_id": 472101
   },
   "Oscar|Best Original Score|2012|tinker tailor soldier spy": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "Oscar|Best Original Score|2012|war horse": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2013|anna karenina": {
     "person_name": "Dario Marianelli",
-    "person_id": null
+    "person_id": 11269
   },
   "Oscar|Best Original Score|2013|argo": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2013|life of pi": {
     "person_name": "Mychael Danna",
-    "person_id": null
+    "person_id": 5359
   },
   "Oscar|Best Original Score|2013|lincoln": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2013|skyfall": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2014|gravity": {
     "person_name": "Steven Price",
-    "person_id": null
+    "person_id": 16368
   },
   "Oscar|Best Original Score|2014|her": {
     "person_name": "William Butler",
-    "person_id": null
+    "person_id": 481525
   },
   "Oscar|Best Original Score|2014|philomena": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2014|saving mr. banks": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2014|the book thief": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2015|interstellar": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2015|mr. turner": {
     "person_name": "Gary Yershon",
-    "person_id": null
+    "person_id": 957031
   },
   "Oscar|Best Original Score|2015|the grand budapest hotel": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2015|the imitation game": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2015|the theory of everything": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "Oscar|Best Original Score|2016|bridge of spies": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2016|carol": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "Oscar|Best Original Score|2016|sicario": {
     "person_name": "Jóhann Jóhannsson",
-    "person_id": null
+    "person_id": 117992
   },
   "Oscar|Best Original Score|2016|star wars: the force awakens": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2016|the hateful eight": {
     "person_name": "Ennio Morricone",
-    "person_id": null
+    "person_id": 1259
   },
   "Oscar|Best Original Score|2017|jackie": {
     "person_name": "Mica Levi",
-    "person_id": null
+    "person_id": 1341726
   },
   "Oscar|Best Original Score|2017|la la land": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "Oscar|Best Original Score|2017|lion": {
     "person_name": "Dustin O'Halloran",
-    "person_id": null
+    "person_id": 233130
   },
   "Oscar|Best Original Score|2017|moonlight": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "Oscar|Best Original Score|2017|passengers": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2018|dunkirk": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2018|phantom thread": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "Oscar|Best Original Score|2018|star wars: the last jedi": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2018|the shape of water": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2018|three billboards outside ebbing, missouri": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "Oscar|Best Original Score|2019|black panther": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "Oscar|Best Original Score|2019|blackkklansman": {
     "person_name": "Terence Blanchard",
-    "person_id": null
+    "person_id": 5287
   },
   "Oscar|Best Original Score|2019|if beale street could talk": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "Oscar|Best Original Score|2019|isle of dogs": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2019|mary poppins returns": {
     "person_name": "Marc Shaiman",
-    "person_id": null
+    "person_id": 9251
   },
   "Oscar|Best Original Score|2020|1917": {
     "person_name": "Thomas Newman",
-    "person_id": null
+    "person_id": 153
   },
   "Oscar|Best Original Score|2020|joker": {
     "person_name": "Hildur Guðnadóttir",
-    "person_id": null
+    "person_id": 1178828
   },
   "Oscar|Best Original Score|2020|little women": {
     "person_name": "Alexandre Desplat",
-    "person_id": null
+    "person_id": 2949
   },
   "Oscar|Best Original Score|2020|marriage story": {
     "person_name": "Randy Newman",
-    "person_id": null
+    "person_id": 7885
   },
   "Oscar|Best Original Score|2020|star wars: the rise of skywalker": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2021|da 5 bloods": {
     "person_name": "Terence Blanchard",
-    "person_id": null
+    "person_id": 5287
   },
   "Oscar|Best Original Score|2021|mank": {
     "person_name": "Trent Reznor",
-    "person_id": null
+    "person_id": 3186
   },
   "Oscar|Best Original Score|2021|minari": {
     "person_name": "Emile Mosseri",
-    "person_id": null
+    "person_id": 2188183
   },
   "Oscar|Best Original Score|2021|news of the world": {
     "person_name": "James Newton Howard",
-    "person_id": null
+    "person_id": 1213
   },
   "Oscar|Best Original Score|2021|soul": {
     "person_name": "Jon Batiste",
-    "person_id": null
+    "person_id": 1513968
   },
   "Oscar|Best Original Score|2022|don't look up": {
     "person_name": "Nicholas Britell",
-    "person_id": null
+    "person_id": 1533516
   },
   "Oscar|Best Original Score|2022|dune": {
     "person_name": "Hans Zimmer",
-    "person_id": null
+    "person_id": 947
   },
   "Oscar|Best Original Score|2022|encanto": {
     "person_name": "Germaine Franco",
-    "person_id": null
+    "person_id": 1108963
   },
   "Oscar|Best Original Score|2022|parallel mothers": {
     "person_name": "Alberto Iglesias",
-    "person_id": null
+    "person_id": 405
   },
   "Oscar|Best Original Score|2022|the power of the dog": {
     "person_name": "Jonny Greenwood",
-    "person_id": null
+    "person_id": 74333
   },
   "Oscar|Best Original Score|2023|all quiet on the western front": {
     "person_name": "Volker Bertelmann",
-    "person_id": null
+    "person_id": 1023809
   },
   "Oscar|Best Original Score|2023|babylon": {
     "person_name": "Justin Hurwitz",
-    "person_id": null
+    "person_id": 1419631
   },
   "Oscar|Best Original Score|2023|everything everywhere all at once": {
     "person_name": "Son Lux",
-    "person_id": null
+    "person_id": 3555893
   },
   "Oscar|Best Original Score|2023|the banshees of inisherin": {
     "person_name": "Carter Burwell",
-    "person_id": null
+    "person_id": 1225
   },
   "Oscar|Best Original Score|2023|the fabelmans": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2024|american fiction": {
     "person_name": "Laura Karpman",
-    "person_id": null
+    "person_id": 52515
   },
   "Oscar|Best Original Score|2024|indiana jones and the dial of destiny": {
     "person_name": "John Williams",
-    "person_id": null
+    "person_id": 491
   },
   "Oscar|Best Original Score|2024|killers of the flower moon": {
     "person_name": "Robbie Robertson",
-    "person_id": null
+    "person_id": 72861
   },
   "Oscar|Best Original Score|2024|oppenheimer": {
     "person_name": "Ludwig Göransson",
-    "person_id": null
+    "person_id": 928158
   },
   "Oscar|Best Original Score|2024|poor things": {
     "person_name": "Jerskin Fendrix",
-    "person_id": null
+    "person_id": 4091704
   },
   "Oscar|Best Original Score|2025|conclave": {
     "person_name": "Volker Bertelmann",
-    "person_id": null
+    "person_id": 1023809
   },
   "Oscar|Best Original Score|2025|emilia pérez": {
     "person_name": "Clément Ducol",
-    "person_id": null
+    "person_id": 2006056
   },
   "Oscar|Best Original Score|2025|the brutalist": {
     "person_name": "Daniel Blumberg",
-    "person_id": null
+    "person_id": 1711289
   },
   "Oscar|Best Original Score|2025|the wild robot": {
     "person_name": "Kris Bowers",
-    "person_id": null
+    "person_id": 1802871
   },
   "Oscar|Best Original Score|2025|wicked": {
     "person_name": "John Powell",
-    "person_id": null
+    "person_id": 11098
   },
   "Venice|Golden Lion|2000|the circle": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "Venice|Golden Lion|2001|monsoon wedding": {
     "person_name": "Mira Nair",
-    "person_id": null
+    "person_id": 6495
   },
   "Venice|Golden Lion|2002|the magdalene sisters": {
     "person_name": "Peter Mullan",
-    "person_id": null
+    "person_id": 3064
   },
   "Venice|Golden Lion|2003|the return": {
     "person_name": "Andrey Zvyagintsev",
-    "person_id": null
+    "person_id": 68519
   },
   "Venice|Golden Lion|2004|vera drake": {
     "person_name": "Mike Leigh",
-    "person_id": null
+    "person_id": 65452
   },
   "Venice|Golden Lion|2005|brokeback mountain": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "Venice|Golden Lion|2006|still life": {
     "person_name": "Jia Zhangke",
-    "person_id": null
+    "person_id": 24011
   },
   "Venice|Golden Lion|2007|lust, caution": {
     "person_name": "Ang Lee",
-    "person_id": null
+    "person_id": 1614
   },
   "Venice|Golden Lion|2008|the wrestler": {
     "person_name": "Darren Aronofsky",
-    "person_id": null
+    "person_id": 6431
   },
   "Venice|Golden Lion|2009|lebanon": {
     "person_name": "Samuel Maoz",
-    "person_id": null
+    "person_id": 110356
   },
   "Venice|Golden Lion|2010|somewhere": {
     "person_name": "Sofia Coppola",
-    "person_id": null
+    "person_id": 1769
   },
   "Venice|Golden Lion|2011|faust": {
     "person_name": "Alexander Sokurov",
-    "person_id": null
+    "person_id": 107762
   },
   "Venice|Golden Lion|2012|pietà": {
     "person_name": "Kim Ki-duk",
-    "person_id": null
+    "person_id": 4129625
   },
   "Venice|Golden Lion|2013|sacro gra": {
     "person_name": "Gianfranco Rosi",
-    "person_id": null
+    "person_id": 224452
   },
   "Venice|Golden Lion|2014|a pigeon sat on a branch reflecting on existence": {
     "person_name": "Roy Andersson",
-    "person_id": null
+    "person_id": 45791
   },
   "Venice|Golden Lion|2015|from afar": {
     "person_name": "Lorenzo Vigas",
-    "person_id": null
+    "person_id": 1491538
   },
   "Venice|Golden Lion|2016|the woman who left": {
     "person_name": "Lav Diaz",
-    "person_id": null
+    "person_id": 1051381
   },
   "Venice|Golden Lion|2017|the shape of water": {
     "person_name": "Guillermo del Toro",
-    "person_id": null
+    "person_id": 10828
   },
   "Venice|Golden Lion|2018|roma": {
     "person_name": "Alfonso Cuarón",
-    "person_id": null
+    "person_id": 11218
   },
   "Venice|Golden Lion|2019|joker": {
     "person_name": "Todd Phillips",
-    "person_id": null
+    "person_id": 57130
   },
   "Venice|Golden Lion|2020|nomadland": {
     "person_name": "Chloé Zhao",
-    "person_id": null
+    "person_id": 1395183
   },
   "Venice|Golden Lion|2021|happening": {
     "person_name": "Audrey Diwan",
-    "person_id": null
+    "person_id": 1017274
   },
   "Venice|Golden Lion|2022|all the beauty and the bloodshed": {
     "person_name": "Laura Poitras",
-    "person_id": null
+    "person_id": 220691
   },
   "Venice|Golden Lion|2023|poor things": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "Venice|Golden Lion|2024|the room next door": {
     "person_name": "Pedro Almodóvar",
-    "person_id": null
+    "person_id": 309
   },
   "Venice|Golden Lion|2025|father mother sister brother": {
     "person_name": "Jim Jarmusch",
-    "person_id": null
+    "person_id": 4429
   },
   "Venice|Grand Jury Prize|2000|before night falls": {
     "person_name": "Julian Schnabel",
-    "person_id": null
+    "person_id": 7482
   },
   "Venice|Grand Jury Prize|2001|dog days": {
     "person_name": "Ulrich Seidl",
-    "person_id": null
+    "person_id": 40506
   },
   "Venice|Grand Jury Prize|2002|house of fools": {
     "person_name": "Andrei Konchalovsky",
-    "person_id": null
+    "person_id": 58728
   },
   "Venice|Grand Jury Prize|2003|the kite": {
     "person_name": "Randa Chahal",
-    "person_id": null
+    "person_id": 1440353
   },
   "Venice|Grand Jury Prize|2004|the sea inside": {
     "person_name": "Alejandro Amenábar",
-    "person_id": null
+    "person_id": 19840
   },
   "Venice|Grand Jury Prize|2005|mary": {
     "person_name": "Abel Ferrara",
-    "person_id": null
+    "person_id": 39104
   },
   "Venice|Grand Jury Prize|2006|daratt": {
     "person_name": "Mahamat-Saleh Haroun",
-    "person_id": null
+    "person_id": 226553
   },
   "Venice|Grand Jury Prize|2009|soul kitchen": {
     "person_name": "Fatih Akin",
-    "person_id": null
+    "person_id": 5125
   },
   "Venice|Grand Jury Prize|2010|essential killing": {
     "person_name": "Jerzy Skolimowski",
-    "person_id": null
+    "person_id": 43553
   },
   "Venice|Grand Jury Prize|2011|terraferma": {
     "person_name": "Emanuele Crialese",
-    "person_id": null
+    "person_id": 20587
   },
   "Venice|Grand Jury Prize|2012|paradise: faith": {
     "person_name": "Ulrich Seidl",
-    "person_id": null
+    "person_id": 40506
   },
   "Venice|Grand Jury Prize|2013|stray dogs": {
     "person_name": "Tsai Ming-liang",
-    "person_id": null
+    "person_id": 71174
   },
   "Venice|Grand Jury Prize|2014|the look of silence": {
     "person_name": "Joshua Oppenheimer",
-    "person_id": null
+    "person_id": 53296
   },
   "Venice|Grand Jury Prize|2015|anomalisa": {
     "person_name": "Charlie Kaufman",
-    "person_id": null
+    "person_id": 202
   },
   "Venice|Grand Jury Prize|2016|nocturnal animals": {
     "person_name": "Tom Ford",
-    "person_id": null
+    "person_id": 120615
   },
   "Venice|Grand Jury Prize|2017|foxtrot": {
     "person_name": "Samuel Maoz",
-    "person_id": null
+    "person_id": 110356
   },
   "Venice|Grand Jury Prize|2018|the favourite": {
     "person_name": "Yorgos Lanthimos",
-    "person_id": null
+    "person_id": 122423
   },
   "Venice|Grand Jury Prize|2019|an officer and a spy": {
     "person_name": "Roman Polanski",
-    "person_id": null
+    "person_id": 3556
   },
   "Venice|Grand Jury Prize|2020|new order": {
     "person_name": "Michel Franco",
-    "person_id": null
+    "person_id": 1082434
   },
   "Venice|Grand Jury Prize|2021|the hand of god": {
     "person_name": "Paolo Sorrentino",
-    "person_id": null
+    "person_id": 56194
   },
   "Venice|Grand Jury Prize|2022|saint omer": {
     "person_name": "Alice Diop",
-    "person_id": null
+    "person_id": 1648265
   },
   "Venice|Grand Jury Prize|2023|evil does not exist": {
     "person_name": "Ryusuke Hamaguchi",
-    "person_id": null
+    "person_id": 1487492
   },
   "Venice|Grand Jury Prize|2024|vermiglio": {
     "person_name": "Maura Delpero",
-    "person_id": null
+    "person_id": 2363766
   },
   "Venice|Grand Jury Prize|2025|the voice of hind rajab": {
     "person_name": "Kaouther Ben Hania",
-    "person_id": null
+    "person_id": 1381379
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2000|poetical refugee": {
     "person_name": "Abdellatif Kechiche",
-    "person_id": null
+    "person_id": 17458
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2001|bread and milk": {
     "person_name": "Jan Cvitkovic",
-    "person_id": null
+    "person_id": 559103
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2002|roger dodger": {
     "person_name": "Dylan Kidd",
-    "person_id": null
+    "person_id": 239075
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2002|two friends": {
     "person_name": "Francesco Sframeli",
-    "person_id": null
+    "person_id": 1093108
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2004|the great journey": {
     "person_name": "Ismaël Ferroukhi",
-    "person_id": null
+    "person_id": 932543
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2005|13 tzameti": {
     "person_name": "Gela Babluani",
-    "person_id": null
+    "person_id": 47786
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2006|khadak": {
     "person_name": "Peter Brosens",
-    "person_id": null
+    "person_id": 53995
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2007|la zona": {
     "person_name": "Rodrigo Plá",
-    "person_id": null
+    "person_id": 78880
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2008|mid-august lunch": {
     "person_name": "Gianni Di Gregorio",
-    "person_id": null
+    "person_id": 72769
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2009|engkwentro": {
     "person_name": "Pepe Diokno",
-    "person_id": null
+    "person_id": 1044233
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2010|majority": {
     "person_name": "Seren Yüce",
-    "person_id": null
+    "person_id": 150615
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2011|là-bas: a criminal education": {
     "person_name": "Guido Lombardi",
-    "person_id": null
+    "person_id": 1386110
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2012|mold": {
     "person_name": "Ali Aydın",
-    "person_id": null
+    "person_id": 1096596
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2013|white shadow": {
     "person_name": "Noaz Deshe",
-    "person_id": null
+    "person_id": 1276360
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2014|court": {
     "person_name": "Chaitanya Tamhane",
-    "person_id": null
+    "person_id": 1361809
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2015|''the childhood of a leader''": {
     "person_name": "Brady Corbet",
-    "person_id": null
+    "person_id": 55493
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2016|the last of us": {
     "person_name": "Ala Eddine Slim",
-    "person_id": null
+    "person_id": 1657665
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2017|custody": {
     "person_name": "Xavier Legrand",
-    "person_id": null
+    "person_id": 19077
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2018|the day i lost my shadow": {
     "person_name": "Soudade Kaadan",
-    "person_id": null
+    "person_id": 1848112
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2019|you will die at twenty": {
     "person_name": "Amjad Abu Alala",
-    "person_id": null
+    "person_id": 1976232
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2021|immaculate": {
     "person_name": "George Chiper-Lillemark",
-    "person_id": null
+    "person_id": 2565662
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2022|saint omer": {
     "person_name": "Alice Diop",
-    "person_id": null
+    "person_id": 1648265
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2023|love is a gun": {
     "person_name": "Lee Hong-chi",
-    "person_id": null
+    "person_id": 1630178
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2024|familiar touch": {
     "person_name": "Sarah Friedland",
-    "person_id": null
+    "person_id": 2010090
   },
   "Venice|Lion of the Future — Luigi De Laurentiis Award|2025|short summer": {
     "person_name": "Nastia Korkia",
-    "person_id": null
+    "person_id": 2087418
   },
   "Venice|Marcello Mastroianni Award|2000|liam": {
     "person_name": "Megan Burns",
-    "person_id": null
+    "person_id": 2058
   },
   "Venice|Marcello Mastroianni Award|2001|y tu mamá también": {
     "person_name": "Diego Luna",
-    "person_id": null
+    "person_id": 8688
   },
   "Venice|Marcello Mastroianni Award|2002|oasis": {
     "person_name": "Moon So-ri",
-    "person_id": null
+    "person_id": 83122
   },
   "Venice|Marcello Mastroianni Award|2003|raja": {
     "person_name": "Najat Benssallem",
-    "person_id": null
+    "person_id": 232206
   },
   "Venice|Marcello Mastroianni Award|2004|working slowly (radio alice)": {
     "person_name": "Marco Luisi",
-    "person_id": null
+    "person_id": 3030696
   },
   "Venice|Marcello Mastroianni Award|2005|heading south": {
     "person_name": "Ménothy Cesar",
-    "person_id": null
+    "person_id": 17389
   },
   "Venice|Marcello Mastroianni Award|2006|the untouchable": {
     "person_name": "Isild Le Besco",
-    "person_id": null
+    "person_id": 151180
   },
   "Venice|Marcello Mastroianni Award|2007|the secret of the grain": {
     "person_name": "Hafsia Herzi",
-    "person_id": null
+    "person_id": 54338
   },
   "Venice|Marcello Mastroianni Award|2008|burning plain": {
     "person_name": "Jennifer Lawrence",
-    "person_id": null
+    "person_id": 72129
   },
   "Venice|Marcello Mastroianni Award|2009|the big dream": {
     "person_name": "Jasmine Trinca",
-    "person_id": null
+    "person_id": 69489
   },
   "Venice|Marcello Mastroianni Award|2010|black swan": {
     "person_name": "Mila Kunis",
-    "person_id": null
+    "person_id": 18973
   },
   "Venice|Marcello Mastroianni Award|2011|himizu": {
     "person_name": "Fumi Nikaido",
-    "person_id": null
+    "person_id": 1018945
   },
   "Venice|Marcello Mastroianni Award|2012|dormant beauty": {
     "person_name": "Fabrizio Falco",
-    "person_id": null
+    "person_id": 1076595
   },
   "Venice|Marcello Mastroianni Award|2013|joe": {
     "person_name": "Tye Sheridan",
-    "person_id": null
+    "person_id": 1034681
   },
   "Venice|Marcello Mastroianni Award|2014|the last hammer blow": {
     "person_name": "Romain Paul",
-    "person_id": null
+    "person_id": 1369392
   },
   "Venice|Marcello Mastroianni Award|2015|beasts of no nation": {
     "person_name": "Abraham Attah",
-    "person_id": null
+    "person_id": 1421427
   },
   "Venice|Marcello Mastroianni Award|2016|frantz": {
     "person_name": "Paula Beer",
-    "person_id": null
+    "person_id": 894116
   },
   "Venice|Marcello Mastroianni Award|2017|lean on pete": {
     "person_name": "Charlie Plummer",
-    "person_id": null
+    "person_id": 1440574
   },
   "Venice|Marcello Mastroianni Award|2018|the nightingale": {
     "person_name": "Baykali Ganambarr",
-    "person_id": null
+    "person_id": 1776712
   },
   "Venice|Marcello Mastroianni Award|2019|babyteeth": {
     "person_name": "Toby Wallace",
-    "person_id": null
+    "person_id": 110419
   },
   "Venice|Marcello Mastroianni Award|2020|sun children": {
     "person_name": "Rouhollah Zamani",
-    "person_id": null
+    "person_id": 5225620
   },
   "Venice|Marcello Mastroianni Award|2021|the hand of god": {
     "person_name": "Filippo Scotti",
-    "person_id": null
+    "person_id": 2431166
   },
   "Venice|Marcello Mastroianni Award|2022|bones and all": {
     "person_name": "Taylor Russell",
-    "person_id": null
+    "person_id": 1353827
   },
   "Venice|Marcello Mastroianni Award|2023|io capitano": {
     "person_name": "Seydou Sarr",
-    "person_id": null
+    "person_id": 3626193
   },
   "Venice|Marcello Mastroianni Award|2024|and their children after them": {
     "person_name": "Paul Kircher",
-    "person_id": null
+    "person_id": 2674840
   },
   "Venice|Marcello Mastroianni Award|2025|silent friend": {
     "person_name": "Luna Wedler",
-    "person_id": null
+    "person_id": 1502016
   },
   "Venice|Silver Lion|2000|uttara": {
     "person_name": "Buddhadev Dasgupta",
-    "person_id": null
+    "person_id": 1081568
   },
   "Venice|Silver Lion|2001|secret ballot": {
     "person_name": "Babak Payami",
-    "person_id": null
+    "person_id": 225551
   },
   "Venice|Silver Lion|2002|oasis": {
     "person_name": "Lee Chang-dong",
-    "person_id": null
+    "person_id": 96657
   },
   "Venice|Silver Lion|2003|zatōichi": {
     "person_name": "Takeshi Kitano",
-    "person_id": null
+    "person_id": 3317
   },
   "Venice|Silver Lion|2004|3-iron": {
     "person_name": "Kim Ki-duk",
-    "person_id": null
+    "person_id": 4129625
   },
   "Venice|Silver Lion|2005|regular lovers": {
     "person_name": "Philippe Garrel",
-    "person_id": null
+    "person_id": 56207
   },
   "Venice|Silver Lion|2006|golden door": {
     "person_name": "Emanuele Crialese",
-    "person_id": null
+    "person_id": 20587
   },
   "Venice|Silver Lion|2006|private fears in public places": {
     "person_name": "Alain Resnais",
-    "person_id": null
+    "person_id": 11983
   },
   "Venice|Silver Lion|2007|redacted": {
     "person_name": "Brian De Palma",
-    "person_id": null
+    "person_id": 1150
   },
   "Venice|Silver Lion|2008|paper soldier": {
     "person_name": "Aleksei Alekseivich German",
@@ -71631,347 +71631,347 @@ var PERSON_AWARD_LOOKUP_V1 = {
   },
   "Venice|Silver Lion|2009|women without men": {
     "person_name": "Shirin Neshat",
-    "person_id": null
+    "person_id": 144492
   },
   "Venice|Silver Lion|2010|the last circus": {
     "person_name": "Álex de la Iglesia",
-    "person_id": null
+    "person_id": 57865
   },
   "Venice|Silver Lion|2011|people mountain people sea": {
     "person_name": "Cai Shangjun",
-    "person_id": null
+    "person_id": 15162
   },
   "Venice|Silver Lion|2012|the master": {
     "person_name": "Paul Thomas Anderson",
-    "person_id": null
+    "person_id": 4762
   },
   "Venice|Silver Lion|2013|miss violence": {
     "person_name": "Alexandros Avranas",
-    "person_id": null
+    "person_id": 1194907
   },
   "Venice|Silver Lion|2014|the postman's white nights": {
     "person_name": "Andrei Konchalovsky",
-    "person_id": null
+    "person_id": 58728
   },
   "Venice|Silver Lion|2015|the clan": {
     "person_name": "Pablo Trapero",
-    "person_id": null
+    "person_id": 56210
   },
   "Venice|Silver Lion|2016|paradise": {
     "person_name": "Andrei Konchalovsky",
-    "person_id": null
+    "person_id": 58728
   },
   "Venice|Silver Lion|2016|the untamed": {
     "person_name": "Amat Escalante",
-    "person_id": null
+    "person_id": 56375
   },
   "Venice|Silver Lion|2017|custody": {
     "person_name": "Xavier Legrand",
-    "person_id": null
+    "person_id": 19077
   },
   "Venice|Silver Lion|2018|the sisters brothers": {
     "person_name": "Jacques Audiard",
-    "person_id": null
+    "person_id": 17496
   },
   "Venice|Silver Lion|2019|about endlessness": {
     "person_name": "Roy Andersson",
-    "person_id": null
+    "person_id": 45791
   },
   "Venice|Silver Lion|2020|wife of a spy": {
     "person_name": "Kiyoshi Kurosawa",
-    "person_id": null
+    "person_id": 26882
   },
   "Venice|Silver Lion|2021|the power of the dog": {
     "person_name": "Jane Campion",
-    "person_id": null
+    "person_id": 10757
   },
   "Venice|Silver Lion|2022|bones and all": {
     "person_name": "Luca Guadagnino",
-    "person_id": null
+    "person_id": 78160
   },
   "Venice|Silver Lion|2023|io capitano": {
     "person_name": "Matteo Garrone",
-    "person_id": null
+    "person_id": 63973
   },
   "Venice|Silver Lion|2024|the brutalist": {
     "person_name": "Brady Corbet",
-    "person_id": null
+    "person_id": 55493
   },
   "Venice|Silver Lion|2025|the smashing machine": {
     "person_name": "Benny Safdie",
-    "person_id": null
+    "person_id": 227564
   },
   "Venice|Special Jury Prize|2007|i'm not there": {
     "person_name": "Todd Haynes",
-    "person_id": null
+    "person_id": 16863
   },
   "Venice|Special Jury Prize|2007|the secret of the grain": {
     "person_name": "Abdellatif Kechiche",
-    "person_id": null
+    "person_id": 17458
   },
   "Venice|Special Jury Prize|2008|teza": {
     "person_name": "Haile Gerima",
-    "person_id": null
+    "person_id": 72194
   },
   "Venice|Special Jury Prize|2013|the police officer's wife": {
     "person_name": "Philip Gröning",
-    "person_id": null
+    "person_id": 68656
   },
   "Venice|Special Jury Prize|2014|sivas": {
     "person_name": "Kaan Müjdeci",
-    "person_id": null
+    "person_id": 1360577
   },
   "Venice|Special Jury Prize|2015|frenzy": {
     "person_name": "Emin Alper",
-    "person_id": null
+    "person_id": 1109366
   },
   "Venice|Special Jury Prize|2016|the bad batch": {
     "person_name": "Ana Lily Amirpour",
-    "person_id": null
+    "person_id": 1289604
   },
   "Venice|Special Jury Prize|2017|sweet country": {
     "person_name": "Warwick Thornton",
-    "person_id": null
+    "person_id": 94342
   },
   "Venice|Special Jury Prize|2018|the nightingale": {
     "person_name": "Jennifer Kent",
-    "person_id": null
+    "person_id": 164554
   },
   "Venice|Special Jury Prize|2019|the mafia is no longer what it used to be": {
     "person_name": "Franco Maresco",
-    "person_id": null
+    "person_id": 230350
   },
   "Venice|Special Jury Prize|2020|dear comrades!": {
     "person_name": "Andrei Konchalovsky",
-    "person_id": null
+    "person_id": 58728
   },
   "Venice|Special Jury Prize|2021|il buco": {
     "person_name": "Michelangelo Frammartino",
-    "person_id": null
+    "person_id": 226039
   },
   "Venice|Special Jury Prize|2022|no bears": {
     "person_name": "Jafar Panahi",
-    "person_id": null
+    "person_id": 120229
   },
   "Venice|Special Jury Prize|2023|green border": {
     "person_name": "Agnieszka Holland",
-    "person_id": null
+    "person_id": 1128
   },
   "Venice|Special Jury Prize|2024|april": {
     "person_name": "Dea Kulumbegashvili",
-    "person_id": null
+    "person_id": 1627108
   },
   "Venice|Special Jury Prize|2025|below the clouds": {
     "person_name": "Gianfranco Rosi",
-    "person_id": null
+    "person_id": 224452
   },
   "Venice|Volpi Cup for Best Actor|2000|before night falls": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Venice|Volpi Cup for Best Actor|2001|light of my eyes": {
     "person_name": "Luigi Lo Cascio",
-    "person_id": null
+    "person_id": 34491
   },
   "Venice|Volpi Cup for Best Actor|2002|a journey called love": {
     "person_name": "Stefano Accorsi",
-    "person_id": null
+    "person_id": 65571
   },
   "Venice|Volpi Cup for Best Actor|2003|21 grams": {
     "person_name": "Sean Penn",
-    "person_id": null
+    "person_id": 2228
   },
   "Venice|Volpi Cup for Best Actor|2004|the sea inside": {
     "person_name": "Javier Bardem",
-    "person_id": null
+    "person_id": 3810
   },
   "Venice|Volpi Cup for Best Actor|2005|good night, and good luck": {
     "person_name": "David Strathairn",
-    "person_id": null
+    "person_id": 11064
   },
   "Venice|Volpi Cup for Best Actor|2006|hollywoodland": {
     "person_name": "Ben Affleck",
-    "person_id": null
+    "person_id": 880
   },
   "Venice|Volpi Cup for Best Actor|2007|the assassination of jesse james by the coward robert ford": {
     "person_name": "Brad Pitt",
-    "person_id": null
+    "person_id": 287
   },
   "Venice|Volpi Cup for Best Actor|2008|giovanna's father": {
     "person_name": "Silvio Orlando",
-    "person_id": null
+    "person_id": 108900
   },
   "Venice|Volpi Cup for Best Actor|2009|a single man": {
     "person_name": "Colin Firth",
-    "person_id": null
+    "person_id": 5472
   },
   "Venice|Volpi Cup for Best Actor|2010|essential killing": {
     "person_name": "Vincent Gallo",
-    "person_id": null
+    "person_id": 22461
   },
   "Venice|Volpi Cup for Best Actor|2011|shame": {
     "person_name": "Michael Fassbender",
-    "person_id": null
+    "person_id": 17288
   },
   "Venice|Volpi Cup for Best Actor|2012|the master": {
     "person_name": "Joaquin Phoenix",
-    "person_id": null
+    "person_id": 73421
   },
   "Venice|Volpi Cup for Best Actor|2013|miss violence": {
     "person_name": "Themis Panou",
-    "person_id": null
+    "person_id": 1206241
   },
   "Venice|Volpi Cup for Best Actor|2014|hungry hearts": {
     "person_name": "Adam Driver",
-    "person_id": null
+    "person_id": 1023139
   },
   "Venice|Volpi Cup for Best Actor|2015|courted": {
     "person_name": "Fabrice Luchini",
-    "person_id": null
+    "person_id": 28255
   },
   "Venice|Volpi Cup for Best Actor|2016|the distinguished citizen": {
     "person_name": "Oscar Martínez",
-    "person_id": null
+    "person_id": 1457004
   },
   "Venice|Volpi Cup for Best Actor|2017|the insult": {
     "person_name": "Kamel El Basha",
-    "person_id": null
+    "person_id": 1585765
   },
   "Venice|Volpi Cup for Best Actor|2018|at eternity's gate": {
     "person_name": "Willem Dafoe",
-    "person_id": null
+    "person_id": 5293
   },
   "Venice|Volpi Cup for Best Actor|2019|martin eden": {
     "person_name": "Luca Marinelli",
-    "person_id": null
+    "person_id": 509344
   },
   "Venice|Volpi Cup for Best Actor|2020|padrenostro": {
     "person_name": "Pierfrancesco Favino",
-    "person_id": null
+    "person_id": 17839
   },
   "Venice|Volpi Cup for Best Actor|2021|on the job: the missing 8": {
     "person_name": "John Arcilla",
-    "person_id": null
+    "person_id": 625924
   },
   "Venice|Volpi Cup for Best Actor|2022|the banshees of inisherin": {
     "person_name": "Colin Farrell",
-    "person_id": null
+    "person_id": 72466
   },
   "Venice|Volpi Cup for Best Actor|2023|memory": {
     "person_name": "Peter Sarsgaard",
-    "person_id": null
+    "person_id": 133
   },
   "Venice|Volpi Cup for Best Actor|2024|the quiet son": {
     "person_name": "Vincent Lindon",
-    "person_id": null
+    "person_id": 5443
   },
   "Venice|Volpi Cup for Best Actor|2025|la grazia": {
     "person_name": "Toni Servillo",
-    "person_id": null
+    "person_id": 72782
   },
   "Venice|Volpi Cup for Best Actress|2000|the goddess of 1967": {
     "person_name": "Rose Byrne",
-    "person_id": null
+    "person_id": 9827
   },
   "Venice|Volpi Cup for Best Actress|2001|light of my eyes": {
     "person_name": "Sandra Ceccarelli",
-    "person_id": null
+    "person_id": 53423
   },
   "Venice|Volpi Cup for Best Actress|2002|far from heaven": {
     "person_name": "Julianne Moore",
-    "person_id": null
+    "person_id": 1231
   },
   "Venice|Volpi Cup for Best Actress|2003|rosenstrasse": {
     "person_name": "Katja Riemann",
-    "person_id": null
+    "person_id": 1874
   },
   "Venice|Volpi Cup for Best Actress|2004|vera drake": {
     "person_name": "Imelda Staunton",
-    "person_id": null
+    "person_id": 11356
   },
   "Venice|Volpi Cup for Best Actress|2005|the beast in the heart": {
     "person_name": "Giovanna Mezzogiorno",
-    "person_id": null
+    "person_id": 105685
   },
   "Venice|Volpi Cup for Best Actress|2006|the queen": {
     "person_name": "Helen Mirren",
-    "person_id": null
+    "person_id": 15735
   },
   "Venice|Volpi Cup for Best Actress|2007|i'm not there": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Venice|Volpi Cup for Best Actress|2008|the other one": {
     "person_name": "Dominique Blanc",
-    "person_id": null
+    "person_id": 19068
   },
   "Venice|Volpi Cup for Best Actress|2009|the double hour": {
     "person_name": "Kseniya Rappoport",
-    "person_id": null
+    "person_id": 67320
   },
   "Venice|Volpi Cup for Best Actress|2010|attenberg": {
     "person_name": "Ariane Labed",
-    "person_id": null
+    "person_id": 235125
   },
   "Venice|Volpi Cup for Best Actress|2011|a simple life": {
     "person_name": "Deanie Ip",
-    "person_id": null
+    "person_id": 87840
   },
   "Venice|Volpi Cup for Best Actress|2012|fill the void": {
     "person_name": "Hadas Yaron",
-    "person_id": null
+    "person_id": 1075507
   },
   "Venice|Volpi Cup for Best Actress|2013|a street in palermo": {
     "person_name": "Elena Cotta",
-    "person_id": null
+    "person_id": 93109
   },
   "Venice|Volpi Cup for Best Actress|2014|hungry hearts": {
     "person_name": "Alba Rohrwacher",
-    "person_id": null
+    "person_id": 128748
   },
   "Venice|Volpi Cup for Best Actress|2015|per amor vostro": {
     "person_name": "Valeria Golino",
-    "person_id": null
+    "person_id": 3124
   },
   "Venice|Volpi Cup for Best Actress|2016|la la land": {
     "person_name": "Emma Stone",
-    "person_id": null
+    "person_id": 54693
   },
   "Venice|Volpi Cup for Best Actress|2017|hannah": {
     "person_name": "Charlotte Rampling",
-    "person_id": null
+    "person_id": 44079
   },
   "Venice|Volpi Cup for Best Actress|2018|the favourite": {
     "person_name": "Olivia Colman",
-    "person_id": null
+    "person_id": 39187
   },
   "Venice|Volpi Cup for Best Actress|2019|gloria mundi": {
     "person_name": "Ariane Ascaride",
-    "person_id": null
+    "person_id": 72590
   },
   "Venice|Volpi Cup for Best Actress|2020|pieces of a woman": {
     "person_name": "Vanessa Kirby",
-    "person_id": null
+    "person_id": 556356
   },
   "Venice|Volpi Cup for Best Actress|2021|parallel mothers": {
     "person_name": "Penélope Cruz",
-    "person_id": null
+    "person_id": 955
   },
   "Venice|Volpi Cup for Best Actress|2022|tár": {
     "person_name": "Cate Blanchett",
-    "person_id": null
+    "person_id": 112
   },
   "Venice|Volpi Cup for Best Actress|2023|priscilla": {
     "person_name": "Cailee Spaeny",
-    "person_id": null
+    "person_id": 1683343
   },
   "Venice|Volpi Cup for Best Actress|2024|babygirl": {
     "person_name": "Nicole Kidman",
-    "person_id": null
+    "person_id": 2227
   },
   "Venice|Volpi Cup for Best Actress|2025|the sun rises on us all": {
     "person_name": "Xin Zhilei",
-    "person_id": null
+    "person_id": 1569934
   }
 };
 

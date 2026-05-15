@@ -1,7 +1,7 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
-2003,venice.golden_lion,won,"[{""name"": ""Andrey Zvyagintsev"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Return,122,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
-2003,venice.silver_lion_grand_jury,won,"[{""name"": ""Randa Chahal"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Kite,44086,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
-2003,venice.silver_lion_best_director,won,"[{""name"": ""Takeshi Kitano"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Zatōichi,246,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
-2003,venice.volpi_cup_best_actor,won,"[{""name"": ""Sean Penn"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",21 Grams,470,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
-2003,venice.volpi_cup_best_actress,won,"[{""name"": ""Katja Riemann"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Rosenstrasse,6317,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
-2003,venice.marcello_mastroianni_award,won,"[{""name"": ""Najat Benssallem"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Raja,50900,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.golden_lion,won,"[{""name"": ""Andrey Zvyagintsev"", ""role"": null, ""tmdb_person_id"": 68519, ""profile_path"": ""/2MucUIIczDa9kiFGBAeG8xiCCqj.jpg""}]",The Return,122,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.silver_lion_grand_jury,won,"[{""name"": ""Randa Chahal"", ""role"": null, ""tmdb_person_id"": 1440353, ""profile_path"": ""/77zvrzDJat4AXimcuONC3QrJ8LP.jpg""}]",The Kite,44086,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.silver_lion_best_director,won,"[{""name"": ""Takeshi Kitano"", ""role"": null, ""tmdb_person_id"": 3317, ""profile_path"": null}]",Zatōichi,246,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.volpi_cup_best_actor,won,"[{""name"": ""Sean Penn"", ""role"": null, ""tmdb_person_id"": 2228, ""profile_path"": null}]",21 Grams,470,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.volpi_cup_best_actress,won,"[{""name"": ""Katja Riemann"", ""role"": null, ""tmdb_person_id"": 1874, ""profile_path"": ""/waayy0jpNbxLDQ8JO1uRDng8SLF.jpg""}]",Rosenstrasse,6317,false,auto_verified,,2026-05-03T23:52:10.458420+00:00
+2003,venice.marcello_mastroianni_award,won,"[{""name"": ""Najat Benssallem"", ""role"": null, ""tmdb_person_id"": 232206, ""profile_path"": null}]",Raja,50900,false,auto_verified,,2026-05-03T23:52:10.458420+00:00

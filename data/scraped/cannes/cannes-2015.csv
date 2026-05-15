@@ -1,11 +1,11 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
-2015,cannes.palme_dor,won,"[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Dheepan,314402,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.grand_prix,won,"[{""name"": ""László Nemes"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Son of Saul,336050,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.jury_prize,won,"[{""name"": ""Yorgos Lanthimos"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Lobster,254320,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.best_director,won,"[{""name"": ""Hou Hsiao-hsien"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Assassin,253450,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.best_actor,won,"[{""name"": ""Vincent Lindon"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Measure of a Man,329712,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.best_actress,won,"[{""name"": ""Emmanuelle Bercot"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Mon Roi,329805,true,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.best_actress,won,"[{""name"": ""Rooney Mara"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Carol,258480,true,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.best_screenplay,won,"[{""name"": ""Michel Franco"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Chronic,337104,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.camera_dor,won,"[{""name"": ""César Augusto Acevedo"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Land and Shade,336669,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
-2015,cannes.short_film_palme_dor,won,"[{""name"": ""Ely Dagher"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Waves '98,341687,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.palme_dor,won,"[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": 17496, ""profile_path"": null}]",Dheepan,314402,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.grand_prix,won,"[{""name"": ""László Nemes"", ""role"": null, ""tmdb_person_id"": 1454941, ""profile_path"": ""/wW9QazaYT2G1V783nkWnQYNs0GM.jpg""}]",Son of Saul,336050,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.jury_prize,won,"[{""name"": ""Yorgos Lanthimos"", ""role"": null, ""tmdb_person_id"": 122423, ""profile_path"": null}]",The Lobster,254320,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.best_director,won,"[{""name"": ""Hou Hsiao-hsien"", ""role"": null, ""tmdb_person_id"": 64992, ""profile_path"": null}]",The Assassin,253450,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.best_actor,won,"[{""name"": ""Vincent Lindon"", ""role"": null, ""tmdb_person_id"": 5443, ""profile_path"": null}]",The Measure of a Man,329712,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.best_actress,won,"[{""name"": ""Emmanuelle Bercot"", ""role"": null, ""tmdb_person_id"": 25340, ""profile_path"": null}]",Mon Roi,329805,true,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.best_actress,won,"[{""name"": ""Rooney Mara"", ""role"": null, ""tmdb_person_id"": 108916, ""profile_path"": null}]",Carol,258480,true,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.best_screenplay,won,"[{""name"": ""Michel Franco"", ""role"": null, ""tmdb_person_id"": 1082434, ""profile_path"": ""/9pcGCe3CD4woEB4D8t6V3A4q2vQ.jpg""}]",Chronic,337104,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.camera_dor,won,"[{""name"": ""César Augusto Acevedo"", ""role"": null, ""tmdb_person_id"": 1466330, ""profile_path"": ""/AeeQynwXtLdvukpOeIy32bkZXQU.jpg""}]",Land and Shade,336669,false,auto_verified,,2026-05-03T12:51:58.686608+00:00
+2015,cannes.short_film_palme_dor,won,"[{""name"": ""Ely Dagher"", ""role"": null, ""tmdb_person_id"": 1470329, ""profile_path"": ""/wZmuWNbhdHd4peSNyx64brqCuMC.jpg""}]",Waves '98,341687,false,auto_verified,,2026-05-03T12:51:58.686608+00:00

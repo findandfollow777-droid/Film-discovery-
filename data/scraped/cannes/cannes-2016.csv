@@ -1,11 +1,11 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
-2016,cannes.palme_dor,won,"[{""name"": ""Ken Loach"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]","I, Daniel Blake",374473,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.grand_prix,won,"[{""name"": ""Xavier Dolan"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",It's Only the End of the World,338189,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.jury_prize,won,"[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",American Honey,340485,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.best_director,won,"[{""name"": ""Cristian Mungiu"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Graduation,1574254,true,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.best_director,won,"[{""name"": ""Olivier Assayas"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Personal Shopper,340676,true,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.best_actor,won,"[{""name"": ""Shahab Hosseini"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Salesman,375315,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.best_actress,won,"[{""name"": ""Jaclyn Jose"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Ma' Rosa,392790,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.best_screenplay,won,"[{""name"": ""Asghar Farhadi"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Salesman,375315,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.camera_dor,won,"[{""name"": ""Houda Benyamina"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Divines,393729,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
-2016,cannes.short_film_palme_dor,won,"[{""name"": ""Juanjo Giménez"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Timecode,398395,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.palme_dor,won,"[{""name"": ""Ken Loach"", ""role"": null, ""tmdb_person_id"": 15488, ""profile_path"": null}]","I, Daniel Blake",374473,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.grand_prix,won,"[{""name"": ""Xavier Dolan"", ""role"": null, ""tmdb_person_id"": 143593, ""profile_path"": ""/dfZnAEiwGjUkymUHf4zl6vR4uSp.jpg""}]",It's Only the End of the World,338189,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.jury_prize,won,"[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": 71082, ""profile_path"": ""/ol6skeUdmRIB2eZDq3YJpJjY4P3.jpg""}]",American Honey,340485,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.best_director,won,"[{""name"": ""Cristian Mungiu"", ""role"": null, ""tmdb_person_id"": 20657, ""profile_path"": null}]",Graduation,1574254,true,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.best_director,won,"[{""name"": ""Olivier Assayas"", ""role"": null, ""tmdb_person_id"": 21678, ""profile_path"": null}]",Personal Shopper,340676,true,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.best_actor,won,"[{""name"": ""Shahab Hosseini"", ""role"": null, ""tmdb_person_id"": 229933, ""profile_path"": null}]",The Salesman,375315,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.best_actress,won,"[{""name"": ""Jaclyn Jose"", ""role"": null, ""tmdb_person_id"": 1191698, ""profile_path"": null}]",Ma' Rosa,392790,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.best_screenplay,won,"[{""name"": ""Asghar Farhadi"", ""role"": null, ""tmdb_person_id"": 229931, ""profile_path"": null}]",The Salesman,375315,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.camera_dor,won,"[{""name"": ""Houda Benyamina"", ""role"": null, ""tmdb_person_id"": 1609917, ""profile_path"": ""/kXNvbi4FICqpHm1SdQzhY5tXgWH.jpg""}]",Divines,393729,false,auto_verified,,2026-05-03T12:52:01.044529+00:00
+2016,cannes.short_film_palme_dor,won,"[{""name"": ""Juanjo Giménez"", ""role"": null, ""tmdb_person_id"": 1459948, ""profile_path"": null}]",Timecode,398395,false,auto_verified,,2026-05-03T12:52:01.044529+00:00

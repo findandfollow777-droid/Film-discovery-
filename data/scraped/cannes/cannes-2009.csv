@@ -1,11 +1,11 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
-2009,cannes.palme_dor,won,"[{""name"": ""Michael Haneke"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The White Ribbon,37903,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.grand_prix,won,"[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",A Prophet,21575,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.jury_prize,won,"[{""name"": ""Park Chan-wook"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Thirst,22536,true,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.jury_prize,won,"[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Fish Tank,24469,true,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.best_director,won,"[{""name"": ""Brillante Mendoza"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Kinatay,64450,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.best_actor,won,"[{""name"": ""Christoph Waltz"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Inglourious Basterds,16869,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.best_actress,won,"[{""name"": ""Charlotte Gainsbourg"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Antichrist,17609,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.best_screenplay,won,"[{""name"": ""Mei Feng"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Spring Fever,117646,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.camera_dor,won,"[{""name"": ""Warwick Thornton"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Samson and Delilah,47075,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
-2009,cannes.short_film_palme_dor,won,"[{""name"": ""João Salaviza"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Arena,127059,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.palme_dor,won,"[{""name"": ""Michael Haneke"", ""role"": null, ""tmdb_person_id"": 6011, ""profile_path"": null}]",The White Ribbon,37903,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.grand_prix,won,"[{""name"": ""Jacques Audiard"", ""role"": null, ""tmdb_person_id"": 17496, ""profile_path"": null}]",A Prophet,21575,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.jury_prize,won,"[{""name"": ""Park Chan-wook"", ""role"": null, ""tmdb_person_id"": 10099, ""profile_path"": null}]",Thirst,22536,true,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.jury_prize,won,"[{""name"": ""Andrea Arnold"", ""role"": null, ""tmdb_person_id"": 71082, ""profile_path"": ""/ol6skeUdmRIB2eZDq3YJpJjY4P3.jpg""}]",Fish Tank,24469,true,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.best_director,won,"[{""name"": ""Brillante Mendoza"", ""role"": null, ""tmdb_person_id"": 56213, ""profile_path"": null}]",Kinatay,64450,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.best_actor,won,"[{""name"": ""Christoph Waltz"", ""role"": null, ""tmdb_person_id"": 27319, ""profile_path"": null}]",Inglourious Basterds,16869,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.best_actress,won,"[{""name"": ""Charlotte Gainsbourg"", ""role"": null, ""tmdb_person_id"": 4273, ""profile_path"": null}]",Antichrist,17609,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.best_screenplay,won,"[{""name"": ""Mei Feng"", ""role"": null, ""tmdb_person_id"": 103605, ""profile_path"": ""/bBXnro75Zsa4F7IcuR7e3c5BbBR.jpg""}]",Spring Fever,117646,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.camera_dor,won,"[{""name"": ""Warwick Thornton"", ""role"": null, ""tmdb_person_id"": 94342, ""profile_path"": ""/lbeXa9X4Pxf8FEy9ugXnspdMysG.jpg""}]",Samson and Delilah,47075,false,auto_verified,,2026-05-03T12:51:44.913614+00:00
+2009,cannes.short_film_palme_dor,won,"[{""name"": ""João Salaviza"", ""role"": null, ""tmdb_person_id"": 1081027, ""profile_path"": ""/jbsFugyOP3iiMkRBBgeJRS6ori5.jpg""}]",Arena,127059,false,auto_verified,,2026-05-03T12:51:44.913614+00:00

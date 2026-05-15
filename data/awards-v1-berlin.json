@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0.0",
     "schema_version": "v1.3",
-    "generated_at": "2026-05-09T20:57:57.429458Z",
+    "generated_at": "2026-05-15T21:02:33.815235Z",
     "row_count": 210,
     "festival_count": 1,
     "category_count": 11,
@@ -386,7 +386,7 @@
         {
           "name": "Paul Thomas Anderson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4762,
           "profile_path": null
         }
       ],
@@ -413,8 +413,8 @@
         {
           "name": "Zhang Yimou",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 607,
+          "profile_path": "/uU5vECl94jDQYjiRk4eOpVRMEi9.jpg"
         }
       ],
       "film_tmdb_id": 12276,
@@ -440,7 +440,7 @@
         {
           "name": "Miloš Forman",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3974,
           "profile_path": null
         }
       ],
@@ -467,7 +467,7 @@
         {
           "name": "Denzel Washington",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5292,
           "profile_path": null
         }
       ],
@@ -494,7 +494,7 @@
         {
           "name": "Bibiana Beglau",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 32421,
           "profile_path": null
         }
       ],
@@ -521,8 +521,8 @@
         {
           "name": "Nadja Uhl",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 5511,
+          "profile_path": "/s8xKoionb7eginXbxG0a1HU9KFN.jpg"
         }
       ],
       "film_tmdb_id": 10499,
@@ -548,7 +548,7 @@
         {
           "name": "Akira Ogata",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5055769,
           "profile_path": null
         }
       ],
@@ -575,8 +575,8 @@
         {
           "name": "Patrice Chéreau",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 23724,
+          "profile_path": "/hsdqKnOsxeFTaSkveIsgPV4Nida.jpg"
         }
       ],
       "film_tmdb_id": 11845,
@@ -602,8 +602,8 @@
         {
           "name": "Wang Xiaoshuai",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1016305,
+          "profile_path": "/o5n02PyBkNuWIZg4QV57sDtjgzb.jpg"
         }
       ],
       "film_tmdb_id": 12659,
@@ -629,7 +629,7 @@
         {
           "name": "Lin Cheng-sheng",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 131288,
           "profile_path": null
         }
       ],
@@ -656,7 +656,7 @@
         {
           "name": "Benicio del Toro",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1121,
           "profile_path": null
         }
       ],
@@ -683,8 +683,8 @@
         {
           "name": "Kerry Fox",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 17258,
+          "profile_path": "/qTN8PjqgOdICj6egcAhJ7qXfEk1.jpg"
         }
       ],
       "film_tmdb_id": 11845,
@@ -710,8 +710,8 @@
         {
           "name": "Raúl Pérez Cubero",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 100714,
+          "profile_path": "/fZ62DcF86VU14N4BZe7nHBP6AOh.jpg"
         }
       ],
       "film_tmdb_id": 59988,
@@ -737,8 +737,8 @@
         {
           "name": "Lucrecia Martel",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 56208,
+          "profile_path": "/e70SUgZRzx5fFZ49zgn2uCqw8Jm.jpg"
         }
       ],
       "film_tmdb_id": 58429,
@@ -764,7 +764,7 @@
         {
           "name": "Paul Greengrass",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 25598,
           "profile_path": null
         }
       ],
@@ -791,8 +791,8 @@
         {
           "name": "Hayao Miyazaki",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 608,
+          "profile_path": "/ouhjt9KugzhWtdEyBPipihB3ic8.jpg"
         }
       ],
       "film_tmdb_id": 129,
@@ -818,8 +818,8 @@
         {
           "name": "Andreas Dresen",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 4617,
+          "profile_path": "/aNgqbOIPxBNkrDnpM2qzXYBTanb.jpg"
         }
       ],
       "film_tmdb_id": 316,
@@ -845,7 +845,7 @@
         {
           "name": "Otar Iosseliani",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 40260,
           "profile_path": null
         }
       ],
@@ -872,7 +872,7 @@
         {
           "name": "Jacques Gamblin",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 77860,
           "profile_path": null
         }
       ],
@@ -899,7 +899,7 @@
         {
           "name": "Halle Berry",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4587,
           "profile_path": null
         }
       ],
@@ -953,7 +953,7 @@
         {
           "name": "Christopher Roth",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1630117,
           "profile_path": null
         }
       ],
@@ -980,7 +980,7 @@
         {
           "name": "Michael Winterbottom",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 172,
           "profile_path": null
         }
       ],
@@ -1007,7 +1007,7 @@
         {
           "name": "Spike Jonze",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5953,
           "profile_path": null
         }
       ],
@@ -1034,8 +1034,8 @@
         {
           "name": "Patrice Chéreau",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 23724,
+          "profile_path": "/hsdqKnOsxeFTaSkveIsgPV4Nida.jpg"
         }
       ],
       "film_tmdb_id": 78208,
@@ -1061,7 +1061,7 @@
         {
           "name": "Sam Rockwell",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 6807,
           "profile_path": null
         }
       ],
@@ -1088,7 +1088,7 @@
         {
           "name": "Meryl Streep",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5064,
           "profile_path": null
         }
       ],
@@ -1115,7 +1115,7 @@
         {
           "name": "Nicole Kidman",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 2227,
           "profile_path": null
         }
       ],
@@ -1142,7 +1142,7 @@
         {
           "name": "Julianne Moore",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1231,
           "profile_path": null
         }
       ],
@@ -1169,8 +1169,8 @@
         {
           "name": "Yang Li",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 71049,
+          "profile_path": "/qEaciabL8MzYtJXS8vCH8eAyyfk.jpg"
         }
       ],
       "film_tmdb_id": 11492,
@@ -1196,8 +1196,8 @@
         {
           "name": "Fatih Akın",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 5125,
+          "profile_path": "/jqxUPrXlsAoNPY2GiZaZXUjFbTH.jpg"
         }
       ],
       "film_tmdb_id": 363,
@@ -1223,8 +1223,8 @@
         {
           "name": "Daniel Burman",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 584335,
+          "profile_path": "/6zriWDd1G7g69q2pWR1UedEc6Cz.jpg"
         }
       ],
       "film_tmdb_id": 49681,
@@ -1250,7 +1250,7 @@
         {
           "name": "Kim Ki-duk",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4129625,
           "profile_path": null
         }
       ],
@@ -1277,8 +1277,8 @@
         {
           "name": "Daniel Hendler",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 131867,
+          "profile_path": "/8Q36TGfbnm4CjuKVWz1XGmTiZtk.jpg"
         }
       ],
       "film_tmdb_id": 49681,
@@ -1304,7 +1304,7 @@
         {
           "name": "Catalina Sandino Moreno",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5887,
           "profile_path": null
         }
       ],
@@ -1331,7 +1331,7 @@
         {
           "name": "Charlize Theron",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 6885,
           "profile_path": null
         }
       ],
@@ -1358,91 +1358,91 @@
         {
           "name": "Leif Andrée",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 93239,
+          "profile_path": "/3psjk7tK2uKUv9tLjR5agt0YpoS.jpg"
         },
         {
           "name": "Pernilla August",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 33190,
           "profile_path": null
         },
         {
           "name": "Jan Coster",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1480036,
           "profile_path": null
         },
         {
           "name": "Jakob Eklund",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 92403,
+          "profile_path": "/cXtxuIyFXCBYL02pp8oeJLKtDK8.jpg"
         },
         {
           "name": "Ingvar Hirdwall",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 47070,
+          "profile_path": "/fcoLF3kEQJ5nDuYaFESiyRGTL8U.jpg"
         },
         {
           "name": "Magnus Krepper",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 143391,
+          "profile_path": "/xFN9sb8S2fjcUtbWvzTxoLH4QUJ.jpg"
         },
         {
           "name": "Johan Kvarnström",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5201409,
           "profile_path": null
         },
         {
           "name": "Camilla Larsson",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 91567,
+          "profile_path": "/ddga56v63m8bjceAsym5bneCiDZ.jpg"
         },
         {
           "name": "Marika Lindström",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 233936,
+          "profile_path": "/tzU0pJLesZGlWgoKBe3820uZayo.jpg"
         },
         {
           "name": "Peter Lorentzon",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 726106,
+          "profile_path": "/xoZzXMkhqeCmfX78AvgRN5Uh7cL.jpg"
         },
         {
           "name": "Hampus Penttinen",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5201407,
           "profile_path": null
         },
         {
           "name": "Ann Petrén",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 73070,
+          "profile_path": "/gs73ZPtFQ7Ei49n7vqUYFgluKiu.jpg"
         },
         {
           "name": "Marie Richardson",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 5024,
+          "profile_path": "/y2zq5XV66m5IKGkPbT5VZ8n0s23.jpg"
         },
         {
           "name": "Jenny Svärdsäter",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5201428,
           "profile_path": null
         },
         {
           "name": "Claes-Göran Turesson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1166991,
           "profile_path": null
         }
       ],
@@ -1469,7 +1469,7 @@
         {
           "name": "Mark Dornford-May",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 587860,
           "profile_path": null
         }
       ],
@@ -1496,8 +1496,8 @@
         {
           "name": "Gu Changwei",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 66169,
+          "profile_path": "/m5ylrpN30hjt14syMrZpAX37QKz.jpg"
         }
       ],
       "film_tmdb_id": 11728,
@@ -1523,7 +1523,7 @@
         {
           "name": "Marc Rothemund",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 21737,
           "profile_path": null
         }
       ],
@@ -1550,7 +1550,7 @@
         {
           "name": "Lou Taylor Pucci",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 17441,
           "profile_path": null
         }
       ],
@@ -1577,7 +1577,7 @@
         {
           "name": "Julia Jentsch",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3932,
           "profile_path": null
         }
       ],
@@ -1604,8 +1604,8 @@
         {
           "name": "Tsai Ming-liang",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 71174,
+          "profile_path": "/ceVmDE537vnoxiGmkoNOf5srJWr.jpg"
         }
       ],
       "film_tmdb_id": 36253,
@@ -1631,7 +1631,7 @@
         {
           "name": "Jasmila Žbanić",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4634,
           "profile_path": null
         }
       ],
@@ -1658,7 +1658,7 @@
         {
           "name": "Jafar Panahi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 120229,
           "profile_path": null
         }
       ],
@@ -1685,8 +1685,8 @@
         {
           "name": "Pernille Fischer Christensen",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 110601,
+          "profile_path": "/uGIXnmOTpmoj9HyHIGZfilyREjo.jpg"
         }
       ],
       "film_tmdb_id": 15845,
@@ -1712,7 +1712,7 @@
         {
           "name": "Michael Winterbottom",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 172,
           "profile_path": null
         }
       ],
@@ -1739,8 +1739,8 @@
         {
           "name": "Mat Whitecross",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 182,
+          "profile_path": "/kuo7QsaWWrO4CfV5BOPKUsFoKgs.jpg"
         }
       ],
       "film_tmdb_id": 7872,
@@ -1766,7 +1766,7 @@
         {
           "name": "Moritz Bleibtreu",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 677,
           "profile_path": null
         }
       ],
@@ -1793,7 +1793,7 @@
         {
           "name": "Sandra Hüller",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 7152,
           "profile_path": null
         }
       ],
@@ -1820,7 +1820,7 @@
         {
           "name": "Jürgen Vogel",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 2814785,
           "profile_path": null
         }
       ],
@@ -1847,8 +1847,8 @@
         {
           "name": "Rodrigo Moreno",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1022649,
+          "profile_path": "/ffrwertO1hAdl8H7wxIlbqWHzby.jpg"
         }
       ],
       "film_tmdb_id": 99896,
@@ -1874,8 +1874,8 @@
         {
           "name": "Pernille Fischer Christensen",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 110601,
+          "profile_path": "/uGIXnmOTpmoj9HyHIGZfilyREjo.jpg"
         }
       ],
       "film_tmdb_id": 15845,
@@ -1901,8 +1901,8 @@
         {
           "name": "Wang Quan'an",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 27073,
+          "profile_path": "/sbDPSjaVs5ZAGy7moa62sZobQgX.jpg"
         }
       ],
       "film_tmdb_id": 2694,
@@ -1928,8 +1928,8 @@
         {
           "name": "Ariel Rotter",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 583125,
+          "profile_path": "/66blcJnWsBrbjP8hODoJMLSiWGM.jpg"
         }
       ],
       "film_tmdb_id": 51465,
@@ -1955,7 +1955,7 @@
         {
           "name": "Joseph Cedar",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 77815,
           "profile_path": null
         }
       ],
@@ -1982,7 +1982,7 @@
         {
           "name": "Julio Chávez",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1763729,
           "profile_path": null
         }
       ],
@@ -2009,7 +2009,7 @@
         {
           "name": "Nina Hoss",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 681,
           "profile_path": null
         }
       ],
@@ -2036,7 +2036,7 @@
         {
           "name": "Park Chan-wook",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 10099,
           "profile_path": null
         }
       ],
@@ -2063,8 +2063,8 @@
         {
           "name": "José Padilha",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 52576,
+          "profile_path": "/1v2CvKDLEqxNjZk26Zby0dpasnC.jpg"
         }
       ],
       "film_tmdb_id": 7347,
@@ -2090,8 +2090,8 @@
         {
           "name": "Errol Morris",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 18533,
+          "profile_path": "/p0OVTOHWNOaEfK8eUjvey6uEbRp.jpg"
         }
       ],
       "film_tmdb_id": 8847,
@@ -2117,7 +2117,7 @@
         {
           "name": "Paul Thomas Anderson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4762,
           "profile_path": null
         }
       ],
@@ -2144,7 +2144,7 @@
         {
           "name": "Reza Naji",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 87388,
           "profile_path": null
         }
       ],
@@ -2171,7 +2171,7 @@
         {
           "name": "Sally Hawkins",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 39658,
           "profile_path": null
         }
       ],
@@ -2198,8 +2198,8 @@
         {
           "name": "Wang Xiaoshuai",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1016305,
+          "profile_path": "/o5n02PyBkNuWIZg4QV57sDtjgzb.jpg"
         }
       ],
       "film_tmdb_id": 31205,
@@ -2225,8 +2225,8 @@
         {
           "name": "Jonny Greenwood",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 74333,
+          "profile_path": "/atTznDtyaMG6Dsolpn36snDGNje.jpg"
         }
       ],
       "film_tmdb_id": 7345,
@@ -2252,8 +2252,8 @@
         {
           "name": "Fernando Eimbcke",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 112132,
+          "profile_path": "/Ah6rmSH5zHmDxkm5xszYVNsnVZJ.jpg"
         }
       ],
       "film_tmdb_id": 65726,
@@ -2279,8 +2279,8 @@
         {
           "name": "Claudia Llosa",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 101399,
+          "profile_path": "/w0xZ9LVIZnDOlQHvsvDPfCNXDS2.jpg"
         }
       ],
       "film_tmdb_id": 28644,
@@ -2306,8 +2306,8 @@
         {
           "name": "Adrián Biniez",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 548836,
+          "profile_path": "/1vpjmLhxkrgaRhKBoAKr839TZDP.jpg"
         }
       ],
       "film_tmdb_id": 39488,
@@ -2333,8 +2333,8 @@
         {
           "name": "Maren Ade",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 40476,
+          "profile_path": "/4zeOpAVDxTto67ZELmiUCBsm976.jpg"
         }
       ],
       "film_tmdb_id": 33809,
@@ -2360,7 +2360,7 @@
         {
           "name": "Asghar Farhadi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 229931,
           "profile_path": null
         }
       ],
@@ -2387,7 +2387,7 @@
         {
           "name": "Sotigui Kouyaté",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 125970,
           "profile_path": null
         }
       ],
@@ -2414,7 +2414,7 @@
         {
           "name": "Birgit Minichmayr",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 8800,
           "profile_path": null
         }
       ],
@@ -2441,13 +2441,13 @@
         {
           "name": "Oren Moverman",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 34110,
+          "profile_path": "/40C07hmGi2n7VZTc7DyTsZQFsLK.jpg"
         },
         {
           "name": "Alessandro Camon",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 57561,
           "profile_path": null
         }
       ],
@@ -2474,19 +2474,19 @@
         {
           "name": "György Kovács",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1259031,
+          "profile_path": "/pNa0gjtrN87TGiXXGyD3wNivmON.jpg"
         },
         {
           "name": "Gábor ifj. Erdélyi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1586303,
           "profile_path": null
         },
         {
           "name": "Tamás Székely",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1586305,
           "profile_path": null
         }
       ],
@@ -2513,8 +2513,8 @@
         {
           "name": "Andrzej Wajda",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 2801,
+          "profile_path": "/4agiSYoIv95N1bK3wod1GzWfiFb.jpg"
         }
       ],
       "film_tmdb_id": 51010,
@@ -2540,8 +2540,8 @@
         {
           "name": "Adrián Biniez",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 548836,
+          "profile_path": "/1vpjmLhxkrgaRhKBoAKr839TZDP.jpg"
         }
       ],
       "film_tmdb_id": 39488,
@@ -2567,8 +2567,8 @@
         {
           "name": "Semih Kaplanoğlu",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 130402,
+          "profile_path": "/eYw0RFyQ9mGimjgeuGDQKGubNIl.jpg"
         }
       ],
       "film_tmdb_id": 44160,
@@ -2594,7 +2594,7 @@
         {
           "name": "Florin Șerban",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 125281,
           "profile_path": null
         }
       ],
@@ -2621,7 +2621,7 @@
         {
           "name": "Roman Polanski",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3556,
           "profile_path": null
         }
       ],
@@ -2648,8 +2648,8 @@
         {
           "name": "Grigoriy Dobrygin",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 107722,
+          "profile_path": "/puGDSyS0T9RyT08SkKkhJIC4vUD.jpg"
         }
       ],
       "film_tmdb_id": 38325,
@@ -2675,8 +2675,8 @@
         {
           "name": "Sergei Puskepalis",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 590133,
+          "profile_path": "/qK9dJSjRPQrmF8qdiJdiJ9AhySa.jpg"
         }
       ],
       "film_tmdb_id": 38325,
@@ -2702,7 +2702,7 @@
         {
           "name": "Shinobu Terajima",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 83527,
           "profile_path": null
         }
       ],
@@ -2729,14 +2729,14 @@
         {
           "name": "Jin Na",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1907877,
           "profile_path": null
         },
         {
           "name": "Wang Quan'an",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 27073,
+          "profile_path": "/sbDPSjaVs5ZAGy7moa62sZobQgX.jpg"
         }
       ],
       "film_tmdb_id": 129955,
@@ -2762,8 +2762,8 @@
         {
           "name": "Pavel Kostomarov",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 238619,
+          "profile_path": "/pqatuWDMaRtRkkBtC8jInaMw70Y.jpg"
         }
       ],
       "film_tmdb_id": 38325,
@@ -2789,7 +2789,7 @@
         {
           "name": "Florin Șerban",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 125281,
           "profile_path": null
         }
       ],
@@ -2816,7 +2816,7 @@
         {
           "name": "Asghar Farhadi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 229931,
           "profile_path": null
         }
       ],
@@ -2843,8 +2843,8 @@
         {
           "name": "Béla Tarr",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 85637,
+          "profile_path": "/71o40gwwvIeyI52KvIobGqGteXX.jpg"
         }
       ],
       "film_tmdb_id": 81401,
@@ -2870,8 +2870,8 @@
         {
           "name": "Ulrich Köhler",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 40357,
+          "profile_path": "/a89MgEdTHAPQ7srAQiTLsAGuAZ5.jpg"
         }
       ],
       "film_tmdb_id": 70768,
@@ -2897,8 +2897,8 @@
         {
           "name": "Joshua Marston",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 5872,
+          "profile_path": "/opvpMk86A1CIHPTSM0PEMfvPpqk.jpg"
         }
       ],
       "film_tmdb_id": 82624,
@@ -2924,7 +2924,7 @@
         {
           "name": "Barbara Enriquez",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1018096,
           "profile_path": null
         }
       ],
@@ -2951,8 +2951,8 @@
         {
           "name": "Wojciech Staroń",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1076349,
+          "profile_path": "/rLKVwhP8S33InEyw0ot4JqBqZI6.jpg"
         }
       ],
       "film_tmdb_id": 107073,
@@ -2978,8 +2978,8 @@
         {
           "name": "Andres Veiel",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 68002,
+          "profile_path": "/q4FrxlTURFWz1tGmVOp1BnVKL7k.jpg"
         }
       ],
       "film_tmdb_id": 73132,
@@ -2996,17 +2996,23 @@
       "notes": null
     },
     {
-      "id": "berlin.golden_bear.2012.paolo_and_vittorio_taviani_unresolved",
+      "id": "berlin.golden_bear.2012.paolo_unresolved",
       "ceremony_id": "berlin.2012",
       "category_id": "berlin.golden_bear",
       "year": 2012,
       "result": "won",
       "recipients": [
         {
-          "name": "Paolo and Vittorio Taviani",
+          "name": "Paolo",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 27384,
+          "profile_path": "/2l1a6TvwtNwa5rdEzaAxgmQOD49.jpg"
+        },
+        {
+          "name": "Vittorio Taviani",
+          "role": null,
+          "tmdb_person_id": 24281,
+          "profile_path": "/gQb8aZQO8K0GicAS8U8808hcbBd.jpg"
         }
       ],
       "film_tmdb_id": 96821,
@@ -3032,8 +3038,8 @@
         {
           "name": "Benedek Fliegauf",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 227936,
+          "profile_path": "/vvp4Tj1tXHEeTfx0Q4q62IMBzRw.jpg"
         }
       ],
       "film_tmdb_id": 110383,
@@ -3059,7 +3065,7 @@
         {
           "name": "Christian Petzold",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3953898,
           "profile_path": null
         }
       ],
@@ -3086,7 +3092,7 @@
         {
           "name": "Mikkel Boe Følsgaard",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1013156,
           "profile_path": null
         }
       ],
@@ -3113,7 +3119,7 @@
         {
           "name": "Rachel Mwanza",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1106979,
           "profile_path": null
         }
       ],
@@ -3140,8 +3146,8 @@
         {
           "name": "Nikolaj Arcel",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 74752,
+          "profile_path": "/59d1ivTOr81kbS8Gq2NkLhfW6iO.jpg"
         }
       ],
       "film_tmdb_id": 88273,
@@ -3167,7 +3173,7 @@
         {
           "name": "Lutz Reitemeier",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 27072,
           "profile_path": null
         }
       ],
@@ -3194,7 +3200,7 @@
         {
           "name": "Miguel Gomes",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 150512,
           "profile_path": null
         }
       ],
@@ -3221,7 +3227,7 @@
         {
           "name": "Călin Peter Netzer",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1137536,
           "profile_path": null
         }
       ],
@@ -3248,8 +3254,8 @@
         {
           "name": "Danis Tanović",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 20028,
+          "profile_path": "/76GowczFt5uHd9q80KH1BqYM3OY.jpg"
         }
       ],
       "film_tmdb_id": 159942,
@@ -3275,7 +3281,7 @@
         {
           "name": "David Gordon Green",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 64141,
           "profile_path": null
         }
       ],
@@ -3302,7 +3308,7 @@
         {
           "name": "Nazif Mujić",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1141853,
           "profile_path": null
         }
       ],
@@ -3329,7 +3335,7 @@
         {
           "name": "Paulina García",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1532436,
           "profile_path": null
         }
       ],
@@ -3356,7 +3362,7 @@
         {
           "name": "Jafar Panahi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 120229,
           "profile_path": null
         }
       ],
@@ -3410,8 +3416,8 @@
         {
           "name": "Denis Côté",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 236421,
+          "profile_path": "/fJZ2yKzOl1NdahcniFaOxqcqt1U.jpg"
         }
       ],
       "film_tmdb_id": null,
@@ -3437,8 +3443,8 @@
         {
           "name": "Diao Yinan",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 123552,
+          "profile_path": "/8JOgOQuHXlzpoetMVIvYp7x1Uz8.jpg"
         }
       ],
       "film_tmdb_id": 255756,
@@ -3464,7 +3470,7 @@
         {
           "name": "Wes Anderson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5655,
           "profile_path": null
         }
       ],
@@ -3491,7 +3497,7 @@
         {
           "name": "Richard Linklater",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 564,
           "profile_path": null
         }
       ],
@@ -3518,7 +3524,7 @@
         {
           "name": "Liao Fan",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 99692,
           "profile_path": null
         }
       ],
@@ -3545,7 +3551,7 @@
         {
           "name": "Haru Kuroki",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1054260,
           "profile_path": null
         }
       ],
@@ -3572,8 +3578,8 @@
         {
           "name": "Dietrich Brüggemann",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 28523,
+          "profile_path": "/l6goAXanMSx3NTu9rUTAgRBLcyV.jpg"
         }
       ],
       "film_tmdb_id": 254721,
@@ -3599,8 +3605,8 @@
         {
           "name": "Lou Ye",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 71056,
+          "profile_path": "/nTUeXIn1fSaMJYMCC1vp1v203jv.jpg"
         }
       ],
       "film_tmdb_id": 256106,
@@ -3626,7 +3632,7 @@
         {
           "name": "Alain Resnais",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 11983,
           "profile_path": null
         }
       ],
@@ -3653,8 +3659,8 @@
         {
           "name": "Alonso Ruizpalacios",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1305360,
+          "profile_path": "/aCBWcK4P3yCmovYUVZ9Pcl8RhUP.jpg"
         }
       ],
       "film_tmdb_id": 256057,
@@ -3680,7 +3686,7 @@
         {
           "name": "Jafar Panahi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 120229,
           "profile_path": null
         }
       ],
@@ -3707,8 +3713,8 @@
         {
           "name": "Pablo Larraín",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 225009,
+          "profile_path": "/4vP5MatNdE6Ku1iJbboWZPya18b.jpg"
         }
       ],
       "film_tmdb_id": 270302,
@@ -3734,7 +3740,7 @@
         {
           "name": "Radu Jude",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 588822,
           "profile_path": null
         }
       ],
@@ -3761,8 +3767,8 @@
         {
           "name": "Małgorzata Szumowska",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 932317,
+          "profile_path": "/xFLkJJqeoqeyQfIeQDzLwCFJfwe.jpg"
         }
       ],
       "film_tmdb_id": 1468107,
@@ -3788,7 +3794,7 @@
         {
           "name": "Tom Courtenay",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 14011,
           "profile_path": null
         }
       ],
@@ -3815,7 +3821,7 @@
         {
           "name": "Charlotte Rampling",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 44079,
           "profile_path": null
         }
       ],
@@ -3842,8 +3848,8 @@
         {
           "name": "Patricio Guzmán",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 566294,
+          "profile_path": "/lyb4xwhH3wllasIOsNIBQbvCQkD.jpg"
         }
       ],
       "film_tmdb_id": 319994,
@@ -3869,8 +3875,8 @@
         {
           "name": "Sturla Brandth Grøvlen",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1425112,
+          "profile_path": "/zDNyXGsmuW9jPEX3EqraUxPiBbC.jpg"
         }
       ],
       "film_tmdb_id": 320007,
@@ -3896,13 +3902,13 @@
         {
           "name": "Sergey Mikhalchuk",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 30401,
+          "profile_path": "/64OR9WMV8OdJb0TTmQx5aaJOTme.jpg"
         },
         {
           "name": "Evgeniy Privin",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1386454,
           "profile_path": null
         }
       ],
@@ -3929,8 +3935,8 @@
         {
           "name": "Jayro Bustamante",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1416379,
+          "profile_path": "/Bix4OwfvtFLIrq3IKA5eyirojm.jpg"
         }
       ],
       "film_tmdb_id": 320001,
@@ -3956,7 +3962,7 @@
         {
           "name": "Gabriel Ripstein",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1223306,
           "profile_path": null
         }
       ],
@@ -3983,8 +3989,8 @@
         {
           "name": "Gianfranco Rosi",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 224452,
+          "profile_path": "/m3ozAgDdoUwm7cyKidPK4ctvzMp.jpg"
         }
       ],
       "film_tmdb_id": 377151,
@@ -4010,8 +4016,8 @@
         {
           "name": "Danis Tanović",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 20028,
+          "profile_path": "/76GowczFt5uHd9q80KH1BqYM3OY.jpg"
         }
       ],
       "film_tmdb_id": 377156,
@@ -4037,8 +4043,8 @@
         {
           "name": "Mia Hansen-Løve",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 222686,
+          "profile_path": "/dRT40hNVUdWwjyIWK1GUQ7vTkMB.jpg"
         }
       ],
       "film_tmdb_id": 374465,
@@ -4064,7 +4070,7 @@
         {
           "name": "Majd Mastoura",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1576595,
           "profile_path": null
         }
       ],
@@ -4091,7 +4097,7 @@
         {
           "name": "Trine Dyrholm",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 4460,
           "profile_path": null
         }
       ],
@@ -4118,8 +4124,8 @@
         {
           "name": "Mark Lee Ping Bin",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 232804,
+          "profile_path": "/tQe1n1u5Lcx4oLpOt55yVylOdju.jpg"
         }
       ],
       "film_tmdb_id": 378696,
@@ -4145,8 +4151,8 @@
         {
           "name": "Lav Diaz",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1051381,
+          "profile_path": "/jGWRQrpCoqSlxNYBbzRArhStQRK.jpg"
         }
       ],
       "film_tmdb_id": 377153,
@@ -4172,8 +4178,8 @@
         {
           "name": "Mohamed Ben Attia",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1566818,
+          "profile_path": "/6Pdf9SE1FIMkZaqvV3TRNk7Aa56.jpg"
         }
       ],
       "film_tmdb_id": 378697,
@@ -4199,8 +4205,8 @@
         {
           "name": "Ildikó Enyedi",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1059880,
+          "profile_path": "/1kU6MLhnizfBJuTj4gfz03euz2k.jpg"
         }
       ],
       "film_tmdb_id": 436343,
@@ -4226,8 +4232,8 @@
         {
           "name": "Alain Gomis",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 235932,
+          "profile_path": "/uYo7XGRntbPBkWvUAeE4izy0xOQ.jpg"
         }
       ],
       "film_tmdb_id": 436340,
@@ -4253,8 +4259,8 @@
         {
           "name": "Aki Kaurismäki",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 16767,
+          "profile_path": "/t0pdsYfLts7p01OBN1P9UHp1Z0l.jpg"
         }
       ],
       "film_tmdb_id": 429199,
@@ -4280,7 +4286,7 @@
         {
           "name": "Georg Friedrich",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 40526,
           "profile_path": null
         }
       ],
@@ -4307,7 +4313,7 @@
         {
           "name": "Kim Min-hee",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3248912,
           "profile_path": null
         }
       ],
@@ -4334,8 +4340,8 @@
         {
           "name": "Sebastián Lelio",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1142171,
+          "profile_path": "/uzYhbqxO8BGkzBl4g5xHUZbaD7V.jpg"
         }
       ],
       "film_tmdb_id": 429191,
@@ -4361,8 +4367,8 @@
         {
           "name": "Dana Bunescu",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 20700,
+          "profile_path": "/3YsuCeMAWMPnA5bUGaTLwxEdlo6.jpg"
         }
       ],
       "film_tmdb_id": 429732,
@@ -4388,8 +4394,8 @@
         {
           "name": "Agnieszka Holland",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1128,
+          "profile_path": "/rfM2l3Z1Vm3ASuiEC50Zpf37jLj.jpg"
         }
       ],
       "film_tmdb_id": 432799,
@@ -4415,8 +4421,8 @@
         {
           "name": "Carla Simón",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1748697,
+          "profile_path": "/ohNupdUgeQ0XeqOxssNLHxD11Nm.jpg"
         }
       ],
       "film_tmdb_id": 438634,
@@ -4442,8 +4448,8 @@
         {
           "name": "Adina Pintilie",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1961679,
+          "profile_path": "/nvTZ66vae8fx0nynBPTBOThEcur.jpg"
         }
       ],
       "film_tmdb_id": 499155,
@@ -4469,8 +4475,8 @@
         {
           "name": "Małgorzata Szumowska",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 932317,
+          "profile_path": "/xFLkJJqeoqeyQfIeQDzLwCFJfwe.jpg"
         }
       ],
       "film_tmdb_id": 444400,
@@ -4496,7 +4502,7 @@
         {
           "name": "Wes Anderson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 5655,
           "profile_path": null
         }
       ],
@@ -4523,7 +4529,7 @@
         {
           "name": "Anthony Bajon",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1660839,
           "profile_path": null
         }
       ],
@@ -4550,7 +4556,7 @@
         {
           "name": "Ana Brun",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1961671,
           "profile_path": null
         }
       ],
@@ -4577,8 +4583,8 @@
         {
           "name": "Alonso Ruizpalacios",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1305360,
+          "profile_path": "/aCBWcK4P3yCmovYUVZ9Pcl8RhUP.jpg"
         }
       ],
       "film_tmdb_id": 128133,
@@ -4604,7 +4610,7 @@
         {
           "name": "Elena Okopnaya",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 2065774,
           "profile_path": null
         }
       ],
@@ -4631,8 +4637,8 @@
         {
           "name": "Marcelo Martinessi",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1623016,
+          "profile_path": "/ejf8m5Y2HJ8WJ8uriqCt9OwkLxy.jpg"
         }
       ],
       "film_tmdb_id": 499152,
@@ -4658,8 +4664,8 @@
         {
           "name": "Adina Pintilie",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1961679,
+          "profile_path": "/nvTZ66vae8fx0nynBPTBOThEcur.jpg"
         }
       ],
       "film_tmdb_id": 499155,
@@ -4685,8 +4691,8 @@
         {
           "name": "Nadav Lapid",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1011135,
+          "profile_path": "/w2d3Wty19GGOEhN7CqlSdvLQxIq.jpg"
         }
       ],
       "film_tmdb_id": 501590,
@@ -4712,8 +4718,8 @@
         {
           "name": "François Ozon",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 4387,
+          "profile_path": "/gjXDLWWMlypNp2R4ALMhR9JMf18.jpg"
         }
       ],
       "film_tmdb_id": 509364,
@@ -4739,7 +4745,7 @@
         {
           "name": "Angela Schanelec",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 40485,
           "profile_path": null
         }
       ],
@@ -4766,7 +4772,7 @@
         {
           "name": "Wang Jingchun",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1288449,
           "profile_path": null
         }
       ],
@@ -4793,7 +4799,7 @@
         {
           "name": "Yong Mei",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 572086,
           "profile_path": null
         }
       ],
@@ -4820,14 +4826,14 @@
         {
           "name": "Claudio Giovannesi",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 128077,
+          "profile_path": "/arRuqpNGz70xWyFwG8Vp3awXtBr.jpg"
         },
         {
           "name": "Roberto Saviano",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 72766,
+          "profile_path": "/iwNkvWovNRKxHNYR8RxlUskQutH.jpg"
         }
       ],
       "film_tmdb_id": 574436,
@@ -4853,7 +4859,7 @@
         {
           "name": "Rasmus Videbæk",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 18830,
           "profile_path": null
         }
       ],
@@ -4880,8 +4886,8 @@
         {
           "name": "Nora Fingscheidt",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1304847,
+          "profile_path": "/wjf96BGhggmdxiZVxOVJzWWVoq0.jpg"
         }
       ],
       "film_tmdb_id": 567410,
@@ -4907,8 +4913,8 @@
         {
           "name": "Mohammad Rasoulof",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 935123,
+          "profile_path": "/6cjSAHG0cjy3wVgW4Wr7Qz1imF3.jpg"
         }
       ],
       "film_tmdb_id": 667935,
@@ -4934,8 +4940,8 @@
         {
           "name": "Eliza Hittman",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1134669,
+          "profile_path": "/Wy3d1rQKZVAgQS9llQ1tBeHYlY.jpg"
         }
       ],
       "film_tmdb_id": 595671,
@@ -4961,7 +4967,7 @@
         {
           "name": "Hong Sang-soo",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 150975,
           "profile_path": null
         }
       ],
@@ -4988,7 +4994,7 @@
         {
           "name": "Elio Germano",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 59269,
           "profile_path": null
         }
       ],
@@ -5015,7 +5021,7 @@
         {
           "name": "Paula Beer",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 894116,
           "profile_path": null
         }
       ],
@@ -5033,17 +5039,23 @@
       "notes": null
     },
     {
-      "id": "berlin.silver_bear_best_screenplay.2020.damiano_and_fabio_d_innocenzo_unresolved",
+      "id": "berlin.silver_bear_best_screenplay.2020.damiano_unresolved",
       "ceremony_id": "berlin.2020",
       "category_id": "berlin.silver_bear_best_screenplay",
       "year": 2020,
       "result": "won",
       "recipients": [
         {
-          "name": "Damiano and Fabio D'Innocenzo",
+          "name": "Damiano",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3756999,
           "profile_path": null
+        },
+        {
+          "name": "Fabio D'Innocenzo",
+          "role": null,
+          "tmdb_person_id": 1664305,
+          "profile_path": "/3d6jE84EXyrNOlJ7fM2SpthvVG7.jpg"
         }
       ],
       "film_tmdb_id": 614292,
@@ -5069,8 +5081,8 @@
         {
           "name": "Jürgen Jürges",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 5639,
+          "profile_path": "/qEP9BnRFqCe5t3oo1em7hjUGhNb.jpg"
         }
       ],
       "film_tmdb_id": 667995,
@@ -5096,8 +5108,8 @@
         {
           "name": "Camilo Restrepo",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1585802,
+          "profile_path": "/ieDNtaSimRTZhtV2xtPZi4VB7IB.jpg"
         }
       ],
       "film_tmdb_id": 664572,
@@ -5123,7 +5135,7 @@
         {
           "name": "Radu Jude",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 588822,
           "profile_path": null
         }
       ],
@@ -5150,7 +5162,7 @@
         {
           "name": "Ryusuke Hamaguchi",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1487492,
           "profile_path": null
         }
       ],
@@ -5177,8 +5189,8 @@
         {
           "name": "Dénes Nagy",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1521847,
+          "profile_path": "/fTGIUt1Xq8CWBNIjeRwonCktvKV.jpg"
         }
       ],
       "film_tmdb_id": 669661,
@@ -5204,7 +5216,7 @@
         {
           "name": "Maren Eggert",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 7827,
           "profile_path": null
         }
       ],
@@ -5231,8 +5243,8 @@
         {
           "name": "Lilla Kizlinger",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 2973366,
+          "profile_path": "/gA1wC5Sjg2piRxb481MYy6HFyvB.jpg"
         }
       ],
       "film_tmdb_id": 795818,
@@ -5258,7 +5270,7 @@
         {
           "name": "Hong Sang-soo",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 150975,
           "profile_path": null
         }
       ],
@@ -5285,8 +5297,8 @@
         {
           "name": "Yibrán Asuad",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 965309,
+          "profile_path": "/yEVbwVjkazCoscmTTy3fwmv1tBM.jpg"
         }
       ],
       "film_tmdb_id": 701524,
@@ -5312,8 +5324,8 @@
         {
           "name": "Carla Simón",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1748697,
+          "profile_path": "/ohNupdUgeQ0XeqOxssNLHxD11Nm.jpg"
         }
       ],
       "film_tmdb_id": 804251,
@@ -5339,7 +5351,7 @@
         {
           "name": "Hong Sang-soo",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 150975,
           "profile_path": null
         }
       ],
@@ -5366,7 +5378,7 @@
         {
           "name": "Claire Denis",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 9888,
           "profile_path": null
         }
       ],
@@ -5393,7 +5405,7 @@
         {
           "name": "Meltem Kaptan",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1962697,
           "profile_path": null
         }
       ],
@@ -5420,8 +5432,8 @@
         {
           "name": "Laura Basuki",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1433802,
+          "profile_path": "/nEikcfzmA2swQPX6SAFttQXLXUY.jpg"
         }
       ],
       "film_tmdb_id": 859933,
@@ -5447,7 +5459,7 @@
         {
           "name": "Laila Stieler",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 13734,
           "profile_path": null
         }
       ],
@@ -5474,8 +5486,8 @@
         {
           "name": "Rithy Panh",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 129896,
+          "profile_path": "/fMfHlfQMTGbg17DfDR0WSyg9xOj.jpg"
         }
       ],
       "film_tmdb_id": 1265627,
@@ -5501,8 +5513,8 @@
         {
           "name": "Kurdwin Ayub",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1685215,
+          "profile_path": "/9nLJNodRdI72tNPV4xIEPw67ocv.jpg"
         }
       ],
       "film_tmdb_id": 928735,
@@ -5528,8 +5540,8 @@
         {
           "name": "Nicolas Philibert",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 41788,
+          "profile_path": "/2ixbuJs5f8gDghocTTFqqtfqbE.jpg"
         }
       ],
       "film_tmdb_id": 1070449,
@@ -5555,7 +5567,7 @@
         {
           "name": "Christian Petzold",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3953898,
           "profile_path": null
         }
       ],
@@ -5582,7 +5594,7 @@
         {
           "name": "Philippe Garrel",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 56207,
           "profile_path": null
         }
       ],
@@ -5609,8 +5621,8 @@
         {
           "name": "Sofía Otero",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 3925017,
+          "profile_path": "/4B2F3TwZlpDnyBPWkEk2kv1zj12.jpg"
         }
       ],
       "film_tmdb_id": 1053600,
@@ -5636,7 +5648,7 @@
         {
           "name": "Thea Ehre",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3846249,
           "profile_path": null
         }
       ],
@@ -5663,7 +5675,7 @@
         {
           "name": "Angela Schanelec",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 40485,
           "profile_path": null
         }
       ],
@@ -5690,8 +5702,8 @@
         {
           "name": "Hélène Louvart",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 56289,
+          "profile_path": "/aTcNiyNvU7j3xGBBsFdKm3OldYa.jpg"
         }
       ],
       "film_tmdb_id": 922830,
@@ -5717,13 +5729,13 @@
         {
           "name": "Leandro Koch",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 2774251,
           "profile_path": null
         },
         {
           "name": "Paloma Schachmann",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 3887334,
           "profile_path": null
         }
       ],
@@ -5750,8 +5762,8 @@
         {
           "name": "Mati Diop",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 136168,
+          "profile_path": "/3p8euc4PO9Yo9RR0PjaADsN9R6V.jpg"
         }
       ],
       "film_tmdb_id": 1101256,
@@ -5777,7 +5789,7 @@
         {
           "name": "Hong Sang-soo",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 150975,
           "profile_path": null
         }
       ],
@@ -5831,7 +5843,7 @@
         {
           "name": "Sebastian Stan",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 60898,
           "profile_path": null
         }
       ],
@@ -5858,7 +5870,7 @@
         {
           "name": "Emily Watson",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1639,
           "profile_path": null
         }
       ],
@@ -5885,8 +5897,8 @@
         {
           "name": "Matthias Glasner",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 61750,
+          "profile_path": "/qhl4gGRC8h6jnkP32BaBSaqvX7n.jpg"
         }
       ],
       "film_tmdb_id": 1232781,
@@ -5912,7 +5924,7 @@
         {
           "name": "Martin Gschlacht",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 28620,
           "profile_path": null
         }
       ],
@@ -5939,8 +5951,8 @@
         {
           "name": "Phạm Ngọc Lân",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1627700,
+          "profile_path": "/ynrzGJMJkqR7FcLljQxpMfFDAIF.jpg"
         }
       ],
       "film_tmdb_id": 643776,
@@ -5966,8 +5978,8 @@
         {
           "name": "Dag Johan Haugerud",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1097147,
+          "profile_path": "/zOX6yQF2VLyeXZCPh6rhvpMdDPx.jpg"
         }
       ],
       "film_tmdb_id": 1228682,
@@ -5993,8 +6005,8 @@
         {
           "name": "Gabriel Mascaro",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 1135710,
+          "profile_path": "/1YN0DzUqPSG6yJIUUEy7t0ol9ch.jpg"
         }
       ],
       "film_tmdb_id": 1172265,
@@ -6020,8 +6032,8 @@
         {
           "name": "Huo Meng",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 2305455,
+          "profile_path": "/ianwSfMuGwf1ciiDZYSSz4YkcUn.jpg"
         }
       ],
       "film_tmdb_id": 1421153,
@@ -6047,7 +6059,7 @@
         {
           "name": "Rose Byrne",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 9827,
           "profile_path": null
         }
       ],
@@ -6074,7 +6086,7 @@
         {
           "name": "Andrew Scott",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 125660,
           "profile_path": null
         }
       ],
@@ -6101,7 +6113,7 @@
         {
           "name": "Radu Jude",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 588822,
           "profile_path": null
         }
       ],
@@ -6128,8 +6140,8 @@
         {
           "name": "Lucile Hadžihalilović",
           "role": null,
-          "tmdb_person_id": null,
-          "profile_path": null
+          "tmdb_person_id": 17627,
+          "profile_path": "/gjtaiZBCY88wH6RuX51aboQeJ2Q.jpg"
         }
       ],
       "film_tmdb_id": 1143440,
@@ -6155,7 +6167,7 @@
         {
           "name": "Ernesto Martínez Bucio",
           "role": null,
-          "tmdb_person_id": null,
+          "tmdb_person_id": 1303712,
           "profile_path": null
         }
       ],

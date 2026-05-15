@@ -1,8 +1,8 @@
 year,category_id,result,recipients_json,film_title,film_tmdb_id,co_winner,verified_status,notes,scraped_at
-2000,berlin.golden_bear,won,"[{""name"": ""Paul Thomas Anderson"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Magnolia,334,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.silver_bear_grand_jury,won,"[{""name"": ""Zhang Yimou"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Road Home,12276,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.silver_bear_best_director,won,"[{""name"": ""Miloš Forman"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Man on the Moon,1850,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.silver_bear_best_actor,won,"[{""name"": ""Denzel Washington"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Hurricane,10400,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.silver_bear_best_actress,won,"[{""name"": ""Bibiana Beglau"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Legend of Rita,10499,true,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.silver_bear_best_actress,won,"[{""name"": ""Nadja Uhl"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",The Legend of Rita,10499,true,auto_verified,,2026-05-04T09:21:39.932027+00:00
-2000,berlin.alfred_bauer_prize,won,"[{""name"": ""Akira Ogata"", ""role"": null, ""tmdb_person_id"": null, ""profile_path"": null}]",Boy's Choir,254050,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.golden_bear,won,"[{""name"": ""Paul Thomas Anderson"", ""role"": null, ""tmdb_person_id"": 4762, ""profile_path"": null}]",Magnolia,334,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.silver_bear_grand_jury,won,"[{""name"": ""Zhang Yimou"", ""role"": null, ""tmdb_person_id"": 607, ""profile_path"": ""/uU5vECl94jDQYjiRk4eOpVRMEi9.jpg""}]",The Road Home,12276,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.silver_bear_best_director,won,"[{""name"": ""Miloš Forman"", ""role"": null, ""tmdb_person_id"": 3974, ""profile_path"": null}]",Man on the Moon,1850,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.silver_bear_best_actor,won,"[{""name"": ""Denzel Washington"", ""role"": null, ""tmdb_person_id"": 5292, ""profile_path"": null}]",The Hurricane,10400,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.silver_bear_best_actress,won,"[{""name"": ""Bibiana Beglau"", ""role"": null, ""tmdb_person_id"": 32421, ""profile_path"": null}]",The Legend of Rita,10499,true,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.silver_bear_best_actress,won,"[{""name"": ""Nadja Uhl"", ""role"": null, ""tmdb_person_id"": 5511, ""profile_path"": ""/s8xKoionb7eginXbxG0a1HU9KFN.jpg""}]",The Legend of Rita,10499,true,auto_verified,,2026-05-04T09:21:39.932027+00:00
+2000,berlin.alfred_bauer_prize,won,"[{""name"": ""Akira Ogata"", ""role"": null, ""tmdb_person_id"": 5055769, ""profile_path"": null}]",Boy's Choir,254050,false,auto_verified,,2026-05-04T09:21:39.932027+00:00
