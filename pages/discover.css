@@ -19,7 +19,7 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  background: var(--deep-void);
+  background: var(--space-black);
   color: var(--film-white);
   font-family: var(--font-body);
   font-size: 16px;
@@ -35,29 +35,13 @@ html, body {
 .background-layer {
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 30%, rgba(26, 20, 50, 0.4) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 70%, rgba(15, 23, 41, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at center, var(--cosmic-blue) 0%, var(--deep-void) 40%, var(--deep-void) 100%);
+  background: var(--space-black);
   z-index: -3;
 }
 
-/* Animated Stars */
+/* Animated Stars — disabled on discover (page bg is plain black) */
 .background-layer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(2px 2px at 60% 70%, white, transparent),
-    radial-gradient(1px 1px at 50% 50%, white, transparent),
-    radial-gradient(1px 1px at 80% 10%, white, transparent),
-    radial-gradient(2px 2px at 90% 60%, white, transparent),
-    radial-gradient(1px 1px at 33% 85%, white, transparent),
-    radial-gradient(2px 2px at 15% 75%, white, transparent);
-  background-size: 300% 300%;
-  background-position: 0% 0%;
-  animation: stars-drift 120s linear infinite;
-  opacity: 0.6;
+  display: none;
 }
 
 @keyframes stars-drift {
@@ -82,11 +66,11 @@ html, body {
   50% { opacity: 0.05; }
 }
 
-/* Cinematic Vignette */
+/* Cinematic Vignette — disabled on discover (page bg is plain black) */
 .vignette {
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
+  background: transparent;
   pointer-events: none;
   z-index: 99;
 }
@@ -382,14 +366,22 @@ html, body {
 
 .orbit-card {
   flex: 1;
-  background: rgba(10, 14, 26, 0.7);
-  backdrop-filter: var(--blur-glass);
+  background: var(--deep-void);
   border: 1px solid rgba(0, 217, 255, 0.15);
   border-radius: var(--radius-card);
   padding: 32px;
   box-shadow: var(--shadow-dramatic);
   position: relative;
   overflow: hidden;
+  /* Fixed-height layout — added 2026-05-16. Bumped from 1010 → 1162
+     (15% deeper, per request). Now comfortably fits the both-
+     collapsed 35-tile worst case (~1047px content) with ~115px
+     headroom. Sidebar uses align-self: stretch so it auto-grows to
+     match. Mobile breakpoint reverts to natural flow. */
+  display: flex;
+  flex-direction: column;
+  min-height: 1162px;
+  max-height: 1162px;
 }
 
 .orbit-card::before {
@@ -417,10 +409,10 @@ html, body {
 }
 
 .orbit-card-subtitle {
-  font-size: 15px;
-  color: var(--muted-silver);
+  font-size: 17px;
+  color: var(--film-white);
   margin: 0;
-  font-weight: 300;
+  font-weight: 700;
 }
 
 /* ============================================
@@ -634,8 +626,7 @@ html, body {
 }
 
 .section-card {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(10px);
+  background: var(--cosmic-blue);
   border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 20px;
@@ -933,22 +924,8 @@ html, body {
   font-weight: 300;
 }
 
-.more-filters-close {
-  background: none;
-  border: none;
-  color: var(--muted-silver);
-  font-size: 22px;
-  cursor: pointer;
-  padding: 4px 8px;
-  line-height: 1;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.more-filters-close:hover {
-  color: var(--film-white);
-  background: rgba(255, 255, 255, 0.08);
-}
+/* .more-filters-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). Header is flex-positioned. */
 
 /* 2-column grid of filter tiles */
 .more-filters-grid {
@@ -1129,23 +1106,35 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 320px;
+  /* 2026-05-16: widened from 340 → 380 so filter-chip labels have
+     ~40px more horizontal room and longer text (e.g. "theme: Coming
+     of age", "Region: United Kingdom") doesn't truncate with
+     ellipsis. */
+  width: 380px;
   flex-shrink: 0;
   position: sticky;
   top: 40px;
+  align-self: stretch;
   animation: panel-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
 }
 
 .orbit-panel {
   width: 100%;
-  background: rgba(10, 14, 26, 0.8);
-  backdrop-filter: var(--blur-glass);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--deep-void);
   border: 1px solid rgba(0, 217, 255, 0.15);
   border-radius: var(--radius-card);
   padding: 24px;
   box-shadow: var(--shadow-dramatic);
-  max-height: calc(100vh - 340px);
   overflow-y: auto;
+}
+
+#orbitFilters {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 /* ============================================
@@ -1329,8 +1318,8 @@ html, body {
 }
 
 .filter-chip {
-  background: rgba(0, 217, 255, 0.1);
-  border: 1px solid rgba(0, 217, 255, 0.3);
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
   border-radius: 10px;
   padding: 12px 14px;
   display: flex;
@@ -1339,6 +1328,7 @@ html, body {
   gap: 10px;
   transition: var(--transition-smooth);
   animation: chip-appear 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+  animation-delay: calc(var(--chip-index, 0) * 0.06s);
 }
 
 @keyframes chip-appear {
@@ -1372,8 +1362,16 @@ html, body {
 }
 
 .filter-chip-label {
-  font-size: 14px;
+  /* 2026-05-16: matched to .discover-preset-name (the white text in
+     the Quick Search tiles) for visual consistency between the tile
+     names and the sidebar chip labels. */
+  font-family: var(--font-display);
+  font-size: 14.4px;
+  font-weight: 700;
   color: var(--film-white);
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1502,21 +1500,8 @@ html, body {
   letter-spacing: 1px;
 }
 
-.focus-close {
-  background: transparent;
-  border: none;
-  color: var(--muted-silver);
-  font-size: 28px;
-  cursor: pointer;
-  padding: 4px 10px;
-  transition: var(--transition-smooth);
-  line-height: 1;
-}
-
-.focus-close:hover {
-  color: var(--danger-red);
-  transform: rotate(90deg);
-}
+/* .focus-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). Header is flex-positioned. */
 
 .focus-card-content {
   padding: 28px;
@@ -1570,8 +1555,16 @@ html, body {
   color: var(--accent-cyan);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 12px;
+  margin: 16px 0 12px;
   display: block;
+}
+
+/* First label in any panel needs no top gap */
+.oft-panel-body > .focus-section-label:first-child,
+.people-tab-content > .focus-section-label:first-child,
+.oft-setting-col > .focus-section-label:first-child,
+.oft-source-col > .focus-section-label:first-child {
+  margin-top: 0;
 }
 
 .chip-group {
@@ -2782,5 +2775,2847 @@ html, body {
 .icon-btn-orbit:hover .icon-stats .bar-1 { height: 8px; }
 .icon-btn-orbit:hover .icon-stats .bar-2 { height: 14px; }
 .icon-btn-orbit:hover .icon-stats .bar-3 { height: 11px; }
+
+/* ============================================================
+   BUILD YOUR ORBIT REDESIGN — Added May 1, 2026
+   Nav bar, streaming bar, Quick Starts presets, Watch Providers
+   primary card variant, and People panel filmmaker tabs.
+
+   Token gaps flagged for a future variables.css PR (do not touch
+   variables.css now, per scope of this change):
+     - --accent-cyan-rgb (using --accent-rgb instead — same value)
+     - --success-green-rgb (using literal 16, 185, 129 below)
+     - --white-overlay-* (using literal rgba(255,255,255,0.0X) below)
+   ============================================================ */
+
+/* MOVIE MOSAIC — mirrors landing-page hero-mosaic ---------------
+   Sits exactly at the bottom edge of the streaming bar. The actual
+   pixel offset is set at runtime by initMosaicAnchor() in
+   discover.js so it always lines up with the second horizontal
+   divider regardless of nav/bar wrapping. */
+.discover-mosaic-region {
+  position: absolute;
+  top: var(--mosaic-top, 75px);
+  left: 0;
+  right: 0;
+  height: 70vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Real alpha fade — bottom of the mosaic dissolves into whatever
+     is rendered below (the page background-layer + body), so there
+     is no color seam at the boundary. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 28%,
+    rgba(0, 0, 0, 0.85) 50%,
+    rgba(0, 0, 0, 0.45) 75%,
+    rgba(0, 0, 0, 0.15) 92%,
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 28%,
+    rgba(0, 0, 0, 0.85) 50%,
+    rgba(0, 0, 0, 0.45) 75%,
+    rgba(0, 0, 0, 0.15) 92%,
+    transparent 100%
+  );
+}
+.discover-mosaic-region .hero-mosaic {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* Portrait film-tile grid: 12 cols × 2 rows. */
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
+  padding: 4px;
+  opacity: 0.45;
+  z-index: 0;
+  pointer-events: none;
+}
+.discover-mosaic-region .mosaic-cell {
+  border-radius: 3px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.4px) saturate(0.65) brightness(0.55);
+  transition: opacity 0.8s ease;
+}
+/* Brighter fallback cell colors so the mosaic is visible against the
+   pure-black page background even before TMDB posters finish loading. */
+.discover-mosaic-region .mosaic-cell:nth-child(6n+1) { background-color: #1f2a44; }
+.discover-mosaic-region .mosaic-cell:nth-child(6n+2) { background-color: #2a1f44; }
+.discover-mosaic-region .mosaic-cell:nth-child(6n+3) { background-color: #1e293b; }
+.discover-mosaic-region .mosaic-cell:nth-child(6n+4) { background-color: #44241f; }
+.discover-mosaic-region .mosaic-cell:nth-child(6n+5) { background-color: #1f4434; }
+.discover-mosaic-region .mosaic-cell:nth-child(6n+6) { background-color: #2c2c44; }
+.discover-mosaic-region .mosaic-vignette-radial {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 30%, transparent 18%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.85) 100%);
+}
+.discover-mosaic-region .mosaic-vignette-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Bottom fade is handled by mask-image on the region itself — keep
+     only a subtle left/right edge fade so the mosaic doesn't run hard
+     into the screen edges. */
+  background:
+    linear-gradient(to right,
+      rgba(0,0,0,0.6) 0%,
+      transparent 8%,
+      transparent 92%,
+      rgba(0,0,0,0.6) 100%);
+}
+
+/* SIDEBAR ACTIONS (Launch / Reset, inside Your Orbit panel,
+   directly below the cyan header divider line) -------------- */
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.sidebar-actions .launch-orbit-btn,
+.sidebar-actions .reset-orbit-btn {
+  grid-column: auto;
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 20px;
+  border-radius: 0;
+}
+
+/* Reset button now lives at the bottom of the orbit panel actions
+   list, alongside Clear all. Sits below the chips, only visible when
+   filters are active or a session is restored. */
+.orbit-panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.orbit-panel-actions .reset-orbit-btn {
+  grid-column: auto;
+  width: 100%;
+  min-height: 0;
+  padding: 10px;
+  border-radius: 0;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ghost-gray);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: none;
+}
+.orbit-panel-actions .reset-orbit-btn:hover {
+  color: var(--film-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* PAGE H1 TWO-TONE --------------------------------------------- */
+.orbit-card .orbit-card-title {
+  font-size: clamp(2.25rem, 6.5vw, 5.25rem);
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin: 0 0 14px 0;
+}
+.orbit-title-cyan,
+.orbit-title-gold {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.orbit-title-cyan {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 24px rgba(var(--accent-rgb), 0.35);
+}
+.orbit-title-gold {
+  color: var(--accent-gold);
+  text-shadow: 0 0 24px rgba(var(--accent-gold-rgb), 0.35);
+}
+@media (max-width: 650px) {
+  .orbit-card .orbit-card-title { font-size: clamp(1.6rem, 8vw, 2.6rem); }
+}
+
+/* DISCOVER NAV ------------------------------------------------- */
+.discover-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--deep-void);
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.12);
+  padding: 12px 24px;
+  position: relative;
+  z-index: 50;
+}
+.discover-nav-back {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.discover-nav-back:hover { opacity: 0.7; }
+.discover-nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.discover-nav-link {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.discover-nav-link:hover { opacity: 0.7; }
+.discover-nav-link--active { opacity: 0.7; cursor: default; }
+
+/* STREAMING BAR ------------------------------------------------ */
+.discover-stream-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(var(--accent-rgb), 0.04);
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.15);
+  padding: 10px 24px;
+  position: relative;
+  z-index: 49;
+}
+.discover-stream-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+.discover-stream-bar--empty .discover-stream-label { color: var(--ghost-gray); }
+.discover-stream-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+.discover-stream-pill {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  color: var(--accent-cyan);
+  font-family: var(--font-body);
+}
+.discover-stream-none {
+  font-size: 11px;
+  color: var(--ghost-gray);
+  font-style: italic;
+}
+.discover-stream-link {
+  font-size: 10px;
+  color: var(--muted-silver);
+  margin-left: auto;
+  white-space: nowrap;
+  text-decoration: none;
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  transition: color 0.15s ease;
+}
+.discover-stream-link:hover { color: var(--film-white); }
+
+/* QUICK STARTS PRESETS ---------------------------------------- */
+.discover-presets-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.discover-presets-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-display);
+  text-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+}
+.discover-presets-shuffle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  font-family: var(--font-display);
+  background: none;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 4px 12px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.discover-presets-shuffle:hover {
+  color: var(--accent-gold);
+  border-color: rgba(var(--accent-gold-rgb), 0.5);
+  background: rgba(var(--accent-gold-rgb), 0.06);
+}
+
+.discover-presets {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 22px;
+}
+/* ============================================================
+   HEADLINE CAROUSEL — Added 2026-05-16
+   Three rotating messages inside .orbit-header-center. Visit
+   counter (sessionStorage `orbit_discovery_visits`) picks which
+   message shows on page load; dots let the user override.
+   Each .headline-message keeps the existing orbit-card-title +
+   orbit-card-subtitle markup so the cyan/gold split styling
+   carries through unchanged.
+   ============================================================ */
+.headline-carousel {
+  position: relative;
+  /* Grid-stack all 3 messages in the same cell so the carousel
+     sizes to the tallest message and stays a consistent height
+     across rotations. Without this, message 3 ("?") was shrinking
+     the carousel mid-rotation.
+     2026-05-26: row 1 switched from `auto` → `1fr` so it absorbs
+     any extra carousel height; combined with min-height + vertical
+     padding this fills the headline section instead of leaving a
+     ~94px dead band below the canvas. Messages use `align-self:
+     center` so shorter slides (1 & 2) don't sit at the top of the
+     taller cell. */
+  display: grid;
+  /* minmax(0, 1fr) — without the 0 min, the column resolves to
+     minmax(auto, 1fr) and inflates to the wrapped/nowrap headline's
+     intrinsic width, pushing slides past the carousel edge. */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  min-height: 360px;
+  padding: 24px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.headline-carousel .headline-message {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  max-width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease-in-out;
+}
+.headline-carousel .headline-message.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.headline-carousel .carousel-dots {
+  grid-column: 1;
+  grid-row: 2;
+  /* Drop the dots down so they sit on the same horizontal line as
+     the "QUICK SEARCHES" label below. Uses transform so the grid
+     row's own size stays the same — no reflow, sections below
+     don't move. Centered dots vs. left-aligned label means they
+     sit in the empty middle of the QS row. */
+  transform: translateY(60px);
+}
+/* Scoped clamp cap — lower than the global .orbit-card .orbit-card-title
+   clamp so worst-case wrapped headlines (e.g. both spans on two lines)
+   still fit inside the carousel's 360px canvas. Keeps the Quick Search
+   and Search Tab sections in their current positions. Scope avoids
+   touching .orbit-card-title on tv.html / both.html ("Build your orbit"). */
+.headline-carousel .orbit-card-title {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+}
+@media (max-width: 650px) {
+  .headline-carousel .orbit-card-title {
+    font-size: clamp(1.6rem, 8vw, 2.6rem);
+  }
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s, border-color 0.2s;
+}
+.carousel-dot.active {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+.carousel-dot:hover {
+  transform: scale(1.25);
+  border-color: var(--accent-cyan);
+}
+
+/* ============================================================
+   SLIDE 3 — NAVIGATION PILLS (Added 2026-05-26)
+   Replaces the carousel's third subtitle line with two compact
+   horizontal nav pills (Quick Searches / Randomizer). All rules
+   are scoped under .headline-message-nav so slides 1 & 2 keep
+   their existing subtitle treatment. Surface follows the
+   tokenized landing-tile pattern (glass-bg + blur, accent-tinted
+   border, lift-on-hover).
+   ============================================================ */
+.headline-message-nav .headline-nav-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 18px;
+}
+.headline-message-nav .headline-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  /* Content-sized — no flex-grow, no width:100%. Cap at 300px so a
+     long label can't stretch a pill into a bar; arrow uses
+     margin-left:auto to sit at the pill's true right edge whatever
+     the resulting width. */
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 300px;
+  min-height: 60px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--blur-glass);
+          backdrop-filter: var(--blur-glass);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-out, border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.headline-message-nav .headline-nav-pill--cyan {
+  border-color: rgba(var(--accent-cyan-rgb), 0.3);
+}
+.headline-message-nav .headline-nav-pill--gold {
+  border-color: rgba(var(--accent-gold-rgb), 0.3);
+}
+.headline-message-nav .headline-nav-pill--cyan:hover,
+.headline-message-nav .headline-nav-pill--cyan:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-cyan-rgb), 0.6);
+  box-shadow: 0 8px 24px rgba(var(--accent-cyan-rgb), 0.25);
+  outline: none;
+}
+.headline-message-nav .headline-nav-pill--gold:hover,
+.headline-message-nav .headline-nav-pill--gold:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-gold-rgb), 0.6);
+  box-shadow: 0 8px 24px rgba(var(--accent-gold-rgb), 0.25);
+  outline: none;
+}
+.headline-message-nav .headline-nav-pill__icon {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.headline-message-nav .headline-nav-pill__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 2px;
+  line-height: 1.2;
+}
+.headline-message-nav .headline-nav-pill__label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--film-white);
+  letter-spacing: 0.3px;
+}
+.headline-message-nav .headline-nav-pill__hint {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--muted-silver);
+}
+.headline-message-nav .headline-nav-pill__arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: transform 0.3s ease-out;
+}
+.headline-message-nav .headline-nav-pill--cyan .headline-nav-pill__arrow {
+  color: var(--accent-cyan);
+}
+.headline-message-nav .headline-nav-pill--gold .headline-nav-pill__arrow {
+  color: var(--accent-gold);
+}
+.headline-message-nav .headline-nav-pill:hover .headline-nav-pill__arrow,
+.headline-message-nav .headline-nav-pill:focus-visible .headline-nav-pill__arrow {
+  transform: translateX(4px);
+}
+@media (max-width: 650px) {
+  .headline-message-nav .headline-nav-pills {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .headline-message-nav .headline-nav-pill {
+    /* Stay content-sized, cap a bit wider than desktop so the
+       label + hint line look comfortable on a single-column
+       stack. Never full-bleed — that's what caused viewport
+       overflow at narrow widths. */
+    width: fit-content;
+    max-width: 340px;
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================
+   QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
+   Sits next to Shuffle. Modal markup lives at the end of body
+   (see discover.html). Uses orbit-close.js Black Hole exit
+   (Rule 17). Body scroll lock managed by initShowAllModal IIFE.
+   ============================================================ */
+.discover-presets-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.discover-presets-show-all {
+  /* Mirror .discover-presets-shuffle's visual treatment so the
+     two buttons read as a pair. */
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+  border-radius: 6px;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.discover-presets-show-all:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.1);
+  border-color: var(--accent-cyan);
+}
+.discover-presets-show-all:active {
+  transform: scale(0.96);
+}
+
+.discover-presets-modal[hidden] { display: none; }
+.discover-presets-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.discover-presets-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--deep-void-rgb), 0.82);
+  backdrop-filter: blur(8px);
+}
+.discover-presets-modal-content {
+  position: relative;
+  z-index: 1;
+  background: var(--deep-void);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.35);
+  border-radius: 14px;
+  width: 92%;
+  max-width: 1100px;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+}
+.discover-presets-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(var(--accent-cyan-rgb), 0.18);
+}
+.discover-presets-modal-title {
+  /* 2026-05-16: was 'Cormorant Garamond' serif which clashed with
+     Orbit's identity. Now matches the QUICK SEARCHES label
+     (.discover-presets-label) — Orbitron display font, cyan→gold
+     gradient text, uppercase letter-spaced — scaled up for the modal
+     heading context. */
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+  margin: 0;
+}
+.discover-presets-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--film-white);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.discover-presets-modal-close:hover {
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+}
+.discover-presets-modal-body {
+  overflow-y: auto;
+  padding: 20px 22px 24px;
+  flex: 1;
+}
+.discover-presets-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (max-width: 900px) {
+  .discover-presets-modal-grid { grid-template-columns: repeat(3, 1fr); }
+  .discover-presets-modal-content { width: 96%; max-height: 90vh; }
+}
+@media (max-width: 650px) {
+  .discover-presets-modal-grid { grid-template-columns: repeat(2, 1fr); }
+  .discover-presets-modal-title { font-size: 1.4rem; }
+}
+
+/* ============================================================
+   COLLAPSIBLE SECTIONS — Added 2026-05-16
+   Wraps headline + Quick Searches in .section-container blocks.
+   Each container has a single .section-collapse-toggle (top-right)
+   that toggles .collapsed on the container. When collapsed,
+   any descendant marked .section-collapse-hide is display:none.
+   State persists per-tab via sessionStorage in discover.js.
+   ============================================================ */
+.section-container {
+  position: relative;
+  /* No horizontal padding — the toggle is absolutely positioned into
+     the orbit-card's existing 32px left-padding area (via negative
+     left offset on .section-collapse-toggle), so section content
+     takes the full content-area width with no horizontal sacrifice. */
+  /* 2026-05-16: switched from flex: 1 1 auto to 0 0 auto. Sections
+     keep their natural height now — collapsing one doesn't make
+     siblings grow to absorb the freed space. Empty space falls to
+     the bottom of the card, which means the Filter Tabs section
+     moves UP toward the headline when Quick Searches collapses,
+     instead of being pushed down by a growing headline. */
+  flex: 0 0 auto;
+  min-height: 0;
+}
+.section-container.collapsed {
+  flex: 0 0 auto; /* no growth, no shrink; natural (min-height: 40px) size */
+}
+/* Filter tabs and divider are flex siblings of .section-container,
+   not themselves .section-containers. Tabs grow to fill freed space
+   too, but capped so the panel body doesn't stretch absurdly when
+   both other sections collapse. The divider keeps its natural 1px. */
+.discover-presets-divider {
+  flex: 0 0 auto;
+}
+/* Filter tabs is no longer a direct flex child of .orbit-card
+   (wrapped in .section-container[data-section="filterTabs"] —
+   added 2026-05-16). Cap the wrapper instead of the inner tabs
+   so the section's height matches the tab UI height. */
+.section-container[data-section="filterTabs"] {
+  max-height: 620px;
+  min-height: 0;
+}
+/* Mobile: revert to natural flow so the card isn't forced to 85vh
+   on phones where vertical space is at a premium. */
+@media (max-width: 650px) {
+  .orbit-card {
+    min-height: auto;
+  }
+  .section-container,
+  .orbit-filter-tabs {
+    flex: 0 0 auto;
+    max-height: none;
+  }
+}
+/* When collapsed, hide every direct child except the toggle button.
+   The .section-collapse-hide class is now redundant but left in markup
+   harmless — the wildcard rule supersedes it. */
+.section-container.collapsed > *:not(.section-collapse-toggle) {
+  display: none;
+}
+.section-container.collapsed {
+  /* 40px = toggle (28px at top:8) fits cleanly with 4px breathing room
+     below. Earlier 32px was clipping the toggle 4px past the section's
+     visible bar. */
+  min-height: 40px;
+  /* The bar is clickable to expand (see JS handler) — show it. */
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.section-container.collapsed:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.04);
+}
+/* Label each collapsed bar with its section name so users can identify
+   what the + expands. Pseudo-element so it isn't caught by the
+   "hide all direct children" wildcard above. Styled to match the
+   .discover-presets-label (QUICK SEARCHES) for visual consistency
+   across all three section labels. */
+.section-container.collapsed::after {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.section-container[data-section="headline"].collapsed::after { content: "Headline"; }
+.section-container[data-section="quickSearches"].collapsed::after { content: "Quick Searches"; }
+.section-container[data-section="filterTabs"].collapsed::after { content: "Search Tabs"; }
+/* 2026-05-16: hide the divider when Quick Searches is collapsed so
+   Filter Tabs sits as close to the headline (or to the collapsed QS
+   bar) as possible. Saves ~23px of vertical space. */
+.section-container[data-section="quickSearches"].collapsed + .discover-presets-divider {
+  display: none;
+}
+/* When Quick Searches is collapsed, tighten the headline's bottom
+   margin so the carousel dots sit just above the collapsed QS bar
+   instead of being separated by the default 24px header-row gap.
+   Uses :has() — supported in Chrome 105+, Firefox 121+, Safari 15.4+. */
+.section-container[data-section="headline"]:has(+ .section-container[data-section="quickSearches"].collapsed) .orbit-header-row {
+  margin-bottom: 4px;
+}
+.section-collapse-toggle {
+  position: absolute;
+  top: 8px;
+  /* Negative left so the toggle sits in orbit-card's existing 32px
+     left padding (the card has `padding: 32px` and `overflow: hidden`
+     clips at its outer border edge). Toggle occupies x=4–28 from the
+     card's outer left edge, with a 4px gap to section content. */
+  left: -28px;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  /* Border hidden by default; fades in on :hover (border-color is
+     already in the transition list). 1px transparent border kept
+     so the toggle doesn't shift when the border appears. */
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--accent-cyan);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+  z-index: 2;
+  padding: 0;
+}
+.section-collapse-toggle:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.1);
+  border-color: var(--accent-cyan);
+}
+.section-collapse-toggle:active {
+  transform: scale(0.92);
+}
+.section-collapse-toggle .collapse-icon {
+  display: inline-block;
+  line-height: 1;
+}
+/* Carousel section override — keep the toggle in line with the
+   Quick Searches / Search Tabs toggles below it (left: -28px,
+   inherited), but push it up into the orbit-card's 32px top
+   padding so its top edge sits ~4px under the card frame —
+   mirroring the existing 4px left-edge inset. */
+.section-container[data-section="headline"] .section-collapse-toggle {
+  top: -28px;
+}
+
+.discover-presets-divider {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(var(--accent-rgb), 0.35) 12%,
+    rgba(var(--accent-rgb), 0.35) 88%,
+    transparent 100%
+  );
+  margin: 0 0 22px 0;
+}
+.discover-preset {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 110px;
+  background: var(--nebula-dark);
+  /* TOKEN GAP: no white-overlay token in variables.css */
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  padding: 16px 14px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  font-family: var(--font-body);
+}
+.discover-preset--cyan   { --preset-color: var(--accent-cyan);     --preset-color-rgb: var(--accent-rgb); }
+.discover-preset--gold   { --preset-color: var(--accent-gold);     --preset-color-rgb: var(--accent-gold-rgb); }
+.discover-preset--purple { --preset-color: var(--prestige-purple); --preset-color-rgb: var(--prestige-purple-rgb); }
+.discover-preset--green  { --preset-color: var(--success-green);   --preset-color-rgb: var(--success-green-rgb); }
+.discover-preset--indigo { --preset-color: var(--accent-indigo);   --preset-color-rgb: var(--accent-indigo-rgb); }
+.discover-preset--teal   { --preset-color: var(--accent-teal);     --preset-color-rgb: var(--accent-teal-rgb); }
+.discover-preset--orange { --preset-color: var(--accent-orange);   --preset-color-rgb: var(--accent-orange-rgb); }
+.discover-preset--rose   { --preset-color: var(--accent-rose);     --preset-color-rgb: var(--accent-rose-rgb); }
+
+/* ============================================================
+   PHASE 3 — HYBRID B TILE LAYOUT — 2026-05-24
+   Rounded card with neutral hairline border. Corner color "sun"
+   bleeds from top-right behind a tinted badge holding the T2 glyph.
+   White name centre-left, colored CAPS label bottom-left.
+   On hover the full frame lights in the variant color, the corner
+   glow intensifies (~0.20 → ~0.42), the badge brightens, the tile
+   lifts -2px. Spotlight is exempt — keeps its amber gradient + loud
+   "NOW STREAMING / IN CINEMAS" badge identity unchanged.
+   ============================================================ */
+
+/* Non-spotlight base — rounded card with gradient surface, hairline
+   neutral rest border. The base .discover-preset rule above stays
+   intact so spotlight inherits its previous look. */
+.discover-preset:not(.discover-preset--spotlight) {
+  justify-content: space-between;
+  background: linear-gradient(145deg, var(--cosmic-blue), var(--deep-void));
+  border-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px;
+  transition: border-color 0.3s ease-out, transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.discover-preset:not(.discover-preset--spotlight):hover {
+  border-color: var(--preset-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(var(--preset-color-rgb), 0.35),
+              inset 0 0 12px rgba(var(--preset-color-rgb), 0.06);
+}
+
+/* Corner color "sun" — top-right blur bleeding into the card */
+.discover-preset-glow {
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--preset-color);
+  filter: blur(24px);
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+.discover-preset:hover .discover-preset-glow {
+  opacity: 0.42;
+}
+
+/* 38x38 badge holding the T2 glyph, anchored top-right */
+.discover-preset-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background: rgba(var(--preset-color-rgb), 0.14);
+  border: 1px solid rgba(var(--preset-color-rgb), 0.35);
+  transition: background 0.3s ease-out, border-color 0.3s ease-out;
+}
+.discover-preset:hover .discover-preset-badge {
+  background: rgba(var(--preset-color-rgb), 0.22);
+  border-color: rgba(var(--preset-color-rgb), 0.6);
+}
+
+/* Glyph inside the badge — flex-centred by the badge. Overrides
+   Phase 2's absolute positioning entirely. */
+.discover-preset-glyph {
+  position: static;
+  top: auto;
+  left: auto;
+  --og-glyph-size: 24px;
+  width: 24px;
+  height: 24px;
+  filter: none;
+}
+
+/* Phase 2 — glyph follows tile colour on every non-spotlight tile. og-qs is
+   currentColor-driven (mask-based), so this retints the mask without changing
+   its shape. Spotlight keeps its baked og-qs-X category colour. */
+.discover-preset:not(.discover-preset--spotlight) .discover-preset-glyph {
+  color: var(--preset-color);
+}
+
+/* Tag base — spotlight uses this. Non-spotlight overrides below. */
+.discover-preset-tag {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--preset-color);
+  display: block;
+  margin-bottom: 8px;
+  opacity: 1;
+  font-family: var(--font-display);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Preset name — white, capped at 130px so it never runs under
+   the badge regardless of viewport. */
+.discover-preset-name {
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--film-white);
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  display: block;
+  max-width: 130px;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: filter 0.18s ease;
+}
+.discover-preset:hover .discover-preset-name {
+  filter: brightness(1.15);
+}
+
+/* Non-spotlight label — CAPS coloured micro-meta, bottom-right
+   (2026-05-24: moved from flex-start → stretch+right per Phase 3.1.
+   2026-05-24 later: base bumped 9 → 9.9px (+10%) per user request.) */
+.discover-preset:not(.discover-preset--spotlight) .discover-preset-tag {
+  position: relative;
+  z-index: 2;
+  font-size: 10.4px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--preset-color);
+  margin-top: auto;
+  margin-bottom: 0;
+  align-self: stretch;
+  text-align: right;
+  max-width: 100%;
+}
+
+/* ============================================================
+   PHASE 3.1 — COMPACT-TILE SIZE BUMP — Added 2026-05-24
+   When the preset name renders in 1–2 lines there's spare room
+   on the card, so name + label step up 5% for visual balance.
+   The modifier class is applied by JS after measuring the
+   rendered name height (see applyCompactClasses in discover.js).
+   Names that wrap to 3+ lines keep the base size.
+   ============================================================ */
+.discover-preset--compact .discover-preset-name {
+  font-size: 15.4px;  /* 14 × 1.05 × 1.05 (was 14.7) */
+}
+.discover-preset--compact .discover-preset-tag {
+  font-size: 11.4px;  /* 10.4 × 1.05 (was 10.9) */
+}
+
+/* WATCH PROVIDERS PRIMARY CARD VARIANT ------------------------ */
+/* TOKEN GAP: --success-green-rgb missing — using literal below */
+.section-card--streaming {
+  border-color: rgba(16, 185, 129, 0.25);
+}
+.section-card--streaming:hover {
+  border-color: var(--success-green);
+}
+.section-card--streaming .orbit-icon .icon-core,
+.section-card--streaming .orbit-icon .ring-outer,
+.section-card--streaming .orbit-icon .ring-inner {
+  color: var(--success-green);
+}
+.section-card-helper {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+/* PEOPLE PANEL TABS + FILMMAKER PROFILE ----------------------- */
+.people-panel-tabs {
+  display: flex;
+  /* TOKEN GAP: white-overlay token */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+.people-tab {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  background: transparent;
+  border: none;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.people-tab:hover { color: var(--muted-silver); }
+.people-tab--active {
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+}
+.people-tab-content--hidden { display: none; }
+
+.filmmaker-profile-hint {
+  font-size: 13px;
+  color: var(--ghost-gray);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-family: var(--font-body);
+}
+/* ============================================================
+   FILMMAKER TAB — design language alignment (May 9, 2026)
+   Uses flat .focus-section-label + .chip-group pattern to match
+   Genre/Themes/Ratings panels. No card UI. Single-select active
+   state uses .chip.active (cyan); awards multi-select keeps gold
+   via .filmmaker-opt--award-active.
+   ============================================================ */
+
+.oft-filmmaker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-height: 315px;
+  overflow: hidden;
+}
+
+.oft-filmmaker-col {
+  padding: 0 14px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.oft-filmmaker-col + .oft-filmmaker-col {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.oft-filmmaker-col > .focus-section-label:first-child {
+  margin-top: 0;
+}
+
+.filmmaker-awards-label {
+  color: rgba(var(--accent-gold-rgb), 0.7);
+}
+
+.filmmaker-soon-label {
+  opacity: 0.3;
+  margin-top: 16px;
+}
+
+.filmmaker-soon-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  opacity: 0.25;
+}
+
+.filmmaker-soon-item {
+  font-size: 12px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+  padding: 2px 0;
+}
+
+.filmmaker-opt--award-active {
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  border-color: rgba(var(--accent-gold-rgb), 0.5);
+  color: var(--accent-gold);
+}
+.filmmaker-profile-note {
+  font-size: 13px;
+  color: var(--ghost-gray);
+  line-height: 1.5;
+  font-style: italic;
+  font-family: var(--font-body);
+}
+
+/* RESPONSIVE -------------------------------------------------- */
+@media (max-width: 900px) {
+  .discover-nav { padding: 10px 16px; }
+  .discover-stream-bar { padding: 10px 16px; }
+  .discover-presets { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 650px) {
+  .discover-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .discover-nav-links {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .discover-stream-bar {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .discover-stream-link {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+  .discover-presets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .oft-filmmaker-grid {
+    grid-template-columns: 1fr;
+  }
+  /* On mobile the nav stacks vertically — JS anchors the top
+     dynamically; just shrink the mosaic height. */
+  .discover-mosaic-region {
+    height: 45vh;
+  }
+}
+
+/* ============================================================
+   ORBIT FILTER TABS — Added May 1, 2026
+   Replaces .filter-grid card system. Tab bar + lazy-built panel
+   bodies + per-panel "Add to orbit" buttons.
+   ============================================================ */
+
+.orbit-filter-tabs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.oft-tab-bar {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--nebula-dark);
+}
+.oft-tabs-scroll {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.oft-tabs-scroll::-webkit-scrollbar { display: none; }
+/* Add-to-orbit button is JS-relocated into the active panel's header
+   on every tab activation. Hidden by default so the parked instance
+   in static HTML doesn't flash before relocation; shown only when its
+   parent is .oft-panel-header. */
+.oft-tab-commit-btn {
+  display: none;
+}
+.oft-panel-header > .oft-tab-commit-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  padding: 7px 16px;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  height: auto;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.oft-tab-commit-btn.oft-add-btn--just-added {
+  animation: oftAddedPulse 0.6s ease;
+}
+@keyframes oftAddedPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.55); }
+}
+
+.oft-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 16px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ghost-gray);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.oft-tab:hover { color: var(--muted-silver); }
+
+.oft-tab--active {
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+  background: rgba(0, 217, 255, 0.03);
+}
+
+.oft-tab--has-filter::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+.oft-panel-area {
+  flex: 1;
+  position: relative;
+  min-height: 380px;
+}
+
+.oft-panel {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+
+.oft-panel--active { display: flex; }
+
+.oft-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.oft-panel-header .orbit-icon {
+  width: 44px;
+  height: 44px;
+}
+
+/* All filter tabs — title + desc on a single left-aligned row at 1.4x size */
+.oft-panel-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.oft-panel-title {
+  font-family: var(--font-display);
+  font-size: 15.4px;
+  font-weight: 600;
+  color: var(--film-white);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.oft-panel-desc {
+  font-size: 16.8px;
+  line-height: 1.35;
+  color: var(--ghost-gray);
+  margin: 0;
+}
+
+.oft-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+}
+
+.oft-setting-combined,
+.oft-source-combined {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 100%;
+}
+
+.oft-setting-col,
+.oft-source-col {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Panel-footer Add button moved to the tab bar (May 4, 2026).
+   Hide any legacy injection so leftover code can't show a duplicate. */
+.oft-panel-actions {
+  display: none;
+}
+
+.orbit-btn--primary {
+  padding: 10px 24px;
+  background: var(--accent-cyan);
+  color: #000;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: filter 0.15s, transform 0.1s;
+}
+.orbit-btn--primary:hover { filter: brightness(1.1); }
+.orbit-btn--primary:active { transform: translateY(1px); }
+
+.orbit-btn--ghost {
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ghost-gray);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.15s, border-color 0.15s;
+}
+.orbit-btn--ghost:hover {
+  color: var(--film-white);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.oft-add-btn--just-added {
+  filter: brightness(1.25);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.5);
+}
+
+@media (max-width: 650px) {
+  .oft-tab {
+    padding: 8px 10px;
+    font-size: 8px;
+  }
+  .oft-panel-header { padding: 10px 12px 8px; }
+  .oft-setting-combined,
+  .oft-source-combined {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   CATEGORY CHIP COLOURS — Added May 3, 2026
+   Scoped .chip.active overrides per panel. Each filter category
+   gets its own accent colour. Does NOT modify global .chip.active.
+   ============================================================ */
+
+/* Genre — prestige purple */
+#oft-panel-genres .chip.active {
+  background: var(--prestige-purple);
+  border-color: var(--prestige-purple);
+  color: var(--film-white);
+  box-shadow: 0 0 14px rgba(var(--prestige-purple-rgb), 0.45);
+}
+#oft-panel-genres .chip:hover:not(.active) {
+  border-color: rgba(var(--prestige-purple-rgb), 0.5);
+  color: #c084fc;
+}
+
+/* Awards — accent gold */
+#oft-panel-awards .chip.active {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--space-black);
+  box-shadow: 0 0 14px rgba(var(--accent-gold-rgb), 0.4);
+}
+#oft-panel-awards .chip:hover:not(.active) {
+  border-color: rgba(var(--accent-gold-rgb), 0.5);
+  color: var(--accent-gold);
+}
+
+/* Era — warning orange */
+#oft-panel-era .chip.active {
+  background: var(--warning-orange);
+  border-color: var(--warning-orange);
+  color: var(--space-black);
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.4);
+}
+#oft-panel-era .chip:hover:not(.active) {
+  border-color: rgba(249, 115, 22, 0.5);
+  color: var(--warning-orange);
+}
+
+/* Watch (streaming) — success green */
+#oft-panel-watch .chip.active {
+  background: var(--success-green);
+  border-color: var(--success-green);
+  color: var(--space-black);
+  box-shadow: 0 0 14px rgba(var(--success-green-rgb), 0.4);
+}
+#oft-panel-watch .chip:hover:not(.active) {
+  border-color: rgba(var(--success-green-rgb), 0.5);
+  color: #6ee7b7;
+}
+
+/* Themes — muted silver */
+#oft-panel-themes .chip.active {
+  background: var(--cosmic-blue);
+  border-color: var(--muted-silver);
+  color: var(--film-white);
+  box-shadow: none;
+}
+#oft-panel-themes .chip:hover:not(.active) {
+  border-color: var(--muted-silver);
+  color: var(--film-white);
+}
+
+/* Setting — danger red */
+#oft-panel-setting .chip.active {
+  background: var(--danger-red);
+  border-color: var(--danger-red);
+  color: var(--film-white);
+  box-shadow: 0 0 14px rgba(var(--danger-red-rgb), 0.35);
+}
+#oft-panel-setting .chip:hover:not(.active) {
+  border-color: rgba(var(--danger-red-rgb), 0.5);
+  color: #f87171;
+}
+
+/* Region, Source, Production, Ratings, People — cyan hover tint */
+#oft-panel-region .chip:hover:not(.active),
+#oft-panel-source .chip:hover:not(.active),
+#oft-panel-production .chip:hover:not(.active),
+#oft-panel-ratings .chip:hover:not(.active),
+#oft-panel-people .chip:hover:not(.active) {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  color: var(--accent-cyan);
+}
+
+/* ============================================================
+   ORBIT RING SIDEBAR — Added May 3, 2026
+   ============================================================ */
+
+.orbit-ring-container {
+  border: 1px solid rgba(var(--accent-rgb), 0.1);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  flex-shrink: 0;
+  height: 130px;
+  margin: 0 0 8px;
+}
+
+.orbit-ring-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ============================================================
+   SIDEBAR FILTER CHIPS — PER-CATEGORY COLOURS
+   Added May 3, 2026. Mirrors ORBIT_RING_COLOURS map in discover.js
+   so a chip in the pile shares its colour with its dot on the ring.
+   ============================================================ */
+
+/* Genre — prestige purple */
+.filter-chip[data-section="genres"] {
+  background: rgba(var(--prestige-purple-rgb), 0.12);
+  border-color: rgba(var(--prestige-purple-rgb), 0.45);
+}
+.filter-chip[data-section="genres"] .filter-chip-section {
+  color: var(--prestige-purple);
+}
+.filter-chip[data-section="genres"]:hover {
+  background: rgba(var(--prestige-purple-rgb), 0.18);
+  border-color: var(--prestige-purple);
+}
+
+/* Awards — accent gold */
+.filter-chip[data-section="awards"] {
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  border-color: rgba(var(--accent-gold-rgb), 0.4);
+}
+.filter-chip[data-section="awards"] .filter-chip-section {
+  color: var(--accent-gold);
+}
+.filter-chip[data-section="awards"]:hover {
+  background: rgba(var(--accent-gold-rgb), 0.16);
+  border-color: var(--accent-gold);
+}
+
+/* Era — warning orange */
+.filter-chip[data-section="timeEra"] {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.4);
+}
+.filter-chip[data-section="timeEra"] .filter-chip-section {
+  color: var(--warning-orange);
+}
+.filter-chip[data-section="timeEra"]:hover {
+  background: rgba(249, 115, 22, 0.18);
+  border-color: var(--warning-orange);
+}
+
+/* Watch (streaming) — success green */
+.filter-chip[data-section="watch"] {
+  background: rgba(var(--success-green-rgb), 0.12);
+  border-color: rgba(var(--success-green-rgb), 0.4);
+}
+.filter-chip[data-section="watch"] .filter-chip-section {
+  color: var(--success-green);
+}
+.filter-chip[data-section="watch"]:hover {
+  background: rgba(var(--success-green-rgb), 0.18);
+  border-color: var(--success-green);
+}
+
+/* Themes — muted silver */
+.filter-chip[data-section="themes"] {
+  background: rgba(var(--muted-silver-rgb), 0.1);
+  border-color: rgba(var(--muted-silver-rgb), 0.35);
+}
+.filter-chip[data-section="themes"] .filter-chip-section {
+  color: var(--muted-silver);
+}
+.filter-chip[data-section="themes"]:hover {
+  background: rgba(var(--muted-silver-rgb), 0.16);
+  border-color: var(--muted-silver);
+}
+
+/* Setting — danger red */
+.filter-chip[data-section="settingWhere"],
+.filter-chip[data-section="settingWhen"] {
+  background: rgba(var(--danger-red-rgb), 0.1);
+  border-color: rgba(var(--danger-red-rgb), 0.4);
+}
+.filter-chip[data-section="settingWhere"] .filter-chip-section,
+.filter-chip[data-section="settingWhen"] .filter-chip-section {
+  color: var(--danger-red);
+}
+.filter-chip[data-section="settingWhere"]:hover,
+.filter-chip[data-section="settingWhen"]:hover {
+  background: rgba(var(--danger-red-rgb), 0.16);
+  border-color: var(--danger-red);
+}
+
+/* People, Ratings, Source, Region, Production — keep cyan default
+   (already set on .filter-chip base). */
+
+/* ============================================================
+   STREAMING BAR — Interactive Pills + Edit Popup
+   Added May 4, 2026
+   ============================================================ */
+
+/* --- Pill upgrades (override existing .discover-stream-pill) --- */
+.discover-stream-pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.discover-stream-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.discover-stream-pill:hover {
+  background: rgba(var(--accent-rgb), 0.18);
+  border-color: rgba(var(--accent-rgb), 0.65);
+}
+.discover-stream-pill--off {
+  background: rgba(239, 68, 68, 0.07) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: var(--danger-red) !important;
+  text-decoration: line-through;
+  text-decoration-color: rgba(239, 68, 68, 0.45);
+}
+.discover-stream-pill--off:hover {
+  background: rgba(239, 68, 68, 0.13) !important;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+}
+
+/* --- Bar action area --- */
+.discover-stream-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.discover-bar-modified {
+  font-size: 9px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: var(--warning-orange);
+  background: rgba(245, 158, 11, 0.08);
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  transition: background 0.15s;
+}
+.discover-bar-modified:hover {
+  background: rgba(245, 158, 11, 0.14);
+}
+.discover-stream-count {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  white-space: nowrap;
+}
+.discover-stream-count strong {
+  color: var(--muted-silver);
+}
+.discover-edit-btn {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  background: none;
+  font-family: var(--font-display);
+  white-space: nowrap;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.discover-edit-btn:hover,
+.discover-edit-btn--open {
+  border-color: rgba(var(--accent-rgb), 0.45);
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.06);
+}
+
+/* --- Popup wrapper (in-flow, max-height anim) ---
+   Mosaic region is position:absolute over the same in-flow zone, so the
+   wrap needs its own stacking context above z-index 0 + a solid base
+   background to hide blurred posters bleeding through during the
+   max-height transition. */
+.discover-popup-wrap {
+  position: relative;
+  z-index: 5;
+  background: var(--nebula-dark);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s ease, opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+.discover-popup-wrap--open {
+  max-height: 460px;
+  opacity: 1;
+  pointer-events: all;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+.discover-popup {
+  background: var(--nebula-dark);
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+
+/* --- Popup head --- */
+.discover-popup-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+}
+.discover-popup-title {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  margin-bottom: 3px;
+  font-family: var(--font-display);
+}
+.discover-popup-sub {
+  font-size: 11px;
+  color: var(--ghost-gray);
+  line-height: 1.5;
+}
+.discover-popup-close {
+  font-size: 20px;
+  color: var(--ghost-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  margin-top: -2px;
+}
+.discover-popup-close:hover {
+  color: var(--muted-silver);
+}
+
+/* --- Popup body --- */
+.discover-popup-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.discover-popup-col {
+  padding: 14px 20px;
+}
+.discover-popup-col--country {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+.discover-popup-col-label {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--ghost-gray);
+  display: block;
+  margin-bottom: 9px;
+  font-family: var(--font-display);
+}
+.discover-popup-country {
+  width: 100%;
+  background: var(--deep-void);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--muted-silver);
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+.discover-popup-country:focus {
+  outline: none;
+  border-color: rgba(var(--accent-rgb), 0.45);
+}
+.discover-popup-country-note {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  margin-top: 9px;
+  line-height: 1.55;
+  opacity: 0.7;
+}
+
+/* --- Provider grid in popup --- */
+.discover-popup-provider-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.discover-popup-provider-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: var(--ghost-gray);
+  cursor: pointer;
+  background: none;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+.discover-popup-provider-pill:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--muted-silver);
+}
+.discover-popup-provider-pill--on {
+  background: rgba(var(--success-green-rgb), 0.1);
+  border-color: rgba(var(--success-green-rgb), 0.5);
+  color: #6ee7b7;
+}
+.discover-popup-provider-pill--on:hover {
+  background: rgba(var(--success-green-rgb), 0.16);
+  border-color: rgba(var(--success-green-rgb), 0.7);
+}
+
+/* --- Popup footer --- */
+.discover-popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--deep-void);
+}
+.discover-popup-footer-note {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  opacity: 0.7;
+}
+.discover-popup-btns {
+  display: flex;
+  gap: 8px;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .discover-popup-body {
+    grid-template-columns: 1fr;
+  }
+  .discover-popup-col--country {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .discover-stream-bar-actions {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* ============================================================
+   ORBIT CHIP V2 — Sleek single-line sidebar chips
+   Added May 4, 2026
+   Replaces the tall rounded card style with square-edged
+   single-line strips. 3px coloured left border, text left, × right.
+   ============================================================ */
+
+/* Override existing filter-chip styling on the v2 variant */
+.filter-chip.orbit-chip-v2 {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  border-left: 3px solid transparent;
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 1px;
+  height: 32px;
+  overflow: hidden;
+  transition: background 0.12s;
+  box-shadow: none;
+}
+
+.filter-chip.orbit-chip-v2:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Content area — text left-aligned */
+.orbit-chip-content {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 0 8px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Prefix (theme, rating, language, min votes) — 2026-05-16: matched
+   to .orbit-chip-value so prefix + value read as one consistent
+   label. Pseudo-element appends a ":" so the rendered chip reads
+   e.g. "theme: Coming of age" instead of "theme Coming of age". */
+.orbit-chip-prefix {
+  font-family: var(--font-display);
+  font-size: 14.4px;
+  font-weight: 700;
+  color: var(--film-white);
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.orbit-chip-prefix::after {
+  content: ":";
+}
+
+/* Main value label */
+.orbit-chip-value {
+  /* 2026-05-16: matched to .discover-preset-name (the white text in
+     the Quick Search tiles). Previously 12px Barlow weight 500 —
+     too small and visually disconnected from the tile names. */
+  font-family: var(--font-display);
+  font-size: 14.4px;
+  font-weight: 700;
+  color: var(--film-white);
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Remove button — overrides .filter-chip-remove sizing */
+.filter-chip.orbit-chip-v2 .orbit-chip-remove,
+.filter-chip.orbit-chip-v2 .filter-chip-remove {
+  width: 28px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--ghost-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.12s, color 0.12s;
+  padding: 0;
+  border-radius: 0;
+}
+
+.filter-chip.orbit-chip-v2 .orbit-chip-remove:hover,
+.filter-chip.orbit-chip-v2 .filter-chip-remove:hover {
+  opacity: 1;
+  color: var(--danger-red);
+  background: none;
+}
+
+/* Per-section coloured left border + tinted background. Cyan reserved
+   for People only; every other section has its own unique accent.
+   Bg opacity 0.09 (bumped from 0.04 for stronger visual weight). */
+.filter-chip.orbit-chip-v2[data-section="people"] {
+  border-left-color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="genres"] {
+  border-left-color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="awards"] {
+  border-left-color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="timeEra"] {
+  border-left-color: var(--warning-orange);
+  background: rgba(249, 115, 22, 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="watch"] {
+  border-left-color: var(--success-green);
+  background: rgba(var(--success-green-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="themes"] {
+  border-left-color: var(--muted-silver);
+  background: rgba(var(--muted-silver-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="settingWhere"],
+.filter-chip.orbit-chip-v2[data-section="settingWhen"] {
+  border-left-color: var(--danger-red);
+  background: rgba(var(--danger-red-rgb), 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="ratingsContent"] {
+  border-left-color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="regionLanguage"] {
+  border-left-color: var(--accent-teal);
+  background: rgba(20, 184, 166, 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="basedOn"],
+.filter-chip.orbit-chip-v2[data-section="universes"] {
+  border-left-color: var(--accent-rose);
+  background: rgba(244, 63, 94, 0.09);
+}
+.filter-chip.orbit-chip-v2[data-section="production"] {
+  border-left-color: var(--accent-indigo);
+  background: rgba(99, 102, 241, 0.09);
+}
+
+/* ============================================================
+   TAB ACTIVE COLOURS — Unique accent per tab (May 4, 2026)
+   Overrides the global .oft-tab--active cyan rule. Cyan now
+   reserved for People only.
+   ============================================================ */
+.oft-tab[data-tab="people"].oft-tab--active      { color: var(--accent-cyan); border-bottom-color: var(--accent-cyan); }
+.oft-tab[data-tab="genres"].oft-tab--active      { color: var(--prestige-purple); border-bottom-color: var(--prestige-purple); }
+.oft-tab[data-tab="awards"].oft-tab--active      { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+.oft-tab[data-tab="era"].oft-tab--active         { color: var(--warning-orange); border-bottom-color: var(--warning-orange); }
+.oft-tab[data-tab="watch"].oft-tab--active       { color: var(--success-green); border-bottom-color: var(--success-green); }
+.oft-tab[data-tab="setting"].oft-tab--active     { color: var(--danger-red); border-bottom-color: var(--danger-red); }
+.oft-tab[data-tab="themes"].oft-tab--active      { color: var(--muted-silver); border-bottom-color: var(--muted-silver); }
+.oft-tab[data-tab="ratings"].oft-tab--active     { color: var(--accent-amber); border-bottom-color: var(--accent-amber); }
+.oft-tab[data-tab="region"].oft-tab--active      { color: var(--accent-teal); border-bottom-color: var(--accent-teal); }
+.oft-tab[data-tab="source"].oft-tab--active      { color: var(--accent-rose); border-bottom-color: var(--accent-rose); }
+.oft-tab[data-tab="production"].oft-tab--active  { color: var(--accent-indigo); border-bottom-color: var(--accent-indigo); }
+
+.oft-tab[data-tab="people"].oft-tab--has-filter::after      { background: var(--accent-cyan); }
+.oft-tab[data-tab="genres"].oft-tab--has-filter::after      { background: var(--prestige-purple); }
+.oft-tab[data-tab="awards"].oft-tab--has-filter::after      { background: var(--accent-gold); }
+.oft-tab[data-tab="era"].oft-tab--has-filter::after         { background: var(--warning-orange); }
+.oft-tab[data-tab="watch"].oft-tab--has-filter::after       { background: var(--success-green); }
+.oft-tab[data-tab="setting"].oft-tab--has-filter::after     { background: var(--danger-red); }
+.oft-tab[data-tab="themes"].oft-tab--has-filter::after      { background: var(--muted-silver); }
+.oft-tab[data-tab="ratings"].oft-tab--has-filter::after     { background: var(--accent-amber); }
+.oft-tab[data-tab="region"].oft-tab--has-filter::after      { background: var(--accent-teal); }
+.oft-tab[data-tab="source"].oft-tab--has-filter::after      { background: var(--accent-rose); }
+.oft-tab[data-tab="production"].oft-tab--has-filter::after  { background: var(--accent-indigo); }
+
+/* ============================================================
+   ORBIT FILM COUNT — Live total_results display (May 4, 2026)
+   ============================================================ */
+.orbit-film-count {
+  text-align: center;
+  padding: 10px 16px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+.orbit-film-count-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  line-height: 1;
+  margin-bottom: 3px;
+  letter-spacing: 0.05em;
+}
+.orbit-film-count-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--ghost-gray);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   PRESET CARD COLOUR VARIANTS — Spotlight + new accents
+   Added May 4, 2026
+   ============================================================ */
+
+/* Spotlight card — amber/orange gradient, slightly stronger border */
+.discover-preset--spotlight {
+  background: linear-gradient(135deg,
+    rgba(245, 158, 11, 0.15) 0%,
+    rgba(249, 115, 22, 0.10) 100%);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+.discover-preset--spotlight:hover {
+  border-color: rgba(245, 158, 11, 0.8);
+  background: linear-gradient(135deg,
+    rgba(245, 158, 11, 0.22) 0%,
+    rgba(249, 115, 22, 0.15) 100%);
+}
+.discover-preset-tag--live {
+  color: var(--accent-amber);
+  letter-spacing: 0.06em;
+}
+
+/* Reverted to the original 4-colour preset palette
+   (gold/cyan/purple/green). The amber/rose/indigo/teal card
+   variants previously added for the expanded pool are no longer
+   used — keep only the spotlight variant above. */
+
+/* ============================================================
+   STREAMING COVERAGE WARNING — Added May 4, 2026
+   ============================================================ */
+.orbit-streaming-warning {
+  padding: 8px 14px;
+  font-size: 10px;
+  line-height: 1.5;
+  border-top: 1px solid rgba(245, 158, 11, 0.2);
+  flex-shrink: 0;
+}
+.orbit-warning-text {
+  display: block;
+  color: var(--warning-orange);
+  margin-bottom: 3px;
+}
+.orbit-warning-link {
+  background: none;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  font-family: var(--font-body);
+}
+.orbit-warning-link:hover {
+  color: var(--film-white);
+}
+
+/* ============================================================
+   CHIP BLACK HOLE EXIT — CLAUDE.md Rule 17 extended to chips
+   Added May 4, 2026
+   Reuses the orbit-x-blackhole and orbit-popup-exit keyframes
+   defined globally in orbit-close.css. The chip's × spirals red
+   while the chip itself fades and scales out.
+   ============================================================ */
+
+.filter-chip.closing {
+  animation: orbit-popup-exit 600ms cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
+  pointer-events: none;
+}
+.filter-chip.closing .filter-chip-remove {
+  animation: orbit-x-blackhole 600ms cubic-bezier(0.55, 0, 0.85, 0.2) forwards;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-chip.closing {
+    animation: orbit-popup-fade 200ms ease-out forwards;
+  }
+  .filter-chip.closing .filter-chip-remove {
+    animation: orbit-x-fade 200ms ease-out forwards;
+  }
+}
+
+/* ============================================================
+   PEOPLE RECENT / POPULAR REGION CHIPS — Added May 4, 2026
+   Inherits .chip styling. Just a margin nudge on the recent group
+   so it sits between the role buttons and the search input cleanly.
+   ============================================================ */
+.oft-people-recent-section {
+  margin-bottom: 14px;
+}
+.oft-people-recent {
+  margin-top: 4px;
+}
+
+/* ============================================================
+   FILTER PANEL 2-COLUMN LAYOUTS — Batch B (May 4, 2026)
+   Themes / Era / Ratings / Production split into two columns so
+   their content fits the ~311px panel-body height without scroll.
+   ============================================================ */
+
+.oft-genres-grid,
+.oft-awards-grid,
+.oft-themes-grid,
+.oft-era-grid,
+.oft-ratings-grid,
+.oft-production-grid {
+  display: grid;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.oft-genres-grid    { grid-template-columns: 55% 45%; }
+.oft-awards-grid    { grid-template-columns: 45% 55%; }
+.oft-themes-grid    { grid-template-columns: 1fr 1fr; }
+.oft-era-grid       { grid-template-columns: 55% 45%; }
+.oft-ratings-grid   { grid-template-columns: 60% 40%; }
+.oft-production-grid{ grid-template-columns: 60% 40%; }
+
+.oft-genres-col,
+.oft-awards-col,
+.oft-themes-col,
+.oft-era-col,
+.oft-ratings-col,
+.oft-production-col {
+  padding: 0 14px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.oft-genres-col + .oft-genres-col,
+.oft-awards-col + .oft-awards-col,
+.oft-themes-col + .oft-themes-col,
+.oft-era-col + .oft-era-col,
+.oft-ratings-col + .oft-ratings-col,
+.oft-production-col + .oft-production-col {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Make sure first child labels in each column don't push their
+   column down — the .focus-section-label first-child override
+   added in an earlier turn covers .oft-panel-body but not these
+   new column wrappers. Add them here. */
+.oft-genres-col > .focus-section-label:first-child,
+.oft-awards-col > .focus-section-label:first-child,
+.oft-themes-col > .focus-section-label:first-child,
+.oft-era-col > .focus-section-label:first-child,
+.oft-ratings-col > .focus-section-label:first-child,
+.oft-production-col > .focus-section-label:first-child {
+  margin-top: 0;
+}
+
+/* ============================================================
+   DISCOVERY ONBOARDING POPUP — Added 2026-05-05
+   Inactivity-triggered onboarding popup. Visual fidelity to
+   discovery-popup-mockup-8.html. All hardcoded rgba ported to
+   var(--*-rgb) per Rule 12. All selectors scoped under
+   .discovery-onboarding-popup to prevent collisions with
+   existing classes (.cinema-planet, .orbital-strip, etc).
+   ============================================================ */
+
+.discovery-onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  overflow: hidden;
+  animation: discoveryOnboardingFadeIn 0.5s ease-out;
+}
+
+.discovery-onboarding-overlay[hidden] { display: none; }
+
+/* Exit animation owned by orbit-close.css via [data-orbit-popup].orbit-popup-closing (Rule 17) */
+
+@keyframes discoveryOnboardingFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.discovery-onboarding-cosmic {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(var(--prestige-purple-rgb), 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(var(--accent-rgb), 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(var(--accent-gold-rgb), 0.08) 0%, transparent 40%);
+  filter: blur(70px);
+  animation: discoveryCosmicRotate 30s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes discoveryCosmicRotate {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+  50%      { transform: rotate(15deg) scale(1.2); opacity: 1; }
+}
+
+.discovery-onboarding-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, var(--accent-cyan), transparent),
+    radial-gradient(1px 1px at 30% 60%, var(--accent-gold), transparent),
+    radial-gradient(2px 2px at 70% 30%, var(--prestige-purple), transparent),
+    radial-gradient(1px 1px at 50% 80%, var(--film-white), transparent),
+    radial-gradient(1px 1px at 85% 50%, var(--accent-cyan), transparent),
+    radial-gradient(2px 2px at 15% 70%, var(--accent-gold), transparent),
+    radial-gradient(1px 1px at 65% 15%, var(--prestige-purple), transparent),
+    radial-gradient(2px 2px at 40% 45%, var(--film-white), transparent);
+  background-size: 400% 400%;
+  animation: discoveryStarField 60s ease-in-out infinite;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@keyframes discoveryStarField {
+  0%, 100% { background-position: 0% 0%; opacity: 0.3; }
+  50%      { background-position: 100% 100%; opacity: 0.6; }
+}
+
+.discovery-onboarding-popup {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background:
+    linear-gradient(135deg, rgba(var(--accent-rgb), 0.06) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(var(--prestige-purple-rgb), 0.06) 0%, transparent 50%),
+    rgba(var(--deep-void-rgb), 0.94);
+  border: 3px solid;
+  border-image: linear-gradient(135deg,
+    var(--accent-cyan) 0%,
+    var(--prestige-purple) 50%,
+    var(--accent-gold) 100%) 1;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow:
+    0 50px 140px rgba(0, 0, 0, 1),
+    0 0 160px rgba(var(--accent-rgb), 0.5),
+    inset 0 0 120px rgba(var(--accent-rgb), 0.04);
+  animation: discoverySlideUp 0.3s ease-out;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+/* slideUp per ORBIT-UI-PATTERNS.md (no elastic easing) */
+@keyframes discoverySlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.discovery-onboarding-popup .discovery-onboarding-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 3;
+}
+
+.discovery-onboarding-popup .cinema-planet {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at 35% 35%,
+    rgba(var(--accent-rgb), 0.6),
+    rgba(var(--prestige-purple-rgb), 0.5),
+    rgba(var(--accent-gold-rgb), 0.3));
+  border-radius: 50%;
+  box-shadow:
+    0 0 100px rgba(var(--accent-rgb), 0.9),
+    0 0 160px rgba(var(--prestige-purple-rgb), 0.7),
+    inset 0 0 60px rgba(var(--accent-rgb), 0.4);
+  animation: discoveryPlanetPulse 5s ease-in-out infinite;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes discoveryPlanetPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow:
+      0 0 100px rgba(var(--accent-rgb), 0.9),
+      0 0 160px rgba(var(--prestige-purple-rgb), 0.7),
+      inset 0 0 60px rgba(var(--accent-rgb), 0.4);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow:
+      0 0 140px rgba(var(--accent-rgb), 1),
+      0 0 200px rgba(var(--prestige-purple-rgb), 0.9),
+      inset 0 0 80px rgba(var(--accent-rgb), 0.5);
+  }
+}
+
+.discovery-onboarding-popup .cinema-planet-glyph {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 1));
+  animation: discoveryPlanetFloat 4s ease-in-out infinite;
+}
+
+@keyframes discoveryPlanetFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+.discovery-onboarding-popup .orbital-rings {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 9;
+  width: 0;
+  height: 0;
+}
+
+.discovery-onboarding-popup .orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid;
+  border-radius: 50%;
+  animation: discoveryRingRotate 40s linear infinite;
+}
+
+.discovery-onboarding-popup .orbit-ring:nth-child(1) {
+  width: 280px; height: 280px;
+  margin-left: -140px; margin-top: -140px;
+  border-color: rgba(var(--accent-rgb), 0.3);
+  border-style: dashed;
+}
+.discovery-onboarding-popup .orbit-ring:nth-child(2) {
+  width: 400px; height: 400px;
+  margin-left: -200px; margin-top: -200px;
+  border-color: rgba(var(--prestige-purple-rgb), 0.25);
+  border-style: dashed;
+  animation-duration: 55s;
+}
+.discovery-onboarding-popup .orbit-ring:nth-child(3) {
+  width: 520px; height: 520px;
+  margin-left: -260px; margin-top: -260px;
+  border-color: rgba(var(--accent-gold-rgb), 0.2);
+  border-style: dashed;
+  animation-duration: 70s;
+}
+
+@keyframes discoveryRingRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.discovery-onboarding-popup .discovery-onboarding-header {
+  text-align: center;
+  margin-bottom: 120px;
+  margin-top: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.discovery-onboarding-popup .orbit-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg,
+    rgba(var(--accent-rgb), 0.15),
+    rgba(var(--prestige-purple-rgb), 0.15));
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.4);
+}
+
+.discovery-onboarding-popup .orbit-indicator .og {
+  width: 12px;
+  height: 12px;
+}
+
+.discovery-onboarding-popup .discovery-onboarding-title {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 900;
+  background: linear-gradient(135deg,
+    var(--accent-cyan) 0%,
+    var(--film-white) 25%,
+    var(--prestige-purple) 75%,
+    var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  animation: discoveryTitleGlow 5s ease-in-out infinite;
+}
+
+@keyframes discoveryTitleGlow {
+  0%, 100% { filter: drop-shadow(0 0 25px rgba(var(--accent-rgb), 0.6)); }
+  50%      { filter: drop-shadow(0 0 50px rgba(var(--prestige-purple-rgb), 0.9)); }
+}
+
+.discovery-onboarding-popup .discovery-onboarding-subtitle {
+  font-size: 16px;
+  color: var(--muted-silver);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.discovery-onboarding-popup .strips-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.discovery-onboarding-popup .orbital-strip {
+  position: relative;
+  background: linear-gradient(135deg,
+    rgba(var(--accent-rgb), 0.1) 0%,
+    rgba(17, 24, 39, 0.5) 50%,
+    rgba(var(--prestige-purple-rgb), 0.1) 100%);
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.4s ease-out;
+  overflow: hidden;
+}
+
+.discovery-onboarding-popup .orbital-strip:nth-child(1) { border-color: rgba(var(--accent-rgb), 0.5); }
+.discovery-onboarding-popup .orbital-strip:nth-child(2) { border-color: rgba(var(--prestige-purple-rgb), 0.5); }
+.discovery-onboarding-popup .orbital-strip:nth-child(3) { border-color: rgba(var(--accent-gold-rgb), 0.5); }
+
+.discovery-onboarding-popup .orbital-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(var(--accent-rgb), 0.4) 50%,
+    transparent 100%);
+  transition: left 0.9s ease-out;
+}
+
+.discovery-onboarding-popup .orbital-strip:hover::before { left: 100%; }
+
+.discovery-onboarding-popup .orbital-strip:hover {
+  box-shadow:
+    0 0 60px rgba(var(--accent-rgb), 0.5),
+    inset 0 0 50px rgba(var(--accent-rgb), 0.15);
+  transform: translateY(-6px) scale(1.02);
+}
+
+.discovery-onboarding-popup .orbit-number {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.4) 0%, transparent 70%);
+  border: 2px solid var(--accent-cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.6);
+}
+
+.discovery-onboarding-popup .orbital-strip:nth-child(2) .orbit-number {
+  background: radial-gradient(circle, rgba(var(--prestige-purple-rgb), 0.4) 0%, transparent 70%);
+  border-color: var(--prestige-purple);
+  color: var(--prestige-purple);
+  box-shadow: 0 0 25px rgba(var(--prestige-purple-rgb), 0.6);
+}
+.discovery-onboarding-popup .orbital-strip:nth-child(3) .orbit-number {
+  background: radial-gradient(circle, rgba(var(--accent-gold-rgb), 0.4) 0%, transparent 70%);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 0 25px rgba(var(--accent-gold-rgb), 0.6);
+}
+
+.discovery-onboarding-popup .strip-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.discovery-onboarding-popup .strip-icon {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.7));
+  animation: discoveryIconBob 3.5s ease-in-out infinite;
+}
+
+@keyframes discoveryIconBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.discovery-onboarding-popup .strip-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--film-white);
+  margin: 0;
+}
+
+.discovery-onboarding-popup .strip-description {
+  font-size: 16px;
+  color: var(--muted-silver);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.discovery-onboarding-popup .search-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* Quick Search chips inside the popup reuse the global .discover-preset
+   styles so they look identical to the chips on the Discovery page. */
+
+.discovery-onboarding-popup .cta-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.discovery-onboarding-popup .cta-button {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  background: linear-gradient(135deg,
+    var(--accent-cyan) 0%,
+    var(--prestige-purple) 50%,
+    var(--accent-gold) 100%);
+  color: var(--film-white);
+  border: none;
+  border-radius: 8px;
+  padding: 0 60px;
+  height: 54px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 0 60px rgba(var(--accent-rgb), 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.discovery-onboarding-popup .cta-button:hover {
+  box-shadow: 0 0 90px rgba(var(--accent-rgb), 1);
+  transform: scale(1.12);
+}
+
+.discovery-onboarding-popup .checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted-silver);
+  cursor: pointer;
+}
+
+.discovery-onboarding-popup .checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent-cyan);
+}
+
+@media (max-width: 650px) {
+  .discovery-onboarding-popup .search-grid { grid-template-columns: 1fr; }
+
+  .discovery-onboarding-popup .cinema-planet {
+    width: 140px;
+    height: 140px;
+    top: -70px;
+  }
+  .discovery-onboarding-popup .cinema-planet-glyph {
+    width: 56px;
+    height: 56px;
+  }
+  .discovery-onboarding-popup .discovery-onboarding-header {
+    margin-bottom: 90px;
+    margin-top: 50px;
+  }
+  .discovery-onboarding-popup .discovery-onboarding-title { font-size: 32px; }
+
+  .discovery-onboarding-popup .orbital-rings { top: -70px; }
+  .discovery-onboarding-popup .orbit-ring:nth-child(1) {
+    width: 200px; height: 200px;
+    margin-left: -100px; margin-top: -100px;
+  }
+  .discovery-onboarding-popup .orbit-ring:nth-child(2) {
+    width: 280px; height: 280px;
+    margin-left: -140px; margin-top: -140px;
+  }
+  .discovery-onboarding-popup .orbit-ring:nth-child(3) {
+    width: 360px; height: 360px;
+    margin-left: -180px; margin-top: -180px;
+  }
+}
+/* === END DISCOVERY ONBOARDING POPUP === */
+
+/* ============================================================
+   KEYWORD & COLLECTION SEARCH — Phase 1 (May 9, 2026)
+   Source/Universe right column: unified search input, dropdown
+   with FILM SERIES + THEMES & CONCEPTS groups, plus the purple
+   variant used by Popular Themes chips.
+   ============================================================ */
+
+.orbit-kw-search-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.orbit-kw-input {
+  width: 100%;
+  height: 38px;
+  background: rgba(17, 24, 39, 0.8);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 0 12px;
+  outline: none;
+  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.orbit-kw-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(0, 217, 255, 0.2);
+}
+
+.orbit-kw-input::placeholder {
+  color: var(--ghost-gray);
+  font-size: 12px;
+}
+
+.orbit-kw-dropdown {
+  background: var(--nebula-dark);
+  border: 1px solid rgba(0, 217, 255, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 10;
+}
+
+.orbit-kw-group-label {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  padding: 6px 10px 4px;
+  color: var(--ghost-gray);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.orbit-kw-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.orbit-kw-item:hover {
+  background: rgba(0, 217, 255, 0.06);
+}
+
+.orbit-kw-item-name {
+  font-size: 12px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+}
+
+.orbit-kw-item-badge {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.orbit-kw-badge--collection {
+  color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.08);
+}
+
+.orbit-kw-badge--keyword {
+  color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.08);
+}
+
+.orbit-kw-empty {
+  padding: 10px;
+  font-size: 12px;
+  color: var(--ghost-gray);
+  text-align: center;
+  font-style: italic;
+}
+
+/* Purple section label — used by "Popular Themes" */
+.focus-section-label--purple {
+  color: var(--prestige-purple);
+}
+
+/* Sidebar filter chips — universe-type accents */
+.filter-chip[data-universe-type="collection"] {
+  border-left: 3px solid var(--accent-gold);
+}
+.filter-chip[data-universe-type="keyword"] {
+  border-left: 3px solid var(--prestige-purple);
+}
+
+/* Theme chip — purple accent variant of .chip */
+.orbit-theme-chip {
+  border-color: rgba(var(--prestige-purple-rgb), 0.2);
+}
+.orbit-theme-chip:hover {
+  border-color: rgba(var(--prestige-purple-rgb), 0.5);
+  color: var(--prestige-purple);
+}
+.orbit-theme-chip.active {
+  background: rgba(var(--prestige-purple-rgb), 0.12);
+  border-color: rgba(var(--prestige-purple-rgb), 0.5);
+  color: var(--prestige-purple);
+  box-shadow: 0 0 14px rgba(var(--prestige-purple-rgb), 0.25);
+}
+
+/* ============================================================
+   KEYWORD SEARCH — Phase 2 (May 9, 2026)
+   Sticky compact search widget for the Themes and Genre tab
+   right columns. Reuses the .orbit-kw-* base styles from Phase 1;
+   only modifier classes defined here.
+   ============================================================ */
+
+.orbit-kw-tab-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--nebula-dark);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.orbit-kw-input--compact {
+  height: 34px;
+  font-size: 12px;
+}
+
+.orbit-kw-dropdown--inline {
+  position: relative;
+  z-index: auto;
+  box-shadow: none;
+  border-radius: 6px;
+  margin-top: 2px;
+}
 
 /* END OF STYLES */

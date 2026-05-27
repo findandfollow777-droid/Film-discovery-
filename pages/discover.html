@@ -2,16 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Orbit – Cinematic Discovery</title>
+  <title>Build Your Orbit — ORBIT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="discover.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="movie-mode">
+  <!-- DISCOVER NAV — Added May 1, 2026 -->
+  <nav class="discover-nav">
+    <a href="../index.html" class="discover-nav-back">&larr; Hub</a>
+    <div class="discover-nav-links">
+      <span class="discover-nav-link discover-nav-link--active">Build Your Orbit</span>
+      <a href="randomizer-hub.html" class="discover-nav-link">What To Watch</a>
+      <a href="timeline.html" class="discover-nav-link">Timelines</a>
+      <a href="awards-browse.html" class="discover-nav-link">Awards</a>
+      <a href="../games/arcade.html" class="discover-nav-link">Arcade</a>
+    </div>
+  </nav>
+
+  <!-- STREAMING BAR — Interactive pills + Edit Services popup. May 4, 2026 rewrite. -->
+  <div class="discover-stream-bar" id="discoverStreamBar">
+    <span class="discover-stream-label">WATCHING ON</span>
+    <div class="discover-stream-services" id="discoverStreamServices"></div>
+    <div class="discover-stream-bar-actions">
+      <span class="discover-bar-modified" id="discoverBarModified" style="display:none;">↺ Reset to defaults</span>
+      <span class="discover-stream-count" id="discoverStreamCount"></span>
+      <button class="discover-edit-btn" id="discoverEditBtn" type="button">Edit services</button>
+    </div>
+  </div>
+
+  <!-- EDIT SERVICES POPUP — inline (no fixed positioning) — May 4, 2026 -->
+  <div class="discover-popup-wrap" id="discoverPopupWrap" aria-hidden="true">
+    <div class="discover-popup">
+      <div class="discover-popup-head">
+        <div>
+          <div class="discover-popup-title ff">YOUR STREAMING SERVICES</div>
+          <div class="discover-popup-sub">Saves to your Profile as your default. Bar toggles above override for this session.</div>
+        </div>
+        <button class="discover-popup-close" id="discoverPopupClose" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="discover-popup-body">
+        <div class="discover-popup-col discover-popup-col--country">
+          <span class="discover-popup-col-label ff">COUNTRY</span>
+          <select class="discover-popup-country" id="discoverPopupCountry">
+            <option value="AU">Australia</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="JP">Japan</option>
+            <option value="KR">South Korea</option>
+            <option value="IT">Italy</option>
+            <option value="ES">Spain</option>
+            <option value="NL">Netherlands</option>
+            <option value="BR">Brazil</option>
+            <option value="MX">Mexico</option>
+            <option value="IN">India</option>
+          </select>
+          <p class="discover-popup-country-note">Your country determines which services and titles are available to you.</p>
+        </div>
+        <div class="discover-popup-col discover-popup-col--providers">
+          <span class="discover-popup-col-label ff">SERVICES</span>
+          <div class="discover-popup-provider-grid" id="discoverPopupProviderGrid"></div>
+        </div>
+      </div>
+      <div class="discover-popup-footer">
+        <span class="discover-popup-footer-note">Saved to your Profile &middot; applies as default across ORBIT</span>
+        <div class="discover-popup-btns">
+          <button class="discover-popup-cancel orbit-btn orbit-btn--ghost" id="discoverPopupCancel" type="button">Cancel</button>
+          <button class="discover-popup-save orbit-btn orbit-btn--primary" id="discoverPopupSave" type="button">Save as default</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOVIE MOSAIC — Added May 1, 2026. Mirrors landing-page hero-mosaic.
+       12 cols × 2 rows of poster-aspect tiles. Populated by
+       loadDiscoverMosaicPosters() in discover.js. -->
+  <div class="discover-mosaic-region" aria-hidden="true">
+    <div class="hero-mosaic" id="discover-hero-mosaic">
+      <div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div>
+      <div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div><div class="mosaic-cell"></div>
+    </div>
+    <div class="mosaic-vignette-radial"></div>
+    <div class="mosaic-vignette-edge"></div>
+  </div>
+
   <!-- CINEMATIC BACKGROUND LAYERS -->
   <div class="background-layer"></div>
   <div class="film-grain"></div>
@@ -26,59 +109,232 @@
     <div class="stars"></div>
   </div>
 
-  <!-- HOME BUTTON -->
-  <a href="../index.html" class="home-button" title="Home">
-    <div class="home-icon">
-      <div class="outer-ring"></div>
-      <div class="inner-ring"></div>
-      <div class="center-dot"></div>
-    </div>
-  </a>
-
   <div class="app-shell">
-    <!-- CINEMATIC HEADER -->
-    <header class="orbit-header">
-      <div class="orbit-logo">
-        <div class="orbit-logo-mark">
-          <div class="orbit-ring"></div>
-          <div class="orbit-ring orbit-ring-2"></div>
-        </div>
-        <div class="orbit-logo-text">ORBIT</div>
-      </div>
-      <p class="orbit-tagline">Discover cinema through the intersection of infinite possibilities</p>
-    </header>
-
     <main class="orbit-main">
       <!-- MAIN SEARCH & CRITERIA CARD -->
       <section class="orbit-card" id="mainCard">
-        <header class="orbit-header-row">
-          <div class="orbit-header-center">
-            <h1 class="orbit-card-title">Build your orbit</h1>
-            <p class="orbit-card-subtitle">Select criteria to shape your cinematic universe.</p>
-          </div>
-        </header>
-
-        <!-- PRIMARY FILTER GRID (3×2) — cards built dynamically by JS -->
-        <div class="filter-grid" id="filterGrid">
-
-          <!-- MORE FILTERS (always last in grid) -->
-          <button class="more-filters-btn" id="moreFiltersBtn">
-            <span class="more-badge" id="moreBadge" hidden>0</span>
-            <div class="orbit-icon icon-more">
-              <div class="ring-outer"></div>
-              <div class="ring-inner"></div>
-              <div class="icon-core"></div>
-            </div>
-            <div class="section-text">
-              <h2>More Filters</h2>
-              <p>Themes, setting, source & more</p>
-            </div>
+        <!-- HEADLINE SECTION (collapsible — 2026-05-16) -->
+        <div class="section-container" data-section="headline">
+          <button class="section-collapse-toggle" type="button" aria-label="Collapse section" aria-expanded="true">
+            <span class="collapse-icon">&minus;</span>
           </button>
+          <header class="orbit-header-row">
+            <div class="orbit-header-center headline-carousel" id="headlineCarousel">
+              <div class="headline-message active" data-message="0">
+                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Every film that fits</span><span class="orbit-title-gold">what you actually want.</span></h1>
+                <p class="orbit-card-subtitle section-collapse-hide">Stack any combination of filters &mdash; then see exactly which films make your cut.</p>
+              </div>
+              <div class="headline-message" data-message="1">
+                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Don't know what to watch?</span><span class="orbit-title-gold">You came to the right place.</span></h1>
+                <p class="orbit-card-subtitle section-collapse-hide">Explore curated Quick Searches or build your perfect filter combination.</p>
+              </div>
+              <div class="headline-message headline-message-nav" data-message="2">
+                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Two More</span><span class="orbit-title-gold">Ways to Orbit</span></h1>
+                <div class="headline-nav-pills section-collapse-hide">
+                  <a class="headline-nav-pill headline-nav-pill--cyan" data-nav="quick-search" href="#quickSearchesSection">
+                    <span class="og og-bolt headline-nav-pill__icon" aria-hidden="true"></span>
+                    <span class="headline-nav-pill__text">
+                      <span class="headline-nav-pill__label">Quick Searches</span>
+                      <span class="headline-nav-pill__hint">Know what you want</span>
+                    </span>
+                    <svg class="headline-nav-pill__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                  </a>
+                  <a class="headline-nav-pill headline-nav-pill--gold" data-nav="randomizer" href="randomizer-hub.html">
+                    <span class="og og-dice headline-nav-pill__icon" aria-hidden="true"></span>
+                    <span class="headline-nav-pill__text">
+                      <span class="headline-nav-pill__label">Randomizer</span>
+                      <span class="headline-nav-pill__hint">Surprise me</span>
+                    </span>
+                    <svg class="headline-nav-pill__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="carousel-dots section-collapse-hide" role="tablist" aria-label="Headline rotation">
+                <button type="button" class="carousel-dot active" data-message-index="0" role="tab" aria-label="Show message 1" aria-selected="true"></button>
+                <button type="button" class="carousel-dot" data-message-index="1" role="tab" aria-label="Show message 2" aria-selected="false"></button>
+                <button type="button" class="carousel-dot" data-message-index="2" role="tab" aria-label="Show message 3" aria-selected="false"></button>
+              </div>
+            </div>
+          </header>
+        </div>
 
-          <!-- ACTION BUTTONS (row 3 of grid) -->
-          <button class="reset-orbit-btn" id="resetOrbitButton" hidden>Reset</button>
-          <button class="launch-orbit-btn" id="launchCard" disabled>Launch Discovery</button>
+        <!-- QUICK SEARCHES SECTION (collapsible — 2026-05-16; previously "QUICK STARTS" added May 1, 2026. Populated by initPresets() in discover.js.) -->
+        <div class="section-container" id="quickSearchesSection" data-section="quickSearches">
+          <button class="section-collapse-toggle" type="button" aria-label="Collapse section" aria-expanded="true">
+            <span class="collapse-icon">&minus;</span>
+          </button>
+          <div class="discover-presets-row">
+            <span class="discover-presets-label">QUICK SEARCHES</span>
+            <div class="discover-presets-actions section-collapse-hide">
+              <button class="discover-presets-shuffle" id="discoverPresetShuffle" type="button">&#x21bb; Shuffle</button>
+              <button class="discover-presets-show-all" id="discoverPresetShowAll" type="button" aria-haspopup="dialog" aria-controls="discoverPresetsModal">&#x2630; Show all</button>
+            </div>
+          </div>
+          <div class="discover-presets section-collapse-hide" id="discoverPresets"></div>
+        </div>
 
+        <!-- Divider between Quick Searches and primary filter grid -->
+        <div class="discover-presets-divider" aria-hidden="true"></div>
+
+        <!-- FILTER TABS SECTION (collapsible — 2026-05-16; ORBIT FILTER TABS added May 1, 2026.
+             Replaces the .filter-grid card grid. All 13 builders still
+             populate the same controls, just lazy-built into the active
+             panel on tab activation. Each panel has its own "Add to
+             orbit" button that mimics the original addToSearchButton
+             flow (sets currentSectionKey, runs collectLabelsForSection,
+             updates state.filters). -->
+        <div class="section-container" data-section="filterTabs">
+          <button class="section-collapse-toggle" type="button" aria-label="Collapse section" aria-expanded="true">
+            <span class="collapse-icon">&minus;</span>
+          </button>
+          <div class="orbit-filter-tabs" id="orbitFilterTabs">
+
+          <div class="oft-tab-bar" id="oftTabBar">
+            <div class="oft-tabs-scroll">
+              <button class="oft-tab oft-tab--active" data-tab="people" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-5 6-5s6 1.7 6 5"/></svg>People</button>
+              <button class="oft-tab" data-tab="genres" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="3" width="12" height="10" rx="1"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="6" y1="3" x2="6" y2="7"/><line x1="10" y1="3" x2="10" y2="7"/></svg>Genre</button>
+              <button class="oft-tab" data-tab="era" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="3" width="12" height="11" rx="1"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="5" y1="1" x2="5" y2="5"/><line x1="11" y1="1" x2="11" y2="5"/></svg>Era &amp; Release</button>
+              <button class="oft-tab" data-tab="ratings" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 1l1.8 3.6 4 .6-3 2.9.7 4L8 10.5l-3.5 1.6.7-4-3-2.9 4-.6z"/></svg>Ratings</button>
+              <button class="oft-tab" data-tab="awards" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 2l1.5 3.5 3.5.5-2.5 2.5.5 3.5L8 10.5l-3 1.5.5-3.5L3 6l3.5-.5z"/></svg>Awards</button>
+              <button class="oft-tab" data-tab="themes" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 1a4 4 0 0 1 4 4c0 2-1 3-2.5 4H6.5C5 9 4 8 4 5a4 4 0 0 1 4-4z"/><line x1="6.5" y1="12" x2="9.5" y2="12"/></svg>Themes</button>
+              <button class="oft-tab" data-tab="setting" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="6" r="2.5"/><path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5z"/></svg>Setting</button>
+              <button class="oft-tab" data-tab="source" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="1" width="8" height="12" rx="1"/><line x1="4" y1="5" x2="8" y2="5"/><line x1="4" y1="8" x2="8" y2="8"/><path d="M6 1h6a1 1 0 0 1 1 1v12"/></svg>Source</button>
+              <button class="oft-tab" data-tab="region" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c-1.7 2-2.5 3.8-2.5 6s.8 4 2.5 6M8 2c1.7 2 2.5 3.8 2.5 6s-.8 4-2.5 6"/></svg>Region</button>
+              <button class="oft-tab" data-tab="production" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="8" width="12" height="6" rx="1"/><path d="M4 8V5.5a4 4 0 0 1 8 0V8"/></svg>Production</button>
+              <button class="oft-tab" data-tab="watch" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><polygon points="4,2 14,8 4,14"/></svg>Stream</button>
+            </div>
+          </div>
+          <!-- Add-to-orbit button is JS-moved into the active panel's
+               .oft-panel-header on every tab activation. Parked here as
+               the static home (will be relocated on first paint). -->
+          <button class="orbit-btn orbit-btn--primary oft-tab-commit-btn" id="tabBarAddToOrbit" type="button">Add to orbit</button>
+
+          <div class="oft-panel-area" id="oftPanelArea">
+
+            <div class="oft-panel oft-panel--active" id="oft-panel-people" data-tab="people" data-section="people">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-people"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">People</h3>
+                  <p class="oft-panel-desc">Actors, directors, writers — search by name or describe the filmmaker</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-people"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-genres" data-tab="genres" data-section="genres">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-genres"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Genre &amp; Mood</h3>
+                  <p class="oft-panel-desc">Action, drama, horror &amp; more — combine genres or add keyword filters</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-genres"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-era" data-tab="era" data-section="timeEra">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-datetime"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Era &amp; Release</h3>
+                  <p class="oft-panel-desc">Year, decade, film length</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-era"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-ratings" data-tab="ratings" data-section="ratingsContent">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-ratings"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Ratings</h3>
+                  <p class="oft-panel-desc">Score range, vote reliability, age certification</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-ratings"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-awards" data-tab="awards" data-section="awards">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-awards"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Awards</h3>
+                  <p class="oft-panel-desc">Oscar, BAFTA, Cannes, Venice, Berlin, Golden Globe</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-awards"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-themes" data-tab="themes" data-section="themes">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-themes"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Themes</h3>
+                  <p class="oft-panel-desc">What the film is really about — beneath the genre</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-themes"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-setting" data-tab="setting" data-section="setting-combined">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-where"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Setting</h3>
+                  <p class="oft-panel-desc">Where and when the story takes place</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-setting"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-source" data-tab="source" data-section="source-combined">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-basedon"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Source &amp; Universe</h3>
+                  <p class="oft-panel-desc">Source material, franchise status, cinematic universes</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-source"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-region" data-tab="region" data-section="regionLanguage">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-region"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Region &amp; Language</h3>
+                  <p class="oft-panel-desc">Production origin and original language</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-region"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-production" data-tab="production" data-section="production">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-production"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Production &amp; Box Office</h3>
+                  <p class="oft-panel-desc">Studios, budget, revenue</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-production"></div>
+            </div>
+
+            <div class="oft-panel" id="oft-panel-watch" data-tab="watch" data-section="watch">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-watch"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Watch Providers</h3>
+                  <p class="oft-panel-desc">Filter to films on your active streaming services</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-watch"></div>
+            </div>
+
+          </div>
+
+          </div>
         </div>
       </section>
 
@@ -92,6 +348,38 @@
             </div>
             <button class="orbit-panel-toggle" id="orbitPanelToggle">⯈</button>
           </header>
+
+          <!-- LAUNCH — placed inside Your Orbit panel, below header divider -->
+          <div class="sidebar-actions">
+            <button class="launch-orbit-btn" id="launchCard" disabled>Launch Discovery</button>
+          </div>
+
+          <div class="orbit-ring-container" id="orbitRingContainer">
+            <svg class="orbit-ring-svg" viewBox="0 0 220 130"
+                 xmlns="http://www.w3.org/2000/svg" id="orbitRingSvg">
+              <circle cx="110" cy="65" r="55" fill="none"
+                      stroke="rgba(0,217,255,0.1)" stroke-width="1.5"
+                      stroke-dasharray="4 3"/>
+              <circle cx="110" cy="65" r="36" fill="none"
+                      stroke="rgba(0,217,255,0.16)" stroke-width="1"
+                      stroke-dasharray="3 2.5"/>
+              <circle cx="110" cy="65" r="19" fill="none"
+                      stroke="rgba(0,217,255,0.09)" stroke-width="1"
+                      stroke-dasharray="2 3"/>
+              <circle cx="110" cy="65" r="5" fill="rgba(0,217,255,0.2)"/>
+              <circle cx="110" cy="65" r="2.5" fill="#00d9ff" opacity="0.9"/>
+              <g id="orbitRingDots"></g>
+              <text x="110" y="120" text-anchor="middle"
+                    font-size="7.5" fill="rgba(0,217,255,0.28)"
+                    letter-spacing="1.5" font-family="monospace"
+                    id="orbitRingEmptyText">NO STARS IN ORBIT YET</text>
+            </svg>
+          </div>
+          <div class="orbit-film-count" id="orbitFilmCount" style="display:none;">
+            <span class="orbit-film-count-number" id="orbitFilmCountNumber">—</span>
+            <span class="orbit-film-count-label">films match</span>
+          </div>
+          <div class="orbit-streaming-warning" id="orbitStreamingWarning" style="display:none;"></div>
           <div class="orbit-panel-body" id="orbitFiltersEmpty">
             <p class="orbit-panel-empty">
               No criteria selected yet. Build your orbit by selecting filters.
@@ -101,82 +389,149 @@
             <!-- Filter chips injected here -->
           </div>
           <div class="orbit-panel-actions" id="orbitPanelActions" hidden>
-            <button class="btn-clear-all" id="clearAllButton">
-              Clear all
-            </button>
+            <button class="reset-orbit-btn" id="resetOrbitButton" hidden>Reset</button>
           </div>
         </aside>
 
-        <a href="../games/arcade.html" class="arcade-button" id="arcadeButton">
-          <div class="arcade-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <!-- Galaga bee ship -->
-              <rect x="14" y="2" width="4" height="4"/>
-              <rect x="12" y="6" width="8" height="4"/>
-              <rect x="10" y="10" width="12" height="4"/>
-              <rect x="4" y="8" width="6" height="8"/>
-              <rect x="22" y="8" width="6" height="8"/>
-              <rect x="2" y="12" width="4" height="6"/>
-              <rect x="26" y="12" width="4" height="6"/>
-              <rect x="8" y="14" width="4" height="10"/>
-              <rect x="20" y="14" width="4" height="10"/>
-              <rect x="12" y="14" width="8" height="6"/>
-              <rect x="14" y="20" width="4" height="8"/>
-              <rect x="6" y="24" width="4" height="4"/>
-              <rect x="22" y="24" width="4" height="4"/>
-            </svg>
-          </div>
-          <div class="arcade-text">
-            <h3>TRAVEL TO THE ARCADE</h3>
-            <p>Play daily games & challenges</p>
-          </div>
-          <div class="arcade-arrow">→</div>
-        </a>
       </div>
     </main>
   </div>
 
   <!-- FOCUS CARD OVERLAY -->
-  <div class="focus-overlay" id="focusOverlay" hidden>
+  <div class="focus-overlay" id="focusOverlay" data-orbit-popup hidden>
     <div class="focus-card" id="focusCard">
       <header class="focus-card-header">
         <h2 class="focus-card-title" id="focusTitle">Section</h2>
-        <button class="focus-close" id="focusCloseButton">✕</button>
+        <button class="focus-close orbit-close" id="focusCloseButton" aria-label="Close">✕</button>
       </header>
       <div class="focus-card-content" id="focusContent">
         <!-- Dynamic controls injected here -->
       </div>
       <footer class="focus-card-footer">
-        <button class="btn-primary" id="addToSearchButton">
-          Add to orbit
-        </button>
       </footer>
     </div>
   </div>
 
-  <!-- MORE FILTERS MODAL -->
-  <div class="more-filters-overlay" id="moreFiltersOverlay" hidden>
-    <div class="more-filters-modal">
-      <header class="more-filters-header">
-        <div>
-          <h2 class="more-filters-title">More Filters</h2>
-          <p class="more-filters-subtitle">Tap a filter to configure</p>
-        </div>
-        <button class="more-filters-close" id="moreFiltersClose">&times;</button>
+  <!-- ============================================================
+       DISCOVERY ONBOARDING POPUP — Added 2026-05-05
+       Inactivity-triggered guide (20s). Lifetime cap: 2 impressions.
+       Dismissal: CTA / ESC / overlay click / "don't show again".
+       Storage: orbit_discovery_popup_count, orbit_discovery_popup_dismissed
+       ============================================================ -->
+  <div class="discovery-onboarding-overlay" id="discoveryOnboardingOverlay" data-orbit-popup hidden>
+    <div class="discovery-onboarding-popup" role="dialog" aria-modal="true" aria-labelledby="discoveryOnboardingTitle">
+      <div class="discovery-onboarding-cosmic" aria-hidden="true"></div>
+      <div class="discovery-onboarding-stars" aria-hidden="true"></div>
+      <button type="button" class="orbit-close discovery-onboarding-close" aria-label="Close">&times;</button>
+
+      <div class="cinema-planet" aria-hidden="true">
+        <span class="og og-film cinema-planet-glyph"></span>
+      </div>
+      <div class="orbital-rings" aria-hidden="true">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+      </div>
+
+      <header class="discovery-onboarding-header">
+        <span class="orbit-indicator"><span class="og og-sparkle" aria-hidden="true"></span> Discovery Page</span>
+        <h1 class="discovery-onboarding-title" id="discoveryOnboardingTitle">Search the Overlap</h1>
+        <p class="discovery-onboarding-subtitle">Find films at the intersection of your criteria</p>
       </header>
-      <div class="more-filters-grid" id="moreFiltersGrid">
-        <!-- Secondary filter tiles built dynamically by JS -->
+
+      <div class="strips-container">
+        <section class="orbital-strip">
+          <span class="orbit-number">1</span>
+          <div class="strip-header">
+            <span class="og og-target strip-icon" aria-hidden="true"></span>
+            <h2 class="strip-title">Find What to Watch</h2>
+          </div>
+          <p class="strip-description">Search by the people, eras, genres, and streamers you want. We'll show you every film that matches ALL of them.</p>
+        </section>
+
+        <section class="orbital-strip">
+          <span class="orbit-number">2</span>
+          <div class="strip-header">
+            <span class="og og-books strip-icon" aria-hidden="true"></span>
+            <h2 class="strip-title">Or go deep — research the cinematic universe</h2>
+          </div>
+          <p class="strip-description">Explore filmographies. Track collaborations. Filter by decade and awards. This is cinema discovery at cinephile depth.</p>
+        </section>
+
+        <section class="orbital-strip">
+          <span class="orbit-number">3</span>
+          <div class="strip-header">
+            <span class="og og-bolt strip-icon" aria-hidden="true"></span>
+            <h2 class="strip-title">Quick Searches</h2>
+          </div>
+          <p class="strip-description">One-click entry to curated intersections:</p>
+          <div class="search-grid">
+            <button type="button" class="discover-preset discover-preset--cyan" data-onboarding-preset="Crime epics, 8.5+">
+              <span class="discover-preset-tag">GENRE &middot; RATING</span>
+              <span class="discover-preset-name">Crime epics, 8.5+</span>
+            </button>
+            <button type="button" class="discover-preset discover-preset--gold" data-onboarding-preset="Palme d'Or, 21st century">
+              <span class="discover-preset-tag">AWARDS &middot; ERA</span>
+              <span class="discover-preset-name">Palme d'Or, 21st century</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div class="cta-section">
+        <button type="button" class="cta-button" id="discoveryOnboardingCta">Start Searching</button>
+        <label class="checkbox-container">
+          <input type="checkbox" id="discoveryOnboardingDontShow">
+          <span>Don't show this again</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
+       Renders the full PRESET_POOL (all Quick Searches) in a grid.
+       Dismissal: X / ESC / backdrop click. Uses orbit-close.js for
+       Black Hole exit (Rule 17). Body scroll locked while open.
+       ============================================================ -->
+  <div class="discover-presets-modal" id="discoverPresetsModal" data-orbit-popup role="dialog" aria-modal="true" aria-labelledby="discoverPresetsModalTitle" hidden>
+    <div class="discover-presets-modal-backdrop" aria-hidden="true"></div>
+    <div class="discover-presets-modal-content">
+      <div class="discover-presets-modal-head">
+        <h2 class="discover-presets-modal-title" id="discoverPresetsModalTitle">Quick Searches</h2>
+        <button type="button" class="orbit-close discover-presets-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="discover-presets-modal-body">
+        <div class="discover-presets-modal-grid" id="discoverPresetsModalGrid"></div>
       </div>
     </div>
   </div>
 
   <script src="../config.js"></script>
   <script src="../orbit-utils.js"></script>
+  <script src="../orbit-close.js"></script>
   <script src="../utils.js"></script>
   <script src="../components/awards.js"></script>
+  <!-- 2026-05-17 (Awards Phase 2): async-fetch v1 awards data (2000-2026,
+       98.4% TMDB-resolved). Discover's hybrid query in discover.js
+       reads window.AWARDS_V1_DATA when available; legacy AWARDS_DATABASE
+       is the fallback (pre-2000 years + before v1 finishes loading). -->
+  <script>
+    fetch('../data/awards-data-v1.json')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        window.AWARDS_V1_DATA = data;
+        console.log('[Awards v1] Loaded:', data.meta && data.meta.row_count, 'rows');
+      })
+      .catch(function (err) {
+        console.warn('[Awards v1] Load failed — legacy fallback only:', err);
+        window.AWARDS_V1_DATA = null;
+      });
+  </script>
   <script src="../components/shortlist-service.js"></script>
   <script src="era-decade-map.js"></script>
   <script src="theme-taxonomy.js"></script>
+  <script src="../data/keyword-ids.js"></script>
   <script src="discover.js"></script>
   <script src="../components/shortlist-badge.js"></script>
 </body>

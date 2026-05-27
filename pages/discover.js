@@ -51,28 +51,34 @@ const GENRE_SVGS = {
   "Western": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="12" rx="6" ry="2"/><path d="M4 12Q3 8 8 4Q13 8 12 12"/><line x1="3" y1="10" x2="13" y2="10"/></svg>`
 };
 
+// TMDB keyword IDs — verified 2026-05-10 via TMDB /keyword/{id} API.
+// Replaces prior IDs that semantically collided (e.g. 9715=superhero was
+// mapped to Gritty/Fast-paced/Intense/Atmospheric; 10683=coming-of-age was
+// mapped to Uplifting/Quirky/Whimsical/Feel-good/Heartwarming; 818=based-on-
+// novel was mapped to Suspenseful/Twisted/Mind-bending). See keyword-ids.js
+// note re: the May 9, 2026 road-trip fix for related background.
 const KEYWORD_MAP = {
-  "Noir": 210024,
-  "Gritty": 9715,
-  "Dark": 207928,
-  "Uplifting": 10683,
-  "Quirky": 10683,
-  "Whimsical": 10683,
-  "Bleak": 207928,
-  "Slow-burn": 14537,
-  "Fast-paced": 9715,
-  "Intense": 9715,
-  "Suspenseful": 818,
-  "Emotional": 3205,
-  "Feel-good": 10683,
-  "Atmospheric": 9715,
-  "Cerebral": 4344,
-  "Twisted": 818,
-  "Violent": 9663,
-  "Gore": 12670,
-  "Family-friendly": 6054,
-  "Heartwarming": 10683,
-  "Mind-bending": 818
+  "Noir": 9807,             // "film noir" (1053 movies); plain "noir" splits into british/french/nordic/tech-noir variants
+  "Gritty": 286125,
+  "Dark": 10123,            // "dark comedy" — no plain "dark" tone keyword; narrows to comedy
+  "Uplifting": 334465,
+  "Quirky": 324713,         // reuses "whimsical" — exact "quirky" keyword has 0 movies on TMDB
+  "Whimsical": 324713,
+  "Bleak": 230747,
+  "Slow-burn": 277551,
+  "Fast-paced": 372235,     // exact match but very low coverage (1 movie); no better TMDB option
+  "Intense": 321464,
+  "Suspenseful": 314730,
+  "Emotional": 365954,
+  "Feel-good": 329716,
+  "Atmospheric": 155800,
+  "Cerebral": 12565,        // "psychological thriller" — no plain "cerebral" tone keyword; narrows to thriller
+  "Twisted": 243026,
+  "Violent": 342828,
+  "Gore": 10292,
+  "Family-friendly": 317983,
+  "Heartwarming": 319357,
+  "Mind-bending": 362567    // exact match but low coverage (5 movies); no better TMDB option
 };
 
 // =============================================
@@ -113,7 +119,8 @@ getSettingsData();
 
 const state = {
   filters: [],
-  genreLogic: "or"
+  genreLogic: "or",
+  regionLogic: "or"
 };
 
 const searchInput = document.getElementById("searchInput");
@@ -127,7 +134,6 @@ const focusOverlay = document.getElementById("focusOverlay");
 const focusTitle = document.getElementById("focusTitle");
 const focusContent = document.getElementById("focusContent");
 const focusCloseButton = document.getElementById("focusCloseButton");
-const addToSearchButton = document.getElementById("addToSearchButton");
 const orbitPanel = document.getElementById("orbitPanel");
 const orbitPanelToggle = document.getElementById("orbitPanelToggle");
 const orbitFiltersEmpty = document.getElementById("orbitFiltersEmpty");
@@ -349,56 +355,1097 @@ window.addEventListener('resize', () => {
   }
 });
 
-// ── Build filter grid + More modal from layout ──
+/* ============================================================
+   FILTER GRID — All filters rendered as primary cards.
+   "More Filters" modal removed May 1, 2026; full FILTER_REGISTRY
+   now lives directly in the front-page grid. Watch Providers gets
+   its dedicated streaming variant inline.
+   ============================================================ */
 (function buildFilterLayout() {
-  var registry = OrbitUtils.FILTER_REGISTRY;
-  var layout = OrbitUtils.store.get('orbit_search_layout') || OrbitUtils.DEFAULT_LAYOUT;
+  var registry = OrbitUtils && OrbitUtils.FILTER_REGISTRY;
   var filterGrid = document.getElementById('filterGrid');
-  var moreBtn = document.getElementById('moreFiltersBtn');
-  var moreGrid = document.getElementById('moreFiltersGrid');
-  if (!filterGrid || !moreBtn || !registry) return;
+  if (!filterGrid || !registry) return;
 
-  // Primary cards
-  layout.forEach(function(id) {
-    var def = registry.find(function(r) { return r.id === id; });
-    if (!def) return;
+  registry.forEach(function (def) {
     var btn = document.createElement('button');
-    btn.className = 'section-card';
+    var classes = 'section-card';
+    if (def.id === 'watch') classes += ' section-card--streaming';
+    btn.className = classes;
     btn.dataset.section = def.id;
+    var helper = def.id === 'watch'
+      ? '<span class="section-card-helper">Filter to films on your active services</span>'
+      : '';
     btn.innerHTML =
       '<div class="orbit-icon ' + def.iconClass + '">' +
         '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
       '</div>' +
-      '<div class="section-text"><h2>' + def.title + '</h2><p>' + def.subtitle + '</p></div>';
-    filterGrid.insertBefore(btn, moreBtn);
+      '<div class="section-text">' +
+        '<h2>' + def.title + '</h2>' +
+        '<p>' + def.subtitle + '</p>' +
+        helper +
+      '</div>';
+    filterGrid.appendChild(btn);
   });
+})();
 
-  // More modal tiles (everything not in layout)
-  if (moreGrid) {
-    var layoutSet = {};
-    layout.forEach(function(id) { layoutSet[id] = true; });
-    registry.filter(function(r) { return !layoutSet[r.id]; }).forEach(function(def) {
-      var tile = document.createElement('button');
-      tile.className = 'more-filter-tile';
-      tile.dataset.section = def.id;
-      tile.innerHTML =
-        '<div class="orbit-icon ' + def.iconClass + '">' +
-          '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
-        '</div>' +
-        '<span class="more-filter-label">' + def.title + '</span>';
-      moreGrid.appendChild(tile);
+/* ============================================================
+   STREAMING BAR — Interactive Pills + Edit Popup
+   Added May 4, 2026 (replaces initStreamingBar from May 1).
+
+   Storage keys (Rule 8):
+   - orbit_user_providers : profile default IDs array — read-only here
+   - orbit_user_country   : profile country code     — read-only here
+   - orbit_bar_providers  : bar active subset IDs    — read/write here
+
+   Watch tab keys (watchCountry, watchProviders) are NOT touched.
+   ============================================================ */
+(function initStreamingBarInteractive() {
+
+  // --- Profile defaults (read-only) ---
+  var profileProviderIds;
+  try { profileProviderIds = JSON.parse(localStorage.getItem('orbit_user_providers') || '[]'); }
+  catch (e) { profileProviderIds = []; }
+  var profileCountry =
+    localStorage.getItem('orbit_user_country') ||
+    localStorage.getItem('watchCountry') || 'US';
+
+  // --- Bar state (persists, starts as copy of profile) ---
+  var barProviderIds;
+  var rawBar = localStorage.getItem('orbit_bar_providers');
+  try { barProviderIds = rawBar ? JSON.parse(rawBar) : null; }
+  catch (e) { barProviderIds = null; }
+  if (!barProviderIds) {
+    barProviderIds = profileProviderIds.slice();
+    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
+  }
+
+  // Extended provider name map. Unknown IDs fall back to "Service N".
+  var PNAMES = {
+    2: 'Apple TV', 8: 'Netflix', 9: 'Amazon Prime', 10: 'Amazon Video',
+    11: 'MUBI', 15: 'Hulu', 21: 'MUBI', 100: 'MUBI',
+    119: 'Amazon Prime', 122: 'Peacock', 192: 'YouTube',
+    283: 'Crunchyroll', 337: 'Disney+', 350: 'Apple TV+',
+    384: 'Max', 386: 'Peacock', 531: 'Paramount+'
+  };
+
+  function getProviderName(id) { return PNAMES[id] || ('Service ' + id); }
+
+  function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
+    return true;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
 
-  // Update More button subtitle with remaining filter names
-  var layoutSet2 = {};
-  layout.forEach(function(id) { layoutSet2[id] = true; });
-  var secondaryNames = registry.filter(function(r) { return !layoutSet2[r.id]; })
-    .slice(0, 3).map(function(r) { return r.title.split(':')[0].trim(); });
-  var moreSubtitle = moreBtn.querySelector('.section-text p');
-  if (moreSubtitle && secondaryNames.length) {
-    moreSubtitle.textContent = secondaryNames.join(', ') + ' & more';
+  // --- Bar render ---
+  function renderBar() {
+    var bar       = document.getElementById('discoverStreamBar');
+    var container = document.getElementById('discoverStreamServices');
+    var countEl   = document.getElementById('discoverStreamCount');
+    var modBadge  = document.getElementById('discoverBarModified');
+    if (!container) return;
+
+    if (bar) {
+      var anyConfigured = profileProviderIds.length > 0 || barProviderIds.length > 0;
+      bar.classList.toggle('discover-stream-bar--empty', !anyConfigured);
+    }
+
+    // Show every ID the user has ever configured (profile ∪ bar) so
+    // off-state pills remain togglable back on.
+    var seen = {};
+    var allIds = [];
+    profileProviderIds.concat(barProviderIds).forEach(function (id) {
+      if (!seen[id]) { seen[id] = true; allIds.push(id); }
+    });
+
+    if (allIds.length === 0) {
+      container.innerHTML = '<span class="discover-stream-none">No streaming services configured — click Edit services to add some.</span>';
+    } else {
+      container.innerHTML = allIds.map(function (id) {
+        var name = getProviderName(id);
+        var isOn = barProviderIds.indexOf(id) > -1;
+        var cls  = 'discover-stream-pill' + (isOn ? '' : ' discover-stream-pill--off');
+        var titleAttr = isOn ? 'Click to exclude' : 'Click to include';
+        return '<span class="' + cls + '" data-provider-id="' + id +
+               '" title="' + titleAttr + '">' + escapeHtml(name) + '</span>';
+      }).join('');
+
+      Array.prototype.forEach.call(
+        container.querySelectorAll('.discover-stream-pill'),
+        function (pill) {
+          pill.addEventListener('click', function () {
+            toggleBarPill(parseInt(pill.dataset.providerId, 10));
+          });
+        }
+      );
+    }
+
+    if (countEl) {
+      countEl.innerHTML = '<strong>' + barProviderIds.length + '</strong> active';
+    }
+
+    var differs = !arraysEqual(
+      barProviderIds.slice().sort(),
+      profileProviderIds.slice().sort()
+    );
+    if (modBadge) modBadge.style.display = differs ? 'inline-block' : 'none';
+
+    window._discoverUserProviders = barProviderIds;
   }
+
+  function toggleBarPill(providerId) {
+    var idx = barProviderIds.indexOf(providerId);
+    if (idx > -1) barProviderIds.splice(idx, 1);
+    else barProviderIds.push(providerId);
+    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
+    renderBar();
+  }
+
+  // --- Popup ---
+  function openPopup() {
+    var wrap = document.getElementById('discoverPopupWrap');
+    var btn  = document.getElementById('discoverEditBtn');
+    if (!wrap) return;
+    wrap.classList.add('discover-popup-wrap--open');
+    wrap.setAttribute('aria-hidden', 'false');
+    if (btn) btn.classList.add('discover-edit-btn--open');
+
+    var countryEl = document.getElementById('discoverPopupCountry');
+    if (countryEl) {
+      countryEl.value = profileCountry;
+      loadPopupProviders(profileCountry);
+    }
+  }
+
+  function closePopup() {
+    var wrap = document.getElementById('discoverPopupWrap');
+    var btn  = document.getElementById('discoverEditBtn');
+    if (!wrap) return;
+    wrap.classList.remove('discover-popup-wrap--open');
+    wrap.setAttribute('aria-hidden', 'true');
+    if (btn) btn.classList.remove('discover-edit-btn--open');
+  }
+
+  function loadPopupProviders(countryCode) {
+    var grid = document.getElementById('discoverPopupProviderGrid');
+    if (!grid) return;
+    grid.innerHTML = '<span style="font-size:11px;color:var(--ghost-gray);font-style:italic;">Loading…</span>';
+
+    var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+    var url = 'https://api.themoviedb.org/3/watch/providers/movie?api_key=' +
+              encodeURIComponent(apiKey) +
+              '&watch_region=' + encodeURIComponent(countryCode) +
+              '&language=en-US';
+
+    fetch(url)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var providers = (data && data.results) ? data.results.slice(0, 40) : [];
+        renderPopupGrid(providers);
+      })
+      .catch(function () {
+        // Fallback: profile providers only
+        var fallback = profileProviderIds.map(function (id) {
+          return { provider_id: id, provider_name: getProviderName(id) };
+        });
+        renderPopupGrid(fallback);
+      });
+  }
+
+  function renderPopupGrid(providers) {
+    var grid = document.getElementById('discoverPopupProviderGrid');
+    if (!grid) return;
+
+    if (!providers.length) {
+      grid.innerHTML = '<span style="font-size:11px;color:var(--ghost-gray);font-style:italic;">No providers found for this region.</span>';
+      return;
+    }
+
+    grid.innerHTML = providers.map(function (p) {
+      var id = p.provider_id;
+      var name = p.provider_name || getProviderName(id);
+      var isOn = profileProviderIds.indexOf(id) > -1;
+      var cls = 'discover-popup-provider-pill' + (isOn ? ' discover-popup-provider-pill--on' : '');
+      return '<button class="' + cls + '" data-provider-id="' + id +
+             '" type="button">' + escapeHtml(name) + '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(
+      grid.querySelectorAll('.discover-popup-provider-pill'),
+      function (btn) {
+        btn.addEventListener('click', function () {
+          btn.classList.toggle('discover-popup-provider-pill--on');
+        });
+      }
+    );
+  }
+
+  function saveDefaults() {
+    var selected = Array.prototype.map.call(
+      document.querySelectorAll('.discover-popup-provider-pill--on'),
+      function (btn) { return parseInt(btn.dataset.providerId, 10); }
+    );
+    var countryEl = document.getElementById('discoverPopupCountry');
+    var country = (countryEl && countryEl.value) ? countryEl.value : profileCountry;
+
+    try {
+      localStorage.setItem('orbit_user_providers', JSON.stringify(selected));
+      localStorage.setItem('orbit_user_country', country);
+    } catch (e) {}
+
+    /* Best-effort sync with profile.js if it was loaded on this page.
+       On the discover page profile.js isn't included, so this is a no-op. */
+    if (typeof saveProviderSelections === 'function') {
+      try { saveProviderSelections(); } catch (e) {}
+    }
+
+    // Reset the in-memory profile reference + bar to match new defaults
+    profileProviderIds.length = 0;
+    selected.forEach(function (id) { profileProviderIds.push(id); });
+    profileCountry = country;
+    barProviderIds = selected.slice();
+    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
+
+    renderBar();
+    closePopup();
+  }
+
+  function resetBarToProfile() {
+    barProviderIds = profileProviderIds.slice();
+    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
+    renderBar();
+  }
+
+  // --- Event wiring ---
+  var editBtn   = document.getElementById('discoverEditBtn');
+  var closeBtn  = document.getElementById('discoverPopupClose');
+  var cancelBtn = document.getElementById('discoverPopupCancel');
+  var saveBtn   = document.getElementById('discoverPopupSave');
+  var modBadge  = document.getElementById('discoverBarModified');
+  var countryEl = document.getElementById('discoverPopupCountry');
+
+  if (editBtn)   editBtn.addEventListener('click', openPopup);
+  if (closeBtn)  closeBtn.addEventListener('click', closePopup);
+  if (cancelBtn) cancelBtn.addEventListener('click', closePopup);
+  if (saveBtn)   saveBtn.addEventListener('click', saveDefaults);
+  if (modBadge)  modBadge.addEventListener('click', resetBarToProfile);
+  if (countryEl) countryEl.addEventListener('change', function () {
+    loadPopupProviders(countryEl.value);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  renderBar();
+})();
+
+/* ============================================================
+   QUICK STARTS — Added May 1, 2026
+   Pool of 8 preset searches. 4 shown per visit, rotated daily
+   based on day-since-epoch index. Shuffle button reshuffles
+   on demand.
+
+   localStorage key reserved for future use:
+     orbit_discover_preset_day  (integer, day-since-epoch).
+     Not written or read this pass — placeholder for stickiness
+     when applyPreset() learns to wire into filter state.
+   ============================================================ */
+/* Preset shapes use existing collectLabelsForSection value schemas:
+   - genres:     { type: "genre", name }
+   - decade:     { type: "decade", decade: "1990", subType: "release" }
+   - region:     { type: "region", code, name }
+   - rating:     { type: "rating", min, max }
+   - festival:   { type: "award-festival", festival }    (capitalized: "Oscar", "Cannes")
+   - category:   { type: "award-category", category }    (full label: "Palme d'Or", "Best Picture")
+   - yearRange:  { type: "award-year-range", from, to }
+   Phase-1 presets relying on filmmaker_profile / watch_providers:'user' /
+   career_stage / language:'non-english' have been removed since those
+   filters do not exist yet. */
+/* ============================================================
+   PRESET_POOL — Rebuilt May 4, 2026
+   Index 0 is the spotlight (rotated in via shouldShowSpotlight()).
+   Indices 1-60 are evergreen presets, fisher-yates shuffled per visit.
+   Update spotlight `weekId` each Monday; flip `streamingNow` when the
+   spotlight title hits a streaming service.
+   ============================================================ */
+var PRESET_POOL = [
+  // SPOTLIGHT (index 0)
+  {
+    name: 'Music biopics, 2020s',
+    tag: 'IN CINEMAS',
+    color: 'spotlight',
+    spotlight: true,
+    weekId: '2026-W19',
+    streamingNow: false,
+    filters: {
+      genres: ['Drama', 'Music'],
+      decade: '2020',
+      keyword: { id: 9672, name: 'Based on true story' },
+      minRating: 7.0,
+      minVotes: 500
+    }
+  },
+
+  // AWARDS (8)
+  /* 2026-05-17: added `level: 'winner'` to the four "winner" presets
+     so the preset path pushes an award-level filter into state.
+     Without it, getAwardsMatchingIds returned winners + nominees +
+     in-competition entries (419 for Palme d'Or, 172 for Best Picture,
+     etc.). Requires the matching presetToStateFilters branch below. */
+  { name: "Palme d'Or, 21st century", tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Cannes', category: "Palme d'Or", yearFrom: 2000, level: 'winner' } } },
+  { name: 'Best Picture winners, 21st century', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Oscar', category: 'Best Picture', yearFrom: 2000, level: 'winner' } } },
+  { name: 'Golden Lion winners, post-2000', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Venice', category: 'Golden Lion', yearFrom: 2000, level: 'winner' } } },
+  { name: 'Golden Bear winners, post-2000', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Berlin', category: 'Golden Bear', yearFrom: 2000, level: 'winner' } } },
+  /* 2026-05-17: refined to last 10 years + winners only (was 1990+, all results). */
+  { name: 'Oscar Best International Film, 2015+', tag: 'AWARDS · REGION', color: 'gold',
+    filters: { awards: { festival: 'Oscar', category: 'Best International Feature Film', yearFrom: 2015, level: 'winner' } } },
+  { name: 'BAFTA Best Film, 21st century', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'BAFTA', category: 'Best Film', yearFrom: 2000, level: 'winner' } } },
+  { name: "Cannes Jury Prize, 1990s–2000s", tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Cannes', category: 'Jury Prize', yearFrom: 1990, yearTo: 2009, level: 'winner' } } },
+  /* 2026-05-17: fixed v1 category name ("Best Documentary Feature" → "Best
+     Documentary Feature Film") and added level:'winner'. v1 has 26 Oscar
+     Best Documentary Feature Film winners 1990-2025. */
+  { name: 'Oscar-winning documentaries', tag: 'AWARDS · GENRE', color: 'gold',
+    filters: { genres: ['Documentary'], awards: { festival: 'Oscar', category: 'Best Documentary Feature Film', yearFrom: 1990, level: 'winner' } } },
+
+  // REGION (12)
+  { name: '90s Hong Kong cinema', tag: 'REGION · DECADE', color: 'cyan',
+    filters: { region: { code: 'HK', name: 'Hong Kong' }, decade: '1990', minRating: 7.0, minVotes: 50 } },
+  { name: 'Korean thrillers, 7.5+, 2010s+', tag: 'REGION · GENRE', color: 'purple',
+    filters: { region: { code: 'KR', name: 'South Korea' }, genres: ['Thriller'], minRating: 7.5, releaseYearFrom: 2010 } },
+  { name: 'Japanese anime, 7.5+', tag: 'REGION · GENRE', color: 'green',
+    filters: { genres: ['Animation'], region: { code: 'JP', name: 'Japan' }, minRating: 7.5, minVotes: 1000, releaseYearFrom: 1990 } },
+  { name: 'French New Wave, 1950s–60s', tag: 'REGION · DECADE', color: 'indigo',
+    filters: { region: { code: 'FR', name: 'France' }, releaseYearFrom: 1950, releaseYearTo: 1969, minVotes: 300 } },
+  { name: 'Italian neo-realism classics', tag: 'REGION · GENRE', color: 'teal',
+    filters: { region: { code: 'IT', name: 'Italy' }, genres: ['Drama'], decade: '1950', minVotes: 50 } },
+  { name: 'New German Cinema, 1970s', tag: 'REGION · DECADE', color: 'orange',
+    filters: { region: { code: 'DE', name: 'Germany' }, decade: '1970', minVotes: 50 } },
+  { name: 'Iranian cinema, post-2000', tag: 'REGION · ERA', color: 'rose',
+    filters: { region: { code: 'IR', name: 'Iran' }, releaseYearFrom: 2000, minRating: 7.0, minVotes: 20 } },
+  { name: 'Classic Hollywood noir, 1940s, 7.5+', tag: 'REGION · DECADE', color: 'cyan',
+    filters: { region: { code: 'US', name: 'United States' }, genres: ['Crime', 'Drama'], decade: '1940', minRating: 7.5, minVotes: 25 } },
+  { name: 'Romanian New Wave', tag: 'REGION · ERA', color: 'purple',
+    filters: { region: { code: 'RO', name: 'Romania' }, decade: '2000', minVotes: 20 } },
+  { name: 'Nordic crime dramas', tag: 'REGION · GENRE', color: 'green',
+    filters: { region: { code: 'SE|NO|DK|FI|IS', name: 'Nordic' }, genres: ['Crime', 'Thriller'], minRating: 6.5, minVotes: 100 } },
+  { name: 'Latin American cinema, 2000s+', tag: 'REGION · DECADE', color: 'indigo',
+    filters: { region: { code: 'MX|BR|AR|CL|CO|PE', name: 'Latin America' }, releaseYearFrom: 2000, minVotes: 500 } },
+  /* 2026-05-17: tuned to rating 7-8 + minVotes 100 (verified ≈85 films). */
+  { name: 'Hindi drama classics, 2000s', tag: 'REGION · DECADE', color: 'teal',
+    filters: { region: { code: 'IN', name: 'India' }, genres: ['Drama'], language: 'hi', minRating: 7, maxRating: 8, decade: '2000' } },
+
+  // GENRE + ERA (15)
+  { name: '70s horror classics', tag: 'GENRE · DECADE', color: 'orange',
+    filters: { genres: ['Horror'], decade: '1970', minRating: 7.5 } },
+  { name: 'Sci-fi thrillers, 8.0+, 2010s+', tag: 'GENRE · RATING', color: 'rose',
+    filters: { genres: ['Science Fiction', 'Thriller'], minRating: 8.0, releaseYearFrom: 2010 } },
+  { name: '1980s sci-fi, 7.0+', tag: 'GENRE · DECADE', color: 'cyan',
+    filters: { genres: ['Science Fiction'], decade: '1980', minRating: 7.0 } },
+  { name: '1960s spy thrillers', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Action', 'Thriller'], decade: '1960' } },
+  { name: 'Film noir, 1940s–50s', tag: 'GENRE · DECADE', color: 'green',
+    filters: { genres: ['Crime', 'Drama'], releaseYearFrom: 1940, releaseYearTo: 1959, minVotes: 1000 } },
+  { name: 'Spaghetti westerns, 1960s–70s', tag: 'GENRE · DECADE', color: 'indigo',
+    filters: { genres: ['Western'], region: { code: 'IT', name: 'Italy' }, releaseYearFrom: 1960, releaseYearTo: 1979, minRating: 7.5 } },
+  { name: 'New Hollywood, early 1970s', tag: 'GENRE · DECADE', color: 'teal',
+    filters: { genres: ['Drama'], region: { code: 'US', name: 'United States' }, decade: '1970', minVotes: 500 } },
+  { name: 'Indie drama, 2000s', tag: 'GENRE · ERA', color: 'orange',
+    filters: { genres: ['Drama'], decade: '2000', minRating: 7.5 } },
+  { name: '1990s slasher horror', tag: 'GENRE · DECADE', color: 'rose',
+    filters: { genres: ['Horror'], decade: '1990' } },
+  { name: 'Contemporary animation, 2010s+', tag: 'GENRE · ERA', color: 'cyan',
+    filters: { genres: ['Animation'], releaseYearFrom: 2010, minVotes: 5000 } },
+  { name: 'Classic musicals, 1950s', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Music', 'Romance'], decade: '1950' } },
+  { name: '2020s prestige drama', tag: 'GENRE · ERA', color: 'green',
+    filters: { genres: ['Drama'], decade: '2020', minRating: 7.5 } },
+  { name: 'Silent era masterpieces', tag: 'GENRE · ERA', color: 'indigo',
+    filters: { genres: ['Drama'], decade: '1920', minRating: 7 } },
+  { name: '1980s action blockbusters', tag: 'GENRE · DECADE', color: 'teal',
+    filters: { genres: ['Action'], decade: '1980', minRating: 7.5 } },
+  { name: 'Psychological horror, 2010s+', tag: 'GENRE · ERA', color: 'orange',
+    filters: { genres: ['Horror', 'Thriller'], releaseYearFrom: 2010, minRating: 7, minVotes: 5000 } },
+
+  // RATING + MOOD (8)
+  /* 2026-05-17: loosened from 8.5/50k (returned 0) to 8.0/10k (~79). */
+  { name: 'Crime epics, 8.0+', tag: 'GENRE · RATING', color: 'rose',
+    filters: { genres: ['Crime', 'Drama'], minRating: 8.0, minVotes: 10000 } },
+  { name: 'Crime documentaries, 7.0+', tag: 'GENRE · RATING', color: 'cyan',
+    filters: { genres: ['Documentary'], keyword: { id: 307587, name: 'true crime' }, minRating: 7.0 } },
+  { name: 'War films, 8.0+', tag: 'GENRE · RATING', color: 'purple',
+    filters: { genres: ['War', 'Drama'], minRating: 8 } },
+  { name: 'Hidden gems, 7.5+ pre-1970', tag: 'RATING · ERA', color: 'green',
+    filters: { minRating: 7.5, releaseYearFrom: 1900, releaseYearTo: 1969, minVotes: 2000 } },
+  /* 2026-05-17: rating 8+ + votes 10k was too tight (only 8 results
+     after votes-bug fix). Loosened to 7.9+ + votes 1k. */
+  { name: 'Animation for adults, 8.0+', tag: 'GENRE · RATING', color: 'indigo',
+    filters: { genres: ['Animation'], minRating: 7.9, minVotes: 1000 } },
+  /* "Horror under 90 minutes" removed 2026-05-22: runtimeMax silently
+     dropped by the preset translator (no upper-bound runtime semantics),
+     so the preset returned all Horror films. Re-add only after the
+     translator gains with_runtime.lte support. */
+  /* "Epic cinema, 8.0+" — runtimeMax dropped (no upper-bound semantics
+     in current preset translator). Will gain a min-runtime filter when
+     buildTMDBQueryFromFilters is extended.
+     2026-05-17: votes 20k → 10k, tag updated to 'RATING' (no genre filter). */
+  { name: 'Epic cinema, 8.0+', tag: 'RATING', color: 'teal',
+    filters: { minRating: 8.0, minVotes: 10000 } },
+  { name: 'Romance, 8.0+, 2000s+', tag: 'GENRE · RATING', color: 'orange',
+    filters: { genres: ['Romance', 'Drama'], minRating: 8.0, releaseYearFrom: 2000 } },
+
+  // SOURCE + MOOD (7)
+  { name: 'Drama novels, 7.0–8.5', tag: 'SOURCE · RATING', color: 'rose',
+    filters: { genres: ['Drama'], keyword: { id: 818, name: 'Based on novel' }, minRating: 7.0, maxRating: 8.5, minVotes: 5000 } },
+  { name: 'True crime, 7.5+, 2000s+', tag: 'GENRE · SOURCE', color: 'cyan',
+    filters: { genres: ['Crime', 'Thriller'], keyword: { id: 9672, name: 'Based on true story' }, minRating: 7.5, releaseYearFrom: 2000 } },
+  { name: 'Coming-of-age, 1980s', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Drama'], keyword: { id: 10683, name: 'Coming of age' }, releaseYearFrom: 1980, releaseYearTo: 1989, minRating: 7.0 } },
+  { name: 'Heist films, 2000s', tag: 'GENRE · ERA', color: 'green',
+    filters: { genres: ['Crime', 'Thriller'], decade: '2000', keyword: { id: 10051, name: 'Heist' } } },
+  { name: 'Supernatural horror, 1970s–80s', tag: 'GENRE · DECADE', color: 'indigo',
+    filters: { genres: ['Horror'], releaseYearFrom: 1970, releaseYearTo: 1989, minVotes: 1000 } },
+  { name: 'Road movies, 6.5+, 1970s-90s', tag: 'GENRE · THEME', color: 'teal',
+    filters: { genres: ['Drama', 'Adventure'], keyword: { id: 7312, name: 'Road trip' }, minRating: 6.5, releaseYearFrom: 1970, releaseYearTo: 1999 } },
+  { name: 'Courtroom dramas', tag: 'GENRE · THEME', color: 'orange',
+    filters: { genres: ['Drama', 'Thriller'], keyword: { id: 33519, name: 'Courtroom drama' }, minRating: 7.0, minVotes: 1000 } },
+
+  // FRANCHISES (was 9, now 13 — 2026-05-16: dropped standalone Alien
+  // and Predator entries, merged into "Alien vs. Predator Universe"
+  // via multiCollections; added 6 new collection-based franchises)
+  /* 2026-05-16: slug-based extended collection. The ids live in
+     EXTENDED_COLLECTIONS['wizarding-world']; presetToStateFilters
+     detects the string id and rewrites to a movieList universe
+     filter at apply time. */
+  { name: 'The Wizarding World', tag: 'FRANCHISE', color: 'rose',
+    description: 'Harry Potter and Fantastic Beasts films',
+    filters: { collection: { id: 'wizarding-world', name: 'The Wizarding World' } } },
+  /* 2026-05-16: corrected 735 → 115762. TMDB ID 735 is the
+     "Blade Collection" (Wesley Snipes vampire films), NOT Alien
+     vs. Predator. 115762 is the actual AVP Collection. */
+  { name: 'Alien vs. Predator Universe', tag: 'FRANCHISE', color: 'cyan',
+    description: 'All Alien, Predator, and crossover films',
+    filters: { multiCollections: [
+      { id: 8091,   name: 'Alien Collection' },
+      { id: 399,    name: 'Predator Collection' },
+      { id: 115762, name: 'AVP Collection' }
+    ] } },
+  /* 2026-05-16: switched from broad Action+Thriller+UK (returned ~4,835
+     films) to TMDB James Bond Collection (id 645, ~27 films). Matches
+     the HP / MI / Star Wars / LOTR / MCU preset pattern. */
+  { name: 'James Bond saga', tag: 'FRANCHISE', color: 'purple',
+    filters: { collection: { id: 645, name: 'James Bond Collection' } } },
+  /* 2026-05-16: TMDB ID 131295 is "Captain America Collection" (4 films),
+     NOT the MCU. The MCU is split across ~25 TMDB collections plus
+     standalones. The clean path is TMDB keyword 180547 ("marvel
+     cinematic universe (mcu)") which tags every MCU film — handled
+     via universesKeyword → universes section → with_keywords. */
+  { name: 'Marvel Cinematic Universe', tag: 'FRANCHISE', color: 'green',
+    filters: { universesKeyword: { id: 180547, name: 'Marvel Cinematic Universe' } } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['star-wars']
+     (Skywalker saga + Rogue One + Solo + Mando & Grogu = 12 films). */
+  { name: 'Star Wars', tag: 'FRANCHISE', color: 'indigo',
+    filters: { collection: { id: 'star-wars', name: 'Star Wars' } } },
+  /* 2026-05-16: added Hobbit Collection (121938) alongside LOTR
+     (119). Dropped genre filters — the multi-collection alone
+     defines the franchise. */
+  { name: 'Middle-earth films', tag: 'FRANCHISE', color: 'teal',
+    filters: { multiCollections: [
+      { id: 119,    name: 'The Lord of the Rings Collection' },
+      { id: 121938, name: 'The Hobbit Collection' }
+    ] } },
+  /* 2026-05-16: dropped Action+Thriller genres — collection alone
+     defines the franchise; AND-semantics genre filters were
+     reducing the count below the collection's natural size. */
+  { name: 'Mission: Impossible series', tag: 'FRANCHISE', color: 'orange',
+    filters: { collection: { id: 87359, name: 'Mission: Impossible Collection' } } },
+  { name: 'Indiana Jones saga', tag: 'FRANCHISE', color: 'rose',
+    description: 'Archaeology adventures across decades',
+    filters: { collection: { id: 84, name: 'Indiana Jones Collection' } } },
+  { name: 'Jurassic Park/World', tag: 'FRANCHISE', color: 'cyan',
+    description: 'Dinosaurs from \'93 to now',
+    filters: { collection: { id: 328, name: 'Jurassic Park Collection' } } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['fast-furious']
+     (main 11 + Hobbs & Shaw = 12 films). */
+  { name: 'Fast & Furious', tag: 'FRANCHISE', color: 'purple',
+    description: 'Street racing to global heists',
+    filters: { collection: { id: 'fast-furious', name: 'Fast & Furious' } } },
+  { name: 'Bourne series', tag: 'FRANCHISE', color: 'green',
+    description: 'Espionage thriller saga',
+    filters: { collection: { id: 31562, name: 'The Bourne Collection' } } },
+  /* 2026-05-16: added Creed Collection (553717) alongside Rocky
+     (1575) so all 9 films appear. */
+  { name: 'Rocky & Creed', tag: 'FRANCHISE', color: 'indigo',
+    description: 'Boxing legacy spanning 50 years',
+    filters: { multiCollections: [
+      { id: 1575,   name: 'Rocky Collection' },
+      { id: 553717, name: 'Creed Collection' }
+    ] } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['planet-apes']
+     (original 5 + Burton + modern 4 = 10 films). */
+  { name: 'Planet of the Apes', tag: 'FRANCHISE', color: 'teal',
+    description: 'Evolution across timelines',
+    filters: { collection: { id: 'planet-apes', name: 'Planet of the Apes' } } },
+  /* 2026-05-26: Horror franchises mega-preset — 27 TMDB collections, 149
+     films total (144 released + 5 unreleased). Major slasher, supernatural,
+     and Asian horror series with 3+ films each. Freddy vs. Jason is
+     already inside Friday the 13th Collection (9735); Wes Craven's New
+     Nightmare is inside Elm Street Collection (8581). Texas Chainsaw is
+     split across TMDB into the original series + 2003 reboot duology, and
+     Ju-on across original + reboot + 2009 anthology — all branches included
+     for full coverage. Conjuring Universe bundled here (Conjuring +
+     Annabelle + Nun + La Llorona) rather than a separate preset. */
+  { name: 'Horror franchises', tag: 'FRANCHISE · GENRE', color: 'rose',
+    description: 'Major horror series with 3+ films',
+    filters: { multiCollections: [
+      { id: 91361,   name: 'Halloween Collection' },
+      { id: 9735,    name: 'Friday the 13th Collection' },
+      { id: 8581,    name: 'A Nightmare on Elm Street Collection' },
+      { id: 2602,    name: 'Scream Collection' },
+      { id: 656,     name: 'Saw Collection' },
+      { id: 8917,    name: 'Hellraiser Collection' },
+      { id: 10455,   name: "Child's Play Collection" },
+      { id: 8864,    name: 'Final Destination Collection' },
+      { id: 228446,  name: 'Insidious Collection' },
+      { id: 41437,   name: 'Paranormal Activity Collection' },
+      { id: 256322,  name: 'The Purge Collection' },
+      { id: 111751,  name: 'Texas Chainsaw Massacre Collection' },
+      { id: 425175,  name: 'Texas Chainsaw (Reboot) Collection' },
+      { id: 12263,   name: 'The Exorcist Collection' },
+      { id: 1960,    name: 'Evil Dead Collection' },
+      { id: 98580,   name: 'Candyman Collection' },
+      { id: 313086,  name: 'The Conjuring Collection' },
+      { id: 402074,  name: 'Annabelle Collection' },
+      { id: 968052,  name: 'The Nun Collection' },
+      { id: 1533646, name: 'La Llorona Collection' },
+      { id: 432,     name: 'Cube Collection' },
+      { id: 14563,   name: 'The Ring Collection' },
+      { id: 93369,   name: 'Ringu Collection' },
+      { id: 1974,    name: 'The Grudge Collection' },
+      { id: 1972,    name: 'Ju-on Collection' },
+      { id: 1246435, name: 'Ju-on (Reboot) Collection' },
+      { id: 1246426, name: 'Ju-on (2009) Collection' }
+    ] } },
+
+  // TIME TRAVEL (1)
+  { name: 'Time travel adventures', tag: 'GENRE · CONCEPT', color: 'orange',
+    filters: { genres: ['Science Fiction', 'Adventure'], keyword: { id: 4379, name: 'Time travel' }, minRating: 7.0, minVotes: 3000 } }
+];
+
+function getTodayIndex() { return Math.floor(Date.now() / 86400000); }
+
+/* ============================================================
+   SPOTLIGHT ROTATION — Added May 4, 2026
+
+   - Spotlight is always PRESET_POOL[0]
+   - Appears at position 0 of the 5 shown when earned
+   - Random every 2nd or 3rd visit, never consecutive
+   - Caps at 3 views per ISO week, then rests until next week
+   - Visit counter increments only on page-load (not on Shuffle)
+
+   Storage keys:
+   - orbit_visit_count            number — page-load count
+   - orbit_spotlight_last_shown   "true" / "false"
+   - orbit_spotlight_week         current ISO week, e.g. "2026-W19"
+   - orbit_spotlight_views        views this week
+   - orbit_last_preset_indices    JSON array of last evergreen picks
+   ============================================================ */
+
+function getISOWeek() {
+  var now = new Date();
+  var jan4 = new Date(now.getFullYear(), 0, 4);
+  var weekNo = Math.ceil(((now - jan4) / 86400000 + jan4.getDay() + 1) / 7);
+  return now.getFullYear() + '-W' + String(weekNo).padStart(2, '0');
+}
+
+function shouldShowSpotlight() {
+  var spotlight = PRESET_POOL[0];
+  if (!spotlight || !spotlight.spotlight) return false;
+
+  var currentWeek = getISOWeek();
+  var spotlightWeek = localStorage.getItem('orbit_spotlight_week') || '';
+  var lastShown = localStorage.getItem('orbit_spotlight_last_shown') === 'true';
+  var views = parseInt(localStorage.getItem('orbit_spotlight_views') || '0', 10);
+
+  /* Never show twice in a row */
+  if (lastShown) return false;
+
+  /* Reset weekly view count if we've crossed into a new ISO week */
+  if (spotlightWeek !== currentWeek) {
+    localStorage.setItem('orbit_spotlight_views', '0');
+    localStorage.setItem('orbit_spotlight_week', currentWeek);
+    views = 0;
+  }
+
+  /* Cap at 3 views per week */
+  if (views >= 3) return false;
+
+  /* Random gating: every 2nd or 3rd visit */
+  var gap = Math.random() < 0.5 ? 2 : 3;
+  var visitCount = parseInt(localStorage.getItem('orbit_visit_count') || '0', 10);
+  return visitCount % gap === 0;
+}
+
+function recordSpotlightView() {
+  var currentWeek = getISOWeek();
+  var storedWeek = localStorage.getItem('orbit_spotlight_week') || '';
+  var views = storedWeek === currentWeek
+    ? parseInt(localStorage.getItem('orbit_spotlight_views') || '0', 10)
+    : 0;
+  localStorage.setItem('orbit_spotlight_week', currentWeek);
+  localStorage.setItem('orbit_spotlight_views', String(views + 1));
+  localStorage.setItem('orbit_spotlight_last_shown', 'true');
+}
+
+/* Fisher–Yates shuffle of indices 1..N (excludes spotlight at 0). */
+function shuffleEvergreenIndices() {
+  var indices = [];
+  for (var i = 1; i < PRESET_POOL.length; i++) indices.push(i);
+  for (var j = indices.length - 1; j > 0; j--) {
+    var k = Math.floor(Math.random() * (j + 1));
+    var tmp = indices[j]; indices[j] = indices[k]; indices[k] = tmp;
+  }
+  return indices;
+}
+
+/* Pick 5 evergreen presets, avoiding the previous batch where possible. */
+function pickEvergreens(count) {
+  var lastRaw = localStorage.getItem('orbit_last_preset_indices') || '[]';
+  var lastSet = {};
+  try {
+    JSON.parse(lastRaw).forEach(function (idx) { lastSet[idx] = true; });
+  } catch (e) { /* corrupted — start fresh */ }
+
+  var shuffled = shuffleEvergreenIndices();
+  var fresh = shuffled.filter(function (idx) { return !lastSet[idx]; });
+  var stale = shuffled.filter(function (idx) {  return  lastSet[idx]; });
+
+  /* Prefer fresh picks; fall back to stale ones if fewer than `count` fresh. */
+  var picks = fresh.slice(0, count);
+  if (picks.length < count) {
+    picks = picks.concat(stale.slice(0, count - picks.length));
+  }
+  localStorage.setItem('orbit_last_preset_indices', JSON.stringify(picks));
+  return picks.map(function (idx) { return PRESET_POOL[idx]; });
+}
+
+function getActivePresets(count) {
+  count = (typeof count === 'number' && count > 0) ? count : 5;
+  if (shouldShowSpotlight()) {
+    recordSpotlightView();
+    return [PRESET_POOL[0]].concat(pickEvergreens(count - 1));
+  }
+  localStorage.setItem('orbit_spotlight_last_shown', 'false');
+  return pickEvergreens(count);
+}
+
+/* Returns the number of preset tiles to render based on which other
+   sections are collapsed. Collapsing a section frees vertical space;
+   Quick Searches fills that space with additional tile rows.
+     • Both expanded → 5 tiles (1 row × 5)
+     • Headline collapsed only → 10 tiles (2 rows × 5)
+     • Filter tabs collapsed only → 25 tiles (5 rows × 5)
+     • Both collapsed → 35 tiles (7 rows × 5)
+   Reads from the live DOM so callers don't need to thread state. */
+function getActivePresetCount() {
+  var headline = document.querySelector('.section-container[data-section="headline"]');
+  var filterTabs = document.querySelector('.section-container[data-section="filterTabs"]');
+  var headlineCollapsed = !!(headline && headline.classList.contains('collapsed'));
+  var tabsCollapsed = !!(filterTabs && filterTabs.classList.contains('collapsed'));
+  if (headlineCollapsed && tabsCollapsed) return 35;
+  if (tabsCollapsed) return 25;
+  if (headlineCollapsed) return 10;
+  return 5;
+}
+
+/* ============================================================
+   PRESET → GLYPH MAPPING — Added 2026-05-24 (Phase 2)
+   Maps a preset to its T2 Quick Search glyph class. First word of
+   the tag wins for compound tags ('GENRE · DECADE' → og-qs-genre).
+   Returns null for the spotlight tile so it keeps its loud
+   "NOW STREAMING / IN CINEMAS" badge identity untouched.
+   T2 glyph definitions live in components/orbit-glyphs-v2.css.
+   ============================================================ */
+function getPresetGlyphClass(preset) {
+  // Spotlight gets no glyph - already has "NOW STREAMING" badge
+  if (preset.tag === 'IN CINEMAS') return null;
+
+  // First word wins for compound tags
+  const firstWord = preset.tag.split(' · ')[0];
+
+  const glyphMap = {
+    'FRANCHISE': 'og-qs-franchise',
+    'AWARDS': 'og-qs-awards',
+    'GENRE': 'og-qs-genre',
+    'REGION': 'og-qs-region',
+    'RATING': 'og-qs-ratings',  // Discovery tab glyph, but semantically fits
+    'SOURCE': 'og-qs-source',   // Discovery tab glyph, but semantically fits
+    // These should never be first word based on the data, but handle anyway:
+    'DECADE': 'og-qs-decade',
+    'ERA': 'og-qs-era',
+    'THEME': 'og-qs-theme',
+    'CONCEPT': 'og-qs-theme'    // CONCEPT maps to theme glyph
+  };
+
+  return glyphMap[firstWord] || 'og-qs-genre'; // fallback
+}
+
+function renderPresets(presets) {
+  var container = document.getElementById('discoverPresets');
+  if (!container) return;
+  container.innerHTML = presets.map(function (p, i) {
+    var isSpotlight = p.color === 'spotlight';
+    var classes = 'discover-preset discover-preset--' + p.color;
+    if (isSpotlight) classes += ' discover-preset--spotlight';
+    var tagClass = 'discover-preset-tag' + (isSpotlight ? ' discover-preset-tag--live' : '');
+    var tagText  = isSpotlight
+      ? (p.streamingNow ? '● NOW STREAMING' : '● IN CINEMAS')
+      : p.tag;
+    var glyphClass = getPresetGlyphClass(p);
+    var glyphSpan  = glyphClass ? '<span class="og-qs ' + glyphClass + ' discover-preset-glyph" aria-hidden="true"></span>' : '';
+    /* 2026-05-24 Phase 3 — Hybrid B decorations: corner color "sun"
+       glow + tinted badge wrapping the glyph. CSS does the positioning. */
+    var decorations = glyphClass
+      ? '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+        '<span class="discover-preset-badge" aria-hidden="true">' + glyphSpan + '</span>'
+      : '';
+    var tagSpan  = '<span class="' + tagClass + '">' + tagText + '</span>';
+    var nameSpan = '<span class="discover-preset-name">' + p.name + '</span>';
+    /* Spotlight keeps tag-first (loud amber badge on top). Non-spotlight
+       emits glow + badge + name + label (tag), DOM order matches visual. */
+    var inner = isSpotlight ? (tagSpan + nameSpan) : (decorations + nameSpan + tagSpan);
+    return '<button class="' + classes + '" type="button" data-preset="' + i + '">' + inner + '</button>';
+  }).join('');
+  container.querySelectorAll('.discover-preset').forEach(function (btn, i) {
+    btn.addEventListener('click', function () { applyPreset(presets[i]); });
+  });
+  applyCompactClasses(container);
+}
+
+/* ============================================================
+   COMPACT-TILE SIZER — Added 2026-05-24 (Phase 3.1)
+   After tiles are in the DOM, measure each non-spotlight preset
+   name and add `discover-preset--compact` when it renders in
+   ≤ 2 lines. CSS bumps name + label font-size by 5% for those
+   tiles. Measure at base size first — the 5% step is small so
+   borderline cases don't flip in practice (brief accepts this).
+   Skips spotlight and tiles with no name element. Safe to call
+   multiple times — classList.add is idempotent.
+   ============================================================ */
+function applyCompactClasses(rootEl) {
+  if (!rootEl) return;
+  var tiles = rootEl.querySelectorAll('.discover-preset:not(.discover-preset--spotlight)');
+  tiles.forEach(function (tile) {
+    var name = tile.querySelector('.discover-preset-name');
+    if (!name) return;
+    var s = getComputedStyle(name);
+    var fontSize = parseFloat(s.fontSize);
+    var lhRaw = s.lineHeight;
+    var lh;
+    if (lhRaw === 'normal') {
+      lh = fontSize * 1.3;
+    } else if (lhRaw.indexOf('px') !== -1) {
+      lh = parseFloat(lhRaw);
+    } else {
+      var n = parseFloat(lhRaw);
+      lh = !isNaN(n) ? fontSize * n : fontSize * 1.3;
+    }
+    if (!lh || lh <= 0) return;
+    var lineCount = Math.round(name.scrollHeight / lh);
+    if (lineCount <= 2) tile.classList.add('discover-preset--compact');
+  });
+}
+
+/* ============================================================
+   PRESET TRANSLATOR — Wired May 2, 2026
+   Translates a Quick Start preset into state.filters entries
+   matching the shapes produced by collectLabelsForSection, then
+   replaces state.filters and refreshes UI.
+   ============================================================ */
+function presetToStateFilters(preset) {
+  var f = preset.filters || {};
+  var entries = [];
+  function push(section, label, value) {
+    entries.push({ id: section + '-' + label, section: section, label: label, value: value });
+  }
+
+  if (Array.isArray(f.genres)) {
+    f.genres.forEach(function (g) {
+      push('genres', g, { type: 'genre', name: g });
+    });
+  }
+
+  if (f.decade) {
+    var decadeStr = String(f.decade).replace(/s$/, '');
+    push('timeEra', decadeStr + 's', { type: 'decade', decade: decadeStr, subType: 'release' });
+  }
+
+  /* 2026-05-23: releaseYearFrom/To → dateRange entry. Without this branch
+     these keys were silently dropped at the preset→state step, leaving
+     presets like "Japanese anime, 1990s-2000s" unbounded by year and
+     hitting TMDB's 9,999+ cap. buildTMDBQueryFromFilters already supports
+     `type: 'dateRange'` (line ~2524). */
+  if (f.releaseYearFrom || f.releaseYearTo) {
+    var fromYear = f.releaseYearFrom || 1900;
+    var toYear = f.releaseYearTo || new Date().getFullYear();
+    push('timeEra', fromYear + '–' + toYear, {
+      type: 'dateRange',
+      start: fromYear + '-01-01',
+      end: toYear + '-12-31'
+    });
+  }
+
+  if (typeof f.minRating === 'number') {
+    var ratingMin = f.minRating;
+    var ratingMax = typeof f.maxRating === 'number' ? f.maxRating : 10;
+    push('ratingsContent',
+      'Rating: ' + ratingMin.toFixed(1) + '-' + ratingMax.toFixed(1),
+      { type: 'rating', min: ratingMin, max: ratingMax });
+  }
+
+  if (f.region && f.region.code) {
+    push('regionLanguage',
+      'Region: ' + f.region.name,
+      { type: 'region', code: f.region.code, name: f.region.name });
+  }
+
+  if (f.awards) {
+    var a = f.awards;
+    if (a.festival) {
+      push('awards', a.festival, { type: 'award-festival', festival: a.festival });
+    }
+    if (a.category) {
+      push('awards', a.category, { type: 'award-category', category: a.category });
+    }
+    /* 2026-05-17: push level filter when the preset says "winner" or
+       "nominee" — without this, getAwardsMatchingIds matched both
+       winners and nominees (also: in-competition Cannes entries with
+       won:false), inflating "Palme d'Or winners" to 419 etc. */
+    if (a.level === 'winner' || a.level === 'nominee') {
+      push('awards', a.level === 'winner' ? 'Winner' : 'Nominee',
+        { type: 'award-level', level: a.level });
+    }
+    if (a.yearFrom || a.yearTo) {
+      var from = a.yearFrom || 1950;
+      var to = a.yearTo || 2025;
+      push('awards',
+        from === to ? 'Year: ' + from : 'Years: ' + from + '–' + to,
+        { type: 'award-year-range', from: from, to: to });
+    }
+  }
+
+  /* ============================================================
+     EXTENDED PRESET KEYS — Added May 4, 2026
+     Known limitation: source/studio/theme/language preset chips
+     appear in the orbit sidebar with the right label and colour but
+     do NOT yet contribute to the TMDB query unless the corresponding
+     buildTMDBQueryFromFilters branch can resolve them (e.g. theme
+     names that exist in KEYWORD_MAP, or studios with numeric ids).
+     Extending buildTMDBQueryFromFilters is a follow-up task.
+     ============================================================ */
+
+  if (f.source) {
+    push('basedOn', f.source, { type: 'source', name: f.source });
+  }
+
+  if (f.studio) {
+    push('production', f.studio, { type: 'studio', name: f.studio });
+  }
+
+  if (f.theme) {
+    push('themes', f.theme, { type: 'theme', name: f.theme });
+  }
+
+  if (typeof f.runtimeMax === 'number') {
+    var runtimeLabel = f.runtimeMax <= 90 ? 'Under 90 min'
+      : f.runtimeMax <= 120 ? 'Under 2 hours'
+      : 'Custom runtime';
+    push('timeEra', runtimeLabel,
+      { type: 'runtime', max: f.runtimeMax });
+    /* Re-key the entry so two presets with different runtimeMax don't
+       collide on the same id. */
+    entries[entries.length - 1].id = 'timeEra-runtime-' + f.runtimeMax;
+  }
+
+  if (f.language) {
+    /* 2026-05-17: fixed field name from `language` → `code`. The query
+       builder's regionLanguage case reads `filter.value.code`, so the
+       preset path was emitting with_original_language=undefined and
+       zeroing out result sets (e.g. "Indian parallel cinema"). */
+    push('regionLanguage', 'Language: ' + f.language,
+      { type: 'language', code: f.language });
+    entries[entries.length - 1].id = 'regionLanguage-language-' + f.language;
+  }
+
+  if (typeof f.minVotes === 'number') {
+    /* 2026-05-17: type was 'minVotes' but buildTMDBQueryFromFilters'
+       ratingsContent case (line ~2336) reads `type === 'votes'`, so
+       presets with minVotes were silently dropping their vote-count
+       gate. Aligning with the manual Ratings-tab chip path which
+       already uses { type: 'votes', min: N }. */
+    push('ratingsContent',
+      'Min votes: ' + f.minVotes.toLocaleString(),
+      { type: 'votes', min: f.minVotes });
+    entries[entries.length - 1].id = 'ratingsContent-votes-' + f.minVotes;
+  }
+
+  /* Phase 3 — preset → real TMDB keyword/collection filters.
+     Filter ids match the Phase 2 dedupe pattern (themes-tmdbkw-<id>)
+     and the Phase 1 collection chip pattern (universes-collection-<id>),
+     so re-clicking a preset and then searching the same item in-tab
+     won't add a duplicate. */
+  if (f.keyword && f.keyword.id != null) {
+    push('themes', f.keyword.name,
+      { type: 'tmdb-keyword', id: f.keyword.id, name: f.keyword.name });
+    entries[entries.length - 1].id = 'themes-tmdbkw-' + f.keyword.id;
+  }
+
+  if (f.collection && f.collection.id != null) {
+    /* String id → registry lookup in ORBIT_KEYWORD_IDS (data/keyword-ids.js).
+       The registry's `type` field drives behavior:
+         • 'extended-collection' → filter with type:'extended-collection'
+           (counter + launch resolve ids via the registry at execution time).
+         • 'collection' (or default) → legacy numeric TMDB collection path. */
+    if (typeof f.collection.id === 'string'
+        && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+        && ORBIT_KEYWORD_IDS[f.collection.id]) {
+      var regEntry = ORBIT_KEYWORD_IDS[f.collection.id];
+      var extName = f.collection.name || regEntry.label;
+      if (regEntry.type === 'extended-collection' && Array.isArray(regEntry.ids)) {
+        push('universes', extName, {
+          type: 'extended-collection',
+          id: f.collection.id,    // slug — counter/launch look up ids in registry
+          name: extName
+        });
+        entries[entries.length - 1].id = 'universes-extcoll-' + f.collection.id;
+      } else if (typeof regEntry.id === 'number') {
+        /* Registry entry resolves to a numeric TMDB collection id. */
+        push('universes', extName, {
+          type: 'collection',
+          id: regEntry.id,
+          name: extName,
+          collections: [regEntry.id]
+        });
+        entries[entries.length - 1].id = 'universes-collection-' + regEntry.id;
+      }
+    } else if (typeof f.collection.id === 'number') {
+      /* Numeric id passed directly in the preset (legacy / non-registry). */
+      push('universes', f.collection.name, {
+        type: 'collection',
+        id: f.collection.id,
+        name: f.collection.name,
+        collections: [f.collection.id]   // back-compat with Universe Mode launch
+      });
+      entries[entries.length - 1].id = 'universes-collection-' + f.collection.id;
+    }
+  }
+
+  /* universesKeyword (2026-05-16) — TMDB keyword that should flow
+     into the live counter via with_keywords. Pushed to the universes
+     section because buildTMDBQueryFromFilters' `case "universes"`
+     already handles type="keyword" → adds to with_keywords. The
+     `f.keyword` path above pushes to themes which is post-filter
+     only; this is the path for franchise keywords like MCU
+     (keyword 180547) where the live counter has to work via TMDB. */
+  if (f.universesKeyword && f.universesKeyword.id != null) {
+    push('universes', f.universesKeyword.name, {
+      type: 'keyword',
+      id: f.universesKeyword.id,
+      name: f.universesKeyword.name
+    });
+    entries[entries.length - 1].id = 'universes-keyword-' + f.universesKeyword.id;
+  }
+
+  /* movieList (2026-05-16) — explicit list of TMDB movie IDs, used
+     for franchises that TMDB doesn't model as a single collection
+     (Wizarding World = HP + Fantastic Beasts; Star Wars = saga +
+     Rogue One + Solo + Mando&Grogu; Fast & Furious + Hobbs & Shaw;
+     Planet of the Apes original + Tim Burton + modern). Counter and
+     launch handlers detect `type: 'movieList'` and use the ids
+     directly (no /collection/{id} fetch needed for size). */
+  if (f.movieList && Array.isArray(f.movieList.ids) && f.movieList.ids.length > 0) {
+    var movieListIds = f.movieList.ids.slice();
+    var movieListLabel = f.movieList.label || 'Movie list';
+    push('universes', movieListLabel, {
+      type: 'movieList',
+      ids: movieListIds,
+      name: movieListLabel
+    });
+    /* Stable id derived from a sorted prefix so chip dedupe across
+       preset clicks works even though the ids array can be long. */
+    entries[entries.length - 1].id = 'universes-movielist-' +
+      movieListIds.slice().sort(function (a, b) { return a - b; }).slice(0, 5).join('-');
+  }
+
+  /* Multi-collection presets (2026-05-16) — used by expanded universes
+     like "Alien vs. Predator Universe" that combine multiple TMDB
+     collections into one chip/filter. Universe Mode launch (line ~1540)
+     and the collection counter branch in fetchFilmCount both iterate
+     value.collections, so they pick up all the IDs transparently. */
+  if (Array.isArray(f.multiCollections) && f.multiCollections.length > 0) {
+    var multiIds = f.multiCollections
+      .filter(function (c) { return c && c.id != null; })
+      .map(function (c) { return c.id; });
+    if (multiIds.length > 0) {
+      var combinedName = f.multiCollections
+        .map(function (c) { return c.name; })
+        .filter(Boolean)
+        .join(' + ');
+      push('universes', combinedName, {
+        type: 'collection',
+        id: multiIds[0],            // primary id (used by chip dedupe / labels)
+        name: combinedName,
+        collections: multiIds       // full set drives Universe Mode + counter
+      });
+      entries[entries.length - 1].id = 'universes-multicollection-' + multiIds.join('-');
+    }
+  }
+
+  return entries;
+}
+
+function applyPreset(preset) {
+  var entries = presetToStateFilters(preset);
+  if (!entries.length) {
+    console.warn('[Discover] Preset produced no filters:', preset.name);
+    return;
+  }
+
+  state.filters = entries;
+  state.genreLogic = preset.genreLogic || 'or';
+
+  updateUIFromState();
+  /* updateUIFromState calls the local renderFilterChips. The wrapped
+     window.renderFilterChips also runs updateTabDots, so call it once
+     more to refresh the tab dot indicators. */
+  if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+}
+
+(function initPresets() {
+  /* Increment visit count ONLY on page load — not on Shuffle clicks.
+     The spotlight rotation reads this counter to gate appearance. */
+  var visitCount = parseInt(localStorage.getItem('orbit_visit_count') || '0', 10);
+  localStorage.setItem('orbit_visit_count', String(visitCount + 1));
+
+  renderPresets(getActivePresets(getActivePresetCount()));
+
+  var shuffleBtn = document.getElementById('discoverPresetShuffle');
+  if (!shuffleBtn) return;
+  shuffleBtn.addEventListener('click', function () {
+    /* Shuffle never shows the spotlight; never bumps visit count. */
+    renderPresets(pickEvergreens(getActivePresetCount()));
+  });
 })();
 
 const sectionDefinitions = {
@@ -412,17 +1459,23 @@ const sectionDefinitions = {
   ratingsContent: { title: "Ratings & Content", builder: buildRatingsContentSection },
   regionLanguage: { title: "Region & Language", builder: buildRegionLanguageContent },
   production: { title: "Production & Box Office", builder: buildProductionContent },
-  watch: { title: "Watch Providers", builder: buildWatchContent },
+  watch: { title: "Stream", builder: buildWatchContent },
   universes: { title: "Universes", builder: buildUniversesContent },
   awards: { title: "Awards", builder: buildAwardsContent }
 };
 
 let currentSectionKey = null;
 
-document.getElementById('filterGrid').addEventListener('click', (e) => {
-  const card = e.target.closest('.section-card[data-section]');
-  if (card) openFocusCard(card.dataset.section);
-});
+// [FilterTabs — retired May 1, 2026]
+// The .filter-grid card system has been replaced by .orbit-filter-tabs.
+// Old listener kept null-safe in case the grid is ever reintroduced.
+var _legacyFilterGrid = document.getElementById('filterGrid');
+if (_legacyFilterGrid) {
+  _legacyFilterGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.section-card[data-section]');
+    if (card) openFocusCard(card.dataset.section);
+  });
+}
 
 function openFocusCard(sectionKey) {
   currentSectionKey = sectionKey;
@@ -447,24 +1500,24 @@ function closeFocusCard() {
   }
 }
 
-focusCloseButton.addEventListener("click", closeFocusCard);
+/* Rule 17: Black Hole exit. */
+function triggerFocusOrbitClose() {
+  if (!focusOverlay || focusOverlay.classList.contains('orbit-popup-closing')) return;
+  if (focusCloseButton) focusCloseButton.classList.add('closing');
+  focusOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (focusCloseButton) focusCloseButton.classList.remove('closing');
+    focusOverlay.classList.remove('orbit-popup-closing');
+    closeFocusCard();
+  }, reduced ? 200 : 600);
+}
 
-addToSearchButton.addEventListener("click", () => {
-  if (!currentSectionKey) return;
-  const labels = collectLabelsForSection(currentSectionKey);
-  
-  state.filters = state.filters.filter((f) => f.section !== currentSectionKey);
-  labels.forEach((item) => {
-    state.filters.push({
-      id: `${currentSectionKey}-${item.label}`,
-      section: currentSectionKey,
-      label: item.label,
-      value: item.value
-    });
-  });
-  
-  updateUIFromState();
-  closeFocusCard();
+focusCloseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  triggerFocusOrbitClose();
 });
 
 function updateUIFromState() {
@@ -518,28 +1571,136 @@ function updateUIFromState() {
     try { hasSession = !!sessionStorage.getItem('orbit_search_criteria'); } catch (e) {}
     resetBtn.hidden = !hasFilters && !hasSession;
   }
+
+  /* Orbit ring is wrapped into renderFilterChips, but renderFilterChips
+     is only called when hasFilters. On the empty branch the ring would
+     never re-paint, so the empty-state caption stays hidden. Call
+     directly to keep the ring + caption in sync with state. */
+  if (typeof updateOrbitRing === 'function') {
+    try { updateOrbitRing(); } catch (e) {}
+  }
+  if (typeof fetchFilmCount === 'function') {
+    try { fetchFilmCount(); } catch (e) {}
+  }
+}
+
+/* ============================================================
+   CHIP LABEL FORMATTER — Added May 4, 2026
+   Cleans up filter labels for the orbit sidebar. Removes redundant
+   section prefixes where the value is self-explanatory; keeps a small
+   dimmed prefix only where the value is ambiguous without context.
+   Returns { prefix, text } — prefix is null for self-explanatory chips.
+   ============================================================ */
+function formatChipLabel(filter) {
+  var label = (filter && filter.label) || '';
+  var section = (filter && filter.section) || '';
+
+  if (section === 'genres') {
+    return { prefix: null, text: label.trim() };
+  }
+
+  if (section === 'awards') {
+    if (label === 'Winner') return { prefix: null, text: 'Award winner' };
+    if (label === 'Nominee') return { prefix: null, text: 'Award nominee' };
+    return { prefix: null, text: label };
+  }
+
+  if (section === 'timeEra') {
+    var cleaned = label.replace(/^Released\s+/i, '');
+    cleaned = cleaned.replace(/Short Films?\s*\(<60min\)/i, 'Under 60 min');
+    cleaned = cleaned.replace(/Standard\s*\(90-120min\)/i, '90–120 min');
+    cleaned = cleaned.replace(/Long\s*\(2h\+\)/i, 'Over 2 hours');
+    cleaned = cleaned.replace(/Epic\s*\(3h\+\)/i, 'Over 3 hours');
+    cleaned = cleaned.replace(/New Releases?\s*\([^)]+\)/i, 'New releases');
+    return { prefix: null, text: cleaned };
+  }
+
+  if (section === 'themes') {
+    var themeVal = label.replace(/^Theme:\s*/i, '');
+    return { prefix: 'theme', text: themeVal };
+  }
+
+  if (section === 'settingWhere' || section === 'settingWhen') {
+    var settingVal = label.replace(/^Set in:\s*/i, '');
+    return { prefix: null, text: settingVal };
+  }
+
+  if (section === 'ratingsContent') {
+    if (/^Rating:/i.test(label)) {
+      return { prefix: 'rating', text: label.replace(/^Rating:\s*/i, '').replace('-', '–') };
+    }
+    if (/^Min votes?:/i.test(label)) {
+      return { prefix: 'min votes', text: label.replace(/^Min votes?:\s*/i, '') };
+    }
+    return { prefix: null, text: label };
+  }
+
+  if (section === 'regionLanguage') {
+    if (/^Language:/i.test(label)) {
+      return { prefix: 'language', text: label.replace(/^Language:\s*/i, '') };
+    }
+    return { prefix: null, text: label.replace(/^Production Region:\s*/i, '') };
+  }
+
+  if (section === 'basedOn' || section === 'universes') {
+    var lower = label.toLowerCase();
+    if (lower === 'sequel') return { prefix: null, text: 'A sequel' };
+    if (lower === 'prequel') return { prefix: null, text: 'A prequel' };
+    if (lower === 'spin-off') return { prefix: null, text: 'A spin-off' };
+    return { prefix: null, text: label };
+  }
+
+  return { prefix: null, text: label };
+}
+
+function escapeChipText(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
 }
 
 function renderFilterChips() {
   orbitFilters.innerHTML = "";
   const container = document.createElement("div");
   container.className = "filter-chips";
-  
-  state.filters.forEach((filter) => {
+
+  state.filters.forEach((filter, index) => {
     const chip = document.createElement("div");
-    chip.className = "filter-chip";
-    chip.innerHTML = `
-      <div class="filter-chip-main">
-        <div class="filter-chip-section">${sectionDefinitions[filter.section]?.title || filter.section}</div>
-        <div class="filter-chip-label">${filter.label}</div>
-      </div>
-    `;
+    chip.className = "filter-chip orbit-chip-v2";
+    chip.dataset.section = filter.section;
+    if (filter.section === "universes" && filter.value && filter.value.type) {
+      chip.dataset.universeType = filter.value.type;
+    }
+    chip.style.setProperty('--chip-index', index);
+
+    const formatted = formatChipLabel(filter);
+    const safeText = escapeChipText(formatted.text);
+    const prefixHTML = formatted.prefix
+      ? '<span class="orbit-chip-prefix">' + escapeChipText(formatted.prefix) + '</span>'
+      : '';
+    const labelHTML = '<span class="orbit-chip-value">' + safeText + '</span>';
+
+    chip.innerHTML =
+      '<div class="orbit-chip-content">' + prefixHTML + labelHTML + '</div>';
+
     const remove = document.createElement("button");
-    remove.className = "filter-chip-remove";
-    remove.textContent = "✕";
+    remove.className = "filter-chip-remove orbit-chip-remove";
+    remove.textContent = "×";
+    remove.setAttribute('aria-label', 'Remove ' + formatted.text);
+    remove.dataset.filterId = filter.id;
     remove.onclick = () => {
-      state.filters = state.filters.filter(f => f.id !== filter.id);
-      updateUIFromState();
+      /* Black Hole exit (CLAUDE.md Rule 17 — extended to chips):
+         the × spirals red and the chip fades/scales out. After the
+         animation completes, mutate state and re-render. */
+      if (chip.classList.contains('closing')) return;
+      chip.classList.add('closing');
+      var reduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var delay = reduced ? 200 : 600;
+      setTimeout(function () {
+        state.filters = state.filters.filter(f => f.id !== filter.id);
+        updateUIFromState();
+      }, delay);
     };
     chip.appendChild(remove);
     container.appendChild(chip);
@@ -548,12 +1709,15 @@ function renderFilterChips() {
 }
 
 orbitPanelToggle.onclick = () => orbitPanel.classList.toggle("collapsed");
-clearAllButton.onclick = () => {
-  state.filters = [];
-  state.genreLogic = 'or';
-  try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
-  updateUIFromState();
-};
+if (clearAllButton) {
+  clearAllButton.onclick = () => {
+    state.filters = [];
+    state.genreLogic = 'or';
+    state.regionLogic = 'or';
+    try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+    updateUIFromState();
+  };
+}
 
 // ── Restore search criteria from sessionStorage ──
 (function restoreSearchCriteria() {
@@ -570,6 +1734,9 @@ clearAllButton.onclick = () => {
     if (saved.genreLogic === 'and' || saved.genreLogic === 'or') {
       state.genreLogic = saved.genreLogic;
     }
+    if (saved.regionLogic === 'and' || saved.regionLogic === 'or') {
+      state.regionLogic = saved.regionLogic;
+    }
     updateUIFromState();
   } catch (e) { /* corrupted data — start fresh */ }
 })();
@@ -580,6 +1747,7 @@ if (resetOrbitButton) {
   resetOrbitButton.addEventListener('click', function() {
     state.filters = [];
     state.genreLogic = 'or';
+    state.regionLogic = 'or';
     try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
     updateUIFromState();
   });
@@ -614,25 +1782,47 @@ if (moreFiltersBtn) {
   moreFiltersBtn.addEventListener('click', openMoreFilters);
 }
 
+/* Rule 17: Black Hole exit for more-filters modal. */
+function triggerMoreFiltersOrbitClose() {
+  if (!moreFiltersOverlay || moreFiltersOverlay.classList.contains('orbit-popup-closing')) return;
+  if (moreFiltersClose) moreFiltersClose.classList.add('closing');
+  moreFiltersOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (moreFiltersClose) moreFiltersClose.classList.remove('closing');
+    moreFiltersOverlay.classList.remove('orbit-popup-closing');
+    closeMoreFilters();
+  }, reduced ? 200 : 600);
+}
+
 if (moreFiltersClose) {
-  moreFiltersClose.addEventListener('click', closeMoreFilters);
+  moreFiltersClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerMoreFiltersOrbitClose();
+  });
 }
 
 // Backdrop click closes modal
 if (moreFiltersOverlay) {
   moreFiltersOverlay.addEventListener('click', (e) => {
-    if (e.target === moreFiltersOverlay) closeMoreFilters();
+    if (e.target === moreFiltersOverlay) triggerMoreFiltersOrbitClose();
   });
 }
 
 // Tile clicks → close modal, open focus card for that section
-document.getElementById('moreFiltersGrid').addEventListener('click', (e) => {
-  const tile = e.target.closest('.more-filter-tile');
-  if (!tile) return;
-  openedFromMore = true;
-  closeMoreFilters();
-  openFocusCard(tile.dataset.section);
-});
+// (More Filters modal removed May 1, 2026 — null-guard kept for safety.)
+var moreFiltersGridEl = document.getElementById('moreFiltersGrid');
+if (moreFiltersGridEl) {
+  moreFiltersGridEl.addEventListener('click', (e) => {
+    const tile = e.target.closest('.more-filter-tile');
+    if (!tile) return;
+    openedFromMore = true;
+    closeMoreFilters();
+    openFocusCard(tile.dataset.section);
+  });
+}
 
 // Escape key: close More modal or focus card
 document.addEventListener('keydown', (e) => {
@@ -652,7 +1842,8 @@ launchCard.addEventListener("click", async () => {
   try {
     sessionStorage.setItem('orbit_search_criteria', JSON.stringify({
       filters: state.filters,
-      genreLogic: state.genreLogic
+      genreLogic: state.genreLogic,
+      regionLogic: state.regionLogic
     }));
   } catch (e) {}
 
@@ -660,14 +1851,27 @@ launchCard.addEventListener("click", async () => {
     // Check for universe filters
     const universeFilters = state.filters.filter(f => f.section === "universes");
     const collectionIds = [];
+    const movieListIdsSet = new Set();
     universeFilters.forEach(f => {
-      if (f.value && f.value.collections) {
+      if (!f.value) return;
+      if (f.value.collections) {
         collectionIds.push(...f.value.collections);
+      }
+      /* movieList: ids embedded directly. */
+      if (f.value.type === "movieList" && Array.isArray(f.value.ids)) {
+        f.value.ids.forEach(id => movieListIdsSet.add(id));
+      }
+      /* extended-collection: ids resolved from ORBIT_KEYWORD_IDS registry. */
+      if (f.value.type === "extended-collection"
+          && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+          && ORBIT_KEYWORD_IDS[f.value.id]
+          && Array.isArray(ORBIT_KEYWORD_IDS[f.value.id].ids)) {
+        ORBIT_KEYWORD_IDS[f.value.id].ids.forEach(id => movieListIdsSet.add(id));
       }
     });
 
-    if (collectionIds.length > 0) {
-      // UNIVERSE MODE: fetch from collections
+    if (collectionIds.length > 0 || movieListIdsSet.size > 0) {
+      // UNIVERSE MODE: fetch from collections and/or explicit movie ID lists
       const hyperspace = document.getElementById('hyperspaceOverlay');
       hyperspace.hidden = false;
 
@@ -689,6 +1893,31 @@ launchCard.addEventListener("click", async () => {
           }
         } catch (err) {
           console.error(`Failed to fetch collection ${colId}:`, err);
+        }
+      }
+
+      /* movieList (2026-05-16): batch-fetch movies from explicit ID
+         lists for franchises that aren't a single TMDB collection.
+         Normalize genres → genre_ids so the client-side filter loop
+         below works the same as /collection/{id} responses. */
+      if (movieListIdsSet.size > 0) {
+        const movieListIdsArr = Array.from(movieListIdsSet);
+        const BATCH_SIZE_ML = 8;
+        for (let i = 0; i < movieListIdsArr.length; i += BATCH_SIZE_ML) {
+          const batch = movieListIdsArr.slice(i, i + BATCH_SIZE_ML);
+          const results = await Promise.all(batch.map(id =>
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          ));
+          results.forEach(m => {
+            if (!m || !m.id || seenIds.has(m.id)) return;
+            if (Array.isArray(m.genres) && !m.genre_ids) {
+              m.genre_ids = m.genres.map(g => g.id);
+            }
+            seenIds.add(m.id);
+            allMovies.push(m);
+          });
         }
       }
 
@@ -796,6 +2025,78 @@ launchCard.addEventListener("click", async () => {
           alert("No award-winning movies match your settings filters. Try removing some filters.");
           return;
         }
+      }
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(allMovies);
+
+      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
+      localStorage.removeItem("resultsCapped");
+      localStorage.removeItem("totalAvailable");
+
+      setTimeout(() => {
+        window.location.href = "results.html";
+      }, 500);
+
+    } else if (shouldUseAwardsAsSource(state.filters)) {
+      /* ============================================================
+         MIXED AWARDS MODE — Added 2026-05-19
+         Awards + other filters (genre, decade, rating, etc.). Awards
+         drive the source set: fetch the matching films from TMDB by
+         id, then apply non-awards filters client-side. Fixes the
+         popularity-intersection bug where the prior NORMAL DISCOVER
+         path would fetch the top 500 popular docs and intersect with
+         ~26 Oscar Best Doc winners, missing most of them.
+         Routes here when getAwardsMatchingIds returns ≤500 ids.
+         ============================================================ */
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      const matchingIds = getAwardsMatchingIds(state.filters);
+      console.log(`[Orbit] Mixed awards mode: ${matchingIds.length} award ids → batch fetch`);
+
+      let allMovies = [];
+      const BATCH_SIZE = 8;
+      for (let i = 0; i < matchingIds.length; i += BATCH_SIZE) {
+        const batch = matchingIds.slice(i, i + BATCH_SIZE);
+        const results = await Promise.all(batch.map(id =>
+          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        ));
+        results.forEach(m => { if (m && m.id) allMovies.push(m); });
+      }
+
+      /* /movie/{id} returns genres:[{id,name},...]; the client-side
+         filter expects genre_ids. Same normalization as AWARDS-ONLY. */
+      allMovies = allMovies.map(m => ({
+        ...m,
+        genre_ids: m.genre_ids || (m.genres ? m.genres.map(g => g.id) : [])
+      }));
+
+      /* Apply non-awards filters (genre, decade, year, rating)
+         client-side. applyClientSideCollectionFilters already skips
+         awards + universes sections, so it's safe to pass the full
+         state.filters. */
+      allMovies = applyClientSideCollectionFilters(allMovies, state.filters);
+      console.log(`[Orbit] Mixed awards mode after client-side filters: ${allMovies.length} movies`);
+
+      // Settings-based post-filter (location, era, themes, based-on) — mirrors AWARDS-ONLY
+      const settingsData = await getSettingsData();
+      if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section)) && settingsData) {
+        allMovies = applySettingsFilters(allMovies, state.filters, settingsData);
+        console.log(`[Orbit] Mixed awards + settings post-filter: → ${allMovies.length} movies`);
+      }
+
+      if (allMovies.length === 0) {
+        hyperspace.hidden = true;
+        alert("No award-winning movies match your other filters. Try removing some filters.");
+        return;
       }
 
       const selectedGenres = getSelectedGenres(state.filters);
@@ -934,11 +2235,25 @@ launchCard.addEventListener("click", async () => {
       const hyperspace = document.getElementById('hyperspaceOverlay');
       hyperspace.hidden = false;
 
+      /* Dedupe across pages by id. TMDB orders /discover/movie by
+         popularity.desc and recomputes popularity in near-real-time, so
+         a movie on the boundary between two pages can shift and land on
+         both — produces duplicate tiles on the results page. */
       let allMovies = [];
+      const seenIds = new Set();
       let currentPage = 1;
 
+      function addUniqueResults(results) {
+        results.forEach(m => {
+          if (m && m.id != null && !seenIds.has(m.id)) {
+            seenIds.add(m.id);
+            allMovies.push(m);
+          }
+        });
+      }
+
       if (previewData.results && previewData.results.length > 0) {
-        allMovies.push(...previewData.results);
+        addUniqueResults(previewData.results);
         const pagesToFetch = Math.min(totalAvailable, MAX_PAGES);
 
         for (currentPage = 2; currentPage <= pagesToFetch; currentPage++) {
@@ -947,7 +2262,7 @@ launchCard.addEventListener("click", async () => {
           if (!response.ok) break;
           const data = await response.json();
           if (data.results && data.results.length > 0) {
-            allMovies.push(...data.results);
+            addUniqueResults(data.results);
           } else {
             break;
           }
@@ -968,7 +2283,15 @@ launchCard.addEventListener("click", async () => {
 
       // Apply settings-based post-filtering (location, time period, themes, based-on)
       const settingsData = await getSettingsData();
-      const hasSettingsFilters = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
+      /* 2026-05-23: exclude tmdb-keyword filters from the settings-mode
+         gate. tmdb-keyword chips live in the 'themes' section so they can
+         share the chip styling, but they're resolved by TMDB's
+         with_keywords param (not the local seed JSON). Treating them as
+         settings filters caused the counter (no seed exclusion) to
+         diverge from the launch (seed exclusion shrinks results). */
+      const hasSettingsFilters = state.filters.some(f =>
+        SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== 'tmdb-keyword'
+      );
       let finalMovies = allMovies;
       if (hasSettingsFilters && settingsData) {
         finalMovies = applySettingsFilters(allMovies, state.filters, settingsData);
@@ -1007,6 +2330,27 @@ launchCard.addEventListener("click", async () => {
   }
 });
 
+/* shouldUseAwardsAsSource (2026-05-19) — Fires when awards filters are
+   mixed with other TMDB filters (genre, decade, rating, etc.) AND the
+   award-matching set is small enough to fetch directly from TMDB by id.
+   Routes the launch handler through MIXED AWARDS MODE so the awards
+   drive the source list, then non-awards filters apply client-side.
+   Without this, NORMAL DISCOVER MODE fetches the top 500 popular films
+   for the genre and intersects with the award set — for sparse award
+   sets (e.g. 26 Oscar Best Doc winners), most winners aren't in the
+   top 500 by current popularity and get dropped. */
+function shouldUseAwardsAsSource(filters) {
+  const hasAwards = filters.some(f => f.section === "awards" && f.value);
+  if (!hasAwards) return false;
+  const dataReady = (window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards))
+    || typeof AWARDS_DATABASE !== "undefined";
+  if (!dataReady) return false;
+  /* Skip if pure-awards (already handled by AWARDS-ONLY branch). */
+  if (hasAwardsOnlyFilters(filters)) return false;
+  const ids = getAwardsMatchingIds(filters);
+  return ids.length > 0 && ids.length <= 500;
+}
+
 function hasAwardsOnlyFilters(filters) {
   const hasAwards = filters.some(f => f.section === "awards" && f.value);
   if (!hasAwards) return false;
@@ -1020,6 +2364,64 @@ function hasAwardsOnlyFilters(filters) {
   return !hasTMDBFilters;
 }
 
+/* Mirrors hasAwardsOnlyFilters for collections. Used as a hint; the
+   counter branch fires whenever ANY collection filter is present
+   regardless of other filters now, and applies non-universe filters
+   client-side via applyClientSideCollectionFilters below. Kept for
+   any future code that needs the "pure collection" check. */
+function hasCollectionOnlyFilters(filters) {
+  var collectionFilters = filters.filter(function (f) {
+    return f.section === "universes" && f.value && f.value.type === "collection";
+  });
+  if (collectionFilters.length === 0) return false;
+  var otherFilters = filters.filter(function (f) {
+    if (f.section === "universes") return false;
+    if (f.section === "awards") return false;
+    return true;
+  });
+  return otherFilters.length === 0;
+}
+
+/* Apply non-universe, non-awards filters to a list of movies fetched
+   from one or more TMDB /collection/{id} endpoints. Mirrors the
+   launch handler's client-side filter logic (lines ~1623-1650) so
+   the live counter and launch return the same count for mixed
+   collection + genre/decade/year/rating filter combinations. */
+function applyClientSideCollectionFilters(movies, filters) {
+  var filtered = movies;
+  filters.forEach(function (f) {
+    if (!f.value) return;
+    if (f.section === "universes" || f.section === "awards") return;
+    if (f.value.type === "genre") {
+      var genreId = (typeof GENRE_MAP !== "undefined") ? GENRE_MAP[f.value.name] : null;
+      if (genreId != null) {
+        filtered = filtered.filter(function (m) {
+          return m && m.genre_ids && m.genre_ids.indexOf(genreId) !== -1;
+        });
+      }
+    } else if (f.value.type === "decade" && f.value.subType === "release") {
+      filtered = filtered.filter(function (m) {
+        var year = m && m.release_date ? parseInt(m.release_date.split("-")[0], 10) : 0;
+        return year >= f.value.decade && year <= (parseInt(f.value.decade, 10) + 9);
+      });
+    } else if (f.value.type === "year") {
+      filtered = filtered.filter(function (m) {
+        var year = m && m.release_date ? parseInt(m.release_date.split("-")[0], 10) : 0;
+        return year === f.value.year;
+      });
+    } else if (f.value.type === "rating") {
+      filtered = filtered.filter(function (m) {
+        var avg = (m && m.vote_average) || 0;
+        return avg >= (f.value.min || 0) && avg <= (f.value.max || 10);
+      });
+    }
+    /* Other filter types (runtime, themes, settings, etc.) need full
+       movie data not present in /collection/{id} responses — they're
+       ignored here, same as the launch path. */
+  });
+  return filtered;
+}
+
 /* Category matching: supports parent categories like "Silver Lion"
    matching subcategories like "Silver Lion (Director)", "Silver Lion (Grand Jury)" */
 function categoryMatchesAward(selectedCategories, awardCategory) {
@@ -1028,89 +2430,188 @@ function categoryMatchesAward(selectedCategories, awardCategory) {
   );
 }
 
-function getAwardsMatchingIds(filters) {
-  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
-  const levels = [];
-  const festivals = [];
-  const categories = [];
-  let yearFrom = null;
-  let yearTo = null;
+/* ============================================================
+   AWARDS v1 HELPERS — Added 2026-05-17 (Phase 2)
+   v1 data covers 2000-2026 with 98.4% TMDB resolution and includes
+   `historical_names` on each category (resolves renames like
+   "Best Foreign Language Film" → "Best International Feature Film").
+   Loaded async from data/awards-data-v1.json into window.AWARDS_V1_DATA.
+   ============================================================ */
 
-  awardFilters.forEach(f => {
-    if (f.value.type === "award-level") levels.push(f.value.level);
-    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
-    else if (f.value.type === "award-category") categories.push(f.value.category);
-    else if (f.value.type === "award-year-range") {
-      yearFrom = f.value.from;
-      yearTo = f.value.to;
-    }
-  });
-
-  const matchingIds = [];
-  for (const [id, entry] of Object.entries(AWARDS_DATABASE)) {
-    if (!entry.awards || entry.awards.length === 0) continue;
-    const match = entry.awards.some(award => {
-      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
-      if (levels.length === 1) {
-        if (levels[0] === "winner" && !award.won) return false;
-        if (levels[0] === "nominee" && award.won) return false;
-      }
-      if (yearFrom !== null && award.year < yearFrom) return false;
-      if (yearTo !== null && award.year > yearTo) return false;
-      return true;
+/* Matches a preset's category string against a v1 category def by
+   checking display_name AND every historical_name. Each candidate
+   name is matched with the same semantics as the legacy
+   categoryMatchesAward (exact OR `startsWith(c + " (")` for parent
+   categories like "Silver Lion"). */
+function categoryMatchesV1(requestedCategories, categoryDef) {
+  if (!categoryDef) return false;
+  var candidates = [];
+  if (categoryDef.display_name) candidates.push(categoryDef.display_name);
+  if (Array.isArray(categoryDef.historical_names)) {
+    categoryDef.historical_names.forEach(function (h) {
+      if (h && h.name) candidates.push(h.name);
     });
-    if (match) matchingIds.push(parseInt(id));
   }
-  return matchingIds;
+  return requestedCategories.some(function (req) {
+    return candidates.some(function (name) {
+      return name === req || name.startsWith(req + " (");
+    });
+  });
 }
 
+/* Returns the v1 award rows that match the given award filters
+   (already-extracted, section==='awards'). Returns [] if v1 data
+   isn't loaded yet — caller falls back to legacy. */
+function getV1MatchingAwardRows(awardFilters) {
+  var v1 = window.AWARDS_V1_DATA;
+  if (!v1 || !Array.isArray(v1.awards)) return [];
+
+  var festivals = [];
+  var categories = [];
+  var levels = [];
+  var yearRanges = [];
+
+  awardFilters.forEach(function (f) {
+    if (!f.value) return;
+    if (f.value.type === "award-festival")    festivals.push(f.value.festival);
+    else if (f.value.type === "award-category")    categories.push(f.value.category);
+    else if (f.value.type === "award-level")       levels.push(f.value.level);
+    else if (f.value.type === "award-year-range")  yearRanges.push({ from: f.value.from, to: f.value.to });
+  });
+
+  /* Build O(1) lookups; v1 has 6 festivals and ~96 categories. */
+  var festivalsBySlug = {};
+  (v1.festivals || []).forEach(function (f) { festivalsBySlug[f.id] = f; });
+  var categoriesById = {};
+  (v1.categories || []).forEach(function (c) { categoriesById[c.id] = c; });
+
+  return v1.awards.filter(function (award) {
+    /* Festival check: preset uses short_name ('Oscar', 'Cannes', etc.).
+       v1's display_name is the long form ('Festival de Cannes'), so
+       match against festival.short_name. */
+    if (festivals.length > 0) {
+      var festSlug = (award.ceremony_id || "").split(".")[0];
+      var festDef = festivalsBySlug[festSlug];
+      if (!festDef || festivals.indexOf(festDef.short_name) === -1) return false;
+    }
+
+    /* Category check: includes historical_names (e.g. "Best Foreign
+       Language Film" → "Best International Feature Film"). */
+    if (categories.length > 0) {
+      var catDef = categoriesById[award.category_id];
+      if (!catDef) return false;
+      if (!categoryMatchesV1(categories, catDef)) return false;
+    }
+
+    /* Level check: v1 uses result: 'won' | 'nominated'. */
+    if (levels.length === 1) {
+      var won = award.result === "won";
+      if (levels[0] === "winner" && !won) return false;
+      if (levels[0] === "nominee" && won) return false;
+    }
+
+    /* Year range. */
+    if (yearRanges.length > 0) {
+      var matches = yearRanges.some(function (r) {
+        return award.year >= r.from && award.year <= r.to;
+      });
+      if (!matches) return false;
+    }
+
+    return true;
+  });
+}
+
+/* ============================================================
+   getAwardsMatchingIds — hybrid (v1 + legacy)
+   Signature preserved (filters = full state.filters array) so all
+   existing callers keep working.
+   v1 path covers 2000+. Legacy is consulted for pre-2000 years OR
+   as a full fallback if v1 hasn't loaded yet.
+   ============================================================ */
+function getAwardsMatchingIds(filters) {
+  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
+  if (awardFilters.length === 0) return [];
+
+  const yearRanges = awardFilters
+    .filter(f => f.value.type === "award-year-range")
+    .map(f => ({ from: f.value.from, to: f.value.to }));
+
+  const v1Loaded = !!(window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards));
+  const v1ShouldFire = v1Loaded && (yearRanges.length === 0 || yearRanges.some(r => r.to >= 2000));
+  /* Legacy fires when v1 hasn't loaded (full fallback), or when the
+     query genuinely needs pre-2000 years that v1 doesn't cover. */
+  const legacyShouldFire = !v1Loaded || yearRanges.length === 0 || yearRanges.some(r => r.from < 2000);
+
+  const matchingIds = new Set();
+
+  if (v1ShouldFire) {
+    getV1MatchingAwardRows(awardFilters).forEach(function (row) {
+      if (row.film_tmdb_id != null) matchingIds.add(row.film_tmdb_id);
+    });
+  }
+
+  if (legacyShouldFire && typeof AWARDS_DATABASE !== "undefined") {
+    const levels = [];
+    const festivals = [];
+    const categories = [];
+    let yearFrom = null;
+    let yearTo = null;
+
+    awardFilters.forEach(f => {
+      if (f.value.type === "award-level") levels.push(f.value.level);
+      else if (f.value.type === "award-festival") festivals.push(f.value.festival);
+      else if (f.value.type === "award-category") categories.push(f.value.category);
+      else if (f.value.type === "award-year-range") {
+        yearFrom = f.value.from;
+        yearTo = f.value.to;
+      }
+    });
+
+    for (const [id, entry] of Object.entries(AWARDS_DATABASE)) {
+      if (!entry.awards || entry.awards.length === 0) continue;
+      const match = entry.awards.some(award => {
+        if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
+        if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
+        if (levels.length === 1) {
+          if (levels[0] === "winner" && !award.won) return false;
+          if (levels[0] === "nominee" && award.won) return false;
+        }
+        if (yearFrom !== null && award.year < yearFrom) return false;
+        if (yearTo !== null && award.year > yearTo) return false;
+        return true;
+      });
+      if (match) matchingIds.add(parseInt(id));
+    }
+  }
+
+  return Array.from(matchingIds);
+}
+
+/* filterByAwards — now delegates to getAwardsMatchingIds. Signature
+   preserved (filters = full state.filters array). Returns movies
+   whose id is in the matching set. Behaviorally equivalent to the
+   prior per-movie iteration but uses the v1+legacy hybrid set. */
 function filterByAwards(movies, filters) {
   const awardFilters = filters.filter(f => f.section === "awards" && f.value);
   if (awardFilters.length === 0) return movies;
-  if (typeof AWARDS_DATABASE === "undefined") return movies;
-
-  const levels = [];
-  const festivals = [];
-  const categories = [];
-  let yearFrom = null;
-  let yearTo = null;
-
-  awardFilters.forEach(function(f) {
-    if (f.value.type === "award-level") levels.push(f.value.level);
-    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
-    else if (f.value.type === "award-category") categories.push(f.value.category);
-    else if (f.value.type === "award-year-range") {
-      yearFrom = f.value.from;
-      yearTo = f.value.to;
-    }
-  });
-
-  return movies.filter(function(movie) {
-    const entry = AWARDS_DATABASE[movie.id];
-    if (!entry || !entry.awards || entry.awards.length === 0) return false;
-
-    return entry.awards.some(function(award) {
-      // Festival filter (OR within group)
-      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      // Category filter (OR within group, supports parent categories)
-      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
-      // Level filter
-      if (levels.length === 1) {
-        if (levels[0] === "winner" && !award.won) return false;
-        if (levels[0] === "nominee" && award.won) return false;
-      }
-      // Year range filter
-      if (yearFrom !== null && award.year < yearFrom) return false;
-      if (yearTo !== null && award.year > yearTo) return false;
-      return true;
-    });
-  });
+  /* If neither data source is available, leave movies unfiltered
+     (safer than dropping everything). */
+  if (!(window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards))
+      && typeof AWARDS_DATABASE === "undefined") {
+    return movies;
+  }
+  const matchingIds = new Set(getAwardsMatchingIds(filters));
+  return movies.filter(function (movie) { return matchingIds.has(movie.id); });
 }
 
 function buildTMDBQueryFromFilters(filters) {
+  // Defensive: tolerate undefined/null/non-array callers so the
+  // query engine returns a base query instead of throwing.
+  if (!Array.isArray(filters)) filters = [];
+
   const params = new URLSearchParams();
-  
+
   params.append("sort_by", "popularity.desc");
   params.append("include_adult", "false");
   params.append("include_video", "false");
@@ -1157,7 +2658,7 @@ function buildTMDBQueryFromFilters(filters) {
           } else if (filter.value.type === "decade") {
             params.delete("primary_release_year");
             const start = filter.value.decade;
-            const end = start + 9;
+            const end = parseInt(start, 10) + 9;
             params.set("primary_release_date.gte", `${start}-01-01`);
             params.set("primary_release_date.lte", `${end}-12-31`);
           } else if (filter.value.type === "dateRange") {
@@ -1191,7 +2692,15 @@ function buildTMDBQueryFromFilters(filters) {
         break;
 
       case "universes":
-        // Collection IDs stored as _collections - handled in launch flow
+        // Collection chips → handled by Universe Mode launch flow
+        // (reads f.value.collections). Keyword chips → with_keywords here.
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}|${filter.value.id}` : String(filter.value.id)
+          );
+        }
         break;
 
       case "awards":
@@ -1200,8 +2709,16 @@ function buildTMDBQueryFromFilters(filters) {
         
       case "regionLanguage":
         if (filter.value.type === "region") {
-          params.set("with_origin_country", filter.value.code);
+          // Accumulate multiple regions; separator depends on regionLogic.
+          // "|" = OR (either country), "," = AND (co-production / both countries).
+          const regionSep = state.regionLogic === "or" ? "|" : ",";
+          const existingRegions = params.get("with_origin_country");
+          params.set(
+            "with_origin_country",
+            existingRegions ? `${existingRegions}${regionSep}${filter.value.code}` : filter.value.code
+          );
         } else if (filter.value.type === "language") {
+          // Language stays last-write-wins — single original_language per query.
           params.set("with_original_language", filter.value.code);
         }
         break;
@@ -1227,8 +2744,32 @@ function buildTMDBQueryFromFilters(filters) {
     }
   });
 
-  // Merge accumulated genre keywords (AND)
-  if (genreKeywordIds.length > 0) params.set("with_keywords", genreKeywordIds.join(","));
+  // Phase 2 — TMDB keyword search results (themes / genres tabs).
+  // Carry real TMDB IDs in filter.value.id and OR-merge with anything
+  // the in-loop universe-keyword case already wrote. Runs before the
+  // genre-keyword merge so that block sees existing values and degrades
+  // to a pipe (OR) merge — avoids mixed comma/pipe separators that
+  // TMDB parses ambiguously.
+  const tmdbKwFilters = filters.filter(function (f) {
+    return f && f.value && f.value.type === "tmdb-keyword" && f.value.id != null;
+  });
+  if (tmdbKwFilters.length > 0) {
+    const newIds = tmdbKwFilters.map(function (f) { return f.value.id; }).join("|");
+    const existing = params.get("with_keywords");
+    params.set("with_keywords", existing ? existing + "|" + newIds : newIds);
+  }
+
+  // Merge accumulated genre keywords (AND, comma).
+  // If universe-keyword chips already wrote pipe-separated keywords,
+  // degrade to OR (pipe) to avoid losing filters from either source.
+  if (genreKeywordIds.length > 0) {
+    const existing = params.get("with_keywords");
+    if (existing) {
+      params.set("with_keywords", existing + "|" + genreKeywordIds.join("|"));
+    } else {
+      params.set("with_keywords", genreKeywordIds.join(","));
+    }
+  }
 
   // Inject saved watch providers from Region settings (if not already set by a filter)
   if (!params.has("with_watch_providers")) {
@@ -1297,7 +2838,11 @@ async function getSeedData() {
 function applySettingsFilters(movies, filters, settingsData) {
   if (!settingsData) return movies;
 
-  const settingsFilters = filters.filter(f => SETTINGS_SECTIONS.includes(f.section));
+  /* 2026-05-23: mirror the launch-handler gate — tmdb-keyword chips
+     ride in the 'themes' section but are resolved by TMDB, not seed. */
+  const settingsFilters = filters.filter(f =>
+    SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== 'tmdb-keyword'
+  );
   if (settingsFilters.length === 0) return movies;
 
   // Separate location filters (OR logic) from other filters (AND logic)
@@ -1406,7 +2951,206 @@ function makeChip(label, section, value) {
 // 1. PEOPLE SECTION
 // =============================================
 
+/* ============================================================
+   FILMMAKER PROFILE — Added May 1, 2026
+   Wraps the existing People panel UI in a two-tab structure:
+   "Search by name" (existing behaviour, unchanged) and
+   "Describe the filmmaker" (new profile builder shell).
+
+   Phase 1 stores the selected profile in currentFilmmakerProfile
+   and logs to console on Add to orbit. Result-side filtering is
+   deferred to a later phase.
+   ============================================================ */
+let currentFilmmakerProfile = {
+  role: null,
+  nationality: null,
+  gender: null,
+  career_stage: null,
+  awards: []
+};
+
+function buildFilmmakerProfileContent(root) {
+  const hint = document.createElement('p');
+  hint.className = 'filmmaker-profile-hint';
+  hint.textContent = 'Build a filmmaker profile. ORBIT finds films matching your criteria.';
+  root.appendChild(hint);
+
+  const ROLE_OPTS = [
+    { v: 'director', l: 'Director' }, { v: 'writer', l: 'Writer' },
+    { v: 'lead_actor', l: 'Lead actor' }, { v: 'composer', l: 'Composer' },
+    { v: 'cinematographer', l: 'Cinematographer' },
+    { v: 'producer', l: 'Producer' },
+    { v: 'editor', l: 'Editor' }
+  ];
+  const NATIONALITY_OPTS = [
+    { v: 'US', l: 'American' }, { v: 'FR', l: 'French' }, { v: 'GB', l: 'British' },
+    { v: 'KR', l: 'Korean' }, { v: 'JP', l: 'Japanese' }, { v: 'IT', l: 'Italian' },
+    { v: 'MX', l: 'Mexican' }, { v: 'CN', l: 'Chinese' }, { v: 'IR', l: 'Iranian' },
+    { v: 'IN', l: 'Indian' }, { v: 'ES', l: 'Spanish' }, { v: 'BR', l: 'Brazilian' },
+    { v: 'AU', l: 'Australian' }
+  ];
+  const GENDER_OPTS = [
+    { v: 'any', l: 'Any' }, { v: 'female', l: 'Female' }, { v: 'male', l: 'Male' }
+  ];
+  const CAREER_OPTS = [
+    { v: 'debut', l: 'Debut film' }, { v: 'established', l: 'Established' }, { v: 'veteran', l: 'Veteran' }
+  ];
+  const AWARDS_OPTS = [
+    { v: 'oscar-winner',  l: 'Oscar winner' },
+    { v: 'oscar-nominee', l: 'Oscar nominee' },
+    { v: 'palme-winner',  l: "Palme d'Or winner" },
+    { v: 'bafta-winner',  l: 'BAFTA winner' },
+    { v: 'venice-winner', l: 'Venice winner' },
+    { v: 'berlin-winner', l: 'Berlin winner' }
+  ];
+
+  function makeLabel(text, extraClass) {
+    const el = document.createElement('div');
+    el.className = 'focus-section-label' + (extraClass ? ' ' + extraClass : '');
+    el.textContent = text;
+    return el;
+  }
+
+  function makeSingleSelectGroup(fieldKey, opts) {
+    const group = document.createElement('div');
+    group.className = 'chip-group';
+    group.dataset.profileField = fieldKey;
+    opts.forEach(function (opt) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'filmmaker-opt chip';
+      btn.dataset.value = opt.v;
+      btn.textContent = opt.l;
+      btn.addEventListener('click', function () {
+        group.querySelectorAll('.filmmaker-opt').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        currentFilmmakerProfile[fieldKey] = opt.v;
+      });
+      group.appendChild(btn);
+    });
+    return group;
+  }
+
+  // TODO: awards pedigree cross-referencing requires
+  // PERSON_AWARD_LOOKUP to be loaded on this page — currently tracked in
+  // state only. Full filtering implemented when awards data pipeline extends
+  // to discover.html.
+  function makeAwardsGroup() {
+    const group = document.createElement('div');
+    group.className = 'chip-group';
+    group.dataset.profileField = 'awards';
+    AWARDS_OPTS.forEach(function (opt) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'filmmaker-opt chip';
+      btn.dataset.value = opt.v;
+      btn.textContent = opt.l;
+      btn.addEventListener('click', function () {
+        const idx = currentFilmmakerProfile.awards.indexOf(opt.v);
+        if (idx === -1) {
+          currentFilmmakerProfile.awards.push(opt.v);
+          btn.classList.add('filmmaker-opt--award-active');
+        } else {
+          currentFilmmakerProfile.awards.splice(idx, 1);
+          btn.classList.remove('filmmaker-opt--award-active');
+        }
+      });
+      group.appendChild(btn);
+    });
+    return group;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'oft-filmmaker-grid';
+
+  const colLeft = document.createElement('div');
+  colLeft.className = 'oft-filmmaker-col';
+  colLeft.appendChild(makeLabel('ROLE'));
+  colLeft.appendChild(makeSingleSelectGroup('role', ROLE_OPTS));
+  colLeft.appendChild(makeLabel('GENDER'));
+  colLeft.appendChild(makeSingleSelectGroup('gender', GENDER_OPTS));
+  colLeft.appendChild(makeLabel('CAREER STAGE'));
+  colLeft.appendChild(makeSingleSelectGroup('career_stage', CAREER_OPTS));
+  grid.appendChild(colLeft);
+
+  const colRight = document.createElement('div');
+  colRight.className = 'oft-filmmaker-col';
+  colRight.appendChild(makeLabel('NATIONALITY'));
+  colRight.appendChild(makeSingleSelectGroup('nationality', NATIONALITY_OPTS));
+  colRight.appendChild(makeLabel('AWARDS PEDIGREE', 'filmmaker-awards-label'));
+  colRight.appendChild(makeAwardsGroup());
+  colRight.appendChild(makeLabel('COMING SOON', 'filmmaker-soon-label'));
+  const soonItems = document.createElement('div');
+  soonItems.className = 'filmmaker-soon-items';
+  ['Era of peak activity', 'Genre specialty', 'Still active / classic era'].forEach(function (text) {
+    const item = document.createElement('span');
+    item.className = 'filmmaker-soon-item';
+    item.textContent = text;
+    soonItems.appendChild(item);
+  });
+  colRight.appendChild(soonItems);
+  grid.appendChild(colRight);
+
+  root.appendChild(grid);
+
+  const note = document.createElement('p');
+  note.className = 'filmmaker-profile-note';
+  note.textContent = '✦ Filmmaker profile filtering is in development. Your profile will be saved to your orbit — results will refine as this feature matures.';
+  root.appendChild(note);
+}
+
 function buildPeopleContent(root) {
+  /* Tab bar */
+  const tabBar = document.createElement('div');
+  tabBar.className = 'people-panel-tabs';
+  const searchTabBtn = document.createElement('button');
+  searchTabBtn.type = 'button';
+  searchTabBtn.className = 'people-tab people-tab--active';
+  searchTabBtn.dataset.tab = 'search';
+  searchTabBtn.textContent = 'Search by name';
+  const profileTabBtn = document.createElement('button');
+  profileTabBtn.type = 'button';
+  profileTabBtn.className = 'people-tab';
+  profileTabBtn.dataset.tab = 'profile';
+  profileTabBtn.textContent = 'Describe the filmmaker';
+  tabBar.appendChild(searchTabBtn);
+  tabBar.appendChild(profileTabBtn);
+  root.appendChild(tabBar);
+
+  /* Tab content containers */
+  const searchTab = document.createElement('div');
+  searchTab.className = 'people-tab-content';
+  searchTab.dataset.tabContent = 'search';
+  const profileTab = document.createElement('div');
+  profileTab.className = 'people-tab-content people-tab-content--hidden';
+  profileTab.dataset.tabContent = 'profile';
+  root.appendChild(searchTab);
+  root.appendChild(profileTab);
+
+  /* Reset profile state for each panel open */
+  currentFilmmakerProfile = { role: null, nationality: null, gender: null, career_stage: null, awards: [] };
+
+  buildPeopleSearchContent(searchTab);
+  buildFilmmakerProfileContent(profileTab);
+
+  function activate(which) {
+    [searchTabBtn, profileTabBtn].forEach(function (b) { b.classList.remove('people-tab--active'); });
+    [searchTab, profileTab].forEach(function (c) { c.classList.add('people-tab-content--hidden'); });
+    if (which === 'profile') {
+      profileTabBtn.classList.add('people-tab--active');
+      profileTab.classList.remove('people-tab-content--hidden');
+    } else {
+      searchTabBtn.classList.add('people-tab--active');
+      searchTab.classList.remove('people-tab-content--hidden');
+    }
+  }
+  searchTabBtn.addEventListener('click', function () { activate('search'); });
+  profileTabBtn.addEventListener('click', function () { activate('profile'); });
+}
+
+function buildPeopleSearchContent(root) {
   root.appendChild(makeSectionLabel("People search"));
   const desc = document.createElement("p");
   desc.style.fontSize = "13px";
@@ -1465,10 +3209,74 @@ function buildPeopleContent(root) {
   });
   
   root.appendChild(roleFilter);
-  
+
+  /* ============================================================
+     RECENTLY SEARCHED (or fallback POPULAR IN ORBIT) — Added May 4, 2026
+     Reads orbit_people_encountered (encounter-service.js shape:
+     { version: 1, people: { id: { name, profile_path,
+       encounter_count, last_encountered, sources } } }).
+     Sorted by last_encountered desc, top 8. Falls back to a popular
+     list when the user has no encounter history yet.
+     Clicking a chip pre-fills the search input — does not commit a
+     filter directly.
+     ============================================================ */
+  const recentSection = document.createElement("div");
+  recentSection.className = "oft-people-recent-section";
+  let recentPeople = [];
+  let recentLabel = 'POPULAR IN ORBIT';
+  try {
+    const raw = localStorage.getItem('orbit_people_encountered');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.version === 1 && parsed.people) {
+        const entries = Object.entries(parsed.people)
+          .map(([id, p]) => ({ id: id, name: p.name, last: p.last_encountered || '' }))
+          .filter(p => p.name)
+          .sort((a, b) => (b.last || '').localeCompare(a.last || ''))
+          .slice(0, 8);
+        if (entries.length > 0) {
+          recentPeople = entries;
+          recentLabel = 'RECENTLY SEARCHED';
+        }
+      }
+    }
+  } catch (e) { /* corrupted — fall through to popular */ }
+
+  if (recentPeople.length === 0) {
+    recentPeople = [
+      { id: '6193', name: 'Leonardo DiCaprio' },
+      { id: '1892', name: 'Martin Scorsese' },
+      { id: '138',  name: 'Quentin Tarantino' },
+      { id: '1654', name: 'Cate Blanchett' },
+      { id: '2037', name: 'Meryl Streep' },
+      { id: '3896', name: 'Christopher Nolan' },
+      { id: '380',  name: 'Robert De Niro' },
+      { id: '1267', name: 'Audrey Hepburn' }
+    ];
+  }
+
+  const recentLabelEl = document.createElement("div");
+  recentLabelEl.className = "focus-section-label";
+  recentLabelEl.textContent = recentLabel;
+  recentSection.appendChild(recentLabelEl);
+
+  const recentGroup = document.createElement("div");
+  recentGroup.className = "chip-group oft-people-recent";
+  recentPeople.forEach(p => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip oft-recent-person-chip";
+    chip.dataset.personId = p.id;
+    chip.dataset.personName = p.name;
+    chip.textContent = p.name;
+    recentGroup.appendChild(chip);
+  });
+  recentSection.appendChild(recentGroup);
+  root.appendChild(recentSection);
+
   const container = document.createElement("div");
   container.style.position = "relative";
-  
+
   const row = document.createElement("div");
   row.className = "input-row";
   const input = document.createElement("input");
@@ -1478,8 +3286,18 @@ function buildPeopleContent(root) {
   input.autocomplete = "off";
   row.appendChild(input);
   container.appendChild(row);
-  
+
   root.appendChild(container);
+
+  /* Wire recent chip clicks: pre-fill the search input and trigger
+     the input event so the existing TMDB search flow runs. */
+  recentGroup.querySelectorAll('.oft-recent-person-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      input.value = chip.dataset.personName;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.focus();
+    });
+  });
   
   let dropdown = document.getElementById("peopleDropdownGlobal");
   if (!dropdown) {
@@ -1650,7 +3468,116 @@ function buildPeopleContent(root) {
 // 2. GENRES SECTION
 // =============================================
 
+/* ============================================================
+   buildKeywordSearchWidget(widgetId, section, placeholder)
+   Phase 2 (May 9, 2026) — keyword-only search widget for the
+   Themes and Genre tab right columns. Selecting a result commits
+   { type:'tmdb-keyword', id, name } directly to state.filters
+   under the given section (themes or genres). Reuses the
+   .orbit-kw-* CSS shipped in Phase 1.
+   ============================================================ */
+function buildKeywordSearchWidget(widgetId, section, placeholder) {
+  const wrap = document.createElement("div");
+  wrap.className = "orbit-kw-tab-wrap";
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "orbit-kw-input orbit-kw-input--compact";
+  input.id = widgetId + "-input";
+  input.placeholder = placeholder;
+  input.autocomplete = "off";
+
+  const dropdown = document.createElement("div");
+  dropdown.className = "orbit-kw-dropdown orbit-kw-dropdown--inline";
+  dropdown.id = widgetId + "-dropdown";
+  dropdown.style.display = "none";
+
+  wrap.appendChild(input);
+  wrap.appendChild(dropdown);
+
+  let _timer = null;
+
+  input.addEventListener("input", function () {
+    const q = this.value.trim();
+    clearTimeout(_timer);
+    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    _timer = setTimeout(function () {
+      searchKeywordsOnly(q, dropdown, section, input);
+    }, 350);
+  });
+
+  input.addEventListener("blur", function () {
+    setTimeout(function () { dropdown.style.display = "none"; }, 200);
+  });
+
+  return wrap;
+}
+
+async function searchKeywordsOnly(query, dropdownEl, section, inputEl) {
+  const key = TMDB_API_KEY;
+  dropdownEl.innerHTML = '<div class="orbit-kw-empty">Searching…</div>';
+  dropdownEl.style.display = "block";
+
+  let data = { results: [] };
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/keyword?api_key=${key}` +
+      `&query=${encodeURIComponent(query)}&page=1`
+    );
+    data = await res.json();
+  } catch (e) {
+    dropdownEl.innerHTML = '<div class="orbit-kw-empty">Search unavailable</div>';
+    return;
+  }
+
+  const keywords = (data.results || []).slice(0, 8);
+  dropdownEl.innerHTML = "";
+
+  if (keywords.length === 0) {
+    dropdownEl.innerHTML = '<div class="orbit-kw-empty">No results</div>';
+    return;
+  }
+
+  keywords.forEach(function (kw) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "orbit-kw-item";
+    item.innerHTML =
+      '<span class="orbit-kw-item-name"></span>' +
+      '<span class="orbit-kw-item-badge orbit-kw-badge--keyword">Keyword</span>';
+    item.querySelector(".orbit-kw-item-name").textContent = kw.name;
+
+    item.addEventListener("mousedown", function () {
+      const filterId = section + "-tmdbkw-" + kw.id;
+      // Dedupe — skip if already present
+      if (!state.filters.some(function (f) { return f.id === filterId; })) {
+        state.filters.push({
+          id: filterId,
+          section: section,
+          label: kw.name,
+          value: { type: "tmdb-keyword", id: kw.id, name: kw.name }
+        });
+        renderFilterChips();
+      }
+      dropdownEl.style.display = "none";
+      if (inputEl) inputEl.value = "";
+    });
+
+    dropdownEl.appendChild(item);
+  });
+}
+
 function buildGenresContent(root) {
+  /* Genre 2-column layout (May 4, 2026): Match toggle + Genres
+     chips on the left, Keywords & Mood subgroups on the right. */
+  const grid = document.createElement("div");
+  grid.className = "oft-genres-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-genres-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-genres-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
+
   const toggleContainer = document.createElement("div");
   toggleContainer.style.cssText = `
     display: flex;
@@ -1713,16 +3640,16 @@ function buildGenresContent(root) {
   
   toggleContainer.appendChild(orBtn);
   toggleContainer.appendChild(andBtn);
-  root.appendChild(toggleContainer);
-  
-  root.appendChild(makeSectionLabel("Genres"));
+  colLeft.appendChild(toggleContainer);
+
+  colLeft.appendChild(makeSectionLabel("Genres"));
   const genres = [
     "Action", "Adventure", "Animation", "Comedy", "Crime",
     "Documentary", "Drama", "Family", "Fantasy", "History",
     "Horror", "Music", "Mystery", "Romance", "Science Fiction",
     "Thriller", "TV Movie", "War", "Western"
   ];
-  
+
   const genreGroup = document.createElement("div");
   genreGroup.className = "chip-group";
   genres.forEach(g => {
@@ -1732,23 +3659,31 @@ function buildGenresContent(root) {
     chip.id = `genre-${g.replace(/\s+/g, '-')}`;
     genreGroup.appendChild(chip);
   });
-  root.appendChild(genreGroup);
-  
-  root.appendChild(makeSectionLabel("Keywords & Mood"));
-  
+  colLeft.appendChild(genreGroup);
+
+  const genresKwSearch = buildKeywordSearchWidget(
+    "genres-kw", "genres", "Search moods & concepts..."
+  );
+  colRight.insertBefore(genresKwSearch, colRight.firstChild);
+
+  colRight.appendChild(makeSectionLabel("Keywords & Mood"));
+
+  /* Trimmed May 4, 2026 to one row per group at 45% column width.
+     Dropped: Tone — Quirky, Whimsical, Bleak; Mood — Twisted;
+     Content — Gore, Heartwarming. */
   const keywordCategories = [
-    { label: "Tone", keywords: ["Noir", "Gritty", "Dark", "Uplifting", "Quirky", "Whimsical", "Bleak"] },
-    { label: "Pace", keywords: ["Slow-burn", "Fast-paced", "Intense", "Suspenseful"] },
-    { label: "Mood", keywords: ["Emotional", "Feel-good", "Atmospheric", "Cerebral", "Twisted"] },
-    { label: "Content", keywords: ["Violent", "Gore", "Family-friendly", "Heartwarming", "Mind-bending"] }
+    { label: "Tone",    keywords: ["Noir", "Gritty", "Dark", "Uplifting"] },
+    { label: "Pace",    keywords: ["Slow-burn", "Fast-paced", "Intense", "Suspenseful"] },
+    { label: "Mood",    keywords: ["Emotional", "Feel-good", "Atmospheric", "Cerebral"] },
+    { label: "Content", keywords: ["Violent", "Family-friendly", "Mind-bending"] }
   ];
-  
+
   keywordCategories.forEach(cat => {
     const catLabel = document.createElement("div");
     catLabel.textContent = cat.label;
     catLabel.style.cssText = "font-size: 11px; color: var(--muted-silver); margin: 16px 0 8px 0; text-transform: uppercase; letter-spacing: 1px;";
-    root.appendChild(catLabel);
-    
+    colRight.appendChild(catLabel);
+
     const keywordGroup = document.createElement("div");
     keywordGroup.className = "chip-group";
     cat.keywords.forEach(kw => {
@@ -1756,7 +3691,7 @@ function buildGenresContent(root) {
       chip.id = `keyword-${kw.replace(/\s+/g, '-')}`;
       keywordGroup.appendChild(chip);
     });
-    root.appendChild(keywordGroup);
+    colRight.appendChild(keywordGroup);
   });
 }
 
@@ -1765,24 +3700,36 @@ function buildGenresContent(root) {
 // =============================================
 
 function buildThemesContent(root) {
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
-  desc.textContent = "Select one or more themes. Films are matched by their normalised theme categories.";
-  root.appendChild(desc);
+  /* Themes 2-column layout (May 4, 2026): first 3 THEME_GROUPS in
+     the left column, remaining groups in the right. Intro paragraph
+     dropped — duplicates the panel header. */
+  const grid = document.createElement("div");
+  grid.className = "oft-themes-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-themes-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-themes-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
 
-  // THEME_GROUPS from theme-taxonomy.js: { "Relationships": ["Family", "Love & Romance", ...], ... }
-  for (const [groupName, categories] of Object.entries(THEME_GROUPS)) {
-    root.appendChild(makeSectionLabel(groupName));
+  const themesKwSearch = buildKeywordSearchWidget(
+    "themes-kw", "themes", "Search themes & concepts..."
+  );
+  colRight.insertBefore(themesKwSearch, colRight.firstChild);
+
+  const groupEntries = Object.entries(THEME_GROUPS);
+  const half = Math.ceil(groupEntries.length / 2);
+
+  groupEntries.forEach(([groupName, categories], i) => {
+    const target = i < half ? colLeft : colRight;
+    target.appendChild(makeSectionLabel(groupName));
     const chipGroup = document.createElement("div");
     chipGroup.className = "chip-group";
-
     categories.forEach(cat => {
       const chip = makeChip(cat, "themes", { type: "theme", name: cat });
       chipGroup.appendChild(chip);
     });
-
-    root.appendChild(chipGroup);
-  }
+    target.appendChild(chipGroup);
+  });
 }
 
 // =============================================
@@ -1791,7 +3738,7 @@ function buildThemesContent(root) {
 
 function buildSettingWhereContent(root) {
   const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
+  desc.style.cssText = "font-size: 15.6px; color: var(--muted-silver); margin-bottom: 0;";
   desc.textContent = "Search for a city, country, or region, or pick from popular locations below.";
   root.appendChild(desc);
 
@@ -1816,7 +3763,7 @@ function buildSettingWhereContent(root) {
   // Container for search-selected locations
   const selectedContainer = document.createElement("div");
   selectedContainer.id = "selectedLocationContainer";
-  selectedContainer.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; min-height:0;";
+  selectedContainer.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; min-height:0;";
   root.appendChild(selectedContainer);
 
   // Build autocomplete from settings data
@@ -1875,9 +3822,29 @@ function buildSettingWhereContent(root) {
   const popularGroup = document.createElement("div");
   popularGroup.className = "chip-group";
   const popularLocations = [
-    "New York", "Los Angeles", "London", "Paris", "Tokyo", "Rome",
-    "Berlin", "Chicago", "San Francisco", "Hong Kong", "Moscow", "Sydney"
+    "New York", "Los Angeles", "London", "Paris"
   ];
+
+  /* 5th chip — primary city of the user's streaming country (read from
+     localStorage key `orbit_user_country`, ISO 3166-1, registered in
+     data/storage-keys.md). Falls back to Sydney when the country is
+     unset, unmapped, or its city is already shown above. */
+  const COUNTRY_PRIMARY_CITY = {
+    AU: "Sydney",         US: "Washington D.C.", GB: "London",
+    CA: "Toronto",        DE: "Berlin",          FR: "Paris",
+    ES: "Madrid",         IT: "Rome",            BR: "Rio de Janeiro",
+    MX: "Mexico City",    JP: "Tokyo",           KR: "Seoul",
+    IN: "Mumbai",         NL: "Amsterdam",       SE: "Stockholm",
+    NO: "Oslo",           DK: "Copenhagen",      FI: "Helsinki",
+    NZ: "Wellington",     IE: "Dublin",          ZA: "Cape Town",
+    AR: "Buenos Aires",   CL: "Santiago",        CO: "Bogotá",
+    PL: "Warsaw",         PT: "Lisbon",          AT: "Vienna",
+    CH: "Zurich",         BE: "Brussels",        SG: "Singapore"
+  };
+  const userCountry = localStorage.getItem("orbit_user_country");
+  let fifthCity = (userCountry && COUNTRY_PRIMARY_CITY[userCountry]) || "Sydney";
+  if (popularLocations.indexOf(fifthCity) !== -1) fifthCity = "Sydney";
+  if (popularLocations.indexOf(fifthCity) === -1) popularLocations.push(fifthCity);
   popularLocations.forEach(loc => {
     const chip = makeChip(loc, "settingWhere", { type: "location", name: loc });
     popularGroup.appendChild(chip);
@@ -1915,10 +3882,13 @@ function buildSettingWhereContent(root) {
 // =============================================
 
 function buildSettingWhenContent(root) {
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
-  desc.textContent = "Not when it was released \u2014 when the story takes place. Decades cross-reference with named eras.";
-  root.appendChild(desc);
+  // Phase 3 — keyword search widget at top of the right column.
+  // root is the right column itself (single-arg builder); firstChild
+  // is null at this point so insertBefore acts as appendChild.
+  const settingKwSearch = buildKeywordSearchWidget(
+    "setting-kw", "settingWhen", "Search settings, locations, eras..."
+  );
+  root.insertBefore(settingKwSearch, root.firstChild);
 
   // Decade chips
   root.appendChild(makeSectionLabel("Decades"));
@@ -1936,12 +3906,14 @@ function buildSettingWhenContent(root) {
   const eraGroup = document.createElement("div");
   eraGroup.className = "chip-group";
 
+  /* Trimmed May 4, 2026: dropped Edwardian, French Revolution,
+     American Civil War, American Revolution — niche/rarely-searched. */
   const eraOrder = [
     "World War II", "World War I", "Cold War", "Vietnam Era",
     "Civil Rights", "Roaring Twenties", "Great Depression", "Prohibition",
-    "Space Race", "Victorian", "Edwardian", "Colonial Era",
-    "Industrial Revolution", "American Civil War", "French Revolution",
-    "American Revolution", "The Troubles", "Fall of the Berlin Wall",
+    "Space Race", "Victorian", "Colonial Era",
+    "Industrial Revolution",
+    "The Troubles", "Fall of the Berlin Wall",
     "Apartheid", "Cultural Revolution", "Post-War", "Korean War",
     "Holocaust", "Watergate"
   ];
@@ -1974,7 +3946,7 @@ function buildSettingWhenContent(root) {
 
   // Info note
   const note = document.createElement("p");
-  note.style.cssText = "font-size: 11px; color: var(--ghost-gray); margin-top: 12px; font-style: italic;";
+  note.style.cssText = "font-size: 14.3px; color: var(--ghost-gray); margin-top: 12px; font-style: italic;";
   note.textContent = 'Decade chips also match films tagged with eras that overlap that decade. Selecting "1940s" includes WWII films even if they span 1939\u20131945.';
   root.appendChild(note);
 }
@@ -2023,7 +3995,17 @@ function buildBasedOnContent(root) {
 // =============================================
 
 function buildTimeEraContent(root) {
-  root.appendChild(makeSectionLabel("Specific Year"));
+  /* Era 2-column layout (May 4, 2026): Year + Decades on left,
+     Runtime sliders + chips on right. */
+  const grid = document.createElement("div");
+  grid.className = "oft-era-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-era-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-era-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
+
+  colLeft.appendChild(makeSectionLabel("Specific Year"));
   const yearRow = document.createElement("div");
   yearRow.className = "input-row";
   const yearInput = document.createElement("input");
@@ -2033,9 +4015,9 @@ function buildTimeEraContent(root) {
   yearInput.min = "1900";
   yearInput.max = "2030";
   yearRow.appendChild(yearInput);
-  root.appendChild(yearRow);
+  colLeft.appendChild(yearRow);
 
-  root.appendChild(makeSectionLabel("Decades (when movie was released)"));
+  colLeft.appendChild(makeSectionLabel("Decades (when movie was released)"));
   const releaseDecades = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
   const relDecadeGroup = document.createElement("div");
   relDecadeGroup.className = "chip-group";
@@ -2044,7 +4026,7 @@ function buildTimeEraContent(root) {
     chip.id = `date-decade-${d}`;
     relDecadeGroup.appendChild(chip);
   });
-  root.appendChild(relDecadeGroup);
+  colLeft.appendChild(relDecadeGroup);
 
   const quickGroup = document.createElement("div");
   quickGroup.className = "chip-group";
@@ -2063,9 +4045,12 @@ function buildTimeEraContent(root) {
   });
   quickGroup.appendChild(newRelease);
   quickGroup.appendChild(classic);
-  root.appendChild(quickGroup);
+  colLeft.appendChild(quickGroup);
 
-  root.appendChild(makeSectionLabel("Runtime (minutes)"));
+  /* Right column: runtime — alias `root` so the existing right-side
+     code reads from the runtime column. */
+  const runtimeRoot = colRight;
+  runtimeRoot.appendChild(makeSectionLabel("Runtime (minutes)"));
   const runtimeRow = document.createElement("div");
   runtimeRow.className = "input-row";
   runtimeRow.style.flexDirection = "column";
@@ -2133,7 +4118,7 @@ function buildTimeEraContent(root) {
 
   runtimeRow.appendChild(minRow);
   runtimeRow.appendChild(maxRow);
-  root.appendChild(runtimeRow);
+  runtimeRoot.appendChild(runtimeRow);
 
   const runtimeQuick = document.createElement("div");
   runtimeQuick.className = "chip-group";
@@ -2158,7 +4143,7 @@ function buildTimeEraContent(root) {
     });
     runtimeQuick.appendChild(chip);
   });
-  root.appendChild(runtimeQuick);
+  runtimeRoot.appendChild(runtimeQuick);
 }
 
 // =============================================
@@ -2166,13 +4151,23 @@ function buildTimeEraContent(root) {
 // =============================================
 
 function buildRatingsContentSection(root) {
-  // --- RATINGS HALF ---
-  const ratingsHeader = document.createElement("div");
-  ratingsHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
-  ratingsHeader.textContent = "Ratings & Votes";
-  root.appendChild(ratingsHeader);
+  /* Ratings 2-column layout (May 4, 2026): Quality Score sliders +
+     chips + Min Votes on the left, Content Rating + cert chips on
+     the right. The duplicate "Ratings & Votes" header is dropped —
+     the column section labels carry that information already. */
+  const grid = document.createElement("div");
+  grid.className = "oft-ratings-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-ratings-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-ratings-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
 
-  root.appendChild(makeSectionLabel("Quality Score Range (0-10)"));
+  /* All "root.appendChild" below this point in this function targets
+     the left column until the divider; right-column code is the
+     SUITABILITY section which we re-route to colRight. */
+
+  colLeft.appendChild(makeSectionLabel("Quality Score Range (0-10)"));
   const ratingRow = document.createElement("div");
   ratingRow.className = "input-row";
   ratingRow.style.flexDirection = "column";
@@ -2242,7 +4237,7 @@ function buildRatingsContentSection(root) {
 
   ratingRow.appendChild(minRow);
   ratingRow.appendChild(maxRow);
-  root.appendChild(ratingRow);
+  colLeft.appendChild(ratingRow);
 
   const ratingQuick = document.createElement("div");
   ratingQuick.className = "chip-group";
@@ -2265,35 +4260,37 @@ function buildRatingsContentSection(root) {
     });
     ratingQuick.appendChild(chip);
   });
-  root.appendChild(ratingQuick);
+  colLeft.appendChild(ratingQuick);
 
-  root.appendChild(makeSectionLabel("Minimum Votes (reliability)"));
+  colLeft.appendChild(makeSectionLabel("Minimum Votes (reliability)"));
   const voteGroup = document.createElement("div");
   voteGroup.className = "chip-group";
+  /* 2026-05-17: TMDB's all-time vote-count leader sits around 40k
+     (Interstellar 39.7k, Inception 39.2k). 50k/100k/250k chips
+     always returned 0, so capped at 30k+ which matches TMDB's
+     realistic data ceiling (~10 films at 30k+). */
   [
     { label: "100+", votes: 100 },
     { label: "1,000+", votes: 1000 },
     { label: "5,000+", votes: 5000 },
-    { label: "10,000+", votes: 10000 }
+    { label: "10,000+", votes: 10000 },
+    { label: "20,000+", votes: 20000 },
+    { label: "25,000+", votes: 25000 },
+    { label: "30,000+", votes: 30000 }
   ].forEach(v => {
     const chip = makeChip(v.label, "ratingsContent", { type: "votes", min: v.votes });
     chip.id = `votes-${v.votes}`;
     voteGroup.appendChild(chip);
   });
-  root.appendChild(voteGroup);
+  colLeft.appendChild(voteGroup);
 
-  // --- DIVIDER ---
-  const divider = document.createElement("hr");
-  divider.style.cssText = "border: none; border-top: 1px solid rgba(0, 217, 255, 0.15); margin: 24px 0;";
-  root.appendChild(divider);
-
-  // --- SUITABILITY HALF ---
+  /* --- SUITABILITY (right column) --- */
   const suitHeader = document.createElement("div");
   suitHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
   suitHeader.textContent = "Content Rating";
-  root.appendChild(suitHeader);
+  colRight.appendChild(suitHeader);
 
-  root.appendChild(makeSectionLabel("Age Rating / Certification"));
+  colRight.appendChild(makeSectionLabel("Age Rating / Certification"));
   const ratings = ["G", "PG", "PG-13", "R", "NC-17", "Unrated"];
   const ratingGroup = document.createElement("div");
   ratingGroup.className = "chip-group";
@@ -2302,7 +4299,7 @@ function buildRatingsContentSection(root) {
     chip.id = `cert-${r.replace('-', '')}`;
     ratingGroup.appendChild(chip);
   });
-  root.appendChild(ratingGroup);
+  colRight.appendChild(ratingGroup);
 
   const note = document.createElement("p");
   note.style.fontSize = "12px";
@@ -2310,7 +4307,7 @@ function buildRatingsContentSection(root) {
   note.style.marginTop = "12px";
   note.style.fontStyle = "italic";
   note.textContent = "Note: Ratings are US certifications. Other regions may have different classifications.";
-  root.appendChild(note);
+  colRight.appendChild(note);
 }
 
 // =============================================
@@ -2319,7 +4316,86 @@ function buildRatingsContentSection(root) {
 
 function buildRegionLanguageContent(root) {
   root.appendChild(makeSectionLabel("Production Region"));
-  
+
+  /* ============================================================
+     REGION MATCH TOGGLE — Added 2026-05-11
+     Any (OR) = movies produced by ANY selected country (pipe-separated)
+     All (AND) = movies produced by ALL selected countries (co-productions)
+     Mirrors the Genres tab toggle pattern (state.genreLogic).
+     ============================================================ */
+  const regionToggleContainer = document.createElement("div");
+  regionToggleContainer.style.cssText = `
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(15, 23, 41, 0.5);
+    border-radius: 8px;
+  `;
+
+  const regionToggleLabel = document.createElement("span");
+  regionToggleLabel.textContent = "Match:";
+  regionToggleLabel.style.cssText = "font-size: 13px; font-weight: 600; color: var(--accent-cyan);";
+  regionToggleContainer.appendChild(regionToggleLabel);
+
+  const regionOrBtn = document.createElement("button");
+  regionOrBtn.type = "button";
+  regionOrBtn.textContent = "Any (OR)";
+  regionOrBtn.style.cssText = `
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    background: ${state.regionLogic === "or" ? "var(--accent-cyan)" : "transparent"};
+    color: ${state.regionLogic === "or" ? "#000" : "var(--film-white)"};
+    transition: all 0.2s;
+  `;
+
+  const regionAndBtn = document.createElement("button");
+  regionAndBtn.type = "button";
+  regionAndBtn.textContent = "All (AND)";
+  regionAndBtn.style.cssText = `
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    background: ${state.regionLogic === "and" ? "var(--accent-cyan)" : "transparent"};
+    color: ${state.regionLogic === "and" ? "#000" : "var(--film-white)"};
+    transition: all 0.2s;
+  `;
+
+  function refreshCountIfRegionsSelected() {
+    const hasRegions = state.filters.some(f => f.section === "regionLanguage" && f.value && f.value.type === "region");
+    if (hasRegions && typeof fetchFilmCount === "function") {
+      try { fetchFilmCount(); } catch (e) {}
+    }
+  }
+
+  regionOrBtn.addEventListener("click", () => {
+    state.regionLogic = "or";
+    regionOrBtn.style.background = "var(--accent-cyan)";
+    regionOrBtn.style.color = "#000";
+    regionAndBtn.style.background = "transparent";
+    regionAndBtn.style.color = "var(--film-white)";
+    refreshCountIfRegionsSelected();
+  });
+
+  regionAndBtn.addEventListener("click", () => {
+    state.regionLogic = "and";
+    regionAndBtn.style.background = "var(--accent-cyan)";
+    regionAndBtn.style.color = "#000";
+    regionOrBtn.style.background = "transparent";
+    regionOrBtn.style.color = "var(--film-white)";
+    refreshCountIfRegionsSelected();
+  });
+
+  regionToggleContainer.appendChild(regionOrBtn);
+  regionToggleContainer.appendChild(regionAndBtn);
+  root.appendChild(regionToggleContainer);
+
   const regionRow = document.createElement("div");
   regionRow.className = "input-row";
   const regionInput = document.createElement("input");
@@ -2334,7 +4410,70 @@ function buildRegionLanguageContent(root) {
   regionContainer.id = "selectedRegionContainer";
   regionContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
   root.appendChild(regionContainer);
-  
+
+  /* Multi-region append helper — 2026-05-11 (hydration support 2026-05-11).
+     Dedupes by data-region-code. Smart language link fires only on the
+     first region added; pass { skipSmartLink: true } during hydration to
+     avoid re-toggling English Only when restoring chips from state.
+     Remove mutates state.filters immediately and re-renders the sidebar
+     (idempotent: filter() is a no-op for chips not yet committed). */
+  function addRegionChip(item, opts) {
+    if (!item || !item.code) return;
+    if (regionContainer.querySelector('[data-region-code="' + item.code + '"]')) return;
+
+    const skipSmartLink = opts && opts.skipSmartLink;
+    const isFirstRegion = regionContainer.children.length === 0;
+
+    const chip = document.createElement("div");
+    chip.dataset.regionCode = item.code;
+    chip.style.cssText = `
+      background: rgba(111, 210, 255, 0.15);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 999px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    `;
+
+    const labelSpan = document.createElement("span");
+    labelSpan.textContent = item.name;
+    chip.appendChild(labelSpan);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "✕";
+    removeBtn.style.cssText = "background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;";
+    removeBtn.addEventListener("click", () => {
+      chip.remove();
+      state.filters = state.filters.filter(function (f) {
+        return !(f.section === "regionLanguage" && f.value && f.value.type === "region" && f.value.code === item.code);
+      });
+      if (typeof updateUIFromState === "function") {
+        try { updateUIFromState(); } catch (e) {}
+      }
+    });
+    chip.appendChild(removeBtn);
+
+    regionContainer.appendChild(chip);
+
+    if (isFirstRegion && !skipSmartLink) {
+      handleRegionLanguageLink(item.code);
+    }
+  }
+
+  /* Hydrate region chips from state.filters on every panel open — 2026-05-11.
+     Without this, switching tabs and returning loses the visible chips even
+     though state.filters still holds the selections. */
+  state.filters
+    .filter(function (f) {
+      return f.section === "regionLanguage" && f.value && f.value.type === "region";
+    })
+    .forEach(function (f) {
+      addRegionChip({ code: f.value.code, name: f.value.name }, { skipSmartLink: true });
+    });
+
   const regions = [
     { code: "US", name: "🇺🇸 United States" },
     { code: "GB", name: "🇬🇧 United Kingdom" },
@@ -2349,8 +4488,6 @@ function buildRegionLanguageContent(root) {
     { code: "CA", name: "🇨🇦 Canada" },
     { code: "AU", name: "🇦🇺 Australia" }
   ];
-  
-  let selectedRegion = null;
   
   regionInput.addEventListener("input", () => {
     const query = regionInput.value.toLowerCase();
@@ -2385,33 +4522,9 @@ function buildRegionLanguageContent(root) {
       opt.onmouseover = () => opt.style.background = "rgba(0, 217, 255, 0.1)";
       opt.onmouseout = () => opt.style.background = "transparent";
       opt.onclick = () => {
-        selectedRegion = item;
         regionInput.value = "";
         hideRegionSuggestions();
-        
-        regionContainer.innerHTML = `
-          <div data-region-code="${item.code}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${item.name}</span>
-            <button id="removeRegion" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeRegion").onclick = () => {
-          selectedRegion = null;
-          regionContainer.innerHTML = "";
-        };
-        
-        // Smart language linking - auto-adjust based on country
-        handleRegionLanguageLink(item.code);
+        addRegionChip(item);
       };
       dropdown.appendChild(opt);
     });
@@ -2574,7 +4687,48 @@ function buildRegionLanguageContent(root) {
   englishToggleRow.appendChild(toggleLabel);
   englishToggleRow.appendChild(toggleSwitch);
   root.appendChild(englishToggleRow);
-  
+
+  /* ============================================================
+     POPULAR REGIONS — Added May 4, 2026
+     Quick-pick chips below the English Only toggle. Clicking a chip
+     pre-fills the Production Region search input with the country
+     name and triggers the input event so the existing region-search
+     flow renders the suggestion dropdown.
+     ============================================================ */
+  const popularLabel = document.createElement("div");
+  popularLabel.className = "focus-section-label";
+  popularLabel.style.marginTop = "12px";
+  popularLabel.textContent = "POPULAR REGIONS";
+  root.appendChild(popularLabel);
+
+  const popularGroup = document.createElement("div");
+  popularGroup.className = "chip-group";
+  const popularRegions = [
+    { code: 'US', name: 'United States', label: 'Hollywood' },
+    { code: 'GB', name: 'United Kingdom', label: 'British' },
+    { code: 'FR', name: 'France',         label: 'French' },
+    { code: 'KR', name: 'South Korea',    label: 'Korean' },
+    { code: 'JP', name: 'Japan',          label: 'Japanese' },
+    { code: 'IT', name: 'Italy',          label: 'Italian' },
+    { code: 'HK', name: 'Hong Kong',      label: 'Hong Kong' },
+    { code: 'DE', name: 'Germany',        label: 'German' }
+  ];
+  popularRegions.forEach(r => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip oft-popular-region-chip";
+    chip.dataset.regionCode = r.code;
+    chip.dataset.regionName = r.name;
+    chip.textContent = r.label;
+    chip.addEventListener('click', () => {
+      // 2026-05-11: clicking a Popular Region adds it directly to the
+      // selection (was previously a search-input prefill).
+      addRegionChip({ code: r.code, name: r.label });
+    });
+    popularGroup.appendChild(chip);
+  });
+  root.appendChild(popularGroup);
+
   // Language search row (hidden when English Only is ON)
   const langSearchSection = document.createElement("div");
   langSearchSection.id = "langSearchSection";
@@ -2736,15 +4890,25 @@ function buildRegionLanguageContent(root) {
 // =============================================
 
 function buildProductionContent(root) {
-  root.appendChild(makeSectionLabel("Studios & Production Companies"));
-  
+  /* Production 2-column layout (May 4, 2026): Studios + search on
+     the left, Box Office sliders + presets on the right. */
+  const grid = document.createElement("div");
+  grid.className = "oft-production-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-production-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-production-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
+
+  colLeft.appendChild(makeSectionLabel("Studios & Production Companies"));
+
   const desc = document.createElement("p");
   desc.style.fontSize = "13px";
   desc.style.color = "var(--muted-silver)";
   desc.style.marginBottom = "16px";
   desc.textContent = "Select from top studios or search for others.";
-  root.appendChild(desc);
-  
+  colLeft.appendChild(desc);
+
   const topStudios = [
     { name: "Disney", id: 2 },
     { name: "Warner Bros", id: 174 },
@@ -2757,16 +4921,16 @@ function buildProductionContent(root) {
     { name: "Pixar", id: 3 },
     { name: "Lucasfilm", id: 1 }
   ];
-  
+
   const studioGroup = document.createElement("div");
   studioGroup.className = "chip-group";
   topStudios.forEach(studio => {
-    const chip = makeChip(`🏛️ ${studio.name}`, "production", { type: "company", id: studio.id, name: studio.name });
+    const chip = makeChip(studio.name, "production", { type: "company", id: studio.id, name: studio.name });
     chip.id = `studio-${studio.name.replace(/\s+/g, '-')}`;
     studioGroup.appendChild(chip);
   });
-  root.appendChild(studioGroup);
-  
+  colLeft.appendChild(studioGroup);
+
   const studioRow = document.createElement("div");
   studioRow.className = "input-row";
   studioRow.style.cssText = "margin-top: 16px; position: relative;";
@@ -2776,7 +4940,7 @@ function buildProductionContent(root) {
   studioInput.placeholder = "Search for other studios...";
   studioInput.autocomplete = "off";
   studioRow.appendChild(studioInput);
-  root.appendChild(studioRow);
+  colLeft.appendChild(studioRow);
 
   const studioDropdown = document.createElement("div");
   studioDropdown.className = "search-dropdown";
@@ -2808,7 +4972,7 @@ function buildProductionContent(root) {
           item.addEventListener("click", () => {
             const chipId = `studio-${company.name.replace(/\s+/g, '-')}`;
             if (!document.getElementById(chipId)) {
-              const chip = makeChip(`🏛️ ${company.name}`, "production", { type: "company", id: company.id, name: company.name });
+              const chip = makeChip(company.name, "production", { type: "company", id: company.id, name: company.name });
               chip.id = chipId;
               studioGroup.appendChild(chip);
             }
@@ -2827,8 +4991,8 @@ function buildProductionContent(root) {
     if (!studioRow.contains(e.target)) studioDropdown.style.display = "none";
   });
   
-  root.appendChild(makeSectionLabel("Box Office (Worldwide Gross)"));
-  
+  colRight.appendChild(makeSectionLabel("Box Office (Worldwide Gross)"));
+
   const boxOfficeRow = document.createElement("div");
   boxOfficeRow.className = "input-row";
   boxOfficeRow.style.flexDirection = "column";
@@ -2902,8 +5066,8 @@ function buildProductionContent(root) {
   
   boxOfficeRow.appendChild(minRow);
   boxOfficeRow.appendChild(maxRow);
-  root.appendChild(boxOfficeRow);
-  
+  colRight.appendChild(boxOfficeRow);
+
   const boxOfficeQuick = document.createElement("div");
   boxOfficeQuick.className = "chip-group";
   boxOfficeQuick.style.marginTop = "12px";
@@ -2924,7 +5088,7 @@ function buildProductionContent(root) {
     });
     boxOfficeQuick.appendChild(chip);
   });
-  root.appendChild(boxOfficeQuick);
+  colRight.appendChild(boxOfficeQuick);
 }
 
 // =============================================
@@ -3067,196 +5231,259 @@ function buildWatchContent(root) {
 // 8. UNIVERSES SECTION
 // =============================================
 
+/* ============================================================
+   UNIVERSES — unified keyword & collection search (Phase 1)
+   Rebuilt May 9, 2026
+   Right column of the Source/Universe tab. Replaces the old
+   Search Collections + Popular Universes layout with a unified
+   search input (parallel TMDB keyword + collection queries) plus
+   curated Popular Series and Popular Themes rows.
+
+   Filter shapes committed to state.filters:
+     collection chip → { type:'collection', id, name, collections:[id] }
+                       (`.collections` array kept so existing Universe
+                        Mode launch path at line ~1480 picks them up
+                        without modification — Phase 1 back-compat.)
+     keyword chip    → { type:'keyword',    id, name }
+                       (handled by buildTMDBQueryFromFilters universes
+                        case → params.set('with_keywords', …))
+   ============================================================ */
 function buildUniversesContent(root) {
-  root.appendChild(makeSectionLabel("Search Collections"));
+  // ---------- Search ----------
+  root.appendChild(makeSectionLabel("Keyword & series search"));
 
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 12px;";
-  desc.textContent = "Search TMDB for any movie collection or franchise.";
-  root.appendChild(desc);
+  const searchWrap = document.createElement("div");
+  searchWrap.className = "orbit-kw-search-wrap";
+  const kwInput = document.createElement("input");
+  kwInput.type = "text";
+  kwInput.id = "kwSeriesInput";
+  kwInput.className = "orbit-kw-input";
+  kwInput.placeholder = "Search franchises, themes, concepts...";
+  kwInput.autocomplete = "off";
+  searchWrap.appendChild(kwInput);
+  root.appendChild(searchWrap);
 
-  const searchContainer = document.createElement("div");
-  searchContainer.style.position = "relative";
-  const searchRow = document.createElement("div");
-  searchRow.className = "input-row";
-  const searchInput = document.createElement("input");
-  searchInput.type = "text";
-  searchInput.id = "universeSearchInput";
-  searchInput.placeholder = "Search collections (e.g., Lord of the Rings)";
-  searchInput.autocomplete = "off";
-  searchRow.appendChild(searchInput);
-  searchContainer.appendChild(searchRow);
-  root.appendChild(searchContainer);
+  const dropdown = document.createElement("div");
+  dropdown.className = "orbit-kw-dropdown";
+  dropdown.id = "kwSeriesDropdown";
+  dropdown.style.display = "none";
+  dropdown.innerHTML =
+    '<div class="orbit-kw-group" id="kwSeriesGroup" style="display:none;">' +
+      '<div class="orbit-kw-group-label">FILM SERIES</div>' +
+      '<div class="orbit-kw-results" id="kwSeriesResults"></div>' +
+    '</div>' +
+    '<div class="orbit-kw-group" id="kwThemeGroup" style="display:none;">' +
+      '<div class="orbit-kw-group-label">THEMES &amp; CONCEPTS</div>' +
+      '<div class="orbit-kw-results" id="kwThemeResults"></div>' +
+    '</div>' +
+    '<div class="orbit-kw-empty" id="kwEmpty" style="display:none;">No results found</div>';
+  root.appendChild(dropdown);
 
-  let universeDropdown = document.getElementById("universeDropdownGlobal");
-  if (!universeDropdown) {
-    universeDropdown = document.createElement("div");
-    universeDropdown.id = "universeDropdownGlobal";
-    universeDropdown.style.cssText = `
-      display: none;
-      position: fixed;
-      max-height: 300px;
-      width: 500px;
-      overflow-y: auto;
-      background: rgba(10, 14, 26, 0.98);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-    `;
-    document.body.appendChild(universeDropdown);
-  }
+  let _kwTimer = null;
 
-  let selectedCollections = [];
-  let universeDebounceTimer;
-
-  const selectedContainer = document.createElement("div");
-  selectedContainer.id = "selectedUniverseContainer";
-  selectedContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  root.appendChild(selectedContainer);
-
-  searchInput.addEventListener('input', () => {
-    clearTimeout(universeDebounceTimer);
-    const query = searchInput.value.trim();
-    if (query.length > 1) {
-      universeDebounceTimer = setTimeout(async () => {
-        const rect = searchInput.getBoundingClientRect();
-        universeDropdown.style.top = `${rect.bottom + 4}px`;
-        universeDropdown.style.left = `${rect.left}px`;
-        universeDropdown.style.width = `${Math.max(rect.width, 400)}px`;
-
-        try {
-          const res = await fetch(`https://api.themoviedb.org/3/search/collection?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
-          if (!res.ok) return;
-          const data = await res.json();
-          renderUniverseDropdown(data.results?.slice(0, 8) || []);
-        } catch (err) {
-          console.error("Collection search error:", err);
-        }
-      }, 300);
-    } else {
-      universeDropdown.style.display = 'none';
-    }
+  kwInput.addEventListener("input", function () {
+    const q = this.value.trim();
+    clearTimeout(_kwTimer);
+    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    _kwTimer = setTimeout(function () { searchKeywordsAndCollections(q); }, 350);
   });
 
-  function renderUniverseDropdown(collections) {
-    if (collections.length === 0) {
-      universeDropdown.style.display = 'none';
-      return;
-    }
-    universeDropdown.style.display = 'block';
-    universeDropdown.innerHTML = collections.map(c => `
-      <div class="universe-dropdown-item" data-id="${c.id}" data-name="${c.name}" style="
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 12px;
-        cursor: pointer;
-        border-bottom: 1px solid rgba(120, 190, 255, 0.1);
-        transition: background 0.15s ease;
-      " onmouseover="this.style.background='rgba(111, 210, 255, 0.1)'" onmouseout="this.style.background='transparent'">
-        <img src="${c.poster_path ? 'https://image.tmdb.org/t/p/w45' + c.poster_path : 'https://placehold.co/45x68?text=?'}"
-          style="width: 35px; height: 52px; object-fit: cover; border-radius: 4px; flex-shrink: 0;"
-          onerror="this.src='https://placehold.co/35x52?text=?'" />
-        <div style="flex: 1; min-width: 0;">
-          <div style="font-size: 14px; font-weight: 500; color: var(--film-white);">${c.name}</div>
-        </div>
-      </div>
-    `).join('');
+  kwInput.addEventListener("blur", function () {
+    setTimeout(function () { dropdown.style.display = "none"; }, 200);
+  });
 
-    universeDropdown.querySelectorAll('.universe-dropdown-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const id = parseInt(item.dataset.id);
-        const name = item.dataset.name;
-        if (selectedCollections.some(s => s.id === id)) return;
-        addCollectionChip({ id, name, type: "collection" });
-        searchInput.value = '';
-        universeDropdown.style.display = 'none';
+  async function searchKeywordsAndCollections(query) {
+    const key = TMDB_API_KEY;
+    const base = "https://api.themoviedb.org/3";
+    dropdown.style.display = "block";
+
+    let kwData = { results: [] }, colData = { results: [] };
+    try {
+      const [kwRes, colRes] = await Promise.all([
+        fetch(`${base}/search/keyword?api_key=${key}&query=${encodeURIComponent(query)}`),
+        fetch(`${base}/search/collection?api_key=${key}&query=${encodeURIComponent(query)}`)
+      ]);
+      [kwData, colData] = await Promise.all([kwRes.json(), colRes.json()]);
+    } catch (e) {
+      console.error("[Orbit] Keyword/collection search failed:", e);
+    }
+
+    const keywords    = (kwData.results  || []).slice(0, 5);
+    const collections = (colData.results || []).slice(0, 5);
+
+    const seriesGroup = document.getElementById("kwSeriesGroup");
+    const themeGroup  = document.getElementById("kwThemeGroup");
+    const emptyEl     = document.getElementById("kwEmpty");
+    const seriesRes   = document.getElementById("kwSeriesResults");
+    const themeRes    = document.getElementById("kwThemeResults");
+
+    seriesRes.innerHTML = "";
+    themeRes.innerHTML  = "";
+
+    if (collections.length > 0) {
+      seriesGroup.style.display = "block";
+      collections.forEach(function (col) {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "orbit-kw-item";
+        item.dataset.kind = "collection";
+        item.dataset.id   = col.id;
+        item.dataset.name = col.name;
+        item.innerHTML =
+          '<span class="orbit-kw-item-name"></span>' +
+          '<span class="orbit-kw-item-badge orbit-kw-badge--collection">Series</span>';
+        item.querySelector(".orbit-kw-item-name").textContent = col.name;
+        item.addEventListener("mousedown", function () {
+          commitKwFilter("collection", col.id, col.name);
+          kwInput.value = "";
+          dropdown.style.display = "none";
+        });
+        seriesRes.appendChild(item);
+      });
+    } else {
+      seriesGroup.style.display = "none";
+    }
+
+    if (keywords.length > 0) {
+      themeGroup.style.display = "block";
+      keywords.forEach(function (kw) {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "orbit-kw-item";
+        item.dataset.kind = "keyword";
+        item.dataset.id   = kw.id;
+        item.dataset.name = kw.name;
+        item.innerHTML =
+          '<span class="orbit-kw-item-name"></span>' +
+          '<span class="orbit-kw-item-badge orbit-kw-badge--keyword">Concept</span>';
+        item.querySelector(".orbit-kw-item-name").textContent = kw.name;
+        item.addEventListener("mousedown", function () {
+          commitKwFilter("keyword", kw.id, kw.name);
+          kwInput.value = "";
+          dropdown.style.display = "none";
+        });
+        themeRes.appendChild(item);
+      });
+    } else {
+      themeGroup.style.display = "none";
+    }
+
+    emptyEl.style.display =
+      (collections.length === 0 && keywords.length === 0) ? "block" : "none";
+  }
+
+  /* commitKwFilter — toggle: add filter on first click, remove on
+     duplicate click. Keeps state.filters and chip visual in sync. */
+  function commitKwFilter(kind, id, name) {
+    const filterId = "universes-" + kind + "-" + id;
+    const existingIdx = state.filters.findIndex(function (f) { return f.id === filterId; });
+
+    if (existingIdx !== -1) {
+      state.filters.splice(existingIdx, 1);
+    } else if (kind === "collection") {
+      // .collections kept for back-compat with Universe Mode launch flow
+      state.filters.push({
+        id: filterId,
+        section: "universes",
+        label: name,
+        value: { type: "collection", id: id, name: name, collections: [id] }
+      });
+    } else {
+      state.filters.push({
+        id: filterId,
+        section: "universes",
+        label: name,
+        value: { type: "keyword", id: id, name: name }
+      });
+    }
+
+    syncCuratedActive();
+    renderFilterChips();
+  }
+
+  // ---------- Popular Series (collection chips) ----------
+  root.appendChild(makeSectionLabel("Popular Series"));
+  const seriesChipGroup = document.createElement("div");
+  seriesChipGroup.className = "chip-group";
+
+  const POPULAR_SERIES = [
+    "mcu", "star-wars", "harry-potter", "james-bond",
+    "alien", "predator", "lotr", "mission-impossible"
+  ];
+  const SERIES_DISPLAY = {
+    "mcu": "MCU",
+    "star-wars": "Star Wars",
+    "harry-potter": "Harry Potter",
+    "james-bond": "James Bond",
+    "alien": "Alien",
+    "predator": "Predator",
+    "lotr": "Lord of the Rings",
+    "mission-impossible": "Mission: Impossible"
+  };
+  POPULAR_SERIES.forEach(function (key) {
+    const entry = ORBIT_KEYWORD_IDS[key];
+    if (!entry) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip";
+    btn.dataset.curatedKey = "collection-" + entry.id;
+    btn.textContent = SERIES_DISPLAY[key] || entry.label;
+    btn.addEventListener("click", function () {
+      commitKwFilter("collection", entry.id, entry.label);
+    });
+    seriesChipGroup.appendChild(btn);
+  });
+  root.appendChild(seriesChipGroup);
+
+  // ---------- Popular Themes (keyword chips) ----------
+  const themesLabel = makeSectionLabel("Popular Themes");
+  themesLabel.classList.add("focus-section-label--purple");
+  root.appendChild(themesLabel);
+
+  const themesChipGroup = document.createElement("div");
+  themesChipGroup.className = "chip-group";
+
+  const POPULAR_THEMES = [
+    "time-travel", "heist", "dystopia", "serial-killer",
+    "revenge", "coming-of-age", "vampire", "space"
+  ];
+  POPULAR_THEMES.forEach(function (key) {
+    const entry = ORBIT_KEYWORD_IDS[key];
+    if (!entry) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip orbit-theme-chip";
+    btn.dataset.curatedKey = "keyword-" + entry.id;
+    btn.textContent = entry.label;
+    btn.addEventListener("click", function () {
+      commitKwFilter("keyword", entry.id, entry.label);
+    });
+    themesChipGroup.appendChild(btn);
+  });
+  root.appendChild(themesChipGroup);
+
+  /* Reflect state.filters → chip .active class. Called after every
+     commit, plus once on initial build to restore active chips when
+     reopening the panel with existing universes filters in state. */
+  function syncCuratedActive() {
+    const activeKeys = new Set();
+    state.filters.forEach(function (f) {
+      if (f.section !== "universes" || !f.value) return;
+      if (f.value.type === "collection" && f.value.id != null) {
+        activeKeys.add("collection-" + f.value.id);
+      } else if (f.value.type === "keyword" && f.value.id != null) {
+        activeKeys.add("keyword-" + f.value.id);
+      }
+    });
+    [seriesChipGroup, themesChipGroup].forEach(function (group) {
+      group.querySelectorAll(".chip").forEach(function (btn) {
+        const k = btn.dataset.curatedKey;
+        if (activeKeys.has(k)) btn.classList.add("active");
+        else btn.classList.remove("active");
       });
     });
-
-    document.addEventListener('click', (e) => {
-      if (!searchInput.contains(e.target) && !universeDropdown.contains(e.target)) {
-        universeDropdown.style.display = 'none';
-      }
-    }, { once: true });
   }
-
-  function addCollectionChip(collection) {
-    selectedCollections.push(collection);
-    const chip = document.createElement("div");
-    chip.className = "selected-universe-chip";
-    chip.dataset.collectionId = collection.id;
-    chip.dataset.collectionName = collection.name;
-    chip.dataset.collectionType = collection.type;
-    chip.style.cssText = `
-      background: rgba(111, 210, 255, 0.15);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 999px;
-      padding: 6px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--film-white);
-    `;
-    chip.innerHTML = `
-      <span>${collection.name}</span>
-      <button style="
-        background: transparent;
-        border: none;
-        color: var(--muted-silver);
-        cursor: pointer;
-        font-size: 14px;
-        padding: 0 4px;
-        transition: color 0.15s;
-      " onmouseover="this.style.color='var(--danger-red)'" onmouseout="this.style.color='var(--muted-silver)'">✕</button>
-    `;
-    chip.querySelector('button').addEventListener('click', () => {
-      selectedCollections = selectedCollections.filter(c => c.id !== collection.id);
-      chip.remove();
-    });
-    selectedContainer.appendChild(chip);
-  }
-
-  // --- CURATED UNIVERSES ---
-  root.appendChild(makeSectionLabel("Popular Universes"));
-  const curatedGroup = document.createElement("div");
-  curatedGroup.className = "chip-group";
-
-  const curated = [
-    { name: "MCU", ids: [131295] },
-    { name: "DCEU", ids: [948485] },
-    { name: "Star Wars", ids: [10] },
-    { name: "Harry Potter", ids: [1241] },
-    { name: "James Bond", ids: [645] },
-    { name: "Fast & Furious", ids: [9485] },
-    { name: "Mission Impossible", ids: [87359] },
-    { name: "Jurassic Park", ids: [328] },
-    { name: "MonsterVerse", ids: [535313] }
-  ];
-
-  curated.forEach(u => {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "chip";
-    chip.textContent = u.name;
-    chip.dataset.value = JSON.stringify({ type: "universe", name: u.name, collections: u.ids });
-    chip.addEventListener("click", () => {
-      chip.classList.toggle("active");
-    });
-    curatedGroup.appendChild(chip);
-  });
-  root.appendChild(curatedGroup);
-
-  // Close dropdown on focus card close
-  const closeButton = document.getElementById('focusCloseButton');
-  if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      universeDropdown.style.display = 'none';
-    });
-  }
+  syncCuratedActive();
 }
 
 // =============================================
@@ -3264,16 +5491,59 @@ function buildUniversesContent(root) {
 // =============================================
 
 function buildAwardsContent(root) {
-  // --- Recognition level ---
-  root.appendChild(makeSectionLabel("Recognition"));
+  /* Awards 2-column layout (May 5, 2026): Recognition + Specific Year
+     + Year Range sliders on the left; Festival above Category on the
+     right, separated by a focus-section-label divider. */
+
+  /* Data-quality disclaimer — added 2026-05-16. Awards data is being
+     rebuilt; coverage is limited to legacy datasets. Uses inline SVG
+     (no og-warning glyph in the current set) with gold accent var. */
+  const awardsDisclaimer = document.createElement("div");
+  awardsDisclaimer.style.cssText = `
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background: rgba(var(--accent-gold-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-gold-rgb), 0.3);
+    border-radius: 8px;
+    font-family: "Barlow", sans-serif;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted-silver);
+  `;
+  awardsDisclaimer.innerHTML = `
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--accent-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;" aria-hidden="true">
+      <path d="M8 2L14 13H2L8 2Z"/>
+      <line x1="8" y1="6.5" x2="8" y2="9.5"/>
+      <circle cx="8" cy="11.5" r="0.5" fill="var(--accent-gold)"/>
+    </svg>
+    <div>
+      <strong style="color: var(--film-white);">Awards data is being rebuilt.</strong>
+      Coverage is limited to Oscar, BAFTA, Golden Globe, Cannes, Venice, and Berlin from legacy datasets &mdash; some nominees and older ceremonies may be missing.
+    </div>
+  `;
+  root.appendChild(awardsDisclaimer);
+
+  const grid = document.createElement("div");
+  grid.className = "oft-awards-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-awards-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-awards-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
+
+  // --- Recognition level (left) ---
+  colLeft.appendChild(makeSectionLabel("Recognition"));
   const levelGroup = document.createElement("div");
   levelGroup.className = "chip-group";
   levelGroup.appendChild(makeChip("Winner", "awards", { type: "award-level", level: "winner" }));
   levelGroup.appendChild(makeChip("Nominee", "awards", { type: "award-level", level: "nominee" }));
-  root.appendChild(levelGroup);
+  colLeft.appendChild(levelGroup);
 
-  // --- Festival ---
-  root.appendChild(makeSectionLabel("Festival"));
+  // --- Festival (right, top) ---
+  colRight.appendChild(makeSectionLabel("Festival"));
   const festivalGroup = document.createElement("div");
   festivalGroup.className = "chip-group";
   const festivals = [
@@ -3289,26 +5559,28 @@ function buildAwardsContent(root) {
     chip.innerHTML = '<span class="og ' + f.glyph + '"></span> ' + f.label;
     festivalGroup.appendChild(chip);
   });
-  root.appendChild(festivalGroup);
+  colRight.appendChild(festivalGroup);
 
-  // --- Category ---
-  root.appendChild(makeSectionLabel("Category"));
+  // --- Category (right, below Festival) ---
+  colRight.appendChild(makeSectionLabel("Category"));
   const catGroup = document.createElement("div");
   catGroup.className = "chip-group";
+  /* Trimmed May 4, 2026: dropped Silver Bear (Grand Jury) and
+     Silver Bear (Director) — Silver Lion variants kept. */
   const categories = [
     "Best Picture", "Best Film", "Best Director", "Best Actor", "Best Actress",
     "Best Drama", "Best Comedy/Musical",
     "Palme d'Or", "Grand Prix", "Jury Prize",
     "Golden Lion", "Silver Lion (Grand Jury)", "Silver Lion (Director)",
-    "Golden Bear", "Silver Bear (Grand Jury)", "Silver Bear (Director)"
+    "Golden Bear"
   ];
   categories.forEach(function(cat) {
     catGroup.appendChild(makeChip(cat, "awards", { type: "award-category", category: cat }));
   });
-  root.appendChild(catGroup);
+  colRight.appendChild(catGroup);
 
-  // --- Specific Year ---
-  root.appendChild(makeSectionLabel("Specific Year"));
+  // --- Specific Year (left) ---
+  colLeft.appendChild(makeSectionLabel("Specific Year"));
   const awardSpecificRow = document.createElement("div");
   awardSpecificRow.className = "input-row";
   const awardYearInput = document.createElement("input");
@@ -3318,10 +5590,10 @@ function buildAwardsContent(root) {
   awardYearInput.min = "1950";
   awardYearInput.max = "2030";
   awardSpecificRow.appendChild(awardYearInput);
-  root.appendChild(awardSpecificRow);
+  colLeft.appendChild(awardSpecificRow);
 
-  // --- Award Year Range ---
-  root.appendChild(makeSectionLabel("Year Range"));
+  // --- Award Year Range (left) ---
+  colLeft.appendChild(makeSectionLabel("Year Range"));
 
   const awardYearRow = document.createElement("div");
   awardYearRow.className = "input-row";
@@ -3372,61 +5644,18 @@ function buildAwardsContent(root) {
 
   awardYearRow.appendChild(awardFromRow);
   awardYearRow.appendChild(awardToRow);
-  root.appendChild(awardYearRow);
+  colLeft.appendChild(awardYearRow);
 
-  // Decade quick-select chips
-  root.appendChild(makeSectionLabel("Quick Decade"));
-  const awardDecadeGroup = document.createElement("div");
-  awardDecadeGroup.className = "chip-group";
-  awardDecadeGroup.id = "awardDecadeGroup";
-  [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020].forEach(function(d) {
-    const chip = makeChip(d + "s", "awards", { type: "award-decade", decade: d });
-    chip.addEventListener("click", function() {
-      // Deactivate other decade chips (single-select)
-      awardDecadeGroup.querySelectorAll(".chip").forEach(function(c) {
-        if (c !== chip) c.classList.remove("active");
-      });
-      // If active, snap sliders to this decade and clear specific year
-      if (chip.classList.contains("active")) {
-        fromSlider.value = d;
-        toSlider.value = d + 9;
-        fromValue.textContent = d;
-        toValue.textContent = d + 9;
-        awardYearInput.value = "";
-      } else {
-        // Deselected — reset sliders to full range
-        fromSlider.value = 1950;
-        toSlider.value = 2025;
-        fromValue.textContent = "1950";
-        toValue.textContent = "2025";
-      }
-    });
-    awardDecadeGroup.appendChild(chip);
-  });
-  root.appendChild(awardDecadeGroup);
+  /* Quick Decade section removed May 4, 2026 — duplicated Year
+     Range slider functionality. Slider handlers below no longer
+     need to clear a decade-chip selection. */
 
-  // Slider interaction clears decade chips
-  function onSliderInput() {
-    var from = parseInt(fromSlider.value);
-    var to = parseInt(toSlider.value);
-    if (from > to) {
-      toSlider.value = from;
-      to = from;
-    }
-    fromValue.textContent = from;
-    toValue.textContent = to;
-    // Clear decade selection when user manually drags
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) {
-      c.classList.remove("active");
-    });
-  }
   fromSlider.addEventListener("input", function() {
     var from = parseInt(fromSlider.value);
     var to = parseInt(toSlider.value);
     if (from > to) { toSlider.value = from; toValue.textContent = from; }
     fromValue.textContent = from;
     awardYearInput.value = "";
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
   toSlider.addEventListener("input", function() {
     var from = parseInt(fromSlider.value);
@@ -3434,7 +5663,6 @@ function buildAwardsContent(root) {
     if (to < from) { fromSlider.value = to; fromValue.textContent = to; }
     toValue.textContent = to;
     awardYearInput.value = "";
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
 
   // Specific year input clears sliders and decade chips
@@ -3451,7 +5679,6 @@ function buildAwardsContent(root) {
       fromValue.textContent = "1950";
       toValue.textContent = "2025";
     }
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
 }
 
@@ -3465,7 +5692,7 @@ function collectLabelsForSection(sectionKey) {
   switch (sectionKey) {
     case "people":
       const selectedPeopleChips = document.querySelectorAll('.selected-person-chip');
-      return Array.from(selectedPeopleChips).map(chip => {
+      const peopleResults = Array.from(selectedPeopleChips).map(chip => {
         const role = chip.dataset.personRole;
         let roleLabel = "";
         if (role === "cast") roleLabel = " (Actor)";
@@ -3480,9 +5707,27 @@ function collectLabelsForSection(sectionKey) {
           }
         };
       });
+      if (typeof currentFilmmakerProfile === 'object' && currentFilmmakerProfile) {
+        const fp = currentFilmmakerProfile;
+        const fpAwards = Array.isArray(fp.awards) ? fp.awards : [];
+        const fpParts = ['role', 'nationality', 'gender', 'career_stage']
+          .filter(k => fp[k] && fp[k] !== 'any')
+          .map(k => k + ':' + fp[k]);
+        if (fpAwards.length > 0) fpParts.push('awards:' + fpAwards.join('+'));
+        if (fpParts.length > 0) {
+          peopleResults.push({
+            label: 'Filmmaker: ' + fpParts.join(', '),
+            value: {
+              type: 'filmmakerProfile',
+              profile: Object.assign({}, fp, { awards: fpAwards.slice() })
+            }
+          });
+        }
+      }
+      return peopleResults;
 
     case "genres":
-      const genreChips = document.querySelectorAll('#focusContent .chip.active');
+      const genreChips = document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active');
       return Array.from(genreChips).map(chip => {
         const value = JSON.parse(chip.dataset.value);
         return { label: chip.textContent, value };
@@ -3499,7 +5744,7 @@ function collectLabelsForSection(sectionKey) {
       }
 
       // Release decade chips + dateRange + runtime chips
-      const releaseChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const releaseChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.subType === "release";
@@ -3549,7 +5794,7 @@ function collectLabelsForSection(sectionKey) {
       }
 
       // Vote chips
-      const voteChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const voteChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "votes";
@@ -3563,7 +5808,7 @@ function collectLabelsForSection(sectionKey) {
       });
 
       // Certification chips
-      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "certification";
@@ -3580,16 +5825,19 @@ function collectLabelsForSection(sectionKey) {
 
     case "regionLanguage":
       const regionContainer = document.getElementById("selectedRegionContainer");
-      if (regionContainer && regionContainer.children.length > 0) {
-        const regionChip = regionContainer.querySelector('[data-region-code]');
-        const regionText = regionContainer.querySelector('span')?.textContent;
-        if (regionChip && regionText) {
+      if (regionContainer) {
+        // 2026-05-11: iterate all region chips for multi-region support.
+        const regionChips = regionContainer.querySelectorAll('[data-region-code]');
+        regionChips.forEach(regionChip => {
           const code = regionChip.dataset.regionCode;
-          results.push({
-            label: `Region: ${regionText}`,
-            value: { type: "region", code: code, name: regionText }
-          });
-        }
+          const regionText = regionChip.querySelector('span')?.textContent;
+          if (code && regionText) {
+            results.push({
+              label: `Region: ${regionText}`,
+              value: { type: "region", code: code, name: regionText }
+            });
+          }
+        });
       }
 
       const englishToggle = document.getElementById("englishOnlyToggle");
@@ -3615,7 +5863,7 @@ function collectLabelsForSection(sectionKey) {
       return results;
 
     case "production":
-      const studioChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const studioChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "company";
@@ -3659,7 +5907,7 @@ function collectLabelsForSection(sectionKey) {
         });
       });
       // Curated universe chips
-      const curatedChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const curatedChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           try {
             const val = JSON.parse(chip.dataset.value);
@@ -3673,7 +5921,7 @@ function collectLabelsForSection(sectionKey) {
       return universeResults;
 
     case "themes":
-      const themeChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const themeChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           try { return JSON.parse(chip.dataset.value).type === "theme"; } catch { return false; }
         });
@@ -3694,7 +5942,7 @@ function collectLabelsForSection(sectionKey) {
         });
       });
       // Chip-selected locations (popular/region/special chips)
-      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           try { return JSON.parse(chip.dataset.value).type === "location"; } catch { return false; }
         });
@@ -3709,7 +5957,7 @@ function collectLabelsForSection(sectionKey) {
 
     case "settingWhen":
       const whenResults = [];
-      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active'));
+      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'));
       whenChips.forEach(chip => {
         try {
           const value = JSON.parse(chip.dataset.value);
@@ -3723,7 +5971,7 @@ function collectLabelsForSection(sectionKey) {
       return whenResults;
 
     case "basedOn":
-      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           try { return JSON.parse(chip.dataset.value).type === "based_on"; } catch { return false; }
         });
@@ -3734,7 +5982,7 @@ function collectLabelsForSection(sectionKey) {
 
     case "awards":
       const awardResults = [];
-      const awardChips = document.querySelectorAll('#focusContent .chip.active');
+      const awardChips = document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active');
       awardChips.forEach(function(chip) {
         const value = JSON.parse(chip.dataset.value);
         // Skip decade chips — the slider values are what we collect
@@ -3762,3 +6010,1279 @@ function collectLabelsForSection(sectionKey) {
 }
 
 // Region modal removed - all streaming settings consolidated into Watch Providers section
+
+/* ============================================================
+   MOSAIC ANCHOR — Added May 1, 2026
+   Pins .discover-mosaic-region's top edge to the exact bottom of
+   the streaming bar so the mosaic begins precisely at the second
+   horizontal divider. Re-measures on resize.
+   ============================================================ */
+(function initMosaicAnchor() {
+  var streamBar = document.getElementById('discoverStreamBar');
+  if (!streamBar) return;
+  function sync() {
+    var rect = streamBar.getBoundingClientRect();
+    /* getBoundingClientRect.bottom is viewport-relative; add scrollY
+       so the value works for an absolute-positioned element pinned
+       to the body's coordinate system. */
+    var topPx = Math.round(rect.bottom + window.scrollY);
+    document.documentElement.style.setProperty('--mosaic-top', topPx + 'px');
+  }
+  sync();
+  window.addEventListener('resize', sync);
+})();
+
+/* ============================================================
+   MOVIE MOSAIC — Added May 1, 2026
+   Mirrors landing page populateMosaic logic from pages/home.js.
+   Fetches trending + top-rated posters via TMDB, caches in
+   sessionStorage for 2h, and fades them into the cell grid.
+
+   Per Rule 9: 3 parallel fetches once per session.
+
+   Cache key version bumped after API key rotation so any stale
+   empty cache from a previous session is ignored.
+   ============================================================ */
+(function loadDiscoverMosaicPosters() {
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return;
+  var grid = document.getElementById('discover-hero-mosaic');
+  if (!grid) return;
+
+  var CACHE_KEY = 'orbit_discover_mosaic_posters_v2';
+  var CACHE_TTL = 2 * 60 * 60 * 1000;
+
+  function paint(paths) {
+    if (!paths || !paths.length) return;
+    var cells = grid.querySelectorAll('.mosaic-cell');
+    if (!cells.length) return;
+
+    var shuffled = paths.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+    }
+
+    var assigned = [];
+    var idx = 0;
+    for (var k = 0; k < cells.length; k++) {
+      if (idx >= shuffled.length) idx = 0;
+      if (k > 0 && assigned[k - 1] === shuffled[idx] && shuffled.length > 1) {
+        idx = (idx + 1) % shuffled.length;
+      }
+      assigned.push(shuffled[idx]);
+      idx++;
+    }
+
+    cells.forEach(function (cell, i) {
+      cell.style.opacity = '0';
+      cell.style.transition = 'opacity 0.8s ease';
+      /* w185 fits the larger 12×2 tile size cleanly; w92 was too low-res. */
+      cell.style.backgroundImage = 'url(' + OrbitUtils.TMDB_IMG + 'w185' + assigned[i] + ')';
+      cell.style.backgroundSize = 'cover';
+      cell.style.backgroundPosition = 'center';
+      setTimeout(function () { cell.style.opacity = '1'; }, 40 * i);
+    });
+  }
+
+  /* Use cache only if it has actual data — never trust an empty cache. */
+  try {
+    var cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      var parsed = JSON.parse(cached);
+      if (parsed && parsed.data && parsed.data.length &&
+          Date.now() - parsed.timestamp < CACHE_TTL) {
+        paint(parsed.data);
+        return;
+      }
+    }
+  } catch (e) { /* fall through to fetch */ }
+
+  /* Use allSettled so one failing endpoint doesn't blank the mosaic. */
+  Promise.allSettled([
+    OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 1 }),
+    OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 2 }),
+    OrbitUtils.tmdbFetch('/movie/top_rated', { language: 'en-US', page: 1 })
+  ]).then(function (results) {
+    var paths = [];
+    results.forEach(function (r) {
+      if (r.status === 'fulfilled' && r.value && r.value.results) {
+        r.value.results.forEach(function (m) {
+          if (m && m.poster_path) paths.push(m.poster_path);
+        });
+      } else if (r.status === 'rejected') {
+        console.warn('ORBIT discover mosaic: endpoint failed', r.reason);
+      }
+    });
+    if (!paths.length) {
+      console.warn('ORBIT discover mosaic: 0 posters returned');
+      return;
+    }
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: paths, timestamp: Date.now() }));
+    } catch (e) { /* quota */ }
+    paint(paths);
+  });
+})();
+
+/* ============================================================
+   ORBIT RING — Added May 3, 2026
+   Reads state.filters and plots coloured dots on the SVG rings in
+   the sidebar. Called from inside the renderFilterChips wrapper.
+   ============================================================ */
+const ORBIT_RING_COLOURS = {
+  people:         '#00d9ff',  // cyan
+  genres:         '#a855f7',  // purple
+  timeEra:        '#f97316',  // orange
+  ratingsContent: '#f59e0b',  // amber
+  awards:         '#ffd700',  // gold
+  themes:         '#94a3b8',  // silver
+  settingWhere:   '#ef4444',  // red
+  settingWhen:    '#ef4444',  // red
+  basedOn:        '#f43f5e',  // rose
+  universes:      '#f43f5e',  // rose
+  regionLanguage: '#14b8a6',  // teal
+  production:     '#6366f1',  // indigo
+  watch:          '#10b981'   // green
+};
+
+function updateOrbitRing() {
+  const dotsGroup = document.getElementById('orbitRingDots');
+  const emptyText = document.getElementById('orbitRingEmptyText');
+  if (!dotsGroup) return;
+
+  const filters = Array.isArray(state.filters) ? state.filters : [];
+  const n = filters.length;
+
+  if (emptyText) emptyText.style.opacity = n === 0 ? '1' : '0';
+
+  if (n === 0) { dotsGroup.innerHTML = ''; return; }
+
+  const cx = 110, cy = 65;
+  const ringRadii = [19, 36, 55];
+
+  /* Inner ring 0–5, middle 6–13, outer 14+ */
+  const grouped = [[], [], []];
+  filters.forEach(function (f, i) {
+    const ri = i < 6 ? 0 : i < 14 ? 1 : 2;
+    grouped[ri].push(f);
+  });
+
+  let svgStr = '';
+  grouped.forEach(function (group, ri) {
+    const r = ringRadii[ri];
+    const total = group.length;
+    group.forEach(function (filter, pos) {
+      const angle = (pos / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2;
+      const x = (cx + r * Math.cos(angle)).toFixed(2);
+      const y = (cy + r * Math.sin(angle)).toFixed(2);
+      const colour = ORBIT_RING_COLOURS[filter.section] || '#00d9ff';
+      svgStr += '<circle cx="' + x + '" cy="' + y + '" r="4.5" fill="' + colour + '" opacity="0.9"/>';
+      svgStr += '<circle cx="' + x + '" cy="' + y + '" r="2" fill="white" opacity="0.6"/>';
+    });
+  });
+
+  dotsGroup.innerHTML = svgStr;
+}
+
+/* ============================================================
+   LIVE FILM COUNT — Added May 4, 2026
+   Fetches total_results from TMDB /discover/movie after filters
+   change. Called from inside the renderFilterChips wrapper.
+   Debounced 600ms to avoid hammering the API on rapid changes.
+   Format: 1234 → "1,234", >9999 → "9,999+".
+   ============================================================ */
+let _filmCountTimer = null;
+
+/* Update the "X of Y on your services" warning under the film count.
+   Only fires when a watch-section filter is active and the streaming-
+   filtered count is less than 60% of the unfiltered total. */
+function updateStreamingWarning(streamingCount, totalCount) {
+  var warningEl = document.getElementById('orbitStreamingWarning');
+  if (!warningEl) return;
+
+  var hasStreamingFilter = Array.isArray(state.filters) &&
+    state.filters.some(function (f) { return f.section === 'watch'; });
+
+  if (!hasStreamingFilter || totalCount === 0) {
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  var ratio = streamingCount / totalCount;
+  if (ratio >= 0.6) {
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  var missed = Math.max(0, totalCount - streamingCount);
+  warningEl.innerHTML =
+    '<span class="orbit-warning-text">' +
+      streamingCount.toLocaleString() + ' of ' + totalCount.toLocaleString() +
+      ' films on your services</span>' +
+    '<button class="orbit-warning-link" type="button" ' +
+      'onclick="document.getElementById(\'discoverEditBtn\').click()">' +
+      missed.toLocaleString() + ' more on other streamers →</button>';
+  warningEl.style.display = 'block';
+}
+
+function fetchFilmCount() {
+  const countEl     = document.getElementById('orbitFilmCount');
+  const countNumber = document.getElementById('orbitFilmCountNumber');
+  if (!countEl || !countNumber) return;
+
+  const filters = Array.isArray(state.filters) ? state.filters : [];
+  if (filters.length === 0) {
+    countEl.style.display = 'none';
+    var warnEmpty = document.getElementById('orbitStreamingWarning');
+    if (warnEmpty) warnEmpty.style.display = 'none';
+    return;
+  }
+
+  countEl.style.display = 'block';
+  countNumber.textContent = '…';
+
+  clearTimeout(_filmCountTimer);
+  _filmCountTimer = setTimeout(function () {
+    /* Awards filters are client-side against AWARDS_DATABASE — TMDB has no
+       awards param. Three modes:
+         1. Awards-only filters → synchronous count via getAwardsMatchingIds.
+         2. Awards + TMDB filters → fetch TMDB page 1, post-filter with
+            filterByAwards, extrapolate. Counter displays "~N" to signal
+            an approximation (true count requires fetching all pages).
+         3. No awards → existing TMDB path unchanged. */
+    /* Movie-list counter (2026-05-16) — handles two filter types
+       with the same ids semantics:
+         • type: 'movieList'           → ids embedded directly in the filter
+         • type: 'extended-collection' → ids looked up from ORBIT_KEYWORD_IDS
+       Both resolve to an array of TMDB movie IDs. Fast path counts
+       length; slow path batch-fetches /movie/{id} when other filters
+       are present. */
+    var explicitIdFilters = filters.filter(function (f) {
+      if (!(f.section === 'universes' && f.value)) return false;
+      return f.value.type === 'movieList' || f.value.type === 'extended-collection';
+    });
+    if (explicitIdFilters.length > 0) {
+      var movieListIds = {};
+      explicitIdFilters.forEach(function (f) {
+        var ids = null;
+        if (f.value.type === 'movieList' && Array.isArray(f.value.ids)) {
+          ids = f.value.ids;
+        } else if (f.value.type === 'extended-collection'
+                   && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+                   && ORBIT_KEYWORD_IDS[f.value.id]
+                   && Array.isArray(ORBIT_KEYWORD_IDS[f.value.id].ids)) {
+          ids = ORBIT_KEYWORD_IDS[f.value.id].ids;
+        }
+        if (ids) ids.forEach(function (id) { movieListIds[id] = true; });
+      });
+      var dedupedMovieIds = Object.keys(movieListIds).map(function (k) { return parseInt(k, 10); });
+
+      var hasOtherFilters = filters.some(function (f) {
+        return f.section !== 'universes' && f.section !== 'awards';
+      });
+
+      if (!hasOtherFilters) {
+        /* Fast path — pure movieList. Count is the deduped list size. */
+        var nFast = dedupedMovieIds.length;
+        countNumber.textContent = nFast > 9999 ? '9,999+' : nFast.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(nFast, nFast);
+        return;
+      }
+
+      /* Slow path — fetch full movie objects (cached) and apply filters. */
+      if (!window._movieListCountCache) window._movieListCountCache = {};
+      var mlApiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+      var mlPromises = dedupedMovieIds.map(function (movieId) {
+        if (window._movieListCountCache[movieId]) {
+          return Promise.resolve(window._movieListCountCache[movieId]);
+        }
+        return fetch('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=' + mlApiKey)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            if (!data || !data.id) return null;
+            /* Normalize: /movie/{id} returns genres: [{id,name},...]
+               but applyClientSideCollectionFilters checks genre_ids. */
+            if (Array.isArray(data.genres) && !data.genre_ids) {
+              data.genre_ids = data.genres.map(function (g) { return g.id; });
+            }
+            window._movieListCountCache[movieId] = data;
+            return data;
+          })
+          .catch(function () { return null; });
+      });
+
+      Promise.all(mlPromises).then(function (results) {
+        var validMovies = results.filter(Boolean);
+        var filteredMovies = applyClientSideCollectionFilters(validMovies, filters);
+        var nMl = filteredMovies.length;
+        countNumber.textContent = nMl > 9999 ? '9,999+' : nMl.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(nMl, nMl);
+      }).catch(function () {
+        countEl.style.display = 'none';
+      });
+
+      return;
+    }
+
+    /* Collection counter — fires whenever any collection filter is
+       present, regardless of mixed sibling filters. Collections are
+       fetched from /collection/{id} (not a TMDB discover param), then
+       other filters (genre, decade, year, rating) are applied
+       client-side to the deduped movie list. Mirrors what the launch
+       handler does at lines ~1593-1650 so the counter matches what
+       Launch will actually return. Cache stores full movie objects
+       (id + genre_ids + release_date + vote_average) so subsequent
+       counter ticks can re-apply different filters without refetching. */
+    var universeCollectionFilters = filters.filter(function (f) {
+      return f.section === 'universes' && f.value && f.value.type === 'collection';
+    });
+    if (universeCollectionFilters.length > 0) {
+      if (!window._collectionCountCache) window._collectionCountCache = {};
+
+      var collectionIdsForCount = [];
+      universeCollectionFilters.forEach(function (f) {
+        if (f.value && Array.isArray(f.value.collections)) {
+          collectionIdsForCount.push.apply(collectionIdsForCount, f.value.collections);
+        }
+      });
+
+      var colApiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+      var colPromises = collectionIdsForCount.map(function (colId) {
+        if (window._collectionCountCache[colId]) {
+          return Promise.resolve(window._collectionCountCache[colId]);
+        }
+        return fetch('https://api.themoviedb.org/3/collection/' + colId + '?api_key=' + colApiKey)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            var movies = (data && Array.isArray(data.parts)) ? data.parts : [];
+            window._collectionCountCache[colId] = movies;
+            return movies;
+          })
+          .catch(function () { return []; });
+      });
+
+      Promise.all(colPromises).then(function (results) {
+        var moviesById = {};
+        results.forEach(function (movies) {
+          movies.forEach(function (m) { if (m && m.id != null) moviesById[m.id] = m; });
+        });
+        var dedupedMovies = Object.keys(moviesById).map(function (k) { return moviesById[k]; });
+
+        var filteredMovies = applyClientSideCollectionFilters(dedupedMovies, filters);
+        var nUnique = filteredMovies.length;
+        countNumber.textContent = nUnique > 9999 ? '9,999+' : nUnique.toLocaleString();
+        countEl.style.display = 'block';
+        /* Suppress streaming-coverage warning in collection mode — the
+           count is constrained by the collection, not by streaming. */
+        updateStreamingWarning(nUnique, nUnique);
+      }).catch(function () {
+        countEl.style.display = 'none';
+      });
+
+      return;
+    }
+
+    var hasAwards = filters.some(function (f) { return f.section === 'awards' && f.value; });
+    var awardsDbReady = typeof AWARDS_DATABASE !== 'undefined';
+
+    if (hasAwards && awardsDbReady && hasAwardsOnlyFilters(filters)) {
+      try {
+        var awardsOnlyCount = getAwardsMatchingIds(filters).length;
+        countNumber.textContent = awardsOnlyCount > 9999 ? '9,999+' : awardsOnlyCount.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(awardsOnlyCount, awardsOnlyCount);
+      } catch (e) {
+        countEl.style.display = 'none';
+      }
+      return;
+    }
+
+    var queryString;
+    try {
+      queryString = buildTMDBQueryFromFilters(filters);
+    } catch (e) {
+      countEl.style.display = 'none';
+      return;
+    }
+    if (queryString == null) {
+      countEl.style.display = 'none';
+      return;
+    }
+
+    /* buildTMDBQueryFromFilters returns a query STRING (params.toString()),
+       not a URLSearchParams. Re-parse so we can append api_key + page. */
+    var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+    var baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+
+    var urlParams = new URLSearchParams(queryString);
+    urlParams.set('api_key', apiKey);
+    urlParams.set('page', '1');
+
+    /* Detect whether a watch filter is active. If so, we run a second
+       parallel fetch with the streaming params stripped to compare
+       coverage. Per Rule 9 — this doubles API spend, but only when a
+       watch filter is active. Debounced 600ms. */
+    var hasWatch = filters.some(function (f) { return f.section === 'watch'; });
+
+    var fetchPrimary = fetch(baseUrl + '?' + urlParams.toString())
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+
+    var fetchTotal;
+    if (hasWatch) {
+      var noStreamParams = new URLSearchParams(queryString);
+      noStreamParams.set('api_key', apiKey);
+      noStreamParams.set('page', '1');
+      noStreamParams.delete('with_watch_providers');
+      noStreamParams.delete('watch_region');
+      noStreamParams.delete('watch_monetization_types');
+      fetchTotal = fetch(baseUrl + '?' + noStreamParams.toString())
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+    } else {
+      fetchTotal = Promise.resolve(null);
+    }
+
+    Promise.all([fetchPrimary, fetchTotal])
+      .then(function (results) {
+        var primary = results[0];
+        var total   = results[1];
+        if (primary && typeof primary.total_results === 'number') {
+          var n = primary.total_results;
+
+          if (hasAwards && awardsDbReady) {
+            /* Mixed awards + TMDB filters. The earlier page-1
+               extrapolation `(page1_awards_match / 20) × tmdb_total`
+               blew up for sparse intersections (e.g. ~26 Oscar Best Doc
+               winners × ~700k TMDB documentaries → 200k+ phantom result).
+               Use the awards-set size as the ceiling instead — it's the
+               authoritative upper bound. At launch, multi-page TMDB
+               fetch + filterByAwards typically lands within a few films
+               of this number. */
+            var awardsCount = getAwardsMatchingIds(filters).length;
+            countNumber.textContent = '~' + (awardsCount > 9999 ? '9,999+' : awardsCount.toLocaleString());
+            countEl.style.display = 'block';
+            /* Pass equal values so the streaming-coverage warning stays
+               hidden — in awards mode the count is constrained by
+               awards, not streaming. */
+            updateStreamingWarning(awardsCount, awardsCount);
+            return;
+          }
+
+          countNumber.textContent = n > 9999 ? '9,999+' : n.toLocaleString();
+          countEl.style.display = 'block';
+
+          var totalN = (total && typeof total.total_results === 'number')
+            ? total.total_results : n;
+          updateStreamingWarning(n, totalN);
+        } else {
+          countEl.style.display = 'none';
+          updateStreamingWarning(0, 0);
+        }
+      })
+      .catch(function () {
+        countEl.style.display = 'none';
+        updateStreamingWarning(0, 0);
+      });
+  }, 600);
+}
+
+/* ============================================================
+   FILTER TABS — Added May 1, 2026
+   Replaces the .filter-grid card + popup system. All 11 tabs share
+   the same content the old .focus-overlay used: each builder is
+   reused untouched and rendered into the active panel's body.
+
+   Rebuild-on-activate: only ONE panel body holds DOM at a time.
+   On tab switch, the previously-active panel body is wiped before
+   the new builder runs. This preserves collectLabelsForSection's
+   getElementById assumptions (yearInput, ratingMin, runtimeMin,
+   selectedRegionContainer, watchProviderChips, etc. are unique).
+
+   Per-panel "Add to orbit" button mirrors the old addToSearchButton
+   flow: collectLabelsForSection(sectionKey) -> mutate state.filters
+   -> updateUIFromState(). For compound tabs (Setting, Source) each
+   column has its own Add button scoped to its own section key.
+   ============================================================ */
+(function initFilterTabs() {
+  var tabBar = document.getElementById('oftTabBar');
+  var panelArea = document.getElementById('oftPanelArea');
+  if (!tabBar || !panelArea) return;
+
+  var BUILDERS = {
+    people: function (root) { buildPeopleContent(root); },
+    genres: function (root) { buildGenresContent(root); },
+    timeEra: function (root) { buildTimeEraContent(root); },
+    ratingsContent: function (root) { buildRatingsContentSection(root); },
+    awards: function (root) { buildAwardsContent(root); },
+    themes: function (root) { buildThemesContent(root); },
+    regionLanguage: function (root) { buildRegionLanguageContent(root); },
+    production: function (root) { buildProductionContent(root); },
+    watch: function (root) { buildWatchContent(root); }
+  };
+
+  function makeAddButton(sectionKey, label) {
+    var actions = document.createElement('div');
+    actions.className = 'oft-panel-actions';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'orbit-btn orbit-btn--primary oft-add-btn';
+    btn.dataset.commitSection = sectionKey;
+    btn.textContent = label || 'Add to orbit';
+    actions.appendChild(btn);
+    return actions;
+  }
+
+  function buildPanelBody(panel) {
+    var body = panel.querySelector('.oft-panel-body');
+    if (!body) return;
+    body.innerHTML = '';
+
+    var section = panel.dataset.section;
+
+    if (section === 'setting-combined') {
+      var wrap = document.createElement('div');
+      wrap.className = 'oft-setting-combined';
+
+      var colWhere = document.createElement('div');
+      colWhere.className = 'oft-setting-col';
+      try { buildSettingWhereContent(colWhere); }
+      catch (e) { console.warn('[FilterTabs] settingWhere error', e); }
+
+      var colWhen = document.createElement('div');
+      colWhen.className = 'oft-setting-col';
+      try { buildSettingWhenContent(colWhen); }
+      catch (e) { console.warn('[FilterTabs] settingWhen error', e); }
+
+      wrap.appendChild(colWhere);
+      wrap.appendChild(colWhen);
+      body.appendChild(wrap);
+      return;
+    }
+
+    if (section === 'source-combined') {
+      var wrap2 = document.createElement('div');
+      wrap2.className = 'oft-source-combined';
+
+      var colBased = document.createElement('div');
+      colBased.className = 'oft-source-col';
+      try { buildBasedOnContent(colBased); }
+      catch (e) { console.warn('[FilterTabs] basedOn error', e); }
+
+      var colUni = document.createElement('div');
+      colUni.className = 'oft-source-col';
+      try { buildUniversesContent(colUni); }
+      catch (e) { console.warn('[FilterTabs] universes error', e); }
+
+      wrap2.appendChild(colBased);
+      wrap2.appendChild(colUni);
+      body.appendChild(wrap2);
+      return;
+    }
+
+    var fn = BUILDERS[section];
+    if (typeof fn !== 'function') return;
+    try { fn(body); }
+    catch (e) { console.warn('[FilterTabs] build error', section, e); }
+  }
+
+  function clearPanelBody(panel) {
+    if (!panel) return;
+    var body = panel.querySelector('.oft-panel-body');
+    if (body) body.innerHTML = '';
+  }
+
+  /* Move the singleton Add-to-orbit button into the active panel's
+     header. It's a single DOM node that follows the active panel rather
+     than being duplicated per panel. */
+  function relocateAddToOrbit(panel) {
+    var btn = document.getElementById('tabBarAddToOrbit');
+    if (!btn || !panel) return;
+    var header = panel.querySelector('.oft-panel-header');
+    if (!header) return;
+    if (btn.parentElement !== header) header.appendChild(btn);
+  }
+
+  function activateTab(tabName) {
+    var tabs = tabBar.querySelectorAll('.oft-tab');
+    var panels = panelArea.querySelectorAll('.oft-panel');
+
+    panels.forEach(function (p) {
+      if (p.classList.contains('oft-panel--active')) clearPanelBody(p);
+      p.classList.remove('oft-panel--active');
+    });
+    tabs.forEach(function (t) { t.classList.remove('oft-tab--active'); });
+
+    var newTab = tabBar.querySelector('.oft-tab[data-tab="' + tabName + '"]');
+    var newPanel = document.getElementById('oft-panel-' + tabName);
+    if (!newTab || !newPanel) return;
+
+    newTab.classList.add('oft-tab--active');
+    newPanel.classList.add('oft-panel--active');
+    buildPanelBody(newPanel);
+    relocateAddToOrbit(newPanel);
+    updateTabDots();
+  }
+
+  tabBar.addEventListener('click', function (e) {
+    var tab = e.target.closest('.oft-tab[data-tab]');
+    if (!tab) return;
+    activateTab(tab.dataset.tab);
+  });
+
+  /* Per-panel Add button: mirrors addToSearchButton click handler.
+     Uses collectLabelsForSection unchanged — it reads from the
+     fixed-ID controls that exist only in the active panel. */
+  panelArea.addEventListener('click', function (e) {
+    var btn = e.target.closest('.oft-add-btn[data-commit-section]');
+    if (!btn) return;
+    var sectionKey = btn.dataset.commitSection;
+    if (!sectionKey) return;
+    /* universes commits directly via commitKwFilter (Phase 1 keyword
+       search). Skip the DOM-scrape rebuild so direct-committed
+       filters aren't wiped. */
+    if (sectionKey !== 'universes') {
+      var labels = collectLabelsForSection(sectionKey);
+      /* Preserve direct-committed tmdb-keyword filters (Phase 2 keyword
+         search widget) so the legacy DOM scrape doesn't wipe them. */
+      state.filters = state.filters.filter(function (f) {
+        return f.section !== sectionKey ||
+          (f.value && f.value.type === 'tmdb-keyword');
+      });
+      labels.forEach(function (item) {
+        state.filters.push({
+          id: sectionKey + '-' + item.label,
+          section: sectionKey,
+          label: item.label,
+          value: item.value
+        });
+      });
+    }
+    updateUIFromState();
+    updateTabDots();
+    btn.classList.add('oft-add-btn--just-added');
+    setTimeout(function () { btn.classList.remove('oft-add-btn--just-added'); }, 600);
+  });
+
+  /* Reset button (footer): same teardown as the sidebar reset. */
+  var resetBtn = document.getElementById('resetFiltersBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function () {
+      state.filters = [];
+      state.genreLogic = 'or';
+      state.regionLogic = 'or';
+      try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+      updateUIFromState();
+      // Rebuild active panel so any in-panel selection state is wiped
+      var active = panelArea.querySelector('.oft-panel--active');
+      if (active) buildPanelBody(active);
+      updateTabDots();
+    });
+  }
+
+  /* data-tab → list of internal section keys. Compound tabs (setting,
+     source) commit two sections per Add. */
+  var TAB_TO_SECTIONS = {
+    people:     ['people'],
+    genres:     ['genres'],
+    era:        ['timeEra'],
+    ratings:    ['ratingsContent'],
+    awards:     ['awards'],
+    themes:     ['themes'],
+    setting:    ['settingWhere', 'settingWhen'],
+    source:     ['basedOn', 'universes'],
+    region:     ['regionLanguage'],
+    production: ['production'],
+    watch:      ['watch']
+  };
+
+  /* Active-filter dot indicator on each tab. */
+  function updateTabDots() {
+    var activeSections = new Set(state.filters.map(function (f) { return f.section; }));
+    tabBar.querySelectorAll('.oft-tab').forEach(function (tab) {
+      var keys = TAB_TO_SECTIONS[tab.dataset.tab] || [];
+      var has = keys.some(function (k) { return activeSections.has(k); });
+      tab.classList.toggle('oft-tab--has-filter', has);
+    });
+  }
+
+  /* Tab-bar Add to orbit: commits ALL section keys mapped to the
+     active tab. Mirrors the per-section commit logic that used to live
+     in the panel-footer .oft-add-btn handler. */
+  var tabCommitBtn = document.getElementById('tabBarAddToOrbit');
+  if (tabCommitBtn) {
+    tabCommitBtn.addEventListener('click', function () {
+      var activeTab = tabBar.querySelector('.oft-tab.oft-tab--active');
+      if (!activeTab) return;
+      var sectionKeys = TAB_TO_SECTIONS[activeTab.dataset.tab] || [];
+      if (!sectionKeys.length) return;
+
+      sectionKeys.forEach(function (sectionKey) {
+        /* universes commits directly via commitKwFilter (Phase 1
+           keyword search). Skip the DOM-scrape rebuild so
+           direct-committed filters aren't wiped when the source-tab
+           Add-to-orbit fires. */
+        if (sectionKey === 'universes') return;
+        var labels = collectLabelsForSection(sectionKey);
+        /* Preserve direct-committed tmdb-keyword filters (Phase 2
+           keyword search widget) so the legacy DOM scrape doesn't
+           wipe them. */
+        state.filters = state.filters.filter(function (f) {
+          return f.section !== sectionKey ||
+            (f.value && f.value.type === 'tmdb-keyword');
+        });
+        labels.forEach(function (item) {
+          state.filters.push({
+            id: sectionKey + '-' + item.label,
+            section: sectionKey,
+            label: item.label,
+            value: item.value
+          });
+        });
+      });
+
+      updateUIFromState();
+      updateTabDots();
+      tabCommitBtn.classList.add('oft-add-btn--just-added');
+      setTimeout(function () { tabCommitBtn.classList.remove('oft-add-btn--just-added'); }, 600);
+    });
+  }
+
+  /* Wrap renderFilterChips so dot indicators stay in sync after any
+     state.filters mutation (chip removal in the sidebar, restore from
+     sessionStorage, etc.). */
+  if (typeof window.renderFilterChips === 'function') {
+    var _origRender = window.renderFilterChips;
+    window.renderFilterChips = function () {
+      var r = _origRender.apply(this, arguments);
+      try { updateTabDots(); } catch (e) {}
+      try { updateOrbitRing(); } catch (e) {}
+      try { fetchFilmCount(); } catch (e) {}
+      return r;
+    };
+  }
+
+  /* Initial paint: People panel is marked active in HTML. */
+  var initial = panelArea.querySelector('.oft-panel--active');
+  if (initial) {
+    buildPanelBody(initial);
+    relocateAddToOrbit(initial);
+  }
+  updateTabDots();
+  try { updateOrbitRing(); } catch (e) {}
+  try { fetchFilmCount(); } catch (e) {}
+
+/* ============================================================
+   DISCOVERY ONBOARDING POPUP — Added 2026-05-05
+                                Cadence revised 2026-05-16.
+   Inactivity-triggered onboarding (20s no interaction).
+   Cadence:
+     • First 2 lifetime impressions: shows freely on inactivity.
+     • After 2: shows at most once per rolling 7 days (gated by the
+       last-shown timestamp). Count keeps incrementing — it tracks
+       total impressions, not the cap.
+     • Checkbox "don't show again" → permanent suppression.
+   Close path: OrbitClose.close() (Rule 17 — Black Hole exit).
+   Manual trigger: Shift+D force-opens (does not burn a count, does
+   not update the last-shown timestamp, ignores the dismissed flag).
+   Mirrors welcome-popup.js's Shift+P pattern.
+   localStorage keys (registered in data/storage-keys.md):
+     orbit_discovery_popup_count       number   total lifetime shows
+     orbit_discovery_popup_dismissed   boolean  permanent
+     orbit_discovery_popup_last_shown  number   ms since epoch
+   ============================================================ */
+(function () {
+  var POPUP_COUNT_KEY = 'orbit_discovery_popup_count';
+  var POPUP_DISMISSED_KEY = 'orbit_discovery_popup_dismissed';
+  var POPUP_LAST_SHOWN_KEY = 'orbit_discovery_popup_last_shown';
+  var INACTIVITY_DELAY = 20000;
+  var ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  var LIFETIME_FREE_SHOWS = 2;
+
+  var store = (window.OrbitUtils && window.OrbitUtils.store) || null;
+
+  function readNumber(key) {
+    if (store) return Number(store.get(key, 0)) || 0;
+    var raw = localStorage.getItem(key);
+    return raw ? (parseInt(raw, 10) || 0) : 0;
+  }
+  function readBool(key) {
+    if (store) return store.get(key, false) === true;
+    return localStorage.getItem(key) === 'true';
+  }
+  function writeValue(key, value) {
+    if (store) { store.set(key, value); return; }
+    localStorage.setItem(key, typeof value === 'string' ? value : String(value));
+  }
+
+  function shouldShowPopup() {
+    if (readBool(POPUP_DISMISSED_KEY)) return false;
+    var count = readNumber(POPUP_COUNT_KEY);
+    if (count < LIFETIME_FREE_SHOWS) return true;
+    var lastShown = readNumber(POPUP_LAST_SHOWN_KEY);
+    if (!lastShown) return true;
+    return (Date.now() - lastShown) >= ONE_WEEK_MS;
+  }
+  function incrementPopupCount() {
+    writeValue(POPUP_COUNT_KEY, readNumber(POPUP_COUNT_KEY) + 1);
+  }
+
+  var overlay  = document.getElementById('discoveryOnboardingOverlay');
+  var ctaBtn   = document.getElementById('discoveryOnboardingCta');
+  var checkbox = document.getElementById('discoveryOnboardingDontShow');
+  if (!overlay || !ctaBtn || !checkbox) return;
+
+  var inactivityTimer = null;
+  var hasShown = false;
+  var isOpen = false;
+
+  function showPopup() {
+    if (hasShown || !shouldShowPopup()) return;
+    hasShown = true;
+    isOpen = true;
+    overlay.hidden = false;
+    incrementPopupCount();
+    writeValue(POPUP_LAST_SHOWN_KEY, Date.now());
+    detachInactivityListeners();
+  }
+
+  // Single dismissal path — all four triggers route through here, which
+  // routes through OrbitClose.close() for the canonical Black Hole exit.
+  function hidePopup() {
+    if (!isOpen) return;
+    isOpen = false;
+    if (checkbox.checked) writeValue(POPUP_DISMISSED_KEY, true);
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(overlay);
+    } else {
+      // Fallback if orbit-close.js failed to load — should not happen in prod.
+      overlay.hidden = true;
+    }
+  }
+
+  function resetTimer() {
+    if (hasShown || !shouldShowPopup()) return;
+    if (inactivityTimer) clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(showPopup, INACTIVITY_DELAY);
+  }
+
+  function attachInactivityListeners() {
+    document.addEventListener('mousemove', resetTimer, { passive: true });
+    document.addEventListener('click',     resetTimer, { passive: true });
+    document.addEventListener('keypress',  resetTimer, { passive: true });
+    document.addEventListener('scroll',    resetTimer, { passive: true });
+  }
+  function detachInactivityListeners() {
+    document.removeEventListener('mousemove', resetTimer);
+    document.removeEventListener('click',     resetTimer);
+    document.removeEventListener('keypress',  resetTimer);
+    document.removeEventListener('scroll',    resetTimer);
+    if (inactivityTimer) { clearTimeout(inactivityTimer); inactivityTimer = null; }
+  }
+
+  // CTA → dismiss
+  ctaBtn.addEventListener('click', function () { hidePopup(); });
+
+  // Quick Search chips → close popup and apply the preset (so the
+  // onboarding becomes actionable, not just illustrative).
+  overlay.querySelectorAll('[data-onboarding-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var name = btn.getAttribute('data-onboarding-preset');
+      var preset = (typeof PRESET_POOL !== 'undefined')
+        ? PRESET_POOL.find(function (p) { return p.name === name; })
+        : null;
+      hidePopup();
+      if (preset && typeof applyPreset === 'function') {
+        applyPreset(preset);
+      }
+    });
+  });
+
+  // Overlay click (outside popup body) → dismiss
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) hidePopup();
+  });
+
+  // Checkbox checked → permanent dismissal AND close immediately
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) hidePopup();
+  });
+
+  // ESC → dismiss
+  document.addEventListener('keydown', function (e) {
+    if (isOpen && (e.key === 'Escape' || e.key === 'Esc')) hidePopup();
+  });
+
+  // X button (.orbit-close inside the overlay) is handled by the global
+  // orbit-close.js click delegate. We listen for the dispatched event so
+  // checkbox state still maps to the dismissed flag.
+  overlay.addEventListener('orbit:close', function () {
+    if (!isOpen) return;
+    isOpen = false;
+    if (checkbox.checked) writeValue(POPUP_DISMISSED_KEY, true);
+  });
+
+  if (shouldShowPopup()) {
+    attachInactivityListeners();
+    resetTimer();
+  }
+
+  // Shift+D force-opens the popup. Bypasses the lifetime cap and the
+  // dismissed flag. Does NOT increment the count. No-op while typing.
+  function forceOpen() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay.hidden = false;
+    detachInactivityListeners();
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'D' && e.key !== 'd') return;
+    if (!e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    e.preventDefault();
+    forceOpen();
+  });
+})();
+/* === END DISCOVERY ONBOARDING POPUP === */
+
+/* ============================================================
+   COLLAPSIBLE DISCOVERY SECTIONS — Added 2026-05-16
+   Toggles `.collapsed` on each .section-container when its
+   .section-collapse-toggle is clicked. Per-section state
+   persists in sessionStorage (per-tab, survives refresh,
+   clears when tab closes). Keyed by .section-container's
+   data-section attribute.
+   localStorage keys (registered in data/storage-keys.md):
+     orbit_discovery_collapsed_state  JSON object  {section: bool}
+   ============================================================ */
+(function () {
+  var STORAGE_KEY = 'orbit_discovery_collapsed_state';
+  var ICON_COLLAPSED = '+';   // +
+  var ICON_EXPANDED  = '−';   // −
+
+  var savedState = {};
+  try {
+    var raw = sessionStorage.getItem(STORAGE_KEY);
+    if (raw) savedState = JSON.parse(raw) || {};
+  } catch (e) { savedState = {}; }
+
+  function persist() {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(savedState)); }
+    catch (e) {}
+  }
+
+  function applyCollapseState(section, collapsed) {
+    if (!section) return;
+    section.classList.toggle('collapsed', collapsed);
+    var btn = section.querySelector('.section-collapse-toggle');
+    if (!btn) return;
+    var iconEl = btn.querySelector('.collapse-icon');
+    if (iconEl) iconEl.textContent = collapsed ? ICON_COLLAPSED : ICON_EXPANDED;
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    btn.setAttribute('aria-label', collapsed ? 'Expand section' : 'Collapse section');
+  }
+
+  /* The headline is informational; collapsing it on its own loses no
+     functionality. Quick Searches and Filter Tabs are the two
+     interactive sections — at least one of them must stay expanded so
+     the user always has a way to actually filter films. */
+  var CRITICAL_SECTIONS = ['quickSearches', 'filterTabs'];
+
+  function isCriticalSection(section) {
+    return !!section && section.dataset
+      && CRITICAL_SECTIONS.indexOf(section.dataset.section) !== -1;
+  }
+
+  function countCriticalExpanded() {
+    var n = 0;
+    CRITICAL_SECTIONS.forEach(function (key) {
+      var el = document.querySelector('.section-container[data-section="' + key + '"]');
+      if (el && !el.classList.contains('collapsed')) n++;
+    });
+    return n;
+  }
+
+  document.querySelectorAll('.section-collapse-toggle').forEach(function (btn) {
+    var section = btn.closest('.section-container');
+    if (!section) return;
+    var name = section.dataset.section;
+    if (!name) return;
+
+    if (savedState[name] === true) applyCollapseState(section, true);
+
+    /* Clicking anywhere on a COLLAPSED bar (not just the small toggle
+     button in the card's left padding) expands the section. Makes the
+     + much easier to find — the whole stripe is the hit target. Does
+     nothing when the section is already expanded (so clicking inside
+     normal content doesn't accidentally collapse it). */
+    section.addEventListener('click', function (e) {
+      if (!section.classList.contains('collapsed')) return;
+      // Avoid double-firing when the click was already on the toggle.
+      if (e.target === btn || (btn.contains && btn.contains(e.target))) return;
+      btn.click();
+    });
+
+    btn.addEventListener('click', function () {
+      var nowCollapsed = !section.classList.contains('collapsed');
+
+      /* Invariant: at least one of {quickSearches, filterTabs} must
+         stay expanded. The headline can always be collapsed. Silently
+         no-op if this click would collapse the last critical section. */
+      if (nowCollapsed && isCriticalSection(section) && countCriticalExpanded() === 1) {
+        return;
+      }
+
+      applyCollapseState(section, nowCollapsed);
+      savedState[name] = nowCollapsed;
+      persist();
+
+      /* When headline OR filter tabs toggles, re-render Quick Searches
+         so the tile count tracks getActivePresetCount() (5/10/15/20
+         depending on which sections are collapsed). The freshly-
+         shuffled tiles also act as a visual confirmation that the
+         collapse took effect. */
+      if ((name === 'headline' || name === 'filterTabs')
+          && typeof renderPresets === 'function'
+          && typeof pickEvergreens === 'function'
+          && typeof getActivePresetCount === 'function') {
+        renderPresets(pickEvergreens(getActivePresetCount()));
+      }
+    });
+  });
+
+  /* Defensive: if sessionStorage was corrupted or manually edited so
+     that neither Quick Searches nor Filter Tabs is expanded, force
+     Quick Searches open so the user has interactive UI available. */
+  if (countCriticalExpanded() === 0) {
+    var fallback = document.querySelector('.section-container[data-section="quickSearches"]')
+                || document.querySelector('.section-container[data-section="filterTabs"]');
+    if (fallback) {
+      applyCollapseState(fallback, false);
+      savedState[fallback.dataset.section] = false;
+      persist();
+    }
+  }
+
+  /* initPresets() runs BEFORE this IIFE applies the saved collapse
+     state, so the initial preset render used a default count of 5.
+     Now that the .collapsed classes are in place, re-render with the
+     correct tile count for the actual collapse state (e.g. headline
+     collapsed at load → 10 tiles, not 5). Skips if helpers aren't
+     defined yet (defensive). */
+  if (typeof renderPresets === 'function'
+      && typeof pickEvergreens === 'function'
+      && typeof getActivePresetCount === 'function') {
+    var resolvedCount = getActivePresetCount();
+    if (resolvedCount !== 5) {
+      renderPresets(pickEvergreens(resolvedCount));
+    }
+  }
+})();
+/* === END COLLAPSIBLE DISCOVERY SECTIONS === */
+
+/* ============================================================
+   HEADLINE CAROUSEL — Added 2026-05-16. Auto-rotate added later.
+   Three rotating headline messages. On each page load the visit
+   count (sessionStorage) increments and picks the starting message
+   ((visits - 1) % 3). Then the carousel auto-rotates every 8s.
+     - Clicking a dot jumps to that message AND resets the timer
+       (no surprise rotation immediately after a manual pick).
+     - Hovering the carousel pauses rotation; mouseleave resumes.
+     - Visit counter only bumps on page load, never on dot click.
+   localStorage keys (registered in data/storage-keys.md):
+     orbit_discovery_visits  session number  per-tab visit counter
+   ============================================================ */
+(function () {
+  var VISITS_KEY = 'orbit_discovery_visits';
+  var ROTATION_MS = 8000;
+  var carousel = document.getElementById('headlineCarousel');
+  if (!carousel) return;
+
+  var messages = carousel.querySelectorAll('.headline-message');
+  var dots = carousel.querySelectorAll('.carousel-dot');
+  if (messages.length === 0) return;
+
+  var currentIndex = 0;
+  var rotationTimer = null;
+
+  function showMessage(index) {
+    if (index < 0 || index >= messages.length) return;
+    currentIndex = index;
+    messages.forEach(function (m, i) {
+      m.classList.toggle('active', i === index);
+    });
+    dots.forEach(function (d, i) {
+      var active = i === index;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  function advance() {
+    showMessage((currentIndex + 1) % messages.length);
+  }
+
+  function startRotation() {
+    stopRotation();
+    rotationTimer = setInterval(advance, ROTATION_MS);
+  }
+
+  function stopRotation() {
+    if (rotationTimer) {
+      clearInterval(rotationTimer);
+      rotationTimer = null;
+    }
+  }
+
+  // Visit-based initial message (per-tab counter; survives F5, resets on tab close)
+  var visits = 0;
+  try {
+    var raw = sessionStorage.getItem(VISITS_KEY);
+    visits = raw ? (parseInt(raw, 10) || 0) : 0;
+  } catch (e) {}
+  visits += 1;
+  try { sessionStorage.setItem(VISITS_KEY, String(visits)); } catch (e) {}
+
+  showMessage((visits - 1) % messages.length);
+  startRotation();
+
+  // Dot click → jump + reset timer (manual pick gets a full 8s before auto-advance)
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      showMessage(i);
+      startRotation();
+    });
+  });
+
+  // Pause on hover so users can read at their own pace
+  carousel.addEventListener('mouseenter', stopRotation);
+  carousel.addEventListener('mouseleave', startRotation);
+
+  // Pause when the tab is hidden (cheap; avoids drift while backgrounded)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stopRotation();
+    else startRotation();
+  });
+})();
+/* === END HEADLINE CAROUSEL === */
+
+/* ============================================================
+   HEADLINE SLIDE 3 — NAV PILL HANDLER — Added 2026-05-26
+   Cyan pill ([data-nav="quick-search"]) intercepts the in-page
+   anchor: if the Quick Searches section is collapsed, programmatic
+   click on its .section-collapse-toggle expands it (re-uses the
+   existing persistence/aria/critical-section guard), then we
+   smooth-scroll the section into view. Gold pill is a plain
+   anchor to randomizer-hub.html and needs no JS. Lives outside
+   the #headlineCarousel rotation IIFE by design.
+   ============================================================ */
+(function () {
+  var pill = document.querySelector('.headline-nav-pill[data-nav="quick-search"]');
+  if (!pill) return;
+  pill.addEventListener('click', function (e) {
+    e.preventDefault();
+    var section = document.querySelector('.section-container[data-section="quickSearches"]');
+    if (!section) return;
+    if (section.classList.contains('collapsed')) {
+      var toggle = section.querySelector('.section-collapse-toggle');
+      if (toggle) toggle.click();
+    }
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+/* === END HEADLINE SLIDE 3 NAV PILL HANDLER === */
+
+/* ============================================================
+   QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
+   Opens a modal listing every preset in PRESET_POOL. Mirrors
+   the existing main-page tile template (renderPresets) so the
+   tiles look identical. Uses orbit-close.js for Black Hole
+   exit (Rule 17): the X button has class "orbit-close" and the
+   global click delegate handles it; backdrop and ESC routes
+   call OrbitClose.close() programmatically. Body scroll lock
+   released on the dispatched orbit:close event.
+   ============================================================ */
+(function () {
+  var modal = document.getElementById('discoverPresetsModal');
+  var openBtn = document.getElementById('discoverPresetShowAll');
+  var backdrop = modal && modal.querySelector('.discover-presets-modal-backdrop');
+  var grid = document.getElementById('discoverPresetsModalGrid');
+  if (!modal || !openBtn || !grid) return;
+
+  function buildTile(p, i) {
+    var isSpotlight = p.color === 'spotlight';
+    var classes = 'discover-preset discover-preset--' + p.color;
+    if (isSpotlight) classes += ' discover-preset--spotlight';
+    var tagClass = 'discover-preset-tag' + (isSpotlight ? ' discover-preset-tag--live' : '');
+    var tagText = isSpotlight
+      ? (p.streamingNow ? '● NOW STREAMING' : '● IN CINEMAS')
+      : p.tag;
+    var glyphClass = getPresetGlyphClass(p);
+    var glyphSpan  = glyphClass ? '<span class="og-qs ' + glyphClass + ' discover-preset-glyph" aria-hidden="true"></span>' : '';
+    /* 2026-05-24 Phase 3 — Hybrid B decorations (mirrors renderPresets). */
+    var decorations = glyphClass
+      ? '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+        '<span class="discover-preset-badge" aria-hidden="true">' + glyphSpan + '</span>'
+      : '';
+    var tagSpan  = '<span class="' + tagClass + '">' + tagText + '</span>';
+    var nameSpan = '<span class="discover-preset-name">' + p.name + '</span>';
+    var inner = isSpotlight ? (tagSpan + nameSpan) : (decorations + nameSpan + tagSpan);
+    return '<button class="' + classes + '" type="button" data-preset-index="' + i + '">' + inner + '</button>';
+  }
+
+  function populate() {
+    if (typeof PRESET_POOL === 'undefined' || !Array.isArray(PRESET_POOL)) return;
+    grid.innerHTML = PRESET_POOL.map(buildTile).join('');
+    grid.querySelectorAll('[data-preset-index]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = parseInt(btn.dataset.presetIndex, 10);
+        if (isNaN(idx)) return;
+        var preset = PRESET_POOL[idx];
+        if (preset && typeof applyPreset === 'function') {
+          applyPreset(preset);
+        }
+        closeModal();
+      });
+    });
+  }
+
+  function openModal() {
+    if (grid.children.length === 0) populate();
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    /* Phase 3.1: measure name lines AFTER the modal is visible — a
+       hidden element has no layout so scrollHeight reads 0. Idempotent
+       across opens. */
+    applyCompactClasses(grid);
+  }
+
+  function closeModal() {
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(modal);
+    } else {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+  }
+
+  openBtn.addEventListener('click', openModal);
+
+  // Backdrop click → close
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+
+  // ESC → close (only when modal is open)
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Escape' || e.key === 'Esc') && !modal.hidden) closeModal();
+  });
+
+  // X button is handled by orbit-close.js global delegate; this listener
+  // releases the body scroll lock when the close animation completes.
+  modal.addEventListener('orbit:close', function () {
+    document.body.style.overflow = '';
+  });
+})();
+/* === END QUICK SEARCHES MODAL === */
+})();
