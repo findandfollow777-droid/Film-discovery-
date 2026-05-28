@@ -1753,6 +1753,177 @@ if (resetOrbitButton) {
   });
 }
 
+/* ============================================================
+   DISCOVERY EMPTY / ERROR STATE HELPER — Phase 1 (2026-05-27)
+   Three-kind advisory inside #orbitPanel. Container markup lives
+   in discover.html (#discoverEmptyState); styles in discover.css
+   (.discover-empty-state + .is-zero / .is-network / .is-data).
+
+   showDiscoverEmptyState(kind, context):
+     kind    — 'zero' | 'network' | 'data'
+     context — optional object:
+       { headline, body, trace, primaryLabel, primaryAction,
+         secondaryLabel, secondaryAction }
+     Omitted fields fall back to per-kind defaults below.
+     primaryAction / secondaryAction are functions; they run
+     before the state is hidden.
+
+   hideDiscoverEmptyState():
+     Hides the container and clears its dynamic content.
+
+   Close control (.orbit-close) is handled by orbit-close.js
+   (Rule 17 Black Hole). We listen for 'orbit:close' on the
+   container so we clear dynamic content alongside the auto-hide.
+
+   Phase 1 deliberately does NOT call this from any launch-flow
+   code — alert() sites remain untouched. Verification uses the
+   temporary __testEmptyState() console hook below.
+   ============================================================ */
+var DISCOVER_EMPTY_DEFAULTS = {
+  zero: {
+    glyph: 'og-satellite',
+    headline: 'No films found in this orbit',
+    body: 'Your filter combination narrowed the universe to zero. Try removing or loosening a filter.',
+    primaryLabel: 'Reset filters',
+    secondaryLabel: null
+  },
+  network: {
+    glyph: 'og-warning',
+    headline: 'Connection lost',
+    body: 'We couldn’t reach the film database. Check your connection and try again.',
+    primaryLabel: 'Retry',
+    secondaryLabel: null
+  },
+  data: {
+    // og-warning is a v2 mask-based glyph; tints via `color` on the
+    // glyph element. og-stats (v1) had cyan baked into its SVG and
+    // couldn't be tinted purple — swapped here, not in static markup
+    // (the markup glyph is overwritten by JS on every show()).
+    glyph: 'og-warning',
+    headline: 'Unexpected data',
+    body: 'A filter returned a result we couldn’t parse. Try a different combination.',
+    primaryLabel: 'Reset filters',
+    secondaryLabel: null
+  }
+};
+
+function showDiscoverEmptyState(kind, context) {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  context = context || {};
+  var defaults = DISCOVER_EMPTY_DEFAULTS[kind] || DISCOVER_EMPTY_DEFAULTS.zero;
+
+  // Kind modifier — strip the three is-* classes first.
+  el.classList.remove('is-zero', 'is-network', 'is-data');
+  el.classList.add('is-' + kind);
+
+  // Glyph — keep the base .og class, swap the variant class.
+  var glyphSpan = el.querySelector('[data-role="glyph"]');
+  if (glyphSpan) glyphSpan.className = 'og ' + defaults.glyph;
+
+  // Text content
+  var headlineEl = el.querySelector('[data-role="headline"]');
+  var bodyEl     = el.querySelector('[data-role="body"]');
+  if (headlineEl) headlineEl.textContent = context.headline || defaults.headline;
+  if (bodyEl)     bodyEl.textContent     = context.body     || defaults.body;
+
+  // Trace (zero kind primarily; optional for others)
+  var traceEl = el.querySelector('[data-role="trace"]');
+  if (traceEl) {
+    if (context.trace) {
+      traceEl.textContent = context.trace;
+      traceEl.hidden = false;
+    } else {
+      traceEl.textContent = '';
+      traceEl.hidden = true;
+    }
+  }
+
+  // Primary button
+  var primaryEl = el.querySelector('[data-role="primary"]');
+  if (primaryEl) {
+    primaryEl.textContent = context.primaryLabel || defaults.primaryLabel;
+    primaryEl.onclick = function () {
+      if (typeof context.primaryAction === 'function') {
+        try { context.primaryAction(); } catch (e) {}
+      }
+      hideDiscoverEmptyState();
+    };
+  }
+
+  // Secondary button (optional)
+  var secondaryEl = el.querySelector('[data-role="secondary"]');
+  var secondaryLabel = context.secondaryLabel || defaults.secondaryLabel;
+  if (secondaryEl) {
+    if (secondaryLabel) {
+      secondaryEl.textContent = secondaryLabel;
+      secondaryEl.hidden = false;
+      secondaryEl.onclick = function () {
+        if (typeof context.secondaryAction === 'function') {
+          try { context.secondaryAction(); } catch (e) {}
+        }
+        hideDiscoverEmptyState();
+      };
+    } else {
+      secondaryEl.textContent = '';
+      secondaryEl.hidden = true;
+      secondaryEl.onclick = null;
+    }
+  }
+
+  el.hidden = false;
+}
+
+function hideDiscoverEmptyState() {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  el.hidden = true;
+
+  var headlineEl  = el.querySelector('[data-role="headline"]');
+  var bodyEl      = el.querySelector('[data-role="body"]');
+  var traceEl     = el.querySelector('[data-role="trace"]');
+  var primaryEl   = el.querySelector('[data-role="primary"]');
+  var secondaryEl = el.querySelector('[data-role="secondary"]');
+
+  if (headlineEl)  headlineEl.textContent = '';
+  if (bodyEl)      bodyEl.textContent     = '';
+  if (traceEl)     { traceEl.textContent = ''; traceEl.hidden = true; }
+  if (primaryEl)   { primaryEl.textContent = ''; primaryEl.onclick = null; }
+  if (secondaryEl) { secondaryEl.textContent = ''; secondaryEl.hidden = true; secondaryEl.onclick = null; }
+}
+
+// orbit-close.js fires 'orbit:close' on the popup wrapper after the
+// Black Hole animation; it also auto-sets popup.hidden = true. We
+// piggy-back to clear dynamic content so a re-open starts clean.
+(function () {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  el.addEventListener('orbit:close', function () {
+    hideDiscoverEmptyState();
+  });
+})();
+
+// TEMP TEST HOOK — remove in Phase 2.
+// Call from devtools: __testEmptyState('zero' | 'network' | 'data')
+window.__testEmptyState = function (kind) {
+  if (kind === 'zero') {
+    showDiscoverEmptyState('zero', {
+      trace: '142 → 142 → 0',
+      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
+    });
+  } else if (kind === 'network') {
+    showDiscoverEmptyState('network', {
+      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
+    });
+  } else if (kind === 'data') {
+    showDiscoverEmptyState('data', {
+      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
+    });
+  } else {
+    console.warn('__testEmptyState: kind must be \"zero\", \"network\", or \"data\".');
+  }
+};
+
 // ── More Filters modal ──
 const moreFiltersOverlay = document.getElementById('moreFiltersOverlay');
 const moreFiltersBtn = document.getElementById('moreFiltersBtn');
@@ -7083,106 +7254,24 @@ function fetchFilmCount() {
 })();
 /* === END COLLAPSIBLE DISCOVERY SECTIONS === */
 
-/* ============================================================
-   HEADLINE CAROUSEL — Added 2026-05-16. Auto-rotate added later.
-   Three rotating headline messages. On each page load the visit
-   count (sessionStorage) increments and picks the starting message
-   ((visits - 1) % 3). Then the carousel auto-rotates every 8s.
-     - Clicking a dot jumps to that message AND resets the timer
-       (no surprise rotation immediately after a manual pick).
-     - Hovering the carousel pauses rotation; mouseleave resumes.
-     - Visit counter only bumps on page load, never on dot click.
-   localStorage keys (registered in data/storage-keys.md):
-     orbit_discovery_visits  session number  per-tab visit counter
-   ============================================================ */
-(function () {
-  var VISITS_KEY = 'orbit_discovery_visits';
-  var ROTATION_MS = 8000;
-  var carousel = document.getElementById('headlineCarousel');
-  if (!carousel) return;
-
-  var messages = carousel.querySelectorAll('.headline-message');
-  var dots = carousel.querySelectorAll('.carousel-dot');
-  if (messages.length === 0) return;
-
-  var currentIndex = 0;
-  var rotationTimer = null;
-
-  function showMessage(index) {
-    if (index < 0 || index >= messages.length) return;
-    currentIndex = index;
-    messages.forEach(function (m, i) {
-      m.classList.toggle('active', i === index);
-    });
-    dots.forEach(function (d, i) {
-      var active = i === index;
-      d.classList.toggle('active', active);
-      d.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
-
-  function advance() {
-    showMessage((currentIndex + 1) % messages.length);
-  }
-
-  function startRotation() {
-    stopRotation();
-    rotationTimer = setInterval(advance, ROTATION_MS);
-  }
-
-  function stopRotation() {
-    if (rotationTimer) {
-      clearInterval(rotationTimer);
-      rotationTimer = null;
-    }
-  }
-
-  // Visit-based initial message (per-tab counter; survives F5, resets on tab close)
-  var visits = 0;
-  try {
-    var raw = sessionStorage.getItem(VISITS_KEY);
-    visits = raw ? (parseInt(raw, 10) || 0) : 0;
-  } catch (e) {}
-  visits += 1;
-  try { sessionStorage.setItem(VISITS_KEY, String(visits)); } catch (e) {}
-
-  showMessage((visits - 1) % messages.length);
-  startRotation();
-
-  // Dot click → jump + reset timer (manual pick gets a full 8s before auto-advance)
-  dots.forEach(function (dot, i) {
-    dot.addEventListener('click', function () {
-      showMessage(i);
-      startRotation();
-    });
-  });
-
-  // Pause on hover so users can read at their own pace
-  carousel.addEventListener('mouseenter', stopRotation);
-  carousel.addEventListener('mouseleave', startRotation);
-
-  // Pause when the tab is hidden (cheap; avoids drift while backgrounded)
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) stopRotation();
-    else startRotation();
-  });
-})();
-/* === END HEADLINE CAROUSEL === */
+/* Old HEADLINE CAROUSEL rotation IIFE removed Phase B (2026-05-27).
+   Replaced by components/discover-carousel.js, which auto-boots on
+   DOMContentLoaded and binds every [data-orbit-carousel]. */
 
 /* ============================================================
-   HEADLINE SLIDE 3 — NAV PILL HANDLER — Added 2026-05-26
-   Cyan pill ([data-nav="quick-search"]) intercepts the in-page
-   anchor: if the Quick Searches section is collapsed, programmatic
-   click on its .section-collapse-toggle expands it (re-uses the
-   existing persistence/aria/critical-section guard), then we
-   smooth-scroll the section into view. Gold pill is a plain
-   anchor to randomizer-hub.html and needs no JS. Lives outside
-   the #headlineCarousel rotation IIFE by design.
+   CAROUSEL SLIDE 3 — CYAN CTA HANDLER — Added 2026-05-26,
+   migrated to .oc-carousel Phase B 2026-05-27.
+   Intercepts the cyan slide-3 link (href="#quickSearchesSection").
+   If Quick Searches is collapsed, programmatic click on its
+   .section-collapse-toggle expands it (re-uses the existing
+   persistence/aria/critical-section guard), then we smooth-scroll
+   the section into view. Gold CTA (randomizer-hub.html) is a
+   plain anchor and needs no JS.
    ============================================================ */
 (function () {
-  var pill = document.querySelector('.headline-nav-pill[data-nav="quick-search"]');
-  if (!pill) return;
-  pill.addEventListener('click', function (e) {
+  var cta = document.querySelector('.oc-cta-card[href="#quickSearchesSection"]');
+  if (!cta) return;
+  cta.addEventListener('click', function (e) {
     e.preventDefault();
     var section = document.querySelector('.section-container[data-section="quickSearches"]');
     if (!section) return;
@@ -7193,7 +7282,7 @@ function fetchFilmCount() {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 })();
-/* === END HEADLINE SLIDE 3 NAV PILL HANDLER === */
+/* === END CAROUSEL SLIDE 3 CTA HANDLER === */
 
 /* ============================================================
    QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16

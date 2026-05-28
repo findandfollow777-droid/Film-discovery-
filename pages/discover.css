@@ -377,11 +377,13 @@ html, body {
      (15% deeper, per request). Now comfortably fits the both-
      collapsed 35-tile worst case (~1047px content) with ~115px
      headroom. Sidebar uses align-self: stretch so it auto-grows to
-     match. Mobile breakpoint reverts to natural flow. */
+     match. Mobile breakpoint reverts to natural flow.
+     Phase B (2026-05-27 carousel swap): max-height removed so the
+     card can absorb the new carousel's modest extra height. Floor
+     stays at 1162px so the layout never shrinks. */
   display: flex;
   flex-direction: column;
   min-height: 1162px;
-  max-height: 1162px;
 }
 
 .orbit-card::before {
@@ -3079,219 +3081,11 @@ html, body {
   gap: 8px;
   margin-bottom: 22px;
 }
-/* ============================================================
-   HEADLINE CAROUSEL — Added 2026-05-16
-   Three rotating messages inside .orbit-header-center. Visit
-   counter (sessionStorage `orbit_discovery_visits`) picks which
-   message shows on page load; dots let the user override.
-   Each .headline-message keeps the existing orbit-card-title +
-   orbit-card-subtitle markup so the cyan/gold split styling
-   carries through unchanged.
-   ============================================================ */
-.headline-carousel {
-  position: relative;
-  /* Grid-stack all 3 messages in the same cell so the carousel
-     sizes to the tallest message and stays a consistent height
-     across rotations. Without this, message 3 ("?") was shrinking
-     the carousel mid-rotation.
-     2026-05-26: row 1 switched from `auto` → `1fr` so it absorbs
-     any extra carousel height; combined with min-height + vertical
-     padding this fills the headline section instead of leaving a
-     ~94px dead band below the canvas. Messages use `align-self:
-     center` so shorter slides (1 & 2) don't sit at the top of the
-     taller cell. */
-  display: grid;
-  /* minmax(0, 1fr) — without the 0 min, the column resolves to
-     minmax(auto, 1fr) and inflates to the wrapped/nowrap headline's
-     intrinsic width, pushing slides past the carousel edge. */
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 1fr auto;
-  min-height: 360px;
-  padding: 24px 0;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-.headline-carousel .headline-message {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: center;
-  max-width: 100%;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.35s ease-in-out;
-}
-.headline-carousel .headline-message.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.headline-carousel .carousel-dots {
-  grid-column: 1;
-  grid-row: 2;
-  /* Drop the dots down so they sit on the same horizontal line as
-     the "QUICK SEARCHES" label below. Uses transform so the grid
-     row's own size stays the same — no reflow, sections below
-     don't move. Centered dots vs. left-aligned label means they
-     sit in the empty middle of the QS row. */
-  transform: translateY(60px);
-}
-/* Scoped clamp cap — lower than the global .orbit-card .orbit-card-title
-   clamp so worst-case wrapped headlines (e.g. both spans on two lines)
-   still fit inside the carousel's 360px canvas. Keeps the Quick Search
-   and Search Tab sections in their current positions. Scope avoids
-   touching .orbit-card-title on tv.html / both.html ("Build your orbit"). */
-.headline-carousel .orbit-card-title {
-  font-size: clamp(2.25rem, 5.5vw, 4rem);
-}
-@media (max-width: 650px) {
-  .headline-carousel .orbit-card-title {
-    font-size: clamp(1.6rem, 8vw, 2.6rem);
-  }
-}
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
-}
-.carousel-dot {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
-  background: transparent;
-  cursor: pointer;
-  transition: transform 0.15s, background 0.2s, border-color 0.2s;
-}
-.carousel-dot.active {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-}
-.carousel-dot:hover {
-  transform: scale(1.25);
-  border-color: var(--accent-cyan);
-}
-
-/* ============================================================
-   SLIDE 3 — NAVIGATION PILLS (Added 2026-05-26)
-   Replaces the carousel's third subtitle line with two compact
-   horizontal nav pills (Quick Searches / Randomizer). All rules
-   are scoped under .headline-message-nav so slides 1 & 2 keep
-   their existing subtitle treatment. Surface follows the
-   tokenized landing-tile pattern (glass-bg + blur, accent-tinted
-   border, lift-on-hover).
-   ============================================================ */
-.headline-message-nav .headline-nav-pills {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 18px;
-}
-.headline-message-nav .headline-nav-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  /* Content-sized — no flex-grow, no width:100%. Cap at 300px so a
-     long label can't stretch a pill into a bar; arrow uses
-     margin-left:auto to sit at the pill's true right edge whatever
-     the resulting width. */
-  flex: 0 0 auto;
-  width: fit-content;
-  max-width: 300px;
-  min-height: 60px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  border: 2px solid transparent;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--blur-glass);
-          backdrop-filter: var(--blur-glass);
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.3s ease-out, border-color 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-.headline-message-nav .headline-nav-pill--cyan {
-  border-color: rgba(var(--accent-cyan-rgb), 0.3);
-}
-.headline-message-nav .headline-nav-pill--gold {
-  border-color: rgba(var(--accent-gold-rgb), 0.3);
-}
-.headline-message-nav .headline-nav-pill--cyan:hover,
-.headline-message-nav .headline-nav-pill--cyan:focus-visible {
-  transform: translateY(-3px);
-  border-color: rgba(var(--accent-cyan-rgb), 0.6);
-  box-shadow: 0 8px 24px rgba(var(--accent-cyan-rgb), 0.25);
-  outline: none;
-}
-.headline-message-nav .headline-nav-pill--gold:hover,
-.headline-message-nav .headline-nav-pill--gold:focus-visible {
-  transform: translateY(-3px);
-  border-color: rgba(var(--accent-gold-rgb), 0.6);
-  box-shadow: 0 8px 24px rgba(var(--accent-gold-rgb), 0.25);
-  outline: none;
-}
-.headline-message-nav .headline-nav-pill__icon {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-  flex-shrink: 0;
-}
-.headline-message-nav .headline-nav-pill__text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 2px;
-  line-height: 1.2;
-}
-.headline-message-nav .headline-nav-pill__label {
-  font-family: 'Barlow', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--film-white);
-  letter-spacing: 0.3px;
-}
-.headline-message-nav .headline-nav-pill__hint {
-  font-family: 'Barlow', sans-serif;
-  font-size: 12.5px;
-  font-weight: 400;
-  color: var(--muted-silver);
-}
-.headline-message-nav .headline-nav-pill__arrow {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  margin-left: auto;
-  transition: transform 0.3s ease-out;
-}
-.headline-message-nav .headline-nav-pill--cyan .headline-nav-pill__arrow {
-  color: var(--accent-cyan);
-}
-.headline-message-nav .headline-nav-pill--gold .headline-nav-pill__arrow {
-  color: var(--accent-gold);
-}
-.headline-message-nav .headline-nav-pill:hover .headline-nav-pill__arrow,
-.headline-message-nav .headline-nav-pill:focus-visible .headline-nav-pill__arrow {
-  transform: translateX(4px);
-}
-@media (max-width: 650px) {
-  .headline-message-nav .headline-nav-pills {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .headline-message-nav .headline-nav-pill {
-    /* Stay content-sized, cap a bit wider than desktop so the
-       label + hint line look comfortable on a single-column
-       stack. Never full-bleed — that's what caused viewport
-       overflow at narrow widths. */
-    width: fit-content;
-    max-width: 340px;
-    justify-content: flex-start;
-  }
-}
+/* Old HEADLINE CAROUSEL + SLIDE 3 NAV PILL CSS removed Phase B
+   (2026-05-27). Replaced by the .oc-carousel component in
+   components/discover-carousel.css. The .section-container[data-section="headline"]
+   wrapper, its collapse toggle, and .section-collapse-hide continue
+   to control show/hide of the new carousel's secondary controls. */
 
 /* ============================================================
    QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
@@ -4878,6 +4672,186 @@ html, body {
 }
 .orbit-warning-link:hover {
   color: var(--film-white);
+}
+
+/* ============================================================
+   DISCOVERY EMPTY / ERROR STATE — Phase 1 (2026-05-27)
+   Three-kind advisory rendered inside #orbitPanel between the
+   streaming warning and the filter chips. Hidden by default;
+   shown by showDiscoverEmptyState() in discover.js.
+     .is-zero    -> accent-cyan       (no result)
+     .is-network -> warning-orange    (fetch / connection)
+     .is-data    -> prestige-purple   (unexpected data shape)
+   Layout is identical across kinds; only the glyph-badge frame,
+   headline tint, and primary button accent change.
+   ============================================================ */
+.discover-empty-state {
+  position: relative;
+  margin: 12px 0;
+  padding: 22px 18px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.22);
+  background: rgba(var(--deep-void-rgb), 0.55);
+  text-align: center;
+  flex-shrink: 0;
+}
+.discover-empty-state[hidden] { display: none; }
+
+.discover-empty-state-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  font-size: 18px;
+}
+
+.discover-empty-state-glyph {
+  width: 56px;
+  height: 56px;
+  margin: 4px auto 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  background: rgba(var(--accent-cyan-rgb), 0.07);
+  box-shadow: 0 0 18px rgba(var(--accent-cyan-rgb), 0.22);
+  color: var(--accent-cyan);
+}
+.discover-empty-state-glyph .og {
+  width: 28px;
+  height: 28px;
+}
+
+.discover-empty-state-headline {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin: 0 0 8px;
+  color: var(--accent-cyan);
+  line-height: 1.3;
+}
+
+.discover-empty-state-body {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted-silver);
+  margin: 0 0 12px;
+}
+
+.discover-empty-state-trace {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--ghost-gray);
+  padding: 6px 12px;
+  margin: 0 auto 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(var(--deep-void-rgb), 0.65);
+  border: 1px dashed rgba(var(--muted-silver-rgb), 0.2);
+  display: inline-block;
+  letter-spacing: 0.04em;
+}
+.discover-empty-state-trace[hidden] { display: none; }
+
+.discover-empty-state-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.discover-empty-state-btn {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.discover-empty-state-btn[hidden] { display: none; }
+
+.discover-empty-state-btn--primary {
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+  border-color: rgba(var(--accent-cyan-rgb), 0.5);
+  color: var(--accent-cyan);
+}
+.discover-empty-state-btn--primary:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.2);
+  border-color: var(--accent-cyan);
+}
+
+.discover-empty-state-btn--ghost {
+  background: transparent;
+  border-color: rgba(var(--muted-silver-rgb), 0.25);
+  color: var(--muted-silver);
+}
+.discover-empty-state-btn--ghost:hover {
+  border-color: rgba(var(--muted-silver-rgb), 0.5);
+  color: var(--film-white);
+}
+
+/* Kind: is-network (warning-orange) */
+.discover-empty-state.is-network {
+  border-color: rgba(var(--warning-orange-rgb), 0.28);
+}
+.discover-empty-state.is-network .discover-empty-state-glyph {
+  border-color: rgba(var(--warning-orange-rgb), 0.45);
+  background: rgba(var(--warning-orange-rgb), 0.08);
+  box-shadow: 0 0 18px rgba(var(--warning-orange-rgb), 0.25);
+  color: var(--warning-orange);
+}
+/* Tint the mask-based v2 glyph (og-warning) by targeting the .og
+   element itself — the v2 rule paints background-color: currentColor
+   on the glyph node, so the wrapper's color alone won't reach it. */
+.discover-empty-state.is-network .discover-empty-state-glyph .og {
+  color: var(--warning-orange);
+}
+.discover-empty-state.is-network .discover-empty-state-headline {
+  color: var(--warning-orange);
+}
+.discover-empty-state.is-network .discover-empty-state-btn--primary {
+  background: rgba(var(--warning-orange-rgb), 0.14);
+  border-color: rgba(var(--warning-orange-rgb), 0.55);
+  color: var(--warning-orange);
+}
+.discover-empty-state.is-network .discover-empty-state-btn--primary:hover {
+  background: rgba(var(--warning-orange-rgb), 0.22);
+  border-color: var(--warning-orange);
+}
+
+/* Kind: is-data (prestige-purple) */
+.discover-empty-state.is-data {
+  border-color: rgba(var(--prestige-purple-rgb), 0.28);
+}
+.discover-empty-state.is-data .discover-empty-state-glyph {
+  border-color: rgba(var(--prestige-purple-rgb), 0.45);
+  background: rgba(var(--prestige-purple-rgb), 0.08);
+  box-shadow: 0 0 18px rgba(var(--prestige-purple-rgb), 0.25);
+  color: var(--prestige-purple);
+}
+/* Same fix as is-network — target the .og element so the v2 mask
+   glyph (og-warning, swapped in via DISCOVER_EMPTY_DEFAULTS) tints
+   to the kind accent. */
+.discover-empty-state.is-data .discover-empty-state-glyph .og {
+  color: var(--prestige-purple);
+}
+.discover-empty-state.is-data .discover-empty-state-headline {
+  color: var(--prestige-purple);
+}
+.discover-empty-state.is-data .discover-empty-state-btn--primary {
+  background: rgba(var(--prestige-purple-rgb), 0.14);
+  border-color: rgba(var(--prestige-purple-rgb), 0.55);
+  color: var(--prestige-purple);
+}
+.discover-empty-state.is-data .discover-empty-state-btn--primary:hover {
+  background: rgba(var(--prestige-purple-rgb), 0.22);
+  border-color: var(--prestige-purple);
 }
 
 /* ============================================================

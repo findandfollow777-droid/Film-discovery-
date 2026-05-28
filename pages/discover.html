@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
+  <link rel="stylesheet" href="../components/discover-carousel.css">
   <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,44 +119,146 @@
           <button class="section-collapse-toggle" type="button" aria-label="Collapse section" aria-expanded="true">
             <span class="collapse-icon">&minus;</span>
           </button>
-          <header class="orbit-header-row">
-            <div class="orbit-header-center headline-carousel" id="headlineCarousel">
-              <div class="headline-message active" data-message="0">
-                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Every film that fits</span><span class="orbit-title-gold">what you actually want.</span></h1>
-                <p class="orbit-card-subtitle section-collapse-hide">Stack any combination of filters &mdash; then see exactly which films make your cut.</p>
-              </div>
-              <div class="headline-message" data-message="1">
-                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Don't know what to watch?</span><span class="orbit-title-gold">You came to the right place.</span></h1>
-                <p class="orbit-card-subtitle section-collapse-hide">Explore curated Quick Searches or build your perfect filter combination.</p>
-              </div>
-              <div class="headline-message headline-message-nav" data-message="2">
-                <h1 class="orbit-card-title"><span class="orbit-title-cyan">Two More</span><span class="orbit-title-gold">Ways to Orbit</span></h1>
-                <div class="headline-nav-pills section-collapse-hide">
-                  <a class="headline-nav-pill headline-nav-pill--cyan" data-nav="quick-search" href="#quickSearchesSection">
-                    <span class="og og-bolt headline-nav-pill__icon" aria-hidden="true"></span>
-                    <span class="headline-nav-pill__text">
-                      <span class="headline-nav-pill__label">Quick Searches</span>
-                      <span class="headline-nav-pill__hint">Know what you want</span>
-                    </span>
-                    <svg class="headline-nav-pill__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-                  </a>
-                  <a class="headline-nav-pill headline-nav-pill--gold" data-nav="randomizer" href="randomizer-hub.html">
-                    <span class="og og-dice headline-nav-pill__icon" aria-hidden="true"></span>
-                    <span class="headline-nav-pill__text">
-                      <span class="headline-nav-pill__label">Randomizer</span>
-                      <span class="headline-nav-pill__hint">Surprise me</span>
-                    </span>
-                    <svg class="headline-nav-pill__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-                  </a>
+          <!-- Discovery Carousel (Variant B) — Phase B 2026-05-27.
+               Component CSS: components/discover-carousel.css
+               Component JS:  components/discover-carousel.js (auto-boots).
+               Sits inside .section-container[data-section="headline"] so
+               the existing collapse toggle (− / +) and section-collapse
+               persistence continue to apply. Secondary controls (dots,
+               nav arrows, counter) carry .section-collapse-hide so they
+               vanish on collapse, consistent with the old carousel. -->
+          <div class="oc-carousel" data-orbit-carousel>
+
+            <div class="oc-counter section-collapse-hide"><strong data-oc-counter>01</strong> / 03</div>
+
+            <div class="oc-slides">
+
+              <!-- ─── Slide 1 ──────────────────────────────────────── -->
+              <div class="oc-slide is-active" data-i="0">
+                <div class="oc-eyebrow">Build your orbit</div>
+                <h1 class="oc-h1">
+                  Every film that fits<br/>
+                  <span class="oc-accent">what you actually want.</span>
+                </h1>
+                <p class="oc-sub">Stack any combination of filters — then see exactly which films make your cut.</p>
+
+                <div class="oc-art oc-art-orbit" aria-hidden="true">
+                  <svg viewBox="0 0 200 200" fill="none">
+                    <g class="oc-orbit-rot">
+                      <circle cx="100" cy="100" r="92" stroke="var(--oc-cyan)" stroke-width="0.6"/>
+                      <circle cx="100" cy="100" r="68" stroke="var(--oc-cyan)" stroke-width="0.6"/>
+                      <circle cx="100" cy="100" r="44" stroke="var(--oc-gold)" stroke-width="0.6"/>
+                      <circle cx="100" cy="100" r="18" stroke="var(--oc-cyan)" stroke-width="0.8"/>
+                      <circle cx="100" cy="8"   r="3.5" fill="var(--oc-cyan)"/>
+                      <circle cx="168" cy="100" r="2.5" fill="var(--oc-gold)"/>
+                      <circle cx="56"  cy="100" r="2"   fill="var(--oc-cyan)"/>
+                      <circle cx="100" cy="100" r="4"   fill="var(--oc-gold)"/>
+                    </g>
+                  </svg>
                 </div>
               </div>
-              <div class="carousel-dots section-collapse-hide" role="tablist" aria-label="Headline rotation">
-                <button type="button" class="carousel-dot active" data-message-index="0" role="tab" aria-label="Show message 1" aria-selected="true"></button>
-                <button type="button" class="carousel-dot" data-message-index="1" role="tab" aria-label="Show message 2" aria-selected="false"></button>
-                <button type="button" class="carousel-dot" data-message-index="2" role="tab" aria-label="Show message 3" aria-selected="false"></button>
+
+              <!-- ─── Slide 2 ──────────────────────────────────────── -->
+              <div class="oc-slide" data-i="1">
+                <div class="oc-eyebrow">No idea where to start</div>
+                <h1 class="oc-h1">
+                  Don't know what to watch?<br/>
+                  <span class="oc-gold">You came to the right place.</span>
+                </h1>
+                <p class="oc-sub">Explore curated Quick Searches or build your perfect filter combination.</p>
+
+                <div class="oc-art oc-art-cards" aria-hidden="true">
+                  <div class="oc-card"></div>
+                  <div class="oc-card"></div>
+                  <div class="oc-card"></div>
+                </div>
               </div>
+
+              <!-- ─── Slide 3 · Two giant icon links ──────────────── -->
+              <div class="oc-slide oc-slide-cta" data-i="2">
+
+                <div class="oc-cta-head">
+                  <h1 class="oc-h1">Two more ways to <span class="oc-accent">orbit</span></h1>
+                  <span class="oc-cta-sub-label">jump straight in</span>
+                </div>
+
+                <div class="oc-cta-grid">
+
+                  <!-- LINK: Quick Searches — anchor on the same Discovery page.
+                       Click handler in discover.js expands the section if collapsed. -->
+                  <a class="oc-cta-card oc-cta--cyan" href="#quickSearchesSection">
+                    <div class="oc-cta-icon">
+                      <svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <g class="oc-orbit-rot-slow">
+                          <circle cx="60" cy="60" r="54" stroke="var(--oc-cyan)" stroke-width="1" stroke-opacity="0.35"/>
+                          <circle cx="60" cy="60" r="38" stroke="var(--oc-cyan)" stroke-width="1" stroke-opacity="0.45"/>
+                          <circle cx="60" cy="6"  r="2"   fill="var(--oc-cyan)" fill-opacity="0.8"/>
+                          <circle cx="98" cy="60" r="1.6" fill="var(--oc-gold)" fill-opacity="0.7"/>
+                          <circle cx="22" cy="60" r="1.4" fill="var(--oc-cyan)" fill-opacity="0.6"/>
+                        </g>
+                        <line x1="4"  y1="60" x2="116" y2="60"  stroke="var(--oc-cyan)" stroke-width="0.5" stroke-opacity="0.18"/>
+                        <line x1="60" y1="4"  x2="60"  y2="116" stroke="var(--oc-cyan)" stroke-width="0.5" stroke-opacity="0.18"/>
+                        <circle cx="60" cy="60" r="22" fill="var(--oc-bg)" fill-opacity="0.55"/>
+                        <circle cx="60" cy="60" r="22" stroke="var(--oc-cyan)" stroke-width="3.5"/>
+                        <line   x1="76" y1="76" x2="98" y2="98" stroke="var(--oc-cyan)" stroke-width="4.5"/>
+                        <circle cx="60" cy="60" r="3"  fill="var(--oc-cyan)"/>
+                      </svg>
+                    </div>
+                    <div class="oc-cta-body">
+                      <div class="oc-cta-eyebrow">Know what you want</div>
+                      <div class="oc-cta-title">Quick Searches</div>
+                      <div class="oc-cta-sub">Curated one-click filter combos.</div>
+                      <span class="oc-cta-arrow">→</span>
+                    </div>
+                  </a>
+
+                  <!-- LINK: Randomizer hub (ORBIT relative path) -->
+                  <a class="oc-cta-card oc-cta--gold" href="randomizer-hub.html">
+                    <div class="oc-cta-icon">
+                      <svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <g class="oc-die-tilt">
+                          <path d="M60 16 L100 36 L100 84 L60 104 L20 84 L20 36 Z" stroke="var(--oc-gold)" stroke-width="3" fill="rgba(255,215,0,0.06)"/>
+                          <path d="M20 36 L60 56 L100 36" stroke="var(--oc-gold)" stroke-width="2"/>
+                          <path d="M60 56 L60 104"        stroke="var(--oc-gold)" stroke-width="2"/>
+                          <!-- top face: star pip -->
+                          <path d="M60 28 L62 33 L67 33 L63 36 L65 41 L60 38 L55 41 L57 36 L53 33 L58 33 Z" fill="var(--oc-gold)"/>
+                          <!-- left face: 2 pips -->
+                          <circle cx="32" cy="56" r="2.2" fill="var(--oc-gold)"/>
+                          <circle cx="42" cy="76" r="2.2" fill="var(--oc-gold)"/>
+                          <!-- right face: 3 pips -->
+                          <circle cx="78" cy="76" r="2.2" fill="var(--oc-gold)"/>
+                          <circle cx="88" cy="56" r="2.2" fill="var(--oc-gold)"/>
+                          <circle cx="83" cy="66" r="2.2" fill="var(--oc-gold)"/>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="oc-cta-body">
+                      <div class="oc-cta-eyebrow">Surprise me</div>
+                      <div class="oc-cta-title">Randomizer</div>
+                      <div class="oc-cta-sub">Roll for a film, a re-watch, or a series.</div>
+                      <span class="oc-cta-arrow">→</span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+
+            </div><!-- /.oc-slides -->
+
+            <button class="oc-nav oc-nav--prev section-collapse-hide" data-oc-dir="-1" aria-label="Previous slide">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 4l-8 8 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="oc-nav oc-nav--next section-collapse-hide" data-oc-dir="1" aria-label="Next slide">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 4l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <div class="oc-dots section-collapse-hide">
+              <button class="oc-dot is-active" data-oc-dot="0" aria-label="Go to slide 1"></button>
+              <button class="oc-dot" data-oc-dot="1" aria-label="Go to slide 2"></button>
+              <button class="oc-dot" data-oc-dot="2" aria-label="Go to slide 3"></button>
             </div>
-          </header>
+
+          </div>
         </div>
 
         <!-- QUICK SEARCHES SECTION (collapsible — 2026-05-16; previously "QUICK STARTS" added May 1, 2026. Populated by initPresets() in discover.js.) -->
@@ -380,6 +483,25 @@
             <span class="orbit-film-count-label">films match</span>
           </div>
           <div class="orbit-streaming-warning" id="orbitStreamingWarning" style="display:none;"></div>
+          <!-- DISCOVERY EMPTY / ERROR STATE (Phase 1 — 2026-05-27)
+               Three-kind advisory (zero / network / data). Hidden by
+               default. Populated and revealed by showDiscoverEmptyState()
+               in discover.js. Phase 2 will wire this to the 10 alert()
+               call-sites; for now only the temporary __testEmptyState()
+               console hook triggers it. -->
+          <div class="discover-empty-state" id="discoverEmptyState" data-orbit-popup hidden>
+            <button type="button" class="orbit-close discover-empty-state-close" aria-label="Dismiss">&times;</button>
+            <div class="discover-empty-state-glyph" aria-hidden="true">
+              <span class="og og-satellite" data-role="glyph"></span>
+            </div>
+            <h3 class="discover-empty-state-headline" data-role="headline"></h3>
+            <p class="discover-empty-state-body" data-role="body"></p>
+            <div class="discover-empty-state-trace" data-role="trace" hidden></div>
+            <div class="discover-empty-state-actions">
+              <button type="button" class="discover-empty-state-btn discover-empty-state-btn--primary" data-role="primary"></button>
+              <button type="button" class="discover-empty-state-btn discover-empty-state-btn--ghost" data-role="secondary" hidden></button>
+            </div>
+          </div>
           <div class="orbit-panel-body" id="orbitFiltersEmpty">
             <p class="orbit-panel-empty">
               No criteria selected yet. Build your orbit by selecting filters.
@@ -533,6 +655,7 @@
   <script src="theme-taxonomy.js"></script>
   <script src="../data/keyword-ids.js"></script>
   <script src="discover.js"></script>
+  <script src="../components/discover-carousel.js"></script>
   <script src="../components/shortlist-badge.js"></script>
 </body>
 </html>
