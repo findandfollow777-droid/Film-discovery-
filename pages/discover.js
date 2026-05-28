@@ -1775,9 +1775,9 @@ if (resetOrbitButton) {
    (Rule 17 Black Hole). We listen for 'orbit:close' on the
    container so we clear dynamic content alongside the auto-hide.
 
-   Phase 1 deliberately does NOT call this from any launch-flow
-   code — alert() sites remain untouched. Verification uses the
-   temporary __testEmptyState() console hook below.
+   Phase 2 (2026-05-28): wired into the launch handler, replacing
+   all 10 window.alert() empty/error surfaces. The temporary
+   __testEmptyState() console hook has been removed.
    ============================================================ */
 var DISCOVER_EMPTY_DEFAULTS = {
   zero: {
@@ -1902,27 +1902,6 @@ function hideDiscoverEmptyState() {
     hideDiscoverEmptyState();
   });
 })();
-
-// TEMP TEST HOOK — remove in Phase 2.
-// Call from devtools: __testEmptyState('zero' | 'network' | 'data')
-window.__testEmptyState = function (kind) {
-  if (kind === 'zero') {
-    showDiscoverEmptyState('zero', {
-      trace: '142 → 142 → 0',
-      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
-    });
-  } else if (kind === 'network') {
-    showDiscoverEmptyState('network', {
-      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
-    });
-  } else if (kind === 'data') {
-    showDiscoverEmptyState('data', {
-      primaryAction: function () { console.log('[empty-state test] primary clicked'); }
-    });
-  } else {
-    console.warn('__testEmptyState: kind must be \"zero\", \"network\", or \"data\".');
-  }
-};
 
 // ── More Filters modal ──
 const moreFiltersOverlay = document.getElementById('moreFiltersOverlay');
@@ -2136,7 +2115,15 @@ launchCard.addEventListener("click", async () => {
 
       if (filtered.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria in the selected universe(s).");
+        showDiscoverEmptyState('zero', {
+          body: 'No films in the selected universe(s) match your other filters. Try removing a non-universe filter.',
+          trace: `${allMovies.length} → 0`,
+          primaryLabel: 'Remove non-universe filters',
+          primaryAction: function () {
+            state.filters = state.filters.filter(function (f) { return f.section === 'universes'; });
+            updateUIFromState();
+          }
+        });
         return;
       }
 
@@ -2163,7 +2150,19 @@ launchCard.addEventListener("click", async () => {
       const matchingIds = getAwardsMatchingIds(state.filters);
       if (matchingIds.length === 0) {
         hyperspace.hidden = true;
-        alert("No award-winning movies found matching your criteria.");
+        showDiscoverEmptyState('zero', {
+          body: 'That award selection doesn’t match any films. Try removing the last award filter.',
+          trace: null,
+          primaryLabel: 'Remove last award filter',
+          primaryAction: function () {
+            var awardsFilters = state.filters.filter(function (f) { return f.section === 'awards'; });
+            if (awardsFilters.length) {
+              var last = awardsFilters[awardsFilters.length - 1];
+              state.filters = state.filters.filter(function (f) { return f !== last; });
+              updateUIFromState();
+            }
+          }
+        });
         return;
       }
 
@@ -2189,11 +2188,20 @@ launchCard.addEventListener("click", async () => {
       // Apply settings-based post-filtering if any settings filters are active
       const settingsData = await getSettingsData();
       if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section)) && settingsData) {
+        const awPreSettings = allMovies.length;
         allMovies = applySettingsFilters(allMovies, state.filters, settingsData);
         console.log(`[Orbit] Awards + settings post-filter: → ${allMovies.length} movies`);
         if (allMovies.length === 0) {
           hyperspace.hidden = true;
-          alert("No award-winning movies match your settings filters. Try removing some filters.");
+          showDiscoverEmptyState('zero', {
+            body: 'No award-winning films match your Setting & Theme filters. Try removing them.',
+            trace: `${awPreSettings} → 0`,
+            primaryLabel: 'Remove Setting & Theme filters',
+            primaryAction: function () {
+              state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+              updateUIFromState();
+            }
+          });
           return;
         }
       }
@@ -2256,6 +2264,7 @@ launchCard.addEventListener("click", async () => {
          state.filters. */
       allMovies = applyClientSideCollectionFilters(allMovies, state.filters);
       console.log(`[Orbit] Mixed awards mode after client-side filters: ${allMovies.length} movies`);
+      const mxAfterClient = allMovies.length;
 
       // Settings-based post-filter (location, era, themes, based-on) — mirrors AWARDS-ONLY
       const settingsData = await getSettingsData();
@@ -2266,7 +2275,15 @@ launchCard.addEventListener("click", async () => {
 
       if (allMovies.length === 0) {
         hyperspace.hidden = true;
-        alert("No award-winning movies match your other filters. Try removing some filters.");
+        showDiscoverEmptyState('zero', {
+          body: 'No award-winning films match your other filters. Try removing your Setting & Theme filters.',
+          trace: `${matchingIds.length} → ${mxAfterClient} → 0`,
+          primaryLabel: 'Remove Setting & Theme filters',
+          primaryAction: function () {
+            state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+            updateUIFromState();
+          }
+        });
         return;
       }
 
@@ -2295,7 +2312,13 @@ launchCard.addEventListener("click", async () => {
       const seedData = await getSeedData();
       if (!settingsData || !seedData) {
         hyperspace.hidden = true;
-        alert("Settings data unavailable. Try adding a genre or person filter alongside your selections.");
+        showDiscoverEmptyState('data', {
+          body: 'Settings data couldn’t be loaded. Retry, or add a genre or person filter alongside your selections.',
+          trace: null,
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); },
+          secondaryLabel: 'Add a different filter'
+        });
         return;
       }
 
@@ -2323,7 +2346,18 @@ launchCard.addEventListener("click", async () => {
 
       if (filtered.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        showDiscoverEmptyState('zero', {
+          body: 'No films match your Setting & Theme filters. Try clearing them for broader results.',
+          trace: `${candidateMovies.length} → 0`,
+          primaryLabel: 'Clear all filters',
+          primaryAction: function () {
+            state.filters = [];
+            state.genreLogic = 'or';
+            state.regionLogic = 'or';
+            try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+            updateUIFromState();
+          }
+        });
         return;
       }
 
@@ -2353,7 +2387,10 @@ launchCard.addEventListener("click", async () => {
 
       if (allMovies.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        showDiscoverEmptyState('network', {
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); }
+        });
         return;
       }
 
@@ -2381,7 +2418,10 @@ launchCard.addEventListener("click", async () => {
       const previewUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}&page=1`;
       const previewResponse = await fetch(previewUrl);
       if (!previewResponse.ok) {
-        alert("Search failed — please try again.");
+        showDiscoverEmptyState('network', {
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); }
+        });
         return;
       }
       const previewData = await previewResponse.json();
@@ -2470,7 +2510,15 @@ launchCard.addEventListener("click", async () => {
 
         if (finalMovies.length === 0) {
           hyperspace.hidden = true;
-          alert("No movies found matching your criteria. Try removing some settings filters (location, era, themes) for broader results.");
+          showDiscoverEmptyState('zero', {
+            body: 'No films match your Setting & Theme filters. Try removing them for broader results.',
+            trace: `${allMovies.length} → 0`,
+            primaryLabel: 'Remove Setting & Theme filters',
+            primaryAction: function () {
+              state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+              updateUIFromState();
+            }
+          });
           return;
         }
       }
@@ -2497,7 +2545,10 @@ launchCard.addEventListener("click", async () => {
     const hyperspace = document.getElementById('hyperspaceOverlay');
     hyperspace.hidden = true;
     console.error("Launch error:", err);
-    alert("Failed to launch orbit. Please try again.");
+    showDiscoverEmptyState('network', {
+      primaryLabel: 'Retry',
+      primaryAction: function () { launchCard.click(); }
+    });
   }
 });
 
