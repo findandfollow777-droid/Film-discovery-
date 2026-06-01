@@ -646,6 +646,27 @@ window.addEventListener('resize', () => {
 })();
 
 /* ============================================================
+   GLOBAL CONTROLS STRIP — Sort-by (SHELL, Phase 1b-i — 2026-06-01)
+   Holds the chosen sort in state.sortBy ONLY. NOT wired into the query,
+   film-count, or Launch — sort_by stays hard-coded popularity.desc in
+   buildTMDBQueryFromFilters until Phase 1b-ii (which will read state.sortBy).
+   Changing the control updates state.sortBy and logs it; results unchanged.
+   ============================================================ */
+(function initGlobalSortControl() {
+  var fieldSel = document.getElementById('discoverSortField');
+  var dirSel   = document.getElementById('discoverSortDir');
+  if (!fieldSel || !dirSel) return;
+  function applySort() {
+    // state.sortBy is the single source of truth Phase 1b-ii will read.
+    state.sortBy = fieldSel.value + '.' + dirSel.value;
+    console.log('[Discover] sort-by held (not yet wired to query):', state.sortBy);
+  }
+  fieldSel.addEventListener('change', applySort);
+  dirSel.addEventListener('change', applySort);
+  applySort();   // initialise state.sortBy from the defaults (popularity.desc)
+})();
+
+/* ============================================================
    QUICK STARTS — Added May 1, 2026
    Pool of 8 preset searches. 4 shown per visit, rotated daily
    based on day-since-epoch index. Shuffle button reshuffles
@@ -1019,7 +1040,22 @@ function shuffleEvergreenIndices() {
   return indices;
 }
 
-/* Pick 5 evergreen presets, avoiding the previous batch where possible. */
+/* Pick `count` evergreen presets, avoiding the previous batch where possible.
+
+   Phase 2 (2026-06-01): favourite-weighted sampling layered on top of the
+   anti-repetition logic.
+     1. Same as before — split indices into `fresh` (not in the previous
+        batch) and `stale` (recently shown). `fresh` is drawn from first
+        so we don't repeat tiles round-to-round.
+     2. WITHIN each pool, sample WITHOUT REPLACEMENT using random weights
+        where each index's weight = 1.5 if PRESET_POOL[idx].name is in
+        orbit_favourite_presets, else 1.0. So favourited entries surface
+        ~50% more often without ever appearing twice in one batch.
+     3. Saved searches do NOT enter the strip — pickEvergreens still
+        returns PRESET_POOL entries only.
+   Helpers come from the Phase 2 IIFE at the end of this file via
+   window.__orbitLoadFavourites; the function-level guard means the
+   shuffle works even if that IIFE hasn't run yet (everyone gets 1.0). */
 function pickEvergreens(count) {
   var lastRaw = localStorage.getItem('orbit_last_preset_indices') || '[]';
   var lastSet = {};
@@ -1027,14 +1063,48 @@ function pickEvergreens(count) {
     JSON.parse(lastRaw).forEach(function (idx) { lastSet[idx] = true; });
   } catch (e) { /* corrupted — start fresh */ }
 
-  var shuffled = shuffleEvergreenIndices();
-  var fresh = shuffled.filter(function (idx) { return !lastSet[idx]; });
-  var stale = shuffled.filter(function (idx) {  return  lastSet[idx]; });
+  var favs = (typeof window.__orbitLoadFavourites === 'function')
+    ? window.__orbitLoadFavourites() : [];
+  var favSet = {};
+  for (var fi = 0; fi < favs.length; fi++) favSet[favs[fi]] = true;
+  function weightFor(idx) {
+    var p = PRESET_POOL[idx];
+    return (p && favSet[p.name]) ? 1.5 : 1.0;
+  }
+
+  /* Indices 1..N-1 (skip spotlight at 0, same as shuffleEvergreenIndices). */
+  var allIdx = [];
+  for (var i = 1; i < PRESET_POOL.length; i++) allIdx.push(i);
+  var fresh = allIdx.filter(function (idx) { return !lastSet[idx]; });
+  var stale = allIdx.filter(function (idx) { return  lastSet[idx]; });
+
+  function pickWeightedNoReplace(pool, n) {
+    var picks = [];
+    var available = pool.slice();
+    var weights = available.map(weightFor);
+    while (picks.length < n && available.length > 0) {
+      var total = 0;
+      for (var k = 0; k < weights.length; k++) total += weights[k];
+      if (total <= 0) break;
+      var r = Math.random() * total;
+      var acc = 0;
+      for (var j = 0; j < available.length; j++) {
+        acc += weights[j];
+        if (r <= acc) {
+          picks.push(available[j]);
+          available.splice(j, 1);
+          weights.splice(j, 1);
+          break;
+        }
+      }
+    }
+    return picks;
+  }
 
   /* Prefer fresh picks; fall back to stale ones if fewer than `count` fresh. */
-  var picks = fresh.slice(0, count);
+  var picks = pickWeightedNoReplace(fresh, count);
   if (picks.length < count) {
-    picks = picks.concat(stale.slice(0, count - picks.length));
+    picks = picks.concat(pickWeightedNoReplace(stale, count - picks.length));
   }
   localStorage.setItem('orbit_last_preset_indices', JSON.stringify(picks));
   return picks.map(function (idx) { return PRESET_POOL[idx]; });
@@ -1430,6 +1500,16 @@ function applyPreset(preset) {
      window.renderFilterChips also runs updateTabDots, so call it once
      more to refresh the tab dot indicators. */
   if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+
+  /* Phase 2 (2026-06-01): track the post-apply state signature so the
+     Save button stays hidden until the user diverges from this preset.
+     window.__orbitStateSignature is defined in the Phase 2 IIFE at the
+     end of this file; the guard tolerates load-order edge cases. */
+  try {
+    if (typeof window.__orbitStateSignature === 'function') {
+      window.__orbitLastAppliedSig = window.__orbitStateSignature(state.filters, state.genreLogic);
+    }
+  } catch (e) { /* swallow — Save button just stays in its current state */ }
 }
 
 (function initPresets() {
@@ -1716,6 +1796,17 @@ if (clearAllButton) {
     state.regionLogic = 'or';
     try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
     updateUIFromState();
+    /* Phase 3 (2026-06-01): mirror the same downstream-update path that
+       applyPreset / chip-add use. updateUIFromState already calls the
+       LOCAL renderFilterChips, but it does NOT trigger the WRAPPED
+       window.renderFilterChips (which runs updateTabDots, updateOrbitRing,
+       fetchFilmCount, and Phase 2's updateSaveButtonVisibility). Without
+       this call the vertical-bar film count + ring stay stale until the
+       next tab interaction does the work. */
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+    /* Clear the last-applied signature so the cleared state reads as
+       pristine — Save button stays hidden after clear. */
+    try { window.__orbitLastAppliedSig = null; } catch (e) {}
   };
 }
 
@@ -1750,6 +1841,17 @@ if (resetOrbitButton) {
     state.regionLogic = 'or';
     try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
     updateUIFromState();
+    /* Phase 3 (2026-06-01): Reset was missing the wrapped chip-render
+       call, so the vertical-bar count + orbit ring stayed stale until
+       the next tab interaction. The WRAPPED window.renderFilterChips
+       cascades to updateTabDots / updateOrbitRing / fetchFilmCount /
+       Phase 2's updateSaveButtonVisibility — exactly what the tab-
+       interaction path does. Adding the call here makes Reset
+       complete in one go. */
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+    /* Clear the last-applied signature so the cleared state reads as
+       pristine — Save button stays hidden after Reset. */
+    try { window.__orbitLastAppliedSig = null; } catch (e) {}
   });
 }
 
@@ -2834,7 +2936,7 @@ function buildTMDBQueryFromFilters(filters) {
 
   const params = new URLSearchParams();
 
-  params.append("sort_by", "popularity.desc");
+  params.append("sort_by", state.sortBy || "popularity.desc");   /* Phase 1b-ii: global sort-by control (1b-i) drives this; defaults to popularity.desc */
   params.append("include_adult", "false");
   params.append("include_video", "false");
 
@@ -6920,11 +7022,25 @@ function fetchFilmCount() {
 
   /* Active-filter dot indicator on each tab. */
   function updateTabDots() {
-    var activeSections = new Set(state.filters.map(function (f) { return f.section; }));
+    /* Phase 1a-ii: per-tab filter-COUNT badge (was presence-only dot).
+       Same source as before — state.filters + TAB_TO_SECTIONS — just
+       summed per section instead of a boolean .some(). No new state, no
+       new triggers; runs at every existing updateTabDots call site. */
+    var counts = {};
+    state.filters.forEach(function (f) { counts[f.section] = (counts[f.section] || 0) + 1; });
     tabBar.querySelectorAll('.oft-tab').forEach(function (tab) {
       var keys = TAB_TO_SECTIONS[tab.dataset.tab] || [];
-      var has = keys.some(function (k) { return activeSections.has(k); });
-      tab.classList.toggle('oft-tab--has-filter', has);
+      var n = keys.reduce(function (sum, k) { return sum + (counts[k] || 0); }, 0);
+      tab.classList.toggle('oft-tab--has-filter', n > 0);
+      /* Lazily create the count badge once, then reuse it. */
+      var badge = tab.querySelector('.oft-tab-badge');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'oft-tab-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        tab.appendChild(badge);
+      }
+      badge.textContent = n > 0 ? String(n) : '';
     });
   }
 
@@ -7309,31 +7425,14 @@ function fetchFilmCount() {
    Replaced by components/discover-carousel.js, which auto-boots on
    DOMContentLoaded and binds every [data-orbit-carousel]. */
 
-/* ============================================================
-   CAROUSEL SLIDE 3 — CYAN CTA HANDLER — Added 2026-05-26,
-   migrated to .oc-carousel Phase B 2026-05-27.
-   Intercepts the cyan slide-3 link (href="#quickSearchesSection").
-   If Quick Searches is collapsed, programmatic click on its
-   .section-collapse-toggle expands it (re-uses the existing
-   persistence/aria/critical-section guard), then we smooth-scroll
-   the section into view. Gold CTA (randomizer-hub.html) is a
-   plain anchor and needs no JS.
-   ============================================================ */
-(function () {
-  var cta = document.querySelector('.oc-cta-card[href="#quickSearchesSection"]');
-  if (!cta) return;
-  cta.addEventListener('click', function (e) {
-    e.preventDefault();
-    var section = document.querySelector('.section-container[data-section="quickSearches"]');
-    if (!section) return;
-    if (section.classList.contains('collapsed')) {
-      var toggle = section.querySelector('.section-collapse-toggle');
-      if (toggle) toggle.click();
-    }
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-})();
-/* === END CAROUSEL SLIDE 3 CTA HANDLER === */
+/* Phase 1 (2026-05-31): the slide-3 cyan CTA's intercept handler was
+   removed in this phase. It targeted .oc-cta-card[href="#quickSearchesSection"]
+   to expand the Loaded Searches section + smooth-scroll into view when
+   that CTA was the entry point. The CTA's href is now ../index.html
+   (it points at the free-form Search rather than the in-page presets),
+   so the selector no longer matches and the handler was dead code.
+   The plain <a href="../index.html"> now navigates natively. Gold CTA
+   (Randomizer) is unaffected — it was always a plain anchor. */
 
 /* ============================================================
    QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
@@ -7352,7 +7451,18 @@ function fetchFilmCount() {
   var grid = document.getElementById('discoverPresetsModalGrid');
   if (!modal || !openBtn || !grid) return;
 
-  function buildTile(p, i) {
+  /* Phase 1 (2026-05-31): Filter-rail elements. May be absent if HTML
+     ever ships without the rail block; the rest of the modal still
+     works in that case (railInitialized stays false, populate() runs
+     unfiltered). */
+  var rail = document.getElementById('discoverPresetsModalRail');
+  var railToggle = document.getElementById('discoverPresetsModalRailToggle');
+  var railSearch = document.getElementById('discoverPresetsModalRailSearch');
+  var railClear = document.getElementById('discoverPresetsModalRailClear');
+  var railChecks = document.getElementById('discoverPresetsModalRailChecks');
+  var railInitialized = false;
+
+  function buildTile(p, i, isFav) {
     var isSpotlight = p.color === 'spotlight';
     var classes = 'discover-preset discover-preset--' + p.color;
     if (isSpotlight) classes += ' discover-preset--spotlight';
@@ -7370,27 +7480,300 @@ function fetchFilmCount() {
     var tagSpan  = '<span class="' + tagClass + '">' + tagText + '</span>';
     var nameSpan = '<span class="discover-preset-name">' + p.name + '</span>';
     var inner = isSpotlight ? (tagSpan + nameSpan) : (decorations + nameSpan + tagSpan);
-    return '<button class="' + classes + '" type="button" data-preset-index="' + i + '">' + inner + '</button>';
+    /* Phase 2 (2026-06-01): favourite ★ on every tile. Stable ID for
+       built-ins is preset.name (matches the orbit_favourite_presets ID
+       scheme). Rendered as <span role="button"> to avoid nested-button
+       HTML; click delegation on .grid stopPropagations the outer tile. */
+    var favId = String(p.name || '').replace(/"/g, '&quot;');
+    var favClass = 'discover-preset-fav-btn' + (isFav ? ' is-fav' : '');
+    var favSpan = '<span class="' + favClass + '" role="button" tabindex="0" data-fav-id="' + favId + '" aria-label="Toggle favourite">★</span>';
+    return '<button class="' + classes + '" type="button" data-preset-index="' + i + '">' + inner + favSpan + '</button>';
   }
 
-  function populate() {
+  /* Phase 2 (2026-06-01): tile for a user-saved search. Distinct purple
+     variant + "MY SEARCH" badge + remove × in the bottom-right corner.
+     Stable ID = saved.id (UUID), used for both data-saved-id (apply)
+     and data-fav-id (favourite). */
+  function buildSavedTile(s, isFav) {
+    var nameSafe = String(s.name == null ? 'Untitled' : s.name)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    var idSafe = String(s.id || '').replace(/"/g, '&quot;');
+    var dateStr = '';
+    try {
+      var d = new Date(s.savedAt);
+      if (!isNaN(d.getTime())) dateStr = d.toLocaleDateString();
+    } catch (e) { /* no date — that's fine */ }
+    var favClass = 'discover-preset-fav-btn' + (isFav ? ' is-fav' : '');
+    return '<button class="discover-preset discover-preset--purple discover-preset--saved" type="button" data-saved-id="' + idSafe + '">' +
+           '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+           '<span class="discover-preset-saved-badge">MY SEARCH</span>' +
+           '<span class="discover-preset-name">' + nameSafe + '</span>' +
+           '<span class="discover-preset-tag">SAVED' + (dateStr ? ' &middot; ' + dateStr : '') + '</span>' +
+           '<span class="' + favClass + '" role="button" tabindex="0" data-fav-id="' + idSafe + '" aria-label="Toggle favourite">★</span>' +
+           '<span class="discover-preset-remove-btn" role="button" tabindex="0" data-saved-remove="' + idSafe + '" aria-label="Remove">&times;</span>' +
+           '</button>';
+  }
+
+  /* Phase 2 (2026-06-01): populate accepts an ordered candidate array of
+     `{kind:'saved'|'preset', data, fav}` items. Saved tiles render FIRST
+     (so user-saved searches surface at the top of the grid). Click
+     delegation on the grid covers tile-apply / favourite-toggle / saved-
+     remove via .grid-level event delegation, so this only sets innerHTML. */
+  function populate(candidates) {
     if (typeof PRESET_POOL === 'undefined' || !Array.isArray(PRESET_POOL)) return;
-    grid.innerHTML = PRESET_POOL.map(buildTile).join('');
-    grid.querySelectorAll('[data-preset-index]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var idx = parseInt(btn.dataset.presetIndex, 10);
-        if (isNaN(idx)) return;
-        var preset = PRESET_POOL[idx];
-        if (preset && typeof applyPreset === 'function') {
-          applyPreset(preset);
-        }
-        closeModal();
+    var list = Array.isArray(candidates) ? candidates : getFilteredCandidates();
+    if (list.length === 0) {
+      grid.innerHTML = '<div class="discover-presets-modal-empty">No searches match.</div>';
+      return;
+    }
+    grid.innerHTML = list.map(function (item) {
+      if (item.kind === 'saved') {
+        return buildSavedTile(item.data, !!item.fav);
+      }
+      var origIdx = PRESET_POOL.indexOf(item.data);
+      return buildTile(item.data, origIdx, !!item.fav);
+    }).join('');
+  }
+
+  /* Phase 2 (2026-06-01): single delegated handler on the grid covers
+     all interactions (apply preset / apply saved / toggle favourite /
+     remove saved). Bound once per modal lifetime (innerHTML resets wipe
+     child listeners but not the parent's). */
+  function onGridClick(e) {
+    var favEl = e.target.closest && e.target.closest('.discover-preset-fav-btn');
+    if (favEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      var favId = favEl.getAttribute('data-fav-id');
+      if (!favId) return;
+      var nowFav = (typeof window.__orbitToggleFavourite === 'function') && window.__orbitToggleFavourite(favId);
+      favEl.classList.toggle('is-fav', !!nowFav);
+      return;
+    }
+    var removeEl = e.target.closest && e.target.closest('.discover-preset-remove-btn');
+    if (removeEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      var savedId = removeEl.getAttribute('data-saved-remove');
+      if (!savedId || typeof window.__orbitLoadSavedSearches !== 'function') return;
+      var arr = window.__orbitLoadSavedSearches();
+      var idx = -1;
+      for (var k = 0; k < arr.length; k++) { if (arr[k] && arr[k].id === savedId) { idx = k; break; } }
+      if (idx === -1) return;
+      arr.splice(idx, 1);
+      window.__orbitPersistSavedSearches(arr);
+      /* Also remove from favourites if present. */
+      var favs = window.__orbitLoadFavourites();
+      var fidx = favs.indexOf(savedId);
+      if (fidx !== -1) { favs.splice(fidx, 1); window.__orbitPersistFavourites(favs); }
+      applyFilters();
+      return;
+    }
+    var savedTile = e.target.closest && e.target.closest('[data-saved-id]');
+    if (savedTile) {
+      var sid = savedTile.getAttribute('data-saved-id');
+      var saved = (typeof window.__orbitLoadSavedSearches === 'function') ? window.__orbitLoadSavedSearches() : [];
+      var match = null;
+      for (var m = 0; m < saved.length; m++) { if (saved[m] && saved[m].id === sid) { match = saved[m]; break; } }
+      if (match && typeof window.__orbitApplySavedSearch === 'function') {
+        window.__orbitApplySavedSearch(match);
+      }
+      closeModal();
+      return;
+    }
+    var presetTile = e.target.closest && e.target.closest('[data-preset-index]');
+    if (presetTile) {
+      var pi = parseInt(presetTile.getAttribute('data-preset-index'), 10);
+      if (isNaN(pi)) return;
+      var preset = PRESET_POOL[pi];
+      if (preset && typeof applyPreset === 'function') applyPreset(preset);
+      closeModal();
+      return;
+    }
+  }
+
+  /* Phase 1 (2026-05-31): split every PRESET_POOL[i].tag on " · ", trim
+     each part, accumulate distinct tokens + per-token count. Returns
+     [{ token: 'AWARDS', count: 8 }, ...] alphabetised by raw token. */
+  function enumerateTokens() {
+    if (typeof PRESET_POOL === 'undefined' || !Array.isArray(PRESET_POOL)) return [];
+    var counts = {};
+    PRESET_POOL.forEach(function (p) {
+      var rawTag = p && typeof p.tag === 'string' ? p.tag : '';
+      rawTag.split(' · ').forEach(function (part) {
+        var token = part.trim();
+        if (!token) return;
+        counts[token] = (counts[token] || 0) + 1;
       });
+    });
+    return Object.keys(counts).sort().map(function (t) {
+      return { token: t, count: counts[t] };
     });
   }
 
+  /* Phase 1 (2026-05-31): convert raw token e.g. "IN CINEMAS" → "In Cinemas"
+     for display. Match continues to use the raw token (case-sensitive)
+     against preset.tag splits. */
+  function titleCase(s) {
+    return s.toLowerCase().replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  /* Phase 1 (2026-05-31): render checkboxes once at first init.
+     Phase 2 (2026-06-01): prepend two SPECIAL boxes (My Searches /
+     Favourites) above the dynamic token list. Specials are distinguished
+     by `data-special` (not a `value`). Token boxes keep the `value="…"`
+     contract from Phase 1. */
+  function renderRailCheckboxes() {
+    if (!railChecks) return;
+    var entries = enumerateTokens();
+    var specials =
+      '<div class="discover-presets-modal-rail-specials">' +
+        '<label class="discover-presets-modal-rail-check">' +
+          '<input type="checkbox" data-special="saved">' +
+          '<span class="discover-presets-modal-rail-check-name">My Searches</span>' +
+        '</label>' +
+        '<label class="discover-presets-modal-rail-check">' +
+          '<input type="checkbox" data-special="favourite">' +
+          '<span class="discover-presets-modal-rail-check-name">Favourites</span>' +
+        '</label>' +
+      '</div>';
+    var tokens = entries.map(function (entry) {
+      var safe = String(entry.token).replace(/"/g, '&quot;');
+      return '<label class="discover-presets-modal-rail-check">' +
+             '<input type="checkbox" value="' + safe + '">' +
+             '<span class="discover-presets-modal-rail-check-name">' + titleCase(entry.token) + '</span>' +
+             '<span class="discover-presets-modal-rail-check-count">' + entry.count + '</span>' +
+             '</label>';
+    }).join('');
+    railChecks.innerHTML = specials + tokens;
+    railChecks.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener('change', applyFilters);
+    });
+  }
+
+  /* Phase 2 (2026-06-01): merged saved + preset filter pipeline.
+     Returns ordered candidate list `[saved..., preset...]` with each item
+     shaped as `{kind:'saved'|'preset', data, fav}`. Combine logic:
+       - text input   → case-insensitive substring on name (+ tag for presets).
+       - token boxes  → OR among ticked tokens; saved searches have no
+         tokens so any ticked token EXCLUDES them.
+       - "My Searches" → restrict to saved entries only.
+       - "Favourites"  → restrict to items whose ID is in favourites.
+     All filter layers AND together. */
+  function getFilteredCandidates() {
+    var search = railSearch ? (railSearch.value || '').trim().toLowerCase() : '';
+    var activeTokens = [];
+    var savedOnly = false;
+    var favouriteOnly = false;
+    if (railChecks) {
+      railChecks.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+        var sp = cb.getAttribute('data-special');
+        if (sp === 'saved') savedOnly = true;
+        else if (sp === 'favourite') favouriteOnly = true;
+        else activeTokens.push(cb.value);
+      });
+    }
+    var saved = (typeof window.__orbitLoadSavedSearches === 'function') ? window.__orbitLoadSavedSearches() : [];
+    var favs = (typeof window.__orbitLoadFavourites === 'function') ? window.__orbitLoadFavourites() : [];
+    var favSet = {};
+    for (var fi = 0; fi < favs.length; fi++) favSet[favs[fi]] = true;
+
+    var filteredSaved = saved.filter(function (s) {
+      if (!s) return false;
+      if (favouriteOnly && !favSet[s.id]) return false;
+      if (search && String(s.name || '').toLowerCase().indexOf(search) === -1) return false;
+      /* Saved have no tag tokens — any ticked token excludes them. */
+      if (activeTokens.length > 0) return false;
+      return true;
+    }).map(function (s) {
+      return { kind: 'saved', data: s, fav: !!favSet[s.id] };
+    });
+
+    var filteredPresets = savedOnly ? [] : PRESET_POOL.filter(function (p) {
+      if (!p) return false;
+      if (favouriteOnly && !favSet[p.name]) return false;
+      var nameLower = String(p.name || '').toLowerCase();
+      var tagLower  = String(p.tag  || '').toLowerCase();
+      if (search && nameLower.indexOf(search) === -1 && tagLower.indexOf(search) === -1) return false;
+      if (activeTokens.length > 0) {
+        var rawTags = String(p.tag || '').split(' · ').map(function (s) { return s.trim(); });
+        if (!activeTokens.some(function (t) { return rawTags.indexOf(t) !== -1; })) return false;
+      }
+      return true;
+    }).map(function (p) {
+      return { kind: 'preset', data: p, fav: !!favSet[p.name] };
+    });
+
+    return filteredSaved.concat(filteredPresets);
+  }
+
+  function applyFilters() {
+    populate(getFilteredCandidates());
+    /* Re-measure compact classes after every re-render so newly-shown
+       tiles get the same name-fits-in-2-lines treatment. */
+    applyCompactClasses(grid);
+  }
+
+  function initRail() {
+    if (railInitialized) return;
+    /* Phase 2 (2026-06-01): grid-level delegated click handler — bound
+       ONCE per modal lifetime regardless of whether the rail HTML exists
+       (delegation covers tile apply / fav toggle / remove for both built-
+       in and saved tiles). Re-renders set innerHTML, which wipes child
+       listeners; the parent-level listener persists. */
+    if (grid && !grid._phase2Bound) {
+      grid.addEventListener('click', onGridClick);
+      grid._phase2Bound = true;
+    }
+    if (!rail) { railInitialized = true; return; }  /* HTML lacks rail — fall back gracefully. */
+
+    renderRailCheckboxes();
+
+    if (railSearch) railSearch.addEventListener('input', applyFilters);
+
+    if (railClear) {
+      railClear.addEventListener('click', function () {
+        if (railSearch) railSearch.value = '';
+        if (railChecks) {
+          railChecks.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+            cb.checked = false;
+          });
+        }
+        applyFilters();
+      });
+    }
+
+    if (railToggle) {
+      railToggle.addEventListener('click', function () {
+        var nowCollapsed = rail.classList.toggle('is-collapsed');
+        railToggle.setAttribute('aria-expanded', nowCollapsed ? 'false' : 'true');
+        railToggle.innerHTML = nowCollapsed ? '⛃ Filter' : '&times;';
+      });
+    }
+
+    /* Default rail state: collapsed at ≤650px so the small-screen layout
+       isn't dominated by the rail. The user can toggle it open via the
+       Filter button. */
+    try {
+      if (window.matchMedia && window.matchMedia('(max-width: 650px)').matches) {
+        rail.classList.add('is-collapsed');
+        if (railToggle) {
+          railToggle.setAttribute('aria-expanded', 'false');
+          railToggle.innerHTML = '⛃ Filter';
+        }
+      }
+    } catch (e) { /* matchMedia unsupported — leave expanded. */ }
+
+    railInitialized = true;
+  }
+
   function openModal() {
-    if (grid.children.length === 0) populate();
+    /* Phase 1 (2026-05-31): initialise the rail (token checkboxes + event
+       wiring) on first open, then render the grid through the filter
+       pipeline so any persisted filter state from a previous open is
+       honoured. */
+    initRail();
+    applyFilters();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     /* Phase 3.1: measure name lines AFTER the modal is visible — a
@@ -7426,3 +7809,253 @@ function fetchFilmCount() {
 })();
 /* === END QUICK SEARCHES MODAL === */
 })();
+
+/* ============================================================
+   PHASE 2 (2026-06-01) — Saved searches + Favourites + Save button.
+   Defines storage helpers, state-signature comparator, applySavedSearch,
+   the sidebar Save button + visibility logic, and wraps
+   window.renderFilterChips so the Save button re-evaluates after every
+   chip render. Exposes helpers on window.__orbit* so:
+     - pickEvergreens (above) can read favourites for weighted sampling,
+     - the Show-all modal IIFE (above) can list saved + toggle fav + remove,
+     - applyPreset (above) can stamp window.__orbitLastAppliedSig after
+       a pristine apply (so the Save button stays hidden until divergence).
+   localStorage keys: orbit_saved_searches, orbit_favourite_presets
+   (registered in data/storage-keys.md).
+   ============================================================ */
+(function () {
+  var SAVED_KEY = 'orbit_saved_searches';
+  var FAV_KEY = 'orbit_favourite_presets';
+
+  function loadJSON(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return [];
+      var v = JSON.parse(raw);
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+  function persistJSON(key, arr) {
+    try { localStorage.setItem(key, JSON.stringify(arr)); } catch (e) {}
+  }
+  function loadSavedSearches() { return loadJSON(SAVED_KEY); }
+  function persistSavedSearches(arr) { persistJSON(SAVED_KEY, arr); }
+  function loadFavourites() { return loadJSON(FAV_KEY); }
+  function persistFavourites(arr) { persistJSON(FAV_KEY, arr); }
+  function isFavourite(id) { return loadFavourites().indexOf(id) !== -1; }
+  function toggleFavourite(id) {
+    if (!id) return false;
+    var favs = loadFavourites();
+    var idx = favs.indexOf(id);
+    if (idx === -1) favs.push(id);
+    else favs.splice(idx, 1);
+    persistFavourites(favs);
+    return idx === -1;  /* true = now favourite, false = now removed */
+  }
+
+  /* Stable JSON serialisation of the filter state for divergence
+     comparison. Filter entries are sorted by id so ordering doesn't
+     spuriously flag user-modification. */
+  function stateSignature(filters, genreLogic) {
+    var sorted = (filters || []).slice().sort(function (a, b) {
+      var ai = String(a && a.id || '');
+      var bi = String(b && b.id || '');
+      return ai < bi ? -1 : ai > bi ? 1 : 0;
+    });
+    try { return JSON.stringify({ f: sorted, g: genreLogic || 'or' }); }
+    catch (e) { return null; }
+  }
+
+  /* Apply a saved search by deep-cloning its state into the page's
+     state object and triggering the existing UI-refresh path (mirrors
+     applyPreset). Also stamps __orbitLastAppliedSig so the Save button
+     stays hidden until the user edits. */
+  function applySavedSearch(saved) {
+    if (!saved || !saved.state || typeof state === 'undefined') return;
+    try {
+      state.filters = JSON.parse(JSON.stringify(saved.state.filters || []));
+    } catch (e) { state.filters = []; }
+    state.genreLogic = saved.state.genreLogic || 'or';
+    if ('regionLogic' in saved.state) state.regionLogic = saved.state.regionLogic || 'or';
+    if (typeof updateUIFromState === 'function') updateUIFromState();
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
+  }
+
+  /* Expose helpers globally for pickEvergreens + modal IIFE. */
+  window.__orbitLoadSavedSearches = loadSavedSearches;
+  window.__orbitPersistSavedSearches = persistSavedSearches;
+  window.__orbitLoadFavourites = loadFavourites;
+  window.__orbitPersistFavourites = persistFavourites;
+  window.__orbitIsFavourite = isFavourite;
+  window.__orbitToggleFavourite = toggleFavourite;
+  window.__orbitStateSignature = stateSignature;
+  window.__orbitApplySavedSearch = applySavedSearch;
+  window.__orbitLastAppliedSig = null;
+
+  /* Save button visibility: shown iff state.filters is non-empty AND
+     the current state diverges from the last-applied preset / saved
+     signature (or no apply happened). */
+  function isUserModifiedState() {
+    if (typeof state === 'undefined' || !state.filters || state.filters.length === 0) return false;
+    if (!window.__orbitLastAppliedSig) return true;
+    return stateSignature(state.filters, state.genreLogic) !== window.__orbitLastAppliedSig;
+  }
+  function updateSaveButtonVisibility() {
+    var btn = document.getElementById('saveSearchButton');
+    if (!btn) return;
+    btn.hidden = !isUserModifiedState();
+  }
+  window.__orbitUpdateSaveBtn = updateSaveButtonVisibility;
+
+  /* Save button click: prompt for a name, dedup by appending " (2)" etc.,
+     deep clone state, persist. */
+  function uniqueName(name, existing) {
+    var base = String(name || '').trim() || 'Untitled';
+    var names = {};
+    existing.forEach(function (s) { if (s && s.name) names[s.name] = true; });
+    if (!names[base]) return base;
+    var n = 2;
+    while (names[base + ' (' + n + ')']) n++;
+    return base + ' (' + n + ')';
+  }
+  function makeId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    /* Fallback for older browsers. */
+    return 'saved-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+  }
+  /* Phase 3 (2026-06-01): commit a new saved search. Used by the styled
+     modal below (replaces the previous window.prompt). Returns true if
+     persisted, false if blocked (empty/whitespace name). */
+  function commitSaveWithName(name) {
+    var trimmed = String(name || '').trim();
+    if (!trimmed) return false;
+    if (typeof state === 'undefined') return false;
+    var existing = loadSavedSearches();
+    var finalName = uniqueName(trimmed, existing);
+    var entry = {
+      id: makeId(),
+      name: finalName,
+      state: {
+        filters: JSON.parse(JSON.stringify(state.filters || [])),
+        genreLogic: state.genreLogic || 'or',
+        regionLogic: state.regionLogic || 'or'
+      },
+      savedAt: Date.now()
+    };
+    existing.push(entry);
+    persistSavedSearches(existing);
+    /* Stamp the signature so the just-saved state reads as pristine
+       until the user edits — Save button hides immediately. */
+    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
+    updateSaveButtonVisibility();
+    return true;
+  }
+
+  /* Phase 3 (2026-06-01): styled save-search modal — replaces
+     window.prompt with the page's existing cyan popup language.
+     Dismissal via X (orbit-close.js Black Hole), Esc, backdrop click,
+     or Cancel button. Save button + Enter on input commit through
+     commitSaveWithName; empty/whitespace shows an inline hint. */
+  var saveModal = document.getElementById('saveSearchModal');
+  var saveModalBackdrop = saveModal && saveModal.querySelector('.save-search-modal-backdrop');
+  var saveModalInput = document.getElementById('saveSearchModalInput');
+  var saveModalHint = document.getElementById('saveSearchModalHint');
+  var saveModalSaveBtn = document.getElementById('saveSearchModalSave');
+  var saveModalCancelBtn = document.getElementById('saveSearchModalCancel');
+
+  function openSaveModal() {
+    if (!saveModal) return;
+    if (saveModalInput) saveModalInput.value = '';
+    if (saveModalHint) saveModalHint.hidden = true;
+    saveModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    /* Defer focus so the popup paint finishes first; some browsers
+       won't focus a node that just transitioned from display:none. */
+    setTimeout(function () { if (saveModalInput) saveModalInput.focus(); }, 0);
+  }
+  function closeSaveModal() {
+    if (!saveModal) return;
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(saveModal);
+    } else {
+      saveModal.hidden = true;
+      document.body.style.overflow = '';
+    }
+  }
+  function attemptSave() {
+    var name = saveModalInput ? saveModalInput.value : '';
+    if (!String(name).trim()) {
+      if (saveModalHint) saveModalHint.hidden = false;
+      if (saveModalInput) saveModalInput.focus();
+      return;
+    }
+    var ok = commitSaveWithName(name);
+    if (ok) closeSaveModal();
+  }
+
+  var saveBtn = document.getElementById('saveSearchButton');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function () {
+      if (!isUserModifiedState()) return;
+      if (saveModal) {
+        openSaveModal();
+      } else {
+        /* HTML lacks the modal — fall back to the original prompt path
+           so the feature still works (defensive — shouldn't happen on
+           the live page since the modal is in discover.html Phase 3). */
+        var raw = window.prompt('Name this search:', '');
+        if (raw === null) return;
+        if (commitSaveWithName(raw)) { /* saved */ }
+      }
+    });
+  }
+
+  if (saveModal) {
+    /* Hint disappears as soon as the user starts typing. */
+    if (saveModalInput) {
+      saveModalInput.addEventListener('input', function () {
+        if (saveModalHint && !saveModalHint.hidden) saveModalHint.hidden = true;
+      });
+      /* Enter submits. Shift-Enter does nothing special (single-line input). */
+      saveModalInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          attemptSave();
+        }
+      });
+    }
+    if (saveModalSaveBtn) saveModalSaveBtn.addEventListener('click', attemptSave);
+    if (saveModalCancelBtn) saveModalCancelBtn.addEventListener('click', closeSaveModal);
+    if (saveModalBackdrop) saveModalBackdrop.addEventListener('click', closeSaveModal);
+    /* Esc — only when modal is open. */
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && !saveModal.hidden) closeSaveModal();
+    });
+    /* Body-scroll lock released on Black Hole close. */
+    saveModal.addEventListener('orbit:close', function () {
+      document.body.style.overflow = '';
+    });
+  }
+
+  /* Wrap window.renderFilterChips ONE MORE TIME so every chip re-render
+     re-evaluates Save-button visibility. Wraps any previous wrap
+     (updateTabDots / updateOrbitRing / fetchFilmCount). */
+  if (typeof window.renderFilterChips === 'function') {
+    var _prevWrap = window.renderFilterChips;
+    window.renderFilterChips = function () {
+      var r = _prevWrap.apply(this, arguments);
+      try { updateSaveButtonVisibility(); } catch (e) {}
+      return r;
+    };
+  }
+
+  /* Initial paint: in case the page restored a state on load, evaluate
+     once after the DOM is ready. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSaveButtonVisibility);
+  } else {
+    updateSaveButtonVisibility();
+  }
+})();
+/* === END PHASE 2: Saved searches + Favourites + Save button === */

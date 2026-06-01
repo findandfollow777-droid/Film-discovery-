@@ -1,0 +1,289 @@
+<!-- TEMP PREVIEW HARNESS — Phase 0b-1 verification, delete before tabs ship -->
+<!-- Standalone. NOT linked from any real page. Verifies the four core
+     Discovery controls in components/discover-components.css render per
+     ORBIT-UI-PATTERNS.md B1, and that axis tinting switches per data-axis. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEMP — Discovery Components Preview (Phase 0b-1)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="discover-components.css">
+  <style>
+    /* Harness-only layout chrome — NOT part of the component spec. */
+    body {
+      margin: 0;
+      padding: 32px;
+      background: var(--deep-void);
+      color: var(--film-white);
+      font-family: var(--font-body);
+    }
+    h1 { font-family: var(--font-display); font-size: 24px; color: var(--accent-cyan); }
+    .note { color: var(--muted-silver); font-size: 13px; line-height: 1.6; max-width: 900px; }
+    .axis-block {
+      border: 1px solid rgba(var(--axis), 0.25);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .axis-block h2 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--axis-hex);
+      margin: 0 0 12px;
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+    .label { font-size: 11px; color: var(--ghost-gray); width: 100%; text-transform: uppercase; letter-spacing: 0.05em; }
+    .slider-wrap { max-width: 320px; }
+    .dials { display: flex; gap: 32px; flex-wrap: wrap; }
+    .dial-unit { text-align: center; }
+  </style>
+</head>
+<body>
+
+  <h1>Discovery core controls — Phase 0b-1 preview</h1>
+  <p class="note">
+    Throwaway harness. Check: (1) chip <strong>.on</strong> shows the 180° axis gradient + inset glow with
+    <strong>axis-coloured text</strong> (not dark); (2) <strong>.on.gold</strong> is gold regardless of axis;
+    (3) <strong>.is-dormant</strong> is dimmed; (4) the dual-slider fill and the dial arc are <strong>cyan→gold</strong>
+    in every block (they do NOT tint to the axis); (5) chip + histogram colours <strong>switch per block</strong>
+    (purple → emerald → orange → gold → teal). Hover a chip / slider knob to see the transition.
+    With reduced-motion enabled, transitions should be suppressed.
+  </p>
+
+  <!-- Shared cyan→gold gradient def for every .dial-fill (stops styled via tokens in the CSS). -->
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0;">
+    <defs>
+      <linearGradient id="cyanGold" x1="0" y1="0" x2="1" y2="1">
+        <stop class="stop-cyan" offset="0%"></stop>
+        <stop class="stop-gold" offset="100%"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ===== Axis block: GENRE (purple) — chips + histogram ===== -->
+  <section class="axis-block" data-axis="genre">
+    <h2>data-axis="genre" — purple</h2>
+    <div class="row">
+      <span class="label">Chip states</span>
+      <button class="chip">Action</button>
+      <button class="chip"><span class="dot"></span>Drama</button>
+      <button class="chip on">Crime <span class="chip-count">128</span></button>
+      <button class="chip on"><span class="dot"></span>Thriller <span class="chip-count">64</span></button>
+      <button class="chip is-dormant">Western <span class="chip-count">0</span></button>
+    </div>
+    <div class="row">
+      <span class="label">Histogram (active vs dim)</span>
+      <div class="histogram" aria-hidden="true" style="width:280px;">
+        <div class="histo-bar" style="height:20%"></div>
+        <div class="histo-bar is-active" style="height:55%"></div>
+        <div class="histo-bar is-active" style="height:90%"></div>
+        <div class="histo-bar is-active" style="height:70%"></div>
+        <div class="histo-bar" style="height:35%"></div>
+        <div class="histo-bar" style="height:2px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Axis block: REGION (emerald) ===== -->
+  <section class="axis-block" data-axis="region">
+    <h2>data-axis="region" — emerald (shared with setting)</h2>
+    <div class="row">
+      <span class="label">Chip states</span>
+      <button class="chip">France</button>
+      <button class="chip on">South Korea <span class="chip-count">212</span></button>
+      <button class="chip on"><span class="dot"></span>Japan <span class="chip-count">301</span></button>
+      <button class="chip is-dormant">Antarctica</button>
+    </div>
+    <div class="row">
+      <span class="label">Histogram</span>
+      <div class="histogram" aria-hidden="true" style="width:280px;">
+        <div class="histo-bar is-active" style="height:80%"></div>
+        <div class="histo-bar is-active" style="height:100%"></div>
+        <div class="histo-bar" style="height:40%"></div>
+        <div class="histo-bar" style="height:25%"></div>
+        <div class="histo-bar" style="height:10%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Axis block: STREAM (orange) ===== -->
+  <section class="axis-block" data-axis="stream">
+    <h2>data-axis="stream" — orange</h2>
+    <div class="row">
+      <span class="label">Chip states</span>
+      <button class="chip">Netflix</button>
+      <button class="chip on">Max <span class="chip-count">540</span></button>
+      <button class="chip on"><span class="dot"></span>MUBI <span class="chip-count">88</span></button>
+    </div>
+    <div class="row">
+      <span class="label">Histogram</span>
+      <div class="histogram" aria-hidden="true" style="width:280px;">
+        <div class="histo-bar" style="height:30%"></div>
+        <div class="histo-bar is-active" style="height:65%"></div>
+        <div class="histo-bar is-active" style="height:95%"></div>
+        <div class="histo-bar" style="height:50%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Axis block: AWARDS (gold) — demonstrates .on vs .on.gold ===== -->
+  <section class="axis-block" data-axis="awards">
+    <h2>data-axis="awards" — gold (and the .on.gold variant)</h2>
+    <div class="row">
+      <span class="label">Axis .on (gold axis) vs explicit .on.gold</span>
+      <button class="chip on">Oscar <span class="chip-count">94</span></button>
+      <button class="chip on gold">BAFTA <span class="chip-count">77</span></button>
+      <button class="chip on gold">Golden Globe <span class="chip-count">81</span></button>
+      <button class="chip is-dormant">Silver Bear</button>
+    </div>
+  </section>
+
+  <!-- ===== Axis block: THEMES (teal) — third+ axis to prove tint switching ===== -->
+  <section class="axis-block" data-axis="themes">
+    <h2>data-axis="themes" — teal</h2>
+    <div class="row">
+      <button class="chip">Identity</button>
+      <button class="chip on">Survival <span class="chip-count">906</span></button>
+      <button class="chip on"><span class="dot"></span>Redemption <span class="chip-count">1201</span></button>
+    </div>
+  </section>
+
+  <!-- ===== Range-family constants: slider + dial DO NOT tint to axis ===== -->
+  <section class="axis-block" data-axis="ratings">
+    <h2>data-axis="ratings" — rose · slider + dial stay cyan→gold</h2>
+
+    <div class="row">
+      <span class="label">Dual-slider (fill + knobs)</span>
+      <div class="slider slider-wrap">
+        <div class="track"></div>
+        <div class="fill" style="left:15%; width:50%;"></div>
+        <div class="knob" style="left:15%;"></div>
+        <div class="knob" style="left:65%;"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="label">Score dial (min-only) — number-only readout, caption beneath</span>
+    </div>
+    <div class="dials">
+      <div class="dial-unit">
+        <div class="score-dial" role="slider" aria-valuemin="0" aria-valuemax="10" aria-valuenow="7.5">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="dial-track" cx="60" cy="60" r="54"></circle>
+            <!-- 75% filled: dasharray = 2πr ≈ 339.29; dashoffset = 339.29 × (1−0.75) ≈ 84.82 -->
+            <circle class="dial-fill" cx="60" cy="60" r="54" stroke-dasharray="339.29" stroke-dashoffset="84.82"></circle>
+            <!-- knob at the 75% arc end (renders at 9 o'clock after the −90° svg rotation) -->
+            <circle class="dial-knob" cx="60" cy="6" r="7"></circle>
+          </svg>
+          <span class="dial-readout">7.5</span>
+        </div>
+        <span class="score-caption">Minimum score</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Second dial in a DIFFERENT axis (production/rose) — proves the arc is
+       still cyan→gold, not axis-tinted. -->
+  <section class="axis-block" data-axis="production">
+    <h2>data-axis="production" — rose · dial arc still cyan→gold (not axis)</h2>
+    <div class="dials">
+      <div class="dial-unit">
+        <div class="score-dial" role="slider" aria-valuemin="0" aria-valuemax="10" aria-valuenow="7.5">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="dial-track" cx="60" cy="60" r="54"></circle>
+            <circle class="dial-fill" cx="60" cy="60" r="54" stroke-dasharray="339.29" stroke-dashoffset="84.82"></circle>
+            <circle class="dial-knob" cx="60" cy="6" r="7"></circle>
+          </svg>
+          <span class="dial-readout">7.5</span>
+        </div>
+        <span class="score-caption">Minimum score</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PHASE 0b-2 SHELLS — tiles · service-toggle · search dropdown
+       ============================================================ -->
+
+  <!-- ===== Poster / portrait tiles — rectangular (NOT circular), role glows ===== -->
+  <section class="axis-block" data-axis="people">
+    <h2>Tiles — vertical rounded-rect · role-glow (cyan actor / purple director)</h2>
+    <div class="row" style="align-items:flex-start;">
+      <div class="disco-tile is-poster" style="width:150px;">
+        <div class="disco-tile-img"></div>
+        <div class="disco-tile-meta">
+          <div class="disco-tile-name">Blade Runner 2049</div>
+          <div class="disco-tile-sub">2017 · Film</div>
+        </div>
+      </div>
+      <div class="disco-tile is-portrait role-actor" style="width:150px;">
+        <div class="disco-tile-img"></div>
+        <div class="disco-tile-meta">
+          <div class="disco-tile-name">Cate Blanchett</div>
+          <div class="disco-tile-sub">Actor</div>
+        </div>
+      </div>
+      <div class="disco-tile is-portrait role-director" style="width:150px;">
+        <div class="disco-tile-img"></div>
+        <div class="disco-tile-meta">
+          <div class="disco-tile-name">Denis Villeneuve</div>
+          <div class="disco-tile-sub">Director</div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Check: rectangular (not circular), cyan glow on the actor, purple glow on the director, hover lifts + glows.</p>
+  </section>
+
+  <!-- ===== Service-toggle tiles — on-state in Stream orange ===== -->
+  <section class="axis-block" data-axis="stream">
+    <h2>Service-toggle tiles — default vs .is-on (orange)</h2>
+    <div class="row">
+      <div class="service-tile" style="width:220px;">
+        <div class="service-logo"></div>
+        <div class="service-name">Netflix</div>
+        <div class="service-count">1,204</div>
+      </div>
+      <div class="service-tile is-on" style="width:220px;">
+        <div class="service-logo"></div>
+        <div class="service-name">MUBI</div>
+        <div class="service-count">88</div>
+      </div>
+    </div>
+    <p class="note">Check: the .is-on tile is orange (Stream axis) — gradient + border + inset glow; default is neutral; hover warms toward orange.</p>
+  </section>
+
+  <!-- ===== Type-tagged search dropdown — static .is-open, floats OVER content ===== -->
+  <section class="axis-block" data-axis="setting">
+    <h2>Type-tagged search dropdown (CSS shell) — static <code>.is-open</code>, emerald axis</h2>
+    <div class="tts-search is-open" style="max-width:360px;">
+      <div class="tts-input-row">
+        <span class="tts-glyph" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="15" y2="15"/></svg>
+        </span>
+        <input class="tts-input" type="text" placeholder="Search settings, locations, eras…" value="tok" />
+      </div>
+      <div class="tts-overlay">
+        <button class="tts-result"><span class="tts-name">Tokyo</span><span class="tts-tag" data-type="location">Location</span></button>
+        <button class="tts-result"><span class="tts-name">Edo Period</span><span class="tts-tag" data-type="era">Era</span></button>
+        <button class="tts-result"><span class="tts-name">Feudal Japan</span><span class="tts-tag" data-type="era">Era</span></button>
+        <button class="tts-result"><span class="tts-name">Middle-earth</span><span class="tts-tag" data-type="world">World</span></button>
+      </div>
+    </div>
+    <!-- Dummy content directly beneath: the open overlay must FLOAT over this
+         without pushing it down (proves the overlay is absolutely positioned). -->
+    <div style="margin-top:8px; padding:16px; border:1px dashed rgba(var(--muted-silver-rgb),0.3); border-radius:8px; color:var(--muted-silver);">
+      Dummy content below the search. The open dropdown should overlap this box, NOT shove it downward.
+      If this box moved when the dropdown opened, the overlay is not absolutely positioned.
+    </div>
+    <p class="note">Check: overlay floats over the dummy box (no layout shift); input border + result hover + overlay border are emerald (axis); tags are emerald/gold/purple by data-type; overflow scrolls past ~280px.</p>
+  </section>
+
+</body>
+</html>

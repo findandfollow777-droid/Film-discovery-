@@ -114,6 +114,60 @@
     <main class="orbit-main">
       <!-- MAIN SEARCH & CRITERIA CARD -->
       <section class="orbit-card" id="mainCard">
+        <!-- Phase K (2026-05-30): banner zone wraps the headline carousel
+             and Quick Searches as a single visual surface. Shared background
+             (washes / dot-grid / corner-ring) lives on .discover-banner in
+             pages/discover.css; .oc-carousel is now transparent so the two
+             don't double-paint. The wrapper's bottom edge meets the existing
+             .discover-presets-divider below; the Search Tab section stays
+             OUTSIDE. discover.js and discover-carousel.js are untouched —
+             carousel rotation, Quick Searches, and both collapse toggles
+             behave exactly as before. -->
+        <div class="discover-banner">
+          <!-- Phase M (2026-05-30): banner-wide background art now rotates
+               with the carousel. Three parallel .oc-bg-slide siblings index
+               1:1 with the carousel's three .oc-slide content slides;
+               discover-carousel.js's render() toggles .is-active on the
+               bg-slide whose index matches the active content slide, so the
+               swap rides the same idx as autoplay / dots / nav / keyboard /
+               touch and cross-fades on the same .55s ease beat.
+                 • [data-bg="0"] → orbit-ring SVG (Phase L's banner-wide
+                   treatment: 640px square, top-clipped, opacity 0.26).
+                 • [data-bg="1"] → card-fan previously inside slide 2 as
+                   foreground (.oc-art-cards); now banner-wide atmospheric
+                   art with the same right-anchored placement language.
+                 • [data-bg="2"] → intentionally empty so slide 3's CTA
+                   cards (Quick Searches / Randomizer) carry the focus.
+               SVG markup, circle coords, stroke widths, colours, and the
+               oc-orbit-rot animation are unchanged from prior phases. -->
+          <div class="oc-bg-slides" aria-hidden="true">
+            <div class="oc-bg-slide is-active" data-bg="0">
+              <div class="oc-bg-art oc-bg-art--rings">
+                <svg viewBox="0 0 200 200" fill="none">
+                  <g class="oc-orbit-rot">
+                    <circle cx="100" cy="100" r="92" stroke="var(--oc-cyan)" stroke-width="0.6"/>
+                    <circle cx="100" cy="100" r="68" stroke="var(--oc-cyan)" stroke-width="0.6"/>
+                    <circle cx="100" cy="100" r="44" stroke="var(--oc-gold)" stroke-width="0.6"/>
+                    <circle cx="100" cy="100" r="18" stroke="var(--oc-cyan)" stroke-width="0.8"/>
+                    <circle cx="100" cy="8"   r="3.5" fill="var(--oc-cyan)"/>
+                    <circle cx="168" cy="100" r="2.5" fill="var(--oc-gold)"/>
+                    <circle cx="56"  cy="100" r="2"   fill="var(--oc-cyan)"/>
+                    <circle cx="100" cy="100" r="4"   fill="var(--oc-gold)"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="oc-bg-slide" data-bg="1">
+              <div class="oc-bg-art oc-bg-art--cards">
+                <div class="oc-card"></div>
+                <div class="oc-card"></div>
+                <div class="oc-card"></div>
+              </div>
+            </div>
+            <div class="oc-bg-slide" data-bg="2">
+              <!-- Slide 3 backdrop intentionally empty — Daniel's decision. -->
+            </div>
+          </div>
         <!-- HEADLINE SECTION (collapsible — 2026-05-16) -->
         <div class="section-container" data-section="headline">
           <button class="section-collapse-toggle" type="button" aria-label="Collapse section" aria-expanded="true">
@@ -142,20 +196,11 @@
                 </h1>
                 <p class="oc-sub">Stack any combination of filters — then see exactly which films make your cut.</p>
 
-                <div class="oc-art oc-art-orbit" aria-hidden="true">
-                  <svg viewBox="0 0 200 200" fill="none">
-                    <g class="oc-orbit-rot">
-                      <circle cx="100" cy="100" r="92" stroke="var(--oc-cyan)" stroke-width="0.6"/>
-                      <circle cx="100" cy="100" r="68" stroke="var(--oc-cyan)" stroke-width="0.6"/>
-                      <circle cx="100" cy="100" r="44" stroke="var(--oc-gold)" stroke-width="0.6"/>
-                      <circle cx="100" cy="100" r="18" stroke="var(--oc-cyan)" stroke-width="0.8"/>
-                      <circle cx="100" cy="8"   r="3.5" fill="var(--oc-cyan)"/>
-                      <circle cx="168" cy="100" r="2.5" fill="var(--oc-gold)"/>
-                      <circle cx="56"  cy="100" r="2"   fill="var(--oc-cyan)"/>
-                      <circle cx="100" cy="100" r="4"   fill="var(--oc-gold)"/>
-                    </g>
-                  </svg>
-                </div>
+                <!-- Phase L (2026-05-30): orbit-ring SVG moved out of this
+                     slide to .discover-banner-art (banner-wide background
+                     decoration). See pages/discover.html line ~127 and
+                     .discover-banner-art in pages/discover.css. Slide 1
+                     content (eyebrow + headline + subtitle) is unchanged. -->
               </div>
 
               <!-- ─── Slide 2 ──────────────────────────────────────── -->
@@ -163,15 +208,16 @@
                 <div class="oc-eyebrow">No idea where to start</div>
                 <h1 class="oc-h1">
                   Don't know what to watch?<br/>
-                  <span class="oc-gold">You came to the right place.</span>
+                  <span class="oc-gold">You came to<br>the right place.</span>
                 </h1>
-                <p class="oc-sub">Explore curated Quick Searches or build your perfect filter combination.</p>
+                <p class="oc-sub">Explore curated Loaded Searches or build your perfect filter combination.</p>
 
-                <div class="oc-art oc-art-cards" aria-hidden="true">
-                  <div class="oc-card"></div>
-                  <div class="oc-card"></div>
-                  <div class="oc-card"></div>
-                </div>
+                <!-- Phase M (2026-05-30): .oc-art-cards moved out of this
+                     slide to .oc-bg-slides[data-bg="1"] inside .discover-banner.
+                     The card-fan now cross-fades with the carousel rotation
+                     as banner-wide background art rather than slide-2
+                     foreground. -->
+
               </div>
 
               <!-- ─── Slide 3 · Two giant icon links ──────────────── -->
@@ -186,7 +232,12 @@
 
                   <!-- LINK: Quick Searches — anchor on the same Discovery page.
                        Click handler in discover.js expands the section if collapsed. -->
-                  <a class="oc-cta-card oc-cta--cyan" href="#quickSearchesSection">
+                  <a class="oc-cta-card oc-cta--cyan" href="../index.html">
+                    <!-- Phase X (2026-05-31): eyebrow moved OUT of .oc-cta-body
+                         to become the first child of the card so it can render
+                         at the top, with the icon in the middle (justify-content:
+                         space-between) and title/sub anchored low. -->
+                    <div class="oc-cta-eyebrow">Know what you want</div>
                     <div class="oc-cta-icon">
                       <svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <g class="oc-orbit-rot-slow">
@@ -205,15 +256,17 @@
                       </svg>
                     </div>
                     <div class="oc-cta-body">
-                      <div class="oc-cta-eyebrow">Know what you want</div>
-                      <div class="oc-cta-title">Quick Searches</div>
-                      <div class="oc-cta-sub">Curated one-click filter combos.</div>
+                      <div class="oc-cta-title">Search</div>
+                      <div class="oc-cta-sub">Find any actor, movie, or director.</div>
                       <span class="oc-cta-arrow">→</span>
                     </div>
                   </a>
 
                   <!-- LINK: Randomizer hub (ORBIT relative path) -->
                   <a class="oc-cta-card oc-cta--gold" href="randomizer-hub.html">
+                    <!-- Phase X (2026-05-31): eyebrow moved OUT of .oc-cta-body
+                         to top of card (mirror of Search). -->
+                    <div class="oc-cta-eyebrow">Surprise me</div>
                     <div class="oc-cta-icon">
                       <svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <g class="oc-die-tilt">
@@ -233,7 +286,6 @@
                       </svg>
                     </div>
                     <div class="oc-cta-body">
-                      <div class="oc-cta-eyebrow">Surprise me</div>
                       <div class="oc-cta-title">Randomizer</div>
                       <div class="oc-cta-sub">Roll for a film, a re-watch, or a series.</div>
                       <span class="oc-cta-arrow">→</span>
@@ -267,7 +319,7 @@
             <span class="collapse-icon">&minus;</span>
           </button>
           <div class="discover-presets-row">
-            <span class="discover-presets-label">QUICK SEARCHES</span>
+            <span class="discover-presets-label">LOADED SEARCHES</span>
             <div class="discover-presets-actions section-collapse-hide">
               <button class="discover-presets-shuffle" id="discoverPresetShuffle" type="button">&#x21bb; Shuffle</button>
               <button class="discover-presets-show-all" id="discoverPresetShowAll" type="button" aria-haspopup="dialog" aria-controls="discoverPresetsModal">&#x2630; Show all</button>
@@ -275,9 +327,39 @@
           </div>
           <div class="discover-presets section-collapse-hide" id="discoverPresets"></div>
         </div>
+        </div><!-- /.discover-banner (Phase K) -->
 
         <!-- Divider between Quick Searches and primary filter grid -->
         <div class="discover-presets-divider" aria-hidden="true"></div>
+
+        <!-- GLOBAL CONTROLS STRIP — Phase 1b-i (2026-06-01). Persistent, non-tab
+             results-level controls. Placed JUST ABOVE the filterTabs section (not
+             inside it) so it stays visible when the filter workspace is collapsed.
+             Visually neutral (cyan, not a tab axis). First tenant: Sort by.
+             SHELL ONLY — the change handler records state.sortBy; it is NOT wired
+             into the query/film-count/Launch until Phase 1b-ii (sort stays
+             popularity.desc in the actual query). Future controls (profile-default
+             overrides) will join this strip. -->
+        <div class="discover-global-strip" id="discoverGlobalStrip">
+          <label class="dgs-label" for="discoverSortField">Sort by</label>
+          <div class="dgs-control">
+            <span class="dgs-field">
+              <select class="dgs-select" id="discoverSortField">
+                <option value="popularity" selected>Popularity</option>
+                <option value="vote_average">Rating</option>
+                <option value="primary_release_date">Release date</option>
+                <option value="revenue">Box office</option>
+                <option value="vote_count">Vote count</option>
+              </select>
+            </span>
+            <span class="dgs-field">
+              <select class="dgs-select" id="discoverSortDir" aria-label="Sort direction">
+                <option value="desc" selected>Descending</option>
+                <option value="asc">Ascending</option>
+              </select>
+            </span>
+          </div>
+        </div>
 
         <!-- FILTER TABS SECTION (collapsible — 2026-05-16; ORBIT FILTER TABS added May 1, 2026.
              Replaces the .filter-grid card grid. All 13 builders still
@@ -292,19 +374,29 @@
           </button>
           <div class="orbit-filter-tabs" id="orbitFilterTabs">
 
+          <!-- VERTICAL TAB RAIL — Phase 1a-i (2026-05-31). Restyled from the
+               old horizontal strip into a 220px side rail per ORBIT-UI-PATTERNS.md
+               B1 §8. Each tab carries data-axis (B2 mapping) so its active state
+               reads in the axis colour via the [data-axis] → --axis-hex convention
+               (declared scoped to the rail in discover.css this phase; the
+               component file is linked during the chip-migration phase). Glyphs
+               are the og-qs-* set (Rule 11). #oftTabBar / .oft-tab / data-tab /
+               .oft-tab--active are unchanged so initFilterTabs/activateTab and the
+               delegated click handler keep working untouched. No badges (1a-ii),
+               no collapse (1a-iii). -->
           <div class="oft-tab-bar" id="oftTabBar">
             <div class="oft-tabs-scroll">
-              <button class="oft-tab oft-tab--active" data-tab="people" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-5 6-5s6 1.7 6 5"/></svg>People</button>
-              <button class="oft-tab" data-tab="genres" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="3" width="12" height="10" rx="1"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="6" y1="3" x2="6" y2="7"/><line x1="10" y1="3" x2="10" y2="7"/></svg>Genre</button>
-              <button class="oft-tab" data-tab="era" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="3" width="12" height="11" rx="1"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="5" y1="1" x2="5" y2="5"/><line x1="11" y1="1" x2="11" y2="5"/></svg>Era &amp; Release</button>
-              <button class="oft-tab" data-tab="ratings" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 1l1.8 3.6 4 .6-3 2.9.7 4L8 10.5l-3.5 1.6.7-4-3-2.9 4-.6z"/></svg>Ratings</button>
-              <button class="oft-tab" data-tab="awards" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 2l1.5 3.5 3.5.5-2.5 2.5.5 3.5L8 10.5l-3 1.5.5-3.5L3 6l3.5-.5z"/></svg>Awards</button>
-              <button class="oft-tab" data-tab="themes" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><path d="M8 1a4 4 0 0 1 4 4c0 2-1 3-2.5 4H6.5C5 9 4 8 4 5a4 4 0 0 1 4-4z"/><line x1="6.5" y1="12" x2="9.5" y2="12"/></svg>Themes</button>
-              <button class="oft-tab" data-tab="setting" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="6" r="2.5"/><path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5z"/></svg>Setting</button>
-              <button class="oft-tab" data-tab="source" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="1" width="8" height="12" rx="1"/><line x1="4" y1="5" x2="8" y2="5"/><line x1="4" y1="8" x2="8" y2="8"/><path d="M6 1h6a1 1 0 0 1 1 1v12"/></svg>Source</button>
-              <button class="oft-tab" data-tab="region" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c-1.7 2-2.5 3.8-2.5 6s.8 4 2.5 6M8 2c1.7 2 2.5 3.8 2.5 6s-.8 4-2.5 6"/></svg>Region</button>
-              <button class="oft-tab" data-tab="production" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="8" width="12" height="6" rx="1"/><path d="M4 8V5.5a4 4 0 0 1 8 0V8"/></svg>Production</button>
-              <button class="oft-tab" data-tab="watch" type="button"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0"><polygon points="4,2 14,8 4,14"/></svg>Stream</button>
+              <button class="oft-tab oft-tab--active" data-tab="people" data-axis="people" type="button"><span class="og-qs og-qs-people oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">People</span></button>
+              <button class="oft-tab" data-tab="genres" data-axis="genre" type="button"><span class="og-qs og-qs-genre oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Genre</span></button>
+              <button class="oft-tab" data-tab="era" data-axis="era" type="button"><span class="og-qs og-qs-era oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Era &amp; Release</span></button>
+              <button class="oft-tab" data-tab="ratings" data-axis="ratings" type="button"><span class="og-qs og-qs-ratings oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Ratings</span></button>
+              <button class="oft-tab" data-tab="awards" data-axis="awards" type="button"><span class="og-qs og-qs-awards oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Awards</span></button>
+              <button class="oft-tab" data-tab="themes" data-axis="themes" type="button"><span class="og-qs og-qs-theme oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Themes</span></button>
+              <button class="oft-tab" data-tab="setting" data-axis="setting" type="button"><span class="og-qs og-qs-setting oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Setting</span></button>
+              <button class="oft-tab" data-tab="source" data-axis="source" type="button"><span class="og-qs og-qs-source oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Source</span></button>
+              <button class="oft-tab" data-tab="region" data-axis="region" type="button"><span class="og-qs og-qs-region oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Region</span></button>
+              <button class="oft-tab" data-tab="production" data-axis="production" type="button"><span class="og-qs og-qs-production oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Production</span></button>
+              <button class="oft-tab" data-tab="watch" data-axis="stream" type="button"><span class="og-qs og-qs-stream oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Stream</span></button>
             </div>
           </div>
           <!-- Add-to-orbit button is JS-moved into the active panel's
@@ -455,6 +547,14 @@
           <!-- LAUNCH — placed inside Your Orbit panel, below header divider -->
           <div class="sidebar-actions">
             <button class="launch-orbit-btn" id="launchCard" disabled>Launch Discovery</button>
+            <!-- Phase 2 (2026-06-01): Save-this-search control. Hidden by
+                 default; shown only when the current state.filters diverges
+                 from the last-applied preset (or no preset was applied) AND
+                 there's at least one filter. Click → prompt for a name and
+                 push to orbit_saved_searches. JS toggles `hidden` based on
+                 updateSaveButtonVisibility() called from a wrapped
+                 window.renderFilterChips. -->
+            <button class="save-search-btn" id="saveSearchButton" type="button" hidden>★ Save this search</button>
           </div>
 
           <div class="orbit-ring-container" id="orbitRingContainer">
@@ -584,7 +684,7 @@
           <span class="orbit-number">3</span>
           <div class="strip-header">
             <span class="og og-bolt strip-icon" aria-hidden="true"></span>
-            <h2 class="strip-title">Quick Searches</h2>
+            <h2 class="strip-title">Loaded Searches</h2>
           </div>
           <p class="strip-description">One-click entry to curated intersections:</p>
           <div class="search-grid">
@@ -620,11 +720,58 @@
     <div class="discover-presets-modal-backdrop" aria-hidden="true"></div>
     <div class="discover-presets-modal-content">
       <div class="discover-presets-modal-head">
-        <h2 class="discover-presets-modal-title" id="discoverPresetsModalTitle">Quick Searches</h2>
+        <h2 class="discover-presets-modal-title" id="discoverPresetsModalTitle">Loaded Searches</h2>
         <button type="button" class="orbit-close discover-presets-modal-close" aria-label="Close">&times;</button>
       </div>
       <div class="discover-presets-modal-body">
         <div class="discover-presets-modal-grid" id="discoverPresetsModalGrid"></div>
+        <!-- Phase 1 (2026-05-31): collapsible right-side filter rail for the
+             Show-all Loaded Searches modal. Renders a text search + a
+             dynamic list of category checkboxes (derived at runtime from
+             distinct " · "-separated tokens in PRESET_POOL[i].tag). The
+             rail-init / token enumeration / filtering / re-render are all
+             wired in the SHOW ALL modal IIFE in pages/discover.js. -->
+        <aside class="discover-presets-modal-rail" id="discoverPresetsModalRail">
+          <div class="discover-presets-modal-rail-head">
+            <span class="discover-presets-modal-rail-title">Filter</span>
+            <button type="button" class="discover-presets-modal-rail-toggle" id="discoverPresetsModalRailToggle" aria-label="Toggle filters" aria-expanded="true">&times;</button>
+          </div>
+          <div class="discover-presets-modal-rail-body" id="discoverPresetsModalRailBody">
+            <input type="search" class="discover-presets-modal-rail-search" id="discoverPresetsModalRailSearch" placeholder="Search…" autocomplete="off">
+            <button type="button" class="discover-presets-modal-rail-clear" id="discoverPresetsModalRailClear">Clear filters</button>
+            <div class="discover-presets-modal-rail-section">
+              <div class="discover-presets-modal-rail-section-label">Categories</div>
+              <div class="discover-presets-modal-rail-checks" id="discoverPresetsModalRailChecks"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SAVE-SEARCH MODAL — Phase 3 (2026-06-01)
+       Styled in-page modal that replaces the native window.prompt for
+       the ★ Save this search flow. Uses the same data-orbit-popup +
+       .orbit-close pattern as the Show-all and onboarding popups so
+       dismissal (X / ESC / backdrop click) routes through
+       orbit-close.js's Black Hole exit. JS in discover.js Phase 3 IIFE.
+       ============================================================ -->
+  <div class="save-search-modal" id="saveSearchModal" data-orbit-popup role="dialog" aria-modal="true" aria-labelledby="saveSearchModalTitle" hidden>
+    <div class="save-search-modal-backdrop" aria-hidden="true"></div>
+    <div class="save-search-modal-content">
+      <div class="save-search-modal-head">
+        <h2 class="save-search-modal-title" id="saveSearchModalTitle">Save this search</h2>
+        <button type="button" class="orbit-close save-search-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="save-search-modal-body">
+        <label class="save-search-modal-label" for="saveSearchModalInput">Name</label>
+        <input type="text" class="save-search-modal-input" id="saveSearchModalInput" placeholder="e.g. My noir picks" maxlength="80" autocomplete="off">
+        <p class="save-search-modal-hint" id="saveSearchModalHint" hidden>Please enter a name.</p>
+      </div>
+      <div class="save-search-modal-footer">
+        <button class="save-search-modal-cancel orbit-btn orbit-btn--ghost" id="saveSearchModalCancel" type="button">Cancel</button>
+        <button class="save-search-modal-save orbit-btn orbit-btn--primary" id="saveSearchModalSave" type="button">Save</button>
       </div>
     </div>
   </div>

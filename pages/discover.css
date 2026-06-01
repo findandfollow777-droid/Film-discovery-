@@ -846,6 +846,35 @@ html, body {
   filter: brightness(1.1);
 }
 
+/* Phase 2 (2026-06-01): Save-this-search button. Lives next to the
+   Launch Discovery button in .sidebar-actions, hidden by default.
+   Distinct from Launch (slimmer / amber outline) so it reads as a
+   secondary action. JS toggles `hidden` based on current filter state. */
+.save-search-btn {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.45);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  margin-top: 8px;
+  width: 100%;
+}
+.save-search-btn:hover {
+  background: rgba(var(--accent-gold-rgb), 0.12);
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+.save-search-btn[hidden] {
+  display: none;
+}
+
 .launch-orbit-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -1717,6 +1746,31 @@ html, body {
 @media (max-width: 1200px) {
   .orbit-main {
     flex-direction: column;
+    /* Phase Q (2026-05-31): the base .orbit-main rule sets
+       align-items: flex-start, which works at desktop (row layout —
+       sidebar+card aligned to top). At ≤1200 the column flip drops the
+       sidebar below the card, but flex-start kept .orbit-card sized to
+       its content's max-content (driven by .oc-carousel's max-width
+       1200px ceiling propagating up) — orbit-card rendered ~951px in a
+       625px viewport and silently clipped by body { overflow-x: hidden }.
+       align-items: stretch makes orbit-card stretch to the column's
+       actual cross-axis = the available width = viewport. Inside the
+       card, every descendant grid already has min-width:0 on its items
+       (Phase O for tiles + CTA cards) so 1fr cells now compress correctly
+       once the parent is sized to viewport. */
+    align-items: stretch;
+  }
+  /* Phase Q (2026-05-31): defensive belt-and-braces so no descendant
+     max-content (carousel max-width:1200, a hypothetical wide panel,
+     etc.) can push orbit-card beyond its flex container at narrow widths.
+     With align-items:stretch above these are mostly redundant, but they
+     guarantee the cap regardless of intrinsic-sizing edge cases. */
+  .orbit-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .oc-carousel {
+    max-width: 100%;
   }
 
   .sidebar-container {
@@ -3088,6 +3142,237 @@ html, body {
    to control show/hide of the new carousel's secondary controls. */
 
 /* ============================================================
+   BANNER ZONE — Phase K (2026-05-30)
+   Shared visual surface spanning the headline carousel + Quick
+   Searches under one continuous background. Wraps the two
+   .section-containers (see pages/discover.html); ends at
+   .discover-presets-divider — the Search Tab section below stays
+   on its own normal background and normal 32px inset. Background
+   (radial washes, ::before dot-grid, ::after corner-ring, faint
+   inset hairline) was relocated here from .oc-carousel so the two
+   sections share one zone instead of double-painting decoration.
+   Geometry: negative side+top margins break the wrapper out of
+   .orbit-card's 32px padding to reach the inner border edges flush
+   (Option C); matching positive padding restores content layout so
+   the carousel and Quick Searches sit where they were before. Top
+   margin is -31px (not -32) so the .orbit-card::before 1px cyan
+   accent line at the very top stays visible above the banner.
+   ============================================================ */
+.discover-banner {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 auto;
+  margin: -31px -32px 0;
+  padding: 31px 32px 0;
+  /* Phase P (2026-05-30): vertical size + position of the radial washes
+     converted from percentage to fixed px (referenced against the
+     EXPANDED banner height ~580px at desktop). Horizontal radii / x
+     positions stay percentage so the washes still scale with viewport
+     width. When Quick Searches collapses (banner shrinks ~129px from
+     the BOTTOM — top stays fixed), the washes no longer recompute
+     centre + Y-radius against the new height and slide/shrink upward;
+     they stay visually FIXED, the banner just shows less of them at
+     the bottom (curtain crop). Expanded appearance is unchanged:
+     0.6 × 580 = 348 (Y-radii), 0.2 × 580 = 116 (cyan pos-Y),
+     1.0 × 580 = 580 (gold pos-Y) — bit-equivalent at 580px tall. */
+  background:
+    radial-gradient(80% 348px at 80% 116px, rgba(var(--accent-rgb), 0.06), transparent 60%),
+    radial-gradient(70% 348px at 0% 580px, rgba(var(--accent-gold-rgb), 0.05), transparent 60%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  /* Phase M (2026-05-30): token bridge for banner-internal SVGs and the
+     relocated card-fan styles. The orbit-ring SVG (.oc-bg-art--rings)
+     references --oc-cyan / --oc-gold; the card-fan rules (.oc-bg-art--
+     cards .oc-card) reference --oc-cyan-rgb / --oc-gold-rgb / --oc-line-3
+     / --oc-disp. All originally defined inside .oc-carousel; redeclared
+     here so the relocated markup + CSS resolve without changing the
+     SVG markup or rewriting the card rules' token names. */
+  --oc-cyan: var(--accent-cyan);
+  --oc-gold: var(--accent-gold);
+  --oc-cyan-rgb: var(--accent-rgb);
+  --oc-gold-rgb: var(--accent-gold-rgb);
+  --oc-line-3: rgba(var(--accent-rgb), 0.32);
+  --oc-disp: var(--font-display);
+}
+
+/* Phase M (2026-05-30): banner-art layer that swaps per active slide.
+   Three .oc-bg-slide siblings live inside .oc-bg-slides, indexed by
+   data-bg (0/1/2) to match the carousel's three .oc-slide content slides
+   by data-i. discover-carousel.js (init + render()) toggles .is-active
+   on the bg-slide whose index matches the active content slide — same
+   idx, same beat, every control path (autoplay / dots / nav / keyboard /
+   touch). The cross-fade timing (.55s ease) matches .oc-slide so back-
+   ground and content swap together. .oc-bg-slide opacity rides 0 → 1;
+   the inner .oc-bg-art carries the atmospheric base treatment so the
+   final visible alpha = activation × art-intrinsic transparency.
+   Layout: .oc-bg-slides absolute inset:0 over the whole .discover-banner
+   so each slide can place its own art with the same right-anchored,
+   top-clipped placement language. */
+.oc-bg-slides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.oc-bg-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+.oc-bg-slide.is-active { opacity: 1; }
+
+.oc-bg-art {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Slide 0 — orbit rings. Geometry inherited from Phase L's
+   .discover-banner-art: 640×640, top-clipped by .discover-banner's
+   overflow:hidden, right-anchored, atmospheric opacity 0.26 against
+   --deep-void. Stroke widths on screen ~1.92px / 2.56px at this size.
+   Token bridge on .discover-banner resolves var(--oc-cyan)/var(--oc-gold)
+   in the SVG. */
+.oc-bg-art--rings {
+  /* Phase V.1 (2026-05-31): ring centre nudged down 5% of banner height
+     (~29px → top -81→-52) and right 5% of banner width (~57px → right
+     -19→-76). The whole SVG box moves together, so every ring stroke +
+     orbiting dot shifts uniformly (they're all centred at viewBox 100,100
+     inside one SVG). Net effect: more of the right side clips off
+     screen, less of the top clips, so the visible arc shifts toward the
+     lower-left of the original framing. Width/height/opacity unchanged. */
+  top: -52px;
+  right: -76px;
+  width: 640px;
+  height: 640px;
+  opacity: 0.26;
+}
+.oc-bg-art--rings svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Slide 1 — card-fan, relocated from slide 2's foreground .oc-art-cards
+   to a banner-wide background layer. Right-anchored, anchored DOWN
+   (Phase M-fix) so it sits in the lower banner zone behind the QS tile
+   row rather than the upper-middle band where the headline lives. Tiles'
+   opaque gradient fills cover the overlap where they sit; the fan reads
+   in the tile gaps. Cards scaled 160×230 → 180×260 (same 130:190 aspect
+   family) and overlap -44 → -48 so the fan reads at banner scale rather
+   than carousel scale. Tilts (-8/-2/+4°) and translateY staggers preserved.
+
+   Phase M-fix (2026-05-30): Phase M placed the fan with top:50%;
+   translateY(-50%), centring it on banner-mid (~banner-y 270 at 1440px).
+   That put the fan layout-top at banner-y 140, well INSIDE slide-2's
+   headline band (banner-y 147..273 — "Don't know what to watch? / You
+   came to the right place." — measured live at viewport-y 288..414). The
+   headline right edge reaches viewport-x 1093, leaving only ~70px of
+   clear horizontal space against the 444px-wide fan, so a right-shift
+   couldn't resolve it. Instead anchor the fan DOWN at a fixed pixel
+   offset (top:290px, transform:none) so its layout-top starts ~17px
+   below the headline bottom. Fan then spans banner-y 290..550, the
+   bottom ~10px clipping past the ~540px-tall banner — matches the
+   "clipped placement language" the rings use on slide 1 (top:-100). */
+.oc-bg-art--cards {
+  /* Phase V (2026-05-31): raised the fan 120px (top 290 → 170) so the
+     cards sit alongside the headline block on slide 2 and fan down through
+     the Quick Searches area — more present in the slide-2 banner. Paired
+     with the slide-2 markup change (extra <br> inside the gold span) which
+     forces the headline into a tidy 4-line block so the right-side cards
+     don't get obscured by sprawling line 2. right unchanged. Validated
+     live at top:170. */
+  top: 170px;
+  right: 40px;
+  transform: none;
+  display: flex;
+}
+.oc-bg-art--cards .oc-card {
+  width: 180px; height: 260px;
+  border-radius: 10px;
+  border: 1px solid var(--oc-line-3);
+  background: linear-gradient(180deg, rgba(var(--oc-cyan-rgb),0.08), rgba(var(--oc-gold-rgb),0.04));
+  margin-left: -48px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.oc-bg-art--cards .oc-card:nth-child(1) { transform: rotate(-8deg) translateY(20px); }
+.oc-bg-art--cards .oc-card:nth-child(2) { transform: rotate(-2deg) translateY(8px);  border-color: rgba(var(--oc-gold-rgb),0.4); background: linear-gradient(180deg, rgba(var(--oc-gold-rgb),0.10), rgba(var(--oc-cyan-rgb),0.04)); }
+.oc-bg-art--cards .oc-card:nth-child(3) { transform: rotate(4deg);                    border-color: rgba(var(--oc-cyan-rgb),0.45); background: linear-gradient(180deg, rgba(var(--oc-cyan-rgb),0.14), rgba(var(--oc-cyan-rgb),0.04)); }
+.oc-bg-art--cards .oc-card::before {
+  content: ""; position: absolute; inset: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 5px;
+}
+.oc-bg-art--cards .oc-card::after {
+  content: "?"; position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--oc-disp); font-size: 64px; font-weight: 700;
+  color: rgba(255,255,255,0.15);
+}
+.oc-bg-art--cards .oc-card:nth-child(3)::after { color: var(--oc-cyan); opacity: 0.6; }
+
+@media (max-width: 900px) {
+  /* Mirror the prior .oc-art-orbit / .oc-art-cards ≤900px display:none —
+     banner art stays hidden on narrow viewports to keep the headline
+     column clean. Hiding the parent .oc-bg-slides covers all three. */
+  .oc-bg-slides { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Match .oc-slide's reduced-motion transition (set in
+     components/discover-carousel.css) so background and content swap
+     at the same shortened beat for users who prefer reduced motion. */
+  .oc-bg-slide { transition: opacity 0.2s ease; }
+}
+.discover-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.discover-banner::after {
+  content: "";
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  /* Phase P (2026-05-30): re-anchored from bottom:-460 to top:240 so the
+     ring no longer rides UP when Quick Searches collapses (banner shrinks
+     from the bottom — top edge stays fixed). 240px = (expanded-banner-h
+     580) + (old bottom-offset 460) − (element-height 800), preserving
+     today's visible arc at expanded state (only the top portion of the
+     circle peeks above the banner bottom). At collapsed state the
+     circle's TOP now stays put; the banner bottom rises through it and
+     crops more of the visible arc — the curtain effect. right:-260
+     unchanged. */
+  top: 240px;
+  right: -260px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-rgb), 0.07);
+  box-shadow: 0 0 0 60px rgba(var(--accent-rgb), 0.025);
+  pointer-events: none;
+}
+
+/* Phase O (2026-05-30): .orbit-card's padding drops 32→20px at ≤768px
+   (pages/discover.css:1779). The desktop banner breakout (-31px top /
+   -32px sides) was tuned to that 32px padding; at ≤768px the same -32
+   sides extend 12px past the card's inner edge on each side, breaking
+   out PAST the card border instead of sitting flush to its inner edge
+   (measured live at 625px: 11px overflow per side, matching the
+   32−20−1 differential). Override here mirrors the desktop logic at
+   the reduced padding: -(pad−1) top to preserve the .orbit-card::before
+   1px accent line, -pad sides for flush, matching positive padding
+   restores the content position so the carousel and Quick Searches sit
+   where they were before. */
+@media (max-width: 768px) {
+  .discover-banner {
+    margin: -19px -20px 0;
+    padding: 19px 20px 0;
+  }
+}
+
+/* ============================================================
    QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
    Sits next to Shuffle. Modal markup lives at the end of body
    (see discover.html). Uses orbit-close.js Black Hole exit
@@ -3129,6 +3414,129 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Phase 3 (2026-06-01): Save-search modal — same overlay + cyan-bordered
+   content card pattern as the Show-all modal, scaled down for a single
+   text-input dialog. Reuses `.orbit-btn--primary` / `.orbit-btn--ghost`
+   for the action buttons and the `.orbit-close` global delegate for the
+   X / ESC / backdrop close routes. */
+.save-search-modal[hidden] { display: none; }
+.save-search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;  /* above .discover-presets-modal (1000) so it stacks correctly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.save-search-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--deep-void-rgb), 0.82);
+  backdrop-filter: blur(8px);
+}
+.save-search-modal-content {
+  position: relative;
+  z-index: 1;
+  background: var(--deep-void);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.35);
+  border-radius: 14px;
+  width: 92%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+}
+.save-search-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(var(--accent-cyan-rgb), 0.18);
+}
+.save-search-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+  margin: 0;
+}
+.save-search-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--film-white);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.save-search-modal-close:hover {
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+}
+.save-search-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.save-search-modal-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+.save-search-modal-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(var(--accent-cyan-rgb), 0.05);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+}
+.save-search-modal-input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+}
+.save-search-modal-input::placeholder {
+  color: var(--ghost-gray);
+}
+.save-search-modal-hint {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--danger-red);
+}
+.save-search-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 18px;
+  border-top: 1px solid rgba(var(--accent-cyan-rgb), 0.12);
+}
+.save-search-modal-save,
+.save-search-modal-cancel {
+  font-size: 13px;
+  padding: 8px 18px;
+  min-width: 90px;
 }
 .discover-presets-modal-backdrop {
   position: absolute;
@@ -3190,23 +3598,299 @@ html, body {
   color: var(--accent-cyan);
   background: rgba(var(--accent-cyan-rgb), 0.08);
 }
+/* Phase 1 (2026-05-31): modal-body becomes a flex row container so the
+   grid (left) and the new filter rail (right) sit side-by-side. The grid
+   and rail scroll independently (min-height:0 + their own overflow). */
 .discover-presets-modal-body {
-  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
   padding: 20px 22px 24px;
   flex: 1;
+  min-height: 0;
 }
 .discover-presets-modal-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
+  /* Phase 1 (2026-05-31): grid now flex-grows in the row and scrolls
+     on its own when content exceeds the modal height. min-width:0 lets
+     the grid actually shrink inside the flex row (otherwise the grid
+     items' intrinsic min-content fights the rail's 260px fixed width). */
+  flex: 1;
+  min-width: 0;
+  align-content: start;
+  overflow-y: auto;
 }
+
+/* Phase 1 (2026-05-31): Show-all modal RIGHT-SIDE FILTER RAIL.
+   Default desktop: 260px wide, scrolls independently. Collapsible via
+   #discoverPresetsModalRailToggle (JS toggles .is-collapsed on the
+   rail). Mobile (≤900px) flips to a horizontal bar above the grid. */
+.discover-presets-modal-rail {
+  flex-shrink: 0;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(var(--accent-cyan-rgb), 0.18);
+  overflow-y: auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+.discover-presets-modal-rail.is-collapsed {
+  width: auto;
+  padding-left: 12px;
+}
+.discover-presets-modal-rail.is-collapsed .discover-presets-modal-rail-body {
+  display: none;
+}
+.discover-presets-modal-rail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.discover-presets-modal-rail-title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+.discover-presets-modal-rail-toggle {
+  background: transparent;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+  color: var(--accent-cyan);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: var(--font-body);
+  line-height: 1;
+}
+.discover-presets-modal-rail-toggle:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.1);
+  border-color: var(--accent-cyan);
+}
+.discover-presets-modal-rail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.discover-presets-modal-rail-search {
+  width: 100%;
+  padding: 8px 10px;
+  background: rgba(var(--accent-cyan-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.2);
+  border-radius: 6px;
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  box-sizing: border-box;
+}
+.discover-presets-modal-rail-search:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+}
+.discover-presets-modal-rail-clear {
+  background: transparent;
+  border: none;
+  color: var(--muted-silver);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 11.5px;
+  padding: 0;
+  text-align: left;
+  font-family: var(--font-body);
+  align-self: flex-start;
+}
+.discover-presets-modal-rail-clear:hover {
+  color: var(--accent-cyan);
+}
+.discover-presets-modal-rail-section-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+  margin-bottom: 4px;
+}
+.discover-presets-modal-rail-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.discover-presets-modal-rail-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--film-white);
+  padding: 5px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+}
+.discover-presets-modal-rail-check:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.06);
+}
+.discover-presets-modal-rail-check input[type="checkbox"] {
+  margin: 0;
+  accent-color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+.discover-presets-modal-rail-check-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.discover-presets-modal-rail-check-count {
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-variant-numeric: tabular-nums;
+}
+/* Empty-state message shown inside the grid when no presets match. */
+.discover-presets-modal-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted-silver);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+/* Phase 2 (2026-06-01): saved-search tile + favourite star + remove ×
+   decorations for the Show-all modal grid.
+   - .discover-preset--saved: distinct visual variant for user-saved
+     searches (purple accent). Positioned FIRST in the grid (HTML order).
+   - .discover-preset-saved-badge: small "MY SEARCH" pill inside the tile.
+   - .discover-preset-fav-btn: small ★ button anchored bottom-left.
+     Empty by default; .is-fav fills it gold. stopPropagation on click so
+     toggling doesn't trigger the tile's apply action.
+   - .discover-preset-remove-btn: small × button anchored bottom-right,
+     ONLY on saved tiles. Same stopPropagation pattern. */
+.discover-preset--saved {
+  border-color: rgba(var(--prestige-purple-rgb), 0.45) !important;
+  background: linear-gradient(145deg,
+    rgba(var(--prestige-purple-rgb), 0.18),
+    rgba(var(--prestige-purple-rgb), 0.02)) !important;
+}
+.discover-preset--saved .discover-preset-glow {
+  background: var(--prestige-purple);
+}
+.discover-preset-saved-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(var(--prestige-purple-rgb), 0.22);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.55);
+  color: var(--prestige-purple);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  z-index: 3;
+  pointer-events: none;
+}
+.discover-preset-fav-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: var(--ghost-gray);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s, transform 0.15s;
+  z-index: 4;
+}
+.discover-preset-fav-btn:hover {
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  color: var(--accent-gold);
+  transform: scale(1.1);
+}
+.discover-preset-fav-btn.is-fav {
+  color: var(--accent-gold);
+  text-shadow: 0 0 6px rgba(var(--accent-gold-rgb), 0.6);
+}
+.discover-preset-remove-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: var(--ghost-gray);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  z-index: 4;
+}
+.discover-preset-remove-btn:hover {
+  background: rgba(var(--danger-red-rgb), 0.12);
+  color: var(--danger-red);
+}
+/* Special rail checkbox group separator (the My Searches / Favourites
+   pair sits above the token list with a thin divider). */
+.discover-presets-modal-rail-specials {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(var(--accent-cyan-rgb), 0.12);
+  margin-bottom: 4px;
+}
+
 @media (max-width: 900px) {
   .discover-presets-modal-grid { grid-template-columns: repeat(3, 1fr); }
   .discover-presets-modal-content { width: 96%; max-height: 90vh; }
+  /* Phase 1: at ≤900px the rail flips to a horizontal bar ABOVE the
+     grid so the grid keeps its 3-col width without being squeezed. */
+  .discover-presets-modal-body {
+    flex-direction: column;
+  }
+  .discover-presets-modal-rail {
+    width: 100%;
+    border-left: 0;
+    border-bottom: 1px solid rgba(var(--accent-cyan-rgb), 0.18);
+    padding-left: 0;
+    padding-bottom: 12px;
+    max-height: 240px;
+  }
+  .discover-presets-modal-rail.is-collapsed {
+    padding-left: 0;
+    padding-bottom: 8px;
+    max-height: none;
+  }
 }
 @media (max-width: 650px) {
   .discover-presets-modal-grid { grid-template-columns: repeat(2, 1fr); }
   .discover-presets-modal-title { font-size: 1.4rem; }
+  /* Phase 1: at ≤650px the rail starts collapsed by default — the JS in
+     discover.js adds .is-collapsed on first init when this MQ matches. */
 }
 
 /* ============================================================
@@ -3304,7 +3988,7 @@ html, body {
   white-space: nowrap;
 }
 .section-container[data-section="headline"].collapsed::after { content: "Headline"; }
-.section-container[data-section="quickSearches"].collapsed::after { content: "Quick Searches"; }
+.section-container[data-section="quickSearches"].collapsed::after { content: "Loaded Searches"; }
 .section-container[data-section="filterTabs"].collapsed::after { content: "Search Tabs"; }
 /* 2026-05-16: hide the divider when Quick Searches is collapsed so
    Filter Tabs sits as close to the headline (or to the collapsed QS
@@ -3361,9 +4045,23 @@ html, body {
    Quick Searches / Search Tabs toggles below it (left: -28px,
    inherited), but push it up into the orbit-card's 32px top
    padding so its top edge sits ~4px under the card frame —
-   mirroring the existing 4px left-edge inset. */
+   mirroring the existing 4px left-edge inset.
+   2026-05-28: headline-only — give the floating toggle a subtle dark
+   circular backing + text-shadow so the glyph stays legible over the
+   carousel content (and any future bright slide imagery). Circular to
+   read as a button. Scoped to [data-section="headline"] so the
+   quickSearches / filterTabs toggles keep their transparent square
+   treatment. Tokens only (no hardcoded hex). */
 .section-container[data-section="headline"] .section-collapse-toggle {
   top: -28px;
+  background: rgba(var(--space-black-rgb), 0.5);
+  border-radius: 50%;
+  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.85);
+  z-index: 4;
+}
+.section-container[data-section="headline"] .section-collapse-toggle:hover {
+  background: rgba(var(--space-black-rgb), 0.65);
+  border-color: var(--accent-cyan);
 }
 
 .discover-presets-divider {
@@ -3394,6 +4092,15 @@ html, body {
   text-align: left;
   transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
   font-family: var(--font-body);
+  /* Phase O (2026-05-30): grid items default to min-width:auto which
+     resolves to min-content — at narrow viewports (≤900px the grid is
+     3 cols, ≤650px is 2 cols) the tile's intrinsic min (badge 38px +
+     paddings + tag/name) refused to shrink and forced horizontal
+     overflow past the viewport. min-width:0 lets the 1fr columns
+     actually compress to fit; the tag is already white-space:nowrap +
+     text-overflow:ellipsis, and the name has max-width:130px, so the
+     reduced width truncates cleanly rather than wrapping awkwardly. */
+  min-width: 0;
 }
 .discover-preset--cyan   { --preset-color: var(--accent-cyan);     --preset-color-rgb: var(--accent-rgb); }
 .discover-preset--gold   { --preset-color: var(--accent-gold);     --preset-color-rgb: var(--accent-gold-rgb); }
@@ -3726,26 +4433,103 @@ html, body {
    bodies + per-panel "Add to orbit" buttons.
    ============================================================ */
 
+/* Phase 1a-i: rail beside panel (was column: strip above panel). */
+/* ============================================================
+   GLOBAL CONTROLS STRIP — Phase 1b-i (2026-06-01)
+   Slim, full-width, always-visible results-level controls (first tenant:
+   Sort by). Visually NEUTRAL — cyan, not tied to any tab axis. Wraps at
+   narrow widths; selects keep a ≥44px tap target. Tokens only.
+   ============================================================ */
+.discover-global-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  background: var(--nebula-dark);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.18);
+  border-radius: var(--radius-md);
+}
+.dgs-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+.dgs-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.dgs-field {
+  position: relative;
+  display: inline-flex;
+}
+.dgs-field::after {                       /* token-coloured caret (no hex) */
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--muted-silver);
+  border-bottom: 2px solid var(--muted-silver);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+.dgs-select {
+  min-height: 44px;                       /* tap target */
+  padding: 0 32px 0 12px;
+  background: rgba(var(--cosmic-blue-rgb), 0.6);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.25);
+  border-radius: var(--radius-sm);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease-out;
+}
+.dgs-select:hover,
+.dgs-select:focus {
+  border-color: rgba(var(--accent-cyan-rgb), 0.5);
+  outline: none;
+}
+@media (max-width: 900px) {
+  .dgs-control { width: 100%; }           /* selects drop to their own full-width row */
+  .dgs-field { flex: 1 1 auto; }
+  .dgs-select { width: 100%; }
+}
+
 .orbit-filter-tabs {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 16px;
 }
 
+/* VERTICAL TAB RAIL — 220px, tabs stacked (ORBIT-UI-PATTERNS.md B1 §8). */
 .oft-tab-bar {
+  flex: 0 0 220px;
+  width: 220px;
+  align-self: flex-start;
   display: flex;
-  align-items: stretch;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-direction: column;
   background: var(--nebula-dark);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 .oft-tabs-scroll {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
-.oft-tabs-scroll::-webkit-scrollbar { display: none; }
 /* Add-to-orbit button is JS-relocated into the active panel's header
    on every tab activation. Hidden by default so the parked instance
    in static HTML doesn't flash before relocation; shown only when its
@@ -3774,49 +4558,104 @@ html, body {
   50%      { transform: scale(1.06); box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.55); }
 }
 
+/* Rail tab — 44px row, glyph + label, left-aligned (B1 §8). */
 .oft-tab {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 10px 16px;
+  gap: 10px;
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
   font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: var(--ghost-gray);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: left;
+  color: var(--muted-silver);
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
-  white-space: nowrap;
+  border-left: 2px solid transparent;   /* active rail indicator lives here */
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
-  flex-shrink: 0;
   text-transform: uppercase;
 }
+/* og-qs glyph retints from the tab's currentColor (override its own color). */
+.oft-tab .oft-tab-glyph { font-size: 15px; color: inherit; }
+.oft-tab-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.oft-tab:hover { color: var(--muted-silver); }
+.oft-tab:hover { color: var(--film-white); background: rgba(255, 255, 255, 0.03); }
 
+/* Active tab + its glyph read in the tab's axis colour (B1 §8), via the
+   [data-axis] → --axis-hex convention declared further below. */
 .oft-tab--active {
-  color: var(--accent-cyan);
-  border-bottom-color: var(--accent-cyan);
-  background: rgba(0, 217, 255, 0.03);
+  color: var(--axis-hex);
+  border-left-color: var(--axis-hex);
+  background: rgba(var(--axis), 0.06);
 }
 
-.oft-tab--has-filter::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  right: 5px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
+/* Per-tab filter-count badge — Phase 1a-ii (ORBIT-UI-PATTERNS.md B1 §8).
+   Supersedes the old presence dot: a count implies presence. Orbitron,
+   ~18px circle, axis-coloured (per-tab --axis / --axis-hex), hidden at 0
+   via the existing .oft-tab--has-filter gate. Count text is written by
+   updateTabDots in discover.js. (1a-iii collapse: the badge will float on
+   the glyph in the 64px icon strip — slot reserved, not built here.) */
+.oft-tab-badge {
+  display: none;
+  margin-left: auto;            /* right-align at the end of the rail row */
+  flex-shrink: 0;
+  box-sizing: border-box;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 10px;
+  line-height: 1;
+  color: var(--axis-hex);
+  background: rgba(var(--axis), 0.2);
+  border: 1px solid rgba(var(--axis), 0.4);
 }
+.oft-tab--has-filter .oft-tab-badge { display: inline-flex; }
 
 .oft-panel-area {
   flex: 1;
   position: relative;
   min-height: 380px;
+  min-width: 0;
+}
+
+/* ============================================================
+   RAIL RESPONSIVE COLLAPSE — Phase 1a-iii (ORBIT-UI-PATTERNS.md B1 §8)
+   At ≤900px the 220px rail collapses to a ~64px ICON-ONLY strip: labels
+   hidden, glyph centred, badge floats on the glyph (top-right). The panel
+   area (flex:1, min-width:0) auto-reclaims the freed width. Touch targets
+   stay ≥44px (44px tall × 64px wide). Active axis tinting (glyph colour +
+   left indicator) and the count badge keep working unchanged — only layout
+   shifts. Single rail breakpoint at 900px; the ≤650px block below is now
+   panel-only (its obsolete .oft-tab padding/font override was removed).
+   ============================================================ */
+@media (max-width: 900px) {
+  .oft-tab-bar { flex: 0 0 64px; width: 64px; }
+  .oft-tab {
+    justify-content: center;   /* centre the glyph in the 64px strip */
+    padding: 0;
+    gap: 0;
+  }
+  .oft-tab-label { display: none; }            /* labels hidden when collapsed */
+  .oft-tab .oft-tab-glyph { font-size: 18px; } /* slightly larger icon when alone */
+  /* Badge floats on the glyph (top-right) instead of right-aligning the row. */
+  .oft-tab-badge {
+    position: absolute;
+    top: 5px;
+    right: 11px;
+    margin-left: 0;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    font-size: 9px;
+  }
 }
 
 .oft-panel {
@@ -3938,10 +4777,10 @@ html, body {
 }
 
 @media (max-width: 650px) {
-  .oft-tab {
-    padding: 8px 10px;
-    font-size: 8px;
-  }
+  /* Panel-only tweaks. The old .oft-tab padding/font override (for the
+     legacy horizontal strip) was removed in Phase 1a-iii — the ≤900px
+     icon-only collapse above now governs rail-tab appearance, so the rail
+     has ONE breakpoint (900px) and this block stays panel-scoped. */
   .oft-panel-header { padding: 10px 12px 8px; }
   .oft-setting-combined,
   .oft-source-combined {
@@ -4562,33 +5401,27 @@ html, body {
 }
 
 /* ============================================================
-   TAB ACTIVE COLOURS — Unique accent per tab (May 4, 2026)
-   Overrides the global .oft-tab--active cyan rule. Cyan now
-   reserved for People only.
+   TAB AXIS COLOURS — Phase 1a-i (2026-05-31).
+   Replaces the May-4 ad-hoc per-tab colours with the canonical B2/§8
+   axis mapping, delivered through the [data-axis] → --axis-hex / --axis
+   convention. These declarations are BYTE-IDENTICAL (bar the .oft-tab
+   scope prefix) to the [data-axis] block in
+   components/discover-components.css, so when that file is linked during
+   the chip-migration phase, the rail's tinting is unchanged (no-op).
+   The generic .oft-tab--active / .oft-tab-badge rules read --axis-hex /
+   --axis, so no per-tab colour rules are needed here.
    ============================================================ */
-.oft-tab[data-tab="people"].oft-tab--active      { color: var(--accent-cyan); border-bottom-color: var(--accent-cyan); }
-.oft-tab[data-tab="genres"].oft-tab--active      { color: var(--prestige-purple); border-bottom-color: var(--prestige-purple); }
-.oft-tab[data-tab="awards"].oft-tab--active      { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
-.oft-tab[data-tab="era"].oft-tab--active         { color: var(--warning-orange); border-bottom-color: var(--warning-orange); }
-.oft-tab[data-tab="watch"].oft-tab--active       { color: var(--success-green); border-bottom-color: var(--success-green); }
-.oft-tab[data-tab="setting"].oft-tab--active     { color: var(--danger-red); border-bottom-color: var(--danger-red); }
-.oft-tab[data-tab="themes"].oft-tab--active      { color: var(--muted-silver); border-bottom-color: var(--muted-silver); }
-.oft-tab[data-tab="ratings"].oft-tab--active     { color: var(--accent-amber); border-bottom-color: var(--accent-amber); }
-.oft-tab[data-tab="region"].oft-tab--active      { color: var(--accent-teal); border-bottom-color: var(--accent-teal); }
-.oft-tab[data-tab="source"].oft-tab--active      { color: var(--accent-rose); border-bottom-color: var(--accent-rose); }
-.oft-tab[data-tab="production"].oft-tab--active  { color: var(--accent-indigo); border-bottom-color: var(--accent-indigo); }
-
-.oft-tab[data-tab="people"].oft-tab--has-filter::after      { background: var(--accent-cyan); }
-.oft-tab[data-tab="genres"].oft-tab--has-filter::after      { background: var(--prestige-purple); }
-.oft-tab[data-tab="awards"].oft-tab--has-filter::after      { background: var(--accent-gold); }
-.oft-tab[data-tab="era"].oft-tab--has-filter::after         { background: var(--warning-orange); }
-.oft-tab[data-tab="watch"].oft-tab--has-filter::after       { background: var(--success-green); }
-.oft-tab[data-tab="setting"].oft-tab--has-filter::after     { background: var(--danger-red); }
-.oft-tab[data-tab="themes"].oft-tab--has-filter::after      { background: var(--muted-silver); }
-.oft-tab[data-tab="ratings"].oft-tab--has-filter::after     { background: var(--accent-amber); }
-.oft-tab[data-tab="region"].oft-tab--has-filter::after      { background: var(--accent-teal); }
-.oft-tab[data-tab="source"].oft-tab--has-filter::after      { background: var(--accent-rose); }
-.oft-tab[data-tab="production"].oft-tab--has-filter::after  { background: var(--accent-indigo); }
+.oft-tab[data-axis="genre"]      { --axis: var(--prestige-purple-rgb); --axis-hex: var(--prestige-purple); }
+.oft-tab[data-axis="people"]     { --axis: var(--accent-cyan-rgb);     --axis-hex: var(--accent-cyan); }
+.oft-tab[data-axis="awards"]     { --axis: var(--accent-gold-rgb);     --axis-hex: var(--accent-gold); }
+.oft-tab[data-axis="region"],
+.oft-tab[data-axis="setting"]    { --axis: var(--emerald-rgb);          --axis-hex: var(--emerald); }    /* shared */
+.oft-tab[data-axis="stream"]     { --axis: var(--collision-orange-rgb); --axis-hex: var(--collision-orange); }
+.oft-tab[data-axis="era"],
+.oft-tab[data-axis="source"]     { --axis: var(--indigo-rgb);           --axis-hex: var(--indigo); }     /* shared */
+.oft-tab[data-axis="ratings"],
+.oft-tab[data-axis="production"] { --axis: var(--rose-rgb);             --axis-hex: var(--rose); }       /* shared */
+.oft-tab[data-axis="themes"]     { --axis: var(--teal-rgb);             --axis-hex: var(--teal); }
 
 /* ============================================================
    ORBIT FILM COUNT — Live total_results display (May 4, 2026)

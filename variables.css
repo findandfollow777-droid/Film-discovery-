@@ -36,9 +36,23 @@
   --space-black-rgb: 0, 0, 0;
   --accent-cyan-rgb:   var(--accent-rgb);
   --accent-orange-rgb: 255, 107, 53;
+  --collision-orange-rgb: var(--accent-orange-rgb);
   --accent-teal-rgb:   20, 184, 166;
   --accent-rose-rgb:   244, 63, 94;
   --accent-indigo-rgb: 99, 102, 241;
+
+  /* Discovery axis aliases — axis identity decoupled from semantic tokens.
+     Aliases only (single source of truth); the four already-clean axes
+     (Genre=--prestige-purple, People=--accent-cyan, Awards=--accent-gold,
+     Stream=--collision-orange) are referenced directly and not aliased. */
+  --emerald:     var(--success-green);
+  --emerald-rgb: var(--success-green-rgb);
+  --indigo:      var(--accent-indigo);
+  --indigo-rgb:  var(--accent-indigo-rgb);
+  --teal:        var(--accent-teal);
+  --teal-rgb:    var(--accent-teal-rgb);
+  --rose:        var(--accent-rose);
+  --rose-rgb:    var(--accent-rose-rgb);
 
   /* Status Colors */
   --success-green: #10b981;
