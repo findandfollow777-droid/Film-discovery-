@@ -3,6 +3,7 @@ node_modules/
 .DS_Store
 *.log
 .claude/
+.vscode/
 convert-awards-browse.js
 convert-awards-csv.js
 generate-settings-seed.js
