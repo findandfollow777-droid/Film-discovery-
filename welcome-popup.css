@@ -1,0 +1,580 @@
+/* ============================================
+   ORBIT — Welcome Popup  (redesign v2)
+   z-index 1000 layer
+   ============================================ */
+
+/* ── Overlay ───────────────────────────── */
+
+.wp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.wp-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Modal Card ───────────────────────── */
+
+.wp-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: radial-gradient(ellipse at 60% 18%, #0c1828, #04080f, #020408);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  transform: scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wp-overlay.visible .wp-content {
+  transform: scale(1);
+}
+
+/* ── Header ───────────────────────────── */
+
+.wp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px 14px;
+}
+
+.wp-header-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+.wp-header-title .wp-muted {
+  color: var(--muted-silver, #94a3b8);
+  opacity: 0.5;
+}
+
+.wp-header-title .wp-cyan {
+  color: var(--accent-cyan, #00d9ff);
+}
+
+.wp-header-close {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted-silver, #94a3b8);
+  opacity: 0.5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: opacity 0.15s;
+}
+
+.wp-header-close:hover {
+  opacity: 0.9;
+}
+
+.wp-divider {
+  height: 1px;
+  background: rgba(0, 217, 255, 0.12);
+  margin: 0 24px;
+}
+
+/* ── Planet Zone ──────────────────────── */
+
+.wp-planet-zone {
+  position: relative;
+  height: 340px;
+  overflow: visible;
+  margin: 0 24px;
+}
+
+/* ── Star Canvas ──────────────────────── */
+
+.wp-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Planet ────────────────────────────── */
+
+.wp-planet {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Pulse Aura ───────────────────────── */
+
+.wp-planet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: wp-ppulse 3.2s ease-out infinite;
+  animation-delay: inherit;
+  pointer-events: none;
+}
+
+@keyframes wp-ppulse {
+  0%   { transform: scale(0.85); opacity: 0.65; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+/* ── Planet Circle ────────────────────── */
+
+.wp-planet-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.04), transparent 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.wp-planet-name {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.wp-planet-divider {
+  width: 18px;
+  height: 1px;
+  opacity: 0.3;
+  margin: 5px 0;
+}
+
+.wp-planet-desc {
+  font-family: 'Barlow', sans-serif;
+  color: #f1f5f9;
+  text-align: center;
+  line-height: 1.35;
+}
+
+/* ── Planet 1: Daily Games ────────────── */
+
+.wp-planet--daily-games {
+  width: 216px;
+  height: 216px;
+  top: 4px;
+  left: 50px;
+  color: var(--accent-cyan, #00d9ff);
+  animation-delay: 0s;
+}
+
+.wp-planet--daily-games .wp-planet-circle {
+  border: 2px solid var(--accent-cyan, #00d9ff);
+  box-shadow:
+    inset 0 0 20px rgba(0, 217, 255, 0.12),
+    0 0 24px rgba(0, 217, 255, 0.18),
+    0 0 48px rgba(0, 217, 255, 0.08);
+  overflow: visible;
+}
+
+.wp-planet--daily-games .wp-planet-name {
+  color: var(--accent-cyan, #00d9ff);
+  font-size: 26px;
+}
+
+.wp-planet--daily-games .wp-planet-divider {
+  background: var(--accent-cyan, #00d9ff);
+}
+
+.wp-planet--daily-games .wp-planet-desc {
+  font-size: 21px;
+}
+
+/* Moon */
+
+.wp-moon-orbit {
+  position: absolute;
+  width: 188px;
+  height: 188px;
+  top: 50%;
+  left: 50%;
+  margin-top: -94px;
+  margin-left: -94px;
+  border: 1px dashed rgba(0, 217, 255, 0.2);
+  border-radius: 50%;
+  animation: wp-moon-rotate 5.5s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wp-moon-dot {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -5px;
+  width: 10px;
+  height: 10px;
+  background: #7ba8c4;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(123, 168, 196, 0.9);
+}
+
+@keyframes wp-moon-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Planet 2: What to Watch ──────────── */
+
+.wp-planet--what-to-watch {
+  width: 175px;
+  height: 175px;
+  top: 30px;
+  left: 320px;
+  color: #ff6b35;
+  animation-delay: 0.7s;
+}
+
+.wp-planet--what-to-watch .wp-planet-circle {
+  border: 2px solid #ff6b35;
+  box-shadow:
+    inset 0 0 16px rgba(255, 107, 53, 0.12),
+    0 0 20px rgba(255, 107, 53, 0.18),
+    0 0 40px rgba(255, 107, 53, 0.08);
+}
+
+.wp-planet--what-to-watch .wp-planet-name {
+  color: #ff6b35;
+  font-size: 19px;
+}
+
+.wp-planet--what-to-watch .wp-planet-divider {
+  background: #ff6b35;
+}
+
+.wp-planet--what-to-watch .wp-planet-desc {
+  font-size: 20px;
+}
+
+/* ── Planet 3: Awards ─────────────────── */
+
+.wp-planet--awards {
+  width: 180px;
+  height: 180px;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  color: var(--accent-gold, #ffd700);
+  animation-delay: 1.4s;
+}
+
+.wp-planet--awards .wp-planet-circle {
+  border: 2px solid var(--accent-gold, #ffd700);
+  box-shadow:
+    inset 0 0 18px rgba(255, 215, 0, 0.12),
+    0 0 22px rgba(255, 215, 0, 0.18),
+    0 0 44px rgba(255, 215, 0, 0.08);
+  z-index: 2;
+}
+
+.wp-planet--awards .wp-planet-name {
+  color: var(--accent-gold, #ffd700);
+  font-size: 22px;
+  z-index: 4;
+  position: relative;
+}
+
+.wp-planet--awards .wp-planet-divider {
+  background: var(--accent-gold, #ffd700);
+  z-index: 4;
+  position: relative;
+}
+
+.wp-planet--awards .wp-planet-desc {
+  z-index: 4;
+  position: relative;
+  font-size: 20px;
+}
+
+/* Saturn ring layers */
+
+.wp-saturn-ring {
+  position: absolute;
+  width: 196px;
+  height: 44px;
+  top: 50%;
+  left: 50%;
+  margin-left: -98px;
+  margin-top: -22px;
+  border-radius: 50%;
+  transform: rotate(-26deg);
+  pointer-events: none;
+}
+
+.wp-saturn-ring--back {
+  z-index: 1;
+  border: 1.5px solid rgba(255, 215, 0, 0.38);
+}
+
+.wp-saturn-ring--front {
+  z-index: 3;
+  border: 1.5px solid rgba(255, 215, 0, 0.6);
+  clip-path: polygon(0% 52%, 100% 52%, 100% 100%, 0% 100%);
+}
+
+/* ── Planet 4: Trivia ─────────────────── */
+
+.wp-planet--trivia {
+  width: 148px;
+  height: 148px;
+  top: 190px;
+  left: 150px;
+  color: #f59e0b;
+  animation-delay: 2s;
+}
+
+.wp-planet--trivia .wp-planet-circle {
+  border: 2px solid #f59e0b;
+  box-shadow:
+    inset 0 0 14px rgba(245, 158, 11, 0.12),
+    0 0 18px rgba(245, 158, 11, 0.18),
+    0 0 36px rgba(245, 158, 11, 0.08);
+}
+
+.wp-planet--trivia .wp-planet-name {
+  color: #f59e0b;
+  font-size: 24px;
+}
+
+.wp-planet--trivia .wp-planet-divider {
+  background: #f59e0b;
+}
+
+.wp-planet--trivia .wp-planet-desc {
+  font-size: 20px;
+}
+
+/* ── Planet 5: List It ────────────────── */
+
+.wp-planet--list-it {
+  width: 156px;
+  height: 156px;
+  bottom: 20px;
+  right: 200px;
+  left: auto;
+  top: auto;
+  color: #a855f7;
+  animation-delay: 2.6s;
+}
+
+.wp-planet--list-it .wp-planet-circle {
+  border: 2px solid #a855f7;
+  box-shadow:
+    inset 0 0 15px rgba(168, 85, 247, 0.12),
+    0 0 20px rgba(168, 85, 247, 0.18),
+    0 0 40px rgba(168, 85, 247, 0.08);
+}
+
+.wp-planet--list-it .wp-planet-name {
+  color: #a855f7;
+  font-size: 24px;
+}
+
+.wp-planet--list-it .wp-planet-divider {
+  background: #a855f7;
+}
+
+.wp-planet--list-it .wp-planet-desc {
+  font-size: 20px;
+}
+
+/* ── And Much More ────────────────────── */
+
+.wp-much-more {
+  position: absolute;
+  right: 60px;
+  bottom: 30px;
+  z-index: 2;
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  pointer-events: none;
+}
+
+.wp-much-more-and {
+  display: block;
+  font-size: 10px;
+  color: var(--film-white, #f1f5f9);
+  opacity: 0.6;
+}
+
+.wp-much-more-much,
+.wp-much-more-more {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--film-white, #f1f5f9);
+}
+
+/* ── Footer ───────────────────────────── */
+
+.wp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px 14px;
+}
+
+.wp-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wp-counter {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  color: var(--muted-silver, #94a3b8);
+  opacity: 0.4;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wp-dont-show {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.wp-dont-show input[type="checkbox"] {
+  accent-color: var(--accent-cyan, #00d9ff);
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+}
+
+.wp-dont-show span {
+  font-family: 'Barlow', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  color: var(--muted-silver, #94a3b8);
+  opacity: 0.4;
+  text-transform: uppercase;
+}
+
+.wp-footer-close {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--muted-silver, #94a3b8);
+  opacity: 0.4;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: opacity 0.15s;
+}
+
+.wp-footer-close:hover {
+  opacity: 0.9;
+}
+
+/* ── Mobile (< 600px) ─────────────────── */
+
+@media (max-width: 600px) {
+  .wp-content {
+    max-width: 100%;
+    border-radius: 14px;
+  }
+
+  .wp-planet-zone {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 14px;
+    padding: 20px 0;
+    justify-items: center;
+    overflow: hidden;
+  }
+
+  .wp-planet {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  /* Reduce all diameters by 35% */
+  .wp-planet--daily-games  { width: 140px; height: 140px; }
+  .wp-planet--what-to-watch { width: 104px; height: 104px; }
+  .wp-planet--awards       { width: 117px; height: 117px; }
+  .wp-planet--trivia       { width: 96px;  height: 96px; }
+  .wp-planet--list-it      { width: 101px; height: 101px; }
+
+  .wp-planet--daily-games .wp-planet-name  { font-size: 17px; }
+  .wp-planet--what-to-watch .wp-planet-name { font-size: 13px; }
+  .wp-planet--awards .wp-planet-name       { font-size: 15px; }
+  .wp-planet--trivia .wp-planet-name       { font-size: 16px; }
+  .wp-planet--list-it .wp-planet-name      { font-size: 16px; }
+
+  .wp-planet-desc { font-size: 10px !important; }
+
+  /* Remove moon animation */
+  .wp-moon-orbit { display: none; }
+
+  /* Remove Saturn ring layers, keep gold border */
+  .wp-saturn-ring { display: none; }
+
+  /* "And much more" */
+  .wp-much-more {
+    position: static;
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .wp-much-more-much,
+  .wp-much-more-more {
+    font-size: 20px;
+  }
+
+  /* Footer stacks */
+  .wp-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .wp-footer-left {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+}

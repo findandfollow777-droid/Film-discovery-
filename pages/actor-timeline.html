@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="../components/people-cube.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="stylesheet" href="../components/taste-overlay.css">
 </head>
 <body>
@@ -101,9 +103,9 @@
   </div>
 
   <!-- CAREER DNA POPUP -->
-  <div class="career-dna-overlay" id="careerDnaOverlay" hidden>
+  <div class="career-dna-overlay" id="careerDnaOverlay" data-orbit-popup hidden>
     <div class="career-dna-popup">
-      <button class="career-dna-close" id="careerDnaClose">&times;</button>
+      <button class="career-dna-close orbit-close" id="careerDnaClose" aria-label="Close">&times;</button>
       <h3 class="dna-popup-title">CAREER DNA</h3>
       <div class="dna-popup-bar">
         <div class="dna-popup-film" id="dnaPopupFilm"></div>

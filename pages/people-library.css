@@ -561,8 +561,8 @@ body {
 
 .pl-card-photo {
   width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   border: 2px solid rgba(0,217,255,0.4);
   box-shadow: 0 0 16px rgba(0,217,255,0.15);
@@ -570,8 +570,8 @@ body {
 
 .pl-card-fallback {
   width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
   background: var(--nebula-dark);
   border: 2px solid rgba(0,217,255,0.2);
   display: flex;
@@ -750,8 +750,8 @@ body {
 
 .pl-skeleton-photo {
   width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, rgba(30,41,59,0.5) 0%, rgba(51,65,85,0.5) 50%, rgba(30,41,59,0.5) 100%);
   background-size: 400px 100%;
   animation: shimmer 1.5s ease-in-out infinite;

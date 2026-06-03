@@ -50,7 +50,7 @@
    Part A's documented border convention (default 0.25 / hover ~0.5),
    axis-tinted. Flagged in the Phase 0b-1 report for confirmation.
    ------------------------------------------------------------ */
-.chip {
+.disco-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -66,33 +66,33 @@
               box-shadow 0.3s ease-out,
               opacity 0.3s ease-out;
 }
-.chip:hover {
+.disco-chip:hover {
   border-color: rgba(var(--axis), 0.5);
   background: rgba(var(--axis), 0.08);
 }
-.chip.on {                                    /* selected — text STAYS axis-coloured */
+.disco-chip.on {                              /* selected — text STAYS axis-coloured */
   background: linear-gradient(180deg, rgba(var(--axis), 0.18), rgba(var(--axis), 0.06));
   box-shadow: inset 0 0 12px rgba(var(--axis), 0.15);
   border-color: rgba(var(--axis), 0.45);
   color: var(--axis-hex);
 }
-.chip.on.gold {                               /* BAFTA + Golden Globe — gold, not axis */
+.disco-chip.on.gold {                         /* BAFTA + Golden Globe — gold, not axis */
   background: linear-gradient(180deg, rgba(var(--accent-gold-rgb), 0.18), rgba(var(--accent-gold-rgb), 0.06));
   box-shadow: inset 0 0 12px rgba(var(--accent-gold-rgb), 0.15);
   border-color: rgba(var(--accent-gold-rgb), 0.45);
   color: var(--accent-gold);
 }
-.chip.is-dormant {                            /* designed-but-disabled / awaiting data */
+.disco-chip.is-dormant {                      /* designed-but-disabled / awaiting data */
   opacity: 0.4;
   cursor: default;
 }
-.chip .dot {
+.disco-chip .dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: currentColor;                   /* = the chip's axis colour */
 }
-.chip .chip-count {
+.disco-chip .chip-count {
   font-family: var(--font-display);           /* Orbitron */
   opacity: 0.55;
 }
@@ -234,7 +234,7 @@
    prefers-reduced-motion — drop the state transitions (B1 mandate).
    ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
-  .chip,
+  .disco-chip,
   .slider .knob,
   .score-dial .dial-fill,
   .histogram .histo-bar {

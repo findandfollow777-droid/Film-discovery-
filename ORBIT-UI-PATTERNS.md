@@ -1,7 +1,7 @@
 # ORBIT UI PATTERNS
 ## The Definitive Visual Style Guide
 
-**Version:** 1.1.2 · base from May 3, 2026, Discovery redesign added May 31, 2026, reconciled to the Phase 0b-1 + 0b-2 builds May 31, 2026
+**Version:** 1.2.0 · base from May 3, 2026, Discovery redesign added May 31, 2026, reconciled to the Phase 0b-1 + 0b-2 builds May 31, 2026 · v1.2.0 added decisions+as-built reconciliation layer (chosen variants, page/tab as-built, gates) Jun 2026
 **Purpose:** Lock down the exact visual specifications for ORBIT's UI. Every measurement, every color, every animation timing defined here.
 
 > **v1.1 note:** v1.1 adds the Discovery Redesign Components (Part B1) and the per-tab redesign spec (Part B2). Part A is the original v1.0 base, restored to the repo (it had existed only as external reference).
@@ -1094,6 +1094,14 @@ is the in-range variant; bar height is data-driven, set inline by the consuming 
 .histogram .histo-bar.is-active { background: rgba(var(--axis), 0.55); }   /* in slider range — bright */
 ```
 
+> **Colour clarification (v1.2.0):** the histogram frame **and ALL bars — dim *and* active —
+> are AXIS-tinted** (active is just the brighter `0.55` axis alpha). This is a **deliberate
+> exception** to the §2 constant-thread rule: the histogram is *furniture* sitting BEHIND the
+> slider, not the cyan→gold control thread itself. The cyan→gold range fill belongs to the
+> dual-slider directly below it (§3); the histogram backdrop reads as the panel's axis family,
+> matching the as-built `components/discover-components.css` (its colour-model header groups
+> histogram with chips = axis, distinct from slider/dial = cyan→gold). Code is source of truth.
+
 - **Decorative / `aria-hidden`** — the slider carries all interaction.
 - Bucket count is **tab-supplied**.
 
@@ -1265,6 +1273,11 @@ The container all Discovery tab controls live in.
 **Dimensions / rule:**
 - **Fixed size — NEVER resizes between tabs.**
 - Add-to-orbit anchors **top-right**.
+- Design-target dimensions (from Claude Design artboards): **1000 × 580 desktop**. NOTE: this
+  is the artboard target — VERIFY against the live panel's actual height at build time before
+  treating 580 as a hard lock (the live panel may currently differ).
+- Filters commit to the existing shared `state.filters` array (the "Your orbit" sidebar); no
+  new accumulator. Mobile: 375px companion mandatory (rail collapses to 64px icon strip ≤900px).
 
 > **⚠️ EXPLICIT EXCEPTION to the base Panel spec.** The base "Panels (Info Containers)"
 > spec locks `max-width: 900px` and `padding: 16px` ("never more"). The Discovery
@@ -1567,3 +1580,62 @@ Foundation work the per-tab plans depend on (captured here so it isn't lost):
 3. **Profile-defaults surface** — serves Region + Stream (country / language / providers).
 4. **`-rgb` token additions to `variables.css`** — required for every axis colour (B1 §2).
 5. **Wikidata adaptation-type enrichment project** — remake = clean, spin-off = partial, mythology = none; gates the Source dormant adaptation-type slot.
+
+---
+
+## 🧭 B3 — CHOSEN VARIANTS
+
+Per-tab chosen design variant (from the Claude Design decks). Where TBD, decide at that tab's
+build turn against the artboards.
+
+- **Ratings = C** (stacked single-column: score-range dual-slider + histogram, vote-count
+  slider, age-cert chips; rose furniture, cyan→gold sliders; NO dial in compact, NO preset
+  column). **LOCKED.**
+- **Genre, People, Era, Awards, Themes, Setting, Source, Region, Production, Stream** = variant
+  TBD — confirm at each tab's turn.
+
+---
+
+## 📐 B4 — NAMING FACTS (code identifiers ≠ display names)
+
+Rail `data-tab` code identifiers differ from display labels. Confirmed live:
+`genres` (not "genre"), `watch` (not "stream"). Build prompts must use the code identifiers
+in selectors. (Verify the other 9 against `discover.html` at each tab's build.)
+
+---
+
+## 🚦 B5 — GATES (block specific tabs, run in parallel)
+
+- `awards-data-v1.json` field audit → gates **Awards** expanded (ranked-superlative decision).
+- TMDB budget-coverage check → gates **Production** expanded presentation.
+- Profile-defaults surface → gates **Stream + Region** (country/provider defaults).
+- Describe-filtering ENGINE → **People** (separate new engineering, not this redesign; interface
+  buildable, will not filter until the person pipeline exists).
+
+---
+
+## 🗂️ B6 — AS-BUILT RECONCILIATION (verify vs code; live-confirmed this session)
+
+Three states — **DESIGNED / BUILT / GAP**.
+
+**BUILT & LIVE:**
+- Vertical rail (220px, `og-qs-*` glyphs, axis-tinted active, filter-count badges; 11 tabs all
+  carry `data-axis`).
+- Global sort-by strip — wired to `state.sortBy` (single append site in the query builder).
+- `components/discover-components.css` globally linked; component chip namespaced `.chip`→
+  `.disco-chip` (the only collision removed; zero bare `.chip` remains in the component file).
+- Era CHIPS migrated to `.disco-chip`/`.on`, indigo, `data-axis="era"` on `#oft-panel-era`; the
+  `timeEra` read site reads `.disco-chip.on`. Era filter verified end-to-end (decade→results).
+
+**BUILT BUT UNCONSUMED:**
+- Component slider / score-dial / histogram / disco-tile / service-tile / `tts-*` exist in
+  `discover-components.css` but NO live tab consumes them yet.
+
+**GAP (designed, not built):**
+- Era PANEL LAYOUT — still old v1 (number `#yearInput`, 2 native runtime range inputs, old
+  2-col grid). Era is a HYBRID: new chips inside an old panel.
+- All 10 non-Era tabs — untouched legacy `.chip`/`.active`; only `#oft-panel-era` carries `data-axis`.
+- Every per-tab compact panel layout (incl. Era's) — designed, not built.
+- Expanded tier (all tabs) + the expand-on-collapse mechanic — designed, not built.
+
+This B6 layer is the anti-double-build guard; the B2 spec remains the future-tense build-plan.

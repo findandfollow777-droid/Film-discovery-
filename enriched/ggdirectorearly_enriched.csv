@@ -1,0 +1,246 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+39,Sam Mendes,1999,Golden Globe,Best Director,true,American Beauty
+13563,Norman Jewison,1999,Golden Globe,Best Director,false,The Hurricane
+17016,Neil Jordan,1999,Golden Globe,Best Director,false,The End of the Affair
+638,Michael Mann,1999,Golden Globe,Best Director,false,The Insider
+2239,Anthony Minghella,1999,Golden Globe,Best Director,false,The Talented Mr. Ripley
+488,Steven Spielberg,1998,Golden Globe,Best Director,true,Saving Private Ryan
+37630,Shekhar Kapur,1998,Golden Globe,Best Director,false,Elizabeth
+18844,John Madden,1998,Golden Globe,Best Director,false,Shakespeare in Love
+4135,Robert Redford,1998,Golden Globe,Best Director,false,The Horse Whisperer
+2690,Peter Weir,1998,Golden Globe,Best Director,false,The Truman Show
+2710,James Cameron,1997,Golden Globe,Best Director,true,Titanic
+3388,James L. Brooks,1997,Golden Globe,Best Director,false,As Good as It Gets
+323,Curtis Hanson,1997,Golden Globe,Best Director,false,L.A. Confidential
+53334,Jim Sheridan,1997,Golden Globe,Best Director,false,The Boxer
+488,Steven Spielberg,1997,Golden Globe,Best Director,false,Amistad
+3974,Milos Forman,1996,Golden Globe,Best Director,true,The People vs. Larry Flynt
+1223,Joel Coen,1996,Golden Globe,Best Director,false,Fargo
+33433,Scott Hicks,1996,Golden Globe,Best Director,false,Shine
+2239,Anthony Minghella,1996,Golden Globe,Best Director,false,The English Patient
+9168,Alan Parker,1996,Golden Globe,Best Director,false,Evita
+2461,Mel Gibson,1995,Golden Globe,Best Director,true,Braveheart
+6111,Mike Figgis,1995,Golden Globe,Best Director,false,Leaving Las Vegas
+6159,Ron Howard,1995,Golden Globe,Best Director,false,Apollo 13
+1614,Ang Lee,1995,Golden Globe,Best Director,false,Sense and Sensibility
+3026,Rob Reiner,1995,Golden Globe,Best Director,false,The American President
+1032,Martin Scorsese,1995,Golden Globe,Best Director,false,Casino
+24,Robert Zemeckis,1994,Golden Globe,Best Director,true,Forrest Gump
+4135,Robert Redford,1994,Golden Globe,Best Director,false,Quiz Show
+1152,Oliver Stone,1994,Golden Globe,Best Director,false,Natural Born Killers
+138,Quentin Tarantino,1994,Golden Globe,Best Director,false,Pulp Fiction
+9181,Edward Zwick,1994,Golden Globe,Best Director,false,Legends of the Fall
+488,Steven Spielberg,1993,Golden Globe,Best Director,true,Schindler's List
+10757,Jane Campion,1993,Golden Globe,Best Director,false,The Piano
+12989,Andrew Davis,1993,Golden Globe,Best Director,false,The Fugitive
+54441,James Ivory,1993,Golden Globe,Best Director,false,The Remains of the Day
+1032,Martin Scorsese,1993,Golden Globe,Best Director,false,The Age of Innocence
+190,Clint Eastwood,1992,Golden Globe,Best Director,true,Unforgiven
+9789,Robert Altman,1992,Golden Globe,Best Director,false,The Player
+54441,James Ivory,1992,Golden Globe,Best Director,false,Howards End
+4135,Robert Redford,1992,Golden Globe,Best Director,false,A River Runs Through It
+3026,Rob Reiner,1992,Golden Globe,Best Director,false,A Few Good Men
+1152,Oliver Stone,1991,Golden Globe,Best Director,true,JFK
+16294,Jonathan Demme,1991,Golden Globe,Best Director,false,The Silence of the Lambs
+280,Terry Gilliam,1991,Golden Globe,Best Director,false,The Fisher King
+8246,Barry Levinson,1991,Golden Globe,Best Director,false,Bugsy
+10400,Barbra Streisand,1991,Golden Globe,Best Director,false,The Prince of Tides
+1269,Kevin Costner,1990,Golden Globe,Best Director,true,Dances with Wolves
+4956,Bernardo Bertolucci,1990,Golden Globe,Best Director,false,The Sheltering Sky
+1776,Francis Ford Coppola,1990,Golden Globe,Best Director,false,The Godfather Part III
+23393,Barbet Schroeder,1990,Golden Globe,Best Director,false,Reversal of Fortune
+1032,Martin Scorsese,1990,Golden Globe,Best Director,false,Goodfellas
+1152,Oliver Stone,1989,Golden Globe,Best Director,true,Born on the Fourth of July
+5281,Spike Lee,1989,Golden Globe,Best Director,false,Do the Right Thing
+3026,Rob Reiner,1989,Golden Globe,Best Director,false,When Harry Met Sally...
+2690,Peter Weir,1989,Golden Globe,Best Director,false,Dead Poets Society
+9181,Edward Zwick,1989,Golden Globe,Best Director,false,Glory
+190,Clint Eastwood,1988,Golden Globe,Best Director,true,Bird
+8246,Barry Levinson,1988,Golden Globe,Best Director,false,Rain Man
+39996,Sidney Lumet,1988,Golden Globe,Best Director,false,Running on Empty
+5342,Mike Nichols,1988,Golden Globe,Best Director,false,Working Girl
+9168,Alan Parker,1988,Golden Globe,Best Director,false,Mississippi Burning
+64061,Fred Schepisi,1988,Golden Globe,Best Director,false,A Cry in the Dark
+4956,Bernardo Bertolucci,1987,Golden Globe,Best Director,true,The Last Emperor
+4786,Richard Attenborough,1987,Golden Globe,Best Director,false,Cry Freedom
+19665,John Boorman,1987,Golden Globe,Best Director,false,Hope and Glory
+3388,James L. Brooks,1987,Golden Globe,Best Director,false,Broadcast News
+7270,Adrian Lyne,1987,Golden Globe,Best Director,false,Fatal Attraction
+1152,Oliver Stone,1986,Golden Globe,Best Director,true,Platoon
+1243,Woody Allen,1986,Golden Globe,Best Director,false,Hannah and Her Sisters
+54441,James Ivory,1986,Golden Globe,Best Director,false,A Room with a View
+8965,Roland Joffe,1986,Golden Globe,Best Director,false,The Mission
+3026,Rob Reiner,1986,Golden Globe,Best Director,false,Stand by Me
+6593,John Huston,1985,Golden Globe,Best Director,true,Prizzi's Honor
+4786,Richard Attenborough,1985,Golden Globe,Best Director,false,A Chorus Line
+2226,Sydney Pollack,1985,Golden Globe,Best Director,false,Out of Africa
+488,Steven Spielberg,1985,Golden Globe,Best Director,false,The Color Purple
+2690,Peter Weir,1985,Golden Globe,Best Director,false,Witness
+3974,Milos Forman,1984,Golden Globe,Best Director,true,Amadeus
+1776,Francis Ford Coppola,1984,Golden Globe,Best Director,false,The Cotton Club
+8965,Roland Joffe,1984,Golden Globe,Best Director,false,The Killing Fields
+12238,David Lean,1984,Golden Globe,Best Director,false,A Passage to India
+4385,Sergio Leone,1984,Golden Globe,Best Director,false,Once Upon a Time in America
+10400,Barbra Streisand,1983,Golden Globe,Best Director,true,Yentl
+5696,Bruce Beresford,1983,Golden Globe,Best Director,false,Tender Mercies
+5100320,Ingmar Bergman,1983,Golden Globe,Best Director,false,Fanny and Alexander
+3388,James L. Brooks,1983,Golden Globe,Best Director,false,Terms of Endearment
+5342,Mike Nichols,1983,Golden Globe,Best Director,false,Silkwood
+12804,Peter Yates,1983,Golden Globe,Best Director,false,The Dresser
+4786,Richard Attenborough,1982,Golden Globe,Best Director,true,Gandhi
+27436,Costa-Gavras,1982,Golden Globe,Best Director,false,Missing
+39996,Sidney Lumet,1982,Golden Globe,Best Director,false,The Verdict
+2226,Sydney Pollack,1982,Golden Globe,Best Director,false,Tootsie
+488,Steven Spielberg,1982,Golden Globe,Best Director,false,E.T. the Extra-Terrestrial
+6449,Warren Beatty,1981,Golden Globe,Best Director,true,Reds
+3974,Milos Forman,1981,Golden Globe,Best Director,false,Ragtime
+39996,Sidney Lumet,1981,Golden Globe,Best Director,false,Prince of the City
+15389,Louis Malle,1981,Golden Globe,Best Director,false,Atlantic City
+21958,Mark Rydell,1981,Golden Globe,Best Director,false,On Golden Pond
+488,Steven Spielberg,1981,Golden Globe,Best Director,false,Raiders of the Lost Ark
+4135,Robert Redford,1980,Golden Globe,Best Director,true,Ordinary People
+5602,David Lynch,1980,Golden Globe,Best Director,false,The Elephant Man
+3556,Roman Polanski,1980,Golden Globe,Best Director,false,Tess
+21806,Richard Rush,1980,Golden Globe,Best Director,false,The Stunt Man
+1032,Martin Scorsese,1980,Golden Globe,Best Director,false,Raging Bull
+1776,Francis Ford Coppola,1979,Golden Globe,Best Director,true,Apocalypse Now
+4964,Hal Ashby,1979,Golden Globe,Best Director,false,Being There
+6729,Robert Benton,1979,Golden Globe,Best Director,false,Kramer vs. Kramer
+14838,James Bridges,1979,Golden Globe,Best Director,false,The China Syndrome
+12804,Peter Yates,1979,Golden Globe,Best Director,false,Breaking Away
+12114,Michael Cimino,1978,Golden Globe,Best Director,true,The Deer Hunter
+1243,Woody Allen,1978,Golden Globe,Best Director,false,Interiors
+4964,Hal Ashby,1978,Golden Globe,Best Director,false,Coming Home
+30715,Terrence Malick,1978,Golden Globe,Best Director,false,Days of Heaven
+47773,Paul Mazursky,1978,Golden Globe,Best Director,false,An Unmarried Woman
+9168,Alan Parker,1978,Golden Globe,Best Director,false,Midnight Express
+18378,Herbert Ross,1977,Golden Globe,Best Director,true,The Turning Point
+1243,Woody Allen,1977,Golden Globe,Best Director,false,Annie Hall
+1,George Lucas,1977,Golden Globe,Best Director,false,Star Wars
+488,Steven Spielberg,1977,Golden Globe,Best Director,false,Close Encounters of the Third Kind
+4065,Fred Zinnemann,1977,Golden Globe,Best Director,false,Julia
+39996,Sidney Lumet,1976,Golden Globe,Best Director,true,Network
+4964,Hal Ashby,1976,Golden Globe,Best Director,false,Bound for Glory
+16513,John G. Avildsen,1976,Golden Globe,Best Director,false,Rocky
+6349,Alan J. Pakula,1976,Golden Globe,Best Director,false,All the President's Men
+19304,John Schlesinger,1976,Golden Globe,Best Director,false,Marathon Man
+3974,Milos Forman,1975,Golden Globe,Best Director,true,One Flew Over the Cuckoo's Nest
+9789,Robert Altman,1975,Golden Globe,Best Director,false,Nashville
+240,Stanley Kubrick,1975,Golden Globe,Best Director,false,Barry Lyndon
+39996,Sidney Lumet,1975,Golden Globe,Best Director,false,Dog Day Afternoon
+488,Steven Spielberg,1975,Golden Globe,Best Director,false,Jaws
+3556,Roman Polanski,1974,Golden Globe,Best Director,true,Chinatown
+11147,John Cassavetes,1974,Golden Globe,Best Director,false,A Woman Under the Influence
+1776,Francis Ford Coppola,1974,Golden Globe,Best Director,false,The Conversation
+1776,Francis Ford Coppola,1974,Golden Globe,Best Director,false,The Godfather Part II
+66777,Bob Fosse,1974,Golden Globe,Best Director,false,Lenny
+15175,William Friedkin,1973,Golden Globe,Best Director,true,The Exorcist
+4956,Bernardo Bertolucci,1973,Golden Globe,Best Director,false,Last Tango in Paris
+39012,Peter Bogdanovich,1973,Golden Globe,Best Director,false,Paper Moon
+1,George Lucas,1973,Golden Globe,Best Director,false,American Graffiti
+4065,Fred Zinnemann,1973,Golden Globe,Best Director,false,The Day of the Jackal
+1776,Francis Ford Coppola,1972,Golden Globe,Best Director,true,The Godfather
+19665,John Boorman,1972,Golden Globe,Best Director,false,Deliverance
+66777,Bob Fosse,1972,Golden Globe,Best Director,false,Cabaret
+2636,Alfred Hitchcock,1972,Golden Globe,Best Director,false,Frenzy
+3146,Billy Wilder,1972,Golden Globe,Best Director,false,Avanti!
+15175,William Friedkin,1971,Golden Globe,Best Director,true,The French Connection
+39012,Peter Bogdanovich,1971,Golden Globe,Best Director,false,The Last Picture Show
+13563,Norman Jewison,1971,Golden Globe,Best Director,false,Fiddler on the Roof
+240,Stanley Kubrick,1971,Golden Globe,Best Director,false,A Clockwork Orange
+8482,Robert Mulligan,1971,Golden Globe,Best Director,false,Summer of '42
+133259,Arthur Hiller,1970,Golden Globe,Best Director,true,Love Story
+9789,Robert Altman,1970,Golden Globe,Best Director,false,MASH
+19450,Bob Rafelson,1970,Golden Globe,Best Director,false,Five Easy Pieces
+32327,Ken Russell,1970,Golden Globe,Best Director,false,Women in Love
+13265,Franklin J. Schaffner,1970,Golden Globe,Best Director,false,Patton
+29646,Charles Jarrott,1969,Golden Globe,Best Director,true,Anne of the Thousand Days
+13294,Gene Kelly,1969,Golden Globe,Best Director,false,Hello Dolly!
+4081,Stanley Kramer,1969,Golden Globe,Best Director,false,The Secret of Santa Vittoria
+2226,Sydney Pollack,1969,Golden Globe,Best Director,false,They Shoot Horses Don't They?
+19304,John Schlesinger,1969,Golden Globe,Best Director,false,Midnight Cowboy
+3636,Paul Newman,1968,Golden Globe,Best Director,true,Rachel Rachel
+12009,Anthony Harvey,1968,Golden Globe,Best Director,false,The Lion in Winter
+15378,Carol Reed,1968,Golden Globe,Best Director,false,Oliver!
+10001,William Wyler,1968,Golden Globe,Best Director,false,Funny Girl
+24657,Franco Zeffirelli,1968,Golden Globe,Best Director,false,Romeo and Juliet
+5342,Mike Nichols,1967,Golden Globe,Best Director,true,The Graduate
+13563,Norman Jewison,1967,Golden Globe,Best Director,false,In the Heat of the Night
+4081,Stanley Kramer,1967,Golden Globe,Best Director,false,Guess Who's Coming to Dinner
+6448,Arthur Penn,1967,Golden Globe,Best Director,false,Bonnie and Clyde
+21958,Mark Rydell,1967,Golden Globe,Best Director,false,The Fox
+4065,Fred Zinnemann,1966,Golden Globe,Best Director,true,A Man for All Seasons
+10076,Lewis Gilbert,1966,Golden Globe,Best Director,false,Alfie
+16862,Claude Lelouch,1966,Golden Globe,Best Director,false,A Man and a Woman
+5342,Mike Nichols,1966,Golden Globe,Best Director,false,Who's Afraid of Virginia Woolf?
+1744,Robert Wise,1966,Golden Globe,Best Director,false,The Sand Pebbles
+12238,David Lean,1965,Golden Globe,Best Director,true,Doctor Zhivago
+67619,Guy Green,1965,Golden Globe,Best Director,false,A Patch of Blue
+19304,John Schlesinger,1965,Golden Globe,Best Director,false,Darling
+1744,Robert Wise,1965,Golden Globe,Best Director,false,The Sound of Music
+10001,William Wyler,1965,Golden Globe,Best Director,false,The Collector
+14674,George Cukor,1964,Golden Globe,Best Director,true,My Fair Lady
+65843,Michael Cacoyannis,1964,Golden Globe,Best Director,false,Zorba the Greek
+13776,John Frankenheimer,1964,Golden Globe,Best Director,false,Seven Days in May
+86659,Peter Glenville,1964,Golden Globe,Best Director,false,Becket
+6593,John Huston,1964,Golden Globe,Best Director,false,The Night of the Iguana
+2746,Elia Kazan,1963,Golden Globe,Best Director,true,America America
+543946,Hall Bartlett,1963,Golden Globe,Best Director,false,The Caretakers
+93953,George Englund,1963,Golden Globe,Best Director,false,The Ugly American
+10601,Joseph L. Mankiewicz,1963,Golden Globe,Best Director,false,Cleopatra
+834,Otto Preminger,1963,Golden Globe,Best Director,false,The Cardinal
+32765,Tony Richardson,1963,Golden Globe,Best Director,false,Tom Jones
+18854,Martin Ritt,1963,Golden Globe,Best Director,false,Hud
+1744,Robert Wise,1963,Golden Globe,Best Director,false,The Haunting
+12238,David Lean,1962,Golden Globe,Best Director,true,Lawrence of Arabia
+14674,George Cukor,1962,Golden Globe,Best Director,false,The Chapman Report
+87521,Morton DaCosta,1962,Golden Globe,Best Director,false,The Music Man
+1927,Blake Edwards,1962,Golden Globe,Best Director,false,Days of Wine and Roses
+13776,John Frankenheimer,1962,Golden Globe,Best Director,false,The Manchurian Candidate
+6593,John Huston,1962,Golden Globe,Best Director,false,Freud
+240,Stanley Kubrick,1962,Golden Globe,Best Director,false,Lolita
+9054,Mervyn LeRoy,1962,Golden Globe,Best Director,false,Gypsy
+8482,Robert Mulligan,1962,Golden Globe,Best Director,false,To Kill a Mockingbird
+18854,Martin Ritt,1962,Golden Globe,Best Director,false,Hemingway's Adventures of a Young Man
+97967,Ismael Rodriguez,1962,Golden Globe,Best Director,false,The Iron Brothers
+4081,Stanley Kramer,1961,Golden Globe,Best Director,true,Judgment at Nuremberg
+40199,Anthony Mann,1961,Golden Globe,Best Director,false,El Cid
+18669,J. Lee Thompson,1961,Golden Globe,Best Director,false,The Guns of Navarone
+0,Jerome Robbins & Robert Wise,1961,Golden Globe,Best Director,false,West Side Story
+10001,William Wyler,1961,Golden Globe,Best Director,false,The Children's Hour
+6603,Jack Cardiff,1960,Golden Globe,Best Director,true,Sons and Lovers
+3632,Richard Brooks,1960,Golden Globe,Best Director,false,Elmer Gantry
+240,Stanley Kubrick,1960,Golden Globe,Best Director,false,Spartacus
+3146,Billy Wilder,1960,Golden Globe,Best Director,false,The Apartment
+4065,Fred Zinnemann,1960,Golden Globe,Best Director,false,The Sundowners
+10001,William Wyler,1959,Golden Globe,Best Director,true,Ben-Hur
+4081,Stanley Kramer,1959,Golden Globe,Best Director,false,On the Beach
+834,Otto Preminger,1959,Golden Globe,Best Director,false,Anatomy of a Murder
+18738,George Stevens,1959,Golden Globe,Best Director,false,The Diary of Anne Frank
+4065,Fred Zinnemann,1959,Golden Globe,Best Director,false,The Nun's Story
+13980,Vincente Minnelli,1958,Golden Globe,Best Director,true,Gigi
+3632,Richard Brooks,1958,Golden Globe,Best Director,false,Cat on a Hot Tin Roof
+4081,Stanley Kramer,1958,Golden Globe,Best Director,false,The Defiant Ones
+67451,Delbert Mann,1958,Golden Globe,Best Director,false,Separate Tables
+1744,Robert Wise,1958,Golden Globe,Best Director,false,I Want to Live!
+12238,David Lean,1957,Golden Globe,Best Director,true,The Bridge on the River Kwai
+86051,Joshua Logan,1957,Golden Globe,Best Director,false,Sayonara
+39996,Sidney Lumet,1957,Golden Globe,Best Director,false,12 Angry Men
+3146,Billy Wilder,1957,Golden Globe,Best Director,false,Witness for the Prosecution
+4065,Fred Zinnemann,1957,Golden Globe,Best Director,false,A Hatful of Rain
+2746,Elia Kazan,1956,Golden Globe,Best Director,true,Baby Doll
+20412,Michael Anderson,1956,Golden Globe,Best Director,false,Around the World in 80 Days
+13980,Vincente Minnelli,1956,Golden Globe,Best Director,false,Lust for Life
+18738,George Stevens,1956,Golden Globe,Best Director,false,Giant
+29962,King Vidor,1956,Golden Globe,Best Director,false,War and Peace
+86051,Joshua Logan,1955,Golden Globe,Best Director,true,Picnic
+2746,Elia Kazan,1954,Golden Globe,Best Director,true,On the Waterfront
+4065,Fred Zinnemann,1953,Golden Globe,Best Director,true,From Here to Eternity
+8636,Cecil B. DeMille,1952,Golden Globe,Best Director,true,The Greatest Show on Earth
+89981,Laszlo Benedek,1951,Golden Globe,Best Director,true,Death of a Salesman
+13980,Vincente Minnelli,1951,Golden Globe,Best Director,false,An American in Paris
+18738,George Stevens,1951,Golden Globe,Best Director,false,A Place in the Sun
+3146,Billy Wilder,1950,Golden Globe,Best Director,true,Sunset Boulevard
+10601,Joseph L. Mankiewicz,1950,Golden Globe,Best Director,false,All About Eve
+6593,John Huston,1950,Golden Globe,Best Director,false,The Asphalt Jungle
+14674,George Cukor,1950,Golden Globe,Best Director,false,Born Yesterday

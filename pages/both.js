@@ -126,7 +126,25 @@ function closeFocusCard() {
   document.body.style.overflow = '';
 }
 
-focusCloseButton.addEventListener("click", closeFocusCard);
+/* Rule 17: Black Hole exit. */
+function triggerFocusOrbitClose() {
+  if (!focusOverlay || focusOverlay.classList.contains('orbit-popup-closing')) return;
+  if (focusCloseButton) focusCloseButton.classList.add('closing');
+  focusOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (focusCloseButton) focusCloseButton.classList.remove('closing');
+    focusOverlay.classList.remove('orbit-popup-closing');
+    closeFocusCard();
+  }, reduced ? 200 : 600);
+}
+
+focusCloseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  triggerFocusOrbitClose();
+});
 
 addToSearchButton.addEventListener("click", () => {
   if (!currentSectionKey) return;

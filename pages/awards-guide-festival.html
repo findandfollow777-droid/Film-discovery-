@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT — Festival Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="awards-guide-festival.css">
+</head>
+<body>
+
+  <!-- COSMIC ATMOSPHERE -->
+  <div class="cosmic-stars"></div>
+  <div class="nebula-glow"></div>
+  <div class="nebula-glow two"></div>
+
+  <!-- MAIN CONTENT (JS-rendered) -->
+  <main id="festival-guide-root"></main>
+
+  <!-- ERROR STATE -->
+  <div id="festival-guide-error" class="error-state" hidden>
+    <div class="error-card">
+      <div class="error-icon">?</div>
+      <h2 class="error-title">Festival not found</h2>
+      <p class="error-text">The festival you requested doesn't exist in our guide.</p>
+      <a href="awards-guide.html" class="error-back-link">&larr; Back to the Guide</a>
+    </div>
+  </div>
+
+  <!-- SCRIPTS (order matters) -->
+  <script src="../data/festival-guide-data.js"></script>
+  <script src="awards-guide-festival.js"></script>
+</body>
+</html>

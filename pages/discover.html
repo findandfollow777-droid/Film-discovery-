@@ -5,6 +5,7 @@
   <title>Build Your Orbit — ORBIT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="discover.css">
+  <link rel="stylesheet" href="../components/discover-components.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
   <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
@@ -428,7 +429,7 @@
               <div class="oft-panel-body" id="oft-body-genres"></div>
             </div>
 
-            <div class="oft-panel" id="oft-panel-era" data-tab="era" data-section="timeEra">
+            <div class="oft-panel" id="oft-panel-era" data-tab="era" data-section="timeEra" data-axis="era">
               <div class="oft-panel-header">
                 <div class="orbit-icon icon-datetime"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
                 <div class="oft-panel-meta">
@@ -746,6 +747,12 @@
           </div>
         </aside>
       </div>
+      <!-- Phase 4 (2026-06-02): collapse-to-tab affordance. Visible only
+           when the rail is collapsed (aria-expanded="false" on the tab);
+           clicking re-expands the rail. The rail's × toggle button
+           collapses it back to this tab. Position is absolute within
+           .discover-presets-modal-content (top-right). -->
+      <button class="discover-presets-modal-rail-tab" id="discoverPresetsModalRailTab" type="button" aria-controls="discoverPresetsModalRail" aria-expanded="false" aria-label="Show filters">Filters</button>
     </div>
   </div>
 

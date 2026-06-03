@@ -36,7 +36,15 @@
      headline-carousel envelope. Paired with the aspect-ratio removal
      below so wide viewports don't balloon to ~450px. */
   --oc-min-h:     360px;
-  --oc-pad-x:     80px;
+  /* Full-bleed adapt (2026-05-28): 80 → 40 so big-type slide content
+     spans closer to the panel edges (the carousel has no imagery; this
+     widens the text block). Feeds only the base .oc-slide rule;
+     .oc-slide-cta (slide 3) defines its own padding and is unaffected.
+     The ≤900px override (28px) below still wins on mobile. NOTE: the
+     prev/next nav arrows sit at 26px inset (occupying x≈26–70px), so at
+     40px the headline's leading edge underlaps the translucent arrows —
+     flagged for review; raise toward 72px to fully clear if needed. */
+  --oc-pad-x:     40px;
   /* Phase D (2026-05-28): 56 → 40. Big-type slides (1 & 2) overflowed
      the fixed 360px box at wide widths; slide 2 needed ~382px. This
      knob feeds only the base .oc-slide vertical padding (line ~113);
@@ -74,11 +82,19 @@
      ::after corner ring remain. Fallback if these washes read oddly
      on --deep-void: re-add a single linear-gradient using --deep-void
      → --nebula-dark (dark-family only, no jump). */
-  background:
-    radial-gradient(80% 60% at 80% 20%, rgba(var(--oc-cyan-rgb), 0.06), transparent 60%),
-    radial-gradient(70% 60% at 0% 100%, rgba(var(--oc-gold-rgb), 0.05), transparent 60%);
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  /* Phase K (2026-05-30): background washes + inset hairline relocated to
+     .discover-banner (see pages/discover.css). Carousel is now a transparent
+     layer that sits on the shared banner background; this prevents
+     double-painting once the banner owns those decorations. ::before
+     (dot-grid) and ::after (corner-ring) are nulled below for the same
+     reason. Carousel layout, sizing, slides, dots, nav, counter unchanged. */
+  background: transparent;
+  /* Phase R-fix (2026-05-31): overflow hidden → visible so .oc-counter
+     (now top:-48 → renders ABOVE the carousel at orbit-card y=5, parallel
+     with the section-collapse toggle) is not clipped. Per-slide decorative
+     art has all moved to .discover-banner's .oc-bg-slides layer (Phase L
+     + Phase M), so nothing in the carousel relies on clipping any more. */
+  overflow: visible;
   font-family: var(--oc-body);
   color: var(--oc-text);
   box-sizing: border-box;
@@ -87,21 +103,12 @@
 .oc-carousel *::before,
 .oc-carousel *::after { box-sizing: border-box; }
 
-.oc-carousel::before {
-  content: ""; position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(var(--oc-cyan-rgb), 0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none; opacity: 0.5;
-}
-.oc-carousel::after {
-  content: ""; position: absolute;
-  width: 800px; height: 800px;
-  right: -260px; bottom: -460px;
-  border-radius: 50%;
-  border: 1px solid rgba(var(--oc-cyan-rgb), 0.07);
-  box-shadow: 0 0 0 60px rgba(var(--oc-cyan-rgb), 0.025);
-  pointer-events: none;
-}
+/* Phase K (2026-05-30): ::before dot-grid and ::after corner-ring relocated
+   to .discover-banner so the carousel area and Quick Searches share one
+   continuous decoration. Nulled here (content:none) so they don't generate
+   — re-introduce only if the carousel needs its own additional layer. */
+.oc-carousel::before,
+.oc-carousel::after { content: none; }
 
 /* ── Slides ─────────────────────────────────────────────── */
 /* Phase C (2026-05-27): switched from `position: relative; height: 100%`
@@ -112,13 +119,31 @@
    of the carousel (the slide-1 headline was clipped). Anchoring
    .oc-slides absolutely to .oc-carousel (which is position: relative)
    fills the full min-height box, so slides centre correctly. */
-.oc-slides { position: absolute; inset: 0; }
+/* Phase S (2026-05-31): translateY(-23px) lifts ALL three slides as a
+   block so each slide's first content element aligns to the collapse-
+   toggle's centre line. Counter, dots, nav arrows live in .oc-carousel
+   OUTSIDE .oc-slides and don't move; background art (.oc-bg-slides) lives
+   on .discover-banner separately and also doesn't move. Internal slide
+   spacing (eyebrow → headline → sub flex gaps) is preserved — the entire
+   slide-content block shifts up by 23px. Per-slide compensators apply
+   on top of this (see .oc-cta-head margin-top for slide 3). */
+.oc-slides { position: absolute; inset: 0; transform: translateY(-23px); }
 
 .oc-slide {
   position: absolute; inset: 0;
   padding: var(--oc-pad-y) var(--oc-pad-x);
+  /* Phase R-fix (2026-05-31): padding-top overridden to 0 so slide text
+     starts at the top of the slide instead of being centred in the box.
+     Combined with justify-content:flex-start below, this lifts the
+     eyebrow/headline/subtitle block up by ~58px (was centred with ~18px
+     slack + 40px padding = top at slide-y 58; now starts at slide-y 0)
+     so it sits closer to the .oc-counter level (which is now at
+     orbit-card y=5 — parallel with the section-collapse toggle).
+     .oc-slide-cta (slide 3) defines its own padding so the CTA grid is
+     unaffected. */
+  padding-top: 0;
   display: flex; flex-direction: column;
-  justify-content: center; gap: 18px;
+  justify-content: flex-start; gap: 18px;
   opacity: 0;
   transform: translateX(24px) scale(0.995);
   transition: opacity .55s ease, transform .55s ease;
@@ -173,58 +198,65 @@
   text-wrap: pretty;
 }
 
-/* ── Decorative art ─────────────────────────────────────── */
-.oc-art {
-  position: absolute;
-  pointer-events: none;
+/* Phase U1 (2026-05-31): Direction-D scale-up — slide 1 ONLY.
+   Headline grows from clamp(36, 5vw, 64) → clamp(36, 6.2vw, 80) so the
+   ~140px of empty band below the slide-1 content fills naturally. The
+   max-width:13ch (down from base 22ch) is what makes the larger text
+   break cleanly across three lines ("Every film that fits / what you
+   actually / want.") instead of orphaning "want." awkwardly — this is
+   essential, not optional. line-height (0.98) and text-wrap (balance)
+   inherit from the base .oc-h1 rule. Subtitle ceiling 22→26 keeps the
+   eyebrow → headline → sub hierarchy balanced under the bigger headline.
+   Eyebrow unchanged. Slides 2 and 3 untouched: the [data-i="0"] scope
+   means the base rules continue to govern slide 2; slide 3's own
+   .oc-slide-cta .oc-h1 override (clamp(28, 3.4vw, 44)) is unaffected. */
+.oc-slide[data-i="0"] .oc-h1 {
+  font-size: clamp(36px, 6.2vw, 80px);
+  max-width: 13ch;
+}
+.oc-slide[data-i="0"] .oc-sub {
+  font-size: clamp(16px, 1.7vw, 26px);
 }
 
-.oc-art-orbit {
-  right: -40px; top: 50%;
-  transform: translateY(-50%);
-  width: 520px; height: 520px;
-  opacity: 0.18;
-}
-.oc-art-orbit svg { width: 100%; height: 100%; }
+/* Phase U2-revert (2026-05-31): the slide-2 headline override added in
+   U2 (clamp(36, 5.8vw, 75) + max-width:30ch) was removed. Live testing
+   showed Orbitron renders much wider than the investigation's 0.5em/char
+   estimate, so at 75px the headline wrapped to FOUR lines and collided
+   with the card-fan by ~113px. Slide 2 falls back to the base
+   .oc-h1 (clamp(36, 5vw, 64) + 22ch + text-wrap:balance), which renders
+   cleanly as 2 lines and clears the card-fan by the pre-U2 ~65px gap.
+   Slide 1's U1 overrides above are intentionally kept — slide 1's
+   shorter headline scaled up cleanly; slide 2's longer text didn't. */
 
-.oc-art-cards {
-  right: 80px; top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-}
-.oc-art-cards .oc-card {
-  width: 130px; height: 190px;
-  border-radius: 10px;
-  border: 1px solid var(--oc-line-3);
-  background: linear-gradient(180deg, rgba(var(--oc-cyan-rgb),0.08), rgba(var(--oc-gold-rgb),0.04));
-  margin-left: -36px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
-  position: relative;
-  overflow: hidden;
-}
-.oc-art-cards .oc-card:nth-child(1) { transform: rotate(-8deg) translateY(20px); }
-.oc-art-cards .oc-card:nth-child(2) { transform: rotate(-2deg) translateY(8px);  border-color: rgba(var(--oc-gold-rgb),0.4); background: linear-gradient(180deg, rgba(var(--oc-gold-rgb),0.10), rgba(var(--oc-cyan-rgb),0.04)); }
-.oc-art-cards .oc-card:nth-child(3) { transform: rotate(4deg);                    border-color: rgba(var(--oc-cyan-rgb),0.45); background: linear-gradient(180deg, rgba(var(--oc-cyan-rgb),0.14), rgba(var(--oc-cyan-rgb),0.04)); }
-.oc-art-cards .oc-card::before {
-  content: ""; position: absolute; inset: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 5px;
-}
-.oc-art-cards .oc-card::after {
-  content: "?"; position: absolute; inset: 0;
-  display: grid; place-items: center;
-  font-family: var(--oc-disp); font-size: 64px; font-weight: 700;
-  color: rgba(255,255,255,0.15);
-}
-.oc-art-cards .oc-card:nth-child(3)::after { color: var(--oc-cyan); opacity: 0.6; }
+/* Phase M (2026-05-30): all per-slide decorative art removed from the
+   carousel component. The orbit-ring SVG (Phase L) and the card-fan
+   (Phase M) both live in .discover-banner's parallel .oc-bg-slides layer
+   now and cross-fade with the carousel's rotation via discover-carousel.js.
+   The card-fan rules (selectors .oc-art-cards / .oc-art-cards .oc-card*,
+   including tilts, gradients, ::before inset, ::after "?" pseudo) have
+   been relocated to pages/discover.css under .oc-bg-art--cards. The
+   shared .oc-art base rule is also gone — no remaining users in the
+   carousel component. */
 
 /* ── Slide 3 · giant icon CTAs ──────────────────────────── */
 .oc-slide-cta {
-  padding: 36px 56px 28px;
-  gap: 22px;
+  /* Phase W (2026-05-31): padding-top 28 → 0 so slide 3 receives the
+     FULL .oc-slides translateY(-23) lift like slides 0/1. Previously
+     the 28px top padding cancelled the lift and pushed slide-3 content
+     +5..+25 below slides 0/1; with padding-top:0 the head now starts
+     at carousel-y=-23, matching slide-1's eyebrow line. Side & bottom
+     padding (40 / 26) preserved from Phase F so the cards keep their
+     horizontal placement and bottom margin. */
+  padding: 0 40px 26px;
+  gap: 16px;
 }
 .oc-cta-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+  /* Phase W (2026-05-31): removed the Phase S `margin-top: 20px`
+     compensator. Slide 3 now genuinely wants to match slides 0/1's top
+     position (no longer offset down to align the counter); the global
+     .oc-slides translateY(-23) handles the lift on its own, and the
+     slide-cta padding-top above is now 0 so no compensation is needed. */
 }
 .oc-slide-cta .oc-h1 {
   font-size: clamp(28px, 3.4vw, 44px);
@@ -242,6 +274,14 @@
 .oc-cta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* Phase F (2026-05-28): explicit `grid-template-rows: 1fr`. The grid
+     is `flex: 1` so it already fills the slide's vertical space, but
+     without a defined row the implicit row was `auto` (content-sized),
+     so the cards sat at content height and left ~130px of dead space
+     below them. A 1fr row stretches to the grid's full height; the
+     cards (default align-self: stretch) then fill it, consuming the
+     buffer. Card content stays centred (justify-content: center). */
+  grid-template-rows: 1fr;
   gap: 14px;
   flex: 1;
   min-height: 0;
@@ -249,26 +289,65 @@
 .oc-cta-card {
   position: relative;
   border-radius: 14px;
-  padding: 22px 24px;
+  /* Phase X (2026-05-31): padding 22 24 → 28 24, gap 14 → 0 (let
+     space-between distribute below), justify-content center →
+     space-between so eyebrow sits top / icon middle / body bottom in
+     the new 3-child flex layout (eyebrow moved out of body in HTML). */
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 14px;
+  gap: 0;
   text-decoration: none;
   color: var(--oc-text);
   overflow: hidden;
-  justify-content: center;
+  justify-content: space-between;
   transition: transform .25s ease, border-color .25s ease, background .25s ease;
   cursor: pointer;
+  /* Phase O (2026-05-30): at ≤900px .oc-cta-grid drops to a single
+     grid-template-columns:1fr. The card's default min-width:auto
+     resolves to min-content (icon + paddings + title), which can refuse
+     to shrink below the icon+padding floor and force horizontal
+     overflow at narrow viewports. min-width:0 lets 1fr actually fit
+     the available width; .oc-cta-body already has min-width:0 so its
+     text contents already truncate/wrap cleanly inside. */
+  min-width: 0;
+  /* Phase X (2026-05-31): min-height floor 224 → 260 to give the bigger
+     icon (clamp(120, 11vw, 150) below) breathing room above + below.
+     Grid row (flex:1 + grid-template-rows:1fr) still stretches cards
+     larger when room permits — at 1280 px the row resolves to ~275, so
+     cards render at 275 and the floor doesn't bind. */
+  min-height: 260px;
 }
 .oc-cta-card:hover { transform: translateY(-2px); }
 
 .oc-cta-icon {
   flex-shrink: 0;
-  width: clamp(110px, 15vw, 180px);
-  height: clamp(110px, 15vw, 180px);
+  /* Phase X (2026-05-31): clamp ceiling 76 → 150, vw 5.7 → 11. The
+     Phase W 76 ceiling was sized for the centred-stack layout; in the
+     new "eyebrow-top / icon-middle / body-bottom" layout the icon is
+     the dominant element and needs more presence. At 1280px 11vw = 141
+     → ~140; at 1440 → clamped 150. Below the card-fits-grid-row floor
+     of ~275px at 1280 the content totals ~262 (eyebrow 14 + icon 140 +
+     body 52 + padding 56) which leaves slack — no carousel overflow.
+     Mobile ≤900px override (96px) unchanged. */
+  width: clamp(120px, 11vw, 150px);
+  height: clamp(120px, 11vw, 150px);
   display: grid; place-items: center;
+  /* Phase X: position + isolation + ::before for the glow bloom behind
+     the SVG. isolation:isolate keeps the z-index:-1 bloom inside the
+     icon's stacking context (won't escape to behind the card). */
+  position: relative;
+  isolation: isolate;
+}
+.oc-cta-icon::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, var(--cta-glow, transparent) 0%, transparent 65%);
+  z-index: -1;
+  pointer-events: none;
 }
 .oc-cta-icon svg { width: 100%; height: 100%; }
 
@@ -302,44 +381,104 @@
   opacity: 0.5;
   margin-top: 4px;
   transition: opacity .25s ease, transform .25s ease;
-  display: inline-block;
+  /* Phase X (2026-05-31): arrow hidden — the whole card is already an
+     <a href>; the arrow added visual noise without contributing
+     interaction affordance. display:none reclaims the vertical space
+     for the rest of the card content. */
+  display: none;
 }
 .oc-cta-card:hover .oc-cta-arrow {
   opacity: 1; transform: translateY(2px);
 }
 
+/* Phase X (2026-05-31): legibility text-shadows. The eyebrow and title
+   are now white (not cyan/gold) on the tinted card background; the
+   shadow guarantees contrast against the brighter parts of the nebula
+   washes / starfield. */
+.oc-cta-eyebrow { text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); }
+.oc-cta-title   { text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); }
+.oc-cta-sub     { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+
+/* Phase X (2026-05-31): cards gain a hand-placed starfield (14 dots,
+   identical positions on both variants for visual stability) + a
+   top-right nebula bloom layered above the existing left/right wash
+   and diagonal gradient. The starfield dots are tinted with the card's
+   accent colour (cyan or gold) at low opacity so they read as cosmic
+   without competing with the glyph + text. Existing left-side wash,
+   135deg/225deg diagonal, border, and inset box-shadow preserved.
+   The .oc-cta-icon { --cta-glow } token below feeds the icon-bloom
+   pseudo-element in the .oc-cta-icon rule earlier. */
 .oc-cta--cyan {
   background:
+    /* Starfield — 14 hand-placed cyan stars */
+    radial-gradient(1.5px 1.5px at 12% 10%, rgba(var(--oc-cyan-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 28% 25%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(2px 2px at 45% 8%, rgba(var(--oc-cyan-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 65% 18%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 82% 12%, rgba(var(--oc-cyan-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 15% 45%, rgba(var(--oc-cyan-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(2px 2px at 90% 38%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 10% 78%, rgba(var(--oc-cyan-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(2px 2px at 32% 88%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 55% 82%, rgba(var(--oc-cyan-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 75% 92%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 92% 70%, rgba(var(--oc-cyan-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 8% 60%, rgba(var(--oc-cyan-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 50% 50%, rgba(var(--oc-cyan-rgb), 0.5) 50%, transparent 60%),
+    /* Nebula bloom — top-right */
+    radial-gradient(ellipse at 95% 5%, rgba(var(--oc-cyan-rgb), 0.32) 0%, transparent 50%),
+    /* Existing left-side wash + diagonal */
     radial-gradient(80% 100% at 0% 50%, rgba(var(--oc-cyan-rgb), 0.18), transparent 70%),
     linear-gradient(135deg, rgba(var(--oc-cyan-rgb), 0.10), rgba(var(--oc-cyan-rgb), 0.02));
   border: 1px solid rgba(var(--oc-cyan-rgb), 0.35);
   box-shadow: inset 0 0 40px rgba(var(--oc-cyan-rgb), 0.06);
 }
+.oc-cta--cyan .oc-cta-icon { --cta-glow: rgba(var(--oc-cyan-rgb), 0.35); }
 .oc-cta--cyan:hover {
   border-color: var(--oc-cyan);
   background:
     radial-gradient(80% 100% at 0% 50%, rgba(var(--oc-cyan-rgb), 0.28), transparent 70%),
     linear-gradient(135deg, rgba(var(--oc-cyan-rgb), 0.14), rgba(var(--oc-cyan-rgb), 0.04));
 }
-.oc-cta--cyan .oc-cta-eyebrow,
-.oc-cta--cyan .oc-cta-title,
+/* Phase X (2026-05-31): eyebrow + title dropped from this colour
+   override so they inherit --oc-text (white) from the card — fixes the
+   prior cyan-on-cyan / gold-on-gold legibility issue. Arrow rule kept
+   for completeness even though .oc-cta-arrow is display:none. */
 .oc-cta--cyan .oc-cta-arrow { color: var(--oc-cyan); }
 
 .oc-cta--gold {
   background:
+    /* Starfield — same 14 positions, gold tint */
+    radial-gradient(1.5px 1.5px at 12% 10%, rgba(var(--oc-gold-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 28% 25%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(2px 2px at 45% 8%, rgba(var(--oc-gold-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 65% 18%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 82% 12%, rgba(var(--oc-gold-rgb), 0.7) 50%, transparent 60%),
+    radial-gradient(1px 1px at 15% 45%, rgba(var(--oc-gold-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(2px 2px at 90% 38%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 10% 78%, rgba(var(--oc-gold-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(2px 2px at 32% 88%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 55% 82%, rgba(var(--oc-gold-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 75% 92%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 92% 70%, rgba(var(--oc-gold-rgb), 0.5) 50%, transparent 60%),
+    radial-gradient(1.5px 1.5px at 8% 60%, rgba(var(--oc-gold-rgb), 0.6) 50%, transparent 60%),
+    radial-gradient(1px 1px at 50% 50%, rgba(var(--oc-gold-rgb), 0.5) 50%, transparent 60%),
+    /* Nebula bloom — top-right */
+    radial-gradient(ellipse at 95% 5%, rgba(var(--oc-gold-rgb), 0.32) 0%, transparent 50%),
+    /* Existing right-side wash + diagonal */
     radial-gradient(80% 100% at 100% 50%, rgba(var(--oc-gold-rgb), 0.18), transparent 70%),
     linear-gradient(225deg, rgba(var(--oc-gold-rgb), 0.10), rgba(var(--oc-gold-rgb), 0.02));
   border: 1px solid rgba(var(--oc-gold-rgb), 0.35);
   box-shadow: inset 0 0 40px rgba(var(--oc-gold-rgb), 0.06);
 }
+.oc-cta--gold .oc-cta-icon { --cta-glow: rgba(var(--oc-gold-rgb), 0.35); }
 .oc-cta--gold:hover {
   border-color: var(--oc-gold);
   background:
     radial-gradient(80% 100% at 100% 50%, rgba(var(--oc-gold-rgb), 0.28), transparent 70%),
     linear-gradient(225deg, rgba(var(--oc-gold-rgb), 0.14), rgba(var(--oc-gold-rgb), 0.04));
 }
-.oc-cta--gold .oc-cta-eyebrow,
-.oc-cta--gold .oc-cta-title,
+/* Phase X: eyebrow + title dropped (see cyan equivalent above). */
 .oc-cta--gold .oc-cta-arrow { color: var(--oc-gold); }
 
 /* ── Controls ───────────────────────────────────────────── */
@@ -358,17 +497,37 @@
   transform: translateY(-50%);
   z-index: 5;
   padding: 0;
+  /* Phase T (2026-05-31): resting opacity dropped to 0.4 so the arrows
+     recede behind slide content (headline / CTA cards). :hover and
+     :focus-visible below brighten them back to full. The transition:all
+     above already animates opacity. */
+  opacity: 0.4;
 }
-.oc-nav:hover { border-color: var(--oc-cyan); color: var(--oc-cyan); }
-/* Phase C (2026-05-27, polish 3b): inset 18 → 26 so the arrows have
-   more breathing room from the carousel edge while staying fully
-   inside the component. */
-.oc-nav--prev { left: 26px; }
-.oc-nav--next { right: 26px; }
+.oc-nav:hover,
+.oc-nav:focus-visible {
+  border-color: var(--oc-cyan);
+  color: var(--oc-cyan);
+  /* Phase T (2026-05-31): full opacity on hover/focus so arrows are
+     unambiguously interactive when reached. */
+  opacity: 1;
+}
+/* Phase T (2026-05-31): inset 26 → 10 so the arrows hug the banner's
+   left/right edges and no longer overlap the slide-3 CTA cards or the
+   slides 1/2 headline column. Still fully inside the carousel and
+   clickable; z-index:5 above keeps them on top of slide content. */
+.oc-nav--prev { left: 10px; }
+.oc-nav--next { right: 10px; }
 
 .oc-dots {
   position: absolute;
-  bottom: 22px; left: 50%;
+  /* Phase T (2026-05-31): bottom 22 → -8 drops the dots ~30px so they
+     align with the "QUICK SEARCHES" section label (label centre sits
+     ~6px below the carousel bottom; dot height 4 → bottom:-8 places the
+     dot row 4px below the carousel edge, centre matching the label).
+     .oc-carousel { overflow: visible } (Phase R-fix) means the negative
+     bottom renders outside the carousel without clipping; the dots still
+     sit inside .discover-banner (which extends through the QS section). */
+  bottom: -8px; left: 50%;
   transform: translateX(-50%);
   display: flex; gap: 10px;
   z-index: 5;
@@ -399,7 +558,12 @@
 
 .oc-counter {
   position: absolute;
-  top: 22px; right: 26px;
+  /* Phase S (2026-05-31): top -48 → -23 drops the counter 25px so its
+     CENTRE lands on the collapse-toggle's centre line (per live
+     measurement at 1280px: counter centre was 25px above toggle centre).
+     Counter is in .oc-carousel (not .oc-slides), so the Phase S slide
+     translate doesn't affect it — this shift is independent. */
+  top: -23px; right: 26px;
   font-family: var(--oc-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
@@ -424,7 +588,9 @@
     --oc-min-h: 460px;
     aspect-ratio: auto;
   }
-  .oc-art-orbit, .oc-art-cards { display: none; }
+  /* Phase M (2026-05-30): all decorative art relocated to .discover-banner's
+     .oc-bg-slides layer; its ≤900px display:none equivalent lives in
+     pages/discover.css. Nothing carousel-side to hide here anymore. */
   .oc-cta-grid { grid-template-columns: 1fr; gap: 10px; }
   .oc-cta-icon { width: 96px; height: 96px; }
   .oc-cta-card { padding: 14px 16px; }

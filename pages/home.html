@@ -9,7 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../variables.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="../welcome-popup.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <style>
+    .stars-stat-powered {
+      margin-top: 8px;
+      color: #334155;
+    }
+    .stars-stat-tmdb { color: #00d9ff; }
+    .star-card-role {
+      font-family: 'Barlow', sans-serif;
+      font-size: 8px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 3px;
+    }
+  </style>
 </head>
 <body>
 
@@ -32,10 +50,11 @@
       <span class="nav-logo-text">ORBIT</span>
     </a>
     <div class="nav-links">
-      <a href="../games/arcade.html">ARCADE</a>
+      <a href="../games/arcade.html">DAILY GAMES</a>
       <a href="awards-browse.html">AWARDS</a>
-      <a href="timeline.html">TIMELINE</a>
+      <a href="../index.html">EXPLORE</a>
       <a href="randomizer-hub.html">WHAT TO WATCH</a>
+      <a href="../next-frontier.html">NEXT FRONTIER</a>
       <a href="../index.html">MENU</a>
     </div>
   </nav>
@@ -59,20 +78,15 @@
       <div class="mosaic-vignette-radial"></div>
       <div class="mosaic-vignette-edge"></div>
 
-      <p class="hero-micro-label">FILM DISCOVERY · GAMES · AWARDS · TIMELINES</p>
+      <div class="hero-trio">
+        <span class="hero-trio-word hero-trio--cyan">SEARCH</span>
+        <span class="hero-trio-word hero-trio--white">EXPLORE</span>
+        <span class="hero-trio-word hero-trio--gold">OBSESS</span>
+      </div>
 
-      <h1 class="hero-heading">
-        Chart your<br>
-        <span class="cyan">cinema.</span>
-      </h1>
+      <p class="hero-subtext">Your next favourite film is already out there. ORBIT helps you find it &mdash; through the people who made it, not the algorithm that sold it.</p>
 
-      <div class="hero-divider"></div>
-
-      <p class="hero-tagline">
-        Search any two people in film — actors, directors, composers — and
-        ORBIT maps everywhere their careers collide. Venn diagrams, timelines,
-        awards, trivia games and more.
-      </p>
+      <p class="hero-tagline">A hub for people who love movies. <span class="hero-tagline-accent">Embrace the black hole.</span></p>
 
       <!-- Search Bar -->
       <div class="home-search-wrap" id="home-search-wrap">
@@ -83,35 +97,13 @@
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
           </span>
-          <input type="text" class="hero-search-input" placeholder="Actor, director, film…" autocomplete="off">
+          <input type="text" class="hero-search-input" placeholder="QUICK SEARCH: actors, directors, film…" autocomplete="off">
           <button type="button" class="hero-search-btn">SEARCH</button>
         </form>
         <div class="home-search-dropdown" id="home-search-dropdown"></div>
       </div>
 
-      <!-- Seed suggestions -->
-      <p class="hero-seeds">
-        Try:
-        <span class="seed-link" data-seed="scorsese+deniro">Scorsese + De Niro</span>
-        <span class="seed-link" data-seed="blanchett+pitt">Blanchett + Pitt</span>
-        <span class="seed-link" data-seed="nolan+bale">Nolan + Bale</span>
-      </p>
 
-      <!-- Stats row -->
-      <div class="hero-stats">
-        <div class="stat-box">
-          <span class="stat-number">7,040</span>
-          <span class="stat-label">AWARD ENTRIES</span>
-        </div>
-        <div class="stat-box stat-gold">
-          <span class="stat-number">6</span>
-          <span class="stat-label">GAMES</span>
-        </div>
-        <div class="stat-box stat-purple">
-          <span class="stat-number">400+</span>
-          <span class="stat-label">NEBULA REVIEWS</span>
-        </div>
-      </div>
     </div>
 
     <!-- RIGHT COLUMN -->
@@ -190,107 +182,794 @@
   </section>
 
   <!-- ============================================
-       CURRENTLY IN ORBIT
-  ============================================ -->
-  <section class="home-section home-films">
-    <div class="section-header">
-      <span class="accent-bar cyan"></span>
-      <h2>CURRENTLY IN ORBIT — THIS WEEK'S FIVE</h2>
-      <a href="results.html" class="section-link">VIEW ALL →</a>
-    </div>
-
-    <div class="film-strip">
-      <div class="film-tile">
-        <div class="film-tile-poster">
-          <span class="tile-rank">01</span>
-          <span class="tile-award-badge"></span>
-        </div>
-        <div class="film-tile-info">
-          <span class="tile-title"></span>
-          <span class="tile-year"></span>
-        </div>
-      </div>
-      <div class="film-tile">
-        <div class="film-tile-poster">
-          <span class="tile-rank">02</span>
-          <span class="tile-award-badge"></span>
-        </div>
-        <div class="film-tile-info">
-          <span class="tile-title"></span>
-          <span class="tile-year"></span>
-        </div>
-      </div>
-      <div class="film-tile">
-        <div class="film-tile-poster">
-          <span class="tile-rank">03</span>
-          <span class="tile-award-badge"></span>
-        </div>
-        <div class="film-tile-info">
-          <span class="tile-title"></span>
-          <span class="tile-year"></span>
-        </div>
-      </div>
-      <div class="film-tile">
-        <div class="film-tile-poster">
-          <span class="tile-rank">04</span>
-          <span class="tile-award-badge"></span>
-        </div>
-        <div class="film-tile-info">
-          <span class="tile-title"></span>
-          <span class="tile-year"></span>
-        </div>
-      </div>
-      <div class="film-tile">
-        <div class="film-tile-poster">
-          <span class="tile-rank">05</span>
-          <span class="tile-award-badge"></span>
-        </div>
-        <div class="film-tile-info">
-          <span class="tile-title"></span>
-          <span class="tile-year"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       BRIGHTEST STARS
+       BRIGHTEST STARS — FILMSTRIP CAROUSEL
   ============================================ -->
   <section class="home-section home-actors">
-    <div class="section-header">
-      <span class="accent-bar gold"></span>
-      <h2>BRIGHTEST STARS — IN THE CONSTELLATION</h2>
-      <a href="timeline.html" class="section-link">EXPLORE TIMELINES →</a>
+    <div class="stars-header">
+      <div class="stars-header-left">
+        <div class="stars-eyebrow">BRIGHTEST STARS</div>
+        <h2 class="stars-heading">Follow the stars. Find the films.</h2>
+        <div class="stars-timeline-wrap">
+          <a href="#" class="section-link stars-timeline-link" id="stars-timeline-toggle">EXPLORE TIMELINES →</a>
+          <div class="stars-search-box" id="stars-search-box">
+            <input type="text" class="stars-search-input" id="stars-search-input" placeholder="Search an actor or director..." autocomplete="off">
+            <div class="stars-search-results" id="stars-search-results"></div>
+          </div>
+        </div>
+      </div>
+      <div class="stars-header-right">
+        <div class="stars-stat-lines">
+          <span><span class="stars-stat-accent">1,000,000+</span> STARS</span>
+          <span><span class="stars-stat-accent">900,000+</span> FILMS</span>
+          <span><span class="stars-stat-accent">130</span> YEARS OF CINEMA</span>
+          <span class="stars-stat-powered">Powered by <span class="stars-stat-tmdb">TMDB</span></span>
+        </div>
+      </div>
     </div>
 
-    <div class="actor-strip">
-      <div class="actor-tile">
-        <div class="actor-portrait"></div>
-        <span class="actor-name"></span>
-        <span class="actor-subtitle"></span>
+    <div class="star-carousel">
+      <div class="star-carousel-track" id="star-carousel-track">
+        <!-- Cards injected by inline script below -->
       </div>
-      <div class="actor-tile">
-        <div class="actor-portrait"></div>
-        <span class="actor-name"></span>
-        <span class="actor-subtitle"></span>
-      </div>
-      <div class="actor-tile">
-        <div class="actor-portrait"></div>
-        <span class="actor-name"></span>
-        <span class="actor-subtitle"></span>
-      </div>
-      <div class="actor-tile">
-        <div class="actor-portrait"></div>
-        <span class="actor-name"></span>
-        <span class="actor-subtitle"></span>
-      </div>
-      <div class="actor-tile">
-        <div class="actor-portrait"></div>
-        <span class="actor-name"></span>
-        <span class="actor-subtitle"></span>
-      </div>
+      <div class="star-carousel-fade star-carousel-fade--left"></div>
+      <div class="star-carousel-fade star-carousel-fade--right"></div>
     </div>
   </section>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var ACTORS = [
+      // Actors (25)
+      { id: 76788, name: 'Dev Patel', role: 'Actor' },
+      { id: 524, name: 'Natalie Portman', role: 'Actor' },
+      { id: 1337, name: 'Tony Leung Chiu-wai', role: 'Actor' },
+      { id: 19492, name: 'Viola Davis', role: 'Actor' },
+      { id: 6193, name: 'Leonardo DiCaprio', role: 'Actor' },
+      { id: 955, name: 'Penélope Cruz', role: 'Actor' },
+      { id: 1229, name: 'Jeff Bridges', role: 'Actor' },
+      { id: 39187, name: 'Olivia Colman', role: 'Actor' },
+      { id: 5292, name: 'Denzel Washington', role: 'Actor' },
+      { id: 1775557, name: 'Yalitza Aparicio', role: 'Actor' },
+      { id: 287, name: 'Brad Pitt', role: 'Actor' },
+      { id: 643, name: 'Gong Li', role: 'Actor' },
+      { id: 3894, name: 'Christian Bale', role: 'Actor' },
+      { id: 36592, name: 'Saoirse Ronan', role: 'Actor' },
+      { id: 762, name: 'Ali Suliman', role: 'Actor' },
+      { id: 3063, name: 'Tilda Swinton', role: 'Actor' },
+      { id: 1190668, name: 'Timothée Chalamet', role: 'Actor' },
+      { id: 5294, name: 'Chiwetel Ejiofor', role: 'Actor' },
+      { id: 2227, name: 'Nicole Kidman', role: 'Actor' },
+      { id: 172069, name: 'Chadwick Boseman', role: 'Actor' },
+      { id: 1231, name: 'Julianne Moore', role: 'Actor' },
+      { id: 932967, name: 'Mahershala Ali', role: 'Actor' },
+      { id: 31, name: 'Tom Hanks', role: 'Actor' },
+      { id: 505710, name: 'Zendaya', role: 'Actor' },
+      { id: 11856, name: 'Daniel Day-Lewis', role: 'Actor' },
+      { id: 77234, name: 'Priyanka Chopra', role: 'Actor' },
+      { id: 380, name: 'Robert De Niro', role: 'Actor' },
+      { id: 1625558, name: 'Awkwafina', role: 'Actor' },
+      { id: 3910, name: 'Frances McDormand', role: 'Actor' },
+      { id: 30614, name: 'Ryan Gosling', role: 'Actor' },
+      { id: 1267329, name: 'Lupita Nyong\'o', role: 'Actor' },
+      { id: 112, name: 'Cate Blanchett', role: 'Actor' },
+      { id: 1233, name: 'Philip Seymour Hoffman', role: 'Actor' },
+      { id: 73421, name: 'Joaquin Phoenix', role: 'Actor' },
+      { id: 5064, name: 'Meryl Streep', role: 'Actor' },
+      // Directors (7)
+      { id: 21684, name: 'Bong Joon-ho', role: 'Director' },
+      { id: 45400, name: 'Greta Gerwig', role: 'Director' },
+      { id: 12453, name: 'Wong Kar-wai', role: 'Director' },
+      { id: 5281, name: 'Spike Lee', role: 'Director' },
+      { id: 68813, name: 'Céline Sciamma', role: 'Director' },
+      { id: 56208, name: 'Lucrecia Martel', role: 'Director' },
+      { id: 10099, name: 'Park Chan-wook', role: 'Director' },
+      // Composers (3)
+      { id: 947, name: 'Hans Zimmer', role: 'Composer' },
+      { id: 1259, name: 'Ennio Morricone', role: 'Composer' },
+      { id: 11382, name: 'Ryuichi Sakamoto', role: 'Composer' }
+    ];
+
+    // Fisher-Yates shuffle — runs every page load
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+    shuffle(ACTORS);
+
+    var CACHE_KEY = 'star_carousel_cache_v3';
+    var CACHE_TTL = 2 * 60 * 60 * 1000; // 2 hours
+    var CARD_W = 202;
+    var track = document.getElementById('star-carousel-track');
+
+    function getInitials(name) {
+      return name.split(' ').map(function (w) { return w[0]; }).join('');
+    }
+
+    function buildCard(actor, imgUrl) {
+      var card = document.createElement('a');
+      card.className = 'star-card';
+      card.href = 'people-profile.html?id=' + actor.id;
+
+      if (imgUrl) {
+        var img = document.createElement('img');
+        img.className = 'star-card-img';
+        img.src = imgUrl;
+        img.alt = actor.name;
+        img.loading = 'lazy';
+        img.draggable = false;
+        card.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'star-card-placeholder';
+        ph.textContent = getInitials(actor.name);
+        card.appendChild(ph);
+      }
+
+      var label = document.createElement('div');
+      label.className = 'star-card-name';
+      var parts = actor.name.split(' ');
+      if (parts.length > 1) {
+        var first = parts.slice(0, -1).join(' ');
+        var last = parts[parts.length - 1];
+        label.innerHTML = first + '<br>' + last;
+      } else {
+        label.textContent = actor.name;
+      }
+      if (actor.role && actor.role !== 'Actor') {
+        var roleEl = document.createElement('div');
+        roleEl.className = 'star-card-role';
+        roleEl.textContent = actor.role;
+        label.appendChild(roleEl);
+      }
+      card.appendChild(label);
+
+      var bar = document.createElement('div');
+      bar.className = 'star-card-hover-bar';
+      card.appendChild(bar);
+
+      return card;
+    }
+
+    function populateTrack(data) {
+      track.innerHTML = '';
+      // Build two copies for seamless loop
+      for (var copy = 0; copy < 2; copy++) {
+        ACTORS.forEach(function (actor) {
+          var imgUrl = data[actor.id] || null;
+          track.appendChild(buildCard(actor, imgUrl));
+        });
+      }
+      startScroll();
+    }
+
+    // ── Auto-scroll ──
+    var scrollPos = 0;
+    var paused = false;
+    var setWidth = ACTORS.length * CARD_W;
+
+    function startScroll() {
+      var container = track.parentElement;
+      container.addEventListener('mouseenter', function () { paused = true; });
+      container.addEventListener('mouseleave', function () { paused = false; });
+
+      function step() {
+        if (!paused) {
+          scrollPos += 0.4;
+          if (scrollPos >= setWidth) scrollPos -= setWidth;
+          track.style.transform = 'translateX(' + (-scrollPos) + 'px)';
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ── Fetch with cache ──
+    function loadActors() {
+      var cached = null;
+      try {
+        var raw = sessionStorage.getItem(CACHE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed.ts && Date.now() - parsed.ts < CACHE_TTL) {
+            cached = parsed.data;
+          }
+        }
+      } catch (e) { /* ignore */ }
+
+      if (cached) {
+        populateTrack(cached);
+        return;
+      }
+
+      // Show placeholders immediately while fetching
+      var placeholderData = {};
+      populateTrack(placeholderData);
+
+      var apiKey = (typeof TMDB_API_KEY !== 'undefined' ? TMDB_API_KEY : '') || window.TMDB_KEY || '';
+      if (!apiKey) return;
+
+      var results = {};
+      var done = 0;
+
+      ACTORS.forEach(function (actor) {
+        fetch('https://api.themoviedb.org/3/person/' + actor.id + '?api_key=' + apiKey)
+          .then(function (r) { return r.json(); })
+          .then(function (json) {
+            if (json.profile_path) {
+              results[actor.id] = 'https://image.tmdb.org/t/p/w185' + json.profile_path;
+            } else {
+              console.warn('[Star Carousel] No profile_path for:', actor.name, '(ID:', actor.id + ')');
+            }
+          })
+          .catch(function () {
+            console.warn('[Star Carousel] Fetch failed for:', actor.name, '(ID:', actor.id + ')');
+          })
+          .finally(function () {
+            done++;
+            if (done === ACTORS.length) {
+              var success = Object.keys(results).length;
+              var failed = ACTORS.length - success;
+              console.log('[Star Carousel] Images loaded:', success + '/' + ACTORS.length, '| Failed:', failed);
+              try {
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: results }));
+              } catch (e) { /* quota */ }
+              scrollPos = 0;
+              populateTrack(results);
+            }
+          });
+      });
+    }
+
+    window.addEventListener('load', loadActors);
+  })();
+  </script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var toggle = document.getElementById('stars-timeline-toggle');
+    var box = document.getElementById('stars-search-box');
+    var input = document.getElementById('stars-search-input');
+    var results = document.getElementById('stars-search-results');
+    var timer = null;
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = box.classList.toggle('open');
+      if (open) {
+        input.focus();
+        toggle.textContent = 'CLOSE SEARCH \u2715';
+      } else {
+        toggle.textContent = 'EXPLORE TIMELINES \u2192';
+        input.value = '';
+        results.innerHTML = '';
+        results.classList.remove('open');
+      }
+    });
+
+    input.addEventListener('input', function () {
+      clearTimeout(timer);
+      var q = input.value.trim();
+      if (q.length < 2) {
+        results.innerHTML = '';
+        results.classList.remove('open');
+        return;
+      }
+      timer = setTimeout(function () { searchPeople(q); }, 300);
+    });
+
+    function searchPeople(query) {
+      var apiKey = (typeof TMDB_API_KEY !== 'undefined' ? TMDB_API_KEY : '') || '';
+      if (!apiKey) return;
+
+      fetch('https://api.themoviedb.org/3/search/person?api_key=' + apiKey + '&query=' + encodeURIComponent(query))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var people = (data.results || []).slice(0, 6);
+          results.innerHTML = '';
+          if (!people.length) {
+            results.innerHTML = '<div class="stars-search-empty">No results</div>';
+            results.classList.add('open');
+            return;
+          }
+          people.forEach(function (p) {
+            var row = document.createElement('a');
+            row.className = 'stars-search-row';
+            row.href = 'timeline.html?search=' + encodeURIComponent(p.name) + '&type=person';
+
+            var thumb = document.createElement('div');
+            thumb.className = 'stars-search-thumb';
+            if (p.profile_path) {
+              thumb.style.backgroundImage = 'url(https://image.tmdb.org/t/p/w92' + p.profile_path + ')';
+            }
+
+            var info = document.createElement('div');
+            info.className = 'stars-search-info';
+            var nameEl = document.createElement('div');
+            nameEl.className = 'stars-search-name';
+            nameEl.textContent = p.name;
+            var dept = document.createElement('div');
+            dept.className = 'stars-search-dept';
+            dept.textContent = p.known_for_department || 'Acting';
+            info.appendChild(nameEl);
+            info.appendChild(dept);
+
+            row.appendChild(thumb);
+            row.appendChild(info);
+            results.appendChild(row);
+          });
+          results.classList.add('open');
+        })
+        .catch(function () { /* skip */ });
+    }
+
+    // Close on click outside
+    document.addEventListener('click', function (e) {
+      if (!box.contains(e.target) && e.target !== toggle) {
+        box.classList.remove('open');
+        toggle.textContent = 'EXPLORE TIMELINES \u2192';
+        input.value = '';
+        results.innerHTML = '';
+        results.classList.remove('open');
+      }
+    });
+  })();
+  </script>
+
+  <!-- ============================================
+       PICK YOUR ORBIT
+  ============================================ -->
+  <section class="home-section home-features" id="pyo-section">
+
+    <!-- Mosaic background — movie posters -->
+    <div class="pyo-mosaic" id="pyo-mosaic"></div>
+    <div class="pyo-mosaic-overlay"></div>
+
+    <div class="pyo-header">
+      <h2 class="pyo-heading">PICK YOUR ORBIT</h2>
+      <p class="pyo-sub">How ORBIT helps you explore cinema</p>
+    </div>
+
+    <!-- ROW 1 -->
+    <div class="pyo-row pyo-row-1">
+      <div class="pyo-block" data-pyo="0" data-href="results.html" data-color="#00d9ff" data-name="QUICK SEARCH" data-glyph="og-eye">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="1" data-href="randomizer-hub.html" data-color="#00d9ff" data-name="WHAT TO WATCH" data-glyph="og-shuffle">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="2" data-href="#" data-color="#ffd700" data-name="YOUR NEXT FRONTIER" data-glyph="og-rocket">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="3" data-href="awards-browse.html" data-color="#f1f5f9" data-name="AWARDS" data-glyph="og-star">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="pyo-row pyo-row-2">
+      <div class="pyo-block" data-pyo="4" data-href="towatchiverse.html" data-color="#f1f5f9" data-name="TOWATCHIVERSE" data-glyph="og-clipboard">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="5" data-href="../games/arcade.html" data-color="#ffd700" data-name="THE ARCADE" data-glyph="og-dice">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="6" data-href="../games/arcade.html" data-color="#00d9ff" data-name="TRIVIA" data-glyph="og-brain">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+      <div class="pyo-block" data-pyo="7" data-href="#" data-color="#a855f7" data-name="EVERYTHING ORBIT" data-glyph="og-galaxy">
+        <canvas class="pyo-canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Popup overlay -->
+    <div class="pyo-overlay" id="pyo-overlay" data-orbit-popup>
+      <!-- Default popup -->
+      <div class="pyo-popup" id="pyo-popup">
+        <div class="pyo-popup-bar" id="pyo-popup-bar"></div>
+        <div class="pyo-popup-header">
+          <button class="pyo-popup-close orbit-close" id="pyo-popup-close" aria-label="Close">✕</button>
+          <div class="pyo-popup-eyebrow" id="pyo-popup-eyebrow"></div>
+          <div class="pyo-popup-name" id="pyo-popup-name"></div>
+          <p class="pyo-popup-desc" id="pyo-popup-desc"></p>
+        </div>
+        <div class="pyo-popup-actions">
+          <button class="pyo-popup-cta" id="pyo-popup-cta"></button>
+          <div class="pyo-popup-nav">
+            <button class="pyo-popup-arrow" id="pyo-popup-prev">←</button>
+            <div class="pyo-popup-dots" id="pyo-popup-dots"></div>
+            <button class="pyo-popup-arrow" id="pyo-popup-next">→</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arcade popup (custom layout) -->
+      <div class="arc-popup" id="arc-popup">
+        <!-- 1. Header row -->
+        <div class="arc-header">
+          <div class="arc-header-left">
+            <span class="arc-pip"></span>
+            <span class="arc-header-label">OBSESS · THE ARCADE</span>
+          </div>
+          <div class="arc-header-right">
+            <span class="arc-counter" id="arc-counter">6 / 8</span>
+            <button class="arc-close orbit-close" id="arc-close" aria-label="Close">✕</button>
+          </div>
+        </div>
+
+        <!-- 2. Visual panel -->
+        <div class="arc-visual">
+          <span class="arc-ghost og og-dice"></span>
+          <div class="arc-logo-row">
+            <div class="arc-logo-mark">
+              <div class="arc-logo-ring"></div>
+              <div class="arc-logo-inner"></div>
+              <div class="arc-logo-core"></div>
+            </div>
+            <span class="arc-logo-label">THE ARCADE</span>
+          </div>
+          <div class="arc-trio">
+            <div class="arc-trio-line arc-trio--gold">KNOW YOUR FILMS.</div>
+            <div class="arc-trio-line arc-trio--white">BEAT YOUR STREAK.</div>
+            <div class="arc-trio-line arc-trio--cyan">PROVE IT DAILY.</div>
+          </div>
+        </div>
+
+        <!-- 3. Content row -->
+        <div class="arc-content">
+          <div class="arc-content-desc">
+            Six daily games powered by real film data. Each one tests a different corner of your cinema knowledge — streaks, stats and personal bests all tracked.
+          </div>
+          <div class="arc-content-right">
+            <div class="arc-content-pills">
+              <div class="arc-pill">
+                <div class="arc-orbit-icon" style="--arc-accent:#00d9ff; --arc-accent-glow:rgba(0,217,255,0.25)">
+                  <div class="arc-ring-outer"></div>
+                  <div class="arc-ring-inner"></div>
+                  <svg class="arc-pill-glyph" viewBox="0 0 24 24" fill="#00d9ff"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg>
+                </div>
+                <span class="arc-pill-label">CONSTELLATION</span>
+              </div>
+              <div class="arc-pill">
+                <div class="arc-orbit-icon" style="--arc-accent:#ff6b35; --arc-accent-glow:rgba(255,107,53,0.25)">
+                  <div class="arc-ring-outer"></div>
+                  <div class="arc-ring-inner"></div>
+                  <svg class="arc-pill-glyph" viewBox="0 0 24 24" fill="none" stroke="#ff6b35" stroke-width="2.5"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg>
+                </div>
+                <span class="arc-pill-label">COLLISION COURSE</span>
+              </div>
+              <div class="arc-pill">
+                <div class="arc-orbit-icon" style="--arc-accent:#a855f7; --arc-accent-glow:rgba(168,85,247,0.25)">
+                  <div class="arc-ring-outer"></div>
+                  <div class="arc-ring-inner"></div>
+                  <svg class="arc-pill-glyph" viewBox="0 0 24 24" fill="#a855f7"><path d="M12 2L22 12L12 22L2 12z"/></svg>
+                </div>
+                <span class="arc-pill-label">MASTERMIND</span>
+              </div>
+            </div>
+            <button class="arc-cta" id="arc-cta">Enter the Arcade →</button>
+          </div>
+        </div>
+
+        <!-- 4. Nav bar -->
+        <div class="arc-nav">
+          <div class="arc-nav-left">
+            <button class="pyo-popup-arrow" id="arc-prev">←</button>
+            <div class="pyo-popup-dots" id="arc-dots"></div>
+            <button class="pyo-popup-arrow" id="arc-next">→</button>
+            <span class="arc-nav-counter">6 of 8</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section bottom band -->
+    <div class="pyo-bottom-band">
+      <span class="pyo-bottom-left">A hub for people who actually love movies. <span class="pyo-bottom-cyan">Embrace the black hole.</span></span>
+      <span class="pyo-bottom-right">Continue exploring ↓</span>
+    </div>
+    <div class="pyo-bottom-fade"></div>
+  </section>
+
+  <script>
+  (function () {
+    var DATA = [
+      { name: 'QUICK SEARCH', eyebrow: 'DISCOVER', tier: 'cyan',
+        desc: 'Every actor, director and composer in cinema. Find them in seconds — then follow them into their entire filmography.',
+        cta: 'Start Searching →', href: 'results.html' },
+      { name: 'WHAT TO WATCH', eyebrow: 'DISCOVER', tier: 'cyan',
+        desc: "Can't decide? Let ORBIT pick tonight's film for you — filtered by mood, genre, or pure cosmic chance.",
+        cta: 'Randomise Now →', href: 'randomizer-hub.html' },
+      { name: 'YOUR NEXT FRONTIER', eyebrow: 'OBSESS', tier: 'gold',
+        desc: 'Every film worth seeing in the next 12 months. Plan your cinematic calendar before everyone else does.',
+        cta: 'Explore Releases →', href: '#' },
+      { name: 'AWARDS', eyebrow: 'EXPLORE', tier: 'white',
+        desc: 'Time travel through the history of award winning cinema. 7,040 entries across six major festivals — Oscars to Berlin.',
+        cta: 'Browse Awards →', href: 'awards-browse.html' },
+      { name: 'TOWATCHIVERSE', eyebrow: 'EXPLORE', tier: 'white',
+        desc: "Collate the movies you think you'll love — and come back to them later. Your watchlist, your liked films, your watched history.",
+        cta: 'Open Towatchiverse →', href: 'towatchiverse.html' },
+      { name: 'THE ARCADE', eyebrow: 'OBSESS', tier: 'gold',
+        desc: 'Six games built from real film data. Your knowledge vs the canon. Daily puzzles, streaks, leaderboards.',
+        cta: 'Enter the Arcade →', href: '../games/arcade.html' },
+      { name: 'TRIVIA', eyebrow: 'DISCOVER', tier: 'cyan',
+        desc: 'How well do you actually know cinema? Put yourself to the test — one film at a time, one question at a time.',
+        cta: 'Test Yourself →', href: '../games/arcade.html' },
+      { name: 'EVERYTHING ORBIT', eyebrow: 'MISSION BRIEFING', tier: 'purple',
+        desc: 'Every tool, every game, every corner of ORBIT — mapped. The full mission briefing for anyone who wants to go deeper.',
+        cta: 'Full Mission Briefing →', href: '#' }
+    ];
+
+    var COLORS = { cyan: '#00d9ff', white: '#f1f5f9', gold: '#ffd700', purple: '#a855f7' };
+    var overlay = document.getElementById('pyo-overlay');
+    var defaultPopup = document.getElementById('pyo-popup');
+    var arcadePopup = document.getElementById('arc-popup');
+    var current = 0;
+    var ARCADE_IDX = 5;
+
+    function buildDots(container, idx, color) {
+      container.innerHTML = '';
+      for (var i = 0; i < 8; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'pyo-dot' + (i === idx ? ' pyo-dot-active' : '');
+        if (i === idx) dot.style.background = color;
+        dot.setAttribute('data-i', i);
+        container.appendChild(dot);
+      }
+    }
+
+    function show(idx) {
+      current = idx;
+      var d = DATA[idx];
+      var isArcade = (idx === ARCADE_IDX);
+
+      // Toggle which popup is visible
+      defaultPopup.style.display = isArcade ? 'none' : 'block';
+      arcadePopup.style.display = isArcade ? 'block' : 'none';
+
+      if (isArcade) {
+        // Arcade popup — dots
+        buildDots(document.getElementById('arc-dots'), idx, '#ffd700');
+      } else {
+        // Default popup
+        document.getElementById('pyo-popup-bar').style.background = COLORS[d.tier];
+        document.getElementById('pyo-popup-eyebrow').textContent = d.eyebrow;
+        document.getElementById('pyo-popup-eyebrow').style.color = COLORS[d.tier];
+        document.getElementById('pyo-popup-name').textContent = d.name;
+        document.getElementById('pyo-popup-desc').textContent = d.desc;
+        var cta = document.getElementById('pyo-popup-cta');
+        cta.textContent = d.cta;
+        cta.style.background = COLORS[d.tier];
+        cta.style.color = d.tier === 'purple' ? '#fff' : '#000';
+        cta.onclick = function () { window.location.href = d.href; };
+        buildDots(document.getElementById('pyo-popup-dots'), idx, COLORS[d.tier]);
+      }
+
+      overlay.classList.add('pyo-open');
+    }
+
+    // Block clicks
+    document.querySelectorAll('.pyo-block[data-pyo]').forEach(function (b) {
+      b.addEventListener('click', function () { show(parseInt(b.dataset.pyo)); });
+    });
+
+    // Rule 17: shared Black Hole exit trigger.
+    function triggerOrbitClose(btn) {
+      if (overlay.classList.contains('orbit-popup-closing')) return;
+      if (btn) btn.classList.add('closing');
+      overlay.classList.add('orbit-popup-closing');
+      var reduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () {
+        if (btn) btn.classList.remove('closing');
+        overlay.classList.remove('orbit-popup-closing');
+        overlay.classList.remove('pyo-open');
+      }, reduced ? 200 : 600);
+    }
+
+    // Close — default
+    document.getElementById('pyo-popup-close').addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      triggerOrbitClose(this);
+    });
+    // Close — arcade
+    document.getElementById('arc-close').addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      triggerOrbitClose(this);
+    });
+    // Close — overlay click
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) {
+        var btn = overlay.querySelector('.orbit-close');
+        triggerOrbitClose(btn);
+      }
+    });
+
+    // Nav — default
+    document.getElementById('pyo-popup-prev').addEventListener('click', function () {
+      show((current - 1 + 8) % 8);
+    });
+    document.getElementById('pyo-popup-next').addEventListener('click', function () {
+      show((current + 1) % 8);
+    });
+    document.getElementById('pyo-popup-dots').addEventListener('click', function (e) {
+      if (e.target.dataset.i !== undefined) show(parseInt(e.target.dataset.i));
+    });
+
+    // Nav — arcade
+    document.getElementById('arc-prev').addEventListener('click', function () {
+      show((current - 1 + 8) % 8);
+    });
+    document.getElementById('arc-next').addEventListener('click', function () {
+      show((current + 1) % 8);
+    });
+    document.getElementById('arc-dots').addEventListener('click', function (e) {
+      if (e.target.dataset.i !== undefined) show(parseInt(e.target.dataset.i));
+    });
+    document.getElementById('arc-cta').addEventListener('click', function () {
+      window.location.href = '../games/arcade.html';
+    });
+  })();
+
+  // ── PYO Canvas knockout renderer ──
+  (function () {
+    // Extract SVG data URL from orbit-glyphs.css computed style
+    function getGlyphSVG(glyphClass) {
+      var tmp = document.createElement('span');
+      tmp.className = 'og ' + glyphClass;
+      tmp.style.position = 'absolute';
+      tmp.style.left = '-9999px';
+      document.body.appendChild(tmp);
+      var bg = getComputedStyle(tmp).backgroundImage;
+      document.body.removeChild(tmp);
+      if (!bg || bg === 'none') return null;
+      // Extract URL from url("...")
+      var match = bg.match(/url\(["']?(.*?)["']?\)/);
+      return match ? match[1] : null;
+    }
+
+    function renderBlock(block) {
+      var canvas = block.querySelector('.pyo-canvas');
+      if (!canvas) return;
+      var dpr = window.devicePixelRatio || 1;
+      var w = block.offsetWidth;
+      var h = block.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      var ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      var color = block.dataset.color || '#00d9ff';
+      var name = block.dataset.name || '';
+      var glyphClass = block.dataset.glyph || '';
+
+      // 1. Fill with block colour
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, w, h);
+
+      // 2. Knock out the name text
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.font = '900 22px Orbitron, monospace';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'rgba(0,0,0,1)';
+
+      // Position: text on right side, vertically centered
+      var textX = 90;
+      var textY = h / 2 - 10;
+      ctx.fillText(name, textX, textY);
+
+      // 3. Knock out hint text
+      ctx.font = '400 14px Barlow, sans-serif';
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillText('Tap to explore →', textX, textY + 28);
+
+      // 4. Knock out glyph
+      if (glyphClass) {
+        var svgUrl = getGlyphSVG(glyphClass);
+        if (svgUrl) {
+          var img = new Image();
+          img.onload = function () {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.drawImage(img, 12, (h - 68) / 2, 68, 68);
+          };
+          img.src = svgUrl;
+        }
+      }
+    }
+
+    function renderAll() {
+      document.querySelectorAll('.pyo-block[data-name]').forEach(renderBlock);
+    }
+
+    // Render after fonts load
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(renderAll);
+    } else {
+      window.addEventListener('load', renderAll);
+    }
+
+    // Re-render on resize
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderAll, 200);
+    });
+  })();
+
+  // ── PYO Mosaic poster loader ──
+  (function () {
+    var CACHE_KEY = 'pyo_mosaic_posters';
+    var CACHE_TTL = 2 * 60 * 60 * 1000;
+    var CELL_COUNT = 80; // 16×5
+    var grid = document.getElementById('pyo-mosaic');
+
+    function buildCells(paths) {
+      grid.innerHTML = '';
+      for (var i = 0; i < CELL_COUNT; i++) {
+        var cell = document.createElement('span');
+        if (paths && paths[i % paths.length]) {
+          cell.style.backgroundImage = 'url(https://image.tmdb.org/t/p/w92' + paths[i % paths.length] + ')';
+        }
+        grid.appendChild(cell);
+      }
+    }
+
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+      }
+      return arr;
+    }
+
+    function load() {
+      var apiKey = (typeof TMDB_API_KEY !== 'undefined' ? TMDB_API_KEY : '') || '';
+
+      try {
+        var raw = sessionStorage.getItem(CACHE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Date.now() - parsed.ts < CACHE_TTL) {
+            buildCells(shuffle(parsed.data.slice()));
+            return;
+          }
+        }
+      } catch (e) {}
+
+      // Show placeholder cells first
+      buildCells(null);
+
+      if (!apiKey) return;
+
+      Promise.all([
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=' + apiKey + '&page=3').then(function (r) { return r.json(); }),
+        fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=' + apiKey + '&page=2').then(function (r) { return r.json(); }),
+        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=' + apiKey + '&page=1').then(function (r) { return r.json(); })
+      ]).then(function (results) {
+        var paths = [];
+        results.forEach(function (d) {
+          (d.results || []).forEach(function (m) {
+            if (m.poster_path) paths.push(m.poster_path);
+          });
+        });
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: paths }));
+        } catch (e) {}
+        buildCells(shuffle(paths));
+      }).catch(function () {});
+    }
+
+    window.addEventListener('load', load);
+  })();
+  </script>
 
   <!-- ============================================
        THE PRESTIGE CIRCUIT
@@ -298,7 +977,7 @@
   <section class="home-section home-awards">
     <div class="section-header">
       <span class="accent-bar gold"></span>
-      <h2>THE PRESTIGE CIRCUIT — SIX FESTIVALS · 7,040 ENTRIES</h2>
+      <h2>THE PRESTIGE CIRCUIT — SIX FESTIVALS · <span data-award-stat="total">10,357</span> ENTRIES</h2>
       <a href="awards-browse.html" class="section-link">BROWSE AWARDS →</a>
     </div>
 
@@ -306,43 +985,43 @@
       <div class="glyph-cell">
         <span class="og og-star gold"></span>
         <span class="glyph-label">ACADEMY</span>
-        <span class="glyph-count">2,847</span>
+        <span class="glyph-count" data-award-stat="Oscar">4,538</span>
       </div>
       <div class="glyph-cell">
         <span class="og og-globe gold"></span>
         <span class="glyph-label">GOLDEN GLOBE</span>
-        <span class="glyph-count">1,204</span>
+        <span class="glyph-count" data-award-stat="GoldenGlobe">2,171</span>
       </div>
       <div class="glyph-cell">
         <span class="og og-film cyan"></span>
         <span class="glyph-label">BAFTA</span>
-        <span class="glyph-count">1,188</span>
+        <span class="glyph-count" data-award-stat="BAFTA">1,844</span>
       </div>
       <div class="glyph-cell">
         <span class="og og-palm green"></span>
         <span class="glyph-label">CANNES</span>
-        <span class="glyph-count">892</span>
+        <span class="glyph-count" data-award-stat="Cannes">892</span>
       </div>
       <div class="glyph-cell">
         <span class="og og-lion purple"></span>
         <span class="glyph-label">VENICE</span>
-        <span class="glyph-count">548</span>
+        <span class="glyph-count" data-award-stat="Venice">548</span>
       </div>
       <div class="glyph-cell">
         <span class="og og-bear amber"></span>
         <span class="glyph-label">BERLIN</span>
-        <span class="glyph-count">361</span>
+        <span class="glyph-count" data-award-stat="Berlin">364</span>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       WHERE YOUR SEARCH TAKES YOU
+       SEE IT IN ACTION
   ============================================ -->
   <section class="home-section home-showcase">
     <div class="section-header">
       <span class="accent-bar purple"></span>
-      <h2>WHERE YOUR SEARCH TAKES YOU</h2>
+      <h2>SEE IT IN ACTION</h2>
       <p class="section-subtitle">Every result opens a universe of tools</p>
     </div>
 
@@ -449,84 +1128,67 @@
   </section>
 
   <!-- ============================================
-       FEATURES + STATS
+       CURRENTLY IN ORBIT
   ============================================ -->
-  <section class="home-section home-features">
-
-    <!-- LEFT: YOUR INSTRUMENTS -->
-    <div class="features-left">
+  <section class="home-section home-films">
+    <div class="section-header">
       <span class="accent-bar cyan"></span>
-      <h2>YOUR INSTRUMENTS</h2>
+      <h2>CURRENTLY IN ORBIT — THIS WEEK'S FIVE</h2>
+      <a href="results.html" class="section-link">VIEW ALL →</a>
+    </div>
 
-      <div class="features-grid">
-        <div class="feature-box">
-          <span class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-          </span>
-          <h3>QUICK SEARCH</h3>
-          <p>Find any actor, director or composer — results appear instantly as you type.</p>
+    <div class="film-strip">
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">01</span>
+          <span class="tile-award-badge"></span>
         </div>
-        <div class="feature-box">
-          <span class="feature-icon"><span class="og og-film"></span></span>
-          <h3>SACRED TIMELINE</h3>
-          <p>Two careers plotted side-by-side across decades, with every collision highlighted.</p>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
         </div>
-        <div class="feature-box">
-          <span class="feature-icon"><span class="og og-galaxy"></span></span>
-          <h3>COSMIC VENN</h3>
-          <p>Interactive Venn diagrams revealing every shared film between two people.</p>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">02</span>
+          <span class="tile-award-badge"></span>
         </div>
-        <div class="feature-box">
-          <span class="feature-icon"><span class="og og-sparkle gold"></span></span>
-          <h3>AWARDS</h3>
-          <p>Seven thousand entries across six major festivals — Oscars to Berlin.</p>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
         </div>
-        <div class="feature-box">
-          <span class="feature-icon"><span class="og og-dice green"></span></span>
-          <h3>THE ARCADE</h3>
-          <p>Six trivia and guessing games built from real film data. Test your knowledge.</p>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">03</span>
+          <span class="tile-award-badge"></span>
         </div>
-        <div class="feature-box">
-          <span class="feature-icon"><span class="og og-planet purple"></span></span>
-          <h3>NEBULA</h3>
-          <p>Community-powered micro-reviews. Rate any film in three words and see what sticks.</p>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">04</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
+        </div>
+      </div>
+      <div class="film-tile">
+        <div class="film-tile-poster">
+          <span class="tile-rank">05</span>
+          <span class="tile-award-badge"></span>
+        </div>
+        <div class="film-tile-info">
+          <span class="tile-title"></span>
+          <span class="tile-year"></span>
         </div>
       </div>
     </div>
-
-    <!-- RIGHT: THE NUMBERS -->
-    <div class="features-right">
-      <div class="features-right-backdrop"></div>
-      <span class="accent-bar purple"></span>
-      <h2>THE NUMBERS</h2>
-
-      <div class="stat-blocks">
-        <div class="stat-block cyan">
-          <span class="stat-block-number">7,040</span>
-          <span class="stat-block-label">AWARD ENTRIES INDEXED</span>
-        </div>
-        <div class="stat-block gold">
-          <span class="stat-block-number">6</span>
-          <span class="stat-block-label">ARCADE GAMES</span>
-        </div>
-        <div class="stat-block purple">
-          <span class="stat-block-number">400+</span>
-          <span class="stat-block-label">NEBULA REVIEWS</span>
-        </div>
-        <div class="stat-block green">
-          <span class="stat-block-number">∞</span>
-          <span class="stat-block-label">PAIR COMBINATIONS</span>
-        </div>
-      </div>
-
-      <div class="cta-box">
-        <a href="#" class="cta-link" id="ctaBegin">BEGIN YOUR DISCOVERY</a>
-      </div>
-    </div>
-
   </section>
 
   <!-- ============================================
@@ -578,6 +1240,7 @@
   <script src="../components/moviecube.js"></script>
   <script src="../components/people-cube.js"></script>
   <script src="home.js"></script>
+  <script src="../welcome-popup.js"></script>
 
 </body>
 </html>

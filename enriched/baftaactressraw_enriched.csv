@@ -1,0 +1,331 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+1498158,Jessie Buckley,2026,BAFTA,Best Actress,false,Hamnet
+9827,Rose Byrne,2026,BAFTA,Best Actress,false,If I Had Legs I'd Kick You
+11661,Kate Hudson,2026,BAFTA,Best Actress,false,Song Sung Blue
+3914706,Chase Infiniti,2026,BAFTA,Best Actress,false,One Battle After Another
+1576786,Renate Reinsve,2026,BAFTA,Best Actress,false,Sentimental Value
+54693,Emma Stone,2026,BAFTA,Best Actress,false,Bugonia
+1640439,Mikey Madison,2025,BAFTA,Best Actress,true,Anora
+1765068,Cynthia Erivo,2025,BAFTA,Best Actress,false,Wicked
+1505938,Karla Sofia Gascon,2025,BAFTA,Best Actress,false,Emilia Perez
+17352,Marianne Jean-Baptiste,2025,BAFTA,Best Actress,false,Hard Truths
+3416,Demi Moore,2025,BAFTA,Best Actress,false,The Substance
+36592,Saoirse Ronan,2025,BAFTA,Best Actress,false,The Outrun
+54693,Emma Stone,2024,BAFTA,Best Actress,true,Poor Things
+165909,Fantasia Barrino,2024,BAFTA,Best Actress,false,The Color Purple
+7152,Sandra Huller,2024,BAFTA,Best Actress,false,Anatomy of a Fall
+36662,Carey Mulligan,2024,BAFTA,Best Actress,false,Maestro
+1675593,Vivian Oparah,2024,BAFTA,Best Actress,false,Rye Lane
+234352,Margot Robbie,2024,BAFTA,Best Actress,false,Barbie
+112,Cate Blanchett,2023,BAFTA,Best Actress,true,Tar
+19492,Viola Davis,2023,BAFTA,Best Actress,false,The Woman King
+1853909,Danielle Deadwyler,2023,BAFTA,Best Actress,false,Till
+224513,Ana de Armas,2023,BAFTA,Best Actress,false,Blonde
+7056,Emma Thompson,2023,BAFTA,Best Actress,false,Good Luck to You Leo Grande
+1620,Michelle Yeoh,2023,BAFTA,Best Actress,false,Everything Everywhere All at Once
+33450,Joanna Scanlan,2022,BAFTA,Best Actress,true,After Love
+237405,Lady Gaga,2022,BAFTA,Best Actress,false,House of Gucci
+1741367,Alana Haim,2022,BAFTA,Best Actress,false,Licorice Pizza
+1331023,Emilia Jones,2022,BAFTA,Best Actress,false,CODA
+1576786,Renate Reinsve,2022,BAFTA,Best Actress,false,The Worst Person in the World
+62561,Tessa Thompson,2022,BAFTA,Best Actress,false,Passing
+3910,Frances McDormand,2021,BAFTA,Best Actress,true,Nomadland
+2381123,Bukky Bakray,2021,BAFTA,Best Actress,false,Rocks
+2379700,Radha Blank,2021,BAFTA,Best Actress,false,The Forty-Year-Old Version
+556356,Vanessa Kirby,2021,BAFTA,Best Actress,false,Pieces of a Woman
+134774,Wunmi Mosaku,2021,BAFTA,Best Actress,false,His House
+1981,Alfre Woodard,2021,BAFTA,Best Actress,false,Clemency
+9137,Renee Zellweger,2020,BAFTA,Best Actress,true,Judy
+1498158,Jessie Buckley,2020,BAFTA,Best Actress,false,Wild Rose
+1245,Scarlett Johansson,2020,BAFTA,Best Actress,false,Marriage Story
+36592,Saoirse Ronan,2020,BAFTA,Best Actress,false,Little Women
+6885,Charlize Theron,2020,BAFTA,Best Actress,false,Bombshell
+39187,Olivia Colman,2019,BAFTA,Best Actress,true,The Favourite
+515,Glenn Close,2019,BAFTA,Best Actress,false,The Wife
+19492,Viola Davis,2019,BAFTA,Best Actress,false,Widows
+237405,Lady Gaga,2019,BAFTA,Best Actress,false,A Star Is Born
+55536,Melissa McCarthy,2019,BAFTA,Best Actress,false,Can You Ever Forgive Me?
+3910,Frances McDormand,2018,BAFTA,Best Actress,true,Three Billboards Outside Ebbing Missouri
+516,Annette Bening,2018,BAFTA,Best Actress,false,Film Stars Don't Die in Liverpool
+39658,Sally Hawkins,2018,BAFTA,Best Actress,false,The Shape of Water
+234352,Margot Robbie,2018,BAFTA,Best Actress,false,I Tonya
+36592,Saoirse Ronan,2018,BAFTA,Best Actress,false,Lady Bird
+54693,Emma Stone,2017,BAFTA,Best Actress,true,La La Land
+9273,Amy Adams,2017,BAFTA,Best Actress,false,Arrival
+5081,Emily Blunt,2017,BAFTA,Best Actress,false,The Girl on the Train
+524,Natalie Portman,2017,BAFTA,Best Actress,false,Jackie
+5064,Meryl Streep,2017,BAFTA,Best Actress,false,Florence Foster Jenkins
+60073,Brie Larson,2016,BAFTA,Best Actress,true,Room
+112,Cate Blanchett,2016,BAFTA,Best Actress,false,Carol
+36592,Saoirse Ronan,2016,BAFTA,Best Actress,false,Brooklyn
+10978,Maggie Smith,2016,BAFTA,Best Actress,false,The Lady in the Van
+227454,Alicia Vikander,2016,BAFTA,Best Actress,false,The Danish Girl
+1231,Julianne Moore,2015,BAFTA,Best Actress,true,Still Alice
+9273,Amy Adams,2015,BAFTA,Best Actress,false,Big Eyes
+72855,Felicity Jones,2015,BAFTA,Best Actress,false,The Theory of Everything
+10882,Rosamund Pike,2015,BAFTA,Best Actress,false,Gone Girl
+368,Reese Witherspoon,2015,BAFTA,Best Actress,false,Wild
+112,Cate Blanchett,2014,BAFTA,Best Actress,true,Blue Jasmine
+9273,Amy Adams,2014,BAFTA,Best Actress,false,American Hustle
+18277,Sandra Bullock,2014,BAFTA,Best Actress,false,Gravity
+5309,Judi Dench,2014,BAFTA,Best Actress,false,Philomena
+7056,Emma Thompson,2014,BAFTA,Best Actress,false,Saving Mr. Banks
+267962,Emmanuelle Riva,2013,BAFTA,Best Actress,true,Amour
+83002,Jessica Chastain,2013,BAFTA,Best Actress,false,Zero Dark Thirty
+8293,Marion Cotillard,2013,BAFTA,Best Actress,false,Rust and Bone
+72129,Jennifer Lawrence,2013,BAFTA,Best Actress,false,Silver Linings Playbook
+15735,Helen Mirren,2013,BAFTA,Best Actress,false,Hitchcock
+5064,Meryl Streep,2012,BAFTA,Best Actress,true,The Iron Lady
+82923,Berenice Bejo,2012,BAFTA,Best Actress,false,The Artist
+19492,Viola Davis,2012,BAFTA,Best Actress,false,The Help
+3063,Tilda Swinton,2012,BAFTA,Best Actress,false,We Need to Talk About Kevin
+1812,Michelle Williams,2012,BAFTA,Best Actress,false,My Week with Marilyn
+524,Natalie Portman,2011,BAFTA,Best Actress,true,Black Swan
+516,Annette Bening,2011,BAFTA,Best Actress,false,The Kids Are All Right
+1231,Julianne Moore,2011,BAFTA,Best Actress,false,The Kids Are All Right
+87722,Noomi Rapace,2011,BAFTA,Best Actress,false,The Girl with the Dragon Tattoo
+130640,Hailee Steinfeld,2011,BAFTA,Best Actress,false,True Grit
+36662,Carey Mulligan,2010,BAFTA,Best Actress,true,An Education
+36592,Saoirse Ronan,2010,BAFTA,Best Actress,false,The Lovely Bones
+109560,Gabourey Sidibe,2010,BAFTA,Best Actress,false,Precious
+5064,Meryl Streep,2010,BAFTA,Best Actress,false,Julie & Julia
+2405,Audrey Tautou,2010,BAFTA,Best Actress,false,Coco Before Chanel
+204,Kate Winslet,2009,BAFTA,Best Actress,true,The Reader
+11701,Angelina Jolie,2009,BAFTA,Best Actress,false,Changeling
+5470,Kristin Scott Thomas,2009,BAFTA,Best Actress,false,I've Loved You So Long
+5064,Meryl Streep,2009,BAFTA,Best Actress,false,Doubt
+204,Kate Winslet,2009,BAFTA,Best Actress,false,Revolutionary Road
+8293,Marion Cotillard,2008,BAFTA,Best Actress,true,La Vie en Rose
+112,Cate Blanchett,2008,BAFTA,Best Actress,false,Elizabeth: The Golden Age
+1666,Julie Christie,2008,BAFTA,Best Actress,false,Away from Her
+116,Keira Knightley,2008,BAFTA,Best Actress,false,Atonement
+27578,Ellen Page,2008,BAFTA,Best Actress,false,Juno
+15735,Helen Mirren,2007,BAFTA,Best Actress,true,The Queen
+955,Penelope Cruz,2007,BAFTA,Best Actress,false,Volver
+5309,Judi Dench,2007,BAFTA,Best Actress,false,Notes on a Scandal
+5064,Meryl Streep,2007,BAFTA,Best Actress,false,The Devil Wears Prada
+204,Kate Winslet,2007,BAFTA,Best Actress,false,Little Children
+368,Reese Witherspoon,2006,BAFTA,Best Actress,true,Walk the Line
+5309,Judi Dench,2006,BAFTA,Best Actress,false,Mrs. Henderson Presents
+6885,Charlize Theron,2006,BAFTA,Best Actress,false,North Country
+3293,Rachel Weisz,2006,BAFTA,Best Actress,false,The Constant Gardener
+1339,Zhang Ziyi,2006,BAFTA,Best Actress,false,Memoirs of a Geisha
+11356,Imelda Staunton,2005,BAFTA,Best Actress,true,Vera Drake
+6885,Charlize Theron,2005,BAFTA,Best Actress,false,Monster
+204,Kate Winslet,2005,BAFTA,Best Actress,false,Eternal Sunshine of the Spotless Mind
+1339,Zhang Ziyi,2005,BAFTA,Best Actress,false,House of Flying Daggers
+1245,Scarlett Johansson,2005,BAFTA,Best Actress,false,Lost in Translation
+1245,Scarlett Johansson,2004,BAFTA,Best Actress,true,Lost in Translation
+1245,Scarlett Johansson,2004,BAFTA,Best Actress,false,Girl with a Pearl Earring
+77287,Anne Reid,2004,BAFTA,Best Actress,false,The Mother
+139,Uma Thurman,2004,BAFTA,Best Actress,false,Kill Bill: Vol. 1
+3489,Naomi Watts,2004,BAFTA,Best Actress,false,21 Grams
+2227,Nicole Kidman,2003,BAFTA,Best Actress,true,The Hours
+4587,Halle Berry,2003,BAFTA,Best Actress,false,Monster's Ball
+3136,Salma Hayek,2003,BAFTA,Best Actress,false,Frida
+5064,Meryl Streep,2003,BAFTA,Best Actress,false,The Hours
+9137,Renee Zellweger,2003,BAFTA,Best Actress,false,Chicago
+5309,Judi Dench,2002,BAFTA,Best Actress,true,Iris
+2227,Nicole Kidman,2002,BAFTA,Best Actress,false,The Others
+5606,Sissy Spacek,2002,BAFTA,Best Actress,false,In the Bedroom
+2405,Audrey Tautou,2002,BAFTA,Best Actress,false,Amelie
+9137,Renee Zellweger,2002,BAFTA,Best Actress,false,Bridget Jones's Diary
+1204,Julia Roberts,2001,BAFTA,Best Actress,true,Erin Brockovich
+1137,Juliette Binoche,2001,BAFTA,Best Actress,false,Chocolat
+11661,Kate Hudson,2001,BAFTA,Best Actress,false,Almost Famous
+448,Hilary Swank,2001,BAFTA,Best Actress,false,Boys Don't Cry
+1620,Michelle Yeoh,2001,BAFTA,Best Actress,false,Crouching Tiger Hidden Dragon
+516,Annette Bening,2000,BAFTA,Best Actress,true,American Beauty
+8443,Linda Bassett,2000,BAFTA,Best Actress,false,East Is East
+1231,Julianne Moore,2000,BAFTA,Best Actress,false,The End of the Affair
+1639,Emily Watson,2000,BAFTA,Best Actress,false,Angela's Ashes
+112,Cate Blanchett,1999,BAFTA,Best Actress,true,Elizabeth
+34902,Jane Horrocks,1999,BAFTA,Best Actress,false,Little Voice
+12052,Gwyneth Paltrow,1999,BAFTA,Best Actress,false,Shakespeare in Love
+1639,Emily Watson,1999,BAFTA,Best Actress,false,Hilary and Jackie
+5309,Judi Dench,1998,BAFTA,Best Actress,true,Mrs. Brown
+326,Kim Basinger,1998,BAFTA,Best Actress,false,L.A. Confidential
+1283,Helena Bonham Carter,1998,BAFTA,Best Actress,false,The Wings of the Dove
+37759,Kathy Burke,1998,BAFTA,Best Actress,false,Nil by Mouth
+4154,Brenda Blethyn,1997,BAFTA,Best Actress,true,Secrets & Lies
+3910,Frances McDormand,1997,BAFTA,Best Actress,false,Fargo
+5470,Kristin Scott Thomas,1997,BAFTA,Best Actress,false,The English Patient
+1639,Emily Watson,1997,BAFTA,Best Actress,false,Breaking the Waves
+7056,Emma Thompson,1996,BAFTA,Best Actress,true,Sense and Sensibility
+2227,Nicole Kidman,1996,BAFTA,Best Actress,false,To Die For
+15735,Helen Mirren,1996,BAFTA,Best Actress,false,The Madness of King George
+1951,Elisabeth Shue,1996,BAFTA,Best Actress,false,Leaving Las Vegas
+4038,Susan Sarandon,1995,BAFTA,Best Actress,true,The Client
+9625,Linda Fiorentino,1995,BAFTA,Best Actress,false,The Last Seduction
+1350,Irene Jacob,1995,BAFTA,Best Actress,false,Three Colors: Red
+139,Uma Thurman,1995,BAFTA,Best Actress,false,Pulp Fiction
+18686,Holly Hunter,1994,BAFTA,Best Actress,true,The Piano
+8436,Miranda Richardson,1994,BAFTA,Best Actress,false,Tom & Viv
+3063,Tilda Swinton,1994,BAFTA,Best Actress,false,Orlando
+26513,Debra Winger,1994,BAFTA,Best Actress,false,Shadowlands
+7056,Emma Thompson,1993,BAFTA,Best Actress,true,Howards End
+351,Judy Davis,1993,BAFTA,Best Actress,false,Husbands and Wives
+65010,Tara Morice,1993,BAFTA,Best Actress,false,Strictly Ballroom
+5698,Jessica Tandy,1993,BAFTA,Best Actress,false,Fried Green Tomatoes
+1038,Jodie Foster,1992,BAFTA,Best Actress,true,The Silence of the Lambs
+16935,Geena Davis,1992,BAFTA,Best Actress,false,Thelma & Louise
+4038,Susan Sarandon,1992,BAFTA,Best Actress,false,Thelma & Louise
+6238,Juliet Stevenson,1992,BAFTA,Best Actress,false,Truly Madly Deeply
+5698,Jessica Tandy,1991,BAFTA,Best Actress,true,Driving Miss Daisy
+4090,Shirley MacLaine,1991,BAFTA,Best Actress,false,Postcards from the Edge
+1160,Michelle Pfeiffer,1991,BAFTA,Best Actress,false,The Fabulous Baker Boys
+1204,Julia Roberts,1991,BAFTA,Best Actress,false,Pretty Woman
+83437,Pauline Collins,1990,BAFTA,Best Actress,true,Shirley Valentine
+515,Glenn Close,1990,BAFTA,Best Actress,false,Dangerous Liaisons
+1038,Jodie Foster,1990,BAFTA,Best Actress,false,The Accused
+29369,Melanie Griffith,1990,BAFTA,Best Actress,false,Working Girl
+10978,Maggie Smith,1989,BAFTA,Best Actress,true,The Lonely Passion of Judith Hearne
+19092,Stephane Audran,1989,BAFTA,Best Actress,false,Babette's Feast
+38225,Cher,1989,BAFTA,Best Actress,false,Moonstruck
+8944,Jamie Lee Curtis,1989,BAFTA,Best Actress,false,A Fish Called Wanda
+10774,Anne Bancroft,1988,BAFTA,Best Actress,true,84 Charing Cross Road
+18017,Emily Lloyd,1988,BAFTA,Best Actress,false,Wish You Were Here
+15197,Sarah Miles,1988,BAFTA,Best Actress,false,Hope and Glory
+477,Julie Walters,1988,BAFTA,Best Actress,false,Personal Services
+10978,Maggie Smith,1987,BAFTA,Best Actress,true,A Room with a View
+12021,Mia Farrow,1987,BAFTA,Best Actress,false,Hannah and Her Sisters
+5064,Meryl Streep,1987,BAFTA,Best Actress,false,Out of Africa
+61840,Cathy Tyson,1987,BAFTA,Best Actress,false,Mona Lisa
+3672,Peggy Ashcroft,1986,BAFTA,Best Actress,true,A Passage to India
+12021,Mia Farrow,1986,BAFTA,Best Actress,false,The Purple Rose of Cairo
+11084,Kelly McGillis,1986,BAFTA,Best Actress,false,Witness
+230909,Alexandra Pigg,1986,BAFTA,Best Actress,false,Letter to Brezhnev
+10978,Maggie Smith,1985,BAFTA,Best Actress,true,A Private Function
+4090,Shirley MacLaine,1985,BAFTA,Best Actress,false,Terms of Endearment
+15735,Helen Mirren,1985,BAFTA,Best Actress,false,Cal
+5064,Meryl Streep,1985,BAFTA,Best Actress,false,Silkwood
+477,Julie Walters,1984,BAFTA,Best Actress,true,Educating Rita
+4431,Jessica Lange,1984,BAFTA,Best Actress,false,Tootsie
+127164,Phyllis Logan,1984,BAFTA,Best Actress,false,Another Time Another Place
+5064,Meryl Streep,1984,BAFTA,Best Actress,false,Sophie's Choice
+6598,Katharine Hepburn,1983,BAFTA,Best Actress,true,On Golden Pond
+3092,Diane Keaton,1983,BAFTA,Best Actress,false,Reds
+1013092,Jennifer Kendal,1983,BAFTA,Best Actress,false,36 Chowringhee Lane
+5606,Sissy Spacek,1983,BAFTA,Best Actress,false,Missing
+5064,Meryl Streep,1982,BAFTA,Best Actress,true,The French Lieutenant's Woman
+21277,Mary Tyler Moore,1982,BAFTA,Best Actress,false,Ordinary People
+10978,Maggie Smith,1982,BAFTA,Best Actress,false,Quartet
+5606,Sissy Spacek,1982,BAFTA,Best Actress,false,Coal Miner's Daughter
+351,Judy Davis,1981,BAFTA,Best Actress,true,My Brilliant Career
+4090,Shirley MacLaine,1981,BAFTA,Best Actress,false,Being There
+73931,Bette Midler,1981,BAFTA,Best Actress,false,The Rose
+5064,Meryl Streep,1981,BAFTA,Best Actress,false,Kramer vs. Kramer
+6352,Jane Fonda,1980,BAFTA,Best Actress,true,The China Syndrome
+3092,Diane Keaton,1980,BAFTA,Best Actress,false,Manhattan
+5064,Meryl Streep,1980,BAFTA,Best Actress,false,The Deer Hunter
+10205,Sigourney Weaver,1980,BAFTA,Best Actress,false,Alien
+6352,Jane Fonda,1979,BAFTA,Best Actress,true,Julia
+10774,Anne Bancroft,1979,BAFTA,Best Actress,false,The Turning Point
+20362,Jill Clayburgh,1979,BAFTA,Best Actress,false,An Unmarried Woman
+19131,Marsha Mason,1979,BAFTA,Best Actress,false,The Goodbye Girl
+3092,Diane Keaton,1978,BAFTA,Best Actress,true,Annie Hall
+6450,Faye Dunaway,1978,BAFTA,Best Actress,false,Network
+10409,Shelley Duvall,1978,BAFTA,Best Actress,false,3 Women
+10437,Lily Tomlin,1978,BAFTA,Best Actress,false,The Late Show
+7071,Louise Fletcher,1977,BAFTA,Best Actress,true,One Flew Over the Cuckoo's Nest
+7570,Lauren Bacall,1977,BAFTA,Best Actress,false,The Shootist
+13299,Rita Moreno,1977,BAFTA,Best Actress,false,The Ritz
+11916,Liv Ullmann,1977,BAFTA,Best Actress,false,Face to Face
+9560,Ellen Burstyn,1976,BAFTA,Best Actress,true,Alice Doesn't Live Here Anymore
+10774,Anne Bancroft,1976,BAFTA,Best Actress,false,The Prisoner of Second Avenue
+26483,Valerie Perrine,1976,BAFTA,Best Actress,false,Lenny
+11916,Liv Ullmann,1976,BAFTA,Best Actress,false,Scenes from a Marriage
+109410,Joanne Woodward,1975,BAFTA,Best Actress,true,Summer Wishes Winter Dreams
+6450,Faye Dunaway,1975,BAFTA,Best Actress,false,Chinatown
+10400,Barbra Streisand,1975,BAFTA,Best Actress,false,The Way We Were
+18249,Cicely Tyson,1975,BAFTA,Best Actress,false,The Autobiography of Miss Jane Pittman
+19092,Stephane Audran,1974,BAFTA,Best Actress,true,The Discreet Charm of the Bourgeoisie
+1666,Julie Christie,1974,BAFTA,Best Actress,false,Don't Look Now
+115573,Glenda Jackson,1974,BAFTA,Best Actress,false,A Touch of Class
+32715,Diana Ross,1974,BAFTA,Best Actress,false,Lady Sings the Blues
+66776,Liza Minnelli,1973,BAFTA,Best Actress,true,Cabaret
+19092,Stephane Audran,1973,BAFTA,Best Actress,false,The Butcher
+10774,Anne Bancroft,1973,BAFTA,Best Actress,false,Young Winston
+38998,Dorothy Tutin,1973,BAFTA,Best Actress,false,Savage Messiah
+115573,Glenda Jackson,1972,BAFTA,Best Actress,true,Sunday Bloody Sunday
+11140,Lynn Carlin,1972,BAFTA,Best Actress,false,Taking Off
+1666,Julie Christie,1972,BAFTA,Best Actress,false,The Go-Between
+6352,Jane Fonda,1972,BAFTA,Best Actress,false,Klute
+9594,Katharine Ross,1971,BAFTA,Best Actress,true,Butch Cassidy and the Sundance Kid
+6352,Jane Fonda,1971,BAFTA,Best Actress,false,They Shoot Horses Don't They?
+18892,Goldie Hawn,1971,BAFTA,Best Actress,false,Cactus Flower
+15197,Sarah Miles,1971,BAFTA,Best Actress,false,Ryan's Daughter
+10978,Maggie Smith,1970,BAFTA,Best Actress,true,The Prime of Miss Jean Brodie
+12021,Mia Farrow,1970,BAFTA,Best Actress,false,Secret Ceremony
+115573,Glenda Jackson,1970,BAFTA,Best Actress,false,Women in Love
+10400,Barbra Streisand,1970,BAFTA,Best Actress,false,Funny Girl
+6598,Katharine Hepburn,1969,BAFTA,Best Actress,true,The Lion in Winter
+10774,Anne Bancroft,1969,BAFTA,Best Actress,false,The Graduate
+50,Catherine Deneuve,1969,BAFTA,Best Actress,false,Belle de Jour
+109410,Joanne Woodward,1969,BAFTA,Best Actress,false,Rachel Rachel
+45465,Edith Evans,1968,BAFTA,Best Actress,true,The Whisperers
+3672,Peggy Ashcroft,1968,BAFTA,Best Actress,false,The Wednesday Play
+3635,Elizabeth Taylor,1968,BAFTA,Best Actress,false,The Taming of the Shrew
+5682,Anouk Aimee,1968,BAFTA,Best Actress,true,A Man and a Woman
+6657,Bibi Andersson,1968,BAFTA,Best Actress,false,Persona
+6352,Jane Fonda,1968,BAFTA,Best Actress,false,Barefoot in the Park
+12266,Simone Signoret,1968,BAFTA,Best Actress,false,The Deadly Affair
+3635,Elizabeth Taylor,1967,BAFTA,Best Actress,true,Who's Afraid of Virginia Woolf?
+1666,Julie Christie,1967,BAFTA,Best Actress,false,Doctor Zhivago
+29791,Lynn Redgrave,1967,BAFTA,Best Actress,false,Georgy Girl
+13333,Vanessa Redgrave,1967,BAFTA,Best Actress,false,Morgan: A Suitable Case for Treatment
+14812,Jeanne Moreau,1967,BAFTA,Best Actress,true,Viva Maria!
+3783,Brigitte Bardot,1967,BAFTA,Best Actress,false,Viva Maria!
+18588,Joan Hackett,1967,BAFTA,Best Actress,false,The Group
+12266,Simone Signoret,1967,BAFTA,Best Actress,false,The Sleeping Car Murders
+1666,Julie Christie,1966,BAFTA,Best Actress,true,Darling
+5823,Julie Andrews,1966,BAFTA,Best Actress,false,The Sound of Music
+10978,Maggie Smith,1966,BAFTA,Best Actress,false,Young Cassidy
+47754,Rita Tushingham,1966,BAFTA,Best Actress,false,The Knack ...and How to Get It
+1934,Patricia Neal,1966,BAFTA,Best Actress,true,In Harm's Way
+6352,Jane Fonda,1966,BAFTA,Best Actress,false,Cat Ballou
+45523,Lila Kedrova,1966,BAFTA,Best Actress,false,Zorba the Greek
+12266,Simone Signoret,1966,BAFTA,Best Actress,false,Ship of Fools
+1932,Audrey Hepburn,1965,BAFTA,Best Actress,true,Charade
+45465,Edith Evans,1965,BAFTA,Best Actress,false,The Chalk Garden
+20141,Deborah Kerr,1965,BAFTA,Best Actress,false,The Chalk Garden
+47754,Rita Tushingham,1965,BAFTA,Best Actress,false,Girl with Green Eyes
+10774,Anne Bancroft,1965,BAFTA,Best Actress,true,The Pumpkin Eater
+25787,Ava Gardner,1965,BAFTA,Best Actress,false,The Night of the Iguana
+4090,Shirley MacLaine,1965,BAFTA,Best Actress,false,Irma la Douce
+31440,Kim Stanley,1965,BAFTA,Best Actress,false,Seance on a Wet Afternoon
+82495,Rachel Roberts,1964,BAFTA,Best Actress,true,This Sporting Life
+1666,Julie Christie,1964,BAFTA,Best Actress,false,Billy Liar
+45465,Edith Evans,1964,BAFTA,Best Actress,false,Tom Jones
+15197,Sarah Miles,1964,BAFTA,Best Actress,false,The Servant
+1934,Patricia Neal,1964,BAFTA,Best Actress,true,Hud
+31550,Joan Crawford,1964,BAFTA,Best Actress,false,What Ever Happened to Baby Jane?
+3380,Bette Davis,1964,BAFTA,Best Actress,false,What Ever Happened to Baby Jane?
+855,Lee Remick,1964,BAFTA,Best Actress,false,Days of Wine and Roses
+83461,Daniela Rocca,1964,BAFTA,Best Actress,false,Divorce Italian Style
+5320,Leslie Caron,1963,BAFTA,Best Actress,true,The L-Shaped Room
+151040,Virginia Maskell,1963,BAFTA,Best Actress,false,The Wild and the Willing
+83129,Janet Munro,1963,BAFTA,Best Actress,false,Life for Ruth
+10774,Anne Bancroft,1963,BAFTA,Best Actress,true,The Miracle Worker
+7569,Harriet Andersson,1963,BAFTA,Best Actress,false,Through a Glass Darkly
+5682,Anouk Aimee,1963,BAFTA,Best Actress,false,Lola
+29902,Melina Mercouri,1963,BAFTA,Best Actress,false,Phaedra
+14812,Jeanne Moreau,1963,BAFTA,Best Actress,false,Jules and Jim
+41283,Geraldine Page,1963,BAFTA,Best Actress,false,Sweet Bird of Youth
+2769,Natalie Wood,1963,BAFTA,Best Actress,false,Splendor in the Grass
+43626,Dora Bryan,1962,BAFTA,Best Actress,true,A Taste of Honey
+20141,Deborah Kerr,1962,BAFTA,Best Actress,false,The Sundowners
+36819,Hayley Mills,1962,BAFTA,Best Actress,false,Whistle Down the Wind
+16757,Sophia Loren,1962,BAFTA,Best Actress,true,Two Women
+6014,Annie Girardot,1962,BAFTA,Best Actress,false,Rocco and His Brothers
+6721,Piper Laurie,1962,BAFTA,Best Actress,false,The Hustler
+103939,Claudia McNeil,1962,BAFTA,Best Actress,false,A Raisin in the Sun
+3830,Jean Seberg,1962,BAFTA,Best Actress,false,Breathless
+82495,Rachel Roberts,1961,BAFTA,Best Actress,true,Saturday Night and Sunday Morning
+13325,Wendy Hiller,1961,BAFTA,Best Actress,false,Sons and Lovers
+36819,Hayley Mills,1961,BAFTA,Best Actress,false,Pollyanna
+4090,Shirley MacLaine,1961,BAFTA,Best Actress,true,The Apartment
+99374,Pier Angeli,1961,BAFTA,Best Actress,false,The Angry Silence
+29902,Melina Mercouri,1961,BAFTA,Best Actress,false,Never on Sunday
+267962,Emmanuelle Riva,1961,BAFTA,Best Actress,false,Hiroshima mon amour
+14500,Jean Simmons,1961,BAFTA,Best Actress,false,Elmer Gantry

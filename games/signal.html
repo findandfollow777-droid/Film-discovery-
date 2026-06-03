@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGNAL — ORBIT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="signal.css">
+</head>
+<body>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <main class="signal-container">
+    <a href="arcade.html" class="back-link signal-back" id="backNav">
+      <span class="og og-arrow-left" aria-hidden="true"></span>
+      <span>Back to Arcade</span>
+    </a>
+
+    <header class="signal-header">
+      <h1>SIGNAL</h1>
+      <p class="signal-tagline">Decode the transmission</p>
+    </header>
+
+    <div class="score-panel">
+      <div class="score-card">
+        <div class="score-label">ATTEMPTS</div>
+        <div id="attemptCount" class="score-value">0</div>
+      </div>
+      <div class="score-card rank-card">
+        <div class="score-label">RANK</div>
+        <div id="rankBadge" class="rank-value">Awaiting signal&hellip;</div>
+      </div>
+    </div>
+
+    <section class="letter-section">
+      <div class="section-label">DECODE LETTERS</div>
+      <div id="letterGrid" class="letter-grid" role="group" aria-label="Letter decoder grid">
+        <!-- 26 letter buttons injected by signal.js (Step 2) -->
+      </div>
+    </section>
+
+    <section class="actors-section">
+      <div id="actorFrames" class="actor-grid">
+        <!-- Static placeholder frames (5) — replaced by signal.js (Step 2) -->
+        <div class="actor-frame">
+          <div class="actor-portrait">
+            <img src="" alt="" class="actor-img">
+            <div class="scanline-overlay"></div>
+          </div>
+          <div class="actor-name encrypted">_ _ _ _ _ _ _</div>
+        </div>
+        <div class="actor-frame">
+          <div class="actor-portrait">
+            <img src="" alt="" class="actor-img">
+            <div class="scanline-overlay"></div>
+          </div>
+          <div class="actor-name encrypted">_ _ _ _ _ _ _</div>
+        </div>
+        <div class="actor-frame">
+          <div class="actor-portrait">
+            <img src="" alt="" class="actor-img">
+            <div class="scanline-overlay"></div>
+          </div>
+          <div class="actor-name encrypted">_ _ _ _ _ _ _</div>
+        </div>
+        <div class="actor-frame">
+          <div class="actor-portrait">
+            <img src="" alt="" class="actor-img">
+            <div class="scanline-overlay"></div>
+          </div>
+          <div class="actor-name encrypted">_ _ _ _ _ _ _</div>
+        </div>
+        <div class="actor-frame">
+          <div class="actor-portrait">
+            <img src="" alt="" class="actor-img">
+            <div class="scanline-overlay"></div>
+          </div>
+          <div class="actor-name encrypted">_ _ _ _ _ _ _</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="movie-section">
+      <div class="movie-box">
+        <div class="movie-label">
+          <span class="og og-film" aria-hidden="true"></span>
+          <span>IDENTIFY THE MOVIE</span>
+        </div>
+        <div class="movie-input-row">
+          <input type="text" id="movieInput" placeholder="Enter movie title..." autocomplete="off" spellcheck="false">
+          <button id="submitMovie" class="submit-btn" type="button">SUBMIT</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="hint-section">
+      <button id="hintBtn" class="hint-btn locked" type="button" aria-disabled="true">
+        <span class="og og-lock" aria-hidden="true"></span>
+        <span class="hint-label">HINT &mdash; 5 guesses required</span>
+      </button>
+    </div>
+
+    <div id="feedback" class="feedback-msg" role="status" aria-live="polite">
+      Click letters to decode the signal&hellip;
+    </div>
+  </main>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="signal-puzzles.js"></script>
+  <script src="signal.js"></script>
+</body>
+</html>

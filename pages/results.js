@@ -9,7 +9,7 @@ let allMovies = [];
 let sortedMovies = [];
 let currentPage = 1;
 let totalPages = 1;
-let currentSort = "chronology";
+let currentSort = "foryou";
 let isReversed = false;
 
 // Settings data for location/era badges
@@ -206,7 +206,7 @@ async function init() {
         localStorage.setItem("anchorMovie", JSON.stringify(movie));
         localStorage.setItem("constellationMovies", JSON.stringify(allMovies));
         localStorage.setItem("anchorFromResults", "true");
-        window.location.href = "../games/constellation.html";
+        window.location.href = "anchor-point.html";
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();
@@ -350,9 +350,31 @@ async function init() {
     // Load movies from localStorage (normal mode)
     const moviesData = localStorage.getItem("movies");
     const filtersData = localStorage.getItem("orbitFilters");
-    
+
     if (!moviesData) {
-      showEmptyState("No results found. Return to Orbit to search.");
+      /* Awards-aware empty state — added 2026-05-16. When the launch
+         was an awards search, give specific guidance rather than the
+         generic "no results" line. Falls back silently on parse error. */
+      let emptyMsg = "No results found. Return to Orbit to search.";
+      try {
+        const savedFilters = filtersData ? JSON.parse(filtersData) : null;
+        const hasAwards = Array.isArray(savedFilters) && savedFilters.some(function (f) {
+          return f && f.section === "awards" && f.value;
+        });
+        if (hasAwards) {
+          emptyMsg = `<h3 style="color: var(--film-white); margin: 0 0 12px 0;">No award winners found</h3>
+            <p style="margin: 0 0 12px 0;">Try broadening your search:</p>
+            <ul style="text-align: left; display: inline-block; margin: 0 0 16px 0; padding-left: 20px;">
+              <li>Select multiple festivals</li>
+              <li>Expand the year range</li>
+              <li>Remove specific category filters</li>
+            </ul>
+            <p style="font-size: 13px; color: var(--muted-silver); margin: 0;">
+              Awards data coverage is limited &mdash; some nominees and older ceremonies may be missing.
+            </p>`;
+        }
+      } catch (e) { /* corrupted filters data — use generic message */ }
+      showEmptyState(emptyMsg);
       setupEventListeners();
       return;
     }
@@ -419,6 +441,18 @@ function displayActiveFilters(filters) {
 }
 
 function processMovies() {
+  /* Dedupe by id (defensive). The discover-mode launch flow now dedupes
+     at the producer too, but this also catches stale localStorage.movies
+     written before the producer-side fix and any other launch path that
+     misses dedupe (Awards/Settings modes rely on upstream uniqueness). */
+  const seenIds = new Set();
+  allMovies = allMovies.filter(m => {
+    if (!m || m.id == null) return false;
+    if (seenIds.has(m.id)) return false;
+    seenIds.add(m.id);
+    return true;
+  });
+
   // Filter out movies without posters
   allMovies = allMovies.filter(m => m && m.poster_path);
 
@@ -912,17 +946,43 @@ function showEmptyState(message) {
 function showCappedBanner(totalAvailable) {
   const banner = document.createElement('div');
   banner.className = 'capped-banner';
+  banner.setAttribute('data-orbit-popup', '');
   banner.innerHTML = `
     <span class="capped-icon"><span class="og og-target"></span></span>
     <span class="capped-text">Showing 500 of ~${parseInt(totalAvailable).toLocaleString()} results. <a href="../index.html">Add more filters</a> for refined results.</span>
-    <button class="capped-close" onclick="this.parentElement.remove()">✕</button>
+    <button class="capped-close orbit-close" aria-label="Close">✕</button>
   `;
-  
+
+  // Rule 17: trigger Black Hole exit, then remove the banner.
+  const btn = banner.querySelector('.capped-close');
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(banner, btn, () => banner.remove());
+  });
+
   // Insert after header
   const header = document.querySelector('.results-header');
   if (header) {
     header.after(banner);
   }
+}
+
+/* ============================================================
+   ORBIT CLOSE — Shared trigger for Rule 17 Black Hole exit.
+   ============================================================ */
+function triggerOrbitClose(overlay, btn, teardownFn) {
+  if (!overlay) { if (teardownFn) teardownFn(); return; }
+  if (overlay.classList.contains('orbit-popup-closing')) return;
+  if (btn) btn.classList.add('closing');
+  overlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (btn) btn.classList.remove('closing');
+    overlay.classList.remove('orbit-popup-closing');
+    if (teardownFn) teardownFn();
+  }, reduced ? 200 : 600);
 }
 
 function deleteMovie(movieId) {
@@ -1176,8 +1236,14 @@ function setupEventListeners() {
   }
 
   drawerToggle?.addEventListener('click', openDrawer);
-  drawerClose?.addEventListener('click', closeDrawer);
-  drawerBackdrop?.addEventListener('click', closeDrawer);
+  drawerClose?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(controlsDrawer, drawerClose, closeDrawer);
+  });
+  drawerBackdrop?.addEventListener('click', () => {
+    triggerOrbitClose(controlsDrawer, drawerClose, closeDrawer);
+  });
 }
 
 // Expose functions to window for inline onclick handlers
@@ -1255,14 +1321,18 @@ function initBioPanel() {
     bioPanelTab.addEventListener("click", toggleBioPanel);
   }
   if (bioClose) {
-    bioClose.addEventListener("click", closeBioPanel);
+    bioClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(bioPanel, bioClose, closeBioPanel);
+    });
   }
-  
+
   // Click outside to close
   document.addEventListener("click", (e) => {
-    if (bioPanel && bioPanel.classList.contains("expanded") && 
+    if (bioPanel && bioPanel.classList.contains("expanded") &&
         !bioPanel.contains(e.target)) {
-      closeBioPanel();
+      triggerOrbitClose(bioPanel, bioClose, closeBioPanel);
     }
   });
 }

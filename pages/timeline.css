@@ -34,6 +34,15 @@ html, body {
    BACKGROUNDS
 ============================================ */
 
+#orbit-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .space-bg {
   position: fixed;
   inset: 0;
@@ -108,10 +117,10 @@ html, body {
 /* Main cosmic line - ethereal glow effect */
 .sacred-line-main {
   fill: none;
-  stroke-width: 2.5;
+  stroke-width: 8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.7;
+  opacity: 0.85;
   filter: url(#cosmicGlow);
   animation: cosmicPulse 8s ease-in-out infinite;
 }
@@ -122,14 +131,14 @@ html, body {
   stroke-width: 8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.15;
+  opacity: 0.4;
   filter: blur(4px);
 }
 
 /* Inner bright core */
 .sacred-line-core {
   fill: none;
-  stroke-width: 1;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0.9;
@@ -245,6 +254,11 @@ html, body {
   background: linear-gradient(90deg, var(--orbit-1), var(--orbit-4));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.header-emblem-glyph {
+  --glyph-size: 40px;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.35));
 }
 
 .timeline-subtitle {
@@ -414,6 +428,76 @@ html, body {
   background: var(--deep-void);
 }
 
+/* Multi-select dropdown (genre filter) — looks like .filter-select,
+   opens a panel of checkboxes. */
+.multi-select {
+  position: relative;
+  display: inline-block;
+}
+
+.multi-select-trigger {
+  font-family: inherit;
+  text-align: left;
+}
+
+.multi-select-trigger.has-selection {
+  border-color: var(--orbit-1);
+  color: var(--orbit-1);
+}
+
+.multi-select-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  min-width: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  background: var(--deep-void);
+  border: 1px solid rgba(0, 217, 255, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.multi-select-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  color: var(--orbit-1);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.multi-select-option:hover {
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.multi-select-option input[type="checkbox"] {
+  accent-color: var(--orbit-1);
+  cursor: pointer;
+  margin: 0;
+}
+
+.multi-select-clear {
+  width: 100%;
+  margin-top: 4px;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: var(--muted-silver);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.multi-select-clear:hover {
+  border-color: var(--orbit-1);
+  color: var(--orbit-1);
+}
+
 .checkbox-filter {
   display: flex;
   align-items: center;
@@ -447,71 +531,135 @@ html, body {
   position: fixed;
   top: calc(var(--header-height) + var(--controls-height) + 10px);
   right: 15px;
-  width: 180px;
-  max-height: 400px;
-  background: rgba(10, 14, 26, 0.95);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 12px;
-  padding: 15px;
   z-index: 60;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: calc(100vw - 30px);
 }
 
-.upcoming-title {
-  font-family: var(--font-display);
-  font-size: 11px;
+.upcoming-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 999px;
   color: var(--orbit-4);
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-  text-align: center;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upcoming-toggle:hover {
+  background: rgba(255, 215, 0, 0.18);
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.25);
+}
+
+.upcoming-toggle-count {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--orbit-4);
+}
+
+.upcoming-toggle-count:empty {
+  display: none;
+}
+
+.upcoming-chevron {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.upcoming-section.expanded .upcoming-chevron {
+  transform: rotate(180deg);
 }
 
 .upcoming-track {
+  display: none;
+  flex-direction: row;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(10, 14, 26, 0.92);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 12px;
+  max-width: calc(100vw - 30px);
+  max-height: calc(100vh - var(--header-height) - var(--controls-height) - 90px);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.upcoming-section.expanded .upcoming-track {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .upcoming-card {
-  display: flex;
-  gap: 10px;
-  padding: 8px;
-  background: rgba(255, 215, 0, 0.05);
-  border: 1px solid rgba(255, 215, 0, 0.15);
+  position: relative;
+  width: 140px;
+  height: 210px;
+  flex-shrink: 0;
   border-radius: 8px;
+  overflow: hidden;
   cursor: pointer;
-  transition: all 0.2s;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .upcoming-card:hover {
-  background: rgba(255, 215, 0, 0.1);
-  border-color: rgba(255, 215, 0, 0.3);
+  transform: scale(1.04);
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(255, 215, 0, 0.18);
 }
 
 .upcoming-card img {
-  width: 40px;
-  height: 60px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  display: block;
 }
 
 .upcoming-info {
-  flex: 1;
-  min-width: 0;
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 24px 10px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.upcoming-card:hover .upcoming-info {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .upcoming-info .title {
-  font-size: 10px;
-  color: #fff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--film-white);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 4px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .upcoming-info .date {
-  font-size: 9px;
+  font-family: var(--font-display);
+  font-size: 11px;
   color: var(--orbit-4);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .upcoming-badge {
@@ -693,6 +841,10 @@ html, body {
   padding: 20px 40px;
 }
 
+#timelineTrack, .timeline-track {
+  perspective: 1200px;
+}
+
 /* ============================================
    MOVIE CARDS
 ============================================ */
@@ -702,6 +854,127 @@ html, body {
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0s, filter 0.3s;
   z-index: 10;
+}
+
+/* Reposition transient class — applied to surviving cards on any re-render
+   (delete, sort, filter). Cards smoothly slide from old position to new
+   without disappearing. Both axes transition so staircase sorts (Rating,
+   Box Office) animate vertical movement too. Reverse uses tile-spin
+   instead of slide — see below. */
+.timeline-card-sliding {
+  transition: left 600ms cubic-bezier(0.65, 0, 0.35, 1),
+              top  600ms cubic-bezier(0.65, 0, 0.35, 1) !important;
+}
+
+/* Reverse-only: each tile keeps its position. An opaque overlay containing
+   the spinning ORBIT emblem covers the card from frame 0, masks the
+   underlying content swap, then fades out to reveal the new content. The
+   tile rectangle never leaves the screen; nothing disappears. */
+.tile-spin-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 14, 26, 0.96);
+  border-radius: inherit;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 1;
+  /* Stays opaque through the pre-spin dip (500ms) + spinner hold (220ms),
+     then fades out 720→940ms. Total: ~940ms. */
+  animation: tileSpinFadeOut 220ms ease 720ms forwards;
+}
+
+/* Pre-spin vertical dip — all tiles dip down together (then return) before
+   the spinner takes over. Uses the same ease-in-out curve as the
+   Rating/Box Office slide so the motion feels like a sibling gesture. */
+@keyframes tilePreSpinDip {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(22px); }
+}
+
+.tile-pre-spin-dip {
+  animation: tilePreSpinDip 500ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Cosmic spinner — same three-ring assembly used by the randomiser page,
+   scaled down to fit inside a tile face. Cyan ring + gold counter-ring +
+   purple inner ring + pulsing cyan core. */
+.tile-spin-icon {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  max-width: 70px;
+  max-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-spin-icon .spinner-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.tile-spin-icon .spinner-ring-1 {
+  width: 100%; height: 100%;
+  border-top-color: var(--accent-cyan);
+  border-right-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb, 0, 217, 255), 0.4);
+  animation: tileSpinFast 1.2s linear infinite;
+}
+
+.tile-spin-icon .spinner-ring-2 {
+  width: 75%; height: 75%;
+  border-top-color: var(--accent-gold);
+  border-left-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(var(--accent-gold-rgb, 255, 215, 0), 0.3);
+  animation: tileSpinFast 1.8s linear infinite reverse;
+}
+
+.tile-spin-icon .spinner-ring-3 {
+  width: 50%; height: 50%;
+  border-bottom-color: var(--prestige-purple, #a855f7);
+  border-right-color: var(--prestige-purple, #a855f7);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+  animation: tileSpinFast 0.9s linear infinite;
+}
+
+.tile-spin-icon .spinner-core {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--accent-cyan),
+              0 0 40px rgba(var(--accent-rgb, 0, 217, 255), 0.3);
+  animation: tileSpinPulseCore 1s ease-in-out infinite;
+}
+
+@keyframes tileSpinFast {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes tileSpinPulseCore {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.3); opacity: 0.7; }
+}
+
+@keyframes tileSpinFadeOut {
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-spin-overlay {
+    animation: tileSpinFadeOut 200ms ease 50ms forwards;
+  }
+  .tile-spin-icon .spinner-ring,
+  .tile-spin-icon .spinner-core,
+  .tile-pre-spin-dip {
+    animation: none;
+  }
 }
 
 .timeline-card:hover {
@@ -756,6 +1029,89 @@ html, body {
 @keyframes cardGlowPulse {
   0%, 100% { opacity: 0.4; transform: scale(1); }
   50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes timelineCardExit {
+  0%   { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); }
+  40%  { opacity: 0.6; transform: scale(1.06) translateY(-6px); filter: brightness(1.4); }
+  100% { opacity: 0; transform: scale(0.7) translateY(-18px); filter: brightness(0.4); }
+}
+
+.timeline-card.orbit-popup-closing {
+  animation: timelineCardExit 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+  z-index: 200 !important;
+}
+
+@keyframes timelineCardEnter {
+  0%   { transform: translateY(-20px); opacity: 0.4; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.timeline-card-entering {
+  animation: timelineCardEnter 320ms cubic-bezier(0.2, 0, 0.1, 1) both;
+}
+
+@keyframes timelineCardFlip {
+  0%   { transform: perspective(600px) rotateY(70deg) scale(0.9); opacity: 0; }
+  100% { transform: perspective(600px) rotateY(0deg) scale(1); opacity: 1; }
+}
+
+.timeline-card-flipping {
+  animation: timelineCardFlip 220ms cubic-bezier(0.25, 0, 0.1, 1) both;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* Exit flip: applied to existing cards before the DOM rebuild so the user
+   sees them flip away (rotateY 0 → 90, fade) while old content is still on
+   screen. Once exit completes, JS rebuilds the DOM and the entry flip runs. */
+@keyframes timelineCardFlipOut {
+  0%   { transform: perspective(1100px) rotateY(0deg); opacity: 1; }
+  100% { transform: perspective(1100px) rotateY(90deg); opacity: 0; }
+}
+
+.timeline-card-flipping-out {
+  animation: timelineCardFlipOut 220ms cubic-bezier(0.55, 0, 0.85, 0.3) forwards;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Cyan sweep line — leads the non-reverse stagger */
+@keyframes timelineSweep {
+  0%   { left: 0; opacity: 0; width: 3px; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; width: 3px; }
+}
+
+.timeline-sweep-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.3);
+  pointer-events: none;
+  z-index: 50;
+  animation: timelineSweep 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card.orbit-popup-closing,
+  .timeline-card-entering {
+    animation: none;
+  }
+  .timeline-card-flipping,
+  .timeline-card-flipping-out {
+    animation: none;
+    opacity: 1;
+  }
+  .timeline-sweep-line {
+    display: none;
+  }
 }
 
 .timeline-card.orbit-1 .card-inner { border-color: rgba(0, 217, 255, 0.4); }
@@ -817,21 +1173,37 @@ html, body {
 
 .card-meta-row {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
 .card-rating {
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: 22px;
   color: var(--orbit-4);
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 
 .card-year {
-  font-size: 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
   color: var(--orbit-1);
+  white-space: nowrap;
 }
+
+/* Multi-person mode: cards are narrower because orbits share width.
+   Shrink rating + year + star icon so all three sit on one line. */
+.timeline-viewport.multi-mode .card-meta-row { gap: 6px; }
+.timeline-viewport.multi-mode .card-rating { font-size: 14px; }
+.timeline-viewport.multi-mode .card-rating svg { width: 10px; height: 10px; }
+.timeline-viewport.multi-mode .card-year { font-size: 13px; }
+.timeline-viewport.multi-mode .card-title { font-size: 14px; }
+.timeline-viewport.multi-mode .card-value { font-size: 8px; }
 
 .card-value {
   font-size: 9px;
@@ -840,7 +1212,7 @@ html, body {
 }
 
 .card-title {
-  font-size: 14px;
+  font-size: 20px;
   color: var(--film-white);
   margin-top: 3px;
   white-space: nowrap;
@@ -878,14 +1250,12 @@ html, body {
 
 .card-delete {
   position: absolute;
-  top: 5px;
+  top: -31px;
   right: 5px;
   width: 20px;
   height: 20px;
-  background: rgba(255, 71, 87, 0.8);
   border: none;
   border-radius: 50%;
-  color: white;
   font-size: 10px;
   cursor: pointer;
   opacity: 0;
@@ -1077,19 +1447,9 @@ html, body {
 }
 
 .convergence-card .card-delete {
-  position: absolute;
-  top: 5px;
-  right: 5px;
   width: 22px;
   height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 71, 87, 0.9);
-  border: none;
-  color: white;
   font-size: 11px;
-  cursor: pointer;
-  opacity: 0;
-  transition: all 0.2s;
   z-index: 10;
 }
 
@@ -1099,7 +1459,7 @@ html, body {
 
 .convergence-badge {
   position: absolute;
-  bottom: -10px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1230,15 +1590,12 @@ html, body {
   position: relative;
 }
 
+/* .modal-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .modal-close {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: none;
-  border: none;
-  color: var(--muted-silver);
-  font-size: 18px;
-  cursor: pointer;
 }
 
 .modal-title {
@@ -1303,7 +1660,7 @@ html, body {
 .search-result-img {
   width: 35px;
   height: 35px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
 }
 
@@ -1335,6 +1692,117 @@ html, body {
 @keyframes pulse-loading {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
+}
+
+/* ── Collaborator suggestions (Add Person modal) ── */
+
+.collab-suggestions {
+  margin-bottom: 16px;
+}
+
+.collab-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--ghost-gray);
+  padding: 0 0 8px;
+}
+
+.collab-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 0;
+  font-size: 12px;
+  color: var(--ghost-gray);
+}
+
+.collab-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(var(--accent-rgb), 0.2);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: collab-spin 0.6s linear infinite;
+}
+
+@keyframes collab-spin {
+  to { transform: rotate(360deg); }
+}
+
+.collab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent-rgb), 0.15) transparent;
+  border: 1px solid rgba(var(--accent-rgb), 0.1);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.collab-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.collab-row:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.collab-photo {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.collab-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.collab-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--film-white);
+}
+
+.collab-meta {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collab-count {
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+.collab-dept {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
 }
 
 .current-orbits h4 {
@@ -1425,18 +1893,13 @@ html, body {
   height: 480px;
 }
 
+/* .popup-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .popup-close {
   position: absolute;
   top: -40px;
   right: 0;
-  width: 35px;
-  height: 35px;
-  background: rgba(255, 71, 87, 0.3);
-  border: none;
-  border-radius: 50%;
-  color: var(--danger-red);
-  font-size: 16px;
-  cursor: pointer;
+  z-index: 10;
 }
 
 .flip-wrapper {
@@ -1662,18 +2125,12 @@ html, body {
   border: none;
 }
 
+/* .trailer-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .trailer-close {
   position: absolute;
   top: -40px;
   right: 0;
-  width: 35px;
-  height: 35px;
-  background: rgba(255, 71, 87, 0.8);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 /* ============================================
@@ -1696,7 +2153,7 @@ html, body {
 .bio-panel {
   position: fixed;
   left: 0;
-  top: 80px;
+  top: calc(var(--header-height) + var(--controls-height));
   bottom: 0;
   width: 50px; /* Width for tab */
   background: transparent;
@@ -1704,6 +2161,17 @@ html, body {
   transition: all 0.3s ease;
   overflow: visible;
   pointer-events: none;
+}
+
+/* Bio panel close: pure fade — overrides the global orbit-popup-exit
+   (scale + blur + opacity) so the X click reads as a clean fade only. */
+.bio-panel[data-orbit-popup].orbit-popup-closing {
+  animation: bio-panel-fade-out 220ms ease forwards;
+}
+
+@keyframes bio-panel-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
 .bio-panel.visible .bio-panel-tab {
@@ -1716,7 +2184,7 @@ html, body {
   border-right: 1px solid rgba(0, 217, 255, 0.2);
   backdrop-filter: blur(20px);
   pointer-events: auto;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 /* Hide bio tab in multi-person mode */
@@ -1758,97 +2226,100 @@ html, body {
 }
 
 .bio-panel-content {
-  width: 400px;
+  width: 455px;
   height: 100%;
-  overflow-y: auto;
-  padding: 25px;
+  padding: 25px 25px 8px;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
   transition: opacity 0.2s ease;
+  zoom: 0.88;
 }
 
 .bio-panel.expanded .bio-panel-content {
   opacity: 1;
 }
 
+/* .bio-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .bio-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 50%;
-  color: var(--muted-silver);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
+  top: 6px;
+  right: 6px;
+  z-index: 10;
 }
 
-.bio-close:hover {
-  background: rgba(255, 71, 87, 0.3);
-  color: white;
-}
-
-/* QUICK STATS - Pumpy colorful stats */
-.bio-quick-stats {
+/* STATS STRIP — centred inline strip with thin dividers */
+.bio-stats-strip {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px 4px;
+  margin-top: -15px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.bio-quick-stat {
-  flex: 1;
+.bio-stat-item {
   text-align: center;
-  padding: 14px 8px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 0 16px;
+  flex: 1;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.bio-quick-stat.films {
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 150, 255, 0.05));
-  border: 1px solid rgba(0, 217, 255, 0.3);
+.bio-stat-item:last-child {
+  border-right: none;
 }
 
-.bio-quick-stat.rating {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 180, 0, 0.05));
-  border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.bio-quick-stat.career {
-  background: linear-gradient(135deg, rgba(214, 93, 177, 0.15), rgba(180, 60, 150, 0.05));
-  border: 1px solid rgba(214, 93, 177, 0.3);
-}
-
-.bio-quick-stat .stat-value {
+.bio-stat-item .stat-value {
   display: block;
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
 }
 
-.bio-quick-stat.films .stat-value { color: var(--accent-cyan); }
-.bio-quick-stat.rating .stat-value { color: var(--accent-gold); }
-.bio-quick-stat.career .stat-value { color: #d65db1; }
-
-.bio-quick-stat .stat-label {
+.bio-stat-item .stat-label {
+  display: block;
   font-size: 10px;
-  color: var(--muted-silver);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--ghost-gray);
+  margin-top: 3px;
 }
+
+.bio-stat-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+/* preserve existing colour per stat */
+#bioFilmCount  { color: var(--accent-cyan); }
+#bioAvgRating  { color: var(--accent-gold); }
+#bioCareerSpan { color: #d65db1; }
 
 /* Debut line */
 .bio-debut {
-  font-size: 12px;
-  color: #d65db1;
-  margin-top: 6px;
+  font-size: 15px;
+  color: #a855f7;
   font-style: italic;
+  margin-top: 4px;
 }
 
 .bio-debut::before {
-  content: "🎬 ";
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.4);
+  border: 1.5px solid #a855f7;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 
 .bio-header {
@@ -1860,11 +2331,12 @@ html, body {
 }
 
 .bio-photo {
-  width: 80px;
-  height: 120px;
+  width: 100px;
+  height: 130px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 6px;
+  border: 1.5px solid rgba(0, 217, 255, 0.35);
+  flex-shrink: 0;
 }
 
 .bio-header-info {
@@ -1877,21 +2349,67 @@ html, body {
 .bio-name {
   font-family: var(--font-display);
   font-size: 20px;
+  line-height: 1.2;
   font-weight: 700;
   color: white;
   margin-bottom: 6px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .bio-role {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--accent-cyan);
   font-weight: 600;
+}
+
+.bio-role-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 4px;
 }
 
 .bio-dates {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted-silver);
+  padding-left: 14px;
+  text-indent: -14px;
+}
+
+.bio-dates::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.4);
+  border: 1.5px solid #a855f7;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.bio-dates:empty::before {
+  display: none;
+}
+
+.bio-cube-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  background: none;
+  border: none;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.bio-cube-link:hover {
+  color: var(--prestige-purple);
+  transform: scale(1.15);
 }
 
 .bio-memorial {
@@ -1911,7 +2429,7 @@ html, body {
 
 .memorial-text {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--accent-gold);
   letter-spacing: 1px;
 }
@@ -1921,39 +2439,435 @@ html, body {
 }
 
 .bio-birthplace {
-  font-size: 13px;
-  color: var(--muted-silver);
-  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--ghost-gray);
+  margin-bottom: 8px;
 }
 
 .bio-birthplace::before {
-  content: "📍 ";
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ghost-gray);
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 
 .bio-text {
-  font-size: 14px;
-  line-height: 1.7;
-  color: white;
-  opacity: 0.9;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--muted-silver);
+  opacity: 1;
 }
 
 .bio-read-more {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 0;
-  background: none;
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
   border: none;
-  color: var(--accent-cyan, #00d9ff);
-  font-family: var(--font-body, 'Barlow', sans-serif);
-  font-size: 13px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+  display: inline-block;
   cursor: pointer;
-  text-decoration: none;
-  transition: opacity 0.2s;
+  padding: 0 0 1px;
+  background: none;
+  margin-top: 8px;
 }
 
 .bio-read-more:hover {
   opacity: 0.8;
-  text-decoration: underline;
+}
+
+/* ============================================
+   BIO PANEL — AI BIO + AWARDS (Prompt B2)
+============================================ */
+
+.bio-awards-section {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.bio-section-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.bio-award-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bio-award-row:last-child {
+  margin-bottom: 0;
+}
+
+.bio-award-detail {
+  flex: 1;
+  min-width: 0;
+}
+
+.bio-award-title {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: var(--film-white);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bio-award-sub {
+  font-size: 10px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+}
+
+.bio-award-chip {
+  font-family: var(--font-display);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+.bio-award-chip.win {
+  color: var(--accent-gold);
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.07);
+}
+
+.bio-award-chip.nom {
+  color: var(--ghost-gray);
+  border-color: rgba(100, 116, 139, 0.2);
+  background: rgba(100, 116, 139, 0.05);
+}
+
+.bio-awards-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.awards-badge {
+  font-family: var(--font-display);
+  font-size: 7px;
+  letter-spacing: 0.07em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+.awards-badge.win {
+  color: var(--accent-gold);
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.awards-badge.nom {
+  color: var(--muted-silver);
+  border-color: rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.05);
+}
+
+.bio-ai-section {
+  margin-bottom: 12px;
+}
+
+.bio-ai-tag {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.bio-ai-text {
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--muted-silver);
+}
+
+.bio-ai-loading {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  height: 18px;
+}
+
+.bio-loading-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ghost-gray);
+  animation: bioDotPulse 1.4s infinite;
+}
+
+.bio-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.bio-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bioDotPulse {
+  0%, 80%, 100% { opacity: 0.2; }
+  40%           { opacity: 1; }
+}
+
+.bio-full-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   BIO PANEL — AWARDS GLYPH ROW (compact festival glyphs + hover tooltip)
+============================================ */
+
+/* 3×2 fixed grid of festival tiles */
+.awards-glyphs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.award-glyph-tile {
+  padding: 6px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.award-glyph-tile .bio-award-glyph-btn {
+  width: 100%;
+  height: 100%;
+}
+
+.award-glyph-tile .bio-award-glyph-btn svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.award-glyph-tile.no-data {
+  opacity: 0.4;
+}
+
+.award-glyph-tile .glyph-count-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.award-glyph-tile.has-wins .glyph-count-badge {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+.award-glyph-tile.has-noms .glyph-count-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--muted-silver);
+}
+
+.bio-award-glyph-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.bio-award-glyph-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  background: transparent;
+  transition: transform 0.15s;
+  padding: 0;
+}
+
+.bio-award-glyph-btn:hover {
+  transform: translateY(-2px);
+}
+
+.bio-award-glyph-btn.has-win {
+  color: var(--accent-gold);
+  --halo-oscar:  rgba(255, 215, 0, 0.45);
+  --halo-bafta:  rgba(255, 215, 0, 0.45);
+  --halo-cannes: rgba(255, 215, 0, 0.45);
+  --halo-venice: rgba(255, 215, 0, 0.45);
+  --halo-berlin: rgba(255, 215, 0, 0.45);
+  --halo-globe:  rgba(255, 215, 0, 0.45);
+  --bg-card:     rgba(10, 14, 26, 0.98);
+}
+
+.bio-award-glyph-btn.nom-only {
+  color: #475569;
+  --halo-oscar:  rgba(148, 163, 184, 0.30);
+  --halo-bafta:  rgba(148, 163, 184, 0.30);
+  --halo-cannes: rgba(148, 163, 184, 0.30);
+  --halo-venice: rgba(148, 163, 184, 0.30);
+  --halo-berlin: rgba(148, 163, 184, 0.30);
+  --halo-globe:  rgba(148, 163, 184, 0.30);
+  --bg-card:     rgba(10, 14, 26, 0.98);
+}
+
+.bio-award-glyph-btn.no-data {
+  color: #334155;
+  --halo-oscar:  rgba(148, 163, 184, 0.12);
+  --halo-bafta:  rgba(148, 163, 184, 0.12);
+  --halo-cannes: rgba(148, 163, 184, 0.12);
+  --halo-venice: rgba(148, 163, 184, 0.12);
+  --halo-berlin: rgba(148, 163, 184, 0.12);
+  --halo-globe:  rgba(148, 163, 184, 0.12);
+  --bg-card:     rgba(10, 14, 26, 0.98);
+}
+
+.bio-award-glyph-btn .og {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* count badge */
+.bio-glyph-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.has-win .bio-glyph-count {
+  background: var(--accent-gold);
+  color: #0a0e1a;
+}
+
+.nom-only .bio-glyph-count {
+  background: #334155;
+  color: #94a3b8;
+}
+
+/* tooltip — always pinned to the left of its wrap with an explicit
+   buffer so it never butts up against the bio-panel / page edge. */
+.bio-glyph-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 8px;
+  background: #0a0e1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  min-width: 220px;
+  max-width: 300px;
+  max-height: 320px;
+  overflow-y: auto;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 200;
+}
+
+.bio-award-glyph-wrap:hover .bio-glyph-tooltip {
+  opacity: 1;
+}
+
+.bio-glyph-tooltip-title {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(148, 163, 184, 0.6);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.bio-glyph-tooltip-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--film-white);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.bio-glyph-tooltip-row:last-child {
+  margin-bottom: 0;
+}
+
+.bio-glyph-tooltip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.bio-glyph-tooltip-dot.win {
+  background: var(--accent-gold);
+}
+
+.bio-glyph-tooltip-dot.nom {
+  background: #475569;
+}
+
+.bio-glyph-tooltip-year {
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--ghost-gray);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.bio-glyph-tooltip-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 18px;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #0a0e1a;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================
@@ -1980,59 +2894,16 @@ html, body {
   position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-top: 0;
+  margin-bottom: -10px;
 }
 
 .genre-pie {
-  width: 180px;
-  height: 180px;
-}
-
-.genre-pie-slice {
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  transform-origin: 100px 100px;
-}
-
-.genre-pie-slice:hover {
-  filter: brightness(1.3);
-  transform: scale(1.03);
-}
-
-.genre-pie-tooltip {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(0, 217, 255, 0.5);
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 12px;
-  color: white;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 100;
-  white-space: nowrap;
-}
-
-.genre-pie-tooltip.visible {
-  opacity: 1;
-}
-
-.genre-pie-tooltip .tooltip-genre {
-  font-weight: 600;
-  color: var(--accent-cyan);
-}
-
-.genre-pie-tooltip .tooltip-percent {
-  color: var(--accent-gold);
-  margin-left: 8px;
-}
-
-.genre-pie-tooltip .tooltip-count {
-  color: var(--muted-silver);
-  font-size: 11px;
   display: block;
-  margin-top: 2px;
+}
+
+.genre-pie-container .genre-legend {
+  display: none;
 }
 
 .genre-legend {
@@ -2040,16 +2911,18 @@ html, body {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  margin-bottom: 12px;
 }
 
 .genre-legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 11px;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 14px;
   color: #ccc;
   cursor: pointer;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
   transition: all 0.2s ease;
@@ -2063,13 +2936,21 @@ html, body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .genre-legend-label {
-  max-width: 80px;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.genre-legend-count {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted-silver);
 }
 
 /* ============================================
@@ -2112,7 +2993,7 @@ html, body {
 .bio-person-tab-photo {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
 }
 
@@ -2128,38 +3009,58 @@ html, body {
 
 .bio-viz-tabs {
   display: flex;
-  gap: 4px;
-  margin: 20px 0 15px;
-  padding: 4px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .bio-viz-tab {
-  flex: 1;
-  padding: 8px 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   background: transparent;
-  border: none;
-  border-radius: 6px;
-  color: var(--muted-silver);
-  font-size: 11px;
-  font-weight: 500;
+  color: var(--ghost-gray);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.bio-viz-tab:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.05);
+.bio-viz-tab::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ghost-gray);
+  flex-shrink: 0;
+  transition: background 0.2s;
 }
 
 .bio-viz-tab.active {
-  background: rgba(0, 217, 255, 0.15);
+  background: rgba(0, 217, 255, 0.08);
   color: var(--accent-cyan);
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.bio-viz-tab.active::before {
+  background: var(--accent-cyan);
 }
 
 .bio-viz-panel {
   min-height: 180px;
+}
+
+#vizCollabs:not([hidden]) {
+  position: relative;
+  z-index: 5;
+  background: rgba(10, 14, 26, 0.98);
+  padding: 10px 0;
 }
 
 /* ============================================
@@ -2181,6 +3082,9 @@ html, body {
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .collab-item:hover {
@@ -2188,10 +3092,10 @@ html, body {
   border-color: rgba(0, 217, 255, 0.2);
 }
 
-.collab-photo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.collabs-list .collab-photo {
+  width: 44px;
+  height: 60px;
+  border-radius: 6px;
   object-fit: cover;
   border: 2px solid rgba(0, 217, 255, 0.3);
 }
@@ -2201,25 +3105,25 @@ html, body {
 }
 
 .collab-name {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: white;
 }
 
 .collab-role {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--accent-cyan);
 }
 
 .collab-count {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--accent-gold);
 }
 
 .collab-count-label {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted-silver);
   text-transform: uppercase;
 }
@@ -2245,8 +3149,8 @@ html, body {
 }
 
 .decade-label {
-  width: 50px;
-  font-size: 11px;
+  width: 55px;
+  font-size: 13px;
   color: var(--muted-silver);
   text-align: right;
 }
@@ -2272,7 +3176,7 @@ html, body {
 }
 
 .decade-count {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: white;
 }
@@ -2293,13 +3197,13 @@ html, body {
 
 .activity-stat-value {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--accent-cyan);
 }
 
 .activity-stat-label {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted-silver);
   text-transform: uppercase;
 }

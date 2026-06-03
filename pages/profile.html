@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="profile.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
 </head>
 <body>
 
@@ -380,7 +381,7 @@
   </main>
 
   <!-- LIST MODAL -->
-  <div class="list-modal-overlay" id="listModal" hidden>
+  <div class="list-modal-overlay" id="listModal" data-orbit-popup hidden>
     <div class="list-modal-panel">
       <header class="list-modal-header" id="listModalHeader">
         <div class="list-modal-header-left">
@@ -388,7 +389,7 @@
           <h2 class="list-modal-title" id="listModalTitle">List</h2>
           <span class="list-modal-count" id="listModalCount">(0 titles)</span>
         </div>
-        <button class="list-modal-close" id="listModalClose">&#x2715;</button>
+        <button class="list-modal-close orbit-close" id="listModalClose" aria-label="Close">&#x2715;</button>
       </header>
       <div class="list-modal-body" id="listModalBody"></div>
       <footer class="list-modal-footer">

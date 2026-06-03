@@ -885,25 +885,13 @@ html, body {
 
 .info-panel:not([hidden]) { transform: translateX(0); }
 
+/* .info-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .info-close {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 35px;
-  height: 35px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.3s;
   z-index: 10;
-}
-
-.info-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: rotate(90deg);
 }
 
 .info-poster {
@@ -1060,24 +1048,12 @@ html, body {
   transform: translateX(0);
 }
 
+/* .bio-close-right legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .bio-close-right {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 50%;
-  color: var(--muted-silver);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.bio-close-right:hover {
-  background: rgba(255, 71, 87, 0.3);
-  color: white;
 }
 
 /* Person Tabs */
@@ -1392,24 +1368,13 @@ html, body {
   perspective: 1500px;
 }
 
+/* .popup-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .popup-close {
   position: absolute;
   top: -40px;
   right: -40px;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
   z-index: 10;
-  transition: all 0.2s;
-}
-
-.popup-close:hover {
-  background: rgba(255, 71, 87, 0.5);
 }
 
 .flip-wrapper {
@@ -1559,18 +1524,12 @@ html, body {
   aspect-ratio: 16/9;
 }
 
+/* .trailer-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .trailer-close {
   position: absolute;
   top: -40px;
   right: 0;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
 }
 
 .trailer-container {

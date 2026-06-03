@@ -524,6 +524,12 @@ def _strip_category_prefix(body, cat):
     m = re.match(r"^\s*'{2,3}\s*\[\[[^\]]+\]\]\s*'{2,3}\s*:\s*", body)
     if m:
         return body[m.end():]
+    # Malformed italic-after-wikilink form: `[[Target]]'': content''` —
+    # cer 2023 Golden Bear uses this. The italic span starts after the
+    # wikilink and wraps the content (including the colon).
+    m = re.match(r"^\s*\[\[[^\]]+\]\]\s*''\s*:\s*", body)
+    if m:
+        return body[m.end():]
     # Bare wikilink with optional " for Y:" qualifier
     m = re.match(r"^\s*\[\[[^\]]+\]\](?:\s+for\s+[^:]+)?\s*:\s*", body)
     if m:
@@ -563,14 +569,24 @@ def _parse_winner_line(content, cat):
     m = re.match(r"^''(?:\[\[(?:[^|\]]*\|)?([^\]]+)\]\]|(.+?))''(.*)$", content)
     if m:
         film = (m.group(1) or m.group(2) or "").strip()
+        # Malformed wikitext sometimes wraps "by" inside the italic span
+        # (cer 2024: ''[[A Traveler's Needs]] by''). If the captured
+        # film contains a wikilink, prefer that as the title.
+        if "[[" in film:
+            wm = re.search(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", film)
+            if wm:
+                film = wm.group(1).strip()
         rest = m.group(3).strip()
         rest = re.sub(r"^\s*(?:by|de)\s+", "", rest, flags=re.IGNORECASE)
         recipients = _extract_persons(rest)
         recipients = [r for r in recipients if r.lower() not in NON_PERSON_NAMES]
         return {"film_title": film, "recipients": recipients}
 
-    # F1b: non-italic wikilinked film + by
-    m = re.match(r"^\[\[(?:[^|\]]*\|)?([^\]]+)\]\]\s+by\s+(.*)$", content, re.IGNORECASE)
+    # F1b: wikilinked film + optional stray italic + by + recipient(s).
+    # Handles `[[Film]] by [[Director]]` and the malformed
+    # `[[Film]]'' by [[Director]]` (cer 2023 Golden Bear).
+    m = re.match(r"^\[\[(?:[^|\]]*\|)?([^\]]+)\]\](?:\s*'')?\s+by\s+(.*)$",
+                 content, re.IGNORECASE)
     if m:
         film = m.group(1).strip()
         rest = m.group(2).strip()
@@ -618,9 +634,17 @@ def _extract_film_from_segment(segment):
     # ''plain text'' (non-greedy to allow apostrophes inside)
     m = re.search(r"''(.+?)''", segment)
     if m:
-        inner = m.group(1)
-        wm = re.match(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]$", inner)
-        return (wm.group(1) if wm else inner).strip()
+        inner = m.group(1).strip()
+        # If the italic span wraps any wikilink, prefer that as the
+        # title (handles malformed wikitext like ''[[Film]] by'' or
+        # cer 2023 ': [[On the Adamant]]').
+        wm = re.search(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", inner)
+        if wm:
+            return wm.group(1).strip()
+        # Strip stray leading/trailing punctuation/connectives.
+        inner = re.sub(r"^[\s:,]+|[\s,]+$", "", inner)
+        inner = re.sub(r"\s+by\s*$", "", inner, flags=re.IGNORECASE)
+        return inner.strip()
     return ""
 
 

@@ -16,6 +16,11 @@ let searchTimeout = null;
 let lastChronoSorted = []; // Store for redrawing sacred line
 let currentMediaMode = 'movies'; // 'movies', 'tv', 'both'
 let showGuestAppearances = false; // Exclude guest appearances by default
+let hasRenderedOnce = false; // Suppress entrance animation on first mount
+let lastActionWasReverse = false; // Reverse-button paired-flip flag (one-shot)
+let lastActionWasRanked = false; // Ranked-sort two-phase flip flag (one-shot)
+let lastActionWasDelete = false; // Gap-close slide flag (one-shot)
+let cardPositionSnapshot = null; // {movieId: leftPx} snapshot before clear
 
 // Randomized gradient for this session
 let currentGradientId = "lineGrad" + (Math.floor(Math.random() * 4) + 1);
@@ -25,6 +30,8 @@ let timelineTitle, timelineSubtitle, movieCount;
 let timelineTrack, multiTracks, timelineViewport;
 let sacredSvg, sacredLines;
 let decadeFilter, yearFilter, ratingFilter, reverseBtn;
+let genreFilterTrigger, genreFilterPanel;
+const selectedGenres = new Set();
 let billingFilter, roleFilter, excludeSelfCheckbox, featureFilmsOnly;
 let upcomingSection, upcomingTrack;
 let addPersonBtn, vennBtn, bioBtn, orbitLabels;
@@ -40,12 +47,38 @@ let emptyState;
 document.addEventListener("DOMContentLoaded", init);
 window.addEventListener("resize", OrbitUtils.debounce(renderCurrentView, 200));
 
+// ── Timeline scroll persistence ──
+// Saves scrollLeft to sessionStorage as the user scrolls so that returning to
+// this timeline (after a Movie Cube nav or page reload within the same tab)
+// restores the scroll position rather than snapping back to the start.
+function getTimelineScrollKey() {
+  const type = localStorage.getItem("timelineType") || "anon";
+  const id = localStorage.getItem("timelineMovieId") || "0";
+  return `orbit_timeline_scroll:${type}:${id}`;
+}
+let _timelineScrollRestorePending = true;
+function restoreTimelineScrollOnce(maxScroll) {
+  if (!_timelineScrollRestorePending || !timelineViewport) return;
+  _timelineScrollRestorePending = false;
+  try {
+    const raw = sessionStorage.getItem(getTimelineScrollKey());
+    const saved = parseFloat(raw);
+    if (!isNaN(saved) && saved > 0) {
+      requestAnimationFrame(() => {
+        timelineViewport.scrollLeft = Math.min(saved, maxScroll);
+      });
+    }
+  } catch (e) { /* sessionStorage unavailable */ }
+}
+
 function init() {
   // Embed mode: hide chrome when loaded in an iframe
   const urlParams0 = new URLSearchParams(window.location.search);
   if (urlParams0.get('embed') === '1') {
     document.body.classList.add('timeline-embed-mode');
   }
+
+  initBackground();
 
   cacheElements();
 
@@ -57,7 +90,7 @@ function init() {
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
       localStorage.removeItem("anchorFromResults");
-      window.location.href = "../games/constellation.html";
+      window.location.href = "anchor-point.html";
     }
   });
   if (typeof initPeopleCube === 'function') initPeopleCube();
@@ -175,6 +208,9 @@ function cacheElements() {
   decadeFilter = document.getElementById("decadeFilter");
   yearFilter = document.getElementById("yearFilter");
   ratingFilter = document.getElementById("ratingFilter");
+  genreFilterTrigger = document.getElementById("genreFilterTrigger");
+  genreFilterPanel = document.getElementById("genreFilterPanel");
+  initGenreFilterUI();
   reverseBtn = document.getElementById("reverseBtn");
   billingFilter = document.getElementById("billingFilter");
   roleFilter = document.getElementById("roleFilter");
@@ -325,10 +361,11 @@ async function loadPersonTimeline(personId) {
   allTvShows = tvShows;
 
   timelineTitle.textContent = person.name;
-  const totalCount = movies.length + tvShows.length;
+  const mainCastShows = tvShows.filter(s => s.isMainCast);
+  const totalCount = movies.length + mainCastShows.length;
   const countParts = [];
   if (movies.length) countParts.push(`${movies.length} Films`);
-  if (tvShows.length) countParts.push(`${tvShows.length} Shows`);
+  if (mainCastShows.length) countParts.push(`${mainCastShows.length} Shows`);
   timelineSubtitle.textContent = `${primaryRole} • ${countParts.join(' • ') || '0 titles'}`;
 
   // Show bio button for single person view
@@ -687,6 +724,86 @@ const TMDB_GENRE_MAP = {
   10770:'TV Movie',53:'Thriller',10752:'War',37:'Western'
 };
 
+/* ============================================================
+   GENRE MULTI-SELECT FILTER
+   Custom checkbox-dropdown that mirrors .filter-select visually.
+   Selection state lives in the module-level `selectedGenres` Set.
+   OR semantics: a movie passes if it has any selected genre.
+   ============================================================ */
+function initGenreFilterUI() {
+  if (!genreFilterTrigger || !genreFilterPanel) return;
+
+  genreFilterTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    genreFilterPanel.hidden = !genreFilterPanel.hidden;
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!genreFilterPanel.hidden && !e.target.closest('#genreFilter')) {
+      genreFilterPanel.hidden = true;
+    }
+  });
+}
+
+function populateGenreFilter(availableGenres) {
+  if (!genreFilterPanel || !genreFilterTrigger) return;
+
+  // Drop selections that are no longer in the visible credit set.
+  for (const g of [...selectedGenres]) {
+    if (!availableGenres.has(g)) selectedGenres.delete(g);
+  }
+
+  const sortedGenres = [...availableGenres]
+    .filter(g => TMDB_GENRE_MAP[g])
+    .sort((a, b) => TMDB_GENRE_MAP[a].localeCompare(TMDB_GENRE_MAP[b]));
+
+  const rows = sortedGenres.map(g => {
+    const checked = selectedGenres.has(g) ? 'checked' : '';
+    return `<label class="multi-select-option">
+      <input type="checkbox" value="${g}" ${checked}>
+      <span>${TMDB_GENRE_MAP[g]}</span>
+    </label>`;
+  }).join('');
+
+  genreFilterPanel.innerHTML = rows +
+    '<button type="button" class="multi-select-clear">Clear All</button>';
+
+  genreFilterPanel.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const id = parseInt(cb.value);
+      if (cb.checked) selectedGenres.add(id);
+      else selectedGenres.delete(id);
+      updateGenreTriggerLabel();
+      applyFiltersAndSort();
+    });
+  });
+
+  genreFilterPanel.querySelector('.multi-select-clear')?.addEventListener('click', () => {
+    selectedGenres.clear();
+    genreFilterPanel.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    updateGenreTriggerLabel();
+    applyFiltersAndSort();
+  });
+
+  updateGenreTriggerLabel();
+}
+
+function updateGenreTriggerLabel() {
+  if (!genreFilterTrigger) return;
+  const count = selectedGenres.size;
+  if (count === 0) {
+    genreFilterTrigger.textContent = 'All Genres';
+    genreFilterTrigger.classList.remove('has-selection');
+  } else if (count <= 2) {
+    genreFilterTrigger.textContent = [...selectedGenres]
+      .map(g => TMDB_GENRE_MAP[g]).filter(Boolean).join(', ');
+    genreFilterTrigger.classList.add('has-selection');
+  } else {
+    genreFilterTrigger.textContent = `${count} genres`;
+    genreFilterTrigger.classList.add('has-selection');
+  }
+}
+
 function applyMovieModeUI(collectionName) {
   if (people.length > 0) return; // only in movie mode
 
@@ -708,30 +825,6 @@ function applyMovieModeUI(collectionName) {
 
   const mediaModeToggle = document.getElementById('mediaModeToggle');
   if (mediaModeToggle) mediaModeToggle.style.display = 'none';
-
-  // Build genre filter from collection movies
-  const genreIds = new Set();
-  allMovies.forEach(m => {
-    (m.genre_ids || []).forEach(g => genreIds.add(g));
-  });
-
-  if (genreIds.size > 0) {
-    const controlsRight = document.querySelector('.controls-right');
-    if (controlsRight && !document.getElementById('genreFilter')) {
-      const sel = document.createElement('select');
-      sel.id = 'genreFilter';
-      sel.className = 'filter-select';
-      sel.title = 'Filter by genre';
-      let opts = '<option value="all">All Genres</option>';
-      [...genreIds].sort((a, b) => (TMDB_GENRE_MAP[a] || '').localeCompare(TMDB_GENRE_MAP[b] || '')).forEach(gid => {
-        const name = TMDB_GENRE_MAP[gid] || `Genre ${gid}`;
-        opts += `<option value="${gid}">${name}</option>`;
-      });
-      sel.innerHTML = opts;
-      sel.addEventListener('change', () => applyFiltersAndSort());
-      controlsRight.prepend(sel);
-    }
-  }
 
   // Show collection badge
   if (collectionName) {
@@ -905,6 +998,7 @@ function processAndRender() {
   // Build filters from source items (movies + TV shows)
   let allYears = new Set();
   let allDecades = new Set();
+  let allGenres = new Set();
 
   // Apply media mode filter so dropdowns only show relevant decades/years
   let sourceMovies;
@@ -958,21 +1052,25 @@ function processAndRender() {
 
     allYears.add(y);
     allDecades.add(Math.floor(y / 10) * 10);
+    (m.genre_ids || []).forEach(g => allGenres.add(g));
   });
-  
+
   // Populate decade filter
   const decades = [...allDecades].sort((a, b) => b - a);
   if (decadeFilter) {
-    decadeFilter.innerHTML = '<option value="all">All Decades</option>' + 
+    decadeFilter.innerHTML = '<option value="all">All Decades</option>' +
       decades.map(d => `<option value="${d}">${d}s</option>`).join('');
   }
-  
+
   // Populate year filter
   const years = [...allYears].sort((a, b) => b - a);
   if (yearFilter) {
-    yearFilter.innerHTML = '<option value="all">All Years</option>' + 
+    yearFilter.innerHTML = '<option value="all">All Years</option>' +
       years.map(y => `<option value="${y}">${y}</option>`).join('');
   }
+
+  // Populate genre filter (only genres present in visible credits)
+  populateGenreFilter(allGenres);
   
   applyFiltersAndSort();
   updateMediaModeToggleVisibility();
@@ -1043,9 +1141,6 @@ function applyFiltersAndSort() {
     return m.jobCategories?.includes(roleVal) || false;
   };
   
-  // Genre filter (movie mode)
-  const genreFilter2 = document.getElementById('genreFilter');
-  const genreVal = genreFilter2?.value || 'all';
 
   const filterFn = (m) => {
     // Exclude unreleased from main timeline
@@ -1054,10 +1149,10 @@ function applyFiltersAndSort() {
     // Features only filter (exclude documentaries and TV movies)
     if (featuresOnly && isNonFeature(m)) return false;
 
-    // Genre filter (movie mode)
-    if (genreVal !== 'all') {
+    // Genre filter (multi-select, OR semantics)
+    if (selectedGenres.size > 0) {
       const genres = m.genre_ids || [];
-      if (!genres.includes(parseInt(genreVal))) return false;
+      if (!genres.some(g => selectedGenres.has(g))) return false;
     }
 
     // Self exclusion filter
@@ -1157,23 +1252,30 @@ function applyFiltersAndSort() {
 
 function renderUpcoming(movies) {
   if (!upcomingSection || !upcomingTrack) return;
-  
+
   if (movies.length === 0) {
     upcomingSection.hidden = true;
+    upcomingSection.classList.remove('expanded');
     return;
   }
-  
+
   upcomingSection.hidden = false;
-  
+
   // Sort by release date
   movies.sort((a, b) => new Date(a.release_date || "9999") - new Date(b.release_date || "9999"));
-  
-  upcomingTrack.innerHTML = movies.slice(0, 10).map(movie => {
-    const posterUrl = movie.poster_path 
-      ? `${TMDB_IMG}w92${movie.poster_path}`
-      : 'https://placehold.co/40x60?text=?';
+
+  const limited = movies.slice(0, 10);
+
+  // Update count badge on the toggle pill
+  const countEl = document.getElementById('upcomingCount');
+  if (countEl) countEl.textContent = limited.length;
+
+  upcomingTrack.innerHTML = limited.map(movie => {
+    const posterUrl = movie.poster_path
+      ? `${TMDB_IMG}w185${movie.poster_path}`
+      : 'https://placehold.co/140x210?text=?';
     const releaseDate = movie.release_date || 'TBA';
-    
+
     return `
       <div class="upcoming-card" data-movie-id="${movie.id}">
         <img src="${posterUrl}" alt="${movie.title}">
@@ -1184,13 +1286,23 @@ function renderUpcoming(movies) {
       </div>
     `;
   }).join('');
-  
+
   // Add click handlers
   upcomingTrack.querySelectorAll('.upcoming-card').forEach(card => {
     card.addEventListener('click', () => {
       openMovieCube(card.dataset.movieId);
     });
   });
+
+  // Wire the Coming Soon toggle once
+  const toggle = document.getElementById('upcomingToggle');
+  if (toggle && !toggle.dataset.wired) {
+    toggle.dataset.wired = '1';
+    toggle.addEventListener('click', () => {
+      const expanded = upcomingSection.classList.toggle('expanded');
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+  }
 }
 function sortMovies(arr) {
   const sortFn = getSortFunction();
@@ -1256,6 +1368,20 @@ function renderSingleTimeline() {
     return;
   }
 
+  // Always snapshot surviving card positions — any card present in both the
+  // old and the new render is treated as a "survivor" and slides between
+  // positions instead of disappearing/reappearing. New cards (filter
+  // relaxation, fresh person load) still get the entrance flip.
+  cardPositionSnapshot = {};
+  Array.from(timelineTrack.children).forEach(child => {
+    if (child.dataset && child.dataset.movieId) {
+      cardPositionSnapshot[child.dataset.movieId] = {
+        left: parseFloat(child.style.left) || 0,
+        top:  parseFloat(child.style.top)  || 0
+      };
+    }
+  });
+
   hideEmpty();
   // Clear timelineTrack but preserve SVG
   Array.from(timelineTrack.children).forEach(child => {
@@ -1279,23 +1405,23 @@ function renderSingleTimeline() {
   
   if (numCards <= 3) {
     // Very small collection - large hero cards
-    cardWidth = 300;
-    cardHeight = 450;
+    cardWidth = 375;
+    cardHeight = 563;
     cardGap = 60;
   } else if (numCards <= 10) {
     // Small collection - bigger cards
-    cardWidth = 260;
-    cardHeight = 390;
+    cardWidth = 325;
+    cardHeight = 488;
     cardGap = 45;
   } else if (numCards <= 25) {
     // Medium collection
-    cardWidth = 220;
-    cardHeight = 330;
+    cardWidth = 275;
+    cardHeight = 413;
     cardGap = 35;
   } else {
     // Large collection
-    cardWidth = 180;
-    cardHeight = 270;
+    cardWidth = 225;
+    cardHeight = 338;
     cardGap = 30;
   }
   
@@ -1361,9 +1487,114 @@ function renderSingleTimeline() {
     const card = createMovieCard(movie, cardWidth, cardHeight);
     card.style.left = `${x}px`;
     card.style.top = `${y}px`;
-    
+
     timelineTrack.appendChild(card);
   });
+
+
+  // Card flip stagger — paired symmetric timing on Reverse, otherwise left→right.
+  if (hasRenderedOnce) {
+    const allCards = Array.from(timelineTrack.querySelectorAll('.timeline-card'));
+    const n = allCards.length;
+
+    // A "survivor" is any card whose movieId existed in the previous render.
+    // Survivors slide between old/new positions instead of flipping in/out.
+    // Brand-new cards (filter relaxation, fresh person load) still flip in.
+    const isSurvivor = (card) =>
+      cardPositionSnapshot &&
+      card.dataset.movieId &&
+      cardPositionSnapshot[card.dataset.movieId] !== undefined;
+
+    if (lastActionWasReverse && n > 1) {
+      // Paired flip: card i and card (n-1-i) flip at the same time.
+      // Delay grows toward the middle, capped at 220ms.
+      allCards.forEach((card, i) => {
+        if (isSurvivor(card)) return;
+        const pairDepth = Math.min(i, n - 1 - i);
+        const delay = Math.min(pairDepth * 38, 220);
+        card.classList.add('timeline-card-flipping');
+        card.style.animationDelay = `${delay}ms`;
+      });
+    } else if (n > 0) {
+      // Standard left-to-right position-based stagger
+      const lefts = allCards.map(c => parseFloat(c.style.left) || 0);
+      const minLeft = Math.min(...lefts);
+      const maxLeft = Math.max(...lefts);
+      const range = maxLeft - minLeft || 1;
+      allCards.forEach(card => {
+        if (isSurvivor(card)) return;
+        const leftPos = parseFloat(card.style.left) || 0;
+        const fraction = (leftPos - minLeft) / range;
+        const delay = Math.round(fraction * 180);
+        card.classList.add('timeline-card-flipping');
+        card.style.animationDelay = `${delay}ms`;
+      });
+    }
+
+    lastActionWasRanked = false;
+    // lastActionWasReverse is reset below, AFTER the slide/spin block reads it.
+  }
+
+  // Reposition surviving cards. Reverse uses a spinning-emblem overlay that
+  // masks the content swap (tiles never visually move); every other action
+  // uses a smooth slide between old and new positions.
+  if (cardPositionSnapshot) {
+    const allCards = Array.from(timelineTrack.querySelectorAll('.timeline-card'));
+    allCards.forEach(card => {
+      const id = card.dataset.movieId;
+      const old = id ? cardPositionSnapshot[id] : null;
+      if (old) {
+        const newLeft = parseFloat(card.style.left);
+        const newTop  = parseFloat(card.style.top);
+        const moved = Math.abs(old.left - newLeft) > 1 || Math.abs(old.top - newTop) > 1;
+        if (!moved) return;
+
+        if (lastActionWasReverse) {
+          // Pre-spin dip: all cards translateY together (down then back)
+          // BEFORE the content swap is revealed. The opaque spin overlay is
+          // attached at the same time so the new content under it stays
+          // hidden through both the dip and the spinner phases.
+          card.classList.add('tile-pre-spin-dip');
+          card.addEventListener('animationend', (e) => {
+            if (e.animationName === 'tilePreSpinDip') {
+              card.classList.remove('tile-pre-spin-dip');
+            }
+          }, { once: true });
+
+          const overlay = document.createElement('div');
+          overlay.className = 'tile-spin-overlay';
+          overlay.innerHTML =
+            '<div class="tile-spin-icon">' +
+              '<div class="spinner-ring spinner-ring-1"></div>' +
+              '<div class="spinner-ring spinner-ring-2"></div>' +
+              '<div class="spinner-ring spinner-ring-3"></div>' +
+              '<div class="spinner-core"></div>' +
+            '</div>';
+          card.appendChild(overlay);
+          overlay.addEventListener('animationend', (e) => {
+            // Only remove on the overlay's own fade-out animation, not the
+            // child rings' rotate (which fire earlier and repeatedly).
+            if (e.target === overlay) overlay.remove();
+          });
+        } else {
+          // Default slide path — card travels from old position to new.
+          card.style.left = `${old.left}px`;
+          card.style.top  = `${old.top}px`;
+          requestAnimationFrame(() => {
+            card.classList.add('timeline-card-sliding');
+            card.style.left = `${newLeft}px`;
+            card.style.top  = `${newTop}px`;
+            card.addEventListener('transitionend', () => {
+              card.classList.remove('timeline-card-sliding');
+            }, { once: true });
+          });
+        }
+      }
+    });
+  }
+  lastActionWasReverse = false;
+  lastActionWasDelete = false;
+  cardPositionSnapshot = null;
 
 
   // Clamp scroll position so viewport doesn't show excess space
@@ -1372,11 +1603,16 @@ function renderSingleTimeline() {
     timelineViewport.scrollLeft = maxScroll;
   }
 
+  // Restore scroll position once on first render (e.g. after returning from a Movie Cube)
+  restoreTimelineScrollOnce(maxScroll);
+
   // Draw sacred line after cards render
   setTimeout(() => drawSacredLine(chronoSorted), 100);
 
   // Update timeline width to fit content
   updateTimelineWidth();
+
+  hasRenderedOnce = true;
 }
 
 // Update timeline container width to fit actual content
@@ -1572,6 +1808,7 @@ function renderMultiTimeline() {
       const card = createConvergenceCardFull(movie, personIndices, cardWidth, cardHeight);
       card.style.left = `${x}px`;
       card.style.top = `${convergenceY}px`;
+
       multiTracks.appendChild(card);
       
       // ALL involved tracks converge to this same point
@@ -1593,6 +1830,7 @@ function renderMultiTimeline() {
       const card = createMovieCard(movie, cardWidth, cardHeight, pIndex);
       card.style.left = `${x}px`;
       card.style.top = `${y}px`;
+
       multiTracks.appendChild(card);
       
       trackPaths[pIndex].push({ 
@@ -1604,6 +1842,45 @@ function renderMultiTimeline() {
     }
   });
   
+  // Card flip stagger — paired symmetric timing on Reverse, otherwise left→right.
+  if (hasRenderedOnce) {
+    const allCards = Array.from(multiTracks.querySelectorAll('.timeline-card, .convergence-card'));
+    const n = allCards.length;
+
+    if (lastActionWasReverse && n > 1) {
+      // Paired flip: card i and card (n-1-i) flip at the same time.
+      allCards.forEach((card, i) => {
+        const pairDepth = Math.min(i, n - 1 - i);
+        const delay = Math.min(pairDepth * 38, 220);
+        card.classList.add('timeline-card-flipping');
+        card.style.animationDelay = `${delay}ms`;
+      });
+    } else if (n > 0) {
+      const lefts = allCards.map(c => parseFloat(c.style.left) || 0);
+      const minLeft = Math.min(...lefts);
+      const maxLeft = Math.max(...lefts);
+      const range = maxLeft - minLeft || 1;
+      allCards.forEach(card => {
+        const leftPos = parseFloat(card.style.left) || 0;
+        const fraction = (leftPos - minLeft) / range;
+        const delay = Math.round(fraction * 180);
+        card.classList.add('timeline-card-flipping');
+        card.style.animationDelay = `${delay}ms`;
+      });
+    }
+
+    // Sweep line — only on non-reverse (reverse has its own symmetric timing)
+    if (!lastActionWasReverse) {
+      const sweep = document.createElement('div');
+      sweep.className = 'timeline-sweep-line';
+      multiTracks.appendChild(sweep);
+      sweep.addEventListener('animationend', () => sweep.remove());
+    }
+
+    lastActionWasReverse = false;
+    lastActionWasRanked = false;
+  }
+
   // Clamp scroll position so viewport doesn't show excess space
   const vpWidth = timelineViewport.offsetWidth;
   const maxScroll = Math.max(0, totalWidth - vpWidth);
@@ -1611,11 +1888,16 @@ function renderMultiTimeline() {
     timelineViewport.scrollLeft = maxScroll;
   }
 
+  // Restore scroll position once on first render (e.g. after returning from a Movie Cube)
+  restoreTimelineScrollOnce(maxScroll);
+
   // Draw sacred lines with convergence
   setTimeout(() => drawMultiSacredLines(trackPaths, totalWidth, vpHeight), 100);
 
   // Show mini-map for multi-actor timelines
   setTimeout(() => showMinimap(), 150);
+
+  hasRenderedOnce = true;
 }
 
 function getValueRangeMulti(entries) {
@@ -1698,7 +1980,7 @@ function createMovieCard(movie, width, height, orbitIndex = 0) {
   card.innerHTML = `
     <div class="card-glow"></div>
     <div class="card-inner">
-      <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
+      <button class="card-delete orbit-close" onclick="event.stopPropagation(); event.preventDefault(); triggerOrbitClose(this.closest('.timeline-card, .convergence-card'), this, () => deleteItem(${movie.id}, '${movie.media_type || 'movie'}'));">✕</button>
       ${tvBadge}
       <img class="card-poster" src="${posterSrc}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${Math.round(width)}x${Math.round(height)}?text=?'">
@@ -1749,15 +2031,17 @@ function createConvergenceCardFull(movie, personIndices, width, height) {
   card.innerHTML = `
     <div class="convergence-glow"></div>
     <div class="card-inner">
-      <button class="card-delete" onclick="event.stopPropagation(); deleteItem(${movie.id}, '${movie.media_type || 'movie'}')">✕</button>
+      <button class="card-delete orbit-close" onclick="event.stopPropagation(); event.preventDefault(); triggerOrbitClose(this.closest('.timeline-card, .convergence-card'), this, () => deleteItem(${movie.id}, '${movie.media_type || 'movie'}'));">✕</button>
       ${tvBadge}
       <img class="card-poster" src="${movie.poster_path ? TMDB_IMG + 'w300' + movie.poster_path : 'https://placehold.co/' + width + 'x' + height + '?text=?'}" alt="${title}" loading="lazy"
            onerror="this.src='https://placehold.co/${width}x${height}?text=?'">
-      <div class="card-overlay">
+    </div>
+    <div class="card-meta">
+      <div class="card-meta-row">
         <div class="card-rating"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> ${rating}</div>
         <div class="card-year">${year || ''}</div>
-        <div class="card-title">${title}</div>
       </div>
+      <div class="card-title">${title}</div>
     </div>
     <div class="convergence-badge">${dots}</div>
   `;
@@ -1799,6 +2083,8 @@ function drawSacredLine(chronoMovies) {
 
   // Collect points FIRST before clearing - connect through card centers/nodes
   const points = [];
+  let firstGeom = null;
+  let lastGeom = null;
   movies.forEach(movie => {
     const card = timelineTrack.querySelector(`[data-movie-id="${movie.id}"]`);
     if (card) {
@@ -1808,17 +2094,27 @@ function drawSacredLine(chronoMovies) {
       const height = card.offsetHeight || 150;
 
       if (left > 0 || top > 0) {
-        // Connect through the node at bottom of card
-        points.push({
-          x: left + width / 2,
-          y: top + height + 8 // Position at the card node
-        });
+        // Line threads through each card at 1/3 from bottom (poster above, info strip below).
+        const y = top + height * 2 / 3;
+        points.push({ x: left + width / 2, y });
+        if (!firstGeom) firstGeom = { left, width, y };
+        lastGeom = { left, width, y };
       }
     }
   });
 
   // Only proceed if we have enough points
   if (points.length < 2) return;
+
+  // Extend endpoints past the first and last tile so the line starts before / ends after them,
+  // rather than terminating under those bookend cards.
+  const tailExtension = 60;
+  if (firstGeom) {
+    points.unshift({ x: firstGeom.left - tailExtension, y: firstGeom.y });
+  }
+  if (lastGeom) {
+    points.push({ x: lastGeom.left + lastGeom.width + tailExtension, y: lastGeom.y });
+  }
 
   // NOW safe to clear and redraw
   sacredSvg.setAttribute("width", trackWidth);
@@ -1837,17 +2133,18 @@ function drawSacredLine(chronoMovies) {
   outerGlow.setAttribute("d", pathD);
   outerGlow.setAttribute("class", "sacred-line-glow");
   outerGlow.setAttribute("stroke", "url(#cosmicGradient)");
-  outerGlow.setAttribute("stroke-width", "20");
-  outerGlow.style.filter = "blur(8px)";
+  outerGlow.setAttribute("stroke-width", "48");
+  outerGlow.style.filter = "blur(18px)";
+  outerGlow.style.opacity = "0.5";
 
   // Middle glow layer
   const midGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
   midGlow.setAttribute("d", pathD);
   midGlow.setAttribute("class", "sacred-line-glow");
   midGlow.setAttribute("stroke", "url(#cosmicGradient)");
-  midGlow.setAttribute("stroke-width", "10");
-  midGlow.style.filter = "blur(4px)";
-  midGlow.style.opacity = "0.25";
+  midGlow.setAttribute("stroke-width", "24");
+  midGlow.style.filter = "blur(8px)";
+  midGlow.style.opacity = "0.55";
 
   // Main cosmic line
   const mainPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -2217,13 +2514,32 @@ async function openPopup(movieId) {
 function closePopup() {
   if (popupOverlay) popupOverlay.hidden = true;
   currentMovieData = null;
-  
+
   // Ensure sacred line is still visible after popup closes
   setTimeout(() => {
     if (sacredLines && sacredLines.children.length === 0 && lastChronoSorted.length > 1) {
       drawSacredLine();
     }
   }, 100);
+}
+
+/* ============================================================
+   ORBIT CLOSE — Shared trigger for Rule 17 Black Hole exit.
+   Adds .closing to the X and .orbit-popup-closing to the wrapper,
+   then runs the supplied teardown after the animation.
+   ============================================================ */
+function triggerOrbitClose(overlay, btn, teardownFn) {
+  if (!overlay) { if (teardownFn) teardownFn(); return; }
+  if (overlay.classList.contains('orbit-popup-closing')) return;
+  if (btn) btn.classList.add('closing');
+  overlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (btn) btn.classList.remove('closing');
+    overlay.classList.remove('orbit-popup-closing');
+    if (teardownFn) teardownFn();
+  }, reduced ? 200 : 600);
 }
 
 function flipToNext() {
@@ -2327,6 +2643,7 @@ function openAddPersonModal() {
   if (personSearch) personSearch.value = "";
   if (searchResults) searchResults.innerHTML = "";
   renderOrbitChips();
+  loadCollabSuggestions();
 }
 
 function closeAddPersonModal() {
@@ -2387,6 +2704,159 @@ function renderOrbitChips() {
   });
 }
 
+/* ============================================================
+   COLLABORATOR SUGGESTIONS — Added April 2026
+   When the Add Person modal opens, fetch frequent collaborators
+   for people currently on the timeline and show as quick-picks.
+   ============================================================ */
+
+async function loadCollabSuggestions() {
+  var container = document.getElementById('collabSuggestions');
+  if (!container) return;
+  if (!people.length) { container.innerHTML = ''; return; }
+
+  /* Show loading */
+  container.innerHTML =
+    '<div class="collab-label">SUGGESTED COLLABORATORS</div>' +
+    '<div class="collab-loading">' +
+      '<div class="collab-spinner"></div> Finding collaborators\u2026' +
+    '</div>';
+
+  try {
+    /* Gather collaborator counts across all people on timeline */
+    var coworkers = {};
+    var onTimelineIds = {};
+    people.forEach(function (p) { onTimelineIds[p.id] = true; });
+
+    for (var pi = 0; pi < people.length; pi++) {
+      var person = people[pi];
+      var cacheKey = 'orbit_collab_' + person.id;
+      var credits;
+
+      /* Per Rule 28: cache in sessionStorage */
+      var cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        credits = JSON.parse(cached);
+      } else {
+        var res = await fetch(
+          'https://api.themoviedb.org/3/person/' + person.id +
+          '/combined_credits?api_key=' + TMDB_API_KEY
+        );
+        credits = await res.json();
+        try { sessionStorage.setItem(cacheKey, JSON.stringify(credits)); } catch (e) { /* quota */ }
+      }
+
+      /* Get top 8 movies by popularity */
+      var topMovies = (credits.cast || [])
+        .filter(function (c) { return c.media_type === 'movie' || !c.media_type; })
+        .sort(function (a, b) { return (b.popularity || 0) - (a.popularity || 0); })
+        .slice(0, 8);
+
+      /* Fetch cast for each movie (parallel, cached) */
+      var castPromises = topMovies.map(function (movie) {
+        var movieCacheKey = 'orbit_movie_credits_' + movie.id;
+        var movieCached = sessionStorage.getItem(movieCacheKey);
+        if (movieCached) return Promise.resolve(JSON.parse(movieCached));
+        return fetch(
+          'https://api.themoviedb.org/3/movie/' + movie.id +
+          '/credits?api_key=' + TMDB_API_KEY
+        ).then(function (r) { return r.json(); })
+         .then(function (data) {
+           try { sessionStorage.setItem(movieCacheKey, JSON.stringify(data)); } catch (e) { /* quota */ }
+           return data;
+         })
+         .catch(function () { return null; });
+      });
+
+      var allCasts = await Promise.all(castPromises);
+
+      allCasts.forEach(function (movieData, movieIdx) {
+        if (!movieData) return;
+        var cast = (movieData.cast || []).concat(movieData.crew || []);
+        cast.forEach(function (p) {
+          if (onTimelineIds[p.id]) return; /* skip people already on timeline */
+          if (!coworkers[p.id]) {
+            coworkers[p.id] = {
+              id: p.id,
+              name: p.name,
+              department: p.known_for_department || p.department || '',
+              profile_path: p.profile_path || '',
+              count: 0,
+              films: [],
+              withPeople: {}
+            };
+          }
+          var filmTitle = topMovies[movieIdx] && topMovies[movieIdx].title;
+          if (filmTitle && coworkers[p.id].films.indexOf(filmTitle) === -1) {
+            coworkers[p.id].count++;
+            coworkers[p.id].films.push(filmTitle);
+            coworkers[p.id].withPeople[person.name] = true;
+          }
+        });
+      });
+    }
+
+    /* Sort by count, take top 6 */
+    var topCollabs = Object.values(coworkers)
+      .filter(function (c) { return c.count >= 2; })
+      .sort(function (a, b) { return b.count - a.count; })
+      .slice(0, 6);
+
+    if (!topCollabs.length) {
+      container.innerHTML = '';
+      return;
+    }
+
+    container.innerHTML =
+      '<div class="collab-label">SUGGESTED COLLABORATORS</div>' +
+      '<div class="collab-list">' +
+        topCollabs.map(function (collab) {
+          var imgSrc = collab.profile_path
+            ? TMDB_IMG + 'w45' + collab.profile_path
+            : 'https://placehold.co/35?text=?';
+          var filmsText = collab.films.slice(0, 2).join(', ');
+          var withNames = Object.keys(collab.withPeople).join(', ');
+          return '<div class="collab-row" data-collab-id="' + collab.id + '">' +
+            '<img class="collab-photo" src="' + imgSrc + '" onerror="this.style.display=\'none\'" alt="">' +
+            '<div class="collab-info">' +
+              '<div class="collab-name">' + escHtml(collab.name) + '</div>' +
+              '<div class="collab-meta">' +
+                '<span class="collab-count">' + collab.count + ' films</span> with ' +
+                escHtml(withNames) +
+                ' \u00B7 ' + escHtml(filmsText) +
+              '</div>' +
+            '</div>' +
+            '<div class="collab-dept">' + escHtml(collab.department) + '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+
+    /* Wire clicks — add collaborator to timeline */
+    container.querySelectorAll('.collab-row').forEach(function (row) {
+      row.addEventListener('click', async function () {
+        if (addPersonBusy) return;
+        var id = parseInt(this.dataset.collabId, 10);
+        if (people.find(function (p) { return p.id === id; })) return;
+        this.style.opacity = '0.4';
+        this.style.pointerEvents = 'none';
+        await addPerson(id);
+        renderOrbitChips();
+        loadCollabSuggestions(); /* refresh — removes the one just added */
+      });
+    });
+
+  } catch (err) {
+    console.error('[collab-suggestions]', err);
+    container.innerHTML = '';
+  }
+}
+
+/* Escape HTML helper for collab suggestions */
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 // ============================================
 // NAVIGATION
 // ============================================
@@ -2408,7 +2878,7 @@ function makeAnchorStar() {
   localStorage.setItem("anchorMovie", JSON.stringify(currentMovieData));
   localStorage.setItem("constellationMovies", JSON.stringify(allMov));
   localStorage.removeItem("anchorFromResults");
-  window.location.href = "../games/constellation.html";
+  window.location.href = "anchor-point.html";
 }
 
 // ============================================
@@ -2426,6 +2896,7 @@ function formatPopularity(pop) {
 }
 
 function deleteItem(itemId, mediaType) {
+  lastActionWasDelete = true;
   if (people.length > 0) {
     people.forEach(p => {
       if (mediaType === 'tv') {
@@ -2491,7 +2962,54 @@ function escapeHtml(text) {
 // ============================================
 
 function setupEventListeners() {
-  // Sort
+  // Two-phase flip helper — exit-flip existing cards, then rebuild the DOM
+  // and trigger the paired-symmetric entry stagger via lastActionWasReverse.
+  // Used by Reverse and Chronology so they share the same exit-then-enter feel.
+  function playFlipRebuild() {
+    lastActionWasReverse = true;
+
+    const existing = [
+      ...(timelineTrack ? timelineTrack.querySelectorAll('.timeline-card') : []),
+      ...(multiTracks ? multiTracks.querySelectorAll('.timeline-card, .convergence-card') : [])
+    ];
+
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (existing.length === 0 || reduced) {
+      applyFiltersAndSort();
+      return;
+    }
+
+    existing.forEach(c => c.classList.add('timeline-card-flipping-out'));
+    // 220ms matches the exit keyframe duration.
+    setTimeout(() => applyFiltersAndSort(), 220);
+  }
+
+  function playRankedRebuild() {
+    const singleCards = Array.from(timelineTrack.children).filter(
+      c => c.classList.contains('timeline-card')
+    );
+    const multiCards = document.querySelectorAll('.multi-track .timeline-card, .multi-track .convergence-card');
+    const existing = singleCards.length > 0 ? singleCards : Array.from(multiCards);
+
+    if (existing.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      applyFiltersAndSort();
+      return;
+    }
+
+    // Stagger exit left-to-right across ~180ms total
+    existing.forEach((card, i) => {
+      const delay = existing.length > 1 ? (i / (existing.length - 1)) * 180 : 0;
+      card.style.animationDelay = `${delay}ms`;
+      card.classList.add('timeline-card-flipping-out');
+    });
+
+    lastActionWasRanked = true;
+    setTimeout(() => applyFiltersAndSort(), 220); // 220ms matches exit keyframe duration
+  }
+
+  // Sort — surviving cards slide to their new positions; no flip-out phase.
   document.querySelectorAll(".sort-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".sort-btn").forEach(b => b.classList.remove("active"));
@@ -2500,11 +3018,14 @@ function setupEventListeners() {
       applyFiltersAndSort();
     });
   });
-  
-  // Reverse
+
+  // Reverse — tiles keep their positions; spinning ⧗ emblem covers each face,
+  // and when it fades the underlying content has been swapped to the mirrored
+  // film. The tile shape never moves; nothing disappears.
   reverseBtn?.addEventListener("click", () => {
     isReversed = !isReversed;
     reverseBtn.classList.toggle("active", isReversed);
+    lastActionWasReverse = true;
     applyFiltersAndSort();
   });
   
@@ -2526,7 +3047,11 @@ function setupEventListeners() {
 
   // Modal
   addPersonBtn?.addEventListener("click", openAddPersonModal);
-  modalClose?.addEventListener("click", closeAddPersonModal);
+  modalClose?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(addPersonModal, modalClose, closeAddPersonModal);
+  });
   modalCancel?.addEventListener("click", closeAddPersonModal);
   modalConfirm?.addEventListener("click", closeAddPersonModal);
   
@@ -2561,6 +3086,17 @@ function setupEventListeners() {
 
   // Mini-map scroll sync + interaction
   timelineViewport?.addEventListener("scroll", updateMinimap);
+
+  // Persist scroll position so Movie Cube round-trips don't lose place.
+  let _scrollSaveTimer = null;
+  timelineViewport?.addEventListener("scroll", () => {
+    if (_scrollSaveTimer) clearTimeout(_scrollSaveTimer);
+    _scrollSaveTimer = setTimeout(() => {
+      try {
+        sessionStorage.setItem(getTimelineScrollKey(), String(timelineViewport.scrollLeft));
+      } catch (e) { /* quota or disabled */ }
+    }, 150);
+  }, { passive: true });
 
   // ── Mouse wheel & trackpad → horizontal scroll ──
   if (timelineViewport) {
@@ -2626,26 +3162,42 @@ function setupEventListeners() {
   });
   
   // Popup
-  popupClose?.addEventListener("click", closePopup);
-  popupOverlay?.addEventListener("click", (e) => { if (e.target === popupOverlay) closePopup(); });
+  popupClose?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(popupOverlay, popupClose, closePopup);
+  });
+  popupOverlay?.addEventListener("click", (e) => {
+    if (e.target === popupOverlay) triggerOrbitClose(popupOverlay, popupClose, closePopup);
+  });
   flipCard?.addEventListener("click", (e) => {
     if (!e.target.closest(".popup-btn, .trivia-option")) flipToNext();
   });
-  
+
   // Trailer
   trailerBtn?.addEventListener("click", (e) => { e.stopPropagation(); playTrailer(); });
-  trailerClose?.addEventListener("click", closeTrailer);
-  trailerOverlay?.addEventListener("click", (e) => { if (e.target === trailerOverlay) closeTrailer(); });
-  
+  trailerClose?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(trailerOverlay, trailerClose, closeTrailer);
+  });
+  trailerOverlay?.addEventListener("click", (e) => {
+    if (e.target === trailerOverlay) triggerOrbitClose(trailerOverlay, trailerClose, closeTrailer);
+  });
+
   // Anchor
   anchorBtn?.addEventListener("click", (e) => { e.stopPropagation(); makeAnchorStar(); });
-  
+
   // Keyboard
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      if (trailerOverlay && !trailerOverlay.hidden) closeTrailer();
-      else if (popupOverlay && !popupOverlay.hidden) closePopup();
-      else if (addPersonModal && !addPersonModal.hidden) closeAddPersonModal();
+      if (trailerOverlay && !trailerOverlay.hidden) {
+        triggerOrbitClose(trailerOverlay, trailerClose, closeTrailer);
+      } else if (popupOverlay && !popupOverlay.hidden) {
+        triggerOrbitClose(popupOverlay, popupClose, closePopup);
+      } else if (addPersonModal && !addPersonModal.hidden) {
+        triggerOrbitClose(addPersonModal, modalClose, closeAddPersonModal);
+      }
     }
   });
 }
@@ -2729,7 +3281,11 @@ function initBioPanel() {
   
   // Close button
   if (bioClose) {
-    bioClose.addEventListener("click", closeBioPanel);
+    bioClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(bioPanel, bioClose, closeBioPanel);
+    });
   }
 }
 
@@ -2786,11 +3342,24 @@ function setupVizTabs() {
       Object.entries(vizPanels).forEach(([key, panel]) => {
         if (panel) panel.hidden = key !== viz;
       });
-      
+
+      // Hide the awards section while the Collabs tab is active
+      // so the collab cards visually cover the bottom of the panel.
+      const awardsSection = document.getElementById('bioAwardsSection');
+      if (awardsSection) {
+        if (viz === 'collabs') {
+          awardsSection.dataset.hiddenByTab = '1';
+          awardsSection.hidden = true;
+        } else if (awardsSection.dataset.hiddenByTab === '1') {
+          delete awardsSection.dataset.hiddenByTab;
+          awardsSection.hidden = false;
+        }
+      }
+
       // Render data if needed
       const personIdx = currentBioPersonIndex;
       const movies = people[personIdx]?.filteredMovies || people[personIdx]?.movies || [];
-      
+
       if (viz === "collabs" && vizPanels.collabs) {
         renderCollaborators(people[personIdx]?.id, movies);
       } else if (viz === "activity" && vizPanels.activity) {
@@ -2819,7 +3388,6 @@ async function loadPersonBio(personId, personIdx = 0) {
     const bioRole = document.getElementById("bioRole");
     const bioDates = document.getElementById("bioDates");
     const bioMemorial = document.getElementById("bioMemorial");
-    const bioBirthplace = document.getElementById("bioBirthplace");
     const bioText = document.getElementById("bioText");
     const bioFilmCount = document.getElementById("bioFilmCount");
     const bioAvgRating = document.getElementById("bioAvgRating");
@@ -2835,59 +3403,31 @@ async function loadPersonBio(personId, personIdx = 0) {
     if (bioName) bioName.textContent = person.name || "Unknown";
     if (bioRole) bioRole.textContent = person.known_for_department || "Artist";
     
-    // Format dates
+    // Format dates — birth year + birthplace consolidated on one row
     if (bioDates) {
       const birth = person.birthday ? new Date(person.birthday).getFullYear() : null;
       const death = person.deathday ? new Date(person.deathday).getFullYear() : null;
-      
-      if (birth && death) {
-        bioDates.textContent = `${birth} – ${death}`;
-      } else if (birth) {
-        bioDates.textContent = `Born ${birth}`;
-      } else {
-        bioDates.textContent = "";
-      }
+      const place = person.place_of_birth || "";
+
+      let datePart = "";
+      if (birth && death) datePart = `${birth} – ${death}`;
+      else if (birth) datePart = `Born ${birth}`;
+
+      bioDates.textContent = [datePart, place].filter(Boolean).join(" · ");
     }
-    
+
     // Memorial banner for deceased
     if (bioMemorial) {
       bioMemorial.hidden = !person.deathday;
     }
     
-    if (bioBirthplace) {
-      bioBirthplace.textContent = person.place_of_birth || "";
-      bioBirthplace.hidden = !person.place_of_birth;
-    }
-    
-    if (bioText) {
-      const bio = person.biography || "No biography available.";
-      const needsTruncation = bio.length > 400;
+    // Bio text + AI bio + awards are wired below after renderGenrePie.
+    // The static #bioReadMore button + #bioFullSection in the HTML replace
+    // the old dynamic .bio-read-more injection — see block after renderGenrePie.
+    const biography = person.biography || "";
+    const personName = person.name || "Unknown";
 
-      // Set initial truncated text
-      bioText.textContent = needsTruncation ? bio.substring(0, 400) + "..." : bio;
 
-      // Remove any existing read-more button (from previous person render)
-      const existingBtn = bioText.parentElement?.querySelector('.bio-read-more');
-      if (existingBtn) existingBtn.remove();
-
-      // Add read more / read less toggle if needed
-      if (needsTruncation) {
-        const readMoreBtn = document.createElement('button');
-        readMoreBtn.className = 'bio-read-more';
-        readMoreBtn.textContent = 'Read more';
-        let expanded = false;
-
-        readMoreBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          expanded = !expanded;
-          bioText.textContent = expanded ? bio : bio.substring(0, 400) + "...";
-          readMoreBtn.textContent = expanded ? 'Read less' : 'Read more';
-        });
-
-        bioText.after(readMoreBtn);
-      }
-    }
-    
     // Get movies for THIS person (use personIdx to get correct person's movies)
     const movies = people[personIdx]?.filteredMovies || people[personIdx]?.movies || 
                    (people.length > 0 ? (people[0].filteredMovies || people[0].movies || []) : []);
@@ -2951,13 +3491,521 @@ async function loadPersonBio(personId, personIdx = 0) {
     
     // Render genre pie chart
     renderGenrePie(movies);
-    
+
+    waitForAwardsData(() => {
+      renderBioAwards(personId);
+    });
+
+    // AI bio — async, fires after panel is visible
+    const aiSection = document.getElementById('bioAiSection');
+    const aiTextEl = document.getElementById('bioAiText');
+    const aiLoadingEl = document.getElementById('bioAiLoading');
+    const readMoreBtn = document.getElementById('bioReadMore');
+    const fullSection = document.getElementById('bioFullSection');
+    const bioTextEl = document.getElementById('bioText');
+
+    // Populate full TMDB bio in collapsed section
+    if (biography && bioTextEl) {
+      bioTextEl.textContent = biography;
+      if (readMoreBtn) readMoreBtn.hidden = false;
+    }
+
+    // Wire read-more toggle — remove any previously attached listener first
+    if (readMoreBtn) {
+      const newBtn = readMoreBtn.cloneNode(true);
+      readMoreBtn.parentNode.replaceChild(newBtn, readMoreBtn);
+      newBtn.addEventListener('click', () => {
+        const isHidden = fullSection.hidden;
+        fullSection.hidden = !isHidden;
+        newBtn.textContent = isHidden ? 'HIDE BIOGRAPHY' : 'FULL BIOGRAPHY';
+      });
+    }
+
+    // Fire AI bio async
+    if (aiSection && aiTextEl) {
+      generateAiBio(personId, personName, biography).then(aiBio => {
+        if (aiBio && aiTextEl) {
+          if (aiLoadingEl) aiLoadingEl.remove();
+          const cleaned = aiBio
+            .replace(/^#+\s*/gm, '')
+            .replace(new RegExp(`^${personName}[\\s\\W]*`, 'i'), '')
+            .trim();
+          aiTextEl.textContent = cleaned;
+        } else if (aiSection) {
+          aiSection.hidden = true;
+        }
+      });
+    }
+
     // Store current person for viz tabs
     currentBioPersonIndex = personIdx;
-    
+
+    // Wire OPEN IN CUBE pill — fresh listener each render
+    const cubeLink = document.getElementById('bioCubeLink');
+    if (cubeLink) {
+      const newCubeLink = cubeLink.cloneNode(true);
+      cubeLink.parentNode.replaceChild(newCubeLink, cubeLink);
+      newCubeLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof openPeopleCube === 'function') openPeopleCube(personId);
+      });
+    }
+
   } catch (e) {
     console.error("Failed to load person bio:", e);
   }
+}
+
+// ============================================
+// AI BIO + AWARDS HELPERS (Bio panel)
+// ============================================
+
+// Polls until awards-data.js has finished parsing (PERSON_AWARD_LOOKUP defined).
+// 50ms cadence, 5s cap — covers slow machines without leaking intervals.
+function waitForAwardsData(cb, maxWait = 5000) {
+  if (typeof PERSON_AWARD_LOOKUP !== 'undefined') {
+    cb();
+    return;
+  }
+  const start = Date.now();
+  const t = setInterval(() => {
+    if (typeof PERSON_AWARD_LOOKUP !== 'undefined') {
+      clearInterval(t);
+      cb();
+    } else if (Date.now() - start > maxWait) {
+      clearInterval(t);
+    }
+  }, 50);
+}
+
+async function generateAiBio(personId, personName, tmdbBio) {
+  const cacheKey = `orbit_ai_bio_${personId}`;
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached) return cached;
+  if (!tmdbBio || tmdbBio.length < 50) return null;
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 120,
+        messages: [{
+          role: 'user',
+          content: `Write a 2-sentence bio for ${personName} for use in a film discovery app. Focus on what makes them cinematically significant — their range, impact, or defining quality as a filmmaker or performer. Avoid birth dates, nationalities, and biographical trivia. Be punchy and specific. Source material: ${tmdbBio.slice(0, 800)}`
+        }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content?.[0]?.text || null;
+    if (text) sessionStorage.setItem(cacheKey, text);
+    return text;
+  } catch (e) {
+    return null;
+  }
+}
+
+function buildAwardsBadges(personId) {
+  if (typeof PERSON_AWARD_LOOKUP === 'undefined') return '';
+  personId = parseInt(personId, 10);
+  const rawEntries = Object.entries(PERSON_AWARD_LOOKUP)
+    .filter(([, v]) => v.person_id === personId);
+  if (!rawEntries.length) return '';
+
+  const festNormalise = {
+    'GoldenGlobes':     'GoldenGlobe',
+    'Golden Globes':    'GoldenGlobe',
+    'Golden Globe':     'GoldenGlobe',
+    'Oscars':           'Oscar',
+    'Academy Awards':   'Oscar',
+    'AcademyAwards':    'Oscar'
+  };
+
+  // Normalise + dedupe by (festival, category, year, film) so variant festival
+  // spellings or repeat keys don't double-count toward badge totals.
+  const seen = new Set();
+  const entries = [];
+  rawEntries.forEach(([key]) => {
+    const [festRaw, category, year, film] = key.split('|');
+    const festival = festNormalise[festRaw] || festRaw;
+    const dedupKey = `${festival}|${category}|${year}|${film}`;
+    if (seen.has(dedupKey)) return;
+    seen.add(dedupKey);
+    entries.push({ festival, category, year, film });
+  });
+
+  const festivalWins = {};
+  const festivalNoms = {};
+
+  entries.forEach(({ festival, category, year, film }) => {
+    let won = false;
+    // Primary: parallel winners index — covers actor categories at Globe /
+    // Cannes / Venice / Berlin which AWARDS_BROWSE_DATABASE doesn't store.
+    if (typeof PERSON_WINNERS_LOOKUP !== 'undefined' &&
+        PERSON_WINNERS_LOOKUP[`${festival}|${category}|${year}|${film}`]) {
+      won = true;
+    }
+    // Fallback: film-level awards that AWARDS_BROWSE_DATABASE does store
+    // (Globe Best Comedy/Musical, Berlin Golden Bear, etc.).
+    if (!won) {
+      try {
+        for (const tryYear of [parseInt(year), parseInt(year) + 1]) {
+          const db = AWARDS_BROWSE_DATABASE?.[festival]?.[category]?.[tryYear];
+          if (!db) continue;
+          const winTitle = (db.winner?.title || '').toLowerCase().trim();
+          const coWin = Array.isArray(db.winners) &&
+            db.winners.some(w => (w.title || '').toLowerCase().trim() === film);
+          if (winTitle === film || coWin) {
+            won = true;
+            break;
+          }
+        }
+      } catch (e) {}
+    }
+    if (won) {
+      festivalWins[festival] = (festivalWins[festival] || 0) + 1;
+    } else {
+      if (!festivalWins[festival]) festivalNoms[festival] = true;
+    }
+  });
+
+  const short = {
+    'Oscar': 'OSCAR', 'BAFTA': 'BAFTA',
+    'Cannes': 'CANNES', 'Venice': 'VENICE',
+    'Berlin': 'BERLIN', 'GoldenGlobe': 'GLOBE'
+  };
+
+  let html = '';
+  Object.entries(festivalWins).forEach(([fest, wins]) => {
+    const label = short[fest] || fest.toUpperCase();
+    const prefix = wins > 1 ? `${wins}× ` : '';
+    html += `<span class="awards-badge win">${prefix}${label}</span>`;
+  });
+  Object.entries(festivalNoms).forEach(([fest]) => {
+    const label = short[fest] || fest.toUpperCase();
+    html += `<span class="awards-badge nom">${label} NOM</span>`;
+  });
+  return html;
+}
+
+function renderBioAwards(personId) {
+  const section = document.getElementById('bioAwardsSection');
+  const glyphs = document.getElementById('bioAwardsGlyphs');
+  if (!section || !glyphs) return;
+  if (typeof PERSON_AWARD_LOOKUP === 'undefined') return;
+  personId = parseInt(personId, 10);
+
+  const festNormalise = {
+    'GoldenGlobes':     'GoldenGlobe',
+    'Golden Globes':    'GoldenGlobe',
+    'Golden Globe':     'GoldenGlobe',
+    'Oscars':           'Oscar',
+    'Academy Awards':   'Oscar',
+    'AcademyAwards':    'Oscar'
+  };
+
+  // Festival config — inline SVG icons extracted verbatim from
+  // docs/Award Glyphs _standalone_.html (gold-tier badges). Each SVG uses
+  // currentColor for the inner glyph; halo rings reference --halo-* CSS vars
+  // and BAFTA mask cut-outs reference --bg-card, all defined on .bio-award-glyph-btn.
+  const festConfig = {
+    'Oscar': {
+      label: 'Academy Awards',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <!-- outer halo (cyan) -->
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-oscar)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-oscar)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+            <!-- inner core ring -->
+
+            <!-- knight head + body silhouette -->
+            <g stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- head -->
+              <ellipse cx="66" cy="42" rx="6" ry="8"></ellipse>
+              <!-- shoulders / chest -->
+              <path d="M58 52 Q56 60 56 72 L56 84 Q56 88 60 90 L72 90 Q76 88 76 84 L76 72 Q76 60 74 52"></path>
+              <!-- arms across body holding sword (crossed arms) -->
+              <line x1="56" y1="62" x2="76" y2="62" stroke-width="2.4"></line>
+              <!-- sword vertical down center -->
+              <line x1="66" y1="58" x2="66" y2="92" stroke-width="2"></line>
+              <!-- pedestal: stacked discs -->
+              <ellipse cx="66" cy="92" rx="14" ry="2.5" stroke-width="1.5"></ellipse>
+              <line x1="62" y1="92" x2="62" y2="100" stroke-width="2"></line>
+              <line x1="70" y1="92" x2="70" y2="100" stroke-width="2"></line>
+              <ellipse cx="66" cy="100" rx="14" ry="2.5"></ellipse>
+              <rect x="50" y="100" width="32" height="6" rx="1"></rect>
+            </g>
+            <!-- eyes (small dots) -->
+            <circle cx="63.5" cy="42" r="0.9" fill="currentColor"></circle>
+            <circle cx="68.5" cy="42" r="0.9" fill="currentColor"></circle>
+
+            </g></svg>`
+    },
+    'BAFTA': {
+      label: 'BAFTA',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-bafta)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-bafta)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+
+            <!-- Tragedy/comedy mask silhouette -->
+            <g fill="currentColor">
+              <!-- Mask outline -->
+              <path d="M66 36
+                       Q82 38 84 56
+                       Q84 74 78 84
+                       Q72 92 66 92
+                       Q60 92 54 84
+                       Q48 74 48 56
+                       Q50 38 66 36 Z"></path>
+            </g>
+            <!-- eyes & mouth (cut out via dark fill) -->
+            <g fill="var(--bg-card)">
+              <ellipse cx="58" cy="58" rx="2.2" ry="3.2"></ellipse>
+              <ellipse cx="74" cy="58" rx="2.2" ry="3.2"></ellipse>
+              <!-- nose triangle -->
+              <path d="M66 64 L63.5 76 L68.5 76 Z"></path>
+              <!-- Mouth -->
+              <ellipse cx="66" cy="83" rx="5" ry="2"></ellipse>
+            </g>
+            <!-- Pedestal base bars -->
+            <rect x="48" y="98" width="36" height="4" rx="1" fill="currentColor"></rect>
+            <rect x="44" y="104" width="44" height="5" rx="1" fill="currentColor"></rect>
+
+            </g></svg>`
+    },
+    'Cannes': {
+      label: 'Cannes',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-cannes)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-cannes)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+
+            <!-- Palm frond inside rectangular casing -->
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Casing rectangle -->
+              <rect x="50" y="32" width="32" height="68" rx="1.5" stroke-width="2"></rect>
+              <!-- Stem -->
+              <path d="M66 92 Q66 78 66 64 Q66 50 66 38" stroke-width="2"></path>
+              <!-- Frond pairs (curving downward) -->
+              <path d="M66 78 Q60 74 52 80 Q56 76 66 78 Z" stroke-width="1.6"></path>
+              <path d="M66 78 Q72 74 80 80 Q76 76 66 78 Z" stroke-width="1.6"></path>
+              <path d="M66 66 Q60 60 52 64 Q58 60 66 66 Z" stroke-width="1.6"></path>
+              <path d="M66 66 Q72 60 80 64 Q74 60 66 66 Z" stroke-width="1.6"></path>
+              <path d="M66 54 Q60 48 54 50 Q60 46 66 54 Z" stroke-width="1.6"></path>
+              <path d="M66 54 Q72 48 78 50 Q72 46 66 54 Z" stroke-width="1.6"></path>
+              <path d="M66 44 Q62 38 58 38 Q62 36 66 44 Z" stroke-width="1.5"></path>
+              <path d="M66 44 Q70 38 74 38 Q70 36 66 44 Z" stroke-width="1.5"></path>
+              <!-- Cushion at base -->
+              <path d="M58 92 L74 92 L76 100 L56 100 Z"></path>
+            </g>
+
+            </g></svg>`
+    },
+    'Venice': {
+      label: 'Venice',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-venice)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-venice)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+
+            <!-- Winged lion in side profile (passant), facing right -->
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Mane (sun-disc) -->
+              <circle cx="84" cy="60" r="9"></circle>
+              <!-- Mane points -->
+              <g stroke-width="1.4">
+                <line x1="84" y1="49" x2="84" y2="46"></line>
+                <line x1="92" y1="52" x2="94" y2="50"></line>
+                <line x1="93" y1="60" x2="96" y2="60"></line>
+                <line x1="92" y1="68" x2="94" y2="70"></line>
+                <line x1="76" y1="68" x2="74" y2="70"></line>
+                <line x1="75" y1="60" x2="72" y2="60"></line>
+                <line x1="76" y1="52" x2="74" y2="50"></line>
+              </g>
+              <!-- Snout -->
+              <path d="M92 60 L98 62 L97 66 L92 65"></path>
+              <!-- Body in passant -->
+              <path d="M76 66 Q60 70 52 78 Q46 86 48 92 L80 92 Q86 86 84 78 Q82 72 78 68"></path>
+              <!-- Wing (arc up and back from shoulder) -->
+              <path d="M74 66 Q68 54 56 48 Q50 56 54 64 Q62 70 72 68"></path>
+              <!-- Tail with curl -->
+              <path d="M50 82 Q40 80 40 72 Q44 68 48 72"></path>
+              <!-- Open book under paw -->
+              <rect x="54" y="94" width="26" height="6" rx="0.8"></rect>
+              <line x1="67" y1="94" x2="67" y2="100" stroke-width="1.2"></line>
+              <!-- Pedestal -->
+              <rect x="48" y="102" width="36" height="5" rx="1"></rect>
+            </g>
+            <!-- Eye -->
+            <circle cx="86" cy="58" r="1" fill="currentColor"></circle>
+
+            </g></svg>`
+    },
+    'Berlin': {
+      label: 'Berlin',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-berlin)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-berlin)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+
+            <!-- Rampant bear silhouette, side profile right-facing, paws raised -->
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Head -->
+              <path d="M82 38 Q88 38 90 44 Q90 50 86 54 L80 56 Q76 56 74 52 Q74 46 76 42 Q78 38 82 38 Z"></path>
+              <!-- Ear -->
+              <path d="M76 38 Q74 33 78 33 Q80 35 80 38"></path>
+              <!-- Snout -->
+              <path d="M88 48 L93 50 L92 54 L86 53"></path>
+              <!-- Body, side profile rampant -->
+              <path d="M76 56 Q66 64 64 78 L64 96 Q66 102 72 102 L82 102 Q88 100 88 92 L88 70 Q88 60 82 56"></path>
+              <!-- Front paw raised forward & up (claws) -->
+              <path d="M76 64 Q66 60 58 64 Q64 68 72 70"></path>
+              <!-- Front paw lower -->
+              <path d="M76 76 Q66 72 60 76 Q66 80 74 80"></path>
+              <!-- Hind paws -->
+              <ellipse cx="72" cy="106" rx="6" ry="2"></ellipse>
+              <ellipse cx="84" cy="106" rx="6" ry="2"></ellipse>
+              <!-- Pedestal -->
+              <rect x="48" y="110" width="36" height="4" rx="1"></rect>
+            </g>
+            <!-- Eye -->
+            <circle cx="84" cy="46" r="0.9" fill="currentColor"></circle>
+            <!-- Claws (small ticks) -->
+            <g stroke="currentColor" stroke-width="1" stroke-linecap="round">
+              <line x1="58" y1="63" x2="55" y2="62"></line>
+              <line x1="58" y1="65" x2="55" y2="65"></line>
+              <line x1="58" y1="67" x2="55" y2="68"></line>
+            </g>
+
+            </g></svg>`
+    },
+    'GoldenGlobe': {
+      label: 'Golden Globe',
+      svgIcon: `<svg viewBox="0 0 132 132" width="28" height="28">
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-globe)" stroke-width="1.4" opacity="0.95"></circle>
+            <circle cx="66" cy="66" r="62" fill="none" stroke="var(--halo-globe)" stroke-width="3" opacity="0.25"></circle>
+            <g transform="translate(-9.9 -17.95) scale(1.15)">
+
+            <!-- Globe on cylindrical pedestal -->
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Globe sphere -->
+              <circle cx="66" cy="60" r="20"></circle>
+              <!-- Equator -->
+              <ellipse cx="66" cy="60" rx="20" ry="6.5" stroke-width="1.5"></ellipse>
+              <!-- Meridian -->
+              <ellipse cx="66" cy="60" rx="6.5" ry="20" stroke-width="1.5"></ellipse>
+              <!-- Latitude lines -->
+              <line x1="48" y1="52" x2="84" y2="52" stroke-width="1" opacity="0.7"></line>
+              <line x1="48" y1="68" x2="84" y2="68" stroke-width="1" opacity="0.7"></line>
+              <!-- Connecting stem -->
+              <line x1="66" y1="80" x2="66" y2="92" stroke-width="2.4"></line>
+              <!-- Pedestal -->
+              <rect x="54" y="92" width="24" height="5" rx="1"></rect>
+              <rect x="48" y="97" width="36" height="6" rx="1"></rect>
+            </g>
+
+            </g></svg>`
+    }
+  };
+
+  // Collect and dedup entries
+  const seen = new Set();
+  const entries = [];
+  Object.entries(PERSON_AWARD_LOOKUP)
+    .filter(([, v]) => v.person_id === personId)
+    .forEach(([key]) => {
+      const [festRaw, category, year, film] = key.split('|');
+      const festival = festNormalise[festRaw] || festRaw;
+      const dedupKey = `${festival}|${category}|${year}|${film}`;
+      if (seen.has(dedupKey)) return;
+      seen.add(dedupKey);
+
+      let won = false;
+      if (typeof PERSON_WINNERS_LOOKUP !== 'undefined' &&
+          PERSON_WINNERS_LOOKUP[`${festival}|${category}|${year}|${film}`]) {
+        won = true;
+      }
+      if (!won) {
+        try {
+          for (const tryYear of [parseInt(year), parseInt(year) + 1]) {
+            const db = AWARDS_BROWSE_DATABASE?.[festival]?.[category]?.[tryYear];
+            if (!db) continue;
+            const winTitle = (db.winner?.title || '').toLowerCase().trim();
+            const coWin = Array.isArray(db.winners) &&
+              db.winners.some(w => (w.title || '').toLowerCase().trim() === film);
+            if (winTitle === film || coWin) { won = true; break; }
+          }
+        } catch(e) {}
+      }
+
+      entries.push({ festival, category, year: parseInt(year), film, won });
+    });
+
+  // Hide the section entirely if this person has no award data.
+  if (!entries.length) {
+    section.hidden = true;
+    glyphs.innerHTML = '';
+    return;
+  }
+
+  // Group by festival
+  const byFest = {};
+  entries.forEach(e => {
+    if (!byFest[e.festival]) byFest[e.festival] = { wins: [], noms: [] };
+    if (e.won) byFest[e.festival].wins.push(e);
+    else byFest[e.festival].noms.push(e);
+  });
+
+  // Always render all 6 festivals in a fixed 3x2 grid order.
+  const festOrder = ['Oscar', 'BAFTA', 'Cannes', 'GoldenGlobe', 'Berlin', 'Venice'];
+  const filmDisplay = f => f.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  glyphs.className = 'bio-awards-glyphs awards-glyphs-grid';
+  glyphs.innerHTML = festOrder.map(fest => {
+    const data = byFest[fest] || { wins: [], noms: [] };
+    const wins = data.wins;
+    const noms = data.noms;
+    const hasWin = wins.length > 0;
+    const hasNom = !hasWin && noms.length > 0;
+    const total = wins.length + noms.length;
+    const stateClass = hasWin ? 'has-wins has-win' : (hasNom ? 'has-noms nom-only' : 'no-data');
+    const cfg = festConfig[fest] || { label: fest, svgIcon: '' };
+
+    const allEntries = [...wins, ...noms].sort((a,b) => b.year - a.year);
+    const tooltipRows = allEntries.length
+      ? allEntries.map(e => `
+        <div class="bio-glyph-tooltip-row">
+          <span class="bio-glyph-tooltip-dot ${e.won ? 'win' : 'nom'}"></span>
+          <span style="flex:1;min-width:0;word-break:break-word">${e.category} · ${filmDisplay(e.film)}</span>
+          <span class="bio-glyph-tooltip-year">${e.year}</span>
+        </div>`).join('')
+      : `<div class="bio-glyph-tooltip-row" style="color: var(--ghost-gray); font-style: italic;">No awards data</div>`;
+
+    const countBadge = total > 0
+      ? `<span class="glyph-count-badge bio-glyph-count">${total}</span>`
+      : '';
+
+    return `
+      <div class="bio-award-glyph-wrap award-glyph-tile ${stateClass}">
+        <div class="bio-award-glyph-btn ${stateClass}" aria-label="${cfg.label} awards">
+          ${cfg.svgIcon}
+        </div>
+        ${countBadge}
+        <div class="bio-glyph-tooltip">
+          <div class="bio-glyph-tooltip-title">${cfg.label}</div>
+          ${tooltipRows}
+          <div class="bio-glyph-tooltip-arrow"></div>
+        </div>
+      </div>`;
+  }).join('');
+
+  section.hidden = false;
 }
 
 // ============================================
@@ -3034,7 +4082,7 @@ async function renderCollaborators(personId, movies) {
         ? `https://image.tmdb.org/t/p/w92${collab.profile}`
         : "https://placehold.co/40x40?text=?";
       return `
-        <div class="collab-item">
+        <a class="collab-item" href="people-profile.html?id=${collab.id}">
           <img class="collab-photo" src="${photoUrl}" alt="${collab.name}">
           <div class="collab-info">
             <div class="collab-name">${collab.name}</div>
@@ -3044,7 +4092,7 @@ async function renderCollaborators(personId, movies) {
             <div class="collab-count">${collab.count}</div>
             <div class="collab-count-label">films</div>
           </div>
-        </div>
+        </a>
       `;
     }).join("");
     
@@ -3093,7 +4141,16 @@ function renderActivity(movies) {
   // Calculate averages
   const yearsActive = lastYear - firstYear + 1;
   const filmsPerYear = totalFilms / yearsActive;
-  
+
+  // Random colour scheme for the bars on each render
+  const ACTIVITY_BAR_SCHEMES = [
+    'linear-gradient(90deg, #00d9ff, #d65db1)', // cyan → magenta
+    'linear-gradient(90deg, #ffd700, #ff7f50)', // gold → orange
+    'linear-gradient(90deg, #1dd1a1, #00d9ff)', // teal → cyan
+    'linear-gradient(90deg, #a855f7, #ff6b9d)'  // purple → pink
+  ];
+  const barGradient = ACTIVITY_BAR_SCHEMES[Math.floor(Math.random() * ACTIVITY_BAR_SCHEMES.length)];
+
   activityChart.innerHTML = `
     <div class="activity-decades">
       ${sortedDecades.map(decade => {
@@ -3103,7 +4160,7 @@ function renderActivity(movies) {
           <div class="decade-row">
             <span class="decade-label">${decade}s</span>
             <div class="decade-bar-container">
-              <div class="decade-bar" style="width: ${widthPercent}%">
+              <div class="decade-bar" style="width: ${widthPercent}%; background: ${barGradient};">
                 <span class="decade-count">${count}</span>
               </div>
             </div>
@@ -3129,52 +4186,37 @@ function renderActivity(movies) {
 }
 
 // Genre colors - vibrant palette
-const GENRE_COLORS = {
-  "Action": "#ff4757",
-  "Adventure": "#ff7f50",
-  "Animation": "#ffd700",
-  "Comedy": "#7bed9f",
-  "Crime": "#5352ed",
-  "Documentary": "#a55eea",
-  "Drama": "#00d9ff",
-  "Family": "#ff6b81",
-  "Fantasy": "#d65db1",
-  "History": "#c9a227",
-  "Horror": "#2f3542",
-  "Music": "#1dd1a1",
-  "Mystery": "#576574",
-  "Romance": "#ff6b9d",
-  "Science Fiction": "#00ff88",
-  "TV Movie": "#747d8c",
-  "Thriller": "#eb4d4b",
-  "War": "#6c5ce7",
-  "Western": "#cd6133",
-  "Other": "#4a5568"
-};
+/* Pie ring palette — well-separated hues so no two rings share a perceptually
+   similar colour within a single pie. Indexed by render order (rank). With max
+   6 rings and 8 palette entries, repeats are impossible. */
+const PIE_RING_PALETTE = [
+  '#00d9ff', // cyan
+  '#ffd700', // gold
+  '#ff4757', // red
+  '#7bed9f', // green
+  '#d65db1', // magenta
+  '#ff7f50', // orange
+  '#a55eea', // purple
+  '#1dd1a1'  // teal
+];
 
 function getGenreColor(genreName, index) {
-  return GENRE_COLORS[genreName] || `hsl(${(index * 47) % 360}, 70%, 55%)`;
+  return PIE_RING_PALETTE[index % PIE_RING_PALETTE.length];
 }
 
 function renderGenrePie(movies) {
-  const pieContainer = document.getElementById("genrePie");
-  const legendContainer = document.getElementById("genreLegend");
-  const tooltip = document.getElementById("genreTooltip");
-  
-  if (!pieContainer || !legendContainer) return;
-  
   // Count genres with FRACTIONAL weighting
   // If a movie has 2 genres, each gets 0.5
   // If a movie has 3 genres, each gets 0.333
   const genreCounts = {};
   let totalWeight = 0;
-  
+
   movies.forEach(movie => {
     const genres = movie.genre_ids || [];
     if (genres.length === 0) return;
-    
+
     const weight = 1 / genres.length; // Fractional weight per genre
-    
+
     genres.forEach(genreId => {
       const genreName = getGenreName(genreId);
       if (genreName) {
@@ -3183,137 +4225,123 @@ function renderGenrePie(movies) {
       }
     });
   });
-  
+
   // Sort by count and take top 7, group rest as "Other"
-  const sortedGenres = Object.entries(genreCounts)
+  const sortedRaw = Object.entries(genreCounts)
     .sort((a, b) => b[1] - a[1]);
-  
-  let displayGenres = sortedGenres.slice(0, 7);
-  const otherGenres = sortedGenres.slice(7);
-  
+
+  let displayGenres = sortedRaw.slice(0, 7);
+  const otherGenres = sortedRaw.slice(7);
+
   // Add "Other" category if there are more genres
   if (otherGenres.length > 0) {
     const otherCount = otherGenres.reduce((sum, [_, count]) => sum + count, 0);
     displayGenres.push(["Other", otherCount]);
   }
-  
-  if (displayGenres.length === 0) {
-    pieContainer.innerHTML = '<text x="100" y="100" text-anchor="middle" fill="#666">No genre data</text>';
-    legendContainer.innerHTML = '';
+
+  // Canonical sorted descending list with name + percent
+  const sortedGenres = displayGenres
+    .map(([name, count]) => ({
+      name,
+      count,
+      percent: totalWeight > 0 ? (count / totalWeight) * 100 : 0
+    }))
+    .sort((a, b) => b.percent - a.percent);
+
+  const canvas = document.getElementById('genrePie');
+  const legendEl = document.getElementById('genreLegend');
+  if (!canvas) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const W = 300, H = 300;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  if (sortedGenres.length === 0) {
+    ctx.fillStyle = 'rgba(136, 146, 166, 0.8)';
+    ctx.font = '15px Barlow, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('No genre data', W / 2, H / 2);
+    canvas.setAttribute('aria-label', 'Genre breakdown orbital rings chart — no data');
+    if (legendEl) legendEl.innerHTML = '';
     return;
   }
-  
-  // Build pie slices
-  const cx = 100, cy = 100, r = 80;
-  let currentAngle = -90; // Start at top
-  let svgContent = '';
-  
-  displayGenres.forEach(([genre, count], index) => {
-    const percentage = (count / totalWeight) * 100;
-    const angle = (count / totalWeight) * 360;
-    const color = getGenreColor(genre, index);
-    
-    // Calculate arc
-    const startAngle = currentAngle;
-    // For last slice, ensure it ends at exactly 270 (-90 + 360)
-    const isLast = index === displayGenres.length - 1;
-    const endAngle = isLast ? 270 : currentAngle + angle;
-    
-    const startRad = (startAngle * Math.PI) / 180;
-    const endRad = (endAngle * Math.PI) / 180;
-    
-    const x1 = cx + r * Math.cos(startRad);
-    const y1 = cy + r * Math.sin(startRad);
-    const x2 = cx + r * Math.cos(endRad);
-    const y2 = cy + r * Math.sin(endRad);
-    
-    // Use large arc if angle > 180, accounting for last slice
-    const sliceAngle = isLast ? (270 - startAngle) : angle;
-    const largeArc = sliceAngle > 180 ? 1 : 0;
-    
-    const pathD = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
-    
-    svgContent += `
-      <path 
-        class="genre-pie-slice" 
-        d="${pathD}" 
-        fill="${color}"
-        data-genre="${genre}"
-        data-percent="${percentage.toFixed(1)}"
-        data-count="${Math.round(count)}"
-      />
-    `;
-    
-    currentAngle = endAngle;
-  });
-  
-  pieContainer.innerHTML = svgContent;
-  
-  // Build legend
-  let legendHtml = '';
-  displayGenres.forEach(([genre, count], index) => {
-    const percentage = (count / totalWeight) * 100;
-    const color = getGenreColor(genre, index);
-    legendHtml += `
-      <div class="genre-legend-item" data-genre="${genre}">
-        <span class="genre-legend-color" style="background: ${color}"></span>
-        <span class="genre-legend-label">${genre}</span>
-      </div>
-    `;
-  });
-  legendContainer.innerHTML = legendHtml;
-  
-  // Tooltip handlers
-  const slices = pieContainer.querySelectorAll('.genre-pie-slice');
-  slices.forEach(slice => {
-    slice.addEventListener('mouseenter', (e) => {
-      const genre = slice.dataset.genre;
-      const percent = slice.dataset.percent;
-      const count = parseFloat(slice.dataset.count);
-      const displayCount = Math.round(count);
 
-      tooltip.innerHTML = `
-        <span class="tooltip-genre">${genre}</span>
-        <span class="tooltip-percent">${percent}%</span>
-        <span class="tooltip-count">${displayCount} film${displayCount !== 1 ? 's' : ''}</span>
-      `;
-      tooltip.classList.add('visible');
-    });
-    
-    slice.addEventListener('mousemove', (e) => {
-      const rect = pieContainer.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
-      tooltip.style.top = (e.clientY - rect.top - 40) + 'px';
-    });
-    
-    slice.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('visible');
-    });
+  const cx = W / 2, cy = H / 2;
+  const maxR = 125, ringGap = 18, lineWidth = 8;
+
+  // Cap to 6 rings — beyond that the ring radius collapses and Canvas arc() throws IndexSizeError.
+  const drawGenres = sortedGenres.slice(0, 6);
+
+  drawGenres.forEach((g, i) => {
+    const r = maxR - i * ringGap;
+    if (r < 4) return;
+    const color = getGenreColor(g.name, i);
+    const sweep = (g.percent / 100) * Math.PI * 2;
+    const start = -Math.PI / 2;
+    const end = start + sweep;
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = color + '22';
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'butt';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, end);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    const ex = cx + r * Math.cos(end);
+    const ey = cy + r * Math.sin(end);
+    ctx.beginPath();
+    ctx.arc(ex, ey, 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 6;
+    ctx.fill();
+    ctx.shadowBlur = 0;
   });
-  
-  // Legend hover highlights
-  const legendItems = legendContainer.querySelectorAll('.genre-legend-item');
-  legendItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const genre = item.dataset.genre;
-      slices.forEach(slice => {
-        if (slice.dataset.genre === genre) {
-          slice.style.filter = 'brightness(1.3)';
-          slice.style.transform = 'scale(1.05)';
-        } else {
-          slice.style.opacity = '0.5';
-        }
-      });
-    });
-    
-    item.addEventListener('mouseleave', () => {
-      slices.forEach(slice => {
-        slice.style.filter = '';
-        slice.style.transform = '';
-        slice.style.opacity = '';
-      });
-    });
-  });
+
+  // Centre dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(0, 217, 255, 0.12)';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(0, 217, 255, 0.5)';
+  ctx.fill();
+
+  // Render legend below the pie (DOM-based for sizing/wrapping control)
+  if (legendEl) {
+    legendEl.innerHTML = drawGenres.map((g, i) => {
+      const color = getGenreColor(g.name, i);
+      return `<span class="genre-legend-item">
+        <span class="genre-legend-color" style="background:${color}"></span>
+        <span class="genre-legend-label">${g.name}</span>
+        <span class="genre-legend-count">${Math.round(g.percent)}%</span>
+      </span>`;
+    }).join('');
+  }
+
+  const top = sortedGenres[0];
+  canvas.setAttribute(
+    'aria-label',
+    `Genre breakdown orbital rings chart — top genre ${top.name} at ${Math.round(top.percent)}%`
+  );
 }
 
 // Genre ID to name mapping
@@ -3361,7 +4389,14 @@ function toggleBioPanel() {
 
 function closeBioPanel() {
   if (bioPanel) {
+    // Suppress the .bio-panel { transition: all 0.3s } width-collapse so the
+    // close reads as a clean fade only — not a slide-to-the-left.
+    const prev = bioPanel.style.transition;
+    bioPanel.style.transition = 'none';
     bioPanel.classList.remove("expanded");
+    requestAnimationFrame(() => {
+      bioPanel.style.transition = prev;
+    });
   }
 }
 
@@ -3600,3 +4635,83 @@ function updateMediaModeToggleVisibility() {
     if (e.key === 'Escape') closeMenu();
   });
 })();
+
+/* ============================================================
+   COSMIC BACKGROUND CANVAS — twinkling stars + nebula blobs.
+   Always on; no theme branching. Renders 320 twinkling stars and
+   three soft nebula blobs into #orbit-bg-canvas.
+   ============================================================ */
+function initBackground() {
+  const canvas = document.getElementById('orbit-bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let stars = [];
+  let width = 0, height = 0;
+  let rafId = null;
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    seedStars();
+  }
+
+  function seedStars() {
+    stars = [];
+    for (let i = 0; i < 320; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: 0.2 + Math.random() * 1.2,
+        baseOpacity: 0.1 + Math.random() * 0.8,
+        twinkleSpeed: 0.001 + Math.random() * 0.005,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawNebula() {
+    const blobs = [
+      { cx: 0.15, cy: 0.30, r: 0.18, color: [80, 30, 160], a: 0.09 },
+      { cx: 0.65, cy: 0.20, r: 0.15, color: [0, 80, 140], a: 0.08 },
+      { cx: 0.40, cy: 0.60, r: 0.12, color: [120, 40, 80], a: 0.07 }
+    ];
+    for (const b of blobs) {
+      const x = b.cx * width;
+      const y = b.cy * height;
+      const r = b.r * width;
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+      grad.addColorStop(0, `rgba(${b.color[0]}, ${b.color[1]}, ${b.color[2]}, ${b.a})`);
+      grad.addColorStop(1, `rgba(${b.color[0]}, ${b.color[1]}, ${b.color[2]}, 0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+    }
+  }
+
+  function frame(t) {
+    ctx.clearRect(0, 0, width, height);
+    for (const s of stars) {
+      const o = s.baseOpacity * (0.4 + 0.6 * Math.sin(t * s.twinkleSpeed + s.phase));
+      ctx.fillStyle = `rgba(190, 215, 255, ${Math.max(0, Math.min(1, o))})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    drawNebula();
+    rafId = requestAnimationFrame(frame);
+  }
+
+  resize();
+  window.addEventListener('resize', () => {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    resize();
+    rafId = requestAnimationFrame(frame);
+  });
+
+  rafId = requestAnimationFrame(frame);
+}
+

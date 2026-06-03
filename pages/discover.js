@@ -659,7 +659,7 @@ window.addEventListener('resize', () => {
   function applySort() {
     // state.sortBy is the single source of truth Phase 1b-ii will read.
     state.sortBy = fieldSel.value + '.' + dirSel.value;
-    console.log('[Discover] sort-by held (not yet wired to query):', state.sortBy);
+    console.log('[Discover] sort-by →', state.sortBy);
   }
   fieldSel.addEventListener('change', applySort);
   dirSel.addEventListener('change', applySort);
@@ -3259,14 +3259,20 @@ function makeSectionLabel(text) {
   return label;
 }
 
-function makeChip(label, section, value) {
+function makeChip(label, section, value, opts) {
+  /* Phase 2b: optional 4th arg opts.component opts a chip INTO the
+     .disco-chip component (toggles "on"). Absent/false = legacy behaviour
+     (className "chip", toggles "active") — byte-identical for all existing
+     callers. Migrated per-tab; Era is the first consumer. */
+  const useComponent = !!(opts && opts.component);
+  const activeClass = useComponent ? "on" : "active";
   const chip = document.createElement("button");
   chip.type = "button";
-  chip.className = "chip";
+  chip.className = useComponent ? "disco-chip" : "chip";
   chip.textContent = label;
   chip.dataset.value = JSON.stringify(value);
   chip.addEventListener("click", () => {
-    chip.classList.toggle("active");
+    chip.classList.toggle(activeClass);
   });
   return chip;
 }
@@ -4346,7 +4352,7 @@ function buildTimeEraContent(root) {
   const relDecadeGroup = document.createElement("div");
   relDecadeGroup.className = "chip-group";
   releaseDecades.forEach(d => {
-    const chip = makeChip(`${d}s`, "timeEra", { type: "decade", decade: d, subType: "release" });
+    const chip = makeChip(`${d}s`, "timeEra", { type: "decade", decade: d, subType: "release" }, { component: true });
     chip.id = `date-decade-${d}`;
     relDecadeGroup.appendChild(chip);
   });
@@ -4360,13 +4366,13 @@ function buildTimeEraContent(root) {
     subType: "release",
     start: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     end: new Date().toISOString().split('T')[0]
-  });
+  }, { component: true });
   const classic = makeChip("Classic (Pre-1980)", "timeEra", {
     type: "dateRange",
     subType: "release",
     start: "1900-01-01",
     end: "1979-12-31"
-  });
+  }, { component: true });
   quickGroup.appendChild(newRelease);
   quickGroup.appendChild(classic);
   colLeft.appendChild(quickGroup);
@@ -4458,7 +4464,7 @@ function buildTimeEraContent(root) {
       subType: "release",
       min: preset.min,
       max: preset.max
-    });
+    }, { component: true });
     chip.addEventListener("click", () => {
       document.getElementById("runtimeMin").value = preset.min;
       document.getElementById("runtimeMax").value = preset.max;
@@ -6068,7 +6074,7 @@ function collectLabelsForSection(sectionKey) {
       }
 
       // Release decade chips + dateRange + runtime chips
-      const releaseChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
+      const releaseChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.subType === "release";
@@ -7460,6 +7466,12 @@ function fetchFilmCount() {
   var railSearch = document.getElementById('discoverPresetsModalRailSearch');
   var railClear = document.getElementById('discoverPresetsModalRailClear');
   var railChecks = document.getElementById('discoverPresetsModalRailChecks');
+  /* Phase 4 (2026-06-02): tab affordance (visible only when collapsed)
+     and persistence key. Default first-view is EXPANDED; the user's
+     choice is stored in orbit_presets_rail_collapsed (registered in
+     data/storage-keys.md). */
+  var railTab = document.getElementById('discoverPresetsModalRailTab');
+  var RAIL_STATE_KEY = 'orbit_presets_rail_collapsed';
   var railInitialized = false;
 
   function buildTile(p, i, isFav) {
@@ -7556,6 +7568,30 @@ function fetchFilmCount() {
       e.stopPropagation();
       var savedId = removeEl.getAttribute('data-saved-remove');
       if (!savedId || typeof window.__orbitLoadSavedSearches !== 'function') return;
+      /* Phase 8 (2026-06-02): two-click confirm. First click → enter
+         `.is-confirming` state (red filled "DEL?" via CSS) and start a
+         3-second revert timer. Second click within that window → run the
+         actual delete. The 3-second timer is stored on the element so a
+         tile re-render (applyFilters wipes innerHTML) effectively cancels
+         the pending revert too (the element is gone). */
+      if (!removeEl.classList.contains('is-confirming')) {
+        removeEl.classList.add('is-confirming');
+        var prevText = removeEl.textContent;
+        removeEl.textContent = 'DEL?';
+        var t = setTimeout(function () {
+          if (removeEl.isConnected) {
+            removeEl.classList.remove('is-confirming');
+            removeEl.textContent = prevText;
+          }
+        }, 3000);
+        removeEl._phase8Timer = t;
+        return;
+      }
+      /* Confirmed — cancel revert + delete. */
+      if (removeEl._phase8Timer) {
+        clearTimeout(removeEl._phase8Timer);
+        removeEl._phase8Timer = null;
+      }
       var arr = window.__orbitLoadSavedSearches();
       var idx = -1;
       for (var k = 0; k < arr.length; k++) { if (arr[k] && arr[k].id === savedId) { idx = k; break; } }
@@ -7651,15 +7687,58 @@ function fetchFilmCount() {
     });
   }
 
+  /* ============================================================
+     SAVED-SEARCH TOKEN-MEMBERSHIP MAP — Added 2026-06-02
+     ------------------------------------------------------------
+     Saved searches don't have a `tag` string, so they're classified
+     against the rail's category tick-boxes by translating their
+     state.filters' `section` keys to the same token vocabulary the
+     built-in presets use. A saved search matches a ticked token if
+     any of its sections maps to that token.
+
+     This is the touch-point if the filter-state schema changes in
+     future: update SECTION_TO_TOKENS to keep saved-search
+     membership accurate. (Phase 9 ranking/cue was reverted on
+     2026-06-02 — only membership remains.)
+     ============================================================ */
+  var SECTION_TO_TOKENS = {
+    genres:         ['GENRE'],
+    timeEra:        ['ERA', 'DECADE'],
+    regionLanguage: ['REGION'],
+    ratingsContent: ['RATING'],
+    awards:         ['AWARDS'],
+    basedOn:        ['SOURCE'],
+    production:     ['FRANCHISE'],
+    themes:         ['THEME'],
+    universes:      ['FRANCHISE']
+  };
+
+  /* Derive the union of tokens a saved search covers — used by
+     getFilteredCandidates to decide whether a saved tile is kept
+     when one or more category tick-boxes are active. */
+  function getSavedMeta(s) {
+    var sections = {};
+    var filters = (s && s.state && Array.isArray(s.state.filters)) ? s.state.filters : [];
+    filters.forEach(function (f) { if (f && f.section) sections[f.section] = true; });
+    var tokens = {};
+    Object.keys(sections).forEach(function (k) {
+      var arr = SECTION_TO_TOKENS[k] || [];
+      arr.forEach(function (t) { tokens[t] = true; });
+    });
+    return { tokens: tokens };
+  }
+
   /* Phase 2 (2026-06-01): merged saved + preset filter pipeline.
-     Returns ordered candidate list `[saved..., preset...]` with each item
-     shaped as `{kind:'saved'|'preset', data, fav}`. Combine logic:
+     Returns ordered candidate list `[saved..., preset...]` with each
+     item shaped as `{kind:'saved'|'preset', data, fav}`. Combine logic:
        - text input   → case-insensitive substring on name (+ tag for presets).
-       - token boxes  → OR among ticked tokens; saved searches have no
-         tokens so any ticked token EXCLUDES them.
+       - token boxes  → OR membership. Saved searches participate via
+         SECTION_TO_TOKENS / getSavedMeta (added 2026-06-02 — replaces
+         the original "any ticked token excludes saved" rule).
        - "My Searches" → restrict to saved entries only.
        - "Favourites"  → restrict to items whose ID is in favourites.
-     All filter layers AND together. */
+     Order is the default "saved first, then PRESET_POOL order" — no
+     ranking is applied. */
   function getFilteredCandidates() {
     var search = railSearch ? (railSearch.value || '').trim().toLowerCase() : '';
     var activeTokens = [];
@@ -7682,8 +7761,17 @@ function fetchFilmCount() {
       if (!s) return false;
       if (favouriteOnly && !favSet[s.id]) return false;
       if (search && String(s.name || '').toLowerCase().indexOf(search) === -1) return false;
-      /* Saved have no tag tokens — any ticked token excludes them. */
-      if (activeTokens.length > 0) return false;
+      /* Saved-search token membership (2026-06-02): include the entry
+         only if at least one of its SECTION_TO_TOKENS-derived tokens
+         matches an active token. Excluded otherwise. */
+      if (activeTokens.length > 0) {
+        var meta = getSavedMeta(s);
+        var hit = false;
+        for (var ti = 0; ti < activeTokens.length; ti++) {
+          if (meta.tokens[activeTokens[ti]]) { hit = true; break; }
+        }
+        if (!hit) return false;
+      }
       return true;
     }).map(function (s) {
       return { kind: 'saved', data: s, fav: !!favSet[s.id] };
@@ -7743,26 +7831,77 @@ function fetchFilmCount() {
       });
     }
 
+    /* Phase 4 (2026-06-02): centralised rail-state setter. Sets the
+       .is-collapsed class + aria-expanded on BOTH the rail-head toggle
+       AND the collapse-to-tab control. `persist=true` writes the choice
+       to localStorage; `persist=false` is used for the first-open
+       restore (so reading from storage doesn't immediately re-write
+       the same value). */
+    function setRailCollapsed(collapsed, persist) {
+      collapsed = !!collapsed;
+      rail.classList.toggle('is-collapsed', collapsed);
+      if (railToggle) {
+        /* Toggle reflects whether the rail (its target) is expanded. */
+        railToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        railToggle.innerHTML = '&times;';  /* always × when visible; tab is the "show" affordance */
+      }
+      if (railTab) {
+        /* Tab's aria-expanded === "false" means rail is collapsed → tab
+           visible (CSS rule keyed on the attribute). */
+        railTab.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      }
+      if (persist) {
+        try { localStorage.setItem(RAIL_STATE_KEY, JSON.stringify(collapsed)); }
+        catch (e) { /* storage unavailable — preference doesn't persist */ }
+      }
+    }
+
     if (railToggle) {
-      railToggle.addEventListener('click', function () {
-        var nowCollapsed = rail.classList.toggle('is-collapsed');
-        railToggle.setAttribute('aria-expanded', nowCollapsed ? 'false' : 'true');
-        railToggle.innerHTML = nowCollapsed ? '⛃ Filter' : '&times;';
+      railToggle.addEventListener('click', function (e) {
+        /* Phase 5 (2026-06-02): play the site's Black Hole spin on the X
+           (reuses orbit-x-blackhole / orbit-x-fade keyframes from
+           orbit-close.css via the .spinning class scoped to this
+           selector). The toggle does NOT carry .orbit-close, so the
+           global orbit-close.js delegate never resolves a popup target
+           and the Show-all modal stays open — only the X visual fires.
+           The existing 250ms width wipe runs in parallel via
+           setRailCollapsed below; the two play together. */
+        var willCollapse = !rail.classList.contains('is-collapsed');
+        if (willCollapse) {
+          railToggle.classList.add('spinning');
+          /* Remove the class once the animation ends so the X resets to
+             its default state before the next open. */
+          var onSpinEnd = function () {
+            railToggle.classList.remove('spinning');
+            railToggle.removeEventListener('animationend', onSpinEnd);
+          };
+          railToggle.addEventListener('animationend', onSpinEnd);
+        }
+        setRailCollapsed(willCollapse, true);
+      });
+    }
+    if (railTab) {
+      railTab.addEventListener('click', function () {
+        /* If the user re-opens mid-spin, force-clear the .spinning class
+           so the X isn't stuck at scale(0) when the rail wipes back in. */
+        if (railToggle) railToggle.classList.remove('spinning');
+        setRailCollapsed(false, true);  /* tab click always expands */
       });
     }
 
-    /* Default rail state: collapsed at ≤650px so the small-screen layout
-       isn't dominated by the rail. The user can toggle it open via the
-       Filter button. */
+    /* Phase 4 (2026-06-02): restore persisted state on first init. If
+       no preference is stored (first-ever view of the modal), default
+       to EXPANDED so the user sees the filter affordances exist. The
+       legacy ≤650-default-collapse is dropped — persistence covers it. */
+    var storedCollapsed = null;
     try {
-      if (window.matchMedia && window.matchMedia('(max-width: 650px)').matches) {
-        rail.classList.add('is-collapsed');
-        if (railToggle) {
-          railToggle.setAttribute('aria-expanded', 'false');
-          railToggle.innerHTML = '⛃ Filter';
-        }
+      var raw = localStorage.getItem(RAIL_STATE_KEY);
+      if (raw !== null) {
+        var parsed = JSON.parse(raw);
+        if (typeof parsed === 'boolean') storedCollapsed = parsed;
       }
-    } catch (e) { /* matchMedia unsupported — leave expanded. */ }
+    } catch (e) { /* corrupted / unavailable — fall through to default */ }
+    setRailCollapsed(storedCollapsed === true, false);
 
     railInitialized = true;
   }

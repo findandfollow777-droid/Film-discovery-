@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="../components/people-cube.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
 </head>
 <body>
   <!-- BACKGROUNDS -->
@@ -108,12 +110,12 @@
   </div>
 
   <!-- PERSON BIO PANEL (right side) -->
-  <div class="bio-panel-right" id="bioPanelRight">
+  <div class="bio-panel-right" id="bioPanelRight" data-orbit-popup>
     <div class="bio-panel-tab-right" id="bioPanelTabRight" title="Person Bios">
       <span class="bio-tab-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="3.5"/><path d="M19 21v-1.5c0-2-1.6-3.5-3.5-3.5h-7C6.6 16 5 17.5 5 19.5V21"/><circle cx="5" cy="9" r="2" opacity="0.5"/><circle cx="19" cy="9" r="2" opacity="0.5"/></svg></span>
     </div>
     <div class="bio-panel-content-right" id="bioPanelContentRight">
-      <button class="bio-close-right" id="bioCloseRight">✕</button>
+      <button class="bio-close-right orbit-close" id="bioCloseRight" aria-label="Close">✕</button>
       
       <!-- Person Selector -->
       <div class="bio-person-tabs" id="bioPersonTabs">
@@ -173,8 +175,8 @@
   </div>
 
   <!-- INFO PANEL -->
-  <aside class="info-panel" id="infoPanel" hidden>
-    <button class="info-close" id="infoClose">✕</button>
+  <aside class="info-panel" id="infoPanel" data-orbit-popup hidden>
+    <button class="info-close orbit-close" id="infoClose" aria-label="Close">✕</button>
     <img class="info-poster" id="infoPoster" src="" alt="">
     <div class="info-content">
       <h2 class="info-title" id="infoTitle"></h2>
@@ -189,9 +191,9 @@
   </aside>
 
   <!-- 3D MOVIE POPUP -->
-  <div class="popup-overlay" id="popupOverlay" hidden>
+  <div class="popup-overlay" id="popupOverlay" data-orbit-popup hidden>
     <div class="popup-container">
-      <button class="popup-close" id="popupClose">✕</button>
+      <button class="popup-close orbit-close" id="popupClose" aria-label="Close">✕</button>
       <div class="flip-wrapper">
         <div class="flip-card" id="flipCard">
           <div class="flip-side side-1">
@@ -222,9 +224,9 @@
   </div>
 
   <!-- TRAILER MODAL -->
-  <div class="trailer-overlay" id="trailerOverlay" hidden>
+  <div class="trailer-overlay" id="trailerOverlay" data-orbit-popup hidden>
     <div class="trailer-modal">
-      <button class="trailer-close" id="trailerClose">✕</button>
+      <button class="trailer-close orbit-close" id="trailerClose" aria-label="Close">✕</button>
       <div class="trailer-container" id="trailerContainer"></div>
     </div>
   </div>

@@ -8,8 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/award-badges.css">
   <link rel="stylesheet" href="people-profile.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="stylesheet" href="../components/moviecube.css">
   <link rel="stylesheet" href="../components/people-cube.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
@@ -254,9 +257,9 @@
   </main>
 
   <!-- PHOTO LIGHTBOX -->
-  <div id="ppLightbox" class="pp-lightbox hidden">
+  <div id="ppLightbox" class="pp-lightbox hidden" data-orbit-popup>
     <div class="pp-lightbox-backdrop"></div>
-    <button class="pp-lightbox-close" id="ppLightboxClose">&times;</button>
+    <button class="pp-lightbox-close orbit-close" id="ppLightboxClose" aria-label="Close">&times;</button>
     <span class="pp-lightbox-counter" id="ppLightboxCounter"></span>
     <button class="pp-lightbox-nav pp-lightbox-prev" id="ppLightboxPrev">&#8249;</button>
     <button class="pp-lightbox-nav pp-lightbox-next" id="ppLightboxNext">&#8250;</button>
@@ -266,10 +269,10 @@
   </div>
 
   <!-- AWARDS MODAL -->
-  <div id="ppAwardsModal" class="pp-awards-modal hidden">
+  <div id="ppAwardsModal" class="pp-awards-modal hidden" data-orbit-popup>
     <div class="pp-awards-modal-backdrop"></div>
     <div class="pp-awards-modal-panel">
-      <button class="pp-awards-modal-close" id="ppAwardsModalClose">&times;</button>
+      <button class="pp-awards-modal-close orbit-close" id="ppAwardsModalClose" aria-label="Close">&times;</button>
       <h3 class="pp-awards-modal-title">All Awards</h3>
       <div class="pp-awards-modal-body" id="ppAwardsModalBody"></div>
     </div>
@@ -309,6 +312,7 @@
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
   <script src="../components/awards.js"></script>
+  <script src="../components/award-badges.js"></script>
   <script src="../components/shortlist-service.js"></script>
   <script src="../components/encounter-service.js"></script>
   <script src="../components/trivia-stats.js"></script>

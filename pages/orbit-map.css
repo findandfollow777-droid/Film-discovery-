@@ -250,24 +250,8 @@ body {
   white-space: nowrap;
 }
 
-.panel-close {
-  background: none;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: var(--danger-red);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.panel-close:hover {
-  background: rgba(239, 68, 68, 0.15);
-}
+/* .panel-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). */
 
 /* Poster grid */
 .panel-movie-grid {

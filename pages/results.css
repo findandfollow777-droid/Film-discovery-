@@ -491,26 +491,9 @@ body {
   text-transform: uppercase;
 }
 
-.drawer-close {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: var(--muted-silver);
-  font-size: 22px;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.drawer-close:hover {
-  background: rgba(255, 71, 87, 0.15);
-  border-color: rgba(255, 71, 87, 0.3);
-  color: var(--danger-red);
-}
+/* .drawer-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). No layout props
+   needed here since the drawer header is a flex container. */
 
 .drawer-body {
   flex: 1;
@@ -1025,24 +1008,6 @@ body {
   margin-top: 4px;
 }
 
-.award-badge {
-  display: inline-block;
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  border-radius: 10px;
-  padding: 1px 6px;
-  font-size: 8px;
-  color: var(--accent-gold);
-  font-family: var(--font-body);
-  white-space: nowrap;
-}
-
-.award-badge-nom {
-  color: #c0c0c0;
-  border-color: rgba(192, 192, 192, 0.25);
-  background: rgba(192, 192, 192, 0.08);
-}
-
 .movie-award-counts {
   display: flex;
   gap: 6px;
@@ -1375,28 +1340,12 @@ body {
   padding: 24px;
 }
 
+/* .bio-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .bio-close {
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 32px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: var(--muted-silver);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bio-close:hover {
-  background: rgba(255, 71, 87, 0.2);
-  border-color: rgba(255, 71, 87, 0.3);
-  color: white;
 }
 
 .bio-header {
@@ -1565,26 +1514,14 @@ body {
   pointer-events: auto;
 }
 
+/* .popup-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .popup-close {
   position: absolute;
   top: -40px;
   right: 0;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 71, 87, 0.9);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
   z-index: 10;
-  transition: var(--transition-smooth);
   pointer-events: auto;
-}
-
-.popup-close:hover {
-  background: var(--danger-red);
-  transform: scale(1.1);
 }
 
 /* ============================================

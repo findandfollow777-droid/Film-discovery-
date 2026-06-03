@@ -2095,7 +2095,6 @@
     if (!panel || !enrichedMovies) return;
 
     var idx = buildAwardsIndex();
-    var svgs = (typeof AWARD_SVGS !== 'undefined') ? AWARD_SVGS : {};
     var anyHasAwards = false;
 
     var html = '<div class="awards-compare-grid">';
@@ -2137,10 +2136,14 @@
         html += '<span class="awards-col-empty">\u2014</span>';
       } else {
         wins.forEach(function(a) {
-          var svg = svgs[a.festival] || '';
+          var festId = window.detectFestivalId ? window.detectFestivalId(a.festival) : null;
           var tip = (FEST_DISPLAY_NAMES[a.festival] || a.festival) + ' \u2014 ' + a.category + ' (' + a.year + ')';
           if (a.person) tip += ' \u2022 ' + a.person;
-          html += '<span class="awards-glyph win" data-tip="' + escapeHTML(tip) + '">' + svg + '</span>';
+          if (festId) {
+            html += '<span class="awards-glyph win" data-tip="' + escapeHTML(tip) + '"><div class="orbit-award-badge" data-award-badge="' + festId + '" data-status="winner" data-size="24" title="' + escapeHTML(tip) + '"></div></span>';
+          } else {
+            html += '<span class="awards-glyph win" data-tip="' + escapeHTML(tip) + '"></span>';
+          }
         });
       }
       html += '</div>';
@@ -2151,10 +2154,14 @@
         html += '<span class="awards-col-empty">\u2014</span>';
       } else {
         noms.forEach(function(a) {
-          var svg = svgs[a.festival] || '';
+          var festId = window.detectFestivalId ? window.detectFestivalId(a.festival) : null;
           var tip = (FEST_DISPLAY_NAMES[a.festival] || a.festival) + ' \u2014 ' + a.category + ' (' + a.year + ')';
           if (a.person) tip += ' \u2022 ' + a.person;
-          html += '<span class="awards-glyph nom" data-tip="' + escapeHTML(tip) + '">' + svg + '</span>';
+          if (festId) {
+            html += '<span class="awards-glyph nom" data-tip="' + escapeHTML(tip) + '"><div class="orbit-award-badge" data-award-badge="' + festId + '" data-status="nominee" data-size="24" title="' + escapeHTML(tip) + '"></div></span>';
+          } else {
+            html += '<span class="awards-glyph nom" data-tip="' + escapeHTML(tip) + '"></span>';
+          }
         });
       }
       html += '</div>';
@@ -2173,6 +2180,7 @@
     }
 
     panel.innerHTML = html;
+    if (window.renderAwardBadges) window.renderAwardBadges(panel);
 
     // Bind glyph hover tooltips
     panel.querySelectorAll('.awards-glyph[data-tip]').forEach(function(el) {

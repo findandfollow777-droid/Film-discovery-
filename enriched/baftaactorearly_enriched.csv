@@ -1,0 +1,223 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+3151,Jack Lemmon,1979,BAFTA,Best Actor,true,The China Syndrome
+1243,Woody Allen,1979,BAFTA,Best Actor,false,Manhattan
+380,Robert De Niro,1979,BAFTA,Best Actor,false,The Deer Hunter
+8349,Martin Sheen,1979,BAFTA,Best Actor,false,Apocalypse Now
+3037,Richard Dreyfuss,1978,BAFTA,Best Actor,true,The Goodbye Girl
+4173,Anthony Hopkins,1978,BAFTA,Best Actor,false,Magic
+69010,Brad Davis,1978,BAFTA,Best Actor,false,Midnight Express
+14501,Peter Ustinov,1978,BAFTA,Best Actor,false,Death on the Nile
+29903,Peter Finch,1977,BAFTA,Best Actor,true,Network
+8252,William Holden,1977,BAFTA,Best Actor,false,Network
+16483,Sylvester Stallone,1977,BAFTA,Best Actor,false,Rocky
+3636,Paul Newman,1977,BAFTA,Best Actor,false,Slap Shot
+514,Jack Nicholson,1976,BAFTA,Best Actor,true,One Flew Over the Cuckoo's Nest
+380,Robert De Niro,1976,BAFTA,Best Actor,false,Taxi Driver
+4483,Dustin Hoffman,1976,BAFTA,Best Actor,false,All the President's Men
+6837,Walter Matthau,1976,BAFTA,Best Actor,false,The Bad News Bears
+1158,Al Pacino,1975,BAFTA,Best Actor,true,The Godfather Part II
+3037,Richard Dreyfuss,1975,BAFTA,Best Actor,false,Jaws
+193,Gene Hackman,1975,BAFTA,Best Actor,false,French Connection II
+4483,Dustin Hoffman,1975,BAFTA,Best Actor,false,Lenny
+514,Jack Nicholson,1974,BAFTA,Best Actor,true,Chinatown
+3926,Albert Finney,1974,BAFTA,Best Actor,false,Murder on the Orient Express
+193,Gene Hackman,1974,BAFTA,Best Actor,false,The Conversation
+1158,Al Pacino,1974,BAFTA,Best Actor,false,Serpico
+6837,Walter Matthau,1973,BAFTA,Best Actor,true,Pete 'n' Tillie
+3084,Marlon Brando,1973,BAFTA,Best Actor,false,Last Tango in Paris
+3359,Laurence Olivier,1973,BAFTA,Best Actor,false,Sleuth
+55636,Donald Sutherland,1973,BAFTA,Best Actor,false,Steelyard Blues
+193,Gene Hackman,1972,BAFTA,Best Actor,true,The French Connection
+3084,Marlon Brando,1972,BAFTA,Best Actor,false,The Nightcomers
+862,George C. Scott,1972,BAFTA,Best Actor,false,The Hospital
+8606,Robert Shaw,1972,BAFTA,Best Actor,false,Young Winston
+29903,Peter Finch,1971,BAFTA,Best Actor,true,Sunday Bloody Sunday
+21605,Dirk Bogarde,1971,BAFTA,Best Actor,false,Death in Venice
+3926,Albert Finney,1971,BAFTA,Best Actor,false,Gumshoe
+4483,Dustin Hoffman,1971,BAFTA,Best Actor,false,Little Big Man
+4135,Robert Redford,1970,BAFTA,Best Actor,true,Butch Cassidy and the Sundance Kid
+827,Elliott Gould,1970,BAFTA,Best Actor,false,MASH
+3636,Paul Newman,1970,BAFTA,Best Actor,false,Butch Cassidy and the Sundance Kid
+862,George C. Scott,1970,BAFTA,Best Actor,false,Patton
+4483,Dustin Hoffman,1969,BAFTA,Best Actor,true,Midnight Cowboy
+27554,Alan Bates,1969,BAFTA,Best Actor,false,Women in Love
+6837,Walter Matthau,1969,BAFTA,Best Actor,false,The Secret Life of an American Wife
+51812,Nicol Williamson,1969,BAFTA,Best Actor,false,Inadmissible Evidence
+12147,Spencer Tracy,1968,BAFTA,Best Actor,true,Guess Who's Coming to Dinner
+12726,Trevor Howard,1968,BAFTA,Best Actor,false,The Charge of the Light Brigade
+41236,Ron Moody,1968,BAFTA,Best Actor,false,Oliver!
+51812,Nicol Williamson,1968,BAFTA,Best Actor,false,The Bofors Gun
+13324,Paul Scofield,1967,BAFTA,Best Actor,true,A Man for All Seasons
+21605,Dirk Bogarde,1967,BAFTA,Best Actor,false,Accident
+5341,Richard Burton,1967,BAFTA,Best Actor,false,The Taming of the Shrew
+2091,James Mason,1967,BAFTA,Best Actor,false,The Deadly Affair
+522,Rod Steiger,1967,BAFTA,Best Actor,true,In the Heat of the Night
+6449,Warren Beatty,1967,BAFTA,Best Actor,false,Bonnie and Clyde
+40,Orson Welles,1967,BAFTA,Best Actor,false,Chimes at Midnight
+16897,Sidney Poitier,1967,BAFTA,Best Actor,false,In the Heat of the Night
+5341,Richard Burton,1966,BAFTA,Best Actor,true,The Spy Who Came in from the Cold
+3895,Michael Caine,1966,BAFTA,Best Actor,false,Alfie
+12689,Ralph Richardson,1966,BAFTA,Best Actor,false,Doctor Zhivago
+2076,David Warner,1966,BAFTA,Best Actor,false,Morgan: A Suitable Case for Treatment
+522,Rod Steiger,1966,BAFTA,Best Actor,true,The Pawnbroker
+3829,Jean-Paul Belmondo,1966,BAFTA,Best Actor,false,Pierrot le Fou
+16897,Sidney Poitier,1966,BAFTA,Best Actor,false,A Patch of Blue
+18216,Oskar Werner,1966,BAFTA,Best Actor,false,The Spy Who Came in from the Cold
+21605,Dirk Bogarde,1965,BAFTA,Best Actor,true,Darling
+19463,Harry Andrews,1965,BAFTA,Best Actor,false,The Hill
+35321,Rex Harrison,1965,BAFTA,Best Actor,false,My Fair Lady
+5401,Anthony Quinn,1965,BAFTA,Best Actor,false,Zorba the Greek
+18391,Lee Marvin,1965,BAFTA,Best Actor,true,Cat Ballou
+3151,Jack Lemmon,1965,BAFTA,Best Actor,false,Good Neighbor Sam
+5401,Anthony Quinn,1965,BAFTA,Best Actor,false,Zorba the Greek
+18216,Oskar Werner,1965,BAFTA,Best Actor,false,Ship of Fools
+4786,Richard Attenborough,1964,BAFTA,Best Actor,true,Guns at Batasi
+14011,Tom Courtenay,1964,BAFTA,Best Actor,false,King & Country
+11390,Peter O'Toole,1964,BAFTA,Best Actor,false,Becket
+12446,Peter Sellers,1964,BAFTA,Best Actor,false,Dr. Strangelove
+5676,Marcello Mastroianni,1964,BAFTA,Best Actor,true,Yesterday
+2638,Cary Grant,1964,BAFTA,Best Actor,false,Charade
+3088,Sterling Hayden,1964,BAFTA,Best Actor,false,Dr. Strangelove
+16897,Sidney Poitier,1964,BAFTA,Best Actor,false,Lilies of the Field
+21605,Dirk Bogarde,1963,BAFTA,Best Actor,true,The Servant
+14011,Tom Courtenay,1963,BAFTA,Best Actor,false,Billy Liar
+3926,Albert Finney,1963,BAFTA,Best Actor,false,Tom Jones
+194,Richard Harris,1963,BAFTA,Best Actor,false,This Sporting Life
+5676,Marcello Mastroianni,1963,BAFTA,Best Actor,true,Divorce Italian Style
+44860,Franco Citti,1963,BAFTA,Best Actor,false,Accattone
+39601,Howard Keel,1963,BAFTA,Best Actor,false,The Day of the Triffids
+3151,Jack Lemmon,1963,BAFTA,Best Actor,false,Days of Wine and Roses
+3636,Paul Newman,1963,BAFTA,Best Actor,false,Hud
+8487,Gregory Peck,1963,BAFTA,Best Actor,false,To Kill a Mockingbird
+14011,Tom Courtenay,1962,BAFTA,Best Actor,true,The Loneliness of the Long Distance Runner
+4786,Richard Attenborough,1962,BAFTA,Best Actor,false,The Dock Brief
+11390,Peter O'Toole,1962,BAFTA,Best Actor,false,Lawrence of Arabia
+3359,Laurence Olivier,1962,BAFTA,Best Actor,false,Term of Trial
+13784,Burt Lancaster,1962,BAFTA,Best Actor,true,Birdman of Alcatraz
+3829,Jean-Paul Belmondo,1962,BAFTA,Best Actor,false,Léon Morin
+2090,Kirk Douglas,1962,BAFTA,Best Actor,false,Lonely Are the Brave
+3267,George Hamilton,1962,BAFTA,Best Actor,false,Light in the Piazza
+10921,Charles Laughton,1962,BAFTA,Best Actor,false,Advise & Consent
+5401,Anthony Quinn,1962,BAFTA,Best Actor,false,Lawrence of Arabia
+8253,Robert Ryan,1962,BAFTA,Best Actor,false,Billy Budd
+1305759,Georges Wilson,1962,BAFTA,Best Actor,false,The Long Absence
+29903,Peter Finch,1961,BAFTA,Best Actor,true,No Love for Johnnie
+21605,Dirk Bogarde,1961,BAFTA,Best Actor,false,Victim
+3636,Paul Newman,1961,BAFTA,Best Actor,true,The Hustler
+12151,Montgomery Clift,1961,BAFTA,Best Actor,false,Judgment at Nuremberg
+557006,Vladimir Ivashov,1961,BAFTA,Best Actor,false,Ballad of a Soldier
+25333,Philippe Leroy,1961,BAFTA,Best Actor,false,The Night Watch
+16897,Sidney Poitier,1961,BAFTA,Best Actor,false,A Raisin in the Sun
+12150,Maximilian Schell,1961,BAFTA,Best Actor,false,Judgment at Nuremberg
+45982,Alberto Sordi,1961,BAFTA,Best Actor,false,The Best of Enemies
+29903,Peter Finch,1960,BAFTA,Best Actor,true,The Trials of Oscar Wilde
+4786,Richard Attenborough,1960,BAFTA,Best Actor,false,The Angry Silence
+3926,Albert Finney,1960,BAFTA,Best Actor,false,Saturday Night and Sunday Morning
+69555,John Fraser,1960,BAFTA,Best Actor,false,The Trials of Oscar Wilde
+12248,Alec Guinness,1960,BAFTA,Best Actor,false,Tunes of Glory
+11859,John Mills,1960,BAFTA,Best Actor,false,Tunes of Glory
+3359,Laurence Olivier,1960,BAFTA,Best Actor,false,The Entertainer
+3151,Jack Lemmon,1960,BAFTA,Best Actor,true,The Apartment
+3267,George Hamilton,1960,BAFTA,Best Actor,false,Crime and Punishment U.S.A.
+13784,Burt Lancaster,1960,BAFTA,Best Actor,false,Elmer Gantry
+13576,Fredric March,1960,BAFTA,Best Actor,false,Inherit the Wind
+2565,Yves Montand,1960,BAFTA,Best Actor,false,Let's Make Love
+12147,Spencer Tracy,1960,BAFTA,Best Actor,false,Inherit the Wind
+12446,Peter Sellers,1959,BAFTA,Best Actor,true,I'm All Right Jack
+67449,Stanley Baker,1959,BAFTA,Best Actor,false,Yesterday's Enemy
+5341,Richard Burton,1959,BAFTA,Best Actor,false,Look Back in Anger
+29903,Peter Finch,1959,BAFTA,Best Actor,false,The Nun's Story
+14729,Laurence Harvey,1959,BAFTA,Best Actor,false,Expresso Bongo
+41998,Gordon Jackson,1959,BAFTA,Best Actor,false,Yesterday's Enemy
+3359,Laurence Olivier,1959,BAFTA,Best Actor,false,The Devil's Disciple
+3151,Jack Lemmon,1959,BAFTA,Best Actor,true,Some Like It Hot
+40914,Zbigniew Cybulski,1959,BAFTA,Best Actor,false,Ashes and Diamonds
+18559,Jean Desailly,1959,BAFTA,Best Actor,false,Maigret Sets a Trap
+11544,Jean Gabin,1959,BAFTA,Best Actor,false,Maigret Sets a Trap
+4144558,Takashi Shimura,1959,BAFTA,Best Actor,false,Living
+854,James Stewart,1959,BAFTA,Best Actor,false,Anatomy of a Murder
+12726,Trevor Howard,1958,BAFTA,Best Actor,true,The Key
+25536,Michael Craig,1958,BAFTA,Best Actor,false,Sea of Sand
+14729,Laurence Harvey,1958,BAFTA,Best Actor,false,Room at the Top
+35250,I.S. Johar,1958,BAFTA,Best Actor,false,Harry Black
+14371,Anthony Quayle,1958,BAFTA,Best Actor,false,Ice Cold in Alex
+7640,Michael Redgrave,1958,BAFTA,Best Actor,false,The Quiet American
+14372,Donald Wolfit,1958,BAFTA,Best Actor,false,Room at the Top
+16897,Sidney Poitier,1958,BAFTA,Best Actor,true,The Defiant Ones
+3084,Marlon Brando,1958,BAFTA,Best Actor,false,The Young Lions
+3150,Tony Curtis,1958,BAFTA,Best Actor,false,The Defiant Ones
+3381,Glenn Ford,1958,BAFTA,Best Actor,false,The Sheepman
+10459,Curd Jürgens,1958,BAFTA,Best Actor,false,The Enemy Below
+10921,Charles Laughton,1958,BAFTA,Best Actor,false,Witness for the Prosecution
+3636,Paul Newman,1958,BAFTA,Best Actor,false,Cat on a Hot Tin Roof
+8741,Victor Sjöström,1958,BAFTA,Best Actor,false,Wild Strawberries
+12147,Spencer Tracy,1958,BAFTA,Best Actor,false,The Last Hurrah
+12248,Alec Guinness,1957,BAFTA,Best Actor,true,The Bridge on the River Kwai
+29903,Peter Finch,1957,BAFTA,Best Actor,false,Windom's Way
+12726,Trevor Howard,1957,BAFTA,Best Actor,false,Manuela
+3359,Laurence Olivier,1957,BAFTA,Best Actor,false,The Prince and the Showgirl
+7640,Michael Redgrave,1957,BAFTA,Best Actor,false,Time Without Pity
+4958,Henry Fonda,1957,BAFTA,Best Actor,true,12 Angry Men
+5403,Richard Basehart,1957,BAFTA,Best Actor,false,Time Limit
+24476,Pierre Brasseur,1957,BAFTA,Best Actor,false,Porte des Lilas
+3150,Tony Curtis,1957,BAFTA,Best Actor,false,Sweet Smell of Success
+11544,Jean Gabin,1957,BAFTA,Best Actor,false,La Traversée de Paris
+10158,Robert Mitchum,1957,BAFTA,Best Actor,false,Heaven Knows
+16897,Sidney Poitier,1957,BAFTA,Best Actor,false,Edge of the City
+5833,Ed Wynn,1957,BAFTA,Best Actor,false,The Great Man
+29903,Peter Finch,1956,BAFTA,Best Actor,true,A Town Like Alice
+10018,Jack Hawkins,1956,BAFTA,Best Actor,false,The Long Arm
+67676,Kenneth More,1956,BAFTA,Best Actor,false,Reach for the Sky
+27440,François Périer,1956,BAFTA,Best Actor,true,Gervaise
+6649,Gunnar Björnstrand,1956,BAFTA,Best Actor,false,Smiles of a Summer Night
+2749,James Dean,1956,BAFTA,Best Actor,false,Rebel Without a Cause
+11546,Pierre Fresnay,1956,BAFTA,Best Actor,false,The Defrocked One
+8252,William Holden,1956,BAFTA,Best Actor,false,Picnic
+9857,Karl Malden,1956,BAFTA,Best Actor,false,Baby Doll
+4347,Frank Sinatra,1956,BAFTA,Best Actor,false,The Man with the Golden Arm
+12147,Spencer Tracy,1956,BAFTA,Best Actor,false,The Mountain
+3359,Laurence Olivier,1955,BAFTA,Best Actor,true,Richard III
+30119,Alfie Bass,1955,BAFTA,Best Actor,false,The Bespoke Overcoat
+12248,Alec Guinness,1955,BAFTA,Best Actor,false,The Prisoner
+10018,Jack Hawkins,1955,BAFTA,Best Actor,false,The Prisoner
+67676,Kenneth More,1955,BAFTA,Best Actor,false,The Deep Blue Sea
+7640,Michael Redgrave,1955,BAFTA,Best Actor,false,The Night My Number Came Up
+7502,Ernest Borgnine,1955,BAFTA,Best Actor,true,Marty
+2749,James Dean,1955,BAFTA,Best Actor,false,East of Eden
+3151,Jack Lemmon,1955,BAFTA,Best Actor,false,Mister Roberts
+7450,Toshiro Mifune,1955,BAFTA,Best Actor,false,Seven Samurai
+4144558,Takashi Shimura,1955,BAFTA,Best Actor,false,Seven Samurai
+4347,Frank Sinatra,1955,BAFTA,Best Actor,false,Not as a Stranger
+67676,Kenneth More,1954,BAFTA,Best Actor,true,Doctor in the House
+39952,Maurice Denham,1954,BAFTA,Best Actor,false,The Purple Plain
+3609,Robert Donat,1954,BAFTA,Best Actor,false,Lease of Life
+11859,John Mills,1954,BAFTA,Best Actor,false,Hobson's Choice
+14261,David Niven,1954,BAFTA,Best Actor,false,Carrington V.C.
+14372,Donald Wolfit,1954,BAFTA,Best Actor,false,Svengali
+3084,Marlon Brando,1954,BAFTA,Best Actor,true,On the Waterfront
+9112,Neville Brand,1954,BAFTA,Best Actor,false,Riot in Cell Block 11
+12515,José Ferrer,1954,BAFTA,Best Actor,false,The Caine Mutiny
+13576,Fredric March,1954,BAFTA,Best Actor,false,Executive Suite
+854,James Stewart,1954,BAFTA,Best Actor,false,The Glenn Miller Story
+11857,John Gielgud,1953,BAFTA,Best Actor,true,Julius Caesar
+10018,Jack Hawkins,1953,BAFTA,Best Actor,false,The Cruel Sea
+12726,Trevor Howard,1953,BAFTA,Best Actor,false,The Heart of the Matter
+97426,Duncan Macrae,1953,BAFTA,Best Actor,false,The Kidnappers
+67676,Kenneth More,1953,BAFTA,Best Actor,false,Genevieve
+3084,Marlon Brando,1953,BAFTA,Best Actor,true,Julius Caesar
+11998,Eddie Albert,1953,BAFTA,Best Actor,false,Roman Holiday
+18803,Van Heflin,1953,BAFTA,Best Actor,false,Shane
+150819,Claude Laydu,1953,BAFTA,Best Actor,false,Diary of a Country Priest
+579732,Marcel Mouloudji,1953,BAFTA,Best Actor,false,We Are All Murderers
+8487,Gregory Peck,1953,BAFTA,Best Actor,false,Roman Holiday
+12147,Spencer Tracy,1953,BAFTA,Best Actor,false,The Actress
+12689,Ralph Richardson,1952,BAFTA,Best Actor,true,The Sound Barrier
+10018,Jack Hawkins,1952,BAFTA,Best Actor,false,Mandy
+30769,James Hayter,1952,BAFTA,Best Actor,false,The Pickwick Papers
+3359,Laurence Olivier,1952,BAFTA,Best Actor,false,Carrie
+121003,Nigel Patrick,1952,BAFTA,Best Actor,false,The Sound Barrier
+3084,Marlon Brando,1952,BAFTA,Best Actor,true,Viva Zapata!
+4110,Humphrey Bogart,1952,BAFTA,Best Actor,false,The African Queen
+11546,Pierre Fresnay,1952,BAFTA,Best Actor,false,God Needs Men
+592526,Francesco Golisano,1952,BAFTA,Best Actor,false,Miracle in Milan
+13576,Fredric March,1952,BAFTA,Best Actor,false,Death of a Salesman

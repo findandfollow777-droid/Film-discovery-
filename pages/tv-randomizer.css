@@ -745,15 +745,11 @@ html, body {
   max-height: 80vh; overflow-y: auto; position: relative;
 }
 
+/* .modal-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .modal-close {
   position: absolute; top: 16px; right: 16px;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  color: var(--muted-silver); font-size: 14px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: var(--transition-smooth);
 }
-.modal-close:hover { background: rgba(255,255,255,0.1); color: var(--film-white); }
 
 .modal-title {
   font-family: var(--font-display); font-size: 16px; font-weight: 700;

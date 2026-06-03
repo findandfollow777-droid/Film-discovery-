@@ -1,0 +1,218 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+1056121,Ryan Coogler,2026,BAFTA,Best Director,false,Sinners
+122423,Yorgos Lanthimos,2026,BAFTA,Best Director,false,Bugonia
+129561,Josh Safdie,2026,BAFTA,Best Director,false,Marty Supreme
+4762,Paul Thomas Anderson,2026,BAFTA,Best Director,false,One Battle After Another
+71609,Joachim Trier,2026,BAFTA,Best Director,false,Sentimental Value
+1395183,Chloe Zhao,2026,BAFTA,Best Director,false,Hamnet
+55493,Brady Corbet,2025,BAFTA,Best Director,true,The Brutalist
+17496,Jacques Audiard,2025,BAFTA,Best Director,false,Emilia Perez
+118415,Sean Baker,2025,BAFTA,Best Director,false,Anora
+221522,Edward Berger,2025,BAFTA,Best Director,false,Conclave
+1607016,Coralie Fargeat,2025,BAFTA,Best Director,false,The Substance
+1467320,Payal Kapadia,2025,BAFTA,Best Director,false,All We Imagine as Light
+525,Christopher Nolan,2024,BAFTA,Best Director,true,Oppenheimer
+586002,Andrew Haigh,2024,BAFTA,Best Director,false,All of Us Strangers
+1175620,Justine Triet,2024,BAFTA,Best Director,false,Anatomy of a Fall
+13235,Alexander Payne,2024,BAFTA,Best Director,false,The Holdovers
+51329,Bradley Cooper,2024,BAFTA,Best Director,false,Maestro
+66728,Jonathan Glazer,2024,BAFTA,Best Director,false,The Zone of Interest
+221522,Edward Berger,2023,BAFTA,Best Director,true,All Quiet on the Western Front
+54472,Martin McDonagh,2023,BAFTA,Best Director,false,The Banshees of Inisherin
+10099,Park Chan-wook,2023,BAFTA,Best Director,false,Decision to Leave
+0,Daniel Kwan & Daniel Scheinert,2023,BAFTA,Best Director,false,Everything Everywhere All at Once
+5010,Todd Field,2023,BAFTA,Best Director,false,Tar
+71947,Gina Prince-Bythewood,2023,BAFTA,Best Director,false,The Woman King
+10757,Jane Campion,2022,BAFTA,Best Director,true,The Power of the Dog
+1361417,Aleem Khan,2022,BAFTA,Best Director,false,After Love
+1487492,Ryusuke Hamaguchi,2022,BAFTA,Best Director,false,Drive My Car
+1017274,Audrey Diwan,2022,BAFTA,Best Director,false,Happening
+4762,Paul Thomas Anderson,2022,BAFTA,Best Director,false,Licorice Pizza
+1392433,Julia Ducournau,2022,BAFTA,Best Director,false,Titane
+1395183,Chloe Zhao,2021,BAFTA,Best Director,true,Nomadland
+4453,Thomas Vinterberg,2021,BAFTA,Best Director,false,Another Round
+1457482,Shannon Murphy,2021,BAFTA,Best Director,false,Babyteeth
+931952,Lee Isaac Chung,2021,BAFTA,Best Director,false,Minari
+4634,Jasmila Zbanic,2021,BAFTA,Best Director,false,Quo Vadis Aida?
+93288,Sarah Gavron,2021,BAFTA,Best Director,false,Rocks
+39,Sam Mendes,2020,BAFTA,Best Director,true,1917
+1032,Martin Scorsese,2020,BAFTA,Best Director,false,The Irishman
+57130,Todd Phillips,2020,BAFTA,Best Director,false,Joker
+138,Quentin Tarantino,2020,BAFTA,Best Director,false,Once Upon a Time in Hollywood
+21684,Bong Joon-ho,2020,BAFTA,Best Director,false,Parasite
+11218,Alfonso Cuaron,2019,BAFTA,Best Director,true,Roma
+51329,Bradley Cooper,2019,BAFTA,Best Director,false,A Star Is Born
+64194,Pawel Pawlikowski,2019,BAFTA,Best Director,false,Cold War
+122423,Yorgos Lanthimos,2019,BAFTA,Best Director,false,The Favourite
+5281,Spike Lee,2019,BAFTA,Best Director,false,BlacKkKlansman
+10828,Guillermo del Toro,2018,BAFTA,Best Director,true,The Shape of Water
+137427,Denis Villeneuve,2018,BAFTA,Best Director,false,Blade Runner 2049
+78160,Luca Guadagnino,2018,BAFTA,Best Director,false,Call Me by Your Name
+525,Christopher Nolan,2018,BAFTA,Best Director,false,Dunkirk
+54472,Martin McDonagh,2018,BAFTA,Best Director,false,Three Billboards Outside Ebbing Missouri
+136495,Damien Chazelle,2017,BAFTA,Best Director,true,La La Land
+120615,Tom Ford,2017,BAFTA,Best Director,false,Nocturnal Animals
+15488,Ken Loach,2017,BAFTA,Best Director,false,I Daniel Blake
+30711,Kenneth Lonergan,2017,BAFTA,Best Director,false,Manchester by the Sea
+137427,Denis Villeneuve,2017,BAFTA,Best Director,false,Arrival
+223,Alejandro G. Inarritu,2016,BAFTA,Best Director,true,The Revenant
+16863,Todd Haynes,2016,BAFTA,Best Director,false,Carol
+55710,Adam McKay,2016,BAFTA,Best Director,false,The Big Short
+578,Ridley Scott,2016,BAFTA,Best Director,false,The Martian
+488,Steven Spielberg,2016,BAFTA,Best Director,false,Bridge of Spies
+564,Richard Linklater,2015,BAFTA,Best Director,true,Boyhood
+5655,Wes Anderson,2015,BAFTA,Best Director,false,The Grand Budapest Hotel
+136495,Damien Chazelle,2015,BAFTA,Best Director,false,Whiplash
+223,Alejandro G. Inarritu,2015,BAFTA,Best Director,false,Birdman
+76998,James Marsh,2015,BAFTA,Best Director,false,The Theory of Everything
+11218,Alfonso Cuaron,2014,BAFTA,Best Director,true,Gravity
+25598,Paul Greengrass,2014,BAFTA,Best Director,false,Captain Phillips
+13565,Steve McQueen,2014,BAFTA,Best Director,false,12 Years a Slave
+17883,David O. Russell,2014,BAFTA,Best Director,false,American Hustle
+1032,Martin Scorsese,2014,BAFTA,Best Director,false,The Wolf of Wall Street
+880,Ben Affleck,2013,BAFTA,Best Director,true,Argo
+14392,Kathryn Bigelow,2013,BAFTA,Best Director,false,Zero Dark Thirty
+6011,Michael Haneke,2013,BAFTA,Best Director,false,Amour
+1614,Ang Lee,2013,BAFTA,Best Director,false,Life of Pi
+138,Quentin Tarantino,2013,BAFTA,Best Director,false,Django Unchained
+67717,Michel Hazanavicius,2012,BAFTA,Best Director,true,The Artist
+74396,Tomas Alfredson,2012,BAFTA,Best Director,false,Tinker Tailor Soldier Spy
+83287,Lynne Ramsay,2012,BAFTA,Best Director,false,We Need to Talk About Kevin
+21183,Nicolas Winding Refn,2012,BAFTA,Best Director,false,Drive
+1032,Martin Scorsese,2012,BAFTA,Best Director,false,Hugo
+7467,David Fincher,2011,BAFTA,Best Director,true,The Social Network
+6431,Darren Aronofsky,2011,BAFTA,Best Director,false,Black Swan
+2034,Danny Boyle,2011,BAFTA,Best Director,false,127 Hours
+70500,Tom Hooper,2011,BAFTA,Best Director,false,The King's Speech
+525,Christopher Nolan,2011,BAFTA,Best Director,false,Inception
+14392,Kathryn Bigelow,2010,BAFTA,Best Director,true,The Hurt Locker
+82194,Neill Blomkamp,2010,BAFTA,Best Director,false,District 9
+2710,James Cameron,2010,BAFTA,Best Director,false,Avatar
+1176,Lone Scherfig,2010,BAFTA,Best Director,false,An Education
+138,Quentin Tarantino,2010,BAFTA,Best Director,false,Inglourious Basterds
+2034,Danny Boyle,2009,BAFTA,Best Director,true,Slumdog Millionaire
+468,Stephen Daldry,2009,BAFTA,Best Director,false,The Reader
+190,Clint Eastwood,2009,BAFTA,Best Director,false,Changeling
+7467,David Fincher,2009,BAFTA,Best Director,false,The Curious Case of Benjamin Button
+6159,Ron Howard,2009,BAFTA,Best Director,false,Frost/Nixon
+0,Joel Coen & Ethan Coen,2008,BAFTA,Best Director,true,No Country for Old Men
+25598,Paul Greengrass,2008,BAFTA,Best Director,false,The Bourne Ultimatum
+8193,Florian Henckel von Donnersmarck,2008,BAFTA,Best Director,false,The Lives of Others
+36588,Joe Wright,2008,BAFTA,Best Director,false,Atonement
+25598,Paul Greengrass,2007,BAFTA,Best Director,true,United 93
+0,Jonathan Dayton & Valerie Faris,2007,BAFTA,Best Director,false,Little Miss Sunshine
+3224,Stephen Frears,2007,BAFTA,Best Director,false,The Queen
+223,Alejandro G. Inarritu,2007,BAFTA,Best Director,false,Babel
+1032,Martin Scorsese,2007,BAFTA,Best Director,false,The Departed
+1614,Ang Lee,2006,BAFTA,Best Director,true,Brokeback Mountain
+1461,George Clooney,2006,BAFTA,Best Director,false,Good Night and Good Luck
+455,Paul Haggis,2006,BAFTA,Best Director,false,Crash
+8557,Fernando Meirelles,2006,BAFTA,Best Director,false,The Constant Gardener
+5345,Bennett Miller,2006,BAFTA,Best Director,false,Capote
+65452,Mike Leigh,2005,BAFTA,Best Director,true,Vera Drake
+12995,Marc Forster,2005,BAFTA,Best Director,false,Finding Neverland
+201,Michel Gondry,2005,BAFTA,Best Director,false,Eternal Sunshine of the Spotless Mind
+638,Michael Mann,2005,BAFTA,Best Director,false,Collateral
+1032,Martin Scorsese,2005,BAFTA,Best Director,false,The Aviator
+2690,Peter Weir,2004,BAFTA,Best Director,true,Master and Commander
+510,Tim Burton,2004,BAFTA,Best Director,false,Big Fish
+1769,Sofia Coppola,2004,BAFTA,Best Director,false,Lost in Translation
+108,Peter Jackson,2004,BAFTA,Best Director,false,The Lord of the Rings: The Return of the King
+2239,Anthony Minghella,2004,BAFTA,Best Director,false,Cold Mountain
+3556,Roman Polanski,2003,BAFTA,Best Director,true,The Pianist
+468,Stephen Daldry,2003,BAFTA,Best Director,false,The Hours
+108,Peter Jackson,2003,BAFTA,Best Director,false,The Lord of the Rings: The Two Towers
+17633,Rob Marshall,2003,BAFTA,Best Director,false,Chicago
+1032,Martin Scorsese,2003,BAFTA,Best Director,false,Gangs of New York
+108,Peter Jackson,2002,BAFTA,Best Director,true,The Lord of the Rings: The Fellowship of the Ring
+9789,Robert Altman,2002,BAFTA,Best Director,false,Gosford Park
+6159,Ron Howard,2002,BAFTA,Best Director,false,A Beautiful Mind
+2419,Jean-Pierre Jeunet,2002,BAFTA,Best Director,false,Amelie
+6201,Baz Luhrmann,2002,BAFTA,Best Director,false,Moulin Rouge!
+1614,Ang Lee,2001,BAFTA,Best Director,true,Crouching Tiger Hidden Dragon
+468,Stephen Daldry,2001,BAFTA,Best Director,false,Billy Elliot
+578,Ridley Scott,2001,BAFTA,Best Director,false,Gladiator
+1884,Steven Soderbergh,2001,BAFTA,Best Director,false,Traffic
+1884,Steven Soderbergh,2001,BAFTA,Best Director,false,Erin Brockovich
+309,Pedro Almodovar,2000,BAFTA,Best Director,true,All About My Mother
+17016,Neil Jordan,2000,BAFTA,Best Director,false,The End of the Affair
+39,Sam Mendes,2000,BAFTA,Best Director,false,American Beauty
+2239,Anthony Minghella,2000,BAFTA,Best Director,false,The Talented Mr. Ripley
+11614,M. Night Shyamalan,2000,BAFTA,Best Director,false,The Sixth Sense
+309,Pedro Almodovar,1999,BAFTA,Best Director,true,All About My Mother
+17016,Neil Jordan,1999,BAFTA,Best Director,false,The End of the Affair
+39,Sam Mendes,1999,BAFTA,Best Director,false,American Beauty
+2239,Anthony Minghella,1999,BAFTA,Best Director,false,The Talented Mr. Ripley
+11614,M. Night Shyamalan,1999,BAFTA,Best Director,false,The Sixth Sense
+2690,Peter Weir,1998,BAFTA,Best Director,true,The Truman Show
+37630,Shekhar Kapur,1998,BAFTA,Best Director,false,Elizabeth
+18844,John Madden,1998,BAFTA,Best Director,false,Shakespeare in Love
+488,Steven Spielberg,1998,BAFTA,Best Director,false,Saving Private Ryan
+6201,Baz Luhrmann,1997,BAFTA,Best Director,true,Romeo + Juliet
+2710,James Cameron,1997,BAFTA,Best Director,false,Titanic
+57630,Peter Cattaneo,1997,BAFTA,Best Director,false,The Full Monty
+323,Curtis Hanson,1997,BAFTA,Best Director,false,L.A. Confidential
+1223,Joel Coen,1996,BAFTA,Best Director,true,Fargo
+33433,Scott Hicks,1996,BAFTA,Best Director,false,Shine
+65452,Mike Leigh,1996,BAFTA,Best Director,false,Secrets & Lies
+2239,Anthony Minghella,1996,BAFTA,Best Director,false,The English Patient
+28898,Michael Radford,1995,BAFTA,Best Director,true,Il Postino: The Postman
+2461,Mel Gibson,1995,BAFTA,Best Director,false,Braveheart
+55476,Nicholas Hytner,1995,BAFTA,Best Director,false,The Madness of King George
+1614,Ang Lee,1995,BAFTA,Best Director,false,Sense and Sensibility
+10723,Mike Newell,1994,BAFTA,Best Director,true,Four Weddings and a Funeral
+1126,Krzysztof Kieslowski,1994,BAFTA,Best Director,false,Three Colors: Red
+138,Quentin Tarantino,1994,BAFTA,Best Director,false,Pulp Fiction
+24,Robert Zemeckis,1994,BAFTA,Best Director,false,Forrest Gump
+488,Steven Spielberg,1993,BAFTA,Best Director,true,Schindler's List
+4786,Richard Attenborough,1993,BAFTA,Best Director,false,Shadowlands
+10757,Jane Campion,1993,BAFTA,Best Director,false,The Piano
+54441,James Ivory,1993,BAFTA,Best Director,false,The Remains of the Day
+9789,Robert Altman,1992,BAFTA,Best Director,true,The Player
+190,Clint Eastwood,1992,BAFTA,Best Director,false,Unforgiven
+54441,James Ivory,1992,BAFTA,Best Director,false,Howards End
+17016,Neil Jordan,1992,BAFTA,Best Director,false,The Crying Game
+9168,Alan Parker,1991,BAFTA,Best Director,true,The Commitments
+1269,Kevin Costner,1991,BAFTA,Best Director,false,Dances with Wolves
+16294,Jonathan Demme,1991,BAFTA,Best Director,false,The Silence of the Lambs
+578,Ridley Scott,1991,BAFTA,Best Director,false,Thelma & Louise
+1032,Martin Scorsese,1990,BAFTA,Best Director,true,Goodfellas
+1243,Woody Allen,1990,BAFTA,Best Director,false,Crimes and Misdemeanors
+5696,Bruce Beresford,1990,BAFTA,Best Director,false,Driving Miss Daisy
+65314,Giuseppe Tornatore,1990,BAFTA,Best Director,false,Cinema Paradiso
+11181,Kenneth Branagh,1989,BAFTA,Best Director,true,Henry V
+3224,Stephen Frears,1989,BAFTA,Best Director,false,Dangerous Liaisons
+9168,Alan Parker,1989,BAFTA,Best Director,false,Mississippi Burning
+2690,Peter Weir,1989,BAFTA,Best Director,false,Dead Poets Society
+15389,Louis Malle,1988,BAFTA,Best Director,true,Au revoir les enfants
+70636,Gabriel Axel,1988,BAFTA,Best Director,false,Babette's Feast
+4956,Bernardo Bertolucci,1988,BAFTA,Best Director,false,The Last Emperor
+8929,Charles Crichton,1988,BAFTA,Best Director,false,A Fish Called Wanda
+1152,Oliver Stone,1987,BAFTA,Best Director,true,Platoon
+4786,Richard Attenborough,1987,BAFTA,Best Director,false,Cry Freedom
+19665,John Boorman,1987,BAFTA,Best Director,false,Hope and Glory
+20718,Claude Berri,1987,BAFTA,Best Director,false,Jean de Florette
+1243,Woody Allen,1986,BAFTA,Best Director,true,Hannah and Her Sisters
+8965,Roland Joffe,1986,BAFTA,Best Director,false,The Mission
+17016,Neil Jordan,1986,BAFTA,Best Director,false,Mona Lisa
+54441,James Ivory,1986,BAFTA,Best Director,false,A Room with a View
+2303,Wim Wenders,1984,BAFTA,Best Director,true,Paris Texas
+8965,Roland Joffe,1984,BAFTA,Best Director,false,The Killing Fields
+4385,Sergio Leone,1984,BAFTA,Best Director,false,Once Upon a Time in America
+12804,Peter Yates,1984,BAFTA,Best Director,false,The Dresser
+3556,Roman Polanski,1983,BAFTA,Best Director,true,The Pianist
+68687,Bill Forsyth,1983,BAFTA,Best Director,false,Local Hero
+54441,James Ivory,1983,BAFTA,Best Director,false,Heat and Dust
+1032,Martin Scorsese,1983,BAFTA,Best Director,false,The King of Comedy
+4786,Richard Attenborough,1982,BAFTA,Best Director,true,Gandhi
+27436,Costa-Gavras,1982,BAFTA,Best Director,false,Missing
+21958,Mark Rydell,1982,BAFTA,Best Director,false,On Golden Pond
+488,Steven Spielberg,1982,BAFTA,Best Director,false,E.T. the Extra-Terrestrial
+15389,Louis Malle,1981,BAFTA,Best Director,true,Atlantic City
+68687,Bill Forsyth,1981,BAFTA,Best Director,false,Gregory's Girl
+58220,Hugh Hudson,1981,BAFTA,Best Director,false,Chariots of Fire
+72709,Karel Reisz,1981,BAFTA,Best Director,false,The French Lieutenant's Woman
+5026,Akira Kurosawa,1980,BAFTA,Best Director,true,Kagemusha
+6729,Robert Benton,1980,BAFTA,Best Director,false,Kramer vs. Kramer
+5602,David Lynch,1980,BAFTA,Best Director,false,The Elephant Man
+9168,Alan Parker,1980,BAFTA,Best Director,false,Fame

@@ -1,0 +1,260 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+65,Ian Holm,1969,BAFTA,Best Supporting Actor,TRUE,The Bofors Gun
+4173,Anthony Hopkins,1969,BAFTA,Best Supporting Actor,FALSE,The Lion in Winter
+24498,John McEnery,1969,BAFTA,Best Supporting Actor,FALSE,Romeo and Juliet
+18364,George Segal,1969,BAFTA,Best Supporting Actor,FALSE,No Way to Treat a Lady
+3359,Laurence Olivier,1970,BAFTA,Best Supporting Actor,TRUE,Oh! What a Lovely War
+5250,Jack Klugman,1970,BAFTA,Best Supporting Actor,FALSE,Goodbye Columbus
+514,Jack Nicholson,1970,BAFTA,Best Supporting Actor,FALSE,Easy Rider
+14060,Robert Vaughn,1970,BAFTA,Best Supporting Actor,FALSE,Bullitt
+14957,Colin Welland,1971,BAFTA,Best Supporting Actor,TRUE,Kes
+40943,Bernard Cribbins,1971,BAFTA,Best Supporting Actor,FALSE,The Railway Children
+11859,John Mills,1971,BAFTA,Best Supporting Actor,FALSE,Ryan's Daughter
+70985,Gig Young,1971,BAFTA,Best Supporting Actor,FALSE,They Shoot Horses Don't They?
+9126,Edward Fox,1972,BAFTA,Best Supporting Actor,TRUE,The Go-Between
+3796,Michael Gough,1972,BAFTA,Best Supporting Actor,FALSE,The Go-Between
+58339,Ian Hendry,1972,BAFTA,Best Supporting Actor,FALSE,Get Carter
+5049,John Hurt,1972,BAFTA,Best Supporting Actor,FALSE,10 Rillington Place
+8258,Ben Johnson,1973,BAFTA,Best Supporting Actor,TRUE,The Last Picture Show
+77312,Max Adrian,1973,BAFTA,Best Supporting Actor,FALSE,The Boy Friend
+3087,Robert Duvall,1973,BAFTA,Best Supporting Actor,FALSE,The Godfather
+12689,Ralph Richardson,1973,BAFTA,Best Supporting Actor,FALSE,Lady Caroline Lamb
+39024,Arthur Lowe,1974,BAFTA,Best Supporting Actor,TRUE,O Lucky Man!
+2481,Ian Bannen,1974,BAFTA,Best Supporting Actor,FALSE,The Offence
+656,Denholm Elliott,1974,BAFTA,Best Supporting Actor,FALSE,A Doll's House
+3046592,Michael Lonsdale,1974,BAFTA,Best Supporting Actor,FALSE,The Day of the Jackal
+11857,John Gielgud,1975,BAFTA,Best Supporting Actor,TRUE,Murder on the Orient Express
+97206,Adam Faith,1975,BAFTA,Best Supporting Actor,FALSE,Stardust
+6593,John Huston,1975,BAFTA,Best Supporting Actor,FALSE,Chinatown
+1811,Randy Quaid,1975,BAFTA,Best Supporting Actor,FALSE,The Last Detail
+30181,Fred Astaire,1976,BAFTA,Best Supporting Actor,TRUE,The Towering Inferno
+1936,Martin Balsam,1976,BAFTA,Best Supporting Actor,FALSE,The Taking of Pelham One Two Three
+16523,Burgess Meredith,1976,BAFTA,Best Supporting Actor,FALSE,The Day of the Locust
+5251,Jack Warden,1976,BAFTA,Best Supporting Actor,FALSE,Shampoo
+1370,Brad Dourif,1977,BAFTA,Best Supporting Actor,TRUE,One Flew Over the Cuckoo's Nest
+1936,Martin Balsam,1977,BAFTA,Best Supporting Actor,FALSE,All the President's Men
+39741,Michael Hordern,1977,BAFTA,Best Supporting Actor,FALSE,The Slipper and the Rose
+4765,Jason Robards,1977,BAFTA,Best Supporting Actor,FALSE,All the President's Men
+9126,Edward Fox,1978,BAFTA,Best Supporting Actor,TRUE,A Bridge Too Far
+13329,Colin Blakely,1978,BAFTA,Best Supporting Actor,FALSE,Equus
+3087,Robert Duvall,1978,BAFTA,Best Supporting Actor,FALSE,Network
+18861,Zero Mostel,1978,BAFTA,Best Supporting Actor,FALSE,The Front
+5049,John Hurt,1979,BAFTA,Best Supporting Actor,TRUE,Midnight Express
+193,Gene Hackman,1979,BAFTA,Best Supporting Actor,FALSE,Superman
+4765,Jason Robards,1979,BAFTA,Best Supporting Actor,FALSE,Julia
+1650,François Truffaut,1979,BAFTA,Best Supporting Actor,FALSE,Close Encounters of the Third Kind
+3087,Robert Duvall,1980,BAFTA,Best Supporting Actor,TRUE,Apocalypse Now
+656,Denholm Elliott,1980,BAFTA,Best Supporting Actor,FALSE,Saint Jack
+5049,John Hurt,1980,BAFTA,Best Supporting Actor,FALSE,Alien
+4690,Christopher Walken,1980,BAFTA,Best Supporting Actor,FALSE,The Deer Hunter
+65,Ian Holm,1982,BAFTA,Best Supporting Actor,TRUE,Chariots of Fire
+656,Denholm Elliott,1982,BAFTA,Best Supporting Actor,FALSE,Raiders of the Lost Ark
+11857,John Gielgud,1982,BAFTA,Best Supporting Actor,FALSE,Arthur
+53517,Nigel Havers,1982,BAFTA,Best Supporting Actor,FALSE,Chariots of Fire
+514,Jack Nicholson,1983,BAFTA,Best Supporting Actor,TRUE,Reds
+6637,Frank Finlay,1983,BAFTA,Best Supporting Actor,FALSE,The Return of the Soldier
+9126,Edward Fox,1983,BAFTA,Best Supporting Actor,FALSE,Gandhi
+693,Roshan Seth,1983,BAFTA,Best Supporting Actor,FALSE,Gandhi
+656,Denholm Elliott,1984,BAFTA,Best Supporting Actor,TRUE,Trading Places
+382,Bob Hoskins,1984,BAFTA,Best Supporting Actor,FALSE,The Honorary Consul
+13784,Burt Lancaster,1984,BAFTA,Best Supporting Actor,FALSE,Local Hero
+3663,Jerry Lewis,1984,BAFTA,Best Supporting Actor,FALSE,The King of Comedy
+656,Denholm Elliott,1985,BAFTA,Best Supporting Actor,TRUE,A Private Function
+1821,Michael Elphick,1985,BAFTA,Best Supporting Actor,FALSE,Gorky Park
+65,Ian Holm,1985,BAFTA,Best Supporting Actor,FALSE,Greystoke: The Legend of Tarzan Lord of the Apes
+12689,Ralph Richardson,1985,BAFTA,Best Supporting Actor,FALSE,Greystoke: The Legend of Tarzan Lord of the Apes
+656,Denholm Elliott,1986,BAFTA,Best Supporting Actor,TRUE,Defence of the Realm
+1292,James Fox,1986,BAFTA,Best Supporting Actor,FALSE,A Passage to India
+11857,John Gielgud,1986,BAFTA,Best Supporting Actor,FALSE,Plenty
+11852,Saeed Jaffrey,1986,BAFTA,Best Supporting Actor,FALSE,My Beautiful Laundrette
+40008,Ray McAnally,1987,BAFTA,Best Supporting Actor,TRUE,The Mission
+10647,Klaus Maria Brandauer,1987,BAFTA,Best Supporting Actor,FALSE,Out of Africa
+4001,Simon Callow,1987,BAFTA,Best Supporting Actor,FALSE,A Room with a View
+656,Denholm Elliott,1987,BAFTA,Best Supporting Actor,FALSE,A Room with a View
+6012,Daniel Auteuil,1988,BAFTA,Best Supporting Actor,TRUE,Jean de Florette
+2481,Ian Bannen,1988,BAFTA,Best Supporting Actor,FALSE,Hope and Glory
+738,Sean Connery,1988,BAFTA,Best Supporting Actor,FALSE,The Untouchables
+137924,John Thaw,1988,BAFTA,Best Supporting Actor,FALSE,Cry Freedom
+383,Michael Palin,1989,BAFTA,Best Supporting Actor,TRUE,A Fish Called Wanda
+14324,Joss Ackland,1989,BAFTA,Best Supporting Actor,FALSE,White Mischief
+11390,Peter O'Toole,1989,BAFTA,Best Supporting Actor,FALSE,The Last Emperor
+20277,David Suchet,1989,BAFTA,Best Supporting Actor,FALSE,A World Apart
+40008,Ray McAnally,1990,BAFTA,Best Supporting Actor,TRUE,My Left Foot
+3084,Marlon Brando,1990,BAFTA,Best Supporting Actor,FALSE,A Dry White Season
+738,Sean Connery,1990,BAFTA,Best Supporting Actor,FALSE,Indiana Jones and the Last Crusade
+514,Jack Nicholson,1990,BAFTA,Best Supporting Actor,FALSE,Batman
+68635,Salvatore Cascio,1991,BAFTA,Best Supporting Actor,TRUE,Cinema Paradiso
+21278,Alan Alda,1991,BAFTA,Best Supporting Actor,FALSE,Crimes and Misdemeanors
+5049,John Hurt,1991,BAFTA,Best Supporting Actor,FALSE,The Field
+1158,Al Pacino,1991,BAFTA,Best Supporting Actor,FALSE,Dick Tracy
+4566,Alan Rickman,1992,BAFTA,Best Supporting Actor,TRUE,Robin Hood: Prince of Thieves
+27554,Alan Bates,1992,BAFTA,Best Supporting Actor,FALSE,Hamlet
+937,Derek Jacobi,1992,BAFTA,Best Supporting Actor,FALSE,Dead Again
+1781475,Andrew Strong,1992,BAFTA,Best Supporting Actor,FALSE,The Commitments
+193,Gene Hackman,1993,BAFTA,Best Supporting Actor,TRUE,Unforgiven
+228173,Jaye Davidson,1993,BAFTA,Best Supporting Actor,FALSE,The Crying Game
+2176,Tommy Lee Jones,1993,BAFTA,Best Supporting Actor,FALSE,JFK
+54447,Samuel West,1993,BAFTA,Best Supporting Actor,FALSE,Howards End
+5469,Ralph Fiennes,1994,BAFTA,Best Supporting Actor,TRUE,Schindler's List
+2176,Tommy Lee Jones,1994,BAFTA,Best Supporting Actor,FALSE,The Fugitive
+2282,Ben Kingsley,1994,BAFTA,Best Supporting Actor,FALSE,Schindler's List
+6949,John Malkovich,1994,BAFTA,Best Supporting Actor,FALSE,In the Line of Fire
+2231,Samuel L. Jackson,1995,BAFTA,Best Supporting Actor,TRUE,Pulp Fiction
+4001,Simon Callow,1995,BAFTA,Best Supporting Actor,FALSE,Four Weddings and a Funeral
+10727,John Hannah,1995,BAFTA,Best Supporting Actor,FALSE,Four Weddings and a Funeral
+13324,Paul Scofield,1995,BAFTA,Best Supporting Actor,FALSE,Quiz Show
+3129,Tim Roth,1996,BAFTA,Best Supporting Actor,TRUE,Rob Roy
+65,Ian Holm,1996,BAFTA,Best Supporting Actor,FALSE,The Madness of King George
+2641,Martin Landau,1996,BAFTA,Best Supporting Actor,FALSE,Ed Wood
+4566,Alan Rickman,1996,BAFTA,Best Supporting Actor,FALSE,Sense and Sensibility
+13324,Paul Scofield,1997,BAFTA,Best Supporting Actor,TRUE,The Crucible
+11857,John Gielgud,1997,BAFTA,Best Supporting Actor,FALSE,Shine
+819,Edward Norton,1997,BAFTA,Best Supporting Actor,FALSE,Primal Fear
+4566,Alan Rickman,1997,BAFTA,Best Supporting Actor,FALSE,Michael Collins
+207,Tom Wilkinson,1998,BAFTA,Best Supporting Actor,TRUE,The Full Monty
+13633,Mark Addy,1998,BAFTA,Best Supporting Actor,FALSE,The Full Monty
+4757,Rupert Everett,1998,BAFTA,Best Supporting Actor,FALSE,My Best Friend's Wedding
+16475,Burt Reynolds,1998,BAFTA,Best Supporting Actor,FALSE,Boogie Nights
+118,Geoffrey Rush,1999,BAFTA,Best Supporting Actor,TRUE,Shakespeare in Love
+228,Ed Harris,1999,BAFTA,Best Supporting Actor,FALSE,The Truman Show
+118,Geoffrey Rush,1999,BAFTA,Best Supporting Actor,FALSE,Elizabeth
+207,Tom Wilkinson,1999,BAFTA,Best Supporting Actor,FALSE,Shakespeare in Love
+9642,Jude Law,2000,BAFTA,Best Supporting Actor,TRUE,The Talented Mr. Ripley
+8210,Wes Bentley,2000,BAFTA,Best Supporting Actor,FALSE,American Beauty
+3895,Michael Caine,2000,BAFTA,Best Supporting Actor,FALSE,The Cider House Rules
+7026,Rhys Ifans,2000,BAFTA,Best Supporting Actor,FALSE,Notting Hill
+9191,Timothy Spall,2000,BAFTA,Best Supporting Actor,FALSE,Topsy-Turvy
+1121,Benicio del Toro,2001,BAFTA,Best Supporting Actor,TRUE,Traffic
+3926,Albert Finney,2001,BAFTA,Best Supporting Actor,FALSE,Erin Brockovich
+480,Gary Lewis,2001,BAFTA,Best Supporting Actor,FALSE,Billy Elliot
+73421,Joaquin Phoenix,2001,BAFTA,Best Supporting Actor,FALSE,Gladiator
+936,Oliver Reed,2001,BAFTA,Best Supporting Actor,FALSE,Gladiator
+388,Jim Broadbent,2002,BAFTA,Best Supporting Actor,TRUE,Moulin Rouge!
+19923,Hugh Bonneville,2002,BAFTA,Best Supporting Actor,FALSE,Iris
+1923,Robbie Coltrane,2002,BAFTA,Best Supporting Actor,FALSE,Harry Potter and the Philosopher's Stone
+5472,Colin Firth,2002,BAFTA,Best Supporting Actor,FALSE,Bridget Jones's Diary
+776,Eddie Murphy,2002,BAFTA,Best Supporting Actor,FALSE,Shrek
+4690,Christopher Walken,2003,BAFTA,Best Supporting Actor,TRUE,Catch Me If You Can
+2955,Chris Cooper,2003,BAFTA,Best Supporting Actor,FALSE,Adaptation
+228,Ed Harris,2003,BAFTA,Best Supporting Actor,FALSE,The Hours
+658,Alfred Molina,2003,BAFTA,Best Supporting Actor,FALSE,Frida
+3636,Paul Newman,2003,BAFTA,Best Supporting Actor,FALSE,Road to Perdition
+2440,Bill Nighy,2004,BAFTA,Best Supporting Actor,TRUE,Love Actually
+6162,Paul Bettany,2004,BAFTA,Best Supporting Actor,FALSE,Master and Commander: The Far Side of the World
+3926,Albert Finney,2004,BAFTA,Best Supporting Actor,FALSE,Big Fish
+1327,Ian McKellen,2004,BAFTA,Best Supporting Actor,FALSE,The Lord of the Rings: The Return of the King
+504,Tim Robbins,2004,BAFTA,Best Supporting Actor,FALSE,Mystic River
+2296,Clive Owen,2005,BAFTA,Best Supporting Actor,TRUE,Closer
+21278,Alan Alda,2005,BAFTA,Best Supporting Actor,FALSE,The Aviator
+26854,Phil Davis,2005,BAFTA,Best Supporting Actor,FALSE,Vera Drake
+18478,Rodrigo de la Serna,2005,BAFTA,Best Supporting Actor,FALSE,The Motorcycle Diaries
+134,Jamie Foxx,2005,BAFTA,Best Supporting Actor,FALSE,Collateral
+131,Jake Gyllenhaal,2006,BAFTA,Best Supporting Actor,TRUE,Brokeback Mountain
+1896,Don Cheadle,2006,BAFTA,Best Supporting Actor,FALSE,Crash
+1461,George Clooney,2006,BAFTA,Best Supporting Actor,FALSE,Good Night and Good Luck
+2876,Matt Dillon,2006,BAFTA,Best Supporting Actor,FALSE,Crash
+1903,Alan Arkin,2007,BAFTA,Best Supporting Actor,TRUE,Little Miss Sunshine
+5530,James McAvoy,2007,BAFTA,Best Supporting Actor,FALSE,The Last King of Scotland
+514,Jack Nicholson,2007,BAFTA,Best Supporting Actor,FALSE,The Departed
+10655,Leslie Phillips,2007,BAFTA,Best Supporting Actor,FALSE,Venus
+3968,Michael Sheen,2007,BAFTA,Best Supporting Actor,FALSE,The Queen
+3810,Javier Bardem,2008,BAFTA,Best Supporting Actor,TRUE,No Country for Old Men
+17142,Paul Dano,2008,BAFTA,Best Supporting Actor,FALSE,There Will Be Blood
+1233,Philip Seymour Hoffman,2008,BAFTA,Best Supporting Actor,FALSE,Charlie Wilson's War
+2176,Tommy Lee Jones,2008,BAFTA,Best Supporting Actor,FALSE,No Country for Old Men
+207,Tom Wilkinson,2008,BAFTA,Best Supporting Actor,FALSE,Michael Clayton
+1810,Heath Ledger,2009,BAFTA,Best Supporting Actor,TRUE,The Dark Knight
+3223,Robert Downey Jr.,2009,BAFTA,Best Supporting Actor,FALSE,Tropic Thunder
+2039,Brendan Gleeson,2009,BAFTA,Best Supporting Actor,FALSE,In Bruges
+1233,Philip Seymour Hoffman,2009,BAFTA,Best Supporting Actor,FALSE,Doubt
+287,Brad Pitt,2009,BAFTA,Best Supporting Actor,FALSE,Burn After Reading
+27319,Christoph Waltz,2010,BAFTA,Best Supporting Actor,TRUE,Inglourious Basterds
+7447,Alec Baldwin,2010,BAFTA,Best Supporting Actor,FALSE,It's Complicated
+28478,Christian McKay,2010,BAFTA,Best Supporting Actor,FALSE,Me and Orson Welles
+658,Alfred Molina,2010,BAFTA,Best Supporting Actor,FALSE,An Education
+2283,Stanley Tucci,2010,BAFTA,Best Supporting Actor,FALSE,The Lovely Bones
+118,Geoffrey Rush,2011,BAFTA,Best Supporting Actor,TRUE,The King's Speech
+3894,Christian Bale,2011,BAFTA,Best Supporting Actor,FALSE,The Fighter
+37625,Andrew Garfield,2011,BAFTA,Best Supporting Actor,FALSE,The Social Network
+4935,Pete Postlethwaite,2011,BAFTA,Best Supporting Actor,FALSE,The Town
+103,Mark Ruffalo,2011,BAFTA,Best Supporting Actor,FALSE,The Kids Are All Right
+290,Christopher Plummer,2012,BAFTA,Best Supporting Actor,TRUE,Beginners
+11181,Kenneth Branagh,2012,BAFTA,Best Supporting Actor,FALSE,My Week with Marilyn
+388,Jim Broadbent,2012,BAFTA,Best Supporting Actor,FALSE,The Iron Lady
+21007,Jonah Hill,2012,BAFTA,Best Supporting Actor,FALSE,Moneyball
+1233,Philip Seymour Hoffman,2012,BAFTA,Best Supporting Actor,FALSE,The Ides of March
+27319,Christoph Waltz,2013,BAFTA,Best Supporting Actor,TRUE,Django Unchained
+1903,Alan Arkin,2013,BAFTA,Best Supporting Actor,FALSE,Argo
+3810,Javier Bardem,2013,BAFTA,Best Supporting Actor,FALSE,Skyfall
+1233,Philip Seymour Hoffman,2013,BAFTA,Best Supporting Actor,FALSE,The Master
+2176,Tommy Lee Jones,2013,BAFTA,Best Supporting Actor,FALSE,Lincoln
+1261694,Barkhad Abdi,2014,BAFTA,Best Supporting Actor,TRUE,Captain Phillips
+3872,Daniel Brühl,2014,BAFTA,Best Supporting Actor,FALSE,Rush
+51329,Bradley Cooper,2014,BAFTA,Best Supporting Actor,FALSE,American Hustle
+1892,Matt Damon,2014,BAFTA,Best Supporting Actor,FALSE,Behind the Candelabra
+17288,Michael Fassbender,2014,BAFTA,Best Supporting Actor,FALSE,12 Years a Slave
+18999,J.K. Simmons,2015,BAFTA,Best Supporting Actor,TRUE,Whiplash
+4495,Steve Carell,2015,BAFTA,Best Supporting Actor,FALSE,Foxcatcher
+569,Ethan Hawke,2015,BAFTA,Best Supporting Actor,FALSE,Boyhood
+819,Edward Norton,2015,BAFTA,Best Supporting Actor,FALSE,Birdman
+103,Mark Ruffalo,2015,BAFTA,Best Supporting Actor,FALSE,Foxcatcher
+40900,Mark Rylance,2016,BAFTA,Best Supporting Actor,TRUE,Bridge of Spies
+3894,Christian Bale,2016,BAFTA,Best Supporting Actor,FALSE,The Big Short
+1121,Benicio del Toro,2016,BAFTA,Best Supporting Actor,FALSE,Sicario
+17605,Idris Elba,2016,BAFTA,Best Supporting Actor,FALSE,Beasts of No Nation
+103,Mark Ruffalo,2016,BAFTA,Best Supporting Actor,FALSE,Spotlight
+76788,Dev Patel,2017,BAFTA,Best Supporting Actor,TRUE,Lion
+932967,Mahershala Ali,2017,BAFTA,Best Supporting Actor,FALSE,Moonlight
+1229,Jeff Bridges,2017,BAFTA,Best Supporting Actor,FALSE,Hell or High Water
+3291,Hugh Grant,2017,BAFTA,Best Supporting Actor,FALSE,Florence Foster Jenkins
+27428,Aaron Taylor-Johnson,2017,BAFTA,Best Supporting Actor,FALSE,Nocturnal Animals
+6807,Sam Rockwell,2018,BAFTA,Best Supporting Actor,TRUE,Three Billboards Outside Ebbing Missouri
+5293,Willem Dafoe,2018,BAFTA,Best Supporting Actor,FALSE,The Florida Project
+3291,Hugh Grant,2018,BAFTA,Best Supporting Actor,FALSE,Paddington 2
+57755,Woody Harrelson,2018,BAFTA,Best Supporting Actor,FALSE,Three Billboards Outside Ebbing Missouri
+290,Christopher Plummer,2018,BAFTA,Best Supporting Actor,FALSE,All the Money in the World
+932967,Mahershala Ali,2019,BAFTA,Best Supporting Actor,TRUE,Green Book
+1190668,Timothée Chalamet,2019,BAFTA,Best Supporting Actor,FALSE,Beautiful Boy
+1023139,Adam Driver,2019,BAFTA,Best Supporting Actor,FALSE,BlacKkKlansman
+20766,Richard E. Grant,2019,BAFTA,Best Supporting Actor,FALSE,Can You Ever Forgive Me?
+6807,Sam Rockwell,2019,BAFTA,Best Supporting Actor,FALSE,Vice
+287,Brad Pitt,2020,BAFTA,Best Supporting Actor,TRUE,Once Upon a Time in Hollywood
+31,Tom Hanks,2020,BAFTA,Best Supporting Actor,FALSE,A Beautiful Day in the Neighborhood
+4173,Anthony Hopkins,2020,BAFTA,Best Supporting Actor,FALSE,The Two Popes
+1158,Al Pacino,2020,BAFTA,Best Supporting Actor,FALSE,The Irishman
+4517,Joe Pesci,2020,BAFTA,Best Supporting Actor,FALSE,The Irishman
+206919,Daniel Kaluuya,2021,BAFTA,Best Supporting Actor,TRUE,Judas and the Black Messiah
+1290466,Barry Keoghan,2021,BAFTA,Best Supporting Actor,FALSE,Calm with Horses
+2476742,Alan Kim,2021,BAFTA,Best Supporting Actor,FALSE,Minari
+1254614,Leslie Odom Jr.,2021,BAFTA,Best Supporting Actor,FALSE,One Night in Miami
+1216195,Paul Raci,2021,BAFTA,Best Supporting Actor,FALSE,Sound of Metal
+1571661,Troy Kotsur,2022,BAFTA,Best Supporting Actor,TRUE,CODA
+1423520,Mike Faist,2022,BAFTA,Best Supporting Actor,FALSE,West Side Story
+8785,Ciarán Hinds,2022,BAFTA,Best Supporting Actor,FALSE,Belfast
+1945369,Woody Norman,2022,BAFTA,Best Supporting Actor,FALSE,C'mon C'mon
+88124,Jesse Plemons,2022,BAFTA,Best Supporting Actor,FALSE,The Power of the Dog
+113505,Kodi Smit-McPhee,2022,BAFTA,Best Supporting Actor,FALSE,The Power of the Dog
+1290466,Barry Keoghan,2023,BAFTA,Best Supporting Actor,TRUE,The Banshees of Inisherin
+2039,Brendan Gleeson,2023,BAFTA,Best Supporting Actor,FALSE,The Banshees of Inisherin
+690,Ke Huy Quan,2023,BAFTA,Best Supporting Actor,FALSE,Everything Everywhere All at Once
+37632,Eddie Redmayne,2023,BAFTA,Best Supporting Actor,FALSE,The Good Nurse
+1111158,Albrecht Schuch,2023,BAFTA,Best Supporting Actor,FALSE,All Quiet on the Western Front
+2380397,Micheal Ward,2023,BAFTA,Best Supporting Actor,FALSE,Empire of Light
+3223,Robert Downey Jr.,2024,BAFTA,Best Supporting Actor,TRUE,Oppenheimer
+380,Robert De Niro,2024,BAFTA,Best Supporting Actor,FALSE,Killers of the Flower Moon
+2034418,Jacob Elordi,2024,BAFTA,Best Supporting Actor,FALSE,Saltburn
+30614,Ryan Gosling,2024,BAFTA,Best Supporting Actor,FALSE,Barbie
+2326151,Paul Mescal,2024,BAFTA,Best Supporting Actor,FALSE,All of Us Strangers
+3918497,Dominic Sessa,2024,BAFTA,Best Supporting Actor,FALSE,The Holdovers
+18793,Kieran Culkin,2025,BAFTA,Best Supporting Actor,TRUE,A Real Pain
+1266686,Yura Borisov,2025,BAFTA,Best Supporting Actor,FALSE,Anora
+4178063,Clarence Maclin,2025,BAFTA,Best Supporting Actor,FALSE,Sing Sing
+819,Edward Norton,2025,BAFTA,Best Supporting Actor,FALSE,A Complete Unknown
+529,Guy Pearce,2025,BAFTA,Best Supporting Actor,FALSE,The Brutalist
+239271,Jeremy Strong,2025,BAFTA,Best Supporting Actor,FALSE,The Apprentice
+2228,Sean Penn,2026,BAFTA,Best Supporting Actor,TRUE,One Battle After Another
+1121,Benicio del Toro,2026,BAFTA,Best Supporting Actor,FALSE,One Battle After Another
+2034418,Jacob Elordi,2026,BAFTA,Best Supporting Actor,FALSE,Frankenstein
+2326151,Paul Mescal,2026,BAFTA,Best Supporting Actor,FALSE,Hamnet
+3064,Peter Mullan,2026,BAFTA,Best Supporting Actor,FALSE,I Swear
+1640,Stellan Skarsgård,2026,BAFTA,Best Supporting Actor,FALSE,Sentimental Value

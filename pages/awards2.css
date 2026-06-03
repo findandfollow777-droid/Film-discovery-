@@ -1,0 +1,820 @@
+/* ============================================================
+   AWARDS 2.0 — THE PRESTIGE
+   Year-first awards explorer with editorial hero templates.
+   Standalone WIP page (not yet wired into main nav).
+   ============================================================ */
+
+/* ===== LAYOUT ===== */
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--space-black);
+  color: var(--film-white);
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px 0 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+  z-index: 99;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER ===== */
+.awards-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-top: 12px;
+}
+
+.back-nav {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ghost-gray);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-nav:hover {
+  color: var(--accent-cyan);
+}
+
+.header-center {
+  text-align: center;
+  flex: 1;
+}
+
+.header-center h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--film-white);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  color: var(--muted-silver);
+  font-size: 14px;
+  margin: 0;
+}
+
+.spacer {
+  width: 120px; /* Balance back nav width */
+}
+
+/* ===== HUB NAV ===== */
+.hub-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.hub-pill {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.2);
+  background: rgba(var(--prestige-purple-rgb), 0.05);
+  color: var(--muted-silver);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hub-pill:hover {
+  border-color: rgba(var(--prestige-purple-rgb), 0.4);
+  color: var(--film-white);
+}
+
+.hub-pill.active {
+  border-color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.15);
+  color: var(--prestige-purple);
+  box-shadow: 0 0 12px rgba(var(--prestige-purple-rgb), 0.2);
+}
+
+/* ===== FESTIVAL TABS ===== */
+.festival-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.festival-tab {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ghost-gray);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.festival-tab:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--film-white);
+}
+
+.festival-tab.active {
+  border-color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(var(--accent-gold-rgb), 0.15);
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding: 6px 14px;
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+  border-left: 2px solid var(--accent-cyan);
+  display: inline-block;
+}
+
+/* ===== YEAR STRIPS ===== */
+.year-strip {
+  display: grid;
+  grid-template-columns: 120px 220px 1fr 140px;
+  gap: 20px;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: rgba(var(--nebula-dark-rgb), 0.4);
+  border-radius: 12px;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.year-strip:hover {
+  border-left-color: var(--accent-gold);
+  transform: translateX(8px);
+  background: rgba(var(--nebula-dark-rgb), 0.6);
+  box-shadow: 0 0 30px rgba(var(--accent-gold-rgb), 0.15);
+}
+
+.year-number {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--film-white);
+  line-height: 1;
+}
+
+.strip-visual {
+  width: 220px;
+  height: 120px;
+  background: var(--cosmic-blue);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.strip-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.strip-visual-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ghost-gray);
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 8px;
+}
+
+.strip-headline {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--film-white);
+  line-height: 1.4;
+}
+
+.strip-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted-silver);
+  text-align: right;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.strip-stat {
+  display: block;
+}
+
+/* ===== BACK TO RANGE BUTTON ===== */
+.back-to-range {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ghost-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
+
+.back-to-range:hover {
+  color: var(--accent-cyan);
+}
+
+/* ===== HERO TEMPLATES ===== */
+
+/* A. Film-led */
+.hero-film-led {
+  height: 460px;
+  background: var(--cosmic-blue);
+  border-radius: 16px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
+}
+
+.hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.hero-film-led .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 88px;
+  font-weight: 900;
+  color: var(--film-white);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.hero-ceremony {
+  color: var(--accent-gold);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.hero-headline {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--film-white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.hero-deck {
+  font-size: 15px;
+  color: var(--muted-silver);
+  line-height: 1.6;
+}
+
+/* B. Duel */
+.hero-duel {
+  height: 460px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.duel-side {
+  height: 100%;
+  background: linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  position: relative;
+}
+
+.duel-side .hero-headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.duel-side .hero-deck {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.duel-side.loser {
+  filter: grayscale(0.6);
+  opacity: 0.7;
+}
+
+.duel-year-badge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--film-white);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 32px;
+  border-radius: 12px;
+  border: 2px solid var(--accent-gold);
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(var(--accent-gold-rgb), 0.25);
+}
+
+/* C. Portrait-led */
+.hero-portrait {
+  height: 460px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  background: rgba(var(--nebula-dark-rgb), 0.4);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.portrait-image {
+  width: 280px;
+  height: 380px;
+  background: var(--cosmic-blue);
+  border-radius: 12px;
+  border: 3px solid var(--prestige-purple);
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(var(--prestige-purple-rgb), 0.25);
+}
+
+.portrait-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-portrait .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--film-white);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.hero-tag {
+  background: rgba(var(--prestige-purple-rgb), 0.15);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.3);
+  color: var(--prestige-purple);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* D. Typographic */
+.hero-typographic {
+  height: 460px;
+  background: linear-gradient(135deg, rgba(var(--prestige-purple-rgb), 0.08) 0%, rgba(0, 0, 0, 0) 100%);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.hero-typographic .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 144px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--prestige-purple) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.meta-col {
+  text-align: center;
+}
+
+.meta-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  margin-bottom: 6px;
+}
+
+.meta-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px;
+  color: var(--film-white);
+  font-weight: 500;
+}
+
+/* ===== STICKY YEAR DETAIL HEADER ===== */
+.year-detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(var(--space-black-rgb), 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(var(--accent-gold-rgb), 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Override the legacy free-standing back-to-range margin in this context. */
+.year-detail-header .back-to-range {
+  margin-bottom: 0;
+}
+
+.year-detail-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--film-white);
+  letter-spacing: 0.05em;
+}
+
+/* ===== CATEGORY SECTIONS ===== */
+.category-section {
+  margin-bottom: 64px;
+}
+
+.category-header {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* ===== PHASE 1 SIMPLE TILES (placeholder per spec; Phase 2 = full port from awards-browse) ===== */
+.tile {
+  position: relative;
+  background: rgba(var(--nebula-dark-rgb), 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.08);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+}
+
+.tile.winner {
+  border-color: rgba(var(--accent-gold-rgb), 0.6);
+  box-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+}
+
+.tile.winner:hover {
+  box-shadow: 0 0 28px rgba(var(--accent-gold-rgb), 0.32);
+}
+
+.tile.nominee {
+  opacity: 0.85;
+}
+
+.tile.nominee:hover {
+  opacity: 1;
+  border-color: rgba(var(--muted-silver-rgb), 0.25);
+}
+
+.tile-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: var(--cosmic-blue);
+}
+
+.tile-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tile-no-poster {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ghost-gray);
+  font-size: 28px;
+}
+
+.tile-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(var(--space-black-rgb), 0.75);
+  color: var(--muted-silver);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.tile.winner .tile-label {
+  background: rgba(var(--accent-gold-rgb), 0.95);
+  color: var(--space-black);
+}
+
+.tile-info {
+  padding: 10px 12px 12px;
+}
+
+.tile-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--film-white);
+  line-height: 1.3;
+  margin-bottom: 4px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tile-person {
+  font-size: 11px;
+  color: var(--muted-silver);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Loading / empty / error states */
+.strip-loading,
+.strip-empty,
+.categories-loading,
+.categories-empty,
+.categories-error {
+  padding: 32px;
+  text-align: center;
+  color: var(--ghost-gray);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.categories-error {
+  color: var(--danger-red);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .header-center h1 {
+    font-size: 24px;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .year-strip {
+    grid-template-columns: 100px 180px 1fr;
+  }
+
+  .strip-stats {
+    display: none;
+  }
+
+  .strip-visual {
+    width: 180px;
+    height: 100px;
+  }
+
+  .year-number {
+    font-size: 36px;
+  }
+
+  .hero-duel {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .duel-year-badge {
+    font-size: 48px;
+    padding: 14px 24px;
+  }
+
+  .hero-portrait {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px 1fr;
+    height: auto;
+  }
+
+  .portrait-image {
+    width: 100%;
+    max-width: 280px;
+    height: 220px;
+    margin: 0 auto;
+  }
+
+  .hero-typographic .hero-year {
+    font-size: 96px;
+  }
+
+  .hero-film-led {
+    padding: 32px;
+  }
+
+  .hero-film-led .hero-year {
+    font-size: 64px;
+  }
+
+  .hero-headline {
+    font-size: 22px;
+  }
+
+  .meta-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .year-detail-header {
+    padding: 12px 0;
+  }
+
+  .year-detail-title {
+    font-size: 14px;
+  }
+
+  .category-section {
+    margin-bottom: 48px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .tile-title {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 650px) {
+  .year-strip {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .strip-visual {
+    width: 100%;
+    height: 140px;
+  }
+
+  .hero-film-led .hero-year {
+    font-size: 48px;
+  }
+
+  .hero-headline {
+    font-size: 18px;
+  }
+
+  .duel-side .hero-headline {
+    font-size: 22px;
+  }
+
+  .hero-typographic .hero-year {
+    font-size: 72px;
+  }
+
+  .duel-year-badge {
+    font-size: 40px;
+    padding: 12px 20px;
+  }
+}

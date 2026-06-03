@@ -971,24 +971,6 @@ html, body {
   margin-top: 3px;
 }
 
-.award-badge {
-  display: inline-block;
-  background: rgba(255, 215, 0, 0.12);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 10px;
-  padding: 1px 6px;
-  font-size: 8px;
-  color: var(--accent-gold);
-  font-family: var(--font-body);
-  white-space: nowrap;
-}
-
-.award-badge-nom {
-  color: #c0c0c0;
-  border-color: rgba(192, 192, 192, 0.3);
-  background: rgba(192, 192, 192, 0.1);
-}
-
 /* Award counts (shown on tiles in awards sort mode) */
 .movie-award-counts {
   display: flex;
@@ -1248,26 +1230,14 @@ html, body {
   pointer-events: auto; /* Block clicks from reaching overlay */
 }
 
+/* .popup-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .popup-close {
   position: absolute;
   top: -40px;
   right: 0;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 71, 87, 0.9);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
   z-index: 10;
-  transition: var(--transition-smooth);
-  pointer-events: auto; /* Close button needs clicks */
-}
-
-.popup-close:hover {
-  background: var(--danger-red);
-  transform: scale(1.1);
+  pointer-events: auto;
 }
 
 /* ============================================
@@ -2527,25 +2497,14 @@ html, body {
   padding: 20px;
 }
 
+/* .bio-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .bio-close {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 50%;
-  color: var(--muted-silver);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
 }
 
-.bio-close:hover {
-  background: rgba(255, 71, 87, 0.3);
-  color: white;
-}
 
 .bio-header {
   display: flex;

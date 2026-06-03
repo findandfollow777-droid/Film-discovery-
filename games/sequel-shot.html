@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="sequel-shot.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body>
 
@@ -128,8 +130,8 @@
     </section>
 
     <!-- RESULT SCREEN -->
-    <section class="result-section" id="resultScreen" hidden>
-      <button class="result-close-btn" id="resultCloseBtn">&#x2715;</button>
+    <section class="result-section" id="resultScreen" data-orbit-popup hidden>
+      <button class="result-close-btn orbit-close" id="resultCloseBtn" aria-label="Close">&#x2715;</button>
       <div class="result-content">
         <div class="result-icon" id="resultIcon"><span class="og og-film"></span></div>
         <h2 class="result-title">Shot Complete!</h2>
@@ -166,9 +168,9 @@
   </main>
 
   <!-- HELP MODAL -->
-  <div class="modal-overlay" id="helpModal" hidden>
+  <div class="modal-overlay" id="helpModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="helpClose">&#x2715;</button>
+      <button class="modal-close orbit-close" id="helpClose" aria-label="Close">&#x2715;</button>
       <h2 class="modal-title">How to Play</h2>
 
       <div class="help-content">
@@ -220,9 +222,9 @@
   </div>
 
   <!-- STATS MODAL -->
-  <div class="modal-overlay" id="statsModal" hidden>
+  <div class="modal-overlay" id="statsModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="statsClose">&#x2715;</button>
+      <button class="modal-close orbit-close" id="statsClose" aria-label="Close">&#x2715;</button>
       <h2 class="modal-title">Statistics</h2>
 
       <div class="stats-grid">

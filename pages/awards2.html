@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT · The Prestige</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../variables.css">
+<link rel="stylesheet" href="../components/orbit-glyphs.css">
+<link rel="stylesheet" href="awards2.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="awards-header">
+    <a href="../index.html" class="back-nav">← BACK TO HOME</a>
+    <div class="header-center">
+      <h1>THE PRESTIGE</h1>
+      <p class="subtitle">Every major award · Every year</p>
+    </div>
+    <div class="spacer"></div>
+  </header>
+
+  <!-- Hub Nav -->
+  <nav class="hub-nav">
+    <button class="hub-pill active" data-section="browse">Browse</button>
+    <button class="hub-pill" data-section="guide">Guide</button>
+    <button class="hub-pill" data-section="stats">Stats</button>
+    <button class="hub-pill" data-section="stories">Stories</button>
+  </nav>
+
+  <!-- Festival Tabs -->
+  <nav class="festival-tabs">
+    <button class="festival-tab active" data-festival="oscar">Oscar</button>
+    <button class="festival-tab" data-festival="bafta">BAFTA</button>
+    <button class="festival-tab" data-festival="gg">Golden Globe</button>
+    <button class="festival-tab" data-festival="cannes">Cannes</button>
+    <button class="festival-tab" data-festival="venice">Venice</button>
+    <button class="festival-tab" data-festival="berlin">Berlin</button>
+  </nav>
+
+  <!-- Compact Range View (default) -->
+  <section id="compact-view" class="view-section">
+    <div class="section-label">BROWSE BY YEAR</div>
+    <div id="year-strips-container">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- Year Detail View (hidden by default) -->
+  <section id="year-detail-view" class="view-section" style="display: none;">
+
+    <!-- Sticky year header -->
+    <div class="year-detail-header">
+      <button class="back-to-range">← BACK TO RANGE</button>
+      <div class="year-detail-title" id="year-detail-title"></div>
+    </div>
+
+    <!-- Hero container -->
+    <div id="hero-container"></div>
+
+    <!-- Category sections -->
+    <div id="categories-container"></div>
+
+  </section>
+
+</div>
+
+<script src="../config.js"></script>
+<script src="../orbit-utils.js"></script>
+<script src="awards2.js"></script>
+</body>
+</html>

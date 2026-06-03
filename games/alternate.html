@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="alternate.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body>
   
@@ -144,9 +146,9 @@
   </main>
   
   <!-- HELP MODAL -->
-  <div class="modal-overlay" id="helpModal" hidden>
+  <div class="modal-overlay" id="helpModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="helpClose">✕</button>
+      <button class="modal-close orbit-close" id="helpClose" aria-label="Close">✕</button>
       <h2 class="modal-title">How It Works</h2>
       
       <div class="help-content">

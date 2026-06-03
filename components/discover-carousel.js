@@ -14,6 +14,15 @@
     const dots     = Array.from(root.querySelectorAll('[data-oc-dot]'));
     const arrows   = Array.from(root.querySelectorAll('[data-oc-dir]'));
     const counter  = root.querySelector('[data-oc-counter]');
+    // Phase M (2026-05-30): background-art slides live OUTSIDE the
+    // carousel root (in .discover-banner) so they can extend beyond
+    // the carousel's overflow:hidden. Indexed 1:1 with .oc-slide via
+    // data-bg / data-i — render() toggles .is-active on the bg-slide
+    // matching the active content slide. Optional ancestor: if the
+    // carousel ever boots outside a banner, bgSlides stays empty and
+    // the swap is a no-op (no error).
+    const banner   = root.closest('.discover-banner');
+    const bgSlides = banner ? Array.from(banner.querySelectorAll('.oc-bg-slide')) : [];
 
     if (!slides.length) return;
 
@@ -29,6 +38,7 @@
     function render() {
       slides.forEach((s, k) => s.classList.toggle('is-active', k === idx));
       dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+      bgSlides.forEach((b, k) => b.classList.toggle('is-active', k === idx));
       if (counter) counter.textContent = String(idx + 1).padStart(2, '0');
     }
 

@@ -113,7 +113,7 @@ async function loadHomeConstellation() {
       release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
     }));
     localStorage.removeItem('anchorFromResults');
-    window.location.href = '../games/constellation.html';
+    window.location.href = 'anchor-point.html';
   };
 
   const enterBtn = document.getElementById('home-const-enter');
@@ -150,7 +150,7 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
   const W = canvas.offsetWidth;
   const H = canvas.offsetHeight;
   const cx = W / 2;
-  const cy = H / 2;
+  const cy = H / 2 + 38;
 
   const anchorW = 148, anchorH = 212;
   const tileW = 96, tileH = 138;
@@ -211,12 +211,12 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
   for (let i = 0; i < count; i++) {
     const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
     const variance = 0.45 + Math.random() * 0.55;
-    const rx = W * 0.44 * variance;
-    const ry = H * 0.38 * variance;
+    const rx = W * 0.52 * variance;
+    const ry = H * 0.46 * variance;
     let x = cx + Math.cos(angle) * rx - tileW / 2;
     let y = cy + Math.sin(angle) * ry - tileH / 2;
-    x = Math.max(8, Math.min(W - tileW - 8, x));
-    y = Math.max(8, Math.min(H - tileH - 8, y));
+    x = Math.max(-tileW * 0.4, Math.min(W - tileW - 8, x));
+    y = Math.max(8, Math.min(H + 120 - tileH, y));
     positions.push({ x, y, film: orbitals[i] });
   }
 
@@ -249,8 +249,8 @@ function renderHomeConstellation(anchor, orbitals, canvas) {
         p.x += 5 * (Math.sign((p.x + tileW / 2) - cx) || 1);
         p.y += 5 * (Math.sign((p.y + tileH / 2) - cy) || 1);
       }
-      positions[a].x = Math.max(8, Math.min(W - tileW - 8, positions[a].x));
-      positions[a].y = Math.max(8, Math.min(H - tileH - 8, positions[a].y));
+      positions[a].x = Math.max(-tileW * 0.4, Math.min(W - tileW - 8, positions[a].x));
+      positions[a].y = Math.max(8, Math.min(H + 120 - tileH, positions[a].y));
     }
     if (!any) break;
   }
@@ -533,6 +533,34 @@ function goToSlide(index, fromInteraction) {
 
   if (fromInteraction) hasInteracted = true;
 
+  // Slide 6 (index 5): bring carousel above constellation tiles, hide obstructed tiles
+  const carouselWrap = document.querySelector('.home-carousel-wrap');
+  const canvas = document.getElementById('home-const-canvas');
+  if (index === 5) {
+    if (carouselWrap) carouselWrap.style.zIndex = '20';
+    // Hide orbital tiles that overlap the carousel area
+    if (canvas) {
+      const canvasRect = canvas.getBoundingClientRect();
+      const carouselRect = carouselWrap ? carouselWrap.getBoundingClientRect() : null;
+      canvas.querySelectorAll('.home-const-tile').forEach(tile => {
+        const tileRect = tile.getBoundingClientRect();
+        if (carouselRect && tileRect.bottom > carouselRect.top) {
+          tile.style.opacity = '0';
+          tile.style.transition = 'opacity 0.4s ease';
+        }
+      });
+    }
+  } else {
+    if (carouselWrap) carouselWrap.style.zIndex = '';
+    // Restore hidden tiles
+    if (canvas) {
+      canvas.querySelectorAll('.home-const-tile').forEach(tile => {
+        tile.style.opacity = '';
+        tile.style.transition = 'opacity 0.4s ease';
+      });
+    }
+  }
+
   // Trigger constellation change for film slides (0-4)
   if (index < 5 && carouselFilms[index]) {
     triggerConstellationChange(carouselFilms[index]);
@@ -612,7 +640,7 @@ function triggerConstellationChange(film) {
         release_date: film.release_date, vote_average: film.vote_average, overview: film.overview
       }));
       localStorage.removeItem('anchorFromResults');
-      window.location.href = '../games/constellation.html';
+      window.location.href = 'anchor-point.html';
     };
   }
 
@@ -752,7 +780,7 @@ function wireSlide6Search() {
       overview: hciSelectedFilm.overview
     }));
     localStorage.removeItem('anchorFromResults');
-    window.location.href = '../games/constellation.html';
+    window.location.href = 'anchor-point.html';
   });
 }
 
@@ -1199,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       onAnchorClick: (movie) => {
         localStorage.setItem('anchorMovie', JSON.stringify(movie));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = '../games/constellation.html';
+        window.location.href = 'anchor-point.html';
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();

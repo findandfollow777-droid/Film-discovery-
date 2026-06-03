@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="../components/people-cube.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="../components/taste-overlay.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
 </head>
 <body>
   <!-- CINEMATIC OVERLAYS -->
@@ -52,10 +54,10 @@
 
       <div class="toolbar-sort">
         <div class="sort-options">
-          <button class="sort-option active" data-sort="chronology">Chronology</button>
+          <button class="sort-option" data-sort="chronology">Chronology</button>
           <button class="sort-option" data-sort="rating">Rating</button>
           <button class="sort-option" data-sort="boxoffice">Box Office</button>
-          <button class="sort-option" data-sort="foryou">For You</button>
+          <button class="sort-option active" data-sort="foryou">For You</button>
           <button class="sort-option sort-awards" data-sort="awards">Awards</button>
           <button class="sort-option sort-random" data-sort="random">Random</button>
         </div>
@@ -76,10 +78,10 @@
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
 
   <!-- CONTROLS DRAWER -->
-  <aside class="controls-drawer" id="controlsDrawer">
+  <aside class="controls-drawer" id="controlsDrawer" data-orbit-popup>
     <div class="drawer-header">
       <h2 class="drawer-title">Controls</h2>
-      <button class="drawer-close" id="drawerClose">&times;</button>
+      <button class="drawer-close orbit-close" id="drawerClose" aria-label="Close">&times;</button>
     </div>
     <div class="drawer-body">
       <!-- Navigate -->
@@ -169,12 +171,12 @@
   </aside>
 
   <!-- PERSON BIO PANEL -->
-  <div class="bio-panel" id="bioPanel" hidden>
+  <div class="bio-panel" id="bioPanel" data-orbit-popup hidden>
     <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
       <span class="bio-tab-icon">&#128100;</span>
     </div>
     <div class="bio-panel-content" id="bioPanelContent">
-      <button class="bio-close" id="bioClose">&#10005;</button>
+      <button class="bio-close orbit-close" id="bioClose" aria-label="Close">&#10005;</button>
       <div class="bio-header">
         <img class="bio-photo" id="bioPhoto" src="" alt="">
         <div class="bio-header-info">

@@ -1,0 +1,125 @@
+tmdb_id,nominee,year,festival,category,won,movie_title,song_title,award_name
+11489,William Cameron Menzies,1929,Academy Awards,Best Production Design,TRUE,The Dove,,Interior Decoration
+11489,William Cameron Menzies,1929,Academy Awards,Best Production Design,TRUE,Tempest,,Interior Decoration
+9062,Cedric Gibbons,1930,Academy Awards,Best Production Design,TRUE,The Bridge of San Luis Rey,,Interior Decoration
+1546668,Herman Rosse,1931,Academy Awards,Best Production Design,TRUE,King of Jazz,,Interior Decoration
+1009388,Max Rée,1932,Academy Awards,Best Production Design,TRUE,Cimarron,,Interior Decoration
+94166,Gordon Wiles,1933,Academy Awards,Best Production Design,TRUE,Transatlantic,,Interior Decoration
+1096786,William S. Darling,1934,Academy Awards,Best Production Design,TRUE,Cavalcade,,Interior Decoration
+9062,Cedric Gibbons; Fredric Hope,1935,Academy Awards,Best Production Design,TRUE,The Merry Widow,,Interior Decoration
+1213124,Richard Day,1936,Academy Awards,Best Production Design,TRUE,The Dark Angel,,Interior Decoration
+1213124,Richard Day,1937,Academy Awards,Best Production Design,TRUE,Dodsworth,,Interior Decoration
+29345,Stephen Goosson,1938,Academy Awards,Best Production Design,TRUE,Lost Horizon,,Interior Decoration
+4125,Carl Jules Weyl,1939,Academy Awards,Best Production Design,TRUE,The Adventures of Robin Hood,,Interior Decoration
+3358,Lyle R. Wheeler,1940,Academy Awards,Best Production Design,TRUE,Gone with the Wind,,Interior Decoration
+9062,Cedric Gibbons; Paul Groesse,1941,Academy Awards,Best Production Design (B&W),TRUE,Pride and Prejudice,,Interior Decoration (Black-and-White)
+33261,Vincent Korda,1941,Academy Awards,Best Production Design (Color),TRUE,The Thief of Bagdad,,Interior Decoration (Color)
+1213124,Richard Day; Nathan Juran,1942,Academy Awards,Best Production Design (B&W),TRUE,How Green Was My Valley,,Interior Decoration (Black-and-White)
+9062,Cedric Gibbons; Urie McCleary,1942,Academy Awards,Best Production Design (Color),TRUE,Blossoms in the Dust,,Interior Decoration (Color)
+1213124,Richard Day; Joseph C. Wright,1943,Academy Awards,Best Production Design (B&W),TRUE,This Above All,,Interior Decoration (Black-and-White)
+1213124,Richard Day; Joseph C. Wright,1943,Academy Awards,Best Production Design (Color),TRUE,My Gal Sal,,Interior Decoration (Color)
+2763,James Basevi; William S. Darling,1944,Academy Awards,Best Production Design (B&W),TRUE,The Song of Bernadette,,Interior Decoration (Black-and-White)
+12346,Alexander Golitzen; John B. Goodman,1944,Academy Awards,Best Production Design (Color),TRUE,Phantom of the Opera,,Interior Decoration (Color)
+9062,Cedric Gibbons; William Ferrari,1945,Academy Awards,Best Production Design (B&W),TRUE,Gaslight,,Interior Decoration (Black-and-White)
+103507,Wiard Ihnen,1945,Academy Awards,Best Production Design (Color),TRUE,Wilson,,Interior Decoration (Color)
+103507,Wiard Ihnen,1946,Academy Awards,Best Production Design (B&W),TRUE,Blood on the Sun,,Interior Decoration (Black-and-White)
+8622,Hans Dreier; Ernst Fegté,1946,Academy Awards,Best Production Design (Color),TRUE,Frenchman's Creek,,Interior Decoration (Color)
+1096786,William S. Darling; Lyle R. Wheeler,1947,Academy Awards,Best Production Design (B&W),TRUE,Anna and the King of Siam,,Art Direction (Black-and-White)
+9062,Cedric Gibbons; Paul Groesse,1947,Academy Awards,Best Production Design (Color),TRUE,The Yearling,,Art Direction (Color)
+6605,Wilfred Shingleton,1948,Academy Awards,Best Production Design (B&W),TRUE,Great Expectations,,Art Direction (Black-and-White)
+27937,Alfred Junge,1948,Academy Awards,Best Production Design (Color),TRUE,Black Narcissus,,Art Direction (Color)
+20138,Roger K. Furse,1949,Academy Awards,Best Production Design (B&W),TRUE,Hamlet,,Art Direction (Black-and-White)
+1314532,Hein Heckroth,1949,Academy Awards,Best Production Design (Color),TRUE,The Red Shoes,,Art Direction (Color)
+14878,Harry Horner; John Meehan,1950,Academy Awards,Best Production Design (B&W),TRUE,The Heiress,,Art Direction (Black-and-White)
+9062,Cedric Gibbons; Paul Groesse,1950,Academy Awards,Best Production Design (Color),TRUE,Little Women,,Art Direction (Color)
+8622,Hans Dreier; John Meehan,1951,Academy Awards,Best Production Design (B&W),TRUE,Sunset Boulevard,,Art Direction (Black-and-White)
+8622,Hans Dreier; Walter H. Tyler,1951,Academy Awards,Best Production Design (Color),TRUE,Samson and Delilah,,Art Direction (Color)
+1213124,Richard Day,1952,Academy Awards,Best Production Design (B&W),TRUE,A Streetcar Named Desire,,Art Direction (Black-and-White)
+40170,E. Preston Ames; Cedric Gibbons,1952,Academy Awards,Best Production Design (Color),TRUE,An American in Paris,,Art Direction (Color)
+10009,Edward Carfagno; Cedric Gibbons,1953,Academy Awards,Best Production Design (B&W),TRUE,The Bad and the Beautiful,,Art Direction (Black-and-White)
+119323,Paul Sheriff,1953,Academy Awards,Best Production Design (Color),TRUE,Moulin Rouge,,Art Direction (Color)
+10009,Edward Carfagno; Cedric Gibbons,1954,Academy Awards,Best Production Design (B&W),TRUE,Julius Caesar,,Art Direction (Black-and-White)
+120701,George Davis; Lyle R. Wheeler,1954,Academy Awards,Best Production Design (Color),TRUE,The Robe,,Art Direction (Color)
+1213124,Richard Day,1955,Academy Awards,Best Production Design (B&W),TRUE,On the Waterfront,,Art Direction (Black-and-White)
+1999629,John Meehan,1955,Academy Awards,Best Production Design (Color),TRUE,"20,000 Leagues Under the Sea",,Art Direction (Color)
+5188,Hal Pereira; Tambi Larsen,1956,Academy Awards,Best Production Design (B&W),TRUE,The Rose Tattoo,,Art Direction (Black-and-White)
+1025726,William Flannery; Jo Mielziner,1956,Academy Awards,Best Production Design (Color),TRUE,Picnic,,Art Direction (Color)
+9062,Cedric Gibbons; Malcolm Brown,1957,Academy Awards,Best Production Design (B&W),TRUE,Somebody Up There Likes Me,,Art Direction (Black-and-White)
+3358,Lyle R. Wheeler; John DeCuir,1957,Academy Awards,Best Production Design (Color),TRUE,The King and I,,Art Direction (Color)
+12495,Ted Haworth,1958,Academy Awards,Best Production Design,TRUE,Sayonara,,Art Direction
+9060,William A. Horning; E. Preston Ames,1959,Academy Awards,Best Production Design,TRUE,Gigi,,Art Direction
+3358,Lyle R. Wheeler; George Davis,1960,Academy Awards,Best Production Design (B&W),TRUE,The Diary of Anne Frank,,Art Direction (Black-and-White)
+9060,William A. Horning; Edward Carfagno,1960,Academy Awards,Best Production Design (Color),TRUE,Ben-Hur,,Art Direction (Color)
+4103,Alexandre Trauner,1961,Academy Awards,Best Production Design (B&W),TRUE,The Apartment,,Art Direction (Black-and-White)
+12346,Alexander Golitzen; Eric Orbom,1961,Academy Awards,Best Production Design (Color),TRUE,Spartacus,,Art Direction (Color)
+14878,Harry Horner,1962,Academy Awards,Best Production Design (B&W),TRUE,The Hustler,,Art Direction (Black-and-White)
+874,Boris Leven,1962,Academy Awards,Best Production Design (Color),TRUE,West Side Story,,Art Direction (Color)
+12346,Alexander Golitzen; Henry Bumstead,1963,Academy Awards,Best Production Design (B&W),TRUE,To Kill a Mockingbird,,Art Direction (Black-and-White)
+13321,John Box; John Stoll,1963,Academy Awards,Best Production Design (Color),TRUE,Lawrence of Arabia,,Art Direction (Color)
+14879,Gene Callahan,1964,Academy Awards,Best Production Design (B&W),TRUE,America America,,Art Direction (Black-and-White)
+1118257,John DeCuir; Jack Martin Smith; Hilyard M. Brown,1964,Academy Awards,Best Production Design (Color),TRUE,Cleopatra,,Art Direction (Color)
+1249766,Vassilis Photopoulos,1965,Academy Awards,Best Production Design (B&W),TRUE,Zorba the Greek,,Art Direction (Black-and-White)
+30526,Gene Allen; Cecil Beaton,1965,Academy Awards,Best Production Design (Color),TRUE,My Fair Lady,,Art Direction (Color)
+7306,Robert Clatworthy,1966,Academy Awards,Best Production Design (B&W),TRUE,Ship of Fools,,Art Direction (Black-and-White)
+13321,John Box; Terence Marsh,1966,Academy Awards,Best Production Design (Color),TRUE,Doctor Zhivago,,Art Direction (Color)
+12017,Richard Sylbert,1967,Academy Awards,Best Production Design (B&W),TRUE,Who's Afraid of Virginia Woolf?,,Art Direction (Black-and-White)
+9061,Jack Martin Smith; Dale Hennesy,1967,Academy Awards,Best Production Design (Color),TRUE,Fantastic Voyage,,Art Direction (Color)
+1125663,John Truscott; Edward Carrere,1968,Academy Awards,Best Production Design,TRUE,Camelot,,Art Direction
+13321,John Box; Terence Marsh,1969,Academy Awards,Best Production Design,TRUE,Oliver!,,Art Direction
+1118257,John DeCuir; Jack Martin Smith; Herman A. Blumenthal,1970,Academy Awards,Best Production Design,TRUE,Hello Dolly!,,Art Direction
+35154,Urie McCleary; Gil Parrondo,1971,Academy Awards,Best Production Design,TRUE,Patton,,Art Direction
+13321,John Box; Ernest Archer; Jack Maxsted; Gil Parrondo,1972,Academy Awards,Best Production Design,TRUE,Nicholas and Alexandra,,Art Direction
+3771,Rolf Zehetbauer; Hans Jürgen Kiebach,1973,Academy Awards,Best Production Design,TRUE,Cabaret,,Art Direction
+369,Henry Bumstead,1974,Academy Awards,Best Production Design,TRUE,The Sting,,Art Direction
+2875,Dean Tavoularis; Angelo P. Graham,1975,Academy Awards,Best Production Design,TRUE,The Godfather Part II,,Art Direction
+9869,Ken Adam; Roy Walker,1976,Academy Awards,Best Production Design,TRUE,Barry Lyndon,,Art Direction
+6358,George Jenkins,1977,Academy Awards,Best Production Design,TRUE,All the President's Men,,Art Direction
+2289,John Barry; Norman Reynolds; Leslie Dilley,1978,Academy Awards,Best Production Design,TRUE,Star Wars,,Art Direction
+19045,Paul Sylbert; Edwin O'Donovan,1979,Academy Awards,Best Production Design,TRUE,Heaven Can Wait,,Art Direction
+1233537,Philip Rosenberg; Tony Walton,1980,Academy Awards,Best Production Design,TRUE,All That Jazz,,Art Direction
+9358,Pierre Guffroy; Jack Stephens,1981,Academy Awards,Best Production Design,TRUE,Tess,,Art Direction
+669,Norman Reynolds; Leslie Dilley,1982,Academy Awards,Best Production Design,TRUE,Raiders of the Lost Ark,,Art Direction
+5491,Stuart Craig; Robert W. Laing,1983,Academy Awards,Best Production Design,TRUE,Gandhi,,Art Direction
+2261371,Anna Asp,1984,Academy Awards,Best Production Design,TRUE,Fanny and Alexander,,Art Direction
+6494,Patrizia von Brandenstein; Karel Černý,1985,Academy Awards,Best Production Design,TRUE,Amadeus,,Art Direction
+10641,Stephen B. Grimes,1986,Academy Awards,Best Production Design,TRUE,Out of Africa,,Art Direction
+24668,Gianni Quaranta; Brian Ackland-Snow,1987,Academy Awards,Best Production Design,TRUE,A Room with a View,,Art Direction
+1155,Ferdinando Scarfiotti,1988,Academy Awards,Best Production Design,TRUE,The Last Emperor,,Art Direction
+5491,Stuart Craig,1989,Academy Awards,Best Production Design,TRUE,Dangerous Liaisons,,Art Direction
+3807,Anton Furst,1990,Academy Awards,Best Production Design,TRUE,Batman,,Art Direction
+12017,Richard Sylbert,1991,Academy Awards,Best Production Design,TRUE,Dick Tracy,,Art Direction
+4248,Dennis Gassner,1992,Academy Awards,Best Production Design,TRUE,Bugsy,,Art Direction
+17165,Luciana Arrighi,1993,Academy Awards,Best Production Design,TRUE,Howards End,,Art Direction
+3563,Allan Starski,1994,Academy Awards,Best Production Design,TRUE,Schindler's List,,Art Direction
+9869,Ken Adam,1995,Academy Awards,Best Production Design,TRUE,The Madness of King George,,Art Direction
+961533,Eugenio Zanetti,1996,Academy Awards,Best Production Design,TRUE,Restoration,,Art Direction
+5491,Stuart Craig,1997,Academy Awards,Best Production Design,TRUE,The English Patient,,Art Direction
+8524,Peter Lamont,1998,Academy Awards,Best Production Design,TRUE,Titanic,,Art Direction
+11456,Martin Childs,1999,Academy Awards,Best Production Design,TRUE,Shakespeare in Love,,Art Direction
+496,Rick Carter; Robert Stromberg,2000,Academy Awards,Best Production Design,TRUE,Sleepy Hollow,,Art Direction
+1636,Tim Yip,2001,Academy Awards,Best Production Design,TRUE,Crouching Tiger Hidden Dragon,,Art Direction
+6203,Catherine Martin; Brigitte Broch,2002,Academy Awards,Best Production Design,TRUE,Moulin Rouge!,,Art Direction
+11002,John Myhre; Gordon Sim,2003,Academy Awards,Best Production Design,TRUE,Chicago,,Art Direction
+1314,Grant Major,2004,Academy Awards,Best Production Design,TRUE,The Lord of the Rings: The Return of the King,,Art Direction
+2366,Dante Ferretti,2005,Academy Awards,Best Production Design,TRUE,The Aviator,,Art Direction
+11002,John Myhre,2006,Academy Awards,Best Production Design,TRUE,Memoirs of a Geisha,,Art Direction
+16985,Eugenio Caballero,2007,Academy Awards,Best Production Design,TRUE,Pan's Labyrinth,,Art Direction
+2366,Dante Ferretti,2008,Academy Awards,Best Production Design,TRUE,Sweeney Todd: The Demon Barber of Fleet Street,,Art Direction
+20209,Donald Graham Burt,2009,Academy Awards,Best Production Design,TRUE,The Curious Case of Benjamin Button,,Art Direction
+496,Rick Carter; Robert Stromberg,2010,Academy Awards,Best Production Design,TRUE,Avatar,,Art Direction
+1032536,Robert Stromberg; Karen O'Hara,2011,Academy Awards,Best Production Design,TRUE,Alice in Wonderland,,Art Direction
+2366,Dante Ferretti; Francesca Lo Schiavo,2012,Academy Awards,Best Production Design,TRUE,Hugo,,Art Direction
+496,Rick Carter; Jim Erickson,2013,Academy Awards,Best Production Design,TRUE,Lincoln,,Best Production Design
+6203,Catherine Martin,2014,Academy Awards,Best Production Design,TRUE,The Great Gatsby,,Best Production Design
+1023711,Adam Stockhausen; Anna Pinnock,2015,Academy Awards,Best Production Design,TRUE,The Grand Budapest Hotel,,Best Production Design
+939990,Colin Gibson; Lisa Thompson,2016,Academy Awards,Best Production Design,TRUE,Mad Max: Fury Road,,Best Production Design
+5779,David Wasco; Sandy Reynolds-Wasco,2017,Academy Awards,Best Production Design,TRUE,La La Land,,Best Production Design
+40835,Paul D. Austerberry; Jeff Melvin; Shane Vieau,2018,Academy Awards,Best Production Design,TRUE,The Shape of Water,,Best Production Design
+990139,Hannah Beachler; Jay Hart,2019,Academy Awards,Best Production Design,TRUE,Black Panther,,Best Production Design
+5585,Barbara Ling; Nancy Haigh,2020,Academy Awards,Best Production Design,TRUE,Once Upon a Time in Hollywood,,Best Production Design
+20209,Donald Graham Burt; Jan Pascale,2021,Academy Awards,Best Production Design,TRUE,Mank,,Best Production Design
+102873,Patrice Vermette; Zsuzsanna Sipos,2022,Academy Awards,Best Production Design,TRUE,Dune,,Best Production Design
+6097,Christian M. Goldbeck; Ernestine Hipper,2023,Academy Awards,Best Production Design,TRUE,All Quiet on the Western Front,,Best Production Design
+1372903,James Price; Shona Heath; Zsuzsa Mihalek,2024,Academy Awards,Best Production Design,TRUE,Poor Things,,Best Production Design
+15327,Nathan Crowley; Lee Sandales,2025,Academy Awards,Best Production Design,TRUE,Wicked,,Best Production Design
+11004,Tamara Deverell; Shane Vieau,2026,Academy Awards,Best Production Design,TRUE,Frankenstein,,Best Production Design

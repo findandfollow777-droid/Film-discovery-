@@ -50,6 +50,10 @@ const GAME_INFO = {
     synopsis: "Pick which entry in a franchise the scene comes from. Thirty seconds, streak scoring, no second chances.",
     modes: ["daily"]
   },
+  signal: {
+    synopsis: "Decode five encrypted actor portraits letter by letter, then identify the movie that united them. Unlimited guesses, ranked by speed.",
+    modes: ["daily"]
+  },
   "tenth-star": {
     synopsis: "A Top 10 list with one film missing. Spot the gap across nine rounds of curated cinema lists.",
     modes: ["weekly"]
@@ -306,6 +310,22 @@ function loadGameStatuses() {
     }
   }
 
+  // Check Signal
+  const signalState = localStorage.getItem(`orbit_signal_${today}`);
+  if (signalState) {
+    const state = JSON.parse(signalState);
+    const statusEl = document.getElementById("signalStatus");
+    if (statusEl) {
+      if (state.gameOver) {
+        statusEl.textContent = state.won ? "\u2713 WON" : "PLAYED";
+        statusEl.className = "game-status " + (state.won ? "completed" : "");
+      } else {
+        statusEl.textContent = "IN PROGRESS";
+        statusEl.className = "game-status in-progress";
+      }
+    }
+  }
+
   // Check Mastermind
   const mastermindState = localStorage.getItem(`mastermind_game_${today}`);
   if (mastermindState) {
@@ -419,6 +439,15 @@ function loadAggregateStats() {
   const alternateStats = getStoredStats("alternate_stats");
   if (alternateStats) {
     totalGames += alternateStats.played || 0;
+  }
+
+  // Signal stats — schema uses gamesPlayed/gamesWon (camelCase) per signal.js
+  const signalStats = getStoredStats("orbit_signal_stats");
+  if (signalStats) {
+    totalGames += signalStats.gamesPlayed || 0;
+    totalWins += signalStats.gamesWon || 0;
+    bestStreak = Math.max(bestStreak, signalStats.maxStreak || 0);
+    currentStreak = Math.max(currentStreak, signalStats.currentStreak || 0);
   }
 
   // Update UI
