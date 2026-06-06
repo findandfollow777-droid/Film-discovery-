@@ -61,6 +61,23 @@
     <!-- Hero container -->
     <div id="hero-container"></div>
 
+    <!-- Trophy strip navigation (populated by renderTrophyStrip) -->
+    <nav id="trophy-strip" class="trophy-strip" aria-label="Jump to award category" hidden>
+      <div class="trophy-strip-lead">
+        <span class="og og-trophy"></span>
+        <span class="trophy-strip-lead-text">Jump to award</span>
+      </div>
+      <div class="trophy-carousel-wrap">
+        <button id="trophy-scroll-left" class="trophy-scroll-btn left" type="button" aria-label="Previous awards">
+          <span class="og og-arrow-left"></span>
+        </button>
+        <div id="trophy-carousel" class="trophy-carousel"><!-- populated by JS --></div>
+        <button id="trophy-scroll-right" class="trophy-scroll-btn right" type="button" aria-label="Next awards">
+          <span class="og og-arrow-left"></span>
+        </button>
+      </div>
+    </nav>
+
     <!-- Category sections -->
     <div id="categories-container"></div>
 

@@ -70,10 +70,50 @@ const AWARDS_YEAR_EDITORIAL = {
   }
 };
 
+/* ============================================================
+   TROPHY STRIP NAVIGATION — Added Jun 6 2026
+   Category → ORBIT glyph map (Rule #11: glyphs, never emojis).
+   Keys match v1 category display_name; unmapped categories fall
+   back to og-trophy. Rendering/scroll-spy logic below renderCategories().
+   ============================================================ */
+const AWARD_GLYPH_MAP = {
+  'Best Picture':                   { glyph: 'og-trophy',      label: 'Best Picture' },
+  'Best Director':                  { glyph: 'og-statuette',   label: 'Best Director' },
+  'Best Actor':                     { glyph: 'og-person',      label: 'Best Actor' },
+  'Best Actress':                   { glyph: 'og-person-bare', label: 'Best Actress' },
+  'Best Supporting Actor':          { glyph: 'og-person',      label: 'Supporting Actor' },
+  'Best Supporting Actress':        { glyph: 'og-person-bare', label: 'Supporting Actress' },
+  'Best Animated Feature Film':     { glyph: 'og-sparkle',     label: 'Animated' },
+  'Best Animated Short Film':       { glyph: 'og-sparkle',     label: 'Animated Short' },
+  'Best International Feature Film': { glyph: 'og-globe',       label: 'International' },
+  'Best Documentary Feature Film':  { glyph: 'og-newspaper',   label: 'Documentary' },
+  'Best Documentary Short Film':    { glyph: 'og-newspaper',   label: 'Documentary Short' },
+  'Best Original Screenplay':       { glyph: 'og-writing',     label: 'Original Screenplay' },
+  'Best Adapted Screenplay':        { glyph: 'og-books',       label: 'Adapted Screenplay' },
+  'Best Cinematography':            { glyph: 'og-camera',      label: 'Cinematography' },
+  'Best Film Editing':              { glyph: 'og-scissors',    label: 'Editing' },
+  'Best Production Design':         { glyph: 'og-mask',        label: 'Production Design' },
+  'Best Costume Design':            { glyph: 'og-star',        label: 'Costume Design' },
+  'Best Makeup and Hairstyling':    { glyph: 'og-mask',        label: 'Makeup & Hair' },
+  'Best Original Score':            { glyph: 'og-music',       label: 'Original Score' },
+  'Best Original Song':             { glyph: 'og-mic',         label: 'Original Song' },
+  'Best Sound':                     { glyph: 'og-speech',      label: 'Sound' },
+  'Best Sound Editing':             { glyph: 'og-speech',      label: 'Sound Editing' },
+  'Best Sound Mixing':              { glyph: 'og-speech',      label: 'Sound Mixing' },
+  'Best Visual Effects':            { glyph: 'og-bolt',        label: 'Visual Effects' },
+  'Best Casting':                   { glyph: 'og-handshake',   label: 'Casting' },
+  'Best Live Action Short Film':    { glyph: 'og-film',        label: 'Live Action Short' }
+};
+
 // ===== STATE =====
 let currentFestival = 'oscar';
 let currentYear = null;
 let currentView = 'compact'; // 'compact' or 'detail'
+
+// Trophy strip runtime state (module-scoped to avoid leaks across year navigations)
+let trophySpyObserver = null;      // disconnected & rebuilt each render
+let trophyCarouselInited = false;  // arrow/scroll listeners attach exactly once
+let trophyLoopWidth = 0;           // width of one item set; 0 = no seamless loop
 
 // ===== DATA CACHE (lazy v1 fetch, ported from awards-browse.js) =====
 const V1_FESTIVAL_CACHE = {};   // slug → reshaped festival object
@@ -292,7 +332,9 @@ async function showYearDetail(year) {
     editorial ? `${year} ${festivalDisplayName(currentFestival)}` : `${year}`;
 
   renderHero(year);
-  renderCategories(year);
+  await renderCategories(year);   // await so trophy scroll-spy can observe real headings
+  await renderTrophyStrip(year);
+  initTrophyCarousel();
   window.scrollTo(0, 0);
 }
 
@@ -451,11 +493,122 @@ async function renderCategories(year) {
     ].join('');
     return `
       <section class="category-section">
-        <h2 class="category-header">${escapeHtml(name)}</h2>
+        <h2 class="category-header" data-category-id="${escapeHtml(name)}">${escapeHtml(name)}</h2>
         <div class="category-grid">${tiles}</div>
       </section>
     `;
   }).join('');
+}
+
+// ===== TROPHY STRIP =====
+// Builds the category-glyph carousel from the same ordered transpose
+// renderCategories() uses. Hover/active styling is CSS-driven (awards2.css);
+// JS handles data, click-to-scroll, seamless loop, and scroll-spy.
+async function renderTrophyStrip(year) {
+  const strip = document.getElementById('trophy-strip');
+  const carousel = document.getElementById('trophy-carousel');
+  if (!strip || !carousel) return;
+
+  // Tear down prior scroll-spy before re-rendering (prevents observer leak).
+  if (trophySpyObserver) { trophySpyObserver.disconnect(); trophySpyObserver = null; }
+  carousel.innerHTML = '';
+  trophyLoopWidth = 0;
+  strip.hidden = true;
+
+  // loadV1FestivalData already returns the reshaped legacy DB (db[catName][year]).
+  const db = await loadV1FestivalData(currentFestival);
+  if (!db) return;
+
+  const yearStr = String(year);
+  const raw = V1_RAW_CACHE[currentFestival];
+  const order = raw && Array.isArray(raw.categories)
+    ? raw.categories.map(c => c.display_name)
+    : Object.keys(db);
+  const categories = order.filter(name => db[name] && db[name][yearStr]);
+  if (categories.length === 0) return;
+
+  const itemHtml = (name) => {
+    const g = AWARD_GLYPH_MAP[name] || { glyph: 'og-trophy', label: name };
+    return `
+      <div class="trophy-item" data-category="${escapeHtml(name)}" role="link" tabindex="0" title="${escapeHtml(g.label)}">
+        <span class="og ${g.glyph}"></span>
+        <span class="trophy-label">${escapeHtml(g.label)}</span>
+      </div>`;
+  };
+
+  const baseHtml = categories.map(itemHtml).join('');
+  carousel.innerHTML = baseHtml;
+  strip.hidden = false;
+
+  // Seamless loop: only when items overflow. Duplicate the set once so a
+  // rightward scroll past the first set wraps invisibly (handled in the
+  // scroll listener via trophyLoopWidth). Measure after layout.
+  requestAnimationFrame(() => {
+    if (carousel.scrollWidth > carousel.clientWidth + 4) {
+      trophyLoopWidth = carousel.scrollWidth; // width of one full set
+      carousel.insertAdjacentHTML('beforeend', baseHtml);
+    }
+    attachTrophyItemHandlers(carousel);
+  });
+
+  buildTrophySpy();
+}
+
+// Click / keyboard → smooth-scroll to the matching category section.
+// Idempotent per item (data-bound guard) so re-renders and clones don't stack.
+function attachTrophyItemHandlers(carousel) {
+  carousel.querySelectorAll('.trophy-item').forEach(item => {
+    if (item.dataset.bound === '1') return;
+    item.dataset.bound = '1';
+    const go = () => {
+      const name = item.dataset.category;
+      const target = document.querySelector(`[data-category-id="${name}"]`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    item.addEventListener('click', go);
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+}
+
+// Scroll-spy: highlight the trophy whose category heading is near the top.
+// Single shared observer, rebuilt (and previously disconnected) each render.
+function buildTrophySpy() {
+  trophySpyObserver = new IntersectionObserver((entries) => {
+    const hit = entries.find(e => e.isIntersecting);
+    if (!hit) return;
+    const name = hit.target.dataset.categoryId;
+    document.querySelectorAll('.trophy-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.category === name);
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+  document.querySelectorAll('[data-category-id]').forEach(h => trophySpyObserver.observe(h));
+}
+
+// Arrow buttons + seamless-loop scroll listener. Attaches exactly once
+// (the carousel/buttons are static in the HTML); per-year state lives in
+// trophyLoopWidth, which this listener reads.
+function initTrophyCarousel() {
+  const carousel = document.getElementById('trophy-carousel');
+  const leftBtn = document.getElementById('trophy-scroll-left');
+  const rightBtn = document.getElementById('trophy-scroll-right');
+  if (!carousel || !leftBtn || !rightBtn) return;
+  if (trophyCarouselInited) return;
+  trophyCarouselInited = true;
+
+  const SCROLL_STEP = 200;
+  leftBtn.addEventListener('click', () => carousel.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' }));
+  rightBtn.addEventListener('click', () => carousel.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' }));
+
+  // Direct scrollLeft assignment is instant (unaffected by scroll-behavior),
+  // so wrapping at the set boundary is invisible when a duplicate set exists.
+  carousel.addEventListener('scroll', () => {
+    if (trophyLoopWidth && carousel.scrollLeft >= trophyLoopWidth) {
+      carousel.scrollLeft -= trophyLoopWidth;
+    }
+  });
 }
 
 // Phase 1 placeholder per spec — simple poster + WINNER/NOMINEE label.

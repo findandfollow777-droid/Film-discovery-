@@ -555,12 +555,13 @@ body::after {
 
 .category-header {
   font-family: 'Orbitron', sans-serif;
-  font-size: 14px;
+  font-size: 20px; /* 1.4x of prior 14px — paired with trophy-strip nav (Jun 6 2026) */
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--accent-gold);
   margin: 0 0 20px;
   text-transform: uppercase;
+  scroll-margin-top: 80px; /* offset for sticky year-detail-header on smooth-scroll */
 }
 
 .category-grid {
@@ -816,5 +817,153 @@ body::after {
   .duel-year-badge {
     font-size: 40px;
     padding: 12px 20px;
+  }
+}
+
+/* ============================================================
+   TROPHY STRIP NAVIGATION — Added Jun 6 2026
+   Carousel of category glyphs between hero and category sections.
+   Hover reveals labels; click smooth-scrolls; scroll-spy highlights
+   the active category. Logic in awards2.js (renderTrophyStrip).
+   ============================================================ */
+.trophy-strip {
+  margin: 40px 0;
+  padding: 0 0 24px;
+  border-bottom: 0.5px solid rgba(var(--accent-gold-rgb), 0.15);
+}
+
+.trophy-strip-lead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.trophy-strip-lead .og {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-gold);
+}
+
+.trophy-strip-lead-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+.trophy-carousel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trophy-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 4px;
+  flex: 1;
+  scrollbar-width: none; /* Firefox */
+}
+
+.trophy-carousel::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+.trophy-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column-reverse; /* label sits ABOVE the icon, per spec */
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 2px;
+  min-width: 64px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.trophy-item .og {
+  width: 32px;
+  height: 32px;
+  color: var(--muted-silver);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.trophy-label {
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+  height: 14px;
+  line-height: 14px;
+}
+
+/* Hover — pure CSS, no JS style writes */
+.trophy-item:hover .og {
+  transform: scale(1.3);
+  color: var(--accent-cyan);
+}
+
+.trophy-item:hover .trophy-label {
+  opacity: 1;
+}
+
+/* Scroll-spy active state — gold glow per spec */
+.trophy-item.active .og {
+  color: var(--accent-gold);
+  filter: drop-shadow(0 0 8px var(--accent-gold));
+}
+
+.trophy-item.active .trophy-label {
+  opacity: 1;
+  color: var(--accent-gold);
+}
+
+.trophy-scroll-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-cyan);
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.trophy-scroll-btn .og {
+  width: 18px;
+  height: 18px;
+}
+
+.trophy-scroll-btn.right .og {
+  transform: scaleX(-1); /* flip the left-arrow glyph */
+}
+
+@media (max-width: 650px) {
+  .trophy-strip {
+    margin: 24px 0;
+  }
+
+  .trophy-item {
+    min-width: 56px;
+  }
+
+  .trophy-item .og {
+    width: 28px;
+    height: 28px;
+  }
+
+  .trophy-scroll-btn {
+    padding: 4px;
   }
 }
