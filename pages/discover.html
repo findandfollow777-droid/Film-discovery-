@@ -584,6 +584,11 @@
             <span class="orbit-film-count-label">films match</span>
           </div>
           <div class="orbit-streaming-warning" id="orbitStreamingWarning" style="display:none;"></div>
+          <!-- ZERO-RESULTS GUIDANCE (2026-06-06) — opt-in, normal TMDB
+               discover branch only. Lightweight inline advisory (NOT a
+               data-orbit-popup). Populated/revealed by
+               showZeroGuidanceAffordance() in discover.js. -->
+          <div class="orbit-zero-guidance" id="orbitZeroGuidance" style="display:none;"></div>
           <!-- DISCOVERY EMPTY / ERROR STATE (Phase 1 — 2026-05-27)
                Three-kind advisory (zero / network / data). Hidden by
                default. Populated and revealed by showDiscoverEmptyState()

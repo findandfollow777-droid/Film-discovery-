@@ -2534,6 +2534,26 @@ launchCard.addEventListener("click", async () => {
 
       console.log(`Preview: ${totalMovies} movies across ${totalAvailable} pages`);
 
+      /* Zero-results guidance on launch (2026-06-06): a normal-branch launch
+         that previews 0 results stays on the discover page and surfaces the
+         drop-one guidance ALREADY EXPANDED, instead of navigating to a bare
+         results.html empty state. Runs AFTER totalMovies is known but BEFORE
+         the >MAX_PAGES confirm and BEFORE the hyperspace overlay is shown, so
+         there's no hyperspace flash and no navigation. The settings-post-
+         filter zero sub-case (after applySettingsFilters, below) keeps its own
+         showDiscoverEmptyState handling — drop-one can't help no-op settings
+         filters, and that count isn't 0 here (settings are query no-ops). */
+      if (totalMovies === 0) {
+        var hs = document.getElementById('hyperspaceOverlay');
+        if (hs) hs.hidden = true;
+        showZeroGuidanceAffordance(state.filters, queryParams, true);
+        var ozg = document.getElementById('orbitZeroGuidance');
+        if (ozg && typeof ozg.scrollIntoView === 'function') {
+          ozg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;   // do NOT store empty movies / navigate to results.html
+      }
+
       const hasSettingsFiltersEarly = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
       if (totalAvailable > MAX_PAGES && !hasSettingsFiltersEarly) {
         const proceed = confirm(
@@ -6523,6 +6543,12 @@ function updateOrbitRing() {
    ============================================================ */
 let _filmCountTimer = null;
 
+/* Zero-results guidance (2026-06-06) — state for the opt-in drop-one
+   affordance. _zeroGuidanceCache memoises counterfactual recounts for the
+   current failing query signature so re-clicking doesn't re-fetch; it is
+   invalidated by hideZeroGuidance() (called on every filter change). */
+let _zeroGuidanceCache = null;   /* { sig, results:[{id,label,count}] } */
+
 /* Update the "X of Y on your services" warning under the film count.
    Only fires when a watch-section filter is active and the streaming-
    filtered count is less than 60% of the unfiltered total. */
@@ -6565,6 +6591,7 @@ function fetchFilmCount() {
     countEl.style.display = 'none';
     var warnEmpty = document.getElementById('orbitStreamingWarning');
     if (warnEmpty) warnEmpty.style.display = 'none';
+    hideZeroGuidance();
     return;
   }
 
@@ -6573,6 +6600,10 @@ function fetchFilmCount() {
 
   clearTimeout(_filmCountTimer);
   _filmCountTimer = setTimeout(function () {
+    /* Clear any prior zero-guidance affordance + cached counterfactuals
+       on every recount, so a filter change away from zero (or into a
+       non-normal branch) doesn't leave a stale affordance behind. */
+    hideZeroGuidance();
     /* Awards filters are client-side against AWARDS_DATABASE — TMDB has no
        awards param. Three modes:
          1. Awards-only filters → synchronous count via getAwardsMatchingIds.
@@ -6805,6 +6836,13 @@ function fetchFilmCount() {
           var totalN = (total && typeof total.total_results === 'number')
             ? total.total_results : n;
           updateStreamingWarning(n, totalN);
+
+          /* Zero-results guidance (2026-06-06): NORMAL TMDB branch only, and
+             only past the mixed-awards early-return above — so awards /
+             collection / movieList branches never reach this. Opt-in: render
+             a quiet affordance; no counterfactual fetches fire until click. */
+          if (n === 0) { showZeroGuidanceAffordance(filters, queryString); }
+          else { hideZeroGuidance(); }
         } else {
           countEl.style.display = 'none';
           updateStreamingWarning(0, 0);
@@ -6815,6 +6853,252 @@ function fetchFilmCount() {
         updateStreamingWarning(0, 0);
       });
   }, 600);
+}
+
+/* ============================================================
+   ZERO-RESULTS GUIDANCE — Added 2026-06-06
+   Opt-in, click-triggered "drop-one" counterfactual helper for the
+   NORMAL TMDB discover branch only (wired from fetchFilmCount's
+   normal .then when total_results === 0). Removing each active
+   query-affecting filter in turn and re-counting via TMDB
+   total_results, it suggests the single removal that best recovers
+   results.
+
+   Deliberately NOT triggered in the explicit-id / collection /
+   awards-only / mixed-awards branches: there a recount is either
+   meaningless (collection genuinely empty) or misleading (awards &
+   settings sections never enter the TMDB query — see the no-op cases
+   in buildTMDBQueryFromFilters — so a recount would wrongly report
+   "removing it doesn't help"). Those same sections are excluded from
+   the drop-one candidate list below.
+   ============================================================ */
+
+/* Sections whose filters are TMDB-query no-ops (handled client-side or
+   not at all), so "removing" them can't change total_results. */
+var ZERO_GUIDANCE_NOOP_SECTIONS = ['themes', 'settingWhere', 'settingWhen', 'basedOn', 'awards'];
+var ZERO_GUIDANCE_HEALTHY_MIN = 20;   /* short-circuit + "viable" threshold */
+var ZERO_GUIDANCE_BAND_LOW = 20;
+var ZERO_GUIDANCE_BAND_HIGH = 75;
+/* Module refs for the current failing search, set when the affordance
+   is shown and consumed by the click handler. */
+var _zeroGuidanceFilters = null;
+var _zeroGuidanceQuery = null;
+
+function _getZeroGuidanceEl() {
+  return document.getElementById('orbitZeroGuidance');
+}
+
+/* Restrictiveness rank — lower is tried first. Keyword / collection /
+   votes / rating lead (most likely to be the bottleneck); broad params
+   (decade, region, language) trail. */
+function _zeroGuidanceRank(f) {
+  var s = f ? f.section : '';
+  var v = (f && f.value) ? f.value : {};
+  if (s === 'universes' && (v.type === 'keyword' || v.type === 'collection')) return 0;
+  if (s === 'genres' && (v.type === 'keyword' || v.type === 'tmdb-keyword')) return 1;
+  if (s === 'ratingsContent' && v.type === 'votes') return 2;
+  if (s === 'ratingsContent' && v.type === 'rating') return 3;
+  if (s === 'ratingsContent' && v.type === 'certification') return 4;
+  if (s === 'production') return 5;
+  if (s === 'people') return 6;
+  if (s === 'watch') return 7;
+  if (s === 'genres') return 8;            /* plain genre */
+  if (s === 'timeEra' && v.type !== 'decade') return 9;   /* year / dateRange / runtime */
+  if (s === 'regionLanguage' && v.type === 'language') return 10;
+  if (s === 'timeEra' && v.type === 'decade') return 11;
+  if (s === 'regionLanguage' && v.type === 'region') return 12;
+  return 6;
+}
+
+function hideZeroGuidance() {
+  _zeroGuidanceCache = null;
+  _zeroGuidanceFilters = null;
+  _zeroGuidanceQuery = null;
+  var el = _getZeroGuidanceEl();
+  if (el) {
+    el.style.display = 'none';
+    el.innerHTML = '';
+  }
+}
+
+/* Collapsed state — a quiet one-line prompt + "see what to change"
+   trigger. No counterfactual fetches fire here. A zero result makes the
+   streaming-coverage message moot, so hide it while guidance shows. */
+function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+  _zeroGuidanceFilters = Array.isArray(filters) ? filters : [];
+  _zeroGuidanceQuery = queryString;
+
+  var warn = document.getElementById('orbitStreamingWarning');
+  if (warn) warn.style.display = 'none';
+
+  /* Launch path (autoExpand) — the user has committed to launching, so the
+     opt-in/click rationale that governs the counter path doesn't apply.
+     Skip the collapsed prompt and compute + render suggestions immediately.
+     runZeroCounterfactuals sets the container visible itself, so the
+     visibility + streaming-warning coordination above still applies. */
+  if (autoExpand) {
+    runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
+    return;
+  }
+
+  el.innerHTML =
+    '<span class="ozg-prompt">No matches</span>' +
+    '<button type="button" class="ozg-trigger">see what to change</button>';
+  el.style.display = 'block';
+
+  var trigger = el.querySelector('.ozg-trigger');
+  if (trigger) {
+    trigger.addEventListener('click', function () {
+      runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
+    });
+  }
+}
+
+/* Render the resolved suggestion(s) into the affordance. */
+function _renderZeroGuidanceResults(results) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+
+  var viable = results.filter(function (r) { return r.count > 0; });
+  if (viable.length === 0) {
+    /* Graceful floor — structural zero. No fabricated number. */
+    el.innerHTML =
+      '<span class="ozg-prompt">These filters don’t overlap</span>' +
+      '<span class="ozg-floor">try removing the most specific one</span>';
+    el.style.display = 'block';
+    return;
+  }
+
+  /* Prefer a removal that lands in the 20–75 sweet spot (highest within
+     band), else the single removal whose recount is highest. */
+  var inBand = viable.filter(function (r) {
+    return r.count >= ZERO_GUIDANCE_BAND_LOW && r.count <= ZERO_GUIDANCE_BAND_HIGH;
+  }).sort(function (a, b) { return b.count - a.count; });
+  var rest = viable.filter(function (r) {
+    return !(r.count >= ZERO_GUIDANCE_BAND_LOW && r.count <= ZERO_GUIDANCE_BAND_HIGH);
+  }).sort(function (a, b) { return b.count - a.count; });
+  var ordered = inBand.concat(rest).slice(0, 2);
+
+  var btns = ordered.map(function (r) {
+    var labelSafe = String(r.label == null ? '' : r.label)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    var idSafe = String(r.id == null ? '' : r.id).replace(/"/g, '&quot;');
+    var nDisplay = r.count > 9999 ? '9,999+' : r.count.toLocaleString();
+    return '<button type="button" class="ozg-suggestion" data-remove-id="' + idSafe + '">' +
+           'Remove <span class="ozg-sug-label">' + labelSafe + '</span>' +
+           ' <span class="ozg-sug-arrow">→</span> ' +
+           '<span class="ozg-sug-count">' + nDisplay + ' results</span>' +
+           '</button>';
+  }).join('');
+
+  el.innerHTML = '<span class="ozg-prompt">Try this</span><div class="ozg-suggestions">' + btns + '</div>';
+  el.style.display = 'block';
+
+  el.querySelectorAll('.ozg-suggestion').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var rid = b.getAttribute('data-remove-id');
+      if (!rid) return;
+      state.filters = state.filters.filter(function (f) { return f.id !== rid; });
+      updateUIFromState();   /* re-renders chips + re-runs fetchFilmCount */
+    });
+  });
+}
+
+/* Click handler — run the drop-one recounts. Reuses the normal-branch
+   fetch shape (raw fetch against /discover/movie). Streaming params are
+   stripped from every counterfactual so a dropped watch filter isn't
+   silently re-injected from saved providers by buildTMDBQueryFromFilters. */
+function runZeroCounterfactuals(filters, queryString) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+  filters = Array.isArray(filters) ? filters : [];
+
+  /* Cache hit for the current failing signature → re-render, no refetch. */
+  if (_zeroGuidanceCache && _zeroGuidanceCache.sig === queryString) {
+    _renderZeroGuidanceResults(_zeroGuidanceCache.results);
+    return;
+  }
+
+  /* Candidates: only filters that actually affect the TMDB query. */
+  var candidates = [];
+  filters.forEach(function (f, idx) {
+    if (!f || ZERO_GUIDANCE_NOOP_SECTIONS.indexOf(f.section) !== -1) return;
+    candidates.push({ filter: f, idx: idx });
+  });
+
+  if (candidates.length === 0) {
+    el.innerHTML =
+      '<span class="ozg-prompt">These filters don’t overlap</span>' +
+      '<span class="ozg-floor">try removing the most specific one</span>';
+    el.style.display = 'block';
+    return;
+  }
+
+  /* Restrictiveness order so the burst can short-circuit early. */
+  candidates.sort(function (a, b) {
+    return _zeroGuidanceRank(a.filter) - _zeroGuidanceRank(b.filter);
+  });
+
+  el.innerHTML = '<span class="ozg-prompt ozg-loading">Checking what to change…</span>';
+  el.style.display = 'block';
+
+  var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+  var baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+
+  function recount(cand) {
+    var filtersMinusOne = filters.filter(function (_, idx) { return idx !== cand.idx; });
+    var q = buildTMDBQueryFromFilters(filtersMinusOne);
+    var p = new URLSearchParams(q);
+    /* Strip streaming so dropping a watch filter genuinely drops it. */
+    p.delete('with_watch_providers');
+    p.delete('watch_region');
+    p.delete('watch_monetization_types');
+    p.set('api_key', apiKey);
+    p.set('page', '1');
+    return fetch(baseUrl + '?' + p.toString())
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var c = (data && typeof data.total_results === 'number') ? data.total_results : 0;
+        return {
+          id: cand.filter.id,
+          label: cand.filter.label,
+          count: c
+        };
+      })
+      .catch(function () {
+        return { id: cand.filter.id, label: cand.filter.label, count: 0 };
+      });
+  }
+
+  /* Sequential burst, capped at candidate count (no multiplier), with
+     early exit once a removal lands in the healthy band (>= 20). */
+  var results = [];
+  var i = 0;
+  function step() {
+    if (i >= candidates.length) return Promise.resolve();
+    return recount(candidates[i]).then(function (res) {
+      results.push(res);
+      i++;
+      if (res.count >= ZERO_GUIDANCE_HEALTHY_MIN) return;   /* short-circuit */
+      return step();
+    });
+  }
+
+  step().then(function () {
+    _zeroGuidanceCache = { sig: queryString, results: results };
+    _renderZeroGuidanceResults(results);
+  }).catch(function () {
+    var elx = _getZeroGuidanceEl();
+    if (elx) {
+      elx.innerHTML =
+        '<span class="ozg-prompt">These filters don’t overlap</span>' +
+        '<span class="ozg-floor">try removing the most specific one</span>';
+      elx.style.display = 'block';
+    }
+  });
 }
 
 /* ============================================================
