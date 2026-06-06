@@ -2547,7 +2547,7 @@ launchCard.addEventListener("click", async () => {
         var hs = document.getElementById('hyperspaceOverlay');
         if (hs) hs.hidden = true;
         showZeroGuidanceAffordance(state.filters, queryParams, true);
-        var ozg = document.getElementById('orbitZeroGuidance');
+        var ozg = document.getElementById('launchTakeover');
         if (ozg && typeof ozg.scrollIntoView === 'function') {
           ozg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -6876,8 +6876,48 @@ var ZERO_GUIDANCE_BAND_HIGH = 75;
 var _zeroGuidanceFilters = null;
 var _zeroGuidanceQuery = null;
 
+/* Option C (2026-06-06): the zero-guidance engine now renders INTO the
+   launch-button takeover surface instead of the retired #orbitZeroGuidance.
+   This is the single render-target chokepoint — all four DOM-writing
+   functions resolve through it, so repointing it here moves State 2/3
+   rendering into #launchTakeover without touching the engine logic. */
 function _getZeroGuidanceEl() {
-  return document.getElementById('orbitZeroGuidance');
+  return document.getElementById('launchTakeover');
+}
+
+/* Show/hide coordinator — swap the real Launch button for the takeover.
+   #launchCard is NEVER removed from the DOM (display:none only) because
+   .disabled / .click() / its listener reference it directly. The live
+   count is hidden while the takeover shows so "0 films match" doesn't sit
+   alongside it; on revert it's restored only if filters still exist. */
+function _setTakeoverActive(active) {
+  var lc = document.getElementById('launchCard');
+  var tk = document.getElementById('launchTakeover');
+  var fc = document.getElementById('orbitFilmCount');
+  if (active) {
+    if (lc) lc.style.display = 'none';
+    if (fc) fc.style.display = 'none';
+    if (tk) { tk.hidden = false; tk.style.display = 'block'; }
+  } else {
+    if (lc) lc.style.display = '';
+    if (tk) { tk.hidden = true; tk.style.display = 'none'; }
+    if (fc) {
+      var hasF = !!(typeof state !== 'undefined' && state &&
+        Array.isArray(state.filters) && state.filters.length > 0);
+      fc.style.display = hasF ? 'block' : 'none';
+    }
+  }
+}
+
+/* Move focus to the first control in the takeover on transform, but never
+   interrupt a user mid-typing in a filter input. */
+function _focusTakeover() {
+  var tk = document.getElementById('launchTakeover');
+  if (!tk) return;
+  var ae = document.activeElement;
+  if (ae && /^(input|textarea|select)$/i.test(ae.tagName)) return;
+  var btn = tk.querySelector('button');
+  if (btn && typeof btn.focus === 'function') btn.focus();
 }
 
 /* Restrictiveness rank — lower is tried first. Keyword / collection /
@@ -6907,9 +6947,18 @@ function hideZeroGuidance() {
   _zeroGuidanceFilters = null;
   _zeroGuidanceQuery = null;
   var el = _getZeroGuidanceEl();
+  var wasActive = !!(el && !el.hidden);
+  var focusWasInside = !!(el && el.contains(document.activeElement));
   if (el) {
-    el.style.display = 'none';
     el.innerHTML = '';
+  }
+  /* Swap the takeover back out for the real Launch button + count. */
+  _setTakeoverActive(false);
+  /* Restore focus to Launch only when we were actually showing the takeover
+     and focus was inside it (avoids yanking focus from unrelated controls). */
+  if (wasActive && focusWasInside) {
+    var lc = document.getElementById('launchCard');
+    if (lc && typeof lc.focus === 'function') lc.focus();
   }
 }
 
@@ -6925,18 +6974,22 @@ function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
   var warn = document.getElementById('orbitStreamingWarning');
   if (warn) warn.style.display = 'none';
 
+  /* Swap the Launch CTA out for the takeover surface (hides #launchCard +
+     the live count, reveals #launchTakeover). */
+  _setTakeoverActive(true);
+
   /* Launch path (autoExpand) — the user has committed to launching, so the
      opt-in/click rationale that governs the counter path doesn't apply.
-     Skip the collapsed prompt and compute + render suggestions immediately.
-     runZeroCounterfactuals sets the container visible itself, so the
-     visibility + streaming-warning coordination above still applies. */
+     Skip the collapsed State 2 and compute + render State 3 immediately.
+     runZeroCounterfactuals renders into the takeover (and focuses it). */
   if (autoExpand) {
     runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
     return;
   }
 
+  /* STATE 2 — collapsed prompt; NO recounts until tapped. */
   el.innerHTML =
-    '<span class="ozg-prompt">No matches</span>' +
+    '<span class="ozg-prompt lt-prompt">Nothing to launch &mdash;</span>' +
     '<button type="button" class="ozg-trigger">see what to change</button>';
   el.style.display = 'block';
 
@@ -6946,6 +6999,7 @@ function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
       runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
     });
   }
+  _focusTakeover();
 }
 
 /* Render the resolved suggestion(s) into the affordance. */
@@ -6960,6 +7014,7 @@ function _renderZeroGuidanceResults(results) {
       '<span class="ozg-prompt">These filters don’t overlap</span>' +
       '<span class="ozg-floor">try removing the most specific one</span>';
     el.style.display = 'block';
+    _focusTakeover();
     return;
   }
 
@@ -6986,7 +7041,7 @@ function _renderZeroGuidanceResults(results) {
            '</button>';
   }).join('');
 
-  el.innerHTML = '<span class="ozg-prompt">Try this</span><div class="ozg-suggestions">' + btns + '</div>';
+  el.innerHTML = '<span class="ozg-prompt">Here’s the quickest fix</span><div class="ozg-suggestions">' + btns + '</div>';
   el.style.display = 'block';
 
   el.querySelectorAll('.ozg-suggestion').forEach(function (b) {
@@ -6997,6 +7052,7 @@ function _renderZeroGuidanceResults(results) {
       updateUIFromState();   /* re-renders chips + re-runs fetchFilmCount */
     });
   });
+  _focusTakeover();
 }
 
 /* Click handler — run the drop-one recounts. Reuses the normal-branch

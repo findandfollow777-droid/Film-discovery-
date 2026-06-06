@@ -5661,39 +5661,51 @@ html, body {
 }
 
 /* ============================================================
-   ZERO-RESULTS GUIDANCE — Added 2026-06-06
-   Quiet inline advisory in the count region (sibling of
-   #orbitStreamingWarning). Deliberately lighter than the
-   #discoverEmptyState popup: a single line, no frame/glyph.
-   Cyan for the opt-in trigger; cyan→gold suggestion buttons
-   reusing the established accent pair (tokens only — Rule 12).
+   LAUNCH-BUTTON TAKEOVER (Option C) — zero-results guidance
+   Added 2026-06-06. Replaces the retired #orbitZeroGuidance
+   under-count element. The same engine (.ozg-* rows) now renders
+   into #launchTakeover, which sits in .sidebar-actions where the
+   Launch CTA was. Geometry matches the sidebar launch override
+   (full-width, 64px min-height, square corners); cyan surface for
+   State 2/3. Tokens only (Rule 12) — the launch button's hardcoded
+   color/hover literals are deliberately NOT propagated here.
    ============================================================ */
-.orbit-zero-guidance {
-  padding: 8px 14px 10px;
+.launch-takeover {
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 20px;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 11px;
   line-height: 1.5;
-  border-top: 1px solid rgba(var(--accent-cyan-rgb), 0.12);
-  flex-shrink: 0;
+  background: rgba(var(--accent-cyan-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  animation: card-entrance 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
-.orbit-zero-guidance .ozg-prompt {
+.launch-takeover[hidden] {
+  display: none;
+}
+.launch-takeover .ozg-prompt {
   color: var(--ghost-gray);
   font-family: var(--font-display);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 9px;
 }
-.orbit-zero-guidance .ozg-loading {
+.launch-takeover .ozg-loading {
   color: var(--accent-cyan);
 }
-.orbit-zero-guidance .ozg-floor {
+.launch-takeover .ozg-floor {
   display: block;
   margin-top: 3px;
   color: var(--ghost-gray);
   font-size: 10px;
 }
-.orbit-zero-guidance .ozg-trigger {
-  margin-left: 8px;
+.launch-takeover .ozg-trigger {
+  margin-top: 6px;
   background: none;
   border: none;
   padding: 0;
@@ -5703,16 +5715,17 @@ html, body {
   font-family: var(--font-body);
   text-decoration: underline;
 }
-.orbit-zero-guidance .ozg-trigger:hover {
+.launch-takeover .ozg-trigger:hover {
   color: var(--film-white);
 }
-.orbit-zero-guidance .ozg-suggestions {
+.launch-takeover .ozg-suggestions {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 6px;
+  margin-top: 8px;
+  width: 100%;
 }
-.orbit-zero-guidance .ozg-suggestion {
+.launch-takeover .ozg-suggestion {
   display: inline-block;
   width: 100%;
   background: rgba(var(--accent-cyan-rgb), 0.06);
@@ -5725,19 +5738,19 @@ html, body {
   font-family: var(--font-body);
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.orbit-zero-guidance .ozg-suggestion:hover {
+.launch-takeover .ozg-suggestion:hover {
   background: rgba(var(--accent-cyan-rgb), 0.12);
   border-color: var(--accent-cyan);
 }
-.orbit-zero-guidance .ozg-sug-label {
+.launch-takeover .ozg-sug-label {
   color: var(--accent-cyan);
   font-weight: 600;
 }
-.orbit-zero-guidance .ozg-sug-arrow {
+.launch-takeover .ozg-sug-arrow {
   color: var(--ghost-gray);
   margin: 0 2px;
 }
-.orbit-zero-guidance .ozg-sug-count {
+.launch-takeover .ozg-sug-count {
   color: var(--accent-gold);
   font-weight: 600;
 }

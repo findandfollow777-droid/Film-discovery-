@@ -548,6 +548,13 @@
           <!-- LAUNCH — placed inside Your Orbit panel, below header divider -->
           <div class="sidebar-actions">
             <button class="launch-orbit-btn" id="launchCard" disabled>Launch Discovery</button>
+            <!-- LAUNCH-BUTTON TAKEOVER (2026-06-06) — Option C zero-results
+                 guidance. On a normal-branch zero, #launchCard is hidden
+                 (display:none, never removed — five JS refs depend on it) and
+                 this surface shows State 2 ("Nothing to launch…") → tap →
+                 State 3 (drop-one suggestions). Rendered by the existing
+                 zero-guidance engine via _getZeroGuidanceEl(). -->
+            <div class="launch-takeover" id="launchTakeover" hidden aria-live="polite"></div>
             <!-- Phase 2 (2026-06-01): Save-this-search control. Hidden by
                  default; shown only when the current state.filters diverges
                  from the last-applied preset (or no preset was applied) AND
@@ -584,11 +591,6 @@
             <span class="orbit-film-count-label">films match</span>
           </div>
           <div class="orbit-streaming-warning" id="orbitStreamingWarning" style="display:none;"></div>
-          <!-- ZERO-RESULTS GUIDANCE (2026-06-06) — opt-in, normal TMDB
-               discover branch only. Lightweight inline advisory (NOT a
-               data-orbit-popup). Populated/revealed by
-               showZeroGuidanceAffordance() in discover.js. -->
-          <div class="orbit-zero-guidance" id="orbitZeroGuidance" style="display:none;"></div>
           <!-- DISCOVERY EMPTY / ERROR STATE (Phase 1 — 2026-05-27)
                Three-kind advisory (zero / network / data). Hidden by
                default. Populated and revealed by showDiscoverEmptyState()
