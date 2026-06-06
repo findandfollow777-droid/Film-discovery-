@@ -80,9 +80,9 @@ const AWARD_GLYPH_MAP = {
   'Best Picture':                   { glyph: 'og-trophy',      label: 'Best Picture' },
   'Best Director':                  { glyph: 'og-statuette',   label: 'Best Director' },
   'Best Actor':                     { glyph: 'og-person',      label: 'Best Actor' },
-  'Best Actress':                   { glyph: 'og-person-bare', label: 'Best Actress' },
-  'Best Supporting Actor':          { glyph: 'og-person',      label: 'Supporting Actor' },
-  'Best Supporting Actress':        { glyph: 'og-person-bare', label: 'Supporting Actress' },
+  'Best Actress':                   { glyph: 'og-rising-star', label: 'Best Actress' },
+  'Best Supporting Actor':          { glyph: 'og-person-bare', label: 'Supporting Actor' },
+  'Best Supporting Actress':        { glyph: 'og-star',        label: 'Supporting Actress' },
   'Best Animated Feature Film':     { glyph: 'og-sparkle',     label: 'Animated' },
   'Best Animated Short Film':       { glyph: 'og-sparkle',     label: 'Animated Short' },
   'Best International Feature Film': { glyph: 'og-globe',       label: 'International' },
@@ -92,8 +92,8 @@ const AWARD_GLYPH_MAP = {
   'Best Adapted Screenplay':        { glyph: 'og-books',       label: 'Adapted Screenplay' },
   'Best Cinematography':            { glyph: 'og-camera',      label: 'Cinematography' },
   'Best Film Editing':              { glyph: 'og-scissors',    label: 'Editing' },
-  'Best Production Design':         { glyph: 'og-mask',        label: 'Production Design' },
-  'Best Costume Design':            { glyph: 'og-star',        label: 'Costume Design' },
+  'Best Production Design':         { glyph: 'og-snapshot',    label: 'Production Design' },
+  'Best Costume Design':            { glyph: 'og-mask',        label: 'Costume Design' },
   'Best Makeup and Hairstyling':    { glyph: 'og-mask',        label: 'Makeup & Hair' },
   'Best Original Score':            { glyph: 'og-music',       label: 'Original Score' },
   'Best Original Song':             { glyph: 'og-mic',         label: 'Original Song' },
@@ -540,13 +540,20 @@ async function renderTrophyStrip(year) {
   carousel.innerHTML = baseHtml;
   strip.hidden = false;
 
-  // Seamless loop: only when items overflow. Duplicate the set once so a
-  // rightward scroll past the first set wraps invisibly (handled in the
-  // scroll listener via trophyLoopWidth). Measure after layout.
+  // Seamless bidirectional loop: only when items overflow. Render the set
+  // three times and park the viewport in the middle copy, so the user has a
+  // full set of buffer on BOTH sides. The scroll listener recenters before
+  // either edge is reached (see initTrophyCarousel). Measure after layout.
   requestAnimationFrame(() => {
     if (carousel.scrollWidth > carousel.clientWidth + 4) {
-      trophyLoopWidth = carousel.scrollWidth; // width of one full set
-      carousel.insertAdjacentHTML('beforeend', baseHtml);
+      carousel.insertAdjacentHTML('beforeend', baseHtml + baseHtml); // 3 copies total
+      const items = carousel.querySelectorAll('.trophy-item');
+      const n = items.length / 3;
+      // Period of one set incl. the inter-copy flex gap (exact, avoids seam drift).
+      trophyLoopWidth = items[n].offsetLeft - items[0].offsetLeft;
+      carousel.scrollLeft = trophyLoopWidth; // start in the middle copy
+    } else {
+      trophyLoopWidth = 0;
     }
     attachTrophyItemHandlers(carousel);
   });
@@ -602,12 +609,16 @@ function initTrophyCarousel() {
   leftBtn.addEventListener('click', () => carousel.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' }));
   rightBtn.addEventListener('click', () => carousel.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' }));
 
-  // Direct scrollLeft assignment is instant (unaffected by scroll-behavior),
-  // so wrapping at the set boundary is invisible when a duplicate set exists.
+  // Bidirectional seamless wrap: keep the scroll position within the middle
+  // band [0.5W, 1.5W]. Crossing either side jumps by exactly one set width W
+  // to the identical position in an adjacent copy. Direct scrollLeft writes are
+  // instant (unaffected by scroll-behavior), so the jump is invisible.
   carousel.addEventListener('scroll', () => {
-    if (trophyLoopWidth && carousel.scrollLeft >= trophyLoopWidth) {
-      carousel.scrollLeft -= trophyLoopWidth;
-    }
+    const W = trophyLoopWidth;
+    if (!W) return;
+    const p = carousel.scrollLeft;
+    if (p < W * 0.5) carousel.scrollLeft = p + W;
+    else if (p > W * 1.5) carousel.scrollLeft = p - W;
   });
 }
 

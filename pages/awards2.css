@@ -864,9 +864,12 @@ body::after {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  /* NOTE: no `scroll-behavior: smooth` here — it makes direct scrollLeft
+     writes animate, which turns the seamless loop recenter into a visible
+     slide. Arrow buttons request smooth explicitly via scrollBy() instead. */
   padding: 8px 4px;
   flex: 1;
+  min-width: 0; /* allow the flex child to shrink below content so it scrolls */
   scrollbar-width: none; /* Firefox */
 }
 
@@ -881,49 +884,52 @@ body::after {
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  padding: 4px 2px;
-  min-width: 64px;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  padding: 4px 6px;
+  min-width: 96px;
+  transition: transform 0.2s ease;
 }
 
+/* Glyph colors are baked into each og-* SVG (cyan or gold). `color` can't
+   touch them, so recolor uniformly to --accent-gold (#ffd700): brightness(0)
+   flattens any source to black, the rest rebuilds the gold. Verified against
+   the native gold glyphs. */
 .trophy-item .og {
-  width: 32px;
-  height: 32px;
-  color: var(--muted-silver);
-  transition: transform 0.2s ease, color 0.2s ease;
+  width: 64px;
+  height: 64px;
+  filter: brightness(0) saturate(100%) invert(85%) sepia(70%) saturate(750%) hue-rotate(358deg) brightness(102%) contrast(103%);
+  transition: transform 0.2s ease;
 }
 
 .trophy-label {
-  font-size: 11px;
-  color: var(--muted-silver);
+  font-size: 14px;
+  color: var(--accent-gold);
   font-weight: 500;
   opacity: 0;
   transition: opacity 0.2s ease;
   white-space: nowrap;
   text-align: center;
-  height: 14px;
-  line-height: 14px;
+  height: 18px;
+  line-height: 18px;
 }
 
-/* Hover — pure CSS, no JS style writes */
-.trophy-item:hover .og {
-  transform: scale(1.3);
-  color: var(--accent-cyan);
+/* Hover / keyboard focus — pure CSS, no JS style writes */
+.trophy-item:hover .og,
+.trophy-item:focus-visible .og {
+  transform: scale(1.8);
 }
 
-.trophy-item:hover .trophy-label {
+.trophy-item:hover .trophy-label,
+.trophy-item:focus-visible .trophy-label {
   opacity: 1;
 }
 
-/* Scroll-spy active state — gold glow per spec */
+/* Scroll-spy active state — gold glow per spec (recolor filter + drop-shadow) */
 .trophy-item.active .og {
-  color: var(--accent-gold);
-  filter: drop-shadow(0 0 8px var(--accent-gold));
+  filter: brightness(0) saturate(100%) invert(85%) sepia(70%) saturate(750%) hue-rotate(358deg) brightness(102%) contrast(103%) drop-shadow(0 0 10px var(--accent-gold));
 }
 
 .trophy-item.active .trophy-label {
   opacity: 1;
-  color: var(--accent-gold);
 }
 
 .trophy-scroll-btn {
@@ -955,12 +961,16 @@ body::after {
   }
 
   .trophy-item {
-    min-width: 56px;
+    min-width: 76px;
   }
 
   .trophy-item .og {
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .trophy-label {
+    font-size: 13px;
   }
 
   .trophy-scroll-btn {
