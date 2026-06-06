@@ -4359,156 +4359,325 @@ function buildBasedOnContent(root) {
 // 7. RELEASE DATE & RUNTIME SECTION
 // =============================================
 
-function buildTimeEraContent(root) {
-  /* Era 2-column layout (May 4, 2026): Year + Decades on left,
-     Runtime sliders + chips on right. */
-  const grid = document.createElement("div");
-  grid.className = "oft-era-grid";
-  const colLeft  = document.createElement("div"); colLeft.className  = "oft-era-col";
-  const colRight = document.createElement("div"); colRight.className = "oft-era-col";
-  grid.appendChild(colLeft);
-  grid.appendChild(colRight);
-  root.appendChild(grid);
+/* ERA-A constants (Phase 4) — computed once at load; shared by the builder
+   AND the read branch so the year span bounds can never disagree. */
+const ERA_YEAR_MIN = 1920;
+const ERA_YEAR_MAX = new Date().getFullYear();
 
-  colLeft.appendChild(makeSectionLabel("Specific Year"));
-  const yearRow = document.createElement("div");
-  yearRow.className = "input-row";
+/* ============================================================
+   ERA — "ERA A" COMPACT PANEL — Rebuilt 2026-06-06 (Phase 4)
+   Single-column locked layout consuming the redesign components:
+     A. Hero      — release-year histogram (static stub) + year dual
+                    OrbitSlider. The year scrubber is the SINGLE SOURCE
+                    OF TRUTH for release date.
+     B. Decades   — decade strip (.disco-chip) + jump-to-year (#yearInput)
+     C. Lower row — runtime card (dual slider + preset chips) +
+                    recency card (New Releases / Classics)
+   Decade / jump / recency chips and runtime preset chips are PURE
+   DRIVERS: they only call controller.setValues(...) and emit NO filter.
+   Only the two sliders are read (collectLabelsForSection reads
+   #oft-body-era._eraSliders). The year scrubber emits the lone
+   {type:"dateRange"} release filter; the runtime slider the lone
+   {type:"runtime"} — so the frozen query builder's last-write-wins
+   primary_release_date.* overwrite can never trigger.
+   Axis = indigo (panel data-axis="era"); slider fills stay cyan→gold;
+   histogram bars + active .disco-chips tint indigo via --axis.
+   ============================================================ */
+function buildTimeEraContent(root) {
+  /* Teardown controllers from a prior build first (mirror Ratings-C):
+     buildPanelBody wipes body.innerHTML but a property stashed on `root`
+     (= #oft-body-era) survives the wipe, so destroy() here clears any
+     leaked document-bound drag listeners before we recreate. */
+  if (root._eraSliders) {
+    try { root._eraSliders.year && root._eraSliders.year.destroy(); } catch (e) {}
+    try { root._eraSliders.runtime && root._eraSliders.runtime.destroy(); } catch (e) {}
+    root._eraSliders = null;
+  }
+
+  const hasSlider = (typeof OrbitSlider !== "undefined") && OrbitSlider && typeof OrbitSlider.create === "function";
+
+  const wrap = document.createElement("div");
+  wrap.className = "oft-era";
+  root.appendChild(wrap);
+
+  /* Controllers captured by the chip handlers below; populated at build end.
+     Handlers fire only at click time (post-build), so the object is filled
+     by then. If OrbitSlider is unavailable both stay null and chips no-op. */
+  const eraSliders = { year: null, runtime: null };
+
+  /* Single-select enforcement across the PURE-DRIVER chip groups. */
+  function clearYearPresets() {
+    wrap.querySelectorAll(".oft-era-decade.on, .oft-era-recency-chip.on")
+      .forEach(c => c.classList.remove("on"));
+  }
+  function clearRuntimePresets() {
+    wrap.querySelectorAll(".oft-era-rt-chip.on").forEach(c => c.classList.remove("on"));
+  }
+
+  /* ---- A. HERO: release timeline (histogram + year dual-slider) ---- */
+  const hero = document.createElement("div");
+  hero.className = "oft-era-hero";
+
+  const heroHead = document.createElement("div");
+  heroHead.className = "oft-era-head";
+  const heroLabel = document.createElement("span");
+  heroLabel.className = "oft-era-label";
+  heroLabel.textContent = "Release Timeline";
+  const yearReadout = document.createElement("span");
+  yearReadout.className = "oft-era-readout";
+  yearReadout.textContent = ERA_YEAR_MIN + " – " + ERA_YEAR_MAX;
+  heroHead.appendChild(heroLabel);
+  heroHead.appendChild(yearReadout);
+  hero.appendChild(heroHead);
+
+  const scrubber = document.createElement("div");
+  scrubber.className = "oft-era-scrubber";
+
+  /* Shared year→x mapping (Phase 4 follow-up): a year's horizontal position
+     on the scrubber scale — year MIN at 0% … year MAX at 100%, the SAME scale
+     OrbitSlider uses for knob positions. BOTH the histogram bars and the
+     decade buttons are positioned with this one helper, so they can never
+     drift apart. */
+  const yearToPct = (year) => (year - ERA_YEAR_MIN) / (ERA_YEAR_MAX - ERA_YEAR_MIN) * 100;
+  /* gapless bar width = one span-step of the scale, so bars centered on
+     yearToPct(year) touch edge-to-edge with no accumulating px gap. */
+  const eraBarWidthPct = 100 / (ERA_YEAR_MAX - ERA_YEAR_MIN);
+
+  /* Static SYNTHETIC release-year histogram STUB — one bar per year,
+     decorative only (mirrors Ratings-C, ORBIT-UI-PATTERNS.md B6). Shape:
+     gentle rise toward recent years + a 2000s–2010s swell. NOT real
+     distribution data — aria-hidden; do NOT treat as data. */
+  const histo = document.createElement("div");
+  histo.className = "histogram";
+  histo.setAttribute("aria-hidden", "true");
+  const yearBars = [];
+  for (let y = ERA_YEAR_MIN; y <= ERA_YEAR_MAX; y++) {
+    const t = (y - ERA_YEAR_MIN) / (ERA_YEAR_MAX - ERA_YEAR_MIN);     // 0..1 across the span
+    const ramp = Math.pow(t, 1.6);                                    // rise toward recent years
+    const swell = Math.exp(-Math.pow(y - 2010, 2) / (2 * 18 * 18));   // 2000s–2010s bulge
+    const g = Math.min(1, 0.25 * ramp + 0.75 * swell);
+    const bar = document.createElement("div");
+    bar.className = "histo-bar";
+    bar.style.height = Math.max(8, Math.round(g * 100)) + "%";
+    /* centered on the shared scale (.oft-era-scrubber .histo-bar is absolute +
+       translateX(-50%)); width is one gapless span-step. */
+    bar.style.left = yearToPct(y) + "%";
+    bar.style.width = eraBarWidthPct + "%";
+    bar.dataset.center = String(y);
+    histo.appendChild(bar);
+    yearBars.push(bar);
+  }
+  scrubber.appendChild(histo);
+
+  const yearSliderEl = document.createElement("div");
+  yearSliderEl.className = "slider";
+  scrubber.appendChild(yearSliderEl);
+  hero.appendChild(scrubber);
+  wrap.appendChild(hero);
+
+  /* toggle .is-active on the bars whose year falls within [lo,hi] */
+  function paintYearHistogram(lo, hi) {
+    yearBars.forEach(bar => {
+      const c = parseInt(bar.dataset.center, 10);
+      bar.classList.toggle("is-active", c >= lo && c <= hi);
+    });
+  }
+  /* repaint histogram + readout. Call after EVERY setValues too — setValues
+     deliberately does NOT fire onChange, so presets repaint manually. */
+  function syncYear(lo, hi) {
+    paintYearHistogram(lo, hi);
+    yearReadout.textContent = lo + " – " + hi;
+  }
+
+  /* ---- B. Decade strip (a positioned track inside the scrubber, aligned to
+     the histogram bars) + jump-to-year ---- */
+  const decGroup = document.createElement("div");
+  decGroup.className = "oft-era-decades";
+  /* half the widest decade button (px) — clamps ONLY the two end buttons so
+     1920s / 2020s never clip past the track edges. Interior buttons never
+     reach the clamp, so they stay exactly over their bars. */
+  const ERA_DECADE_HALF = 24;
+  const firstDecade = Math.floor(ERA_YEAR_MIN / 10) * 10;            // 1920
+  for (let d = firstDecade; d <= ERA_YEAR_MAX; d += 10) {
+    const decade = d;
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-decade";
+    chip.textContent = decade + "s";
+    /* Center the button over the bars it controls, on the SHARED yearToPct
+       scale: full decades land on their 10-yr midpoint; the final partial
+       decade (e.g. 2020s on a 2026 axis) centers on its actual covered span.
+       clamp() keeps the end buttons fully on-screen without measuring. The
+       center sits at `left` (translateX(-50%) recenters the box). */
+    const cover = Math.min(decade + 9, ERA_YEAR_MAX);
+    const centerPct = yearToPct((decade + cover) / 2);
+    chip.style.left = "clamp(" + ERA_DECADE_HALF + "px, " + centerPct + "%, calc(100% - " + ERA_DECADE_HALF + "px))";
+    chip.addEventListener("click", () => {
+      clearYearPresets();
+      chip.classList.add("on");
+      const lo = Math.max(decade, ERA_YEAR_MIN);
+      const hi = Math.min(decade + 9, ERA_YEAR_MAX);
+      if (eraSliders.year) eraSliders.year.setValues([lo, hi]);
+      syncYear(lo, hi);
+    });
+    decGroup.appendChild(chip);
+  }
+  /* The track lives INSIDE the scrubber so it shares the exact same content
+     width as the histogram + slider — the buttons line up with the bars on
+     one x-scale, with no magic offset to the hero card's padding. */
+  scrubber.appendChild(decGroup);
+
+  const decBlock = document.createElement("div");
+  decBlock.className = "oft-era-decades-block";
+  const decLabel = document.createElement("div");
+  decLabel.className = "oft-era-label";
+  decLabel.textContent = "Jump to a year";
+  decBlock.appendChild(decLabel);
+
+  /* jump-to-year — keep id #yearInput + reuse .input-row styling */
+  const jump = document.createElement("div");
+  jump.className = "oft-era-jump input-row";
   const yearInput = document.createElement("input");
   yearInput.type = "number";
   yearInput.id = "yearInput";
-  yearInput.placeholder = "e.g., 2020";
-  yearInput.min = "1900";
-  yearInput.max = "2030";
-  yearRow.appendChild(yearInput);
-  colLeft.appendChild(yearRow);
-
-  colLeft.appendChild(makeSectionLabel("Decades (when movie was released)"));
-  const releaseDecades = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-  const relDecadeGroup = document.createElement("div");
-  relDecadeGroup.className = "chip-group";
-  releaseDecades.forEach(d => {
-    const chip = makeChip(`${d}s`, "timeEra", { type: "decade", decade: d, subType: "release" }, { component: true });
-    chip.id = `date-decade-${d}`;
-    relDecadeGroup.appendChild(chip);
+  yearInput.placeholder = "Jump to year…";
+  yearInput.min = String(ERA_YEAR_MIN);
+  yearInput.max = String(ERA_YEAR_MAX);
+  const goBtn = document.createElement("button");
+  goBtn.type = "button";
+  goBtn.className = "disco-chip oft-era-go";
+  goBtn.textContent = "Go";
+  function jumpToYear() {
+    const Y = parseInt(yearInput.value, 10);
+    if (!isFinite(Y) || Y < ERA_YEAR_MIN || Y > ERA_YEAR_MAX) return;
+    clearYearPresets();
+    if (eraSliders.year) eraSliders.year.setValues([Y, Y]);
+    syncYear(Y, Y);
+  }
+  goBtn.addEventListener("click", jumpToYear);
+  yearInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); jumpToYear(); }
   });
-  colLeft.appendChild(relDecadeGroup);
+  jump.appendChild(yearInput);
+  jump.appendChild(goBtn);
+  decBlock.appendChild(jump);
+  wrap.appendChild(decBlock);
 
-  const quickGroup = document.createElement("div");
-  quickGroup.className = "chip-group";
-  quickGroup.style.marginTop = "12px";
-  const newRelease = makeChip("New Releases (6 months)", "timeEra", {
-    type: "dateRange",
-    subType: "release",
-    start: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    end: new Date().toISOString().split('T')[0]
-  }, { component: true });
-  const classic = makeChip("Classic (Pre-1980)", "timeEra", {
-    type: "dateRange",
-    subType: "release",
-    start: "1900-01-01",
-    end: "1979-12-31"
-  }, { component: true });
-  quickGroup.appendChild(newRelease);
-  quickGroup.appendChild(classic);
-  colLeft.appendChild(quickGroup);
+  /* ---- C. Lower row: runtime card + recency card ---- */
+  const lower = document.createElement("div");
+  lower.className = "oft-era-lower";
 
-  /* Right column: runtime — alias `root` so the existing right-side
-     code reads from the runtime column. */
-  const runtimeRoot = colRight;
-  runtimeRoot.appendChild(makeSectionLabel("Runtime (minutes)"));
-  const runtimeRow = document.createElement("div");
-  runtimeRow.className = "input-row";
-  runtimeRow.style.flexDirection = "column";
-  runtimeRow.style.gap = "12px";
+  /* runtime card */
+  const rtCard = document.createElement("div");
+  rtCard.className = "oft-era-card";
+  const rtHead = document.createElement("div");
+  rtHead.className = "oft-era-head";
+  const rtLabel = document.createElement("span");
+  rtLabel.className = "oft-era-label";
+  rtLabel.textContent = "Runtime";
+  const rtReadout = document.createElement("span");
+  rtReadout.className = "oft-era-readout";
+  rtReadout.textContent = "0 – 300 min";
+  rtHead.appendChild(rtLabel);
+  rtHead.appendChild(rtReadout);
+  rtCard.appendChild(rtHead);
 
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "runtimeMin";
-  minSlider.min = "0";
-  minSlider.max = "300";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "0";
-  minValue.id = "runtimeMinValue";
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = minSlider.value;
-    const maxSl = document.getElementById("runtimeMax");
-    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("runtimeMaxValue").textContent = minSlider.value;
-    }
-  });
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const rtSliderEl = document.createElement("div");
+  rtSliderEl.className = "slider";
+  rtCard.appendChild(rtSliderEl);
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "runtimeMax";
-  maxSlider.min = "0";
-  maxSlider.max = "300";
-  maxSlider.value = "300";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "300";
-  maxValue.id = "runtimeMaxValue";
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = maxSlider.value;
-    const minSl = document.getElementById("runtimeMin");
-    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("runtimeMinValue").textContent = maxSlider.value;
-    }
-  });
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
+  function syncRuntime(min, max) {
+    rtReadout.textContent = min + " – " + max + " min";
+  }
 
-  runtimeRow.appendChild(minRow);
-  runtimeRow.appendChild(maxRow);
-  runtimeRoot.appendChild(runtimeRow);
-
-  const runtimeQuick = document.createElement("div");
-  runtimeQuick.className = "chip-group";
-  runtimeQuick.style.marginTop = "12px";
+  const rtChips = document.createElement("div");
+  rtChips.className = "oft-era-rt-chips";
   [
-    { label: "Short Films (<60min)", min: 0, max: 59 },
-    { label: "Standard (90-120min)", min: 90, max: 120 },
-    { label: "Long (2h+)", min: 120, max: 300 },
-    { label: "Epic (3h+)", min: 180, max: 300 }
+    { label: "Short", min: 0, max: 90 },
+    { label: "Standard", min: 90, max: 120 },
+    { label: "Long", min: 120, max: 150 },
+    { label: "Epic", min: 150, max: 300 }
   ].forEach(preset => {
-    const chip = makeChip(preset.label, "timeEra", {
-      type: "runtime",
-      subType: "release",
-      min: preset.min,
-      max: preset.max
-    }, { component: true });
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-rt-chip";
+    chip.textContent = preset.label;
     chip.addEventListener("click", () => {
-      document.getElementById("runtimeMin").value = preset.min;
-      document.getElementById("runtimeMax").value = preset.max;
-      document.getElementById("runtimeMinValue").textContent = preset.min;
-      document.getElementById("runtimeMaxValue").textContent = preset.max;
+      clearRuntimePresets();
+      chip.classList.add("on");
+      if (eraSliders.runtime) eraSliders.runtime.setValues([preset.min, preset.max]);
+      syncRuntime(preset.min, preset.max);
     });
-    runtimeQuick.appendChild(chip);
+    rtChips.appendChild(chip);
   });
-  runtimeRoot.appendChild(runtimeQuick);
+  rtCard.appendChild(rtChips);
+  lower.appendChild(rtCard);
+
+  /* recency card */
+  const recCard = document.createElement("div");
+  recCard.className = "oft-era-card oft-era-recency";
+  const recLabel = document.createElement("div");
+  recLabel.className = "oft-era-label";
+  recLabel.textContent = "Quick Picks";
+  recCard.appendChild(recLabel);
+  [
+    { label: "New Releases", sub: "Last 2 years", lo: ERA_YEAR_MAX - 1, hi: ERA_YEAR_MAX },
+    { label: "Classics", sub: "Pre-1980", lo: ERA_YEAR_MIN, hi: 1979 }
+  ].forEach(rc => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-recency-chip";
+    const main = document.createElement("span");
+    main.className = "oft-era-recency-main";
+    main.textContent = rc.label;
+    const sub = document.createElement("span");
+    sub.className = "oft-era-recency-sub";
+    sub.textContent = rc.sub;
+    chip.appendChild(main);
+    chip.appendChild(sub);
+    chip.addEventListener("click", () => {
+      clearYearPresets();
+      chip.classList.add("on");
+      const lo = Math.max(rc.lo, ERA_YEAR_MIN);
+      const hi = Math.min(rc.hi, ERA_YEAR_MAX);
+      if (eraSliders.year) eraSliders.year.setValues([lo, hi]);
+      syncYear(lo, hi);
+    });
+    recCard.appendChild(chip);
+  });
+  lower.appendChild(recCard);
+  wrap.appendChild(lower);
+
+  /* ---- wire the OrbitSlider engines ---- */
+  if (!hasSlider) {
+    /* Defensive: if the slider module failed to load, the chips + inputs
+       still render; the sliders just stay absent and the read site guards
+       on the stash being present (it won't be set below). */
+    console.warn("[Era-A] OrbitSlider unavailable — year/runtime sliders not built.");
+    return;
+  }
+
+  const yearController = OrbitSlider.create(yearSliderEl, {
+    mode: "dual", min: ERA_YEAR_MIN, max: ERA_YEAR_MAX, step: 1,
+    values: [ERA_YEAR_MIN, ERA_YEAR_MAX],
+    ariaLabels: ["Earliest release year", "Latest release year"],
+    onChange: function (v) { clearYearPresets(); syncYear(v[0], v[1]); }
+  });
+  const runtimeController = OrbitSlider.create(rtSliderEl, {
+    mode: "dual", min: 0, max: 300, step: 5, values: [0, 300],
+    ariaLabels: ["Minimum runtime", "Maximum runtime"],
+    onChange: function (v) { clearRuntimePresets(); syncRuntime(v[0], v[1]); }
+  });
+
+  eraSliders.year = yearController;
+  eraSliders.runtime = runtimeController;
+  /* Stash on the panel body (#oft-body-era = `root`); survives the innerHTML
+     wipe so the read site + the next rebuild's teardown reach them. */
+  root._eraSliders = eraSliders;
+
+  /* initial paint (setValues never fires onChange, so sync manually) */
+  syncYear(ERA_YEAR_MIN, ERA_YEAR_MAX);
+  syncRuntime(0, 300);
 }
 
 // =============================================
@@ -6088,50 +6257,41 @@ function collectLabelsForSection(sectionKey) {
         return { label: chip.textContent, value };
       });
 
-    case "timeEra":
-      // Year input
-      const yearInput = document.getElementById("yearInput");
-      if (yearInput && yearInput.value) {
-        results.push({
-          label: `Year: ${yearInput.value}`,
-          value: { type: "year", year: parseInt(yearInput.value), subType: "release" }
-        });
+    case "timeEra": {
+      /* Phase 4 (Era-A): read ONLY the two OrbitSlider controllers stashed
+         on the panel body (#oft-body-era._eraSliders). The year scrubber is
+         the single source of truth for release date; the runtime slider for
+         runtime. Decade / jump / recency chips + runtime presets are pure
+         DRIVERS (they call setValues only) and are NOT read here — so exactly
+         one primary_release_date.* + one with_runtime.* filter can ever exist.
+         Value shapes match the (frozen) query builder + preset-restore path. */
+      const eraBody = document.getElementById("oft-body-era");
+      const eraSliders = eraBody && eraBody._eraSliders;
+
+      // Release window — dual slider; full-timeline guard emits nothing
+      if (eraSliders && eraSliders.year) {
+        const [lo, hi] = eraSliders.year.getValues();
+        if (lo > ERA_YEAR_MIN || hi < ERA_YEAR_MAX) {
+          results.push({
+            label: `Released ${lo}–${hi}`,
+            value: { type: "dateRange", subType: "release", start: `${lo}-01-01`, end: `${hi}-12-31` }
+          });
+        }
       }
 
-      // Release decade chips + dateRange + runtime chips
-      const releaseChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.subType === "release";
-        });
-      releaseChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        let label = chip.textContent;
-        if (value.type === "decade") label = `Released ${value.decade}s`;
-        else if (value.type === "dateRange") label = chip.textContent;
-        else if (value.type === "runtime") label = chip.textContent;
-        results.push({ label, value });
-      });
-
-      // Runtime sliders
-      const runtimeMin = document.getElementById("runtimeMin");
-      const runtimeMax = document.getElementById("runtimeMax");
-      if (runtimeMin && runtimeMax) {
-        const min = parseInt(runtimeMin.value);
-        const max = parseInt(runtimeMax.value);
+      // Runtime — dual slider; default [0,300] emits nothing
+      if (eraSliders && eraSliders.runtime) {
+        const [min, max] = eraSliders.runtime.getValues();
         if (min > 0 || max < 300) {
-          // Don't add if a runtime chip already selected
-          const hasRuntimeChip = results.some(r => r.value.type === "runtime");
-          if (!hasRuntimeChip) {
-            results.push({
-              label: `Runtime: ${min}-${max} min`,
-              value: { type: "runtime", subType: "release", min, max }
-            });
-          }
+          results.push({
+            label: `Runtime: ${min}-${max} min`,
+            value: { type: "runtime", subType: "release", min, max }
+          });
         }
       }
 
       return results;
+    }
 
     case "ratingsContent": {
       /* Phase 3b: read the OrbitSlider controllers stashed on the panel body
