@@ -285,5 +285,52 @@
     <p class="note">Check: overlay floats over the dummy box (no layout shift); input border + result hover + overlay border are emerald (axis); tags are emerald/gold/purple by data-type; overflow scrolls past ~280px.</p>
   </section>
 
+  <!-- ===== Phase 3a: INTERACTIVE sliders (discover-slider.js) =====
+       Live verification surface for OrbitSlider.create. The .slider divs
+       below are intentionally EMPTY (no .track/.fill/.knob markup) to also
+       prove the module creates the skeleton. Ratings axis = rose furniture;
+       the fill stays cyan→gold (CSS-owned), unaffected by the axis. -->
+  <section class="axis-block" data-axis="ratings">
+    <h2>Interactive sliders (Phase 3a) — drag · keyboard · ARIA</h2>
+
+    <div class="row">
+      <span class="label">Single — minimum votes (0–50,000, step 100) · value: <strong id="demo-single-readout">0</strong></span>
+      <div class="slider slider-wrap" id="demo-single"></div>
+    </div>
+
+    <div class="row">
+      <span class="label">Dual — score range (0.0–10.0, step 0.1) · range: <strong id="demo-dual-readout">0.0 – 10.0</strong></span>
+      <div class="slider slider-wrap" id="demo-dual"></div>
+    </div>
+
+    <p class="note">
+      Check: single knob drags + arrow/Home/End nudge, fill 0→knob, readout tracks, clamps at 0 / 50,000;
+      dual both knobs drag, fill spans BETWEEN them, low ≤ high enforced (no cross), readout "low – high" tracks;
+      fill renders <strong>cyan→gold</strong> (not rose); Tab focuses each knob, arrows + Home/End work and
+      <code>aria-valuenow</code> updates; console clean.
+    </p>
+  </section>
+
+  <script src="discover-slider.js"></script>
+  <script>
+    /* Throwaway harness wiring — Phase 3a verification only. */
+    (function () {
+      var singleOut = document.getElementById("demo-single-readout");
+      OrbitSlider.create(document.getElementById("demo-single"), {
+        mode: "single", min: 0, max: 50000, step: 100, value: 0,
+        ariaLabel: "Minimum votes",
+        onChange: function (v) { singleOut.textContent = v.toLocaleString(); }
+      });
+
+      var dualOut = document.getElementById("demo-dual-readout");
+      function showRange(vals) { dualOut.textContent = vals[0].toFixed(1) + " – " + vals[1].toFixed(1); }
+      OrbitSlider.create(document.getElementById("demo-dual"), {
+        mode: "dual", min: 0, max: 10, step: 0.1, values: [0, 10],
+        ariaLabels: ["Minimum score", "Maximum score"],
+        onChange: showRange
+      });
+    })();
+  </script>
+
 </body>
 </html>
