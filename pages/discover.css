@@ -881,6 +881,34 @@ html, body {
   filter: grayscale(0.6);
 }
 
+/* ZERO-DISABLED STATE (Option B — 2026-06-06) — at a normal-branch zero the
+   Launch button STAYS the visible landmark but goes inert: a greyed surface
+   (still legible, so the no-filters :disabled opacity/grayscale above is
+   overridden) with a two-line label and a square bottom so the guidance block
+   sits flush beneath it. */
+.launch-orbit-btn.is-zero-disabled {
+  opacity: 1;
+  filter: none;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(var(--cosmic-blue-rgb), 0.85);
+  color: var(--muted-silver);
+  border-radius: 0;
+}
+.launch-orbit-btn.is-zero-disabled .launch-orbit-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+.launch-orbit-btn.is-zero-disabled .launch-orbit-sub {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: none;
+  color: var(--danger-red);
+}
+
 /* ============================================
    MORE FILTERS MODAL
 ============================================ */
@@ -5661,57 +5689,67 @@ html, body {
 }
 
 /* ============================================================
-   LAUNCH-BUTTON TAKEOVER (Option C) — zero-results guidance
-   Added 2026-06-06. Replaces the retired #orbitZeroGuidance
-   under-count element. The same engine (.ozg-* rows) now renders
-   into #launchTakeover, which sits in .sidebar-actions where the
-   Launch CTA was. Geometry matches the sidebar launch override
-   (full-width, 64px min-height, square corners); cyan surface for
-   State 2/3. Tokens only (Rule 12) — the launch button's hardcoded
-   color/hover literals are deliberately NOT propagated here.
+   ZERO-RESULTS GUIDANCE BLOCK (Option B) — below the Launch button
+   Added 2026-06-06 (re-homed from the Option C button takeover).
+   #launchTakeover is now a SEPARATE, roomy guidance surface that
+   expands directly below #launchCard — NOT boxed to the button's
+   64px geometry. It sizes to content, squares its top corners, and
+   a dashed cyan divider joins it flush to the (square-bottomed)
+   disabled button so the two read as one unit. The negative top
+   margin cancels the .sidebar-actions 10px gap for that flush join.
+   Tokens only (Rule 12). The .ozg-* rows are reused unchanged.
    ============================================================ */
 .launch-takeover {
   width: 100%;
-  min-height: 64px;
-  padding: 16px 20px;
+  margin-top: -10px;
+  padding: 16px 20px 18px;
   border-radius: 0;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  border-top: 1px dashed rgba(var(--accent-cyan-rgb), 0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   line-height: 1.5;
   background: rgba(var(--accent-cyan-rgb), 0.06);
-  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
   animation: card-entrance 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 .launch-takeover[hidden] {
   display: none;
 }
+/* Heading for the roomy block (State 2 "No films in this orbit" / State 3
+   "Here's the quickest fix" / structural-zero floor lead-in). Matches ORBIT's
+   .focus-section-label (Orbitron, uppercase, 700, 1.5px) scaled up so it reads
+   as a real heading beside the count/labels. */
+.launch-takeover .ozg-heading,
 .launch-takeover .ozg-prompt {
-  color: var(--ghost-gray);
+  color: var(--film-white);
   font-family: var(--font-display);
-  letter-spacing: 0.06em;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  font-size: 9px;
+  font-size: 14px;
+  font-weight: 700;
 }
 .launch-takeover .ozg-loading {
   color: var(--accent-cyan);
 }
 .launch-takeover .ozg-floor {
   display: block;
-  margin-top: 3px;
+  margin-top: 5px;
   color: var(--ghost-gray);
-  font-size: 10px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.4;
 }
 .launch-takeover .ozg-trigger {
-  margin-top: 6px;
+  margin-top: 10px;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   color: var(--accent-cyan);
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 600;
   font-family: var(--font-body);
   text-decoration: underline;
 }
@@ -5721,8 +5759,8 @@ html, body {
 .launch-takeover .ozg-suggestions {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 8px;
+  gap: 8px;
+  margin-top: 12px;
   width: 100%;
 }
 .launch-takeover .ozg-suggestion {
@@ -5731,10 +5769,10 @@ html, body {
   background: rgba(var(--accent-cyan-rgb), 0.06);
   border: 1px solid rgba(var(--accent-cyan-rgb), 0.25);
   border-radius: 8px;
-  padding: 7px 10px;
+  padding: 10px 12px;
   cursor: pointer;
   color: var(--film-white);
-  font-size: 11px;
+  font-size: 14px;
   font-family: var(--font-body);
   transition: border-color 0.15s ease, background 0.15s ease;
 }
@@ -5752,7 +5790,9 @@ html, body {
 }
 .launch-takeover .ozg-sug-count {
   color: var(--accent-gold);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
 }
 
 /* ============================================================

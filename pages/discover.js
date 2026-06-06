@@ -142,6 +142,12 @@ const orbitPanelActions = document.getElementById("orbitPanelActions");
 const launchCard = document.getElementById("launchCard");
 const clearAllButton = document.getElementById("clearAllButton");
 
+/* Zero-results guidance (Option B — 2026-06-06): true while a normal-branch
+   zero is showing its below-button guidance. Declared early (before any
+   updateUIFromState call) so the disabled-coordination at ~1605 never hits a
+   temporal dead zone. Owned by setLaunchZeroState / hideZeroGuidance. */
+let _zeroGuidanceActive = false;
+
 let searchDebounceTimer;
 
 const SEARCH_PLACEHOLDERS = {
@@ -1602,7 +1608,11 @@ focusCloseButton.addEventListener("click", (e) => {
 
 function updateUIFromState() {
   const hasFilters = state.filters.length > 0;
-  launchCard.disabled = !hasFilters;
+  /* Launch is disabled when there are no filters OR a normal-branch zero is
+     showing its guidance (the two rules are OR'd so they don't fight — see
+     setLaunchZeroState / _zeroGuidanceActive). The two-line zero label is
+     owned by setLaunchZeroState; here we only resolve the disabled flag. */
+  launchCard.disabled = !hasFilters || _zeroGuidanceActive;
   
   if (!hasFilters) {
     orbitFiltersEmpty.hidden = false;
@@ -2546,6 +2556,11 @@ launchCard.addEventListener("click", async () => {
       if (totalMovies === 0) {
         var hs = document.getElementById('hyperspaceOverlay');
         if (hs) hs.hidden = true;
+        /* RENDER-RACE FIX (Option B): kill any pending debounced counter so a
+           trailing fetchFilmCount tick can't re-render the collapsed State 2
+           over the State 3 we auto-expand here. Without this, a launch click
+           before the 600ms counter resolves sometimes lands in State 2. */
+        clearTimeout(_filmCountTimer);
         showZeroGuidanceAffordance(state.filters, queryParams, true);
         var ozg = document.getElementById('launchTakeover');
         if (ozg && typeof ozg.scrollIntoView === 'function') {
@@ -6587,8 +6602,15 @@ function fetchFilmCount() {
     return;
   }
 
-  countEl.style.display = 'block';
-  countNumber.textContent = '…';
+  /* RENDER-RACE FIX (Option B): while a zero-guidance block is showing, keep
+     #orbitFilmCount hidden through the recount instead of flashing "…" over
+     the transition. The count is revealed again only when a resolved number is
+     written below (normal/awards branches) — or stays hidden if we land on
+     another zero. The "0 films" lives in the button sub-line meanwhile. */
+  if (!_zeroGuidanceActive) {
+    countEl.style.display = 'block';
+    countNumber.textContent = '…';
+  }
 
   clearTimeout(_filmCountTimer);
   _filmCountTimer = setTimeout(function () {
@@ -6876,36 +6898,55 @@ var ZERO_GUIDANCE_BAND_HIGH = 75;
 var _zeroGuidanceFilters = null;
 var _zeroGuidanceQuery = null;
 
-/* Option C (2026-06-06): the zero-guidance engine now renders INTO the
-   launch-button takeover surface instead of the retired #orbitZeroGuidance.
-   This is the single render-target chokepoint — all four DOM-writing
-   functions resolve through it, so repointing it here moves State 2/3
-   rendering into #launchTakeover without touching the engine logic. */
+/* Option B (2026-06-06): the zero-guidance engine renders INTO the below-button
+   guidance block (#launchTakeover, no longer a button replacement). This is the
+   single render-target chokepoint — all four DOM-writing functions resolve
+   through it, so the engine logic is untouched. */
 function _getZeroGuidanceEl() {
   return document.getElementById('launchTakeover');
 }
 
-/* Show/hide coordinator — swap the real Launch button for the takeover.
-   #launchCard is NEVER removed from the DOM (display:none only) because
-   .disabled / .click() / its listener reference it directly. The live
-   count is hidden while the takeover shows so "0 films match" doesn't sit
-   alongside it; on revert it's restored only if filters still exist. */
-function _setTakeoverActive(active) {
+/* Button-state helper (Option B) — #launchCard STAYS VISIBLE as the landmark.
+   At a normal-branch zero it goes to a disabled two-line label ("Launch
+   Discovery" / red "0 films match — nothing to launch"); on revert it returns
+   to the normal single-line CTA and its disabled flag is re-resolved from the
+   filter count (mirroring updateUIFromState's no-filters rule). */
+function setLaunchZeroState(active) {
   var lc = document.getElementById('launchCard');
+  if (!lc) return;
+  if (active) {
+    lc.classList.add('is-zero-disabled');
+    lc.disabled = true;
+    lc.innerHTML =
+      '<span class="launch-orbit-label">Launch Discovery</span>' +
+      '<span class="launch-orbit-sub">0 films match &mdash; nothing to launch</span>';
+  } else {
+    lc.classList.remove('is-zero-disabled');
+    lc.innerHTML = 'Launch Discovery';
+    var hasF = !!(typeof state !== 'undefined' && state &&
+      Array.isArray(state.filters) && state.filters.length > 0);
+    lc.disabled = !hasF;
+  }
+}
+
+/* Show/hide coordinator (Option B) — the disable-in-place + expand-below swap.
+   #launchCard is never hidden now: it toggles the two-line disabled zero state
+   while the guidance block expands directly below it. _zeroGuidanceActive is
+   set here (the single chokepoint) so updateUIFromState's disabled rule and the
+   "…" count-gate both read a consistent flag. The live count is hidden while
+   guidance shows; on revert it is NOT force-shown here — the count's own
+   resolved-number write-paths reveal it (avoids a stale "…" flash). */
+function _setTakeoverActive(active) {
+  _zeroGuidanceActive = !!active;
   var tk = document.getElementById('launchTakeover');
   var fc = document.getElementById('orbitFilmCount');
   if (active) {
-    if (lc) lc.style.display = 'none';
+    setLaunchZeroState(true);
     if (fc) fc.style.display = 'none';
     if (tk) { tk.hidden = false; tk.style.display = 'block'; }
   } else {
-    if (lc) lc.style.display = '';
+    setLaunchZeroState(false);
     if (tk) { tk.hidden = true; tk.style.display = 'none'; }
-    if (fc) {
-      var hasF = !!(typeof state !== 'undefined' && state &&
-        Array.isArray(state.filters) && state.filters.length > 0);
-      fc.style.display = hasF ? 'block' : 'none';
-    }
   }
 }
 
@@ -6947,19 +6988,13 @@ function hideZeroGuidance() {
   _zeroGuidanceFilters = null;
   _zeroGuidanceQuery = null;
   var el = _getZeroGuidanceEl();
-  var wasActive = !!(el && !el.hidden);
-  var focusWasInside = !!(el && el.contains(document.activeElement));
   if (el) {
     el.innerHTML = '';
   }
-  /* Swap the takeover back out for the real Launch button + count. */
+  /* Restore the normal Launch button + let the count's own write-paths show
+     it. No focus juggling: #launchCard was never hidden (Option B), so there's
+     nothing to restore focus to. */
   _setTakeoverActive(false);
-  /* Restore focus to Launch only when we were actually showing the takeover
-     and focus was inside it (avoids yanking focus from unrelated controls). */
-  if (wasActive && focusWasInside) {
-    var lc = document.getElementById('launchCard');
-    if (lc && typeof lc.focus === 'function') lc.focus();
-  }
 }
 
 /* Collapsed state — a quiet one-line prompt + "see what to change"
@@ -6974,8 +7009,8 @@ function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
   var warn = document.getElementById('orbitStreamingWarning');
   if (warn) warn.style.display = 'none';
 
-  /* Swap the Launch CTA out for the takeover surface (hides #launchCard +
-     the live count, reveals #launchTakeover). */
+  /* Disable #launchCard in place (two-line zero label) + hide the live count,
+     and reveal the below-button guidance block. */
   _setTakeoverActive(true);
 
   /* Launch path (autoExpand) — the user has committed to launching, so the
@@ -6987,9 +7022,11 @@ function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
     return;
   }
 
-  /* STATE 2 — collapsed prompt; NO recounts until tapped. */
+  /* STATE 2 — collapsed prompt; NO recounts until tapped. The "0 films /
+     nothing to launch" message now lives in the button sub-line (Option B),
+     so the block heading just frames the opt-in trigger. */
   el.innerHTML =
-    '<span class="ozg-prompt lt-prompt">Nothing to launch &mdash;</span>' +
+    '<span class="ozg-heading">No films in this orbit</span>' +
     '<button type="button" class="ozg-trigger">see what to change</button>';
   el.style.display = 'block';
 
