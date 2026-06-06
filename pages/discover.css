@@ -6019,6 +6019,60 @@ html, body {
 }
 
 /* ============================================================
+   RATINGS — VARIANT C COMPACT PANEL (Phase 3b — 2026-06-06)
+   Single-column stacked layout consuming the slider + histogram +
+   .disco-chip components. Replaces the old 2-col .oft-ratings-grid
+   USAGE (the builder no longer emits that grid; its rules above are
+   left intact because they're shared with Production — Rule 7).
+   Rose furniture comes from the panel's data-axis="ratings" tokens
+   (--axis / --axis-hex set in discover-components.css) — no hardcoded hex.
+   ============================================================ */
+.oft-ratings-c {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  height: 100%;
+  padding: 4px 14px 8px;
+  overflow-y: auto;
+}
+.oft-rc-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.oft-rc-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.oft-rc-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ghost-gray);
+}
+.oft-rc-readout {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--axis-hex);          /* rose, inherited from data-axis="ratings" */
+}
+/* histogram sits directly above the score slider — small gap, no overlap */
+.oft-rc-block .histogram {
+  margin-bottom: 2px;
+}
+.oft-rc-block .slider {
+  width: 100%;
+}
+.oft-rc-note {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--muted-silver);
+  margin: 4px 0 0;
+}
+
+/* ============================================================
    DISCOVERY ONBOARDING POPUP — Added 2026-05-05
    Inactivity-triggered onboarding popup. Visual fidelity to
    discovery-popup-mockup-8.html. All hardcoded rgba ported to

@@ -440,7 +440,7 @@
               <div class="oft-panel-body" id="oft-body-era"></div>
             </div>
 
-            <div class="oft-panel" id="oft-panel-ratings" data-tab="ratings" data-section="ratingsContent">
+            <div class="oft-panel" id="oft-panel-ratings" data-tab="ratings" data-section="ratingsContent" data-axis="ratings">
               <div class="oft-panel-header">
                 <div class="orbit-icon icon-ratings"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
                 <div class="oft-panel-meta">
@@ -813,6 +813,9 @@
   <script src="era-decade-map.js"></script>
   <script src="theme-taxonomy.js"></script>
   <script src="../data/keyword-ids.js"></script>
+  <!-- Reusable slider engine (Phase 3a) — must load before discover.js so
+       OrbitSlider is defined when the Ratings-C panel builds (Phase 3b). -->
+  <script src="../components/discover-slider.js"></script>
   <script src="discover.js"></script>
   <script src="../components/discover-carousel.js"></script>
   <script src="../components/shortlist-badge.js"></script>

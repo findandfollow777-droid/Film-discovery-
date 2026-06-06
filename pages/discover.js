@@ -4501,163 +4501,153 @@ function buildTimeEraContent(root) {
 // =============================================
 
 function buildRatingsContentSection(root) {
-  /* Ratings 2-column layout (May 4, 2026): Quality Score sliders +
-     chips + Min Votes on the left, Content Rating + cert chips on
-     the right. The duplicate "Ratings & Votes" header is dropped —
-     the column section labels carry that information already. */
-  const grid = document.createElement("div");
-  grid.className = "oft-ratings-grid";
-  const colLeft  = document.createElement("div"); colLeft.className  = "oft-ratings-col";
-  const colRight = document.createElement("div"); colRight.className = "oft-ratings-col";
-  grid.appendChild(colLeft);
-  grid.appendChild(colRight);
-  root.appendChild(grid);
+  /* ============================================================
+     RATINGS — VARIANT C COMPACT PANEL — Rebuilt 2026-06-06 (Phase 3b)
+     Stacked single column consuming the redesign components:
+       1. Score range  — dual OrbitSlider (0–10, .1) + static histogram above
+       2. Min votes     — single OrbitSlider (0–50,000, 100)
+       3. Age cert      — .disco-chip chips (Era pattern) + US-cert note
+     OrbitSlider = components/discover-slider.js (Phase 3a). Axis = rose
+     (panel carries data-axis="ratings"); slider fills stay cyan→gold;
+     histogram bars are axis-tinted (rose). Deliberately NARROWER than the
+     old B2 landing — NO score dial, NO score quick-chips, NO vote buckets,
+     NO preset column (ORBIT-UI-PATTERNS.md B3, variant C). Read site +
+     query params unchanged: still {type:"rating"|"votes"|"certification"}.
+     ============================================================ */
 
-  /* All "root.appendChild" below this point in this function targets
-     the left column until the divider; right-column code is the
-     SUITABILITY section which we re-route to colRight. */
+  /* Teardown controllers from a prior build first. buildPanelBody wipes
+     body.innerHTML but a property stashed on `root` (= #oft-body-ratings)
+     survives the wipe, so destroy() here clears any leaked document-bound
+     drag listeners (Phase 3a destroy()) before we recreate. */
+  if (root._ratingSliders) {
+    try { root._ratingSliders.score && root._ratingSliders.score.destroy(); } catch (e) {}
+    try { root._ratingSliders.votes && root._ratingSliders.votes.destroy(); } catch (e) {}
+    root._ratingSliders = null;
+  }
 
-  colLeft.appendChild(makeSectionLabel("Quality Score Range (0-10)"));
-  const ratingRow = document.createElement("div");
-  ratingRow.className = "input-row";
-  ratingRow.style.flexDirection = "column";
-  ratingRow.style.gap = "12px";
+  const hasSlider = (typeof OrbitSlider !== "undefined") && OrbitSlider && typeof OrbitSlider.create === "function";
 
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "ratingMin";
-  minSlider.min = "0";
-  minSlider.max = "10";
-  minSlider.step = "0.1";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "0.0";
-  minValue.id = "ratingMinValue";
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = parseFloat(minSlider.value).toFixed(1);
-    const maxSl = document.getElementById("ratingMax");
-    if (parseFloat(minSlider.value) > parseFloat(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("ratingMaxValue").textContent = parseFloat(minSlider.value).toFixed(1);
-    }
-  });
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const wrap = document.createElement("div");
+  wrap.className = "oft-ratings-c";
+  root.appendChild(wrap);
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "ratingMax";
-  maxSlider.min = "0";
-  maxSlider.max = "10";
-  maxSlider.step = "0.1";
-  maxSlider.value = "10";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "10.0";
-  maxValue.id = "ratingMaxValue";
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = parseFloat(maxSlider.value).toFixed(1);
-    const minSl = document.getElementById("ratingMin");
-    if (parseFloat(maxSlider.value) < parseFloat(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("ratingMinValue").textContent = parseFloat(maxSlider.value).toFixed(1);
-    }
-  });
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
+  /* ---- 1. SCORE RANGE: readout + static histogram + dual slider ---- */
+  const scoreBlock = document.createElement("div");
+  scoreBlock.className = "oft-rc-block";
 
-  ratingRow.appendChild(minRow);
-  ratingRow.appendChild(maxRow);
-  colLeft.appendChild(ratingRow);
+  const scoreHead = document.createElement("div");
+  scoreHead.className = "oft-rc-head";
+  const scoreLabel = document.createElement("span");
+  scoreLabel.className = "oft-rc-label";
+  scoreLabel.textContent = "Quality score";
+  const scoreReadout = document.createElement("span");
+  scoreReadout.className = "oft-rc-readout";
+  scoreReadout.textContent = "0.0 – 10.0";
+  scoreHead.appendChild(scoreLabel);
+  scoreHead.appendChild(scoreReadout);
+  scoreBlock.appendChild(scoreHead);
 
-  const ratingQuick = document.createElement("div");
-  ratingQuick.className = "chip-group";
-  ratingQuick.style.marginTop = "12px";
-  [
-    { label: "Certified Fresh (8.0+)", min: 8.0, max: 10.0 },
-    { label: "Hidden Gems (6.5-7.5)", min: 6.5, max: 7.5 },
-    { label: "Cult Classics (<6.0)", min: 0, max: 6.0 }
-  ].forEach(preset => {
-    const chip = makeChip(preset.label, "ratingsContent", {
-      type: "rating",
-      min: preset.min,
-      max: preset.max
+  /* Static histogram STUB — no real score distribution exists at panel-
+     render time (documented in ORBIT-UI-PATTERNS.md B6). Fixed bell shape:
+     low at 0–3, peak ~6.8, taper to 9–10. .is-active mirrors the slider
+     range. Real distribution is a later sub-phase — do NOT treat as data. */
+  const histo = document.createElement("div");
+  histo.className = "histogram";
+  histo.setAttribute("aria-hidden", "true");
+  const BAR_COUNT = 24, PEAK = 6.8, SPREAD = 1.7;
+  const bars = [];
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const centerScore = (i + 0.5) * 10 / BAR_COUNT;
+    const g = Math.exp(-Math.pow(centerScore - PEAK, 2) / (2 * SPREAD * SPREAD)); // 0..1
+    const bar = document.createElement("div");
+    bar.className = "histo-bar";
+    bar.style.height = Math.max(8, Math.round(g * 100)) + "%";
+    bar.dataset.center = centerScore.toFixed(3);
+    histo.appendChild(bar);
+    bars.push(bar);
+  }
+  scoreBlock.appendChild(histo);
+
+  /* toggle .is-active on the bars whose score band falls within [lo,hi] */
+  function paintHistogram(lo, hi) {
+    bars.forEach(bar => {
+      const c = parseFloat(bar.dataset.center);
+      bar.classList.toggle("is-active", c >= lo && c <= hi);
     });
-    chip.addEventListener("click", () => {
-      document.getElementById("ratingMin").value = preset.min;
-      document.getElementById("ratingMax").value = preset.max;
-      document.getElementById("ratingMinValue").textContent = preset.min.toFixed(1);
-      document.getElementById("ratingMaxValue").textContent = preset.max.toFixed(1);
-    });
-    ratingQuick.appendChild(chip);
-  });
-  colLeft.appendChild(ratingQuick);
+  }
 
-  colLeft.appendChild(makeSectionLabel("Minimum Votes (reliability)"));
-  const voteGroup = document.createElement("div");
-  voteGroup.className = "chip-group";
-  /* 2026-05-17: TMDB's all-time vote-count leader sits around 40k
-     (Interstellar 39.7k, Inception 39.2k). 50k/100k/250k chips
-     always returned 0, so capped at 30k+ which matches TMDB's
-     realistic data ceiling (~10 films at 30k+). */
-  [
-    { label: "100+", votes: 100 },
-    { label: "1,000+", votes: 1000 },
-    { label: "5,000+", votes: 5000 },
-    { label: "10,000+", votes: 10000 },
-    { label: "20,000+", votes: 20000 },
-    { label: "25,000+", votes: 25000 },
-    { label: "30,000+", votes: 30000 }
-  ].forEach(v => {
-    const chip = makeChip(v.label, "ratingsContent", { type: "votes", min: v.votes });
-    chip.id = `votes-${v.votes}`;
-    voteGroup.appendChild(chip);
-  });
-  colLeft.appendChild(voteGroup);
+  const scoreSliderEl = document.createElement("div");
+  scoreSliderEl.className = "slider";
+  scoreBlock.appendChild(scoreSliderEl);
+  wrap.appendChild(scoreBlock);
 
-  /* --- SUITABILITY (right column) --- */
-  const suitHeader = document.createElement("div");
-  suitHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
-  suitHeader.textContent = "Content Rating";
-  colRight.appendChild(suitHeader);
+  /* ---- 2. MINIMUM VOTES: readout + single slider ---- */
+  const voteBlock = document.createElement("div");
+  voteBlock.className = "oft-rc-block";
+  const voteHead = document.createElement("div");
+  voteHead.className = "oft-rc-head";
+  const voteLabel = document.createElement("span");
+  voteLabel.className = "oft-rc-label";
+  voteLabel.textContent = "Minimum votes (reliability)";
+  const voteReadout = document.createElement("span");
+  voteReadout.className = "oft-rc-readout";
+  voteReadout.textContent = "0";
+  voteHead.appendChild(voteLabel);
+  voteHead.appendChild(voteReadout);
+  voteBlock.appendChild(voteHead);
+  const voteSliderEl = document.createElement("div");
+  voteSliderEl.className = "slider";
+  voteBlock.appendChild(voteSliderEl);
+  wrap.appendChild(voteBlock);
 
-  colRight.appendChild(makeSectionLabel("Age Rating / Certification"));
-  const ratings = ["G", "PG", "PG-13", "R", "NC-17", "Unrated"];
-  const ratingGroup = document.createElement("div");
-  ratingGroup.className = "chip-group";
-  ratings.forEach(r => {
-    const chip = makeChip(r, "ratingsContent", { type: "certification", rating: r });
+  /* ---- 3. AGE CERTIFICATION: .disco-chip chips + US-cert note ---- */
+  const certBlock = document.createElement("div");
+  certBlock.className = "oft-rc-block";
+  certBlock.appendChild(makeSectionLabel("Age rating / certification"));
+  const certGroup = document.createElement("div");
+  certGroup.className = "chip-group";
+  ["G", "PG", "PG-13", "R", "NC-17", "Unrated"].forEach(r => {
+    /* Era precedent: {component:true} → .disco-chip toggling .on; the read
+       site reads .disco-chip.on. Same value shape {type:"certification"}. */
+    const chip = makeChip(r, "ratingsContent", { type: "certification", rating: r }, { component: true });
     chip.id = `cert-${r.replace('-', '')}`;
-    ratingGroup.appendChild(chip);
+    certGroup.appendChild(chip);
   });
-  colRight.appendChild(ratingGroup);
-
+  certBlock.appendChild(certGroup);
   const note = document.createElement("p");
-  note.style.fontSize = "12px";
-  note.style.color = "var(--muted-silver)";
-  note.style.marginTop = "12px";
-  note.style.fontStyle = "italic";
+  note.className = "oft-rc-note";
   note.textContent = "Note: Ratings are US certifications. Other regions may have different classifications.";
-  colRight.appendChild(note);
+  certBlock.appendChild(note);
+  wrap.appendChild(certBlock);
+
+  /* ---- wire the OrbitSlider engine (Phase 3a) ---- */
+  paintHistogram(0, 10); // initial: full range active
+
+  if (!hasSlider) {
+    /* Defensive: if the slider module failed to load, chips + note still
+       render; the score/vote sliders just stay absent (read site guards
+       on the stash being present). */
+    console.warn("[Ratings-C] OrbitSlider unavailable — score/vote sliders not built.");
+    return;
+  }
+
+  const scoreController = OrbitSlider.create(scoreSliderEl, {
+    mode: "dual", min: 0, max: 10, step: 0.1, values: [0, 10],
+    ariaLabels: ["Minimum score", "Maximum score"],
+    onChange: function (v) {
+      scoreReadout.textContent = v[0].toFixed(1) + " – " + v[1].toFixed(1);
+      paintHistogram(v[0], v[1]);
+    }
+  });
+  const voteController = OrbitSlider.create(voteSliderEl, {
+    mode: "single", min: 0, max: 50000, step: 100, value: 0,
+    ariaLabel: "Minimum votes",
+    onChange: function (n) { voteReadout.textContent = n.toLocaleString(); }
+  });
+
+  /* Stash on the panel body (#oft-body-ratings = `root`); survives the
+     innerHTML wipe so the read site + the next rebuild's teardown reach them. */
+  root._ratingSliders = { score: scoreController, votes: voteController };
 }
 
 // =============================================
@@ -6128,50 +6118,52 @@ function collectLabelsForSection(sectionKey) {
 
       return results;
 
-    case "ratingsContent":
-      // Rating sliders
-      const ratingMin = document.getElementById("ratingMin");
-      const ratingMax = document.getElementById("ratingMax");
-      if (ratingMin && ratingMax) {
-        const min = parseFloat(ratingMin.value);
-        const max = parseFloat(ratingMax.value);
-        if (min > 0 || max < 10) {
+    case "ratingsContent": {
+      /* Phase 3b: read the OrbitSlider controllers stashed on the panel body
+         (#oft-body-ratings._ratingSliders) for score + votes, and migrated
+         .disco-chip.on for certs. Emits the SAME value shapes the (frozen)
+         query builder + preset-restore path consume:
+           {type:"rating",min,max} / {type:"votes",min} / {type:"certification",rating} */
+      const ratingsBody = document.getElementById("oft-body-ratings");
+      const sliders = ratingsBody && ratingsBody._ratingSliders;
+
+      // Score range — dual slider; non-default guard preserved (lo>0 || hi<10)
+      if (sliders && sliders.score) {
+        const range = sliders.score.getValues(); // [lo, hi]
+        const lo = range[0], hi = range[1];
+        if (lo > 0 || hi < 10) {
           results.push({
-            label: `Rating: ${min.toFixed(1)}-${max.toFixed(1)}`,
-            value: { type: "rating", min, max }
+            label: `Rating: ${lo.toFixed(1)}-${hi.toFixed(1)}`,
+            value: { type: "rating", min: lo, max: hi }
           });
         }
       }
 
-      // Vote chips
-      const voteChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.type === "votes";
-        });
-      voteChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: `Min votes: ${value.min.toLocaleString()}`,
-          value
-        });
-      });
+      // Minimum votes — single slider; only when constrained (> 0)
+      if (sliders && sliders.votes) {
+        const n = sliders.votes.getValues();
+        if (n > 0) {
+          results.push({
+            label: `Min votes: ${n.toLocaleString()}`,
+            value: { type: "votes", min: n }
+          });
+        }
+      }
 
-      // Certification chips
-      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
+      // Certification chips — migrated to .disco-chip.on (Era pattern, lockstep
+      // with the builder; reading .chip.active here would silently drop certs)
+      const certChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "certification";
         });
       certChips.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: `Rated ${value.rating}`,
-          value
-        });
+        results.push({ label: `Rated ${value.rating}`, value });
       });
 
       return results;
+    }
 
     case "regionLanguage":
       const regionContainer = document.getElementById("selectedRegionContainer");
@@ -7110,8 +7102,11 @@ function runZeroCounterfactuals(filters, queryString) {
    Rebuild-on-activate: only ONE panel body holds DOM at a time.
    On tab switch, the previously-active panel body is wiped before
    the new builder runs. This preserves collectLabelsForSection's
-   getElementById assumptions (yearInput, ratingMin, runtimeMin,
+   getElementById assumptions (yearInput, runtimeMin,
    selectedRegionContainer, watchProviderChips, etc. are unique).
+   (Ratings-C no longer uses getElementById — its read site reads the
+   OrbitSlider controllers stashed on #oft-body-ratings._ratingSliders;
+   Phase 3b, 2026-06-06.)
 
    Per-panel "Add to orbit" button mirrors the old addToSearchButton
    flow: collectLabelsForSection(sectionKey) -> mutate state.filters
