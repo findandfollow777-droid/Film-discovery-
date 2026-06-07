@@ -871,40 +871,65 @@ body::after {
   flex: 1;
   min-width: 0; /* allow the flex child to shrink below content so it scrolls */
   scrollbar-width: none; /* Firefox */
+  cursor: grab; /* drag-to-scroll affordance (desktop) */
 }
 
 .trophy-carousel::-webkit-scrollbar {
   display: none; /* WebKit */
 }
 
+/* Active mouse-drag (set by initTrophyCarousel). Grabbing cursor over the whole
+   strip + clickable items; user-select off so a drag never highlights labels. */
+.trophy-carousel.dragging,
+.trophy-carousel.dragging .trophy-item {
+  cursor: grabbing;
+}
+
+.trophy-carousel.dragging {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Awards 2.0 (Jun 7 2026): belt shows the uniform Oscar statuette; the
+   distinguishing category glyph + name reveal ABOVE on hover, while the
+   default name label below fades out. padding-top reserves room so the
+   enlarged statuette and the hover label never clip or shift layout. */
 .trophy-item {
   flex-shrink: 0;
   display: flex;
-  flex-direction: column-reverse; /* label sits ABOVE the icon, per spec */
+  flex-direction: column; /* statuette, then default label BELOW */
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 60px 6px 4px; /* top room for hover label + 1.8x statuette */
   min-width: 96px;
+  position: relative;
   transition: transform 0.2s ease;
 }
 
-/* Glyph colors are baked into each og-* SVG (cyan or gold). `color` can't
-   touch them, so recolor uniformly to --accent-gold (#ffd700): brightness(0)
-   flattens any source to black, the rest rebuilds the gold. Verified against
-   the native gold glyphs. */
-.trophy-item .og {
+/* Belt statuette glyph. Glyph colors are baked into each og-* SVG (cyan or
+   gold). `color` can't touch them, so recolor uniformly to --accent-gold
+   (#ffd700) via a filter: brightness(0) flattens any source to black, the
+   rest rebuilds the gold. Chain solved to resolve to EXACTLY #ffd700 (the
+   prior chain drifted to #ffff00 — pure yellow — which read brighter than
+   ORBIT's gold). Updated Jun 7 2026. matches --accent-gold: #ffd700. */
+.trophy-icon {
+  display: inline-flex;
+}
+
+.trophy-icon .og {
   width: 64px;
   height: 64px;
-  filter: brightness(0) saturate(100%) invert(85%) sepia(70%) saturate(750%) hue-rotate(358deg) brightness(102%) contrast(103%);
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
   transition: transform 0.2s ease;
 }
 
+/* Default name label (below the statuette) — visible by default. */
 .trophy-label {
   font-size: 14px;
   color: var(--accent-gold);
   font-weight: 500;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease;
   white-space: nowrap;
   text-align: center;
@@ -912,43 +937,116 @@ body::after {
   line-height: 18px;
 }
 
-/* Hover / keyboard focus — pure CSS, no JS style writes */
-.trophy-item:hover .og,
-.trophy-item:focus-visible .og {
+/* Hover label (above the statuette): [category glyph] Award Name, horizontal.
+   Absolutely positioned so it never reflows the belt; anchored near the item
+   top with ~16px clearance to the enlarged statuette (see padding-top). 17px
+   = 20% bigger than the 14px default label. */
+.trophy-hover-label {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.trophy-hover-label .og {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.trophy-hover-text {
+  font-size: 17px;
+  color: var(--accent-gold);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Hover / keyboard focus — pure CSS, no JS style writes. Only the belt
+   statuette enlarges; the bottom label fades out, the top label fades in. */
+.trophy-item:hover .trophy-icon .og,
+.trophy-item:focus-visible .trophy-icon .og {
   transform: scale(1.8);
 }
 
 .trophy-item:hover .trophy-label,
 .trophy-item:focus-visible .trophy-label {
+  opacity: 0;
+}
+
+/* Smart clipping: JS toggles .clipped when the item is partially past a belt
+   edge. Class-based (NOT inline opacity) so it shares the cascade with :hover
+   — both resolve to opacity:0, the default stays 1 — instead of an inline
+   style overriding the hover fade. Inherits the .trophy-label transition. */
+.trophy-item.clipped .trophy-label {
+  opacity: 0;
+}
+
+.trophy-item:hover .trophy-hover-label,
+.trophy-item:focus-visible .trophy-hover-label {
   opacity: 1;
 }
 
 /* Scroll-spy active state — gold glow per spec (recolor filter + drop-shadow) */
-.trophy-item.active .og {
-  filter: brightness(0) saturate(100%) invert(85%) sepia(70%) saturate(750%) hue-rotate(358deg) brightness(102%) contrast(103%) drop-shadow(0 0 10px var(--accent-gold));
+.trophy-item.active .trophy-icon .og {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%) drop-shadow(0 0 10px var(--accent-gold));
 }
 
-.trophy-item.active .trophy-label {
-  opacity: 1;
-}
-
+/* Floating arrows (Jun 7 2026): absolutely positioned OVER the carousel so the
+   belt spans full width and glyphs scroll visibly beneath them. No background/
+   border — a soft radial halo (::before) keeps them legible against passing
+   gold statuettes. top:50% centres on the strip; the +15px keeps them on the
+   statuette row (60px top label-reserve + 64px glyph vs the 18px bottom label). */
 .trophy-scroll-btn {
-  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateY(15px);
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--accent-cyan);
+  color: var(--muted-silver);
   padding: 8px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 10; /* float above the scrolling glyphs */
 }
 
+.trophy-scroll-btn.left { left: 0; }
+.trophy-scroll-btn.right { right: 0; }
+
+/* Soft dark halo so the arrow stays readable when a gold statuette passes
+   under it. Sits inside the arrow's stacking context (above the belt) but
+   behind the arrow glyph itself (z-index:-1). Remove if it reads too heavy. */
+.trophy-scroll-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  background: radial-gradient(circle, rgba(var(--space-black-rgb), 0.55) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Arrow glyph: local override of og-arrow-left (shared glyph untouched, Rule
+   #7). Stroke recoloured to --muted-silver (#94a3b8) and doubled 6→12 for a
+   2x-thicker weight. Right button keeps its scaleX(-1) flip below. */
 .trophy-scroll-btn .og {
-  width: 18px;
-  height: 18px;
+  width: 36px;
+  height: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%2394a3b8' stroke-width='12' stroke-linecap='round'/%3E%3Cpolyline points='40,28 18,50 40,72' stroke='%2394a3b8' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+}
+
+/* Hover: brighten the stroke to --film-white (#f1f5f9). */
+.trophy-scroll-btn:hover .og {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%23f1f5f9' stroke-width='12' stroke-linecap='round'/%3E%3Cpolyline points='40,28 18,50 40,72' stroke='%23f1f5f9' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
 }
 
 .trophy-scroll-btn.right .og {
@@ -962,9 +1060,10 @@ body::after {
 
   .trophy-item {
     min-width: 76px;
+    padding-top: 50px; /* smaller statuette → less top room needed */
   }
 
-  .trophy-item .og {
+  .trophy-icon .og {
     width: 48px;
     height: 48px;
   }
@@ -973,7 +1072,23 @@ body::after {
     font-size: 13px;
   }
 
+  .trophy-hover-label {
+    top: 10px;
+  }
+
+  .trophy-hover-label .og {
+    width: 15px;
+    height: 15px;
+  }
+
+  .trophy-hover-text {
+    font-size: 15px; /* 20% bigger than the 13px mobile default label */
+  }
+
   .trophy-scroll-btn {
     padding: 4px;
+    /* Smaller belt (48px glyph, 50px top reserve) → statuette centre is only
+       ~10px below the full-strip centre. -50% keeps it centred (now absolute). */
+    transform: translateY(-50%) translateY(10px);
   }
 }

@@ -72,37 +72,42 @@ const AWARDS_YEAR_EDITORIAL = {
 
 /* ============================================================
    TROPHY STRIP NAVIGATION — Added Jun 6 2026
+   Updated Jun 7 2026 — Awards 2.0 statuette belt + hover label.
    Category → ORBIT glyph map (Rule #11: glyphs, never emojis).
-   Keys match v1 category display_name; unmapped categories fall
-   back to og-trophy. Rendering/scroll-spy logic below renderCategories().
+   Keys match v1 category display_name.
+     beltGlyph     = Oscar statuette — UNIFORM on the conveyor belt
+                     (every Oscar is the same physical trophy).
+     categoryGlyph = distinguishing glyph, revealed in the hover label.
+   Unmapped categories fall back to og-statuette belt / og-trophy category.
+   Rendering/scroll-spy logic below renderCategories().
    ============================================================ */
 const AWARD_GLYPH_MAP = {
-  'Best Picture':                   { glyph: 'og-trophy',      label: 'Best Picture' },
-  'Best Director':                  { glyph: 'og-statuette',   label: 'Best Director' },
-  'Best Actor':                     { glyph: 'og-person',      label: 'Best Actor' },
-  'Best Actress':                   { glyph: 'og-rising-star', label: 'Best Actress' },
-  'Best Supporting Actor':          { glyph: 'og-person-bare', label: 'Supporting Actor' },
-  'Best Supporting Actress':        { glyph: 'og-star',        label: 'Supporting Actress' },
-  'Best Animated Feature Film':     { glyph: 'og-sparkle',     label: 'Animated' },
-  'Best Animated Short Film':       { glyph: 'og-sparkle',     label: 'Animated Short' },
-  'Best International Feature Film': { glyph: 'og-globe',       label: 'International' },
-  'Best Documentary Feature Film':  { glyph: 'og-newspaper',   label: 'Documentary' },
-  'Best Documentary Short Film':    { glyph: 'og-newspaper',   label: 'Documentary Short' },
-  'Best Original Screenplay':       { glyph: 'og-writing',     label: 'Original Screenplay' },
-  'Best Adapted Screenplay':        { glyph: 'og-books',       label: 'Adapted Screenplay' },
-  'Best Cinematography':            { glyph: 'og-camera',      label: 'Cinematography' },
-  'Best Film Editing':              { glyph: 'og-scissors',    label: 'Editing' },
-  'Best Production Design':         { glyph: 'og-snapshot',    label: 'Production Design' },
-  'Best Costume Design':            { glyph: 'og-mask',        label: 'Costume Design' },
-  'Best Makeup and Hairstyling':    { glyph: 'og-mask',        label: 'Makeup & Hair' },
-  'Best Original Score':            { glyph: 'og-music',       label: 'Original Score' },
-  'Best Original Song':             { glyph: 'og-mic',         label: 'Original Song' },
-  'Best Sound':                     { glyph: 'og-speech',      label: 'Sound' },
-  'Best Sound Editing':             { glyph: 'og-speech',      label: 'Sound Editing' },
-  'Best Sound Mixing':              { glyph: 'og-speech',      label: 'Sound Mixing' },
-  'Best Visual Effects':            { glyph: 'og-bolt',        label: 'Visual Effects' },
-  'Best Casting':                   { glyph: 'og-handshake',   label: 'Casting' },
-  'Best Live Action Short Film':    { glyph: 'og-film',        label: 'Live Action Short' }
+  'Best Picture':                   { label: 'Best Picture',         beltGlyph: 'og-statuette', categoryGlyph: 'og-trophy' },
+  'Best Director':                  { label: 'Best Director',        beltGlyph: 'og-statuette', categoryGlyph: 'og-statuette' },
+  'Best Actor':                     { label: 'Best Actor',           beltGlyph: 'og-statuette', categoryGlyph: 'og-person' },
+  'Best Actress':                   { label: 'Best Actress',         beltGlyph: 'og-statuette', categoryGlyph: 'og-rising-star' },
+  'Best Supporting Actor':          { label: 'Supporting Actor',     beltGlyph: 'og-statuette', categoryGlyph: 'og-person-bare' },
+  'Best Supporting Actress':        { label: 'Supporting Actress',   beltGlyph: 'og-statuette', categoryGlyph: 'og-star' },
+  'Best Animated Feature Film':     { label: 'Animated',             beltGlyph: 'og-statuette', categoryGlyph: 'og-sparkle' },
+  'Best Animated Short Film':       { label: 'Animated Short',       beltGlyph: 'og-statuette', categoryGlyph: 'og-sparkle' },
+  'Best International Feature Film': { label: 'International',         beltGlyph: 'og-statuette', categoryGlyph: 'og-globe' },
+  'Best Documentary Feature Film':  { label: 'Documentary',          beltGlyph: 'og-statuette', categoryGlyph: 'og-newspaper' },
+  'Best Documentary Short Film':    { label: 'Documentary Short',    beltGlyph: 'og-statuette', categoryGlyph: 'og-newspaper' },
+  'Best Original Screenplay':       { label: 'Original Screenplay',  beltGlyph: 'og-statuette', categoryGlyph: 'og-writing' },
+  'Best Adapted Screenplay':        { label: 'Adapted Screenplay',   beltGlyph: 'og-statuette', categoryGlyph: 'og-books' },
+  'Best Cinematography':            { label: 'Cinematography',       beltGlyph: 'og-statuette', categoryGlyph: 'og-camera' },
+  'Best Film Editing':              { label: 'Editing',              beltGlyph: 'og-statuette', categoryGlyph: 'og-scissors' },
+  'Best Production Design':         { label: 'Production Design',     beltGlyph: 'og-statuette', categoryGlyph: 'og-snapshot' },
+  'Best Costume Design':            { label: 'Costume Design',       beltGlyph: 'og-statuette', categoryGlyph: 'og-mask' },
+  'Best Makeup and Hairstyling':    { label: 'Makeup & Hair',        beltGlyph: 'og-statuette', categoryGlyph: 'og-mask' },
+  'Best Original Score':            { label: 'Original Score',       beltGlyph: 'og-statuette', categoryGlyph: 'og-music' },
+  'Best Original Song':             { label: 'Original Song',         beltGlyph: 'og-statuette', categoryGlyph: 'og-mic' },
+  'Best Sound':                     { label: 'Sound',                beltGlyph: 'og-statuette', categoryGlyph: 'og-speech' },
+  'Best Sound Editing':             { label: 'Sound Editing',        beltGlyph: 'og-statuette', categoryGlyph: 'og-speech' },
+  'Best Sound Mixing':              { label: 'Sound Mixing',         beltGlyph: 'og-statuette', categoryGlyph: 'og-speech' },
+  'Best Visual Effects':            { label: 'Visual Effects',       beltGlyph: 'og-statuette', categoryGlyph: 'og-bolt' },
+  'Best Casting':                   { label: 'Casting',              beltGlyph: 'og-statuette', categoryGlyph: 'og-handshake' },
+  'Best Live Action Short Film':    { label: 'Live Action Short',    beltGlyph: 'og-statuette', categoryGlyph: 'og-film' }
 };
 
 // ===== STATE =====
@@ -528,10 +533,15 @@ async function renderTrophyStrip(year) {
   if (categories.length === 0) return;
 
   const itemHtml = (name) => {
-    const g = AWARD_GLYPH_MAP[name] || { glyph: 'og-trophy', label: name };
+    const g = AWARD_GLYPH_MAP[name]
+      || { label: name, beltGlyph: 'og-statuette', categoryGlyph: 'og-trophy' };
     return `
       <div class="trophy-item" data-category="${escapeHtml(name)}" role="link" tabindex="0" title="${escapeHtml(g.label)}">
-        <span class="og ${g.glyph}"></span>
+        <span class="trophy-hover-label">
+          <span class="og ${g.categoryGlyph}"></span>
+          <span class="trophy-hover-text">${escapeHtml(g.label)}</span>
+        </span>
+        <span class="trophy-icon"><span class="og ${g.beltGlyph}"></span></span>
         <span class="trophy-label">${escapeHtml(g.label)}</span>
       </div>`;
   };
@@ -556,6 +566,7 @@ async function renderTrophyStrip(year) {
       trophyLoopWidth = 0;
     }
     attachTrophyItemHandlers(carousel);
+    updateLabelVisibility(); // sync clip state for the freshly rendered belt
   });
 
   buildTrophySpy();
@@ -594,6 +605,23 @@ function buildTrophySpy() {
   document.querySelectorAll('[data-category-id]').forEach(h => trophySpyObserver.observe(h));
 }
 
+// Smart label clipping — Added Jun 7 2026.
+// Hides a belt label while its item is partially past either visible edge of
+// the carousel, so no half-cut text shows under the floating arrows. Toggles a
+// `.clipped` class (NOT inline opacity) so the cascade — not an inline style —
+// arbitrates with the :hover fade. Opacity-only, so no reflow. The 0.5px
+// tolerance absorbs sub-pixel rounding so edge items don't flicker.
+function updateLabelVisibility() {
+  const carousel = document.getElementById('trophy-carousel');
+  if (!carousel) return;
+  const cr = carousel.getBoundingClientRect();
+  carousel.querySelectorAll('.trophy-item').forEach(item => {
+    const r = item.getBoundingClientRect();
+    const fullyVisible = r.left >= cr.left - 0.5 && r.right <= cr.right + 0.5;
+    item.classList.toggle('clipped', !fullyVisible);
+  });
+}
+
 // Arrow buttons + seamless-loop scroll listener. Attaches exactly once
 // (the carousel/buttons are static in the HTML); per-year state lives in
 // trophyLoopWidth, which this listener reads.
@@ -620,6 +648,64 @@ function initTrophyCarousel() {
     if (p < W * 0.5) carousel.scrollLeft = p + W;
     else if (p > W * 1.5) carousel.scrollLeft = p - W;
   });
+
+  // Smart label clipping, rAF-batched so a scroll burst recomputes once/frame.
+  let labelRaf = null;
+  const scheduleLabelUpdate = () => {
+    if (labelRaf) return;
+    labelRaf = requestAnimationFrame(() => { labelRaf = null; updateLabelVisibility(); });
+  };
+  carousel.addEventListener('scroll', scheduleLabelUpdate);
+  scheduleLabelUpdate(); // initial frame
+
+  /* --- Pointer drag-to-scroll (desktop) — Added Jun 7 2026 ---
+     Touch is intentionally left to native overflow-x scrolling (smooth +
+     momentum); only mouse needs help here. Uses an INCREMENTAL per-frame delta
+     (scrollLeft -= dx) rather than an absolute anchor, so the seamless-loop
+     scroll listener above (which jumps scrollLeft by ±W) is never fought —
+     each frame just nudges from wherever scrollLeft currently sits. dragDist
+     accumulates total travel so the capture-phase click handler can swallow
+     the trophy-item click-to-scroll that would otherwise fire when a drag
+     ends over an item. The `dragging` class drives cursor/user-select. */
+  let isDragging = false;
+  let dragMoved = false;
+  let lastX = 0;
+  let dragDist = 0;
+
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.classList.remove('dragging');
+  };
+
+  carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragMoved = false;
+    dragDist = 0;
+    lastX = e.pageX;
+    carousel.classList.add('dragging');
+  });
+
+  carousel.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault(); // suppress text selection while dragging
+    const dx = e.pageX - lastX;
+    lastX = e.pageX;
+    dragDist += Math.abs(dx);
+    if (dragDist > 4) dragMoved = true;
+    carousel.scrollLeft -= dx * 1.5; // 1.5x for a snappier feel
+  });
+
+  carousel.addEventListener('mouseleave', endDrag);
+  carousel.addEventListener('mouseup', endDrag);
+
+  // Swallow the click that trails a real drag so it doesn't jump to a category.
+  carousel.addEventListener('click', (e) => {
+    if (!dragMoved) return;
+    e.preventDefault();
+    e.stopPropagation();
+    dragMoved = false;
+  }, true);
 }
 
 // Phase 1 placeholder per spec — simple poster + WINNER/NOMINEE label.
