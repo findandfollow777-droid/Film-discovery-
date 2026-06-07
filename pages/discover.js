@@ -652,11 +652,14 @@ window.addEventListener('resize', () => {
 })();
 
 /* ============================================================
-   GLOBAL CONTROLS STRIP — Sort-by (SHELL, Phase 1b-i — 2026-06-01)
-   Holds the chosen sort in state.sortBy ONLY. NOT wired into the query,
-   film-count, or Launch — sort_by stays hard-coded popularity.desc in
-   buildTMDBQueryFromFilters until Phase 1b-ii (which will read state.sortBy).
-   Changing the control updates state.sortBy and logs it; results unchanged.
+   GLOBAL CONTROLS STRIP — Sort-by (WIRED, Phase 1b-ii — 2026-06-01)
+   Changing the control updates state.sortBy (and logs it). state.sortBy is
+   consumed by buildTMDBQueryFromFilters (see params.append("sort_by", ...) —
+   NOT hard-coded), so it drives the Launch→results ordering and the recount
+   query. Caveats: applySort only sets state.sortBy — it does NOT re-fetch or
+   re-render, so the new order applies on the next query / Launch; and because
+   sort_by never changes total_results, toggling it does NOT change the
+   film-count number.
    ============================================================ */
 (function initGlobalSortControl() {
   var fieldSel = document.getElementById('discoverSortField');
@@ -1501,21 +1504,25 @@ function applyPreset(preset) {
   state.filters = entries;
   state.genreLogic = preset.genreLogic || 'or';
 
-  updateUIFromState();
-  /* updateUIFromState calls the local renderFilterChips. The wrapped
-     window.renderFilterChips also runs updateTabDots, so call it once
-     more to refresh the tab dot indicators. */
-  if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
-
-  /* Phase 2 (2026-06-01): track the post-apply state signature so the
-     Save button stays hidden until the user diverges from this preset.
-     window.__orbitStateSignature is defined in the Phase 2 IIFE at the
-     end of this file; the guard tolerates load-order edge cases. */
+  /* Phase 2 (2026-06-01): stamp the post-apply signature BEFORE any render.
+     The wrapped window.renderFilterChips re-evaluates Save-button visibility,
+     so the signature must already match the just-applied state — otherwise the
+     pristine preset reads as "modified" and the button wrongly shows. Mirrors
+     commitSaveWithName's stamp-then-evaluate order. Computed from the
+     just-assigned state.filters/genreLogic. window.__orbitStateSignature is
+     defined in the Phase 2 IIFE at the end of this file; the guard tolerates
+     load-order edge cases. */
   try {
     if (typeof window.__orbitStateSignature === 'function') {
       window.__orbitLastAppliedSig = window.__orbitStateSignature(state.filters, state.genreLogic);
     }
   } catch (e) { /* swallow — Save button just stays in its current state */ }
+
+  updateUIFromState();
+  /* updateUIFromState calls the local renderFilterChips. The wrapped
+     window.renderFilterChips also runs updateTabDots, so call it once
+     more to refresh the tab dot indicators. */
+  if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
 }
 
 (function initPresets() {
@@ -8710,9 +8717,12 @@ function runZeroCounterfactuals(filters, queryString) {
     } catch (e) { state.filters = []; }
     state.genreLogic = saved.state.genreLogic || 'or';
     if ('regionLogic' in saved.state) state.regionLogic = saved.state.regionLogic || 'or';
+    /* Stamp BEFORE the render so the wrapped renderFilterChips' Save-button
+       eval reads the freshly-applied saved search as pristine (button hidden).
+       Mirrors applyPreset / commitSaveWithName's stamp-then-evaluate order. */
+    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
     if (typeof updateUIFromState === 'function') updateUIFromState();
     if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
-    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
   }
 
   /* Expose helpers globally for pickEvergreens + modal IIFE. */

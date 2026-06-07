@@ -333,14 +333,17 @@
         <!-- Divider between Quick Searches and primary filter grid -->
         <div class="discover-presets-divider" aria-hidden="true"></div>
 
-        <!-- GLOBAL CONTROLS STRIP — Phase 1b-i (2026-06-01). Persistent, non-tab
+        <!-- GLOBAL CONTROLS STRIP — Phase 1b (2026-06-01). Persistent, non-tab
              results-level controls. Placed JUST ABOVE the filterTabs section (not
              inside it) so it stays visible when the filter workspace is collapsed.
              Visually neutral (cyan, not a tab axis). First tenant: Sort by.
-             SHELL ONLY — the change handler records state.sortBy; it is NOT wired
-             into the query/film-count/Launch until Phase 1b-ii (sort stays
-             popularity.desc in the actual query). Future controls (profile-default
-             overrides) will join this strip. -->
+             WIRED (Phase 1b-ii): the change handler sets state.sortBy, which
+             buildTMDBQueryFromFilters appends as sort_by — so it drives the
+             Launch→results ordering (and the recount query). Note: toggling it
+             does NOT change the film-count NUMBER (sort never alters
+             total_results) and does NOT trigger an immediate re-render — the new
+             order takes effect on the next query / Launch. Future controls
+             (profile-default overrides) will join this strip. -->
         <div class="discover-global-strip" id="discoverGlobalStrip">
           <label class="dgs-label" for="discoverSortField">Sort by</label>
           <div class="dgs-control">
