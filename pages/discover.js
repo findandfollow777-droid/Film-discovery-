@@ -3932,132 +3932,224 @@ async function searchKeywordsOnly(query, dropdownEl, section, inputEl) {
   });
 }
 
+/* ============================================================
+   GENRE PANEL — Rebuilt June 7, 2026
+   Honest reskin + live match hero. Layout:
+     • Inline "Search any concept" unit at top — the existing
+       keyword-search widget repositioned beside a headline; its
+       compact input gets .kw-input. Commit logic (tmdb-keyword →
+       with_keywords) is UNTOUCHED.
+     • Left zone (.gen-left): Any/All match-toggle (drives
+       state.genreLogic) + "Genres" label + the flat-19 genre chips
+       as bigger glyphed .disco-chip.gen-lg components.
+     • Right zone (.gen-hero): decorative orbital ring + a live
+       "films match" count SCOPED to this tab's genre subset only
+       (separate from the full orbit) + ALL/ANY mode line + a
+       glyph-tag cluster echoing the selection.
+   The four mood/Keywords sub-groups (Tone/Pace/Mood/Content) are
+   REMOVED entirely — the query builder's type:"keyword" branch is
+   now dormant.
+
+   Count wiring: scoped recount builds a genre-only filter subset
+   and runs it through the (frozen) buildTMDBQueryFromFilters →
+   discover/movie total_results. state.genreLogic drives comma vs
+   pipe globally, so the hero honours Any/All. Debounced 280ms with
+   a loading pulse on the ring; renders "—" (never a fake number)
+   when nothing is selected.
+   ============================================================ */
 function buildGenresContent(root) {
-  /* Genre 2-column layout (May 4, 2026): Match toggle + Genres
-     chips on the left, Keywords & Mood subgroups on the right. */
-  const grid = document.createElement("div");
-  grid.className = "oft-genres-grid";
-  const colLeft  = document.createElement("div"); colLeft.className  = "oft-genres-col";
-  const colRight = document.createElement("div"); colRight.className = "oft-genres-col";
-  grid.appendChild(colLeft);
-  grid.appendChild(colRight);
-  root.appendChild(grid);
-
-  const toggleContainer = document.createElement("div");
-  toggleContainer.style.cssText = `
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    padding: 12px;
-    background: rgba(15, 23, 41, 0.5);
-    border-radius: 8px;
-  `;
-  
-  const toggleLabel = document.createElement("span");
-  toggleLabel.textContent = "Match:";
-  toggleLabel.style.cssText = "font-size: 13px; font-weight: 600; color: var(--accent-cyan);";
-  toggleContainer.appendChild(toggleLabel);
-  
-  const orBtn = document.createElement("button");
-  orBtn.type = "button";
-  orBtn.textContent = "Any (OR)";
-  orBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.genreLogic === "or" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.genreLogic === "or" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
-  
-  const andBtn = document.createElement("button");
-  andBtn.type = "button";
-  andBtn.textContent = "All (AND)";
-  andBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.genreLogic === "and" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.genreLogic === "and" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
-  
-  orBtn.addEventListener("click", () => {
-    state.genreLogic = "or";
-    orBtn.style.background = "var(--accent-cyan)";
-    orBtn.style.color = "#000";
-    andBtn.style.background = "transparent";
-    andBtn.style.color = "var(--film-white)";
-  });
-  
-  andBtn.addEventListener("click", () => {
-    state.genreLogic = "and";
-    andBtn.style.background = "var(--accent-cyan)";
-    andBtn.style.color = "#000";
-    orBtn.style.background = "transparent";
-    orBtn.style.color = "var(--film-white)";
-  });
-  
-  toggleContainer.appendChild(orBtn);
-  toggleContainer.appendChild(andBtn);
-  colLeft.appendChild(toggleContainer);
-
-  colLeft.appendChild(makeSectionLabel("Genres"));
-  const genres = [
+  const GENRES = [
     "Action", "Adventure", "Animation", "Comedy", "Crime",
     "Documentary", "Drama", "Family", "Fantasy", "History",
     "Horror", "Music", "Mystery", "Romance", "Science Fiction",
     "Thriller", "TV Movie", "War", "Western"
   ];
 
-  const genreGroup = document.createElement("div");
-  genreGroup.className = "chip-group";
-  genres.forEach(g => {
-    const svg = GENRE_SVGS[g] || "";
-    const chip = makeChip(g, "genres", { type: "genre", name: g });
-    if (svg) chip.innerHTML = `<span class="genre-glyph">${svg}</span> ${g}`;
-    chip.id = `genre-${g.replace(/\s+/g, '-')}`;
-    genreGroup.appendChild(chip);
-  });
-  colLeft.appendChild(genreGroup);
+  /* ---- Inline search unit: headline + repositioned keyword widget ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+
+  const inlineHead = document.createElement("div");
+  inlineHead.className = "gen-kw-head";
+  inlineHead.textContent = "Search any concept";
+  inline.appendChild(inlineHead);
 
   const genresKwSearch = buildKeywordSearchWidget(
-    "genres-kw", "genres", "Search moods & concepts..."
+    "genres-kw", "genres", "e.g. heist, time travel, found footage…"
   );
-  colRight.insertBefore(genresKwSearch, colRight.firstChild);
+  /* Restyle the widget's input to the compact .kw-input WITHOUT touching
+     its commit logic (still fires {type:'tmdb-keyword'} via its own
+     mousedown handler). */
+  const kwInput = genresKwSearch.querySelector("input");
+  if (kwInput) kwInput.classList.add("kw-input");
+  inline.appendChild(genresKwSearch);
+  root.appendChild(inline);
 
-  colRight.appendChild(makeSectionLabel("Keywords & Mood"));
+  /* ---- Split: left chips/toggle, right live hero ---- */
+  const split = document.createElement("div");
+  split.className = "gen-split";
+  const left = document.createElement("div"); left.className = "gen-left";
+  const hero = document.createElement("div"); hero.className = "gen-hero";
+  split.appendChild(left);
+  split.appendChild(hero);
+  root.appendChild(split);
 
-  /* Trimmed May 4, 2026 to one row per group at 45% column width.
-     Dropped: Tone — Quirky, Whimsical, Bleak; Mood — Twisted;
-     Content — Gore, Heartwarming. */
-  const keywordCategories = [
-    { label: "Tone",    keywords: ["Noir", "Gritty", "Dark", "Uplifting"] },
-    { label: "Pace",    keywords: ["Slow-burn", "Fast-paced", "Intense", "Suspenseful"] },
-    { label: "Mood",    keywords: ["Emotional", "Feel-good", "Atmospheric", "Cerebral"] },
-    { label: "Content", keywords: ["Violent", "Family-friendly", "Mind-bending"] }
-  ];
+  /* ---- Match toggle (.match-toggle / .opt.on) → state.genreLogic ---- */
+  const toggle = document.createElement("div");
+  toggle.className = "match-toggle";
 
-  keywordCategories.forEach(cat => {
-    const catLabel = document.createElement("div");
-    catLabel.textContent = cat.label;
-    catLabel.style.cssText = "font-size: 11px; color: var(--muted-silver); margin: 16px 0 8px 0; text-transform: uppercase; letter-spacing: 1px;";
-    colRight.appendChild(catLabel);
+  const toggleLabel = document.createElement("span");
+  toggleLabel.className = "match-toggle-label";
+  toggleLabel.textContent = "Match";
+  toggle.appendChild(toggleLabel);
 
-    const keywordGroup = document.createElement("div");
-    keywordGroup.className = "chip-group";
-    cat.keywords.forEach(kw => {
-      const chip = makeChip(kw, "genres", { type: "keyword", name: kw });
-      chip.id = `keyword-${kw.replace(/\s+/g, '-')}`;
-      keywordGroup.appendChild(chip);
-    });
-    colRight.appendChild(keywordGroup);
+  const anyOpt = document.createElement("button");
+  anyOpt.type = "button"; anyOpt.className = "opt"; anyOpt.dataset.logic = "or";
+  anyOpt.textContent = "Any";
+  const allOpt = document.createElement("button");
+  allOpt.type = "button"; allOpt.className = "opt"; allOpt.dataset.logic = "and";
+  allOpt.textContent = "All";
+  (state.genreLogic === "and" ? allOpt : anyOpt).classList.add("on");
+  toggle.appendChild(anyOpt);
+  toggle.appendChild(allOpt);
+
+  anyOpt.addEventListener("click", () => {
+    state.genreLogic = "or";
+    anyOpt.classList.add("on");
+    allOpt.classList.remove("on");
+    updateHeroDisplay();
+    recountHero();
   });
+  allOpt.addEventListener("click", () => {
+    state.genreLogic = "and";
+    allOpt.classList.add("on");
+    anyOpt.classList.remove("on");
+    updateHeroDisplay();
+    recountHero();
+  });
+  left.appendChild(toggle);
+
+  /* ---- Genres axis section label + bigger glyphed chips ---- */
+  left.appendChild(makeSectionLabel("Genres"));
+  const genreGroup = document.createElement("div");
+  genreGroup.className = "chip-group gen-chip-group";
+  GENRES.forEach(g => {
+    const svg = GENRE_SVGS[g] || "";
+    const chip = makeChip(g, "genres", { type: "genre", name: g }, { component: true });
+    chip.classList.add("gen-lg");
+    if (svg) chip.innerHTML = `<span class="genre-glyph">${svg}</span> ${g}`;
+    /* makeChip's own listener toggles .on first; this listener runs
+       after, so it reads the post-toggle state. */
+    chip.addEventListener("click", () => {
+      updateHeroDisplay();
+      recountHero();
+    });
+    genreGroup.appendChild(chip);
+  });
+  left.appendChild(genreGroup);
+
+  /* ---- Right: live match hero ---- */
+  hero.innerHTML = `
+    <div class="gen-ring-wrap">
+      <svg class="gen-ring" viewBox="0 0 140 140" aria-hidden="true">
+        <circle class="gen-ring-track" cx="70" cy="70" r="58"></circle>
+        <ellipse class="gen-ring-orbit" cx="70" cy="70" rx="58" ry="24" transform="rotate(-22 70 70)"></ellipse>
+        <ellipse class="gen-ring-orbit" cx="70" cy="70" rx="24" ry="58" transform="rotate(-22 70 70)"></ellipse>
+        <circle class="gen-ring-dot" cx="70" cy="12" r="3.5"></circle>
+      </svg>
+      <div class="big-count" id="genHeroCount">—</div>
+    </div>
+    <div class="gen-hero-label">films match</div>
+    <div class="gen-hero-mode" id="genHeroMode">matching ANY of</div>
+    <div class="gen-hero-cluster" id="genHeroCluster"></div>
+    <div class="gen-hero-caption">live preview of this tab's selection · separate from your full orbit</div>
+  `;
+
+  /* ---- Hero helpers (closed over this build's DOM) ---- */
+  let _heroTimer = null;
+
+  function selectedGenreValues() {
+    return Array.from(left.querySelectorAll(".disco-chip.on"))
+      .map(c => { try { return JSON.parse(c.dataset.value); } catch (e) { return null; } })
+      .filter(v => v && v.type === "genre");
+  }
+
+  /* Mode line + selected-genre cluster — pure DOM, no fetch. */
+  function updateHeroDisplay() {
+    const modeEl = hero.querySelector("#genHeroMode");
+    const cluster = hero.querySelector("#genHeroCluster");
+    const isAll = state.genreLogic === "and";
+    if (modeEl) modeEl.textContent = "matching " + (isAll ? "ALL" : "ANY") + " of";
+    if (!cluster) return;
+    cluster.innerHTML = "";
+    const sel = selectedGenreValues();
+    if (sel.length === 0) {
+      const empty = document.createElement("span");
+      empty.className = "gen-hero-empty";
+      empty.textContent = "select genres to preview";
+      cluster.appendChild(empty);
+      return;
+    }
+    sel.forEach(v => {
+      const tag = document.createElement("span");
+      tag.className = "atag";
+      const svg = GENRE_SVGS[v.name] || "";
+      tag.innerHTML = (svg ? `<span class="genre-glyph">${svg}</span>` : "") +
+        `<span>${v.name}</span>`;
+      cluster.appendChild(tag);
+    });
+  }
+
+  /* Live, scoped count — genre-only filter subset through the frozen
+     query builder. Debounced; loading pulse on the ring. */
+  function recountHero() {
+    const countEl = hero.querySelector("#genHeroCount");
+    const ring = hero.querySelector(".gen-ring");
+    if (!countEl) return;
+
+    const sel = selectedGenreValues();
+    if (sel.length === 0) {
+      clearTimeout(_heroTimer);
+      countEl.textContent = "—";
+      if (ring) ring.classList.remove("is-loading");
+      return;
+    }
+
+    if (ring) ring.classList.add("is-loading");
+    clearTimeout(_heroTimer);
+    _heroTimer = setTimeout(function () {
+      const scoped = sel.map(v => ({ section: "genres", value: v }));
+      let qs;
+      try { qs = buildTMDBQueryFromFilters(scoped); } catch (e) { qs = null; }
+      if (qs == null) {
+        countEl.textContent = "—";
+        if (ring) ring.classList.remove("is-loading");
+        return;
+      }
+      /* Route through the shared TMDB helper (proxy in production via
+         /api/tmdb; direct TMDB on localhost). Guard mirrors discover.js
+         ~6728 — fail soft to "—" if the helper isn't loaded. */
+      if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== "function") {
+        countEl.textContent = "—";
+        if (ring) ring.classList.remove("is-loading");
+        return;
+      }
+      const reqParams = Object.fromEntries(new URLSearchParams(qs));
+      reqParams.page = 1;
+      OrbitUtils.tmdbFetch("/discover/movie", reqParams)
+        .then(d => {
+          const n = (d && typeof d.total_results === "number") ? d.total_results : 0;
+          countEl.textContent = n > 9999 ? "9,999+" : n.toLocaleString();
+        })
+        .catch(() => { countEl.textContent = "—"; })
+        .then(() => { if (ring) ring.classList.remove("is-loading"); });
+    }, 280);
+  }
+
+  /* Initial paint — reflects any pre-selected chips (none on a fresh
+     build; harmless if a future restore pre-applies .on). */
+  updateHeroDisplay();
+  recountHero();
 }
 
 // =============================================
@@ -6250,12 +6342,26 @@ function collectLabelsForSection(sectionKey) {
       }
       return peopleResults;
 
-    case "genres":
-      const genreChips = document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active');
-      return Array.from(genreChips).map(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        return { label: chip.textContent, value };
+    case "genres": {
+      /* Rebuilt June 7, 2026 (lockstep with buildGenresContent): read
+         the migrated .disco-chip.on genre chips, type:"genre" only. The
+         mood/Keywords sub-groups are gone, so we no longer read
+         type:"keyword" here (the query builder's keyword branch is now
+         dormant). tmdb-keyword filters commit directly via the keyword
+         widget and are not read here. Emits the SAME {type:"genre",name}
+         value shape → query builder unchanged → with_genres (comma/pipe
+         per state.genreLogic). */
+      const genreChips = Array.from(document.querySelectorAll(
+        '#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'
+      )).filter(chip => {
+        let v; try { v = JSON.parse(chip.dataset.value); } catch (e) { return false; }
+        return v && v.type === "genre";
       });
+      return genreChips.map(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        return { label: value.name, value };
+      });
+    }
 
     case "timeEra": {
       /* Phase 4 (Era-A): read ONLY the two OrbitSlider controllers stashed

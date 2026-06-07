@@ -6911,4 +6911,225 @@ html, body {
   margin-top: 2px;
 }
 
+/* ============================================================
+   GENRE PANEL — honest reskin + live match hero (June 7, 2026)
+   Purple axis via #oft-panel-genres[data-axis="genre"] →
+   --axis / --axis-hex (set in discover-components.css). Tokens
+   only; no hardcoded hex. Reuses the .disco-chip convention.
+   ============================================================ */
+
+/* ---- Inline "Search any concept" unit (compact, not full-width) ---- */
+.gen-kw-inline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.gen-kw-head {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--axis-hex);
+  white-space: nowrap;
+}
+.gen-kw-inline .orbit-kw-tab-wrap {
+  flex: 1 1 280px;
+  max-width: 430px;
+  margin: 0;
+}
+.gen-kw-inline .kw-input {
+  width: 100%;
+  height: 38px;
+  font-size: 13px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(var(--axis), 0.3);
+  background: rgba(var(--cosmic-blue-rgb), 0.5);
+  color: var(--film-white);
+  padding: 0 16px;
+}
+.gen-kw-inline .kw-input::placeholder { color: var(--muted-silver); }
+.gen-kw-inline .kw-input:focus {
+  outline: none;
+  border-color: rgba(var(--axis), 0.6);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+/* ---- Split: chips left, hero right ---- */
+.gen-split {
+  display: grid;
+  grid-template-columns: 1fr 332px;
+  gap: 28px;
+  align-items: start;
+}
+.gen-left { min-width: 0; }
+
+/* ---- Match toggle (.match-toggle / .opt.on) ---- */
+.match-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 5px 8px;
+  background: rgba(var(--cosmic-blue-rgb), 0.5);
+  border: 1px solid rgba(var(--axis), 0.18);
+  border-radius: var(--radius-pill);
+}
+.match-toggle-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted-silver);
+  padding: 0 4px;
+}
+.match-toggle .opt {
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font: 12.5px var(--font-body);
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--film-white);
+  transition: background-color 0.25s ease-out,
+              border-color 0.25s ease-out,
+              color 0.25s ease-out;
+}
+.match-toggle .opt:hover { background: rgba(var(--axis), 0.1); }
+.match-toggle .opt.on {
+  background: linear-gradient(180deg, rgba(var(--axis), 0.22), rgba(var(--axis), 0.08));
+  border-color: rgba(var(--axis), 0.45);
+  color: var(--axis-hex);
+}
+
+/* ---- Bigger glyphed genre chips ---- */
+.gen-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: flex-start;
+}
+.disco-chip.gen-lg {
+  font-size: 14.5px;
+  padding: 11px 17px;
+  gap: 8px;
+}
+.disco-chip.gen-lg .genre-glyph {
+  display: inline-flex;
+  align-items: center;
+}
+.disco-chip.gen-lg .genre-glyph svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+}
+
+/* ---- Live match hero (right zone) ---- */
+.gen-hero {
+  border-left: 1px solid rgba(var(--axis), 0.18);
+  padding: 4px 0 4px 26px;
+  text-align: center;
+}
+.gen-ring-wrap {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 6px;
+}
+.gen-ring {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  color: var(--axis-hex);
+}
+.gen-ring-track {
+  stroke: rgba(var(--axis), 0.12);
+  stroke-width: 1.5;
+}
+.gen-ring-orbit {
+  stroke: rgba(var(--axis), 0.35);
+  stroke-width: 1.5;
+}
+.gen-ring-dot {
+  fill: var(--axis-hex);
+  filter: drop-shadow(0 0 4px rgba(var(--axis), 0.6));
+}
+.gen-ring.is-loading { animation: gen-ring-pulse 1.1s ease-in-out infinite; }
+@keyframes gen-ring-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+.gen-hero .big-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1;
+}
+.gen-hero-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--axis-hex);
+  margin-bottom: 2px;
+}
+.gen-hero-mode {
+  font-size: 11px;
+  color: var(--muted-silver);
+  margin-bottom: 12px;
+}
+.gen-hero-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.gen-hero-cluster .atag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  font: 11.5px var(--font-body);
+  color: var(--axis-hex);
+  background: rgba(var(--axis), 0.1);
+  border: 1px solid rgba(var(--axis), 0.3);
+}
+.gen-hero-cluster .atag .genre-glyph { display: inline-flex; }
+.gen-hero-cluster .atag .genre-glyph svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+}
+.gen-hero-cluster .gen-hero-empty {
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--muted-silver);
+}
+.gen-hero-caption {
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted-silver);
+  opacity: 0.8;
+}
+
+/* ---- Mobile: stack hero under chips (Rule 15) ---- */
+@media (max-width: 900px) {
+  .gen-split { grid-template-columns: 1fr; }
+  .gen-hero {
+    border-left: none;
+    border-top: 1px solid rgba(var(--axis), 0.18);
+    padding: 18px 0 4px;
+  }
+}
+@media (max-width: 650px) {
+  .gen-kw-inline { gap: 10px; }
+  .gen-kw-head { font-size: 14px; }
+  .gen-kw-inline .orbit-kw-tab-wrap { max-width: 100%; }
+}
 /* END OF STYLES */
