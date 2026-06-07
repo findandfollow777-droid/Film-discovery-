@@ -4156,37 +4156,88 @@ function buildGenresContent(root) {
 // 3. THEMES SECTION
 // =============================================
 
+/* ============================================================
+   THEMES PANEL — Rebuilt June 7, 2026
+   Honest reskin (mirrors the Genre rebuild). Search is the HERO:
+   the shared inline-search unit (.gen-kw-inline / .gen-kw-head /
+   .kw-input) repositions the existing Themes keyword widget — its
+   tmdb-keyword commit (→ with_keywords) is UNTOUCHED. Below: the
+   curated THEME_GROUPS (6 groups) as bigger .disco-chip.gen-lg
+   components with per-group axis section labels, then a footer
+   match-pill + honest note. No right-zone graphic.
+
+   Theme chips are a client-side post-filter convenience layer (no
+   TMDB param), so the footer pill just reflects the real count of
+   selected curated chips — never a fabricated result count.
+   ============================================================ */
 function buildThemesContent(root) {
-  /* Themes 2-column layout (May 4, 2026): first 3 THEME_GROUPS in
-     the left column, remaining groups in the right. Intro paragraph
-     dropped — duplicates the panel header. */
-  const grid = document.createElement("div");
-  grid.className = "oft-themes-grid";
-  const colLeft  = document.createElement("div"); colLeft.className  = "oft-themes-col";
-  const colRight = document.createElement("div"); colRight.className = "oft-themes-col";
-  grid.appendChild(colLeft);
-  grid.appendChild(colRight);
-  root.appendChild(grid);
+  /* ---- Inline search unit (the hero) — shared Genre classes ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+
+  const head = document.createElement("div");
+  head.className = "gen-kw-head";
+  head.textContent = "Search themes & concepts";
+  inline.appendChild(head);
 
   const themesKwSearch = buildKeywordSearchWidget(
-    "themes-kw", "themes", "Search themes & concepts..."
+    "themes-kw", "themes", "e.g. dystopia, heist, coming of age…"
   );
-  colRight.insertBefore(themesKwSearch, colRight.firstChild);
+  const kwInput = themesKwSearch.querySelector("input");
+  if (kwInput) kwInput.classList.add("kw-input");
+  inline.appendChild(themesKwSearch);
+  root.appendChild(inline);
 
-  const groupEntries = Object.entries(THEME_GROUPS);
-  const half = Math.ceil(groupEntries.length / 2);
+  /* ---- Curated themes: 6 groups of bigger .disco-chip chips ---- */
+  root.appendChild(makeSectionLabel("Curated themes"));
 
-  groupEntries.forEach(([groupName, categories], i) => {
-    const target = i < half ? colLeft : colRight;
-    target.appendChild(makeSectionLabel(groupName));
+  const groupsWrap = document.createElement("div");
+  groupsWrap.className = "theme-groups";
+  root.appendChild(groupsWrap);
+
+  Object.entries(THEME_GROUPS).forEach(([groupName, categories]) => {
+    const group = document.createElement("div");
+    group.className = "theme-group";
+
+    const label = makeSectionLabel(groupName);
+    label.classList.add("theme-group-label");
+    group.appendChild(label);
+
     const chipGroup = document.createElement("div");
-    chipGroup.className = "chip-group";
+    chipGroup.className = "chip-group theme-chip-group";
     categories.forEach(cat => {
-      const chip = makeChip(cat, "themes", { type: "theme", name: cat });
+      const chip = makeChip(cat, "themes", { type: "theme", name: cat }, { component: true });
+      chip.classList.add("gen-lg");
+      chip.addEventListener("click", updateMatchPill);
       chipGroup.appendChild(chip);
     });
-    target.appendChild(chipGroup);
+    group.appendChild(chipGroup);
+    groupsWrap.appendChild(group);
   });
+
+  /* ---- Footer: match pill (real selected-count) + honest note ---- */
+  const footer = document.createElement("div");
+  footer.className = "theme-footer";
+
+  const pill = document.createElement("span");
+  pill.className = "match-pill";
+  pill.id = "themeMatchPill";
+  footer.appendChild(pill);
+
+  const note = document.createElement("p");
+  note.className = "theme-note";
+  note.textContent =
+    "Curated themes are a convenience layer — the search above reaches every concept TMDB knows.";
+  footer.appendChild(note);
+  root.appendChild(footer);
+
+  function updateMatchPill() {
+    const n = groupsWrap.querySelectorAll(".disco-chip.on").length;
+    pill.textContent = n === 0
+      ? "No curated themes selected"
+      : n + (n === 1 ? " curated theme selected" : " curated themes selected");
+  }
+  updateMatchPill();
 }
 
 // =============================================
@@ -6543,15 +6594,20 @@ function collectLabelsForSection(sectionKey) {
       });
       return universeResults;
 
-    case "themes":
-      const themeChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
+    case "themes": {
+      /* Rebuilt June 7, 2026 (lockstep with buildThemesContent): read the
+         migrated .disco-chip.on theme chips (type:"theme"). Same value
+         shape {type:"theme",name} → unchanged client-side post-filter (no
+         TMDB param). tmdb-keyword theme filters commit on their own path. */
+      const themeChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "theme"; } catch { return false; }
+          try { return JSON.parse(chip.dataset.value).type === "theme"; } catch (e) { return false; }
         });
       return themeChips.map(chip => {
         const value = JSON.parse(chip.dataset.value);
         return { label: `Theme: ${value.name}`, value };
       });
+    }
 
     case "settingWhere":
       const locationResults = [];

@@ -7132,4 +7132,57 @@ html, body {
   .gen-kw-head { font-size: 14px; }
   .gen-kw-inline .orbit-kw-tab-wrap { max-width: 100%; }
 }
+
+/* ============================================================
+   THEMES PANEL — honest reskin (June 7, 2026)
+   Teal axis via #oft-panel-themes[data-axis="themes"]. Reuses the
+   Genre inline-search unit (.gen-kw-inline / .kw-input) and the
+   bigger chip size (.disco-chip.gen-lg); only group layout + the
+   footer match pill are new. Tokens only — no hardcoded hex.
+   ============================================================ */
+.theme-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 28px;
+  margin-bottom: 6px;
+}
+.theme-group { min-width: 0; }
+.theme-group-label {
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.theme-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: flex-start;
+}
+
+/* ---- Footer: real selected-count pill + honest note ---- */
+.theme-footer {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(var(--axis), 0.18);
+}
+.match-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font: 12px var(--font-body);
+  color: var(--axis-hex);
+  background: rgba(var(--axis), 0.1);
+  border: 1px solid rgba(var(--axis), 0.3);
+}
+.theme-note {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted-silver);
+}
+
+@media (max-width: 650px) {
+  .theme-groups { grid-template-columns: 1fr; }
+}
+
 /* END OF STYLES */
