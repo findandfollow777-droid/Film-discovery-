@@ -182,7 +182,7 @@ function festivalDisplayName(slug) {
 }
 
 // ===== INIT =====
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   attachEventListeners();
 
   // Movie/People Cube init (guarded — scripts loaded in awards2.html). The
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   attachFlipHandlers(); // delegated, once, on the stable categories container
 
-  initFromHash();
+  await initFromHash();   // opens a hash target if valid (sets currentView='detail')
   if (currentView === 'compact') loadYearStrips();
 });
 
@@ -309,28 +309,84 @@ async function getTmdbBackdropPath(movieId) {
   }
 }
 
+/* ============================================================
+   UNIVERSAL RENDERING HELPERS — Added Jun 8 2026 (Build A1)
+   Every festival/year opens on COMPUTED data; editorial is an
+   optional enhancement that overrides per field where authored.
+   ============================================================ */
+
+// Years present in a festival's loaded data, descending. Sourced from the v1
+// ceremonies list; falls back to scanning the reshaped db.
+function getFestivalYears(festival) {
+  const raw = V1_RAW_CACHE[festival];
+  let years = [];
+  if (raw && Array.isArray(raw.ceremonies)) {
+    years = raw.ceremonies.map(c => c.year).filter(y => Number.isInteger(y));
+  }
+  if (years.length === 0) {
+    const db = V1_FESTIVAL_CACHE[festival] || {};
+    const set = new Set();
+    Object.values(db).forEach(byYear => Object.keys(byYear).forEach(y => set.add(parseInt(y, 10))));
+    years = [...set];
+  }
+  return [...new Set(years)].filter(y => !isNaN(y)).sort((a, b) => b - a);
+}
+
+// Ceremony number for a festival/year (e.g. 97 for oscar-2025). Null for jury
+// festivals (their v1 ceremonies carry ceremony_number: null).
+function getCeremonyNumber(festival, year) {
+  const raw = V1_RAW_CACHE[festival];
+  if (!raw || !Array.isArray(raw.ceremonies)) return null;
+  const c = raw.ceremonies.find(c => c.year === year);
+  return c && c.ceremony_number ? c.ceremony_number : null;
+}
+
+// Computed headline fallback (used when no editorial.headline). A clear multi-win
+// leader reads "{film} leads with {n} wins"; a single-prize leader shows the film
+// title alone (avoids duplicating the ceremony line for jury festivals); no film
+// at all → "{year} {Festival}".
+function computedHeadline(stats, festival, year) {
+  const top = stats && stats.mostWins;
+  if (top && top.count >= 2) return `${top.title} leads with ${top.count} wins`;
+  if (top && top.title) return top.title;
+  return `${year} ${festivalDisplayName(festival)}`;
+}
+
+// Computed strip stats (used when no editorial.stripStats). Only reliably
+// derivable facts — ceremony ordinal (if present), category count, win count.
+// Venue/host are editorial-only and intentionally omitted.
+function computedStripStats(stats, festival, year) {
+  const out = [];
+  const cer = getCeremonyNumber(festival, year);
+  if (cer) out.push(`${cer}${ordinalSuffix(cer)}`);
+  if (stats) {
+    out.push(`${stats.categories} categor${stats.categories === 1 ? 'y' : 'ies'}`);
+    if (stats.mostWins && stats.mostWins.count >= 2) out.push(`${stats.mostWins.count} wins`);
+  }
+  return out;
+}
+
 // ===== YEAR STRIPS =====
 async function loadYearStrips() {
   const container = document.getElementById('year-strips-container');
   container.innerHTML = '<div class="strip-loading">Loading ceremonies…</div>';
 
-  await loadV1FestivalData(currentFestival);
+  const db = await loadV1FestivalData(currentFestival);
 
-  // Only show years that have editorial data.
-  const editorialYears = Object.keys(AWARDS_YEAR_EDITORIAL)
-    .filter(k => k.startsWith(`${currentFestival}-`))
-    .map(k => parseInt(k.split('-')[1], 10))
-    .filter(y => !isNaN(y))
-    .sort((a, b) => b - a);
+  // Strips now derive from DATA (every ceremony), editorial only enhancing.
+  const years = db ? getFestivalYears(currentFestival) : [];
 
-  if (editorialYears.length === 0) {
-    container.innerHTML = `<div class="strip-empty">No editorial entries yet for ${escapeHtml(festivalDisplayName(currentFestival))}. Coming soon.</div>`;
+  if (years.length === 0) {
+    container.innerHTML = `<div class="strip-empty">No data for ${escapeHtml(festivalDisplayName(currentFestival))} yet.</div>`;
     return;
   }
 
-  container.innerHTML = editorialYears.map(year => {
+  container.innerHTML = years.map(year => {
     const editorial = AWARDS_YEAR_EDITORIAL[`${currentFestival}-${year}`];
-    const stats = (editorial.stripStats || []).map(s =>
+    const stats = computeCeremonyStats(currentFestival, year);
+    const headline = (editorial && editorial.headline) || computedHeadline(stats, currentFestival, year);
+    const stripStats = (editorial && editorial.stripStats) || computedStripStats(stats, currentFestival, year);
+    const statsHtml = stripStats.map(s =>
       `<span class="strip-stat">${escapeHtml(s)}</span>`
     ).join('');
     return `
@@ -340,9 +396,9 @@ async function loadYearStrips() {
           <div class="strip-visual-placeholder">Backdrop</div>
         </div>
         <div class="strip-content">
-          <div class="strip-headline">${escapeHtml(editorial.headline)}</div>
+          <div class="strip-headline">${escapeHtml(headline)}</div>
         </div>
-        <div class="strip-stats">${stats}</div>
+        <div class="strip-stats">${statsHtml}</div>
       </div>
     `;
   }).join('');
@@ -381,9 +437,8 @@ async function showYearDetail(year) {
     history.pushState({ festival: currentFestival, year }, '', newHash);
   }
 
-  const editorial = AWARDS_YEAR_EDITORIAL[`${currentFestival}-${year}`];
   document.getElementById('year-detail-title').textContent =
-    editorial ? `${year} ${festivalDisplayName(currentFestival)}` : `${year}`;
+    `${year} ${festivalDisplayName(currentFestival)}`;
 
   renderHero(year);
   await renderCategories(year);   // await so trophy scroll-spy can observe real headings
@@ -392,7 +447,9 @@ async function showYearDetail(year) {
   window.scrollTo(0, 0);
 }
 
-function initFromHash() {
+// Opens a festival/year from the URL hash if it exists in the DATA (editorial
+// optional). Async because it must load the festival's data to validate the year.
+async function initFromHash() {
   const hash = window.location.hash.slice(1);
   if (!hash) return;
   const dash = hash.indexOf('-');
@@ -400,7 +457,9 @@ function initFromHash() {
   const festival = hash.slice(0, dash);
   const year = parseInt(hash.slice(dash + 1), 10);
   if (!festival || !year) return;
-  if (!AWARDS_YEAR_EDITORIAL[`${festival}-${year}`]) return;
+
+  const db = await loadV1FestivalData(festival);
+  if (!db || !getFestivalYears(festival).includes(year)) return; // invalid → stay in compact
 
   currentFestival = festival;
   // Sync festival tab visual state.
@@ -425,29 +484,49 @@ async function renderHero(year) {
   const container = document.getElementById('hero-container');
   const editorial = AWARDS_YEAR_EDITORIAL[`${currentFestival}-${year}`];
 
-  if (!editorial) {
-    container.innerHTML = '';
-    return;
-  }
-
   // Capture the nav target so a stale async render (slow fetch) can't overwrite
   // a newer one or stomp the newer render's auto-rotate timer. Re-checked after
   // every await below.
   const fest = currentFestival, yr = year;
   const superseded = () => currentFestival !== fest || currentYear !== yr;
 
-  // Decide whether the stats slide is shown. ACADEMY_STYLE + computable stats.
-  let showStats = ACADEMY_STYLE.has(currentFestival);
-  let stats = null;
-  if (showStats) {
-    await loadV1FestivalData(fest);
-    if (superseded()) return;
-    stats = computeCeremonyStats(fest, yr);
-    if (!stats) showStats = false; // no category data → editorial only
+  // Always load data — both the stats slide and the computed hero need it.
+  await loadV1FestivalData(fest);
+  if (superseded()) return;
+  const stats = computeCeremonyStats(fest, yr);
+
+  // Hero model: editorial wins per-field; else compute. Computed = film-led on the
+  // top-winning film's backdrop, or typographic if that film has no backdrop (so a
+  // missing image never renders broken). Computed never fabricates deck prose.
+  let hero = editorial;
+  if (!hero) {
+    const top = stats && stats.mostWins;
+    let backdropTmdbId = top && top.tmdbId ? top.tmdbId : null;
+    let heroType = 'film-led';
+    if (backdropTmdbId) {
+      const path = await getTmdbBackdropPath(backdropTmdbId);
+      if (superseded()) return;
+      if (!path) { heroType = 'typographic'; backdropTmdbId = null; }
+    } else {
+      heroType = 'typographic';
+    }
+    hero = {
+      heroType,
+      ceremonyNumber: getCeremonyNumber(fest, yr),   // null for jury → ceremony line uses {year}
+      headline: computedHeadline(stats, fest, yr),
+      deckLine: '',
+      backdropTmdbId,
+      bestPicture: top ? top.title : '—',            // typographic meta-grid only
+      host: '—'
+    };
   }
 
-  const editorialHtml = buildEditorialHtml(editorial, year);
-  const statsHtml = showStats ? buildStatsHtml(stats, editorial, year) : '';
+  if (!hero) { container.innerHTML = ''; return; } // no editorial AND no data
+
+  // Jury suppression unchanged: ACADEMY_STYLE only, and only when stats computed.
+  const showStats = ACADEMY_STYLE.has(fest) && !!stats;
+  const editorialHtml = buildEditorialHtml(hero, year);
+  const statsHtml = showStats ? buildStatsHtml(stats, editorial || {}, year) : '';
 
   container.innerHTML = `
     <div class="hero-carousel" data-slide="0">
@@ -463,9 +542,11 @@ async function renderHero(year) {
     </div>
   `;
 
-  // Editorial backdrop (film-led only) — lazy TMDB fetch, unchanged behaviour.
-  if (editorial.heroType === 'film-led' && editorial.backdropTmdbId) {
-    const path = await getTmdbBackdropPath(editorial.backdropTmdbId);
+  // Backdrop (film-led only) — lazy TMDB fetch, sessionStorage-cached. Works for
+  // editorial (authored id) AND computed (top-winning film id; path already cached
+  // from the pre-check above, so this is instant for computed heroes).
+  if (hero.heroType === 'film-led' && hero.backdropTmdbId) {
+    const path = await getTmdbBackdropPath(hero.backdropTmdbId);
     if (superseded()) return; // navigation finished during the fetch
     if (path) {
       const url = OrbitUtils.tmdbImageUrl(path, OrbitUtils.IMAGE_SIZES.BACKDROP);
@@ -492,7 +573,9 @@ function buildEditorialHtml(editorial, year) {
         <div class="hero-backdrop" data-backdrop-tmdb-id="${editorial.backdropTmdbId || ''}"></div>
         <div class="hero-content">
           <div class="hero-year">${year}</div>
-          <div class="hero-ceremony">${editorial.ceremonyNumber}${ordinalSuffix(editorial.ceremonyNumber)} ${escapeHtml(festivalDisplayName(currentFestival))}${editorial.venue ? ' · ' + escapeHtml(editorial.venue) : ''}</div>
+          <div class="hero-ceremony">${editorial.ceremonyNumber
+            ? `${editorial.ceremonyNumber}${ordinalSuffix(editorial.ceremonyNumber)} ${escapeHtml(festivalDisplayName(currentFestival))}`
+            : `${year} ${escapeHtml(festivalDisplayName(currentFestival))}`}${editorial.venue ? ' · ' + escapeHtml(editorial.venue) : ''}</div>
           <div class="hero-headline">${escapeHtml(editorial.headline)}</div>
           <div class="hero-deck">${escapeHtml(editorial.deckLine || '')}</div>
         </div>
