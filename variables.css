@@ -136,6 +136,10 @@
   --fest-bafta-rgb: 14, 165, 233;
   --fest-globe: #fbbf24;
   --fest-globe-rgb: 251, 191, 36;
+  /* Golden Globe slug is `gg`; alias to the Globe colour so a data-festival="gg"
+     hook resolves (don't rename --fest-globe — other pages use it). */
+  --fest-gg: var(--fest-globe);
+  --fest-gg-rgb: var(--fest-globe-rgb);
 
   /* === Award badge tokens (Phase 1.13) ===
      Halo accents alias the existing --fest-* tokens — single source of truth.

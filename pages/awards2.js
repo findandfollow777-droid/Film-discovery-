@@ -440,6 +440,15 @@ async function showYearDetail(year) {
   document.getElementById('year-detail-title').textContent =
     `${year} ${festivalDisplayName(currentFestival)}`;
 
+  // Per-festival + per-year background tint hooks (Build B). #hero-container is
+  // the single stable ancestor of both the hero and the stats slide, so one set
+  // of attributes drives the wash for both. Overwritten each navigation (no
+  // stale carry-over). Per-year angle is deterministic: same year → same angle.
+  const heroEl = document.getElementById('hero-container');
+  heroEl.setAttribute('data-festival', currentFestival);
+  heroEl.setAttribute('data-year', String(year));
+  heroEl.style.setProperty('--fest-angle', `${120 + (year % 12) * 5}deg`);
+
   renderHero(year);
   await renderCategories(year);   // await so trophy scroll-spy can observe real headings
   await renderTrophyStrip(year);

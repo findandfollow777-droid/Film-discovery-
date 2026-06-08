@@ -307,7 +307,9 @@ body::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.12) 0%, transparent 60%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .hero-content {
@@ -361,7 +363,9 @@ body::after {
 
 .duel-side {
   height: 100%;
-  background: linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 60%),
+    linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
   display: flex;
   align-items: flex-end;
   padding: 40px;
@@ -466,7 +470,9 @@ body::after {
 /* D. Typographic */
 .hero-typographic {
   height: 460px;
-  background: linear-gradient(135deg, rgba(var(--prestige-purple-rgb), 0.08) 0%, rgba(0, 0, 0, 0) 100%);
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(var(--prestige-purple-rgb), 0.08) 0%, rgba(0, 0, 0, 0) 100%);
   border: 1px solid rgba(var(--prestige-purple-rgb), 0.2);
   border-radius: 16px;
   display: flex;
@@ -517,6 +523,22 @@ body::after {
   color: var(--film-white);
   font-weight: 500;
 }
+
+/* ============================================================
+   PER-FESTIVAL + PER-YEAR BACKGROUND TINT — Added Jun 8 2026 (Build B)
+   #hero-container carries data-festival (→ --fest-tint-rgb) and an inline
+   --fest-angle (deterministic per year, set in showYearDetail). A subtle 5%
+   wash of the festival colour layers OVER the existing dark gradients on the
+   hero + stats panels — additive, never a replacement. The wash gradient's
+   ANGLE varies per year (non-colour variation); the base gradients are fixed.
+   Foreground stat accents/glyphs/text are opaque, so legibility is unaffected.
+   ============================================================ */
+#hero-container[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+#hero-container[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+#hero-container[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+#hero-container[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+#hero-container[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+#hero-container[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
 
 /* ============================================================
    HERO CAROUSEL — "By the Numbers" — Added Jun 8 2026
@@ -574,7 +596,9 @@ body::after {
   grid-template-columns: 1fr 255px;   /* 227px photo + 28px right margin (portrait sits inward) */
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(var(--accent-gold-rgb), 0.06) 0%, rgba(var(--prestige-purple-rgb), 0.05) 100%);
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.05) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(var(--accent-gold-rgb), 0.06) 0%, rgba(var(--prestige-purple-rgb), 0.05) 100%);
   border: 1px solid rgba(var(--accent-gold-rgb), 0.18);
 }
 
