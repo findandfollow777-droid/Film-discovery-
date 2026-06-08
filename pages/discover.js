@@ -3053,8 +3053,22 @@ function buildTMDBQueryFromFilters(filters) {
       case "themes":
       case "settingWhere":
       case "settingWhen":
-      case "basedOn":
         // Handled by client-side post-filtering, not TMDB API params
+        break;
+
+      case "basedOn":
+        /* Prompt 1 (2026-06-08): surviving Source Type chips commit
+           {type:"keyword", id} → real with_keywords (OR-merge with "|",
+           identical to the universes keyword chips). Any legacy
+           {type:"based_on"} value (none ship after Prompt 1) is simply
+           ignored here. */
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}|${filter.value.id}` : String(filter.value.id)
+          );
+        }
         break;
 
       case "universes":
@@ -3181,7 +3195,13 @@ function getTopGenresFromMovies(movies) {
 // SETTINGS POST-FILTER
 // =============================================
 
-const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen", "basedOn"];
+/* basedOn removed 2026-06-08 (Source Prompt 1): the surviving Source Type
+   chips now commit {type:"keyword",id} → real with_keywords (full catalogue),
+   so basedOn no longer rides the seed post-filter. Dropping it here stops the
+   seed gate (applySettingsFilters' non-seed exclusion) from re-imposing the
+   ~4.3k-movie ceiling whenever a Source Type chip is active. The frozen
+   case "based_on" post-filter is now unreachable — left in place, out of scope. */
+const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen"];
 
 function hasOnlySettingsFilters(filters) {
   return filters.length > 0 && filters.every(f => SETTINGS_SECTIONS.includes(f.section));
@@ -4471,38 +4491,32 @@ function buildSettingWhenContent(root) {
 // =============================================
 
 function buildBasedOnContent(root) {
-  // Source type chips
+  /* ============================================================
+     SOURCE — "Based On" half · honest data layer (Prompt 1 — 2026-06-08)
+     Source Type chips now commit {type:"keyword", id} → real with_keywords
+     (full catalogue), the SAME shape the universes keyword chips use. Only
+     source types backed by a VERIFIED TMDB keyword id survive:
+       • Novel / Book          → 818  (based on novel or book)
+       • True Story / Real…    → 9672 (based on true story)
+     Dropped (no honest keyword path — were on the coverage-limited seed
+     post-filter): Original Screenplay (an absence filter with_keywords can't
+     express), Short Story, Stage Play, Comic/Graphic Novel, Video Game, and
+     the Franchise Status chips (Sequel, Prequel). No fabricated IDs.
+     Commit model unchanged (legacy .chip.active DOM scrape); only the value
+     SHAPE changed — read branch + query builder updated in lockstep.
+     ============================================================ */
   root.appendChild(makeSectionLabel("Source Type"));
   const sourceGroup = document.createElement("div");
   sourceGroup.className = "chip-group";
   const sourceTypes = [
-    { label: "Original Screenplay", value: "original" },
-    { label: "True Story / Real Events", value: "true_story" },
-    { label: "Novel / Book", value: "novel" },
-    { label: "Short Story", value: "short_story" },
-    { label: "Stage Play", value: "play" },
-    { label: "Comic / Graphic Novel", value: "comic" },
-    { label: "Video Game", value: "video_game" }
+    { label: "Novel / Book", id: 818 },
+    { label: "True Story / Real Events", id: 9672 }
   ];
   sourceTypes.forEach(s => {
-    const chip = makeChip(s.label, "basedOn", { type: "based_on", value: s.value });
+    const chip = makeChip(s.label, "basedOn", { type: "keyword", id: s.id, name: s.label });
     sourceGroup.appendChild(chip);
   });
   root.appendChild(sourceGroup);
-
-  // Franchise status chips
-  root.appendChild(makeSectionLabel("Franchise Status"));
-  const franchiseGroup = document.createElement("div");
-  franchiseGroup.className = "chip-group";
-  const franchiseTypes = [
-    { label: "Sequel", value: "sequel" },
-    { label: "Prequel", value: "prequel" }
-  ];
-  franchiseTypes.forEach(f => {
-    const chip = makeChip(f.label, "basedOn", { type: "based_on", value: f.value });
-    franchiseGroup.appendChild(chip);
-  });
-  root.appendChild(franchiseGroup);
 }
 
 // =============================================
@@ -6761,9 +6775,12 @@ function collectLabelsForSection(sectionKey) {
       return whenResults;
 
     case "basedOn":
+      /* Lockstep with buildBasedOnContent (Prompt 1): surviving Source Type
+         chips carry {type:"keyword", id} → with_keywords, so read by that
+         type. (Legacy {type:"based_on"} chips no longer ship.) */
       const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "based_on"; } catch { return false; }
+          try { return JSON.parse(chip.dataset.value).type === "keyword"; } catch { return false; }
         });
       return basedOnChips.map(chip => {
         const value = JSON.parse(chip.dataset.value);
