@@ -518,6 +518,280 @@ body::after {
   font-weight: 500;
 }
 
+/* ============================================================
+   HERO CAROUSEL — "By the Numbers" — Added Jun 8 2026
+   2-slide crossfade carousel. Both slides occupy the SAME grid cell
+   (grid-area 1/1) so the track height = the taller slide → no jump on
+   rotate, and the stats grid can grow on mobile while heights stay equal.
+   All colors via tokens (Rule #12).
+   ============================================================ */
+.hero-carousel {
+  position: relative;
+  margin-bottom: 40px;        /* replaces the per-template margin (zeroed below) */
+}
+
+.hero-track {
+  display: grid;
+  min-height: 460px;          /* current hero height; equal-height baseline */
+}
+
+.hero-slide {
+  grid-area: 1 / 1;           /* stack both slides in one cell */
+  min-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Templates fill the shared cell (so the editorial slide never leaves a gap
+   when the stats slide is taller on mobile) and drop their standalone margin. */
+.hero-carousel .hero-film-led,
+.hero-carousel .hero-duel,
+.hero-carousel .hero-typographic,
+.hero-carousel .hero-portrait {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+/* ----- Slide 2: stats panel — "Calm Stack" (rebuilt Jun 8 2026) -----
+   Left = stacked stat rows with even vertical rhythm (space-between);
+   right = rectangular portrait tile (NO circle). Height matches slide 1
+   (460px via the shared grid cell) so the carousel never jumps. */
+.hero-slide-stats {
+  display: flex;              /* let the inner panel stretch to the cell height */
+}
+
+.stats-slide {
+  flex: 1;
+  min-width: 0;
+  min-height: 460px;
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(var(--accent-gold-rgb), 0.06) 0%, rgba(var(--prestige-purple-rgb), 0.05) 100%);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.18);
+}
+
+.stats-slide.no-standout {
+  grid-template-columns: 1fr;
+}
+
+/* Even distribution (Jun 8 2026 patch): the slide is locked to 460px to match
+   the editorial hero. Distribute all FOUR rows (title, wins, noms, categories)
+   evenly through the full panel height with space-evenly — equal space above,
+   between, and below — so the column fills the height like the portrait beside
+   it, with no canyon and no floating cluster. (.stats-mid below is display:
+   contents so its two rows are direct flex children and join the distribution.) */
+.stats-main {
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-self: stretch;          /* fill the grid cell's full height so space-evenly has room */
+  box-sizing: border-box;       /* awards2.html has no global border-box; without this the
+                                   min-height below would add the 28px padding → 516px → panel
+                                   grows past the 460px editorial slide and the carousel jumps. */
+  min-height: 460px;            /* belt-and-braces: guarantee 460px even if stretch is overridden */
+  min-width: 0;
+}
+
+.stats-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+/* Dissolve the wrapper box so the two stat rows become direct flex children of
+   .stats-main and join its space-evenly distribution (rather than being grouped
+   as one item). No own box → its old gap no longer applies; spacing is governed
+   entirely by .stats-main's space-evenly. */
+.stats-mid {
+  display: contents;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Number + label share one line; the big glyph row sits beneath at full width. */
+.stat-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-width: 0;
+}
+
+.stat-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 0.9;
+  min-width: 40px;
+}
+
+.stat-num.gold { color: var(--accent-gold); }
+.stat-num.cyan { color: var(--accent-cyan); }
+
+.stat-num-sm {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.stat-num-sm.purple { color: var(--prestige-purple); }
+
+.stat-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--muted-silver);
+  text-transform: uppercase;
+}
+
+/* ----- Glyph rows (gold wins + silver nomination-losses) — the visual hero ----- */
+.glyph-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+/* Reuse the trophy belt's og-statuette. Gold = exact --accent-gold chain
+   (matches .trophy-icon .og at awards2.css). Silver = neutral grey for losses.
+   Enlarged to 26px so the statuettes read as the focal point of each stat. */
+.stat-glyph {
+  width: 26px;
+  height: 26px;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.stat-glyph.silver {
+  filter: brightness(0) saturate(100%) invert(80%);
+}
+
+/* ----- Baseline row: categories | snub. Part of the centered cluster (no
+   auto margin); keeps a full-width divider above it for visual separation. ----- */
+.stat-bottom {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(var(--muted-silver-rgb), 0.18);
+}
+
+.stat-mini {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-highlight {
+  border-left: 1px solid rgba(var(--muted-silver-rgb), 0.18);
+  padding-left: 24px;
+}
+
+.highlight-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--success-green);
+  text-transform: uppercase;
+}
+
+.highlight-value {
+  font-size: 14px;
+  color: var(--film-white);
+  margin-top: 2px;
+}
+
+.highlight-detail {
+  font-size: 12px;
+  color: var(--ghost-gray);
+}
+
+/* ----- Rectangular portrait tile (NO circle) ----- */
+.stats-portrait {
+  position: relative;
+  margin: 20px 20px 20px 0;
+  border-radius: var(--border-radius-lg, 12px);
+  overflow: hidden;
+  background: var(--cosmic-blue);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
+}
+
+.stats-portrait-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+}
+
+.stats-portrait-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(var(--space-black-rgb), 0.9), transparent 55%);
+}
+
+.stats-portrait-text {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+}
+
+.standout-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.standout-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--film-white);
+  line-height: 1.1;
+}
+
+.standout-award {
+  font-size: 11px;
+  color: var(--muted-silver);
+  margin-top: 2px;
+}
+
+/* ----- Carousel dots ----- */
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.hero-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--muted-silver-rgb), 0.4);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-dot:hover { transform: scale(1.2); }
+.hero-dot.is-active { background: var(--accent-gold); }
+
 /* ===== STICKY YEAR DETAIL HEADER ===== */
 .year-detail-header {
   position: sticky;
@@ -582,10 +856,26 @@ body::after {
 }
 
 /* ===== PHASE 1 SIMPLE TILES (placeholder per spec; Phase 2 = full port from awards-browse) ===== */
+
+/* Wrapper = grid item (carries .is-winner/.is-nominee + the award bar). The
+   grid stretches it to the row height; this flex column passes that height to
+   the bordered .tile so all movie cards in a row stay equal-height (matching
+   the pre-wrapper behaviour) regardless of title/person text length. */
+.tile-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .tile is now a pure 2:3 poster card (title overlaid), so it sizes to its own
+   content — no flex:1 stretch that used to leave a gap under short titles. */
+.tile-card .tile {
+  flex: 0 0 auto;
+}
+
 .tile {
   position: relative;
   background: rgba(var(--nebula-dark-rgb), 0.5);
-  border-radius: 10px;
+  border-radius: 0; /* square edges */
   overflow: hidden;
   border: 1px solid rgba(var(--muted-silver-rgb), 0.08);
   cursor: pointer;
@@ -629,8 +919,8 @@ body::after {
 }
 
 .tile-no-poster {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -638,29 +928,19 @@ body::after {
   font-size: 28px;
 }
 
-.tile-label {
+/* Title/person overlay — bottom-anchored on the 2:3 poster, gradient scrim for
+   legibility. Mirrors the flip front's .person-gradient/.person-content so movie
+   and person tiles read consistently. pointer-events:none keeps the whole .tile
+   the single click target. */
+.tile-overlay {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: rgba(var(--space-black-rgb), 0.75);
-  color: var(--muted-silver);
-  text-transform: uppercase;
-  z-index: 2;
-}
-
-.tile.winner .tile-label {
-  background: rgba(var(--accent-gold-rgb), 0.95);
-  color: var(--space-black);
-}
-
-.tile-info {
-  padding: 10px 12px 12px;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(var(--space-black-rgb), 0.92) 0%, rgba(var(--space-black-rgb), 0.45) 32%, transparent 62%);
+  pointer-events: none;
 }
 
 .tile-title {
@@ -668,7 +948,7 @@ body::after {
   font-weight: 600;
   color: var(--film-white);
   line-height: 1.3;
-  margin-bottom: 4px;
+  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -679,10 +959,244 @@ body::after {
   font-size: 11px;
   color: var(--muted-silver);
   line-height: 1.3;
+  margin-top: 2px;
+  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ============================================================
+   PERSON↔MOVIE FLIP TILES — Added Jun 7 2026
+   Person categories (acting + director) render a click-flip card:
+   FRONT = person portrait, BACK = movie poster. Ported from
+   awards-browse but click-driven (.flipped class) instead of hover,
+   with a "View" button on each face to open the People/Movie Cube.
+   ============================================================ */
+.flip-tile {
+  position: relative;
+  perspective: 800px;
+  overflow: visible;
+  background: transparent;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0; /* square edges */
+}
+
+.flip-tile.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 0; /* square edges */
+}
+
+/* FRONT = person (default visible) */
+.flip-front {
+  background: var(--cosmic-blue);
+}
+
+/* BACK = movie */
+.flip-back {
+  transform: rotateY(180deg);
+  background: rgba(var(--nebula-dark-rgb), 0.98);
+}
+
+.flip-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Person face internals (portrait painted via inline background-image) */
+.person-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+}
+
+.person-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(var(--space-black-rgb), 0.97) 0%,
+    rgba(var(--space-black-rgb), 0.65) 40%,
+    rgba(var(--space-black-rgb), 0.08) 100%);
+}
+
+.person-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  z-index: 1;
+}
+
+.person-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px; /* +15% from 13px (Jun 7 2026) */
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.person-film {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; /* +15% from 11px (Jun 7 2026) */
+  color: var(--muted-silver);
+  font-style: italic;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Role tags — actor=cyan, actress=rose/pink, director=purple (awards2 scheme) */
+.role-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.role-tag.actor {
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+}
+
+.role-tag.actress {
+  background: rgba(var(--accent-rose-rgb), 0.12);
+  color: var(--accent-rose);
+  border: 1px solid rgba(var(--accent-rose-rgb), 0.3);
+}
+
+.role-tag.director {
+  background: rgba(var(--prestige-purple-rgb), 0.12);
+  color: var(--prestige-purple);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.3);
+}
+
+/* Glow border on the whole tile, matching the role */
+.flip-tile.glow-actor .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--accent-cyan-rgb), 0.25);
+}
+.flip-tile.glow-actress .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--accent-rose-rgb), 0.25);
+}
+.flip-tile.glow-director .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--prestige-purple-rgb), 0.25);
+}
+
+/* Winner/nominee label — reuse the simple-tile label look on both faces. */
+/* Award top bar — shared by flip (people) tiles AND simple movie tiles. A
+   full-width framed bar floating ABOVE the tile (8px gap), square edges, full
+   border. Status colour is keyed off .is-winner / .is-nominee on the tile
+   wrapper (.flip-tile or .tile-card), so both tile types render identically. */
+.award-toptab {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 0 8px;       /* gap below the bar, above the tile */
+  padding: 6px 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;       /* winner + nominee, matched */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 0;      /* square edges */
+  z-index: 4;
+}
+
+/* Winner = BLACK text on SOLID GOLD; nominee = muted. */
+.is-winner .award-toptab {
+  color: var(--space-black);
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.is-nominee .award-toptab {
+  color: var(--muted-silver);
+  background: rgba(var(--nebula-dark-rgb), 0.85);
+  border-color: rgba(var(--muted-silver-rgb), 0.2);
+}
+
+/* Hanging "flap" below the card — keeps the tile surface clean. It's a sibling
+   of .flip-inner (not inside the rotating faces), so it doesn't flip and the
+   card's 2/3 aspect-ratio is preserved. Only the face-appropriate button shows. */
+/* Bottom bar — full-width framed bar floating BELOW the tile (8px gap). Square
+   edges, complete border — symmetrical with the top bar. Sibling of .flip-inner,
+   so the card's 2/3 aspect-ratio is untouched. Only one button shows per face. */
+.flip-flap {
+  position: relative;
+  width: 100%;
+  margin-top: 8px;    /* gap above the bar, below the tile */
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Sequenced flip: JS adds .flap-hidden before flipping, removes it after the
+   0.55s flip lands — so the old flap fades out, the card turns, the new flap
+   fades in. (.flap-person/.flap-film still pick WHICH button via .flipped.) */
+.flip-tile.flap-hidden .flip-flap {
+  opacity: 0;
+}
+
+.flap-btn {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  border-radius: 0;   /* square edges */
+  background: rgba(var(--space-black-rgb), 0.85);
+  color: var(--accent-cyan);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.flap-btn:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.15);
+  border-color: var(--accent-cyan);
+}
+
+/* Person face up (default) → View Person, text RIGHT-aligned. */
+.flap-person { display: block; text-align: right; }
+.flap-film   { display: none;  text-align: left; }
+
+/* Movie face up (flipped) → View Film, text LEFT-aligned. */
+.flip-tile.flipped .flap-person { display: none; }
+.flip-tile.flipped .flap-film   { display: block; }
 
 /* Loading / empty / error states */
 .strip-loading,
@@ -765,6 +1279,22 @@ body::after {
 
   .hero-film-led .hero-year {
     font-size: 64px;
+  }
+
+  /* Stats slide (Calm Stack): collapse to one column, hide the portrait tile.
+     Rows keep their rhythm; glyph rows still wrap. Both slides stay equal
+     height via the shared carousel grid cell. */
+  .stats-slide,
+  .stats-slide.no-standout {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-portrait {
+    display: none;
+  }
+
+  .stat-num {
+    font-size: 30px;
   }
 
   .hero-headline {

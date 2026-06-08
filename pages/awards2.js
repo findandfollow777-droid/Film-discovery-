@@ -17,7 +17,19 @@ const AWARDS_YEAR_EDITORIAL = {
     headline: 'Oppenheimer dominates with seven wins',
     deckLine: "Christopher Nolan's epic about the father of the atomic bomb sweeps including Best Picture, Best Director, and Best Actor.",
     backdropTmdbId: 872585,
-    stripStats: ['96th', '7 wins', 'Dolby Theatre']
+    stripStats: ['96th', '7 wins', 'Dolby Theatre'],
+    // By the Numbers slide — authored, not computed (computed stats live in computeCeremonyStats).
+    standout: {
+      personId: 2037,            // Cillian Murphy (confirmed in awards-v1-oscar.json)
+      name: 'Cillian Murphy',
+      award: 'Best Actor',
+      note: 'First nomination, first win'
+    },
+    highlight: {
+      label: 'Biggest snub',
+      value: 'American Fiction',
+      detail: '5 nominations, 1 win'   // freeform — author per year
+    }
   },
   'oscar-2023': {
     heroType: 'film-led',
@@ -110,10 +122,31 @@ const AWARD_GLYPH_MAP = {
   'Best Live Action Short Film':    { label: 'Live Action Short',    beltGlyph: 'og-statuette', categoryGlyph: 'og-film' }
 };
 
+// Person-led categories render flip tiles (front: portrait, back: poster).
+// Oscar-only set; matches v1 category display_name. See renderFlipTile.
+const PERSON_CATS = new Set([
+  'Best Actor',
+  'Best Actress',
+  'Best Supporting Actor',
+  'Best Supporting Actress',
+  'Best Director'
+]);
+
 // ===== STATE =====
 let currentFestival = 'oscar';
 let currentYear = null;
 let currentView = 'compact'; // 'compact' or 'detail'
+
+// Festival classification — gates the "By the Numbers" hero slide (Added Jun 8 2026).
+// Academy-style ceremonies have 20+ categories, so "most wins/noms" is meaningful.
+// Jury festivals (cannes/venice/berlin) award single-winner prizes → stats slide
+// suppressed for now; their carousel shows the editorial slide only.
+const ACADEMY_STYLE = new Set(['oscar', 'bafta', 'gg']);
+
+// Hero carousel runtime state. Single shared timer for the one-shot auto-rotate;
+// cleared at the top of every renderHero so rapid year/festival navigation can't
+// stack timers (no leaks).
+let heroAutoTimer = null;
 
 // Trophy strip runtime state (module-scoped to avoid leaks across year navigations)
 let trophySpyObserver = null;      // disconnected & rebuilt each render
@@ -151,6 +184,21 @@ function festivalDisplayName(slug) {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   attachEventListeners();
+
+  // Movie/People Cube init (guarded — scripts loaded in awards2.html). The
+  // cubes self-inject their DOM; onPersonClick lets a MovieCube cast member
+  // open the PeopleCube. Mirrors anchor-point / awards-browse wiring.
+  if (typeof initMovieCube === 'function') {
+    initMovieCube({
+      onPersonClick: (personId) => {
+        if (typeof openPeopleCube === 'function') openPeopleCube(parseInt(personId, 10));
+      }
+    });
+  }
+  if (typeof initPeopleCube === 'function') initPeopleCube();
+
+  attachFlipHandlers(); // delegated, once, on the stable categories container
+
   initFromHash();
   if (currentView === 'compact') loadYearStrips();
 });
@@ -309,6 +357,7 @@ async function loadYearStrips() {
 
 // ===== VIEW SWITCHING =====
 function showCompactView() {
+  clearHeroAutoTimer(); // no stray rotate firing into a hidden/replaced carousel
   currentView = 'compact';
   document.getElementById('compact-view').style.display = 'block';
   document.getElementById('year-detail-view').style.display = 'none';
@@ -361,18 +410,84 @@ function initFromHash() {
   showYearDetail(year);
 }
 
-// ===== HERO =====
+/* ============================================================
+   HERO CAROUSEL — "By the Numbers" — Added Jun 8 2026
+   The hero is a 2-slide crossfade carousel:
+     Slide 1 = editorial template (film-led / duel / typographic / portrait)
+     Slide 2 = computed ceremony stats + standout + per-year highlight
+   Auto-rotates ONCE (editorial → stats) after 8s, then manual-only via dots.
+   Slide 2 is gated to ACADEMY_STYLE festivals; jury festivals show slide 1 only.
+   Both slides stack in one CSS grid cell so the track height = the taller slide
+   (no jump on rotate, responsive at every breakpoint). See heroAutoTimer.
+   ============================================================ */
 async function renderHero(year) {
-  const editorial = AWARDS_YEAR_EDITORIAL[`${currentFestival}-${year}`];
+  clearHeroAutoTimer();
   const container = document.getElementById('hero-container');
+  const editorial = AWARDS_YEAR_EDITORIAL[`${currentFestival}-${year}`];
 
   if (!editorial) {
     container.innerHTML = '';
     return;
   }
 
+  // Capture the nav target so a stale async render (slow fetch) can't overwrite
+  // a newer one or stomp the newer render's auto-rotate timer. Re-checked after
+  // every await below.
+  const fest = currentFestival, yr = year;
+  const superseded = () => currentFestival !== fest || currentYear !== yr;
+
+  // Decide whether the stats slide is shown. ACADEMY_STYLE + computable stats.
+  let showStats = ACADEMY_STYLE.has(currentFestival);
+  let stats = null;
+  if (showStats) {
+    await loadV1FestivalData(fest);
+    if (superseded()) return;
+    stats = computeCeremonyStats(fest, yr);
+    if (!stats) showStats = false; // no category data → editorial only
+  }
+
+  const editorialHtml = buildEditorialHtml(editorial, year);
+  const statsHtml = showStats ? buildStatsHtml(stats, editorial, year) : '';
+
+  container.innerHTML = `
+    <div class="hero-carousel" data-slide="0">
+      <div class="hero-track">
+        <div class="hero-slide hero-slide-editorial is-active">${editorialHtml}</div>
+        ${showStats ? `<div class="hero-slide hero-slide-stats">${statsHtml}</div>` : ''}
+      </div>
+      ${showStats ? `
+        <div class="hero-dots" role="tablist" aria-label="Hero slides">
+          <button class="hero-dot is-active" type="button" data-slide="0" aria-label="Editorial"></button>
+          <button class="hero-dot" type="button" data-slide="1" aria-label="By the numbers"></button>
+        </div>` : ''}
+    </div>
+  `;
+
+  // Editorial backdrop (film-led only) — lazy TMDB fetch, unchanged behaviour.
+  if (editorial.heroType === 'film-led' && editorial.backdropTmdbId) {
+    const path = await getTmdbBackdropPath(editorial.backdropTmdbId);
+    if (superseded()) return; // navigation finished during the fetch
+    if (path) {
+      const url = OrbitUtils.tmdbImageUrl(path, OrbitUtils.IMAGE_SIZES.BACKDROP);
+      const el = container.querySelector('.hero-backdrop');
+      if (el) el.innerHTML = `<img src="${url}" alt="">`;
+    }
+  }
+
+  if (showStats) {
+    const carousel = container.querySelector('.hero-carousel');
+    // Standout portrait via the shared loader (paints background-image; cached).
+    const photo = container.querySelector('.stats-portrait-bg[data-person-id]');
+    if (photo) loadPersonPortrait(parseInt(photo.dataset.personId, 10), photo);
+    wireHeroDots(carousel);
+    armHeroAutoRotate(carousel);
+  }
+}
+
+// Editorial slide markup — the four existing hero templates, unchanged content.
+function buildEditorialHtml(editorial, year) {
   if (editorial.heroType === 'film-led') {
-    container.innerHTML = `
+    return `
       <div class="hero-film-led">
         <div class="hero-backdrop" data-backdrop-tmdb-id="${editorial.backdropTmdbId || ''}"></div>
         <div class="hero-content">
@@ -381,21 +496,10 @@ async function renderHero(year) {
           <div class="hero-headline">${escapeHtml(editorial.headline)}</div>
           <div class="hero-deck">${escapeHtml(editorial.deckLine || '')}</div>
         </div>
-      </div>
-    `;
-    if (editorial.backdropTmdbId) {
-      const path = await getTmdbBackdropPath(editorial.backdropTmdbId);
-      if (path) {
-        const url = OrbitUtils.tmdbImageUrl(path, OrbitUtils.IMAGE_SIZES.BACKDROP);
-        const el = container.querySelector('.hero-backdrop');
-        if (el) el.innerHTML = `<img src="${url}" alt="">`;
-      }
-    }
-    return;
+      </div>`;
   }
-
   if (editorial.heroType === 'duel') {
-    container.innerHTML = `
+    return `
       <div class="hero-duel">
         <div class="duel-side winner">
           <div class="hero-content">
@@ -410,13 +514,10 @@ async function renderHero(year) {
           </div>
         </div>
         <div class="duel-year-badge">${year}</div>
-      </div>
-    `;
-    return;
+      </div>`;
   }
-
   if (editorial.heroType === 'typographic') {
-    container.innerHTML = `
+    return `
       <div class="hero-typographic">
         <div>
           <div class="hero-year">${year}</div>
@@ -435,13 +536,10 @@ async function renderHero(year) {
             </div>
           </div>
         </div>
-      </div>
-    `;
-    return;
+      </div>`;
   }
-
   if (editorial.heroType === 'portrait') {
-    container.innerHTML = `
+    return `
       <div class="hero-portrait">
         <div class="portrait-image"></div>
         <div class="portrait-content">
@@ -450,10 +548,169 @@ async function renderHero(year) {
           <div class="hero-headline">${escapeHtml(editorial.headline || '')}</div>
           <div class="hero-deck">${escapeHtml(editorial.deckLine || '')}</div>
         </div>
-      </div>
-    `;
-    return;
+      </div>`;
   }
+  return '';
+}
+
+// ===== BY THE NUMBERS — computed stats =====
+// Counts wins/noms per film from the already-loaded reshaped DB (db[cat][year]).
+// NO new fetch (Rule #27). Tie-break: count DESC, then title ASC (deterministic).
+function computeCeremonyStats(festival, year) {
+  const db = V1_FESTIVAL_CACHE[festival];
+  if (!db) return null;
+  const yearStr = String(year);
+
+  const winCounts = {};   // title → win count
+  const nomCounts = {};   // title → total nomination count (wins + losses)
+  const tmdbOf = {};      // title → tmdb_id (first seen)
+  let categories = 0;
+
+  Object.keys(db).forEach(catName => {
+    const slot = db[catName] && db[catName][yearStr];
+    if (!slot) return;
+    categories++;
+    const winners = slot.winners ? slot.winners : (slot.winner ? [slot.winner] : []);
+    const nominees = slot.nominees || [];
+    [...winners, ...nominees].forEach(e => {
+      if (!e) return;
+      const t = e.title || 'Unknown';
+      nomCounts[t] = (nomCounts[t] || 0) + 1;
+      if (!(t in tmdbOf)) tmdbOf[t] = e.tmdb_id || 0;
+    });
+    winners.forEach(e => {
+      if (!e) return;
+      const t = e.title || 'Unknown';
+      winCounts[t] = (winCounts[t] || 0) + 1;
+    });
+  });
+
+  if (categories === 0) return null;
+
+  const byCountThenTitle = (counts) => Object.keys(counts)
+    .map(t => ({ title: t, count: counts[t] }))
+    .sort((a, b) => b.count - a.count || a.title.localeCompare(b.title))[0] || null;
+
+  const mwTop = byCountThenTitle(winCounts);
+  const mnTop = byCountThenTitle(nomCounts);
+
+  return {
+    mostWins: mwTop ? { title: mwTop.title, tmdbId: tmdbOf[mwTop.title], count: mwTop.count } : null,
+    mostNoms: mnTop ? { title: mnTop.title, tmdbId: tmdbOf[mnTop.title], count: mnTop.count, winCount: winCounts[mnTop.title] || 0 } : null,
+    categories
+  };
+}
+
+// N statuette glyphs; first `goldCount` gold, the rest silver (= nomination losses).
+// Reuses the trophy belt's og-statuette; gold/silver recolor lives in awards2.css.
+function renderGlyphRow(total, goldCount) {
+  let html = '';
+  for (let i = 0; i < total; i++) {
+    const cls = i < goldCount ? 'stat-glyph' : 'stat-glyph silver';
+    html += `<span class="og og-statuette ${cls}"></span>`;
+  }
+  return html;
+}
+
+// Stats slide markup — "Calm Stack" layout (rebuilt Jun 8 2026).
+// Left = stacked stat rows (even vertical rhythm); right = rectangular portrait
+// tile (NO circle). Computed values, glyph logic, and gating are unchanged —
+// only the markup they populate. Graceful degradation: standout collapses the
+// grid to a single column; highlight omits cleanly from the bottom row.
+function buildStatsHtml(stats, editorial, year) {
+  const mw = stats.mostWins;
+  const mn = stats.mostNoms;
+  const standout = editorial.standout;
+  const highlight = editorial.highlight;
+
+  const winsRow = mw ? `
+    <div class="stat-row">
+      <div class="stat-head">
+        <span class="stat-num gold">${mw.count}</span>
+        <span class="stat-label">Most wins · ${escapeHtml(mw.title)}</span>
+      </div>
+      <div class="glyph-row">${renderGlyphRow(mw.count, mw.count)}</div>
+    </div>` : '';
+
+  const nomsRow = mn ? `
+    <div class="stat-row">
+      <div class="stat-head">
+        <span class="stat-num cyan">${mn.count}</span>
+        <span class="stat-label">Most nominations · ${escapeHtml(mn.title)}</span>
+      </div>
+      <div class="glyph-row">${renderGlyphRow(mn.count, mn.winCount)}</div>
+    </div>` : '';
+
+  const highlightBlock = highlight ? `
+    <div class="stat-highlight">
+      <span class="highlight-label">${escapeHtml(highlight.label || 'Highlight')}</span>
+      <div class="highlight-value">${escapeHtml(highlight.value || '')}<span class="highlight-detail"> · ${escapeHtml(highlight.detail || '')}</span></div>
+    </div>` : '';
+
+  const portrait = standout ? `
+    <div class="stats-portrait">
+      <div class="stats-portrait-bg" data-person-id="${standout.personId}"></div>
+      <div class="stats-portrait-gradient"></div>
+      <div class="stats-portrait-text">
+        <div class="standout-label">Standout</div>
+        <div class="standout-name">${escapeHtml(standout.name || '')}</div>
+        <div class="standout-award">${escapeHtml(standout.award || '')}</div>
+      </div>
+    </div>` : '';
+
+  return `
+    <div class="stats-slide${portrait ? '' : ' no-standout'}">
+      <div class="stats-main">
+        <div class="stats-title">${year} · By the Numbers</div>
+        <div class="stats-mid">
+          ${winsRow}
+          ${nomsRow}
+        </div>
+        <div class="stat-bottom">
+          <div class="stat-mini">
+            <span class="stat-num-sm purple">${stats.categories}</span>
+            <span class="stat-label">categories</span>
+          </div>
+          ${highlightBlock}
+        </div>
+      </div>
+      ${portrait}
+    </div>`;
+}
+
+// ===== HERO CAROUSEL CONTROLS =====
+function clearHeroAutoTimer() {
+  if (heroAutoTimer) { clearTimeout(heroAutoTimer); heroAutoTimer = null; }
+}
+
+function setHeroSlide(carousel, idx) {
+  if (!carousel) return;
+  carousel.dataset.slide = String(idx);
+  carousel.querySelectorAll('.hero-slide').forEach((s, i) => s.classList.toggle('is-active', i === idx));
+  carousel.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('is-active', i === idx));
+}
+
+// One-shot auto-rotate: editorial → stats after 8s, then never again.
+function armHeroAutoRotate(carousel) {
+  clearHeroAutoTimer();
+  heroAutoTimer = setTimeout(() => {
+    heroAutoTimer = null;
+    if (!carousel || !carousel.isConnected) return;      // navigated away
+    if (carousel.dataset.userControlled === '1') return; // user already took over
+    setHeroSlide(carousel, 1);
+  }, 8000);
+}
+
+// Dots switch slides manually; the first manual interaction also cancels the
+// pending one-shot auto-rotate so it can't fight the user.
+function wireHeroDots(carousel) {
+  carousel.querySelectorAll('.hero-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      carousel.dataset.userControlled = '1';
+      clearHeroAutoTimer();
+      setHeroSlide(carousel, parseInt(dot.dataset.slide, 10));
+    });
+  });
 }
 
 function ordinalSuffix(n) {
@@ -489,12 +746,22 @@ async function renderCategories(year) {
     return;
   }
 
+  // Person categories → flip tiles when the entry has both a person and a
+  // poster; otherwise fall back to the simple movie tile (keeps no-poster /
+  // no-person nominees graceful). Non-person categories are unchanged.
+  const tileFor = (entry, isWinner, catName) => {
+    if (PERSON_CATS.has(catName) && entry && entry.person_id && entry.poster_path) {
+      return renderFlipTile(entry, catName, isWinner);
+    }
+    return renderSimpleTile(entry, isWinner);
+  };
+
   container.innerHTML = yearCategories.map(({ name, slot }) => {
     const winners = slot.winners ? slot.winners : (slot.winner ? [slot.winner] : []);
     const nominees = slot.nominees || [];
     const tiles = [
-      ...winners.map(w => renderSimpleTile(w, true)),
-      ...nominees.map(n => renderSimpleTile(n, false))
+      ...winners.map(w => tileFor(w, true, name)),
+      ...nominees.map(n => tileFor(n, false, name))
     ].join('');
     return `
       <section class="category-section">
@@ -503,6 +770,11 @@ async function renderCategories(year) {
       </section>
     `;
   }).join('');
+
+  // Lazy-load portraits for any flip-tile fronts just rendered.
+  container.querySelectorAll('.person-bg[data-person-id]').forEach(bg => {
+    loadPersonPortrait(parseInt(bg.dataset.personId, 10), bg);
+  });
 }
 
 // ===== TROPHY STRIP =====
@@ -721,16 +993,147 @@ function renderSimpleTile(entry, isWinner) {
   const personLine = entry.person_name && entry.person_name !== entry.title
     ? `<div class="tile-person">${escapeHtml(entry.person_name)}</div>`
     : '';
+  const label = isWinner ? 'WINNER' : 'NOMINEE';
+  const statusClass = isWinner ? 'is-winner' : 'is-nominee';
+  // Title/person are OVERLAID on the 2:3 poster (mirrors the flip-tile front
+  // face), so every movie tile is a pure 2:3 card identical in height to the
+  // person flip cards — no variable below-poster info block that previously
+  // stretched some tiles taller than others (Rule #14 alignment, Jun 8 2026).
+  // Wrapper carries the status class + the shared award bar; click target stays
+  // the inner .tile (the overlay is pointer-events:none, so clicks fall through).
   return `
-    <div class="tile ${isWinner ? 'winner' : 'nominee'} ${currentFestival}">
-      <div class="tile-poster">${posterInner}</div>
-      <div class="tile-label">${isWinner ? 'WINNER' : 'NOMINEE'}</div>
-      <div class="tile-info">
-        <div class="tile-title">${escapeHtml(entry.title || 'Unknown')}</div>
-        ${personLine}
+    <div class="tile-card ${statusClass}">
+      <div class="award-toptab">${label}</div>
+      <div class="tile ${isWinner ? 'winner' : 'nominee'} ${currentFestival}" data-tmdb-id="${entry.tmdb_id || 0}">
+        <div class="tile-poster">
+          ${posterInner}
+          <div class="tile-overlay">
+            <div class="tile-title">${escapeHtml(entry.title || 'Unknown')}</div>
+            ${personLine}
+          </div>
+        </div>
       </div>
     </div>
   `;
+}
+
+/* ============================================================
+   PERSON↔MOVIE FLIP TILES — Added Jun 7 2026
+   Front = person portrait, back = movie poster. Click the tile body
+   to flip (.flipped class); the per-face "View" button opens the
+   People/Movie Cube. Portraits lazy-load via OrbitUtils.tmdbFetch and
+   cache in sessionStorage (orbit_person_portrait_{id}, 'none' sentinel).
+   ============================================================ */
+
+// Category → role token (drives role-tag colour + glow). Supporting roles
+// share the base actor/actress colour. Anything else falls back to director.
+function getPersonTileRole(category) {
+  if (/Actress/.test(category)) return 'actress';
+  if (/Actor/.test(category)) return 'actor';
+  return 'director';
+}
+
+function renderFlipTile(entry, category, isWinner) {
+  const role = getPersonTileRole(category);
+  const label = isWinner ? 'WINNER' : 'NOMINEE';
+  const statusClass = isWinner ? 'is-winner' : 'is-nominee';
+  const posterSrc = entry.poster_path
+    ? OrbitUtils.tmdbImageUrl(entry.poster_path, OrbitUtils.IMAGE_SIZES.POSTER_LG)
+    : '';
+  return `
+    <div class="flip-tile glow-${role} ${statusClass}" data-tmdb-id="${entry.tmdb_id}" data-person-id="${entry.person_id}">
+      <!-- TOP BAR: winner/nominee, shared with simple tiles (sibling of .flip-inner). -->
+      <div class="award-toptab">${label}</div>
+      <div class="flip-inner">
+        <!-- FRONT: person (surface = portrait + name/film + role tag) -->
+        <div class="flip-face flip-front">
+          <div class="person-bg" data-person-id="${entry.person_id}"></div>
+          <div class="person-gradient"></div>
+          <div class="role-tag ${role}">${role}</div>
+          <div class="person-content">
+            <div class="person-name">${escapeHtml(entry.person_name || '')}</div>
+            <div class="person-film">${escapeHtml(entry.title || '')}</div>
+          </div>
+        </div>
+        <!-- BACK: movie (surface = poster only) -->
+        <div class="flip-face flip-back">
+          <img src="${posterSrc}" loading="lazy" alt="${escapeHtml(entry.title || '')}" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <!-- FLAP: hangs below the card. CSS shows the face-appropriate button
+           (person-up → right, movie-up → left); fade sequenced via .flap-hidden. -->
+      <div class="flip-flap">
+        <button class="flap-btn flap-person" type="button" data-action="view-person" data-person-id="${entry.person_id}">View person</button>
+        <button class="flap-btn flap-film" type="button" data-action="view-film" data-tmdb-id="${entry.tmdb_id}">View film</button>
+      </div>
+    </div>
+  `;
+}
+
+// Portrait lazy loader (OrbitUtils.tmdbFetch; sessionStorage-cached per Rule #28).
+async function loadPersonPortrait(personId, bgEl) {
+  if (!personId || !bgEl) return;
+  const cacheKey = `orbit_person_portrait_${personId}`;
+  const cached = sessionStorage.getItem(cacheKey);
+  if (cached === 'none') return;
+  if (cached) { bgEl.style.backgroundImage = `url(${cached})`; return; }
+
+  try {
+    const data = await OrbitUtils.tmdbFetch(`/person/${personId}`);
+    if (data && data.profile_path) {
+      const url = OrbitUtils.tmdbImageUrl(data.profile_path, OrbitUtils.IMAGE_SIZES.PROFILE_MD);
+      bgEl.style.backgroundImage = `url(${url})`;
+      try { sessionStorage.setItem(cacheKey, url); } catch (_) {}
+    } else {
+      try { sessionStorage.setItem(cacheKey, 'none'); } catch (_) {}
+    }
+  } catch (err) {
+    console.warn('[awards2] portrait fetch failed:', personId, err);
+  }
+}
+
+// Flip + Cube-button delegation. Attached once to the stable #categories-container
+// (its innerHTML is replaced per year, but the element itself persists), so no
+// listener stacking across year navigation.
+let flipHandlersAttached = false;
+function attachFlipHandlers() {
+  if (flipHandlersAttached) return;
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  flipHandlersAttached = true;
+
+  container.addEventListener('click', (e) => {
+    // 1+2. Flap buttons (most specific — check first). Flap is a child of
+    // .flip-tile, so we must intercept before the flip branch below.
+    const viewBtn = e.target.closest('.flap-btn');
+    if (viewBtn) {
+      e.stopPropagation(); // never flip when a View button is pressed
+      const action = viewBtn.dataset.action;
+      if (action === 'view-person' && typeof openPeopleCube === 'function') {
+        openPeopleCube(parseInt(viewBtn.dataset.personId, 10));
+      } else if (action === 'view-film' && typeof openMovieCube === 'function') {
+        openMovieCube(parseInt(viewBtn.dataset.tmdbId, 10));
+      }
+      return;
+    }
+
+    // 3. Flip tile body → sequenced flip: fade current flap out, flip the card
+    // (0.55s, matches .flip-inner transition), then fade the opposite flap in.
+    const flipTile = e.target.closest('.flip-tile');
+    if (flipTile) {
+      flipTile.classList.add('flap-hidden');   // fade current flap out
+      flipTile.classList.toggle('flipped');    // begin the 0.55s flip
+      setTimeout(() => flipTile.classList.remove('flap-hidden'), 550); // fade new flap in on land
+      return;
+    }
+
+    // 4. Simple movie tile → open MovieCube (guard 0 = person-only fallback).
+    const simpleTile = e.target.closest('.tile');
+    if (simpleTile) {
+      const id = parseInt(simpleTile.dataset.tmdbId, 10);
+      if (id && typeof openMovieCube === 'function') openMovieCube(id);
+    }
+  });
 }
 
 // ===== EVENT LISTENERS =====
