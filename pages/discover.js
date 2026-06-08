@@ -5560,67 +5560,117 @@ function buildRegionLanguageContent(root) {
 }
 
 // =============================================
-// 7. PRODUCTION & BOX OFFICE SECTION
+// 7. PRODUCTION — STUDIOS
 // =============================================
 
+/* ============================================================
+   PRODUCTION — STUDIO ROSTER (Part 1 — rebuilt June 8, 2026)
+   Rose-axis reskin. An inline studio search unit (KEPT: the real
+   /search/company autocomplete → with_companies) sits above a
+   monogram-tile roster (3-col). Tiles mirror makeChip({component:true})
+   ".on" selection semantics so collectLabelsForSection reads them via
+   the .on class, emitting the unchanged {type:"company",id,name} shape.
+
+   CUT (deliberate bug-removal, not a reskin): the box-office dual
+   slider (#boxOfficeMin/#boxOfficeMax), its "Blockbuster"/"Billion
+   Dollar Club" quick chips, and the whole {type:"boxoffice"} path.
+   Those emitted revenue.gte/revenue.lte, which /discover/movie silently
+   ignores — the control never filtered. The right-zone box-office
+   leaderboard that replaces its PURPOSE is Part 2.
+   ============================================================ */
 function buildProductionContent(root) {
-  /* Production 2-column layout (May 4, 2026): Studios + search on
-     the left, Box Office sliders + presets on the right. */
-  const grid = document.createElement("div");
-  grid.className = "oft-production-grid";
-  const colLeft  = document.createElement("div"); colLeft.className  = "oft-production-col";
-  const colRight = document.createElement("div"); colRight.className = "oft-production-col";
-  grid.appendChild(colLeft);
-  grid.appendChild(colRight);
-  root.appendChild(grid);
-
-  colLeft.appendChild(makeSectionLabel("Studios & Production Companies"));
-
-  const desc = document.createElement("p");
-  desc.style.fontSize = "13px";
-  desc.style.color = "var(--muted-silver)";
-  desc.style.marginBottom = "16px";
-  desc.textContent = "Select from top studios or search for others.";
-  colLeft.appendChild(desc);
-
-  const topStudios = [
-    { name: "Disney", id: 2 },
-    { name: "Warner Bros", id: 174 },
-    { name: "Universal", id: 33 },
-    { name: "Paramount", id: 4 },
-    { name: "Sony", id: 5 },
-    { name: "20th Century", id: 25 },
-    { name: "A24", id: 41077 },
-    { name: "Marvel Studios", id: 420 },
-    { name: "Pixar", id: 3 },
-    { name: "Lucasfilm", id: 1 }
+  /* Real TMDB company IDs (unchanged) + a short ORBIT monogram each. */
+  const STUDIOS = [
+    { name: "Disney",         id: 2,     mono: "DIS" },
+    { name: "Warner Bros",    id: 174,   mono: "WB"  },
+    { name: "Universal",      id: 33,    mono: "UNI" },
+    { name: "Paramount",      id: 4,     mono: "PAR" },
+    { name: "Sony",           id: 5,     mono: "SNY" },
+    { name: "20th Century",   id: 25,    mono: "20"  },
+    { name: "A24",            id: 41077, mono: "A24" },
+    { name: "Marvel Studios", id: 420,   mono: "MVL" },
+    { name: "Pixar",          id: 3,     mono: "PXR" },
+    { name: "Lucasfilm",      id: 1,     mono: "LCS" }
   ];
 
-  const studioGroup = document.createElement("div");
-  studioGroup.className = "chip-group";
-  topStudios.forEach(studio => {
-    const chip = makeChip(studio.name, "production", { type: "company", id: studio.id, name: studio.name });
-    chip.id = `studio-${studio.name.replace(/\s+/g, '-')}`;
-    studioGroup.appendChild(chip);
-  });
-  colLeft.appendChild(studioGroup);
+  /* ---- roster tile factory: a .studio-tile button carrying the same
+     dataset.value as the old chips and toggling ".on" (mirrors
+     makeChip({component:true}) so the read site finds it). ---- */
+  function makeStudioTile(studio) {
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "studio-tile";
+    tile.id = `studio-${studio.name.replace(/\s+/g, '-')}`;
+    tile.dataset.value = JSON.stringify({ type: "company", id: studio.id, name: studio.name });
 
-  const studioRow = document.createElement("div");
-  studioRow.className = "input-row";
-  studioRow.style.cssText = "margin-top: 16px; position: relative;";
+    const mono = document.createElement("span");
+    mono.className = "prod-mono";
+    mono.textContent = studio.mono || studio.name.slice(0, 3).toUpperCase();
+    tile.appendChild(mono);
+
+    const nm = document.createElement("span");
+    nm.className = "studio-tile-name";
+    nm.textContent = studio.name;
+    tile.appendChild(nm);
+
+    const check = document.createElement("span");
+    check.className = "studio-tile-check og og-check";  // shown only when .on (CSS)
+    tile.appendChild(check);
+
+    tile.addEventListener("click", () => { tile.classList.toggle("on"); recountBoard(); });
+    return tile;
+  }
+
+  /* ---- Inline search unit: "Find a studio" + the existing
+     /search/company autocomplete, restyled with .kw-input ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+
+  const head = document.createElement("div");
+  head.className = "gen-kw-head";
+  head.textContent = "Find a studio";
+  inline.appendChild(head);
+
+  const searchWrap = document.createElement("div");
+  searchWrap.className = "prod-search-wrap";
+
   const studioInput = document.createElement("input");
   studioInput.type = "text";
   studioInput.id = "studioInput";
-  studioInput.placeholder = "Search for other studios...";
+  studioInput.className = "kw-input";
+  studioInput.placeholder = "Search studios & production companies…";
   studioInput.autocomplete = "off";
-  studioRow.appendChild(studioInput);
-  colLeft.appendChild(studioRow);
+  searchWrap.appendChild(studioInput);
 
   const studioDropdown = document.createElement("div");
-  studioDropdown.className = "search-dropdown";
-  studioDropdown.style.cssText = "position: absolute; z-index: 1000; display: none; background: var(--deep-space); border: 1px solid rgba(0,217,255,0.2); border-radius: 8px; max-height: 200px; overflow-y: auto;";
-  studioRow.appendChild(studioDropdown);
+  studioDropdown.className = "search-dropdown prod-search-dropdown";
+  studioDropdown.style.display = "none";
+  searchWrap.appendChild(studioDropdown);
 
+  inline.appendChild(searchWrap);
+  root.appendChild(inline);
+
+  /* ---- Split: roster left, box-office leaderboard right (Part 2) ---- */
+  const split = document.createElement("div");
+  split.className = "prod-split";
+  const left = document.createElement("div");
+  left.className = "prod-left";
+  const board = document.createElement("div");
+  board.className = "prod-board";   // populated below
+
+  /* ---- Studio roster (3-col monogram tiles) — now in the left column ---- */
+  const roster = document.createElement("div");
+  roster.className = "prod-roster";
+  STUDIOS.forEach(studio => roster.appendChild(makeStudioTile(studio)));
+  left.appendChild(roster);
+
+  split.appendChild(left);
+  split.appendChild(board);
+  root.appendChild(split);
+
+  /* ---- Autocomplete (commit shape {type:"company",id,name} unchanged):
+     debounced /search/company; picking a result appends a roster tile
+     (deduped by id) and selects it. ---- */
   let studioDebounce = null;
   studioInput.addEventListener("input", () => {
     clearTimeout(studioDebounce);
@@ -5635,21 +5685,19 @@ function buildProductionContent(root) {
         if (results.length === 0) { studioDropdown.style.display = "none"; return; }
         studioDropdown.innerHTML = "";
         studioDropdown.style.display = "block";
-        studioDropdown.style.width = `${studioInput.offsetWidth}px`;
         results.forEach(company => {
           const item = document.createElement("div");
           item.className = "dropdown-item";
-          item.style.cssText = "padding: 8px 12px; cursor: pointer; font-size: 13px; color: var(--film-white);";
           item.textContent = company.name;
-          item.addEventListener("mouseenter", () => { item.style.background = "rgba(0,217,255,0.1)"; });
-          item.addEventListener("mouseleave", () => { item.style.background = "transparent"; });
           item.addEventListener("click", () => {
-            const chipId = `studio-${company.name.replace(/\s+/g, '-')}`;
-            if (!document.getElementById(chipId)) {
-              const chip = makeChip(company.name, "production", { type: "company", id: company.id, name: company.name });
-              chip.id = chipId;
-              studioGroup.appendChild(chip);
+            const tileId = `studio-${company.name.replace(/\s+/g, '-')}`;
+            let tile = document.getElementById(tileId);
+            if (!tile) {
+              tile = makeStudioTile({ name: company.name, id: company.id });
+              roster.appendChild(tile);
             }
+            tile.classList.add("on");   // picking from search selects it
+            recountBoard();
             studioInput.value = "";
             studioDropdown.style.display = "none";
           });
@@ -5662,107 +5710,172 @@ function buildProductionContent(root) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!studioRow.contains(e.target)) studioDropdown.style.display = "none";
+    if (!searchWrap.contains(e.target)) studioDropdown.style.display = "none";
   });
-  
-  colRight.appendChild(makeSectionLabel("Box Office (Worldwide Gross)"));
 
-  const boxOfficeRow = document.createElement("div");
-  boxOfficeRow.className = "input-row";
-  boxOfficeRow.style.flexDirection = "column";
-  boxOfficeRow.style.gap = "12px";
-  
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "boxOfficeMin";
-  minSlider.min = "0";
-  minSlider.max = "2000";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "$0M";
-  minValue.id = "boxOfficeMinValue";
-  
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = `$${minSlider.value}M`;
-    const maxSl = document.getElementById("boxOfficeMax");
-    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("boxOfficeMaxValue").textContent = `$${minSlider.value}M${minSlider.value === "2000" ? "+" : ""}`;
+  /* ============================================================
+     BOX-OFFICE LEADERBOARD (Part 2 — added June 8, 2026)
+     Right column: the top-grossing films for the selected studios via
+     ONE /discover/movie?sort_by=revenue.desc call (transport mirrors the
+     Genre hero recount). Design B1 — ranked titles only, NO dollar
+     figures: TMDB discover results don't carry `revenue`, so the ranking
+     is real but grosses can't be shown; the per-row bar is decorative.
+     ============================================================ */
+
+  const boardHead = document.createElement("div");
+  boardHead.className = "prod-board-head";
+  const boardTitle = document.createElement("span");
+  boardTitle.className = "prod-board-title";
+  boardTitle.textContent = "Top grossing";
+  const boardLive = document.createElement("span");
+  boardLive.className = "prod-board-live";
+  boardLive.innerHTML = '<span class="prod-board-dot"></span>live · worldwide';
+  boardHead.appendChild(boardTitle);
+  boardHead.appendChild(boardLive);
+  board.appendChild(boardHead);
+
+  const boardList = document.createElement("div");
+  boardList.className = "prod-board-list";
+  boardList.id = "prodBoard";
+  board.appendChild(boardList);
+
+  /* "Sort my results this way" — the ONLY Part 2 element that touches real
+     Launch results (Step 3). The board itself is preview-only. */
+  const sortBtn = document.createElement("button");
+  sortBtn.type = "button";
+  sortBtn.className = "prod-board-sort";
+  sortBtn.textContent = "Sort my results by box office";
+  let prevSort = null;   // captured field/dir to restore on toggle-off
+  sortBtn.addEventListener("click", () => {
+    const fieldSel = document.getElementById("discoverSortField");
+    const dirSel = document.getElementById("discoverSortDir");
+    const turningOn = !sortBtn.classList.contains("on");
+    if (turningOn) {
+      if (fieldSel && dirSel) {
+        prevSort = { field: fieldSel.value, dir: dirSel.value };
+        fieldSel.value = "revenue";
+        dirSel.value = "desc";
+        fieldSel.dispatchEvent(new Event("change"));
+        dirSel.dispatchEvent(new Event("change"));
+      } else {
+        prevSort = { raw: state.sortBy };
+        state.sortBy = "revenue.desc";   // fallback: no visible strip to sync
+      }
+      sortBtn.classList.add("on");
+      sortBtn.textContent = "Results sorted by box office";
+    } else {
+      if (fieldSel && dirSel && prevSort && prevSort.field != null) {
+        fieldSel.value = prevSort.field;
+        dirSel.value = prevSort.dir;
+        fieldSel.dispatchEvent(new Event("change"));
+        dirSel.dispatchEvent(new Event("change"));
+      } else if (prevSort && prevSort.raw != null) {
+        state.sortBy = prevSort.raw;
+      }
+      prevSort = null;
+      sortBtn.classList.remove("on");
+      sortBtn.textContent = "Sort my results by box office";
     }
   });
+  board.appendChild(sortBtn);
 
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const boardNote = document.createElement("p");
+  boardNote.className = "prod-board-note";
+  boardNote.textContent = "Ranked by box office. Figures aren't shown — TMDB can't return gross here; ranking is real.";
+  board.appendChild(boardNote);
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
+  /* Live, scoped leaderboard — studio-only filter subset through the frozen
+     query builder, forced to revenue.desc for THIS call only. Debounced;
+     loading pulse on the live indicator. Hoisted so the tile click handler
+     (defined earlier) can call it. */
+  let _boardTimer = null;
+  function recountBoard() {
+    const selTiles = Array.from(roster.querySelectorAll(".studio-tile.on"))
+      .map(t => { try { return JSON.parse(t.dataset.value); } catch (e) { return null; } })
+      .filter(v => v && v.type === "company");
 
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "boxOfficeMax";
-  maxSlider.min = "0";
-  maxSlider.max = "2000";
-  maxSlider.value = "2000";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "$2000M+";
-  maxValue.id = "boxOfficeMaxValue";
-
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = `$${maxSlider.value}M${maxSlider.value === "2000" ? "+" : ""}`;
-    const minSl = document.getElementById("boxOfficeMin");
-    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("boxOfficeMinValue").textContent = `$${maxSlider.value}M`;
+    if (selTiles.length === 0) {
+      clearTimeout(_boardTimer);
+      boardLive.classList.remove("is-loading");
+      boardList.innerHTML = '<p class="prod-board-empty">Pick a studio to see its top-grossing films.</p>';
+      return;
     }
-  });
-  
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
-  
-  boxOfficeRow.appendChild(minRow);
-  boxOfficeRow.appendChild(maxRow);
-  colRight.appendChild(boxOfficeRow);
 
-  const boxOfficeQuick = document.createElement("div");
-  boxOfficeQuick.className = "chip-group";
-  boxOfficeQuick.style.marginTop = "12px";
-  [
-    { label: "Blockbuster ($500M+)", min: 500000000, max: 10000000000 },
-    { label: "Billion Dollar Club", min: 1000000000, max: 10000000000 }
-  ].forEach(preset => {
-    const chip = makeChip(preset.label, "production", {
-      type: "boxoffice",
-      min: preset.min,
-      max: preset.max
-    });
-    chip.addEventListener("click", () => {
-      document.getElementById("boxOfficeMin").value = preset.min / 1000000;
-      document.getElementById("boxOfficeMax").value = Math.min(preset.max / 1000000, 2000);
-      document.getElementById("boxOfficeMinValue").textContent = `$${preset.min / 1000000}M`;
-      document.getElementById("boxOfficeMaxValue").textContent = preset.max >= 2000000000 ? "$2000M+" : `$${preset.max / 1000000}M`;
-    });
-    boxOfficeQuick.appendChild(chip);
-  });
-  colRight.appendChild(boxOfficeQuick);
+    boardLive.classList.add("is-loading");
+    clearTimeout(_boardTimer);
+    _boardTimer = setTimeout(function () {
+      const scoped = selTiles.map(v => ({ section: "production", value: v }));
+      let qs;
+      try { qs = buildTMDBQueryFromFilters(scoped); } catch (e) { qs = null; }
+      if (qs == null) {
+        boardLive.classList.remove("is-loading");
+        boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        return;
+      }
+      /* Route through the shared TMDB helper (proxy in production via
+         /api/tmdb; direct TMDB on localhost). Fail soft if absent. */
+      if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== "function") {
+        boardLive.classList.remove("is-loading");
+        boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        return;
+      }
+      const reqParams = Object.fromEntries(new URLSearchParams(qs));
+      reqParams.page = 1;
+      reqParams.sort_by = "revenue.desc";   // board always ranks by revenue, regardless of global sort
+      OrbitUtils.tmdbFetch("/discover/movie", reqParams)
+        .then(d => {
+          const films = (d && Array.isArray(d.results)) ? d.results.slice(0, 5) : [];
+          if (films.length === 0) {
+            boardList.innerHTML = '<p class="prod-board-empty">No films found for this selection.</p>';
+            return;
+          }
+          boardList.innerHTML = "";
+          films.forEach((film, i) => {
+            const row = document.createElement("div");
+            row.className = "lb-row";
+
+            const rank = document.createElement("span");
+            rank.className = "lb-rank";
+            rank.textContent = i + 1;
+            row.appendChild(rank);
+
+            if (film.poster_path) {
+              const img = document.createElement("img");
+              img.className = "lb-poster";
+              img.loading = "lazy";
+              img.alt = "";
+              img.src = OrbitUtils.TMDB_IMG + "w92" + film.poster_path;
+              row.appendChild(img);
+            }
+
+            const main = document.createElement("div");
+            main.className = "lb-main";
+            const title = document.createElement("span");
+            title.className = "lb-title";
+            title.textContent = film.title || film.original_title || "Untitled";
+            const year = document.createElement("span");
+            year.className = "lb-year";
+            year.textContent = (film.release_date || "").slice(0, 4) || "—";
+            const bar = document.createElement("span");
+            bar.className = "lb-bar";
+            bar.style.width = (100 - i * 16) + "%";   // decorative — ranking rhythm, NOT a gross
+            main.appendChild(title);
+            main.appendChild(year);
+            main.appendChild(bar);
+            row.appendChild(main);
+
+            boardList.appendChild(row);
+          });
+        })
+        .catch(() => {
+          boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        })
+        .then(() => { boardLive.classList.remove("is-loading"); });
+    }, 300);
+  }
+
+  /* Initial paint — empty state on a fresh build (no studios selected). */
+  recountBoard();
 }
 
 // =============================================
@@ -6543,30 +6656,21 @@ function collectLabelsForSection(sectionKey) {
 
       return results;
 
-    case "production":
-      const studioChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.type === "company";
+    case "production": {
+      /* Rebuilt June 8, 2026 (lockstep with buildProductionContent):
+         read selected studio tiles (.studio-tile.on, type:"company") and
+         emit the unchanged {type:"company",id,name} shape → with_companies.
+         The box-office read ({type:"boxoffice"}) was CUT — it fed a param
+         /discover/movie ignores. */
+      const studioTiles = Array.from(document.querySelectorAll('#focusContent .studio-tile.on, .oft-panel--active .studio-tile.on'))
+        .filter(tile => {
+          try { return JSON.parse(tile.dataset.value).type === "company"; } catch (e) { return false; }
         });
-      studioChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        results.push({ label: chip.textContent, value });
+      return studioTiles.map(tile => {
+        const value = JSON.parse(tile.dataset.value);
+        return { label: value.name, value };
       });
-
-      const boxOfficeMin = document.getElementById("boxOfficeMin");
-      const boxOfficeMax = document.getElementById("boxOfficeMax");
-      if (boxOfficeMin && boxOfficeMax) {
-        const min = parseInt(boxOfficeMin.value) * 1000000;
-        const max = parseInt(boxOfficeMax.value) * 1000000;
-        if (min > 0 || max < 2000000000) {
-          results.push({
-            label: `Box Office: $${min/1000000}M-$${max/1000000}M${max >= 2000000000 ? '+' : ''}`,
-            value: { type: "boxoffice", min, max }
-          });
-        }
-      }
-      return results;
+    }
 
     case "watch":
       const watchChips = document.querySelectorAll('#watchProviderChips .chip.active');
