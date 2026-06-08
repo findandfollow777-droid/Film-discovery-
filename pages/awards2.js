@@ -603,9 +603,14 @@ function computeCeremonyStats(festival, year) {
 
 // N statuette glyphs; first `goldCount` gold, the rest silver (= nomination losses).
 // Reuses the trophy belt's og-statuette; gold/silver recolor lives in awards2.css.
+// A flex line-break is inserted at the gold→silver boundary so the silver losses
+// wrap onto their own line BENEATH the gold wins (only when both colours exist).
 function renderGlyphRow(total, goldCount) {
   let html = '';
   for (let i = 0; i < total; i++) {
+    if (i === goldCount && goldCount > 0 && goldCount < total) {
+      html += '<span class="glyph-break"></span>';
+    }
     const cls = i < goldCount ? 'stat-glyph' : 'stat-glyph silver';
     html += `<span class="og og-statuette ${cls}"></span>`;
   }
@@ -625,20 +630,20 @@ function buildStatsHtml(stats, editorial, year) {
 
   const winsRow = mw ? `
     <div class="stat-row">
-      <div class="stat-head">
-        <span class="stat-num gold">${mw.count}</span>
+      <span class="stat-num gold">${mw.count}</span>
+      <div class="stat-body">
         <span class="stat-label">Most wins · ${escapeHtml(mw.title)}</span>
+        <div class="glyph-row">${renderGlyphRow(mw.count, mw.count)}</div>
       </div>
-      <div class="glyph-row">${renderGlyphRow(mw.count, mw.count)}</div>
     </div>` : '';
 
   const nomsRow = mn ? `
     <div class="stat-row">
-      <div class="stat-head">
-        <span class="stat-num cyan">${mn.count}</span>
+      <span class="stat-num cyan">${mn.count}</span>
+      <div class="stat-body">
         <span class="stat-label">Most nominations · ${escapeHtml(mn.title)}</span>
+        <div class="glyph-row">${renderGlyphRow(mn.count, mn.winCount)}</div>
       </div>
-      <div class="glyph-row">${renderGlyphRow(mn.count, mn.winCount)}</div>
     </div>` : '';
 
   const highlightBlock = highlight ? `
@@ -662,16 +667,18 @@ function buildStatsHtml(stats, editorial, year) {
     <div class="stats-slide${portrait ? '' : ' no-standout'}">
       <div class="stats-main">
         <div class="stats-title">${year} · By the Numbers</div>
-        <div class="stats-mid">
-          ${winsRow}
-          ${nomsRow}
-        </div>
-        <div class="stat-bottom">
-          <div class="stat-mini">
-            <span class="stat-num-sm purple">${stats.categories}</span>
-            <span class="stat-label">categories</span>
+        <div class="stats-body">
+          <div class="stats-mid">
+            ${winsRow}
+            ${nomsRow}
           </div>
-          ${highlightBlock}
+          <div class="stat-bottom">
+            <div class="stat-mini">
+              <span class="stat-num-sm purple">${stats.categories}</span>
+              <span class="stat-label">categories</span>
+            </div>
+            ${highlightBlock}
+          </div>
         </div>
       </div>
       ${portrait}

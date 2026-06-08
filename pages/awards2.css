@@ -571,7 +571,7 @@ body::after {
   min-width: 0;
   min-height: 460px;
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 255px;   /* 227px photo + 28px right margin (portrait sits inward) */
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(var(--accent-gold-rgb), 0.06) 0%, rgba(var(--prestige-purple-rgb), 0.05) 100%);
@@ -589,21 +589,32 @@ body::after {
    it, with no canyon and no floating cluster. (.stats-mid below is display:
    contents so its two rows are direct flex children and join the distribution.) */
 .stats-main {
-  padding: 28px 30px;
+  padding: 20px 30px 24px;      /* nudged up slightly from 28px */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* title pinned to the top; .stats-body fills the rest */
+  align-self: stretch;          /* fill the grid cell's full height */
+  box-sizing: border-box;       /* awards2.html has no global border-box; without this the
+                                   min-height below would add the padding and overflow 460px,
+                                   growing the panel past the editorial slide → carousel jump. */
+  min-height: 460px;            /* belt-and-braces: guarantee 460px even if stretch is overridden */
+  min-width: 0;
+}
+
+/* The three stat rows (wins, noms, baseline) fill the height below the pinned
+   title and distribute evenly among themselves — so the title stays at the top
+   while the data still spreads down the panel. */
+.stats-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-self: stretch;          /* fill the grid cell's full height so space-evenly has room */
-  box-sizing: border-box;       /* awards2.html has no global border-box; without this the
-                                   min-height below would add the 28px padding → 516px → panel
-                                   grows past the 460px editorial slide and the carousel jumps. */
-  min-height: 460px;            /* belt-and-braces: guarantee 460px even if stretch is overridden */
   min-width: 0;
 }
 
 .stats-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 12px;
+  font-size: 32px;   /* 30px +7.5% */
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -620,23 +631,26 @@ body::after {
 
 .stat-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;          /* number on the left, stacked label+glyphs body on the right */
+  align-items: center;
+  gap: 16px;
 }
 
-/* Number + label share one line; the big glyph row sits beneath at full width. */
-.stat-head {
+/* Label on top, glyph row directly beneath it — one connected unit, left-aligned.
+   Both rows' bodies start at the same x because .stat-num has a fixed min-width. */
+.stat-body {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
+  flex-direction: column;
+  gap: 6px;
   min-width: 0;
 }
 
 .stat-num {
   font-family: 'Orbitron', sans-serif;
-  font-size: 32px;
+  font-size: 48px;       /* 1.5× the prior 32px */
   font-weight: 900;
   line-height: 0.9;
-  min-width: 40px;
+  min-width: 60px;       /* widened so "7" and "13" align → labels line up across rows */
 }
 
 .stat-num.gold { color: var(--accent-gold); }
@@ -644,7 +658,7 @@ body::after {
 
 .stat-num-sm {
   font-family: 'Orbitron', sans-serif;
-  font-size: 22px;
+  font-size: 36px;       /* 1.5× prior, then +10% (33→36) */
   font-weight: 900;
   line-height: 0.9;
 }
@@ -652,10 +666,11 @@ body::after {
 .stat-num-sm.purple { color: var(--prestige-purple); }
 
 .stat-label {
-  font-size: 13px;
+  font-size: 20px;       /* 1.5× the prior 13px */
   letter-spacing: 0.08em;
   color: var(--muted-silver);
   text-transform: uppercase;
+  white-space: nowrap;   /* keep the sentence on one line inside the fixed head column */
 }
 
 /* ----- Glyph rows (gold wins + silver nomination-losses) — the visual hero ----- */
@@ -663,15 +678,22 @@ body::after {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: 8px;
+}
+
+/* Zero-size full-width flex break: forces the silver nomination-loss glyphs onto
+   a new line directly under the gold wins within the glyph row. */
+.glyph-break {
+  flex-basis: 100%;
+  width: 100%;
+  height: 0;
 }
 
 /* Reuse the trophy belt's og-statuette. Gold = exact --accent-gold chain
    (matches .trophy-icon .og at awards2.css). Silver = neutral grey for losses.
    Enlarged to 26px so the statuettes read as the focal point of each stat. */
 .stat-glyph {
-  width: 26px;
-  height: 26px;
+  width: 52px;
+  height: 52px;
   filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
 }
 
@@ -684,7 +706,7 @@ body::after {
 .stat-bottom {
   display: flex;
   gap: 32px;
-  align-items: center;
+  align-items: center;   /* content vertically centered (middle) within the row */
   padding-top: 14px;
   border-top: 1px solid rgba(var(--muted-silver-rgb), 0.18);
 }
@@ -695,34 +717,44 @@ body::after {
   gap: 14px;
 }
 
+/* +10% on the baseline "categories" label only (the shared .stat-label used by
+   the Most wins/noms rows stays 20px). */
+.stat-mini .stat-label {
+  font-size: 22px;
+}
+
 .stat-highlight {
+  display: flex;            /* label + value on ONE line (parallel with "categories") */
+  align-items: baseline;
+  gap: 12px;
   border-left: 1px solid rgba(var(--muted-silver-rgb), 0.18);
   padding-left: 24px;
 }
 
 .highlight-label {
-  font-size: 10px;
+  font-size: 22px;       /* baseline text +10% */
   letter-spacing: 0.15em;
   color: var(--success-green);
   text-transform: uppercase;
 }
 
 .highlight-value {
-  font-size: 14px;
+  font-size: 22px;       /* baseline text +10% */
   color: var(--film-white);
-  margin-top: 2px;
 }
 
 .highlight-detail {
-  font-size: 12px;
+  font-size: 22px;       /* baseline text +10% */
   color: var(--ghost-gray);
 }
 
 /* ----- Rectangular portrait tile (NO circle) ----- */
 .stats-portrait {
   position: relative;
-  margin: 20px 20px 20px 0;
-  border-radius: var(--border-radius-lg, 12px);
+  width: 227px;                /* Best Actor tile WIDTH; now fills panel height (cover-cropped) */
+  align-self: stretch;         /* fill the panel height instead of a fixed 2:3 box */
+  margin: 28px 28px 28px 0;    /* top/bottom: near-full height + vertical centering; right: inward */
+  border-radius: 0;            /* square edges */
   overflow: hidden;
   background: var(--cosmic-blue);
   border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
@@ -731,26 +763,30 @@ body::after {
 .stats-portrait-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: cover;         /* fills the frame like the actor tiles (.person-bg) */
   background-position: center top;
 }
 
 .stats-portrait-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(var(--space-black-rgb), 0.9), transparent 55%);
+  background: linear-gradient(to top,
+    rgba(var(--space-black-rgb), 0.97) 0%,
+    rgba(var(--space-black-rgb), 0.65) 40%,
+    rgba(var(--space-black-rgb), 0.08) 100%);
 }
 
 .stats-portrait-text {
   position: absolute;
   left: 14px;
   right: 14px;
-  bottom: 14px;
+  bottom: 20px;   /* more breathing room beneath the STANDOUT caption */
 }
 
 .standout-label {
   font-family: 'Orbitron', sans-serif;
-  font-size: 9px;
+  font-size: 10px;          /* ×1.1 */
+  font-weight: 700;         /* bold */
   letter-spacing: 0.15em;
   color: var(--accent-gold);
   text-transform: uppercase;
@@ -758,15 +794,16 @@ body::after {
 }
 
 .standout-name {
-  font-size: 15px;
+  font-size: 16.5px;        /* ×1.1 */
   font-weight: 500;
   color: var(--film-white);
   line-height: 1.1;
 }
 
 .standout-award {
-  font-size: 11px;
+  font-size: 13px;          /* ×1.2 */
   color: var(--muted-silver);
+  text-transform: uppercase;   /* capitalise → BEST ACTOR */
   margin-top: 2px;
 }
 
@@ -774,18 +811,21 @@ body::after {
 .hero-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 16px;
+  position: relative;
+  z-index: 5;                 /* always above slide content → always clickable */
 }
 
 .hero-dot {
-  width: 9px;
-  height: 9px;
+  width: 13px;               /* bigger: always visible + an easy hit target */
+  height: 13px;
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(var(--muted-silver-rgb), 0.4);
+  background: rgba(var(--muted-silver-rgb), 0.6);  /* brighter so it's always visible */
   cursor: pointer;
+  pointer-events: auto;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -1557,7 +1597,7 @@ body::after {
   border: none;
   cursor: pointer;
   color: var(--muted-silver);
-  padding: 8px;
+  padding: 6px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1580,22 +1620,23 @@ body::after {
   pointer-events: none;
 }
 
-/* Arrow glyph: local override of og-arrow-left (shared glyph untouched, Rule
-   #7). Stroke recoloured to --muted-silver (#94a3b8) and doubled 6→12 for a
-   2x-thicker weight. Right button keeps its scaleX(-1) flip below. */
+/* Arrow glyph → UNFILLED (outline) grey isosceles triangle pointing left
+   (shared og glyph untouched, Rule #7). fill:none = unfilled; narrower box +
+   thinner stroke than the old arrows. Right button keeps its scaleX(-1) flip
+   below, so the two triangles point in opposite directions. */
 .trophy-scroll-btn .og {
-  width: 36px;
-  height: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%2394a3b8' stroke-width='12' stroke-linecap='round'/%3E%3Cpolyline points='40,28 18,50 40,72' stroke='%2394a3b8' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  width: 24px;
+  height: 31px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 80'%3E%3Cpolygon points='6,40 64,6 64,74' fill='none' stroke='%2394a3b8' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-/* Hover: brighten the stroke to --film-white (#f1f5f9). */
+/* Hover: brighten the outline to --film-white (#f1f5f9). */
 .trophy-scroll-btn:hover .og {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%23f1f5f9' stroke-width='12' stroke-linecap='round'/%3E%3Cpolyline points='40,28 18,50 40,72' stroke='%23f1f5f9' stroke-width='12' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 80'%3E%3Cpolygon points='6,40 64,6 64,74' fill='none' stroke='%23f1f5f9' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 .trophy-scroll-btn.right .og {
-  transform: scaleX(-1); /* flip the left-arrow glyph */
+  transform: scaleX(-1); /* flip the left-pointing triangle → points right */
 }
 
 @media (max-width: 650px) {
