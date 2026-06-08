@@ -389,12 +389,12 @@ async function loadYearStrips() {
     const statsHtml = stripStats.map(s =>
       `<span class="strip-stat">${escapeHtml(s)}</span>`
     ).join('');
+    // Top-winning film's tmdb_id drives the strip backdrop (lazy-loaded below).
+    const topTmdbId = (stats && stats.mostWins && stats.mostWins.tmdbId) || 0;
     return `
       <div class="year-strip" data-year="${year}">
         <div class="year-number">${year}</div>
-        <div class="strip-visual">
-          <div class="strip-visual-placeholder">Backdrop</div>
-        </div>
+        <div class="strip-visual" data-tmdb-id="${topTmdbId}"></div>
         <div class="strip-content">
           <div class="strip-headline">${escapeHtml(headline)}</div>
         </div>
@@ -409,6 +409,25 @@ async function loadYearStrips() {
       showYearDetail(year);
     });
   });
+
+  // Lazy-load each strip's top-film backdrop (cached; shared with the hero).
+  // Async — strips already rendered, images fill in without blocking or shifting.
+  container.querySelectorAll('.strip-visual[data-tmdb-id]').forEach(el => {
+    const id = parseInt(el.dataset.tmdbId, 10);
+    if (id) loadStripBackdrop(id, el);
+  });
+}
+
+// Paints a top-film backdrop into a .strip-visual box. Reuses getTmdbBackdropPath
+// (sessionStorage-cached, same key as the hero). No backdrop on TMDB → leaves the
+// CSS gradient empty-state in place (never the literal "Backdrop" text).
+async function loadStripBackdrop(tmdbId, visualEl) {
+  if (!tmdbId || !visualEl) return;
+  const path = await getTmdbBackdropPath(tmdbId);
+  if (!path || !visualEl.isConnected) return; // no image, or strip replaced by a festival switch
+  const url = OrbitUtils.tmdbImageUrl(path, OrbitUtils.IMAGE_SIZES.BACKDROP);
+  visualEl.style.backgroundImage = `url(${url})`;
+  visualEl.classList.add('has-backdrop');
 }
 
 // ===== VIEW SWITCHING =====

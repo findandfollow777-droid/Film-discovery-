@@ -205,33 +205,28 @@ body::after {
   line-height: 1;
 }
 
+/* Strip backdrop box (Home A — Jun 8 2026). The year's top-winning film backdrop
+   is painted via JS as background-image (cover). Empty state = a subtle dark
+   gradient (no "Backdrop" text). ::after vignette darkens the year-side edge so
+   the image blends cinematically toward the year column. */
 .strip-visual {
   width: 220px;
   height: 120px;
-  background: var(--cosmic-blue);
+  background-color: var(--cosmic-blue);
+  background-image: linear-gradient(135deg, rgba(var(--cosmic-blue-rgb), 0.95), rgba(var(--nebula-dark-rgb), 0.95));
+  background-size: cover;
+  background-position: center;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
 }
 
-.strip-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.strip-visual-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ghost-gray);
-  font-size: 11px;
-  text-align: center;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 0 8px;
+.strip-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, transparent 55%, rgba(var(--space-black-rgb), 0.45) 100%);
+  pointer-events: none;
 }
 
 .strip-headline {
