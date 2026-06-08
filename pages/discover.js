@@ -2116,6 +2116,15 @@ launchCard.addEventListener("click", async () => {
     }));
   } catch (e) {}
 
+  /* Reset the honest-count signal at launch entry so a stale postFiltered
+     banner from a prior launch can't bleed into a path that doesn't set it
+     (awards-only / universe / mixed-awards). The normal-discover path re-sets
+     these after its post-filter when a shrink occurs. */
+  localStorage.removeItem("postFiltered");
+  localStorage.removeItem("postFilteredCount");
+  localStorage.removeItem("postFilteredSampled");
+  localStorage.removeItem("postFilteredBroadTotal");
+
   try {
     // Check for universe filters
     const universeFilters = state.filters.filter(f => f.section === "universes");
@@ -2633,6 +2642,11 @@ launchCard.addEventListener("click", async () => {
         localStorage.removeItem("totalAvailable");
       }
 
+      /* Snapshot the page-capped fetch count BEFORE any post-filter, so the
+         honest-count reconciliation below can detect whether awards/settings
+         post-filtering actually shrank the set. */
+      const fetchedCount = allMovies.length;
+
       // Post-filter by awards
       allMovies = filterByAwards(allMovies, state.filters);
 
@@ -2665,6 +2679,37 @@ launchCard.addEventListener("click", async () => {
           });
           return;
         }
+      }
+
+      /* Honest count (2026-06-08): the capped-banner keys above were set from
+         TMDB total_results BEFORE the awards/settings post-filters ran. When a
+         post-filter actually shrank the fetched set, "Showing 500 of ~{total}"
+         is a lie (only finalMovies.length render). A true post-filtered total
+         across ALL pages is unknowable without fetching everything (out of
+         scope), so surface the ACTUAL rendered count and drop the fabricated
+         "of ~total" framing. No shrink → leave the capped banner exactly as-is
+         (it's honest there: ~total match, ~500 shown). */
+      const postFilterShrank = finalMovies.length < fetchedCount;
+      if (postFilterShrank) {
+        localStorage.removeItem("resultsCapped");
+        localStorage.removeItem("totalAvailable");
+        localStorage.setItem("postFiltered", "true");
+        localStorage.setItem("postFilteredCount", String(finalMovies.length));
+        if (wasCapped) {
+          /* The broad set was page-capped before filtering, so N is drawn from
+             a sample of the top ~totalMovies — record that for a quiet note. */
+          localStorage.setItem("postFilteredSampled", "true");
+          localStorage.setItem("postFilteredBroadTotal", totalMovies.toString());
+        } else {
+          localStorage.removeItem("postFilteredSampled");
+          localStorage.removeItem("postFilteredBroadTotal");
+        }
+      } else {
+        // No shrink — clear any stale post-filter keys from a prior launch.
+        localStorage.removeItem("postFiltered");
+        localStorage.removeItem("postFilteredCount");
+        localStorage.removeItem("postFilteredSampled");
+        localStorage.removeItem("postFilteredBroadTotal");
       }
 
       const selectedGenres = getSelectedGenres(state.filters);

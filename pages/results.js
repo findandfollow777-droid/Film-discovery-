@@ -403,10 +403,19 @@ async function init() {
       }
     }
     
-    // Check if results were capped
+    // Check if results were capped / post-filtered
     const wasCapped = localStorage.getItem("resultsCapped");
     const totalAvailable = localStorage.getItem("totalAvailable");
-    if (wasCapped === "true" && totalAvailable) {
+    const postFiltered = localStorage.getItem("postFiltered");
+    if (postFiltered === "true") {
+      /* A client-side post-filter (seed Settings/Region/Themes, or awards)
+         shrank the fetched set — show the honest rendered count, never a
+         fabricated TMDB total (which would imply all of those match). */
+      const n = parseInt(localStorage.getItem("postFilteredCount") || "0", 10);
+      const sampled = localStorage.getItem("postFilteredSampled") === "true";
+      const broadTotal = localStorage.getItem("postFilteredBroadTotal");
+      showPostFilteredBanner(n, sampled, broadTotal);
+    } else if (wasCapped === "true" && totalAvailable) {
       showCappedBanner(totalAvailable);
     }
     
@@ -950,6 +959,43 @@ function showCappedBanner(totalAvailable) {
   banner.innerHTML = `
     <span class="capped-icon"><span class="og og-target"></span></span>
     <span class="capped-text">Showing 500 of ~${parseInt(totalAvailable).toLocaleString()} results. <a href="../index.html">Add more filters</a> for refined results.</span>
+    <button class="capped-close orbit-close" aria-label="Close">✕</button>
+  `;
+
+  // Rule 17: trigger Black Hole exit, then remove the banner.
+  const btn = banner.querySelector('.capped-close');
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(banner, btn, () => banner.remove());
+  });
+
+  // Insert after header
+  const header = document.querySelector('.results-header');
+  if (header) {
+    header.after(banner);
+  }
+}
+
+/* Honest banner (2026-06-08): a client-side post-filter (seed Settings/Region/
+   Themes, or awards) shrank the fetched set, so no truthful "of ~total" exists
+   (the TMDB total counts films that don't match the post-filter). Show the
+   ACTUAL rendered count; when the broad set was also page-capped, add a quiet
+   note that N is sampled from the top matches. */
+function showPostFilteredBanner(n, sampled, broadTotal) {
+  const count = parseInt(n, 10) || 0;
+  const label = count === 1 ? '1 result' : count.toLocaleString() + ' results';
+  let sampleNote = '';
+  if (sampled && broadTotal) {
+    sampleNote = ` <span class="capped-sample">from a sample of the top ~${parseInt(broadTotal).toLocaleString()} broad matches</span>`;
+  }
+
+  const banner = document.createElement('div');
+  banner.className = 'capped-banner';
+  banner.setAttribute('data-orbit-popup', '');
+  banner.innerHTML = `
+    <span class="capped-icon"><span class="og og-target"></span></span>
+    <span class="capped-text">${label}.${sampleNote} <a href="../index.html">Adjust filters</a> to refine.</span>
     <button class="capped-close orbit-close" aria-label="Close">✕</button>
   `;
 
