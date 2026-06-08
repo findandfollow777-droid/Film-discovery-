@@ -700,6 +700,63 @@ function renderGlyphRow(total, goldCount) {
   return html;
 }
 
+/* ============================================================
+   FIRST/LAST-AWARDED HIGHLIGHT — Added Jun 8 2026 (Build A2)
+   Computed fallback for the stats-slide highlight slot when no editorial
+   highlight is authored: did any category make its FIRST or LAST appearance
+   this year? Only ever runs on the stats slide → ACADEMY_STYLE festivals only
+   (jury festivals never render it; the Cannes-2020 gap is therefore moot).
+   Windowed by the 2000 dataset floor: a "first" needs year > earliest, a
+   "last" needs year < latest — we can't see beyond our window.
+   ============================================================ */
+
+// {categoryName: [sorted years it appears]} per festival, from the already-
+// reshaped db (no fetch). Cached alongside the festival data caches.
+const CAT_YEARS_CACHE = {};
+function getCategoryYears(festival) {
+  if (CAT_YEARS_CACHE[festival]) return CAT_YEARS_CACHE[festival];
+  const db = V1_FESTIVAL_CACHE[festival];
+  if (!db) return {};
+  const map = {};
+  Object.keys(db).forEach(cat => {
+    map[cat] = Object.keys(db[cat]).map(Number).filter(y => !isNaN(y)).sort((a, b) => a - b);
+  });
+  CAT_YEARS_CACHE[festival] = map;
+  return map;
+}
+
+// Returns {label, value, detail} (same shape as editorial.highlight) or null.
+// Tie rule: a FIRST event beats a LAST event (a debut outranks a discontinuation),
+// then alphabetical by category name — deterministic.
+function computeFirstLastHighlight(festival, year) {
+  const db = V1_FESTIVAL_CACHE[festival];
+  if (!db) return null;
+  const years = getFestivalYears(festival);
+  if (years.length === 0) return null;
+  const earliest = years[years.length - 1];
+  const latest = years[0];
+  const catYears = getCategoryYears(festival);
+  const yearStr = String(year);
+
+  const events = [];
+  Object.keys(db).forEach(cat => {
+    if (!db[cat][yearStr]) return;            // category not contested this year
+    const ys = catYears[cat];
+    if (!ys || ys.length === 0) return;
+    const first = ys[0], last = ys[ys.length - 1];
+    if (first === year && year > earliest) events.push({ type: 'first', cat });
+    else if (last === year && year < latest) events.push({ type: 'last', cat });
+  });
+  if (events.length === 0) return null;
+
+  events.sort((a, b) =>
+    (a.type !== b.type) ? (a.type === 'first' ? -1 : 1) : a.cat.localeCompare(b.cat));
+  const ev = events[0];
+  return ev.type === 'first'
+    ? { label: 'New this year', value: ev.cat, detail: 'first awarded' }
+    : { label: 'Final year',   value: ev.cat, detail: 'last awarded' };
+}
+
 // Stats slide markup — "Calm Stack" layout (rebuilt Jun 8 2026).
 // Left = stacked stat rows (even vertical rhythm); right = rectangular portrait
 // tile (NO circle). Computed values, glyph logic, and gating are unchanged —
@@ -709,7 +766,10 @@ function buildStatsHtml(stats, editorial, year) {
   const mw = stats.mostWins;
   const mn = stats.mostNoms;
   const standout = editorial.standout;
-  const highlight = editorial.highlight;
+  // Highlight slot: editorial wins; else computed first/last; else omitted.
+  const highlight = editorial.highlight
+    || computeFirstLastHighlight(currentFestival, year)
+    || null;
 
   const winsRow = mw ? `
     <div class="stat-row">
