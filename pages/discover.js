@@ -395,35 +395,58 @@ window.addEventListener('resize', () => {
 })();
 
 /* ============================================================
-   STREAMING BAR — Interactive Pills + Edit Popup
+   PROFILE DEFAULTS — Shared read surface
+   Added Jun 11, 2026 (Stream arc Prompt 1).
+
+   Single source of truth for profile streaming defaults. Reads the two
+   persistent Profile keys and returns a normalised shape. Top-level scope
+   (no window.*) so the WATCHING ON bar (now) and the upcoming Stream tab +
+   Region tab builds can call it directly — they share this file's scope.
+
+   - orbit_user_providers : JSON number[]  (default [])  — parse/NaN-guarded
+   - orbit_user_country   : ISO 3166-1 code (default null)
+
+   Returns { providers: number[], country: string|null }
+   ============================================================ */
+function getProfileDefaults() {
+  var providers = [];
+  try {
+    var raw = JSON.parse(localStorage.getItem('orbit_user_providers') || '[]');
+    if (Array.isArray(raw)) {
+      providers = raw
+        .map(function (n) { return parseInt(n, 10); })
+        .filter(function (n) { return !isNaN(n); });
+    }
+  } catch (e) { providers = []; }
+  var country = localStorage.getItem('orbit_user_country') || null;
+  return { providers: providers, country: country };
+}
+
+/* ============================================================
+   STREAMING BAR — Pills + Edit Popup
    Added May 4, 2026 (replaces initStreamingBar from May 1).
+   Reworked Jun 11, 2026 (Stream arc Prompt 1): the bar is now a DISPLAY of
+   Profile preferences. Pills are read-only reflections; "Edit services" edits
+   the Profile keys via the popup. The dead orbit_bar_providers middle layer
+   was removed and is purged from localStorage on init.
 
    Storage keys (Rule 8):
-   - orbit_user_providers : profile default IDs array — read-only here
-   - orbit_user_country   : profile country code     — read-only here
-   - orbit_bar_providers  : bar active subset IDs    — read/write here
+   - orbit_user_providers : profile default IDs array — read here (popup save writes)
+   - orbit_user_country   : profile country code     — read here (popup save writes)
 
    Watch tab keys (watchCountry, watchProviders) are NOT touched.
    ============================================================ */
 (function initStreamingBarInteractive() {
 
-  // --- Profile defaults (read-only) ---
-  var profileProviderIds;
-  try { profileProviderIds = JSON.parse(localStorage.getItem('orbit_user_providers') || '[]'); }
-  catch (e) { profileProviderIds = []; }
-  var profileCountry =
-    localStorage.getItem('orbit_user_country') ||
-    localStorage.getItem('watchCountry') || 'US';
+  // One-time cleanup: purge the dead bar-state key from users' storage.
+  try { localStorage.removeItem('orbit_bar_providers'); } catch (e) {}
 
-  // --- Bar state (persists, starts as copy of profile) ---
-  var barProviderIds;
-  var rawBar = localStorage.getItem('orbit_bar_providers');
-  try { barProviderIds = rawBar ? JSON.parse(rawBar) : null; }
-  catch (e) { barProviderIds = null; }
-  if (!barProviderIds) {
-    barProviderIds = profileProviderIds.slice();
-    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
-  }
+  // --- Profile defaults (the single baseline; the bar is a display of these) ---
+  // profileProviderIds is a live reference, mutated in place on popup save so the
+  // popup closures (loadPopupProviders / renderPopupGrid) keep seeing current state.
+  var defaults = getProfileDefaults();
+  var profileProviderIds = defaults.providers;
+  var profileCountry = defaults.country || 'US'; // 'US' = presentational fallback for the popup selector
 
   // Extended provider name map. Unknown IDs fall back to "Service N".
   var PNAMES = {
@@ -436,80 +459,45 @@ window.addEventListener('resize', () => {
 
   function getProviderName(id) { return PNAMES[id] || ('Service ' + id); }
 
-  function arraysEqual(a, b) {
-    if (a.length !== b.length) return false;
-    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
-    return true;
-  }
-
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
 
-  // --- Bar render ---
+  // --- Bar render (display-only reflection of Profile providers) ---
   function renderBar() {
     var bar       = document.getElementById('discoverStreamBar');
     var container = document.getElementById('discoverStreamServices');
     var countEl   = document.getElementById('discoverStreamCount');
-    var modBadge  = document.getElementById('discoverBarModified');
     if (!container) return;
 
     if (bar) {
-      var anyConfigured = profileProviderIds.length > 0 || barProviderIds.length > 0;
-      bar.classList.toggle('discover-stream-bar--empty', !anyConfigured);
+      bar.classList.toggle('discover-stream-bar--empty', profileProviderIds.length === 0);
     }
 
-    // Show every ID the user has ever configured (profile ∪ bar) so
-    // off-state pills remain togglable back on.
+    // Defensive dedup; Profile providers are the only source now.
     var seen = {};
-    var allIds = [];
-    profileProviderIds.concat(barProviderIds).forEach(function (id) {
-      if (!seen[id]) { seen[id] = true; allIds.push(id); }
+    var ids = [];
+    profileProviderIds.forEach(function (id) {
+      if (!seen[id]) { seen[id] = true; ids.push(id); }
     });
 
-    if (allIds.length === 0) {
+    if (ids.length === 0) {
       container.innerHTML = '<span class="discover-stream-none">No streaming services configured — click Edit services to add some.</span>';
     } else {
-      container.innerHTML = allIds.map(function (id) {
+      // Display-only pills: no click handler, no off-state. Editing goes through
+      // the "Edit services" popup, which writes the Profile keys.
+      container.innerHTML = ids.map(function (id) {
         var name = getProviderName(id);
-        var isOn = barProviderIds.indexOf(id) > -1;
-        var cls  = 'discover-stream-pill' + (isOn ? '' : ' discover-stream-pill--off');
-        var titleAttr = isOn ? 'Click to exclude' : 'Click to include';
-        return '<span class="' + cls + '" data-provider-id="' + id +
-               '" title="' + titleAttr + '">' + escapeHtml(name) + '</span>';
+        return '<span class="discover-stream-pill" data-provider-id="' + id +
+               '" title="' + escapeHtml(name) + '">' + escapeHtml(name) + '</span>';
       }).join('');
-
-      Array.prototype.forEach.call(
-        container.querySelectorAll('.discover-stream-pill'),
-        function (pill) {
-          pill.addEventListener('click', function () {
-            toggleBarPill(parseInt(pill.dataset.providerId, 10));
-          });
-        }
-      );
     }
 
     if (countEl) {
-      countEl.innerHTML = '<strong>' + barProviderIds.length + '</strong> active';
+      countEl.innerHTML = '<strong>' + ids.length + '</strong> active';
     }
-
-    var differs = !arraysEqual(
-      barProviderIds.slice().sort(),
-      profileProviderIds.slice().sort()
-    );
-    if (modBadge) modBadge.style.display = differs ? 'inline-block' : 'none';
-
-    window._discoverUserProviders = barProviderIds;
-  }
-
-  function toggleBarPill(providerId) {
-    var idx = barProviderIds.indexOf(providerId);
-    if (idx > -1) barProviderIds.splice(idx, 1);
-    else barProviderIds.push(providerId);
-    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
-    renderBar();
   }
 
   // --- Popup ---
@@ -610,21 +598,14 @@ window.addEventListener('resize', () => {
       try { saveProviderSelections(); } catch (e) {}
     }
 
-    // Reset the in-memory profile reference + bar to match new defaults
+    // Update the in-memory profile reference IN PLACE (closures hold this ref)
+    // so the bar re-renders from the new defaults.
     profileProviderIds.length = 0;
     selected.forEach(function (id) { profileProviderIds.push(id); });
     profileCountry = country;
-    barProviderIds = selected.slice();
-    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
 
     renderBar();
     closePopup();
-  }
-
-  function resetBarToProfile() {
-    barProviderIds = profileProviderIds.slice();
-    try { localStorage.setItem('orbit_bar_providers', JSON.stringify(barProviderIds)); } catch (e) {}
-    renderBar();
   }
 
   // --- Event wiring ---
@@ -632,14 +613,12 @@ window.addEventListener('resize', () => {
   var closeBtn  = document.getElementById('discoverPopupClose');
   var cancelBtn = document.getElementById('discoverPopupCancel');
   var saveBtn   = document.getElementById('discoverPopupSave');
-  var modBadge  = document.getElementById('discoverBarModified');
   var countryEl = document.getElementById('discoverPopupCountry');
 
   if (editBtn)   editBtn.addEventListener('click', openPopup);
   if (closeBtn)  closeBtn.addEventListener('click', closePopup);
   if (cancelBtn) cancelBtn.addEventListener('click', closePopup);
   if (saveBtn)   saveBtn.addEventListener('click', saveDefaults);
-  if (modBadge)  modBadge.addEventListener('click', resetBarToProfile);
   if (countryEl) countryEl.addEventListener('change', function () {
     loadPopupProviders(countryEl.value);
   });
@@ -4558,7 +4537,11 @@ function buildBasedOnContent(root) {
     { label: "True Story / Real Events", id: 9672 }
   ];
   sourceTypes.forEach(s => {
-    const chip = makeChip(s.label, "basedOn", { type: "keyword", id: s.id, name: s.label });
+    /* Prompt 2 reskin: .disco-chip.gen-lg, indigo via the panel's
+       data-axis="source". Value shape {type:"keyword",id,name} is UNCHANGED
+       from Prompt 1 (→ with_keywords); only the chip class/visual migrates. */
+    const chip = makeChip(s.label, "basedOn", { type: "keyword", id: s.id, name: s.label }, { component: true });
+    chip.classList.add("gen-lg");
     sourceGroup.appendChild(chip);
   });
   root.appendChild(sourceGroup);
@@ -6095,19 +6078,28 @@ function buildWatchContent(root) {
                         case → params.set('with_keywords', …))
    ============================================================ */
 function buildUniversesContent(root) {
-  // ---------- Search ----------
-  root.appendChild(makeSectionLabel("Keyword & series search"));
+  /* ---------- Search — shared inline unit (Prompt 2 reskin).
+     Only the wrapper markup + input class change; the /search/keyword +
+     /search/collection autocomplete, the dropdown (IDs preserved), and the
+     commitKwFilter commit path below are all UNCHANGED. ---------- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+  const inlineHead = document.createElement("div");
+  inlineHead.className = "gen-kw-head";
+  inlineHead.textContent = "Search series & concepts";
+  inline.appendChild(inlineHead);
 
   const searchWrap = document.createElement("div");
-  searchWrap.className = "orbit-kw-search-wrap";
+  searchWrap.className = "src-search-wrap";
   const kwInput = document.createElement("input");
   kwInput.type = "text";
   kwInput.id = "kwSeriesInput";
-  kwInput.className = "orbit-kw-input";
+  kwInput.className = "kw-input";
   kwInput.placeholder = "Search franchises, themes, concepts...";
   kwInput.autocomplete = "off";
   searchWrap.appendChild(kwInput);
-  root.appendChild(searchWrap);
+  inline.appendChild(searchWrap);
+  root.appendChild(inline);
 
   const dropdown = document.createElement("div");
   dropdown.className = "orbit-kw-dropdown";
@@ -6271,7 +6263,7 @@ function buildUniversesContent(root) {
     if (!entry) return;
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "chip";
+    btn.className = "disco-chip";   // Prompt 2 reskin; commit path unchanged
     btn.dataset.curatedKey = "collection-" + entry.id;
     btn.textContent = SERIES_DISPLAY[key] || entry.label;
     btn.addEventListener("click", function () {
@@ -6282,9 +6274,8 @@ function buildUniversesContent(root) {
   root.appendChild(seriesChipGroup);
 
   // ---------- Popular Themes (keyword chips) ----------
-  const themesLabel = makeSectionLabel("Popular Themes");
-  themesLabel.classList.add("focus-section-label--purple");
-  root.appendChild(themesLabel);
+  // Prompt 2: drop the off-axis --purple label modifier; indigo via data-axis.
+  root.appendChild(makeSectionLabel("Popular Themes"));
 
   const themesChipGroup = document.createElement("div");
   themesChipGroup.className = "chip-group";
@@ -6298,7 +6289,7 @@ function buildUniversesContent(root) {
     if (!entry) return;
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "chip orbit-theme-chip";
+    btn.className = "disco-chip";   // Prompt 2 reskin; commit path unchanged
     btn.dataset.curatedKey = "keyword-" + entry.id;
     btn.textContent = entry.label;
     btn.addEventListener("click", function () {
@@ -6322,10 +6313,10 @@ function buildUniversesContent(root) {
       }
     });
     [seriesChipGroup, themesChipGroup].forEach(function (group) {
-      group.querySelectorAll(".chip").forEach(function (btn) {
+      group.querySelectorAll(".disco-chip").forEach(function (btn) {
         const k = btn.dataset.curatedKey;
-        if (activeKeys.has(k)) btn.classList.add("active");
-        else btn.classList.remove("active");
+        if (activeKeys.has(k)) btn.classList.add("on");   // .disco-chip active state
+        else btn.classList.remove("on");
       });
     });
   }
@@ -6820,10 +6811,12 @@ function collectLabelsForSection(sectionKey) {
       return whenResults;
 
     case "basedOn":
-      /* Lockstep with buildBasedOnContent (Prompt 1): surviving Source Type
-         chips carry {type:"keyword", id} → with_keywords, so read by that
-         type. (Legacy {type:"based_on"} chips no longer ship.) */
-      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
+      /* Lockstep with buildBasedOnContent: surviving Source Type chips carry
+         {type:"keyword", id} → with_keywords (Prompt 1), now rendered as
+         .disco-chip.on (Prompt 2 reskin), so read by class + type. The
+         universes Popular chips share the active panel but carry no
+         dataset.value → excluded by the try/catch. */
+      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
           try { return JSON.parse(chip.dataset.value).type === "keyword"; } catch { return false; }
         });
