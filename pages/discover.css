@@ -4899,8 +4899,10 @@ html, body {
 .oft-setting-combined,
 .oft-source-combined {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  /* Prompt 2: left "Based On" half holds only 2 chips post-Prompt-1 — give the
+     content-rich Universes half more width so the panel reads balanced. */
+  grid-template-columns: 2fr 3fr;
+  gap: 24px;
   height: 100%;
 }
 
@@ -5173,16 +5175,15 @@ html, body {
    ============================================================ */
 
 /* --- Pill upgrades (override existing .discover-stream-pill) --- */
+/* Display-only since Prompt 1 (the bar reflects Profile; it isn't a control),
+   so the cursor:pointer / :hover affordances were removed (Stream arc 2b). */
 .discover-stream-pill {
   font-size: 12px;
   font-weight: 500;
   padding: 5px 14px;
-  cursor: pointer;
-  user-select: none;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 .discover-stream-pill::before {
   content: '';
@@ -5192,10 +5193,6 @@ html, body {
   background: currentColor;
   flex-shrink: 0;
   opacity: 0.75;
-}
-.discover-stream-pill:hover {
-  background: rgba(var(--accent-rgb), 0.18);
-  border-color: rgba(var(--accent-rgb), 0.65);
 }
 .discover-stream-pill--off {
   background: rgba(239, 68, 68, 0.07) !important;
@@ -7464,6 +7461,170 @@ html, body {
     border-top: 1px solid rgba(var(--axis), 0.18);
     padding: 18px 0 4px;
   }
+}
+
+/* ============================================================
+   SOURCE — VISUAL RESKIN (Prompt 2 — added June 8, 2026)
+   Indigo axis via [data-axis="source"] on the panel. Based-on +
+   universe chips migrated to .disco-chip; the universe search folded
+   into the shared .gen-kw-inline unit (input → .kw-input). Tokens only;
+   commit models untouched. .oft-source-col (shared with Setting) NOT
+   touched here — only the source-only .oft-source-combined was retuned.
+   ============================================================ */
+
+/* Universe search — flexing wrapper inside the shared inline unit
+   (mirrors Production's .prod-search-wrap). The /search/keyword +
+   /search/collection dropdown sits in flow below, restyled to indigo. */
+.src-search-wrap {
+  position: relative;
+  flex: 1 1 280px;
+  max-width: 430px;
+}
+.src-search-wrap .kw-input { width: 100%; }
+
+/* Re-tint the kept .orbit-kw dropdown to the source (indigo) axis without
+   editing the shared base rules (used by other keyword widgets). */
+#oft-panel-source .orbit-kw-dropdown {
+  border-color: rgba(var(--axis), 0.2);
+}
+#oft-panel-source .orbit-kw-item:hover {
+  background: rgba(var(--axis), 0.1);
+}
+
+/* Responsive — single column already handled by the shared
+   .oft-source-combined @900/650px rules; nothing source-specific needed. */
+
+/* ============================================================
+   STREAM PANEL — composed compact (Stream arc Prompt 2b)
+   Added Jun 20, 2026. Panel-scoped under #oft-panel-watch[data-axis="stream"],
+   so --axis / --axis-hex resolve to the orange (collision) axis. Reuses the
+   shared .match-toggle / .service-tile / .disco-chip / .match-pill components;
+   this block only adds layout + the monogram-tile grid adaptation. Tokens only.
+   ============================================================ */
+#oft-body-watch .match-toggle { margin-bottom: 16px; }
+
+/* 2. Region row */
+.disco-stream-region {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-bottom: 16px;
+}
+.disco-stream-region-label { margin: 0; }
+.disco-stream-region-select {
+  padding: 8px 12px;
+  background: rgba(var(--cosmic-blue-rgb), 0.5);
+  border: 1px solid rgba(var(--axis), 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--film-white);
+  font: 13px var(--font-body);
+  cursor: pointer;
+  appearance: none;
+}
+.disco-stream-region-select:hover { border-color: rgba(var(--axis), 0.5); }
+.disco-stream-region-note {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--muted-silver);
+}
+.disco-stream-edit-link {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--axis-hex);
+  font: 600 12px var(--font-display);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  padding: 4px 2px;
+}
+.disco-stream-edit-link:hover { text-decoration: underline; }
+
+/* Provider zone — dims under "All films" mode */
+.disco-stream-zone { transition: opacity 0.25s ease-out; }
+.disco-stream-zone.is-dimmed {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.disco-stream-grid-label,
+.disco-stream-addmore-label { margin-top: 4px; }
+
+/* 3. Service-tile grid — 6-across monogram cells. Reuses .service-tile (state,
+   tokens, orange .is-on); overrides its row layout into a compact stacked tile. */
+.disco-service-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.disco-service-tile {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  aspect-ratio: 1.4 / 1;
+  gap: 4px;
+  padding: 7px 6px;
+  text-align: center;
+}
+.disco-service-mono {           /* monogram replaces the brand logo (IP-safe) */
+  width: 100%;
+  height: auto;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: rgba(var(--axis), 0.12);
+  color: var(--axis-hex);
+  font: 700 15px var(--font-display);
+  letter-spacing: 0.03em;
+}
+.disco-service-tile .service-name {
+  font-size: 9.5px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.disco-service-tile .service-count {
+  margin: 0;
+  font-size: 9.5px;
+}
+
+/* 4. Add-more chips */
+.disco-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* 5. Footer */
+.disco-stream-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba(var(--axis), 0.15);
+  padding-top: 12px;
+}
+.disco-stream-note {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted-silver);
+  margin: 0;
+}
+.disco-stream-empty,
+.disco-stream-loading {
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-style: italic;
+}
+
+/* Mobile — 6-across is too tight on a narrow panel */
+@media (max-width: 650px) {
+  .disco-service-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* END OF STYLES */

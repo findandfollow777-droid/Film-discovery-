@@ -2995,6 +2995,10 @@ function filterByAwards(movies, filters) {
   return movies.filter(function (movie) { return matchingIds.has(movie.id); });
 }
 
+// Session-once guard for the "providers but no country" stream-default warning
+// (buildTMDBQueryFromFilters runs several times per search — main + count previews).
+let _streamDefaultCountryWarned = false;
+
 function buildTMDBQueryFromFilters(filters) {
   // Defensive: tolerate undefined/null/non-array callers so the
   // query engine returns a base query instead of throwing.
@@ -3143,6 +3147,8 @@ function buildTMDBQueryFromFilters(filters) {
           params.set("with_watch_providers", existing ? `${existing}|${filter.value.id}` : filter.value.id);
           if (filter.value.region) params.set("watch_region", filter.value.region);
         }
+        // {type:"stream_mode", mode:"all"} (emitted by the 2b panel) contributes NO
+        // params — its sole effect is suppressing the scope default below.
         break;
         
     }
@@ -3175,19 +3181,35 @@ function buildTMDBQueryFromFilters(filters) {
     }
   }
 
-  // Inject saved watch providers from Region settings (if not already set by a filter)
+  // Stream default (locked model): if the user committed NO stream filter this search
+  // and NO explicit all-films override, and their scope opts Discover in
+  // (orbit_preferences_scope.orbit === true), apply the Profile baseline.
+  // (Replaces the old localStorage watchProviders injection — per-search means
+  // per-search: a previous search's selection never silently re-applies.)
   if (!params.has("with_watch_providers")) {
+    const allFilmsOverride = filters.some(function (f) {
+      return f && f.section === "watch" && f.value &&
+        f.value.type === "stream_mode" && f.value.mode === "all";
+    });
+
+    let scopeOrbit = false;
     try {
-      const savedProviders = JSON.parse(localStorage.getItem("watchProviders") || "[]");
-      const savedCountry = localStorage.getItem("watchCountry");
-      if (savedProviders.length > 0 && savedCountry) {
-        const providerIds = savedProviders.map(p => p.id).join("|");
-        params.set("with_watch_providers", providerIds);
-        params.set("watch_region", savedCountry);
-        console.log("[Orbit] Applying saved watch providers:", providerIds, "region:", savedCountry);
+      const scope = JSON.parse(localStorage.getItem("orbit_preferences_scope") || "{}");
+      scopeOrbit = !!(scope && scope.orbit === true); // absent / garbage → false (research mode)
+    } catch (e) { scopeOrbit = false; }
+
+    if (!allFilmsOverride && scopeOrbit) {
+      const prof = getProfileDefaults(); // { providers: [ids], country }
+      if (prof.providers.length > 0) {
+        if (prof.country) {
+          params.set("with_watch_providers", prof.providers.join("|"));
+          params.set("watch_region", prof.country);
+        } else if (!_streamDefaultCountryWarned) {
+          // All-or-nothing: region-less provider filtering silently no-ops at TMDB.
+          _streamDefaultCountryWarned = true;
+          console.warn("[Orbit] Stream scope is on with profile providers but no profile country — applying no stream default (region-less provider filtering no-ops at TMDB).");
+        }
       }
-    } catch (e) {
-      console.error("[Orbit] Failed to read saved watch providers:", e);
     }
   }
 
@@ -5924,136 +5946,338 @@ function buildProductionContent(root) {
 // 8. WATCH PROVIDERS SECTION
 // =============================================
 
+/* ============================================================
+   STREAM PANEL — composed compact (Stream arc Prompt 2b)
+   Rebuilt Jun 20, 2026. Replaces the legacy country-select + flat chip
+   list with the approved compact: mode switch → region row → profile
+   service-tile grid (real per-service counts) → "add more" chips → footer.
+
+   Commit model (per-search, like every other tab): selection lives in the
+   DOM until "Add to orbit" writes into state.filters. NO localStorage
+   persistence — the old watchProviders/watchCountry writes are GONE; the
+   scope-gated default in buildTMDBQueryFromFilters (Prompt 2a) governs the
+   no-commit case. Mode "All films" commits {type:"stream_mode",mode:"all"}
+   (2a's override type); selected services commit {type:"provider",…}.
+
+   Storage keys (Rule 8):
+   - reads orbit_user_providers / orbit_user_country via getProfileDefaults()
+   - orbit_stream_counts_{region} (sessionStorage) — per-service total_results
+     cache so reopening the panel costs zero TMDB calls for a seen region.
+   NOTE: this panel no longer reads or writes the legacy watchProviders /
+   watchCountry keys. results.js:1163 still DISPLAY-reads them for its
+   "Filtered by:" banner, so they are intentionally NOT purged here —
+   migrating that banner is a follow-up.
+   ============================================================ */
+
+// Per-service streaming-count cache: region → { providerId: total_results }.
+// Module-scoped so it survives the rebuild-on-activate panel wipe; mirrored
+// to sessionStorage so a seen region costs zero calls on reopen.
+var _streamCountCache = {};
+function getStreamCounts(region) {
+  if (_streamCountCache[region]) return _streamCountCache[region];
+  var data = {};
+  try {
+    var raw = sessionStorage.getItem('orbit_stream_counts_' + region);
+    if (raw) data = JSON.parse(raw) || {};
+  } catch (e) { data = {}; }
+  _streamCountCache[region] = data;
+  return data;
+}
+function saveStreamCounts(region) {
+  try {
+    sessionStorage.setItem('orbit_stream_counts_' + region, JSON.stringify(_streamCountCache[region] || {}));
+  } catch (e) {}
+}
+// IP-safe monogram (no brand logos) — 1–2 letters from the service name.
+function streamMonogram(name) {
+  var words = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return '?';
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+function formatStreamCount(n) {
+  return n > 9999 ? '9,999+' : n.toLocaleString();
+}
+
 function buildWatchContent(root) {
-  const savedCountry = localStorage.getItem("watchCountry") || "";
-  let allProviderData = [];
+  var prof = getProfileDefaults();                 // { providers:[ids], country }
+  var profileIds = (prof.providers || []).slice();
+  var region = prof.country || 'US';               // fallback US per spec
 
-  // --- Country selector ---
-  root.appendChild(makeSectionLabel("Your Country"));
+  var ONLY_COPY = "Showing only what’s streamable on your selected services right now. Loaded from your Profile — changes here apply to this search only.";
+  var ALL_COPY  = "Showing all films regardless of where they stream — broaden mode. Switch back to narrow results to your services.";
 
-  const countrySelect = document.createElement("select");
-  countrySelect.id = "watchCountrySelect";
-  countrySelect.style.cssText = "width: 100%; padding: 10px 12px; background: rgba(15,23,41,0.6); border: 1px solid rgba(0,217,255,0.2); border-radius: 8px; color: var(--film-white); font-size: 13px; margin-bottom: 16px; cursor: pointer; appearance: none;";
-  const countries = [
-    ["", "Select country..."],
-    ["US", "United States"], ["GB", "United Kingdom"], ["CA", "Canada"], ["AU", "Australia"],
-    ["NZ", "New Zealand"], ["IE", "Ireland"], ["DE", "Germany"], ["FR", "France"],
-    ["ES", "Spain"], ["IT", "Italy"], ["PT", "Portugal"], ["NL", "Netherlands"],
-    ["BE", "Belgium"], ["AT", "Austria"], ["CH", "Switzerland"], ["SE", "Sweden"],
-    ["NO", "Norway"], ["DK", "Denmark"], ["FI", "Finland"], ["PL", "Poland"],
-    ["BR", "Brazil"], ["MX", "Mexico"], ["AR", "Argentina"], ["CL", "Chile"],
-    ["CO", "Colombia"], ["JP", "Japan"], ["KR", "South Korea"], ["IN", "India"],
-    ["SG", "Singapore"], ["ZA", "South Africa"]
+  // ---------- 1. Mode switch (per-search ONLY — never writes scope) ----------
+  var toggle = document.createElement('div');
+  toggle.className = 'match-toggle';
+  toggle.id = 'watchModeToggle';
+
+  var optAll = document.createElement('button');
+  optAll.type = 'button';
+  optAll.className = 'opt';
+  optAll.dataset.mode = 'all';
+  optAll.textContent = 'All films';
+
+  var optServices = document.createElement('button');
+  optServices.type = 'button';
+  optServices.className = 'opt on';                // default ON = watch-tonight intent
+  optServices.dataset.mode = 'services';
+  optServices.textContent = 'Only on my services';
+
+  toggle.appendChild(optAll);
+  toggle.appendChild(optServices);
+  root.appendChild(toggle);
+
+  // ---------- 2. Region row ----------
+  var regionRow = document.createElement('div');
+  regionRow.className = 'disco-stream-region';
+
+  var regionLabel = makeSectionLabel('Region');
+  regionLabel.classList.add('disco-stream-region-label');
+  regionRow.appendChild(regionLabel);
+
+  var regionSelect = document.createElement('select');
+  regionSelect.id = 'watchRegionSelect';
+  regionSelect.className = 'disco-stream-region-select';
+  var COUNTRIES = [
+    ['US', 'United States'], ['GB', 'United Kingdom'], ['CA', 'Canada'], ['AU', 'Australia'],
+    ['NZ', 'New Zealand'], ['IE', 'Ireland'], ['DE', 'Germany'], ['FR', 'France'],
+    ['ES', 'Spain'], ['IT', 'Italy'], ['PT', 'Portugal'], ['NL', 'Netherlands'],
+    ['BE', 'Belgium'], ['AT', 'Austria'], ['CH', 'Switzerland'], ['SE', 'Sweden'],
+    ['NO', 'Norway'], ['DK', 'Denmark'], ['FI', 'Finland'], ['PL', 'Poland'],
+    ['BR', 'Brazil'], ['MX', 'Mexico'], ['AR', 'Argentina'], ['CL', 'Chile'],
+    ['CO', 'Colombia'], ['JP', 'Japan'], ['KR', 'South Korea'], ['IN', 'India'],
+    ['SG', 'Singapore'], ['ZA', 'South Africa']
   ];
-  countrySelect.innerHTML = countries.map(([code, name]) =>
-    `<option value="${code}"${code === savedCountry ? " selected" : ""}>${name}</option>`
-  ).join("");
-  root.appendChild(countrySelect);
-
-  // --- Provider chips ---
-  root.appendChild(makeSectionLabel("Your Streaming Services"));
-
-  const hint = document.createElement("p");
-  hint.style.cssText = "font-size: 11px; color: var(--muted-silver); margin-bottom: 10px; font-style: italic;";
-  hint.textContent = "Select services you subscribe to. Orbit Search will filter results to these.";
-  root.appendChild(hint);
-
-  const providerContainer = document.createElement("div");
-  providerContainer.id = "watchProviderChips";
-  providerContainer.className = "chip-group";
-  providerContainer.style.flexWrap = "wrap";
-  root.appendChild(providerContainer);
-
-  // --- Status indicator ---
-  const status = document.createElement("div");
-  status.id = "watchStatus";
-  status.style.cssText = "margin-top: 12px; padding: 8px 12px; border-radius: 8px; font-size: 11px; display: none;";
-  root.appendChild(status);
-
-  function updateStatus() {
-    const country = countrySelect.value;
-    const activeChips = providerContainer.querySelectorAll(".chip.active");
-    if (country && activeChips.length > 0) {
-      const names = Array.from(activeChips).map(c => {
-        try { return JSON.parse(c.dataset.value).name; } catch { return ""; }
-      }).filter(Boolean);
-      status.style.display = "block";
-      status.style.background = "rgba(0,217,255,0.08)";
-      status.style.border = "1px solid rgba(0,217,255,0.25)";
-      status.style.color = "var(--accent-cyan)";
-      status.textContent = `Orbit will filter by: ${names.join(", ")} (${country})`;
-    } else {
-      status.style.display = "none";
-    }
+  // Keep the profile region selectable even if it's outside the shortlist.
+  if (!COUNTRIES.some(function (c) { return c[0] === region; })) {
+    COUNTRIES.unshift([region, region]);
   }
+  COUNTRIES.forEach(function (c) {
+    var opt = document.createElement('option');
+    opt.value = c[0];
+    opt.textContent = c[1];
+    if (c[0] === region) opt.selected = true;
+    regionSelect.appendChild(opt);
+  });
+  regionRow.appendChild(regionSelect);
 
-  function saveToLocalStorage() {
-    const country = countrySelect.value;
-    if (country) {
-      localStorage.setItem("watchCountry", country);
-    } else {
-      localStorage.removeItem("watchCountry");
-    }
+  var regionNote = document.createElement('span');
+  regionNote.className = 'disco-stream-region-note';
+  regionNote.textContent = 'availability differs by region';
+  regionRow.appendChild(regionNote);
 
-    const activeChips = providerContainer.querySelectorAll(".chip.active");
-    const providers = Array.from(activeChips).map(c => {
-      try { return JSON.parse(c.dataset.value); } catch { return null; }
-    }).filter(Boolean).map(v => ({ id: v.id, name: v.name, logo: v.logo || "" }));
-    localStorage.setItem("watchProviders", JSON.stringify(providers));
+  var editLink = document.createElement('button');
+  editLink.type = 'button';
+  editLink.className = 'disco-stream-edit-link';
+  editLink.textContent = 'Edit services ›';   // › = › (not an emoji)
+  // Reuse the bar popup's open path (bar IIFE owns it) — don't duplicate.
+  editLink.addEventListener('click', function () {
+    var btn = document.getElementById('discoverEditBtn');
+    if (btn) btn.click();
+  });
+  regionRow.appendChild(editLink);
 
-    updateStatus();
-  }
+  root.appendChild(regionRow);
 
-  function loadProviders(country) {
-    if (!country) {
-      providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Select a country to see providers</span>';
+  // ---------- provider zone (dims under "All films") ----------
+  var zone = document.createElement('div');
+  zone.className = 'disco-stream-zone';
+  zone.id = 'watchProviderZone';
+
+  // 3. Service-tile grid (profile services, pre-selected)
+  var gridLabel = makeSectionLabel('Your services');
+  gridLabel.classList.add('disco-stream-grid-label');
+  zone.appendChild(gridLabel);
+
+  var grid = document.createElement('div');
+  grid.className = 'disco-service-grid';
+  grid.id = 'watchServiceGrid';
+  zone.appendChild(grid);
+
+  // 4. Add-more chips (remaining region providers not on profile)
+  var addMoreLabel = makeSectionLabel('Add more (not on your profile)');
+  addMoreLabel.classList.add('disco-stream-addmore-label');
+  zone.appendChild(addMoreLabel);
+
+  var addMore = document.createElement('div');
+  addMore.className = 'disco-chip-group';
+  addMore.id = 'watchAddMore';
+  zone.appendChild(addMore);
+
+  root.appendChild(zone);
+
+  // ---------- 5. Footer ----------
+  var footer = document.createElement('div');
+  footer.className = 'disco-stream-footer';
+
+  var pill = document.createElement('span');
+  pill.className = 'match-pill';
+  pill.id = 'watchMatchPill';
+  footer.appendChild(pill);
+
+  var intro = document.createElement('p');
+  intro.className = 'disco-stream-note';
+  intro.id = 'watchFooterIntro';
+  footer.appendChild(intro);
+
+  root.appendChild(footer);
+
+  // ---------- behaviour ----------
+  function updatePill() {
+    if (optAll.classList.contains('on')) {
+      pill.textContent = 'All films — no service filter';
       return;
     }
-    providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Loading providers...</span>';
+    var n = zone.querySelectorAll('.service-tile.is-on, .disco-chip.on').length;
+    pill.textContent = n === 0
+      ? 'No services selected — your Profile default applies'
+      : n + (n === 1 ? ' service selected' : ' services selected');
+  }
 
-    fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${TMDB_API_KEY}&watch_region=${country}`)
-      .then(res => { if (!res.ok) throw new Error(`TMDB ${res.status}`); return res.json(); })
-      .then(data => {
-        allProviderData = (data.results || []).slice(0, 25);
-        providerContainer.innerHTML = "";
+  function setMode(allFilms) {
+    optAll.classList.toggle('on', allFilms);
+    optServices.classList.toggle('on', !allFilms);
+    optAll.setAttribute('aria-pressed', allFilms ? 'true' : 'false');
+    optServices.setAttribute('aria-pressed', !allFilms ? 'true' : 'false');
+    zone.classList.toggle('is-dimmed', allFilms);
+    intro.textContent = allFilms ? ALL_COPY : ONLY_COPY;
+    updatePill();
+  }
 
-        let savedIds = [];
-        try { savedIds = JSON.parse(localStorage.getItem("watchProviders") || "[]").map(p => p.id); } catch {}
+  optAll.addEventListener('click', function () { setMode(true); });
+  optServices.addEventListener('click', function () { setMode(false); });
 
-        allProviderData.forEach(p => {
-          const chip = document.createElement("button");
-          chip.type = "button";
-          chip.className = "chip";
-          if (savedIds.includes(p.provider_id)) chip.classList.add("active");
-          chip.dataset.value = JSON.stringify({ type: "provider", id: p.provider_id, name: p.provider_name, logo: p.logo_path, region: country });
-          chip.style.cssText = "display: flex; align-items: center; gap: 6px; padding: 6px 10px;";
-          const logo = p.logo_path ? `<img src="https://image.tmdb.org/t/p/w45${p.logo_path}" style="width:20px;height:20px;border-radius:3px;">` : "";
-          chip.innerHTML = `${logo}<span>${p.provider_name}</span>`;
-          chip.addEventListener("click", () => {
-            chip.classList.toggle("active");
-            saveToLocalStorage();
+  function makeServiceTile(p, forRegion) {
+    var tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'service-tile disco-service-tile is-on';   // profile = pre-selected
+    tile.title = p.name;
+    tile.setAttribute('aria-pressed', 'true');
+    tile.dataset.value = JSON.stringify({ type: 'provider', id: p.id, name: p.name, region: forRegion });
+
+    var mono = document.createElement('span');
+    mono.className = 'service-logo disco-service-mono';
+    mono.textContent = streamMonogram(p.name);
+    tile.appendChild(mono);
+
+    var name = document.createElement('span');
+    name.className = 'service-name';
+    name.textContent = p.name;
+    tile.appendChild(name);
+
+    var count = document.createElement('span');
+    count.className = 'service-count';
+    count.dataset.countFor = p.id;
+    count.textContent = '—';                  // "—" until a real probe resolves
+    tile.appendChild(count);
+
+    tile.addEventListener('click', function () {
+      var on = tile.classList.toggle('is-on');
+      tile.setAttribute('aria-pressed', on ? 'true' : 'false');
+      updatePill();
+    });
+    return tile;
+  }
+
+  function makeAddMoreChip(p, forRegion) {
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'disco-chip';
+    chip.title = p.name;
+    chip.dataset.value = JSON.stringify({ type: 'provider', id: p.id, name: p.name, region: forRegion });
+    var label = document.createElement('span');
+    label.textContent = p.name;
+    chip.appendChild(label);
+    chip.addEventListener('click', function () {
+      chip.classList.toggle('on');
+      updatePill();
+    });
+    return chip;
+  }
+
+  // Per-service real counts — one /discover/movie probe per grid tile (cached).
+  function fetchCounts(forRegion) {
+    if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return;
+    var cache = getStreamCounts(forRegion);
+    profileIds.forEach(function (id) {
+      var cell = grid.querySelector('[data-count-for="' + id + '"]');
+      if (typeof cache[id] === 'number') {
+        if (cell) cell.textContent = formatStreamCount(cache[id]);
+        return;
+      }
+      OrbitUtils.tmdbFetch('/discover/movie', { with_watch_providers: id, watch_region: forRegion })
+        .then(function (data) {
+          var n = (data && typeof data.total_results === 'number') ? data.total_results : null;
+          if (n === null) return;                  // failure → stays "—"
+          cache[id] = n;
+          saveStreamCounts(forRegion);
+          if (regionSelect.value !== forRegion) return;  // region changed mid-flight
+          var live = grid.querySelector('[data-count-for="' + id + '"]');
+          if (live) live.textContent = formatStreamCount(n);
+        })
+        .catch(function () { /* honest "—" — never a fabricated number */ });
+    });
+  }
+
+  function loadRegion(forRegion) {
+    grid.innerHTML = '';
+    addMore.innerHTML = '';
+
+    if (profileIds.length === 0) {
+      grid.innerHTML = '<p class="disco-stream-empty">No services on your Profile yet — add some via “Edit services”.</p>';
+    } else {
+      grid.innerHTML = '<span class="disco-stream-loading">Loading services…</span>';
+    }
+
+    if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') {
+      grid.innerHTML = '<p class="disco-stream-empty">Services unavailable right now.</p>';
+      return;
+    }
+
+    OrbitUtils.tmdbFetch('/watch/providers/movie', { watch_region: forRegion })
+      .then(function (data) {
+        if (regionSelect.value !== forRegion) return;   // stale response guard
+        var all = (data && data.results) || [];
+        var nameById = {};
+        all.forEach(function (p) { nameById[p.provider_id] = p.provider_name; });
+
+        grid.innerHTML = '';
+        if (profileIds.length === 0) {
+          grid.innerHTML = '<p class="disco-stream-empty">No services on your Profile yet — add some via “Edit services”.</p>';
+        } else {
+          profileIds.forEach(function (id) {
+            grid.appendChild(makeServiceTile({ id: id, name: nameById[id] || ('Service ' + id) }, forRegion));
           });
-          providerContainer.appendChild(chip);
+          fetchCounts(forRegion);
+        }
+
+        var onProfile = {};
+        profileIds.forEach(function (id) { onProfile[id] = true; });
+        var remaining = all
+          .filter(function (p) { return !onProfile[p.provider_id]; })
+          .sort(function (a, b) { return (a.display_priority || 999) - (b.display_priority || 999); })
+          .slice(0, 12);
+        remaining.forEach(function (p) {
+          addMore.appendChild(makeAddMoreChip({ id: p.provider_id, name: p.provider_name }, forRegion));
         });
 
-        updateStatus();
+        updatePill();
       })
-      .catch(() => {
-        providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Failed to load providers</span>';
+      .catch(function () {
+        if (regionSelect.value !== forRegion) return;
+        grid.innerHTML = '<p class="disco-stream-empty">Couldn’t load services for this region.</p>';
       });
   }
 
-  countrySelect.addEventListener("change", () => {
-    saveToLocalStorage();
-    loadProviders(countrySelect.value);
+  regionSelect.addEventListener('change', function () {
+    region = regionSelect.value || 'US';
+    loadRegion(region);
   });
 
-  // Auto-load if country already set
-  if (savedCountry) {
-    loadProviders(savedCountry);
-  } else {
-    providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Select a country to see providers</span>';
-  }
+  // Initial paint — default mode ON ("Only on my services"), profile region.
+  setMode(false);
+  loadRegion(region);
 }
 
 // =============================================
@@ -6722,14 +6946,26 @@ function collectLabelsForSection(sectionKey) {
       });
     }
 
-    case "watch":
-      const watchChips = document.querySelectorAll('#watchProviderChips .chip.active');
-      return Array.from(watchChips).map(chip => {
+    case "watch": {
+      /* Rebuilt Jun 20, 2026 (lockstep with buildWatchContent, Stream arc 2b):
+         mode "All films" → emit the 2a {type:"stream_mode",mode:"all"} override
+         (suppresses the scope default, contributes NO params). Otherwise read
+         selected service tiles + add-more chips → unchanged
+         {type:"provider",id,name,region} shapes the query builder already maps. */
+      const watchModeAll = document.querySelector('#watchModeToggle .opt.on[data-mode="all"]');
+      if (watchModeAll) {
+        return [{ label: "All films", value: { type: "stream_mode", mode: "all" } }];
+      }
+      const watchPicks = document.querySelectorAll(
+        '#watchServiceGrid .service-tile.is-on, #watchAddMore .disco-chip.on'
+      );
+      return Array.from(watchPicks).map(el => {
         try {
-          const val = JSON.parse(chip.dataset.value);
+          const val = JSON.parse(el.dataset.value);
           return { label: val.name, value: val };
         } catch { return null; }
       }).filter(Boolean);
+    }
 
     case "universes":
       const universeResults = [];
