@@ -181,6 +181,45 @@ function festivalDisplayName(slug) {
   return map[slug] || slug;
 }
 
+/* ============================================================
+   FESTIVAL IDENTITY BANNER — Added Jun 21 2026
+   Per-festival identity strip above the year browse: iconic glyph +
+   accent-tinted name + "Est. · location · top prize" descriptor.
+   Rebuilt on every festival switch (tab AND rail) from loadYearStrips().
+   Facts verified against authoritative sources (Wikipedia / official
+   festival sites), Jun 2026 — see RESUME report for the few nuances.
+   ============================================================ */
+const FESTIVAL_IDENTITY = {
+  oscar:  { glyph: 'og-statuette', founded: 1929, location: 'Los Angeles, USA',   topPrize: 'Best Picture' },
+  bafta:  { glyph: 'og-mask',      founded: 1949, location: 'London, UK',         topPrize: 'Best Film' },
+  gg:     { glyph: 'og-globe',     founded: 1944, location: 'Beverly Hills, USA', topPrize: 'Best Motion Picture' },
+  cannes: { glyph: 'og-palm',      founded: 1946, location: 'Cannes, France',     topPrize: "Palme d'Or" },
+  venice: { glyph: 'og-lion',      founded: 1932, location: 'Venice, Italy',      topPrize: 'Golden Lion' },
+  berlin: { glyph: 'og-bear',      founded: 1951, location: 'Berlin, Germany',    topPrize: 'Golden Bear' }
+};
+
+// Builds the per-festival identity banner into #festival-banner. The host gets
+// data-festival so CSS resolves --fest-tint-rgb for the name (gg aliases the
+// Globe colour → amber). Name reuses festivalDisplayName(); the glyph is baked
+// gold for all festivals. All text interpolations escaped (Rule #12 / XSS).
+function renderFestivalBanner(festival) {
+  const host = document.getElementById('festival-banner');
+  if (!host) return;
+  const id = FESTIVAL_IDENTITY[festival];
+  if (!id) { host.innerHTML = ''; host.removeAttribute('data-festival'); return; }
+  const descriptor = `Est. ${id.founded} · ${id.location} · ${id.topPrize}`;
+  host.dataset.festival = festival;
+  host.innerHTML = `
+    <div class="fest-banner">
+      <span class="og ${id.glyph} fest-banner-glyph"></span>
+      <div class="fest-banner-text">
+        <div class="fest-banner-name">${escapeHtml(festivalDisplayName(festival))}</div>
+        <div class="fest-banner-desc">${escapeHtml(descriptor)}</div>
+      </div>
+    </div>
+  `;
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', async () => {
   attachEventListeners();
@@ -200,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   attachFlipHandlers(); // delegated, once, on the stable categories container
 
   await initFromHash();   // opens a hash target if valid (sets currentView='detail')
-  if (currentView === 'compact') loadYearStrips();
+  if (currentView === 'compact') { ensureFeaturedCarousel(); loadYearStrips(); }
 });
 
 // ===== LAZY-FETCH V1 DATA (mirrors awards-browse.js: fetchFestivalV1) =====
@@ -368,7 +407,9 @@ function computedStripStats(stats, festival, year) {
 
 // ===== YEAR STRIPS =====
 async function loadYearStrips() {
+  renderFestivalBanner(currentFestival);   // identity banner — refreshed on every switch
   const container = document.getElementById('year-strips-container');
+  container.dataset.festival = currentFestival;   // drives per-festival .year-number tint
   container.innerHTML = '<div class="strip-loading">Loading ceremonies…</div>';
 
   const db = await loadV1FestivalData(currentFestival);
@@ -430,6 +471,206 @@ async function loadStripBackdrop(tmdbId, visualEl) {
   visualEl.classList.add('has-backdrop');
 }
 
+/* ============================================================
+   FEATURED CEREMONY CAROUSEL — Added Jun 2026 (Home C)
+   4-slide marquee at the top of the browse view: 3 curated ceremonies +
+   the latest ceremony across all six festivals (resolved from the light
+   index, no big up-front loads). Reuses the detail-hero film-led CSS, A1
+   headline/ceremony helpers, getTmdbBackdropPath, and the same one-shot
+   timer discipline (separate state). Auto-marches 1→last, then stops.
+   ============================================================ */
+const FEATURED_CEREMONIES = ['oscar-2024', 'cannes-2002', 'venice-2017']; // curated, swappable
+const FEATURED_MARCH_MS = 5500;
+let featuredTimer = null;
+let featuredBuilt = false;
+
+function clearFeaturedTimer() {
+  if (featuredTimer) { clearTimeout(featuredTimer); featuredTimer = null; }
+}
+
+// Build the carousel exactly once (the slides are festival-agnostic, so a
+// festival switch must NOT rebuild/re-march it).
+function ensureFeaturedCarousel() {
+  if (featuredBuilt) return;
+  featuredBuilt = true;
+  buildFeaturedCarousel();
+}
+
+// Resolve the most recent ceremony across festivals from the lightweight index
+// (year_range.max). Tiebreak at equal max-year: first in index order (bafta
+// before gg → bafta, whose Feb ceremony is also genuinely later than GG's Jan).
+async function resolveLatestCeremony() {
+  try {
+    const idx = await fetch('../data/awards-v1-index.json').then(r => (r.ok ? r.json() : null));
+    if (!idx || !idx.festivals) return null;
+    let best = null;
+    for (const [slug, info] of Object.entries(idx.festivals)) {
+      const y = info.year_range && info.year_range.max;
+      if (y != null && (!best || y > best.year)) best = { festival: slug, year: y };
+    }
+    return best;
+  } catch (_) {
+    return null; // curated-only fallback
+  }
+}
+
+async function buildFeaturedCarousel() {
+  const mount = document.getElementById('featured-carousel');
+  if (!mount) return;
+
+  const slides = FEATURED_CEREMONIES.map(key => {
+    const dash = key.indexOf('-');
+    return { festival: key.slice(0, dash), year: parseInt(key.slice(dash + 1), 10), kind: 'featured' };
+  });
+  const latest = await resolveLatestCeremony();
+  if (latest) slides.push({ festival: latest.festival, year: latest.year, kind: 'latest' });
+
+  // Slide shells render immediately; backdrop + headline fill in async (no block).
+  mount.innerHTML = `
+    <div class="featured-carousel-inner" data-slide="0">
+      <div class="featured-track">
+        ${slides.map((s, i) => `
+          <div class="featured-slide${i === 0 ? ' is-active' : ''}" data-festival="${s.festival}" data-year="${s.year}" role="link" tabindex="0" aria-label="Open ${escapeHtml(festivalDisplayName(s.festival))} ${s.year}">
+            <div class="hero-film-led">
+              <div class="hero-backdrop"></div>
+              <div class="hero-content">
+                <div class="featured-eyebrow">${s.kind === 'latest' ? `Latest · ${s.year}` : '◆ Featured Ceremony'}</div>
+                <div class="hero-ceremony" data-slot="ceremony">${escapeHtml(festivalDisplayName(s.festival))} · ${s.year}</div>
+                <div class="hero-headline" data-slot="headline">&nbsp;</div>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="featured-dots">
+        ${slides.map((s, i) => `<button class="featured-dot${i === 0 ? ' is-active' : ''}${s.kind === 'latest' ? ' is-latest' : ''}" type="button" data-slide="${i}" aria-label="Slide ${i + 1}"></button>`).join('')}
+      </div>
+    </div>`;
+
+  const inner = mount.querySelector('.featured-carousel-inner');
+  const slideEls = [...mount.querySelectorAll('.featured-slide')];
+
+  slides.forEach((s, i) => populateFeaturedSlide(s, slideEls[i]));
+
+  // Whole slide is the click target → opens that ceremony's detail page.
+  slideEls.forEach(el => {
+    const go = () => openCeremony(el.dataset.festival, parseInt(el.dataset.year, 10));
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+
+  // Dots: manual jump cancels the march (mirrors the hero carousel's takeover).
+  mount.querySelectorAll('.featured-dot').forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      inner.dataset.userControlled = '1';
+      clearFeaturedTimer();
+      setFeaturedSlide(inner, parseInt(dot.dataset.slide, 10));
+    });
+  });
+
+  armFeaturedMarch(inner, slides.length);
+}
+
+// A festival's flagship/top award — its winner is the ceremony's iconic film
+// (for jury festivals "most wins" misses this: the Palme/Lion winner often takes
+// just one prize). Exact display_names per the v1 categories.
+const FLAGSHIP_CATEGORY = {
+  oscar:  'Best Picture',
+  bafta:  'Best Film',
+  gg:     'Best Motion Picture – Drama',
+  cannes: "Palme d'Or",
+  venice: 'Golden Lion',
+  berlin: 'Golden Bear'
+};
+
+// The film to feature for a ceremony: the flagship-award winner if present,
+// else the most-awarded film. Returns {title, tmdbId} or null.
+function featuredFilmFor(festival, year, stats) {
+  const db = V1_FESTIVAL_CACHE[festival];
+  const flagName = FLAGSHIP_CATEGORY[festival];
+  const slot = flagName && db && db[flagName] && db[flagName][String(year)];
+  if (slot) {
+    const winner = slot.winners ? slot.winners[0] : slot.winner;
+    if (winner && winner.title) return { title: winner.title, tmdbId: winner.tmdb_id || 0 };
+  }
+  const top = stats && stats.mostWins;
+  return top && top.title ? { title: top.title, tmdbId: top.tmdbId || 0 } : null;
+}
+
+// Fill a slide's headline + ceremony line + backdrop (lazy per festival). No
+// backdrop on TMDB → keep the gradient (typographic-ish) — never broken image.
+async function populateFeaturedSlide(s, el) {
+  if (!el) return;
+  const db = await loadV1FestivalData(s.festival);
+  if (!db || !el.isConnected) return; // curated-only graceful path
+  const stats = computeCeremonyStats(s.festival, s.year);
+  const film = featuredFilmFor(s.festival, s.year, stats); // flagship winner (or top-wins)
+  const editorial = AWARDS_YEAR_EDITORIAL[`${s.festival}-${s.year}`];
+  const headline = (editorial && editorial.headline) || (film && film.title) || computedHeadline(stats, s.festival, s.year);
+  const cerNum = getCeremonyNumber(s.festival, s.year);
+  const ceremony = cerNum
+    ? `${cerNum}${ordinalSuffix(cerNum)} ${festivalDisplayName(s.festival)} · ${s.year}`
+    : `${festivalDisplayName(s.festival)} · ${s.year}`;
+  const hlEl = el.querySelector('[data-slot="headline"]');
+  const cerEl = el.querySelector('[data-slot="ceremony"]');
+  if (hlEl) hlEl.textContent = headline;
+  if (cerEl) cerEl.textContent = ceremony;
+
+  const tmdbId = (film && film.tmdbId) || 0;
+  if (!tmdbId) { el.classList.add('featured-typographic'); return; }
+  const path = await getTmdbBackdropPath(tmdbId);
+  if (!el.isConnected) return;
+  if (path) {
+    const url = OrbitUtils.tmdbImageUrl(path, OrbitUtils.IMAGE_SIZES.BACKDROP);
+    const bd = el.querySelector('.hero-backdrop');
+    if (bd) bd.innerHTML = `<img src="${url}" alt="">`;
+  } else {
+    el.classList.add('featured-typographic'); // graceful: gradient, no broken image
+  }
+}
+
+function setFeaturedSlide(inner, idx) {
+  if (!inner) return;
+  inner.dataset.slide = String(idx);
+  inner.querySelectorAll('.featured-slide').forEach((s, i) => s.classList.toggle('is-active', i === idx));
+  inner.querySelectorAll('.featured-dot').forEach((d, i) => d.classList.toggle('is-active', i === idx));
+}
+
+// One-shot march: advance 0→1→…→last on a timer, then STOP at the latest slide.
+// Halts if the user took over, the carousel left the DOM, or browse isn't visible.
+function armFeaturedMarch(inner, count) {
+  clearFeaturedTimer();
+  const compactVisible = () => {
+    const cv = document.getElementById('compact-view');
+    return cv && cv.style.display !== 'none';
+  };
+  const step = () => {
+    featuredTimer = null;
+    if (!inner || !inner.isConnected) return;
+    if (inner.dataset.userControlled === '1') return;
+    if (!compactVisible()) return;
+    const cur = parseInt(inner.dataset.slide || '0', 10);
+    const next = cur + 1;
+    if (next > count - 1) return; // already at the latest → stop
+    setFeaturedSlide(inner, next);
+    if (next < count - 1) featuredTimer = setTimeout(step, FEATURED_MARCH_MS); // keep marching until last
+  };
+  featuredTimer = setTimeout(step, FEATURED_MARCH_MS);
+}
+
+// Open a ceremony detail from a featured slide (festival may differ from the
+// browsed one). Cancels the march so no stale timer fires after navigation.
+function openCeremony(festival, year) {
+  clearFeaturedTimer();
+  if (festival && festival !== currentFestival) {
+    currentFestival = festival;
+    syncFestivalActiveState(festival);
+  }
+  showYearDetail(year);
+}
+
 // ===== VIEW SWITCHING =====
 function showCompactView() {
   clearHeroAutoTimer(); // no stray rotate firing into a hidden/replaced carousel
@@ -440,10 +681,12 @@ function showCompactView() {
     // Clear hash without triggering hashchange-driven re-entry.
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
+  ensureFeaturedCarousel(); // build once (e.g. when arriving here from a deep-link detail)
   window.scrollTo(0, 0);
 }
 
 async function showYearDetail(year) {
+  clearFeaturedTimer(); // any route into a ceremony cancels the featured march
   currentView = 'detail';
   currentYear = year;
 
@@ -490,10 +733,7 @@ async function initFromHash() {
   if (!db || !getFestivalYears(festival).includes(year)) return; // invalid → stay in compact
 
   currentFestival = festival;
-  // Sync festival tab visual state.
-  document.querySelectorAll('.festival-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.festival === festival);
-  });
+  syncFestivalActiveState(festival); // tabs + rail tiles
   showYearDetail(year);
 }
 
@@ -1314,6 +1554,25 @@ function attachFlipHandlers() {
   });
 }
 
+// Keep BOTH the festival tabs and the Home-B quick-entry rail in sync — one
+// active marker source for both (used by switchFestival + initFromHash).
+function syncFestivalActiveState(festival) {
+  document.querySelectorAll('.festival-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.festival === festival));
+  document.querySelectorAll('.fest-tile').forEach(t =>
+    t.classList.toggle('active', t.dataset.festival === festival));
+}
+
+// Single festival-switch path, shared by the tabs AND the rail tiles (no
+// duplicated switching logic). No-op when already on that festival.
+function switchFestival(festival) {
+  if (!festival || festival === currentFestival) return;
+  currentFestival = festival;
+  syncFestivalActiveState(festival);
+  showCompactView();   // always return to the browse view when switching
+  loadYearStrips();
+}
+
 // ===== EVENT LISTENERS =====
 function attachEventListeners() {
   document.querySelector('.back-to-range')?.addEventListener('click', showCompactView);
@@ -1326,20 +1585,9 @@ function attachEventListeners() {
     });
   });
 
-  // Festival tabs — data-driven switching.
-  document.querySelectorAll('.festival-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const festival = tab.dataset.festival;
-      if (festival === currentFestival) return;
-
-      currentFestival = festival;
-      document.querySelectorAll('.festival-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      // Always return to compact view when switching festivals.
-      showCompactView();
-      loadYearStrips();
-    });
+  // Festival tabs AND the quick-entry rail tiles → the same switchFestival path.
+  document.querySelectorAll('.festival-tab, .fest-tile').forEach(el => {
+    el.addEventListener('click', () => switchFestival(el.dataset.festival));
   });
 
   // Browser back/forward.

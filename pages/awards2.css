@@ -242,6 +242,86 @@ body::after {
 .fest-tile[data-festival="berlin"] { --tile-rgb: var(--fest-berlin-rgb); }
 
 /* ============================================================
+   FESTIVAL IDENTITY BANNER — Added Jun 21 2026
+   Per-festival identity strip above the year browse. Glyph baked gold
+   (exact --accent-gold filter chain, matches .stat-glyph); name carries
+   the festival accent via --fest-tint-rgb (gg → amber alias); descriptor
+   muted + uppercase. The year-number tint below recolours ONLY — the
+   strip composition build owns size/weight/nowrap. All colour via tokens.
+   ============================================================ */
+.fest-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  border-left: 3px solid rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.7);
+  background: linear-gradient(135deg, rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 70%);
+}
+
+.fest-banner-glyph {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  /* baked gold — exact --accent-gold filter chain (matches .stat-glyph). */
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.fest-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;   /* lets the descriptor wrap instead of overflowing on narrow widths */
+}
+
+.fest-banner-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: rgb(var(--fest-tint-rgb, var(--accent-gold-rgb)));   /* festival accent */
+}
+
+.fest-banner-desc {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+/* Per-festival name tint resolution (gg via the Globe alias → amber). */
+#festival-banner[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+#festival-banner[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+#festival-banner[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+#festival-banner[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+#festival-banner[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+#festival-banner[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
+
+/* Year-number colour per festival — colour ONLY; size/weight/nowrap stay from
+   the strip composition build. gg via the Globe alias → amber. */
+#year-strips-container[data-festival="oscar"]  .year-number { color: var(--fest-oscar); }
+#year-strips-container[data-festival="bafta"]  .year-number { color: var(--fest-bafta); }
+#year-strips-container[data-festival="gg"]     .year-number { color: var(--fest-gg); }
+#year-strips-container[data-festival="cannes"] .year-number { color: var(--fest-cannes); }
+#year-strips-container[data-festival="venice"] .year-number { color: var(--fest-venice); }
+#year-strips-container[data-festival="berlin"] .year-number { color: var(--fest-berlin); }
+
+/* Narrow widths — keep the banner readable, shrink the glyph + type. */
+@media (max-width: 650px) {
+  .fest-banner {
+    gap: 14px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .fest-banner-glyph { width: 52px; height: 52px; }
+  .fest-banner-name { font-size: 22px; }
+  .fest-banner-desc { font-size: 10px; letter-spacing: 0.08em; }
+}
+
+/* ============================================================
    FEATURED CEREMONY CAROUSEL — Added Jun 2026 (Home C)
    4-slide marquee at the top of browse. Slides reuse the detail-hero
    film-led CSS (backdrop + dark gradient + content); crossfade like the

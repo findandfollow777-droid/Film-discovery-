@@ -45,6 +45,25 @@
 
   <!-- Compact Range View (default) -->
   <section id="compact-view" class="view-section">
+
+    <!-- Featured ceremony carousel (Home C) — 4-slide marquee, JS-rendered. -->
+    <div id="featured-carousel" class="featured-carousel"></div>
+
+    <!-- Festival quick-entry rail (Home B) — colour-coded one-tap entry per
+         festival. Mirrors the festival tabs' active state via switchFestival(). -->
+    <nav class="festival-rail" aria-label="Jump to festival">
+      <button class="fest-tile active" type="button" data-festival="oscar"><span class="og og-statuette fest-tile-glyph"></span><span class="fest-tile-name">Oscars</span></button>
+      <button class="fest-tile" type="button" data-festival="bafta"><span class="og og-mask fest-tile-glyph"></span><span class="fest-tile-name">BAFTA</span></button>
+      <button class="fest-tile" type="button" data-festival="gg"><span class="og og-globe fest-tile-glyph"></span><span class="fest-tile-name">Golden Globe</span></button>
+      <button class="fest-tile" type="button" data-festival="cannes"><span class="og og-palm fest-tile-glyph"></span><span class="fest-tile-name">Cannes</span></button>
+      <button class="fest-tile" type="button" data-festival="venice"><span class="og og-lion fest-tile-glyph"></span><span class="fest-tile-name">Venice</span></button>
+      <button class="fest-tile" type="button" data-festival="berlin"><span class="og og-bear fest-tile-glyph"></span><span class="fest-tile-name">Berlin</span></button>
+    </nav>
+
+    <!-- Per-festival identity banner (JS-rendered) — glyph + accent name + descriptor.
+         Rebuilt on every festival switch via renderFestivalBanner() in loadYearStrips(). -->
+    <div id="festival-banner"></div>
+
     <div class="section-label">BROWSE BY YEAR</div>
     <div id="year-strips-container">
       <!-- Populated by JS -->
