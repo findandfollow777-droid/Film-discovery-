@@ -5259,30 +5259,45 @@ html, body {
   background: rgba(var(--accent-rgb), 0.06);
 }
 
-/* --- Popup wrapper (in-flow, max-height anim) ---
-   Mosaic region is position:absolute over the same in-flow zone, so the
-   wrap needs its own stacking context above z-index 0 + a solid base
-   background to hide blurred posters bleeding through during the
-   max-height transition. */
+/* --- Popup wrapper (fixed centred modal + backdrop) — Jun 21, 2026 ---
+   Was an in-flow max-height accordion: scrolled down to the Stream tab,
+   "Edit services" expanded off-screen near the top with no feedback. Now a
+   viewport-fixed flex-centre overlay; the wrap's own background is the
+   backdrop scrim, the inner .discover-popup is the centred panel. Driven by
+   the same .discover-popup-wrap--open toggle, so no JS change. */
 .discover-popup-wrap {
-  position: relative;
-  z-index: 5;
-  background: var(--nebula-dark);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.28s ease, opacity 0.2s;
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(var(--space-black-rgb), 0.6);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 .discover-popup-wrap--open {
-  max-height: 460px;
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 .discover-popup {
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
   background: var(--nebula-dark);
-  border-bottom: 1px solid rgba(var(--accent-rgb), 0.2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-dramatic);
+  transform: scale(0.98);
+  transition: transform 0.2s ease;
+}
+.discover-popup-wrap--open .discover-popup {
+  transform: scale(1);
 }
 
 /* --- Popup head --- */
