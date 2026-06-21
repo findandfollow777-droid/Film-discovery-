@@ -175,13 +175,176 @@ body::after {
   display: inline-block;
 }
 
+/* ============================================================
+   FESTIVAL QUICK-ENTRY RAIL — Added Jun 8 2026 (Home B)
+   Six colour-coded tiles, one-tap entry per festival. --tile-rgb is the
+   festival accent (border + faint wash + name); active tile is emphasised
+   to mirror the active festival tab. All colour via tokens (Rule #12).
+   ============================================================ */
+.festival-rail {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.fest-tile {
+  --tile-rgb: var(--accent-gold-rgb);   /* overridden per festival below */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 10px;
+  border: 1px solid rgba(var(--tile-rgb), 0.4);
+  background: rgba(var(--tile-rgb), 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.fest-tile:hover {
+  transform: translateY(-3px);
+  background: rgba(var(--tile-rgb), 0.1);
+}
+
+/* Active tile = stronger border + wash + glow → mirrors the active festival tab. */
+.fest-tile.active {
+  border-color: rgba(var(--tile-rgb), 0.9);
+  background: rgba(var(--tile-rgb), 0.14);
+  box-shadow: 0 0 18px rgba(var(--tile-rgb), 0.18);
+}
+
+.fest-tile-glyph {
+  width: 30px;
+  height: 30px;
+  /* iconic award glyphs are baked-colour SVGs → flatten to a neutral silver so
+     all six read uniformly; the festival accent is carried by the name/border/wash. */
+  filter: brightness(0) saturate(100%) invert(82%);
+}
+
+.fest-tile-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(var(--tile-rgb));   /* festival accent */
+}
+
+/* Per-festival accent (--fest-gg alias from Build B resolves the gg tile). */
+.fest-tile[data-festival="oscar"]  { --tile-rgb: var(--fest-oscar-rgb); }
+.fest-tile[data-festival="bafta"]  { --tile-rgb: var(--fest-bafta-rgb); }
+.fest-tile[data-festival="gg"]     { --tile-rgb: var(--fest-gg-rgb); }
+.fest-tile[data-festival="cannes"] { --tile-rgb: var(--fest-cannes-rgb); }
+.fest-tile[data-festival="venice"] { --tile-rgb: var(--fest-venice-rgb); }
+.fest-tile[data-festival="berlin"] { --tile-rgb: var(--fest-berlin-rgb); }
+
+/* ============================================================
+   FEATURED CEREMONY CAROUSEL — Added Jun 2026 (Home C)
+   4-slide marquee at the top of browse. Slides reuse the detail-hero
+   film-led CSS (backdrop + dark gradient + content); crossfade like the
+   detail carousel. Each slide is colour-washed by its festival (reuses the
+   Build-B --fest-tint-rgb hook on .hero-backdrop::after). Tokens only.
+   ============================================================ */
+.featured-carousel {
+  margin-bottom: 40px;
+}
+
+.featured-carousel-inner {
+  position: relative;
+}
+
+.featured-track {
+  display: grid;            /* slides stack in one cell → crossfade, equal height */
+  min-height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.featured-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  cursor: pointer;
+}
+
+.featured-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reuse the film-led hero, sized to the marquee (no standalone margin). */
+.featured-slide .hero-film-led {
+  height: 100%;
+  margin-bottom: 0;
+  border-radius: 16px;
+}
+
+.featured-slide:hover .hero-headline {
+  text-decoration-line: underline;
+  text-decoration-color: rgba(var(--accent-gold-rgb), 0.5);
+  text-underline-offset: 4px;
+}
+
+.featured-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+/* Per-festival colour wash on each slide's backdrop (reuses Build-B mechanism). */
+.featured-slide[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+.featured-slide[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+.featured-slide[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+.featured-slide[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+.featured-slide[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+.featured-slide[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
+
+/* Dots below the marquee. The latest/live slide's dot reads cyan + a halo. */
+.featured-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.featured-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--muted-silver-rgb), 0.45);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.featured-dot:hover { transform: scale(1.2); }
+.featured-dot.is-active { background: var(--accent-gold); }
+
+.featured-dot.is-latest {
+  background: rgba(var(--accent-cyan-rgb), 0.5);
+}
+
+.featured-dot.is-latest.is-active {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(var(--accent-cyan-rgb), 0.7);
+}
+
 /* ===== YEAR STRIPS ===== */
 .year-strip {
   display: grid;
-  grid-template-columns: 120px 220px 1fr 140px;
-  gap: 20px;
+  grid-template-columns: 140px 300px 1fr 150px;  /* year 120→140 (clears 4-digit year), backdrop 220→300 */
+  gap: 28px;                                       /* 20→28 — real clearance year↔backdrop */
   align-items: center;
-  padding: 16px;
+  padding: 18px;
   margin-bottom: 16px;
   background: rgba(var(--nebula-dark-rgb), 0.4);
   border-radius: 12px;
@@ -199,10 +362,11 @@ body::after {
 
 .year-number {
   font-family: 'Orbitron', sans-serif;
-  font-size: 48px;
+  font-size: 48px;            /* fits the 140px track (4-digit year ≈ 134px); nowrap below is the safety */
   font-weight: 900;
   color: var(--film-white);
   line-height: 1;
+  white-space: nowrap;        /* never wrap — keeps the year on one line in its track */
 }
 
 /* Strip backdrop box (Home A — Jun 8 2026). The year's top-winning film backdrop
@@ -210,8 +374,8 @@ body::after {
    gradient (no "Backdrop" text). ::after vignette darkens the year-side edge so
    the image blends cinematically toward the year column. */
 .strip-visual {
-  width: 220px;
-  height: 120px;
+  width: 300px;               /* matches the new 300px track */
+  height: 150px;             /* up from 120 — image-forward, anchors the band */
   background-color: var(--cosmic-blue);
   background-image: linear-gradient(135deg, rgba(var(--cosmic-blue-rgb), 0.95), rgba(var(--nebula-dark-rgb), 0.95));
   background-size: cover;
@@ -230,17 +394,17 @@ body::after {
 }
 
 .strip-headline {
-  font-size: 16px;
+  font-size: 20px;            /* up from 16 — the content carries the strip now */
   font-weight: 500;
   color: var(--film-white);
-  line-height: 1.4;
+  line-height: 1.25;
 }
 
 .strip-stats {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 11px;
+  gap: 7px;                   /* up from 6 — lets the column breathe */
+  font-size: 12px;            /* up from 11 */
   color: var(--muted-silver);
   text-align: right;
   font-family: 'Orbitron', sans-serif;
@@ -1280,6 +1444,14 @@ body::after {
     padding: 0 20px;
   }
 
+  .festival-rail {
+    grid-template-columns: repeat(3, 1fr);   /* 6 → 3×2 */
+  }
+
+  .featured-track {
+    min-height: 360px;
+  }
+
   .header-center h1 {
     font-size: 24px;
   }
@@ -1289,7 +1461,7 @@ body::after {
   }
 
   .year-strip {
-    grid-template-columns: 100px 180px 1fr;
+    grid-template-columns: 120px 220px 1fr;  /* scaled-down version of the new desktop look */
   }
 
   .strip-stats {
@@ -1297,12 +1469,12 @@ body::after {
   }
 
   .strip-visual {
-    width: 180px;
-    height: 100px;
+    width: 220px;
+    height: 120px;
   }
 
   .year-number {
-    font-size: 36px;
+    font-size: 38px;           /* ~134px→~106px year, clears the 120px track */
   }
 
   .hero-duel {
@@ -1392,6 +1564,14 @@ body::after {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .festival-rail {
+    grid-template-columns: repeat(2, 1fr);   /* 3 → 2×3 */
+  }
+
+  .featured-track {
+    min-height: 300px;
+  }
+
   .year-strip {
     grid-template-columns: 1fr;
     text-align: left;
@@ -1399,7 +1579,11 @@ body::after {
 
   .strip-visual {
     width: 100%;
-    height: 140px;
+    height: 160px;             /* image-forward in single-column too */
+  }
+
+  .strip-headline {
+    font-size: 18px;
   }
 
   .hero-film-led .hero-year {
