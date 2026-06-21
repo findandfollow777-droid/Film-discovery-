@@ -7565,47 +7565,118 @@ html, body {
 .disco-stream-grid-label,
 .disco-stream-addmore-label { margin-top: 4px; }
 
-/* 3. Service-tile grid — 6-across monogram cells. Reuses .service-tile (state,
-   tokens, orange .is-on); overrides its row layout into a compact stacked tile. */
+/* 3. Service-tile grid — large standalone TMDB logos, NO container box.
+   Revised Jun 21, 2026: the logo stands alone (~84px square); selection is
+   shown by colour-vs-greyscale on the logo itself, not a box. Name reveals on
+   hover only; count always visible. The shared .service-tile box/border/glow
+   (components/discover-components.css) is neutralised in BOTH states via the
+   #watchServiceGrid id (ID specificity beats the component's class rules).
+   Shared .service-tile and Profile are untouched. */
 .disco-service-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   margin-bottom: 16px;
+  /* Cap at ~2 rows of the taller 84px tiles; ≤~10 services never scrolls,
+     heavier profiles scroll internally instead of overflowing the panel. */
+  max-height: 300px;
+  overflow-y: auto;
 }
-.disco-service-tile {
+.disco-service-grid::-webkit-scrollbar { width: 6px; }
+.disco-service-grid::-webkit-scrollbar-thumb {
+  background: rgba(var(--axis), 0.4);
+  border-radius: var(--radius-pill);
+}
+
+/* Tile — boxless in every state; just logo + name (hover) + count. */
+#watchServiceGrid .disco-service-tile {
   flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  aspect-ratio: 1.4 / 1;
+  align-items: center;
+  justify-content: flex-start;
+  aspect-ratio: auto;
   gap: 4px;
-  padding: 7px 6px;
+  padding: 6px 4px;
   text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-.disco-service-mono {           /* monogram replaces the brand logo (IP-safe) */
+#watchServiceGrid .disco-service-tile.is-on {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+#watchServiceGrid .disco-service-tile:hover,
+#watchServiceGrid .disco-service-tile.is-on:hover {
+  /* subtle interactive hint, still no permanent box */
+  background: rgba(var(--muted-silver-rgb), 0.05);
+  border: none;
+}
+
+/* Logo — large square, fills the column up to 84px; never distorted. */
+#watchServiceGrid .disco-service-tile .disco-service-logo-img {
   width: 100%;
+  max-width: 84px;
+  aspect-ratio: 1 / 1;
   height: auto;
-  flex: 1;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  background: transparent;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+/* Monogram fallback (no logo_path) — same large square, greyable, no box. */
+#watchServiceGrid .disco-service-tile .disco-service-mono {
+  width: 100%;
+  max-width: 84px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  margin: 0 auto;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
   background: rgba(var(--axis), 0.12);
   color: var(--axis-hex);
-  font: 700 15px var(--font-display);
+  font: 700 26px var(--font-display);
   letter-spacing: 0.03em;
+  transition: filter 0.2s ease, opacity 0.2s ease;
 }
-.disco-service-tile .service-name {
-  font-size: 9.5px;
+/* OFF state — greyed but clearly legible & clickable (logo + monogram alike). */
+#watchServiceGrid .disco-service-tile:not(.is-on) .disco-service-logo-img,
+#watchServiceGrid .disco-service-tile:not(.is-on) .disco-service-mono {
+  filter: grayscale(1) brightness(0.55);
+  opacity: 0.55;
+}
+
+/* Name — hidden by default, fades in on tile hover. */
+#watchServiceGrid .disco-service-tile .service-name {
+  font: 500 9.5px var(--font-body);
   line-height: 1.1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.2s ease, max-height 0.2s ease;
 }
-.disco-service-tile .service-count {
+#watchServiceGrid .disco-service-tile:hover .service-name {
+  opacity: 1;
+  max-height: 24px;
+}
+
+/* Count — always visible; dims to muted on OFF tiles. */
+#watchServiceGrid .disco-service-tile .service-count {
   margin: 0;
   font-size: 9.5px;
+  color: var(--muted-silver);
+  opacity: 0.85;
+}
+#watchServiceGrid .disco-service-tile:not(.is-on) .service-count {
+  color: var(--ghost-gray);
+  opacity: 0.6;
 }
 
 /* 4. Add-more chips */
@@ -7637,9 +7708,9 @@ html, body {
   font-style: italic;
 }
 
-/* Mobile — 6-across is too tight on a narrow panel */
+/* Mobile — fewer columns so the larger logos keep room on a narrow panel */
 @media (max-width: 650px) {
-  .disco-service-grid { grid-template-columns: repeat(4, 1fr); }
+  .disco-service-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* END OF STYLES */

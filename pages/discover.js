@@ -6156,10 +6156,23 @@ function buildWatchContent(root) {
     tile.setAttribute('aria-pressed', 'true');
     tile.dataset.value = JSON.stringify({ type: 'provider', id: p.id, name: p.name, region: forRegion });
 
-    var mono = document.createElement('span');
-    mono.className = 'service-logo disco-service-mono';
-    mono.textContent = streamMonogram(p.name);
-    tile.appendChild(mono);
+    // Real TMDB provider logo (matches Profile); monogram only as fallback
+    // when the provider carries no logo_path (e.g. a profile id absent from
+    // this region's results) — never render a broken <img>.
+    var logoUrl = p.logo ? OrbitUtils.tmdbImageUrl(p.logo, 'w92') : null;
+    if (logoUrl) {
+      var img = document.createElement('img');
+      img.className = 'service-logo disco-service-logo-img';
+      img.src = logoUrl;
+      img.alt = p.name;
+      img.loading = 'lazy';
+      tile.appendChild(img);
+    } else {
+      var mono = document.createElement('span');
+      mono.className = 'service-logo disco-service-mono';
+      mono.textContent = streamMonogram(p.name);
+      tile.appendChild(mono);
+    }
 
     var name = document.createElement('span');
     name.className = 'service-name';
@@ -6240,14 +6253,18 @@ function buildWatchContent(root) {
         if (regionSelect.value !== forRegion) return;   // stale response guard
         var all = (data && data.results) || [];
         var nameById = {};
-        all.forEach(function (p) { nameById[p.provider_id] = p.provider_name; });
+        var logoById = {};                              // logo_path comes in this same fetch — keep it
+        all.forEach(function (p) {
+          nameById[p.provider_id] = p.provider_name;
+          logoById[p.provider_id] = p.logo_path;
+        });
 
         grid.innerHTML = '';
         if (profileIds.length === 0) {
           grid.innerHTML = '<p class="disco-stream-empty">No services on your Profile yet — add some via “Edit services”.</p>';
         } else {
           profileIds.forEach(function (id) {
-            grid.appendChild(makeServiceTile({ id: id, name: nameById[id] || ('Service ' + id) }, forRegion));
+            grid.appendChild(makeServiceTile({ id: id, name: nameById[id] || ('Service ' + id), logo: logoById[id] }, forRegion));
           });
           fetchCounts(forRegion);
         }
