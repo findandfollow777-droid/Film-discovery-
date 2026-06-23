@@ -386,6 +386,12 @@ function getCeremonyNumber(festival, year) {
 // at all → "{year} {Festival}".
 function computedHeadline(stats, festival, year) {
   const top = stats && stats.mostWins;
+  // Jury festivals (Cannes/Venice/Berlin): headline is the flagship film (top prize),
+  // never "leads with N wins". featuredFilmFor falls back to most-wins internally if no flagship.
+  if (!ACADEMY_STYLE.has(festival)) {
+    const ff = featuredFilmFor(festival, year, stats);
+    if (ff && ff.title) return ff.title;
+  }
   if (top && top.count >= 2) return `${top.title} leads with ${top.count} wins`;
   if (top && top.title) return top.title;
   return `${year} ${festivalDisplayName(festival)}`;
@@ -430,8 +436,9 @@ async function loadYearStrips() {
     const statsHtml = stripStats.map(s =>
       `<span class="strip-stat">${escapeHtml(s)}</span>`
     ).join('');
-    // Top-winning film's tmdb_id drives the strip backdrop (lazy-loaded below).
-    const topTmdbId = (stats && stats.mostWins && stats.mostWins.tmdbId) || 0;
+    // Flagship film (jury) / top-winning film (Academy) drives the strip backdrop
+    // (lazy-loaded below). Mirrors the hero so the two never disagree.
+    const topTmdbId = ceremonyBackdropId(currentFestival, year, stats) || 0;
     return `
       <div class="year-strip" data-year="${year}">
         <div class="year-number">${year}</div>
@@ -597,6 +604,17 @@ function featuredFilmFor(festival, year, stats) {
   }
   const top = stats && stats.mostWins;
   return top && top.title ? { title: top.title, tmdbId: top.tmdbId || 0 } : null;
+}
+
+// Backdrop tmdbId for a ceremony: flagship film for jury festivals, most-wins for
+// Academy-style. Falls back to most-wins if no flagship. Mirrors the headline rule
+// (computedHeadline) so hero + strips surface the same film and can't disagree.
+function ceremonyBackdropId(festival, year, stats) {
+  if (!ACADEMY_STYLE.has(festival)) {
+    const ff = featuredFilmFor(festival, year, stats);
+    if (ff && ff.tmdbId) return ff.tmdbId;
+  }
+  return (stats && stats.mostWins && stats.mostWins.tmdbId) ? stats.mostWins.tmdbId : null;
 }
 
 // Fill a slide's headline + ceremony line + backdrop (lazy per festival). No
@@ -769,7 +787,7 @@ async function renderHero(year) {
   let hero = editorial;
   if (!hero) {
     const top = stats && stats.mostWins;
-    let backdropTmdbId = top && top.tmdbId ? top.tmdbId : null;
+    let backdropTmdbId = ceremonyBackdropId(fest, yr, stats);
     let heroType = 'film-led';
     if (backdropTmdbId) {
       const path = await getTmdbBackdropPath(backdropTmdbId);
