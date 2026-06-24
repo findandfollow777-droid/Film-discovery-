@@ -5052,575 +5052,379 @@ function buildRatingsContentSection(root) {
 // 6. REGION & LANGUAGE SECTION
 // =============================================
 
-function buildRegionLanguageContent(root) {
-  root.appendChild(makeSectionLabel("Production Region"));
+/* ============================================================
+   REGION & LANGUAGE DATA — Variant-A three-track rebuild
+   (Discovery redesign PROMPT 2a — STRUCTURE ONLY, 2026-06-23)
+   Module-scope so both the builder and collectLabelsForSection's
+   read site share one source of truth. regionName() resolves any
+   emitted region code to a display label (country grid name, then
+   union-only group-code name, else the raw code). NO live counts
+   anywhere — those are PROMPT 2b.
+   ============================================================ */
+const REGION_COUNTRIES = [
+  { name:"United States", code:"US", lang:"en" }, { name:"United Kingdom", code:"GB", lang:"en" },
+  { name:"France", code:"FR", lang:"fr" }, { name:"Germany", code:"DE", lang:"de" },
+  { name:"Italy", code:"IT", lang:"it" }, { name:"Spain", code:"ES", lang:"es" },
+  { name:"Japan", code:"JP", lang:"ja" }, { name:"South Korea", code:"KR", lang:"ko" },
+  { name:"China", code:"CN", lang:"zh" }, { name:"Hong Kong", code:"HK", lang:"cn" },
+  { name:"Taiwan", code:"TW", lang:"zh" }, { name:"India", code:"IN", lang:"hi" },
+  { name:"Canada", code:"CA", lang:"en" }, { name:"Australia", code:"AU", lang:"en" },
+  { name:"New Zealand", code:"NZ", lang:"en" }, { name:"Ireland", code:"IE", lang:"en" },
+  { name:"Brazil", code:"BR", lang:"pt" }, { name:"Mexico", code:"MX", lang:"es" },
+  { name:"Finland", code:"FI", lang:"fi" }, { name:"Argentina", code:"AR", lang:"es" },
+  { name:"Belgium", code:"BE", lang:"fr" }, { name:"Portugal", code:"PT", lang:"pt" },
+  { name:"Sweden", code:"SE", lang:"sv" }, { name:"Denmark", code:"DK", lang:"da" },
+  { name:"Norway", code:"NO", lang:"no" }, { name:"Russia", code:"RU", lang:"ru" },
+  { name:"Poland", code:"PL", lang:"pl" },
+]; // 27
 
-  /* ============================================================
-     REGION MATCH TOGGLE — Added 2026-05-11
-     Any (OR) = movies produced by ANY selected country (pipe-separated)
-     All (AND) = movies produced by ALL selected countries (co-productions)
-     Mirrors the Genres tab toggle pattern (state.genreLogic).
-     ============================================================ */
-  const regionToggleContainer = document.createElement("div");
-  regionToggleContainer.style.cssText = `
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 12px;
-    background: rgba(15, 23, 41, 0.5);
-    border-radius: 8px;
-  `;
+const REGION_GROUPS = {
+  "East Asian":       ["JP","KR","CN","HK","TW"],
+  "Scandinavian":     ["SE","DK","NO","FI"],
+  "Latin American":   ["MX","AR","BR","CL"],
+  "South Asian":      ["IN","PK","BD","LK"],
+  "Iberian":          ["ES","PT"],
+  "Eastern European": ["RU","PL","CZ","HU","RO","UA"],
+  "Francophone":      ["FR","BE","CA","CH"],
+  "Anglosphere":      ["US","GB","CA","AU","NZ","IE"],
+}; // 8
 
-  const regionToggleLabel = document.createElement("span");
-  regionToggleLabel.textContent = "Match:";
-  regionToggleLabel.style.cssText = "font-size: 13px; font-weight: 600; color: var(--accent-cyan);";
-  regionToggleContainer.appendChild(regionToggleLabel);
+const REGION_LANGUAGES = [
+  {name:"English",code:"en"},{name:"French",code:"fr"},{name:"German",code:"de"},{name:"Spanish",code:"es"},
+  {name:"Italian",code:"it"},{name:"Japanese",code:"ja"},{name:"Korean",code:"ko"},{name:"Mandarin",code:"zh"},
+  {name:"Cantonese",code:"cn"},{name:"Hindi",code:"hi"},{name:"Russian",code:"ru"},{name:"Portuguese",code:"pt"},
+  {name:"Arabic",code:"ar"},{name:"Swedish",code:"sv"},{name:"Danish",code:"da"},{name:"Norwegian",code:"no"},
+  {name:"Finnish",code:"fi"},{name:"Dutch",code:"nl"},{name:"Polish",code:"pl"},{name:"Turkish",code:"tr"},
+  {name:"Thai",code:"th"},{name:"Indonesian",code:"id"},{name:"Vietnamese",code:"vi"},
+]; // 23
 
-  const regionOrBtn = document.createElement("button");
-  regionOrBtn.type = "button";
-  regionOrBtn.textContent = "Any (OR)";
-  regionOrBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.regionLogic === "or" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.regionLogic === "or" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
+// Display names for union-only group codes (so every emitted region code has a real label):
+const REGION_EXTRA_NAMES = { CL:"Chile", PK:"Pakistan", BD:"Bangladesh", LK:"Sri Lanka",
+  CZ:"Czechia", HU:"Hungary", RO:"Romania", UA:"Ukraine", CH:"Switzerland" };
 
-  const regionAndBtn = document.createElement("button");
-  regionAndBtn.type = "button";
-  regionAndBtn.textContent = "All (AND)";
-  regionAndBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.regionLogic === "and" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.regionLogic === "and" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
+function regionName(code) {
+  const c = REGION_COUNTRIES.find(r => r.code === code);
+  if (c) return c.name;
+  if (REGION_EXTRA_NAMES[code]) return REGION_EXTRA_NAMES[code];
+  return code;
+}
 
-  function refreshCountIfRegionsSelected() {
-    const hasRegions = state.filters.some(f => f.section === "regionLanguage" && f.value && f.value.type === "region");
-    if (hasRegions && typeof fetchFilmCount === "function") {
-      try { fetchFilmCount(); } catch (e) {}
-    }
-  }
+/* ============================================================
+   REGION LIVE COUNTS — PROMPT 2b (added 2026-06-23)
+   Honest /discover total_results counts, MIRRORING the Stream
+   pattern (getStreamCounts / saveStreamCounts / formatStreamCount /
+   fetchCounts) with Region-scoped helpers — Stream's own functions
+   are NOT called. A single sessionStorage object (orbit_region_counts)
+   keyed by probe-code: a country code, a pipe-joined group union, or
+   a live-selection signature. "—" on failure — NEVER 0, never
+   fabricated. Group cards always probe the OR union regardless of the
+   AND/OR toggle (a card advertises how much of that cinema exists —
+   an inherently OR question). Probes go through OrbitUtils.tmdbFetch,
+   so the API key is never inlined.
 
-  regionOrBtn.addEventListener("click", () => {
-    state.regionLogic = "or";
-    regionOrBtn.style.background = "var(--accent-cyan)";
-    regionOrBtn.style.color = "#000";
-    regionAndBtn.style.background = "transparent";
-    regionAndBtn.style.color = "var(--film-white)";
-    refreshCountIfRegionsSelected();
-  });
+   Storage keys (Rule 8):
+   - orbit_region_counts (sessionStorage) — { probeKey: total_results }
 
-  regionAndBtn.addEventListener("click", () => {
-    state.regionLogic = "and";
-    regionAndBtn.style.background = "var(--accent-cyan)";
-    regionAndBtn.style.color = "#000";
-    regionOrBtn.style.background = "transparent";
-    regionOrBtn.style.color = "var(--film-white)";
-    refreshCountIfRegionsSelected();
-  });
-
-  regionToggleContainer.appendChild(regionOrBtn);
-  regionToggleContainer.appendChild(regionAndBtn);
-  root.appendChild(regionToggleContainer);
-
-  const regionRow = document.createElement("div");
-  regionRow.className = "input-row";
-  const regionInput = document.createElement("input");
-  regionInput.type = "text";
-  regionInput.id = "regionInput";
-  regionInput.placeholder = "Search for country...";
-  regionInput.autocomplete = "off";
-  regionRow.appendChild(regionInput);
-  root.appendChild(regionRow);
-  
-  const regionContainer = document.createElement("div");
-  regionContainer.id = "selectedRegionContainer";
-  regionContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  root.appendChild(regionContainer);
-
-  /* Multi-region append helper — 2026-05-11 (hydration support 2026-05-11).
-     Dedupes by data-region-code. Smart language link fires only on the
-     first region added; pass { skipSmartLink: true } during hydration to
-     avoid re-toggling English Only when restoring chips from state.
-     Remove mutates state.filters immediately and re-renders the sidebar
-     (idempotent: filter() is a no-op for chips not yet committed). */
-  function addRegionChip(item, opts) {
-    if (!item || !item.code) return;
-    if (regionContainer.querySelector('[data-region-code="' + item.code + '"]')) return;
-
-    const skipSmartLink = opts && opts.skipSmartLink;
-    const isFirstRegion = regionContainer.children.length === 0;
-
-    const chip = document.createElement("div");
-    chip.dataset.regionCode = item.code;
-    chip.style.cssText = `
-      background: rgba(111, 210, 255, 0.15);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 999px;
-      padding: 6px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-    `;
-
-    const labelSpan = document.createElement("span");
-    labelSpan.textContent = item.name;
-    chip.appendChild(labelSpan);
-
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.textContent = "✕";
-    removeBtn.style.cssText = "background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;";
-    removeBtn.addEventListener("click", () => {
-      chip.remove();
-      state.filters = state.filters.filter(function (f) {
-        return !(f.section === "regionLanguage" && f.value && f.value.type === "region" && f.value.code === item.code);
-      });
-      if (typeof updateUIFromState === "function") {
-        try { updateUIFromState(); } catch (e) {}
-      }
-    });
-    chip.appendChild(removeBtn);
-
-    regionContainer.appendChild(chip);
-
-    if (isFirstRegion && !skipSmartLink) {
-      handleRegionLanguageLink(item.code);
-    }
-  }
-
-  /* Hydrate region chips from state.filters on every panel open — 2026-05-11.
-     Without this, switching tabs and returning loses the visible chips even
-     though state.filters still holds the selections. */
-  state.filters
-    .filter(function (f) {
-      return f.section === "regionLanguage" && f.value && f.value.type === "region";
+   API volume (Rule 9): a first, uncached panel open probes 8 group
+   unions + 27 countries + 1 live footer (~36 cached /discover calls);
+   reopening in the same session paints entirely from cache (0 calls).
+   ============================================================ */
+var _regionCountCache = null;   // { probeKey: total_results } — survives the panel wipe
+function getRegionCounts() {
+  if (_regionCountCache) return _regionCountCache;
+  var data = {};
+  try {
+    var raw = sessionStorage.getItem('orbit_region_counts');
+    if (raw) data = JSON.parse(raw) || {};
+  } catch (e) { data = {}; }
+  _regionCountCache = data;
+  return _regionCountCache;
+}
+function saveRegionCounts() {
+  try {
+    sessionStorage.setItem('orbit_region_counts', JSON.stringify(_regionCountCache || {}));
+  } catch (e) {}
+}
+function formatRegionCount(n) {
+  return n > 9999 ? '9,999+' : n.toLocaleString();
+}
+/* One cached /discover/movie probe. Resolves to total_results, or null on
+   failure / helper-unavailable (the caller then leaves the honest "—").
+   Cache-first: a seen key resolves with NO network call. */
+function regionCountProbe(key, params) {
+  var cache = getRegionCounts();
+  if (typeof cache[key] === 'number') return Promise.resolve(cache[key]);
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return Promise.resolve(null);
+  return OrbitUtils.tmdbFetch('/discover/movie', params)
+    .then(function (data) {
+      var n = (data && typeof data.total_results === 'number') ? data.total_results : null;
+      if (n === null) return null;             // failure → honest "—"
+      cache[key] = n;
+      saveRegionCounts();
+      return n;
     })
-    .forEach(function (f) {
-      addRegionChip({ code: f.value.code, name: f.value.name }, { skipSmartLink: true });
-    });
-
-  const regions = [
-    { code: "US", name: "🇺🇸 United States" },
-    { code: "GB", name: "🇬🇧 United Kingdom" },
-    { code: "FR", name: "🇫🇷 France" },
-    { code: "DE", name: "🇩🇪 Germany" },
-    { code: "JP", name: "🇯🇵 Japan" },
-    { code: "KR", name: "🇰🇷 South Korea" },
-    { code: "CN", name: "🇨🇳 China" },
-    { code: "IN", name: "🇮🇳 India" },
-    { code: "IT", name: "🇮🇹 Italy" },
-    { code: "ES", name: "🇪🇸 Spain" },
-    { code: "CA", name: "🇨🇦 Canada" },
-    { code: "AU", name: "🇦🇺 Australia" }
-  ];
-  
-  regionInput.addEventListener("input", () => {
-    const query = regionInput.value.toLowerCase();
-    const filtered = regions.filter(r => r.name.toLowerCase().includes(query) || r.code.toLowerCase().includes(query));
-    
-    if (filtered.length > 0 && query.length > 0) {
-      renderRegionSuggestions(filtered.slice(0, 5));
-    } else {
-      hideRegionSuggestions();
-    }
+    .catch(function () { return null; });       // network error → honest "—"
+}
+/* Paint a count slot from a probe; honest "—" stays on failure; detached
+   nodes (panel rebuilt mid-flight) are skipped. */
+function paintRegionCount(slot, key, params) {
+  regionCountProbe(key, params).then(function (n) {
+    if (n === null) return;
+    if (slot && slot.isConnected) slot.textContent = formatRegionCount(n);
   });
-  
-  function renderRegionSuggestions(items) {
-    hideRegionSuggestions();
-    const dropdown = document.createElement("div");
-    dropdown.id = "regionDropdown";
-    dropdown.style.cssText = `
-      position: absolute;
-      background: rgba(10, 14, 26, 0.98);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      margin-top: 4px;
-      max-height: 200px;
-      overflow-y: auto;
-      z-index: 1000;
-    `;
-    
-    items.forEach(item => {
-      const opt = document.createElement("div");
-      opt.style.cssText = "padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(0, 217, 255, 0.1); transition: background 0.15s;";
-      opt.textContent = item.name;
-      opt.onmouseover = () => opt.style.background = "rgba(0, 217, 255, 0.1)";
-      opt.onmouseout = () => opt.style.background = "transparent";
-      opt.onclick = () => {
-        regionInput.value = "";
-        hideRegionSuggestions();
-        addRegionChip(item);
-      };
-      dropdown.appendChild(opt);
-    });
-    
-    regionRow.appendChild(dropdown);
-  }
-  
-  // Country-to-language mapping
-  const countryLanguageMap = {
-    "US": "en", "GB": "en", "CA": "en", "AU": "en", "NZ": "en", "IE": "en", // English-speaking
-    "FR": "fr", "BE": "fr", // French
-    "DE": "de", "AT": "de", // German
-    "ES": "es", "MX": "es", "AR": "es", // Spanish
-    "IT": "it", // Italian
-    "JP": "ja", // Japanese
-    "KR": "ko", // Korean
-    "CN": "zh", "TW": "zh", "HK": "zh", // Chinese
-    "IN": "hi", // Hindi (India has many, but Hindi is primary)
-    "RU": "ru", // Russian
-    "BR": "pt", "PT": "pt", // Portuguese
-    "SE": "sv", // Swedish
-    "DK": "da", // Danish
-    "NO": "no", // Norwegian
-    "FI": "fi", // Finnish
-    "NL": "nl", // Dutch
-    "PL": "pl", // Polish
-    "TR": "tr", // Turkish
-    "TH": "th", // Thai
-    "ID": "id", // Indonesian
-    "VN": "vi"  // Vietnamese
-  };
-  
-  const languageNames = {
-    "en": "English", "fr": "French", "de": "German", "es": "Spanish",
-    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Chinese",
-    "hi": "Hindi", "ru": "Russian", "pt": "Portuguese", "ar": "Arabic",
-    "sv": "Swedish", "da": "Danish", "no": "Norwegian", "fi": "Finnish",
-    "nl": "Dutch", "pl": "Polish", "tr": "Turkish", "th": "Thai",
-    "id": "Indonesian", "vi": "Vietnamese"
-  };
-  
-  function handleRegionLanguageLink(countryCode) {
-    const langCode = countryLanguageMap[countryCode];
-    if (!langCode) return;
-    
-    const englishToggle = document.getElementById("englishOnlyToggle");
-    const langSearchSection = document.getElementById("langSearchSection");
-    const langContainer = document.getElementById("selectedLanguageContainer");
-    const toggleKnob = document.getElementById("toggleKnob");
-    const toggleBg = englishToggle?.parentElement?.querySelector('span');
-    
-    if (langCode === "en") {
-      // English-speaking country - ensure English Only is ON
-      if (englishToggle && !englishToggle.checked) {
-        englishToggle.checked = true;
-        sessionStorage.setItem('englishOnlyToggle', 'true');
-        if (toggleBg) toggleBg.style.background = 'var(--accent-cyan)';
-        if (toggleKnob) {
-          toggleKnob.style.transform = 'translateX(24px)';
-          toggleKnob.style.background = 'white';
-        }
-        if (langSearchSection) langSearchSection.style.display = 'none';
-        if (langContainer) langContainer.innerHTML = '';
-      }
-    } else {
-      // Non-English country - turn OFF English Only and set the language
-      if (englishToggle) {
-        englishToggle.checked = false;
-        sessionStorage.setItem('englishOnlyToggle', 'false');
-        if (toggleBg) toggleBg.style.background = 'rgba(255,255,255,0.1)';
-        if (toggleKnob) {
-          toggleKnob.style.transform = 'translateX(0)';
-          toggleKnob.style.background = 'var(--muted-silver)';
-        }
-        if (langSearchSection) langSearchSection.style.display = 'block';
-      }
-      
-      // Auto-select the language
-      const langName = languageNames[langCode] || langCode;
-      if (langContainer) {
-        langContainer.innerHTML = `
-          <div data-lang-code="${langCode}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${langName}</span>
-            <button id="removeLanguage" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeLanguage").onclick = () => {
-          langContainer.innerHTML = "";
-        };
-      }
-    }
-  }
-  
-  function hideRegionSuggestions() {
-    const existing = document.getElementById("regionDropdown");
-    if (existing) existing.remove();
-  }
-  
-  root.appendChild(makeSectionLabel("Original Language"));
-  
-  // English Only Toggle
-  const englishToggleRow = document.createElement("div");
-  englishToggleRow.style.cssText = `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: rgba(0, 217, 255, 0.05);
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    border-radius: 10px;
-    margin-bottom: 12px;
-  `;
-  
-  const toggleLabel = document.createElement("div");
-  toggleLabel.innerHTML = `
-    <span style="font-weight: 600; color: var(--film-white);">English Only</span>
-    <span style="font-size: 11px; color: var(--muted-silver); display: block; margin-top: 2px;">Hollywood, UK, Australian & Canadian cinema</span>
-  `;
-  
-  const toggleSwitch = document.createElement("label");
-  toggleSwitch.style.cssText = `
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-    cursor: pointer;
-  `;
-  toggleSwitch.innerHTML = `
-    <input type="checkbox" id="englishOnlyToggle" style="opacity: 0; width: 0; height: 0;">
-    <span style="
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.1);
-      border-radius: 26px;
-      transition: 0.3s;
-    "></span>
-    <span style="
-      position: absolute;
-      content: '';
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background: var(--muted-silver);
-      border-radius: 50%;
-      transition: 0.3s;
-    " id="toggleKnob"></span>
-  `;
-  
-  englishToggleRow.appendChild(toggleLabel);
-  englishToggleRow.appendChild(toggleSwitch);
-  root.appendChild(englishToggleRow);
+}
 
-  /* ============================================================
-     POPULAR REGIONS — Added May 4, 2026
-     Quick-pick chips below the English Only toggle. Clicking a chip
-     pre-fills the Production Region search input with the country
-     name and triggers the input event so the existing region-search
-     flow renders the suggestion dropdown.
-     ============================================================ */
-  const popularLabel = document.createElement("div");
-  popularLabel.className = "focus-section-label";
-  popularLabel.style.marginTop = "12px";
-  popularLabel.textContent = "POPULAR REGIONS";
-  root.appendChild(popularLabel);
+/* ============================================================
+   REGION & LANGUAGE PANEL — Variant-A three-track builder
+   (rebuilt 2026-06-23, PROMPT 2a — STRUCTURE ONLY)
 
-  const popularGroup = document.createElement("div");
-  popularGroup.className = "chip-group";
-  const popularRegions = [
-    { code: 'US', name: 'United States', label: 'Hollywood' },
-    { code: 'GB', name: 'United Kingdom', label: 'British' },
-    { code: 'FR', name: 'France',         label: 'French' },
-    { code: 'KR', name: 'South Korea',    label: 'Korean' },
-    { code: 'JP', name: 'Japan',          label: 'Japanese' },
-    { code: 'IT', name: 'Italy',          label: 'Italian' },
-    { code: 'HK', name: 'Hong Kong',      label: 'Hong Kong' },
-    { code: 'DE', name: 'Germany',        label: 'German' }
-  ];
-  popularRegions.forEach(r => {
+   Three stacked tracks inside the emerald panel
+   (#oft-panel-region[data-axis="region"]):
+     1. Curated cinema groups (8 cards) + Any/All match toggle
+        (state.regionLogic). Group cards toggle independently of
+        country chips — selecting one emits its full member union.
+     2. Specific countries (27 chips, mono-code disc + name) with a
+        name/code filter input. Independent .on toggle each.
+     3. Original language (23 chips) — SINGLE-SELECT.
+
+   The legacy region->language smart-link, English-Only toggle and
+   the search-dropdown autocompletes are REMOVED; language is fully
+   manual. Read site (collectLabelsForSection case "regionLanguage")
+   is lockstep with this markup. The frozen query builder
+   (case "regionLanguage") is UNTOUCHED — value shapes preserved.
+   NO counts are rendered here (PROMPT 2b).
+   ============================================================ */
+function buildRegionLanguageContent(root) {
+  /* Hydrate current selections from state.filters on every open.
+     Group cards re-light when ALL their member codes are present
+     (this is what restores union-only codes like CL/PK that have no
+     country chip). Country chips re-light per code; language is the
+     single region-language filter of type "language". */
+  const selectedRegionCodes = new Set(
+    state.filters
+      .filter(f => f.section === "regionLanguage" && f.value && f.value.type === "region")
+      .map(f => f.value.code)
+  );
+  const langFilter = state.filters.find(
+    f => f.section === "regionLanguage" && f.value && f.value.type === "language"
+  );
+  const selectedLangCode = langFilter ? langFilter.value.code : null;
+
+  /* ---- TRACK 1 — Curated cinema groups -------------------------- */
+  const groupCard = document.createElement("div");
+  groupCard.className = "region-track region-track--groups";
+
+  const groupHead = document.createElement("div");
+  groupHead.className = "region-track-head";
+  groupHead.appendChild(makeSectionLabel("Quick · curated cinema groups"));
+
+  /* Match toggle (.match-toggle / .opt.on) -> state.regionLogic.
+     Mirrors the Genres tab toggle exactly. */
+  const toggle = document.createElement("div");
+  toggle.className = "match-toggle";
+  const toggleLabel = document.createElement("span");
+  toggleLabel.className = "match-toggle-label";
+  toggleLabel.textContent = "Match";
+  toggle.appendChild(toggleLabel);
+  const anyOpt = document.createElement("button");
+  anyOpt.type = "button"; anyOpt.className = "opt"; anyOpt.dataset.logic = "or";
+  anyOpt.textContent = "Any";
+  const allOpt = document.createElement("button");
+  allOpt.type = "button"; allOpt.className = "opt"; allOpt.dataset.logic = "and";
+  allOpt.textContent = "All";
+  (state.regionLogic === "and" ? allOpt : anyOpt).classList.add("on");
+  anyOpt.addEventListener("click", () => {
+    state.regionLogic = "or";
+    anyOpt.classList.add("on"); allOpt.classList.remove("on");
+  });
+  allOpt.addEventListener("click", () => {
+    state.regionLogic = "and";
+    allOpt.classList.add("on"); anyOpt.classList.remove("on");
+  });
+  toggle.appendChild(anyOpt);
+  toggle.appendChild(allOpt);
+  groupHead.appendChild(toggle);
+  groupCard.appendChild(groupHead);
+
+  const groupGrid = document.createElement("div");
+  groupGrid.className = "region-group-grid";
+  Object.keys(REGION_GROUPS).forEach(groupName => {
+    const codes = REGION_GROUPS[groupName];
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "region-group-card";
+    card.dataset.groupCodes = codes.join(",");
+    const title = document.createElement("span");
+    title.className = "region-group-name";
+    title.textContent = groupName;
+    const sub = document.createElement("span");
+    sub.className = "region-group-sub";
+    sub.textContent = codes.map(regionName).join(" · ");
+    card.appendChild(title);
+    card.appendChild(sub);
+    if (codes.every(c => selectedRegionCodes.has(c))) card.classList.add("on");
+    card.addEventListener("click", () => card.classList.toggle("on"));
+    groupGrid.appendChild(card);
+  });
+  groupCard.appendChild(groupGrid);
+  root.appendChild(groupCard);
+
+  /* ---- TRACK 2 — Specific countries ----------------------------- */
+  const countryCard = document.createElement("div");
+  countryCard.className = "region-track region-track--countries";
+  countryCard.appendChild(makeSectionLabel("Specific countries"));
+
+  const filterRow = document.createElement("div");
+  filterRow.className = "input-row region-filter-row";
+  const filterInput = document.createElement("input");
+  filterInput.type = "text";
+  filterInput.className = "region-country-filter";
+  filterInput.placeholder = "Filter countries…";
+  filterInput.autocomplete = "off";
+  filterRow.appendChild(filterInput);
+  countryCard.appendChild(filterRow);
+
+  const countryGrid = document.createElement("div");
+  countryGrid.className = "region-country-grid";
+  REGION_COUNTRIES.forEach(c => {
     const chip = document.createElement("button");
     chip.type = "button";
-    chip.className = "chip oft-popular-region-chip";
-    chip.dataset.regionCode = r.code;
-    chip.dataset.regionName = r.name;
-    chip.textContent = r.label;
-    chip.addEventListener('click', () => {
-      // 2026-05-11: clicking a Popular Region adds it directly to the
-      // selection (was previously a search-input prefill).
-      addRegionChip({ code: r.code, name: r.label });
-    });
-    popularGroup.appendChild(chip);
+    chip.className = "disco-chip region-country-chip";
+    chip.dataset.regionCode = c.code;
+    chip.dataset.name = c.name;
+    const disc = document.createElement("span");
+    disc.className = "region-disc";
+    disc.textContent = c.code;
+    const nm = document.createElement("span");
+    nm.className = "region-country-name";
+    nm.textContent = c.name;
+    chip.appendChild(disc);
+    chip.appendChild(nm);
+    if (selectedRegionCodes.has(c.code)) chip.classList.add("on");
+    chip.addEventListener("click", () => chip.classList.toggle("on"));
+    countryGrid.appendChild(chip);
   });
-  root.appendChild(popularGroup);
+  countryCard.appendChild(countryGrid);
 
-  // Language search row (hidden when English Only is ON)
-  const langSearchSection = document.createElement("div");
-  langSearchSection.id = "langSearchSection";
-  
-  const langRow = document.createElement("div");
-  langRow.className = "input-row";
-  const langInput = document.createElement("input");
-  langInput.type = "text";
-  langInput.id = "languageInput";
-  langInput.placeholder = "Search for language (Korean, French, Hindi...)";
-  langInput.autocomplete = "off";
-  langRow.appendChild(langInput);
-  langSearchSection.appendChild(langRow);
-  
-  const langContainer = document.createElement("div");
-  langContainer.id = "selectedLanguageContainer";
-  langContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  langSearchSection.appendChild(langContainer);
-  
-  root.appendChild(langSearchSection);
-  
-  // Toggle functionality
-  const englishToggle = toggleSwitch.querySelector('#englishOnlyToggle');
-  const toggleKnob = toggleSwitch.querySelector('#toggleKnob');
-  const toggleBg = toggleSwitch.querySelector('span');
-  
-  // Check sessionStorage for saved state (default to ON)
-  const savedState = sessionStorage.getItem('englishOnlyToggle');
-  const isEnglishOnly = savedState === null ? true : savedState === 'true';
-  
-  function updateToggleUI(isOn) {
-    if (isOn) {
-      toggleBg.style.background = 'var(--accent-cyan)';
-      toggleKnob.style.transform = 'translateX(24px)';
-      toggleKnob.style.background = 'white';
-      langSearchSection.style.display = 'none';
-    } else {
-      toggleBg.style.background = 'rgba(255,255,255,0.1)';
-      toggleKnob.style.transform = 'translateX(0)';
-      toggleKnob.style.background = 'var(--muted-silver)';
-      langSearchSection.style.display = 'block';
-    }
-  }
-  
-  englishToggle.checked = isEnglishOnly;
-  updateToggleUI(isEnglishOnly);
-  
-  englishToggle.addEventListener('change', () => {
-    const isOn = englishToggle.checked;
-    sessionStorage.setItem('englishOnlyToggle', isOn.toString());
-    updateToggleUI(isOn);
-    
-    // Clear any selected language when turning English Only ON
-    if (isOn) {
-      selectedLanguage = null;
-      langContainer.innerHTML = '';
-    }
-  });
-  
-  const languages = [
-    { code: "en", name: "English" },
-    { code: "es", name: "Spanish" },
-    { code: "fr", name: "French" },
-    { code: "de", name: "German" },
-    { code: "ja", name: "Japanese" },
-    { code: "ko", name: "Korean" },
-    { code: "zh", name: "Chinese" },
-    { code: "hi", name: "Hindi" },
-    { code: "it", name: "Italian" },
-    { code: "pt", name: "Portuguese" },
-    { code: "ru", name: "Russian" },
-    { code: "ar", name: "Arabic" },
-    { code: "sv", name: "Swedish" },
-    { code: "da", name: "Danish" },
-    { code: "no", name: "Norwegian" },
-    { code: "fi", name: "Finnish" },
-    { code: "nl", name: "Dutch" },
-    { code: "pl", name: "Polish" },
-    { code: "tr", name: "Turkish" },
-    { code: "th", name: "Thai" },
-    { code: "id", name: "Indonesian" },
-    { code: "vi", name: "Vietnamese" }
-  ];
-  
-  let selectedLanguage = null;
-  
-  langInput.addEventListener("input", () => {
-    const query = langInput.value.toLowerCase();
-    const filtered = languages.filter(l => l.name.toLowerCase().includes(query) || l.code.toLowerCase().includes(query));
-    
-    if (filtered.length > 0 && query.length > 0) {
-      renderLanguageSuggestions(filtered.slice(0, 5));
-    } else {
-      hideLanguageSuggestions();
-    }
-  });
-  
-  function renderLanguageSuggestions(items) {
-    hideLanguageSuggestions();
-    const dropdown = document.createElement("div");
-    dropdown.id = "languageDropdown";
-    dropdown.style.cssText = `
-      position: absolute;
-      background: rgba(10, 14, 26, 0.98);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      margin-top: 4px;
-      max-height: 200px;
-      overflow-y: auto;
-      z-index: 1000;
-    `;
-    
-    items.forEach(item => {
-      const opt = document.createElement("div");
-      opt.style.cssText = "padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(0, 217, 255, 0.1); transition: background 0.15s;";
-      opt.textContent = item.name;
-      opt.onmouseover = () => opt.style.background = "rgba(0, 217, 255, 0.1)";
-      opt.onmouseout = () => opt.style.background = "transparent";
-      opt.onclick = () => {
-        selectedLanguage = item;
-        langInput.value = "";
-        hideLanguageSuggestions();
-        
-        langContainer.innerHTML = `
-          <div data-lang-code="${item.code}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${item.name}</span>
-            <button id="removeLanguage" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeLanguage").onclick = () => {
-          selectedLanguage = null;
-          langContainer.innerHTML = "";
-        };
-      };
-      dropdown.appendChild(opt);
+  filterInput.addEventListener("input", () => {
+    const q = filterInput.value.trim().toLowerCase();
+    countryGrid.querySelectorAll(".region-country-chip").forEach(chip => {
+      const hay = (chip.dataset.name + " " + chip.dataset.regionCode).toLowerCase();
+      chip.style.display = (!q || hay.includes(q)) ? "" : "none";
     });
-    
-    langRow.appendChild(dropdown);
+  });
+  root.appendChild(countryCard);
+
+  /* ---- TRACK 3 — Original language (single-select) -------------- */
+  const langCard = document.createElement("div");
+  langCard.className = "region-track region-track--language";
+  const langHead = document.createElement("div");
+  langHead.className = "region-track-head";
+  langHead.appendChild(makeSectionLabel("Original language"));
+  const note = document.createElement("span");
+  note.className = "region-track-note";
+  note.textContent = "independent of country";
+  langHead.appendChild(note);
+  langCard.appendChild(langHead);
+
+  const langGrid = document.createElement("div");
+  langGrid.className = "region-language-grid";
+  REGION_LANGUAGES.forEach(l => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip region-language-chip";
+    chip.dataset.langCode = l.code;
+    chip.textContent = l.name;
+    if (selectedLangCode === l.code) chip.classList.add("on");
+    chip.addEventListener("click", () => {
+      const wasOn = chip.classList.contains("on");
+      langGrid.querySelectorAll(".region-language-chip.on").forEach(c => c.classList.remove("on"));
+      if (!wasOn) chip.classList.add("on");
+    });
+    langGrid.appendChild(chip);
+  });
+  langCard.appendChild(langGrid);
+  root.appendChild(langCard);
+
+  /* ============================================================
+     LIVE COUNTS — PROMPT 2b (purely additive to the 2a structure)
+     Append "—" count slots, then probe each via the cached helper and
+     paint progressively (the panel never blocks on the network). Group
+     cards probe the pipe-joined UNION (OR) regardless of the toggle;
+     country chips probe the single code. The footer pill reflects the
+     LIVE selection (countries + groups unioned, joined per
+     state.regionLogic, plus the chosen language), debounced on any
+     selection change. NO language-chip counts in this pass.
+     ============================================================ */
+  groupGrid.querySelectorAll('.region-group-card').forEach(card => {
+    const union = (card.dataset.groupCodes || '').split(',').map(s => s.trim()).filter(Boolean).join('|');
+    const slot = document.createElement('span');
+    slot.className = 'region-card-count';
+    slot.textContent = '—';
+    card.appendChild(slot);
+    if (union) paintRegionCount(slot, union, { with_origin_country: union });
+  });
+
+  countryGrid.querySelectorAll('.region-country-chip').forEach(chip => {
+    const code = chip.dataset.regionCode;
+    const slot = document.createElement('span');
+    slot.className = 'region-chip-count';
+    slot.textContent = '—';
+    chip.appendChild(slot);
+    if (code) paintRegionCount(slot, code, { with_origin_country: code });
+  });
+
+  /* Footer match pill — the real total for the actual emitted query. */
+  const footer = document.createElement('div');
+  footer.className = 'region-footer';
+  const pill = document.createElement('span');
+  pill.className = 'region-match-pill';
+  const pillCount = document.createElement('span');
+  pillCount.className = 'region-match-count';
+  pillCount.textContent = '—';
+  pill.appendChild(pillCount);
+  pill.appendChild(document.createTextNode(' films match this selection'));
+  footer.appendChild(pill);
+  root.appendChild(footer);
+
+  /* Read the live selection straight from the DOM (independent of the
+     read-site — that function is NOT modified). Mirrors its union logic:
+     .on country codes + .on group unions, de-duplicated, + single language. */
+  function regionSelectionParams() {
+    const codes = new Set();
+    countryGrid.querySelectorAll('.region-country-chip.on[data-region-code]').forEach(c => {
+      if (c.dataset.regionCode) codes.add(c.dataset.regionCode);
+    });
+    groupGrid.querySelectorAll('.region-group-card.on[data-group-codes]').forEach(card => {
+      (card.dataset.groupCodes || '').split(',').forEach(x => { x = x.trim(); if (x) codes.add(x); });
+    });
+    const langChip = langGrid.querySelector('.region-language-chip.on[data-lang-code]');
+    return { codes: Array.from(codes), lang: langChip ? langChip.dataset.langCode : null };
   }
-  
-  function hideLanguageSuggestions() {
-    const existing = document.getElementById("languageDropdown");
-    if (existing) existing.remove();
+
+  let _footerTimer = null;
+  function updateFooter() {
+    const sel = regionSelectionParams();
+    if (sel.codes.length === 0 && !sel.lang) { pillCount.textContent = '—'; return; }
+    const sep = state.regionLogic === 'or' ? '|' : ',';   // matches the frozen query builder
+    const params = {};
+    if (sel.codes.length) params.with_origin_country = sel.codes.join(sep);
+    if (sel.lang) params.with_original_language = sel.lang;
+    // Key folds in the join order so AND vs OR (and language) cache distinctly.
+    const key = 'sel::' + (params.with_origin_country || '') + '::' + (sel.lang || '');
+    pillCount.textContent = '—';                          // honest placeholder while probing
+    paintRegionCount(pillCount, key, params);
   }
+  function scheduleFooter() { clearTimeout(_footerTimer); _footerTimer = setTimeout(updateFooter, 350); }
+
+  /* Delegated listeners (bubble AFTER each chip/card's own toggle handler,
+     so they read post-toggle state) — keeps the 2a handlers byte-identical. */
+  groupGrid.addEventListener('click', scheduleFooter);
+  countryGrid.addEventListener('click', scheduleFooter);
+  langGrid.addEventListener('click', scheduleFooter);
+  toggle.addEventListener('click', scheduleFooter);
+
+  updateFooter();   // hydrated selection → initial real count (cache-first)
 }
 
 // =============================================
@@ -6908,44 +6712,47 @@ function collectLabelsForSection(sectionKey) {
       return results;
     }
 
-    case "regionLanguage":
-      const regionContainer = document.getElementById("selectedRegionContainer");
-      if (regionContainer) {
-        // 2026-05-11: iterate all region chips for multi-region support.
-        const regionChips = regionContainer.querySelectorAll('[data-region-code]');
-        regionChips.forEach(regionChip => {
-          const code = regionChip.dataset.regionCode;
-          const regionText = regionChip.querySelector('span')?.textContent;
-          if (code && regionText) {
-            results.push({
-              label: `Region: ${regionText}`,
-              value: { type: "region", code: code, name: regionText }
-            });
-          }
+    case "regionLanguage": {
+      /* Rebuilt 2026-06-23 (lockstep with the Variant-A three-track
+         buildRegionLanguageContent). REGION = the de-duplicated union of
+         every .on country chip (data-region-code) and every .on group card
+         (data-group-codes, a comma list — includes union-only codes like
+         CL/PK that have no country chip). LANGUAGE = the single .on language
+         chip (data-lang-code), or nothing. Emits the unchanged
+         {type:"region"|"language",code,name} shapes the frozen query builder
+         (case "regionLanguage") consumes — that builder is NOT touched. */
+      const panel = document.getElementById("oft-panel-region");
+      if (!panel) return results;
+
+      const codes = new Set();
+      panel.querySelectorAll('.region-country-chip.on[data-region-code]').forEach(chip => {
+        if (chip.dataset.regionCode) codes.add(chip.dataset.regionCode);
+      });
+      panel.querySelectorAll('.region-group-card.on[data-group-codes]').forEach(card => {
+        (card.dataset.groupCodes || "").split(",").forEach(c => {
+          const code = c.trim();
+          if (code) codes.add(code);
         });
-      }
-
-      const englishToggle = document.getElementById("englishOnlyToggle");
-      const langContainer = document.getElementById("selectedLanguageContainer");
-
-      if (englishToggle && englishToggle.checked) {
+      });
+      codes.forEach(code => {
         results.push({
-          label: `Language: English`,
-          value: { type: "language", code: "en", name: "English" }
+          label: `Region: ${regionName(code)}`,
+          value: { type: "region", code: code, name: regionName(code) }
         });
-      } else if (langContainer && langContainer.children.length > 0) {
-        const langChip = langContainer.querySelector('[data-lang-code]');
-        const langText = langContainer.querySelector('span')?.textContent;
-        if (langChip && langText) {
-          const langCode = langChip.dataset.langCode;
-          results.push({
-            label: `Language: ${langText}`,
-            value: { type: "language", code: langCode, name: langText }
-          });
-        }
+      });
+
+      const langChip = panel.querySelector('.region-language-chip.on[data-lang-code]');
+      if (langChip && langChip.dataset.langCode) {
+        const langCode = langChip.dataset.langCode;
+        const langText = (langChip.textContent || "").trim();
+        results.push({
+          label: `Language: ${langText}`,
+          value: { type: "language", code: langCode, name: langText }
+        });
       }
 
       return results;
+    }
 
     case "production": {
       /* Rebuilt June 8, 2026 (lockstep with buildProductionContent):

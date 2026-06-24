@@ -7574,12 +7574,13 @@ html, body {
    Shared .service-tile and Profile are untouched. */
 .disco-service-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
   margin-bottom: 16px;
-  /* Cap at ~2 rows of the taller 84px tiles; ≤~10 services never scrolls,
-     heavier profiles scroll internally instead of overflowing the panel. */
-  max-height: 300px;
+  /* Cap at ~2 rows of the 72px tiles (~100px row + 6px gap); ≤~16 services
+     (2 × 8) never scrolls, heavier profiles scroll internally instead of
+     overflowing the panel. */
+  max-height: 210px;
   overflow-y: auto;
 }
 .disco-service-grid::-webkit-scrollbar { width: 6px; }
@@ -7616,7 +7617,7 @@ html, body {
 /* Logo — large square, fills the column up to 84px; never distorted. */
 #watchServiceGrid .disco-service-tile .disco-service-logo-img {
   width: 100%;
-  max-width: 84px;
+  max-width: 72px;
   aspect-ratio: 1 / 1;
   height: auto;
   margin: 0 auto;
@@ -7628,7 +7629,7 @@ html, body {
 /* Monogram fallback (no logo_path) — same large square, greyable, no box. */
 #watchServiceGrid .disco-service-tile .disco-service-mono {
   width: 100%;
-  max-width: 84px;
+  max-width: 72px;
   aspect-ratio: 1 / 1;
   height: auto;
   margin: 0 auto;
@@ -7708,9 +7709,192 @@ html, body {
   font-style: italic;
 }
 
-/* Mobile — fewer columns so the larger logos keep room on a narrow panel */
+/* Mobile — 8-across is too tight on a narrow panel; 4-col keeps logos usable */
 @media (max-width: 650px) {
-  .disco-service-grid { grid-template-columns: repeat(3, 1fr); }
+  .disco-service-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ============================================================
+   REGION & LANGUAGE — Variant-A three-track layout
+   Added 2026-06-23 (Discovery redesign PROMPT 2a — STRUCTURE).
+   Emerald axis flows in via #oft-panel-region[data-axis="region"]
+   -> --axis / --axis-hex (set in discover-components.css). All
+   accent colour is token-driven — no literal emerald hex. Three
+   stacked cards: curated groups / countries / language. Reuses
+   .disco-chip + .match-toggle + .focus-section-label. NO counts.
+   ============================================================ */
+.region-track {
+  background: rgba(var(--axis), 0.04);
+  border: 1px solid rgba(var(--axis), 0.18);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.region-track:last-child { margin-bottom: 0; }
+.region-track--countries { flex: 1; }
+
+/* Section label + toggle/note share a row, label hugs the left */
+.region-track-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.region-track-head .focus-section-label { margin: 0; color: var(--axis-hex); }
+.region-track-head .match-toggle { margin-bottom: 0; }
+.region-track-note {
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-style: italic;
+}
+
+/* TRACK 1 — curated cinema group cards (~4-col, collapse to 2-col) */
+.region-group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+.region-group-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 11px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(var(--axis), 0.05);
+  border: 1px solid rgba(var(--axis), 0.22);
+  color: var(--film-white);
+  transition: background-color 0.25s ease-out,
+              border-color 0.25s ease-out,
+              box-shadow 0.25s ease-out;
+}
+.region-group-card:hover {
+  border-color: rgba(var(--axis), 0.5);
+  background: rgba(var(--axis), 0.1);
+}
+.region-group-card.on {
+  background: linear-gradient(180deg, rgba(var(--axis), 0.2), rgba(var(--axis), 0.07));
+  border-color: rgba(var(--axis), 0.5);
+  box-shadow: inset 0 0 12px rgba(var(--axis), 0.16);
+}
+.region-group-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--axis-hex);
+}
+.region-group-sub {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--muted-silver);
+}
+
+/* TRACK 2 — country filter input (axis-themed) + chip grid */
+.region-filter-row { margin-bottom: 14px; }
+.region-country-filter {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(var(--axis), 0.05);
+  border: 1px solid rgba(var(--axis), 0.25);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-size: 13px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.region-country-filter::placeholder { color: var(--muted-silver); }
+.region-country-filter:focus {
+  border-color: rgba(var(--axis), 0.55);
+  background: rgba(var(--axis), 0.09);
+  box-shadow: 0 0 16px rgba(var(--axis), 0.18);
+}
+.region-country-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+/* Mono-code disc — ~18px emerald circle, uppercase 2-letter code */
+.region-country-chip { padding-left: 6px; }
+.region-disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--axis-hex);
+  background: rgba(var(--axis), 0.18);
+  border: 1px solid rgba(var(--axis), 0.4);
+}
+.region-country-name { line-height: 1; }
+
+/* TRACK 3 — language chips */
+.region-language-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+@media (max-width: 650px) {
+  .region-group-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   REGION LIVE COUNTS — PROMPT 2b (additive to the 2a layout)
+   Honest /discover total_results, painted into "—" slots. Count
+   text uses Orbitron + axis/muted tokens — no hardcoded hex.
+   ============================================================ */
+/* Group card union total — its own line under the member sub-label */
+.region-card-count {
+  margin-top: 2px;
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--axis-hex);
+}
+/* Per-country total — trails the name, dimmed so the name stays primary */
+.region-chip-count {
+  margin-left: 2px;
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 10px;
+  color: var(--axis-hex);
+  opacity: 0.6;
+}
+/* Footer match pill — live selection's real total */
+.region-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(var(--axis), 0.15);
+}
+.region-match-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--muted-silver);
+  background: rgba(var(--axis), 0.08);
+  border: 1px solid rgba(var(--axis), 0.25);
+}
+.region-match-count {
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--axis-hex);
 }
 
 /* END OF STYLES */
