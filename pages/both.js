@@ -1080,7 +1080,7 @@ function buildRegionLanguageContent(root) {
     "IT": "it",
     "JP": "ja",
     "KR": "ko",
-    "CN": "zh", "TW": "zh", "HK": "zh",
+    "CN": "zh", "TW": "zh", "HK": "cn",
     "IN": "hi",
     "RU": "ru",
     "BR": "pt", "PT": "pt",
@@ -1098,7 +1098,7 @@ function buildRegionLanguageContent(root) {
 
   const languageNames = {
     "en": "English", "fr": "French", "de": "German", "es": "Spanish",
-    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Chinese",
+    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Mandarin", "cn": "Cantonese",
     "hi": "Hindi", "ru": "Russian", "pt": "Portuguese", "ar": "Arabic",
     "sv": "Swedish", "da": "Danish", "no": "Norwegian", "fi": "Finnish",
     "nl": "Dutch", "pl": "Polish", "tr": "Turkish", "th": "Thai",
@@ -1287,7 +1287,8 @@ function buildRegionLanguageContent(root) {
     { code: "de", name: "German" },
     { code: "ja", name: "Japanese" },
     { code: "ko", name: "Korean" },
-    { code: "zh", name: "Chinese" },
+    { code: "zh", name: "Mandarin" },
+    { code: "cn", name: "Cantonese" },
     { code: "hi", name: "Hindi" },
     { code: "it", name: "Italian" },
     { code: "pt", name: "Portuguese" },
