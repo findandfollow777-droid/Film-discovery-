@@ -1770,7 +1770,9 @@ body::after {
   gap: 8px;
   cursor: pointer;
   padding: 60px 6px 4px; /* top room for hover label + 1.8x statuette */
-  min-width: 96px;
+  width: 108px; /* uniform fixed chip → even (Oscar-tight) glyph cadence */
+  min-width: 108px;
+  max-width: 108px;
   position: relative;
   transition: transform 0.2s ease;
 }
@@ -1799,10 +1801,14 @@ body::after {
   font-weight: 500;
   opacity: 1;
   transition: opacity 0.2s ease;
-  white-space: nowrap;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
-  height: 18px;
-  line-height: 18px;
+  line-height: 1.2;
 }
 
 /* Hover label (above the statuette): [category glyph] Award Name, horizontal.
