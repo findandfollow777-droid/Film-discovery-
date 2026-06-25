@@ -5385,7 +5385,12 @@ function buildRegionLanguageContent(root) {
   pill.appendChild(pillCount);
   pill.appendChild(document.createTextNode(' films match this selection'));
   footer.appendChild(pill);
-  root.appendChild(footer);
+  /* Lift the footer OUT of the scroll body so it pins at the panel bottom.
+     The panel column survives clearPanelBody (it only wipes body.innerHTML),
+     so drop any prior footer before re-appending to avoid stacking on rebuild. */
+  const panelCol = root.parentElement;          // .oft-panel (#oft-panel-region)
+  panelCol.querySelector('.region-footer')?.remove();
+  panelCol.appendChild(footer);
 
   /* Read the live selection straight from the DOM (independent of the
      read-site — that function is NOT modified). Mirrors its union logic:

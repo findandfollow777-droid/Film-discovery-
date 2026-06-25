@@ -4126,6 +4126,11 @@ html, body {
     flex: 0 0 auto;
     max-height: none;
   }
+  /* Match the shell's mobile revert: drop the Region panel's height cap so it
+     flows naturally on phones (no internal scroll eating vertical space). */
+  #oft-panel-region {
+    max-height: none;
+  }
 }
 /* When collapsed, hide every direct child except the toggle button.
    The .section-collapse-hide class is now redundant but left in markup
@@ -7872,11 +7877,25 @@ html, body {
   opacity: 0.6;
 }
 /* Footer match pill — live selection's real total */
+/* Region panel height bound — scoped to #oft-panel-region so the track body
+   scrolls internally and the match-pill footer pins at the panel bottom. The
+   shared shell cap (.section-container[data-section="filterTabs"] max-height:620px)
+   does NOT propagate down through the block-display .oft-panel-area, so we bound
+   the panel itself (matching that 620px). min-height:0 lets the flex:1 body shrink
+   below content height and scroll. Other panels keep their natural-flow height. */
+#oft-panel-region {
+  max-height: 620px;
+}
+#oft-panel-region .oft-panel-body {
+  min-height: 0;
+}
+
 .region-footer {
+  flex-shrink: 0;                 /* pin beneath the flex:1 scroll body */
   display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-  padding-top: 12px;
+  justify-content: flex-end;      /* pill stays right-aligned */
+  padding: 10px 16px;             /* breathing room (replaces in-flow margin/pad) */
+  background: var(--deep-void);   /* opaque panel bg → distinct bar over scroll */
   border-top: 1px solid rgba(var(--axis), 0.15);
 }
 .region-match-pill {
