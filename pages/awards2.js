@@ -974,14 +974,15 @@ function computeCeremonyStats(festival, year) {
 // Reuses the trophy belt's og-statuette; gold/silver recolor lives in awards2.css.
 // A flex line-break is inserted at the gold→silver boundary so the silver losses
 // wrap onto their own line BENEATH the gold wins (only when both colours exist).
-function renderGlyphRow(total, goldCount) {
+function renderGlyphRow(total, goldCount, glyph) {
+  glyph = glyph || 'og-statuette';
   let html = '';
   for (let i = 0; i < total; i++) {
     if (i === goldCount && goldCount > 0 && goldCount < total) {
       html += '<span class="glyph-break"></span>';
     }
     const cls = i < goldCount ? 'stat-glyph' : 'stat-glyph silver';
-    html += `<span class="og og-statuette ${cls}"></span>`;
+    html += `<span class="og ${glyph} ${cls}"></span>`;
   }
   return html;
 }
@@ -1062,7 +1063,7 @@ function buildStatsHtml(stats, editorial, year) {
       <span class="stat-num gold">${mw.count}</span>
       <div class="stat-body">
         <span class="stat-label">Most wins · ${escapeHtml(mw.title)}</span>
-        <div class="glyph-row">${renderGlyphRow(mw.count, mw.count)}</div>
+        <div class="glyph-row">${renderGlyphRow(mw.count, mw.count, (FESTIVAL_IDENTITY[currentFestival] && FESTIVAL_IDENTITY[currentFestival].glyph) || 'og-statuette')}</div>
       </div>
     </div>` : '';
 
@@ -1071,7 +1072,7 @@ function buildStatsHtml(stats, editorial, year) {
       <span class="stat-num cyan">${mn.count}</span>
       <div class="stat-body">
         <span class="stat-label">Most nominations · ${escapeHtml(mn.title)}</span>
-        <div class="glyph-row">${renderGlyphRow(mn.count, mn.winCount)}</div>
+        <div class="glyph-row">${renderGlyphRow(mn.count, mn.winCount, (FESTIVAL_IDENTITY[currentFestival] && FESTIVAL_IDENTITY[currentFestival].glyph) || 'og-statuette')}</div>
       </div>
     </div>` : '';
 
@@ -1240,6 +1241,10 @@ async function renderTrophyStrip(year) {
   const categories = order.filter(name => db[name] && db[name][yearStr]);
   if (categories.length === 0) return;
 
+  // Belt mark is the current festival's identity glyph, uniform across every
+  // chip (the per-category icon stays on the hover label). Computed once.
+  const festGlyph = (FESTIVAL_IDENTITY[currentFestival] && FESTIVAL_IDENTITY[currentFestival].glyph) || 'og-statuette';
+
   const itemHtml = (name) => {
     const g = AWARD_GLYPH_MAP[name]
       || { label: name, beltGlyph: 'og-statuette', categoryGlyph: 'og-trophy' };
@@ -1249,7 +1254,7 @@ async function renderTrophyStrip(year) {
           <span class="og ${g.categoryGlyph}"></span>
           <span class="trophy-hover-text">${escapeHtml(g.label)}</span>
         </span>
-        <span class="trophy-icon"><span class="og ${g.beltGlyph}"></span></span>
+        <span class="trophy-icon"><span class="og ${festGlyph}"></span></span>
         <span class="trophy-label">${escapeHtml(g.label)}</span>
       </div>`;
   };
