@@ -120,7 +120,12 @@ getSettingsData();
 const state = {
   filters: [],
   genreLogic: "or",
-  regionLogic: "or"
+  regionLogic: "or",
+  /* Build A (2026-06-27): AND/OR join mode for Setting keyword chips'
+     with_keywords (mirrors regionLogic). Default "or" → "|" separator, the
+     same default as Region. No Setting AND/OR toggle UI ships in Build A;
+     this is the single source of truth the query builder reads. */
+  settingLogic: "or"
 };
 
 const searchInput = document.getElementById("searchInput");
@@ -3079,9 +3084,24 @@ function buildTMDBQueryFromFilters(filters) {
         break;
 
       case "themes":
+        // Handled by client-side post-filtering, not TMDB API params
+        break;
+
       case "settingWhere":
       case "settingWhen":
-        // Handled by client-side post-filtering, not TMDB API params
+        /* Build A (2026-06-27): Setting chips backed by a verified keyword id
+           commit {type:"keyword", id} → real with_keywords, OR/AND-joined by
+           settingLogic (mirrors regionLogic: "or" → "|", "and" → ","). Legacy
+           {type:"location"|"time_*"} chips carry no id → still post-filtered
+           (and bypassed here). Same inline accumulation as basedOn/universes. */
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const settingSep = state.settingLogic === "or" ? "|" : ",";
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}${settingSep}${filter.value.id}` : String(filter.value.id)
+          );
+        }
         break;
 
       case "basedOn":
@@ -3250,7 +3270,15 @@ function getTopGenresFromMovies(movies) {
 const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen"];
 
 function hasOnlySettingsFilters(filters) {
-  return filters.length > 0 && filters.every(f => SETTINGS_SECTIONS.includes(f.section));
+  /* Build A (2026-06-27): {type:"keyword"} Setting chips are real TMDB
+     with_keywords filters (like basedOn) — they MUST route to NORMAL
+     DISCOVER MODE (full catalogue), not the seed-only path. So they don't
+     count as seed-settings here. Legacy location/time chips and tmdb-keyword
+     theme chips keep their existing seed-mode routing unchanged. */
+  const seedSettings = filters.filter(f =>
+    SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== "keyword"
+  );
+  return seedSettings.length > 0 && seedSettings.length === filters.length;
 }
 
 let _seedDataCache = null;
@@ -3271,9 +3299,14 @@ function applySettingsFilters(movies, filters, settingsData) {
   if (!settingsData) return movies;
 
   /* 2026-05-23: mirror the launch-handler gate — tmdb-keyword chips
-     ride in the 'themes' section but are resolved by TMDB, not seed. */
+     ride in the 'themes' section but are resolved by TMDB, not seed.
+     2026-06-27 (Build A): {type:"keyword"} Setting chips likewise resolve
+     via with_keywords, so exclude them too — otherwise the seed gate
+     (`if (!settings) return false`) would re-clamp full-catalogue discover
+     results down to the ~4.3k seed whenever a Setting keyword chip is on. */
   const settingsFilters = filters.filter(f =>
-    SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== 'tmdb-keyword'
+    SETTINGS_SECTIONS.includes(f.section) &&
+    f.value?.type !== 'tmdb-keyword' && f.value?.type !== 'keyword'
   );
   if (settingsFilters.length === 0) return movies;
 
@@ -4317,6 +4350,43 @@ function buildThemesContent(root) {
 // 4. SETTING: WHERE SECTION
 // =============================================
 
+/* ============================================================
+   SETTING → with_keywords rewire (Build A — 2026-06-27)
+   Setting chips whose visible label maps to a probe-verified TMDB
+   keyword id now commit {type:"keyword", id, name} → real with_keywords
+   (mirrors Source's basedOn). Chips NOT in this map keep their legacy
+   {type:"location"|"time_*"} value and stay on the seed post-filter, so
+   the visible tab is unchanged. Only EXISTING UI chips are converted —
+   the full keyword set lives in data/keyword-ids.js for Build B's panel.
+   Ids are duplicated here as a label→id lookup because the builders key
+   off the rendered chip label; they match keyword-ids.js exactly.
+   ============================================================ */
+const SETTING_KEYWORD_BY_LABEL = {
+  // cities (fixed popular + dynamic 5th when Berlin/Tokyo/Rome)
+  "New York":             242,    // new york city
+  "Los Angeles":          12670,
+  "London":               212,    // london, england
+  "Paris":                90,     // paris, france
+  "Berlin":               220,
+  "Tokyo":                12369,
+  "Rome":                 588,
+  // special locations
+  "At Sea":               3799,   // ship
+  "Small Town America":   1415,   // small town
+  "The Road / Traveling": 7312,   // road trip
+  // named era
+  "World War II":         1956
+};
+
+/* Returns the {type:"keyword",id,name} value for a verified Setting chip,
+   else `fallback` (the chip's legacy location/time value). Keeps makeChip
+   on the legacy .chip class so converted chips look identical to their
+   not-yet-wired neighbours (no UI change in Build A). */
+function settingChipValue(label, fallback) {
+  const id = SETTING_KEYWORD_BY_LABEL[label];
+  return id ? { type: "keyword", id: id, name: label } : fallback;
+}
+
 function buildSettingWhereContent(root) {
   const desc = document.createElement("p");
   desc.style.cssText = "font-size: 15.6px; color: var(--muted-silver); margin-bottom: 0;";
@@ -4427,7 +4497,7 @@ function buildSettingWhereContent(root) {
   if (popularLocations.indexOf(fifthCity) !== -1) fifthCity = "Sydney";
   if (popularLocations.indexOf(fifthCity) === -1) popularLocations.push(fifthCity);
   popularLocations.forEach(loc => {
-    const chip = makeChip(loc, "settingWhere", { type: "location", name: loc });
+    const chip = makeChip(loc, "settingWhere", settingChipValue(loc, { type: "location", name: loc }));
     popularGroup.appendChild(chip);
   });
   root.appendChild(popularGroup);
@@ -4452,7 +4522,7 @@ function buildSettingWhereContent(root) {
   specialGroup.className = "chip-group";
   const specials = ["Fictional / Fantasy World", "Space", "At Sea", "Small Town America", "The Road / Traveling"];
   specials.forEach(s => {
-    const chip = makeChip(s, "settingWhere", { type: "location", name: s });
+    const chip = makeChip(s, "settingWhere", settingChipValue(s, { type: "location", name: s }));
     specialGroup.appendChild(chip);
   });
   root.appendChild(specialGroup);
@@ -4501,7 +4571,7 @@ function buildSettingWhenContent(root) {
 
   eraOrder.forEach(era => {
     if (typeof ERA_DECADE_MAP !== 'undefined' && ERA_DECADE_MAP[era]) {
-      const chip = makeChip(era, "settingWhen", { type: "time_era", value: era });
+      const chip = makeChip(era, "settingWhen", settingChipValue(era, { type: "time_era", value: era }));
       eraGroup.appendChild(chip);
     }
   });
@@ -6846,10 +6916,13 @@ function collectLabelsForSection(sectionKey) {
           value: { type: "location", name: loc }
         });
       });
-      // Chip-selected locations (popular/region/special chips)
+      // Chip-selected locations (popular/region/special chips). Build A:
+      // also read {type:"keyword"} chips (verified Setting keywords) so their
+      // id flows through to the query builder's with_keywords; value pushed
+      // wholesale, so the id is carried intact (mirrors basedOn read).
       const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "location"; } catch { return false; }
+          try { const t = JSON.parse(chip.dataset.value).type; return t === "location" || t === "keyword"; } catch { return false; }
         });
       locChipsActive.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
@@ -6869,6 +6942,7 @@ function collectLabelsForSection(sectionKey) {
           let label = chip.textContent;
           if (value.type === "time_decade") label = `Set in ${value.value}`;
           else if (value.type === "time_era") label = `Era: ${value.value}`;
+          else if (value.type === "keyword") label = `Era: ${value.name}`; // Build A: verified era keyword (e.g. WWII) → with_keywords
           // time_special uses the chip text as-is
           whenResults.push({ label, value });
         } catch {}

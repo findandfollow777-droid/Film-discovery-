@@ -32,6 +32,53 @@ const ORBIT_KEYWORD_IDS = {
   'based-on-novel':      { id: 818,    label: 'Based on novel',      type: 'keyword' },
   'courtroom':           { id: 33519,  label: 'Courtroom drama',     type: 'keyword' },
 
+  /* ============================================================
+     SETTING AXES — verified May/Jun 2026 via the coverage probe
+     (data/setting-keyword-probe.md + setting-keyword-reresolve.md).
+     Place-type, cities (canonical "City, Country" form), and seasonal
+     keywords backing the Setting tab's with_keywords rewire (Build A,
+     2026-06-27). Counts = TMDB total_results at probe time.
+     REUSED above, NOT re-added: dystopia 4565, road-trip 7312,
+     post-apocalyptic 4458 (= TMDB "post-apocalyptic future"),
+     courtroom 33519. No fabricated IDs — every entry name-matched.
+     ============================================================ */
+  // Setting · place-type
+  'high-school':         { id: 6270,   label: 'High school',             type: 'keyword' },
+  'world-war-ii':        { id: 1956,   label: 'World War II',            type: 'keyword' },
+  'prison':              { id: 378,    label: 'Prison',                  type: 'keyword' },
+  'small-town':          { id: 1415,   label: 'Small town',              type: 'keyword' },
+  'island':              { id: 2041,   label: 'Island',                  type: 'keyword' },
+  'train':               { id: 13008,  label: 'Train',                   type: 'keyword' },
+  'hospital':            { id: 11612,  label: 'Hospital',                type: 'keyword' },
+  'college':             { id: 3616,   label: 'College',                 type: 'keyword' },
+  'hotel':               { id: 612,    label: 'Hotel',                   type: 'keyword' },
+  'farm':                { id: 4932,   label: 'Farm',                    type: 'keyword' },
+  'airplane':            { id: 3800,   label: 'Airplane',                type: 'keyword' },
+  'ship':                { id: 3799,   label: 'Ship / at sea',           type: 'keyword' },
+  'mansion':             { id: 12545,  label: 'Mansion',                 type: 'keyword' },
+  'factory':             { id: 1382,   label: 'Factory',                 type: 'keyword' },
+  'summer-camp':         { id: 5767,   label: 'Summer camp',             type: 'keyword' },
+  'boarding-school':     { id: 6271,   label: 'Boarding school',         type: 'keyword' },
+  // Setting · cities (canonical "City, Country" keyword)
+  'new-york-city':       { id: 242,    label: 'New York City',           type: 'keyword' },
+  'london':              { id: 212,    label: 'London, England',         type: 'keyword' },
+  'paris':               { id: 90,     label: 'Paris, France',           type: 'keyword' },
+  'los-angeles':         { id: 12670,  label: 'Los Angeles, California', type: 'keyword' },
+  'berlin':              { id: 220,    label: 'Berlin, Germany',         type: 'keyword' },
+  'tokyo':               { id: 12369,  label: 'Tokyo, Japan',            type: 'keyword' },
+  'hong-kong':           { id: 12354,  label: 'Hong Kong',               type: 'keyword' },
+  'san-francisco':       { id: 582,    label: 'San Francisco, California', type: 'keyword' },
+  'chicago':             { id: 520,    label: 'Chicago, Illinois',       type: 'keyword' },
+  'rome':                { id: 588,    label: 'Rome, Italy',             type: 'keyword' },
+  'hawaii':              { id: 1668,   label: 'Hawaii',                  type: 'keyword' },
+  'las-vegas':           { id: 14570,  label: 'Las Vegas',               type: 'keyword' },
+  // Setting · seasonal
+  'christmas':           { id: 207317, label: 'Christmas',               type: 'keyword' },
+  'halloween':           { id: 3335,   label: 'Halloween',               type: 'keyword' },
+  'summer':              { id: 13088,  label: 'Summer',                  type: 'keyword' },
+  'winter':              { id: 1442,   label: 'Winter',                  type: 'keyword' },
+  'new-years-eve':       { id: 613,    label: "New Year's Eve",          type: 'keyword' },
+
   // FILM SERIES (collections — use collection endpoint)
   'harry-potter':        { id: 1241,   label: 'Harry Potter Collection',         type: 'collection' },
   /* 2026-05-16: 'star-wars' upgraded to extended-collection (Skywalker
