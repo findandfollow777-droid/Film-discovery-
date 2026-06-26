@@ -123,14 +123,11 @@ const AWARD_GLYPH_MAP = {
 };
 
 // Person-led categories render flip tiles (front: portrait, back: poster).
-// Oscar-only set; matches v1 category display_name. See renderFlipTile.
-const PERSON_CATS = new Set([
-  'Best Actor',
-  'Best Actress',
-  'Best Supporting Actor',
-  'Best Supporting Actress',
-  'Best Director'
-]);
+// Data-driven across every festival: a category flips when its v1 meta says
+// tile_type === 'person' AND recipient_type is one of these performer/director
+// roles. Excludes craft (writer, composer, …) and film prizes (Golden Lion,
+// Palme d'Or, etc., which are tile_type 'film'). See tileFor / renderFlipTile.
+const PERSON_TILE_ROLES = new Set(['actor', 'actress', 'director']);
 
 // ===== STATE =====
 let currentFestival = 'oscar';
@@ -279,7 +276,7 @@ function buildLegacyFestivalDB(v1Data) {
   const catById = {};
   v1Data.categories.forEach(c => { catById[c.id] = c; });
 
-  function buildEntry(award) {
+  function buildEntry(award, cat) {
     const recipients = Array.isArray(award.recipients) ? award.recipients : [];
     const recipientNames = recipients.map(r => r && r.name).filter(Boolean).join(', ');
     const firstPid = recipients.find(r => r && r.tmdb_person_id);
@@ -289,7 +286,11 @@ function buildLegacyFestivalDB(v1Data) {
       tmdb_id: award.film_tmdb_id || 0,
       poster_path: award.film_poster_path || null,
       person_name: recipientNames || null,
-      person_id: personId
+      person_id: personId,
+      // Category meta carried onto the entry so the tile decision and flip-tile
+      // role/glow can be derived from authoritative data, not a category-name list.
+      tile_type: cat ? cat.tile_type : null,
+      recipient_type: cat ? cat.recipient_type : null
     };
   }
 
@@ -306,7 +307,7 @@ function buildLegacyFestivalDB(v1Data) {
     const year = String(award.year);
     if (!target[catName]) target[catName] = {};
     if (!target[catName][year]) target[catName][year] = [];
-    target[catName][year].push(buildEntry(award));
+    target[catName][year].push(buildEntry(award, cat));
   }
 
   const allCats = new Set([...Object.keys(winBuckets), ...Object.keys(nomBuckets)]);
@@ -1187,7 +1188,9 @@ async function renderCategories(year) {
   // poster; otherwise fall back to the simple movie tile (keeps no-poster /
   // no-person nominees graceful). Non-person categories are unchanged.
   const tileFor = (entry, isWinner, catName) => {
-    if (PERSON_CATS.has(catName) && entry && entry.person_id && entry.poster_path) {
+    const isPersonAward = entry && entry.tile_type === 'person'
+      && PERSON_TILE_ROLES.has(entry.recipient_type);
+    if (isPersonAward && entry.person_id && entry.poster_path) {
       return renderFlipTile(entry, catName, isWinner);
     }
     return renderSimpleTile(entry, isWinner);
@@ -1466,16 +1469,20 @@ function renderSimpleTile(entry, isWinner) {
    cache in sessionStorage (orbit_person_portrait_{id}, 'none' sentinel).
    ============================================================ */
 
-// Category → role token (drives role-tag colour + glow). Supporting roles
-// share the base actor/actress colour. Anything else falls back to director.
-function getPersonTileRole(category) {
-  if (/Actress/.test(category)) return 'actress';
-  if (/Actor/.test(category)) return 'actor';
+// recipient_type → role token (drives role-tag colour + glow). Derived from the
+// category's authoritative recipient_type so oddly-named acting awards (Berlin
+// "Best Leading Performance", Venice "Marcello Mastroianni") map correctly
+// instead of falling through to director. Supporting roles arrive as actor/
+// actress already. 'director' is the last-resort fallback only.
+function getPersonTileRole(recipientType) {
+  if (recipientType === 'actress') return 'actress';
+  if (recipientType === 'actor') return 'actor';
+  if (recipientType === 'director') return 'director';
   return 'director';
 }
 
 function renderFlipTile(entry, category, isWinner) {
-  const role = getPersonTileRole(category);
+  const role = getPersonTileRole(entry.recipient_type);
   const label = isWinner ? 'WINNER' : 'NOMINEE';
   const statusClass = isWinner ? 'is-winner' : 'is-nominee';
   const posterSrc = entry.poster_path
