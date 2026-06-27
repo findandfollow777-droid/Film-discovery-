@@ -390,6 +390,8 @@
           <div class="oft-tab-bar" id="oftTabBar">
             <div class="oft-tabs-scroll">
               <button class="oft-tab oft-tab--active" data-tab="people" data-axis="people" type="button"><span class="og-qs og-qs-people oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">People</span></button>
+              <!-- Filmmaker tab (A1 split, 2026-06-27). Glyph = og-qs-people PLACEHOLDER — no director/clapper glyph exists in orbit-glyphs-v2.css yet. -->
+              <button class="oft-tab" data-tab="filmmaker" data-axis="filmmaker" type="button"><span class="og-qs og-qs-people oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Filmmaker</span></button>
               <button class="oft-tab" data-tab="genres" data-axis="genre" type="button"><span class="og-qs og-qs-genre oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Genre</span></button>
               <button class="oft-tab" data-tab="era" data-axis="era" type="button"><span class="og-qs og-qs-era oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Era &amp; Release</span></button>
               <button class="oft-tab" data-tab="ratings" data-axis="ratings" type="button"><span class="og-qs og-qs-ratings oft-tab-glyph" aria-hidden="true"></span><span class="oft-tab-label">Ratings</span></button>
@@ -409,15 +411,30 @@
 
           <div class="oft-panel-area" id="oftPanelArea">
 
-            <div class="oft-panel oft-panel--active" id="oft-panel-people" data-tab="people" data-section="people">
+            <div class="oft-panel oft-panel--active" id="oft-panel-people" data-tab="people" data-section="people" data-axis="people">
               <div class="oft-panel-header">
                 <div class="orbit-icon icon-people"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
                 <div class="oft-panel-meta">
                   <h3 class="oft-panel-title">People</h3>
-                  <p class="oft-panel-desc">Actors, directors, writers — search by name or describe the filmmaker</p>
+                  <p class="oft-panel-desc">Actors, directors, writers — search by name</p>
                 </div>
               </div>
               <div class="oft-panel-body" id="oft-body-people"></div>
+            </div>
+
+            <!-- Filmmaker panel (A1 split, 2026-06-27). Holds the relocated "Describe
+                 the filmmaker" profile shell unchanged. Non-functional (engine deferred
+                 to Phase B); filmmakerProfile commits under section:"filmmaker" and
+                 contributes no query params. orbit-icon reuses icon-people (placeholder). -->
+            <div class="oft-panel" id="oft-panel-filmmaker" data-tab="filmmaker" data-section="filmmaker" data-axis="filmmaker">
+              <div class="oft-panel-header">
+                <div class="orbit-icon icon-people"><div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div></div>
+                <div class="oft-panel-meta">
+                  <h3 class="oft-panel-title">Filmmaker</h3>
+                  <p class="oft-panel-desc">Describe the filmmaker — in development</p>
+                </div>
+              </div>
+              <div class="oft-panel-body" id="oft-body-filmmaker"></div>
             </div>
 
             <div class="oft-panel" id="oft-panel-genres" data-tab="genres" data-section="genres" data-axis="genre">

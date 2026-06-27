@@ -3573,52 +3573,21 @@ function buildFilmmakerProfileContent(root) {
 }
 
 function buildPeopleContent(root) {
-  /* Tab bar */
-  const tabBar = document.createElement('div');
-  tabBar.className = 'people-panel-tabs';
-  const searchTabBtn = document.createElement('button');
-  searchTabBtn.type = 'button';
-  searchTabBtn.className = 'people-tab people-tab--active';
-  searchTabBtn.dataset.tab = 'search';
-  searchTabBtn.textContent = 'Search by name';
-  const profileTabBtn = document.createElement('button');
-  profileTabBtn.type = 'button';
-  profileTabBtn.className = 'people-tab';
-  profileTabBtn.dataset.tab = 'profile';
-  profileTabBtn.textContent = 'Describe the filmmaker';
-  tabBar.appendChild(searchTabBtn);
-  tabBar.appendChild(profileTabBtn);
-  root.appendChild(tabBar);
+  /* A1 split (2026-06-27): People is now NAME-SEARCH ONLY. The former
+     "Search by name" / "Describe the filmmaker" sub-tab toggle is removed;
+     the describe shell moved to its own Filmmaker tab (buildFilmmakerContent).
+     buildFilmmakerProfileContent is unchanged — only re-parented. */
+  buildPeopleSearchContent(root);
+}
 
-  /* Tab content containers */
-  const searchTab = document.createElement('div');
-  searchTab.className = 'people-tab-content';
-  searchTab.dataset.tabContent = 'search';
-  const profileTab = document.createElement('div');
-  profileTab.className = 'people-tab-content people-tab-content--hidden';
-  profileTab.dataset.tabContent = 'profile';
-  root.appendChild(searchTab);
-  root.appendChild(profileTab);
-
-  /* Reset profile state for each panel open */
+function buildFilmmakerContent(root) {
+  /* A1 split (2026-06-27): the relocated "Describe the filmmaker" shell.
+     Unchanged structured picker — still NON-FUNCTIONAL (writes
+     type:"filmmakerProfile" under section:"filmmaker", which the query
+     builder intentionally ignores; engine deferred to Phase B). The profile
+     resets on each panel open, mirroring the old buildPeopleContent reset. */
   currentFilmmakerProfile = { role: null, nationality: null, gender: null, career_stage: null, awards: [] };
-
-  buildPeopleSearchContent(searchTab);
-  buildFilmmakerProfileContent(profileTab);
-
-  function activate(which) {
-    [searchTabBtn, profileTabBtn].forEach(function (b) { b.classList.remove('people-tab--active'); });
-    [searchTab, profileTab].forEach(function (c) { c.classList.add('people-tab-content--hidden'); });
-    if (which === 'profile') {
-      profileTabBtn.classList.add('people-tab--active');
-      profileTab.classList.remove('people-tab-content--hidden');
-    } else {
-      searchTabBtn.classList.add('people-tab--active');
-      searchTab.classList.remove('people-tab-content--hidden');
-    }
-  }
-  searchTabBtn.addEventListener('click', function () { activate('search'); });
-  profileTabBtn.addEventListener('click', function () { activate('profile'); });
+  buildFilmmakerProfileContent(root);
 }
 
 function buildPeopleSearchContent(root) {
@@ -6972,6 +6941,8 @@ function collectLabelsForSection(sectionKey) {
   
   switch (sectionKey) {
     case "people":
+      /* A1 split: name-search people only. The filmmakerProfile emission
+         moved to case "filmmaker" below (section split). */
       const selectedPeopleChips = document.querySelectorAll('.selected-person-chip');
       const peopleResults = Array.from(selectedPeopleChips).map(chip => {
         const role = chip.dataset.personRole;
@@ -6988,6 +6959,15 @@ function collectLabelsForSection(sectionKey) {
           }
         };
       });
+      return peopleResults;
+
+    case "filmmaker": {
+      /* A1 split (2026-06-27): relocated "Describe the filmmaker" shell.
+         Emits the SAME {type:'filmmakerProfile'} value as before, now under
+         section:"filmmaker". Non-functional — the query builder has no
+         filmmaker case, so it contributes zero params (engine deferred to
+         Phase B). Read from the live currentFilmmakerProfile, unchanged. */
+      const filmmakerResults = [];
       if (typeof currentFilmmakerProfile === 'object' && currentFilmmakerProfile) {
         const fp = currentFilmmakerProfile;
         const fpAwards = Array.isArray(fp.awards) ? fp.awards : [];
@@ -6996,7 +6976,7 @@ function collectLabelsForSection(sectionKey) {
           .map(k => k + ':' + fp[k]);
         if (fpAwards.length > 0) fpParts.push('awards:' + fpAwards.join('+'));
         if (fpParts.length > 0) {
-          peopleResults.push({
+          filmmakerResults.push({
             label: 'Filmmaker: ' + fpParts.join(', '),
             value: {
               type: 'filmmakerProfile',
@@ -7005,7 +6985,8 @@ function collectLabelsForSection(sectionKey) {
           });
         }
       }
-      return peopleResults;
+      return filmmakerResults;
+    }
 
     case "genres": {
       /* Rebuilt June 7, 2026 (lockstep with buildGenresContent): read
@@ -8147,6 +8128,7 @@ function runZeroCounterfactuals(filters, queryString) {
 
   var BUILDERS = {
     people: function (root) { buildPeopleContent(root); },
+    filmmaker: function (root) { buildFilmmakerContent(root); },   // A1 split (2026-06-27)
     genres: function (root) { buildGenresContent(root); },
     timeEra: function (root) { buildTimeEraContent(root); },
     ratingsContent: function (root) { buildRatingsContentSection(root); },
@@ -8311,6 +8293,7 @@ function runZeroCounterfactuals(filters, queryString) {
      source) commit two sections per Add. */
   var TAB_TO_SECTIONS = {
     people:     ['people'],
+    filmmaker:  ['filmmaker'],
     genres:     ['genres'],
     era:        ['timeEra'],
     ratings:    ['ratingsContent'],

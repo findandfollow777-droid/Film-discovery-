@@ -5611,6 +5611,9 @@ html, body {
    ============================================================ */
 .oft-tab[data-axis="genre"]      { --axis: var(--prestige-purple-rgb); --axis-hex: var(--prestige-purple); }
 .oft-tab[data-axis="people"]     { --axis: var(--accent-cyan-rgb);     --axis-hex: var(--accent-cyan); }
+/* A1 split (2026-06-27): Filmmaker rail-tab axis. PLACEHOLDER cyan, mirroring
+   People — the Filmmaker axis colour is a pending design decision. */
+.oft-tab[data-axis="filmmaker"]  { --axis: var(--accent-cyan-rgb);     --axis-hex: var(--accent-cyan); }
 .oft-tab[data-axis="awards"]     { --axis: var(--accent-gold-rgb);     --axis-hex: var(--accent-gold); }
 .oft-tab[data-axis="region"],
 .oft-tab[data-axis="setting"]    { --axis: var(--emerald-rgb);          --axis-hex: var(--emerald); }    /* shared */
