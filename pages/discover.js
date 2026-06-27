@@ -3591,6 +3591,15 @@ function buildFilmmakerContent(root) {
 }
 
 function buildPeopleSearchContent(root) {
+  /* A2 skin (2026-06-27): wrap the name-search flow in ONE axis-tinted card
+     (.oft-people-card) matching .setting-card. Re-point `root` at the card so
+     the existing build order + every local element var stay byte-identical;
+     only container chrome moves to CSS. Chip migration = A2b; pill = A2c. */
+  const card = document.createElement("div");
+  card.className = "oft-people-card";
+  root.appendChild(card);
+  root = card;
+
   root.appendChild(makeSectionLabel("People search"));
   const desc = document.createElement("p");
   desc.style.fontSize = "13px";
@@ -3600,11 +3609,7 @@ function buildPeopleSearchContent(root) {
   root.appendChild(desc);
   
   const roleFilter = document.createElement("div");
-  roleFilter.style.cssText = `
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-  `;
+  roleFilter.className = "oft-people-role-row";
   
   const roles = [
     { value: "any", label: "Any Role" },
@@ -3715,7 +3720,7 @@ function buildPeopleSearchContent(root) {
   root.appendChild(recentSection);
 
   const container = document.createElement("div");
-  container.style.position = "relative";
+  container.className = "oft-people-search";
 
   const row = document.createElement("div");
   row.className = "input-row";
@@ -3782,13 +3787,7 @@ function buildPeopleSearchContent(root) {
   });
   
   const selectedContainer = document.createElement("div");
-  selectedContainer.id = "selectedPeopleContainer";
-  selectedContainer.style.cssText = `
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-  `;
+  selectedContainer.id = "selectedPeopleContainer";   // layout now via CSS (#selectedPeopleContainer)
   root.appendChild(selectedContainer);
   
   async function fetchPeopleSuggestions(query, dropdown, role) {

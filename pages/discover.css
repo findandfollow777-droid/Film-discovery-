@@ -6034,6 +6034,32 @@ html, body {
 }
 
 /* ============================================================
+   PEOPLE — name-search compact-panel skin (A2 — 2026-06-27)
+   Wraps the name-search flow in ONE axis-tinted card matching
+   .setting-card. Cyan resolves via #oft-panel-people[data-axis="people"]
+   → --axis / --axis-hex (no hardcoded hex). Chip migration
+   (.disco-chip / .match-toggle) = A2b; match/count pill = A2c — NOT here.
+   ============================================================ */
+#oft-panel-people { max-height: 620px; }
+#oft-panel-people .oft-panel-body { min-height: 0; }
+
+.oft-people-card {
+  background: rgba(var(--axis), 0.04);
+  border: 1px solid rgba(var(--axis), 0.18);
+  border-radius: var(--radius-lg, 12px);
+  padding: 14px 16px;
+}
+/* Section labels inside the card tint to the axis (cyan), mirroring
+   .setting-card-head .focus-section-label. */
+.oft-people-card .focus-section-label { color: var(--axis-hex); }
+
+/* Container chrome moved off inline styles (layout only — the protected
+   chips/buttons keep their own inline styling for A2b). */
+.oft-people-role-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.oft-people-search { position: relative; }
+#selectedPeopleContainer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+/* ============================================================
    FILTER PANEL 2-COLUMN LAYOUTS — Batch B (May 4, 2026)
    Themes / Era / Ratings / Production split into two columns so
    their content fits the ~311px panel-body height without scroll.
