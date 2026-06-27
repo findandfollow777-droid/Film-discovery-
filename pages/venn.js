@@ -89,7 +89,7 @@ async function init() {
     onAnchorClick: (movie) => {
       localStorage.setItem("anchorMovie", JSON.stringify(movie));
       localStorage.removeItem("anchorFromResults");
-      window.location.href = "../games/constellation.html";
+      window.location.href = "anchor-point.html";
     }
   });
   if (typeof initPeopleCube === 'function') initPeopleCube();
@@ -992,6 +992,25 @@ function hideInfo() {
   currentInfoMovieId = null;
 }
 
+/* ============================================================
+   ORBIT CLOSE — Shared trigger for Rule 17 Black Hole exit.
+   Adds .closing to the X and .orbit-popup-closing to the wrapper,
+   then runs the supplied teardown after the animation.
+   ============================================================ */
+function triggerOrbitClose(overlay, btn, teardownFn) {
+  if (!overlay) { if (teardownFn) teardownFn(); return; }
+  if (overlay.classList.contains('orbit-popup-closing')) return;
+  if (btn) btn.classList.add('closing');
+  overlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (btn) btn.classList.remove('closing');
+    overlay.classList.remove('orbit-popup-closing');
+    if (teardownFn) teardownFn();
+  }, reduced ? 200 : 600);
+}
+
 // ============================================
 // ZOOM & PAN
 // ============================================
@@ -1200,8 +1219,12 @@ function setupEventListeners() {
     });
   });
   
-  infoClose?.addEventListener("click", hideInfo);
-  
+  infoClose?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose(infoPanel, infoClose, hideInfo);
+  });
+
   // Details button - opens 3D popup
   const infoDetailsBtn = document.getElementById("infoDetailsBtn");
   infoDetailsBtn?.addEventListener("click", () => {
@@ -1209,15 +1232,15 @@ function setupEventListeners() {
       openMoviePopup(currentInfoMovieId);
     }
   });
-  
+
   document.addEventListener("click", (e) => {
     if (!infoPanel.hidden && !infoPanel.contains(e.target) && !e.target.closest(".venn-movie")) {
-      hideInfo();
+      triggerOrbitClose(infoPanel, infoClose, hideInfo);
     }
   });
-  
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") hideInfo();
+    if (e.key === "Escape") triggerOrbitClose(infoPanel, infoClose, hideInfo);
   });
   
   window.addEventListener("resize", OrbitUtils.debounce(() => {
@@ -1325,8 +1348,10 @@ function initVennBioPanels() {
   
   // Close button
   if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      panel.classList.remove("expanded");
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(panel, closeBtn, () => panel.classList.remove("expanded"));
     });
   }
 }
@@ -1572,11 +1597,15 @@ function initPopup() {
   trailerContainer = document.getElementById("trailerContainer");
   
   if (popupClose) {
-    popupClose.addEventListener("click", closePopup);
+    popupClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(popupOverlay, popupClose, closePopup);
+    });
   }
   if (popupOverlay) {
     popupOverlay.addEventListener("click", (e) => {
-      if (e.target === popupOverlay) closePopup();
+      if (e.target === popupOverlay) triggerOrbitClose(popupOverlay, popupClose, closePopup);
     });
   }
   if (flipCard) {
@@ -1589,7 +1618,16 @@ function initPopup() {
     anchorBtn.addEventListener("click", setAsAnchor);
   }
   if (trailerClose) {
-    trailerClose.addEventListener("click", closeTrailer);
+    trailerClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(trailerOverlay, trailerClose, closeTrailer);
+    });
+  }
+  if (trailerOverlay) {
+    trailerOverlay.addEventListener("click", (e) => {
+      if (e.target === trailerOverlay) triggerOrbitClose(trailerOverlay, trailerClose, closeTrailer);
+    });
   }
 }
 
@@ -1676,7 +1714,7 @@ function setAsAnchor() {
   localStorage.removeItem("anchorFromResults");
   closePopup();
 
-  window.location.href = "../games/constellation.html";
+  window.location.href = "anchor-point.html";
 }
 
 // Init popup on load

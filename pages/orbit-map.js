@@ -386,7 +386,28 @@ function setupDecadeSlider() {
 let currentPanelSort = 'popular';
 
 function setupPanel() {
-  document.getElementById('panelClose').addEventListener('click', closePanel);
+  const panel = document.getElementById('locationPanel');
+  const closeBtn = document.getElementById('panelClose');
+
+  // Rule 17: Black Hole exit trigger.
+  function triggerOrbitClose() {
+    if (!panel || panel.classList.contains('orbit-popup-closing')) return;
+    if (closeBtn) closeBtn.classList.add('closing');
+    panel.classList.add('orbit-popup-closing');
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      if (closeBtn) closeBtn.classList.remove('closing');
+      panel.classList.remove('orbit-popup-closing');
+      closePanel();
+    }, reduced ? 200 : 600);
+  }
+
+  closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose();
+  });
   document.getElementById('panelViewAll').addEventListener('click', () => {
     if (currentPanelLabel && currentPanelLocData) {
       localStorage.setItem('orbit_map_results', JSON.stringify({
@@ -398,10 +419,10 @@ function setupPanel() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePanel();
+    if (e.key === 'Escape') triggerOrbitClose();
   });
 
-  map.on('click', () => closePanel());
+  map.on('click', () => triggerOrbitClose());
 }
 
 function openLocationPanel(label, locData) {

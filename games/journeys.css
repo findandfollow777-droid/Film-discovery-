@@ -2040,6 +2040,74 @@ html, body {
 }
 
 /* ============================================
+   ABBA SERIES — Added 2026-05-02
+   .series-complete tints the holding caption gold when the
+   series has ended. #remindOpponentBtn is injected next to
+   #counterChallengeBtn when ABBA says the next round is the
+   opponent's to create.
+============================================ */
+.holding-series-info.series-complete {
+  color: var(--accent-gold);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(var(--accent-gold-rgb), 0.5);
+}
+
+#remindOpponentBtn {
+  background: var(--cosmic-blue);
+  color: var(--film-white);
+  border: 2px solid var(--accent-cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#remindOpponentBtn:hover {
+  background: var(--accent-cyan);
+  color: var(--space-black);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
+}
+
+/* ============================================
+   RESULT BANNER (rivalry framing) — Added 2026-05-02
+   Sits inside #holdingResultBlock alongside the par verdict.
+   .won = green (you beat them on par), .lost = red (they beat you),
+   .tied = cyan.
+============================================ */
+.result-banner {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 12px 20px;
+  margin: 14px auto 6px;
+  max-width: 360px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+.result-banner.won {
+  background: rgba(16, 185, 129, 0.18);
+  border: 2px solid var(--success-green);
+  color: var(--success-green);
+}
+.result-banner.lost {
+  background: rgba(239, 68, 68, 0.18);
+  border: 2px solid var(--danger-red);
+  color: var(--danger-red);
+}
+.result-banner.tied {
+  background: rgba(0, 217, 255, 0.18);
+  border: 2px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* ============================================
    RESPONSIVE
 ============================================ */
 
@@ -2064,6 +2132,7 @@ html, body {
   .celebration-title { font-size: 18px; }
   .score-num { font-size: 32px; }
   .score-verdict { font-size: 14px; padding: 8px 18px; letter-spacing: 1.5px; }
+  .result-banner { font-size: 13px; letter-spacing: 1.5px; padding: 10px 14px; }
 
   .cel-btn { padding: 12px 20px; font-size: 13px; }
 

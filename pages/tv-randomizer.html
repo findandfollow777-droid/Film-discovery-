@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tv-randomizer.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <style>
     /* ============================================
        THREE-PICK RESULTS
@@ -479,9 +480,9 @@
   </main>
 
   <!-- HELP MODAL -->
-  <div class="modal-overlay" id="helpModal" hidden>
+  <div class="modal-overlay" id="helpModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="helpClose">&#x2715;</button>
+      <button class="modal-close orbit-close" id="helpClose" aria-label="Close">&#x2715;</button>
       <h2 class="modal-title">How It Works</h2>
       <div class="help-content">
         <div class="help-step">
@@ -517,9 +518,9 @@
   </div>
 
   <!-- HISTORY MODAL -->
-  <div class="modal-overlay" id="historyModal" hidden>
+  <div class="modal-overlay" id="historyModal" data-orbit-popup hidden>
     <div class="modal-content">
-      <button class="modal-close" id="historyClose">&#x2715;</button>
+      <button class="modal-close orbit-close" id="historyClose" aria-label="Close">&#x2715;</button>
       <h2 class="modal-title">Spin History</h2>
       <div class="history-list" id="historyList">
         <p class="history-empty">No spins yet. Give it a whirl!</p>

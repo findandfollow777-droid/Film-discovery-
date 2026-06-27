@@ -919,25 +919,8 @@ html, body {
   color: var(--ghost-gray);
 }
 
-.list-modal-close {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--muted-silver);
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition-smooth);
-}
-
-.list-modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--film-white);
-}
+/* .list-modal-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). Header is flex-positioned. */
 
 .list-modal-body {
   flex: 1;

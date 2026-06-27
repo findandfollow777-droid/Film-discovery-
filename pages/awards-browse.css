@@ -27,7 +27,7 @@ html, body {
   background: var(--deep-void);
   color: var(--film-white);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 [hidden] { display: none !important; }
@@ -215,6 +215,11 @@ html, body {
   scrollbar-width: none;
   background: rgba(10, 14, 23, 0.6);
   border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+  position: sticky;
+  top: 56px;
+  z-index: 99;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .festival-tabs::-webkit-scrollbar { display: none; }
@@ -286,7 +291,7 @@ html, body {
   grid-template-columns: 220px 1fr;
   min-height: calc(100vh - 120px);
   max-width: 100%;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 /* ============================================
@@ -297,8 +302,8 @@ html, body {
   padding: 20px 16px;
   border-right: 1px solid rgba(255, 215, 0, 0.08);
   position: sticky;
-  top: 60px;
-  height: calc(100vh - 120px);
+  top: 104px;
+  height: calc(100vh - 104px);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 215, 0, 0.2) transparent;
@@ -396,12 +401,19 @@ html, body {
   overflow-x: auto;
   scrollbar-width: none;
   position: sticky;
-  top: 0;
+  top: 104px;
   z-index: 21;
+  background: var(--deep-void);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   background: linear-gradient(180deg, rgba(10, 14, 23, 0.98) 0%, rgba(10, 14, 23, 0.9) 80%, transparent 100%);
   backdrop-filter: blur(8px);
 }
 
+.decade-bar.scroll-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
 .decade-bar::-webkit-scrollbar { display: none; }
 .decade-bar:empty { display: none; }
 
@@ -442,12 +454,19 @@ html, body {
   overflow-x: auto;
   scrollbar-width: none;
   position: sticky;
-  top: 42px;
+  top: 148px;
   z-index: 20;
+  background: var(--deep-void);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   background: linear-gradient(180deg, rgba(10, 14, 23, 0.95) 0%, rgba(10, 14, 23, 0.85) 80%, transparent 100%);
   backdrop-filter: blur(8px);
 }
 
+.year-pills.scroll-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
 .year-pills::-webkit-scrollbar { display: none; }
 
 .year-pill {
@@ -506,11 +525,40 @@ html, body {
   margin-bottom: 16px;
 }
 
+/* Category groups (All Categories view) */
+.category-group {
+  margin-bottom: 2rem;
+}
+
+.category-group-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+}
+
+.category-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.category-tiles .award-tile {
+  width: 140px;
+  flex-shrink: 0;
+}
+
 /* ============================================
    AWARD TILE
 ============================================ */
 
 .award-tile {
+  position: relative;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   border-radius: 10px;
@@ -547,11 +595,248 @@ html, body {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  gap: 10px;
   color: var(--ghost-gray);
-  background: rgba(15, 20, 30, 0.8);
+  background: var(--nebula-dark, rgba(15, 20, 30, 0.8));
+  border: 1px solid var(--cosmic-blue, #1e293b);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.award-tile-poster .no-poster .og {
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.award-tile-poster .no-poster-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: var(--muted-silver, #94a3b8);
+  text-align: center;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Movie tiles: poster fills full height, info panel overlays on hover ── */
+.award-tile .award-tile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 10px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.award-tile:hover .award-tile-info {
+  opacity: 1;
+  pointer-events: auto;
+}
+.award-tile .award-tile-poster {
+  height: 100%;
+}
+.award-tile .award-tile-poster img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Person tiles (filtered view, tmdb_id = 0) ── */
+.award-tile[data-tmdb-id="0"] .no-poster.person-tile-bg {
+  background: linear-gradient(160deg, var(--nebula-dark) 0%, rgba(30,41,59,0.8) 100%);
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0;
+  position: relative;
+}
+
+.person-tile-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding-bottom: 4px;
+}
+
+.person-tile-name {
+  font-family: var(--font-display, 'Orbitron', monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.person-tile-film {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-style: italic;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Role tag ── */
+.role-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: var(--font-display, 'Orbitron', monospace);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+/* Unified role-tag scheme: actor & actress = green, director = cyan.
+   Aligns legacy person/flip tiles with the picture/director/actor/craft palette. */
+.role-tag.actor,
+.role-tag.actress {
+  background: rgba(var(--success-green-rgb), 0.12);
+  color: var(--success-green);
+  border: 1px solid rgba(var(--success-green-rgb), 0.3);
+}
+.role-tag.director {
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+}
+
+/* ── Glow classes (person tiles & flip tile backs) ── */
+.glow-actor,
+.glow-actress {
+  border: 1px solid rgba(var(--success-green-rgb), 0.28);
+  box-shadow: 0 0 12px rgba(var(--success-green-rgb), 0.25);
+}
+.glow-director {
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.25);
+}
+
+/* Nominees: halved glow opacity */
+.glow-nominee.glow-actor,
+.glow-nominee.glow-actress {
+  box-shadow: 0 0 12px rgba(var(--success-green-rgb), 0.12);
+}
+.glow-nominee.glow-director {
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.12);
+}
+
+/* ============================================
+   FLIP TILE
+============================================ */
+
+.award-tile.tile-wrap {
+  perspective: 800px;
+  overflow: visible;
+  background: transparent;
+}
+
+/* Override the standard .award-tile hover lift — flip handles its own animation */
+.award-tile.tile-wrap:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 10px;
+  aspect-ratio: 2/3;
+}
+
+.tile-wrap:hover .tile-inner {
+  transform: rotateY(180deg);
+}
+
+.tile-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.tile-front {
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+}
+.tile-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-back {
+  transform: rotateY(180deg);
+  background: rgba(10, 14, 26, 0.98);
+}
+
+.tile-back .person-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+}
+
+.tile-back .person-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(5, 8, 18, 0.97) 0%,
+    rgba(5, 8, 18, 0.65) 40%,
+    rgba(5, 8, 18, 0.08) 100%);
+}
+
+.tile-back .person-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+}
+
+.tile-back .person-name {
+  font-family: var(--font-display, 'Orbitron', monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tile-back .person-film {
+  font-family: var(--font-body, 'Barlow', sans-serif);
+  font-size: 11px;
+  color: var(--muted-silver);
+  font-style: italic;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Winner badge — Orbit rings + star */
@@ -776,28 +1061,13 @@ html, body {
   transform: translateX(0);
 }
 
+/* .info-panel-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .info-panel-close {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--muted-silver);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
   z-index: 1;
-}
-
-.info-panel-close:hover {
-  border-color: var(--awards-gold);
-  color: var(--awards-gold);
 }
 
 .info-panel-content {
@@ -926,27 +1196,12 @@ html, body {
   overflow-y: auto;
 }
 
+/* .modal-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .modal-close {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--muted-silver);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.modal-close:hover {
-  border-color: var(--awards-gold);
-  color: var(--awards-gold);
 }
 
 .modal-title {
@@ -1007,6 +1262,7 @@ html, body {
 .awards-tooltip.visible {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .awards-tooltip-title {
@@ -1030,7 +1286,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  max-height: 260px;
+  max-height: 50vh;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 215, 0, 0.2) transparent;
@@ -1155,7 +1411,9 @@ html, body {
   }
 
   .category-sidebar {
-    position: static;
+    position: sticky;
+    top: 96px;
+    z-index: 98;
     height: auto;
     border-right: none;
     border-bottom: 1px solid rgba(255, 215, 0, 0.08);
@@ -1164,6 +1422,7 @@ html, body {
     gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
+    background: var(--deep-void);
   }
 
   .category-sidebar::-webkit-scrollbar { display: none; }
@@ -1233,4 +1492,448 @@ html, body {
   .award-badge-nominee { width: 20px; height: 20px; }
   .award-badge-nominee .badge-ring-inner { inset: 3px; }
   .award-badge-nominee .badge-core svg { width: 8px; height: 8px; }
+}
+
+/* ============================================================
+   AWARDS HUB NAV — Added April 2026
+   Secondary nav row linking Browse / Guide / Stats / Stories
+   ============================================================ */
+
+.awards-hub-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.hub-nav-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ghost-gray);
+  text-transform: uppercase;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.hub-nav-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(var(--ghost-gray-rgb, 100, 116, 139), 0.25);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.hub-nav-btn {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--ghost-gray-rgb, 100, 116, 139), 0.3);
+  background: transparent;
+  color: var(--muted-silver);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.hub-nav-btn:hover {
+  border-color: rgba(var(--accent-cyan-rgb), 0.4);
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-cyan-rgb), 0.05);
+}
+
+/* Hub-nav active state lives in the Cannes-Amber Identity Layer below
+   (single source of truth — see .awards-hub-nav .hub-nav-btn.active). */
+
+/* Guide CTA at bottom of info panel */
+.info-panel-guide-cta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(var(--fest-cannes-rgb), 0.2);
+}
+
+.guide-cta-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--ghost-gray);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.guide-cta-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--fest-cannes-rgb), 0.25);
+  background: rgba(var(--fest-cannes-rgb), 0.06);
+  text-decoration: none;
+  color: var(--fest-cannes);
+  font-family: var(--font-body);
+  font-size: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.guide-cta-link:hover {
+  border-color: rgba(var(--fest-cannes-rgb), 0.5);
+  background: rgba(var(--fest-cannes-rgb), 0.12);
+}
+
+.guide-cta-arrow {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+@media (max-width: 650px) {
+  .hub-nav-label,
+  .hub-nav-divider {
+    display: none;
+  }
+  .hub-nav-btn {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+}
+
+/* ============================================================
+   TILE YEAR LINE — Added April 2026
+   Film release year shown in hover panel, below nominee name
+   ============================================================ */
+
+.tile-year-line {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--muted-silver);
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  line-height: 1;
+}
+
+.tile-year-val {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+/* ============================================================
+   AWARDS BROWSE — CANNES-AMBER IDENTITY LAYER
+   Added 2026-05-05 — Prompt 1: Core Landmark Features
+   Page identity colour: --fest-cannes (per handover spec).
+   Overrides hub-nav active tint, adds ceremony banner,
+   toggleable landmark strip, notable dot on landmark wins,
+   role tags (picture/director/actor/craft), per-festival
+   tile glow vars.
+   ============================================================ */
+
+/* — Hub Nav active retint to Cannes Amber — */
+.awards-hub-nav .hub-nav-btn.active {
+  border-color: rgba(var(--fest-cannes-rgb), 0.6);
+  color: var(--fest-cannes);
+  background: rgba(var(--fest-cannes-rgb), 0.12);
+  box-shadow: 0 0 14px rgba(var(--fest-cannes-rgb), 0.18);
+}
+.awards-hub-nav .hub-nav-btn.active:hover {
+  border-color: rgba(var(--fest-cannes-rgb), 0.85);
+  color: var(--fest-cannes);
+  background: rgba(var(--fest-cannes-rgb), 0.18);
+}
+
+/* — Ceremony Banner — */
+.ceremony-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  margin: 12px 24px;
+  border: 1px solid rgba(var(--fest-cannes-rgb), 0.18);
+  background: linear-gradient(135deg,
+    rgba(var(--fest-cannes-rgb), 0.05) 0%,
+    rgba(var(--deep-void-rgb), 0.7) 100%);
+  border-radius: var(--radius-sm);
+}
+
+.ceremony-banner-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ceremony-banner-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--film-white);
+}
+
+.ceremony-banner-meta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted-silver);
+}
+
+.landmark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(var(--fest-cannes-rgb), 0.4);
+  background: rgba(var(--fest-cannes-rgb), 0.1);
+  color: var(--fest-cannes);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.landmark-btn:hover {
+  background: rgba(var(--fest-cannes-rgb), 0.2);
+  border-color: rgba(var(--fest-cannes-rgb), 0.7);
+  box-shadow: 0 0 14px rgba(var(--fest-cannes-rgb), 0.25);
+}
+
+.landmark-btn.is-empty {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.landmark-btn-glyph {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.landmark-btn-count { font-weight: 700; }
+
+/* — Landmark Strip (toggleable prose panel) — */
+.landmark-strip {
+  margin: 0 24px 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--fest-cannes);
+  background: linear-gradient(135deg,
+    rgba(var(--fest-cannes-rgb), 0.08) 0%,
+    rgba(var(--deep-void-rgb), 0.95) 100%);
+  display: none;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.landmark-strip.is-visible { display: flex; }
+
+.landmark-strip-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--fest-cannes);
+}
+
+.landmark-strip-prose {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--film-white);
+}
+
+.landmark-strip-prose strong {
+  color: var(--fest-cannes);
+  font-weight: 600;
+}
+
+/* — Notable dot on landmark wins — */
+.tile-notable-dot {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fest-cannes);
+  box-shadow: 0 0 8px var(--fest-cannes), 0 0 14px rgba(var(--fest-cannes-rgb), 0.5);
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* — Role tags (color-coded by category type) —
+   Compose with existing .role-tag base styles.
+   Existing .actor/.actress/.director variants left untouched. */
+.role-tag.role-picture {
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  color: var(--accent-gold);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
+}
+
+.role-tag.role-director {
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+}
+
+.role-tag.role-actor {
+  background: rgba(var(--success-green-rgb), 0.1);
+  color: var(--success-green);
+  border: 1px solid rgba(var(--success-green-rgb), 0.25);
+}
+
+.role-tag.role-craft {
+  background: rgba(var(--muted-silver-rgb), 0.1);
+  color: var(--muted-silver);
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.25);
+}
+
+/* — Festival-specific tile glows — */
+.award-tile.fest-oscar  { --tile-glow: rgba(var(--fest-oscar-rgb),  0.45); }
+.award-tile.fest-cannes { --tile-glow: rgba(var(--fest-cannes-rgb), 0.45); }
+.award-tile.fest-venice { --tile-glow: rgba(var(--fest-venice-rgb), 0.45); }
+.award-tile.fest-berlin { --tile-glow: rgba(var(--fest-berlin-rgb), 0.45); }
+.award-tile.fest-bafta  { --tile-glow: rgba(var(--fest-bafta-rgb),  0.45); }
+.award-tile.fest-globe  { --tile-glow: rgba(var(--fest-globe-rgb),  0.45); }
+
+.award-tile[class*="fest-"]:hover {
+  box-shadow: 0 0 18px var(--tile-glow, rgba(var(--accent-rgb), 0.3));
+}
+
+/* — Mobile rules (Rule 15) — */
+@media (max-width: 900px) {
+  .ceremony-banner,
+  .landmark-strip { margin-left: 16px; margin-right: 16px; }
+}
+
+@media (max-width: 650px) {
+  .ceremony-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+  .landmark-btn { justify-content: center; }
+  .ceremony-banner,
+  .landmark-strip {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .ceremony-banner-title { font-size: 12px; }
+  .ceremony-banner-meta { font-size: 11px; }
+  .landmark-strip-prose { font-size: 12px; }
+}
+
+/* ============================================================
+   AWARDS BROWSE — FILM-CATEGORY OVERLAY TILES + GROUPED SIDEBAR
+   Added 2026-05-05 — Prompt 2
+   • Movie tiles in film categories (Best Picture, Best Film,
+     Palme d'Or, Golden Lion, Golden Bear, Best Drama,
+     Best Comedy/Musical) get a poster-bleed treatment with the
+     existing .award-tile-info anchored as a bottom gradient
+     overlay. Markup unchanged — only style switches via the
+     `.is-film-cat` class set by JS.
+   • Sidebar groups categories under .cat-group-label headers.
+   ============================================================ */
+
+/* — Film-category overlay tile — */
+.award-tile.is-film-cat { position: relative; }
+
+.award-tile.is-film-cat .award-tile-poster {
+  aspect-ratio: 2 / 3;
+}
+
+.award-tile.is-film-cat .award-tile-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+.award-tile.is-film-cat .award-tile-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--film-white);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.award-tile.is-film-cat .award-tile-meta {
+  font-size: 11px;
+  color: var(--muted-silver);
+  margin-top: 3px;
+}
+
+.award-tile.is-film-cat .tile-year-line {
+  font-size: 10px;
+  color: var(--muted-silver);
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  line-height: 1;
+}
+
+.award-tile.is-film-cat .tile-year-val {
+  color: var(--film-white);
+  font-weight: 600;
+}
+
+.award-tile.is-film-cat.nominee,
+.award-tile.is-film-cat:not(.winner-tile) {
+  opacity: 0.85;
+}
+
+.award-tile.is-film-cat.winner-tile { opacity: 1; }
+
+@media (max-width: 650px) {
+  .award-tile.is-film-cat .award-tile-info { padding: 8px; }
+  .award-tile.is-film-cat .award-tile-title { font-size: 11px; }
+  .award-tile.is-film-cat .award-tile-meta { font-size: 10px; }
+  .award-tile.is-film-cat .tile-year-line { font-size: 9px; }
+}
+
+/* — Grouped Category Sidebar — */
+.cat-group-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  margin-top: 16px;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.cat-group-label:first-of-type { margin-top: 0; }
+
+/* Cannes-Amber hover override on the existing .cat-info-btn —
+   keeps existing layout (16px circle, currentColor border). */
+.category-item .cat-info-btn:hover {
+  border-color: var(--fest-cannes);
+  color: var(--fest-cannes);
+  background: rgba(var(--fest-cannes-rgb), 0.1);
+}
+
+@media (max-width: 900px) {
+  .cat-group-label { font-size: 8px; }
 }

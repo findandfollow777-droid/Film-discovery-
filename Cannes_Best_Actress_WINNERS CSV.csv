@@ -1,0 +1,96 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+0,Michèle Morgan,1946,Cannes,Best Actress,TRUE,La symphonie pastorale
+0,Isa Miranda,1949,Cannes,Best Actress,TRUE,The Walls of Malapaga
+0,Bette Davis,1951,Cannes,Best Actress,TRUE,All About Eve
+0,Lee Grant,1952,Cannes,Best Actress,TRUE,Detective Story
+0,Giulietta Masina,1955,Cannes,Best Actress,TRUE,Cabiria
+0,Eva Dahlbeck,1955,Cannes,Best Actress,TRUE,Smiles of a Summer Night
+0,Vera Kuznetsova,1955,Cannes,Best Actress,TRUE,A Big Family
+0,Nadia Gray,1955,Cannes,Best Actress,TRUE,Meridian Unknown
+0,Silvana Mangano,1955,Cannes,Best Actress,TRUE,Mambo
+0,Susan Hayward,1956,Cannes,Best Actress,TRUE,I'll Cry Tomorrow
+0,Giulietta Masina,1957,Cannes,Best Actress,TRUE,Nights of Cabiria
+0,Eva Dahlbeck,1958,Cannes,Best Actress,TRUE,Brink of Life
+0,Bibi Andersson,1958,Cannes,Best Actress,TRUE,Brink of Life
+0,Barbro Hiort af Ornäs,1958,Cannes,Best Actress,TRUE,Brink of Life
+0,Ingrid Thulin,1958,Cannes,Best Actress,TRUE,Brink of Life
+0,Simone Signoret,1959,Cannes,Best Actress,TRUE,Room at the Top
+0,Melina Mercouri,1960,Cannes,Best Actress,TRUE,Never on Sunday
+0,Sophia Loren,1961,Cannes,Best Actress,TRUE,Two Women
+0,Katharine Hepburn,1962,Cannes,Best Actress,TRUE,Long Day's Journey into Night
+0,Rita Tushingham,1962,Cannes,Best Actress,TRUE,A Taste of Honey
+0,Marina Vlady,1963,Cannes,Best Actress,TRUE,Queen Bee
+0,Anne Bancroft,1964,Cannes,Best Actress,TRUE,The Pumpkin Eater
+0,Samantha Eggar,1965,Cannes,Best Actress,TRUE,The Collector
+0,Vanessa Redgrave,1966,Cannes,Best Actress,TRUE,Morgan: A Suitable Case for Treatment
+0,Pia Degermark,1967,Cannes,Best Actress,TRUE,Elvira Madigan
+0,Ottavia Piccolo,1970,Cannes,Best Actress,TRUE,Metello
+0,Kitty Winn,1971,Cannes,Best Actress,TRUE,Panic in Needle Park
+0,Susannah York,1972,Cannes,Best Actress,TRUE,Images
+0,Joanne Woodward,1973,Cannes,Best Actress,TRUE,The Effect of Gamma Rays on Man-in-the-Moon Marigolds
+0,Marie-José Nat,1974,Cannes,Best Actress,TRUE,The Violins of the Ball
+0,Valerie Perrine,1975,Cannes,Best Actress,TRUE,Lenny
+0,Dominique Sanda,1976,Cannes,Best Actress,TRUE,The Inheritance
+0,Shelley Duvall,1977,Cannes,Best Actress,TRUE,Three Women
+0,Monique Mercure,1977,Cannes,Best Actress,TRUE,"J.A. Martin, Photographer"
+0,Isabelle Huppert,1978,Cannes,Best Actress,TRUE,Violette Nozière
+0,Sally Field,1979,Cannes,Best Actress,TRUE,Norma Rae
+0,Anouk Aimée,1980,Cannes,Best Actress,TRUE,Leap into the Void
+0,Isabelle Adjani,1981,Cannes,Best Actress,TRUE,Possession
+0,Isabelle Adjani,1981,Cannes,Best Actress,TRUE,Quartet
+0,Jadwiga Jankowska-Cieślak,1982,Cannes,Best Actress,TRUE,Another Way
+0,Hanna Schygulla,1983,Cannes,Best Actress,TRUE,The Story of Piera
+0,Helen Mirren,1984,Cannes,Best Actress,TRUE,Cal
+0,Norma Aleandro,1985,Cannes,Best Actress,TRUE,The Official Story
+0,Fernanda Torres,1985,Cannes,Best Actress,TRUE,Foreign Land
+0,Barbara Hershey,1987,Cannes,Best Actress,TRUE,Shy People
+0,Barbara Hershey,1988,Cannes,Best Actress,TRUE,A World Apart
+0,Jodhi May,1988,Cannes,Best Actress,TRUE,A World Apart
+0,Linda Mvusi,1988,Cannes,Best Actress,TRUE,A World Apart
+0,Meryl Streep,1989,Cannes,Best Actress,TRUE,A Cry in the Dark
+0,Krystyna Janda,1990,Cannes,Best Actress,TRUE,Interrogation
+0,Irène Jacob,1991,Cannes,Best Actress,TRUE,The Double Life of Véronique
+0,Pernilla August,1992,Cannes,Best Actress,TRUE,Best Intentions
+0,Holly Hunter,1993,Cannes,Best Actress,TRUE,The Piano
+0,Virna Lisi,1994,Cannes,Best Actress,TRUE,Queen Margot
+0,Helen Mirren,1995,Cannes,Best Actress,TRUE,The Madness of King George
+0,Brenda Blethyn,1996,Cannes,Best Actress,TRUE,Secrets & Lies
+0,Kathy Burke,1997,Cannes,Best Actress,TRUE,Nil by Mouth
+0,Elodie Bouchez,1998,Cannes,Best Actress,TRUE,The Dreamlife of Angels
+0,Natacha Régnier,1998,Cannes,Best Actress,TRUE,The Dreamlife of Angels
+0,Séverine Caneele,1999,Cannes,Best Actress,TRUE,L'humanité
+0,Björk,2000,Cannes,Best Actress,TRUE,Dancer in the Dark
+0,Isabelle Huppert,2001,Cannes,Best Actress,TRUE,The Piano Teacher
+0,Kati Outinen,2002,Cannes,Best Actress,TRUE,The Man Without a Past
+0,Marie-Josée Croze,2003,Cannes,Best Actress,TRUE,The Barbarian Invasions
+0,Maggie Cheung,2004,Cannes,Best Actress,TRUE,Clean
+0,Hanna Laslo,2005,Cannes,Best Actress,TRUE,Free Zone
+0,Penélope Cruz,2006,Cannes,Best Actress,TRUE,Volver
+0,Hafsia Herzi,2006,Cannes,Best Actress,TRUE,Volver
+0,Yohana Cobo,2006,Cannes,Best Actress,TRUE,Volver
+0,Blanca Portillo,2006,Cannes,Best Actress,TRUE,Volver
+0,Carmen Machi,2006,Cannes,Best Actress,TRUE,Volver
+0,Lola Dueñas,2006,Cannes,Best Actress,TRUE,Volver
+0,Jeon Do-yeon,2007,Cannes,Best Actress,TRUE,Secret Sunshine
+0,Sandra Corveloni,2008,Cannes,Best Actress,TRUE,Linha de Passe
+0,Charlotte Gainsbourg,2009,Cannes,Best Actress,TRUE,Antichrist
+0,Juliette Binoche,2010,Cannes,Best Actress,TRUE,Certified Copy
+0,Kirsten Dunst,2011,Cannes,Best Actress,TRUE,Melancholia
+0,Cristina Flutur,2012,Cannes,Best Actress,TRUE,Beyond the Hills
+0,Cosmina Stratan,2012,Cannes,Best Actress,TRUE,Beyond the Hills
+0,Bérénice Bejo,2013,Cannes,Best Actress,TRUE,The Past
+0,Julianne Moore,2014,Cannes,Best Actress,TRUE,Maps to the Stars
+0,Emmanuelle Bercot,2015,Cannes,Best Actress,TRUE,Mon Roi
+0,Rooney Mara,2015,Cannes,Best Actress,TRUE,Carol
+0,Jaclyn Jose,2016,Cannes,Best Actress,TRUE,Ma' Rosa
+0,Diane Kruger,2017,Cannes,Best Actress,TRUE,In the Fade
+0,Samal Yeslyamova,2018,Cannes,Best Actress,TRUE,Ayka
+0,Emily Beecham,2019,Cannes,Best Actress,TRUE,Little Joe
+0,Renate Reinsve,2021,Cannes,Best Actress,TRUE,The Worst Person in the World
+0,Zar Amir Ebrahimi,2022,Cannes,Best Actress,TRUE,Holy Spider
+0,Merve Dizdar,2023,Cannes,Best Actress,TRUE,About Dry Grasses
+0,Karla Sofía Gascón,2024,Cannes,Best Actress,TRUE,Emilia Pérez
+0,Zoe Saldaña,2024,Cannes,Best Actress,TRUE,Emilia Pérez
+0,Selena Gomez,2024,Cannes,Best Actress,TRUE,Emilia Pérez
+0,Adriana Paz,2024,Cannes,Best Actress,TRUE,Emilia Pérez
+0,Nadia Melliti,2025,Cannes,Best Actress,TRUE,The Little Sister

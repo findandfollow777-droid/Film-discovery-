@@ -116,7 +116,7 @@ body {
 .pp-hero-photo {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   border: 3px solid var(--accent-cyan);
   box-shadow: 0 0 24px rgba(0, 217, 255, 0.3), 0 0 60px rgba(0, 217, 255, 0.1);
@@ -488,7 +488,7 @@ body {
 .pp-collab-photo {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   border: 2px solid rgba(255,255,255,0.1);
 }
@@ -748,7 +748,7 @@ body {
 .pp-selection-chip-photo {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
 }
 
@@ -924,20 +924,13 @@ body {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
+/* .pp-awards-modal-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .pp-awards-modal-close {
   position: absolute;
   top: 12px;
   right: 14px;
-  background: none;
-  border: none;
-  color: var(--muted-silver);
-  font-size: 1.4rem;
-  cursor: pointer;
-  line-height: 1;
-  padding: 4px 8px;
-  transition: color 0.2s;
 }
-.pp-awards-modal-close:hover { color: var(--film-white); }
 
 .pp-awards-modal-title {
   font-family: var(--font-display);
@@ -1145,7 +1138,7 @@ body {
 .pp-skeleton-photo {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
 }
 
 .pp-skeleton-name {
@@ -1617,20 +1610,14 @@ body {
   background: rgba(0, 0, 0, 0.92);
 }
 
+/* .pp-lightbox-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .pp-lightbox-close {
   position: absolute;
   top: 16px;
   right: 20px;
-  background: none;
-  border: none;
-  color: var(--film-white);
-  font-size: 2rem;
-  cursor: pointer;
   z-index: 2;
-  opacity: 0.7;
-  transition: opacity 0.2s;
 }
-.pp-lightbox-close:hover { opacity: 1; }
 
 .pp-lightbox-counter {
   position: absolute;
@@ -1713,7 +1700,7 @@ body {
 .pp-sim-photo {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   border: 2px solid rgba(255,255,255,0.08);
 }
@@ -1904,13 +1891,8 @@ body {
   text-transform: uppercase;
   color: var(--accent-cyan);
 }
-.pp-reorder-modal-close {
-  background: none;
-  border: none;
-  color: var(--muted-silver);
-  font-size: 1.3rem;
-  cursor: pointer;
-}
+/* .pp-reorder-modal-close legacy class — visual styling now lives in
+   orbit-close.css under .orbit-close (Rule 17). Header is flex-positioned. */
 
 .pp-reorder-list {
   list-style: none;

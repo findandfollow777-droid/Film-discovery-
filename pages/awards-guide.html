@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORBIT — Awards Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="awards-guide.css">
+</head>
+<body>
+
+  <!-- COSMIC ATMOSPHERE -->
+  <div class="cosmic-stars"></div>
+  <div class="nebula-glow"></div>
+  <div class="nebula-glow two"></div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <a class="back-link" href="awards-browse.html">&larr; AWARDS</a>
+    <div class="header-eyebrow">THE AWARDS</div>
+    <h1 class="header-title">GUIDE</h1>
+    <p class="header-tagline">Six festivals. A century of cinema. Every prize explained.</p>
+  </header>
+
+  <!-- AWARDS HUB NAV -->
+  <nav class="awards-hub-nav" id="awardsHubNav">
+    <span class="hub-nav-label">Awards Hub</span>
+    <div class="hub-nav-divider"></div>
+    <a href="awards-browse.html" class="hub-nav-btn" data-section="browse">Browse</a>
+    <a href="awards-guide.html" class="hub-nav-btn active" data-section="guide">Guide</a>
+    <a href="awards-stats.html" class="hub-nav-btn" data-section="stats">Stats</a>
+    <a href="awards-stories.html" class="hub-nav-btn" data-section="stories">Stories</a>
+  </nav>
+
+  <!-- FESTIVAL GRID -->
+  <section class="festival-section">
+    <div class="section-header">
+      <h2 class="section-title">The Six</h2>
+      <p class="section-subtitle"><em>From Hollywood prestige to European auteurism — the festivals that shape film history.</em></p>
+    </div>
+
+    <div class="festival-grid">
+
+      <!-- OSCAR -->
+      <a href="awards-guide-festival.html?festival=oscar" class="festival-tile tile-oscar">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="oscar"></div>
+        <div class="tile-content">
+          <p class="tile-aka">Academy Awards</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1929</strong> &middot; Los Angeles</p>
+        </div>
+      </a>
+
+      <!-- CANNES -->
+      <a href="awards-guide-festival.html?festival=cannes" class="festival-tile tile-cannes">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="cannes"></div>
+        <div class="tile-content">
+          <p class="tile-aka">Festival de Cannes</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1946</strong> &middot; France</p>
+        </div>
+      </a>
+
+      <!-- VENICE -->
+      <a href="awards-guide-festival.html?festival=venice" class="festival-tile tile-venice">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="venice"></div>
+        <div class="tile-content">
+          <p class="tile-aka">Mostra del Cinema</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1932</strong> &middot; Italy</p>
+        </div>
+      </a>
+
+      <!-- BERLIN -->
+      <a href="awards-guide-festival.html?festival=berlin" class="festival-tile tile-berlin">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="berlin"></div>
+        <div class="tile-content">
+          <p class="tile-aka">Berlinale</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1951</strong> &middot; Germany</p>
+        </div>
+      </a>
+
+      <!-- BAFTA -->
+      <a href="awards-guide-festival.html?festival=bafta" class="festival-tile tile-bafta">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="bafta"></div>
+        <div class="tile-content">
+          <p class="tile-aka">British Academy Film Awards</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1948</strong> &middot; United Kingdom</p>
+        </div>
+      </a>
+
+      <!-- GOLDEN GLOBE -->
+      <a href="awards-guide-festival.html?festival=globe" class="festival-tile tile-globe">
+        <div class="tile-orbital-ring"></div>
+        <div class="tile-orbital-ring inner"></div>
+        <div class="tile-trophy" data-festival="globe"></div>
+        <div class="tile-content">
+          <p class="tile-aka">Golden Globe Awards</p>
+          <div class="tile-divider"></div>
+          <p class="tile-meta">Est. <strong>1944</strong> &middot; Los Angeles</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- AGES OF CINEMA -->
+  <section class="ages-section">
+    <div class="section-header">
+      <h2 class="section-title">Ages of Cinema</h2>
+      <p class="section-subtitle"><em>The eras that defined how films are made, watched, and celebrated.</em></p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-track"></div>
+
+      <div class="era-marker above" style="left: 4%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">Studio Era</span>
+          <span class="era-years">1929 &ndash; 1948</span>
+        </div>
+      </div>
+
+      <div class="era-marker below" style="left: 20%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">European Awakening</span>
+          <span class="era-years">1946 &ndash; 1959</span>
+        </div>
+      </div>
+
+      <div class="era-marker above" style="left: 40%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">New Hollywood</span>
+          <span class="era-years">1967 &ndash; 1980</span>
+        </div>
+      </div>
+
+      <div class="era-marker below" style="left: 58%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">Indie Boom</span>
+          <span class="era-years">1989 &ndash; 2005</span>
+        </div>
+      </div>
+
+      <div class="era-marker above" style="left: 76%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">Global Pivot</span>
+          <span class="era-years">2010 &ndash; 2019</span>
+        </div>
+      </div>
+
+      <div class="era-marker below" style="left: 92%">
+        <div class="era-star"></div>
+        <div class="era-label">
+          <span class="era-name">Streaming Era</span>
+          <span class="era-years">2020 &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../data/festival-glyphs.js"></script>
+  <script>window.renderFestivalGlyphs();</script>
+</body>
+</html>

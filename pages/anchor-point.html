@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orbit – Constellation View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="anchor-point.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../components/moviecube.css">
+  <link rel="stylesheet" href="../components/people-cube.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
+  <style>
+    /* ============================================
+       HUD OVERLAY CHROME
+    ============================================ */
+    .hud-top-bar {
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 20px;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .hud-top-bar > * { pointer-events: auto; }
+
+    .hud-back-btn {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.15em; padding: 6px 14px;
+      border: 1px solid var(--cosmic-blue); border-radius: 3px;
+      background: rgba(0,0,0,0.7); color: var(--accent-cyan);
+      opacity: 0.7; cursor: pointer; text-decoration: none;
+    }
+    .hud-back-btn:hover { opacity: 1; }
+
+    .hud-brand {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hud-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 6px rgba(0,217,255,0.5);
+    }
+    .hud-orbit-name {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      color: var(--accent-cyan); letter-spacing: 0.28em;
+    }
+    .hud-page-name {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      color: var(--ghost-gray); letter-spacing: 0.15em;
+    }
+
+    .hud-hint {
+      font-size: 9px; color: var(--ghost-gray);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANCHOR PANEL (top-left) ── */
+    .hud-anchor-panel {
+      position: absolute; top: 56px; left: 16px;
+      background: rgba(0,0,0,0.82);
+      border: 1px solid var(--cosmic-blue);
+      border-radius: 8px; padding: 14px 16px;
+      width: 216px; z-index: 100;
+    }
+    .hud-anchor-eyebrow {
+      font-family: 'Orbitron', monospace; font-size: 7px;
+      letter-spacing: 0.35em; color: var(--ghost-gray);
+      margin-bottom: 10px;
+    }
+    .hud-anchor-body { display: flex; gap: 10px; align-items: flex-start; }
+    .hud-anchor-poster {
+      width: 40px; flex-shrink: 0; aspect-ratio: 2/3;
+      background: var(--nebula-dark); border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 3px; background-size: cover; background-position: center top;
+    }
+    .hud-anchor-info { flex: 1; min-width: 0; }
+    .hud-anchor-title {
+      font-family: 'Orbitron', monospace; font-size: 13px;
+      color: var(--film-white); line-height: 1.1; margin-bottom: 4px;
+    }
+    .hud-anchor-meta {
+      font-size: 9px; color: var(--ghost-gray);
+      letter-spacing: 0.05em; margin-bottom: 6px; line-height: 1.6;
+    }
+    .hud-anchor-badges {
+      display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px;
+    }
+    .hud-anchor-badge {
+      font-family: 'Orbitron', monospace; font-size: 7px;
+      letter-spacing: 0.08em; padding: 2px 6px;
+      border-radius: 10px; border: 1px solid;
+    }
+    .hud-anchor-cube-btn {
+      width: 100%; font-family: 'Orbitron', monospace; font-size: 8px;
+      letter-spacing: 0.12em; padding: 7px;
+      border: 1px solid rgba(0,217,255,0.2); border-radius: 3px;
+      background: rgba(0,217,255,0.06); color: var(--accent-cyan);
+      cursor: pointer;
+    }
+    .hud-anchor-cube-btn:hover { background: rgba(0,217,255,0.12); }
+
+    /* ── LEGEND (bottom-left) ── */
+    .hud-legend {
+      position: absolute; bottom: 16px; left: 16px;
+      background: rgba(0,0,0,0.80);
+      border: 1px solid rgba(0,217,255,0.15);
+      border-radius: 6px; padding: 10px 14px;
+      z-index: 100;
+    }
+    .hud-legend-title {
+      font-family: 'Orbitron', monospace; font-size: 8px;
+      letter-spacing: 0.2em; color: var(--accent-cyan);
+      opacity: 0.65; margin-bottom: 8px;
+    }
+    .hud-legend-item {
+      display: flex; align-items: center; gap: 7px; margin-bottom: 5px;
+    }
+    .hud-legend-item:last-child { margin-bottom: 0; }
+    .hud-legend-item span { font-size: 9px; color: var(--ghost-gray); }
+    .hud-legend-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .hud-dot-near { background: var(--accent-orange); opacity: 0.85; }
+    .hud-dot-mid { background: var(--accent-cyan); opacity: 0.65; }
+    .hud-dot-far { background: var(--ghost-gray); opacity: 0.5; }
+
+    /* ── ACTIONS (bottom-right) ── */
+    .hud-actions {
+      position: absolute; bottom: 16px; right: 16px;
+      text-align: right; z-index: 100;
+    }
+    .hud-actions-row {
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .hud-film-count {
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.2em; color: var(--ghost-gray);
+      opacity: 0.5; margin-bottom: 8px;
+    }
+    .hud-expand-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 11px 22px;
+      border: 1px solid rgba(168,85,247,0.45); border-radius: 4px;
+      background: rgba(168,85,247,0.08); color: var(--prestige-purple);
+      cursor: pointer; display: inline-flex; align-items: center;
+      gap: 8px; transition: all 0.2s;
+    }
+    .hud-expand-btn:hover { background: rgba(168,85,247,0.14); }
+    .hud-expand-btn.loading { opacity: 0.5; pointer-events: none; }
+
+    /* ============================================================
+       MODIFY SIGNAL — Added 2026-04-30
+       Pre-expand similarity-weight tuner. Button lives beside Expand
+       Universe in the bottom-right HUD; opens a centred modal-style
+       panel above the orbital rings (rings remain visible behind a
+       dim backdrop). 6 factors map 1:1 to the anchor.js scoring keys.
+       ============================================================ */
+    .signal-btn {
+      position: relative;
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 11px 18px;
+      border: 1px solid var(--cosmic-blue);
+      border-radius: var(--radius-pill);
+      background: rgba(0,0,0,0.55);
+      color: var(--ghost-gray);
+      cursor: pointer; display: inline-flex; align-items: center;
+      gap: 8px; transition: all 0.2s;
+    }
+    .signal-btn-icon { opacity: 0.85; }
+    .signal-btn:hover,
+    .signal-btn.open {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .signal-chevron {
+      display: inline-block;
+      font-size: 11px; line-height: 1;
+      transition: transform 0.28s ease;
+      transform: rotate(0deg);
+    }
+    .signal-chevron.open { transform: rotate(180deg); }
+
+    .signal-changed-dot {
+      position: absolute;
+      top: 4px; right: 6px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: var(--shadow-glow-gold);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    .signal-changed-dot.visible { opacity: 1; }
+
+    .signal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(2,4,12,0.72);
+      backdrop-filter: blur(4px);
+      z-index: 199;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+    .signal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .signal-dropdown {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.96);
+      z-index: 200;
+      width: min(460px, calc(100vw - 32px));
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: max-height 0.28s ease, opacity 0.22s ease, transform 0.28s ease;
+    }
+    .signal-dropdown.open {
+      max-height: 80vh;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .signal-panel {
+      background: var(--nebula-dark);
+      border: 1px solid rgba(0,217,255,0.15);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-dramatic);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .signal-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .signal-panel-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px; color: var(--muted-silver);
+      letter-spacing: 0.04em;
+    }
+    .signal-reset-btn {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px; letter-spacing: 0.18em;
+      padding: 6px 12px;
+      border: 1px solid var(--cosmic-blue);
+      border-radius: var(--radius-pill);
+      background: transparent;
+      color: var(--ghost-gray);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .signal-reset-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .signal-factors {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .signal-factor-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 8px 4px;
+    }
+    .signal-factor-icon {
+      flex: 0 0 auto;
+      width: 26px; height: 26px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: var(--film-white);
+    }
+    .signal-factor-meta {
+      flex: 1 1 auto; min-width: 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .signal-factor-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px; letter-spacing: 0.12em;
+      color: var(--film-white);
+    }
+    .signal-factor-desc {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px; color: var(--ghost-gray);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .signal-factor-pips {
+      flex: 0 0 auto; position: relative;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .signal-pip {
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,217,255,0.2);
+      background: transparent;
+      cursor: pointer; padding: 0;
+      transition: all 0.2s;
+    }
+    .signal-pip:hover {
+      border-color: rgba(0,217,255,0.55);
+    }
+    .signal-pip.active[data-color="cyan"] {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: var(--shadow-glow-cyan);
+    }
+    .signal-pip.active[data-color="gold"] {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-glow-gold);
+    }
+    .signal-pip-default-tick {
+      position: absolute; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1px; height: 8px;
+      background: rgba(255,255,255,0.1);
+      pointer-events: none;
+    }
+
+    @media (max-width: 650px) {
+      .hud-actions-row { flex-wrap: wrap; justify-content: flex-end; }
+      .signal-factor-desc { display: none; }
+    }
+
+    /* ── WATCHLIST CONTEXT MENU ── */
+    .wl-context-menu {
+      position: fixed; z-index: 200;
+      background: rgba(0,0,0,0.92);
+      border: 1px solid var(--cosmic-blue);
+      border-radius: 6px; padding: 4px 0;
+      min-width: 180px; display: none;
+    }
+    .wl-context-menu.is-open { display: block; }
+    .wl-context-item {
+      display: block; width: 100%; padding: 8px 16px;
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.1em; border: none; background: transparent;
+      cursor: pointer; text-align: left; transition: background 0.15s;
+    }
+    .wl-context-item:hover { background: rgba(255,255,255,0.05); }
+    .wl-context-item.add { color: var(--accent-cyan); }
+    .wl-context-item.remove { color: var(--danger-red); }
+
+    /* Toast notification */
+    .wl-toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 10px 20px; border-radius: 6px;
+      background: rgba(0,217,255,0.15); border: 1px solid rgba(0,217,255,0.3);
+      color: var(--accent-cyan); font-size: 11px;
+      opacity: 0; transition: all 0.3s ease; z-index: 300;
+      pointer-events: none;
+    }
+    .wl-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Hide old chrome */
+    .constellation-header,
+    .similarity-legend { display: none !important; }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel {
+      position: fixed; top: 0; right: -440px; width: 420px; height: 100vh;
+      background: rgba(5,10,20,0.96); border-left: 1px solid var(--cosmic-blue);
+      z-index: 200; display: flex; flex-direction: column;
+      padding: 24px 24px 32px; transition: right 0.35s cubic-bezier(0.16,1,0.3,1);
+      overflow-y: auto;
+    }
+    .preview-panel.open { right: 0; }
+    .preview-close {
+      position: absolute; top: 16px; right: 16px;
+      background: transparent; border: 1px solid var(--cosmic-blue);
+      border-radius: 3px; color: var(--ghost-gray); font-size: 12px;
+      cursor: pointer; padding: 4px 8px; font-family: 'Orbitron', monospace;
+    }
+    .preview-poster-wrap { width: 100%; margin-bottom: 20px; margin-top: 32px; }
+    .preview-poster {
+      width: 100%; aspect-ratio: 2/3; background-size: cover;
+      background-position: center top; background-color: var(--nebula-dark);
+      border: 1px solid rgba(0,217,255,0.15); border-radius: 8px; margin: 0 auto;
+    }
+    .preview-title {
+      font-family: 'Orbitron', monospace; font-size: 22px;
+      color: var(--film-white); line-height: 1.15; margin-bottom: 8px;
+    }
+    .preview-meta {
+      font-size: 11px; color: var(--muted-silver);
+      letter-spacing: 0.08em; margin-bottom: 14px; line-height: 1.7;
+    }
+    .preview-overview {
+      font-size: 14px; color: var(--ghost-gray);
+      line-height: 1.75; margin-bottom: 24px; flex: 1;
+    }
+    .preview-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+    .preview-anchor-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 14px; width: 100%;
+      border: 1px solid rgba(255,215,0,0.4); border-radius: 4px;
+      background: rgba(255,215,0,0.07); color: var(--accent-gold);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .preview-anchor-btn:hover { background: rgba(255,215,0,0.13); }
+    .preview-cube-btn {
+      font-family: 'Orbitron', monospace; font-size: 10px;
+      letter-spacing: 0.15em; padding: 14px; width: 100%;
+      border: 1px solid rgba(0,217,255,0.3); border-radius: 4px;
+      background: rgba(0,217,255,0.06); color: var(--accent-cyan);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .preview-cube-btn:hover { background: rgba(0,217,255,0.12); }
+    .preview-backdrop {
+      position: fixed; inset: 0; z-index: 199; display: none; cursor: pointer;
+    }
+    .preview-backdrop.open { display: block; }
+
+    /* ── LOADING ANIMATION ── */
+    .orbit-loading-label {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: calc(50% + 90px);
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.3em; color: var(--accent-cyan); opacity: 0.6;
+      z-index: 50; transition: opacity 0.2s;
+    }
+    @keyframes ringPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.015); }
+    }
+    @keyframes anchorGlow {
+      0% { border-color: rgba(255,215,0,0.2); }
+      100% { border-color: rgba(255,215,0,0.7); }
+    }
+    .orbital-ring.pulsing { animation: ringPulse 1.8s ease-in-out infinite; }
+    .anchor-star.loading-glow .anchor-poster {
+      animation: anchorGlow 1.4s ease-in-out infinite alternate;
+    }
+    @keyframes fadeInTile {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .orbit-movie.fade-entering { opacity: 0; animation: fadeInTile 0.4s ease both; }
+    .orbit-movie.fade-done { opacity: 1; transform: translate(-50%, -50%) scale(1); animation: none; }
+    .orbit-movie.selected.fade-done, .orbit-movie.selected { transform: translate(-50%, -50%) scale(1.75) !important; z-index: 50; }
+
+    /* ── COSMOS LOADER ── */
+    .cosmos-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(2,4,12,0.88);
+      backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .cosmos-loader.active { opacity: 1; pointer-events: auto; }
+    .cosmos-loader-inner {
+      position: relative; width: 160px; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cosmos-spinner-wrap {
+      position: relative; width: 120px; height: 120px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cosmos-ring {
+      position: absolute; border-radius: 50%;
+      border: 2px solid transparent;
+    }
+    .cosmos-ring-outer {
+      width: 120px; height: 120px;
+      border-top-color: rgba(0,217,255,0.7);
+      border-right-color: rgba(0,217,255,0.2);
+      animation: cosmos-spin 2s linear infinite;
+    }
+    .cosmos-ring-mid {
+      width: 86px; height: 86px;
+      border-bottom-color: rgba(168,85,247,0.6);
+      border-left-color: rgba(168,85,247,0.15);
+      animation: cosmos-spin 1.4s linear infinite reverse;
+    }
+    .cosmos-ring-inner {
+      width: 52px; height: 52px;
+      border-top-color: rgba(255,215,0,0.6);
+      border-right-color: rgba(255,215,0,0.15);
+      animation: cosmos-spin 1s linear infinite;
+    }
+    .cosmos-core {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,217,255,0.9), rgba(0,217,255,0.2));
+      box-shadow: 0 0 14px rgba(0,217,255,0.5);
+      animation: cosmos-pulse 1.2s ease-in-out infinite alternate;
+    }
+    .cosmos-stars { position: absolute; inset: 0; }
+    .cosmos-loader-label {
+      position: absolute; bottom: -36px; left: 50%;
+      transform: translateX(-50%); white-space: nowrap;
+      font-family: 'Orbitron', monospace; font-size: 9px;
+      letter-spacing: 0.35em; color: var(--accent-cyan);
+      animation: cosmos-label-pulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes cosmos-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes cosmos-pulse {
+      from { transform: scale(0.85); border-color: rgba(0,217,255,0.2); }
+      to { transform: scale(1.15); border-color: rgba(0,217,255,0.8); }
+    }
+    @keyframes cosmos-label-pulse {
+      from { opacity: 0.4; }
+      to { opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SPACE BACKGROUND -->
+  <div class="space-bg"></div>
+  <div class="stars-field"></div>
+  <div class="nebula-glow"></div>
+
+  <!-- OLD HEADER (hidden by CSS) -->
+  <header class="constellation-header">
+    <a href="results.html" class="back-link" id="backNav"></a>
+    <div class="header-title"><span class="title-icon"></span><h1>Constellation View</h1></div>
+    <div class="header-hint"></div>
+  </header>
+
+  <!-- HUD: TOP BAR -->
+  <div class="hud-top-bar">
+    <button class="hud-back-btn" onclick="history.back()">&#x2190; BACK</button>
+    <div class="hud-brand">
+      <div class="hud-dot"></div>
+      <span class="hud-orbit-name">ORBIT</span>
+      <span class="hud-page-name">CONSTELLATION VIEW</span>
+    </div>
+    <span class="hud-hint">Click to explore &middot; Double-click to re-anchor</span>
+  </div>
+
+  <!-- HUD: ANCHOR PANEL -->
+  <div class="hud-anchor-panel" id="hud-anchor-panel">
+    <div class="hud-anchor-eyebrow">ANCHOR FILM</div>
+    <div class="hud-anchor-body">
+      <div class="hud-anchor-poster" id="hud-anchor-poster"></div>
+      <div class="hud-anchor-info">
+        <div class="hud-anchor-title" id="hud-anchor-title">&#x2014;</div>
+        <div class="hud-anchor-meta" id="hud-anchor-meta"></div>
+        <div class="hud-anchor-badges" id="hud-anchor-badges"></div>
+        <button class="hud-anchor-cube-btn" id="hud-anchor-cube-btn">OPEN FILM CUBE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD: LEGEND -->
+  <div class="hud-legend">
+    <div class="hud-legend-title">ORBITAL DISTANCE</div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-near"></div><span>Very Similar</span></div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-mid"></div><span>Similar</span></div>
+    <div class="hud-legend-item"><div class="hud-legend-dot hud-dot-far"></div><span>Less Similar</span></div>
+  </div>
+
+  <!-- HUD: ACTIONS -->
+  <div class="hud-actions">
+    <div class="hud-film-count" id="hud-film-count">&#x2014; FILMS IN ORBIT</div>
+    <div class="hud-actions-row">
+      <button class="signal-btn" id="signalBtn" type="button" aria-expanded="false">
+        <svg class="signal-btn-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="signal-btn-label">MODIFY SIGNAL</span>
+        <span class="signal-chevron" id="signalChevron">&#x25BE;</span>
+        <span class="signal-changed-dot" id="signalChangedDot" aria-hidden="true"></span>
+      </button>
+      <button class="hud-expand-btn" id="hud-expand-btn">
+        <span class="og og-galaxy"></span> EXPAND MY UNIVERSE
+      </button>
+    </div>
+  </div>
+
+  <!-- MODIFY SIGNAL OVERLAY (centred modal-style above the rings) -->
+  <div class="signal-backdrop" id="signalBackdrop"></div>
+  <div class="signal-dropdown" id="signalDropdown" aria-hidden="true">
+    <div class="signal-panel" data-orbit-popup>
+      <div class="signal-panel-header">
+        <span class="signal-panel-label">Adjust what &ldquo;similar&rdquo; means for this anchor</span>
+        <button class="signal-reset-btn" id="signalResetBtn" type="button">Reset</button>
+      </div>
+      <div class="signal-factors" id="signalFactors"></div>
+    </div>
+  </div>
+
+  <!-- ORBITAL VISUALIZATION (preserved) -->
+  <div class="orbital-container" id="orbitalContainer">
+    <div class="orbital-ring ring-1"></div>
+    <div class="orbital-ring ring-2"></div>
+    <div class="orbital-ring ring-3"></div>
+    <div class="orbital-ring ring-4"></div>
+    <div class="anchor-star" id="anchorStar">
+      <img class="anchor-poster" id="anchorPoster" src="" alt="">
+      <div class="anchor-glow"></div>
+      <div class="anchor-label" id="anchorLabel">Loading...</div>
+    </div>
+    <div class="orbit-loading-label" id="orbit-loading-label" hidden>RECONFIGURING ORBIT&#x2026;</div>
+    <div class="expand-universe" id="expandUniverse" hidden>
+      <button class="expand-btn" id="expandBtn">
+        <span class="expand-icon"><span class="og og-sparkle"></span></span>
+        <span class="expand-text">Expand Universe</span>
+      </button>
+      <p class="expand-hint">Add similar films based on genre &amp; themes</p>
+    </div>
+    <div class="orbiting-movies" id="orbitingMovies"></div>
+  </div>
+
+  <!-- MOVIE INFO PANEL (preserved) -->
+  <div class="info-panel" id="infoPanel" data-orbit-popup>
+    <button class="info-close orbit-close" id="infoClose" aria-label="Close">&#x2715;</button>
+    <div class="info-content">
+      <img class="info-poster" id="infoPoster" src="" alt="">
+      <div class="info-details">
+        <h2 class="info-title" id="infoTitle"></h2>
+        <div class="info-meta">
+          <span class="info-year" id="infoYear"></span>
+          <span class="info-rating"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg> <span id="infoRating"></span></span>
+          <span class="info-similarity" id="infoSimilarity"></span>
+        </div>
+        <p class="info-overview" id="infoOverview"></p>
+        <div class="info-actions">
+          <button class="make-anchor-btn" id="makeAnchorBtn">
+            <span class="og og-sparkle"></span> Make This the Anchor
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OLD LEGEND (hidden by CSS) -->
+  <div class="similarity-legend"></div>
+
+  <!-- PREVIEW PANEL -->
+  <div class="preview-panel" id="preview-panel" data-orbit-popup>
+    <button class="preview-close orbit-close" id="preview-close" aria-label="Close">&#x2715;</button>
+    <div class="preview-poster-wrap">
+      <div class="preview-poster" id="preview-poster"></div>
+    </div>
+    <div class="preview-info">
+      <div class="preview-title" id="preview-title"></div>
+      <div class="preview-meta" id="preview-meta"></div>
+      <p class="preview-overview" id="preview-overview"></p>
+    </div>
+    <div class="preview-actions">
+      <button class="preview-anchor-btn" id="preview-anchor-btn">MAKE THIS THE ANCHOR</button>
+      <button class="preview-cube-btn" id="preview-cube-btn">OPEN FULL FILM CUBE</button>
+    </div>
+  </div>
+  <div class="preview-backdrop" id="preview-backdrop"></div>
+
+  <!-- WATCHLIST CONTEXT MENU -->
+  <div class="wl-context-menu" id="wlContextMenu">
+    <button class="wl-context-item" id="wlContextBtn"></button>
+  </div>
+
+  <!-- TOAST -->
+  <div class="wl-toast" id="wlToast"></div>
+
+  <!-- COSMOS LOADER -->
+  <div class="cosmos-loader" id="cosmos-loader">
+    <div class="cosmos-loader-inner">
+      <div class="cosmos-spinner-wrap">
+        <div class="cosmos-ring cosmos-ring-outer"></div>
+        <div class="cosmos-ring cosmos-ring-mid"></div>
+        <div class="cosmos-ring cosmos-ring-inner"></div>
+        <div class="cosmos-core"></div>
+      </div>
+      <div class="cosmos-stars" id="cosmos-stars"></div>
+      <div class="cosmos-loader-label" id="cosmos-loader-label">RECONFIGURING ORBIT</div>
+    </div>
+  </div>
+
+  <!-- Load Nebula Service Module -->
+  <script type="module">
+    import * as nebulaService from '../components/nebula-service.js';
+    window.getMergedNebulaData = nebulaService.getMergedNebulaData;
+    window.getTopWords = nebulaService.getTopWords;
+    window.saveUserReview = nebulaService.saveUserReview;
+    window.getUserReviews = nebulaService.getUserReviews;
+    window.calculateWordFrequencies = nebulaService.calculateWordFrequencies;
+    window.clearUserReviews = nebulaService.clearUserReviews;
+  </script>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../components/taste-service.js"></script>
+  <script src="../components/shortlist-service.js"></script>
+  <script src="../components/watchlist-service.js"></script>
+  <script src="../components/encounter-service.js"></script>
+  <script src="../components/trivia-stats.js"></script>
+  <script src="../components/moviecube.js"></script>
+  <script src="../components/people-cube.js"></script>
+  <script src="anchor-point.js"></script>
+</body>
+</html>

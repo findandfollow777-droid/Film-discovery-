@@ -159,6 +159,26 @@ html, body {
   font-weight: 300;
 }
 
+.landing-back-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 8px 20px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.landing-back-btn:hover {
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.15);
+}
+
 /* ============================================
    LANDING GRID
 ============================================ */
@@ -185,6 +205,8 @@ html, body {
   transition: all 0.3s ease;
   text-decoration: none;
   display: block;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .landing-tile:hover {
@@ -196,6 +218,9 @@ html, body {
 .landing-tile.expanded {
   border-color: rgba(0, 217, 255, 0.5);
   box-shadow: 0 12px 40px rgba(0, 217, 255, 0.2);
+  overflow: visible;
+  position: relative;
+  z-index: 50;
 }
 
 a.landing-tile {
@@ -283,6 +308,7 @@ a.landing-tile {
 
 .quick-search-panel {
   margin-top: 1.5rem;
+  position: relative;
 }
 
 .search-type-row {
@@ -324,6 +350,9 @@ a.landing-tile {
 
 .qs-input {
   flex: 1;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
   padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid rgba(0, 217, 255, 0.2);
@@ -350,12 +379,20 @@ a.landing-tile {
 
 .qs-dropdown {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(600px, 90vw);
+  z-index: 100;
   max-height: 400px;
   overflow-y: auto;
   margin-top: 0.5rem;
   border-radius: 10px;
   border: 1px solid rgba(0, 217, 255, 0.2);
   background: rgba(10, 14, 26, 0.98);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .qs-dropdown::-webkit-scrollbar {
@@ -448,8 +485,6 @@ a.landing-tile {
   font-size: 0.9rem;
   color: var(--film-white);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .qs-result-sub {

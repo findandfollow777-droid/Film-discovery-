@@ -1,0 +1,483 @@
+/* ============================================================
+   ORBIT — Discovery Redesign · Core Control Components
+   Phase 0b-1 — added 2026-05-31
+   Authoritative spec: ORBIT-UI-PATTERNS.md (project root), Part B1 §§1–5.
+
+   Reusable controls consumed by every Discovery tab, built ONCE here:
+     1. axis-chip      (.chip)        — B1 §1
+     2. dual-slider    (.slider)      — B1 §3
+     3. score dial     (.score-dial)  — B1 §4
+     4. histogram      (.histogram)   — B1 §5
+   plus the per-panel axis mechanism (B1 §2).
+
+   COLOUR MODEL (B1 §2): chips + histogram tint to the per-panel --axis;
+   slider + dial fill are ALWAYS the cyan→gold range-family constant —
+   never axis-tinted. Every colour is a variables.css token (Rule 12);
+   no hardcoded hex anywhere in this file.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   AXIS MECHANISM (B1 §2) — foundational, defined first.
+   Any container carrying data-axis="…" sets --axis (an "r, g, b" triple
+   for rgba()) and --axis-hex (the solid colour). Every .chip / .histogram
+   inside inherits these and must NOT hardcode colour. Controls must live
+   inside a [data-axis] container, or --axis is undefined.
+
+   NOTE: the doc scopes these to `.tab-panel[data-axis]`; we use the bare
+   attribute selector so any container (panel, preview cell, sub-section)
+   can establish an axis. Superset of the doc — see Phase 0b-1 report.
+   ------------------------------------------------------------ */
+[data-axis="genre"]      { --axis: var(--prestige-purple-rgb); --axis-hex: var(--prestige-purple); }
+[data-axis="people"]     { --axis: var(--accent-cyan-rgb);     --axis-hex: var(--accent-cyan); }
+[data-axis="awards"]     { --axis: var(--accent-gold-rgb);     --axis-hex: var(--accent-gold); }
+[data-axis="region"],
+[data-axis="setting"]    { --axis: var(--emerald-rgb);          --axis-hex: var(--emerald); }    /* shared */
+[data-axis="stream"]     { --axis: var(--collision-orange-rgb); --axis-hex: var(--collision-orange); }
+[data-axis="era"],
+[data-axis="source"]     { --axis: var(--indigo-rgb);           --axis-hex: var(--indigo); }     /* shared */
+[data-axis="ratings"],
+[data-axis="production"] { --axis: var(--rose-rgb);             --axis-hex: var(--rose); }       /* shared */
+[data-axis="themes"]     { --axis: var(--teal-rgb);             --axis-hex: var(--teal); }
+
+/* ------------------------------------------------------------
+   1. CHIP / AXIS-CHIP (B1 §1)
+   Pill, axis-tinted. Selected = axis gradient + inset glow, text STAYS
+   axis-coloured (never dark). .on.gold swaps the axis for gold (BAFTA +
+   Golden Globe). .is-dormant dims to 0.4.
+
+   NOTE: B1 §1 specifies radius/padding/font/gap/selected/count/dot but
+   leaves the DEFAULT border + :hover unspecified. We fill that gap using
+   Part A's documented border convention (default 0.25 / hover ~0.5),
+   axis-tinted. Flagged in the Phase 0b-1 report for confirmation.
+   ------------------------------------------------------------ */
+.disco-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;                       /* pill — never rounded-rect */
+  font: 12.5px var(--font-body);              /* Barlow */
+  color: var(--axis-hex);                     /* text reads in the axis colour */
+  background: transparent;
+  border: 1px solid rgba(var(--axis), 0.25);  /* default — Part A border convention, axis-tinted */
+  cursor: pointer;
+  transition: background-color 0.3s ease-out,
+              border-color 0.3s ease-out,
+              box-shadow 0.3s ease-out,
+              opacity 0.3s ease-out;
+}
+.disco-chip:hover {
+  border-color: rgba(var(--axis), 0.5);
+  background: rgba(var(--axis), 0.08);
+}
+.disco-chip.on {                              /* selected — text STAYS axis-coloured */
+  background: linear-gradient(180deg, rgba(var(--axis), 0.18), rgba(var(--axis), 0.06));
+  box-shadow: inset 0 0 12px rgba(var(--axis), 0.15);
+  border-color: rgba(var(--axis), 0.45);
+  color: var(--axis-hex);
+}
+.disco-chip.on.gold {                         /* BAFTA + Golden Globe — gold, not axis */
+  background: linear-gradient(180deg, rgba(var(--accent-gold-rgb), 0.18), rgba(var(--accent-gold-rgb), 0.06));
+  box-shadow: inset 0 0 12px rgba(var(--accent-gold-rgb), 0.15);
+  border-color: rgba(var(--accent-gold-rgb), 0.45);
+  color: var(--accent-gold);
+}
+.disco-chip.is-dormant {                      /* designed-but-disabled / awaiting data */
+  opacity: 0.4;
+  cursor: default;
+}
+.disco-chip .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;                   /* = the chip's axis colour */
+}
+.disco-chip .chip-count {
+  font-family: var(--font-display);           /* Orbitron */
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------------
+   2. DUAL-SLIDER (B1 §3)
+   Track 4px, knob 14px, control-height 28px. Fill is ALWAYS cyan→gold —
+   never axis-tinted. Positioning of .fill / .knob is data-driven (set by
+   the consuming tab via inline left/width); this file styles appearance.
+   ------------------------------------------------------------ */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 28px;                               /* control-height */
+}
+.slider .track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+}
+.slider .fill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold));  /* ALWAYS cyan→gold */
+}
+.slider .knob {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--space-black);
+  border: 2px solid var(--accent-cyan);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-out;
+}
+.slider .knob:hover {
+  box-shadow: 0 0 12px rgba(var(--accent-cyan-rgb), 0.5);
+}
+
+/* ------------------------------------------------------------
+   3. SCORE DIAL (B1 §4) — min-only.
+   ~120px ring, 6px stroke, arc in cyan→gold (range-family constant, NOT
+   axis). Number-only readout centred inside the ring; the label is a
+   .score-caption element OUTSIDE/beneath the ring.
+
+   Implementation: SVG ring per the doc (stroke: url(#cyanGold)). The
+   .dial-fill arc length (stroke-dasharray/offset) and the .dial-knob
+   position are data-driven (set inline by the consuming tab). The
+   cyanGold gradient <defs> must exist in the host SVG — its stops are
+   styled below via tokens so the gradient carries no hardcoded hex.
+   ------------------------------------------------------------ */
+.score-dial {
+  position: relative;
+  width: 120px;
+  height: 120px;                              /* 120–130px ring */
+}
+.score-dial svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);                  /* arc starts at 12 o'clock */
+}
+.score-dial .dial-track {
+  fill: none;
+  stroke: rgba(var(--accent-cyan-rgb), 0.12);
+  stroke-width: 6;
+}
+.score-dial .dial-fill {
+  fill: none;
+  stroke: url(#cyanGold);                      /* cyan→gold gradient — range-family constant */
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease-out;
+}
+.score-dial .dial-knob {
+  fill: var(--space-black);
+  stroke: var(--accent-cyan);
+  stroke-width: 2;
+}
+.score-dial .dial-readout {                    /* NUMBER ONLY, centred in the ring */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);            /* Orbitron */
+  font-size: 32px;
+  color: var(--accent-gold);
+}
+/* cyan→gold SVG gradient stops — token-based so the dial carries no hex.
+   Host SVG must include:
+     <linearGradient id="cyanGold" x1="0" y1="0" x2="1" y2="1">
+       <stop class="stop-cyan" offset="0%"/><stop class="stop-gold" offset="100%"/>
+     </linearGradient>  */
+#cyanGold .stop-cyan { stop-color: var(--accent-cyan); }
+#cyanGold .stop-gold { stop-color: var(--accent-gold); }
+.score-caption {                               /* label lives OUTSIDE/beneath the ring */
+  display: block;
+  text-align: center;
+  font: 12px var(--font-body);
+  color: var(--muted-silver);
+  margin-top: 8px;
+}
+
+/* ------------------------------------------------------------
+   4. HISTOGRAM (B1 §5) — decorative; the slider carries interaction.
+   48px field; bars flex:1, 2px gap, 2px min-height, rounded tops. Dim
+   (out of range) is the base; .is-active (in slider range) is brighter.
+   Bars tint to --axis. Only the colour transitions (never the height).
+   Bar HEIGHT is data-driven (set inline by the consuming tab).
+   ------------------------------------------------------------ */
+.histogram {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 48px;
+}
+.histogram .histo-bar {
+  flex: 1;
+  min-height: 2px;                            /* empties keep 2px */
+  border-radius: 3px 3px 0 0;                 /* rounded tops */
+  background: rgba(var(--axis), 0.18);        /* dim — out of range */
+  transition: background-color 0.3s ease-out; /* colour only — never animate height */
+}
+.histogram .histo-bar.is-active {
+  background: rgba(var(--axis), 0.55);        /* bright — in slider range */
+}
+
+/* ------------------------------------------------------------
+   prefers-reduced-motion — drop the state transitions (B1 mandate).
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .disco-chip,
+  .slider .knob,
+  .score-dial .dial-fill,
+  .histogram .histo-bar {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   ORBIT — Discovery Redesign · Component Shells (Phase 0b-2)
+   Added 2026-05-31. Spec: ORBIT-UI-PATTERNS.md B1 §10 (tiles),
+   §11 (service-toggle), §7 (type-tagged search dropdown).
+
+   CSS SHELLS ONLY — visual states; NO JavaScript. The search dropdown's
+   open/dismiss/scroll/population behaviour is deferred to the Setting-tab
+   build; here the overlay is shown via the static .tts-search.is-open
+   modifier so the shell is visible.
+
+   Follows the 0b-1 conventions above: tokens only (no hex), 0.3s ease-out
+   transitions, [data-axis] tinting, prefers-reduced-motion handled.
+
+   NOTE (doc reconciliation pending): class names follow this phase's SCOPE
+   (.disco-tile / .service-tile / .tts-*); the doc's §7/§10/§11 examples sketch
+   different names (.media-tile / .portrait-tile, .kw-*, .service-tile.on)
+   and a hardcoded director-glow hex — both reconciled here to SCOPE names
+   and tokens, to be synced into the doc as in Phase 0b-1.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   10. POSTER / PORTRAIT TILE (B1 §10)
+   ONE shared shape: vertical rounded-rectangle (NEVER circular) — an image
+   area (2:3 poster/profile ratio) + a meta area (name + sub-label). Hover
+   lift/glow follows the base Card pattern (Part A). Portraits carry a
+   role-coded glow border: actor = cyan, director = purple. Tile width is
+   set by the consuming grid; the image fills via object-fit.
+   ------------------------------------------------------------ */
+.disco-tile {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);            /* 12px — vertical rounded-rect */
+  overflow: hidden;
+  background: var(--nebula-dark);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease-out,
+              box-shadow 0.3s ease-out,
+              border-color 0.3s ease-out;
+}
+.disco-tile:hover {                                  /* lift + glow, per the Card pattern */
+  transform: translateY(-4px);
+  border-color: rgba(var(--accent-cyan-rgb), 0.6);
+  box-shadow: 0 0 30px rgba(var(--accent-cyan-rgb), 0.3);
+}
+.disco-tile .disco-tile-img {
+  aspect-ratio: 2 / 3;                         /* standard poster / profile ratio */
+  background: rgba(var(--muted-silver-rgb), 0.1);   /* neutral placeholder fill */
+  overflow: hidden;
+}
+.disco-tile .disco-tile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.disco-tile .disco-tile-meta { padding: 8px 10px; }
+.disco-tile .disco-tile-name {
+  font: 500 14px var(--font-body);
+  color: var(--film-white);
+  margin-bottom: 2px;
+}
+.disco-tile .disco-tile-sub {
+  font: 400 12px var(--font-body);
+  color: var(--muted-silver);
+}
+
+/* .is-poster (films) and .is-portrait (people) share the shape; they differ
+   only by the role glow applied to portraits — semantic hooks, no override. */
+.disco-tile.is-portrait,
+.disco-tile.is-poster { /* shared base shape */ }
+
+/* Role-coded glow border on portraits (existing ORBIT role convention). */
+.disco-tile.role-actor {
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(var(--accent-cyan-rgb), 0.4);          /* cyan = actor */
+}
+.disco-tile.role-actor:hover {
+  box-shadow: 0 0 24px rgba(var(--accent-cyan-rgb), 0.55);
+}
+.disco-tile.role-director {
+  border: 2px solid var(--prestige-purple);
+  box-shadow: 0 0 14px rgba(var(--prestige-purple-rgb), 0.4);      /* purple = director (token, not hex) */
+}
+.disco-tile.role-director:hover {
+  box-shadow: 0 0 24px rgba(var(--prestige-purple-rgb), 0.55);
+}
+
+/* ------------------------------------------------------------
+   11. SERVICE-TOGGLE TILE (B1 §11)
+   Stream tab. Logo slot + name + optional title-count. On-state in the
+   Stream axis (orange) — gradient + border + inset glow, mirroring the
+   chip's selected treatment but tile-shaped.
+   ------------------------------------------------------------ */
+.service-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);            /* 8px */
+  background: transparent;
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease-out,
+              border-color 0.3s ease-out,
+              box-shadow 0.3s ease-out;
+}
+.service-tile:hover {
+  border-color: rgba(var(--collision-orange-rgb), 0.4);
+  background: rgba(var(--collision-orange-rgb), 0.06);
+}
+.service-tile .service-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(var(--muted-silver-rgb), 0.12);   /* neutral placeholder */
+}
+.service-tile .service-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.service-tile .service-name {
+  font: 500 13px var(--font-body);
+  color: var(--film-white);
+}
+.service-tile .service-count {
+  margin-left: auto;
+  font-family: var(--font-display);            /* Orbitron */
+  font-size: 11px;
+  opacity: 0.6;
+  color: var(--muted-silver);
+}
+.service-tile.is-on {                          /* on-state — Stream axis (orange) */
+  background: linear-gradient(180deg, rgba(var(--collision-orange-rgb), 0.18), rgba(var(--collision-orange-rgb), 0.06));
+  border-color: rgba(var(--collision-orange-rgb), 0.5);
+  box-shadow: inset 0 0 12px rgba(var(--collision-orange-rgb), 0.15);
+}
+
+/* ------------------------------------------------------------
+   7. TYPE-TAGGED SEARCH DROPDOWN — CSS SHELL ONLY (B1 §7)
+   NO JavaScript here. The overlay is absolutely positioned so it NEVER
+   resizes its container; it is revealed via the static .tts-search.is-open
+   modifier for preview. Real open / dismiss (click-away / Esc / select) /
+   scroll / population JS is deferred to the Setting-tab build. Type tags
+   colour-code by domain via [data-type]: location = emerald, era = gold,
+   world = purple. Input border + overlay border + row hover tint to --axis.
+   ------------------------------------------------------------ */
+.tts-search { position: relative; }            /* anchor for the absolute overlay */
+
+.tts-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(var(--muted-silver-rgb), 0.08);
+  border: 1px solid rgba(var(--axis), 0.4);    /* axis-tinted */
+}
+.tts-input-row .tts-glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--axis-hex);
+}
+.tts-input-row .tts-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--film-white);
+  font: 400 14px var(--font-body);
+}
+.tts-input-row .tts-input::placeholder { color: var(--ghost-gray); }
+
+.tts-overlay {
+  display: none;                               /* revealed via .tts-search.is-open (CSS shell — no JS) */
+  position: absolute;                          /* floats — NEVER resizes the container */
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;                            /* scroll-capped */
+  z-index: 10000;                              /* above the panel */
+  background: var(--glass-bg-heavy);
+  border: 1px solid rgba(var(--axis), 0.3);
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(var(--space-black-rgb), 0.7);
+}
+.tts-search.is-open .tts-overlay { display: block; }   /* static preview toggle; real JS later */
+
+.tts-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+.tts-result:hover { background: rgba(var(--axis), 0.1); }
+.tts-result .tts-name { color: var(--film-white); font: 400 14px var(--font-body); }
+
+.tts-tag {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+.tts-tag[data-type="location"] {               /* emerald */
+  color: var(--emerald);
+  background: rgba(var(--emerald-rgb), 0.15);
+  border: 1px solid rgba(var(--emerald-rgb), 0.4);
+}
+.tts-tag[data-type="era"] {                    /* gold */
+  color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.15);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.4);
+}
+.tts-tag[data-type="world"] {                  /* purple */
+  color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.15);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.4);
+}
+
+/* prefers-reduced-motion — drop the 0b-2 hover transitions (separate block
+   so the 0b-1 reduced-motion rule above is left untouched / append-only). */
+@media (prefers-reduced-motion: reduce) {
+  .disco-tile,
+  .service-tile,
+  .tts-result {
+    transition: none;
+  }
+}

@@ -1,0 +1,80 @@
+/* ============================================================
+   ORBIT — Award Badge Component (Phase 1.13)
+   Produced by components/award-badges.js
+   Marks award winners (gold) and nominees (silver) on movie cards,
+   lists, profiles, and game prestige reveals.
+
+   Class is .orbit-award-badge — the unprefixed .award-badge class is
+   reserved for legacy text-pill markers in pages/results.css,
+   pages/results-classic.css, games/constellation.css, components/moviecube.css.
+   Those legacy rules are retired in Phase 1.13b after migration.
+
+   Usage:
+     <div class="orbit-award-badge"
+          data-award-badge="oscar"
+          data-status="winner"
+          data-size="32"
+          title="Oscar — Best Picture (2020)"></div>
+     window.renderAwardBadges(rootElement);
+   ============================================================ */
+
+.orbit-award-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: help;
+  transition: transform 0.18s ease, filter 0.18s ease;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+  color: var(--accent-gold);
+}
+.orbit-award-badge:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.orbit-award-badge[data-status="winner"]  { color: var(--accent-gold); }
+.orbit-award-badge[data-status="nominee"] { color: var(--silver); }
+
+.orbit-award-badge svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.orbit-award-badge[data-size="14"] { width: 14px; height: 14px; }
+.orbit-award-badge[data-size="18"] { width: 18px; height: 18px; }
+.orbit-award-badge[data-size="24"] { width: 24px; height: 24px; }
+.orbit-award-badge[data-size="32"] { width: 32px; height: 32px; }
+.orbit-award-badge[data-size="36"] { width: 36px; height: 36px; }
+.orbit-award-badge[data-size="40"] { width: 40px; height: 40px; }
+.orbit-award-badge[data-size="48"] { width: 48px; height: 48px; }
+.orbit-award-badge[data-size="56"] { width: 56px; height: 56px; }
+.orbit-award-badge[data-size="76"] { width: 76px; height: 76px; }
+.orbit-award-badge[data-size="132"] { width: 132px; height: 132px; }
+.orbit-award-badge:not([data-size]) { width: 32px; height: 32px; }
+
+.orbit-award-badge-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.orbit-award-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.orbit-award-chip-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--film-white);
+}
+
+.orbit-award-chip[data-status="nominee"] .orbit-award-chip-label {
+  color: var(--muted-silver);
+}

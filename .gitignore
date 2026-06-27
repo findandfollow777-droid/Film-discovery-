@@ -3,7 +3,14 @@ node_modules/
 .DS_Store
 *.log
 .claude/
+.vscode/
 convert-awards-browse.js
 convert-awards-csv.js
 generate-settings-seed.js
 tmdb-batch-fetch.js
+
+# Generated / cache / scratch artifacts (not canonical data)
+orbit_tmdb_cache.json
+data/scraped/*/batch-reports/
+*.parse-error
+awards-sample_backup_*.csv

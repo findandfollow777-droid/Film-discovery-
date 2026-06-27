@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0;url=pages/home.html">
   <title>ORBIT - Your Film & TV Discovery Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="quick-search-modal.css">
+  <link rel="stylesheet" href="welcome-popup.css">
 </head>
 <body>
 
@@ -25,22 +26,23 @@
 
   <!-- HEADER -->
   <header class="landing-header">
-    <div class="orbit-logo">
+    <a href="pages/home.html" class="orbit-logo" style="text-decoration:none">
       <div class="orbit-logo-mark">
         <div class="orbit-ring"></div>
         <div class="orbit-ring orbit-ring-2"></div>
         <div class="orbit-core"></div>
       </div>
       <div class="orbit-logo-text">ORBIT</div>
-    </div>
+    </a>
     <p class="landing-tagline">Your Film &amp; TV Discovery Hub</p>
+    <a href="pages/home.html" class="landing-back-btn">← BACK TO HOME</a>
   </header>
 
   <!-- LANDING GRID -->
   <div class="landing-grid">
 
-    <!-- 1. Quick Search (not a link) -->
-    <div class="landing-tile" id="quickSearchTile">
+    <!-- 1. Quick Search (opens modal) -->
+    <div class="landing-tile" id="qsTile" role="button" tabindex="0" style="cursor:pointer">
       <div class="orbit-icon-container">
         <div class="orbit-ring"></div>
         <div class="orbit-ring orbit-ring-2"></div>
@@ -49,18 +51,8 @@
         </svg>
       </div>
       <h2>QUICK SEARCH</h2>
-      <p>Find any actor, movie, or show</p>
-      <div class="quick-search-panel" id="quickSearchPanel" hidden>
-        <div class="search-type-row">
-          <button class="qs-type-btn active" data-type="movie">Movie</button>
-          <button class="qs-type-btn" data-type="actor">Actor</button>
-          <button class="qs-type-btn" data-type="crew">Director &amp; Crew</button>
-        </div>
-        <div class="qs-input-wrap">
-          <input type="text" class="qs-input" id="qsInput" placeholder="Search movies..." autocomplete="off">
-        </div>
-        <div class="qs-dropdown" id="qsDropdown"></div>
-      </div>
+      <p>Find any actor, movie, or studio</p>
+      <span class="qs-tile-hint"><kbd>&#8984;K</kbd></span>
     </div>
 
     <!-- 2. Build Your Orbit -->
@@ -73,7 +65,7 @@
           <ellipse cx="12" cy="12" rx="11" ry="4" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(-20 12 12)"/>
         </svg>
       </div>
-      <h2>BUILD YOUR ORBIT</h2>
+      <h2>EXPLORE</h2>
       <p>Advanced film &amp; TV discovery</p>
     </a>
 
@@ -202,184 +194,68 @@
       <p>Explore films by location</p>
     </a>
 
+    <!-- 9. The Next Frontier -->
+    <a href="next-frontier.html" class="landing-tile">
+      <div class="orbit-icon-container">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <svg class="orbit-glyph" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/>
+          <path d="M12 22V12"/>
+          <path d="M20 7l-8 5-8-5"/>
+          <circle cx="12" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h2>THE NEXT FRONTIER</h2>
+      <p>What's coming soon</p>
+    </a>
+
+  </div>
+
+  <!-- QUICK SEARCH MODAL -->
+  <link rel="stylesheet" href="orbit-close.css" data-orbit-close>
+  <div class="qs-backdrop" id="qsBackdrop" data-orbit-popup>
+    <div class="qs-modal">
+      <!-- Header -->
+      <div class="qs-header">
+        <svg class="qs-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="text" class="qs-input" id="qsModalInput" placeholder="Search movies&#8230;" autocomplete="off">
+        <button class="orbit-close" id="qsCloseBtn" aria-label="Close">&times;</button>
+      </div>
+      <!-- Type pills -->
+      <div class="qs-type-row">
+        <button class="qs-type-pill qs-active" data-type="movie">Movie</button>
+        <button class="qs-type-pill" data-type="actor">Actor</button>
+        <button class="qs-type-pill" data-type="crew">Director &amp; Crew</button>
+      </div>
+      <!-- Persistent cast stage: rows survive across search/result re-renders. -->
+      <div class="qs-cast-stage" id="qsCastStage" style="display:none"></div>
+      <!-- Results: search results, collab panel, or empty state. -->
+      <div class="qs-results" id="qsResults"></div>
+      <!-- Footer -->
+      <div class="qs-footer">
+        <div class="qs-footer-keys">
+          <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> Navigate</span>
+          <span><kbd>&#9166;</kbd> Select</span>
+          <span><kbd>esc</kbd> Close</span>
+        </div>
+        <div class="qs-footer-actions">
+          <button class="qs-joint-btn qs-joint-timeline" id="qsJointTimeline" style="display:none">Joint Timeline</button>
+          <button class="qs-joint-btn qs-joint-venn" id="qsJointVenn" style="display:none">Venn &rarr;</button>
+          <a href="pages/awards-browse.html" class="qs-footer-link">Browse Awards &rarr;</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="config.js"></script>
   <script src="orbit-utils.js"></script>
   <script src="utils.js"></script>
-  <script>
-    const CREW_DEPTS = ["Directing","Writing","Production","Camera","Editing","Sound","Art","Costume & Make-Up"];
-    const PLACEHOLDERS = { movie:"Search movies...", actor:"Search actors...", crew:"Search directors, writers, producers..." };
-
-    const tile = document.getElementById('quickSearchTile');
-    const panel = document.getElementById('quickSearchPanel');
-    const input = document.getElementById('qsInput');
-    const dropdown = document.getElementById('qsDropdown');
-    let debounceTimer;
-    let fetchController = null;
-    let searchVersion = 0;
-
-    // Toggle panel open/close
-    tile.addEventListener('click', function (e) {
-      if (panel.contains(e.target) && !panel.hidden) return;
-      const expanded = !panel.hidden;
-      panel.hidden = expanded;
-      tile.classList.toggle('expanded', !expanded);
-      if (!expanded) { hideDropdown(); setTimeout(() => input.focus(), 50); }
-    });
-
-    // Type buttons
-    panel.querySelectorAll('.qs-type-btn').forEach(btn => {
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        clearTimeout(debounceTimer);
-        if (fetchController) { fetchController.abort(); fetchController = null; }
-        searchVersion++;
-        panel.querySelectorAll('.qs-type-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        input.placeholder = PLACEHOLDERS[this.dataset.type] || "Search...";
-        input.value = '';
-        hideDropdown();
-        input.focus();
-      });
-    });
-
-    // Live search on input
-    input.addEventListener('input', function (e) {
-      e.stopPropagation();
-      clearTimeout(debounceTimer);
-      const q = input.value.trim();
-      if (q.length < 2) { hideDropdown(); return; }
-      debounceTimer = setTimeout(() => fetchResults(q), 300);
-    });
-
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') hideDropdown();
-    });
-
-    input.addEventListener('click', function (e) { e.stopPropagation(); });
-
-    function getType() {
-      return panel.querySelector('.qs-type-btn.active').dataset.type;
-    }
-
-    async function fetchResults(query) {
-      const type = getType();
-      const version = ++searchVersion;
-      let endpoint;
-      switch(type) {
-        case 'movie': endpoint = '/search/movie'; break;
-        case 'actor': case 'crew': endpoint = '/search/person'; break;
-        default: return;
-      }
-
-      // Abort any previous in-flight request
-      if (fetchController) fetchController.abort();
-      fetchController = new AbortController();
-
-      try {
-        const res = await fetch(`https://api.themoviedb.org/3${endpoint}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`, { signal: fetchController.signal });
-        const data = await res.json();
-
-        // Discard if type changed or a newer search was initiated
-        if (version !== searchVersion || getType() !== type) return;
-
-        let results = data.results || [];
-
-        if (type === 'actor') results = results.filter(p => p.known_for_department === 'Acting');
-        else if (type === 'crew') results = results.filter(p => CREW_DEPTS.includes(p.known_for_department));
-
-        renderDropdown(results.slice(0, 8), type);
-      } catch(err) {
-        if (err.name !== 'AbortError') console.error(err);
-      } finally {
-        fetchController = null;
-      }
-    }
-
-    function renderDropdown(results, type) {
-      if (!results.length) { hideDropdown(); return; }
-
-      dropdown.innerHTML = results.map(item => {
-        let icon, title, subtitle, image, imgClass, rating;
-        switch(type) {
-          case 'movie':
-            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
-            title=item.title; subtitle=item.release_date ? item.release_date.split('-')[0] : '';
-            image=item.poster_path ? `https://image.tmdb.org/t/p/w92${item.poster_path}` : '';
-            imgClass='poster'; rating=item.vote_average; break;
-          case 'actor':
-            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg>';
-            title=item.name; subtitle=(item.known_for||[]).map(k=>k.title||k.name).slice(0,2).join(', ')||'Actor';
-            image=item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
-            imgClass='profile'; rating=null; break;
-          case 'crew':
-            icon='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4h-4z"/></svg>';
-            title=item.name; subtitle=item.known_for_department||'Crew';
-            image=item.profile_path ? `https://image.tmdb.org/t/p/w92${item.profile_path}` : '';
-            imgClass='profile'; rating=null; break;
-        }
-        const ratingHtml = rating && rating > 0 ? `<span class="qs-rating">★ ${rating.toFixed(1)}</span>` : '';
-        const imgHtml = image ? `<img src="${image}" class="qs-result-img ${imgClass}" onerror="this.style.display='none'">` : `<div class="qs-result-img ${imgClass} qs-img-empty"></div>`;
-
-        return `<div class="qs-result-item" data-id="${item.id}" data-type="${type}" data-title="${title.replace(/"/g,'&quot;')}">
-          ${imgHtml}
-          <div class="qs-result-info">
-            <div class="qs-result-title">${icon} ${title}${ratingHtml}</div>
-            <div class="qs-result-sub">${subtitle}</div>
-          </div>
-        </div>`;
-      }).join('');
-
-      dropdown.style.display = 'block';
-
-      dropdown.querySelectorAll('.qs-result-item').forEach(el => {
-        el.addEventListener('click', function (e) {
-          e.stopPropagation();
-          handleSelect(this.dataset.id, this.dataset.type, this.dataset.title);
-        });
-      });
-    }
-
-    function hideDropdown() {
-      dropdown.style.display = 'none';
-      dropdown.innerHTML = '';
-    }
-
-    async function handleSelect(id, type, title) {
-      hideDropdown();
-      localStorage.removeItem('vennPeople');
-      localStorage.removeItem('orbitFilters');
-      localStorage.removeItem('movies');
-      localStorage.removeItem('orbitBaseQuery');
-
-      if (type === 'movie') {
-        try {
-          const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`);
-          const movie = await res.json();
-          if (movie.belongs_to_collection) {
-            localStorage.setItem('timelineMovieId', id);
-            localStorage.setItem('timelineType', 'movie');
-            window.location.href = 'pages/timeline.html';
-          } else {
-            // Standalone movie → timeline with auto-open MovieCube
-            localStorage.setItem('timelineMovieId', id);
-            localStorage.setItem('timelineType', 'movie');
-            window.location.href = 'pages/timeline.html?openCube=' + id;
-          }
-        } catch(e) {
-          localStorage.setItem('timelineMovieId', id);
-          localStorage.setItem('timelineType', 'movie');
-          window.location.href = 'pages/timeline.html';
-        }
-      } else if (type === 'actor' || type === 'crew') {
-        localStorage.setItem('timelineMovieId', id);
-        localStorage.setItem('timelineType', 'person');
-        localStorage.setItem('timelineMediaMode', 'both');
-        window.location.href = 'pages/timeline.html';
-      }
-    }
-  </script>
+  <script src="data/awards-data.js"></script>
+  <script src="quick-search-modal.js"></script>
+  <script src="welcome-popup.js"></script>
 
 </body>
 </html>

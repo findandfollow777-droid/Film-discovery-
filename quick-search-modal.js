@@ -886,21 +886,12 @@
     localStorage.removeItem('orbitBaseQuery');
 
     if (item.type === 'movie') {
-      try {
-        var res = await fetch('https://api.themoviedb.org/3/movie/' + item.id + '?api_key=' + TMDB_API_KEY);
-        var movie = await res.json();
-        localStorage.setItem('timelineMovieId', item.id);
-        localStorage.setItem('timelineType', 'movie');
-        if (movie.belongs_to_collection) {
-          window.location.href = 'pages/timeline.html';
-        } else {
-          window.location.href = 'pages/timeline.html?openCube=' + item.id;
-        }
-      } catch (e) {
-        localStorage.setItem('timelineMovieId', item.id);
-        localStorage.setItem('timelineType', 'movie');
-        window.location.href = 'pages/timeline.html';
-      }
+      /* Movies always land on the timeline directly — no Movie Cube
+         auto-open. Removed belongs_to_collection check + ?openCube
+         hand-off May 1, 2026. */
+      localStorage.setItem('timelineMovieId', item.id);
+      localStorage.setItem('timelineType', 'movie');
+      window.location.href = 'pages/timeline.html';
     } else {
       localStorage.setItem('timelineMovieId', item.id);
       localStorage.setItem('timelineType', 'person');

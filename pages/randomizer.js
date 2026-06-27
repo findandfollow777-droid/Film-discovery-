@@ -129,18 +129,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Modals
   document.getElementById("helpBtn").addEventListener("click", () => showModal("helpModal"));
-  document.getElementById("helpClose").addEventListener("click", () => hideModal("helpModal"));
+  document.getElementById("helpClose").addEventListener("click", (e) => {
+    e.preventDefault(); e.stopPropagation();
+    spiralCloseModal("helpModal");
+  });
   document.getElementById("historyBtn").addEventListener("click", () => {
     renderHistory();
     showModal("historyModal");
   });
-  document.getElementById("historyClose").addEventListener("click", () => hideModal("historyModal"));
+  document.getElementById("historyClose").addEventListener("click", (e) => {
+    e.preventDefault(); e.stopPropagation();
+    spiralCloseModal("historyModal");
+  });
   document.getElementById("clearHistoryBtn").addEventListener("click", clearHistory);
 
-  // Close modals on overlay click
+  // Close modals on overlay click — Rule 17 spiral
   document.querySelectorAll(".modal-overlay").forEach(overlay => {
     overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) overlay.hidden = true;
+      if (e.target === overlay) spiralCloseModal(overlay.id);
     });
   });
 
@@ -255,6 +261,22 @@ function updateFilterCount(elementId, count) {
 
 function showModal(id) { document.getElementById(id).hidden = false; }
 function hideModal(id) { document.getElementById(id).hidden = true; }
+
+/* Rule 17: spiral exit then run hideModal. */
+function spiralCloseModal(id) {
+  const overlay = document.getElementById(id);
+  if (!overlay || overlay.classList.contains('orbit-popup-closing')) return;
+  const btn = overlay.querySelector('.orbit-close');
+  if (btn) btn.classList.add('closing');
+  overlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (btn) btn.classList.remove('closing');
+    overlay.classList.remove('orbit-popup-closing');
+    hideModal(id);
+  }, reduced ? 200 : 600);
+}
 
 function showConfig() {
   configSection.hidden = false;
@@ -899,7 +921,7 @@ function openMovieCubeForId(movieId) {
       onAnchorClick: (movie) => {
         localStorage.setItem('anchorMovie', JSON.stringify(movie));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = '../games/constellation.html';
+        window.location.href = 'anchor-point.html';
       }
     });
     if (typeof initPeopleCube === 'function') initPeopleCube();

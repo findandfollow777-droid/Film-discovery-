@@ -65,7 +65,7 @@ body {
 .header-center { display: flex; align-items: center; gap: 14px; }
 .header-right { display: flex; align-items: center; gap: 12px; }
 .actor-photo {
-  width: 44px; height: 44px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: var(--radius-sm);
   object-fit: cover; border: 2px solid var(--at-cyan);
   box-shadow: 0 0 12px rgba(0,217,255,0.3);
   display: none;
@@ -446,13 +446,11 @@ body {
               0 0 40px rgba(0,217,255,0.1),
               0 0 40px rgba(255,215,0,0.1);
 }
+/* .career-dna-close legacy class — positioning only.
+   Visual styling now lives in orbit-close.css under .orbit-close (Rule 17). */
 .career-dna-close {
   position: absolute; top: 12px; right: 16px;
-  background: none; border: none;
-  color: var(--at-silver); font-size: 24px;
-  cursor: pointer; transition: color .2s;
 }
-.career-dna-close:hover { color: var(--at-white); }
 
 .dna-popup-title {
   font-family: var(--font-display);

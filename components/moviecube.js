@@ -92,10 +92,63 @@
   // INIT
   // ============================================
 
+  /* ============================================================
+     ORBIT CLOSE BOOTSTRAP — Added Apr 27, 2026 (Rule 17)
+     Auto-loads orbit-close.css + orbit-close.js so individual
+     pages don't need to add new <script>/<link> tags themselves.
+     ============================================================ */
+  function ensureOrbitCloseLoaded() {
+    var root = (window.OrbitUtils && OrbitUtils.ROOT) ? OrbitUtils.ROOT : "";
+    if (!document.querySelector('link[data-orbit-close]')) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = root + "orbit-close.css";
+      link.setAttribute("data-orbit-close", "");
+      document.head.appendChild(link);
+    }
+    if (!window.OrbitClose && !document.querySelector('script[data-orbit-close]')) {
+      var script = document.createElement("script");
+      script.src = root + "orbit-close.js";
+      script.setAttribute("data-orbit-close", "");
+      document.head.appendChild(script);
+    }
+  }
+
+  /* ============================================================
+     ORBIT AWARD BADGES BOOTSTRAP — Phase 1.13b.1
+     Auto-loads components/award-badges.css + .js so consumer pages
+     don't need to add new <script>/<link> tags. Mirrors the
+     ensureOrbitCloseLoaded pattern.
+     ============================================================ */
+  function ensureAwardBadgesLoaded() {
+    var root = (window.OrbitUtils && OrbitUtils.ROOT) ? OrbitUtils.ROOT : "";
+    if (!document.querySelector('link[data-orbit-award-badges]')) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = root + "components/award-badges.css";
+      link.setAttribute("data-orbit-award-badges", "");
+      document.head.appendChild(link);
+    }
+    if (!window.renderAwardBadge && !document.querySelector('script[data-orbit-award-badges]')) {
+      var script = document.createElement("script");
+      script.src = root + "components/award-badges.js";
+      script.setAttribute("data-orbit-award-badges", "");
+      // If the awards face was rendered before this script finished loading,
+      // its [data-award-badge] divs will be empty. Hydrate retroactively.
+      script.onload = function () {
+        if (window.renderAwardBadges) window.renderAwardBadges();
+      };
+      document.head.appendChild(script);
+    }
+  }
+
   function initMovieCube(options = {}) {
     onPersonClick = options.onPersonClick || null;
     onAnchorClick = options.onAnchorClick || null;
-    
+
+    ensureOrbitCloseLoaded();
+    ensureAwardBadgesLoaded();
+
     if (!document.getElementById("movieCubeOverlay")) {
       injectCubeHTML();
     }
@@ -148,9 +201,9 @@
   function injectCubeHTML() {
     // Uses EXACT same structure and class names as results.html
     const html = `
-      <div class="movie-popup-overlay" id="movieCubeOverlay" hidden>
+      <div class="movie-popup-overlay" id="movieCubeOverlay" data-orbit-popup hidden>
         <div class="movie-popup">
-          <button class="popup-close" id="cubeCloseBtn">✕</button>
+          <button class="popup-close orbit-close" id="cubeCloseBtn" aria-label="Close">✕</button>
           
           <!-- CUBE NAVIGATION -->
           <div class="cube-nav">
@@ -351,18 +404,18 @@
       </div>
       
       <!-- SIMILAR MOVIES OVERLAY -->
-      <div class="similar-overlay" id="cubeSimilarOverlay" hidden>
+      <div class="similar-overlay" id="cubeSimilarOverlay" data-orbit-popup hidden>
         <div class="similar-modal">
-          <button class="modal-close" id="cubeSimilarClose">✕</button>
+          <button class="modal-close orbit-close" id="cubeSimilarClose" aria-label="Close">✕</button>
           <h2 class="modal-title">Similar Movies</h2>
           <div class="similar-panel-grid" id="cubeSimilarGrid"></div>
         </div>
       </div>
       
       <!-- ALL CAST OVERLAY -->
-      <div class="all-cast-overlay" id="cubeAllCastOverlay" hidden>
+      <div class="all-cast-overlay" id="cubeAllCastOverlay" data-orbit-popup hidden>
         <div class="all-cast-modal">
-          <button class="modal-close" id="cubeAllCastClose">✕</button>
+          <button class="modal-close orbit-close" id="cubeAllCastClose" aria-label="Close">✕</button>
           <h2 class="modal-title">Full Cast</h2>
           <div class="all-cast-timeline" id="cubeAllCastTimeline"></div>
           <div class="cube-venn-bar" id="cubeAllCastVennBar">
@@ -373,9 +426,9 @@
       </div>
       
       <!-- TRAILER OVERLAY -->
-      <div class="trailer-overlay" id="cubeTrailerOverlay" hidden>
+      <div class="trailer-overlay" id="cubeTrailerOverlay" data-orbit-popup hidden>
         <div class="trailer-popup">
-          <button class="trailer-close" id="cubeTrailerClose">✕</button>
+          <button class="trailer-close orbit-close" id="cubeTrailerClose" aria-label="Close">✕</button>
           <div class="trailer-container" id="cubeTrailerContainer"></div>
         </div>
       </div>
@@ -384,26 +437,60 @@
   }
 
   function setupCubeEvents() {
-    document.getElementById("cubeCloseBtn")?.addEventListener("click", closeMovieCube);
-    
-    cubeOverlay?.addEventListener("click", (e) => {
-      if (e.target === cubeOverlay) closeMovieCube();
+    // Rule 17: trigger the shared Black Hole exit animation.
+    // CSS keyframes live in orbit-close.css (loaded by ensureOrbitCloseLoaded).
+    // We drive the class toggles here directly so the cube doesn't depend on
+    // orbit-close.js having finished loading by click time.
+    function triggerOrbitClose() {
+      var btn = document.getElementById("cubeCloseBtn");
+      if (cubeOverlay?.classList.contains("orbit-popup-closing")) return;
+      if (btn) btn.classList.add("closing");
+      if (cubeOverlay) cubeOverlay.classList.add("orbit-popup-closing");
+      var reduced = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.setTimeout(function () {
+        if (btn) btn.classList.remove("closing");
+        if (cubeOverlay) cubeOverlay.classList.remove("orbit-popup-closing");
+        closeMovieCube();
+      }, reduced ? 200 : 600);
+    }
+
+    document.getElementById("cubeCloseBtn")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose();
     });
-    
+
+    cubeOverlay?.addEventListener("click", (e) => {
+      if (e.target !== cubeOverlay) return;
+      triggerOrbitClose();
+    });
+
+    // Expose for ESC handler below
+    cubeOverlay && (cubeOverlay._triggerOrbitClose = triggerOrbitClose);
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         // Close in order: trailer > similar > all cast > main popup
         // If on nebula/trivia face, go back to face 1
+        const subClose = (overlay, fallbackFn) => {
+          if (window.OrbitClose) window.OrbitClose.close(overlay);
+          else fallbackFn();
+        };
         if (cubeTrailerOverlay && !cubeTrailerOverlay.hidden) {
-          closeTrailer();
+          subClose(cubeTrailerOverlay, closeTrailer);
         } else if (cubeSimilarOverlay && !cubeSimilarOverlay.hidden) {
-          closeSimilarPanel();
+          subClose(cubeSimilarOverlay, closeSimilarPanel);
         } else if (cubeAllCastOverlay && !cubeAllCastOverlay.hidden) {
-          closeAllCast();
+          subClose(cubeAllCastOverlay, closeAllCast);
         } else if (currentFace === 5 || currentFace === 6) {
           rotateCube(1); // Go back to poster face
         } else if (cubeOverlay && !cubeOverlay.hidden) {
-          closeMovieCube();
+          if (cubeOverlay._triggerOrbitClose) {
+            cubeOverlay._triggerOrbitClose();
+          } else {
+            closeMovieCube();
+          }
         }
       }
     });
@@ -427,7 +514,7 @@
         // Fallback: save anchor and navigate to anchor page
         localStorage.setItem('anchorMovie', JSON.stringify(cubeMovieData));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = OrbitUtils.ROOT + 'games/constellation.html';
+        window.location.href = OrbitUtils.ROOT + 'pages/anchor-point.html';
       }
     });
     
@@ -444,28 +531,100 @@
     cubeTasteLoveBtn?.addEventListener("click", handleTasteLoveClick);
     cubeTasteSkipBtn?.addEventListener("click", handleTasteSkipClick);
 
-    // Similar close
-    document.getElementById("cubeSimilarClose")?.addEventListener("click", closeSimilarPanel);
+    // Sub-modal close (Rule 17 Black Hole exit). Drive the class toggles
+    // directly so we never depend on orbit-close.js having finished its
+    // async load by click time — the previous OrbitClose-or-instant-hide
+    // fallback was the cause of the trailer "sudden drop" (no fade).
+    function spiralCloseSub(overlay) {
+      if (!overlay) return;
+      if (overlay.classList.contains("orbit-popup-closing")) return;
+      var btn = overlay.querySelector(".orbit-close");
+      if (btn) btn.classList.add("closing");
+      overlay.classList.add("orbit-popup-closing");
+      var reduced = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var dur = reduced ? 200 : 600;
+
+      // Trailer-specific: don't let the cube OR the page behind it bleed
+      // through the fade. Hide the cube instantly, drop a solid black mask
+      // between the page and the cube (z=1900, below cube's z=2000) so the
+      // timeline stays hidden through trailer fade + 100ms gap + cube fade-in,
+      // then remove the mask once the cube has fully retaken centre stage.
+      var hidesCube = overlay === cubeTrailerOverlay && cubeOverlay;
+      var mask = null;
+      if (hidesCube) {
+        cubeOverlay.style.transition = "none";
+        cubeOverlay.style.opacity = "0";
+        mask = document.createElement("div");
+        mask.className = "trailer-mask";
+        mask.style.cssText =
+          "position:fixed;inset:0;background:#000;z-index:1900;pointer-events:none;";
+        document.body.appendChild(mask);
+      }
+
+      window.setTimeout(function () {
+        if (btn) btn.classList.remove("closing");
+        overlay.classList.remove("orbit-popup-closing");
+        overlay.dispatchEvent(new CustomEvent("orbit:close", { bubbles: true, cancelable: true }));
+        overlay.hidden = true;
+
+        if (hidesCube) {
+          window.setTimeout(function () {
+            var fade = reduced ? 0 : 250;
+            cubeOverlay.style.transition = "opacity " + fade + "ms ease";
+            cubeOverlay.style.opacity = "1";
+            window.setTimeout(function () {
+              cubeOverlay.style.transition = "";
+              cubeOverlay.style.opacity = "";
+              if (mask && mask.parentNode) mask.parentNode.removeChild(mask);
+            }, fade + 20);
+          }, 100);
+        }
+      }, dur);
+    }
     cubeSimilarOverlay?.addEventListener("click", (e) => {
-      if (e.target === cubeSimilarOverlay) closeSimilarPanel();
+      if (e.target === cubeSimilarOverlay) spiralCloseSub(cubeSimilarOverlay);
     });
-    
+
     // All cast button
     cubeAllCastBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
       showAllCast();
     });
-    
-    // All cast close
-    document.getElementById("cubeAllCastClose")?.addEventListener("click", closeAllCast);
+
     cubeAllCastOverlay?.addEventListener("click", (e) => {
-      if (e.target === cubeAllCastOverlay) closeAllCast();
+      if (e.target === cubeAllCastOverlay) spiralCloseSub(cubeAllCastOverlay);
     });
-    
-    // Trailer close
-    document.getElementById("cubeTrailerClose")?.addEventListener("click", closeTrailer);
+
     cubeTrailerOverlay?.addEventListener("click", (e) => {
-      if (e.target === cubeTrailerOverlay) closeTrailer();
+      if (e.target === cubeTrailerOverlay) spiralCloseSub(cubeTrailerOverlay);
+    });
+
+    // Direct click handlers on each sub-modal X (Rule 17). Backstop for
+    // pages where the orbit-close.js doc delegate hasn't taken effect (load
+    // timing, cache, page-specific intercepts). close() in orbit-close.js
+    // is idempotent (guards on .closing class) so double-firing is safe.
+    document.getElementById("cubeTrailerClose")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      spiralCloseSub(cubeTrailerOverlay);
+    });
+    document.getElementById("cubeSimilarClose")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      spiralCloseSub(cubeSimilarOverlay);
+    });
+    document.getElementById("cubeAllCastClose")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      spiralCloseSub(cubeAllCastOverlay);
+    });
+
+    // Trailer needs iframe cleanup after the spiral; orbit-close fires the
+    // event once the animation completes. Fallback path also fires it so the
+    // iframe is cleared even if window.OrbitClose isn't loaded.
+    cubeTrailerOverlay?.addEventListener("orbit:close", () => {
+      if (cubeTrailerContainer) cubeTrailerContainer.innerHTML = "";
     });
     
     // Similar movie clicks
@@ -750,135 +909,19 @@
   // AWARDS FACE (Face 7)
   // ============================================
 
-  function getAwardGlyphSVG(festival, size, isWinner) {
-    const ringColor = isWinner ? '#00d9ff' : '#64748b';
-    const strokeColor = isWinner ? '#ffd700' : '#94a3b8';
-    const sw = size <= 32 ? 3 : size <= 48 ? 2.5 : 2;
-    const rw = size <= 32 ? 4 : size <= 48 ? 2.5 : 2;
-
-    const glyphs = {
-      'Oscar': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <ellipse cx="50" cy="20" rx="5" ry="6"/>
-          <path d="M38 32 Q50 28 62 32"/>
-          <path d="M38 32 L38 38 Q40 44 52 42"/>
-          <path d="M62 32 L62 38 Q60 44 48 42"/>
-          <line x1="50" y1="26" x2="50" y2="50"/>
-          <line x1="46" y1="40" x2="54" y2="40"/>
-          <path d="M38 38 L40 56 Q50 62 60 56 L62 38"/>
-          <ellipse cx="50" cy="74" rx="12" ry="4"/>
-          <path d="M36 78 L36 88 Q50 92 64 88 L64 78"/>
-        </g>
-      </svg>`,
-
-      'Cannes': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M50 85 Q48 70 50 55 Q52 40 50 12"/>
-          <path d="M50 55 Q44 54 35 58 M50 50 Q42 48 30 52 M50 45 Q40 42 26 44 M50 40 Q40 36 24 36 M50 35 Q42 30 28 28 M50 30 Q44 24 34 20 M50 25 Q46 20 40 14 M50 20 Q48 16 46 10"/>
-          <path d="M50 55 Q56 54 65 58 M50 50 Q58 48 70 52 M50 45 Q60 42 74 44 M50 40 Q60 36 76 36 M50 35 Q58 30 72 28 M50 30 Q56 24 66 20 M50 25 Q54 20 60 14 M50 20 Q52 16 54 10"/>
-          <rect x="40" y="85" width="20" height="8" rx="1"/>
-        </g>
-      </svg>`,
-
-      'Venice': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M72 38 Q78 34 76 28 Q72 30 70 28 Q72 24 68 22 Q66 26 64 24 Q66 20 62 18 Q60 22 58 20 Q58 16 54 16 Q54 20 52 20"/>
-          <path d="M72 38 Q76 42 78 46 L82 48 Q84 46 86 48"/>
-          <path d="M78 46 Q76 50 72 52"/>
-          <circle cx="76" cy="42" r="2"/>
-          <path d="M70 34 Q72 30 68 32"/>
-          <path d="M52 20 Q44 22 38 28 Q32 34 30 44 L28 58"/>
-          <path d="M72 52 Q66 56 58 58 Q50 60 42 58 L28 58"/>
-          <path d="M58 58 L60 68 Q62 72 58 74"/>
-          <path d="M48 58 L46 72 Q44 76 48 78"/>
-          <path d="M32 58 L30 72 Q28 76 32 78"/>
-          <path d="M28 56 Q24 62 22 72 Q20 76 24 78"/>
-          <path d="M28 54 Q20 50 18 44 Q20 42 22 44"/>
-          <path d="M42 44 Q38 36 42 28 Q48 32 56 30"/>
-          <path d="M42 28 Q46 22 52 24"/>
-          <path d="M44 32 Q48 28 54 28"/>
-          <rect x="16" y="82" width="68" height="6" rx="1"/>
-        </g>
-      </svg>`,
-
-      'Berlin': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="40" cy="16" r="4"/>
-          <circle cx="60" cy="16" r="4"/>
-          <ellipse cx="50" cy="24" rx="12" ry="10"/>
-          <ellipse cx="50" cy="28" rx="5" ry="4"/>
-          <ellipse cx="50" cy="26" rx="2" ry="1.5"/>
-          <circle cx="44" cy="22" r="1.5"/>
-          <circle cx="56" cy="22" r="1.5"/>
-          <path d="M47 30 Q50 32 53 30"/>
-          <path d="M38 32 Q32 40 32 52 L32 70"/>
-          <path d="M62 32 Q68 40 68 52 L68 70"/>
-          <path d="M32 70 Q50 78 68 70"/>
-          <path d="M32 42 Q26 40 22 44 L18 52"/>
-          <path d="M68 42 Q74 40 78 44 L82 52"/>
-          <ellipse cx="18" cy="54" rx="4" ry="3"/>
-          <ellipse cx="82" cy="54" rx="4" ry="3"/>
-          <path d="M38 70 L38 82 Q38 86 44 86"/>
-          <path d="M62 70 L62 82 Q62 86 56 86"/>
-          <ellipse cx="44" cy="86" rx="6" ry="3"/>
-          <ellipse cx="56" cy="86" rx="6" ry="3"/>
-        </g>
-      </svg>`,
-
-      'BAFTA': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M50 10 Q68 10 72 26 L72 38 Q72 54 50 62 Q28 54 28 38 L28 26 Q32 10 50 10 Z"/>
-          <path d="M36 28 Q32 32 34 40 Q38 44 44 40 Q46 34 42 28 Q38 26 36 28 Z"/>
-          <path d="M64 28 Q68 32 66 40 Q62 44 56 40 Q54 34 58 28 Q62 26 64 28 Z"/>
-          <path d="M50 32 L50 46"/>
-          <path d="M46 46 L50 52 L54 46"/>
-          <path d="M32 24 Q38 20 46 24"/>
-          <path d="M68 24 Q62 20 54 24"/>
-          <path d="M30 40 Q34 44 38 42"/>
-          <path d="M70 40 Q66 44 62 42"/>
-          <line x1="50" y1="62" x2="50" y2="74"/>
-          <path d="M34 78 L34 92 L66 92 L66 78 Z"/>
-          <path d="M34 78 L42 72 L74 72 L66 78"/>
-          <path d="M66 78 L74 72 L74 86 L66 92"/>
-        </g>
-      </svg>`,
-
-      'Golden Globe': `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-        <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="50" cy="34" r="20"/>
-          <ellipse cx="50" cy="34" rx="20" ry="7"/>
-          <ellipse cx="50" cy="24" rx="16" ry="4"/>
-          <ellipse cx="50" cy="44" rx="16" ry="4"/>
-          <ellipse cx="50" cy="34" rx="7" ry="20"/>
-          <ellipse cx="50" cy="34" rx="14" ry="20"/>
-          <path d="M36 52 Q50 58 64 52"/>
-          <path d="M46 56 L46 66 L54 66 L54 56"/>
-          <path d="M36 66 L36 72 L64 72 L64 66 Z"/>
-          <ellipse cx="50" cy="76" rx="16" ry="4"/>
-          <path d="M34 76 L34 84 Q34 88 50 88 Q66 88 66 84 L66 76"/>
-          <ellipse cx="50" cy="88" rx="16" ry="4"/>
-        </g>
-      </svg>`
-    };
-
-    // Aliases
-    glyphs['Academy Awards'] = glyphs['Oscar'];
-
-    // Fallback: generic star glyph
-    const fallback = `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
-      <circle cx="50" cy="50" r="48" stroke="${ringColor}" stroke-width="${rw}" fill="none"/>
-      <g stroke="${strokeColor}" stroke-width="${sw}" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M50 15 L58 38 L82 38 L63 52 L70 76 L50 62 L30 76 L37 52 L18 38 L42 38 Z"/>
-      </g>
-    </svg>`;
-
-    return glyphs[festival] || fallback;
+  // Build markup for a single Two-Ring Orbit award badge. Returns null when
+  // the festival can't be mapped to a canonical id — caller decides how to
+  // gracefully degrade (skip the entry / drop the icon / etc.). The actual
+  // SVG is injected by window.renderAwardBadges() once award-badges.js loads.
+  function buildAwardBadgeMarkup(festivalRaw, size, isWinner, titleText) {
+    const fid = window.detectFestivalId ? window.detectFestivalId(festivalRaw) : null;
+    if (!fid) {
+      console.warn('[moviecube] Unknown festival in award:', festivalRaw);
+      return null;
+    }
+    const status = isWinner ? 'winner' : 'nominee';
+    const titleAttr = titleText ? ` title="${String(titleText).replace(/"/g, '&quot;')}"` : '';
+    return `<div class="orbit-award-badge" data-award-badge="${fid}" data-status="${status}" data-size="${size}"${titleAttr}></div>`;
   }
 
   function populateAwardsFace(movieId) {
@@ -972,7 +1015,9 @@
     // Show nav button with SVG glyph
     if (navBtn) {
       navBtn.style.display = '';
-      navBtn.innerHTML = `${getAwardGlyphSVG('Oscar', 14, true)} Awards`;
+      const navBadge = buildAwardBadgeMarkup('Oscar', 14, true, null) || '';
+      navBtn.innerHTML = `${navBadge} Awards`;
+      window.renderAwardBadges?.(navBtn);
     }
 
     // Build header with movie title
@@ -994,7 +1039,7 @@
 
     // Smart header glyph: use specific festival if only one, else default to Oscar
     const headerFestival = festivals.length === 1 ? festivals[0] : 'Oscar';
-    const headerGlyph = getAwardGlyphSVG(headerFestival, 48, true);
+    const headerGlyph = buildAwardBadgeMarkup(headerFestival, 48, true, headerFestival) || '';
 
     content.innerHTML = `
       <div class="awards-face-header">
@@ -1013,7 +1058,11 @@
       // Compact mode: no festival headers, festival name in each entry
       uniqueAwards.forEach(award => {
         const isWin = award.won === true || award.won === 'true' || award.won === 'True';
-        const glyph = getAwardGlyphSVG(award.festival, 40, isWin);
+        const titleParts = [award.festival, isWin ? 'Winner' : 'Nominee'];
+        if (award.category) titleParts.push('— ' + award.category);
+        if (award.year) titleParts.push('(' + award.year + ')');
+        const glyph = buildAwardBadgeMarkup(award.festival, 40, isWin, titleParts.join(' '));
+        if (glyph === null) return; // skip entry on unknown festival
         const personText = award.person ? ` — ${award.person}` : '';
 
         const entry = document.createElement('div');
@@ -1042,7 +1091,7 @@
         const group = document.createElement('div');
         group.className = 'awards-festival-group';
 
-        const headerGlyph = getAwardGlyphSVG(festival, 24, true);
+        const headerGlyph = buildAwardBadgeMarkup(festival, 24, true, festival) || '';
         const header = document.createElement('div');
         header.className = 'awards-festival-header';
         header.innerHTML = `
@@ -1070,6 +1119,10 @@
         list.appendChild(group);
       });
     }
+
+    // Hydrate every newly-injected [data-award-badge] in the awards face,
+    // including the header glyph injected via content.innerHTML above.
+    window.renderAwardBadges?.(content);
   }
 
   function getWatchCountry() {

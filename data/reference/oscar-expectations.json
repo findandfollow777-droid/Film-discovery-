@@ -1,0 +1,233 @@
+{
+  "schema_version": "v1",
+  "festival": "oscar",
+  "generated_at": "2026-05-03T00:00:00+00:00",
+  "generated_from": "scripts/scrape-oscar-categories.json + data-driven survey of cer 72-97 CSVs",
+  "expectations": {
+    "oscar.best_picture": {
+      "typical_nominations": 9,
+      "tolerance": 1,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "5 nominees through 2009 (cer 81); expanded to 10 at 82nd ceremony (2010); fluctuating 8-10 since 84th (2012).",
+      "era_overrides": [
+        {
+          "from_year": 1929,
+          "to_year": 2009,
+          "typical_nominations": 5,
+          "tolerance": 0,
+          "reason": "Fixed 5-nominee slate before the 2009 expansion."
+        },
+        {
+          "from_year": 2010,
+          "to_year": 2011,
+          "typical_nominations": 10,
+          "tolerance": 0,
+          "reason": "Fixed 10-nominee slate at 82nd and 83rd ceremonies before the variable-slate rule (2012)."
+        }
+      ]
+    },
+    "oscar.best_director": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate across full scope. split_co_recipients=false — directing teams stay on one row."
+    },
+    "oscar.best_actor": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_actress": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_supporting_actor": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1937,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_supporting_actress": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1937,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_original_screenplay": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1940,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate. Co-author credits kept together on one row."
+    },
+    "oscar.best_adapted_screenplay": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1940,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate. Co-author credits kept together on one row."
+    },
+    "oscar.best_cinematography": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_film_editing": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1935,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate. split_co_recipients=false — editing teams stay on one row."
+    },
+    "oscar.best_production_design": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1929,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate. Renamed from Best Art Direction at 85th ceremony (2013)."
+    },
+    "oscar.best_costume_design": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1949,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate."
+    },
+    "oscar.best_makeup_and_hairstyling": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1982,
+      "last_year": null,
+      "notes": "3 nominees through 2019 (cer 91); expanded to 5 at 92nd ceremony (2020). Renamed from Best Makeup at 85th (2013).",
+      "era_overrides": [
+        {
+          "from_year": 1982,
+          "to_year": 2019,
+          "typical_nominations": 3,
+          "tolerance": 2,
+          "reason": "Pre-2020 slate was typically 3 nominees, with documented outliers of 2 (cer 75/2003) and 4 (cer 72/2000)."
+        }
+      ]
+    },
+    "oscar.best_original_score": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1935,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate. split_co_recipients=false — composer teams stay on one row."
+    },
+    "oscar.best_original_song": {
+      "typical_nominations": 5,
+      "tolerance": 3,
+      "first_year": 1935,
+      "last_year": null,
+      "notes": "Mostly 5 nominees but rule produced sub-5 slates several times. Famous 2-nominee year at 84th ceremony (2012). Tolerance=3 covers 2-5 historical range. Subject title (song name) populated alongside film title."
+    },
+    "oscar.best_visual_effects": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1964,
+      "last_year": null,
+      "notes": "3 nominees through 2010 (cer 82); expanded to 5 at 83rd ceremony (2011).",
+      "era_overrides": [
+        {
+          "from_year": 1964,
+          "to_year": 2010,
+          "typical_nominations": 3,
+          "tolerance": 0,
+          "reason": "Pre-2011 fixed 3-nominee slate."
+        }
+      ]
+    },
+    "oscar.best_documentary_feature": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1943,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate across full scope (display name updated to '...Film' at 95th)."
+    },
+    "oscar.best_documentary_short": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 1943,
+      "last_year": null,
+      "notes": "Variable 3-5 in early 2000s; stabilized at 5 from cer 82 (2010). Tolerance=2 covers historical range."
+    },
+    "oscar.best_animated_short": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 1932,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate; one historical 3-nominee year (cer 73/2001). Tolerance=2 absorbs."
+    },
+    "oscar.best_live_action_short": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1932,
+      "last_year": null,
+      "notes": "Stable 5-nominee slate; cer 72/2000 had 6. Tolerance=1 absorbs."
+    },
+    "oscar.best_international_feature": {
+      "typical_nominations": 5,
+      "tolerance": 1,
+      "first_year": 1957,
+      "last_year": null,
+      "notes": "Mostly 5 nominees with occasional 6 in early 2000s (ties broke into a 6-slot slate). Renamed from Best Foreign Language Film at 92nd (2020)."
+    },
+    "oscar.best_animated_feature": {
+      "typical_nominations": 5,
+      "tolerance": 2,
+      "first_year": 2002,
+      "last_year": null,
+      "notes": "First awarded at 74th ceremony (2002). Slate was 3 or 5 depending on number of qualifying films through ~2011; stabilized at 5 from cer 84 (2012). Tolerance=2 covers historical range."
+    },
+    "oscar.best_sound_editing": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1964,
+      "last_year": 2020,
+      "notes": "Highly variable in early 2000s (2-6 nominees); stabilized at 5 from 79th (2007). Closed after 92nd (2020) and merged into best_sound.",
+      "era_overrides": [
+        {
+          "from_year": 1964,
+          "to_year": 2006,
+          "typical_nominations": 4,
+          "tolerance": 2,
+          "reason": "Pre-stabilization era; cer 72 had 6, cer 73-78 ranged 2-3. Tolerance=2 covers 2-6."
+        }
+      ]
+    },
+    "oscar.best_sound_mixing": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 1930,
+      "last_year": 2020,
+      "notes": "Stable 5-nominee slate across the cer 72-92 (2000-2020) scope. Closed after 92nd and merged into best_sound."
+    },
+    "oscar.best_sound": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 2021,
+      "last_year": null,
+      "notes": "First awarded at 93rd ceremony (2021) as merged successor of sound_editing and sound_mixing. Stable 5-nominee slate."
+    },
+    "oscar.best_casting": {
+      "typical_nominations": 5,
+      "tolerance": 0,
+      "first_year": 2026,
+      "last_year": null,
+      "notes": "First awarded at 98th ceremony (2026) — outside the cer 72-97 scope of this expectations file. Included for completeness."
+    }
+  }
+}

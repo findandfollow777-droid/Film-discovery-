@@ -1,0 +1,1969 @@
+/* ============================================================
+   AWARDS 2.0 — THE PRESTIGE
+   Year-first awards explorer with editorial hero templates.
+   Standalone WIP page (not yet wired into main nav).
+   ============================================================ */
+
+/* ===== LAYOUT ===== */
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--space-black);
+  color: var(--film-white);
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px 0 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+  z-index: 99;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER ===== */
+.awards-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-top: 12px;
+}
+
+.back-nav {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ghost-gray);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-nav:hover {
+  color: var(--accent-cyan);
+}
+
+.header-center {
+  text-align: center;
+  flex: 1;
+}
+
+.header-center h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--film-white);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  color: var(--muted-silver);
+  font-size: 14px;
+  margin: 0;
+}
+
+.spacer {
+  width: 120px; /* Balance back nav width */
+}
+
+/* ===== HUB NAV ===== */
+.hub-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.hub-pill {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.2);
+  background: rgba(var(--prestige-purple-rgb), 0.05);
+  color: var(--muted-silver);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hub-pill:hover {
+  border-color: rgba(var(--prestige-purple-rgb), 0.4);
+  color: var(--film-white);
+}
+
+.hub-pill.active {
+  border-color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.15);
+  color: var(--prestige-purple);
+  box-shadow: 0 0 12px rgba(var(--prestige-purple-rgb), 0.2);
+}
+
+/* ===== FESTIVAL TABS ===== */
+.festival-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.festival-tab {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ghost-gray);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.festival-tab:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--film-white);
+}
+
+.festival-tab.active {
+  border-color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.1);
+  color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(var(--accent-gold-rgb), 0.15);
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding: 6px 14px;
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+  border-left: 2px solid var(--accent-cyan);
+  display: inline-block;
+}
+
+/* ============================================================
+   FESTIVAL QUICK-ENTRY RAIL — Added Jun 8 2026 (Home B)
+   Six colour-coded tiles, one-tap entry per festival. --tile-rgb is the
+   festival accent (border + faint wash + name); active tile is emphasised
+   to mirror the active festival tab. All colour via tokens (Rule #12).
+   ============================================================ */
+.festival-rail {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.fest-tile {
+  --tile-rgb: var(--accent-gold-rgb);   /* overridden per festival below */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 10px;
+  border: 1px solid rgba(var(--tile-rgb), 0.4);
+  background: rgba(var(--tile-rgb), 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.fest-tile:hover {
+  transform: translateY(-3px);
+  background: rgba(var(--tile-rgb), 0.1);
+}
+
+/* Active tile = stronger border + wash + glow → mirrors the active festival tab. */
+.fest-tile.active {
+  border-color: rgba(var(--tile-rgb), 0.9);
+  background: rgba(var(--tile-rgb), 0.14);
+  box-shadow: 0 0 18px rgba(var(--tile-rgb), 0.18);
+}
+
+.fest-tile-glyph {
+  width: 30px;
+  height: 30px;
+  /* iconic award glyphs are baked-colour SVGs → flatten to a neutral silver so
+     all six read uniformly; the festival accent is carried by the name/border/wash. */
+  filter: brightness(0) saturate(100%) invert(82%);
+}
+
+.fest-tile-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(var(--tile-rgb));   /* festival accent */
+}
+
+/* Per-festival accent (--fest-gg alias from Build B resolves the gg tile). */
+.fest-tile[data-festival="oscar"]  { --tile-rgb: var(--fest-oscar-rgb); }
+.fest-tile[data-festival="bafta"]  { --tile-rgb: var(--fest-bafta-rgb); }
+.fest-tile[data-festival="gg"]     { --tile-rgb: var(--fest-gg-rgb); }
+.fest-tile[data-festival="cannes"] { --tile-rgb: var(--fest-cannes-rgb); }
+.fest-tile[data-festival="venice"] { --tile-rgb: var(--fest-venice-rgb); }
+.fest-tile[data-festival="berlin"] { --tile-rgb: var(--fest-berlin-rgb); }
+
+/* ============================================================
+   FESTIVAL IDENTITY BANNER — Added Jun 21 2026
+   Per-festival identity strip above the year browse. Glyph baked gold
+   (exact --accent-gold filter chain, matches .stat-glyph); name carries
+   the festival accent via --fest-tint-rgb (gg → amber alias); descriptor
+   muted + uppercase. The year-number tint below recolours ONLY — the
+   strip composition build owns size/weight/nowrap. All colour via tokens.
+   ============================================================ */
+.fest-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  border-left: 3px solid rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.7);
+  background: linear-gradient(135deg, rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 70%);
+}
+
+.fest-banner-glyph {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  /* baked gold — exact --accent-gold filter chain (matches .stat-glyph). */
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.fest-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;   /* lets the descriptor wrap instead of overflowing on narrow widths */
+}
+
+.fest-banner-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: rgb(var(--fest-tint-rgb, var(--accent-gold-rgb)));   /* festival accent */
+}
+
+.fest-banner-desc {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+/* Per-festival name tint resolution (gg via the Globe alias → amber). */
+#festival-banner[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+#festival-banner[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+#festival-banner[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+#festival-banner[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+#festival-banner[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+#festival-banner[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
+
+/* Year-number colour per festival — colour ONLY; size/weight/nowrap stay from
+   the strip composition build. gg via the Globe alias → amber. */
+#year-strips-container[data-festival="oscar"]  .year-number { color: var(--fest-oscar); }
+#year-strips-container[data-festival="bafta"]  .year-number { color: var(--fest-bafta); }
+#year-strips-container[data-festival="gg"]     .year-number { color: var(--fest-gg); }
+#year-strips-container[data-festival="cannes"] .year-number { color: var(--fest-cannes); }
+#year-strips-container[data-festival="venice"] .year-number { color: var(--fest-venice); }
+#year-strips-container[data-festival="berlin"] .year-number { color: var(--fest-berlin); }
+
+/* Narrow widths — keep the banner readable, shrink the glyph + type. */
+@media (max-width: 650px) {
+  .fest-banner {
+    gap: 14px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .fest-banner-glyph { width: 52px; height: 52px; }
+  .fest-banner-name { font-size: 22px; }
+  .fest-banner-desc { font-size: 10px; letter-spacing: 0.08em; }
+}
+
+/* ============================================================
+   FEATURED CEREMONY CAROUSEL — Added Jun 2026 (Home C)
+   4-slide marquee at the top of browse. Slides reuse the detail-hero
+   film-led CSS (backdrop + dark gradient + content); crossfade like the
+   detail carousel. Each slide is colour-washed by its festival (reuses the
+   Build-B --fest-tint-rgb hook on .hero-backdrop::after). Tokens only.
+   ============================================================ */
+.featured-carousel {
+  margin-bottom: 40px;
+}
+
+.featured-carousel-inner {
+  position: relative;
+}
+
+.featured-track {
+  display: grid;            /* slides stack in one cell → crossfade, equal height */
+  min-height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.featured-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  cursor: pointer;
+}
+
+.featured-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reuse the film-led hero, sized to the marquee (no standalone margin). */
+.featured-slide .hero-film-led {
+  height: 100%;
+  margin-bottom: 0;
+  border-radius: 16px;
+}
+
+.featured-slide:hover .hero-headline {
+  text-decoration-line: underline;
+  text-decoration-color: rgba(var(--accent-gold-rgb), 0.5);
+  text-underline-offset: 4px;
+}
+
+.featured-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+/* Per-festival colour wash on each slide's backdrop (reuses Build-B mechanism). */
+.featured-slide[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+.featured-slide[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+.featured-slide[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+.featured-slide[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+.featured-slide[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+.featured-slide[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
+
+/* Dots below the marquee. The latest/live slide's dot reads cyan + a halo. */
+.featured-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.featured-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--muted-silver-rgb), 0.45);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.featured-dot:hover { transform: scale(1.2); }
+.featured-dot.is-active { background: var(--accent-gold); }
+
+.featured-dot.is-latest {
+  background: rgba(var(--accent-cyan-rgb), 0.5);
+}
+
+.featured-dot.is-latest.is-active {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(var(--accent-cyan-rgb), 0.7);
+}
+
+/* ===== YEAR STRIPS ===== */
+.year-strip {
+  display: grid;
+  grid-template-columns: 140px 300px 1fr 150px;  /* year 120→140 (clears 4-digit year), backdrop 220→300 */
+  gap: 28px;                                       /* 20→28 — real clearance year↔backdrop */
+  align-items: center;
+  padding: 18px;
+  margin-bottom: 16px;
+  background: rgba(var(--nebula-dark-rgb), 0.4);
+  border-radius: 12px;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.year-strip:hover {
+  border-left-color: var(--accent-gold);
+  transform: translateX(8px);
+  background: rgba(var(--nebula-dark-rgb), 0.6);
+  box-shadow: 0 0 30px rgba(var(--accent-gold-rgb), 0.15);
+}
+
+.year-number {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;            /* fits the 140px track (4-digit year ≈ 134px); nowrap below is the safety */
+  font-weight: 900;
+  color: var(--film-white);
+  line-height: 1;
+  white-space: nowrap;        /* never wrap — keeps the year on one line in its track */
+}
+
+/* Strip backdrop box (Home A — Jun 8 2026). The year's top-winning film backdrop
+   is painted via JS as background-image (cover). Empty state = a subtle dark
+   gradient (no "Backdrop" text). ::after vignette darkens the year-side edge so
+   the image blends cinematically toward the year column. */
+.strip-visual {
+  width: 300px;               /* matches the new 300px track */
+  height: 150px;             /* up from 120 — image-forward, anchors the band */
+  background-color: var(--cosmic-blue);
+  background-image: linear-gradient(135deg, rgba(var(--cosmic-blue-rgb), 0.95), rgba(var(--nebula-dark-rgb), 0.95));
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.strip-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, transparent 55%, rgba(var(--space-black-rgb), 0.45) 100%);
+  pointer-events: none;
+}
+
+.strip-headline {
+  font-size: 20px;            /* up from 16 — the content carries the strip now */
+  font-weight: 500;
+  color: var(--film-white);
+  line-height: 1.25;
+}
+
+.strip-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;                   /* up from 6 — lets the column breathe */
+  font-size: 12px;            /* up from 11 */
+  color: var(--muted-silver);
+  text-align: right;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.strip-stat {
+  display: block;
+}
+
+/* ===== BACK TO RANGE BUTTON ===== */
+.back-to-range {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ghost-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
+
+.back-to-range:hover {
+  color: var(--accent-cyan);
+}
+
+/* ===== HERO TEMPLATES ===== */
+
+/* A. Film-led */
+.hero-film-led {
+  height: 460px;
+  background: var(--cosmic-blue);
+  border-radius: 16px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
+}
+
+.hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.12) 0%, transparent 60%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.hero-film-led .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 88px;
+  font-weight: 900;
+  color: var(--film-white);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.hero-ceremony {
+  color: var(--accent-gold);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.hero-headline {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--film-white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.hero-deck {
+  font-size: 15px;
+  color: var(--muted-silver);
+  line-height: 1.6;
+}
+
+/* B. Duel */
+.hero-duel {
+  height: 460px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.duel-side {
+  height: 100%;
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 60%),
+    linear-gradient(135deg, var(--cosmic-blue), var(--nebula-dark));
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  position: relative;
+}
+
+.duel-side .hero-headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.duel-side .hero-deck {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.duel-side.loser {
+  filter: grayscale(0.6);
+  opacity: 0.7;
+}
+
+.duel-year-badge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--film-white);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 32px;
+  border-radius: 12px;
+  border: 2px solid var(--accent-gold);
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(var(--accent-gold-rgb), 0.25);
+}
+
+/* C. Portrait-led */
+.hero-portrait {
+  height: 460px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  background: rgba(var(--nebula-dark-rgb), 0.4);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.portrait-image {
+  width: 280px;
+  height: 380px;
+  background: var(--cosmic-blue);
+  border-radius: 12px;
+  border: 3px solid var(--prestige-purple);
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(var(--prestige-purple-rgb), 0.25);
+}
+
+.portrait-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-portrait .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--film-white);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.hero-tag {
+  background: rgba(var(--prestige-purple-rgb), 0.15);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.3);
+  color: var(--prestige-purple);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* D. Typographic */
+.hero-typographic {
+  height: 460px;
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.10) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(var(--prestige-purple-rgb), 0.08) 0%, rgba(0, 0, 0, 0) 100%);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.hero-typographic .hero-year {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 144px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--prestige-purple) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.meta-col {
+  text-align: center;
+}
+
+.meta-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  margin-bottom: 6px;
+}
+
+.meta-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px;
+  color: var(--film-white);
+  font-weight: 500;
+}
+
+/* ============================================================
+   PER-FESTIVAL + PER-YEAR BACKGROUND TINT — Added Jun 8 2026 (Build B)
+   #hero-container carries data-festival (→ --fest-tint-rgb) and an inline
+   --fest-angle (deterministic per year, set in showYearDetail). A subtle 5%
+   wash of the festival colour layers OVER the existing dark gradients on the
+   hero + stats panels — additive, never a replacement. The wash gradient's
+   ANGLE varies per year (non-colour variation); the base gradients are fixed.
+   Foreground stat accents/glyphs/text are opaque, so legibility is unaffected.
+   ============================================================ */
+#hero-container[data-festival="oscar"]  { --fest-tint-rgb: var(--fest-oscar-rgb); }
+#hero-container[data-festival="bafta"]  { --fest-tint-rgb: var(--fest-bafta-rgb); }
+#hero-container[data-festival="gg"]     { --fest-tint-rgb: var(--fest-gg-rgb); }
+#hero-container[data-festival="cannes"] { --fest-tint-rgb: var(--fest-cannes-rgb); }
+#hero-container[data-festival="venice"] { --fest-tint-rgb: var(--fest-venice-rgb); }
+#hero-container[data-festival="berlin"] { --fest-tint-rgb: var(--fest-berlin-rgb); }
+
+/* ============================================================
+   HERO CAROUSEL — "By the Numbers" — Added Jun 8 2026
+   2-slide crossfade carousel. Both slides occupy the SAME grid cell
+   (grid-area 1/1) so the track height = the taller slide → no jump on
+   rotate, and the stats grid can grow on mobile while heights stay equal.
+   All colors via tokens (Rule #12).
+   ============================================================ */
+.hero-carousel {
+  position: relative;
+  margin-bottom: 40px;        /* replaces the per-template margin (zeroed below) */
+}
+
+.hero-track {
+  display: grid;
+  min-height: 460px;          /* current hero height; equal-height baseline */
+}
+
+.hero-slide {
+  grid-area: 1 / 1;           /* stack both slides in one cell */
+  min-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Templates fill the shared cell (so the editorial slide never leaves a gap
+   when the stats slide is taller on mobile) and drop their standalone margin. */
+.hero-carousel .hero-film-led,
+.hero-carousel .hero-duel,
+.hero-carousel .hero-typographic,
+.hero-carousel .hero-portrait {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+/* ----- Slide 2: stats panel — "Calm Stack" (rebuilt Jun 8 2026) -----
+   Left = stacked stat rows with even vertical rhythm (space-between);
+   right = rectangular portrait tile (NO circle). Height matches slide 1
+   (460px via the shared grid cell) so the carousel never jumps. */
+.hero-slide-stats {
+  display: flex;              /* let the inner panel stretch to the cell height */
+}
+
+.stats-slide {
+  flex: 1;
+  min-width: 0;
+  min-height: 460px;
+  display: grid;
+  grid-template-columns: 1fr 255px;   /* 227px photo + 28px right margin (portrait sits inward) */
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(var(--fest-angle, 135deg), rgba(var(--fest-tint-rgb, var(--accent-gold-rgb)), 0.05) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(var(--accent-gold-rgb), 0.06) 0%, rgba(var(--prestige-purple-rgb), 0.05) 100%);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.18);
+}
+
+.stats-slide.no-standout {
+  grid-template-columns: 1fr;
+}
+
+/* Even distribution (Jun 8 2026 patch): the slide is locked to 460px to match
+   the editorial hero. Distribute all FOUR rows (title, wins, noms, categories)
+   evenly through the full panel height with space-evenly — equal space above,
+   between, and below — so the column fills the height like the portrait beside
+   it, with no canyon and no floating cluster. (.stats-mid below is display:
+   contents so its two rows are direct flex children and join the distribution.) */
+.stats-main {
+  padding: 20px 30px 24px;      /* nudged up slightly from 28px */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* title pinned to the top; .stats-body fills the rest */
+  align-self: stretch;          /* fill the grid cell's full height */
+  box-sizing: border-box;       /* awards2.html has no global border-box; without this the
+                                   min-height below would add the padding and overflow 460px,
+                                   growing the panel past the editorial slide → carousel jump. */
+  min-height: 460px;            /* belt-and-braces: guarantee 460px even if stretch is overridden */
+  min-width: 0;
+}
+
+/* The three stat rows (wins, noms, baseline) fill the height below the pinned
+   title and distribute evenly among themselves — so the title stays at the top
+   while the data still spreads down the panel. */
+.stats-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 0;
+}
+
+.stats-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;   /* 30px +7.5% */
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+/* Dissolve the wrapper box so the two stat rows become direct flex children of
+   .stats-main and join its space-evenly distribution (rather than being grouped
+   as one item). No own box → its old gap no longer applies; spacing is governed
+   entirely by .stats-main's space-evenly. */
+.stats-mid {
+  display: contents;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: row;          /* number on the left, stacked label+glyphs body on the right */
+  align-items: center;
+  gap: 16px;
+}
+
+/* Label on top, glyph row directly beneath it — one connected unit, left-aligned.
+   Both rows' bodies start at the same x because .stat-num has a fixed min-width. */
+.stat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.stat-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;       /* 1.5× the prior 32px */
+  font-weight: 900;
+  line-height: 0.9;
+  min-width: 60px;       /* widened so "7" and "13" align → labels line up across rows */
+}
+
+.stat-num.gold { color: var(--accent-gold); }
+.stat-num.cyan { color: var(--accent-cyan); }
+
+.stat-num-sm {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 36px;       /* 1.5× prior, then +10% (33→36) */
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.stat-num-sm.purple { color: var(--prestige-purple); }
+
+.stat-label {
+  font-size: 20px;       /* 1.5× the prior 13px */
+  letter-spacing: 0.08em;
+  color: var(--muted-silver);
+  text-transform: uppercase;
+  white-space: nowrap;   /* keep the sentence on one line inside the fixed head column */
+}
+
+/* ----- Glyph rows (gold wins + silver nomination-losses) — the visual hero ----- */
+.glyph-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Zero-size full-width flex break: forces the silver nomination-loss glyphs onto
+   a new line directly under the gold wins within the glyph row. */
+.glyph-break {
+  flex-basis: 100%;
+  width: 100%;
+  height: 0;
+}
+
+/* Reuse the trophy belt's og-statuette. Gold = exact --accent-gold chain
+   (matches .trophy-icon .og at awards2.css). Silver = neutral grey for losses.
+   Enlarged to 26px so the statuettes read as the focal point of each stat. */
+.stat-glyph {
+  width: 52px;
+  height: 52px;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.stat-glyph.silver {
+  filter: brightness(0) saturate(100%) invert(80%);
+}
+
+/* ----- Baseline row: categories | snub. Part of the centered cluster (no
+   auto margin); keeps a full-width divider above it for visual separation. ----- */
+.stat-bottom {
+  display: flex;
+  gap: 32px;
+  align-items: center;   /* content vertically centered (middle) within the row */
+  padding-top: 14px;
+  border-top: 1px solid rgba(var(--muted-silver-rgb), 0.18);
+}
+
+.stat-mini {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* +10% on the baseline "categories" label only (the shared .stat-label used by
+   the Most wins/noms rows stays 20px). */
+.stat-mini .stat-label {
+  font-size: 22px;
+}
+
+.stat-highlight {
+  display: flex;            /* label + value on ONE line (parallel with "categories") */
+  align-items: baseline;
+  gap: 12px;
+  border-left: 1px solid rgba(var(--muted-silver-rgb), 0.18);
+  padding-left: 24px;
+}
+
+.highlight-label {
+  font-size: 22px;       /* baseline text +10% */
+  letter-spacing: 0.15em;
+  color: var(--success-green);
+  text-transform: uppercase;
+}
+
+.highlight-value {
+  font-size: 22px;       /* baseline text +10% */
+  color: var(--film-white);
+}
+
+.highlight-detail {
+  font-size: 22px;       /* baseline text +10% */
+  color: var(--ghost-gray);
+}
+
+/* ----- Rectangular portrait tile (NO circle) ----- */
+.stats-portrait {
+  position: relative;
+  width: 227px;                /* Best Actor tile WIDTH; now fills panel height (cover-cropped) */
+  align-self: stretch;         /* fill the panel height instead of a fixed 2:3 box */
+  margin: 28px 28px 28px 0;    /* top/bottom: near-full height + vertical centering; right: inward */
+  border-radius: 0;            /* square edges */
+  overflow: hidden;
+  background: var(--cosmic-blue);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
+}
+
+.stats-portrait-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;         /* fills the frame like the actor tiles (.person-bg) */
+  background-position: center top;
+}
+
+.stats-portrait-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(var(--space-black-rgb), 0.97) 0%,
+    rgba(var(--space-black-rgb), 0.65) 40%,
+    rgba(var(--space-black-rgb), 0.08) 100%);
+}
+
+.stats-portrait-text {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 20px;   /* more breathing room beneath the STANDOUT caption */
+}
+
+.standout-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;          /* ×1.1 */
+  font-weight: 700;         /* bold */
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.standout-name {
+  font-size: 16.5px;        /* ×1.1 */
+  font-weight: 500;
+  color: var(--film-white);
+  line-height: 1.1;
+}
+
+.standout-award {
+  font-size: 13px;          /* ×1.2 */
+  color: var(--muted-silver);
+  text-transform: uppercase;   /* capitalise → BEST ACTOR */
+  margin-top: 2px;
+}
+
+/* ----- Carousel dots ----- */
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 5;                 /* always above slide content → always clickable */
+}
+
+.hero-dot {
+  width: 13px;               /* bigger: always visible + an easy hit target */
+  height: 13px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--muted-silver-rgb), 0.6);  /* brighter so it's always visible */
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-dot:hover { transform: scale(1.2); }
+.hero-dot.is-active { background: var(--accent-gold); }
+
+/* ===== STICKY YEAR DETAIL HEADER ===== */
+.year-detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(var(--space-black-rgb), 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(var(--accent-gold-rgb), 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Override the legacy free-standing back-to-range margin in this context. */
+.year-detail-header .back-to-range {
+  margin-bottom: 0;
+}
+
+.year-detail-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--film-white);
+  letter-spacing: 0.05em;
+}
+
+/* ===== CATEGORY SECTIONS ===== */
+.category-section {
+  margin-bottom: 64px;
+}
+
+.category-header {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px; /* 1.4x of prior 14px — paired with trophy-strip nav (Jun 6 2026) */
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  margin: 0 0 20px;
+  text-transform: uppercase;
+  scroll-margin-top: 80px; /* offset for sticky year-detail-header on smooth-scroll */
+}
+
+/* Fixed 5-col grid (Jun 7 2026): matches the Oscar 5-nominee rhythm — every
+   category is 1 row of 5 (4 nominees + winner), Best Picture 2 even rows of 10.
+   1fr columns grow each tile to fill the container. Steps 5→4→3→2 below. */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* 4 cols on mid-width (ORBIT 1100px breakpoint). Declared BEFORE the 900px
+   block so the narrower query wins on overlap. */
+@media (max-width: 1100px) {
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===== PHASE 1 SIMPLE TILES (placeholder per spec; Phase 2 = full port from awards-browse) ===== */
+
+/* Wrapper = grid item (carries .is-winner/.is-nominee + the award bar). The
+   grid stretches it to the row height; this flex column passes that height to
+   the bordered .tile so all movie cards in a row stay equal-height (matching
+   the pre-wrapper behaviour) regardless of title/person text length. */
+.tile-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .tile is now a pure 2:3 poster card (title overlaid), so it sizes to its own
+   content — no flex:1 stretch that used to leave a gap under short titles. */
+.tile-card .tile {
+  flex: 0 0 auto;
+}
+
+.tile {
+  position: relative;
+  background: rgba(var(--nebula-dark-rgb), 0.5);
+  border-radius: 0; /* square edges */
+  overflow: hidden;
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.08);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+}
+
+.tile.winner {
+  border-color: rgba(var(--accent-gold-rgb), 0.6);
+  box-shadow: 0 0 18px rgba(var(--accent-gold-rgb), 0.18);
+}
+
+.tile.winner:hover {
+  box-shadow: 0 0 28px rgba(var(--accent-gold-rgb), 0.32);
+}
+
+.tile.nominee {
+  opacity: 0.85;
+}
+
+.tile.nominee:hover {
+  opacity: 1;
+  border-color: rgba(var(--muted-silver-rgb), 0.25);
+}
+
+.tile-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: var(--cosmic-blue);
+}
+
+.tile-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tile-no-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ghost-gray);
+  font-size: 28px;
+}
+
+/* Title/person overlay — bottom-anchored on the 2:3 poster, gradient scrim for
+   legibility. Mirrors the flip front's .person-gradient/.person-content so movie
+   and person tiles read consistently. pointer-events:none keeps the whole .tile
+   the single click target. */
+.tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(var(--space-black-rgb), 0.92) 0%, rgba(var(--space-black-rgb), 0.45) 32%, transparent 62%);
+  pointer-events: none;
+}
+
+.tile-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--film-white);
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tile-person {
+  font-size: 11px;
+  color: var(--muted-silver);
+  line-height: 1.3;
+  margin-top: 2px;
+  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   PERSON↔MOVIE FLIP TILES — Added Jun 7 2026
+   Person categories (acting + director) render a click-flip card:
+   FRONT = person portrait, BACK = movie poster. Ported from
+   awards-browse but click-driven (.flipped class) instead of hover,
+   with a "View" button on each face to open the People/Movie Cube.
+   ============================================================ */
+.flip-tile {
+  position: relative;
+  perspective: 800px;
+  overflow: visible;
+  background: transparent;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0; /* square edges */
+}
+
+.flip-tile.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 0; /* square edges */
+}
+
+/* FRONT = person (default visible) */
+.flip-front {
+  background: var(--cosmic-blue);
+}
+
+/* BACK = movie */
+.flip-back {
+  transform: rotateY(180deg);
+  background: rgba(var(--nebula-dark-rgb), 0.98);
+}
+
+.flip-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Person face internals (portrait painted via inline background-image) */
+.person-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+}
+
+.person-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(var(--space-black-rgb), 0.97) 0%,
+    rgba(var(--space-black-rgb), 0.65) 40%,
+    rgba(var(--space-black-rgb), 0.08) 100%);
+}
+
+.person-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  z-index: 1;
+}
+
+.person-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px; /* +15% from 13px (Jun 7 2026) */
+  font-weight: 700;
+  color: var(--film-white);
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.person-film {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; /* +15% from 11px (Jun 7 2026) */
+  color: var(--muted-silver);
+  font-style: italic;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Role tags — actor=cyan, actress=rose/pink, director=purple (awards2 scheme) */
+.role-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.role-tag.actor {
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+}
+
+.role-tag.actress {
+  background: rgba(var(--accent-rose-rgb), 0.12);
+  color: var(--accent-rose);
+  border: 1px solid rgba(var(--accent-rose-rgb), 0.3);
+}
+
+.role-tag.director {
+  background: rgba(var(--prestige-purple-rgb), 0.12);
+  color: var(--prestige-purple);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.3);
+}
+
+/* Glow border on the whole tile, matching the role */
+.flip-tile.glow-actor .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--accent-cyan-rgb), 0.25);
+}
+.flip-tile.glow-actress .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--accent-rose-rgb), 0.25);
+}
+.flip-tile.glow-director .flip-inner {
+  box-shadow: 0 0 12px rgba(var(--prestige-purple-rgb), 0.25);
+}
+
+/* Winner/nominee label — reuse the simple-tile label look on both faces. */
+/* Award top bar — shared by flip (people) tiles AND simple movie tiles. A
+   full-width framed bar floating ABOVE the tile (8px gap), square edges, full
+   border. Status colour is keyed off .is-winner / .is-nominee on the tile
+   wrapper (.flip-tile or .tile-card), so both tile types render identically. */
+.award-toptab {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 0 8px;       /* gap below the bar, above the tile */
+  padding: 6px 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;       /* winner + nominee, matched */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 0;      /* square edges */
+  z-index: 4;
+}
+
+/* Winner = BLACK text on SOLID GOLD; nominee = muted. */
+.is-winner .award-toptab {
+  color: var(--space-black);
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.is-nominee .award-toptab {
+  color: var(--muted-silver);
+  background: rgba(var(--nebula-dark-rgb), 0.85);
+  border-color: rgba(var(--muted-silver-rgb), 0.2);
+}
+
+/* Hanging "flap" below the card — keeps the tile surface clean. It's a sibling
+   of .flip-inner (not inside the rotating faces), so it doesn't flip and the
+   card's 2/3 aspect-ratio is preserved. Only the face-appropriate button shows. */
+/* Bottom bar — full-width framed bar floating BELOW the tile (8px gap). Square
+   edges, complete border — symmetrical with the top bar. Sibling of .flip-inner,
+   so the card's 2/3 aspect-ratio is untouched. Only one button shows per face. */
+.flip-flap {
+  position: relative;
+  width: 100%;
+  margin-top: 8px;    /* gap above the bar, below the tile */
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Sequenced flip: JS adds .flap-hidden before flipping, removes it after the
+   0.55s flip lands — so the old flap fades out, the card turns, the new flap
+   fades in. (.flap-person/.flap-film still pick WHICH button via .flipped.) */
+.flip-tile.flap-hidden .flip-flap {
+  opacity: 0;
+}
+
+.flap-btn {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  border-radius: 0;   /* square edges */
+  background: rgba(var(--space-black-rgb), 0.85);
+  color: var(--accent-cyan);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.flap-btn:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.15);
+  border-color: var(--accent-cyan);
+}
+
+/* Person face up (default) → View Person, text RIGHT-aligned. */
+.flap-person { display: block; text-align: right; }
+.flap-film   { display: none;  text-align: left; }
+
+/* Movie face up (flipped) → View Film, text LEFT-aligned. */
+.flip-tile.flipped .flap-person { display: none; }
+.flip-tile.flipped .flap-film   { display: block; }
+
+/* Loading / empty / error states */
+.strip-loading,
+.strip-empty,
+.categories-loading,
+.categories-empty,
+.categories-error {
+  padding: 32px;
+  text-align: center;
+  color: var(--ghost-gray);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.categories-error {
+  color: var(--danger-red);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .festival-rail {
+    grid-template-columns: repeat(3, 1fr);   /* 6 → 3×2 */
+  }
+
+  .featured-track {
+    min-height: 360px;
+  }
+
+  .header-center h1 {
+    font-size: 24px;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .year-strip {
+    grid-template-columns: 120px 220px 1fr;  /* scaled-down version of the new desktop look */
+  }
+
+  .strip-stats {
+    display: none;
+  }
+
+  .strip-visual {
+    width: 220px;
+    height: 120px;
+  }
+
+  .year-number {
+    font-size: 38px;           /* ~134px→~106px year, clears the 120px track */
+  }
+
+  .hero-duel {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .duel-year-badge {
+    font-size: 48px;
+    padding: 14px 24px;
+  }
+
+  .hero-portrait {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px 1fr;
+    height: auto;
+  }
+
+  .portrait-image {
+    width: 100%;
+    max-width: 280px;
+    height: 220px;
+    margin: 0 auto;
+  }
+
+  .hero-typographic .hero-year {
+    font-size: 96px;
+  }
+
+  .hero-film-led {
+    padding: 32px;
+  }
+
+  .hero-film-led .hero-year {
+    font-size: 64px;
+  }
+
+  /* Stats slide (Calm Stack): collapse to one column, hide the portrait tile.
+     Rows keep their rhythm; glyph rows still wrap. Both slides stay equal
+     height via the shared carousel grid cell. */
+  .stats-slide,
+  .stats-slide.no-standout {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-portrait {
+    display: none;
+  }
+
+  .stat-num {
+    font-size: 30px;
+  }
+
+  .hero-headline {
+    font-size: 22px;
+  }
+
+  .meta-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .year-detail-header {
+    padding: 12px 0;
+  }
+
+  .year-detail-title {
+    font-size: 14px;
+  }
+
+  .category-section {
+    margin-bottom: 48px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .tile-title {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 650px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .festival-rail {
+    grid-template-columns: repeat(2, 1fr);   /* 3 → 2×3 */
+  }
+
+  .featured-track {
+    min-height: 300px;
+  }
+
+  .year-strip {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .strip-visual {
+    width: 100%;
+    height: 160px;             /* image-forward in single-column too */
+  }
+
+  .strip-headline {
+    font-size: 18px;
+  }
+
+  .hero-film-led .hero-year {
+    font-size: 48px;
+  }
+
+  .hero-headline {
+    font-size: 18px;
+  }
+
+  .duel-side .hero-headline {
+    font-size: 22px;
+  }
+
+  .hero-typographic .hero-year {
+    font-size: 72px;
+  }
+
+  .duel-year-badge {
+    font-size: 40px;
+    padding: 12px 20px;
+  }
+}
+
+/* ============================================================
+   TROPHY STRIP NAVIGATION — Added Jun 6 2026
+   Carousel of category glyphs between hero and category sections.
+   Hover reveals labels; click smooth-scrolls; scroll-spy highlights
+   the active category. Logic in awards2.js (renderTrophyStrip).
+   ============================================================ */
+.trophy-strip {
+  margin: 40px 0;
+  padding: 0 0 24px;
+  border-bottom: 0.5px solid rgba(var(--accent-gold-rgb), 0.15);
+}
+
+.trophy-strip-lead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.trophy-strip-lead .og {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-gold);
+}
+
+.trophy-strip-lead-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+.trophy-carousel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trophy-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  /* NOTE: no `scroll-behavior: smooth` here — it makes direct scrollLeft
+     writes animate, which turns the seamless loop recenter into a visible
+     slide. Arrow buttons request smooth explicitly via scrollBy() instead. */
+  padding: 8px 4px;
+  flex: 1;
+  min-width: 0; /* allow the flex child to shrink below content so it scrolls */
+  scrollbar-width: none; /* Firefox */
+  cursor: grab; /* drag-to-scroll affordance (desktop) */
+}
+
+.trophy-carousel::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* Active mouse-drag (set by initTrophyCarousel). Grabbing cursor over the whole
+   strip + clickable items; user-select off so a drag never highlights labels. */
+.trophy-carousel.dragging,
+.trophy-carousel.dragging .trophy-item {
+  cursor: grabbing;
+}
+
+.trophy-carousel.dragging {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Awards 2.0 (Jun 7 2026): belt shows the uniform Oscar statuette; the
+   distinguishing category glyph + name reveal ABOVE on hover, while the
+   default name label below fades out. padding-top reserves room so the
+   enlarged statuette and the hover label never clip or shift layout. */
+.trophy-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column; /* statuette, then default label BELOW */
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 60px 6px 4px; /* top room for hover label + 1.8x statuette */
+  width: 108px; /* uniform fixed chip → even (Oscar-tight) glyph cadence */
+  min-width: 108px;
+  max-width: 108px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+/* Belt statuette glyph. Glyph colors are baked into each og-* SVG (cyan or
+   gold). `color` can't touch them, so recolor uniformly to --accent-gold
+   (#ffd700) via a filter: brightness(0) flattens any source to black, the
+   rest rebuilds the gold. Chain solved to resolve to EXACTLY #ffd700 (the
+   prior chain drifted to #ffff00 — pure yellow — which read brighter than
+   ORBIT's gold). Updated Jun 7 2026. matches --accent-gold: #ffd700. */
+.trophy-icon {
+  display: inline-flex;
+}
+
+.trophy-icon .og {
+  width: 64px;
+  height: 64px;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+  transition: transform 0.2s ease;
+}
+
+/* Default name label (below the statuette) — visible by default. */
+.trophy-label {
+  font-size: 14px;
+  color: var(--accent-gold);
+  font-weight: 500;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Hover label (above the statuette): [category glyph] Award Name, horizontal.
+   Absolutely positioned so it never reflows the belt; anchored near the item
+   top with ~16px clearance to the enlarged statuette (see padding-top). 17px
+   = 20% bigger than the 14px default label. */
+.trophy-hover-label {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.trophy-hover-label .og {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%);
+}
+
+.trophy-hover-text {
+  font-size: 17px;
+  color: var(--muted-silver);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Hover / keyboard focus — pure CSS, no JS style writes. Only the belt
+   statuette enlarges; the bottom label fades out, the top label fades in. */
+.trophy-item:hover .trophy-icon .og,
+.trophy-item:focus-visible .trophy-icon .og {
+  transform: scale(1.8);
+}
+
+.trophy-item:hover .trophy-label,
+.trophy-item:focus-visible .trophy-label {
+  opacity: 0;
+}
+
+/* Smart clipping: JS toggles .clipped when the item is partially past a belt
+   edge. Class-based (NOT inline opacity) so it shares the cascade with :hover
+   — both resolve to opacity:0, the default stays 1 — instead of an inline
+   style overriding the hover fade. Inherits the .trophy-label transition. */
+.trophy-item.clipped .trophy-label {
+  opacity: 0;
+}
+
+.trophy-item:hover .trophy-hover-label,
+.trophy-item:focus-visible .trophy-hover-label {
+  opacity: 1;
+}
+
+/* Scroll-spy active state — gold glow per spec (recolor filter + drop-shadow) */
+.trophy-item.active .trophy-icon .og {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(37%) saturate(2954%) hue-rotate(0deg) brightness(152%) contrast(197%) drop-shadow(0 0 10px var(--accent-gold));
+}
+
+/* Floating arrows (Jun 7 2026): absolutely positioned OVER the carousel so the
+   belt spans full width and glyphs scroll visibly beneath them. No background/
+   border — a soft radial halo (::before) keeps them legible against passing
+   gold statuettes. top:50% centres on the strip; the +15px keeps them on the
+   statuette row (60px top label-reserve + 64px glyph vs the 18px bottom label). */
+.trophy-scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateY(15px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted-silver);
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10; /* float above the scrolling glyphs */
+}
+
+.trophy-scroll-btn.left { left: 0; }
+.trophy-scroll-btn.right { right: 0; }
+
+/* Soft dark halo so the arrow stays readable when a gold statuette passes
+   under it. Sits inside the arrow's stacking context (above the belt) but
+   behind the arrow glyph itself (z-index:-1). Remove if it reads too heavy. */
+.trophy-scroll-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  background: radial-gradient(circle, rgba(var(--space-black-rgb), 0.55) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Arrow glyph → UNFILLED (outline) grey isosceles triangle pointing left
+   (shared og glyph untouched, Rule #7). fill:none = unfilled; narrower box +
+   thinner stroke than the old arrows. Right button keeps its scaleX(-1) flip
+   below, so the two triangles point in opposite directions. */
+.trophy-scroll-btn .og {
+  width: 24px;
+  height: 31px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 80'%3E%3Cpolygon points='6,40 64,6 64,74' fill='none' stroke='%2394a3b8' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Hover: brighten the outline to --film-white (#f1f5f9). */
+.trophy-scroll-btn:hover .og {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 80'%3E%3Cpolygon points='6,40 64,6 64,74' fill='none' stroke='%23f1f5f9' stroke-width='8' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.trophy-scroll-btn.right .og {
+  transform: scaleX(-1); /* flip the left-pointing triangle → points right */
+}
+
+@media (max-width: 650px) {
+  .trophy-strip {
+    margin: 24px 0;
+  }
+
+  .trophy-item {
+    min-width: 76px;
+    padding-top: 50px; /* smaller statuette → less top room needed */
+  }
+
+  .trophy-icon .og {
+    width: 48px;
+    height: 48px;
+  }
+
+  .trophy-label {
+    font-size: 13px;
+  }
+
+  .trophy-hover-label {
+    top: 10px;
+  }
+
+  .trophy-hover-label .og {
+    width: 15px;
+    height: 15px;
+  }
+
+  .trophy-hover-text {
+    font-size: 15px; /* 20% bigger than the 13px mobile default label */
+  }
+
+  .trophy-scroll-btn {
+    padding: 4px;
+    /* Smaller belt (48px glyph, 50px top reserve) → statuette centre is only
+       ~10px below the full-strip centre. -50% keeps it centred (now absolute). */
+    transform: translateY(-50%) translateY(10px);
+  }
+}

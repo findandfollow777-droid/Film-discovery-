@@ -18,8 +18,34 @@
      TMDB API Helpers
   ────────────────────────────────────────── */
 
-  /** Base URL for TMDB REST API (v3). */
+  /** Base URL for TMDB REST API (v3). Unchanged — external callers append /path?api_key=...&... */
   OrbitUtils.TMDB_BASE = 'https://api.themoviedb.org/3';
+
+  // Env-aware endpoint used only by OrbitUtils.tmdbFetch via buildTMDBUrl.
+  // Local: direct TMDB. Production: Netlify proxy that injects the key server-side.
+  var TMDB_FETCH_BASE = (location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+    ? 'https://api.themoviedb.org/3'
+    : '/api/tmdb';
+
+  function buildTMDBUrl(path, params) {
+    var qs;
+    if (TMDB_FETCH_BASE.indexOf('http') === 0) {
+      qs = new URLSearchParams({ api_key: typeof TMDB_API_KEY !== 'undefined' ? TMDB_API_KEY : '' });
+      if (params) {
+        Object.keys(params).forEach(function (k) {
+          if (params[k] != null) qs.set(k, params[k]);
+        });
+      }
+      return TMDB_FETCH_BASE + path + '?' + qs.toString();
+    }
+    qs = new URLSearchParams({ path: path });
+    if (params) {
+      Object.keys(params).forEach(function (k) {
+        if (params[k] != null) qs.set(k, params[k]);
+      });
+    }
+    return TMDB_FETCH_BASE + '?' + qs.toString();
+  }
 
   /** Base URL for TMDB image CDN. */
   OrbitUtils.TMDB_IMG = 'https://image.tmdb.org/t/p/';
@@ -54,15 +80,7 @@
    * @returns {Promise<Object>} Parsed JSON response
    */
   OrbitUtils.tmdbFetch = function (endpoint, params) {
-    var query = 'api_key=' + (typeof TMDB_API_KEY !== 'undefined' ? TMDB_API_KEY : '');
-    if (params) {
-      Object.keys(params).forEach(function (k) {
-        if (params[k] != null) {
-          query += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
-        }
-      });
-    }
-    var url = OrbitUtils.TMDB_BASE + endpoint + '?' + query;
+    var url = buildTMDBUrl(endpoint, params);
     return fetch(url).then(function (r) {
       if (!r.ok) throw new Error('TMDB ' + r.status + ': ' + endpoint);
       return r.json();

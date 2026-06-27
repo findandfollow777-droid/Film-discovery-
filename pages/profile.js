@@ -13,7 +13,7 @@ const GENRE_MAP = {
 const GAME_REGISTRY = [
   {
     key: "orbit_game_stats", name: "Constellation", color: "#ffd700",
-    href: "games/game.html",
+    href: "games/constellation.html",
     glyph: '<svg class="orbit-glyph" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z"/></svg>',
     extract: (s) => ({ played: s.played || 0, wins: s.wins || 0, points: 0, extra: s.maxStreak ? `Best streak: ${s.maxStreak}` : null })
   },
@@ -186,16 +186,34 @@ function setupListModal() {
   document.getElementById("lovedCard").addEventListener("click", () => openListModal("loved"));
   document.getElementById("tonightCard").addEventListener("click", () => openListModal("tonight"));
 
+  // Rule 17: Black Hole exit trigger.
+  function triggerOrbitClose() {
+    if (modal.classList.contains('orbit-popup-closing')) return;
+    if (closeBtn) closeBtn.classList.add('closing');
+    modal.classList.add('orbit-popup-closing');
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      if (closeBtn) closeBtn.classList.remove('closing');
+      modal.classList.remove('orbit-popup-closing');
+      closeListModal();
+    }, reduced ? 200 : 600);
+  }
+
   // Close
-  closeBtn.addEventListener("click", closeListModal);
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerOrbitClose();
+  });
   doneBtn.addEventListener("click", closeListModal);
 
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeListModal();
+    if (e.target === modal) triggerOrbitClose();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.hidden) closeListModal();
+    if (e.key === "Escape" && !modal.hidden) triggerOrbitClose();
   });
 
   // Clear all

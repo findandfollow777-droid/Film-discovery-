@@ -126,7 +126,25 @@ function closeFocusCard() {
   document.body.style.overflow = '';
 }
 
-focusCloseButton.addEventListener("click", closeFocusCard);
+/* Rule 17: Black Hole exit. */
+function triggerFocusOrbitClose() {
+  if (!focusOverlay || focusOverlay.classList.contains('orbit-popup-closing')) return;
+  if (focusCloseButton) focusCloseButton.classList.add('closing');
+  focusOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (focusCloseButton) focusCloseButton.classList.remove('closing');
+    focusOverlay.classList.remove('orbit-popup-closing');
+    closeFocusCard();
+  }, reduced ? 200 : 600);
+}
+
+focusCloseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  triggerFocusOrbitClose();
+});
 
 addToSearchButton.addEventListener("click", () => {
   if (!currentSectionKey) return;
@@ -1062,7 +1080,7 @@ function buildRegionLanguageContent(root) {
     "IT": "it",
     "JP": "ja",
     "KR": "ko",
-    "CN": "zh", "TW": "zh", "HK": "zh",
+    "CN": "zh", "TW": "zh", "HK": "cn",
     "IN": "hi",
     "RU": "ru",
     "BR": "pt", "PT": "pt",
@@ -1080,7 +1098,7 @@ function buildRegionLanguageContent(root) {
 
   const languageNames = {
     "en": "English", "fr": "French", "de": "German", "es": "Spanish",
-    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Chinese",
+    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Mandarin", "cn": "Cantonese",
     "hi": "Hindi", "ru": "Russian", "pt": "Portuguese", "ar": "Arabic",
     "sv": "Swedish", "da": "Danish", "no": "Norwegian", "fi": "Finnish",
     "nl": "Dutch", "pl": "Polish", "tr": "Turkish", "th": "Thai",
@@ -1269,7 +1287,8 @@ function buildRegionLanguageContent(root) {
     { code: "de", name: "German" },
     { code: "ja", name: "Japanese" },
     { code: "ko", name: "Korean" },
-    { code: "zh", name: "Chinese" },
+    { code: "zh", name: "Mandarin" },
+    { code: "cn", name: "Cantonese" },
     { code: "hi", name: "Hindi" },
     { code: "it", name: "Italian" },
     { code: "pt", name: "Portuguese" },

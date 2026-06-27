@@ -1,6 +1,12 @@
 [build]
   publish = "."
   command = ""
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/tmdb"
+  to = "/.netlify/functions/tmdb"
+  status = 200
 
 [[redirects]]
   from = "/*"

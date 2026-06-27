@@ -1,0 +1,87 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+68687,Bill Forsyth,1984,BAFTA,Best Original Screenplay,TRUE,Local Hero
+26157,Harold Pinter,1984,BAFTA,Best Adapted Screenplay,TRUE,Betrayal
+1243,Woody Allen,1985,BAFTA,Best Original Screenplay,TRUE,Broadway Danny Rose
+13317,Robert Bolt,1985,BAFTA,Best Adapted Screenplay,TRUE,The Mission
+1243,Woody Allen,1986,BAFTA,Best Original Screenplay,TRUE,Hannah and Her Sisters
+10637,Kurt Luedtke,1986,BAFTA,Best Adapted Screenplay,TRUE,Out of Africa
+1243,Woody Allen,1987,BAFTA,Best Original Screenplay,TRUE,Radio Days
+9747,Jean-Claude Carrière; Philip Kaufman,1987,BAFTA,Best Adapted Screenplay,TRUE,The Unbearable Lightness of Being
+15539,Shawn Slovo,1988,BAFTA,Best Original Screenplay,TRUE,A World Apart
+9747,Jean-Claude Carrière,1988,BAFTA,Best Adapted Screenplay,TRUE,The Unbearable Lightness of Being
+9248,Nora Ephron,1989,BAFTA,Best Original Screenplay,TRUE,When Harry Met Sally...
+12952,Christopher Hampton,1989,BAFTA,Best Adapted Screenplay,TRUE,Dangerous Liaisons
+65314,Giuseppe Tornatore,1990,BAFTA,Best Original Screenplay,TRUE,Cinema Paradiso
+5697,Alfred Uhry,1990,BAFTA,Best Adapted Screenplay,TRUE,Driving Miss Daisy
+65314,Giuseppe Tornatore,1991,BAFTA,Best Original Screenplay,TRUE,Cinema Paradiso
+2630965,Michael Blake,1991,BAFTA,Best Adapted Screenplay,TRUE,Dances with Wolves
+2239,Anthony Minghella,1992,BAFTA,Best Original Screenplay,TRUE,Truly Madly Deeply
+57862,Ted Tally,1992,BAFTA,Best Adapted Screenplay,TRUE,The Silence of the Lambs
+1243,Woody Allen,1993,BAFTA,Best Original Screenplay,TRUE,Husbands and Wives
+54443,Ruth Prawer Jhabvala,1993,BAFTA,Best Adapted Screenplay,TRUE,Howards End
+1526,Danny Rubin; Harold Ramis,1994,BAFTA,Best Original Screenplay,TRUE,Groundhog Day
+2260,Steven Zaillian,1994,BAFTA,Best Adapted Screenplay,TRUE,Schindler's List
+138,Quentin Tarantino,1995,BAFTA,Best Original Screenplay,TRUE,Pulp Fiction
+45543,Paul Attanasio,1995,BAFTA,Best Adapted Screenplay,TRUE,Quiz Show
+9033,Christopher McQuarrie,1996,BAFTA,Best Original Screenplay,TRUE,The Usual Suspects
+8999,John Hodge,1996,BAFTA,Best Adapted Screenplay,TRUE,Trainspotting
+55299,Mark Herman,1997,BAFTA,Best Original Screenplay,TRUE,Brassed Off
+6201,Baz Luhrmann; Craig Pearce,1997,BAFTA,Best Adapted Screenplay,TRUE,William Shakespeare's Romeo + Juliet
+64,Gary Oldman,1998,BAFTA,Best Original Screenplay,TRUE,Nil by Mouth
+4027,Frank Darabont,1998,BAFTA,Best Adapted Screenplay,TRUE,L.A. Confidential
+8685,Andrew Niccol,1999,BAFTA,Best Original Screenplay,TRUE,The Truman Show
+58251,Elaine May,1999,BAFTA,Best Adapted Screenplay,TRUE,Primary Colors
+202,Charlie Kaufman,2000,BAFTA,Best Original Screenplay,TRUE,Being John Malkovich
+17016,Neil Jordan,2000,BAFTA,Best Adapted Screenplay,TRUE,The End of the Affair
+11649,Cameron Crowe,2001,BAFTA,Best Original Screenplay,TRUE,Almost Famous
+2945,Stephen Gaghan,2001,BAFTA,Best Adapted Screenplay,TRUE,Traffic
+2420,Guillaume Laurant; Jean-Pierre Jeunet,2002,BAFTA,Best Original Screenplay,TRUE,Amélie
+1705,Ted Elliott; Terry Rossio; Joe Stillman; Roger S.H. Schulman,2002,BAFTA,Best Adapted Screenplay,TRUE,Shrek
+54645,Nia Vardalos,2003,BAFTA,Best Original Screenplay,TRUE,My Big Fat Greek Wedding
+12952,Christopher Hampton,2003,BAFTA,Best Adapted Screenplay,TRUE,The Quiet American
+1769,Sofia Coppola,2004,BAFTA,Best Original Screenplay,TRUE,Lost in Translation
+126,Fran Walsh; Philippa Boyens; Peter Jackson,2004,BAFTA,Best Adapted Screenplay,TRUE,The Lord of the Rings: The Return of the King
+202,Charlie Kaufman,2005,BAFTA,Best Original Screenplay,TRUE,Eternal Sunshine of the Spotless Mind
+13235,Alexander Payne; Jim Taylor,2005,BAFTA,Best Adapted Screenplay,TRUE,Sideways
+1614,Ang Lee; James Schamus,2006,BAFTA,Best Original Screenplay,FALSE,Brokeback Mountain
+1807,Larry McMurtry; Diana Ossana,2006,BAFTA,Best Adapted Screenplay,TRUE,Brokeback Mountain
+16961,Michael Arndt,2007,BAFTA,Best Original Screenplay,TRUE,Little Miss Sunshine
+15730,Peter Morgan,2007,BAFTA,Best Adapted Screenplay,TRUE,The Queen
+52444,Diablo Cody,2008,BAFTA,Best Original Screenplay,TRUE,Juno
+3558,Ronald Harwood,2008,BAFTA,Best Adapted Screenplay,TRUE,The Diving Bell and the Butterfly
+54472,Martin McDonagh,2009,BAFTA,Best Original Screenplay,TRUE,In Bruges
+57631,Simon Beaufoy,2009,BAFTA,Best Adapted Screenplay,TRUE,Slumdog Millionaire
+51686,Mark Boal,2010,BAFTA,Best Original Screenplay,TRUE,The Hurt Locker
+62946,Jesse Armstrong; Simon Blackwell; Armando Iannucci; Tony Roche,2010,BAFTA,Best Adapted Screenplay,TRUE,In the Loop
+132832,David Seidler,2011,BAFTA,Best Original Screenplay,TRUE,The King's Speech
+13520,Aaron Sorkin,2011,BAFTA,Best Adapted Screenplay,TRUE,The Social Network
+67717,Michel Hazanavicius,2012,BAFTA,Best Original Screenplay,TRUE,The Artist
+13235,Alexander Payne; Nat Faxon; Jim Rash,2012,BAFTA,Best Adapted Screenplay,TRUE,The Descendants
+138,Quentin Tarantino,2013,BAFTA,Best Original Screenplay,TRUE,Django Unchained
+131680,Chris Terrio,2013,BAFTA,Best Adapted Screenplay,TRUE,Argo
+5953,Spike Jonze,2014,BAFTA,Best Original Screenplay,TRUE,Her
+4581,Steve Coogan; Jeff Pope,2014,BAFTA,Best Adapted Screenplay,TRUE,Philomena
+221850,Graham Moore,2015,BAFTA,Best Original Screenplay,TRUE,The Grand Budapest Hotel
+1041394,Anthony McCarten,2015,BAFTA,Best Adapted Screenplay,TRUE,The Theory of Everything
+1323533,Matt Charman; Joel Coen; Ethan Coen,2016,BAFTA,Best Original Screenplay,TRUE,Bridge of Spies
+3225,Nick Hornby,2016,BAFTA,Best Adapted Screenplay,TRUE,Brooklyn
+1215399,Taylor Sheridan,2017,BAFTA,Best Original Screenplay,TRUE,Hell or High Water
+37268,Luke Davies,2017,BAFTA,Best Adapted Screenplay,TRUE,Lion
+291263,Jordan Peele,2018,BAFTA,Best Original Screenplay,TRUE,Get Out
+54441,James Ivory,2018,BAFTA,Best Adapted Screenplay,TRUE,Call Me by Your Name
+1556401,Deborah Davis; Tony McNamara,2019,BAFTA,Best Original Screenplay,TRUE,The Favourite
+92784,Barry Jenkins,2019,BAFTA,Best Adapted Screenplay,TRUE,If Beale Street Could Talk
+21684,Bong Joon-ho; Han Jin-won,2020,BAFTA,Best Original Screenplay,TRUE,Parasite
+55934,Taika Waititi,2020,BAFTA,Best Adapted Screenplay,TRUE,Jojo Rabbit
+1252934,Emerald Fennell,2021,BAFTA,Best Original Screenplay,TRUE,Promising Young Woman
+12952,Christopher Hampton; Florian Zeller,2021,BAFTA,Best Adapted Screenplay,TRUE,The Father
+4762,Paul Thomas Anderson,2022,BAFTA,Best Original Screenplay,TRUE,Licorice Pizza
+98,Sarah Polley,2022,BAFTA,Best Adapted Screenplay,TRUE,Women Talking
+56370,Ruben Östlund,2023,BAFTA,Best Original Screenplay,TRUE,Triangle of Sadness
+54472,Martin McDonagh,2023,BAFTA,Best Adapted Screenplay,TRUE,The Banshees of Inisherin
+2518227,Celine Song,2024,BAFTA,Best Original Screenplay,TRUE,Past Lives
+1893777,Cord Jefferson,2024,BAFTA,Best Adapted Screenplay,TRUE,American Fiction
+55493,Brady Corbet; Mona Fastvold,2025,BAFTA,Best Original Screenplay,TRUE,The Brutalist
+64814,Peter Straughan,2025,BAFTA,Best Adapted Screenplay,TRUE,Conclave
+1056121,Ryan Coogler,2026,BAFTA,Best Original Screenplay,TRUE,Sinners
+4762,Paul Thomas Anderson,2026,BAFTA,Best Adapted Screenplay,TRUE,One Battle After Another

@@ -1,0 +1,651 @@
+@import url('../variables.css');
+
+/* ============================================
+   ORBIT - AWARDS GUIDE
+   Theme: Prestige Purple
+============================================ */
+
+/* ============================================
+   RESET & BASE
+============================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100vh;
+  background: var(--deep-void);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+/* ============================================
+   COSMIC ATMOSPHERE
+============================================ */
+
+.cosmic-stars {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(1px 1px at 12% 8%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 28% 22%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 5%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 62% 18%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 78% 32%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 88% 12%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 8% 45%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 35% 58%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 42%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 72% 55%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 92% 48%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 18% 72%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 78%, var(--film-white) 50%, transparent 100%),
+    radial-gradient(1px 1px at 82% 68%, var(--film-white) 50%, transparent 100%);
+  background-size: 800px 800px;
+  background-repeat: repeat;
+  opacity: 0.55;
+  animation: cosmic-drift 240s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes cosmic-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 800px 800px; }
+}
+
+.nebula-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  z-index: -2;
+  pointer-events: none;
+  top: -10%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(var(--prestige-purple-rgb), 0.6) 0%, transparent 70%);
+  filter: blur(120px);
+  opacity: 0.18;
+}
+
+.nebula-glow.two {
+  top: auto;
+  right: auto;
+  bottom: -15%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.6) 0%, transparent 70%);
+  filter: blur(120px);
+  opacity: 0.12;
+}
+
+/* ============================================
+   PAGE HEADER
+============================================ */
+
+.page-header {
+  position: relative;
+  text-align: center;
+  padding: 48px 24px 32px;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 600px;
+  height: 240px;
+  background: radial-gradient(ellipse at center, rgba(var(--prestige-purple-rgb), 0.18) 0%, rgba(var(--prestige-purple-rgb), 0.05) 30%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.page-header .back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.header-eyebrow {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--prestige-purple);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.header-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--film-white);
+  margin-bottom: 12px;
+  text-shadow: 0 0 40px rgba(var(--prestige-purple-rgb), 0.3);
+}
+
+.header-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted-silver);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   AWARDS HUB NAV
+   (exact match with awards-browse.css)
+============================================ */
+
+.awards-hub-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.hub-nav-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ghost-gray);
+  text-transform: uppercase;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.hub-nav-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(var(--ghost-gray-rgb, 100, 116, 139), 0.25);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.hub-nav-btn {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--ghost-gray-rgb, 100, 116, 139), 0.3);
+  background: transparent;
+  color: var(--muted-silver);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.hub-nav-btn:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.05);
+}
+
+.hub-nav-btn.active {
+  border-color: rgba(var(--prestige-purple-rgb), 0.6);
+  color: var(--prestige-purple);
+  background: rgba(var(--prestige-purple-rgb), 0.1);
+  box-shadow: 0 0 12px rgba(var(--prestige-purple-rgb), 0.15);
+}
+
+.hub-nav-btn.active:hover {
+  border-color: rgba(var(--prestige-purple-rgb), 0.85);
+  color: var(--prestige-purple);
+}
+
+/* ============================================
+   SECTION HEADERS
+============================================ */
+
+.festival-section,
+.ages-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--film-white);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--muted-silver);
+  line-height: 1.5;
+}
+
+/* ============================================
+   FESTIVAL GRID
+============================================ */
+
+.festival-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── Individual tile ── */
+
+.festival-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  min-height: 420px;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--tile-glow, rgba(255, 255, 255, 0.02));
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s ease;
+}
+
+.festival-tile::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tile-glow-strong, rgba(255, 255, 255, 0.05)) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.festival-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--tile-accent-rgb, 255, 255, 255), 0.2);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px var(--tile-glow-strong, rgba(255, 255, 255, 0.05));
+}
+
+/* ── Per-tile accent colours ── */
+
+.tile-oscar {
+  --tile-accent: var(--fest-oscar);
+  --tile-accent-rgb: var(--fest-oscar-rgb);
+  --tile-glow: rgba(var(--fest-oscar-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-oscar-rgb), 0.18);
+}
+
+.tile-cannes {
+  --tile-accent: var(--fest-cannes);
+  --tile-accent-rgb: var(--fest-cannes-rgb);
+  --tile-glow: rgba(var(--fest-cannes-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-cannes-rgb), 0.18);
+}
+
+.tile-venice {
+  --tile-accent: var(--fest-venice);
+  --tile-accent-rgb: var(--fest-venice-rgb);
+  --tile-glow: rgba(var(--fest-venice-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-venice-rgb), 0.18);
+}
+
+.tile-berlin {
+  --tile-accent: var(--fest-berlin);
+  --tile-accent-rgb: var(--fest-berlin-rgb);
+  --tile-glow: rgba(var(--fest-berlin-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-berlin-rgb), 0.18);
+}
+
+.tile-bafta {
+  --tile-accent: var(--fest-bafta);
+  --tile-accent-rgb: var(--fest-bafta-rgb);
+  --tile-glow: rgba(var(--fest-bafta-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-bafta-rgb), 0.18);
+}
+
+.tile-globe {
+  --tile-accent: var(--fest-globe);
+  --tile-accent-rgb: var(--fest-globe-rgb);
+  --tile-glow: rgba(var(--fest-globe-rgb), 0.04);
+  --tile-glow-strong: rgba(var(--fest-globe-rgb), 0.18);
+}
+
+/* ── Orbital rings ── */
+
+.tile-orbital-ring {
+  position: absolute;
+  inset: -20px;
+  border: 1px solid var(--tile-accent, var(--muted-silver));
+  border-radius: 50%;
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.tile-orbital-ring.inner {
+  inset: -8px;
+  border-width: 1px;
+  opacity: 0.05;
+}
+
+.festival-tile:hover .tile-orbital-ring {
+  opacity: 0.18;
+}
+
+.festival-tile:hover .tile-orbital-ring.inner {
+  opacity: 0.12;
+}
+
+/* ── Trophy glyph ── */
+
+.tile-trophy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  margin-bottom: 12px;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 215, 0, 0.5))
+    drop-shadow(0 8px 32px rgba(255, 215, 0, 0.25));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.tile-trophy .og {
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tile-trophy svg {
+  width: 200px;
+  height: 200px;
+}
+
+.festival-tile:hover .tile-trophy {
+  filter:
+    drop-shadow(0 0 16px rgba(255, 215, 0, 0.6))
+    drop-shadow(0 8px 36px rgba(255, 215, 0, 0.35));
+  transform: scale(1.05);
+}
+
+/* ── Tile text content ── */
+
+.tile-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.tile-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--film-white);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.tile-aka {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-style: italic;
+  color: var(--tile-accent, var(--muted-silver));
+  margin-bottom: 12px;
+}
+
+.tile-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--tile-accent, var(--muted-silver));
+  opacity: 0.6;
+  margin: 0 auto 12px;
+}
+
+.tile-meta {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--ghost-gray);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   AGES OF CINEMA - TIMELINE
+============================================ */
+
+.ages-section {
+  padding-bottom: 80px;
+}
+
+.timeline {
+  position: relative;
+  height: 260px;
+  margin-top: 20px;
+}
+
+/* ── Gradient track ── */
+
+.timeline-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    rgba(var(--prestige-purple-rgb), 0.6) 0%,
+    rgba(var(--accent-rgb), 0.4) 50%,
+    rgba(var(--accent-gold-rgb), 0.6) 100%
+  );
+  border-radius: 1px;
+}
+
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--prestige-purple-rgb), 0.08) 0%,
+    rgba(var(--accent-rgb), 0.06) 50%,
+    rgba(var(--accent-gold-rgb), 0.08) 100%
+  );
+  filter: blur(6px);
+  border-radius: 4px;
+}
+
+/* ── Era markers ── */
+
+.era-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+.era-marker.above {
+  flex-direction: column-reverse;
+  transform: translateX(-50%) translateY(calc(-50% - 4px));
+}
+
+.era-marker.below {
+  transform: translateX(-50%) translateY(calc(-50% + 4px));
+}
+
+/* ── Four-pointed star (clip-path polygon) ── */
+
+.era-star {
+  width: 16px;
+  height: 16px;
+  background: var(--film-white);
+  clip-path: polygon(
+    50% 0%,
+    61% 39%,
+    100% 50%,
+    61% 61%,
+    50% 100%,
+    39% 61%,
+    0% 50%,
+    39% 39%
+  );
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.era-marker:hover .era-star {
+  transform: scale(1.4);
+  opacity: 1;
+}
+
+/* ── Era label ── */
+
+.era-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+}
+
+.era-marker.above .era-label {
+  padding-bottom: 10px;
+}
+
+.era-marker.below .era-label {
+  padding-top: 10px;
+}
+
+.era-name {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--film-white);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.era-years {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  white-space: nowrap;
+}
+
+/* ============================================
+   RESPONSIVE — 900px
+============================================ */
+
+@media (max-width: 900px) {
+  .festival-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-title {
+    font-size: 36px;
+  }
+
+  .timeline {
+    height: 220px;
+  }
+
+  .era-name {
+    font-size: 9px;
+  }
+
+  .era-years {
+    font-size: 10px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — 650px (hub nav)
+============================================ */
+
+@media (max-width: 650px) {
+  .hub-nav-label,
+  .hub-nav-divider {
+    display: none;
+  }
+  .hub-nav-btn {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — 600px
+============================================ */
+
+@media (max-width: 600px) {
+  .festival-grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .header-title {
+    font-size: 28px;
+    letter-spacing: 0.15em;
+  }
+
+  .header-tagline {
+    font-size: 15px;
+  }
+
+  .page-header {
+    padding: 32px 16px 24px;
+  }
+
+  .festival-section,
+  .ages-section {
+    padding: 32px 16px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .timeline {
+    height: 200px;
+    overflow-x: auto;
+    overflow-y: visible;
+    min-width: 600px;
+  }
+
+  .ages-section {
+    overflow-x: auto;
+  }
+}

@@ -14,6 +14,14 @@
 | `watchCountry` | local | String | app.js, both.js, tv.js, moviecube.js | app.js, both.js, tv.js, moviecube.js | **Legacy** — superseded by `orbit_user_country` |
 | `watchProviders` | local | JSON array | app.js, both.js, tv.js, moviecube.js | app.js, both.js, tv.js, moviecube.js | **Legacy** — superseded by `orbit_user_providers` |
 | `orbit_search_layout` | local | JSON array (5 section IDs) | profile.js | profile.js, discover.js | Custom search grid layout |
+| `orbit_discovery_popup_count` | local | JSON number | discover.js | discover.js | Total lifetime impressions of Discovery onboarding popup. First 2 shows free; subsequent shows gated by `orbit_discovery_popup_last_shown` (≥7 days). |
+| `orbit_discovery_popup_dismissed` | local | JSON boolean | discover.js | discover.js | Permanent "don't show again" flag for Discovery onboarding popup. |
+| `orbit_discovery_popup_last_shown` | local | JSON number (ms since epoch) | discover.js | discover.js | Timestamp of most recent Discovery onboarding popup show. Used to enforce the 7-day weekly cadence after the first 2 lifetime impressions. |
+| `orbit_discovery_collapsed_state` | session | JSON object `{sectionName: bool}` | discover.js | discover.js | Per-section collapsed state for Discovery page collapsible sections (`headline`, `quickSearches`). Tab-scoped: survives refresh, clears on tab close. |
+| `orbit_discovery_visits` | session | JSON number | discover.js | discover.js | Per-tab visit counter for the Discovery headline carousel. Increments on page load; modulo-3 indexes which of the 3 headline messages to show. Tab-scoped. |
+| `orbit_saved_searches` | local | JSON array of `{id, name, state:{filters,genreLogic,regionLogic}, savedAt}` | discover.js | discover.js | User-saved named search criteria. `id` is `crypto.randomUUID()`; `state` is a deep clone of the page's filter state at save time; `savedAt` is `Date.now()`. Saved searches appear first in the Show-all modal's grid (badged "MY SEARCH") and can be applied with a click (re-uses the same state-restore path as `applyPreset`). Added 2026-06-01. |
+| `orbit_favourite_presets` | local | JSON array of strings (IDs) | discover.js | discover.js | User's favourited tiles. **ID scheme:** for built-in presets the ID is `PRESET_POOL[i].name` (display name); for saved searches the ID is the saved entry's `id` (UUID). A single flat array of strings — branching on whether the ID matches a saved-search UUID or a preset name is done at lookup time. Used by (a) the modal "Favourites" filter checkbox and (b) the revolving Loaded Searches strip's `pickEvergreens` which gives favourited built-ins a 1.5× selection weight while preserving anti-repetition. Saved searches do not enter the revolving strip. Added 2026-06-01. |
+| `orbit_presets_rail_collapsed` | local | JSON boolean | discover.js | discover.js | Persisted collapsed/expanded state for the Show-all modal's right-side filter rail. `null`/unset = default to EXPANDED on first view (so users see the filters exist). On toggle (rail × button or the collapse tab), the boolean is written. Read on every modal open via `initRail` so the user's choice survives close/reopen and full page reload. Added 2026-06-02. |
 
 ## Navigation State
 
@@ -44,6 +52,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `sequelshot_${today}` | arcade.js | arcade.js | Sequel Shot daily state |
 | `mastermind_game_${today}` | arcade.js | arcade.js | Mastermind daily state |
 | `alternate_game_${today}` | arcade.js | arcade.js | Alternate Universe daily state |
+| `orbit_signal_${y}_${m}_${d}` | signal.js | signal.js, arcade.js | Signal daily state — encrypted cast, revealed letters, attempts, gameOver/won, rank. M is `getMonth()+1` (1-12, matches arcade.js `getTodayKey()`), D is `getDate()` (1-31), no leading zeros. |
 
 ## Game Statistics
 
@@ -58,6 +67,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `mastermind_stats` | JSON | mastermind.js | mastermind.js, profile.js | Mastermind stats |
 | `sequelshot_stats` | JSON | sequel-shot.js | sequel-shot.js | Sequel Shot stats |
 | `orbit_tenth_star_stats` | JSON | tenth-star.js | tenth-star.js, profile.js | Tenth Star stats |
+| `orbit_signal_stats` | JSON `{gamesPlayed, gamesWon, currentStreak, maxStreak, lastPlayedDate, totalAttempts, averageAttempts, distribution{1-5,6-10,11-15,16-20,21+}}` | signal.js | signal.js | Signal cumulative stats across daily plays |
 | `orbit_tenth_star_${puzzleId}` | JSON | tenth-star.js | tenth-star.js | Individual puzzle state |
 | `alternate_comments_${weekNumber}` | JSON | alternate.js | alternate.js | Community comments |
 

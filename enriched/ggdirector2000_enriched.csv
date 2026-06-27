@@ -1,0 +1,142 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+4762,Paul Thomas Anderson,2026,Golden Globe,Best Director,true,One Battle After Another
+1056121,Ryan Coogler,2026,Golden Globe,Best Director,false,Sinners
+10828,Guillermo del Toro,2026,Golden Globe,Best Director,false,Frankenstein
+120229,Jafar Panahi,2026,Golden Globe,Best Director,false,It Was Just an Accident
+71609,Joachim Trier,2026,Golden Globe,Best Director,false,Sentimental Value
+1395183,Chloé Zhao,2026,Golden Globe,Best Director,false,Hamnet
+55493,Brady Corbet,2025,Golden Globe,Best Director,true,The Brutalist
+17496,Jacques Audiard,2025,Golden Globe,Best Director,false,Emilia Pérez
+118415,Sean Baker,2025,Golden Globe,Best Director,false,Anora
+221522,Edward Berger,2025,Golden Globe,Best Director,false,Conclave
+1607016,Coralie Fargeat,2025,Golden Globe,Best Director,false,The Substance
+1467320,Payal Kapadia,2025,Golden Globe,Best Director,false,All We Imagine as Light
+525,Christopher Nolan,2024,Golden Globe,Best Director,true,Oppenheimer
+51329,Bradley Cooper,2024,Golden Globe,Best Director,false,Maestro
+45400,Greta Gerwig,2024,Golden Globe,Best Director,false,Barbie
+122423,Yorgos Lanthimos,2024,Golden Globe,Best Director,false,Poor Things
+1032,Martin Scorsese,2024,Golden Globe,Best Director,false,Killers of the Flower Moon
+2518227,Celine Song,2024,Golden Globe,Best Director,false,Past Lives
+488,Steven Spielberg,2023,Golden Globe,Best Director,true,The Fabelmans
+2710,James Cameron,2023,Golden Globe,Best Director,false,Avatar: The Way of Water
+0,Daniel Kwan & Daniel Scheinert,2023,Golden Globe,Best Director,false,Everything Everywhere All at Once
+6201,Baz Luhrmann,2023,Golden Globe,Best Director,false,Elvis
+54472,Martin McDonagh,2023,Golden Globe,Best Director,false,The Banshees of Inisherin
+10757,Jane Campion,2022,Golden Globe,Best Director,true,The Power of the Dog
+11181,Kenneth Branagh,2022,Golden Globe,Best Director,false,Belfast
+1579,Maggie Gyllenhaal,2022,Golden Globe,Best Director,false,The Lost Daughter
+488,Steven Spielberg,2022,Golden Globe,Best Director,false,West Side Story
+137427,Denis Villeneuve,2022,Golden Globe,Best Director,false,Dune
+1395183,Chloé Zhao,2021,Golden Globe,Best Director,true,Nomadland
+1252934,Emerald Fennell,2021,Golden Globe,Best Director,false,Promising Young Woman
+7467,David Fincher,2021,Golden Globe,Best Director,false,Mank
+9788,Regina King,2021,Golden Globe,Best Director,false,One Night in Miami...
+13520,Aaron Sorkin,2021,Golden Globe,Best Director,false,The Trial of the Chicago 7
+39,Sam Mendes,2020,Golden Globe,Best Director,true,1917
+21684,Bong Joon-ho,2020,Golden Globe,Best Director,false,Parasite
+57130,Todd Phillips,2020,Golden Globe,Best Director,false,Joker
+1032,Martin Scorsese,2020,Golden Globe,Best Director,false,The Irishman
+138,Quentin Tarantino,2020,Golden Globe,Best Director,false,Once Upon a Time in Hollywood
+11218,Alfonso Cuarón,2019,Golden Globe,Best Director,true,Roma
+51329,Bradley Cooper,2019,Golden Globe,Best Director,false,A Star Is Born
+7396,Peter Farrelly,2019,Golden Globe,Best Director,false,Green Book
+5281,Spike Lee,2019,Golden Globe,Best Director,false,BlacKkKlansman
+55710,Adam McKay,2019,Golden Globe,Best Director,false,Vice
+10828,Guillermo del Toro,2018,Golden Globe,Best Director,true,The Shape of Water
+54472,Martin McDonagh,2018,Golden Globe,Best Director,false,Three Billboards Outside Ebbing Missouri
+525,Christopher Nolan,2018,Golden Globe,Best Director,false,Dunkirk
+578,Ridley Scott,2018,Golden Globe,Best Director,false,All the Money in the World
+488,Steven Spielberg,2018,Golden Globe,Best Director,false,The Post
+136495,Damien Chazelle,2017,Golden Globe,Best Director,true,La La Land
+120615,Tom Ford,2017,Golden Globe,Best Director,false,Nocturnal Animals
+2461,Mel Gibson,2017,Golden Globe,Best Director,false,Hacksaw Ridge
+92784,Barry Jenkins,2017,Golden Globe,Best Director,false,Moonlight
+30711,Kenneth Lonergan,2017,Golden Globe,Best Director,false,Manchester by the Sea
+223,Alejandro G. Iñárritu,2016,Golden Globe,Best Director,true,The Revenant
+16863,Todd Haynes,2016,Golden Globe,Best Director,false,Carol
+17867,Tom McCarthy,2016,Golden Globe,Best Director,false,Spotlight
+20629,George Miller,2016,Golden Globe,Best Director,false,Mad Max: Fury Road
+578,Ridley Scott,2016,Golden Globe,Best Director,false,The Martian
+564,Richard Linklater,2015,Golden Globe,Best Director,true,Boyhood
+5655,Wes Anderson,2015,Golden Globe,Best Director,false,The Grand Budapest Hotel
+929825,Ava DuVernay,2015,Golden Globe,Best Director,false,Selma
+7467,David Fincher,2015,Golden Globe,Best Director,false,Gone Girl
+223,Alejandro G. Iñárritu,2015,Golden Globe,Best Director,false,Birdman
+11218,Alfonso Cuarón,2014,Golden Globe,Best Director,true,Gravity
+25598,Paul Greengrass,2014,Golden Globe,Best Director,false,Captain Phillips
+13565,Steve McQueen,2014,Golden Globe,Best Director,false,12 Years a Slave
+13235,Alexander Payne,2014,Golden Globe,Best Director,false,Nebraska
+17883,David O. Russell,2014,Golden Globe,Best Director,false,American Hustle
+880,Ben Affleck,2013,Golden Globe,Best Director,true,Argo
+14392,Kathryn Bigelow,2013,Golden Globe,Best Director,false,Zero Dark Thirty
+1614,Ang Lee,2013,Golden Globe,Best Director,false,Life of Pi
+488,Steven Spielberg,2013,Golden Globe,Best Director,false,Lincoln
+138,Quentin Tarantino,2013,Golden Globe,Best Director,false,Django Unchained
+1032,Martin Scorsese,2012,Golden Globe,Best Director,true,Hugo
+1243,Woody Allen,2012,Golden Globe,Best Director,false,Midnight in Paris
+1461,George Clooney,2012,Golden Globe,Best Director,false,The Ides of March
+67717,Michel Hazanavicius,2012,Golden Globe,Best Director,false,The Artist
+13235,Alexander Payne,2012,Golden Globe,Best Director,false,The Descendants
+7467,David Fincher,2011,Golden Globe,Best Director,true,The Social Network
+6431,Darren Aronofsky,2011,Golden Globe,Best Director,false,Black Swan
+70500,Tom Hooper,2011,Golden Globe,Best Director,false,The King's Speech
+525,Christopher Nolan,2011,Golden Globe,Best Director,false,Inception
+17883,David O. Russell,2011,Golden Globe,Best Director,false,The Fighter
+2710,James Cameron,2010,Golden Globe,Best Director,true,Avatar
+14392,Kathryn Bigelow,2010,Golden Globe,Best Director,false,The Hurt Locker
+190,Clint Eastwood,2010,Golden Globe,Best Director,false,Invictus
+52443,Jason Reitman,2010,Golden Globe,Best Director,false,Up in the Air
+138,Quentin Tarantino,2010,Golden Globe,Best Director,false,Inglourious Basterds
+2710,James Cameron,2009,Golden Globe,Best Director,true,Avatar
+14392,Kathryn Bigelow,2009,Golden Globe,Best Director,false,The Hurt Locker
+190,Clint Eastwood,2009,Golden Globe,Best Director,false,Invictus
+52443,Jason Reitman,2009,Golden Globe,Best Director,false,Up in the Air
+138,Quentin Tarantino,2009,Golden Globe,Best Director,false,Inglourious Basterds
+2034,Danny Boyle,2008,Golden Globe,Best Director,true,Slumdog Millionaire
+468,Stephen Daldry,2008,Golden Globe,Best Director,false,The Reader
+7467,David Fincher,2008,Golden Globe,Best Director,false,The Curious Case of Benjamin Button
+6159,Ron Howard,2008,Golden Globe,Best Director,false,Frost/Nixon
+39,Sam Mendes,2008,Golden Globe,Best Director,false,Revolutionary Road
+7482,Julian Schnabel,2007,Golden Globe,Best Director,true,The Diving Bell and the Butterfly
+510,Tim Burton,2007,Golden Globe,Best Director,false,Sweeney Todd
+0,Joel Coen & Ethan Coen,2007,Golden Globe,Best Director,false,No Country for Old Men
+578,Ridley Scott,2007,Golden Globe,Best Director,false,American Gangster
+36588,Joe Wright,2007,Golden Globe,Best Director,false,Atonement
+1032,Martin Scorsese,2006,Golden Globe,Best Director,true,The Departed
+190,Clint Eastwood,2006,Golden Globe,Best Director,false,Flags of Our Fathers
+190,Clint Eastwood,2006,Golden Globe,Best Director,false,Letters from Iwo Jima
+3224,Stephen Frears,2006,Golden Globe,Best Director,false,The Queen
+223,Alejandro G. Iñárritu,2006,Golden Globe,Best Director,false,Babel
+1614,Ang Lee,2005,Golden Globe,Best Director,true,Brokeback Mountain
+1243,Woody Allen,2005,Golden Globe,Best Director,false,Match Point
+1461,George Clooney,2005,Golden Globe,Best Director,false,Good Night and Good Luck
+108,Peter Jackson,2005,Golden Globe,Best Director,false,King Kong
+8557,Fernando Meirelles,2005,Golden Globe,Best Director,false,The Constant Gardener
+488,Steven Spielberg,2005,Golden Globe,Best Director,false,Munich
+190,Clint Eastwood,2004,Golden Globe,Best Director,true,Million Dollar Baby
+12995,Marc Forster,2004,Golden Globe,Best Director,false,Finding Neverland
+18596,Taylor Hackford,2004,Golden Globe,Best Director,false,Ray
+13235,Alexander Payne,2004,Golden Globe,Best Director,false,Sideways
+1032,Martin Scorsese,2004,Golden Globe,Best Director,false,The Aviator
+108,Peter Jackson,2003,Golden Globe,Best Director,true,The Lord of the Rings: The Return of the King
+1769,Sofia Coppola,2003,Golden Globe,Best Director,false,Lost in Translation
+190,Clint Eastwood,2003,Golden Globe,Best Director,false,Mystic River
+2239,Anthony Minghella,2003,Golden Globe,Best Director,false,Cold Mountain
+2690,Peter Weir,2003,Golden Globe,Best Director,false,Master and Commander
+1032,Martin Scorsese,2002,Golden Globe,Best Director,true,Gangs of New York
+309,Pedro Almodóvar,2002,Golden Globe,Best Director,false,Talk to Her
+468,Stephen Daldry,2002,Golden Globe,Best Director,false,The Hours
+108,Peter Jackson,2002,Golden Globe,Best Director,false,The Lord of the Rings: The Two Towers
+17633,Rob Marshall,2002,Golden Globe,Best Director,false,Chicago
+13235,Alexander Payne,2002,Golden Globe,Best Director,false,About Schmidt
+9789,Robert Altman,2001,Golden Globe,Best Director,true,Gosford Park
+6159,Ron Howard,2001,Golden Globe,Best Director,false,A Beautiful Mind
+108,Peter Jackson,2001,Golden Globe,Best Director,false,The Lord of the Rings: The Fellowship of the Ring
+6201,Baz Luhrmann,2001,Golden Globe,Best Director,false,Moulin Rouge!
+5602,David Lynch,2001,Golden Globe,Best Director,false,Mulholland Drive
+488,Steven Spielberg,2001,Golden Globe,Best Director,false,A.I. Artificial Intelligence
+1614,Ang Lee,2000,Golden Globe,Best Director,true,Crouching Tiger Hidden Dragon
+578,Ridley Scott,2000,Golden Globe,Best Director,false,Gladiator
+1884,Steven Soderbergh,2000,Golden Globe,Best Director,false,Erin Brockovich
+1884,Steven Soderbergh,2000,Golden Globe,Best Director,false,Traffic
+3484906,Istvan Szabo,2000,Golden Globe,Best Director,false,Sunshine

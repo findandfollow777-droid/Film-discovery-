@@ -32,6 +32,9 @@ Before adding new TMDB API calls (especially in loops or on page load), flag the
 ### 10. Git Commit Between Steps
 For multi-step implementations, commit after each working step before moving to the next. Makes rollback painless if step 3 breaks what step 2 built.
 
+### 10a. No AI Attribution in Commits
+Never add a `Co-Authored-By` line or a "Generated with Claude Code" line to commit messages or PR descriptions.
+
 ---
 
 ## Visual & UI Consistency

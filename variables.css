@@ -14,8 +14,14 @@
   --accent-cyan: #00d9ff;
   --accent-gold: #ffd700;
   --accent-orange: #ff6b35;
+  --collision-orange: var(--accent-orange);
   --prestige-purple: #a855f7;
   --warning-orange: #f97316;
+  --warning-orange-rgb: 249, 115, 22;
+  --accent-amber:  #f59e0b;
+  --accent-teal:   #14b8a6;
+  --accent-rose:   #f43f5e;
+  --accent-indigo: #6366f1;
 
   /* RGB Components (for rgba() usage) */
   --accent-rgb: 0, 217, 255;
@@ -26,10 +32,35 @@
   --muted-silver-rgb: 148, 163, 184;
   --success-green-rgb: 16, 185, 129;
   --danger-red-rgb: 239, 68, 68;
+  --nebula-dark-rgb: 17, 24, 39;
+  --space-black-rgb: 0, 0, 0;
+  --accent-cyan-rgb:   var(--accent-rgb);
+  --accent-orange-rgb: 255, 107, 53;
+  --collision-orange-rgb: var(--accent-orange-rgb);
+  --accent-teal-rgb:   20, 184, 166;
+  --accent-rose-rgb:   244, 63, 94;
+  --accent-indigo-rgb: 99, 102, 241;
+
+  /* Discovery axis aliases — axis identity decoupled from semantic tokens.
+     Aliases only (single source of truth); the four already-clean axes
+     (Genre=--prestige-purple, People=--accent-cyan, Awards=--accent-gold,
+     Stream=--collision-orange) are referenced directly and not aliased. */
+  --emerald:     var(--success-green);
+  --emerald-rgb: var(--success-green-rgb);
+  --indigo:      var(--accent-indigo);
+  --indigo-rgb:  var(--accent-indigo-rgb);
+  --teal:        var(--accent-teal);
+  --teal-rgb:    var(--accent-teal-rgb);
+  --rose:        var(--accent-rose);
+  --rose-rgb:    var(--accent-rose-rgb);
 
   /* Status Colors */
   --success-green: #10b981;
   --danger-red: #ef4444;
+
+  /* Signal game — uses existing ORBIT tokens (no new accents per Rule #16).
+     Cyan: letters, encrypted state. Gold: movie box, perfect rank.
+     Purple: hint, mid-tier rank. Green/red: feedback. */
 
   /* Text Colors */
   --film-white: #f1f5f9;
@@ -87,3 +118,42 @@
   transition: opacity 0.3s, color 0.3s;
 }
 .back-link:hover { opacity: 1; color: var(--film-white); }
+
+/* ============================================
+   Festival Accent System
+============================================ */
+:root {
+  /* === Festival accent system === */
+  --fest-oscar: #ffd700;
+  --fest-oscar-rgb: 255, 215, 0;
+  --fest-cannes: #ffb84d;
+  --fest-cannes-rgb: 255, 184, 77;
+  --fest-venice: #dc2626;
+  --fest-venice-rgb: 220, 38, 38;
+  --fest-berlin: #ef4444;
+  --fest-berlin-rgb: 239, 68, 68;
+  --fest-bafta: #0ea5e9;
+  --fest-bafta-rgb: 14, 165, 233;
+  --fest-globe: #fbbf24;
+  --fest-globe-rgb: 251, 191, 36;
+  /* Golden Globe slug is `gg`; alias to the Globe colour so a data-festival="gg"
+     hook resolves (don't rename --fest-globe — other pages use it). */
+  --fest-gg: var(--fest-globe);
+  --fest-gg-rgb: var(--fest-globe-rgb);
+
+  /* === Award badge tokens (Phase 1.13) ===
+     Halo accents alias the existing --fest-* tokens — single source of truth.
+     Venice and Berlin are deliberately distinct shades; the Award Glyphs design
+     specified a shared red, which we discard in favour of ORBIT's existing
+     festival distinction. */
+  --halo-oscar:  var(--fest-oscar);
+  --halo-cannes: var(--fest-cannes);
+  --halo-venice: var(--fest-venice);
+  --halo-berlin: var(--fest-berlin);
+  --halo-bafta:  var(--fest-bafta);
+  --halo-globe:  var(--fest-globe);
+
+  /* Silver tier — used by award badge nominee variant */
+  --silver: #c8d0db;
+  --silver-bright: #e2e8f0;
+}

@@ -1,0 +1,1067 @@
+/* ============================================
+   ORBIT — Quick Search Modal
+   Scoped with qs- prefix to avoid collisions
+============================================ */
+
+/* ── Backdrop ── */
+
+.qs-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.qs-backdrop.qs-open {
+  display: flex;
+  opacity: 1;
+}
+
+/* ── Modal container ── */
+
+.qs-modal {
+  width: 100%;
+  max-width: 640px;
+  background: var(--glass-bg-heavy);
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 14px;
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.7),
+    0 0 60px rgba(var(--accent-rgb), 0.15);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 4rem);
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.qs-backdrop.qs-open .qs-modal {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ── Header ── */
+
+.qs-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
+}
+
+.qs-search-icon {
+  flex-shrink: 0;
+  color: var(--accent-cyan);
+  opacity: 0.7;
+}
+
+.qs-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--film-white);
+  caret-color: var(--accent-cyan);
+}
+
+.qs-input::placeholder {
+  color: var(--ghost-gray);
+  font-weight: 400;
+}
+
+.qs-close-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 6px;
+  color: var(--ghost-gray);
+  font-family: var(--font-body);
+  font-size: 11px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.qs-close-btn:hover {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  color: var(--film-white);
+}
+
+/* ── Type pills ── */
+
+.qs-type-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 24px;
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.08);
+}
+
+.qs-type-pill {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  background: transparent;
+  color: var(--muted-silver);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.qs-type-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent-cyan);
+}
+
+.qs-type-pill.qs-active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.1);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.15);
+}
+
+/* ── Results area ── */
+
+.qs-results {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 420px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent-rgb), 0.2) transparent;
+}
+
+.qs-results::-webkit-scrollbar { width: 6px; }
+.qs-results::-webkit-scrollbar-track { background: transparent; }
+.qs-results::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb), 0.2);
+  border-radius: 3px;
+}
+
+/* ── Empty state ── */
+
+.qs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.qs-empty-icon {
+  color: var(--ghost-gray);
+  opacity: 0.4;
+  margin-bottom: 16px;
+}
+
+.qs-empty-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ghost-gray);
+  margin-bottom: 16px;
+}
+
+.qs-hint-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.qs-hint-pill {
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  background: rgba(var(--accent-rgb), 0.05);
+  color: var(--muted-silver);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qs-hint-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.1);
+}
+
+/* ── Result row ── */
+
+.qs-result-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.qs-result-row:last-child { border-bottom: none; }
+
+.qs-result-row:hover,
+.qs-result-row.qs-focused {
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.qs-result-poster {
+  flex-shrink: 0;
+  width: 40px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.qs-result-photo {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.qs-result-poster-empty,
+.qs-result-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ghost-gray);
+  opacity: 0.3;
+  font-size: 18px;
+}
+
+.qs-result-poster-empty {
+  flex-shrink: 0;
+  width: 40px;
+  height: 56px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.qs-result-photo-empty {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.qs-result-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.qs-result-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--film-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-result-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-result-rating {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--accent-gold);
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+/* ── Award badge ── */
+
+.qs-award-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  margin-left: 6px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* ── Collaborator suggestions panel ── */
+
+.qs-collab-panel {
+  padding: 0;
+}
+
+.qs-collab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px;
+}
+
+.qs-collab-selected {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.qs-collab-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
+}
+
+.qs-collab-avatar-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ghost-gray);
+  font-size: 18px;
+}
+
+.qs-collab-selected-info {
+  min-width: 0;
+}
+
+.qs-collab-selected-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--film-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-collab-selected-dept {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+}
+
+.qs-collab-go {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent-cyan);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.qs-collab-go:hover {
+  background: rgba(var(--accent-rgb), 0.2);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.2);
+}
+
+.qs-collab-divider {
+  height: 1px;
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.qs-collab-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--ghost-gray);
+  padding: 14px 24px 8px;
+}
+
+.qs-collab-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent-rgb), 0.2) transparent;
+}
+
+.qs-collab-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 24px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ghost-gray);
+}
+
+.qs-collab-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(var(--accent-rgb), 0.2);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: qs-spin 0.6s linear infinite;
+}
+
+@keyframes qs-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   ORBITAL PORTAL — hint pill → result transition
+   Cyan / purple / gold rings rotating at different speeds
+   around a pulsing cosmic core. Plays while fetchResults
+   runs and the top result is auto-selected.
+============================================ */
+
+.qs-portal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 36px 16px 28px;
+  animation: qs-portal-fade-in 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes qs-portal-fade-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.qs-portal-stage {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.qs-portal-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #00d9ff 0%, rgba(168, 85, 247, 0.7) 55%, transparent 100%);
+  box-shadow:
+    0 0 18px rgba(0, 217, 255, 0.85),
+    0 0 36px rgba(168, 85, 247, 0.55),
+    0 0 54px rgba(255, 215, 0, 0.25);
+  animation: qs-portal-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes qs-portal-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.45); opacity: 0.75; }
+}
+
+.qs-portal-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.qs-portal-ring-1 {
+  width: 50px; height: 50px; margin: -25px 0 0 -25px;
+  border: 1px solid rgba(0, 217, 255, 0.65);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  animation: qs-portal-spin 1.2s linear infinite;
+}
+
+.qs-portal-ring-2 {
+  width: 78px; height: 78px; margin: -39px 0 0 -39px;
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation: qs-portal-spin 1.9s linear infinite reverse;
+}
+
+.qs-portal-ring-3 {
+  width: 106px; height: 106px; margin: -53px 0 0 -53px;
+  border: 1px solid rgba(255, 215, 0, 0.40);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: qs-portal-spin 2.6s linear infinite;
+}
+
+@keyframes qs-portal-spin {
+  to { transform: rotate(360deg); }
+}
+
+.qs-portal-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  animation: qs-portal-label-fade 1.6s ease-in-out infinite;
+}
+
+@keyframes qs-portal-label-fade {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qs-portal-core,
+  .qs-portal-ring-1,
+  .qs-portal-ring-2,
+  .qs-portal-ring-3,
+  .qs-portal-label { animation-duration: 4s; }
+  .qs-portal { animation: none; }
+}
+
+.qs-collab-empty {
+  padding: 32px 24px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ghost-gray);
+}
+
+.qs-collab-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.qs-collab-row:last-child { border-bottom: none; }
+
+.qs-collab-row:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.qs-collab-photo {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.qs-collab-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ghost-gray);
+  opacity: 0.3;
+  font-size: 16px;
+}
+
+.qs-collab-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.qs-collab-name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--film-white);
+}
+
+.qs-collab-meta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-collab-count {
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+.qs-collab-dept {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+}
+
+.qs-collab-back {
+  display: block;
+  width: 100%;
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.08);
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted-silver);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s, background 0.2s;
+}
+
+.qs-collab-back:hover {
+  color: var(--accent-cyan);
+  background: rgba(var(--accent-rgb), 0.04);
+}
+
+/* ── Footer ── */
+
+.qs-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.1);
+}
+
+.qs-footer-keys {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+}
+
+.qs-footer-keys kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--muted-silver);
+  margin: 0 2px;
+}
+
+.qs-footer-link {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.qs-footer-link:hover {
+  opacity: 0.8;
+}
+
+/* ── Tile hint ── */
+
+.qs-tile-hint {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  opacity: 0.6;
+}
+
+.qs-tile-hint kbd {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--muted-silver);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 600px) {
+  .qs-type-row {
+    flex-wrap: wrap;
+  }
+
+  .qs-type-pill {
+    flex: 1 1 calc(50% - 4px);
+    text-align: center;
+    min-width: 0;
+  }
+
+  .qs-footer-keys {
+    display: none;
+  }
+
+  .qs-backdrop {
+    padding: 1rem;
+  }
+}
+
+/* ============================================================
+   QUICK SEARCH CAST STRIP — Added 2026-04-30
+   Multi-person staging area for joint timeline / Venn.
+   Person tabs only; movie tab is unaffected.
+   ============================================================ */
+
+.qs-cast-strip {
+  background: rgba(10, 15, 26, 0.9);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 0 24px 14px;
+}
+
+.qs-cast-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.qs-cast-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.qs-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--nebula-dark);
+  border-radius: 20px;
+  padding: 4px 10px 4px 2px;
+  cursor: grab;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  user-select: none;
+  transition: border-color 0.15s, opacity 0.15s;
+}
+
+.qs-chip.qs-chip-anchor {
+  border-width: 1.5px;
+}
+
+.qs-chip.dragging { opacity: 0.4; }
+.qs-chip.drag-over { border-style: dashed; }
+
+.qs-chip-grip {
+  font-size: 13px;
+  color: var(--ghost-gray);
+  padding: 0 5px;
+  cursor: grab;
+  letter-spacing: -1px;
+}
+
+.qs-chip-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+  color: var(--midnight-void, #0a0f1a);
+}
+
+.qs-chip-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--film-white);
+  white-space: nowrap;
+}
+
+.qs-chip-timeline {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--muted-silver);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+.qs-chip-timeline:hover { opacity: 1; }
+
+.qs-chip-remove {
+  font-size: 15px;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+.qs-chip-remove:hover { color: var(--danger-red); }
+
+/* Collaborator row + main person row CTAs */
+.qs-add-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.qs-add-btn:hover {
+  background: rgba(var(--accent-rgb), 0.2);
+}
+
+.qs-in-cast-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  padding: 5px 12px;
+}
+
+.qs-solo-timeline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+.qs-solo-timeline:hover { color: var(--muted-silver); }
+
+/* Footer joint buttons */
+.qs-footer-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.qs-joint-btn {
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.qs-joint-timeline {
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  color: var(--accent-cyan);
+}
+
+.qs-joint-timeline:hover {
+  background: rgba(var(--accent-rgb), 0.18);
+}
+
+.qs-joint-venn {
+  background: rgba(var(--prestige-purple-rgb), 0.08);
+  border: 1px solid rgba(var(--prestige-purple-rgb), 0.4);
+  color: var(--prestige-purple);
+}
+
+.qs-joint-venn:hover {
+  background: rgba(var(--prestige-purple-rgb), 0.18);
+}
+
+/* ============================================================
+   COLLAB PANEL STACKED CAST LIST — Added 2026-04-30
+   Cast members render as vertical rows inside the collab panel,
+   each with a "Search Timeline →" CTA. Replaces the single
+   "selected person" header from the prior layout.
+   ============================================================ */
+
+.qs-cast-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px 12px;
+}
+
+.qs-cast-clear {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  padding: 2px 4px;
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+.qs-cast-clear:hover {
+  color: var(--danger-red);
+}
+
+.qs-collab-cast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 24px 0;
+}
+
+.qs-collab-cast-list:empty {
+  padding: 0;
+}
+
+.qs-collab-cast-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--nebula-dark);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.qs-collab-cast-row.qs-collab-cast-anchor {
+  border-color: rgba(var(--accent-rgb), 0.45);
+  border-width: 1.5px;
+}
+
+.qs-collab-cast-row .qs-collab-cast-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.qs-collab-cast-avatar-empty {
+  background: var(--ghost-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--midnight-void, #0a0f1a);
+}
+
+.qs-collab-cast-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.qs-collab-cast-name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--film-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qs-collab-cast-dept {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ghost-gray);
+  margin-top: 2px;
+}
+
+.qs-search-timeline-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.qs-search-timeline-btn:hover {
+  background: rgba(var(--accent-rgb), 0.2);
+}
+
+.qs-collab-cast-remove {
+  font-size: 18px;
+  color: var(--ghost-gray);
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+}
+
+.qs-collab-cast-remove:hover {
+  color: var(--danger-red);
+}
+
+/* Candidate row — fresh search result not yet in cast */
+.qs-collab-candidate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 24px 0;
+  padding: 8px 12px;
+  background: var(--nebula-dark);
+  border: 1px dashed rgba(var(--accent-rgb), 0.35);
+  border-radius: 10px;
+}
+
+.qs-collab-candidate .qs-collab-cast-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}

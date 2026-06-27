@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Frontier – Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="components/orbit-glyphs.css">
+  <link rel="stylesheet" href="components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="components/moviecube.css">
+  <link rel="stylesheet" href="next-frontier.css">
+</head>
+<body>
+
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="landing-backdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+
+  <!-- NAV -->
+  <nav class="nf-nav">
+    <a href="pages/home.html" class="nav-logo">
+      <div class="nav-logo-mark">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-core"></div>
+      </div>
+      <span class="nav-logo-text">ORBIT</span>
+    </a>
+    <div class="nav-links">
+      <a href="games/arcade.html">DAILY GAMES</a>
+      <a href="pages/awards-browse.html">AWARDS</a>
+      <a href="index.html">EXPLORE</a>
+      <a href="pages/randomizer-hub.html">WHAT TO WATCH</a>
+      <a href="next-frontier.html" class="nav-active">NEXT FRONTIER</a>
+      <a href="index.html">MENU</a>
+    </div>
+  </nav>
+
+  <main class="nf-page">
+
+    <!-- HEADER -->
+    <header class="nf-header">
+      <div class="nf-header-left">
+        <a href="javascript:void(0)" class="back-link" onclick="history.back()"><span class="og og-arrow-left"></span> Back</a>
+        <div class="nf-eyebrow">ORBIT</div>
+        <h1 class="nf-title">NEXT FRONTIER</h1>
+        <p class="nf-tagline">The edge of what's next</p>
+      </div>
+      <div class="nf-region-select">
+        <button class="nf-region-btn active" data-region="AU">AU</button>
+        <button class="nf-region-btn" data-region="US">US</button>
+        <button class="nf-region-btn" data-region="GB">UK</button>
+        <button class="nf-region-btn" data-region="NZ">NZ</button>
+        <button class="nf-region-btn" data-region="CA">CA</button>
+      </div>
+    </header>
+
+    <!-- TABS -->
+    <div class="nf-tabs">
+      <button class="nf-tab active" data-tab="bigscreen">
+        <span class="og og-film"></span> THE BIG SCREEN
+      </button>
+      <button class="nf-tab" data-tab="streamers">
+        <span class="og og-satellite"></span> YOUR STREAMERS
+      </button>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="nf-layout">
+
+      <!-- MAIN CONTENT -->
+      <div class="nf-main">
+
+        <!-- BIG SCREEN PANEL -->
+        <div class="nf-panel" id="panelBigscreen">
+
+          <!-- Alert banner for this-week releases -->
+          <div class="nf-alert-banner" id="alertBanner" hidden></div>
+
+          <!-- View toggle -->
+          <div class="nf-view-toggle">
+            <button class="tgl-btn active" data-view="schedule">SCHEDULE</button>
+            <button class="tgl-btn" data-view="countdown">MY COUNTDOWN</button>
+          </div>
+
+          <!-- Schedule view -->
+          <div class="nf-view" id="viewSchedule">
+            <div class="nf-loading" id="loadingSchedule">Loading upcoming releases...</div>
+            <div id="scheduleList"></div>
+          </div>
+
+          <!-- Countdown view -->
+          <div class="nf-view" id="viewCountdown" hidden>
+            <div id="countdownList"></div>
+            <div class="nf-empty-state" id="countdownEmpty" hidden>
+              No films saved yet — hit Want to See on any film in the Schedule.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- STREAMERS PANEL -->
+        <div class="nf-panel" id="panelStreamers" hidden>
+
+          <!-- Content type toggle + sort -->
+          <div class="nf-stream-controls">
+            <div class="nf-stream-toggle">
+              <button class="tgl-btn active" data-stype="movie">FILMS</button>
+              <button class="tgl-btn" data-stype="tv">TV SERIES</button>
+            </div>
+            <select class="nf-sort-select" id="streamSort">
+              <option value="newest">Newest first</option>
+              <option value="az">A – Z</option>
+            </select>
+          </div>
+
+          <div class="nf-loading" id="loadingStreamers" hidden>Loading streaming titles...</div>
+          <div id="streamerRows"></div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="nf-sidebar">
+
+        <!-- Big Screen sidebar -->
+        <div class="nf-sidebar-panel" id="sidebarBigscreen">
+          <div class="nf-sidebar-section">
+            <div class="nf-sidebar-label">JUMP TO</div>
+            <div class="nf-month-nav">
+              <button class="nf-month-arrow" id="monthPrev"><span class="og og-arrow-left"></span></button>
+              <span class="nf-month-label" id="monthLabel"></span>
+              <button class="nf-month-arrow" id="monthNext"><span class="og og-arrow-right"></span></button>
+            </div>
+            <div class="nf-thursday-strip" id="thursdayStrip"></div>
+          </div>
+
+          <div class="nf-sidebar-section">
+            <div class="nf-sidebar-label">FILTERS</div>
+            <input type="text" class="nf-filter-input" id="filterSearch" placeholder="Actor / Director...">
+            <select class="nf-filter-select" id="filterGenre">
+              <option value="">All genres</option>
+              <option value="28">Action</option>
+              <option value="18">Drama</option>
+              <option value="35">Comedy</option>
+              <option value="27">Horror</option>
+              <option value="878">Sci-Fi</option>
+              <option value="53">Thriller</option>
+              <option value="16">Animation</option>
+              <option value="99">Documentary</option>
+            </select>
+
+            <div class="nf-sidebar-sublabel">WHERE</div>
+            <div class="nf-chip-group" id="whereChips">
+              <button class="nf-chip active" data-where="all">All</button>
+              <button class="nf-chip" data-where="cinema">Cinema</button>
+              <button class="nf-chip" data-where="stream">Cinema + Stream</button>
+            </div>
+
+            <div class="nf-sidebar-sublabel">PRESTIGE</div>
+            <div class="nf-chip-group">
+              <button class="nf-chip nf-chip-gold" id="filterAwards" data-active="false">
+                <span class="og og-oscar"></span> Awards contenders
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streamers sidebar -->
+        <div class="nf-sidebar-panel" id="sidebarStreamers" hidden>
+          <div class="nf-sidebar-section">
+            <div class="nf-sidebar-label">SERVICES</div>
+            <div class="nf-chip-group" id="serviceChips"></div>
+          </div>
+
+          <div class="nf-sidebar-section">
+            <div class="nf-sidebar-label">FILTERS</div>
+            <input type="text" class="nf-filter-input" id="streamFilterSearch" placeholder="Actor / Director...">
+            <select class="nf-filter-select" id="streamFilterGenre">
+              <option value="">All genres</option>
+              <option value="28">Action</option>
+              <option value="18">Drama</option>
+              <option value="35">Comedy</option>
+              <option value="27">Horror</option>
+              <option value="878">Sci-Fi</option>
+              <option value="53">Thriller</option>
+              <option value="16">Animation</option>
+              <option value="99">Documentary</option>
+            </select>
+
+            <div class="nf-sidebar-sublabel">SHOW</div>
+            <div class="nf-chip-group" id="timeChips">
+              <button class="nf-chip active" data-time="month">New this month</button>
+              <button class="nf-chip" data-time="week">New this week</button>
+              <button class="nf-chip" data-time="all">All available</button>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </main>
+
+  <script src="config.js"></script>
+  <script src="orbit-utils.js"></script>
+  <script src="components/moviecube.js"></script>
+  <script src="next-frontier.js"></script>
+</body>
+</html>

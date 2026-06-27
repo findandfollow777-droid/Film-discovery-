@@ -1,0 +1,258 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+0,Billie Whitelaw,1969,BAFTA,Best Supporting Actress,TRUE,Charlie Bubbles
+0,Pat Heywood,1969,BAFTA,Best Supporting Actress,FALSE,Romeo and Juliet
+0,Virginia Maskell,1969,BAFTA,Best Supporting Actress,FALSE,Interlude
+0,Simone Signoret,1969,BAFTA,Best Supporting Actress,FALSE,Games
+0,Celia Johnson,1970,BAFTA,Best Supporting Actress,TRUE,The Prime of Miss Jean Brodie
+0,Peggy Ashcroft,1970,BAFTA,Best Supporting Actress,FALSE,Three into Two Won't Go
+0,Pamela Franklin,1970,BAFTA,Best Supporting Actress,FALSE,The Prime of Miss Jean Brodie
+0,Mary Wimbush,1970,BAFTA,Best Supporting Actress,FALSE,Oh! What a Lovely War
+0,Susannah York,1971,BAFTA,Best Supporting Actress,TRUE,They Shoot Horses Don't They?
+0,Evin Crowley,1971,BAFTA,Best Supporting Actress,FALSE,Ryan's Daughter
+0,Estelle Parsons,1971,BAFTA,Best Supporting Actress,FALSE,Watermelon Man
+0,Maureen Stapleton,1971,BAFTA,Best Supporting Actress,FALSE,Airport
+0,Margaret Leighton,1972,BAFTA,Best Supporting Actress,TRUE,The Go-Between
+0,Jane Asher,1972,BAFTA,Best Supporting Actress,FALSE,Deep End
+0,Georgia Brown,1972,BAFTA,Best Supporting Actress,FALSE,The Raging Moon
+0,Georgia Engel,1972,BAFTA,Best Supporting Actress,FALSE,Taking Off
+0,Cloris Leachman,1973,BAFTA,Best Supporting Actress,TRUE,The Last Picture Show
+0,Marisa Berenson,1973,BAFTA,Best Supporting Actress,FALSE,Cabaret
+0,Eileen Brennan,1973,BAFTA,Best Supporting Actress,FALSE,The Last Picture Show
+0,Shelley Winters,1973,BAFTA,Best Supporting Actress,FALSE,The Poseidon Adventure
+0,Valentina Cortese,1974,BAFTA,Best Supporting Actress,TRUE,Day for Night
+0,Rosemary Leach,1974,BAFTA,Best Supporting Actress,FALSE,That'll Be the Day
+0,Delphine Seyrig,1974,BAFTA,Best Supporting Actress,FALSE,The Day of the Jackal
+0,Ingrid Thulin,1974,BAFTA,Best Supporting Actress,FALSE,Cries and Whispers
+0,Ingrid Bergman,1975,BAFTA,Best Supporting Actress,TRUE,Murder on the Orient Express
+0,Sylvia Sidney,1975,BAFTA,Best Supporting Actress,FALSE,Summer Wishes Winter Dreams
+0,Sylvia Syms,1975,BAFTA,Best Supporting Actress,FALSE,The Tamarind Seed
+0,Cindy Williams,1975,BAFTA,Best Supporting Actress,FALSE,American Graffiti
+0,Diane Ladd,1976,BAFTA,Best Supporting Actress,TRUE,Alice Doesn't Live Here Anymore
+0,Ronee Blakley,1976,BAFTA,Best Supporting Actress,FALSE,Nashville
+0,Lelia Goldoni,1976,BAFTA,Best Supporting Actress,FALSE,Alice Doesn't Live Here Anymore
+0,Gwen Welles,1976,BAFTA,Best Supporting Actress,FALSE,Nashville
+0,Jodie Foster,1977,BAFTA,Best Supporting Actress,TRUE,Bugsy Malone
+0,Annette Crosbie,1977,BAFTA,Best Supporting Actress,FALSE,The Slipper and the Rose
+0,Vivien Merchant,1977,BAFTA,Best Supporting Actress,FALSE,The Homecoming
+0,Billie Whitelaw,1977,BAFTA,Best Supporting Actress,FALSE,The Omen
+0,Jenny Agutter,1978,BAFTA,Best Supporting Actress,TRUE,Equus
+0,Geraldine Chaplin,1978,BAFTA,Best Supporting Actress,FALSE,Welcome to L.A.
+0,Joan Plowright,1978,BAFTA,Best Supporting Actress,FALSE,Equus
+0,Shelley Winters,1978,BAFTA,Best Supporting Actress,FALSE,Next Stop Greenwich Village
+0,Geraldine Page,1979,BAFTA,Best Supporting Actress,TRUE,Interiors
+0,Angela Lansbury,1979,BAFTA,Best Supporting Actress,FALSE,Death on the Nile
+0,Maggie Smith,1979,BAFTA,Best Supporting Actress,FALSE,Death on the Nile
+0,Mona Washbourne,1979,BAFTA,Best Supporting Actress,FALSE,Stevie
+0,Rachel Roberts,1980,BAFTA,Best Supporting Actress,TRUE,Yanks
+0,Lisa Eichhorn,1980,BAFTA,Best Supporting Actress,FALSE,The Europeans
+0,Mariel Hemingway,1980,BAFTA,Best Supporting Actress,FALSE,Manhattan
+0,Meryl Streep,1980,BAFTA,Best Supporting Actress,FALSE,Manhattan
+0,Rohini Hattangadi,1983,BAFTA,Best Supporting Actress,TRUE,Gandhi
+0,Maureen Stapleton,1983,BAFTA,Best Supporting Actress,TRUE,Reds
+0,Candice Bergen,1983,BAFTA,Best Supporting Actress,FALSE,Gandhi
+0,Jane Fonda,1983,BAFTA,Best Supporting Actress,FALSE,On Golden Pond
+0,Jamie Lee Curtis,1984,BAFTA,Best Supporting Actress,TRUE,Trading Places
+0,Teri Garr,1984,BAFTA,Best Supporting Actress,FALSE,Tootsie
+0,Rosemary Harris,1984,BAFTA,Best Supporting Actress,FALSE,The Ploughman's Lunch
+0,Maureen Lipman,1984,BAFTA,Best Supporting Actress,FALSE,Educating Rita
+0,Liz Smith,1985,BAFTA,Best Supporting Actress,TRUE,A Private Function
+0,Eileen Atkins,1985,BAFTA,Best Supporting Actress,FALSE,The Dresser
+0,Cher,1985,BAFTA,Best Supporting Actress,FALSE,Silkwood
+0,Tuesday Weld,1985,BAFTA,Best Supporting Actress,FALSE,Once Upon a Time in America
+0,Rosanna Arquette,1986,BAFTA,Best Supporting Actress,TRUE,Desperately Seeking Susan
+0,Judi Dench,1986,BAFTA,Best Supporting Actress,FALSE,Wetherby
+0,Anjelica Huston,1986,BAFTA,Best Supporting Actress,FALSE,Prizzi's Honor
+0,Tracey Ullman,1986,BAFTA,Best Supporting Actress,FALSE,Plenty
+0,Judi Dench,1987,BAFTA,Best Supporting Actress,TRUE,A Room with a View
+0,Rosanna Arquette,1987,BAFTA,Best Supporting Actress,FALSE,After Hours
+0,Barbara Hershey,1987,BAFTA,Best Supporting Actress,FALSE,Hannah and Her Sisters
+0,Rosemary Leach,1987,BAFTA,Best Supporting Actress,FALSE,A Room with a View
+0,Susan Wooldridge,1988,BAFTA,Best Supporting Actress,TRUE,Hope and Glory
+0,Judi Dench,1988,BAFTA,Best Supporting Actress,FALSE,84 Charing Cross Road
+0,Vanessa Redgrave,1988,BAFTA,Best Supporting Actress,FALSE,Prick up Your Ears
+0,Dianne Wiest,1988,BAFTA,Best Supporting Actress,FALSE,Radio Days
+0,Judi Dench,1989,BAFTA,Best Supporting Actress,TRUE,A Handful of Dust
+0,Maria Aitken,1989,BAFTA,Best Supporting Actress,FALSE,A Fish Called Wanda
+0,Anne Archer,1989,BAFTA,Best Supporting Actress,FALSE,Fatal Attraction
+0,Olympia Dukakis,1989,BAFTA,Best Supporting Actress,FALSE,Moonstruck
+0,Michelle Pfeiffer,1990,BAFTA,Best Supporting Actress,TRUE,Dangerous Liaisons
+0,Peggy Ashcroft,1990,BAFTA,Best Supporting Actress,FALSE,Madame Sousatzka
+0,Laura San Giacomo,1990,BAFTA,Best Supporting Actress,FALSE,sex lies and videotape
+0,Sigourney Weaver,1990,BAFTA,Best Supporting Actress,FALSE,Working Girl
+0,Whoopi Goldberg,1991,BAFTA,Best Supporting Actress,TRUE,Ghost
+0,Anjelica Huston,1991,BAFTA,Best Supporting Actress,FALSE,Crimes and Misdemeanors
+0,Shirley MacLaine,1991,BAFTA,Best Supporting Actress,FALSE,Steel Magnolias
+0,Billie Whitelaw,1991,BAFTA,Best Supporting Actress,FALSE,The Krays
+0,Kate Nelligan,1992,BAFTA,Best Supporting Actress,TRUE,Frankie and Johnny
+0,Annette Bening,1992,BAFTA,Best Supporting Actress,FALSE,The Grifters
+0,Amanda Plummer,1992,BAFTA,Best Supporting Actress,FALSE,The Fisher King
+0,Julie Walters,1992,BAFTA,Best Supporting Actress,FALSE,Stepping Out
+0,Miranda Richardson,1993,BAFTA,Best Supporting Actress,TRUE,Damage
+0,Kathy Bates,1993,BAFTA,Best Supporting Actress,FALSE,Fried Green Tomatoes
+0,Helena Bonham Carter,1993,BAFTA,Best Supporting Actress,FALSE,Howards End
+0,Miranda Richardson,1993,BAFTA,Best Supporting Actress,FALSE,The Crying Game
+0,Miriam Margolyes,1994,BAFTA,Best Supporting Actress,TRUE,The Age of Innocence
+0,Holly Hunter,1994,BAFTA,Best Supporting Actress,FALSE,The Firm
+0,Winona Ryder,1994,BAFTA,Best Supporting Actress,FALSE,The Age of Innocence
+0,Maggie Smith,1994,BAFTA,Best Supporting Actress,FALSE,The Secret Garden
+0,Kristin Scott Thomas,1995,BAFTA,Best Supporting Actress,TRUE,Four Weddings and a Funeral
+0,Charlotte Coleman,1995,BAFTA,Best Supporting Actress,FALSE,Four Weddings and a Funeral
+0,Sally Field,1995,BAFTA,Best Supporting Actress,FALSE,Forrest Gump
+0,Anjelica Huston,1995,BAFTA,Best Supporting Actress,FALSE,Manhattan Murder Mystery
+0,Kate Winslet,1996,BAFTA,Best Supporting Actress,TRUE,Sense and Sensibility
+0,Joan Allen,1996,BAFTA,Best Supporting Actress,FALSE,Nixon
+0,Mira Sorvino,1996,BAFTA,Best Supporting Actress,FALSE,Mighty Aphrodite
+0,Elizabeth Spriggs,1996,BAFTA,Best Supporting Actress,FALSE,Sense and Sensibility
+0,Juliette Binoche,1997,BAFTA,Best Supporting Actress,TRUE,The English Patient
+0,Lauren Bacall,1997,BAFTA,Best Supporting Actress,FALSE,The Mirror Has Two Faces
+0,Marianne Jean-Baptiste,1997,BAFTA,Best Supporting Actress,FALSE,Secrets & Lies
+0,Lynn Redgrave,1997,BAFTA,Best Supporting Actress,FALSE,Shine
+0,Sigourney Weaver,1998,BAFTA,Best Supporting Actress,TRUE,The Ice Storm
+0,Jennifer Ehle,1998,BAFTA,Best Supporting Actress,FALSE,Wilde
+0,Lesley Sharp,1998,BAFTA,Best Supporting Actress,FALSE,The Full Monty
+0,Zoe Wanamaker,1998,BAFTA,Best Supporting Actress,FALSE,Wilde
+0,Judi Dench,1999,BAFTA,Best Supporting Actress,TRUE,Shakespeare in Love
+0,Kathy Bates,1999,BAFTA,Best Supporting Actress,FALSE,Primary Colors
+0,Brenda Blethyn,1999,BAFTA,Best Supporting Actress,FALSE,Little Voice
+0,Lynn Redgrave,1999,BAFTA,Best Supporting Actress,FALSE,Gods and Monsters
+0,Maggie Smith,2000,BAFTA,Best Supporting Actress,TRUE,Tea with Mussolini
+0,Thora Birch,2000,BAFTA,Best Supporting Actress,FALSE,American Beauty
+0,Cate Blanchett,2000,BAFTA,Best Supporting Actress,FALSE,The Talented Mr. Ripley
+0,Cameron Diaz,2000,BAFTA,Best Supporting Actress,FALSE,Being John Malkovich
+0,Mena Suvari,2000,BAFTA,Best Supporting Actress,FALSE,American Beauty
+0,Julie Walters,2001,BAFTA,Best Supporting Actress,TRUE,Billy Elliot
+0,Judi Dench,2001,BAFTA,Best Supporting Actress,FALSE,Chocolat
+0,Frances McDormand,2001,BAFTA,Best Supporting Actress,FALSE,Almost Famous
+0,Lena Olin,2001,BAFTA,Best Supporting Actress,FALSE,Chocolat
+0,Ziyi Zhang,2001,BAFTA,Best Supporting Actress,FALSE,Crouching Tiger Hidden Dragon
+0,Jennifer Connelly,2002,BAFTA,Best Supporting Actress,TRUE,A Beautiful Mind
+0,Judi Dench,2002,BAFTA,Best Supporting Actress,FALSE,The Shipping News
+0,Helen Mirren,2002,BAFTA,Best Supporting Actress,FALSE,Gosford Park
+0,Maggie Smith,2002,BAFTA,Best Supporting Actress,FALSE,Gosford Park
+0,Kate Winslet,2002,BAFTA,Best Supporting Actress,FALSE,Iris
+0,Catherine Zeta-Jones,2003,BAFTA,Best Supporting Actress,TRUE,Chicago
+0,Toni Collette,2003,BAFTA,Best Supporting Actress,FALSE,About a Boy
+0,Julianne Moore,2003,BAFTA,Best Supporting Actress,FALSE,The Hours
+0,Queen Latifah,2003,BAFTA,Best Supporting Actress,FALSE,Chicago
+0,Meryl Streep,2003,BAFTA,Best Supporting Actress,FALSE,Adaptation
+0,Renée Zellweger,2004,BAFTA,Best Supporting Actress,TRUE,Cold Mountain
+0,Holly Hunter,2004,BAFTA,Best Supporting Actress,FALSE,Thirteen
+0,Laura Linney,2004,BAFTA,Best Supporting Actress,FALSE,Mystic River
+0,Judy Parfitt,2004,BAFTA,Best Supporting Actress,FALSE,Girl with a Pearl Earring
+0,Emma Thompson,2004,BAFTA,Best Supporting Actress,FALSE,Love Actually
+0,Cate Blanchett,2005,BAFTA,Best Supporting Actress,TRUE,The Aviator
+0,Julie Christie,2005,BAFTA,Best Supporting Actress,FALSE,Finding Neverland
+0,Heather Craney,2005,BAFTA,Best Supporting Actress,FALSE,Vera Drake
+0,Natalie Portman,2005,BAFTA,Best Supporting Actress,FALSE,Closer
+0,Meryl Streep,2005,BAFTA,Best Supporting Actress,FALSE,The Manchurian Candidate
+0,Thandiwe Newton,2006,BAFTA,Best Supporting Actress,TRUE,Crash
+0,Brenda Blethyn,2006,BAFTA,Best Supporting Actress,FALSE,Pride & Prejudice
+0,Catherine Keener,2006,BAFTA,Best Supporting Actress,FALSE,Capote
+0,Frances McDormand,2006,BAFTA,Best Supporting Actress,FALSE,North Country
+0,Michelle Williams,2006,BAFTA,Best Supporting Actress,FALSE,Brokeback Mountain
+0,Jennifer Hudson,2007,BAFTA,Best Supporting Actress,TRUE,Dreamgirls
+0,Emily Blunt,2007,BAFTA,Best Supporting Actress,FALSE,The Devil Wears Prada
+0,Abigail Breslin,2007,BAFTA,Best Supporting Actress,FALSE,Little Miss Sunshine
+0,Toni Collette,2007,BAFTA,Best Supporting Actress,FALSE,Little Miss Sunshine
+0,Frances de la Tour,2007,BAFTA,Best Supporting Actress,FALSE,The History Boys
+0,Tilda Swinton,2008,BAFTA,Best Supporting Actress,TRUE,Michael Clayton
+0,Cate Blanchett,2008,BAFTA,Best Supporting Actress,FALSE,I'm Not There
+0,Kelly Macdonald,2008,BAFTA,Best Supporting Actress,FALSE,No Country for Old Men
+0,Samantha Morton,2008,BAFTA,Best Supporting Actress,FALSE,Control
+0,Saoirse Ronan,2008,BAFTA,Best Supporting Actress,FALSE,Atonement
+0,Penélope Cruz,2009,BAFTA,Best Supporting Actress,TRUE,Vicky Cristina Barcelona
+0,Amy Adams,2009,BAFTA,Best Supporting Actress,FALSE,Doubt
+0,Freida Pinto,2009,BAFTA,Best Supporting Actress,FALSE,Slumdog Millionaire
+0,Tilda Swinton,2009,BAFTA,Best Supporting Actress,FALSE,Burn After Reading
+0,Marisa Tomei,2009,BAFTA,Best Supporting Actress,FALSE,The Wrestler
+0,Mo'Nique,2010,BAFTA,Best Supporting Actress,TRUE,Precious
+0,Anne-Marie Duff,2010,BAFTA,Best Supporting Actress,FALSE,Nowhere Boy
+0,Vera Farmiga,2010,BAFTA,Best Supporting Actress,FALSE,Up in the Air
+0,Anna Kendrick,2010,BAFTA,Best Supporting Actress,FALSE,Up in the Air
+0,Kristin Scott Thomas,2010,BAFTA,Best Supporting Actress,FALSE,Nowhere Boy
+0,Helena Bonham Carter,2011,BAFTA,Best Supporting Actress,TRUE,The King's Speech
+0,Amy Adams,2011,BAFTA,Best Supporting Actress,FALSE,The Fighter
+0,Barbara Hershey,2011,BAFTA,Best Supporting Actress,FALSE,Black Swan
+0,Lesley Manville,2011,BAFTA,Best Supporting Actress,FALSE,Another Year
+0,Miranda Richardson,2011,BAFTA,Best Supporting Actress,FALSE,Made in Dagenham
+0,Octavia Spencer,2012,BAFTA,Best Supporting Actress,TRUE,The Help
+0,Jessica Chastain,2012,BAFTA,Best Supporting Actress,FALSE,The Help
+0,Judi Dench,2012,BAFTA,Best Supporting Actress,FALSE,My Week with Marilyn
+0,Melissa McCarthy,2012,BAFTA,Best Supporting Actress,FALSE,Bridesmaids
+0,Carey Mulligan,2012,BAFTA,Best Supporting Actress,FALSE,Drive
+0,Anne Hathaway,2013,BAFTA,Best Supporting Actress,TRUE,Les Misérables
+0,Amy Adams,2013,BAFTA,Best Supporting Actress,FALSE,The Master
+0,Judi Dench,2013,BAFTA,Best Supporting Actress,FALSE,Skyfall
+0,Sally Field,2013,BAFTA,Best Supporting Actress,FALSE,Lincoln
+0,Helen Hunt,2013,BAFTA,Best Supporting Actress,FALSE,The Sessions
+0,Jennifer Lawrence,2014,BAFTA,Best Supporting Actress,TRUE,American Hustle
+0,Sally Hawkins,2014,BAFTA,Best Supporting Actress,FALSE,Blue Jasmine
+0,Lupita Nyong'o,2014,BAFTA,Best Supporting Actress,FALSE,12 Years a Slave
+0,Julia Roberts,2014,BAFTA,Best Supporting Actress,FALSE,August: Osage County
+0,Oprah Winfrey,2014,BAFTA,Best Supporting Actress,FALSE,The Butler
+0,Patricia Arquette,2015,BAFTA,Best Supporting Actress,TRUE,Boyhood
+0,Keira Knightley,2015,BAFTA,Best Supporting Actress,FALSE,The Imitation Game
+0,Rene Russo,2015,BAFTA,Best Supporting Actress,FALSE,Nightcrawler
+0,Imelda Staunton,2015,BAFTA,Best Supporting Actress,FALSE,Pride
+0,Emma Stone,2015,BAFTA,Best Supporting Actress,FALSE,Birdman
+0,Kate Winslet,2016,BAFTA,Best Supporting Actress,TRUE,Steve Jobs
+0,Jennifer Jason Leigh,2016,BAFTA,Best Supporting Actress,FALSE,The Hateful Eight
+0,Rooney Mara,2016,BAFTA,Best Supporting Actress,FALSE,Carol
+0,Alicia Vikander,2016,BAFTA,Best Supporting Actress,FALSE,Ex Machina
+0,Julie Walters,2016,BAFTA,Best Supporting Actress,FALSE,Brooklyn
+0,Viola Davis,2017,BAFTA,Best Supporting Actress,TRUE,Fences
+0,Naomie Harris,2017,BAFTA,Best Supporting Actress,FALSE,Moonlight
+0,Nicole Kidman,2017,BAFTA,Best Supporting Actress,FALSE,Lion
+0,Hayley Squires,2017,BAFTA,Best Supporting Actress,FALSE,I Daniel Blake
+0,Michelle Williams,2017,BAFTA,Best Supporting Actress,FALSE,Manchester by the Sea
+0,Allison Janney,2018,BAFTA,Best Supporting Actress,TRUE,I Tonya
+0,Lesley Manville,2018,BAFTA,Best Supporting Actress,FALSE,Phantom Thread
+0,Laurie Metcalf,2018,BAFTA,Best Supporting Actress,FALSE,Lady Bird
+0,Kristin Scott Thomas,2018,BAFTA,Best Supporting Actress,FALSE,Darkest Hour
+0,Octavia Spencer,2018,BAFTA,Best Supporting Actress,FALSE,The Shape of Water
+0,Rachel Weisz,2019,BAFTA,Best Supporting Actress,TRUE,The Favourite
+0,Amy Adams,2019,BAFTA,Best Supporting Actress,FALSE,Vice
+0,Claire Foy,2019,BAFTA,Best Supporting Actress,FALSE,First Man
+0,Margot Robbie,2019,BAFTA,Best Supporting Actress,FALSE,Mary Queen of Scots
+0,Emma Stone,2019,BAFTA,Best Supporting Actress,FALSE,The Favourite
+0,Laura Dern,2020,BAFTA,Best Supporting Actress,TRUE,Marriage Story
+0,Scarlett Johansson,2020,BAFTA,Best Supporting Actress,FALSE,Jojo Rabbit
+0,Florence Pugh,2020,BAFTA,Best Supporting Actress,FALSE,Little Women
+0,Margot Robbie,2020,BAFTA,Best Supporting Actress,FALSE,Bombshell
+0,Margot Robbie,2020,BAFTA,Best Supporting Actress,FALSE,Once Upon a Time in Hollywood
+0,Youn Yuh-jung,2021,BAFTA,Best Supporting Actress,TRUE,Minari
+0,Niamh Algar,2021,BAFTA,Best Supporting Actress,FALSE,Calm with Horses
+0,Kosar Ali,2021,BAFTA,Best Supporting Actress,FALSE,Rocks
+0,Maria Bakalova,2021,BAFTA,Best Supporting Actress,FALSE,Borat Subsequent Moviefilm
+0,Dominique Fishback,2021,BAFTA,Best Supporting Actress,FALSE,Judas and the Black Messiah
+0,Ashley Madekwe,2021,BAFTA,Best Supporting Actress,FALSE,County Lines
+0,Ariana DeBose,2022,BAFTA,Best Supporting Actress,TRUE,West Side Story
+0,Caitríona Balfe,2022,BAFTA,Best Supporting Actress,FALSE,Belfast
+0,Jessie Buckley,2022,BAFTA,Best Supporting Actress,FALSE,The Lost Daughter
+0,Ann Dowd,2022,BAFTA,Best Supporting Actress,FALSE,Mass
+0,Aunjanue Ellis-Taylor,2022,BAFTA,Best Supporting Actress,FALSE,King Richard
+0,Ruth Negga,2022,BAFTA,Best Supporting Actress,FALSE,Passing
+0,Kerry Condon,2023,BAFTA,Best Supporting Actress,TRUE,The Banshees of Inisherin
+0,Angela Bassett,2023,BAFTA,Best Supporting Actress,FALSE,Black Panther: Wakanda Forever
+0,Hong Chau,2023,BAFTA,Best Supporting Actress,FALSE,The Whale
+0,Jamie Lee Curtis,2023,BAFTA,Best Supporting Actress,FALSE,Everything Everywhere All at Once
+0,Dolly de Leon,2023,BAFTA,Best Supporting Actress,FALSE,Triangle of Sadness
+0,Carey Mulligan,2023,BAFTA,Best Supporting Actress,FALSE,She Said
+0,Da'Vine Joy Randolph,2024,BAFTA,Best Supporting Actress,TRUE,The Holdovers
+0,Emily Blunt,2024,BAFTA,Best Supporting Actress,FALSE,Oppenheimer
+0,Danielle Brooks,2024,BAFTA,Best Supporting Actress,FALSE,The Color Purple
+0,Claire Foy,2024,BAFTA,Best Supporting Actress,FALSE,All of Us Strangers
+0,Sandra Hüller,2024,BAFTA,Best Supporting Actress,FALSE,The Zone of Interest
+0,Rosamund Pike,2024,BAFTA,Best Supporting Actress,FALSE,Saltburn
+0,Zoe Saldaña,2025,BAFTA,Best Supporting Actress,TRUE,Emilia Pérez
+0,Jamie Lee Curtis,2025,BAFTA,Best Supporting Actress,FALSE,The Last Showgirl
+0,Selena Gomez,2025,BAFTA,Best Supporting Actress,FALSE,Emilia Pérez
+0,Ariana Grande,2025,BAFTA,Best Supporting Actress,FALSE,Wicked
+0,Felicity Jones,2025,BAFTA,Best Supporting Actress,FALSE,The Brutalist
+0,Isabella Rossellini,2025,BAFTA,Best Supporting Actress,FALSE,Conclave
+0,Wunmi Mosaku,2026,BAFTA,Best Supporting Actress,TRUE,Sinners
+0,Odessa A'zion,2026,BAFTA,Best Supporting Actress,FALSE,Marty Supreme
+0,Inga Ibsdotter Lilleaas,2026,BAFTA,Best Supporting Actress,FALSE,Sentimental Value
+0,Carey Mulligan,2026,BAFTA,Best Supporting Actress,FALSE,The Ballad of Wallis Island
+0,Teyana Taylor,2026,BAFTA,Best Supporting Actress,FALSE,One Battle After Another
+0,Emily Watson,2026,BAFTA,Best Supporting Actress,FALSE,Hamnet

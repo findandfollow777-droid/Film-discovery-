@@ -250,9 +250,9 @@ html, body {
 
 .entity-photo-wrap {
   width: 100px;
-  height: 100px;
+  aspect-ratio: 2 / 3;
   margin: 0 auto 12px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   border: 3px solid rgba(255, 255, 255, 0.15);
   background: var(--nebula-dark);

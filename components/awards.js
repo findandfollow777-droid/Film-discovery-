@@ -11,7 +11,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1978, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1977, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1977, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "George Lucas" }
+      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "George Lucas" , person_id: 1 }
     ]
   },
   13: {
@@ -23,28 +23,28 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1995, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1994, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1994, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "Tom Hanks" },
-      { festival: "Golden Globe", category: "Best Director", year: 1994, won: true, person: "Robert Zemeckis" },
-      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Robert Zemeckis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "Tom Hanks" , person_id: 31 },
+      { festival: "Golden Globe", category: "Best Director", year: 1994, won: true, person: "Robert Zemeckis" , person_id: 24 },
+      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Robert Zemeckis" , person_id: 24 }
     ]
   },
   14: {
     title: "American Beauty",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2000, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2000, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2000, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2000, won: true , person: "Sam Mendes", person_id: 39 },
+      { festival: "Oscar", category: "Best Actor", year: 2000, won: true , person: "Kevin Spacey", person_id: 1979 },
       { festival: "BAFTA", category: "Best Film", year: 2000, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2000, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 2000, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2000, won: false , person: "Annette Bening", person_id: 516 },
       { festival: "BAFTA", category: "Best Film", year: 1999, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2000, won: true, person: "Kevin Spacey" },
-      { festival: "BAFTA", category: "Best Actor", year: 1999, won: true, person: "Kevin Spacey" },
-      { festival: "Golden Globe", category: "Best Director", year: 1999, won: true, person: "Sam Mendes" },
-      { festival: "BAFTA", category: "Best Actress", year: 2000, won: true, person: "Annette Bening" },
-      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Sam Mendes" },
-      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Sam Mendes" }
+      { festival: "BAFTA", category: "Best Actor", year: 2000, won: true, person: "Kevin Spacey" , person_id: 1979 },
+      { festival: "BAFTA", category: "Best Actor", year: 1999, won: true, person: "Kevin Spacey" , person_id: 1979 },
+      { festival: "Golden Globe", category: "Best Director", year: 1999, won: true, person: "Sam Mendes" , person_id: 39 },
+      { festival: "BAFTA", category: "Best Actress", year: 2000, won: true, person: "Annette Bening" , person_id: 516 },
+      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Sam Mendes" , person_id: 39 },
+      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Sam Mendes" , person_id: 39 }
     ]
   },
   16: {
@@ -56,13 +56,14 @@ const AWARDS_DATABASE = {
   22: {
     title: "Pirates of the Caribbean: The Curse of the Black Pearl",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Johnny Depp" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Johnny Depp" , person_id: 85 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1984, won: true, person: "Jack Nicholson", person_id: 514 }]
   },
   24: {
     title: "Kill Bill: Vol. 1",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Uma Thurman" }
+      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Uma Thurman" , person_id: 139 }
     ]
   },
   28: {
@@ -73,8 +74,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1979, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1979, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1979, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Martin Sheen" },
-      { festival: "Golden Globe", category: "Best Director", year: 1979, won: true, person: "Francis Ford Coppola" }
+      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Martin Sheen" , person_id: 8349 },
+      { festival: "Golden Globe", category: "Best Director", year: 1979, won: true, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   33: {
@@ -84,18 +85,18 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1993, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1992, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1992, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1992, won: true, person: "Clint Eastwood" },
-      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 1992, won: true, person: "Clint Eastwood" , person_id: 190 },
+      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   38: {
     title: "Eternal Sunshine of the Spotless Mind",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2005, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Jim Carrey" },
-      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Kate Winslet" },
-      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Michel Gondry" }
+      { festival: "Oscar", category: "Best Actress", year: 2005, won: false , person: "Kate Winslet", person_id: 204 },
+      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Jim Carrey" , person_id: 206 },
+      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Kate Winslet" , person_id: 204 },
+      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Michel Gondry" , person_id: 201 }
     ]
   },
   59: {
@@ -120,7 +121,7 @@ const AWARDS_DATABASE = {
   64: {
     title: "Talk to Her",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Pedro Almodóvar" }
+      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Pedro Almodóvar" , person_id: 309 }
     ]
   },
   67: {
@@ -133,19 +134,19 @@ const AWARDS_DATABASE = {
     title: "Walk the Line",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2006, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 2006, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Joaquin Phoenix" },
-      { festival: "BAFTA", category: "Best Actress", year: 2006, won: true, person: "Reese Witherspoon" }
+      { festival: "Oscar", category: "Best Actress", year: 2006, won: true , person: "Reese Witherspoon", person_id: 368 },
+      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Joaquin Phoenix" , person_id: 73421 },
+      { festival: "BAFTA", category: "Best Actress", year: 2006, won: true, person: "Reese Witherspoon" , person_id: 368 }
     ]
   },
   70: {
     title: "Million Dollar Baby",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2005, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2005, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 2005, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2005, won: true , person: "Clint Eastwood", person_id: 190 },
+      { festival: "Oscar", category: "Best Actress", year: 2005, won: true , person: "Hilary Swank", person_id: 448 },
       { festival: "Golden Globe", category: "Best Drama", year: 2005, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2004, won: true, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 2004, won: true, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   71: {
@@ -153,8 +154,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2001, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2001, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2001, won: true, person: "Jamie Bell" },
-      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Stephen Daldry" }
+      { festival: "BAFTA", category: "Best Actor", year: 2001, won: true, person: "Jamie Bell" , person_id: 478 },
+      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Stephen Daldry" , person_id: 468 }
     ]
   },
   75: {
@@ -188,7 +189,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1982, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1981, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   88: {
@@ -210,29 +211,29 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1959, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1959, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1959, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "James Stewart" },
-      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Otto Preminger" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "James Stewart" , person_id: 854 },
+      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Otto Preminger" , person_id: 834 }
     ]
   },
   98: {
     title: "Gladiator",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2001, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2001, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2001, won: true , person: "Russell Crowe", person_id: 934 },
       { festival: "BAFTA", category: "Best Film", year: 2001, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2001, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Russell Crowe" },
-      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Ridley Scott" },
-      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Ridley Scott" }
+      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Russell Crowe" , person_id: 934 },
+      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Ridley Scott" , person_id: 578 },
+      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Ridley Scott" , person_id: 578 }
     ]
   },
   99: {
     title: "All About My Mother",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1999, won: true, person: "Pedro Almodovar" },
+      { festival: "Cannes", category: "Best Director", year: 1999, won: true, person: "Pedro Almodovar" , person_id: 309 },
       { festival: "Cannes", category: "Palme d'Or", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2000, won: true, person: "Pedro Almodovar" },
-      { festival: "BAFTA", category: "Best Director", year: 1999, won: true, person: "Pedro Almodovar" }
+      { festival: "BAFTA", category: "Best Director", year: 2000, won: true, person: "Pedro Almodovar" , person_id: 309 },
+      { festival: "BAFTA", category: "Best Director", year: 1999, won: true, person: "Pedro Almodovar" , person_id: 309 }
     ]
   },
   103: {
@@ -242,7 +243,7 @@ const AWARDS_DATABASE = {
       { festival: "Cannes", category: "Palme d'Or", year: 1976, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1976, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1976, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Robert De Niro" }
+      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Robert De Niro" , person_id: 380 }
     ]
   },
   104: {
@@ -275,8 +276,8 @@ const AWARDS_DATABASE = {
     title: "Three Colors: Red",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1994, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Irene Jacob" },
-      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Krzysztof Kieslowski" }
+      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Irene Jacob" , person_id: 1350 },
+      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Krzysztof Kieslowski" , person_id: 1126 }
     ]
   },
   114: {
@@ -296,7 +297,7 @@ const AWARDS_DATABASE = {
     title: "Match Point",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2006, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Woody Allen" }
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Woody Allen" , person_id: 1243 }
     ]
   },
   120: {
@@ -305,9 +306,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2002, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2001, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Ian McKellen" },
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Peter Jackson" },
-      { festival: "BAFTA", category: "Best Director", year: 2002, won: true, person: "Peter Jackson" }
+      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Ian McKellen" , person_id: 1327 },
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Peter Jackson" , person_id: 108 },
+      { festival: "BAFTA", category: "Best Director", year: 2002, won: true, person: "Peter Jackson" , person_id: 108 }
     ]
   },
   121: {
@@ -324,12 +325,12 @@ const AWARDS_DATABASE = {
     title: "The Lord of the Rings: The Return of the King",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2004, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2004, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2004, won: true , person: "Peter Jackson", person_id: 108 },
       { festival: "Venice", category: "Golden Lion", year: 2003, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2004, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2004, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2003, won: true, person: "Peter Jackson" },
-      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Peter Jackson" }
+      { festival: "Golden Globe", category: "Best Director", year: 2003, won: true, person: "Peter Jackson" , person_id: 108 },
+      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Peter Jackson" , person_id: 108 }
     ]
   },
   129: {
@@ -351,15 +352,15 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2006, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2006, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Heath Ledger" },
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: true, person: "Ang Lee" },
-      { festival: "BAFTA", category: "Best Director", year: 2006, won: true, person: "Ang Lee" }
+      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Heath Ledger" , person_id: 1810 },
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: true, person: "Ang Lee" , person_id: 1614 },
+      { festival: "BAFTA", category: "Best Director", year: 2006, won: true, person: "Ang Lee" , person_id: 1614 }
     ]
   },
   144: {
     title: "Wings of Desire",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1987, won: true, person: "Wim Wenders" },
+      { festival: "Cannes", category: "Best Director", year: 1987, won: true, person: "Wim Wenders" , person_id: 2303 },
       { festival: "Cannes", category: "Palme d'Or", year: 1987, won: false }
     ]
   },
@@ -370,7 +371,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1997, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1996, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1996, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Emily Watson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Emily Watson" , person_id: 1639 }
     ]
   },
   146: {
@@ -378,15 +379,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2001, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2000, won: true, person: "Ang Lee" },
-      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Michelle Yeoh" },
-      { festival: "BAFTA", category: "Best Director", year: 2001, won: true, person: "Ang Lee" }
+      { festival: "Golden Globe", category: "Best Director", year: 2000, won: true, person: "Ang Lee" , person_id: 1614 },
+      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Michelle Yeoh" , person_id: 1620 },
+      { festival: "BAFTA", category: "Best Director", year: 2001, won: true, person: "Ang Lee" , person_id: 1614 }
     ]
   },
   147: {
     title: "The 400 Blows",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1959, won: true, person: "Francois Truffaut" },
+      { festival: "Cannes", category: "Best Director", year: 1959, won: true, person: "Francois Truffaut" , person_id: 1650 },
       { festival: "Cannes", category: "Palme d'Or", year: 1959, won: false }
     ]
   },
@@ -396,11 +397,11 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2004, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2004, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2004, won: true, person: "Bill Murray" },
-      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Sofia Coppola" },
-      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Scarlett Johansson" },
-      { festival: "BAFTA", category: "Best Actress", year: 2004, won: true, person: "Scarlett Johansson" },
-      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Sofia Coppola" }
+      { festival: "BAFTA", category: "Best Actor", year: 2004, won: true, person: "Bill Murray" , person_id: 1532 },
+      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Sofia Coppola" , person_id: 1769 },
+      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Scarlett Johansson" , person_id: 1245 },
+      { festival: "BAFTA", category: "Best Actress", year: 2004, won: true, person: "Scarlett Johansson" , person_id: 1245 },
+      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Sofia Coppola" , person_id: 1769 }
     ]
   },
   164: {
@@ -421,14 +422,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1991, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1991, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Terry Gilliam" }
+      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Terry Gilliam" , person_id: 280 }
     ]
   },
   182: {
     title: "The Good German",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 2007, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1993, won: true, person: "Gene Hackman", person_id: 193 }]
   },
   184: {
     title: "Jackie Brown",
@@ -443,7 +445,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1972, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1971, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1971, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Stanley Kubrick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Stanley Kubrick" , person_id: 240 }
     ]
   },
   187: {
@@ -455,15 +457,16 @@ const AWARDS_DATABASE = {
   192: {
     title: "The Name of the Rose",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1987, won: true, person: "Sean Connery" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1987, won: true, person: "Sean Connery" , person_id: 738 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2005, won: true, person: "Morgan Freeman", person_id: 192 }]
   },
   194: {
     title: "Amelie",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Audrey Tautou" },
-      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Jean-Pierre Jeunet" }
+      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Audrey Tautou" , person_id: 2405 },
+      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Jean-Pierre Jeunet" , person_id: 2419 }
     ]
   },
   197: {
@@ -472,8 +475,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1996, won: true },
       { festival: "Oscar", category: "Best Director", year: 1996, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1995, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: true, person: "Mel Gibson" },
-      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Mel Gibson" }
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: true, person: "Mel Gibson" , person_id: 2461 },
+      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Mel Gibson" , person_id: 2461 }
     ]
   },
   204: {
@@ -499,17 +502,17 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1989, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1989, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Robin Williams" },
-      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Peter Weir" },
-      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Peter Weir" }
+      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Robin Williams" , person_id: 2157 },
+      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Peter Weir" , person_id: 2690 },
+      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Peter Weir" , person_id: 2690 }
     ]
   },
   219: {
     title: "Volver",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2006, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Penelope Cruz" }
+      { festival: "Oscar", category: "Best Actress", year: 2007, won: false , person: "Penélope Cruz", person_id: 955 },
+      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Penelope Cruz" , person_id: 955 }
     ]
   },
   220: {
@@ -518,13 +521,13 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1955, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1955, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1955, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "James Dean" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "James Dean" , person_id: 2749 }
     ]
   },
   221: {
     title: "Rebel Without a Cause",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "James Dean" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "James Dean" , person_id: 2749 }
     ]
   },
   225: {
@@ -536,7 +539,7 @@ const AWARDS_DATABASE = {
   226: {
     title: "Boys Don't Cry",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Hilary Swank" }
+      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Hilary Swank" , person_id: 448 }
     ]
   },
   231: {
@@ -549,16 +552,16 @@ const AWARDS_DATABASE = {
     title: "Stand by Me",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Rob Reiner" }
+      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Rob Reiner" , person_id: 3026 }
     ]
   },
   238: {
     title: "The Godfather",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1973, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1973, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1973, won: true , person: "Marlon Brando", person_id: 3084 },
       { festival: "Golden Globe", category: "Best Drama", year: 1973, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1972, won: true, person: "Francis Ford Coppola" }
+      { festival: "Golden Globe", category: "Best Director", year: 1972, won: true, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   239: {
@@ -566,23 +569,23 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1959, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1959, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: true, person: "Jack Lemmon" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: true, person: "Jack Lemmon" , person_id: 3151 }
     ]
   },
   240: {
     title: "The Godfather Part II",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1975, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1975, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1975, won: true, person: "Al Pacino" },
-      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Francis Ford Coppola" }
+      { festival: "Oscar", category: "Best Director", year: 1975, won: true , person: "Francis Ford Coppola", person_id: 1776 },
+      { festival: "BAFTA", category: "Best Actor", year: 1975, won: true, person: "Al Pacino" , person_id: 1158 },
+      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   241: {
     title: "Natural Born Killers",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1994, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Oliver Stone" }
+      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Oliver Stone" , person_id: 1152 }
     ]
   },
   242: {
@@ -591,7 +594,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1991, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1990, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1990, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Francis Ford Coppola" }
+      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   246: {
@@ -631,7 +634,7 @@ const AWARDS_DATABASE = {
   254: {
     title: "King Kong",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Peter Jackson" }
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Peter Jackson" , person_id: 108 }
     ]
   },
   261: {
@@ -641,16 +644,16 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1958, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1958, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1958, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Paul Newman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Richard Brooks" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Paul Newman" , person_id: 3636 },
+      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Richard Brooks" , person_id: 3632 }
     ]
   },
   262: {
     title: "The King of Comedy",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1983, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Robert De Niro" },
-      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Robert De Niro" , person_id: 380 },
+      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   269: {
@@ -670,25 +673,25 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1991, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1991, won: true, person: "Anthony Hopkins" },
-      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Jonathan Demme" },
-      { festival: "BAFTA", category: "Best Actress", year: 1992, won: true, person: "Jodie Foster" },
-      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Jonathan Demme" }
+      { festival: "BAFTA", category: "Best Actor", year: 1991, won: true, person: "Anthony Hopkins" , person_id: 4173 },
+      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Jonathan Demme" , person_id: 16294 },
+      { festival: "BAFTA", category: "Best Actress", year: 1992, won: true, person: "Jodie Foster" , person_id: 1038 },
+      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Jonathan Demme" , person_id: 16294 }
     ]
   },
   275: {
     title: "Fargo",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1997, won: false },
-      { festival: "Cannes", category: "Best Director", year: 1996, won: true, person: "Joel Coen" },
+      { festival: "Cannes", category: "Best Director", year: 1996, won: true, person: "Joel Coen" , person_id: 1223 },
       { festival: "Oscar", category: "Best Actress", year: 1997, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1996, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1996, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1996, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1996, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Joel Coen" },
-      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Frances McDormand" },
-      { festival: "BAFTA", category: "Best Director", year: 1996, won: true, person: "Joel Coen" }
+      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Joel Coen" , person_id: 1223 },
+      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Frances McDormand" , person_id: 3910 },
+      { festival: "BAFTA", category: "Best Director", year: 1996, won: true, person: "Joel Coen" , person_id: 1223 }
     ]
   },
   276: {
@@ -712,27 +715,27 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actor", year: 1985, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1985, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1985, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "F. Murray Abraham" },
-      { festival: "Golden Globe", category: "Best Director", year: 1984, won: true, person: "Milos Forman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "F. Murray Abraham" , person_id: 1164 },
+      { festival: "Golden Globe", category: "Best Director", year: 1984, won: true, person: "Milos Forman" , person_id: 3974 }
     ]
   },
   284: {
     title: "The Apartment",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1961, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1961, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1961, won: true , person: "Billy Wilder", person_id: 3146 },
       { festival: "Oscar", category: "Best Actress", year: 1960, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1960, won: true },
       { festival: "Venice", category: "Golden Lion", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: true, person: "Jack Lemmon" },
-      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Billy Wilder" },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: true, person: "Shirley MacLaine" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: true, person: "Jack Lemmon" , person_id: 3151 },
+      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Billy Wilder" , person_id: 3146 },
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: true, person: "Shirley MacLaine" , person_id: 4090 }
     ]
   },
   288: {
     title: "High Noon",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1953, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1953, won: true , person: "Gary Cooper", person_id: 4068 },
       { festival: "Oscar", category: "Best Picture", year: 1952, won: false }
     ]
   },
@@ -740,13 +743,13 @@ const AWARDS_DATABASE = {
     title: "Barton Fink",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1991, won: true },
-      { festival: "Cannes", category: "Best Director", year: 1991, won: true, person: "Joel Coen" }
+      { festival: "Cannes", category: "Best Director", year: 1991, won: true, person: "Joel Coen" , person_id: 1223 }
     ]
   },
   293: {
     title: "A River Runs Through It",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Robert Redford" }
+      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Robert Redford" , person_id: 4135 }
     ]
   },
   300: {
@@ -772,8 +775,8 @@ const AWARDS_DATABASE = {
   311: {
     title: "Once Upon a Time in America",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Sergio Leone" },
-      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Sergio Leone" }
+      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Sergio Leone" , person_id: 4385 },
+      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Sergio Leone" , person_id: 4385 }
     ]
   },
   313: {
@@ -803,11 +806,11 @@ const AWARDS_DATABASE = {
   322: {
     title: "Mystic River",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2004, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2004, won: true , person: "Sean Penn", person_id: 2228 },
       { festival: "Oscar", category: "Best Picture", year: 2003, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2003, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2004, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   334: {
@@ -827,21 +830,21 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1955, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1954, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Toshiro Mifune" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Toshiro Mifune" , person_id: 7450 }
     ]
   },
   348: {
     title: "Alien",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1979, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Sigourney Weaver" }
+      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Sigourney Weaver" , person_id: 10205 }
     ]
   },
   350: {
     title: "The Devil Wears Prada",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 2007, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   363: {
@@ -858,9 +861,10 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actor", year: 1989, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 1989, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1989, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Barry Levinson" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Barry Levinson" , person_id: 8246 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1975, won: true, person: "Robert De Niro", person_id: 380 }]
   },
   381: {
     title: "To Catch a Thief",
@@ -875,8 +879,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1957, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1957, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1957, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: true, person: "Henry Fonda" },
-      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Sidney Lumet" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: true, person: "Henry Fonda" , person_id: 4958 },
+      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Sidney Lumet" , person_id: 39996 }
     ]
   },
   392: {
@@ -891,8 +895,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1966, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1966, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1966, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Mike Nichols" },
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: true, person: "Elizabeth Taylor" }
+      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Mike Nichols" , person_id: 5342 },
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: true, person: "Elizabeth Taylor" , person_id: 3635 }
     ]
   },
   398: {
@@ -901,8 +905,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2006, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2005, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2006, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2006, won: true, person: "Philip Seymour Hoffman" },
-      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Bennett Miller" }
+      { festival: "BAFTA", category: "Best Actor", year: 2006, won: true, person: "Philip Seymour Hoffman" , person_id: 1233 },
+      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Bennett Miller" , person_id: 5345 }
     ]
   },
   402: {
@@ -917,10 +921,10 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1990, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1990, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1990, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 1989, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 1989, won: true , person: "Jessica Tandy", person_id: 5698 },
       { festival: "BAFTA", category: "Best Film", year: 1990, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1990, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Bruce Beresford" }
+      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Bruce Beresford" , person_id: 5696 }
     ]
   },
   404: {
@@ -938,7 +942,7 @@ const AWARDS_DATABASE = {
   406: {
     title: "La Haine",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1995, won: true, person: "Mathieu Kassovitz" },
+      { festival: "Cannes", category: "Best Director", year: 1995, won: true, person: "Mathieu Kassovitz" , person_id: 2406 },
       { festival: "Cannes", category: "Palme d'Or", year: 1995, won: false }
     ]
   },
@@ -953,10 +957,10 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1996, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1996, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 1997, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Ralph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Anthony Minghella" },
-      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Kristin Scott Thomas" },
-      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Anthony Minghella" }
+      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Anthony Minghella" , person_id: 2239 },
+      { festival: "BAFTA", category: "Best Actress", year: 1997, won: false, person: "Kristin Scott Thomas" , person_id: 5470 },
+      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Anthony Minghella" , person_id: 2239 }
     ]
   },
   421: {
@@ -974,15 +978,15 @@ const AWARDS_DATABASE = {
   423: {
     title: "The Pianist",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2003, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2003, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2003, won: true , person: "Roman Polanski", person_id: 3556 },
+      { festival: "Oscar", category: "Best Actor", year: 2003, won: true , person: "Adrien Brody", person_id: 3490 },
       { festival: "Cannes", category: "Palme d'Or", year: 2002, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2003, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2002, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Adrien Brody" },
-      { festival: "BAFTA", category: "Best Director", year: 2003, won: true, person: "Roman Polanski" },
-      { festival: "BAFTA", category: "Best Director", year: 1983, won: true, person: "Roman Polanski" }
+      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Adrien Brody" , person_id: 3490 },
+      { festival: "BAFTA", category: "Best Director", year: 2003, won: true, person: "Roman Polanski" , person_id: 3556 },
+      { festival: "BAFTA", category: "Best Director", year: 1983, won: true, person: "Roman Polanski" , person_id: 3556 }
     ]
   },
   424: {
@@ -994,9 +998,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1994, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1993, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1993, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Liam Neeson" },
-      { festival: "Golden Globe", category: "Best Director", year: 1993, won: true, person: "Steven Spielberg" },
-      { festival: "BAFTA", category: "Best Director", year: 1993, won: true, person: "Steven Spielberg" }
+      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Liam Neeson" , person_id: 3896 },
+      { festival: "Golden Globe", category: "Best Director", year: 1993, won: true, person: "Steven Spielberg" , person_id: 488 },
+      { festival: "BAFTA", category: "Best Director", year: 1993, won: true, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   427: {
@@ -1023,7 +1027,7 @@ const AWARDS_DATABASE = {
   436: {
     title: "Maria Full of Grace",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2005, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2005, won: false , person: "Catalina Sandino Moreno", person_id: 5887 }
     ]
   },
   439: {
@@ -1036,7 +1040,7 @@ const AWARDS_DATABASE = {
   445: {
     title: "Cache",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2005, won: true, person: "Michael Haneke" },
+      { festival: "Cannes", category: "Best Director", year: 2005, won: true, person: "Michael Haneke" , person_id: 6011 },
       { festival: "Cannes", category: "Palme d'Or", year: 2005, won: false }
     ]
   },
@@ -1046,47 +1050,47 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actor", year: 1996, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1996, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1995, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Nicolas Cage" },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Mike Figgis" },
-      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Elisabeth Shue" }
+      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Nicolas Cage" , person_id: 2963 },
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Mike Figgis" , person_id: 6111 },
+      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Elisabeth Shue" , person_id: 1951 }
     ]
   },
   453: {
     title: "A Beautiful Mind",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2002, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2002, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2002, won: true , person: "Ron Howard", person_id: 6159 },
       { festival: "Golden Globe", category: "Best Drama", year: 2002, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2002, won: true, person: "Russell Crowe" },
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Ron Howard" },
-      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Ron Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 2002, won: true, person: "Russell Crowe" , person_id: 934 },
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Ron Howard" , person_id: 6159 },
+      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Ron Howard" , person_id: 6159 }
     ]
   },
   454: {
     title: "Romeo + Juliet",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1997, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1997, won: true, person: "Baz Luhrmann" }
+      { festival: "BAFTA", category: "Best Director", year: 1997, won: true, person: "Baz Luhrmann" , person_id: 6201 }
     ]
   },
   462: {
     title: "Erin Brockovich",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2001, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2001, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2001, won: true , person: "Julia Roberts", person_id: 1204 },
       { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2001, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Steven Soderbergh" },
-      { festival: "BAFTA", category: "Best Actress", year: 2001, won: true, person: "Julia Roberts" },
-      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Steven Soderbergh" }
+      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Steven Soderbergh" , person_id: 1884 },
+      { festival: "BAFTA", category: "Best Actress", year: 2001, won: true, person: "Julia Roberts" , person_id: 1204 },
+      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Steven Soderbergh" , person_id: 1884 }
     ]
   },
   466: {
     title: "Klute",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1971, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Jane Fonda" }
+      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   468: {
@@ -1098,10 +1102,10 @@ const AWARDS_DATABASE = {
   470: {
     title: "21 Grams",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2004, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2004, won: false , person: "Naomi Watts", person_id: 3489 },
       { festival: "Venice", category: "Golden Lion", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Benicio del Toro" },
-      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Naomi Watts" }
+      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Benicio del Toro" , person_id: 2228 },
+      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Naomi Watts" , person_id: 3489 }
     ]
   },
   475: {
@@ -1111,8 +1115,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1967, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1967, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1967, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Warren Beatty" },
-      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Arthur Penn" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Warren Beatty" , person_id: 6449 },
+      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Arthur Penn" , person_id: 6448 }
     ]
   },
   480: {
@@ -1130,10 +1134,10 @@ const AWARDS_DATABASE = {
   488: {
     title: "The African Queen",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1952, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1952, won: true , person: "Humphrey Bogart", person_id: 4110 },
       { festival: "Oscar", category: "Best Actress", year: 1951, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Humphrey Bogart" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Humphrey Bogart" , person_id: 4110 }
     ]
   },
   489: {
@@ -1162,8 +1166,7 @@ const AWARDS_DATABASE = {
   497: {
     title: "The Green Mile",
     awards: [
-      { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
-      { festival: "Oscar", category: "Best Picture", year: 1999, won: false }
+      { festival: "Oscar", category: "Best Picture", year: 2000, won: false }
     ]
   },
   499: {
@@ -1175,7 +1178,7 @@ const AWARDS_DATABASE = {
   504: {
     title: "Monster",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2004, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2004, won: true , person: "Charlize Theron", person_id: 6885 },
       { festival: "Berlin", category: "Golden Bear", year: 2004, won: false }
     ]
   },
@@ -1189,14 +1192,14 @@ const AWARDS_DATABASE = {
     title: "One Flew Over the Cuckoo's Nest",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1976, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1976, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1976, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1976, won: true , person: "Miloš Forman", person_id: 3974 },
+      { festival: "Oscar", category: "Best Actor", year: 1976, won: true , person: "Jack Nicholson", person_id: 514 },
       { festival: "BAFTA", category: "Best Film", year: 1977, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1976, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1975, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1976, won: true, person: "Jack Nicholson" },
-      { festival: "Golden Globe", category: "Best Director", year: 1975, won: true, person: "Milos Forman" },
-      { festival: "BAFTA", category: "Best Actress", year: 1977, won: true, person: "Louise Fletcher" }
+      { festival: "BAFTA", category: "Best Actor", year: 1976, won: true, person: "Jack Nicholson" , person_id: 514 },
+      { festival: "Golden Globe", category: "Best Director", year: 1975, won: true, person: "Milos Forman" , person_id: 3974 },
+      { festival: "BAFTA", category: "Best Actress", year: 1977, won: true, person: "Louise Fletcher" , person_id: 7071 }
     ]
   },
   522: {
@@ -1210,7 +1213,7 @@ const AWARDS_DATABASE = {
     title: "Casino",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1996, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Martin Scorsese" }
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   535: {
@@ -1223,7 +1226,7 @@ const AWARDS_DATABASE = {
     title: "The Man with the Golden Arm",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1956, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Frank Sinatra" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Frank Sinatra" , person_id: 4347 }
     ]
   },
   544: {
@@ -1235,14 +1238,14 @@ const AWARDS_DATABASE = {
   546: {
     title: "Transamerica",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2006, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2006, won: false , person: "Felicity Huffman", person_id: 7427 }
     ]
   },
   547: {
     title: "The Horse Whisperer",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1998, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Robert Redford" }
+      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Robert Redford" , person_id: 4135 }
     ]
   },
   548: {
@@ -1283,7 +1286,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1996, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1995, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1995, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Ron Howard" }
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Ron Howard" , person_id: 6159 }
     ]
   },
   571: {
@@ -1296,7 +1299,7 @@ const AWARDS_DATABASE = {
     title: "Frenzy",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1972, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Alfred Hitchcock" }
+      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Alfred Hitchcock" , person_id: 2636 }
     ]
   },
   574: {
@@ -1308,7 +1311,7 @@ const AWARDS_DATABASE = {
   577: {
     title: "To Die For",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Nicole Kidman" }
+      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Nicole Kidman" , person_id: 2227 }
     ]
   },
   578: {
@@ -1318,8 +1321,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1975, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1975, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1975, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Richard Dreyfuss" },
-      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Steven Spielberg" }
+      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Richard Dreyfuss" , person_id: 3037 },
+      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   581: {
@@ -1331,17 +1334,17 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1990, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Kevin Costner" },
-      { festival: "Golden Globe", category: "Best Director", year: 1990, won: true, person: "Kevin Costner" },
-      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Kevin Costner" }
+      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Kevin Costner" , person_id: 1269 },
+      { festival: "Golden Globe", category: "Best Director", year: 1990, won: true, person: "Kevin Costner" , person_id: 1269 },
+      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Kevin Costner" , person_id: 1269 }
     ]
   },
   582: {
     title: "The Lives of Others",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "Ulrich Mühe" },
-      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Florian Henckel von Donnersmarck" }
+      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "Ulrich Mühe" , person_id: 8196 },
+      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Florian Henckel von Donnersmarck" , person_id: 8193 }
     ]
   },
   586: {
@@ -1356,7 +1359,7 @@ const AWARDS_DATABASE = {
     title: "Big Fish",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2004, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Tim Burton" }
+      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Tim Burton" , person_id: 510 }
     ]
   },
   590: {
@@ -1365,11 +1368,11 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2003, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2003, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2002, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2003, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2003, won: true , person: "Nicole Kidman", person_id: 2227 },
       { festival: "Berlin", category: "Golden Bear", year: 2003, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Stephen Daldry" },
-      { festival: "BAFTA", category: "Best Actress", year: 2003, won: true, person: "Nicole Kidman" },
-      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Stephen Daldry" }
+      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Stephen Daldry" , person_id: 468 },
+      { festival: "BAFTA", category: "Best Actress", year: 2003, won: true, person: "Nicole Kidman" , person_id: 2227 },
+      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Stephen Daldry" , person_id: 468 }
     ]
   },
   592: {
@@ -1380,8 +1383,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1974, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1974, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1974, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Gene Hackman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Francis Ford Coppola" }
+      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Gene Hackman" , person_id: 193 },
+      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   593: {
@@ -1394,12 +1397,12 @@ const AWARDS_DATABASE = {
   595: {
     title: "To Kill a Mockingbird",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1963, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1963, won: true , person: "Gregory Peck", person_id: 8487 },
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1963, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Gregory Peck" },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Robert Mulligan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Gregory Peck" , person_id: 8487 },
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Robert Mulligan" , person_id: 8482 }
     ]
   },
   597: {
@@ -1411,8 +1414,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1998, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1997, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1997, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1997, won: true, person: "James Cameron" },
-      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "James Cameron" }
+      { festival: "Golden Globe", category: "Best Director", year: 1997, won: true, person: "James Cameron" , person_id: 2710 },
+      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "James Cameron" , person_id: 2710 }
     ]
   },
   599: {
@@ -1422,7 +1425,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1950, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1950, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1950, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1950, won: true, person: "Billy Wilder" }
+      { festival: "Golden Globe", category: "Best Director", year: 1950, won: true, person: "Billy Wilder" , person_id: 3146 }
     ]
   },
   601: {
@@ -1432,8 +1435,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1983, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1982, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1982, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Steven Spielberg" },
-      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Steven Spielberg" , person_id: 488 },
+      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   606: {
@@ -1442,9 +1445,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1986, won: true },
       { festival: "Oscar", category: "Best Director", year: 1986, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 1985, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Sydney Pollack" },
-      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 1985, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Sydney Pollack" , person_id: 2226 },
+      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   607: {
@@ -1457,14 +1460,14 @@ const AWARDS_DATABASE = {
     title: "Munich",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2005, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   614: {
     title: "Wild Strawberries",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1958, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Victor Sjöström" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Victor Sjöström" , person_id: 8741 }
     ]
   },
   620: {
@@ -1484,9 +1487,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1988, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1988, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1988, won: true, person: "John Cleese" },
-      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Jamie Lee Curtis" },
-      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Charles Crichton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1988, won: true, person: "John Cleese" , person_id: 8945 },
+      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Jamie Lee Curtis" , person_id: 8944 },
+      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Charles Crichton" , person_id: 8929 }
     ]
   },
   624: {
@@ -1502,9 +1505,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1985, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1984, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1984, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1984, won: true, person: "Haing S. Ngor" },
-      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Roland Joffe" },
-      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Roland Joffe" }
+      { festival: "BAFTA", category: "Best Actor", year: 1984, won: true, person: "Haing S. Ngor" , person_id: 8975 },
+      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Roland Joffe" , person_id: 8965 },
+      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Roland Joffe" , person_id: 8965 }
     ]
   },
   629: {
@@ -1516,24 +1519,24 @@ const AWARDS_DATABASE = {
   632: {
     title: "Stalag 17",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1954, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 1954, won: true , person: "William Holden", person_id: 8252 }
     ]
   },
   634: {
     title: "Bridget Jones's Diary",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Renee Zellweger" }
+      { festival: "Oscar", category: "Best Actress", year: 2002, won: false , person: "Renée Zellweger", person_id: 9137 },
+      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Renee Zellweger" , person_id: 9137 }
     ]
   },
   637: {
     title: "Life Is Beautiful",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1999, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1999, won: true , person: "Roberto Benigni", person_id: 4818 },
       { festival: "Oscar", category: "Best Picture", year: 1999, won: false },
       { festival: "Cannes", category: "Grand Prix", year: 1998, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1998, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1998, won: true, person: "Roberto Benigni" }
+      { festival: "BAFTA", category: "Best Actor", year: 1998, won: true, person: "Roberto Benigni" , person_id: 4818 }
     ]
   },
   639: {
@@ -1541,13 +1544,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1989, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1989, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Rob Reiner" }
+      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Rob Reiner" , person_id: 3026 }
     ]
   },
   641: {
     title: "Requiem for a Dream",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2001, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2001, won: false , person: "Ellen Burstyn", person_id: 9560 }
     ]
   },
   642: {
@@ -1557,21 +1560,21 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1971, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1969, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1969, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1970, won: true, person: "Robert Redford" },
-      { festival: "BAFTA", category: "Best Actress", year: 1971, won: true, person: "Katharine Ross" }
+      { festival: "BAFTA", category: "Best Actor", year: 1970, won: true, person: "Robert Redford" , person_id: 4135 },
+      { festival: "BAFTA", category: "Best Actress", year: 1971, won: true, person: "Katharine Ross" , person_id: 9594 }
     ]
   },
   644: {
     title: "A.I. Artificial Intelligence",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   649: {
     title: "Belle de Jour",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1967, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Catherine Deneuve" }
+      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Catherine Deneuve" , person_id: 50 }
     ]
   },
   651: {
@@ -1582,20 +1585,20 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1971, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1970, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1970, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1970, won: false, person: "Elliott Gould" },
-      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Robert Altman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1970, won: false, person: "Elliott Gould" , person_id: 827 },
+      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Robert Altman" , person_id: 9789 }
     ]
   },
   654: {
     title: "On the Waterfront",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1955, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1955, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1955, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1955, won: true , person: "Elia Kazan", person_id: 2746 },
+      { festival: "Oscar", category: "Best Actor", year: 1955, won: true , person: "Marlon Brando", person_id: 3084 },
       { festival: "Golden Globe", category: "Best Drama", year: 1954, won: true },
       { festival: "Venice", category: "Golden Lion", year: 1954, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: true, person: "Marlon Brando" },
-      { festival: "Golden Globe", category: "Best Director", year: 1954, won: true, person: "Elia Kazan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: true, person: "Marlon Brando" , person_id: 3084 },
+      { festival: "Golden Globe", category: "Best Director", year: 1954, won: true, person: "Elia Kazan" , person_id: 2746 }
     ]
   },
   655: {
@@ -1603,7 +1606,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1984, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1984, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1984, won: true, person: "Wim Wenders" }
+      { festival: "BAFTA", category: "Best Director", year: 1984, won: true, person: "Wim Wenders" , person_id: 2303 }
     ]
   },
   659: {
@@ -1616,18 +1619,18 @@ const AWARDS_DATABASE = {
     title: "Ben-Hur",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1960, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1960, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1960, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1960, won: true , person: "William Wyler", person_id: 10001 },
+      { festival: "Oscar", category: "Best Actor", year: 1960, won: true , person: "Charlton Heston", person_id: 10017 },
       { festival: "BAFTA", category: "Best Film", year: 1959, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1959, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1959, won: true, person: "William Wyler" }
+      { festival: "Golden Globe", category: "Best Director", year: 1959, won: true, person: "William Wyler" , person_id: 10001 }
     ]
   },
   666: {
     title: "Central Station",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1998, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 1999, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1999, won: false , person: "Fernanda Montenegro", person_id: 10055 }
     ]
   },
   670: {
@@ -1640,7 +1643,7 @@ const AWARDS_DATABASE = {
   679: {
     title: "Aliens",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1986, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1986, won: false , person: "Sigourney Weaver", person_id: 10205 }
     ]
   },
   680: {
@@ -1651,10 +1654,10 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1994, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1994, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1994, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "John Travolta" },
-      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Quentin Tarantino" },
-      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Uma Thurman" },
-      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Quentin Tarantino" }
+      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "John Travolta" , person_id: 8891 },
+      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Quentin Tarantino" , person_id: 138 },
+      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Uma Thurman" , person_id: 139 },
+      { festival: "BAFTA", category: "Best Director", year: 1994, won: false, person: "Quentin Tarantino" , person_id: 138 }
     ]
   },
   687: {
@@ -1682,8 +1685,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1980, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1979, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Woody Allen" },
-      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Diane Keaton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Woody Allen" , person_id: 1243 },
+      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Diane Keaton" , person_id: 3092 }
     ]
   },
   702: {
@@ -1699,12 +1702,12 @@ const AWARDS_DATABASE = {
     title: "Annie Hall",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1978, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1978, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1978, won: true , person: "Woody Allen", person_id: 1243 },
       { festival: "BAFTA", category: "Best Film", year: 1978, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1977, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1977, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Woody Allen" },
-      { festival: "BAFTA", category: "Best Actress", year: 1978, won: true, person: "Diane Keaton" }
+      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Woody Allen" , person_id: 1243 },
+      { festival: "BAFTA", category: "Best Actress", year: 1978, won: true, person: "Diane Keaton" , person_id: 3092 }
     ]
   },
   705: {
@@ -1716,7 +1719,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1950, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1950, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1951, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "Joseph L. Mankiewicz" }
+      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "Joseph L. Mankiewicz" , person_id: 10601 }
     ]
   },
   711: {
@@ -1733,8 +1736,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1994, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1994, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1994, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1994, won: true, person: "Hugh Grant" },
-      { festival: "BAFTA", category: "Best Director", year: 1994, won: true, person: "Mike Newell" }
+      { festival: "BAFTA", category: "Best Actor", year: 1994, won: true, person: "Hugh Grant" , person_id: 3291 },
+      { festival: "BAFTA", category: "Best Director", year: 1994, won: true, person: "Mike Newell" , person_id: 10723 }
     ]
   },
   713: {
@@ -1746,9 +1749,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1993, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1993, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1993, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Jane Campion" },
-      { festival: "BAFTA", category: "Best Actress", year: 1994, won: true, person: "Holly Hunter" },
-      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "Jane Campion" }
+      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Jane Campion" , person_id: 10757 },
+      { festival: "BAFTA", category: "Best Actress", year: 1994, won: true, person: "Holly Hunter" , person_id: 18686 },
+      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "Jane Campion" , person_id: 10757 }
     ]
   },
   745: {
@@ -1758,8 +1761,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2000, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1999, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "M. Night Shyamalan" },
-      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "M. Night Shyamalan" }
+      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "M. Night Shyamalan" , person_id: 11614 },
+      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "M. Night Shyamalan" , person_id: 11614 }
     ]
   },
   746: {
@@ -1769,8 +1772,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1988, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1989, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1988, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1987, won: true, person: "Bernardo Bertolucci" },
-      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Bernardo Bertolucci" }
+      { festival: "Golden Globe", category: "Best Director", year: 1987, won: true, person: "Bernardo Bertolucci" , person_id: 4956 },
+      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Bernardo Bertolucci" , person_id: 4956 }
     ]
   },
   752: {
@@ -1800,9 +1803,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1990, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1990, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1990, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Robert De Niro" },
-      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 1990, won: true, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Robert De Niro" , person_id: 380 },
+      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 1990, won: true, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   771: {
@@ -1826,9 +1829,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1983, won: true },
       { festival: "Oscar", category: "Best Actor", year: 1983, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1983, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1982, won: true, person: "Ben Kingsley" },
-      { festival: "Golden Globe", category: "Best Director", year: 1982, won: true, person: "Richard Attenborough" },
-      { festival: "BAFTA", category: "Best Director", year: 1982, won: true, person: "Richard Attenborough" }
+      { festival: "BAFTA", category: "Best Actor", year: 1982, won: true, person: "Ben Kingsley" , person_id: 2282 },
+      { festival: "Golden Globe", category: "Best Director", year: 1982, won: true, person: "Richard Attenborough" , person_id: 4786 },
+      { festival: "BAFTA", category: "Best Director", year: 1982, won: true, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   786: {
@@ -1836,7 +1839,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2001, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2001, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Kate Hudson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Kate Hudson" , person_id: 11661 }
     ]
   },
   788: {
@@ -1853,14 +1856,14 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1987, won: true },
       { festival: "Berlin", category: "Silver Bear (Director)", year: 1987, won: true, person: "Oliver Stone" },
       { festival: "Golden Globe", category: "Best Drama", year: 1987, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1986, won: true, person: "Oliver Stone" },
-      { festival: "BAFTA", category: "Best Director", year: 1987, won: true, person: "Oliver Stone" }
+      { festival: "Golden Globe", category: "Best Director", year: 1986, won: true, person: "Oliver Stone" , person_id: 1152 },
+      { festival: "BAFTA", category: "Best Director", year: 1987, won: true, person: "Oliver Stone" , person_id: 1152 }
     ]
   },
   800: {
     title: "Los Olvidados",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1951, won: true, person: "Luis Bunuel" },
+      { festival: "Cannes", category: "Best Director", year: 1951, won: true, person: "Luis Bunuel" , person_id: 793 },
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false }
     ]
   },
@@ -1874,7 +1877,7 @@ const AWARDS_DATABASE = {
     title: "Lolita",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Stanley Kubrick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Stanley Kubrick" , person_id: 240 }
     ]
   },
   804: {
@@ -1884,7 +1887,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1953, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1953, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Eddie Albert" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Eddie Albert" , person_id: 8487 }
     ]
   },
   808: {
@@ -1923,17 +1926,17 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1992, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1991, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1991, won: true, person: "Oliver Stone" }
+      { festival: "Golden Globe", category: "Best Director", year: 1991, won: true, person: "Oliver Stone" , person_id: 1152 }
     ]
   },
   821: {
     title: "Judgment at Nuremberg",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1962, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1962, won: true , person: "Spencer Tracy", person_id: 12147 },
       { festival: "Golden Globe", category: "Best Drama", year: 1961, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1961, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Montgomery Clift" },
-      { festival: "Golden Globe", category: "Best Director", year: 1961, won: true, person: "Stanley Kramer" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Montgomery Clift" , person_id: 12151 },
+      { festival: "Golden Globe", category: "Best Director", year: 1961, won: true, person: "Stanley Kramer" , person_id: 4081 }
     ]
   },
   824: {
@@ -1942,21 +1945,21 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2002, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2002, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2001, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2002, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Baz Luhrmann" },
-      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Baz Luhrmann" }
+      { festival: "Oscar", category: "Best Actress", year: 2002, won: false , person: "Nicole Kidman", person_id: 2227 },
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "Baz Luhrmann" , person_id: 6201 },
+      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Baz Luhrmann" , person_id: 6201 }
     ]
   },
   826: {
     title: "The Bridge on the River Kwai",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1958, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1958, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1958, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1958, won: true , person: "David Lean", person_id: 12238 },
+      { festival: "Oscar", category: "Best Actor", year: 1958, won: true , person: "Alec Guinness", person_id: 12248 },
       { festival: "BAFTA", category: "Best Film", year: 1957, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1957, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: true, person: "Alec Guinness" },
-      { festival: "Golden Globe", category: "Best Director", year: 1957, won: true, person: "David Lean" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: true, person: "Alec Guinness" , person_id: 12248 },
+      { festival: "Golden Globe", category: "Best Director", year: 1957, won: true, person: "David Lean" , person_id: 12238 }
     ]
   },
   829: {
@@ -1967,9 +1970,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1974, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1974, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1974, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1974, won: true, person: "Jack Nicholson" },
-      { festival: "Golden Globe", category: "Best Director", year: 1974, won: true, person: "Roman Polanski" },
-      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Faye Dunaway" }
+      { festival: "BAFTA", category: "Best Actor", year: 1974, won: true, person: "Jack Nicholson" , person_id: 514 },
+      { festival: "Golden Globe", category: "Best Director", year: 1974, won: true, person: "Roman Polanski" , person_id: 3556 },
+      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Faye Dunaway" , person_id: 6450 }
     ]
   },
   833: {
@@ -1984,7 +1987,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1974, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1974, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1973, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "George Lucas" }
+      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "George Lucas" , person_id: 1 }
     ]
   },
   840: {
@@ -1992,7 +1995,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1978, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1977, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   844: {
@@ -2010,15 +2013,15 @@ const AWARDS_DATABASE = {
   857: {
     title: "Saving Private Ryan",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1999, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1999, won: true , person: "Steven Spielberg", person_id: 488 },
       { festival: "Oscar", category: "Best Picture", year: 1999, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1998, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1998, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1998, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Tom Hanks" },
-      { festival: "Golden Globe", category: "Best Director", year: 1998, won: true, person: "Steven Spielberg" },
-      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "Steven Spielberg" }
+      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Tom Hanks" , person_id: 31 },
+      { festival: "Golden Globe", category: "Best Director", year: 1998, won: true, person: "Steven Spielberg" , person_id: 488 },
+      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   858: {
@@ -2031,10 +2034,10 @@ const AWARDS_DATABASE = {
     title: "Dangerous Liaisons",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1988, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1988, won: false , person: "Glenn Close", person_id: 515 },
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Glenn Close" },
-      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Stephen Frears" }
+      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Glenn Close" , person_id: 515 },
+      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Stephen Frears" , person_id: 3224 }
     ]
   },
   862: {
@@ -2056,9 +2059,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2005, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2004, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Johnny Depp" },
-      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Marc Forster" },
-      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Marc Forster" }
+      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Johnny Depp" , person_id: 85 },
+      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Marc Forster" , person_id: 12995 },
+      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Marc Forster" , person_id: 12995 }
     ]
   },
   872: {
@@ -2071,22 +2074,22 @@ const AWARDS_DATABASE = {
     title: "The Color Purple",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1986, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1985, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1985, won: false , person: "Whoopi Goldberg", person_id: 2395 },
       { festival: "Golden Globe", category: "Best Drama", year: 1985, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1985, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   874: {
     title: "A Man for All Seasons",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1967, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1967, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1967, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1967, won: true , person: "Fred Zinnemann", person_id: 4065 },
+      { festival: "Oscar", category: "Best Actor", year: 1967, won: true , person: "Paul Scofield", person_id: 13324 },
       { festival: "BAFTA", category: "Best Film", year: 1967, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1966, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: true, person: "Paul Scofield" },
-      { festival: "Golden Globe", category: "Best Director", year: 1966, won: true, person: "Fred Zinnemann" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: true, person: "Paul Scofield" , person_id: 13324 },
+      { festival: "Golden Globe", category: "Best Director", year: 1966, won: true, person: "Fred Zinnemann" , person_id: 4065 }
     ]
   },
   881: {
@@ -2095,7 +2098,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1993, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1992, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1992, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Rob Reiner" }
+      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Rob Reiner" , person_id: 3026 }
     ]
   },
   884: {
@@ -2112,8 +2115,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1976, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1976, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1976, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "Alan J. Pakula" }
+      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "Alan J. Pakula" , person_id: 6349 }
     ]
   },
   897: {
@@ -2125,7 +2128,7 @@ const AWARDS_DATABASE = {
   898: {
     title: "Birdman of Alcatraz",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: true, person: "Burt Lancaster" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: true, person: "Burt Lancaster" , person_id: 13784 }
     ]
   },
   907: {
@@ -2135,9 +2138,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1965, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1966, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Ralph Richardson" },
-      { festival: "Golden Globe", category: "Best Director", year: 1965, won: true, person: "David Lean" },
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Julie Christie" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Ralph Richardson" , person_id: 12689 },
+      { festival: "Golden Globe", category: "Best Director", year: 1965, won: true, person: "David Lean" , person_id: 12238 },
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   922: {
@@ -2151,20 +2154,20 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1989, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1989, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Spike Lee" }
+      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Spike Lee" , person_id: 5281 }
     ]
   },
   931: {
     title: "Don't Look Now",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Julie Christie" }
+      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   934: {
     title: "Rififi",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1955, won: true, person: "Jules Dassin" },
+      { festival: "Cannes", category: "Best Director", year: 1955, won: true, person: "Jules Dassin" , person_id: 14227 },
       { festival: "Cannes", category: "Palme d'Or", year: 1955, won: false }
     ]
   },
@@ -2172,24 +2175,24 @@ const AWARDS_DATABASE = {
     title: "Dr. Strangelove",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Peter Sellers" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Peter Sellers" , person_id: 3088 }
     ]
   },
   947: {
     title: "Lawrence of Arabia",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1963, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1963, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1963, won: true , person: "David Lean", person_id: 12238 },
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Peter O'Toole" },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: true, person: "David Lean" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Peter O'Toole" , person_id: 11390 },
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: true, person: "David Lean" , person_id: 12238 }
     ]
   },
   967: {
     title: "Spartacus",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1960, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Stanley Kubrick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Stanley Kubrick" , person_id: 240 }
     ]
   },
   968: {
@@ -2199,7 +2202,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1975, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1975, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1975, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Sidney Lumet" }
+      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Sidney Lumet" , person_id: 39996 }
     ]
   },
   975: {
@@ -2211,19 +2214,19 @@ const AWARDS_DATABASE = {
   976: {
     title: "Sweet Smell of Success",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Tony Curtis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Tony Curtis" , person_id: 3150 }
     ]
   },
   982: {
     title: "The Manchurian Candidate",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "John Frankenheimer" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "John Frankenheimer" , person_id: 13776 }
     ]
   },
   986: {
     title: "Chimes at Midnight",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Orson Welles" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Orson Welles" , person_id: 40 }
     ]
   },
   987: {
@@ -2238,9 +2241,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1979, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1979, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1979, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1979, won: true, person: "Jack Lemmon" },
-      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "James Bridges" },
-      { festival: "BAFTA", category: "Best Actress", year: 1980, won: true, person: "Jane Fonda" }
+      { festival: "BAFTA", category: "Best Actor", year: 1979, won: true, person: "Jack Lemmon" , person_id: 3151 },
+      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "James Bridges" , person_id: 14838 },
+      { festival: "BAFTA", category: "Best Actress", year: 1980, won: true, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   990: {
@@ -2248,23 +2251,23 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1961, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1961, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: true, person: "Paul Newman" },
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Piper Laurie" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: true, person: "Paul Newman" , person_id: 3636 },
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Piper Laurie" , person_id: 6721 }
     ]
   },
   993: {
     title: "Sleuth",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1972, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   1018: {
     title: "Mulholland Drive",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2001, won: true, person: "David Lynch" },
+      { festival: "Cannes", category: "Best Director", year: 2001, won: true, person: "David Lynch" , person_id: 5602 },
       { festival: "Golden Globe", category: "Best Drama", year: 2002, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "David Lynch" }
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: false, person: "David Lynch" , person_id: 5602 }
     ]
   },
   1024: {
@@ -2284,12 +2287,12 @@ const AWARDS_DATABASE = {
     title: "The French Connection",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1972, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1972, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1972, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1972, won: true , person: "William Friedkin", person_id: 15175 },
+      { festival: "Oscar", category: "Best Actor", year: 1972, won: true , person: "Gene Hackman", person_id: 193 },
       { festival: "Golden Globe", category: "Best Drama", year: 1972, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1972, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1972, won: true, person: "Gene Hackman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1971, won: true, person: "William Friedkin" }
+      { festival: "BAFTA", category: "Best Actor", year: 1972, won: true, person: "Gene Hackman" , person_id: 193 },
+      { festival: "Golden Globe", category: "Best Director", year: 1971, won: true, person: "William Friedkin" , person_id: 15175 }
     ]
   },
   1052: {
@@ -2301,7 +2304,7 @@ const AWARDS_DATABASE = {
   1058: {
     title: "Breathless",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Jean Seberg" }
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Jean Seberg" , person_id: 3830 }
     ]
   },
   1075: {
@@ -2314,7 +2317,7 @@ const AWARDS_DATABASE = {
   1088: {
     title: "Whale Rider",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2004, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2004, won: false , person: "Keisha Castle-Hughes", person_id: 15293 }
     ]
   },
   1116: {
@@ -2334,13 +2337,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1962, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: true, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: true, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   1164: {
     title: "Babel",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2006, won: true, person: "Alejandro Gonzalez Inarritu" },
+      { festival: "Cannes", category: "Best Director", year: 2006, won: true, person: "Alejandro Gonzalez Inarritu" , person_id: 223 },
       { festival: "Golden Globe", category: "Best Drama", year: 2007, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2007, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2006, won: false },
@@ -2354,12 +2357,12 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2007, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2006, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2007, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2007, won: true , person: "Helen Mirren", person_id: 15735 },
       { festival: "Golden Globe", category: "Best Drama", year: 2007, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2006, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Stephen Frears" },
-      { festival: "BAFTA", category: "Best Actress", year: 2007, won: true, person: "Helen Mirren" },
-      { festival: "BAFTA", category: "Best Director", year: 2007, won: false, person: "Stephen Frears" }
+      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Stephen Frears" , person_id: 3224 },
+      { festival: "BAFTA", category: "Best Actress", year: 2007, won: true, person: "Helen Mirren" , person_id: 15735 },
+      { festival: "BAFTA", category: "Best Director", year: 2007, won: false, person: "Stephen Frears" , person_id: 3224 }
     ]
   },
   1213: {
@@ -2370,9 +2373,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1999, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2000, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Anthony Minghella" },
-      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Anthony Minghella" },
-      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Anthony Minghella" }
+      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Anthony Minghella" , person_id: 2239 },
+      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Anthony Minghella" , person_id: 2239 },
+      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Anthony Minghella" , person_id: 2239 }
     ]
   },
   1245: {
@@ -2383,9 +2386,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1993, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1993, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1993, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1993, won: true, person: "Anthony Hopkins" },
-      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "James Ivory" },
-      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "James Ivory" }
+      { festival: "BAFTA", category: "Best Actor", year: 1993, won: true, person: "Anthony Hopkins" , person_id: 4173 },
+      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "James Ivory" , person_id: 54441 },
+      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "James Ivory" , person_id: 54441 }
     ]
   },
   1249: {
@@ -2399,20 +2402,20 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2006, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2007, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   1255: {
     title: "The Last King of Scotland",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2007, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 2007, won: true , person: "Forest Whitaker", person_id: 2178 }
     ]
   },
   1259: {
     title: "Notes on a Scandal",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Judi Dench" }
+      { festival: "Oscar", category: "Best Actress", year: 2007, won: false , person: "Judi Dench", person_id: 5309 },
+      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Judi Dench" , person_id: 5309 }
     ]
   },
   1278: {
@@ -2451,21 +2454,21 @@ const AWARDS_DATABASE = {
   1365: {
     title: "Monster's Ball",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2002, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2002, won: true , person: "Halle Berry", person_id: 4587 },
       { festival: "Berlin", category: "Golden Bear", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2003, won: false, person: "Halle Berry" }
+      { festival: "BAFTA", category: "Best Actress", year: 2003, won: false, person: "Halle Berry" , person_id: 4587 }
     ]
   },
   1366: {
     title: "Rocky",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1977, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1977, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1977, won: true , person: "John G. Avildsen", person_id: 16513 },
       { festival: "Golden Globe", category: "Best Drama", year: 1977, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1976, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1977, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1977, won: false, person: "Sylvester Stallone" },
-      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "John G. Avildsen" }
+      { festival: "BAFTA", category: "Best Actor", year: 1977, won: false, person: "Sylvester Stallone" , person_id: 16483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "John G. Avildsen" , person_id: 16513 }
     ]
   },
   1379: {
@@ -2489,7 +2492,7 @@ const AWARDS_DATABASE = {
   1394: {
     title: "Nostalghia",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1983, won: true, person: "Andrei Tarkovsky" },
+      { festival: "Cannes", category: "Best Director", year: 1983, won: true, person: "Andrei Tarkovsky" , person_id: 8452 },
       { festival: "Cannes", category: "Palme d'Or", year: 1983, won: false }
     ]
   },
@@ -2502,9 +2505,9 @@ const AWARDS_DATABASE = {
   1407: {
     title: "La Vie en Rose",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2008, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2008, won: true , person: "Marion Cotillard", person_id: 8293 },
       { festival: "Berlin", category: "Golden Bear", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2008, won: true, person: "Marion Cotillard" }
+      { festival: "BAFTA", category: "Best Actress", year: 2008, won: true, person: "Marion Cotillard" , person_id: 8293 }
     ]
   },
   1412: {
@@ -2523,12 +2526,12 @@ const AWARDS_DATABASE = {
     title: "The Departed",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2007, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2007, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2007, won: true , person: "Martin Scorsese", person_id: 1032 },
       { festival: "BAFTA", category: "Best Film", year: 2007, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Leonardo DiCaprio" },
-      { festival: "Golden Globe", category: "Best Director", year: 2006, won: true, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 2007, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Leonardo DiCaprio" , person_id: 6193 },
+      { festival: "Golden Globe", category: "Best Director", year: 2006, won: true, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 2007, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   1429: {
@@ -2540,22 +2543,22 @@ const AWARDS_DATABASE = {
   1440: {
     title: "Little Children",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2007, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2007, won: false , person: "Kate Winslet", person_id: 204 },
       { festival: "Golden Globe", category: "Best Drama", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Kate Winslet" }
+      { festival: "BAFTA", category: "Best Actress", year: 2007, won: false, person: "Kate Winslet" , person_id: 204 }
     ]
   },
   1523: {
     title: "The Last King of Scotland",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2007, won: true, person: "Forest Whitaker" }
+      { festival: "BAFTA", category: "Best Actor", year: 2007, won: true, person: "Forest Whitaker" , person_id: 2178 }
     ]
   },
   1538: {
     title: "Collateral",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Michael Mann" }
+      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Michael Mann" , person_id: 638 }
     ]
   },
   1541: {
@@ -2564,8 +2567,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1992, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1992, won: false, person: "Geena Davis" },
-      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Ridley Scott" }
+      { festival: "BAFTA", category: "Best Actress", year: 1992, won: false, person: "Geena Davis" , person_id: 4038 },
+      { festival: "BAFTA", category: "Best Director", year: 1991, won: false, person: "Ridley Scott" , person_id: 578 }
     ]
   },
   1554: {
@@ -2586,10 +2589,10 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2003, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2003, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2003, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2003, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Rob Marshall" },
-      { festival: "BAFTA", category: "Best Actress", year: 2003, won: false, person: "Renee Zellweger" },
-      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Rob Marshall" }
+      { festival: "Oscar", category: "Best Actress", year: 2003, won: false , person: "Renée Zellweger", person_id: 9137 },
+      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Rob Marshall" , person_id: 17633 },
+      { festival: "BAFTA", category: "Best Actress", year: 2003, won: false, person: "Renee Zellweger" , person_id: 9137 },
+      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Rob Marshall" , person_id: 17633 }
     ]
   },
   1578: {
@@ -2599,8 +2602,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1980, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Robert De Niro" },
-      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Robert De Niro" , person_id: 380 },
+      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   1595: {
@@ -2643,7 +2646,7 @@ const AWARDS_DATABASE = {
     title: "Jules and Jim",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Jeanne Moreau" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Jeanne Moreau" , person_id: 14812 }
     ]
   },
   1629: {
@@ -2657,7 +2660,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1997, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1996, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1996, won: true, person: "Milos Forman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1996, won: true, person: "Milos Forman" , person_id: 3974 }
     ]
   },
   1632: {
@@ -2666,15 +2669,15 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1988, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Alan Parker" },
-      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Alan Parker" }
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Alan Parker" , person_id: 9168 },
+      { festival: "BAFTA", category: "Best Director", year: 1989, won: false, person: "Alan Parker" , person_id: 9168 }
     ]
   },
   1633: {
     title: "Fried Green Tomatoes",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Jessica Tandy" }
+      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Jessica Tandy" , person_id: 5698 }
     ]
   },
   1640: {
@@ -2682,22 +2685,22 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2006, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2006, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Paul Haggis" }
+      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Paul Haggis" , person_id: 455 }
     ]
   },
   1643: {
     title: "Last Tango in Paris",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Marlon Brando" },
-      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Bernardo Bertolucci" }
+      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Marlon Brando" , person_id: 3084 },
+      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Bernardo Bertolucci" , person_id: 4956 }
     ]
   },
   1653: {
     title: "The Motorcycle Diaries",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Gael García Bernal" }
+      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Gael García Bernal" , person_id: 258 }
     ]
   },
   1665: {
@@ -2709,15 +2712,15 @@ const AWARDS_DATABASE = {
   1669: {
     title: "The Hunt for Red October",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Sean Connery" }
+      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Sean Connery" , person_id: 738 }
     ]
   },
   1677: {
     title: "Ray",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2004, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2005, won: true, person: "Jamie Foxx" },
-      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Taylor Hackford" }
+      { festival: "BAFTA", category: "Best Actor", year: 2005, won: true, person: "Jamie Foxx" , person_id: 134 },
+      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Taylor Hackford" , person_id: 18596 }
     ]
   },
   1700: {
@@ -2729,10 +2732,10 @@ const AWARDS_DATABASE = {
   1712: {
     title: "Giant",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1957, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1957, won: true , person: "George Stevens", person_id: 18738 },
       { festival: "Golden Globe", category: "Best Drama", year: 1956, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1956, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "George Stevens" }
+      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "George Stevens" , person_id: 18738 }
     ]
   },
   1713: {
@@ -2750,8 +2753,7 @@ const AWARDS_DATABASE = {
   1715: {
     title: "The Cider House Rules",
     awards: [
-      { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
-      { festival: "Oscar", category: "Best Picture", year: 1999, won: false }
+      { festival: "Oscar", category: "Best Picture", year: 2000, won: false }
     ]
   },
   1719: {
@@ -2786,7 +2788,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1987, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1988, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1988, won: true, person: "Louis Malle" }
+      { festival: "BAFTA", category: "Best Director", year: 1988, won: true, person: "Louis Malle" , person_id: 15389 }
     ]
   },
   1791: {
@@ -2805,7 +2807,7 @@ const AWARDS_DATABASE = {
     title: "Elephant",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2003, won: true },
-      { festival: "Cannes", category: "Best Director", year: 2003, won: true, person: "Gus Van Sant" }
+      { festival: "Cannes", category: "Best Director", year: 2003, won: true, person: "Gus Van Sant" , person_id: 5216 }
     ]
   },
   1808: {
@@ -2819,14 +2821,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1952, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: true, person: "Marlon Brando" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: true, person: "Marlon Brando" , person_id: 3084 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2009, won: true, person: "Heath Ledger", person_id: 1810 }]
   },
   1816: {
     title: "A Chorus Line",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1985, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Richard Attenborough" }
+      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   1829: {
@@ -2867,15 +2870,16 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1967, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1967, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1967, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1968, won: true, person: "Spencer Tracy" },
-      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Stanley Kramer" }
+      { festival: "BAFTA", category: "Best Actor", year: 1968, won: true, person: "Spencer Tracy" , person_id: 12147 },
+      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Stanley Kramer" , person_id: 4081 }
     ]
   },
   1882: {
     title: "The Men",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1950, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1991, won: true, person: "Joe Pesci", person_id: 4517 }]
   },
   1883: {
     title: "Malcolm X",
@@ -2893,7 +2897,7 @@ const AWARDS_DATABASE = {
     title: "Children of a Lesser God",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1987, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1986, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 1986, won: true , person: "Marlee Matlin", person_id: 19797 },
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1986, won: false }
     ]
@@ -2901,18 +2905,18 @@ const AWARDS_DATABASE = {
   1893: {
     title: "Capote",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2006, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 2006, won: true , person: "Philip Seymour Hoffman", person_id: 1233 }
     ]
   },
   1900: {
     title: "Traffic",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2001, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2001, won: true , person: "Steven Soderbergh", person_id: 1884 },
       { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2001, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2001, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Steven Soderbergh" },
-      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Steven Soderbergh" }
+      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Steven Soderbergh" , person_id: 1884 },
+      { festival: "BAFTA", category: "Best Director", year: 2001, won: false, person: "Steven Soderbergh" , person_id: 1884 }
     ]
   },
   1901: {
@@ -2924,7 +2928,7 @@ const AWARDS_DATABASE = {
   1904: {
     title: "Memoirs of a Geisha",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Zhang Ziyi" }
+      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Zhang Ziyi" , person_id: 1339 }
     ]
   },
   1907: {
@@ -2937,7 +2941,7 @@ const AWARDS_DATABASE = {
     title: "Inherit the Wind",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Fredric March" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Fredric March" , person_id: 12147 }
     ]
   },
   1913: {
@@ -2950,8 +2954,8 @@ const AWARDS_DATABASE = {
   1919: {
     title: "Away from Her",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Julie Christie" }
+      { festival: "Oscar", category: "Best Actress", year: 2008, won: false , person: "Julie Christie", person_id: 1666 },
+      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   1923: {
@@ -2964,7 +2968,7 @@ const AWARDS_DATABASE = {
     title: "The Others",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 2001, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Nicole Kidman" }
+      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Nicole Kidman" , person_id: 2227 }
     ]
   },
   1934: {
@@ -2973,14 +2977,14 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1999, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1999, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1999, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 1999, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 1999, won: true , person: "Gwyneth Paltrow", person_id: 12052 },
       { festival: "BAFTA", category: "Best Film", year: 1998, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1998, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Joseph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "John Madden" },
-      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Gwyneth Paltrow" },
-      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "John Madden" }
+      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Joseph Fiennes" , person_id: 12763 },
+      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "John Madden" , person_id: 18844 },
+      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Gwyneth Paltrow" , person_id: 12052 },
+      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "John Madden" , person_id: 18844 }
     ]
   },
   1945: {
@@ -3016,9 +3020,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1980, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1980, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1980, won: true, person: "John Hurt" },
-      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "David Lynch" },
-      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "David Lynch" }
+      { festival: "BAFTA", category: "Best Actor", year: 1980, won: true, person: "John Hurt" , person_id: 5049 },
+      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "David Lynch" , person_id: 5602 },
+      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "David Lynch" , person_id: 5602 }
     ]
   },
   1958: {
@@ -3030,7 +3034,7 @@ const AWARDS_DATABASE = {
   1969: {
     title: "Brokeback Mountain",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2006, won: true }
+      { festival: "Oscar", category: "Best Director", year: 2006, won: true , person: "Ang Lee", person_id: 1614 }
     ]
   },
   1985: {
@@ -3039,10 +3043,10 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2006, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2006, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Ralph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Fernando Meirelles" },
-      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Rachel Weisz" },
-      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Fernando Meirelles" }
+      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "Fernando Meirelles" , person_id: 8557 },
+      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Rachel Weisz" , person_id: 3293 },
+      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "Fernando Meirelles" , person_id: 8557 }
     ]
   },
   1989: {
@@ -3067,10 +3071,10 @@ const AWARDS_DATABASE = {
     title: "In the Bedroom",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2001, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2002, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2002, won: false , person: "Sissy Spacek", person_id: 5606 },
       { festival: "Golden Globe", category: "Best Drama", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Tom Wilkinson" },
-      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Sissy Spacek" }
+      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Tom Wilkinson" , person_id: 207 },
+      { festival: "BAFTA", category: "Best Actress", year: 2002, won: false, person: "Sissy Spacek" , person_id: 5606 }
     ]
   },
   2001: {
@@ -3133,9 +3137,9 @@ const AWARDS_DATABASE = {
   2013: {
     title: "The Diving Bell and the Butterfly",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2007, won: true, person: "Julian Schnabel" },
+      { festival: "Cannes", category: "Best Director", year: 2007, won: true, person: "Julian Schnabel" , person_id: 7482 },
       { festival: "Cannes", category: "Palme d'Or", year: 2007, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2007, won: true, person: "Julian Schnabel" }
+      { festival: "Golden Globe", category: "Best Director", year: 2007, won: true, person: "Julian Schnabel" , person_id: 7482 }
     ]
   },
   2014: {
@@ -3159,7 +3163,7 @@ const AWARDS_DATABASE = {
   2034: {
     title: "Training Day",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2002, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 2002, won: true , person: "Denzel Washington", person_id: 5292 }
     ]
   },
   2039: {
@@ -3167,10 +3171,10 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
       { festival: "Berlin", category: "Silver Bear (Director)", year: 1988, won: true, person: "Norman Jewison" },
-      { festival: "Oscar", category: "Best Actress", year: 1987, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 1987, won: true , person: "Cher", person_id: 38225 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1987, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1987, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Cher" }
+      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Cher" , person_id: 38225 }
     ]
   },
   2075: {
@@ -3180,7 +3184,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1986, won: true },
       { festival: "Venice", category: "Golden Lion", year: 1985, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1985, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1985, won: true, person: "John Huston" }
+      { festival: "Golden Globe", category: "Best Director", year: 1985, won: true, person: "John Huston" , person_id: 6593 }
     ]
   },
   2103: {
@@ -3203,17 +3207,17 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1997, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1997, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1997, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Kevin Spacey" },
-      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Curtis Hanson" },
-      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Kim Basinger" },
-      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "Curtis Hanson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Kevin Spacey" , person_id: 1979 },
+      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Curtis Hanson" , person_id: 323 },
+      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Kim Basinger" , person_id: 326 },
+      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "Curtis Hanson" , person_id: 323 }
     ]
   },
   2148: {
     title: "The Cotton Club",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1984, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Francis Ford Coppola" }
+      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "Francis Ford Coppola" , person_id: 1776 }
     ]
   },
   2239: {
@@ -3225,14 +3229,14 @@ const AWARDS_DATABASE = {
   2251: {
     title: "Unfaithful",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2003, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2003, won: false , person: "Diane Lane", person_id: 2882 }
     ]
   },
   2252: {
     title: "Eastern Promises",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "Viggo Mortensen" }
+      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "Viggo Mortensen" , person_id: 110 }
     ]
   },
   2262: {
@@ -3246,7 +3250,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1990, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1990, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1989, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1989, won: false , person: "Jessica Lange", person_id: 4431 }
     ]
   },
   2280: {
@@ -3266,9 +3270,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2004, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2004, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Jude Law" },
-      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Anthony Minghella" },
-      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Anthony Minghella" }
+      { festival: "BAFTA", category: "Best Actor", year: 2004, won: false, person: "Jude Law" , person_id: 9642 },
+      { festival: "Golden Globe", category: "Best Director", year: 2003, won: false, person: "Anthony Minghella" , person_id: 2239 },
+      { festival: "BAFTA", category: "Best Director", year: 2004, won: false, person: "Anthony Minghella" , person_id: 2239 }
     ]
   },
   2302: {
@@ -3307,7 +3311,7 @@ const AWARDS_DATABASE = {
   2503: {
     title: "The Bourne Ultimatum",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Paul Greengrass" }
+      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Paul Greengrass" , person_id: 25598 }
     ]
   },
   2517: {
@@ -3322,9 +3326,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2005, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2005, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2004, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Leonardo DiCaprio" },
-      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 2005, won: false, person: "Leonardo DiCaprio" , person_id: 6193 },
+      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 2005, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   2574: {
@@ -3346,7 +3350,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1959, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1959, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1959, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "George Stevens" }
+      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "George Stevens" , person_id: 18738 }
     ]
   },
   2577: {
@@ -3363,8 +3367,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1990, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1990, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Tom Cruise" },
-      { festival: "Golden Globe", category: "Best Director", year: 1989, won: true, person: "Oliver Stone" }
+      { festival: "BAFTA", category: "Best Actor", year: 1990, won: false, person: "Tom Cruise" , person_id: 500 },
+      { festival: "Golden Globe", category: "Best Director", year: 1989, won: true, person: "Oliver Stone" , person_id: 1152 }
     ]
   },
   2619: {
@@ -3391,7 +3395,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1963, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Shirley MacLaine" }
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Shirley MacLaine" , person_id: 4090 }
     ]
   },
   2694: {
@@ -3426,8 +3430,8 @@ const AWARDS_DATABASE = {
     title: "About Schmidt",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Jack Nicholson" },
-      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Alexander Payne" }
+      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Jack Nicholson" , person_id: 514 },
+      { festival: "Golden Globe", category: "Best Director", year: 2002, won: false, person: "Alexander Payne" , person_id: 13235 }
     ]
   },
   2757: {
@@ -3435,14 +3439,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Berlin", category: "Silver Bear (Grand Jury)", year: 2003, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Nicolas Cage" }
+      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Nicolas Cage" , person_id: 2963 }
     ]
   },
   2759: {
     title: "The Adventures of Priscilla Queen of the Desert",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1994, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "Terence Stamp" }
+      { festival: "BAFTA", category: "Best Actor", year: 1994, won: false, person: "Terence Stamp" , person_id: 28641 }
     ]
   },
   2769: {
@@ -3451,7 +3455,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1952, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1951, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1951, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1951, won: false, person: "Vincente Minnelli" }
+      { festival: "Golden Globe", category: "Best Director", year: 1951, won: false, person: "Vincente Minnelli" , person_id: 13980 }
     ]
   },
   2786: {
@@ -3459,7 +3463,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1965, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Jean-Paul Belmondo" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Jean-Paul Belmondo" , person_id: 3829 }
     ]
   },
   2891: {
@@ -3473,7 +3477,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1957, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1956, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "Michael Anderson" }
+      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "Michael Anderson" , person_id: 20412 }
     ]
   },
   2898: {
@@ -3485,7 +3489,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1998, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1997, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1997, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "James L. Brooks" }
+      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "James L. Brooks" , person_id: 3388 }
     ]
   },
   2926: {
@@ -3498,13 +3502,13 @@ const AWARDS_DATABASE = {
     title: "The Cardinal",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Otto Preminger" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Otto Preminger" , person_id: 834 }
     ]
   },
   3011: {
     title: "Good Neighbor Sam",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Jack Lemmon" }
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Jack Lemmon" , person_id: 3151 }
     ]
   },
   3033: {
@@ -3517,13 +3521,13 @@ const AWARDS_DATABASE = {
     title: "Seance on a Wet Afternoon",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Kim Stanley" }
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Kim Stanley" , person_id: 31440 }
     ]
   },
   3109: {
     title: "The Quiet Man",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1953, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1953, won: true , person: "John Ford", person_id: 8500 },
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1952, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1952, won: false }
@@ -3534,7 +3538,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1953, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Van Heflin" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Van Heflin" , person_id: 18803 }
     ]
   },
   3111: {
@@ -3547,11 +3551,11 @@ const AWARDS_DATABASE = {
     title: "Midnight Cowboy",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1970, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1970, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1970, won: true , person: "John Schlesinger", person_id: 19304 },
       { festival: "BAFTA", category: "Best Film", year: 1970, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1969, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1969, won: true, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "John Schlesinger" }
+      { festival: "BAFTA", category: "Best Actor", year: 1969, won: true, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "John Schlesinger" , person_id: 19304 }
     ]
   },
   3121: {
@@ -3560,7 +3564,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1976, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1975, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1975, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Robert Altman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Robert Altman" , person_id: 9789 }
     ]
   },
   3131: {
@@ -3569,9 +3573,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2003, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2002, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2003, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2003, won: true, person: "Daniel Day-Lewis" },
-      { festival: "Golden Globe", category: "Best Director", year: 2002, won: true, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 2003, won: true, person: "Daniel Day-Lewis" , person_id: 11856 },
+      { festival: "Golden Globe", category: "Best Director", year: 2002, won: true, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 2003, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   3175: {
@@ -3581,7 +3585,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1975, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1975, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1975, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Stanley Kubrick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1975, won: false, person: "Stanley Kubrick" , person_id: 240 }
     ]
   },
   3291: {
@@ -3591,9 +3595,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2005, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2006, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "David Strathairn" },
-      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "George Clooney" },
-      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "George Clooney" }
+      { festival: "BAFTA", category: "Best Actor", year: 2006, won: false, person: "David Strathairn" , person_id: 11064 },
+      { festival: "Golden Globe", category: "Best Director", year: 2005, won: false, person: "George Clooney" , person_id: 1461 },
+      { festival: "BAFTA", category: "Best Director", year: 2006, won: false, person: "George Clooney" , person_id: 1461 }
     ]
   },
   3469: {
@@ -3619,10 +3623,10 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1989, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 1988, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1988, won: false , person: "Melanie Griffith", person_id: 29369 },
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Mike Nichols" },
-      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Melanie Griffith" }
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Mike Nichols" , person_id: 5342 },
+      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Melanie Griffith" , person_id: 29369 }
     ]
   },
   3526: {
@@ -3641,16 +3645,16 @@ const AWARDS_DATABASE = {
     title: "Fame",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "Alan Parker" }
+      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "Alan Parker" , person_id: 9168 }
     ]
   },
   3580: {
     title: "Changeling",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2008, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Angelina Jolie" },
-      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Clint Eastwood" }
+      { festival: "Oscar", category: "Best Actress", year: 2009, won: false , person: "Angelina Jolie", person_id: 11701 },
+      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Angelina Jolie" , person_id: 11701 },
+      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   3586: {
@@ -3662,13 +3666,13 @@ const AWARDS_DATABASE = {
   3635: {
     title: "Girl with a Pearl Earring",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Scarlett Johansson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Scarlett Johansson" , person_id: 1245 }
     ]
   },
   3683: {
     title: "Flags of Our Fathers",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 2006, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   3777: {
@@ -3706,21 +3710,21 @@ const AWARDS_DATABASE = {
     title: "Revolutionary Road",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2009, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Sam Mendes" },
-      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Kate Winslet" }
+      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Sam Mendes" , person_id: 39 },
+      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Kate Winslet" , person_id: 204 }
     ]
   },
   4176: {
     title: "Murder on the Orient Express",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1974, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Albert Finney" }
+      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Albert Finney" , person_id: 3926 }
     ]
   },
   4192: {
     title: "Death on the Nile",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Peter Ustinov" }
+      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Peter Ustinov" , person_id: 14501 }
     ]
   },
   4203: {
@@ -3738,7 +3742,7 @@ const AWARDS_DATABASE = {
   4311: {
     title: "The Sleeping Car Murders",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Simone Signoret" }
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Simone Signoret" , person_id: 12266 }
     ]
   },
   4339: {
@@ -3754,16 +3758,16 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2008, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2007, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "James McAvoy" },
-      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Joe Wright" },
-      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Keira Knightley" },
-      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Joe Wright" }
+      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "James McAvoy" , person_id: 5530 },
+      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Joe Wright" , person_id: 36588 },
+      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Keira Knightley" , person_id: 116 },
+      { festival: "BAFTA", category: "Best Director", year: 2008, won: false, person: "Joe Wright" , person_id: 36588 }
     ]
   },
   4348: {
     title: "Pride & Prejudice",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2006, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2006, won: false , person: "Keira Knightley", person_id: 116 }
     ]
   },
   4441: {
@@ -3781,7 +3785,7 @@ const AWARDS_DATABASE = {
   4454: {
     title: "Svengali",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Donald Wolfit" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Donald Wolfit" , person_id: 14372 }
     ]
   },
   4461: {
@@ -3801,15 +3805,15 @@ const AWARDS_DATABASE = {
     title: "Legends of the Fall",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1994, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Edward Zwick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Edward Zwick" , person_id: 9181 }
     ]
   },
   4480: {
     title: "Jean de Florette",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1988, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1987, won: false, person: "Gérard Depardieu" },
-      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "Claude Berri" }
+      { festival: "BAFTA", category: "Best Actor", year: 1987, won: false, person: "Gérard Depardieu" , person_id: 2565 },
+      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "Claude Berri" , person_id: 20718 }
     ]
   },
   4486: {
@@ -3833,21 +3837,21 @@ const AWARDS_DATABASE = {
   4517: {
     title: "Elizabeth: The Golden Age",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Cate Blanchett" }
+      { festival: "Oscar", category: "Best Actress", year: 2008, won: false , person: "Cate Blanchett", person_id: 112 },
+      { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Cate Blanchett" , person_id: 112 }
     ]
   },
   4518: {
     title: "Elizabeth",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1999, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1999, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1999, won: false , person: "Cate Blanchett", person_id: 112 },
       { festival: "Oscar", category: "Best Picture", year: 1998, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1998, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1998, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Shekhar Kapur" },
-      { festival: "BAFTA", category: "Best Actress", year: 1999, won: true, person: "Cate Blanchett" },
-      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "Shekhar Kapur" }
+      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Shekhar Kapur" , person_id: 37630 },
+      { festival: "BAFTA", category: "Best Actress", year: 1999, won: true, person: "Cate Blanchett" , person_id: 112 },
+      { festival: "BAFTA", category: "Best Director", year: 1998, won: false, person: "Shekhar Kapur" , person_id: 37630 }
     ]
   },
   4520: {
@@ -3893,7 +3897,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2007, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2008, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2007, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "George Clooney" }
+      { festival: "BAFTA", category: "Best Actor", year: 2008, won: false, person: "George Clooney" , person_id: 1461 }
     ]
   },
   4584: {
@@ -3907,9 +3911,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1995, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1995, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1995, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Ang Lee" },
-      { festival: "BAFTA", category: "Best Actress", year: 1996, won: true, person: "Emma Thompson" },
-      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Ang Lee" }
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Ang Lee" , person_id: 1614 },
+      { festival: "BAFTA", category: "Best Actress", year: 1996, won: true, person: "Emma Thompson" , person_id: 7056 },
+      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Ang Lee" , person_id: 1614 }
     ]
   },
   4588: {
@@ -3922,7 +3926,7 @@ const AWARDS_DATABASE = {
     title: "The Discreet Charm of the Bourgeoisie",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1974, won: true, person: "Stephane Audran" }
+      { festival: "BAFTA", category: "Best Actress", year: 1974, won: true, person: "Stephane Audran" , person_id: 19092 }
     ]
   },
   4723: {
@@ -3946,8 +3950,8 @@ const AWARDS_DATABASE = {
   4808: {
     title: "Charade",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Cary Grant" },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: true, person: "Audrey Hepburn" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Cary Grant" , person_id: 2638 },
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: true, person: "Audrey Hepburn" , person_id: 1932 }
     ]
   },
   4816: {
@@ -3967,7 +3971,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1973, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1973, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Fred Zinnemann" }
+      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Fred Zinnemann" , person_id: 4065 }
     ]
   },
   4912: {
@@ -3982,9 +3986,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2009, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2008, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Brad Pitt" },
-      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "David Fincher" },
-      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "David Fincher" }
+      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Brad Pitt" , person_id: 287 },
+      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "David Fincher" , person_id: 7467 },
+      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "David Fincher" , person_id: 7467 }
     ]
   },
   4935: {
@@ -4023,7 +4027,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2008, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2008, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Ridley Scott" }
+      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Ridley Scott" , person_id: 578 }
     ]
   },
   4985: {
@@ -4067,7 +4071,7 @@ const AWARDS_DATABASE = {
   5055: {
     title: "Ashes and Diamonds",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Zbigniew Cybulski" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Zbigniew Cybulski" , person_id: 40914 }
     ]
   },
   5121: {
@@ -4083,10 +4087,10 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1987, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1986, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1986, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1986, won: false, person: "Woody Allen" },
-      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Woody Allen" },
-      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Mia Farrow" },
-      { festival: "BAFTA", category: "Best Director", year: 1986, won: true, person: "Woody Allen" }
+      { festival: "BAFTA", category: "Best Actor", year: 1986, won: false, person: "Woody Allen" , person_id: 1243 },
+      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Woody Allen" , person_id: 1243 },
+      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Mia Farrow" , person_id: 12021 },
+      { festival: "BAFTA", category: "Best Director", year: 1986, won: true, person: "Woody Allen" , person_id: 1243 }
     ]
   },
   5165: {
@@ -4103,7 +4107,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1969, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1969, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1969, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1970, won: true, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 1970, won: true, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   5183: {
@@ -4118,21 +4122,23 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2001, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2002, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2001, won: true, person: "Robert Altman" },
-      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Robert Altman" }
+      { festival: "Golden Globe", category: "Best Director", year: 2001, won: true, person: "Robert Altman" , person_id: 9789 },
+      { festival: "BAFTA", category: "Best Director", year: 2002, won: false, person: "Robert Altman" , person_id: 9789 }
     ]
   },
   5334: {
     title: "Billy Budd",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Robert Ryan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Robert Ryan" , person_id: 8253 }
     ]
   },
   5335: {
     title: "Teorema",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1968, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1961, won: true, person: "Peter Ustinov", person_id: 14501 },
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1965, won: true, person: "Peter Ustinov", person_id: 14501 }]
   },
   5488: {
     title: "I'm a Cyborg But That's OK",
@@ -4145,7 +4151,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1994, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1993, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Andrew Davis" }
+      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Andrew Davis" , person_id: 12989 }
     ]
   },
   5506: {
@@ -4164,7 +4170,7 @@ const AWARDS_DATABASE = {
     title: "Hiroshima Mon Amour",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1959, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Emmanuelle Riva" }
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Emmanuelle Riva" , person_id: 267962 }
     ]
   },
   5602: {
@@ -4189,12 +4195,12 @@ const AWARDS_DATABASE = {
     title: "Tom Jones",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1964, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1964, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1964, won: true , person: "Tony Richardson", person_id: 32765 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1963, won: true },
       { festival: "Venice", category: "Golden Lion", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Albert Finney" },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Tony Richardson" },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Edith Evans" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Albert Finney" , person_id: 3926 },
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Tony Richardson" , person_id: 32765 },
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Edith Evans" , person_id: 45465 }
     ]
   },
   5801: {
@@ -4233,7 +4239,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1966, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1966, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Robert Wise" }
+      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Robert Wise" , person_id: 1744 }
     ]
   },
   5955: {
@@ -4245,7 +4251,7 @@ const AWARDS_DATABASE = {
   5961: {
     title: "Fanny and Alexander",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Ingmar Bergman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Ingmar Bergman" , person_id: 5100320 }
     ]
   },
   5967: {
@@ -4258,20 +4264,20 @@ const AWARDS_DATABASE = {
     title: "Romeo and Juliet",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1968, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Franco Zeffirelli" }
+      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Franco Zeffirelli" , person_id: 24657 }
     ]
   },
   6440: {
     title: "The Shipping News",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Kevin Spacey" }
+      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Kevin Spacey" , person_id: 1979 }
     ]
   },
   6521: {
     title: "The Contender",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2001, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2001, won: false , person: "Joan Allen", person_id: 11148 }
     ]
   },
   6619: {
@@ -4279,7 +4285,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1971, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1971, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Dirk Bogarde" }
+      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Dirk Bogarde" , person_id: 21605 }
     ]
   },
   6620: {
@@ -4297,7 +4303,7 @@ const AWARDS_DATABASE = {
   6964: {
     title: "Something's Gotta Give",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2004, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2004, won: false , person: "Diane Keaton", person_id: 3092 }
     ]
   },
   6977: {
@@ -4322,7 +4328,7 @@ const AWARDS_DATABASE = {
     title: "Juno",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2007, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2008, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2008, won: false , person: "Elliot Page", person_id: 27578 },
       { festival: "BAFTA", category: "Best Actress", year: 2008, won: false, person: "Ellen Page" }
     ]
   },
@@ -4335,13 +4341,13 @@ const AWARDS_DATABASE = {
   7345: {
     title: "There Will Be Blood",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2008, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2008, won: true , person: "Daniel Day-Lewis", person_id: 11856 },
       { festival: "Berlin", category: "Silver Bear (Director)", year: 2008, won: true, person: "Paul Thomas Anderson" },
       { festival: "BAFTA", category: "Best Film", year: 2008, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2007, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2008, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2008, won: true, person: "Daniel Day-Lewis" }
+      { festival: "BAFTA", category: "Best Actor", year: 2008, won: true, person: "Daniel Day-Lewis" , person_id: 11856 }
     ]
   },
   7347: {
@@ -4370,9 +4376,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1996, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1996, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1996, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1996, won: true, person: "Geoffrey Rush" },
-      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Scott Hicks" },
-      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Scott Hicks" }
+      { festival: "BAFTA", category: "Best Actor", year: 1996, won: true, person: "Geoffrey Rush" , person_id: 118 },
+      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Scott Hicks" , person_id: 33433 },
+      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Scott Hicks" , person_id: 33433 }
     ]
   },
   7872: {
@@ -4384,7 +4390,7 @@ const AWARDS_DATABASE = {
   7980: {
     title: "The Lovely Bones",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Saoirse Ronan" }
+      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Saoirse Ronan" , person_id: 36592 }
     ]
   },
   7984: {
@@ -4394,7 +4400,7 @@ const AWARDS_DATABASE = {
       { festival: "Berlin", category: "Golden Bear", year: 1994, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1993, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1993, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Daniel Day-Lewis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Daniel Day-Lewis" , person_id: 11856 }
     ]
   },
   8012: {
@@ -4407,7 +4413,7 @@ const AWARDS_DATABASE = {
   8051: {
     title: "Punch-Drunk Love",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2002, won: true, person: "Paul Thomas Anderson" }
+      { festival: "Cannes", category: "Best Director", year: 2002, won: true, person: "Paul Thomas Anderson" , person_id: 4762 }
     ]
   },
   8053: {
@@ -4421,11 +4427,11 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2009, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2008, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2009, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2009, won: true , person: "Kate Winslet", person_id: 204 },
       { festival: "Golden Globe", category: "Best Drama", year: 2009, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Stephen Daldry" },
-      { festival: "BAFTA", category: "Best Actress", year: 2009, won: true, person: "Kate Winslet" },
-      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Stephen Daldry" }
+      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Stephen Daldry" , person_id: 468 },
+      { festival: "BAFTA", category: "Best Actress", year: 2009, won: true, person: "Kate Winslet" , person_id: 204 },
+      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Stephen Daldry" , person_id: 468 }
     ]
   },
   8072: {
@@ -4451,13 +4457,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1963, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Joseph L. Mankiewicz" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Joseph L. Mankiewicz" , person_id: 10601 }
     ]
   },
   8198: {
     title: "The Quiet American",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Michael Caine" }
+      { festival: "BAFTA", category: "Best Actor", year: 2003, won: false, person: "Michael Caine" , person_id: 3895 }
     ]
   },
   8224: {
@@ -4475,14 +4481,14 @@ const AWARDS_DATABASE = {
   8272: {
     title: "The Savages",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2008, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2008, won: false , person: "Laura Linney", person_id: 350 }
     ]
   },
   8276: {
     title: "I've Loved You So Long",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Kristin Scott Thomas" }
+      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Kristin Scott Thomas" , person_id: 5470 }
     ]
   },
   8293: {
@@ -4495,9 +4501,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1992, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1992, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1992, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "James Ivory" },
-      { festival: "BAFTA", category: "Best Actress", year: 1993, won: true, person: "Emma Thompson" },
-      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "James Ivory" }
+      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "James Ivory" , person_id: 54441 },
+      { festival: "BAFTA", category: "Best Actress", year: 1993, won: true, person: "Emma Thompson" , person_id: 7056 },
+      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "James Ivory" , person_id: 54441 }
     ]
   },
   8324: {
@@ -4515,7 +4521,7 @@ const AWARDS_DATABASE = {
   8358: {
     title: "Cast Away",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Tom Hanks" }
+      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Tom Hanks" , person_id: 31 }
     ]
   },
   8422: {
@@ -4523,7 +4529,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1961, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Annie Girardot" }
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Annie Girardot" , person_id: 6014 }
     ]
   },
   8425: {
@@ -4549,8 +4555,8 @@ const AWARDS_DATABASE = {
   8545: {
     title: "Little Voice",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Michael Caine" },
-      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Jane Horrocks" }
+      { festival: "BAFTA", category: "Best Actor", year: 1998, won: false, person: "Michael Caine" , person_id: 3895 },
+      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Jane Horrocks" , person_id: 34902 }
     ]
   },
   8587: {
@@ -4569,7 +4575,7 @@ const AWARDS_DATABASE = {
   8618: {
     title: "The History Boys",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Richard Griffiths" }
+      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Richard Griffiths" , person_id: 10983 }
     ]
   },
   8619: {
@@ -4595,7 +4601,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1997, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1996, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Alan Parker" }
+      { festival: "Golden Globe", category: "Best Director", year: 1996, won: false, person: "Alan Parker" , person_id: 9168 }
     ]
   },
   8832: {
@@ -4700,7 +4706,7 @@ const AWARDS_DATABASE = {
   8905: {
     title: "Three Monkeys",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2008, won: true, person: "Nuri Bilge Ceylan" },
+      { festival: "Cannes", category: "Best Director", year: 2008, won: true, person: "Nuri Bilge Ceylan" , person_id: 56214 },
       { festival: "Cannes", category: "Palme d'Or", year: 2008, won: false }
     ]
   },
@@ -4721,12 +4727,11 @@ const AWARDS_DATABASE = {
     title: "The Insider",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2000, won: false },
-      { festival: "Oscar", category: "Best Picture", year: 1999, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2000, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Russell Crowe" },
-      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Russell Crowe" },
-      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Michael Mann" }
+      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Russell Crowe" , person_id: 934 },
+      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Russell Crowe" , person_id: 934 },
+      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Michael Mann" , person_id: 638 }
     ]
   },
   9013: {
@@ -4739,7 +4744,7 @@ const AWARDS_DATABASE = {
     title: "Serpico",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Al Pacino" }
+      { festival: "BAFTA", category: "Best Actor", year: 1974, won: false, person: "Al Pacino" , person_id: 1158 }
     ]
   },
   9045: {
@@ -4762,7 +4767,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1971, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1970, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1970, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1970, won: true, person: "Arthur Hiller" }
+      { festival: "Golden Globe", category: "Best Director", year: 1970, won: true, person: "Arthur Hiller" , person_id: 133259 }
     ]
   },
   9065: {
@@ -4788,7 +4793,7 @@ const AWARDS_DATABASE = {
     title: "The American President",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1995, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Rob Reiner" }
+      { festival: "Golden Globe", category: "Best Director", year: 1995, won: false, person: "Rob Reiner" , person_id: 3026 }
     ]
   },
   9089: {
@@ -4819,7 +4824,7 @@ const AWARDS_DATABASE = {
     title: "The Sting",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1974, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1974, won: true }
+      { festival: "Oscar", category: "Best Director", year: 1974, won: true , person: "George Roy Hill", person_id: 9577 }
     ]
   },
   9281: {
@@ -4829,9 +4834,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1985, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1985, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1985, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "Harrison Ford" },
-      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Peter Weir" },
-      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Kelly McGillis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "Harrison Ford" , person_id: 3 },
+      { festival: "Golden Globe", category: "Best Director", year: 1985, won: false, person: "Peter Weir" , person_id: 2690 },
+      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Kelly McGillis" , person_id: 11084 }
     ]
   },
   9289: {
@@ -4844,7 +4849,7 @@ const AWARDS_DATABASE = {
   9300: {
     title: "Orlando",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Tilda Swinton" }
+      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Tilda Swinton" , person_id: 3063 }
     ]
   },
   9342: {
@@ -4856,7 +4861,7 @@ const AWARDS_DATABASE = {
   9343: {
     title: "Fitzcarraldo",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1982, won: true, person: "Werner Herzog" },
+      { festival: "Cannes", category: "Best Director", year: 1982, won: true, person: "Werner Herzog" , person_id: 6818 },
       { festival: "Cannes", category: "Palme d'Or", year: 1982, won: false }
     ]
   },
@@ -4869,7 +4874,7 @@ const AWARDS_DATABASE = {
   9361: {
     title: "The Last of the Mohicans",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Daniel Day-Lewis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Daniel Day-Lewis" , person_id: 11856 }
     ]
   },
   9390: {
@@ -4894,8 +4899,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1997, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1997, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1997, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1997, won: true, person: "Robert Carlyle" },
-      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "Peter Cattaneo" }
+      { festival: "BAFTA", category: "Best Actor", year: 1997, won: true, person: "Robert Carlyle" , person_id: 18023 },
+      { festival: "BAFTA", category: "Best Director", year: 1997, won: false, person: "Peter Cattaneo" , person_id: 57630 }
     ]
   },
   9428: {
@@ -4910,7 +4915,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1982, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1982, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Hugh Hudson" }
+      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Hugh Hudson" , person_id: 58220 }
     ]
   },
   9452: {
@@ -4923,7 +4928,7 @@ const AWARDS_DATABASE = {
   9453: {
     title: "Cal",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Helen Mirren" }
+      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Helen Mirren" , person_id: 15735 }
     ]
   },
   9459: {
@@ -4977,7 +4982,7 @@ const AWARDS_DATABASE = {
   9550: {
     title: "House of Flying Daggers",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Zhang Ziyi" }
+      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Zhang Ziyi" , person_id: 1339 }
     ]
   },
   9552: {
@@ -4987,7 +4992,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1974, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1973, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1973, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1973, won: true, person: "William Friedkin" }
+      { festival: "Golden Globe", category: "Best Director", year: 1973, won: true, person: "William Friedkin" , person_id: 15175 }
     ]
   },
   9563: {
@@ -5003,9 +5008,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1983, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1983, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1982, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Sydney Pollack" },
-      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Jessica Lange" }
+      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Sydney Pollack" , person_id: 2226 },
+      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Jessica Lange" , person_id: 4431 }
     ]
   },
   9587: {
@@ -5040,14 +5045,14 @@ const AWARDS_DATABASE = {
     title: "Glory",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1989, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Edward Zwick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1989, won: false, person: "Edward Zwick" , person_id: 9181 }
     ]
   },
   9671: {
     title: "Crocodile Dundee",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1986, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1986, won: false, person: "Paul Hogan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1986, won: false, person: "Paul Hogan" , person_id: 57147 }
     ]
   },
   9675: {
@@ -5055,7 +5060,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2005, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2004, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Alexander Payne" }
+      { festival: "Golden Globe", category: "Best Director", year: 2004, won: false, person: "Alexander Payne" , person_id: 13235 }
     ]
   },
   9676: {
@@ -5079,8 +5084,8 @@ const AWARDS_DATABASE = {
   9701: {
     title: "North Country",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2006, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Charlize Theron" }
+      { festival: "Oscar", category: "Best Actress", year: 2006, won: false , person: "Charlize Theron", person_id: 6885 },
+      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Charlize Theron" , person_id: 6885 }
     ]
   },
   9716: {
@@ -5117,7 +5122,7 @@ const AWARDS_DATABASE = {
   9829: {
     title: "United 93",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2007, won: true, person: "Paul Greengrass" }
+      { festival: "BAFTA", category: "Best Director", year: 2007, won: true, person: "Paul Greengrass" , person_id: 25598 }
     ]
   },
   9941: {
@@ -5144,15 +5149,15 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1986, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1986, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1986, won: true, person: "Bob Hoskins" },
-      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Cathy Tyson" },
-      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "Neil Jordan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1986, won: true, person: "Bob Hoskins" , person_id: 382 },
+      { festival: "BAFTA", category: "Best Actress", year: 1987, won: false, person: "Cathy Tyson" , person_id: 61840 },
+      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "Neil Jordan" , person_id: 17016 }
     ]
   },
   10013: {
     title: "Peggy Sue Got Married",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1986, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1986, won: false , person: "Kathleen Turner", person_id: 3391 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1986, won: false }
     ]
   },
@@ -5180,7 +5185,7 @@ const AWARDS_DATABASE = {
   10130: {
     title: "Gorillas in the Mist",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1988, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1988, won: false , person: "Sigourney Weaver", person_id: 10205 },
       { festival: "Golden Globe", category: "Best Drama", year: 1988, won: false }
     ]
   },
@@ -5189,7 +5194,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2009, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Sean Penn" }
+      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Sean Penn" , person_id: 2228 }
     ]
   },
   10149: {
@@ -5206,7 +5211,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1990, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1989, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1989, won: true, person: "Daniel Day-Lewis" }
+      { festival: "BAFTA", category: "Best Actor", year: 1989, won: true, person: "Daniel Day-Lewis" , person_id: 11856 }
     ]
   },
   10170: {
@@ -5220,19 +5225,19 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1954, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1954, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "José Ferrer" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "José Ferrer" , person_id: 12515 }
     ]
   },
   10183: {
     title: "Frozen River",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2009, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2009, won: false , person: "Melissa Leo", person_id: 6832 }
     ]
   },
   10191: {
     title: "Milk",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2009, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 2009, won: true , person: "Sean Penn", person_id: 2228 }
     ]
   },
   10193: {
@@ -5251,7 +5256,8 @@ const AWARDS_DATABASE = {
     title: "The Sweet Hereafter",
     awards: [
       { festival: "Cannes", category: "Grand Prix", year: 1997, won: true }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1994, won: true, person: "Tommy Lee Jones", person_id: 2176 }]
   },
   10220: {
     title: "Rounders",
@@ -5269,7 +5275,7 @@ const AWARDS_DATABASE = {
     title: "The Way We Were",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Barbra Streisand" }
+      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Barbra Streisand" , person_id: 10400 }
     ]
   },
   10238: {
@@ -5284,7 +5290,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1962, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Joan Crawford" }
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Joan Crawford" , person_id: 31550 }
     ]
   },
   10243: {
@@ -5298,7 +5304,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1984, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1983, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: true, person: "Barbra Streisand" }
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: true, person: "Barbra Streisand" , person_id: 10400 }
     ]
   },
   10293: {
@@ -5328,14 +5334,14 @@ const AWARDS_DATABASE = {
   10314: {
     title: "Crazy Heart",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2010, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 2010, won: true , person: "Jeff Bridges", person_id: 1229 }
     ]
   },
   10316: {
     title: "The Ides of March",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2012, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "George Clooney" }
+      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "George Clooney" , person_id: 1461 }
     ]
   },
   10319: {
@@ -5350,9 +5356,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1980, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1979, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Peter Sellers" },
-      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Hal Ashby" },
-      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Shirley MacLaine" }
+      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Peter Sellers" , person_id: 12446 },
+      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Hal Ashby" , person_id: 4964 },
+      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Shirley MacLaine" , person_id: 4090 }
     ]
   },
   10328: {
@@ -5368,7 +5374,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1991, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1992, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Barbra Streisand" }
+      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Barbra Streisand" , person_id: 10400 }
     ]
   },
   10337: {
@@ -5379,7 +5385,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1991, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1991, won: true },
       { festival: "Berlin", category: "Golden Bear", year: 1992, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Barry Levinson" }
+      { festival: "Golden Globe", category: "Best Director", year: 1991, won: false, person: "Barry Levinson" , person_id: 8246 }
     ]
   },
   10338: {
@@ -5403,7 +5409,7 @@ const AWARDS_DATABASE = {
   10397: {
     title: "Angela's Ashes",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Emily Watson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Emily Watson" , person_id: 1639 }
     ]
   },
   10400: {
@@ -5412,20 +5418,20 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2000, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 2000, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Norman Jewison" }
+      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Norman Jewison" , person_id: 13563 }
     ]
   },
   10403: {
     title: "The Player",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1992, won: true, person: "Robert Altman" },
+      { festival: "Cannes", category: "Best Director", year: 1992, won: true, person: "Robert Altman" , person_id: 9789 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1993, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1992, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1992, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1992, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Tim Robbins" },
-      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Robert Altman" },
-      { festival: "BAFTA", category: "Best Director", year: 1992, won: true, person: "Robert Altman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Tim Robbins" , person_id: 504 },
+      { festival: "Golden Globe", category: "Best Director", year: 1992, won: false, person: "Robert Altman" , person_id: 9789 },
+      { festival: "BAFTA", category: "Best Director", year: 1992, won: true, person: "Robert Altman" , person_id: 9789 }
     ]
   },
   10404: {
@@ -5439,7 +5445,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1992, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1993, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Tara Morice" }
+      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Tara Morice" , person_id: 65010 }
     ]
   },
   10410: {
@@ -5457,14 +5463,14 @@ const AWARDS_DATABASE = {
   10435: {
     title: "Chaplin",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1992, won: true, person: "Robert Downey Jr." }
+      { festival: "BAFTA", category: "Best Actor", year: 1992, won: true, person: "Robert Downey Jr." , person_id: 3223 }
     ]
   },
   10436: {
     title: "The Age of Innocence",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1993, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Martin Scorsese" }
+      { festival: "Golden Globe", category: "Best Director", year: 1993, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   10443: {
@@ -5479,9 +5485,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1994, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1993, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1993, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Anthony Hopkins" },
-      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Debra Winger" },
-      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "Richard Attenborough" }
+      { festival: "BAFTA", category: "Best Actor", year: 1993, won: false, person: "Anthony Hopkins" , person_id: 4173 },
+      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Debra Winger" , person_id: 26513 },
+      { festival: "BAFTA", category: "Best Director", year: 1993, won: false, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   10452: {
@@ -5500,20 +5506,20 @@ const AWARDS_DATABASE = {
   10511: {
     title: "In America",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2004, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2004, won: false , person: "Samantha Morton", person_id: 2206 }
     ]
   },
   10518: {
     title: "Marathon Man",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "John Schlesinger" }
+      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "John Schlesinger" , person_id: 19304 }
     ]
   },
   10557: {
     title: "East Is East",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Om Puri" }
+      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Om Puri" , person_id: 11851 }
     ]
   },
   10575: {
@@ -5528,9 +5534,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1965, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1964, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Anthony Quinn" },
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Anthony Quinn" , person_id: 5401 },
       { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "Michael Cacoyannis" },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Lila Kedrova" }
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Lila Kedrova" , person_id: 45523 }
     ]
   },
   10609: {
@@ -5549,11 +5555,11 @@ const AWARDS_DATABASE = {
     title: "In the Heat of the Night",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1968, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1968, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1968, won: true , person: "Rod Steiger", person_id: 522 },
       { festival: "BAFTA", category: "Best Film", year: 1967, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1967, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: true, person: "Rod Steiger" },
-      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Norman Jewison" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: true, person: "Rod Steiger" , person_id: 16897 },
+      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Norman Jewison" , person_id: 13563 }
     ]
   },
   10644: {
@@ -5575,7 +5581,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1973, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1972, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1972, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "John Boorman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "John Boorman" , person_id: 19665 }
     ]
   },
   10671: {
@@ -5600,20 +5606,20 @@ const AWARDS_DATABASE = {
   10705: {
     title: "Henry V",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Kenneth Branagh" },
-      { festival: "BAFTA", category: "Best Director", year: 1989, won: true, person: "Kenneth Branagh" }
+      { festival: "BAFTA", category: "Best Actor", year: 1989, won: false, person: "Kenneth Branagh" , person_id: 11181 },
+      { festival: "BAFTA", category: "Best Director", year: 1989, won: true, person: "Kenneth Branagh" , person_id: 11181 }
     ]
   },
   10711: {
     title: "French Connection II",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Gene Hackman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Gene Hackman" , person_id: 193 }
     ]
   },
   10712: {
     title: "Far from Heaven",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2003, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2003, won: false , person: "Julianne Moore", person_id: 1231 },
       { festival: "Venice", category: "Golden Lion", year: 2002, won: false }
     ]
   },
@@ -5621,7 +5627,7 @@ const AWARDS_DATABASE = {
     title: "The Client",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1995, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1995, won: true, person: "Susan Sarandon" }
+      { festival: "BAFTA", category: "Best Actress", year: 1995, won: true, person: "Susan Sarandon" , person_id: 4038 }
     ]
   },
   10740: {
@@ -5653,22 +5659,22 @@ const AWARDS_DATABASE = {
   10773: {
     title: "Mrs. Henderson Presents",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2006, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Judi Dench" }
+      { festival: "Oscar", category: "Best Actress", year: 2006, won: false , person: "Judi Dench", person_id: 5309 },
+      { festival: "BAFTA", category: "Best Actress", year: 2006, won: false, person: "Judi Dench" , person_id: 5309 }
     ]
   },
   10774: {
     title: "Network",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1977, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1977, won: true , person: "William Holden", person_id: 8252 },
       { festival: "Oscar", category: "Best Picture", year: 1977, won: false },
       { festival: "Oscar", category: "Best Actress", year: 1976, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1977, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1976, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1976, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1977, won: true, person: "Peter Finch" },
-      { festival: "Golden Globe", category: "Best Director", year: 1976, won: true, person: "Sidney Lumet" },
-      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Faye Dunaway" }
+      { festival: "BAFTA", category: "Best Actor", year: 1977, won: true, person: "Peter Finch" , person_id: 8252 },
+      { festival: "Golden Globe", category: "Best Director", year: 1976, won: true, person: "Sidney Lumet" , person_id: 39996 },
+      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Faye Dunaway" , person_id: 6450 }
     ]
   },
   10776: {
@@ -5680,21 +5686,21 @@ const AWARDS_DATABASE = {
   10778: {
     title: "The Man Who Wasn't There",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2001, won: true, person: "Joel Coen" },
+      { festival: "Cannes", category: "Best Director", year: 2001, won: true, person: "Joel Coen" , person_id: 1223 },
       { festival: "Golden Globe", category: "Best Drama", year: 2002, won: false }
     ]
   },
   10784: {
     title: "Cabaret",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1973, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1973, won: true , person: "Bob Fosse", person_id: 66777 },
       { festival: "Oscar", category: "Best Picture", year: 1973, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1973, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1973, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1972, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1972, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Bob Fosse" },
-      { festival: "BAFTA", category: "Best Actress", year: 1973, won: true, person: "Liza Minnelli" }
+      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Bob Fosse" , person_id: 66777 },
+      { festival: "BAFTA", category: "Best Actress", year: 1973, won: true, person: "Liza Minnelli" , person_id: 66776 }
     ]
   },
   10831: {
@@ -5712,7 +5718,7 @@ const AWARDS_DATABASE = {
   10843: {
     title: "After Hours",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1986, won: true, person: "Martin Scorsese" },
+      { festival: "Cannes", category: "Best Director", year: 1986, won: true, person: "Martin Scorsese" , person_id: 1032 },
       { festival: "Cannes", category: "Palme d'Or", year: 1986, won: false }
     ]
   },
@@ -5722,7 +5728,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1986, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1985, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1985, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Mia Farrow" }
+      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Mia Farrow" , person_id: 12021 }
     ]
   },
   10860: {
@@ -5734,22 +5740,22 @@ const AWARDS_DATABASE = {
   10868: {
     title: "The Accused",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1988, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Jodie Foster" }
+      { festival: "Oscar", category: "Best Actress", year: 1988, won: true , person: "Jodie Foster", person_id: 1038 },
+      { festival: "BAFTA", category: "Best Actress", year: 1990, won: false, person: "Jodie Foster" , person_id: 1038 }
     ]
   },
   10875: {
     title: "The Fabulous Baker Boys",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1990, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Michelle Pfeiffer" }
+      { festival: "Oscar", category: "Best Actress", year: 1989, won: false , person: "Michelle Pfeiffer", person_id: 1160 },
+      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Michelle Pfeiffer" , person_id: 1160 }
     ]
   },
   10876: {
     title: "Quills",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Geoffrey Rush" }
+      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Geoffrey Rush" , person_id: 118 }
     ]
   },
   10889: {
@@ -5769,7 +5775,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1961, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1961, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "J. Lee Thompson" }
+      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "J. Lee Thompson" , person_id: 18669 }
     ]
   },
   10935: {
@@ -5800,11 +5806,11 @@ const AWARDS_DATABASE = {
     title: "Fatal Attraction",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1987, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1987, won: false , person: "Glenn Close", person_id: 515 },
       { festival: "Golden Globe", category: "Best Drama", year: 1987, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1987, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1988, won: false, person: "Michael Douglas" },
-      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "Adrian Lyne" }
+      { festival: "BAFTA", category: "Best Actor", year: 1988, won: false, person: "Michael Douglas" , person_id: 3392 },
+      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "Adrian Lyne" , person_id: 7270 }
     ]
   },
   11000: {
@@ -5816,7 +5822,7 @@ const AWARDS_DATABASE = {
   11004: {
     title: "Wonder Boys",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Michael Douglas" }
+      { festival: "BAFTA", category: "Best Actor", year: 2001, won: false, person: "Michael Douglas" , person_id: 3392 }
     ]
   },
   11005: {
@@ -5837,8 +5843,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1996, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1995, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Massimo Troisi" },
-      { festival: "BAFTA", category: "Best Director", year: 1995, won: true, person: "Michael Radford" }
+      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Massimo Troisi" , person_id: 67792 },
+      { festival: "BAFTA", category: "Best Director", year: 1995, won: true, person: "Michael Radford" , person_id: 28898 }
     ]
   },
   11030: {
@@ -5850,7 +5856,7 @@ const AWARDS_DATABASE = {
   11040: {
     title: "Little Big Man",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Dustin Hoffman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Dustin Hoffman" , person_id: 4483 }
     ]
   },
   11042: {
@@ -5873,8 +5879,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1984, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1984, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1983, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "James L. Brooks" },
-      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Shirley MacLaine" }
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "James L. Brooks" , person_id: 3388 },
+      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Shirley MacLaine" , person_id: 4090 }
     ]
   },
   11051: {
@@ -5901,20 +5907,20 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 2004, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2005, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2005, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2005, won: true, person: "Imelda Staunton" },
-      { festival: "BAFTA", category: "Best Director", year: 2005, won: true, person: "Mike Leigh" }
+      { festival: "Oscar", category: "Best Actress", year: 2005, won: false , person: "Imelda Staunton", person_id: 11356 },
+      { festival: "BAFTA", category: "Best Actress", year: 2005, won: true, person: "Imelda Staunton" , person_id: 11356 },
+      { festival: "BAFTA", category: "Best Director", year: 2005, won: true, person: "Mike Leigh" , person_id: 65452 }
     ]
   },
   11113: {
     title: "My Fair Lady",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1965, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1965, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1965, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1965, won: true , person: "George Cukor", person_id: 14674 },
+      { festival: "Oscar", category: "Best Actor", year: 1965, won: true , person: "Rex Harrison", person_id: 35321 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1964, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Rex Harrison" },
-      { festival: "Golden Globe", category: "Best Director", year: 1964, won: true, person: "George Cukor" }
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Rex Harrison" , person_id: 35321 },
+      { festival: "Golden Globe", category: "Best Director", year: 1964, won: true, person: "George Cukor" , person_id: 14674 }
     ]
   },
   11121: {
@@ -5922,8 +5928,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Roman Polanski" }
-    ]
+      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Roman Polanski" , person_id: 3556 }
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 1976, won: true, person: "Brad Dourif", person_id: 1370 }]
   },
   11123: {
     title: "Earthquake",
@@ -5934,7 +5941,7 @@ const AWARDS_DATABASE = {
   11156: {
     title: "Coco Before Chanel",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Audrey Tautou" }
+      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Audrey Tautou" , person_id: 2405 }
     ]
   },
   11159: {
@@ -5946,9 +5953,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1996, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1996, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1996, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Timothy Spall" },
-      { festival: "BAFTA", category: "Best Actress", year: 1997, won: true, person: "Brenda Blethyn" },
-      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Mike Leigh" }
+      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Timothy Spall" , person_id: 9191 },
+      { festival: "BAFTA", category: "Best Actress", year: 1997, won: true, person: "Brenda Blethyn" , person_id: 4154 },
+      { festival: "BAFTA", category: "Best Director", year: 1996, won: false, person: "Mike Leigh" , person_id: 65452 }
     ]
   },
   11163: {
@@ -5980,24 +5987,27 @@ const AWARDS_DATABASE = {
     title: "Patton",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1971, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1971, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1971, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1971, won: true , person: "Franklin J. Schaffner", person_id: 13265 },
+      { festival: "Oscar", category: "Best Actor", year: 1971, won: true , person: "George C. Scott", person_id: 862 },
       { festival: "Golden Globe", category: "Best Drama", year: 1970, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1970, won: false, person: "George C. Scott" },
-      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Franklin J. Schaffner" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1970, won: false, person: "George C. Scott" , person_id: 862 },
+      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Franklin J. Schaffner" , person_id: 13265 }
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2003, won: true, person: "Christopher Walken", person_id: 4690 }]
   },
   11206: {
     title: "Wait Until Dark",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1967, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2004, won: true, person: "Bill Nighy", person_id: 2440 }]
   },
   11209: {
     title: "The Alamo",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1960, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2005, won: true, person: "Clive Owen", person_id: 2296 }]
   },
   11215: {
     title: "Baby Boom",
@@ -6010,9 +6020,10 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Grand Prix", year: 1989, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1990, won: true, person: "Philippe Noiret" },
-      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Giuseppe Tornatore" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1990, won: true, person: "Philippe Noiret" , person_id: 24366 },
+      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Giuseppe Tornatore" , person_id: 65314 }
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2007, won: true, person: "Alan Arkin", person_id: 1903 }]
   },
   11222: {
     title: "The American Friend",
@@ -6024,13 +6035,15 @@ const AWARDS_DATABASE = {
     title: "Cinderella",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1950, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2010, won: true, person: "Christoph Waltz", person_id: 27319 },
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2013, won: true, person: "Christoph Waltz", person_id: 27319 }]
   },
   11235: {
     title: "Local Hero",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1983, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "Bill Forsyth" }
+      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "Bill Forsyth" , person_id: 68687 }
     ]
   },
   11257: {
@@ -6041,16 +6054,16 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1986, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1986, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "James Ivory" },
-      { festival: "BAFTA", category: "Best Actress", year: 1987, won: true, person: "Maggie Smith" },
-      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "James Ivory" }
+      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "James Ivory" , person_id: 54441 },
+      { festival: "BAFTA", category: "Best Actress", year: 1987, won: true, person: "Maggie Smith" , person_id: 10978 },
+      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "James Ivory" , person_id: 54441 }
     ]
   },
   11293: {
     title: "Paper Moon",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1973, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Peter Bogdanovich" }
+      { festival: "Golden Globe", category: "Best Director", year: 1973, won: false, person: "Peter Bogdanovich" , person_id: 39012 }
     ]
   },
   11296: {
@@ -6070,9 +6083,9 @@ const AWARDS_DATABASE = {
     title: "The Madness of King George",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1995, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1995, won: true, person: "Nigel Hawthorne" },
-      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Helen Mirren" },
-      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Nicholas Hytner" }
+      { festival: "BAFTA", category: "Best Actor", year: 1995, won: true, person: "Nigel Hawthorne" , person_id: 15788 },
+      { festival: "BAFTA", category: "Best Actress", year: 1996, won: false, person: "Helen Mirren" , person_id: 15735 },
+      { festival: "BAFTA", category: "Best Director", year: 1995, won: false, person: "Nicholas Hytner" , person_id: 55476 }
     ]
   },
   11326: {
@@ -6090,8 +6103,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1978, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1978, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1978, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Brad Davis" },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Alan Parker" }
+      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Brad Davis" , person_id: 69010 },
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Alan Parker" , person_id: 9168 }
     ]
   },
   11356: {
@@ -6113,8 +6126,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1992, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1992, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1992, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Stephen Rea" },
-      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "Neil Jordan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1992, won: false, person: "Stephen Rea" , person_id: 9029 },
+      { festival: "BAFTA", category: "Best Director", year: 1992, won: false, person: "Neil Jordan" , person_id: 17016 }
     ]
   },
   11399: {
@@ -6135,8 +6148,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1958, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1958, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1958, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: true, person: "Sidney Poitier" },
-      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Stanley Kramer" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: true, person: "Sidney Poitier" , person_id: 3150 },
+      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Stanley Kramer" , person_id: 4081 }
     ]
   },
   11416: {
@@ -6147,19 +6160,19 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1986, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1986, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1986, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Roland Joffe" },
-      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "Roland Joffe" }
+      { festival: "Golden Globe", category: "Best Director", year: 1986, won: false, person: "Roland Joffe" , person_id: 8965 },
+      { festival: "BAFTA", category: "Best Director", year: 1986, won: false, person: "Roland Joffe" , person_id: 8965 }
     ]
   },
   11426: {
     title: "From Here to Eternity",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1954, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1954, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1954, won: true , person: "Fred Zinnemann", person_id: 4065 },
       { festival: "Oscar", category: "Best Actress", year: 1953, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1954, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1953, won: true, person: "Fred Zinnemann" }
+      { festival: "Golden Globe", category: "Best Director", year: 1953, won: true, person: "Fred Zinnemann" , person_id: 4065 }
     ]
   },
   11439: {
@@ -6182,7 +6195,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1994, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1994, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1995, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Robert Redford" }
+      { festival: "Golden Globe", category: "Best Director", year: 1994, won: false, person: "Robert Redford" , person_id: 4135 }
     ]
   },
   11489: {
@@ -6209,9 +6222,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2009, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2008, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Frank Langella" },
-      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Ron Howard" },
-      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Ron Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Frank Langella" , person_id: 8924 },
+      { festival: "Golden Globe", category: "Best Director", year: 2008, won: false, person: "Ron Howard" , person_id: 6159 },
+      { festival: "BAFTA", category: "Best Director", year: 2009, won: false, person: "Ron Howard" , person_id: 6159 }
     ]
   },
   11524: {
@@ -6238,7 +6251,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1990, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Woody Allen" }
+      { festival: "BAFTA", category: "Best Director", year: 1990, won: false, person: "Woody Allen" , person_id: 1243 }
     ]
   },
   11566: {
@@ -6262,7 +6275,7 @@ const AWARDS_DATABASE = {
   11590: {
     title: "Slap Shot",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1977, won: false, person: "Paul Newman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1977, won: false, person: "Paul Newman" , person_id: 3636 }
     ]
   },
   11593: {
@@ -6314,24 +6327,24 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1992, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1991, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1991, won: true, person: "Alan Parker" }
+      { festival: "BAFTA", category: "Best Director", year: 1991, won: true, person: "Alan Parker" , person_id: 9168 }
     ]
   },
   11673: {
     title: "Cyrano de Bergerac",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1951, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1951, won: true , person: "José Ferrer", person_id: 12515 },
       { festival: "Cannes", category: "Palme d'Or", year: 1990, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Gérard Depardieu" }
+      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Gérard Depardieu" , person_id: 16927 }
     ]
   },
   11694: {
     title: "Cat Ballou",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1966, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1966, won: true , person: "Lee Marvin", person_id: 18391 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: true, person: "Lee Marvin" },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Jane Fonda" }
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: true, person: "Lee Marvin" , person_id: 18391 },
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   11699: {
@@ -6344,7 +6357,7 @@ const AWARDS_DATABASE = {
     title: "Smiles of a Summer Night",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1956, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Gunnar Björnstrand" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Gunnar Björnstrand" , person_id: 6649 }
     ]
   },
   11703: {
@@ -6355,7 +6368,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1985, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1985, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1985, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1985, won: true, person: "William Hurt" }
+      { festival: "BAFTA", category: "Best Actor", year: 1985, won: true, person: "William Hurt" , person_id: 227 }
     ]
   },
   11705: {
@@ -6369,14 +6382,14 @@ const AWARDS_DATABASE = {
     title: "War and Peace",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1956, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "King Vidor" }
+      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "King Vidor" , person_id: 29962 }
     ]
   },
   11709: {
     title: "Camille Claudel",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1990, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1989, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1989, won: false , person: "Isabelle Adjani", person_id: 6553 }
     ]
   },
   11710: {
@@ -6395,25 +6408,25 @@ const AWARDS_DATABASE = {
   11772: {
     title: "The Haunting",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Robert Wise" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Robert Wise" , person_id: 1744 }
     ]
   },
   11778: {
     title: "The Deer Hunter",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1979, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1979, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1979, won: true , person: "Michael Cimino", person_id: 12114 },
       { festival: "BAFTA", category: "Best Film", year: 1979, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1978, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Robert De Niro" },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: true, person: "Michael Cimino" },
-      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Meryl Streep" }
+      { festival: "BAFTA", category: "Best Actor", year: 1979, won: false, person: "Robert De Niro" , person_id: 380 },
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: true, person: "Michael Cimino" , person_id: 12114 },
+      { festival: "BAFTA", category: "Best Actress", year: 1980, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   11799: {
     title: "Viva Maria!",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: true, person: "Jeanne Moreau" }
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: true, person: "Jeanne Moreau" , person_id: 14812 }
     ]
   },
   11816: {
@@ -6425,25 +6438,25 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1981, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1982, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Henry Fonda" },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Mark Rydell" },
-      { festival: "BAFTA", category: "Best Actress", year: 1983, won: true, person: "Katharine Hepburn" },
-      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Mark Rydell" }
+      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Henry Fonda" , person_id: 4958 },
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Mark Rydell" , person_id: 21958 },
+      { festival: "BAFTA", category: "Best Actress", year: 1983, won: true, person: "Katharine Hepburn" , person_id: 6598 },
+      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Mark Rydell" , person_id: 21958 }
     ]
   },
   11831: {
     title: "Amistad",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1997, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   11832: {
     title: "Babette's Feast",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1988, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Stephane Audran" },
-      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Gabriel Axel" }
+      { festival: "BAFTA", category: "Best Actress", year: 1989, won: false, person: "Stephane Audran" , person_id: 19092 },
+      { festival: "BAFTA", category: "Best Director", year: 1988, won: false, person: "Gabriel Axel" , person_id: 70636 }
     ]
   },
   11843: {
@@ -6479,10 +6492,10 @@ const AWARDS_DATABASE = {
   11889: {
     title: "Iris",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2002, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2002, won: false , person: "Judi Dench", person_id: 5309 },
       { festival: "Berlin", category: "Golden Bear", year: 2002, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Jim Broadbent" },
-      { festival: "BAFTA", category: "Best Actress", year: 2002, won: true, person: "Judi Dench" }
+      { festival: "BAFTA", category: "Best Actor", year: 2002, won: false, person: "Jim Broadbent" , person_id: 388 },
+      { festival: "BAFTA", category: "Best Actress", year: 2002, won: true, person: "Judi Dench" , person_id: 5309 }
     ]
   },
   11893: {
@@ -6501,7 +6514,7 @@ const AWARDS_DATABASE = {
   11913: {
     title: "Taking Off",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Lynn Carlin" }
+      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Lynn Carlin" , person_id: 11140 }
     ]
   },
   11934: {
@@ -6527,7 +6540,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1980, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1980, won: true, person: "Akira Kurosawa" }
+      { festival: "BAFTA", category: "Best Director", year: 1980, won: true, person: "Akira Kurosawa" , person_id: 5026 }
     ]
   },
   11971: {
@@ -6559,14 +6572,14 @@ const AWARDS_DATABASE = {
     title: "Kramer vs. Kramer",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1980, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1980, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1980, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1980, won: true , person: "Robert Benton", person_id: 6729 },
+      { festival: "Oscar", category: "Best Actor", year: 1980, won: true , person: "Dustin Hoffman", person_id: 4483 },
       { festival: "Golden Globe", category: "Best Drama", year: 1980, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Robert Benton" },
-      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Meryl Streep" },
-      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "Robert Benton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Robert Benton" , person_id: 6729 },
+      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Meryl Streep" , person_id: 5064 },
+      { festival: "BAFTA", category: "Best Director", year: 1980, won: false, person: "Robert Benton" , person_id: 6729 }
     ]
   },
   12140: {
@@ -6586,27 +6599,28 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1991, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1990, won: true }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1998, won: true, person: "Robin Williams", person_id: 2157 }]
   },
   12162: {
     title: "The Hurt Locker",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2010, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2010, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2010, won: true , person: "Kathryn Bigelow", person_id: 14392 },
       { festival: "BAFTA", category: "Best Film", year: 2010, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2010, won: false },
       { festival: "Venice", category: "Golden Lion", year: 2008, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Jeremy Renner" },
-      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Kathryn Bigelow" },
-      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Kathryn Bigelow" },
-      { festival: "BAFTA", category: "Best Director", year: 2010, won: true, person: "Kathryn Bigelow" }
+      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Jeremy Renner" , person_id: 17604 },
+      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Kathryn Bigelow" , person_id: 14392 },
+      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Kathryn Bigelow" , person_id: 14392 },
+      { festival: "BAFTA", category: "Best Director", year: 2010, won: true, person: "Kathryn Bigelow" , person_id: 14392 }
     ]
   },
   12163: {
     title: "The Wrestler",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 2008, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2009, won: true, person: "Mickey Rourke" }
+      { festival: "BAFTA", category: "Best Actor", year: 2009, won: true, person: "Mickey Rourke" , person_id: 2295 }
     ]
   },
   12165: {
@@ -6651,12 +6665,12 @@ const AWARDS_DATABASE = {
     title: "Slumdog Millionaire",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2009, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2009, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2009, won: true , person: "Danny Boyle", person_id: 2034 },
       { festival: "BAFTA", category: "Best Film", year: 2009, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2009, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Dev Patel" },
-      { festival: "Golden Globe", category: "Best Director", year: 2008, won: true, person: "Danny Boyle" },
-      { festival: "BAFTA", category: "Best Director", year: 2009, won: true, person: "Danny Boyle" }
+      { festival: "BAFTA", category: "Best Actor", year: 2009, won: false, person: "Dev Patel" , person_id: 76788 },
+      { festival: "Golden Globe", category: "Best Director", year: 2008, won: true, person: "Danny Boyle" , person_id: 2034 },
+      { festival: "BAFTA", category: "Best Director", year: 2009, won: true, person: "Danny Boyle" , person_id: 2034 }
     ]
   },
   12427: {
@@ -6688,7 +6702,7 @@ const AWARDS_DATABASE = {
     title: "Accattone",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1961, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Franco Citti" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Franco Citti" , person_id: 44860 }
     ]
   },
   12502: {
@@ -6696,8 +6710,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1983, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1983, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Mike Nichols" },
-      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Meryl Streep" }
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Mike Nichols" , person_id: 5342 },
+      { festival: "BAFTA", category: "Best Actress", year: 1985, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   12506: {
@@ -6705,8 +6719,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1987, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1987, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "Richard Attenborough" },
-      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "Richard Attenborough" }
+      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "Richard Attenborough" , person_id: 4786 },
+      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   12518: {
@@ -6725,7 +6739,7 @@ const AWARDS_DATABASE = {
     title: "Avanti!",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1972, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Billy Wilder" }
+      { festival: "Golden Globe", category: "Best Director", year: 1972, won: false, person: "Billy Wilder" , person_id: 3146 }
     ]
   },
   12535: {
@@ -6740,9 +6754,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1981, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1981, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Jeremy Irons" },
-      { festival: "BAFTA", category: "Best Actress", year: 1982, won: true, person: "Meryl Streep" },
-      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Karel Reisz" }
+      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Jeremy Irons" , person_id: 16940 },
+      { festival: "BAFTA", category: "Best Actress", year: 1982, won: true, person: "Meryl Streep" , person_id: 5064 },
+      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Karel Reisz" , person_id: 72709 }
     ]
   },
   12545: {
@@ -6774,7 +6788,7 @@ const AWARDS_DATABASE = {
   12584: {
     title: "The Shootist",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Lauren Bacall" }
+      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Lauren Bacall" , person_id: 7570 }
     ]
   },
   12614: {
@@ -6794,10 +6808,10 @@ const AWARDS_DATABASE = {
     title: "Broadcast News",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1988, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1987, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1987, won: false , person: "Holly Hunter", person_id: 18686 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1987, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1987, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "James L. Brooks" }
+      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "James L. Brooks" , person_id: 3388 }
     ]
   },
   12627: {
@@ -6870,7 +6884,7 @@ const AWARDS_DATABASE = {
     title: "The Spy Who Came in from the Cold",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1966, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: true, person: "Richard Burton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: true, person: "Richard Burton" , person_id: 5341 }
     ]
   },
   13614: {
@@ -6890,7 +6904,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1962, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Morton DaCosta" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Morton DaCosta" , person_id: 87521 }
     ]
   },
   13681: {
@@ -6918,7 +6932,7 @@ const AWARDS_DATABASE = {
   13771: {
     title: "Venus",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Peter O'Toole" }
+      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Peter O'Toole" , person_id: 11390 }
     ]
   },
   13776: {
@@ -6942,7 +6956,7 @@ const AWARDS_DATABASE = {
   13885: {
     title: "Sweeney Todd",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Tim Burton" }
+      { festival: "Golden Globe", category: "Best Director", year: 2007, won: false, person: "Tim Burton" , person_id: 510 }
     ]
   },
   13898: {
@@ -6975,7 +6989,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1970, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1969, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1969, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Gene Kelly" }
+      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Gene Kelly" , person_id: 13294 }
     ]
   },
   14047: {
@@ -6999,14 +7013,14 @@ const AWARDS_DATABASE = {
   14295: {
     title: "You Can Count On Me",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2001, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2001, won: false , person: "Laura Linney", person_id: 350 }
     ]
   },
   14359: {
     title: "Doubt",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 2009, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "BAFTA", category: "Best Actress", year: 2009, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   14372: {
@@ -7069,8 +7083,8 @@ const AWARDS_DATABASE = {
     title: "The Night of the Iguana",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1964, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "John Huston" },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Ava Gardner" }
+      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "John Huston" , person_id: 6593 },
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Ava Gardner" , person_id: 25787 }
     ]
   },
   14729: {
@@ -7082,20 +7096,20 @@ const AWARDS_DATABASE = {
   14741: {
     title: "The Goodbye Girl",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1978, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1978, won: true , person: "Richard Dreyfuss", person_id: 3037 },
       { festival: "Oscar", category: "Best Picture", year: 1978, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1978, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1977, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1977, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1978, won: true, person: "Richard Dreyfuss" },
-      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Marsha Mason" }
+      { festival: "BAFTA", category: "Best Actor", year: 1978, won: true, person: "Richard Dreyfuss" , person_id: 3037 },
+      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Marsha Mason" , person_id: 19131 }
     ]
   },
   14755: {
     title: "The Deadly Affair",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "James Mason" },
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Simone Signoret" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "James Mason" , person_id: 2091 },
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Simone Signoret" , person_id: 12266 }
     ]
   },
   14794: {
@@ -7107,7 +7121,7 @@ const AWARDS_DATABASE = {
   14807: {
     title: "The Long Good Friday",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Bob Hoskins" }
+      { festival: "BAFTA", category: "Best Actor", year: 1981, won: false, person: "Bob Hoskins" , person_id: 382 }
     ]
   },
   14811: {
@@ -7116,7 +7130,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1972, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1972, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1971, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Norman Jewison" }
+      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Norman Jewison" , person_id: 13563 }
     ]
   },
   14832: {
@@ -7141,7 +7155,7 @@ const AWARDS_DATABASE = {
   14976: {
     title: "Rachel Getting Married",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2009, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2009, won: false , person: "Anne Hathaway", person_id: 1813 },
       { festival: "Venice", category: "Golden Lion", year: 2008, won: false }
     ]
   },
@@ -7156,17 +7170,17 @@ const AWARDS_DATABASE = {
     title: "The Sound of Music",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1966, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1966, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1966, won: true , person: "Robert Wise", person_id: 1744 },
       { festival: "Oscar", category: "Best Actress", year: 1965, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1965, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "Robert Wise" },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Julie Andrews" }
+      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "Robert Wise" , person_id: 1744 },
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Julie Andrews" , person_id: 5823 }
     ]
   },
   15244: {
     title: "A Man Escaped",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1957, won: true, person: "Robert Bresson" },
+      { festival: "Cannes", category: "Best Director", year: 1957, won: true, person: "Robert Bresson" , person_id: 10346 },
       { festival: "Cannes", category: "Palme d'Or", year: 1957, won: false }
     ]
   },
@@ -7188,8 +7202,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1964, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1964, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Peter O'Toole" },
-      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "Peter Glenville" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Peter O'Toole" , person_id: 11390 },
+      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "Peter Glenville" , person_id: 86659 }
     ]
   },
   15462: {
@@ -7205,8 +7219,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1966, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1966, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1966, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Michael Caine" },
-      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Lewis Gilbert" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Michael Caine" , person_id: 3895 },
+      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Lewis Gilbert" , person_id: 10076 }
     ]
   },
   15600: {
@@ -7218,9 +7232,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1982, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1982, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1982, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Costa-Gavras" },
-      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Sissy Spacek" },
-      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Costa-Gavras" }
+      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Costa-Gavras" , person_id: 27436 },
+      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Sissy Spacek" , person_id: 5606 },
+      { festival: "BAFTA", category: "Best Director", year: 1982, won: false, person: "Costa-Gavras" , person_id: 27436 }
     ]
   },
   15659: {
@@ -7232,7 +7246,7 @@ const AWARDS_DATABASE = {
   15677: {
     title: "84 Charing Cross Road",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1988, won: true, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1988, won: true, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   15764: {
@@ -7240,7 +7254,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1982, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1982, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Meryl Streep" }
+      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   15765: {
@@ -7259,13 +7273,13 @@ const AWARDS_DATABASE = {
     title: "Interiors",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1978, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Woody Allen" }
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Woody Allen" , person_id: 1243 }
     ]
   },
   15876: {
     title: "The Enemy Below",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Curd Jürgens" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Curd Jürgens" , person_id: 10459 }
     ]
   },
   15919: {
@@ -7273,9 +7287,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1956, won: true },
       { festival: "Oscar", category: "Best Director", year: 1956, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1956, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1956, won: true , person: "Ernest Borgnine", person_id: 7502 },
       { festival: "Cannes", category: "Palme d'Or", year: 1955, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: true, person: "Ernest Borgnine" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: true, person: "Ernest Borgnine" , person_id: 7502 }
     ]
   },
   15927: {
@@ -7285,9 +7299,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1984, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1985, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1984, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "Victor Banerjee" },
-      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "David Lean" },
-      { festival: "BAFTA", category: "Best Actress", year: 1986, won: true, person: "Peggy Ashcroft" }
+      { festival: "BAFTA", category: "Best Actor", year: 1985, won: false, person: "Victor Banerjee" , person_id: 78951 },
+      { festival: "Golden Globe", category: "Best Director", year: 1984, won: false, person: "David Lean" , person_id: 12238 },
+      { festival: "BAFTA", category: "Best Actress", year: 1986, won: true, person: "Peggy Ashcroft" , person_id: 3672 }
     ]
   },
   16081: {
@@ -7303,13 +7317,13 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1968, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1968, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1968, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "William Wyler" }
+      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "William Wyler" , person_id: 10001 }
     ]
   },
   16103: {
     title: "The Loneliness of the Long Distance Runner",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: true, person: "Tom Courtenay" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: true, person: "Tom Courtenay" , person_id: 14011 }
     ]
   },
   16121: {
@@ -7324,14 +7338,14 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1976, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1974, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1975, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1976, won: true, person: "Ellen Burstyn" }
+      { festival: "BAFTA", category: "Best Actress", year: 1976, won: true, person: "Ellen Burstyn" , person_id: 9560 }
     ]
   },
   16284: {
     title: "Ice Cold in Alex",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1958, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Anthony Quayle" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Anthony Quayle" , person_id: 14371 }
     ]
   },
   16306: {
@@ -7380,7 +7394,7 @@ const AWARDS_DATABASE = {
       { festival: "Berlin", category: "Golden Bear", year: 1954, won: true },
       { festival: "Berlin", category: "Silver Bear (Director)", year: 1954, won: true, person: "David Lean" },
       { festival: "BAFTA", category: "Best Film", year: 1954, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "John Mills" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "John Mills" , person_id: 11859 }
     ]
   },
   16436: {
@@ -7423,8 +7437,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Director", year: 1981, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1981, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1980, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1980, won: true, person: "Robert Redford" },
-      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Mary Tyler Moore" }
+      { festival: "Golden Globe", category: "Best Director", year: 1980, won: true, person: "Robert Redford" , person_id: 4135 },
+      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Mary Tyler Moore" , person_id: 21277 }
     ]
   },
   16620: {
@@ -7443,22 +7457,22 @@ const AWARDS_DATABASE = {
     title: "El Cid",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1961, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "Anthony Mann" }
+      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "Anthony Mann" , person_id: 40199 }
     ]
   },
   16642: {
     title: "Days of Heaven",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1979, won: true, person: "Terrence Malick" },
+      { festival: "Cannes", category: "Best Director", year: 1979, won: true, person: "Terrence Malick" , person_id: 30715 },
       { festival: "Golden Globe", category: "Best Drama", year: 1978, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1979, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Terrence Malick" }
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Terrence Malick" , person_id: 30715 }
     ]
   },
   16659: {
     title: "My Brilliant Career",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1981, won: true, person: "Judy Davis" }
+      { festival: "BAFTA", category: "Best Actress", year: 1981, won: true, person: "Judy Davis" , person_id: 351 }
     ]
   },
   16672: {
@@ -7475,7 +7489,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1981, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1980, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Sissy Spacek" }
+      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Sissy Spacek" , person_id: 5606 }
     ]
   },
   16858: {
@@ -7484,13 +7498,13 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1980, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1979, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Roy Scheider" }
+      { festival: "BAFTA", category: "Best Actor", year: 1980, won: false, person: "Roy Scheider" , person_id: 6355 }
     ]
   },
   16869: {
     title: "Ray",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2005, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2005, won: true , person: "Jamie Foxx", person_id: 134 },
       { festival: "Golden Globe", category: "Best Drama", year: 2010, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2009, won: false },
@@ -7502,7 +7516,7 @@ const AWARDS_DATABASE = {
   16885: {
     title: "The General",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1998, won: true, person: "John Boorman" },
+      { festival: "Cannes", category: "Best Director", year: 1998, won: true, person: "John Boorman" , person_id: 19665 },
       { festival: "Cannes", category: "Palme d'Or", year: 1998, won: false }
     ]
   },
@@ -7510,14 +7524,14 @@ const AWARDS_DATABASE = {
     title: "The Cruel Sea",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Jack Hawkins" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Jack Hawkins" , person_id: 10018 }
     ]
   },
   16958: {
     title: "The Asphalt Jungle",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1950, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "John Huston" }
+      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "John Huston" , person_id: 6593 }
     ]
   },
   16992: {
@@ -7525,13 +7539,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1997, won: false },
       { festival: "Berlin", category: "Golden Bear", year: 1998, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Jim Sheridan" }
+      { festival: "Golden Globe", category: "Best Director", year: 1997, won: false, person: "Jim Sheridan" , person_id: 53334 }
     ]
   },
   17185: {
     title: "Advise & Consent",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Charles Laughton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Charles Laughton" , person_id: 10921 }
     ]
   },
   17247: {
@@ -7544,8 +7558,8 @@ const AWARDS_DATABASE = {
     title: "Gigi",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1959, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1959, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1958, won: true, person: "Vincente Minnelli" }
+      { festival: "Oscar", category: "Best Director", year: 1959, won: true , person: "Vincente Minnelli", person_id: 13980 },
+      { festival: "Golden Globe", category: "Best Director", year: 1958, won: true, person: "Vincente Minnelli" , person_id: 13980 }
     ]
   },
   17295: {
@@ -7581,7 +7595,7 @@ const AWARDS_DATABASE = {
   17529: {
     title: "True Grit",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1970, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 1970, won: true , person: "John Wayne", person_id: 4165 }
     ]
   },
   17589: {
@@ -7589,8 +7603,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1998, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1997, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Billy Connolly" },
-      { festival: "BAFTA", category: "Best Actress", year: 1998, won: true, person: "Judi Dench" }
+      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Billy Connolly" , person_id: 9188 },
+      { festival: "BAFTA", category: "Best Actress", year: 1998, won: true, person: "Judi Dench" , person_id: 5309 }
     ]
   },
   17591: {
@@ -7609,7 +7623,7 @@ const AWARDS_DATABASE = {
     title: "District 9",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "Neill Blomkamp" }
+      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "Neill Blomkamp" , person_id: 82194 }
     ]
   },
   17665: {
@@ -7621,7 +7635,7 @@ const AWARDS_DATABASE = {
   17729: {
     title: "The Glenn Miller Story",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "James Stewart" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "James Stewart" , person_id: 854 }
     ]
   },
   17768: {
@@ -7633,13 +7647,13 @@ const AWARDS_DATABASE = {
   17771: {
     title: "Sunshine",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Istvan Szabo" }
+      { festival: "Golden Globe", category: "Best Director", year: 2000, won: false, person: "Istvan Szabo" , person_id: 3484906 }
     ]
   },
   17887: {
     title: "Barefoot in the Park",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Jane Fonda" }
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   17917: {
@@ -7647,8 +7661,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1968, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1968, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Ron Moody" },
-      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Carol Reed" }
+      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Ron Moody" , person_id: 41236 },
+      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Carol Reed" , person_id: 15378 }
     ]
   },
   17974: {
@@ -7668,7 +7682,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1953, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: true, person: "John Gielgud" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: true, person: "John Gielgud" , person_id: 3084 }
     ]
   },
   18095: {
@@ -7688,7 +7702,7 @@ const AWARDS_DATABASE = {
     title: "Running on Empty",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1988, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Sidney Lumet" }
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Sidney Lumet" , person_id: 39996 }
     ]
   },
   18254: {
@@ -7699,8 +7713,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1981, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1981, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Warren Beatty" },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: true, person: "Warren Beatty" }
+      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Warren Beatty" , person_id: 6449 },
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: true, person: "Warren Beatty" , person_id: 6449 }
     ]
   },
   18299: {
@@ -7712,20 +7726,20 @@ const AWARDS_DATABASE = {
   18302: {
     title: "Chi-hwa-seon",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2002, won: true, person: "Im Kwon-taek" }
+      { festival: "Cannes", category: "Best Director", year: 2002, won: true, person: "Im Kwon-taek" , person_id: 87554 }
     ]
   },
   18317: {
     title: "Truly Madly Deeply",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Alan Rickman" },
-      { festival: "BAFTA", category: "Best Actress", year: 1992, won: false, person: "Juliet Stevenson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1991, won: false, person: "Alan Rickman" , person_id: 4566 },
+      { festival: "BAFTA", category: "Best Actress", year: 1992, won: false, person: "Juliet Stevenson" , person_id: 6238 }
     ]
   },
   18329: {
     title: "Happy Together",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1997, won: true, person: "Wong Kar-wai" }
+      { festival: "Cannes", category: "Best Director", year: 1997, won: true, person: "Wong Kar-wai" , person_id: 12453 }
     ]
   },
   18421: {
@@ -7737,7 +7751,7 @@ const AWARDS_DATABASE = {
   18497: {
     title: "Exiles",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2004, won: true, person: "Tony Gatlif" },
+      { festival: "Cannes", category: "Best Director", year: 2004, won: true, person: "Tony Gatlif" , person_id: 41040 },
       { festival: "Cannes", category: "Palme d'Or", year: 2004, won: false }
     ]
   },
@@ -7751,16 +7765,16 @@ const AWARDS_DATABASE = {
     title: "Shirley Valentine",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1990, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 1989, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1989, won: false , person: "Pauline Collins", person_id: 83437 },
       { festival: "BAFTA", category: "Best Film", year: 1989, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1989, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1990, won: true, person: "Pauline Collins" }
+      { festival: "BAFTA", category: "Best Actress", year: 1990, won: true, person: "Pauline Collins" , person_id: 83437 }
     ]
   },
   18701: {
     title: "Being Julia",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2005, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2005, won: false , person: "Annette Bening", person_id: 516 }
     ]
   },
   18747: {
@@ -7774,8 +7788,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1963, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Richard Harris" },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: true, person: "Rachel Roberts" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Richard Harris" , person_id: 194 },
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: true, person: "Rachel Roberts" , person_id: 82495 }
     ]
   },
   18785: {
@@ -7811,7 +7825,7 @@ const AWARDS_DATABASE = {
   18929: {
     title: "The Entertainer",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   18971: {
@@ -7833,8 +7847,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1968, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1968, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1968, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Anthony Harvey" },
-      { festival: "BAFTA", category: "Best Actress", year: 1969, won: true, person: "Katharine Hepburn" }
+      { festival: "Golden Globe", category: "Best Director", year: 1968, won: false, person: "Anthony Harvey" , person_id: 12009 },
+      { festival: "BAFTA", category: "Best Actress", year: 1969, won: true, person: "Katharine Hepburn" , person_id: 6598 }
     ]
   },
   19067: {
@@ -7858,7 +7872,7 @@ const AWARDS_DATABASE = {
   19178: {
     title: "La Traversée de Paris",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Jean Gabin" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Jean Gabin" , person_id: 11544 }
     ]
   },
   19186: {
@@ -7870,13 +7884,13 @@ const AWARDS_DATABASE = {
   19221: {
     title: "The Prisoner of Second Avenue",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   19413: {
     title: "Brutti sporchi e cattivi",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1976, won: true, person: "Ettore Scola" }
+      { festival: "Cannes", category: "Best Director", year: 1976, won: true, person: "Ettore Scola" , person_id: 31894 }
     ]
   },
   19426: {
@@ -7916,25 +7930,25 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2010, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2010, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2010, won: true, person: "James Cameron" },
-      { festival: "Golden Globe", category: "Best Director", year: 2009, won: true, person: "James Cameron" },
-      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "James Cameron" }
+      { festival: "Golden Globe", category: "Best Director", year: 2010, won: true, person: "James Cameron" , person_id: 2710 },
+      { festival: "Golden Globe", category: "Best Director", year: 2009, won: true, person: "James Cameron" , person_id: 2710 },
+      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "James Cameron" , person_id: 2710 }
     ]
   },
   20024: {
     title: "The End of the Affair",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2000, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2000, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2000, won: false , person: "Julianne Moore", person_id: 1231 },
       { festival: "Golden Globe", category: "Best Drama", year: 2000, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1999, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Ralph Fiennes" },
-      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Ralph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Neil Jordan" },
-      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Julianne Moore" },
-      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Neil Jordan" },
-      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Neil Jordan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "Golden Globe", category: "Best Director", year: 1999, won: false, person: "Neil Jordan" , person_id: 17016 },
+      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Julianne Moore" , person_id: 1231 },
+      { festival: "BAFTA", category: "Best Director", year: 2000, won: false, person: "Neil Jordan" , person_id: 17016 },
+      { festival: "BAFTA", category: "Best Director", year: 1999, won: false, person: "Neil Jordan" , person_id: 17016 }
     ]
   },
   20108: {
@@ -7946,22 +7960,22 @@ const AWARDS_DATABASE = {
   20123: {
     title: "Time of the Gypsies",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1989, won: true, person: "Emir Kusturica" },
+      { festival: "Cannes", category: "Best Director", year: 1989, won: true, person: "Emir Kusturica" , person_id: 15254 },
       { festival: "Cannes", category: "Palme d'Or", year: 1989, won: false }
     ]
   },
   20139: {
     title: "The Children's Hour",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "William Wyler" }
+      { festival: "Golden Globe", category: "Best Director", year: 1961, won: false, person: "William Wyler" , person_id: 10001 }
     ]
   },
   20271: {
     title: "Divorce Italian Style",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: true, person: "Marcello Mastroianni" },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Daniela Rocca" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: true, person: "Marcello Mastroianni" , person_id: 5676 },
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Daniela Rocca" , person_id: 83461 }
     ]
   },
   20283: {
@@ -7970,14 +7984,15 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1980, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1980, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1979, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Peter Yates" }
+      { festival: "Golden Globe", category: "Best Director", year: 1979, won: false, person: "Peter Yates" , person_id: 12804 }
     ]
   },
   20391: {
     title: "Paint Your Wagon",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1969, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actress", year: 2001, won: true, person: "Julie Walters", person_id: 477 }]
   },
   20506: {
     title: "The Eel",
@@ -7989,7 +8004,8 @@ const AWARDS_DATABASE = {
     title: "Sansho the Bailiff",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1954, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Original Screenplay", year: 1946, won: true, person: "Richard Schweizer", person_id: 125561 }]
   },
   20539: {
     title: "The Crucible",
@@ -8000,20 +8016,22 @@ const AWARDS_DATABASE = {
   20540: {
     title: "The Pawnbroker",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: true, person: "Rod Steiger" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: true, person: "Rod Steiger" , person_id: 522 }
     ]
   },
   20620: {
     title: "Seconds",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1966, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Adapted Screenplay", year: 1960, won: true, person: "Richard Brooks", person_id: 3632 }]
   },
   20649: {
     title: "Clockers",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1995, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Original Screenplay", year: 1959, won: true, person: "Stanley Shapiro; Maurice Richlin" }]
   },
   20758: {
     title: "Father of the Bride",
@@ -8031,7 +8049,8 @@ const AWARDS_DATABASE = {
     title: "The Handmaid's Tale",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 1990, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Adapted Screenplay", year: 1982, won: true, person: "Ernest Thompson", person_id: 70570 }]
   },
   20853: {
     title: "Detective Story",
@@ -8057,14 +8076,14 @@ const AWARDS_DATABASE = {
   21143: {
     title: "The Day of the Triffids",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Howard Keel" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Howard Keel" , person_id: 39601 }
     ]
   },
   21252: {
     title: "Nil by Mouth",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Ray Winstone" },
-      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Kathy Burke" }
+      { festival: "BAFTA", category: "Best Actor", year: 1997, won: false, person: "Ray Winstone" , person_id: 5538 },
+      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Kathy Burke" , person_id: 37759 }
     ]
   },
   21259: {
@@ -8083,14 +8102,16 @@ const AWARDS_DATABASE = {
     title: "New Rose Hotel",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1998, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Adapted Screenplay", year: 2019, won: true, person: "Spike Lee; David Rabinowitz; Charlie Wachtel; Kevin Willmott" }]
   },
   21450: {
     title: "Naked",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1993, won: true, person: "Mike Leigh" },
+      { festival: "Cannes", category: "Best Director", year: 1993, won: true, person: "Mike Leigh" , person_id: 65452 },
       { festival: "Cannes", category: "Palme d'Or", year: 1993, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Original Screenplay", year: 2022, won: true, person: "Paul Thomas Anderson", person_id: 4762 }]
   },
   21484: {
     title: "Possession",
@@ -8115,18 +8136,18 @@ const AWARDS_DATABASE = {
     title: "Gregory's Girl",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Bill Forsyth" }
+      { festival: "BAFTA", category: "Best Director", year: 1981, won: false, person: "Bill Forsyth" , person_id: 68687 }
     ]
   },
   22013: {
     title: "Elmer Gantry",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1961, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1961, won: true , person: "Burt Lancaster", person_id: 13784 },
       { festival: "Golden Globe", category: "Best Drama", year: 1960, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Burt Lancaster" },
-      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Richard Brooks" },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Jean Simmons" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Burt Lancaster" , person_id: 13784 },
+      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Richard Brooks" , person_id: 3632 },
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Jean Simmons" , person_id: 14500 }
     ]
   },
   22016: {
@@ -8157,7 +8178,7 @@ const AWARDS_DATABASE = {
   22350: {
     title: "Reach for the Sky",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Kenneth More" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Kenneth More" , person_id: 67676 }
     ]
   },
   22383: {
@@ -8170,7 +8191,7 @@ const AWARDS_DATABASE = {
     title: "Postcards from the Edge",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Shirley MacLaine" }
+      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Shirley MacLaine" , person_id: 4090 }
     ]
   },
   22522: {
@@ -8181,7 +8202,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1969, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1969, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1969, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1969, won: true, person: "Charles Jarrott" }
+      { festival: "Golden Globe", category: "Best Director", year: 1969, won: true, person: "Charles Jarrott" , person_id: 29646 }
     ]
   },
   22536: {
@@ -8221,7 +8242,7 @@ const AWARDS_DATABASE = {
     title: "The Blind Side",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2010, won: true }
+      { festival: "Oscar", category: "Best Actress", year: 2010, won: true , person: "Sandra Bullock", person_id: 18277 }
     ]
   },
   22897: {
@@ -8236,23 +8257,23 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2010, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2010, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "George Clooney" },
-      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Jason Reitman" },
-      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Jason Reitman" }
+      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "George Clooney" , person_id: 1461 },
+      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Jason Reitman" , person_id: 52443 },
+      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Jason Reitman" , person_id: 52443 }
     ]
   },
   22954: {
     title: "Invictus",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Clint Eastwood" },
-      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 2010, won: false, person: "Clint Eastwood" , person_id: 190 },
+      { festival: "Golden Globe", category: "Best Director", year: 2009, won: false, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   23148: {
     title: "Lady Sings the Blues",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1972, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Diana Ross" }
+      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Diana Ross" , person_id: 32715 }
     ]
   },
   23210: {
@@ -8264,13 +8285,13 @@ const AWARDS_DATABASE = {
   23479: {
     title: "The Bad News Bears",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Walter Matthau" }
+      { festival: "BAFTA", category: "Best Actor", year: 1976, won: false, person: "Walter Matthau" , person_id: 6837 }
     ]
   },
   23518: {
     title: "Seven Days in May",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "John Frankenheimer" }
+      { festival: "Golden Globe", category: "Best Director", year: 1964, won: false, person: "John Frankenheimer" , person_id: 13776 }
     ]
   },
   23724: {
@@ -8287,9 +8308,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1981, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1981, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1981, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1981, won: true, person: "Burt Lancaster" },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Louis Malle" },
-      { festival: "BAFTA", category: "Best Director", year: 1981, won: true, person: "Louis Malle" }
+      { festival: "BAFTA", category: "Best Actor", year: 1981, won: true, person: "Burt Lancaster" , person_id: 13784 },
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Louis Malle" , person_id: 15389 },
+      { festival: "BAFTA", category: "Best Director", year: 1981, won: true, person: "Louis Malle" , person_id: 15389 }
     ]
   },
   24010: {
@@ -8301,19 +8322,19 @@ const AWARDS_DATABASE = {
   24012: {
     title: "The Prince and the Showgirl",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   24014: {
     title: "Let's Make Love",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Yves Montand" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Yves Montand" , person_id: 2565 }
     ]
   },
   24016: {
     title: "The Sheltering Sky",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Bernardo Bertolucci" }
+      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Bernardo Bertolucci" , person_id: 4956 }
     ]
   },
   24134: {
@@ -8321,9 +8342,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1965, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: true, person: "Dirk Bogarde" },
-      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "John Schlesinger" },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: true, person: "Julie Christie" }
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: true, person: "Dirk Bogarde" , person_id: 21605 },
+      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "John Schlesinger" , person_id: 19304 },
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: true, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   24167: {
@@ -8356,7 +8377,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1983, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1982, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1982, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Sidney Lumet" }
+      { festival: "Golden Globe", category: "Best Director", year: 1982, won: false, person: "Sidney Lumet" , person_id: 39996 }
     ]
   },
   24395: {
@@ -8364,7 +8385,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1965, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Harry Andrews" }
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Harry Andrews" , person_id: 19463 }
     ]
   },
   24461: {
@@ -8385,7 +8406,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1950, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1950, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "George Cukor" }
+      { festival: "Golden Globe", category: "Best Director", year: 1950, won: false, person: "George Cukor" , person_id: 14674 }
     ]
   },
   24559: {
@@ -8411,7 +8432,7 @@ const AWARDS_DATABASE = {
     title: "Bird",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1988, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: true, person: "Clint Eastwood" }
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: true, person: "Clint Eastwood" , person_id: 190 }
     ]
   },
   24684: {
@@ -8419,15 +8440,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2010, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2010, won: true, person: "Carey Mulligan" },
-      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "Lone Scherfig" }
+      { festival: "Oscar", category: "Best Actress", year: 2010, won: false , person: "Carey Mulligan", person_id: 36662 },
+      { festival: "BAFTA", category: "Best Actress", year: 2010, won: true, person: "Carey Mulligan" , person_id: 36662 },
+      { festival: "BAFTA", category: "Best Director", year: 2010, won: false, person: "Lone Scherfig" , person_id: 1176 }
     ]
   },
   24735: {
     title: "Agnes of God",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1985, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1985, won: false , person: "Anne Bancroft", person_id: 10774 }
     ]
   },
   24748: {
@@ -8436,16 +8457,16 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1963, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1963, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Paul Newman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Martin Ritt" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Paul Newman" , person_id: 3636 },
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Martin Ritt" , person_id: 18854 }
     ]
   },
   24803: {
     title: "Julie & Julia",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2010, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 2010, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   24858: {
@@ -8465,7 +8486,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1961, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: true, person: "Dora Bryan" }
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: true, person: "Dora Bryan" , person_id: 43626 }
     ]
   },
   25113: {
@@ -8493,13 +8514,13 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1972, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1971, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1971, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Peter Bogdanovich" }
+      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Peter Bogdanovich" , person_id: 39012 }
     ]
   },
   25196: {
     title: "Crazy Heart",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Jeff Bridges" }
+      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Jeff Bridges" , person_id: 1229 }
     ]
   },
   25221: {
@@ -8511,7 +8532,7 @@ const AWARDS_DATABASE = {
   25284: {
     title: "The Last Seduction",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Linda Fiorentino" }
+      { festival: "BAFTA", category: "Best Actress", year: 1995, won: false, person: "Linda Fiorentino" , person_id: 9625 }
     ]
   },
   25364: {
@@ -8523,14 +8544,14 @@ const AWARDS_DATABASE = {
   25403: {
     title: "Dear Diary",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1994, won: true, person: "Nanni Moretti" }
+      { festival: "Cannes", category: "Best Director", year: 1994, won: true, person: "Nanni Moretti" , person_id: 69488 }
     ]
   },
   25430: {
     title: "All the King's Men",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1950, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 1950, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 1950, won: true , person: "Broderick Crawford", person_id: 85895 }
     ]
   },
   25495: {
@@ -8548,22 +8569,22 @@ const AWARDS_DATABASE = {
   25538: {
     title: "Yi Yi",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2000, won: true, person: "Edward Yang" }
+      { festival: "Cannes", category: "Best Director", year: 2000, won: true, person: "Edward Yang" , person_id: 143035 }
     ]
   },
   25560: {
     title: "The Taming of the Shrew",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1967, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Richard Burton" },
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Elizabeth Taylor" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Richard Burton" , person_id: 5341 },
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Elizabeth Taylor" , person_id: 3635 }
     ]
   },
   25566: {
     title: "Ragtime",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1981, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Milos Forman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Milos Forman" , person_id: 3974 }
     ]
   },
   25624: {
@@ -8586,7 +8607,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1951, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1951, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1951, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1951, won: false, person: "George Stevens" }
+      { festival: "Golden Globe", category: "Best Director", year: 1951, won: false, person: "George Stevens" , person_id: 18738 }
     ]
   },
   25767: {
@@ -8601,8 +8622,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2010, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2010, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2009, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Gabourey Sidibe" }
+      { festival: "Oscar", category: "Best Actress", year: 2010, won: false , person: "Gabourey Sidibe", person_id: 109560 },
+      { festival: "BAFTA", category: "Best Actress", year: 2010, won: false, person: "Gabourey Sidibe" , person_id: 109560 }
     ]
   },
   25838: {
@@ -8626,7 +8647,7 @@ const AWARDS_DATABASE = {
   26149: {
     title: "Music of the Heart",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2000, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2000, won: false , person: "Meryl Streep", person_id: 5064 }
     ]
   },
   26175: {
@@ -8667,8 +8688,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1963, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Tom Courtenay" },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Julie Christie" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Tom Courtenay" , person_id: 14011 },
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   26561: {
@@ -8683,7 +8704,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1971, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1970, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1970, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Bob Rafelson" }
+      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Bob Rafelson" , person_id: 19450 }
     ]
   },
   26638: {
@@ -8759,8 +8780,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 1959, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1959, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1959, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Peter Finch" },
-      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Fred Zinnemann" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Peter Finch" , person_id: 29903 },
+      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Fred Zinnemann" , person_id: 4065 }
     ]
   },
   27030: {
@@ -8777,8 +8798,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1974, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1975, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1974, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Dustin Hoffman" },
-      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Bob Fosse" }
+      { festival: "BAFTA", category: "Best Actor", year: 1975, won: false, person: "Dustin Hoffman" , person_id: 4483 },
+      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "Bob Fosse" , person_id: 66777 }
     ]
   },
   27098: {
@@ -8792,7 +8813,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1953, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1952, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1952, won: true, person: "Cecil B. DeMille" }
+      { festival: "Golden Globe", category: "Best Director", year: 1952, won: true, person: "Cecil B. DeMille" , person_id: 8636 }
     ]
   },
   27205: {
@@ -8801,8 +8822,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2011, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2011, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Christopher Nolan" },
-      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Christopher Nolan" }
+      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Christopher Nolan" , person_id: 525 },
+      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Christopher Nolan" , person_id: 525 }
     ]
   },
   27221: {
@@ -8844,7 +8865,7 @@ const AWARDS_DATABASE = {
   27585: {
     title: "Rabbit Hole",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2011, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2011, won: false , person: "Nicole Kidman", person_id: 2227 }
     ]
   },
   27744: {
@@ -8856,7 +8877,7 @@ const AWARDS_DATABASE = {
   27857: {
     title: "Prick Up Your Ears",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1987, won: false, person: "Gary Oldman" }
+      { festival: "BAFTA", category: "Best Actor", year: 1987, won: false, person: "Gary Oldman" , person_id: 64 }
     ]
   },
   27983: {
@@ -8868,7 +8889,7 @@ const AWARDS_DATABASE = {
   28023: {
     title: "Riot in Cell Block 11",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Neville Brand" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Neville Brand" , person_id: 9112 }
     ]
   },
   28089: {
@@ -8882,8 +8903,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1969, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1969, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Sydney Pollack" },
-      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Jane Fonda" }
+      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Sydney Pollack" , person_id: 2226 },
+      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   28270: {
@@ -8902,7 +8923,7 @@ const AWARDS_DATABASE = {
     title: "Cactus Flower",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1969, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Goldie Hawn" }
+      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Goldie Hawn" , person_id: 18892 }
     ]
   },
   28307: {
@@ -8920,14 +8941,14 @@ const AWARDS_DATABASE = {
   28384: {
     title: "Husbands and Wives",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Judy Davis" }
+      { festival: "BAFTA", category: "Best Actress", year: 1993, won: false, person: "Judy Davis" , person_id: 351 }
     ]
   },
   28463: {
     title: "East Is East",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Om Puri" },
-      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Linda Bassett" }
+      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Om Puri" , person_id: 11851 },
+      { festival: "BAFTA", category: "Best Actress", year: 2000, won: false, person: "Linda Bassett" , person_id: 8443 }
     ]
   },
   28528: {
@@ -8941,7 +8962,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1961, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1961, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Natalie Wood" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Natalie Wood" , person_id: 2769 }
     ]
   },
   28575: {
@@ -8956,7 +8977,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1958, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1958, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Robert Wise" }
+      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Robert Wise" , person_id: 1744 }
     ]
   },
   28644: {
@@ -8992,14 +9013,14 @@ const AWARDS_DATABASE = {
   29146: {
     title: "Charly",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1969, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1969, won: true , person: "Cliff Robertson", person_id: 19153 },
       { festival: "Golden Globe", category: "Best Drama", year: 1968, won: false }
     ]
   },
   29259: {
     title: "The Night Watch",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Philippe Leroy" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Philippe Leroy" , person_id: 25333 }
     ]
   },
   29264: {
@@ -9035,8 +9056,8 @@ const AWARDS_DATABASE = {
   29478: {
     title: "A Raisin in the Sun",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Sidney Poitier" },
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Claudia McNeil" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Sidney Poitier" , person_id: 16897 },
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Claudia McNeil" , person_id: 103939 }
     ]
   },
   29572: {
@@ -9049,7 +9070,7 @@ const AWARDS_DATABASE = {
     title: "Lust for Life",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1956, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "Vincente Minnelli" }
+      { festival: "Golden Globe", category: "Best Director", year: 1956, won: false, person: "Vincente Minnelli" , person_id: 13980 }
     ]
   },
   29845: {
@@ -9057,7 +9078,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1974, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1974, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "John Cassavetes" }
+      { festival: "Golden Globe", category: "Best Director", year: 1974, won: false, person: "John Cassavetes" , person_id: 11147 }
     ]
   },
   29912: {
@@ -9083,7 +9104,8 @@ const AWARDS_DATABASE = {
     title: "Taste of Cherry",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1997, won: true }
-    ]
+    ,
+      { festival: "Golden Globe", category: "Best Supporting Actress", year: 1953, won: true, person: "Katy Jurado", person_id: 4069 }]
   },
   30080: {
     title: "Ship of Fools",
@@ -9091,14 +9113,15 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1965, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1965, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Oskar Werner" },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Simone Signoret" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1965, won: false, person: "Oskar Werner" , person_id: 18216 },
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Simone Signoret" , person_id: 12266 }
+    ,
+      { festival: "Golden Globe", category: "Best Supporting Actress", year: 1983, won: true, person: "Jessica Lange", person_id: 4431 }]
   },
   30104: {
     title: "Sea of Sand",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Michael Craig" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Michael Craig" , person_id: 25536 }
     ]
   },
   30159: {
@@ -9123,21 +9146,27 @@ const AWARDS_DATABASE = {
     title: "Father Goose",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1964, won: false }
-    ]
+    ,
+      { festival: "Golden Globe", category: "Best Screenplay", year: 2011, won: true, person: "Aaron Sorkin", person_id: 13520 },
+      { festival: "Golden Globe", category: "Best Screenplay", year: 2016, won: true, person: "Aaron Sorkin", person_id: 13520 },
+      { festival: "Golden Globe", category: "Best Screenplay", year: 2021, won: true, person: "Aaron Sorkin", person_id: 13520 }]
   },
   30298: {
     title: "The Secret of Santa Vittoria",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1970, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1969, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Stanley Kramer" }
-    ]
+      { festival: "Golden Globe", category: "Best Director", year: 1969, won: false, person: "Stanley Kramer" , person_id: 4081 }
+    ,
+      { festival: "Golden Globe", category: "Best Screenplay", year: 1997, won: true, person: "Ethan Coen; Joel Coen" },
+      { festival: "Golden Globe", category: "Best Screenplay", year: 2008, won: true, person: "Joel Coen; Ethan Coen" }]
   },
   30363: {
     title: "The State of Things",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1982, won: true }
-    ]
+    ,
+      { festival: "Golden Globe", category: "Best Screenplay", year: 2015, won: true, person: "Alejandro G. Iñárritu; Nicolás Giacobone; Alexander Dinelaris Jr.; Armando Bo" }]
   },
   30636: {
     title: "Luna",
@@ -9181,7 +9210,7 @@ const AWARDS_DATABASE = {
   31102: {
     title: "Pollyanna",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Hayley Mills" }
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Hayley Mills" , person_id: 36819 }
     ]
   },
   31121: {
@@ -9195,7 +9224,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Berlin", category: "Silver Bear (Director)", year: 1996, won: true, person: "Richard Loncraine" },
       { festival: "Berlin", category: "Golden Bear", year: 1996, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Ian McKellen" }
+      { festival: "BAFTA", category: "Best Actor", year: 1996, won: false, person: "Ian McKellen" , person_id: 1327 }
     ]
   },
   31175: {
@@ -9284,7 +9313,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1978, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1978, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1978, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Hal Ashby" }
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Hal Ashby" , person_id: 4964 }
     ]
   },
   31677: {
@@ -9310,7 +9339,7 @@ const AWARDS_DATABASE = {
   31924: {
     title: "The Morning After",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1986, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1986, won: false , person: "Jane Fonda", person_id: 6352 }
     ]
   },
   31944: {
@@ -9330,7 +9359,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1981, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1981, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Sidney Lumet" }
+      { festival: "Golden Globe", category: "Best Director", year: 1981, won: false, person: "Sidney Lumet" , person_id: 39996 }
     ]
   },
   32054: {
@@ -9340,9 +9369,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1988, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1987, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1987, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "John Boorman" },
-      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Sarah Miles" },
-      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "John Boorman" }
+      { festival: "Golden Globe", category: "Best Director", year: 1987, won: false, person: "John Boorman" , person_id: 19665 },
+      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Sarah Miles" , person_id: 15197 },
+      { festival: "BAFTA", category: "Best Director", year: 1987, won: false, person: "John Boorman" , person_id: 19665 }
     ]
   },
   32078: {
@@ -9356,7 +9385,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Berlin", category: "Silver Bear (Grand Jury)", year: 1972, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1971, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "George C. Scott" }
+      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "George C. Scott" , person_id: 862 }
     ]
   },
   32087: {
@@ -9388,8 +9417,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1962, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Jack Lemmon" },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Blake Edwards" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: false, person: "Jack Lemmon" , person_id: 3151 },
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Blake Edwards" , person_id: 1927 }
     ]
   },
   32489: {
@@ -9427,8 +9456,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1965, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Sidney Poitier" },
-      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "Guy Green" }
+      { festival: "BAFTA", category: "Best Actor", year: 1966, won: false, person: "Sidney Poitier" , person_id: 16897 },
+      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "Guy Green" , person_id: 67619 }
     ]
   },
   33575: {
@@ -9447,7 +9476,7 @@ const AWARDS_DATABASE = {
     title: "Sweet Bird of Youth",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Geraldine Page" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Geraldine Page" , person_id: 41283 }
     ]
   },
   33725: {
@@ -9501,19 +9530,19 @@ const AWARDS_DATABASE = {
   34093: {
     title: "Rendez-vous",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1985, won: true, person: "Andre Techine" }
+      { festival: "Cannes", category: "Best Director", year: 1985, won: true, person: "Andre Techine" , person_id: 96627 }
     ]
   },
   34193: {
     title: "Magic",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Anthony Hopkins" }
+      { festival: "BAFTA", category: "Best Actor", year: 1978, won: false, person: "Anthony Hopkins" , person_id: 4173 }
     ]
   },
   34282: {
     title: "Whistle Down the Wind",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Hayley Mills" }
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Hayley Mills" , person_id: 36819 }
     ]
   },
   34444: {
@@ -9532,7 +9561,7 @@ const AWARDS_DATABASE = {
     title: "A Single Man",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 2009, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2010, won: true, person: "Colin Firth" }
+      { festival: "BAFTA", category: "Best Actor", year: 2010, won: true, person: "Colin Firth" , person_id: 5472 }
     ]
   },
   34672: {
@@ -9544,13 +9573,13 @@ const AWARDS_DATABASE = {
   34783: {
     title: "I'm All Right Jack",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: true, person: "Peter Sellers" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: true, person: "Peter Sellers" , person_id: 12446 }
     ]
   },
   34991: {
     title: "Gumshoe",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Albert Finney" }
+      { festival: "BAFTA", category: "Best Actor", year: 1971, won: false, person: "Albert Finney" , person_id: 3926 }
     ]
   },
   35057: {
@@ -9568,9 +9597,9 @@ const AWARDS_DATABASE = {
   35119: {
     title: "A Cry in the Dark",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1988, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1988, won: false , person: "Meryl Streep", person_id: 5064 },
       { festival: "Golden Globe", category: "Best Drama", year: 1988, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Fred Schepisi" }
+      { festival: "Golden Globe", category: "Best Director", year: 1988, won: false, person: "Fred Schepisi" , person_id: 64061 }
     ]
   },
   35124: {
@@ -9582,7 +9611,7 @@ const AWARDS_DATABASE = {
   35129: {
     title: "Edge of the City",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Sidney Poitier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Sidney Poitier" , person_id: 16897 }
     ]
   },
   35164: {
@@ -9601,7 +9630,7 @@ const AWARDS_DATABASE = {
     title: "On the Beach",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1959, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Stanley Kramer" }
+      { festival: "Golden Globe", category: "Best Director", year: 1959, won: false, person: "Stanley Kramer" , person_id: 4081 }
     ]
   },
   35790: {
@@ -9614,13 +9643,13 @@ const AWARDS_DATABASE = {
     title: "Freud",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "John Huston" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "John Huston" , person_id: 6593 }
     ]
   },
   35841: {
     title: "The Lonely Passion of Judith Hearne",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1989, won: true, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 1989, won: true, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   35867: {
@@ -9653,7 +9682,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1971, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1971, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Julie Christie" }
+      { festival: "BAFTA", category: "Best Actress", year: 1972, won: false, person: "Julie Christie" , person_id: 1666 }
     ]
   },
   36210: {
@@ -9689,13 +9718,13 @@ const AWARDS_DATABASE = {
   36380: {
     title: "Boys Don't Cry",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2000, won: true }
+      { festival: "Oscar", category: "Best Actress", year: 2000, won: true , person: "Hilary Swank", person_id: 448 }
     ]
   },
   36557: {
     title: "Casino Royale",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Daniel Craig" }
+      { festival: "BAFTA", category: "Best Actor", year: 2007, won: false, person: "Daniel Craig" , person_id: 8784 }
     ]
   },
   36645: {
@@ -9725,7 +9754,7 @@ const AWARDS_DATABASE = {
   36811: {
     title: "The Last Station",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2010, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2010, won: false , person: "Helen Mirren", person_id: 15735 }
     ]
   },
   36850: {
@@ -9737,7 +9766,7 @@ const AWARDS_DATABASE = {
   37086: {
     title: "A Hatful of Rain",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Fred Zinnemann" }
+      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Fred Zinnemann" , person_id: 4065 }
     ]
   },
   37094: {
@@ -9758,8 +9787,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1998, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1998, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Peter Weir" },
-      { festival: "BAFTA", category: "Best Director", year: 1998, won: true, person: "Peter Weir" }
+      { festival: "Golden Globe", category: "Best Director", year: 1998, won: false, person: "Peter Weir" , person_id: 2690 },
+      { festival: "BAFTA", category: "Best Director", year: 1998, won: true, person: "Peter Weir" , person_id: 2690 }
     ]
   },
   37181: {
@@ -9773,38 +9802,38 @@ const AWARDS_DATABASE = {
     title: "Saturday Night and Sunday Morning",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Albert Finney" },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: true, person: "Rachel Roberts" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Albert Finney" , person_id: 3926 },
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: true, person: "Rachel Roberts" , person_id: 82495 }
     ]
   },
   37234: {
     title: "Sex & Drugs & Rock & Roll",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Andy Serkis" }
+      { festival: "BAFTA", category: "Best Actor", year: 2010, won: false, person: "Andy Serkis" , person_id: 1333 }
     ]
   },
   37247: {
     title: "The Graduate",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1968, won: true },
+      { festival: "Oscar", category: "Best Director", year: 1968, won: true , person: "Mike Nichols", person_id: 5342 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1967, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1967, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1967, won: true, person: "Mike Nichols" },
-      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Anne Bancroft" }
+      { festival: "Golden Globe", category: "Best Director", year: 1967, won: true, person: "Mike Nichols" , person_id: 5342 },
+      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   37257: {
     title: "Witness for the Prosecution",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1957, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Charles Laughton" },
-      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Billy Wilder" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Charles Laughton" , person_id: 10921 },
+      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Billy Wilder" , person_id: 3146 }
     ]
   },
   37454: {
     title: "Maigret Sets a Trap",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Jean Desailly" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Jean Desailly" , person_id: 11544 }
     ]
   },
   37550: {
@@ -9837,9 +9866,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2011, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2011, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Jesse Eisenberg" },
-      { festival: "Golden Globe", category: "Best Director", year: 2011, won: true, person: "David Fincher" },
-      { festival: "BAFTA", category: "Best Director", year: 2011, won: true, person: "David Fincher" }
+      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Jesse Eisenberg" , person_id: 44735 },
+      { festival: "Golden Globe", category: "Best Director", year: 2011, won: true, person: "David Fincher" , person_id: 7467 },
+      { festival: "BAFTA", category: "Best Director", year: 2011, won: true, person: "David Fincher" , person_id: 7467 }
     ]
   },
   37842: {
@@ -9852,7 +9881,7 @@ const AWARDS_DATABASE = {
     title: "Mister Roberts",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1955, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Jack Lemmon" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Jack Lemmon" , person_id: 3151 }
     ]
   },
   37903: {
@@ -9902,8 +9931,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1984, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1983, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1983, won: true, person: "Michael Caine" },
-      { festival: "BAFTA", category: "Best Actress", year: 1984, won: true, person: "Julie Walters" }
+      { festival: "BAFTA", category: "Best Actor", year: 1983, won: true, person: "Michael Caine" , person_id: 3895 },
+      { festival: "BAFTA", category: "Best Actress", year: 1984, won: true, person: "Julie Walters" , person_id: 477 }
     ]
   },
   38360: {
@@ -9952,7 +9981,7 @@ const AWARDS_DATABASE = {
   38714: {
     title: "Save the Tiger",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1974, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1974, won: true , person: "Jack Lemmon", person_id: 3151 },
       { festival: "Golden Globe", category: "Best Drama", year: 1973, won: false }
     ]
   },
@@ -9961,7 +9990,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actor", year: 1991, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 1990, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Barbet Schroeder" }
+      { festival: "Golden Globe", category: "Best Director", year: 1990, won: false, person: "Barbet Schroeder" , person_id: 23393 }
     ]
   },
   38724: {
@@ -9978,8 +10007,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1978, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1978, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1978, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Paul Mazursky" },
-      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Jill Clayburgh" }
+      { festival: "Golden Globe", category: "Best Director", year: 1978, won: false, person: "Paul Mazursky" , person_id: 47773 },
+      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Jill Clayburgh" , person_id: 20362 }
     ]
   },
   38772: {
@@ -9991,10 +10020,10 @@ const AWARDS_DATABASE = {
   38805: {
     title: "Lilies of the Field",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1964, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1964, won: true , person: "Sidney Poitier", person_id: 16897 },
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Sidney Poitier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Sidney Poitier" , person_id: 16897 }
     ]
   },
   38953: {
@@ -10002,14 +10031,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1970, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1970, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Sarah Miles" }
+      { festival: "BAFTA", category: "Best Actress", year: 1971, won: false, person: "Sarah Miles" , person_id: 15197 }
     ]
   },
   39013: {
     title: "Winter's Bone",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2011, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2011, won: false , person: "Jennifer Lawrence", person_id: 72129 }
     ]
   },
   39210: {
@@ -10034,7 +10063,7 @@ const AWARDS_DATABASE = {
     title: "Gypsy",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Mervyn LeRoy" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Mervyn LeRoy" , person_id: 9054 }
     ]
   },
   39495: {
@@ -10066,8 +10095,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2011, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Annette Bening" }
+      { festival: "Oscar", category: "Best Actress", year: 2011, won: false , person: "Annette Bening", person_id: 516 },
+      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Annette Bening" , person_id: 1231 }
     ]
   },
   39800: {
@@ -10086,8 +10115,8 @@ const AWARDS_DATABASE = {
     title: "Picnic",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1955, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "William Holden" },
-      { festival: "Golden Globe", category: "Best Director", year: 1955, won: true, person: "Joshua Logan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "William Holden" , person_id: 8252 },
+      { festival: "Golden Globe", category: "Best Director", year: 1955, won: true, person: "Joshua Logan" , person_id: 86051 }
     ]
   },
   39946: {
@@ -10126,8 +10155,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1956, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1956, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Karl Malden" },
-      { festival: "Golden Globe", category: "Best Director", year: 1956, won: true, person: "Elia Kazan" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Karl Malden" , person_id: 9857 },
+      { festival: "Golden Globe", category: "Best Director", year: 1956, won: true, person: "Elia Kazan" , person_id: 2746 }
     ]
   },
   40634: {
@@ -10139,7 +10168,7 @@ const AWARDS_DATABASE = {
   40641: {
     title: "Lola",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Anouk Aimee" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Anouk Aimee" , person_id: 5682 }
     ]
   },
   40732: {
@@ -10153,7 +10182,7 @@ const AWARDS_DATABASE = {
   40739: {
     title: "The Young Lions",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Marlon Brando" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Marlon Brando" , person_id: 3084 }
     ]
   },
   40775: {
@@ -10183,7 +10212,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1957, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1957, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Joshua Logan" }
+      { festival: "Golden Globe", category: "Best Director", year: 1957, won: false, person: "Joshua Logan" , person_id: 86051 }
     ]
   },
   40939: {
@@ -10195,7 +10224,7 @@ const AWARDS_DATABASE = {
   40962: {
     title: "Ironweed",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1987, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1987, won: false , person: "Meryl Streep", person_id: 5064 }
     ]
   },
   41050: {
@@ -10226,13 +10255,13 @@ const AWARDS_DATABASE = {
     title: "Summer of '42",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1971, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Robert Mulligan" }
+      { festival: "Golden Globe", category: "Best Director", year: 1971, won: false, person: "Robert Mulligan" , person_id: 8482 }
     ]
   },
   41430: {
     title: "The Dock Brief",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Richard Attenborough" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   41455: {
@@ -10251,13 +10280,14 @@ const AWARDS_DATABASE = {
     title: "Three Coins in the Fountain",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1954, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 1994, won: true, person: "Samuel L. Jackson", person_id: 2231 }]
   },
   41662: {
     title: "3 Women",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1977, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Shelley Duvall" }
+      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Shelley Duvall" , person_id: 10409 }
     ]
   },
   41714: {
@@ -10287,7 +10317,7 @@ const AWARDS_DATABASE = {
   41842: {
     title: "Taxi Blues",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1990, won: true, person: "Pavel Lungin" }
+      { festival: "Cannes", category: "Best Director", year: 1990, won: true, person: "Pavel Lungin" , person_id: 126855 }
     ]
   },
   41949: {
@@ -10300,9 +10330,9 @@ const AWARDS_DATABASE = {
   41951: {
     title: "Chocolat",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2001, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 2001, won: false , person: "Juliette Binoche", person_id: 1137 },
       { festival: "Berlin", category: "Golden Bear", year: 2001, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Juliette Binoche" }
+      { festival: "BAFTA", category: "Best Actress", year: 2001, won: false, person: "Juliette Binoche" , person_id: 1137 }
     ]
   },
   42006: {
@@ -10320,7 +10350,7 @@ const AWARDS_DATABASE = {
   42045: {
     title: "Sweet Dreams",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1985, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1985, won: false , person: "Jessica Lange", person_id: 4431 }
     ]
   },
   42087: {
@@ -10344,15 +10374,18 @@ const AWARDS_DATABASE = {
   42102: {
     title: "A Sunday in the Country",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1984, won: true, person: "Bertrand Tavernier" }
+      { festival: "Cannes", category: "Best Director", year: 1984, won: true, person: "Bertrand Tavernier" , person_id: 20556 }
     ]
   },
   42112: {
     title: "L'Argent",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1983, won: true, person: "Robert Bresson" },
+      { festival: "Cannes", category: "Best Director", year: 1983, won: true, person: "Robert Bresson" , person_id: 10346 },
       { festival: "Cannes", category: "Palme d'Or", year: 1983, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1987, won: true, person: "Michael Caine", person_id: 3895 },
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2000, won: true, person: "Michael Caine", person_id: 3895 },
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 1982, won: true, person: "Michael Caine", person_id: 3895 }]
   },
   42113: {
     title: "The Ballad of Narayama",
@@ -10368,7 +10401,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1983, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1983, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1983, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Bruce Beresford" }
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Bruce Beresford" , person_id: 5696 }
     ]
   },
   42122: {
@@ -10377,9 +10410,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 1984, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1984, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1983, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1984, won: false, person: "Tom Courtenay" },
-      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Peter Yates" },
-      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Peter Yates" }
+      { festival: "BAFTA", category: "Best Actor", year: 1984, won: false, person: "Tom Courtenay" , person_id: 14011 },
+      { festival: "Golden Globe", category: "Best Director", year: 1983, won: false, person: "Peter Yates" , person_id: 12804 },
+      { festival: "BAFTA", category: "Best Director", year: 1984, won: false, person: "Peter Yates" , person_id: 12804 }
     ]
   },
   42130: {
@@ -10422,7 +10455,7 @@ const AWARDS_DATABASE = {
     title: "The Stunt Man",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1980, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Richard Rush" }
+      { festival: "Golden Globe", category: "Best Director", year: 1980, won: false, person: "Richard Rush" , person_id: 21806 }
     ]
   },
   42168: {
@@ -10440,7 +10473,7 @@ const AWARDS_DATABASE = {
   42193: {
     title: "The Charge of the Light Brigade",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Trevor Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Trevor Howard" , person_id: 12726 }
     ]
   },
   42196: {
@@ -10463,8 +10496,8 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1977, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1977, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1977, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Fred Zinnemann" },
-      { festival: "BAFTA", category: "Best Actress", year: 1979, won: true, person: "Jane Fonda" }
+      { festival: "Golden Globe", category: "Best Director", year: 1977, won: false, person: "Fred Zinnemann" , person_id: 4065 },
+      { festival: "BAFTA", category: "Best Actress", year: 1979, won: true, person: "Jane Fonda" , person_id: 6352 }
     ]
   },
   42225: {
@@ -10476,8 +10509,9 @@ const AWARDS_DATABASE = {
   42228: {
     title: "The Late Show",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Lily Tomlin" }
-    ]
+      { festival: "BAFTA", category: "Best Actress", year: 1978, won: false, person: "Lily Tomlin" , person_id: 10437 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1988, won: true, person: "Sean Connery", person_id: 738 }]
   },
   42229: {
     title: "A Special Day",
@@ -10492,7 +10526,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1976, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1977, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1976, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "Hal Ashby" }
+      { festival: "Golden Globe", category: "Best Director", year: 1976, won: false, person: "Hal Ashby" , person_id: 4964 }
     ]
   },
   42233: {
@@ -10522,7 +10556,7 @@ const AWARDS_DATABASE = {
   42448: {
     title: "Harry and Tonto",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1975, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1975, won: true , person: "Art Carney", person_id: 40176 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1974, won: false }
     ]
   },
@@ -10539,7 +10573,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1973, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1973, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Glenda Jackson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1974, won: false, person: "Glenda Jackson" , person_id: 115573 }
     ]
   },
   42473: {
@@ -10551,7 +10585,7 @@ const AWARDS_DATABASE = {
   42482: {
     title: "On Tour",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2010, won: true, person: "Mathieu Amalric" },
+      { festival: "Cannes", category: "Best Director", year: 2010, won: true, person: "Mathieu Amalric" , person_id: 8789 },
       { festival: "Cannes", category: "Palme d'Or", year: 2010, won: false }
     ]
   },
@@ -10572,7 +10606,7 @@ const AWARDS_DATABASE = {
   42526: {
     title: "The Nightcomers",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "Marlon Brando" }
+      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "Marlon Brando" , person_id: 3084 }
     ]
   },
   42593: {
@@ -10611,8 +10645,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1968, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1968, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1968, won: true, person: "Paul Newman" },
-      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Joanne Woodward" }
+      { festival: "Golden Globe", category: "Best Director", year: 1968, won: true, person: "Paul Newman" , person_id: 3636 },
+      { festival: "BAFTA", category: "Best Actress", year: 1969, won: false, person: "Joanne Woodward" , person_id: 109410 }
     ]
   },
   42691: {
@@ -10632,7 +10666,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1966, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1966, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Lynn Redgrave" }
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Lynn Redgrave" , person_id: 29791 }
     ]
   },
   42724: {
@@ -10649,8 +10683,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1966, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1966, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Claude Lelouch" },
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: true, person: "Anouk Aimee" }
+      { festival: "Golden Globe", category: "Best Director", year: 1966, won: false, person: "Claude Lelouch" , person_id: 16862 },
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: true, person: "Anouk Aimee" , person_id: 5682 }
     ]
   },
   42728: {
@@ -10672,7 +10706,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1965, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1965, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1965, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "William Wyler" }
+      { festival: "Golden Globe", category: "Best Director", year: 1965, won: false, person: "William Wyler" , person_id: 10001 }
     ]
   },
   42744: {
@@ -10680,7 +10714,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1965, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1965, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Rita Tushingham" }
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Rita Tushingham" , person_id: 47754 }
     ]
   },
   42790: {
@@ -10706,8 +10740,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1963, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1963, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1963, won: true, person: "Dirk Bogarde" },
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Sarah Miles" }
+      { festival: "BAFTA", category: "Best Actor", year: 1963, won: true, person: "Dirk Bogarde" , person_id: 21605 },
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Sarah Miles" , person_id: 15197 }
     ]
   },
   42991: {
@@ -10719,7 +10753,7 @@ const AWARDS_DATABASE = {
   43002: {
     title: "Lonely Are the Brave",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Kirk Douglas" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Kirk Douglas" , person_id: 2090 }
     ]
   },
   43004: {
@@ -10732,15 +10766,16 @@ const AWARDS_DATABASE = {
   43028: {
     title: "Victim",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Dirk Bogarde" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Dirk Bogarde" , person_id: 21605 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2018, won: true, person: "Sam Rockwell", person_id: 6807 }]
   },
   43039: {
     title: "Never on Sunday",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1960, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Melina Mercouri" }
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Melina Mercouri" , person_id: 29902 }
     ]
   },
   43047: {
@@ -10748,14 +10783,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1960, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1960, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Fred Zinnemann" },
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Deborah Kerr" }
+      { festival: "Golden Globe", category: "Best Director", year: 1960, won: false, person: "Fred Zinnemann" , person_id: 4065 },
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: false, person: "Deborah Kerr" , person_id: 20141 }
     ]
   },
   43048: {
     title: "Tunes of Glory",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Alec Guinness" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Alec Guinness" , person_id: 11859 }
     ]
   },
   43100: {
@@ -10770,7 +10805,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1959, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1958, won: true },
       { festival: "Oscar", category: "Best Picture", year: 1959, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Laurence Harvey" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Laurence Harvey" , person_id: 14729 }
     ]
   },
   43121: {
@@ -10782,11 +10817,11 @@ const AWARDS_DATABASE = {
   43136: {
     title: "Separate Tables",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1959, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1959, won: true , person: "David Niven", person_id: 14261 },
       { festival: "Oscar", category: "Best Actress", year: 1958, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 1958, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1958, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Delbert Mann" }
+      { festival: "Golden Globe", category: "Best Director", year: 1958, won: false, person: "Delbert Mann" , person_id: 67451 }
     ]
   },
   43138: {
@@ -10804,7 +10839,7 @@ const AWARDS_DATABASE = {
   43198: {
     title: "Carrington V.C.",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "David Niven" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "David Niven" , person_id: 14261 }
     ]
   },
   43231: {
@@ -10849,7 +10884,7 @@ const AWARDS_DATABASE = {
   43310: {
     title: "The King and I",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1957, won: true }
+      { festival: "Oscar", category: "Best Actor", year: 1957, won: true , person: "Yul Brynner", person_id: 14528 }
     ]
   },
   43311: {
@@ -10874,20 +10909,20 @@ const AWARDS_DATABASE = {
     title: "Richard III",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1955, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: true, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: true, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   43336: {
     title: "Executive Suite",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Fredric March" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Fredric March" , person_id: 13576 }
     ]
   },
   43346: {
     title: "Genevieve",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1953, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Kenneth More" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Kenneth More" , person_id: 67676 }
     ]
   },
   43349: {
@@ -10906,13 +10941,13 @@ const AWARDS_DATABASE = {
     title: "Carrie",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   43376: {
     title: "Diary of a Country Priest",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Claude Laydu" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Claude Laydu" , person_id: 150819 }
     ]
   },
   43379: {
@@ -10920,7 +10955,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1951, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Francesco Golisano" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Francesco Golisano" , person_id: 592526 }
     ]
   },
   43388: {
@@ -11002,8 +11037,8 @@ const AWARDS_DATABASE = {
     title: "127 Hours",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "James Franco" },
-      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Danny Boyle" }
+      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "James Franco" , person_id: 17051 },
+      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Danny Boyle" , person_id: 2034 }
     ]
   },
   44160: {
@@ -11015,7 +11050,7 @@ const AWARDS_DATABASE = {
   44201: {
     title: "Personal Services",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Julie Walters" }
+      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Julie Walters" , person_id: 477 }
     ]
   },
   44214: {
@@ -11024,10 +11059,10 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2011, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2011, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2011, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Darren Aronofsky" },
-      { festival: "BAFTA", category: "Best Actress", year: 2011, won: true, person: "Natalie Portman" },
-      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Darren Aronofsky" }
+      { festival: "Oscar", category: "Best Actress", year: 2011, won: true , person: "Natalie Portman", person_id: 524 },
+      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Darren Aronofsky" , person_id: 6431 },
+      { festival: "BAFTA", category: "Best Actress", year: 2011, won: true, person: "Natalie Portman" , person_id: 524 },
+      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Darren Aronofsky" , person_id: 6431 }
     ]
   },
   44264: {
@@ -11035,8 +11070,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2011, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Jeff Bridges" },
-      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Hailee Steinfeld" }
+      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Jeff Bridges" , person_id: 1229 },
+      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Hailee Steinfeld" , person_id: 130640 }
     ]
   },
   44334: {
@@ -11068,8 +11103,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2012, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2011, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2012, won: true, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Martin Scorsese" }
+      { festival: "Golden Globe", category: "Best Director", year: 2012, won: true, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   44898: {
@@ -11100,20 +11135,20 @@ const AWARDS_DATABASE = {
   45247: {
     title: "Light in the Piazza",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "George Hamilton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "George Hamilton" , person_id: 3267 }
     ]
   },
   45269: {
     title: "The King's Speech",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2011, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2011, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2011, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2011, won: true , person: "Tom Hooper", person_id: 70500 },
+      { festival: "Oscar", category: "Best Actor", year: 2011, won: true , person: "Colin Firth", person_id: 5472 },
       { festival: "BAFTA", category: "Best Film", year: 2011, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2011, won: true, person: "Colin Firth" },
-      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Tom Hooper" },
-      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Tom Hooper" }
+      { festival: "BAFTA", category: "Best Actor", year: 2011, won: true, person: "Colin Firth" , person_id: 5472 },
+      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "Tom Hooper" , person_id: 70500 },
+      { festival: "BAFTA", category: "Best Director", year: 2011, won: false, person: "Tom Hooper" , person_id: 70500 }
     ]
   },
   45284: {
@@ -11127,20 +11162,20 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2011, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2010, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "David O. Russell" }
+      { festival: "Golden Globe", category: "Best Director", year: 2011, won: false, person: "David O. Russell" , person_id: 17883 }
     ]
   },
   45578: {
     title: "A Letter to Three Wives",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 1950, won: true }
+      { festival: "Oscar", category: "Best Director", year: 1950, won: true , person: "Joseph L. Mankiewicz", person_id: 10601 }
     ]
   },
   45609: {
     title: "The Wings of the Dove",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1998, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Helena Bonham Carter" }
+      { festival: "BAFTA", category: "Best Actress", year: 1998, won: false, person: "Helena Bonham Carter" , person_id: 1283 }
     ]
   },
   45695: {
@@ -11154,15 +11189,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1972, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1971, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1971, won: true, person: "Peter Finch" },
-      { festival: "BAFTA", category: "Best Actress", year: 1972, won: true, person: "Glenda Jackson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1971, won: true, person: "Peter Finch" , person_id: 29903 },
+      { festival: "BAFTA", category: "Best Actress", year: 1972, won: true, person: "Glenda Jackson" , person_id: 115573 }
     ]
   },
   45958: {
     title: "Biutiful",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2010, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Javier Bardem" }
+      { festival: "BAFTA", category: "Best Actor", year: 2011, won: false, person: "Javier Bardem" , person_id: 3810 }
     ]
   },
   46011: {
@@ -11189,8 +11224,8 @@ const AWARDS_DATABASE = {
     title: "Topsy-Turvy",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 1999, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Jim Broadbent" },
-      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Jim Broadbent" }
+      { festival: "BAFTA", category: "Best Actor", year: 2000, won: false, person: "Jim Broadbent" , person_id: 388 },
+      { festival: "BAFTA", category: "Best Actor", year: 1999, won: false, person: "Jim Broadbent" , person_id: 388 }
     ]
   },
   46458: {
@@ -11202,26 +11237,26 @@ const AWARDS_DATABASE = {
   46580: {
     title: "Time Limit",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Richard Basehart" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Richard Basehart" , person_id: 5403 }
     ]
   },
   46592: {
     title: "Ballad of a Soldier",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Vladimir Ivashov" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Vladimir Ivashov" , person_id: 557006 }
     ]
   },
   46659: {
     title: "All My Compatriots",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1969, won: true, person: "Vojtech Jasny" }
+      { festival: "Cannes", category: "Best Director", year: 1969, won: true, person: "Vojtech Jasny" , person_id: 137071 }
     ]
   },
   46705: {
     title: "Blue Valentine",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2011, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2011, won: false , person: "Michelle Williams", person_id: 1812 }
     ]
   },
   46770: {
@@ -11234,7 +11269,7 @@ const AWARDS_DATABASE = {
     title: "Tom & Viv",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1995, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Miranda Richardson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1994, won: false, person: "Miranda Richardson" , person_id: 8436 }
     ]
   },
   46817: {
@@ -11246,7 +11281,7 @@ const AWARDS_DATABASE = {
   46976: {
     title: "Wish You Were Here",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Emily Lloyd" }
+      { festival: "BAFTA", category: "Best Actress", year: 1988, won: false, person: "Emily Lloyd" , person_id: 18017 }
     ]
   },
   46979: {
@@ -11258,23 +11293,23 @@ const AWARDS_DATABASE = {
   46992: {
     title: "Hilary and Jackie",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1999, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1999, won: false , person: "Emily Watson", person_id: 1639 },
       { festival: "Venice", category: "Golden Lion", year: 1998, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Emily Watson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1999, won: false, person: "Emily Watson" , person_id: 1639 }
     ]
   },
   47018: {
     title: "Carrington",
     awards: [
       { festival: "Cannes", category: "Jury Prize", year: 1995, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Jonathan Pryce" }
+      { festival: "BAFTA", category: "Best Actor", year: 1995, won: false, person: "Jonathan Pryce" , person_id: 378 }
     ]
   },
   47026: {
     title: "Mandy",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Jack Hawkins" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Jack Hawkins" , person_id: 10018 }
     ]
   },
   47104: {
@@ -11294,7 +11329,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1963, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: true, person: "Elia Kazan" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: true, person: "Elia Kazan" , person_id: 2746 }
     ]
   },
   47310: {
@@ -11320,13 +11355,13 @@ const AWARDS_DATABASE = {
     title: "The Kidnappers",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1954, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Duncan Macrae" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Duncan Macrae" , person_id: 97426 }
     ]
   },
   47697: {
     title: "Othello",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1956, won: true, person: "Sergei Yutkevich" },
+      { festival: "Cannes", category: "Best Director", year: 1956, won: true, person: "Sergei Yutkevich" , person_id: 24419 },
       { festival: "Cannes", category: "Palme d'Or", year: 1952, won: true }
     ]
   },
@@ -11364,7 +11399,7 @@ const AWARDS_DATABASE = {
   47908: {
     title: "The Trip to Bountiful",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1985, won: true }
+      { festival: "Oscar", category: "Best Actress", year: 1985, won: true , person: "Geraldine Page", person_id: 41283 }
     ]
   },
   47909: {
@@ -11388,7 +11423,7 @@ const AWARDS_DATABASE = {
   48110: {
     title: "Phaedra",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Melina Mercouri" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Melina Mercouri" , person_id: 29902 }
     ]
   },
   48121: {
@@ -11443,7 +11478,7 @@ const AWARDS_DATABASE = {
   48259: {
     title: "Crimes of the Heart",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1986, won: false },
+      { festival: "Oscar", category: "Best Actress", year: 1986, won: false , person: "Sissy Spacek", person_id: 5606 },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1986, won: false }
     ]
   },
@@ -11495,26 +11530,26 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2023, won: false },
       { festival: "BAFTA", category: "Best Film", year: 2023, won: true },
-      { festival: "BAFTA", category: "Best Director", year: 2023, won: true, person: "Edward Berger" }
+      { festival: "BAFTA", category: "Best Director", year: 2023, won: true, person: "Edward Berger" , person_id: 221522 }
     ]
   },
   49047: {
     title: "Gravity",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2014, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2014, won: true , person: "Alfonso Cuarón", person_id: 11218 },
       { festival: "BAFTA", category: "Best Film", year: 2014, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2014, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2014, won: true, person: "Alfonso Cuarón" },
-      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Sandra Bullock" },
-      { festival: "BAFTA", category: "Best Director", year: 2014, won: true, person: "Alfonso Cuaron" }
+      { festival: "Oscar", category: "Best Actress", year: 2014, won: false , person: "Sandra Bullock", person_id: 18277 },
+      { festival: "Golden Globe", category: "Best Director", year: 2014, won: true, person: "Alfonso Cuarón" , person_id: 11218 },
+      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Sandra Bullock" , person_id: 18277 },
+      { festival: "BAFTA", category: "Best Director", year: 2014, won: true, person: "Alfonso Cuaron" , person_id: 11218 }
     ]
   },
   49096: {
     title: "Empire of Passion",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1978, won: true, person: "Nagisa Oshima" }
+      { festival: "Cannes", category: "Best Director", year: 1978, won: true, person: "Nagisa Oshima" , person_id: 2415178 }
     ]
   },
   49139: {
@@ -11527,8 +11562,8 @@ const AWARDS_DATABASE = {
     title: "Tinker Tailor Soldier Spy",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Gary Oldman" },
-      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Tomas Alfredson" }
+      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Gary Oldman" , person_id: 64 },
+      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Tomas Alfredson" , person_id: 74396 }
     ]
   },
   49681: {
@@ -11564,7 +11599,7 @@ const AWARDS_DATABASE = {
   50011: {
     title: "Look Back in Anger",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Richard Burton" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Richard Burton" , person_id: 5341 }
     ]
   },
   50014: {
@@ -11573,8 +11608,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2012, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2012, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2011, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Viola Davis" }
+      { festival: "Oscar", category: "Best Actress", year: 2012, won: false , person: "Viola Davis", person_id: 19492 },
+      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Viola Davis" , person_id: 19492 }
     ]
   },
   50030: {
@@ -11604,7 +11639,7 @@ const AWARDS_DATABASE = {
   50799: {
     title: "The Long Arm",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Jack Hawkins" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Jack Hawkins" , person_id: 10018 }
     ]
   },
   51044: {
@@ -11626,7 +11661,7 @@ const AWARDS_DATABASE = {
     title: "The Sound Barrier",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1952, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: true, person: "Ralph Richardson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: true, person: "Ralph Richardson" , person_id: 12689 }
     ]
   },
   51857: {
@@ -11669,14 +11704,14 @@ const AWARDS_DATABASE = {
     title: "Gervaise",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1956, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: true, person: "François Périer" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: true, person: "François Périer" , person_id: 27440 }
     ]
   },
   52772: {
     title: "Shoot the Moon",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 1982, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Albert Finney" }
+      { festival: "BAFTA", category: "Best Actor", year: 1982, won: false, person: "Albert Finney" , person_id: 3926 }
     ]
   },
   52780: {
@@ -11688,7 +11723,7 @@ const AWARDS_DATABASE = {
   52857: {
     title: "The Prisoner",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Alec Guinness" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Alec Guinness" , person_id: 10018 }
     ]
   },
   52936: {
@@ -11706,7 +11741,7 @@ const AWARDS_DATABASE = {
   53113: {
     title: "One True Thing",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1999, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1999, won: false , person: "Meryl Streep", person_id: 5064 }
     ]
   },
   53487: {
@@ -11724,7 +11759,7 @@ const AWARDS_DATABASE = {
   53650: {
     title: "The Ugly American",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "George Englund" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "George Englund" , person_id: 93953 }
     ]
   },
   53879: {
@@ -11740,8 +11775,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1960, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1960, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1960, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1960, won: true, person: "Jack Cardiff" },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Wendy Hiller" }
+      { festival: "Golden Globe", category: "Best Director", year: 1960, won: true, person: "Jack Cardiff" , person_id: 6603 },
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Wendy Hiller" , person_id: 13325 }
     ]
   },
   54139: {
@@ -11795,7 +11830,7 @@ const AWARDS_DATABASE = {
   55123: {
     title: "Tumbleweeds",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2000, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2000, won: false , person: "Janet McTeer", person_id: 47627 }
     ]
   },
   55343: {
@@ -11813,7 +11848,7 @@ const AWARDS_DATABASE = {
   55380: {
     title: "The Night My Number Came Up",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Michael Redgrave" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Michael Redgrave" , person_id: 7640 }
     ]
   },
   55721: {
@@ -11837,7 +11872,7 @@ const AWARDS_DATABASE = {
   56156: {
     title: "The Last Hurrah",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Spencer Tracy" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Spencer Tracy" , person_id: 12147 }
     ]
   },
   56231: {
@@ -11881,7 +11916,7 @@ const AWARDS_DATABASE = {
     title: "A Private Function",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1984, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1985, won: true, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 1985, won: true, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   57602: {
@@ -11906,13 +11941,13 @@ const AWARDS_DATABASE = {
   57868: {
     title: "The Autobiography of Miss Jane Pittman",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Cicely Tyson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1975, won: false, person: "Cicely Tyson" , person_id: 18249 }
     ]
   },
   57993: {
     title: "The Mountain",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Spencer Tracy" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: false, person: "Spencer Tracy" , person_id: 12147 }
     ]
   },
   58098: {
@@ -11924,7 +11959,7 @@ const AWARDS_DATABASE = {
   58257: {
     title: "Savage Messiah",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Dorothy Tutin" }
+      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Dorothy Tutin" , person_id: 38998 }
     ]
   },
   58383: {
@@ -11960,7 +11995,7 @@ const AWARDS_DATABASE = {
   59210: {
     title: "The Mother",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Anne Reid" }
+      { festival: "BAFTA", category: "Best Actress", year: 2004, won: false, person: "Anne Reid" , person_id: 77287 }
     ]
   },
   59436: {
@@ -11968,7 +12003,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2012, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2011, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Woody Allen" }
+      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Woody Allen" , person_id: 1243 }
     ]
   },
   59881: {
@@ -11996,13 +12031,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2012, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Brad Pitt" }
+      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Brad Pitt" , person_id: 287 }
     ]
   },
   60363: {
     title: "Letter to Brezhnev",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Alexandra Pigg" }
+      { festival: "BAFTA", category: "Best Actress", year: 1986, won: false, person: "Alexandra Pigg" , person_id: 230909 }
     ]
   },
   60455: {
@@ -12026,13 +12061,13 @@ const AWARDS_DATABASE = {
   60899: {
     title: "Brink of Life",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1958, won: true, person: "Ingmar Bergman" }
+      { festival: "Cannes", category: "Best Director", year: 1958, won: true, person: "Ingmar Bergman" , person_id: 5100320 }
     ]
   },
   60938: {
     title: "Time Without Pity",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Michael Redgrave" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Michael Redgrave" , person_id: 7640 }
     ]
   },
   60981: {
@@ -12044,7 +12079,7 @@ const AWARDS_DATABASE = {
   61095: {
     title: "The Turning Point",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1979, won: false, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   61280: {
@@ -12054,7 +12089,7 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 1978, won: true },
       { festival: "Oscar", category: "Best Actress", year: 1977, won: false },
       { festival: "Oscar", category: "Best Picture", year: 1977, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1977, won: true, person: "Herbert Ross" }
+      { festival: "Golden Globe", category: "Best Director", year: 1977, won: true, person: "Herbert Ross" , person_id: 18378 }
     ]
   },
   61703: {
@@ -12084,7 +12119,7 @@ const AWARDS_DATABASE = {
   62547: {
     title: "Fanfan la Tulipe",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1952, won: true, person: "Christian-Jaque" }
+      { festival: "Cannes", category: "Best Director", year: 1952, won: true, person: "Christian-Jaque" , person_id: 48995 }
     ]
   },
   62842: {
@@ -12116,7 +12151,7 @@ const AWARDS_DATABASE = {
     title: "The Ritz",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 1976, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Rita Moreno" }
+      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Rita Moreno" , person_id: 13299 }
     ]
   },
   63892: {
@@ -12128,7 +12163,7 @@ const AWARDS_DATABASE = {
   64158: {
     title: "Guns at Batasi",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: true, person: "Richard Attenborough" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: true, person: "Richard Attenborough" , person_id: 4786 }
     ]
   },
   64291: {
@@ -12165,16 +12200,17 @@ const AWARDS_DATABASE = {
   64690: {
     title: "Drive",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2011, won: true, person: "Nicolas Winding Refn" },
+      { festival: "Cannes", category: "Best Director", year: 2011, won: true, person: "Nicolas Winding Refn" , person_id: 21183 },
       { festival: "BAFTA", category: "Best Film", year: 2012, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Nicolas Winding Refn" }
-    ]
+      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Nicolas Winding Refn" , person_id: 21183 }
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2007, won: true, person: "Alan Arkin", person_id: 1903 }]
   },
   64811: {
     title: "Girl with Green Eyes",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Rita Tushingham" }
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Rita Tushingham" , person_id: 47754 }
     ]
   },
   64942: {
@@ -12195,8 +12231,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2012, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2012, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "George Clooney" },
-      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Alexander Payne" }
+      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "George Clooney" , person_id: 1461 },
+      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Alexander Payne" , person_id: 13235 }
     ]
   },
   65296: {
@@ -12227,8 +12263,8 @@ const AWARDS_DATABASE = {
   65754: {
     title: "The Girl with the Dragon Tattoo",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Noomi Rapace" }
+      { festival: "Oscar", category: "Best Actress", year: 2012, won: false , person: "Rooney Mara", person_id: 108916 },
+      { festival: "BAFTA", category: "Best Actress", year: 2011, won: false, person: "Noomi Rapace" , person_id: 87722 }
     ]
   },
   65787: {
@@ -12241,7 +12277,7 @@ const AWARDS_DATABASE = {
     title: "The Chalk Garden",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Edith Evans" }
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: false, person: "Edith Evans" , person_id: 45465 }
     ]
   },
   66027: {
@@ -12249,9 +12285,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1970, won: true },
       { festival: "BAFTA", category: "Best Film", year: 1969, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Alan Bates" },
-      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Ken Russell" },
-      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Glenda Jackson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Alan Bates" , person_id: 27554 },
+      { festival: "Golden Globe", category: "Best Director", year: 1970, won: false, person: "Ken Russell" , person_id: 32327 },
+      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Glenda Jackson" , person_id: 115573 }
     ]
   },
   66092: {
@@ -12276,20 +12312,20 @@ const AWARDS_DATABASE = {
   66775: {
     title: "Young Winston",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "Robert Shaw" },
-      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actor", year: 1972, won: false, person: "Robert Shaw" , person_id: 8606 },
+      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   67377: {
     title: "The Best of Enemies",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Alberto Sordi" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: false, person: "Alberto Sordi" , person_id: 45982 }
     ]
   },
   67555: {
     title: "Porte des Lilas",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Pierre Brasseur" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Pierre Brasseur" , person_id: 24476 }
     ]
   },
   67731: {
@@ -12302,7 +12338,7 @@ const AWARDS_DATABASE = {
     title: "Heat and Dust",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1983, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "James Ivory" }
+      { festival: "BAFTA", category: "Best Director", year: 1983, won: false, person: "James Ivory" , person_id: 54441 }
     ]
   },
   68198: {
@@ -12314,7 +12350,7 @@ const AWARDS_DATABASE = {
   68242: {
     title: "Doctor in the House",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: true, person: "Kenneth More" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: true, person: "Kenneth More" , person_id: 67676 }
     ]
   },
   68553: {
@@ -12328,15 +12364,15 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2013, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Quentin Tarantino" },
-      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Quentin Tarantino" }
+      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Quentin Tarantino" , person_id: 138 },
+      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Quentin Tarantino" , person_id: 138 }
     ]
   },
   68722: {
     title: "The Master",
     awards: [
       { festival: "Venice", category: "Silver Lion (Director)", year: 2012, won: true, person: "Paul Thomas Anderson" },
-      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Joaquin Phoenix" }
+      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Joaquin Phoenix" , person_id: 73421 }
     ]
   },
   68734: {
@@ -12345,9 +12381,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2013, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2013, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2013, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Ben Affleck" },
-      { festival: "Golden Globe", category: "Best Director", year: 2013, won: true, person: "Ben Affleck" },
-      { festival: "BAFTA", category: "Best Director", year: 2013, won: true, person: "Ben Affleck" }
+      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Ben Affleck" , person_id: 880 },
+      { festival: "Golden Globe", category: "Best Director", year: 2013, won: true, person: "Ben Affleck" , person_id: 880 },
+      { festival: "BAFTA", category: "Best Director", year: 2013, won: true, person: "Ben Affleck" , person_id: 880 }
     ]
   },
   68822: {
@@ -12377,7 +12413,7 @@ const AWARDS_DATABASE = {
   69007: {
     title: "The Honorary Consul",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Michael Caine" }
+      { festival: "BAFTA", category: "Best Actor", year: 1983, won: false, person: "Michael Caine" , person_id: 3895 }
     ]
   },
   69557: {
@@ -12386,20 +12422,20 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Actress", year: 1964, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1964, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 1964, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1965, won: true, person: "Anne Bancroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1965, won: true, person: "Anne Bancroft" , person_id: 10774 }
     ]
   },
   69765: {
     title: "Les Ordres",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1975, won: true, person: "Michel Brault" }
+      { festival: "Cannes", category: "Best Director", year: 1975, won: true, person: "Michel Brault" , person_id: 550175 }
     ]
   },
   70635: {
     title: "The Whisperers",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1967, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: true, person: "Edith Evans" }
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: true, person: "Edith Evans" , person_id: 45465 }
     ]
   },
   70768: {
@@ -12436,14 +12472,14 @@ const AWARDS_DATABASE = {
   71395: {
     title: "Secret Ceremony",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Mia Farrow" }
+      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Mia Farrow" , person_id: 12021 }
     ]
   },
   71688: {
     title: "The Iron Lady",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2012, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2012, won: true, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 2012, won: true , person: "Meryl Streep", person_id: 5064 },
+      { festival: "BAFTA", category: "Best Actress", year: 2012, won: true, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   71721: {
@@ -12474,8 +12510,8 @@ const AWARDS_DATABASE = {
     title: "We Need to Talk About Kevin",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Tilda Swinton" },
-      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Lynne Ramsay" }
+      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Tilda Swinton" , person_id: 3063 },
+      { festival: "BAFTA", category: "Best Director", year: 2012, won: false, person: "Lynne Ramsay" , person_id: 83287 }
     ]
   },
   72354: {
@@ -12500,12 +12536,12 @@ const AWARDS_DATABASE = {
   72976: {
     title: "Lincoln",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2013, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2013, won: true , person: "Daniel Day-Lewis", person_id: 11856 },
       { festival: "BAFTA", category: "Best Film", year: 2013, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2013, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2013, won: true, person: "Daniel Day-Lewis" },
-      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Steven Spielberg" }
+      { festival: "BAFTA", category: "Best Actor", year: 2013, won: true, person: "Daniel Day-Lewis" , person_id: 11856 },
+      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   72996: {
@@ -12517,7 +12553,7 @@ const AWARDS_DATABASE = {
   73069: {
     title: "Another Time Another Place",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Phyllis Logan" }
+      { festival: "BAFTA", category: "Best Actress", year: 1984, won: false, person: "Phyllis Logan" , person_id: 127164 }
     ]
   },
   73311: {
@@ -12547,25 +12583,25 @@ const AWARDS_DATABASE = {
   73873: {
     title: "Albert Nobbs",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2012, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2012, won: false , person: "Glenn Close", person_id: 515 }
     ]
   },
   73907: {
     title: "The Purple Plain",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Maurice Denham" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Maurice Denham" , person_id: 39952 }
     ]
   },
   74057: {
     title: "Steelyard Blues",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Donald Sutherland" }
+      { festival: "BAFTA", category: "Best Actor", year: 1973, won: false, person: "Donald Sutherland" , person_id: 55636 }
     ]
   },
   74349: {
     title: "Antonio das Mortes",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1969, won: true, person: "Glauber Rocha" },
+      { festival: "Cannes", category: "Best Director", year: 1969, won: true, person: "Glauber Rocha" , person_id: 544845 },
       { festival: "Cannes", category: "Palme d'Or", year: 1969, won: false }
     ]
   },
@@ -12580,7 +12616,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Grand Prix", year: 1967, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 1967, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Dirk Bogarde" }
+      { festival: "BAFTA", category: "Best Actor", year: 1967, won: false, person: "Dirk Bogarde" , person_id: 21605 }
     ]
   },
   74585: {
@@ -12593,8 +12629,8 @@ const AWARDS_DATABASE = {
     title: "The Artist",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2012, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2012, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2012, won: true }
+      { festival: "Oscar", category: "Best Director", year: 2012, won: true , person: "Michel Hazanavicius", person_id: 67717 },
+      { festival: "Oscar", category: "Best Actor", year: 2012, won: true , person: "Jean Dujardin", person_id: 56024 }
     ]
   },
   74643: {
@@ -12603,10 +12639,10 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2012, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2012, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 2011, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2012, won: true, person: "Jean Dujardin" },
-      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Michel Hazanavicius" },
-      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Berenice Bejo" },
-      { festival: "BAFTA", category: "Best Director", year: 2012, won: true, person: "Michel Hazanavicius" }
+      { festival: "BAFTA", category: "Best Actor", year: 2012, won: true, person: "Jean Dujardin" , person_id: 56024 },
+      { festival: "Golden Globe", category: "Best Director", year: 2012, won: false, person: "Michel Hazanavicius" , person_id: 67717 },
+      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Berenice Bejo" , person_id: 82923 },
+      { festival: "BAFTA", category: "Best Director", year: 2012, won: true, person: "Michel Hazanavicius" , person_id: 67717 }
     ]
   },
   74657: {
@@ -12631,7 +12667,7 @@ const AWARDS_DATABASE = {
   74896: {
     title: "The Fox",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Mark Rydell" }
+      { festival: "Golden Globe", category: "Best Director", year: 1967, won: false, person: "Mark Rydell" , person_id: 21958 }
     ]
   },
   75641: {
@@ -12644,8 +12680,8 @@ const AWARDS_DATABASE = {
     title: "My Week with Marilyn",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2012, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Michelle Williams" }
+      { festival: "Oscar", category: "Best Actress", year: 2012, won: false , person: "Michelle Williams", person_id: 1812 },
+      { festival: "BAFTA", category: "Best Actress", year: 2012, won: false, person: "Michelle Williams" , person_id: 1812 }
     ]
   },
   75947: {
@@ -12659,7 +12695,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1963, won: false },
       { festival: "BAFTA", category: "Best Film", year: 1962, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: true, person: "Leslie Caron" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: true, person: "Leslie Caron" , person_id: 5320 }
     ]
   },
   76002: {
@@ -12671,13 +12707,13 @@ const AWARDS_DATABASE = {
   76025: {
     title: "Shame",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Michael Fassbender" }
+      { festival: "BAFTA", category: "Best Actor", year: 2012, won: false, person: "Michael Fassbender" , person_id: 17288 }
     ]
   },
   76117: {
     title: "Not as a Stranger",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Frank Sinatra" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Frank Sinatra" , person_id: 4347 }
     ]
   },
   76203: {
@@ -12686,9 +12722,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2014, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2014, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2014, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2014, won: true, person: "Chiwetel Ejiofor" },
-      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Steve McQueen" },
-      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Steve McQueen" }
+      { festival: "BAFTA", category: "Best Actor", year: 2014, won: true, person: "Chiwetel Ejiofor" , person_id: 5294 },
+      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Steve McQueen" , person_id: 13565 },
+      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Steve McQueen" , person_id: 13565 }
     ]
   },
   76341: {
@@ -12696,7 +12732,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2016, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "George Miller" }
+      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "George Miller" , person_id: 20629 }
     ]
   },
   76397: {
@@ -12708,7 +12744,7 @@ const AWARDS_DATABASE = {
   76568: {
     title: "The Sheepman",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Glenn Ford" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Glenn Ford" , person_id: 3381 }
     ]
   },
   76600: {
@@ -12716,7 +12752,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2023, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "James Cameron" }
+      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "James Cameron" , person_id: 2710 }
     ]
   },
   76816: {
@@ -12734,7 +12770,7 @@ const AWARDS_DATABASE = {
   77333: {
     title: "Leo the Last",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1970, won: true, person: "John Boorman" }
+      { festival: "Cannes", category: "Best Director", year: 1970, won: true, person: "John Boorman" , person_id: 19665 }
     ]
   },
   77560: {
@@ -12758,7 +12794,7 @@ const AWARDS_DATABASE = {
   78078: {
     title: "The Devil's Disciple",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   78162: {
@@ -12800,13 +12836,13 @@ const AWARDS_DATABASE = {
   79921: {
     title: "Special Section",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1975, won: true, person: "Costa-Gavras" }
+      { festival: "Cannes", category: "Best Director", year: 1975, won: true, person: "Costa-Gavras" , person_id: 27436 }
     ]
   },
   80278: {
     title: "The Impossible",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2013, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2013, won: false , person: "Naomi Watts", person_id: 3489 }
     ]
   },
   80382: {
@@ -12886,9 +12922,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2013, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2013, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Bradley Cooper" },
-      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Jennifer Lawrence" }
+      { festival: "Oscar", category: "Best Actress", year: 2013, won: true , person: "Jennifer Lawrence", person_id: 72129 },
+      { festival: "BAFTA", category: "Best Actor", year: 2013, won: false, person: "Bradley Cooper" , person_id: 51329 },
+      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Jennifer Lawrence" , person_id: 72129 }
     ]
   },
   82695: {
@@ -12917,8 +12953,8 @@ const AWARDS_DATABASE = {
     title: "The Angry Silence",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1960, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Richard Attenborough" },
-      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Pier Angeli" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: false, person: "Richard Attenborough" , person_id: 4786 },
+      { festival: "BAFTA", category: "Best Actress", year: 1961, won: false, person: "Pier Angeli" , person_id: 99374 }
     ]
   },
   84050: {
@@ -12931,14 +12967,14 @@ const AWARDS_DATABASE = {
   84164: {
     title: "Term of Trial",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Laurence Olivier" }
+      { festival: "BAFTA", category: "Best Actor", year: 1962, won: false, person: "Laurence Olivier" , person_id: 3359 }
     ]
   },
   84175: {
     title: "Beasts of the Southern Wild",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2013, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2013, won: false , person: "Quvenzhané Wallis", person_id: 1055235 }
     ]
   },
   84214: {
@@ -12980,8 +13016,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2015, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2015, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2015, won: true, person: "Richard Linklater" },
-      { festival: "BAFTA", category: "Best Director", year: 2015, won: true, person: "Richard Linklater" }
+      { festival: "Golden Globe", category: "Best Director", year: 2015, won: true, person: "Richard Linklater" , person_id: 564 },
+      { festival: "BAFTA", category: "Best Director", year: 2015, won: true, person: "Richard Linklater" , person_id: 564 }
     ]
   },
   85420: {
@@ -12993,7 +13029,7 @@ const AWARDS_DATABASE = {
   85514: {
     title: "The Quiet American",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Michael Redgrave" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "Michael Redgrave" , person_id: 7640 }
     ]
   },
   85550: {
@@ -13006,7 +13042,7 @@ const AWARDS_DATABASE = {
     title: "The Caretakers",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1963, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Hall Bartlett" }
+      { festival: "Golden Globe", category: "Best Director", year: 1963, won: false, person: "Hall Bartlett" , person_id: 543946 }
     ]
   },
   85783: {
@@ -13024,7 +13060,7 @@ const AWARDS_DATABASE = {
   86732: {
     title: "Red Psalm",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1972, won: true, person: "Miklos Jancso" }
+      { festival: "Cannes", category: "Best Director", year: 1972, won: true, person: "Miklos Jancso" , person_id: 137349 }
     ]
   },
   86829: {
@@ -13040,21 +13076,21 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2012, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2013, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2013, won: true, person: "Emmanuelle Riva" },
-      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Michael Haneke" }
+      { festival: "Oscar", category: "Best Actress", year: 2013, won: false , person: "Emmanuelle Riva", person_id: 267962 },
+      { festival: "BAFTA", category: "Best Actress", year: 2013, won: true, person: "Emmanuelle Riva" , person_id: 267962 },
+      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Michael Haneke" , person_id: 6011 }
     ]
   },
   87093: {
     title: "Big Eyes",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Amy Adams" }
+      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Amy Adams" , person_id: 9273 }
     ]
   },
   87125: {
     title: "The Butcher",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Stephane Audran" }
+      { festival: "BAFTA", category: "Best Actress", year: 1973, won: false, person: "Stephane Audran" , person_id: 19092 }
     ]
   },
   87208: {
@@ -13068,12 +13104,13 @@ const AWARDS_DATABASE = {
     title: "The Fixer",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1968, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1954, won: true, person: "Frank Sinatra", person_id: 4347 }]
   },
   87492: {
     title: "Foxcatcher",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2014, won: true, person: "Bennett Miller" },
+      { festival: "Cannes", category: "Best Director", year: 2014, won: true, person: "Bennett Miller" , person_id: 5345 },
       { festival: "Golden Globe", category: "Best Drama", year: 2015, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2014, won: false }
     ]
@@ -13081,12 +13118,12 @@ const AWARDS_DATABASE = {
   87827: {
     title: "Life of Pi",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2013, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2013, won: true , person: "Ang Lee", person_id: 1614 },
       { festival: "BAFTA", category: "Best Film", year: 2013, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2013, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Ang Lee" },
-      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Ang Lee" }
+      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Ang Lee" , person_id: 1614 },
+      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Ang Lee" , person_id: 1614 }
     ]
   },
   88284: {
@@ -13098,7 +13135,7 @@ const AWARDS_DATABASE = {
   88558: {
     title: "A Town Like Alice",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1956, won: true, person: "Peter Finch" }
+      { festival: "BAFTA", category: "Best Actor", year: 1956, won: true, person: "Peter Finch" , person_id: 29903 }
     ]
   },
   90299: {
@@ -13110,7 +13147,7 @@ const AWARDS_DATABASE = {
   90835: {
     title: "36 Chowringhee Lane",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Jennifer Kendal" }
+      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Jennifer Kendal" , person_id: 1013092 }
     ]
   },
   92283: {
@@ -13123,7 +13160,7 @@ const AWARDS_DATABASE = {
     title: "Summer Wishes Winter Dreams",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1973, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1975, won: true, person: "Joanne Woodward" }
+      { festival: "BAFTA", category: "Best Actress", year: 1975, won: true, person: "Joanne Woodward" , person_id: 109410 }
     ]
   },
   92432: {
@@ -13154,7 +13191,7 @@ const AWARDS_DATABASE = {
   94135: {
     title: "Yesterday's Enemy",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Stanley Baker" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Stanley Baker" , person_id: 67449 }
     ]
   },
   94529: {
@@ -13190,7 +13227,7 @@ const AWARDS_DATABASE = {
   96394: {
     title: "King & Country",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Tom Courtenay" }
+      { festival: "BAFTA", category: "Best Actor", year: 1964, won: false, person: "Tom Courtenay" , person_id: 14011 }
     ]
   },
   96712: {
@@ -13233,7 +13270,7 @@ const AWARDS_DATABASE = {
     title: "Rust and Bone",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2012, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Marion Cotillard" }
+      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Marion Cotillard" , person_id: 8293 }
     ]
   },
   97630: {
@@ -13242,22 +13279,22 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2013, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2013, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2012, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2013, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Kathryn Bigelow" },
-      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Jessica Chastain" },
-      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Kathryn Bigelow" }
+      { festival: "Oscar", category: "Best Actress", year: 2013, won: false , person: "Jessica Chastain", person_id: 83002 },
+      { festival: "Golden Globe", category: "Best Director", year: 2013, won: false, person: "Kathryn Bigelow" , person_id: 14392 },
+      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Jessica Chastain" , person_id: 83002 },
+      { festival: "BAFTA", category: "Best Director", year: 2013, won: false, person: "Kathryn Bigelow" , person_id: 14392 }
     ]
   },
   98364: {
     title: "The Actress",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Spencer Tracy" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Spencer Tracy" , person_id: 12147 }
     ]
   },
   98422: {
     title: "Face to Face",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Liv Ullmann" }
+      { festival: "BAFTA", category: "Best Actress", year: 1977, won: false, person: "Liv Ullmann" , person_id: 11916 }
     ]
   },
   98864: {
@@ -13294,7 +13331,7 @@ const AWARDS_DATABASE = {
   102081: {
     title: "The Key",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: true, person: "Trevor Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: true, person: "Trevor Howard" , person_id: 12726 }
     ]
   },
   102869: {
@@ -13330,7 +13367,7 @@ const AWARDS_DATABASE = {
   103689: {
     title: "Post Tenebras Lux",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2012, won: true, person: "Carlos Reygadas" },
+      { festival: "Cannes", category: "Best Director", year: 2012, won: true, person: "Carlos Reygadas" , person_id: 20660 },
       { festival: "Cannes", category: "Palme d'Or", year: 2012, won: false }
     ]
   },
@@ -13395,14 +13432,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 1952, won: false },
       { festival: "Venice", category: "Golden Lion", year: 1951, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Fredric March" },
-      { festival: "Golden Globe", category: "Best Director", year: 1951, won: true, person: "Laszlo Benedek" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Fredric March" , person_id: 13576 },
+      { festival: "Golden Globe", category: "Best Director", year: 1951, won: true, person: "Laszlo Benedek" , person_id: 89981 }
     ]
   },
   104633: {
     title: "Reds",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Diane Keaton" }
+      { festival: "BAFTA", category: "Best Actress", year: 1983, won: false, person: "Diane Keaton" , person_id: 3092 }
     ]
   },
   105406: {
@@ -13429,8 +13466,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Leonardo DiCaprio" },
-      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Martin Scorsese" }
+      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Leonardo DiCaprio" , person_id: 6193 },
+      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   107231: {
@@ -13442,13 +13479,13 @@ const AWARDS_DATABASE = {
   107285: {
     title: "Anna",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 1987, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 1987, won: false , person: "Sally Kirkland", person_id: 12134 }
     ]
   },
   107774: {
     title: "Pete 'n' Tillie",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1973, won: true, person: "Walter Matthau" }
+      { festival: "BAFTA", category: "Best Actor", year: 1973, won: true, person: "Walter Matthau" , person_id: 6837 }
     ]
   },
   109424: {
@@ -13457,9 +13494,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2014, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Tom Hanks" },
-      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Paul Greengrass" },
-      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Paul Greengrass" }
+      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Tom Hanks" , person_id: 31 },
+      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Paul Greengrass" , person_id: 25598 },
+      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "Paul Greengrass" , person_id: 25598 }
     ]
   },
   109441: {
@@ -13496,7 +13533,7 @@ const AWARDS_DATABASE = {
     title: "Hemingway's Adventures of a Young Man",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Martin Ritt" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Martin Ritt" , person_id: 18854 }
     ]
   },
   111815: {
@@ -13515,7 +13552,7 @@ const AWARDS_DATABASE = {
   112336: {
     title: "Hitchcock",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Helen Mirren" }
+      { festival: "BAFTA", category: "Best Actress", year: 2013, won: false, person: "Helen Mirren" , person_id: 15735 }
     ]
   },
   113012: {
@@ -13588,14 +13625,14 @@ const AWARDS_DATABASE = {
   118487: {
     title: "Forest of the Hanged",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1965, won: true, person: "Liviu Ciulei" }
+      { festival: "Cannes", category: "Best Director", year: 1965, won: true, person: "Liviu Ciulei" , person_id: 1200608 }
     ]
   },
   118955: {
     title: "The Chapman Report",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1962, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "George Cukor" }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "George Cukor" , person_id: 14674 }
     ]
   },
   119183: {
@@ -13613,7 +13650,7 @@ const AWARDS_DATABASE = {
   119904: {
     title: "The Heart of the Matter",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Trevor Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 1953, won: false, person: "Trevor Howard" , person_id: 12726 }
     ]
   },
   120467: {
@@ -13623,9 +13660,9 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2015, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2015, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Ralph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "Wes Anderson" },
-      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "Wes Anderson" }
+      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "Wes Anderson" , person_id: 5655 },
+      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "Wes Anderson" , person_id: 5655 }
     ]
   },
   120522: {
@@ -13650,13 +13687,15 @@ const AWARDS_DATABASE = {
     title: "Home Before Dark",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 1958, won: false }
-    ]
+    ,
+      { festival: "BAFTA", category: "Best Adapted Screenplay", year: 1986, won: true, person: "Richard Eyre; Charles Wood" }]
   },
   121354: {
     title: "The Great Man",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Ed Wynn" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Ed Wynn" , person_id: 5833 }
+    ,
+      { festival: "BAFTA", category: "Best Original Screenplay", year: 2010, won: true, person: "Mark Boal", person_id: 51686 }]
   },
   122671: {
     title: "Ole Dole Doff",
@@ -13715,7 +13754,7 @@ const AWARDS_DATABASE = {
   127688: {
     title: "Expresso Bongo",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Laurence Harvey" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Laurence Harvey" , person_id: 14729 }
     ]
   },
   128775: {
@@ -13730,8 +13769,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2013, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Bruce Dern" },
-      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Alexander Payne" }
+      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Bruce Dern" , person_id: 6905 },
+      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "Alexander Payne" , person_id: 13235 }
     ]
   },
   129734: {
@@ -13743,7 +13782,7 @@ const AWARDS_DATABASE = {
   130474: {
     title: "Young Cassidy",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: false, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   130544: {
@@ -13774,7 +13813,7 @@ const AWARDS_DATABASE = {
   133919: {
     title: "Scenes from a Marriage",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Liv Ullmann" }
+      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Liv Ullmann" , person_id: 11916 }
     ]
   },
   135473: {
@@ -13792,19 +13831,19 @@ const AWARDS_DATABASE = {
   139204: {
     title: "The Pickwick Papers",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "James Hayter" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "James Hayter" , person_id: 30769 }
     ]
   },
   140823: {
     title: "Saving Mr. Banks",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Emma Thompson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Emma Thompson" , person_id: 7056 }
     ]
   },
   145865: {
     title: "Harry Black",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "I.S. Johar" }
+      { festival: "BAFTA", category: "Best Actor", year: 1958, won: false, person: "I.S. Johar" , person_id: 35250 }
     ]
   },
   147747: {
@@ -13846,7 +13885,7 @@ const AWARDS_DATABASE = {
   152532: {
     title: "Dallas Buyers Club",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2014, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2014, won: true , person: "Matthew McConaughey", person_id: 10297 },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false }
     ]
   },
@@ -13878,7 +13917,7 @@ const AWARDS_DATABASE = {
   152737: {
     title: "August: Osage County",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2014, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2014, won: false , person: "Meryl Streep", person_id: 5064 }
     ]
   },
   152780: {
@@ -13890,7 +13929,7 @@ const AWARDS_DATABASE = {
   154380: {
     title: "God Needs Men",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Pierre Fresnay" }
+      { festival: "BAFTA", category: "Best Actor", year: 1952, won: false, person: "Pierre Fresnay" , person_id: 11546 }
     ]
   },
   154582: {
@@ -13902,7 +13941,7 @@ const AWARDS_DATABASE = {
   155451: {
     title: "The Bofors Gun",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Nicol Williamson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1968, won: false, person: "Nicol Williamson" , person_id: 51812 }
     ]
   },
   157827: {
@@ -13944,8 +13983,8 @@ const AWARDS_DATABASE = {
   160588: {
     title: "Blue Jasmine",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2014, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2014, won: true, person: "Cate Blanchett" }
+      { festival: "Oscar", category: "Best Actress", year: 2014, won: true , person: "Cate Blanchett", person_id: 112 },
+      { festival: "BAFTA", category: "Best Actress", year: 2014, won: true, person: "Cate Blanchett" , person_id: 112 }
     ]
   },
   160768: {
@@ -14020,11 +14059,11 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2014, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2014, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Christian Bale" },
-      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "David O. Russell" },
-      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Amy Adams" },
-      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "David O. Russell" }
+      { festival: "Oscar", category: "Best Actress", year: 2014, won: false , person: "Amy Adams", person_id: 9273 },
+      { festival: "BAFTA", category: "Best Actor", year: 2014, won: false, person: "Christian Bale" , person_id: 3894 },
+      { festival: "Golden Globe", category: "Best Director", year: 2014, won: false, person: "David O. Russell" , person_id: 17883 },
+      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Amy Adams" , person_id: 9273 },
+      { festival: "BAFTA", category: "Best Director", year: 2014, won: false, person: "David O. Russell" , person_id: 17883 }
     ]
   },
   169610: {
@@ -14036,13 +14075,13 @@ const AWARDS_DATABASE = {
   169618: {
     title: "No Love for Johnnie",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1961, won: true, person: "Peter Finch" }
+      { festival: "BAFTA", category: "Best Actor", year: 1961, won: true, person: "Peter Finch" , person_id: 29903 }
     ]
   },
   172535: {
     title: "The Trials of Oscar Wilde",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1960, won: true, person: "Peter Finch" }
+      { festival: "BAFTA", category: "Best Actor", year: 1960, won: true, person: "Peter Finch" , person_id: 29903 }
     ]
   },
   173893: {
@@ -14055,7 +14094,7 @@ const AWARDS_DATABASE = {
   173937: {
     title: "Life for Ruth",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Janet Munro" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Janet Munro" , person_id: 83129 }
     ]
   },
   175956: {
@@ -14122,7 +14161,7 @@ const AWARDS_DATABASE = {
   186935: {
     title: "Heli",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2013, won: true, person: "Amat Escalante" },
+      { festival: "Cannes", category: "Best Director", year: 2013, won: true, person: "Amat Escalante" , person_id: 56375 },
       { festival: "Cannes", category: "Palme d'Or", year: 2013, won: false }
     ]
   },
@@ -14165,7 +14204,7 @@ const AWARDS_DATABASE = {
   193321: {
     title: "The Deep Blue Sea",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Kenneth More" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Kenneth More" , person_id: 67676 }
     ]
   },
   194662: {
@@ -14221,13 +14260,13 @@ const AWARDS_DATABASE = {
   198796: {
     title: "Ten Thousand Days",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1967, won: true, person: "Ferenc Kosa" }
+      { festival: "Cannes", category: "Best Director", year: 1967, won: true, person: "Ferenc Kosa" , person_id: 1180630 }
     ]
   },
   198802: {
     title: "Lenin in Poland",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1966, won: true, person: "Sergei Yutkevich" }
+      { festival: "Cannes", category: "Best Director", year: 1966, won: true, person: "Sergei Yutkevich" , person_id: 24419 }
     ]
   },
   198828: {
@@ -14239,7 +14278,7 @@ const AWARDS_DATABASE = {
   198902: {
     title: "Chronicle of Flaming Years",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1961, won: true, person: "Yuliya Solntseva" }
+      { festival: "Cannes", category: "Best Director", year: 1961, won: true, person: "Yuliya Solntseva" , person_id: 29195 }
     ]
   },
   199177: {
@@ -14276,7 +14315,7 @@ const AWARDS_DATABASE = {
   203901: {
     title: "The Bespoke Overcoat",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Alfie Bass" }
+      { festival: "BAFTA", category: "Best Actor", year: 1955, won: false, person: "Alfie Bass" , person_id: 30119 }
     ]
   },
   205220: {
@@ -14285,8 +14324,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2014, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2014, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2013, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2014, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Judi Dench" }
+      { festival: "Oscar", category: "Best Actress", year: 2014, won: false , person: "Judi Dench", person_id: 5309 },
+      { festival: "BAFTA", category: "Best Actress", year: 2014, won: false, person: "Judi Dench" , person_id: 5309 }
     ]
   },
   205596: {
@@ -14295,7 +14334,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2015, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2015, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Benedict Cumberbatch" }
+      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Benedict Cumberbatch" , person_id: 71580 }
     ]
   },
   209840: {
@@ -14307,9 +14346,9 @@ const AWARDS_DATABASE = {
   210577: {
     title: "Gone Girl",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2015, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "David Fincher" },
-      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Rosamund Pike" }
+      { festival: "Oscar", category: "Best Actress", year: 2015, won: false , person: "Rosamund Pike", person_id: 10882 },
+      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "David Fincher" , person_id: 7467 },
+      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Rosamund Pike" , person_id: 10882 }
     ]
   },
   211052: {
@@ -14346,7 +14385,7 @@ const AWARDS_DATABASE = {
     title: "Two Days One Night",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2014, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2015, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2015, won: false , person: "Marion Cotillard", person_id: 8293 }
     ]
   },
   224141: {
@@ -14376,8 +14415,8 @@ const AWARDS_DATABASE = {
   228970: {
     title: "Wild",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Reese Witherspoon" }
+      { festival: "Oscar", category: "Best Actress", year: 2015, won: false , person: "Reese Witherspoon", person_id: 368 },
+      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Reese Witherspoon" , person_id: 368 }
     ]
   },
   234200: {
@@ -14395,7 +14434,7 @@ const AWARDS_DATABASE = {
   238737: {
     title: "Lease of Life",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Robert Donat" }
+      { festival: "BAFTA", category: "Best Actor", year: 1954, won: false, person: "Robert Donat" , person_id: 3609 }
     ]
   },
   239563: {
@@ -14407,7 +14446,7 @@ const AWARDS_DATABASE = {
   242582: {
     title: "Nightcrawler",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Jake Gyllenhaal" }
+      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Jake Gyllenhaal" , person_id: 131 }
     ]
   },
   244761: {
@@ -14420,13 +14459,13 @@ const AWARDS_DATABASE = {
     title: "Whiplash",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "Damien Chazelle" }
+      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "Damien Chazelle" , person_id: 136495 }
     ]
   },
   245181: {
     title: "The Group",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Joan Hackett" }
+      { festival: "BAFTA", category: "Best Actress", year: 1967, won: false, person: "Joan Hackett" , person_id: 18588 }
     ]
   },
   245184: {
@@ -14450,7 +14489,7 @@ const AWARDS_DATABASE = {
   245786: {
     title: "Inadmissible Evidence",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Nicol Williamson" }
+      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Nicol Williamson" , person_id: 51812 }
     ]
   },
   246860: {
@@ -14462,7 +14501,7 @@ const AWARDS_DATABASE = {
   253450: {
     title: "The Assassin",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2015, won: true, person: "Hou Hsiao-hsien" },
+      { festival: "Cannes", category: "Best Director", year: 2015, won: true, person: "Hou Hsiao-hsien" , person_id: 64992 },
       { festival: "Cannes", category: "Palme d'Or", year: 2015, won: false }
     ]
   },
@@ -14482,7 +14521,7 @@ const AWARDS_DATABASE = {
   257181: {
     title: "The Wild and the Willing",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Virginia Maskell" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Virginia Maskell" , person_id: 151040 }
     ]
   },
   257677: {
@@ -14503,16 +14542,16 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2016, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2016, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2015, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2016, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Todd Haynes" },
-      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Cate Blanchett" },
-      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Todd Haynes" }
+      { festival: "Oscar", category: "Best Actress", year: 2016, won: false , person: "Cate Blanchett", person_id: 112 },
+      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Todd Haynes" , person_id: 16863 },
+      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Cate Blanchett" , person_id: 112 },
+      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Todd Haynes" , person_id: 16863 }
     ]
   },
   261004: {
     title: "Persona",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Bibi Andersson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Bibi Andersson" , person_id: 6657 }
     ]
   },
   262617: {
@@ -14524,7 +14563,7 @@ const AWARDS_DATABASE = {
   262702: {
     title: "Monster",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Charlize Theron" }
+      { festival: "BAFTA", category: "Best Actress", year: 2005, won: false, person: "Charlize Theron" , person_id: 6885 }
     ]
   },
   262958: {
@@ -14562,8 +14601,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2016, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2016, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2016, won: true, person: "Brie Larson" }
+      { festival: "Oscar", category: "Best Actress", year: 2016, won: true , person: "Brie Larson", person_id: 60073 },
+      { festival: "BAFTA", category: "Best Actress", year: 2016, won: true, person: "Brie Larson" , person_id: 60073 }
     ]
   },
   264656: {
@@ -14619,14 +14658,14 @@ const AWARDS_DATABASE = {
   266856: {
     title: "The Theory of Everything",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2015, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2015, won: true , person: "Eddie Redmayne", person_id: 37632 },
       { festival: "BAFTA", category: "Best Film", year: 2015, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2015, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2015, won: true, person: "Eddie Redmayne" },
-      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Felicity Jones" },
-      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "James Marsh" }
+      { festival: "Oscar", category: "Best Actress", year: 2015, won: false , person: "Felicity Jones", person_id: 72855 },
+      { festival: "BAFTA", category: "Best Actor", year: 2015, won: true, person: "Eddie Redmayne" , person_id: 37632 },
+      { festival: "BAFTA", category: "Best Actress", year: 2015, won: false, person: "Felicity Jones" , person_id: 72855 },
+      { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "James Marsh" , person_id: 76998 }
     ]
   },
   267480: {
@@ -14644,7 +14683,7 @@ const AWARDS_DATABASE = {
   268554: {
     title: "Windom's Way",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Peter Finch" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Peter Finch" , person_id: 29903 }
     ]
   },
   269031: {
@@ -14662,7 +14701,7 @@ const AWARDS_DATABASE = {
   269298: {
     title: "Manuela",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Trevor Howard" }
+      { festival: "BAFTA", category: "Best Actor", year: 1957, won: false, person: "Trevor Howard" , person_id: 12726 }
     ]
   },
   269325: {
@@ -14688,14 +14727,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2015, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2014, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "Ava DuVernay" }
+      { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "Ava DuVernay" , person_id: 929825 }
     ]
   },
   274479: {
     title: "Joy",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2016, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2016, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2016, won: false , person: "Jennifer Lawrence", person_id: 72129 }
     ]
   },
   278700: {
@@ -14708,11 +14747,11 @@ const AWARDS_DATABASE = {
     title: "The Revenant",
     awards: [
       { festival: "Oscar", category: "Best Director", year: 2016, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2016, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2016, won: true , person: "Leonardo DiCaprio", person_id: 6193 },
       { festival: "BAFTA", category: "Best Film", year: 2016, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2016, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2016, won: true, person: "Leonardo DiCaprio" },
+      { festival: "BAFTA", category: "Best Actor", year: 2016, won: true, person: "Leonardo DiCaprio" , person_id: 6193 },
       { festival: "Golden Globe", category: "Best Director", year: 2016, won: true, person: "Alejandro G. Iñárritu" },
       { festival: "BAFTA", category: "Best Director", year: 2016, won: true, person: "Alejandro G. Inarritu" }
     ]
@@ -14733,8 +14772,8 @@ const AWARDS_DATABASE = {
   284293: {
     title: "Still Alice",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2015, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2015, won: true, person: "Julianne Moore" }
+      { festival: "Oscar", category: "Best Actress", year: 2015, won: true , person: "Julianne Moore", person_id: 1231 },
+      { festival: "BAFTA", category: "Best Actress", year: 2015, won: true, person: "Julianne Moore" , person_id: 1231 }
     ]
   },
   286217: {
@@ -14742,9 +14781,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2016, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Matt Damon" },
-      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Ridley Scott" },
-      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Ridley Scott" }
+      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Matt Damon" , person_id: 1892 },
+      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Ridley Scott" , person_id: 578 },
+      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Ridley Scott" , person_id: 578 }
     ]
   },
   287854: {
@@ -14762,7 +14801,7 @@ const AWARDS_DATABASE = {
   289450: {
     title: "Driving Miss Daisy",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1991, won: true, person: "Jessica Tandy" }
+      { festival: "BAFTA", category: "Best Actress", year: 1991, won: true, person: "Jessica Tandy" , person_id: 5698 }
     ]
   },
   290098: {
@@ -14787,26 +14826,26 @@ const AWARDS_DATABASE = {
     title: "Brooklyn",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2016, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Saoirse Ronan" }
+      { festival: "Oscar", category: "Best Actress", year: 2016, won: false , person: "Saoirse Ronan", person_id: 36592 },
+      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Saoirse Ronan" , person_id: 36592 }
     ]
   },
   291727: {
     title: "Rustin",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Colman Domingo" }
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Colman Domingo" , person_id: 91671 }
     ]
   },
   292039: {
     title: "The Great Game",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 1954, won: true, person: "Rene Clement" }
+      { festival: "Cannes", category: "Best Director", year: 1954, won: true, person: "Rene Clement" , person_id: 9740 }
     ]
   },
   294016: {
     title: "Trumbo",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Bryan Cranston" }
+      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Bryan Cranston" , person_id: 17419 }
     ]
   },
   296098: {
@@ -14814,7 +14853,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2016, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Steven Spielberg" }
+      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   301365: {
@@ -14826,8 +14865,8 @@ const AWARDS_DATABASE = {
   306819: {
     title: "The Danish Girl",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Eddie Redmayne" },
-      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Alicia Vikander" }
+      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Eddie Redmayne" , person_id: 37632 },
+      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Alicia Vikander" , person_id: 227454 }
     ]
   },
   307381: {
@@ -14845,21 +14884,21 @@ const AWARDS_DATABASE = {
   311291: {
     title: "45 Years",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2016, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2016, won: false , person: "Charlotte Rampling", person_id: 44079 }
     ]
   },
   313369: {
     title: "La La Land",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2017, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2017, won: true , person: "Damien Chazelle", person_id: 136495 },
       { festival: "BAFTA", category: "Best Film", year: 2017, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2017, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2016, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2017, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Ryan Gosling" },
-      { festival: "Golden Globe", category: "Best Director", year: 2017, won: true, person: "Damien Chazelle" },
-      { festival: "BAFTA", category: "Best Actress", year: 2017, won: true, person: "Emma Stone" },
-      { festival: "BAFTA", category: "Best Director", year: 2017, won: true, person: "Damien Chazelle" }
+      { festival: "Oscar", category: "Best Actress", year: 2017, won: true , person: "Emma Stone", person_id: 54693 },
+      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Ryan Gosling" , person_id: 30614 },
+      { festival: "Golden Globe", category: "Best Director", year: 2017, won: true, person: "Damien Chazelle" , person_id: 136495 },
+      { festival: "BAFTA", category: "Best Actress", year: 2017, won: true, person: "Emma Stone" , person_id: 54693 },
+      { festival: "BAFTA", category: "Best Director", year: 2017, won: true, person: "Damien Chazelle" , person_id: 136495 }
     ]
   },
   314365: {
@@ -14868,7 +14907,7 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2016, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2016, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2016, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Tom McCarthy" }
+      { festival: "Golden Globe", category: "Best Director", year: 2016, won: false, person: "Tom McCarthy" , person_id: 17867 }
     ]
   },
   314388: {
@@ -14893,8 +14932,8 @@ const AWARDS_DATABASE = {
     title: "Florence Foster Jenkins",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2017, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Meryl Streep" }
+      { festival: "Oscar", category: "Best Actress", year: 2017, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Meryl Streep" , person_id: 5064 }
     ]
   },
   315846: {
@@ -14921,7 +14960,7 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2016, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2016, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Adam McKay" }
+      { festival: "BAFTA", category: "Best Director", year: 2016, won: false, person: "Adam McKay" , person_id: 55710 }
     ]
   },
   319993: {
@@ -14945,7 +14984,7 @@ const AWARDS_DATABASE = {
   321697: {
     title: "Steve Jobs",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Michael Fassbender" }
+      { festival: "BAFTA", category: "Best Actor", year: 2016, won: false, person: "Michael Fassbender" , person_id: 17288 }
     ]
   },
   324786: {
@@ -14953,14 +14992,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2017, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2016, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Andrew Garfield" },
-      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Mel Gibson" }
+      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Andrew Garfield" , person_id: 37625 },
+      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Mel Gibson" , person_id: 2461 }
     ]
   },
   328589: {
     title: "The Lady in the Van",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 2016, won: false, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   329712: {
@@ -14980,8 +15019,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2017, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2016, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Amy Adams" },
-      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Denis Villeneuve" }
+      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Amy Adams" , person_id: 9273 },
+      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Denis Villeneuve" , person_id: 137427 }
     ]
   },
   330294: {
@@ -14994,8 +15033,8 @@ const AWARDS_DATABASE = {
     title: "Little Women",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2020, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Saoirse Ronan" }
+      { festival: "Oscar", category: "Best Actress", year: 2020, won: false , person: "Saoirse Ronan", person_id: 36592 },
+      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Saoirse Ronan" , person_id: 36592 }
     ]
   },
   332562: {
@@ -15004,11 +15043,11 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2019, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2019, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Bradley Cooper" },
-      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Bradley Cooper" },
-      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Lady Gaga" },
-      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Bradley Cooper" }
+      { festival: "Oscar", category: "Best Actress", year: 2019, won: false , person: "Lady Gaga", person_id: 237405 },
+      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Bradley Cooper" , person_id: 51329 },
+      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Bradley Cooper" , person_id: 51329 },
+      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Lady Gaga" , person_id: 237405 },
+      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Bradley Cooper" , person_id: 51329 }
     ]
   },
   332872: {
@@ -15020,19 +15059,19 @@ const AWARDS_DATABASE = {
   334533: {
     title: "Captain Fantastic",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Viggo Mortensen" }
+      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Viggo Mortensen" , person_id: 110 }
     ]
   },
   334541: {
     title: "Manchester by the Sea",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2017, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2017, won: true , person: "Casey Affleck", person_id: 1893 },
       { festival: "BAFTA", category: "Best Film", year: 2017, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2017, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2016, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2017, won: true, person: "Casey Affleck" },
-      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Kenneth Lonergan" },
-      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Kenneth Lonergan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2017, won: true, person: "Casey Affleck" , person_id: 1893 },
+      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Kenneth Lonergan" , person_id: 30711 },
+      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Kenneth Lonergan" , person_id: 30711 }
     ]
   },
   334543: {
@@ -15045,7 +15084,7 @@ const AWARDS_DATABASE = {
   335984: {
     title: "Blade Runner 2049",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Denis Villeneuve" }
+      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Denis Villeneuve" , person_id: 137427 }
     ]
   },
   336050: {
@@ -15071,7 +15110,7 @@ const AWARDS_DATABASE = {
     title: "Elle",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2016, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2017, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2017, won: false , person: "Isabelle Huppert", person_id: 17882 }
     ]
   },
   338189: {
@@ -15092,7 +15131,7 @@ const AWARDS_DATABASE = {
     title: "Loving",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2016, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2017, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2017, won: false , person: "Ruth Negga", person_id: 17018 }
     ]
   },
   340481: {
@@ -15117,23 +15156,23 @@ const AWARDS_DATABASE = {
   340613: {
     title: "The Wife",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Glenn Close" }
+      { festival: "Oscar", category: "Best Actress", year: 2019, won: false , person: "Glenn Close", person_id: 515 },
+      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Glenn Close" , person_id: 515 }
     ]
   },
   340666: {
     title: "Nocturnal Animals",
     awards: [
       { festival: "Venice", category: "Silver Lion (Grand Jury)", year: 2016, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Jake Gyllenhaal" },
-      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Tom Ford" },
-      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Tom Ford" }
+      { festival: "BAFTA", category: "Best Actor", year: 2017, won: false, person: "Jake Gyllenhaal" , person_id: 131 },
+      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Tom Ford" , person_id: 120615 },
+      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Tom Ford" , person_id: 120615 }
     ]
   },
   340676: {
     title: "Personal Shopper",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2016, won: true, person: "Olivier Assayas" },
+      { festival: "Cannes", category: "Best Director", year: 2016, won: true, person: "Olivier Assayas" , person_id: 21678 },
       { festival: "Cannes", category: "Palme d'Or", year: 2016, won: false }
     ]
   },
@@ -15146,7 +15185,7 @@ const AWARDS_DATABASE = {
   345550: {
     title: "The Secret Life of an American Wife",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Walter Matthau" }
+      { festival: "BAFTA", category: "Best Actor", year: 1969, won: false, person: "Walter Matthau" , person_id: 6837 }
     ]
   },
   345628: {
@@ -15158,7 +15197,7 @@ const AWARDS_DATABASE = {
   346685: {
     title: "The Girl on the Train",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Emily Blunt" }
+      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Emily Blunt" , person_id: 5081 }
     ]
   },
   346698: {
@@ -15166,8 +15205,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2024, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Greta Gerwig" },
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Margot Robbie" }
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Greta Gerwig" , person_id: 45400 },
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Margot Robbie" , person_id: 234352 }
     ]
   },
   348672: {
@@ -15179,7 +15218,7 @@ const AWARDS_DATABASE = {
   349874: {
     title: "Living",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Takashi Shimura" }
+      { festival: "BAFTA", category: "Best Actor", year: 1959, won: false, person: "Takashi Shimura" , person_id: 4144558 }
     ]
   },
   352162: {
@@ -15198,7 +15237,7 @@ const AWARDS_DATABASE = {
   359628: {
     title: "Graduation",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2016, won: true, person: "Cristian Mungiu" },
+      { festival: "Cannes", category: "Best Director", year: 2016, won: true, person: "Cristian Mungiu" , person_id: 20657 },
       { festival: "Cannes", category: "Palme d'Or", year: 2016, won: false }
     ]
   },
@@ -15214,17 +15253,17 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2018, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2018, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2018, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Martin McDonagh" },
-      { festival: "BAFTA", category: "Best Actress", year: 2018, won: true, person: "Frances McDormand" },
-      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Martin McDonagh" }
+      { festival: "Oscar", category: "Best Actress", year: 2018, won: true , person: "Frances McDormand", person_id: 3910 },
+      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Martin McDonagh" , person_id: 54472 },
+      { festival: "BAFTA", category: "Best Actress", year: 2018, won: true, person: "Frances McDormand" , person_id: 3910 },
+      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Martin McDonagh" , person_id: 54472 }
     ]
   },
   360731: {
     title: "Pretty Woman",
     awards: [
       { festival: "Oscar", category: "Best Actress", year: 1991, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Julia Roberts" }
+      { festival: "BAFTA", category: "Best Actress", year: 1991, won: false, person: "Julia Roberts" , person_id: 1204 }
     ]
   },
   361743: {
@@ -15237,7 +15276,7 @@ const AWARDS_DATABASE = {
   365499: {
     title: "Days of Wine and Roses",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Lee Remick" }
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: false, person: "Lee Remick" , person_id: 855 }
     ]
   },
   369557: {
@@ -15281,7 +15320,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2016, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Ken Loach" }
+      { festival: "BAFTA", category: "Best Director", year: 2017, won: false, person: "Ken Loach" , person_id: 15488 }
     ]
   },
   374475: {
@@ -15296,8 +15335,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2018, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2018, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Christopher Nolan" },
-      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Christopher Nolan" }
+      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Christopher Nolan" , person_id: 525 },
+      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Christopher Nolan" , person_id: 525 }
     ]
   },
   375262: {
@@ -15307,9 +15346,9 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2019, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2019, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2019, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2019, won: true, person: "Olivia Colman" },
-      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Yorgos Lanthimos" }
+      { festival: "Oscar", category: "Best Actress", year: 2019, won: true , person: "Olivia Colman", person_id: 39187 },
+      { festival: "BAFTA", category: "Best Actress", year: 2019, won: true, person: "Olivia Colman" , person_id: 39187 },
+      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Yorgos Lanthimos" , person_id: 122423 }
     ]
   },
   375315: {
@@ -15327,8 +15366,8 @@ const AWARDS_DATABASE = {
   376866: {
     title: "Jackie",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Natalie Portman" }
+      { festival: "Oscar", category: "Best Actress", year: 2017, won: false , person: "Natalie Portman", person_id: 524 },
+      { festival: "BAFTA", category: "Best Actress", year: 2017, won: false, person: "Natalie Portman" , person_id: 524 }
     ]
   },
   376867: {
@@ -15337,13 +15376,13 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2017, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2017, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2017, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Barry Jenkins" }
+      { festival: "Golden Globe", category: "Best Director", year: 2017, won: false, person: "Barry Jenkins" , person_id: 92784 }
     ]
   },
   377068: {
     title: "Funny Girl",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Barbra Streisand" }
+      { festival: "BAFTA", category: "Best Actress", year: 1970, won: false, person: "Barbra Streisand" , person_id: 10400 }
     ]
   },
   377151: {
@@ -15410,8 +15449,8 @@ const AWARDS_DATABASE = {
     title: "I Tonya",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2018, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2018, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Margot Robbie" }
+      { festival: "Oscar", category: "Best Actress", year: 2018, won: false , person: "Margot Robbie", person_id: 234352 },
+      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Margot Robbie" , person_id: 234352 }
     ]
   },
   390401: {
@@ -15425,8 +15464,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2018, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2018, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Saoirse Ronan" }
+      { festival: "Oscar", category: "Best Actress", year: 2018, won: false , person: "Saoirse Ronan", person_id: 36592 },
+      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Saoirse Ronan" , person_id: 36592 }
     ]
   },
   392269: {
@@ -15456,7 +15495,7 @@ const AWARDS_DATABASE = {
   394741: {
     title: "Stan & Ollie",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Steve Coogan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Steve Coogan" , person_id: 4581 }
     ]
   },
   396398: {
@@ -15474,8 +15513,8 @@ const AWARDS_DATABASE = {
   398174: {
     title: "Film Stars Don't Die in Liverpool",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Jamie Bell" },
-      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Annette Bening" }
+      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Jamie Bell" , person_id: 478 },
+      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Annette Bening" , person_id: 516 }
     ]
   },
   398181: {
@@ -15490,8 +15529,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2018, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2018, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Timothée Chalamet" },
-      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Luca Guadagnino" }
+      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Timothée Chalamet" , person_id: 1190668 },
+      { festival: "BAFTA", category: "Best Director", year: 2018, won: false, person: "Luca Guadagnino" , person_id: 78160 }
     ]
   },
   398978: {
@@ -15500,14 +15539,14 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2020, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2020, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Martin Scorsese" },
-      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Martin Scorsese" }
+      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Martin Scorsese" , person_id: 1032 },
+      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   399019: {
     title: "The Beguiled",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2017, won: true, person: "Sofia Coppola" },
+      { festival: "Cannes", category: "Best Director", year: 2017, won: true, person: "Sofia Coppola" , person_id: 1769 },
       { festival: "Cannes", category: "Palme d'Or", year: 2017, won: false }
     ]
   },
@@ -15521,14 +15560,14 @@ const AWARDS_DATABASE = {
     title: "The Shape of Water",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2018, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2018, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2018, won: true , person: "Guillermo del Toro", person_id: 10828 },
       { festival: "Venice", category: "Golden Lion", year: 2017, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2018, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2018, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2018, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2018, won: true, person: "Guillermo del Toro" },
-      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Sally Hawkins" },
-      { festival: "BAFTA", category: "Best Director", year: 2018, won: true, person: "Guillermo del Toro" }
+      { festival: "Oscar", category: "Best Actress", year: 2018, won: false , person: "Sally Hawkins", person_id: 39658 },
+      { festival: "Golden Globe", category: "Best Director", year: 2018, won: true, person: "Guillermo del Toro" , person_id: 10828 },
+      { festival: "BAFTA", category: "Best Actress", year: 2018, won: false, person: "Sally Hawkins" , person_id: 39658 },
+      { festival: "BAFTA", category: "Best Director", year: 2018, won: true, person: "Guillermo del Toro" , person_id: 10828 }
     ]
   },
   399057: {
@@ -15552,17 +15591,17 @@ const AWARDS_DATABASE = {
   399404: {
     title: "Darkest Hour",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2018, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2018, won: true , person: "Gary Oldman", person_id: 64 },
       { festival: "BAFTA", category: "Best Film", year: 2018, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2018, won: true, person: "Gary Oldman" }
+      { festival: "BAFTA", category: "Best Actor", year: 2018, won: true, person: "Gary Oldman" , person_id: 64 }
     ]
   },
   400617: {
     title: "Phantom Thread",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Daniel Day-Lewis" }
+      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Daniel Day-Lewis" , person_id: 11856 }
     ]
   },
   400650: {
@@ -15580,7 +15619,7 @@ const AWARDS_DATABASE = {
   401469: {
     title: "Widows",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Viola Davis" }
+      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Viola Davis" , person_id: 19492 }
     ]
   },
   401545: {
@@ -15592,15 +15631,15 @@ const AWARDS_DATABASE = {
   401847: {
     title: "Can You Ever Forgive Me?",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Melissa McCarthy" }
+      { festival: "Oscar", category: "Best Actress", year: 2019, won: false , person: "Melissa McCarthy", person_id: 55536 },
+      { festival: "BAFTA", category: "Best Actress", year: 2019, won: false, person: "Melissa McCarthy" , person_id: 55536 }
     ]
   },
   402431: {
     title: "Wicked",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Cynthia Erivo" }
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Cynthia Erivo" , person_id: 1765068 }
     ]
   },
   403300: {
@@ -15637,7 +15676,8 @@ const AWARDS_DATABASE = {
     title: "Redoubtable",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2017, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1960, won: true, person: "Hugh Griffith", person_id: 10021 }]
   },
   418472: {
     title: "The Wild Pear Tree",
@@ -15650,13 +15690,13 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2018, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Daniel Kaluuya" }
+      { festival: "BAFTA", category: "Best Actor", year: 2018, won: false, person: "Daniel Kaluuya" , person_id: 206919 }
     ]
   },
   419886: {
     title: "Quartet",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Maggie Smith" }
+      { festival: "BAFTA", category: "Best Actress", year: 1982, won: false, person: "Maggie Smith" , person_id: 10978 }
     ]
   },
   423646: {
@@ -15668,29 +15708,29 @@ const AWARDS_DATABASE = {
   424277: {
     title: "Annette",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2021, won: true, person: "Leos Carax" },
+      { festival: "Cannes", category: "Best Director", year: 2021, won: true, person: "Leos Carax" , person_id: 27977 },
       { festival: "Cannes", category: "Palme d'Or", year: 2021, won: false }
     ]
   },
   424694: {
     title: "Bohemian Rhapsody",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2019, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2019, won: true , person: "Rami Malek", person_id: 17838 },
       { festival: "Golden Globe", category: "Best Drama", year: 2019, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2019, won: true, person: "Rami Malek" }
+      { festival: "BAFTA", category: "Best Actor", year: 2019, won: true, person: "Rami Malek" , person_id: 17838 }
     ]
   },
   426426: {
     title: "Roma",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2019, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2019, won: true , person: "Alfonso Cuarón", person_id: 11218 },
       { festival: "Venice", category: "Golden Lion", year: 2018, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2019, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2019, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2019, won: true, person: "Alfonso Cuarón" },
-      { festival: "BAFTA", category: "Best Director", year: 2019, won: true, person: "Alfonso Cuaron" }
+      { festival: "Oscar", category: "Best Actress", year: 2019, won: false , person: "Yalitza Aparicio", person_id: 1775557 },
+      { festival: "Golden Globe", category: "Best Director", year: 2019, won: true, person: "Alfonso Cuarón" , person_id: 11218 },
+      { festival: "BAFTA", category: "Best Director", year: 2019, won: true, person: "Alfonso Cuaron" , person_id: 11218 }
     ]
   },
   429174: {
@@ -15705,8 +15745,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2019, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Christian Bale" },
-      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Adam McKay" }
+      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Christian Bale" , person_id: 3894 },
+      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Adam McKay" , person_id: 55710 }
     ]
   },
   429199: {
@@ -15726,7 +15766,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2015, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2015, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Michael Keaton" },
+      { festival: "BAFTA", category: "Best Actor", year: 2015, won: false, person: "Michael Keaton" , person_id: 2232 },
       { festival: "Golden Globe", category: "Best Director", year: 2015, won: false, person: "Alejandro G. Iñárritu" },
       { festival: "BAFTA", category: "Best Director", year: 2015, won: false, person: "Alejandro G. Inarritu" }
     ]
@@ -15748,7 +15788,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2022, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2022, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Denis Villeneuve" }
+      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Denis Villeneuve" , person_id: 137427 }
     ]
   },
   440161: {
@@ -15760,7 +15800,7 @@ const AWARDS_DATABASE = {
   440298: {
     title: "Cold War",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Pawel Pawlikowski" }
+      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Pawel Pawlikowski" , person_id: 64194 }
     ]
   },
   441393: {
@@ -15772,7 +15812,7 @@ const AWARDS_DATABASE = {
   442472: {
     title: "In Harm's Way",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1966, won: true, person: "Patricia Neal" }
+      { festival: "BAFTA", category: "Best Actress", year: 1966, won: true, person: "Patricia Neal" , person_id: 1934 }
     ]
   },
   442947: {
@@ -15817,14 +15857,14 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2018, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2017, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2018, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Steven Spielberg" }
+      { festival: "Oscar", category: "Best Actress", year: 2018, won: false , person: "Meryl Streep", person_id: 5064 },
+      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   446791: {
     title: "All the Money in the World",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Ridley Scott" }
+      { festival: "Golden Globe", category: "Best Director", year: 2018, won: false, person: "Ridley Scott" , person_id: 578 }
     ]
   },
   451945: {
@@ -15859,44 +15899,44 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2020, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Leonardo DiCaprio" },
-      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Quentin Tarantino" },
-      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Quentin Tarantino" }
+      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Leonardo DiCaprio" , person_id: 6193 },
+      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Quentin Tarantino" , person_id: 138 },
+      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Quentin Tarantino" , person_id: 138 }
     ]
   },
   466420: {
     title: "Killers of the Flower Moon",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Director", year: 2024, won: false },
+      { festival: "Oscar", category: "Best Director", year: 2024, won: false , person: "Martin Scorsese", person_id: 1032 },
       { festival: "BAFTA", category: "Best Film", year: 2024, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2024, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Martin Scorsese" }
+      { festival: "Oscar", category: "Best Actress", year: 2024, won: false , person: "Lily Gladstone", person_id: 1183917 },
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Martin Scorsese" , person_id: 1032 }
     ]
   },
   467244: {
     title: "The Zone of Interest",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Director", year: 2024, won: false },
+      { festival: "Oscar", category: "Best Director", year: 2024, won: false , person: "Jonathan Glazer", person_id: 66728 },
       { festival: "Cannes", category: "Grand Prix", year: 2023, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2023, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Jonathan Glazer" }
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Jonathan Glazer" , person_id: 66728 }
     ]
   },
   475557: {
     title: "Joker",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2020, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2020, won: true , person: "Joaquin Phoenix", person_id: 73421 },
       { festival: "Venice", category: "Golden Lion", year: 2019, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2020, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2020, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2020, won: true, person: "Joaquin Phoenix" },
-      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Todd Phillips" },
-      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Todd Phillips" }
+      { festival: "BAFTA", category: "Best Actor", year: 2020, won: true, person: "Joaquin Phoenix" , person_id: 73421 },
+      { festival: "Golden Globe", category: "Best Director", year: 2020, won: false, person: "Todd Phillips" , person_id: 57130 },
+      { festival: "BAFTA", category: "Best Director", year: 2020, won: false, person: "Todd Phillips" , person_id: 57130 }
     ]
   },
   475930: {
@@ -15926,7 +15966,7 @@ const AWARDS_DATABASE = {
   482981: {
     title: "Wild Rose",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Jessie Buckley" }
+      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Jessie Buckley" , person_id: 1498158 }
     ]
   },
   483184: {
@@ -15949,8 +15989,8 @@ const AWARDS_DATABASE = {
       { festival: "Golden Globe", category: "Best Drama", year: 2019, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2018, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2018, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Spike Lee" },
-      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Spike Lee" }
+      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Spike Lee" , person_id: 5281 },
+      { festival: "BAFTA", category: "Best Director", year: 2019, won: false, person: "Spike Lee" , person_id: 5281 }
     ]
   },
   487850: {
@@ -15965,15 +16005,15 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2019, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2019, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2019, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Viggo Mortensen" },
-      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Peter Farrelly" }
+      { festival: "BAFTA", category: "Best Actor", year: 2019, won: false, person: "Viggo Mortensen" , person_id: 110 },
+      { festival: "Golden Globe", category: "Best Director", year: 2019, won: false, person: "Peter Farrelly" , person_id: 7396 }
     ]
   },
   491283: {
     title: "Judy",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2020, won: true },
-      { festival: "BAFTA", category: "Best Actress", year: 2020, won: true, person: "Renee Zellweger" }
+      { festival: "Oscar", category: "Best Actress", year: 2020, won: true , person: "Renée Zellweger", person_id: 9137 },
+      { festival: "BAFTA", category: "Best Actress", year: 2020, won: true, person: "Renee Zellweger" , person_id: 9137 }
     ]
   },
   492188: {
@@ -15981,9 +16021,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2020, won: false },
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2020, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Adam Driver" },
-      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Scarlett Johansson" }
+      { festival: "Oscar", category: "Best Actress", year: 2020, won: false , person: "Scarlett Johansson", person_id: 1245 },
+      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Adam Driver" , person_id: 1023139 },
+      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Scarlett Johansson" , person_id: 1245 }
     ]
   },
   493514: {
@@ -16045,7 +16085,7 @@ const AWARDS_DATABASE = {
   502033: {
     title: "Sound of Metal",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Riz Ahmed" }
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Riz Ahmed" , person_id: 53240 }
     ]
   },
   502897: {
@@ -16076,7 +16116,7 @@ const AWARDS_DATABASE = {
     title: "Rocketman",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2020, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Taron Egerton" }
+      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Taron Egerton" , person_id: 1303037 }
     ]
   },
   505026: {
@@ -16100,7 +16140,7 @@ const AWARDS_DATABASE = {
   506528: {
     title: "Harriet",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2020, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2020, won: false , person: "Cynthia Erivo", person_id: 1765068 }
     ]
   },
   509364: {
@@ -16113,7 +16153,7 @@ const AWARDS_DATABASE = {
     title: "West Side Story",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2022, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Steven Spielberg" }
+      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   511819: {
@@ -16133,7 +16173,7 @@ const AWARDS_DATABASE = {
   517088: {
     title: "Being the Ricardos",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2022, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2022, won: false , person: "Nicole Kidman", person_id: 2227 }
     ]
   },
   517104: {
@@ -16189,7 +16229,7 @@ const AWARDS_DATABASE = {
   522098: {
     title: "Babyteeth",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Shannon Murphy" }
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Shannon Murphy" , person_id: 1457482 }
     ]
   },
   522369: {
@@ -16209,7 +16249,7 @@ const AWARDS_DATABASE = {
     title: "Maestro",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actor", year: 2024, won: false }
+      { festival: "Oscar", category: "Best Actor", year: 2024, won: false , person: "Bradley Cooper", person_id: 51329 }
     ]
   },
   523627: {
@@ -16221,8 +16261,8 @@ const AWARDS_DATABASE = {
   525661: {
     title: "Bombshell",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2020, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Charlize Theron" }
+      { festival: "Oscar", category: "Best Actress", year: 2020, won: false , person: "Charlize Theron", person_id: 6885 },
+      { festival: "BAFTA", category: "Best Actress", year: 2020, won: false, person: "Charlize Theron" , person_id: 6885 }
     ]
   },
   528888: {
@@ -16235,7 +16275,7 @@ const AWARDS_DATABASE = {
     title: "Oliver!",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 1969, won: true },
-      { festival: "Oscar", category: "Best Director", year: 1969, won: true }
+      { festival: "Oscar", category: "Best Director", year: 1969, won: true , person: "Carol Reed", person_id: 15378 }
     ]
   },
   530915: {
@@ -16244,8 +16284,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2020, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2020, won: true },
       { festival: "Oscar", category: "Best Picture", year: 2019, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2020, won: true, person: "Sam Mendes" },
-      { festival: "BAFTA", category: "Best Director", year: 2020, won: true, person: "Sam Mendes" }
+      { festival: "Golden Globe", category: "Best Director", year: 2020, won: true, person: "Sam Mendes" , person_id: 39 },
+      { festival: "BAFTA", category: "Best Director", year: 2020, won: true, person: "Sam Mendes" , person_id: 39 }
     ]
   },
   531428: {
@@ -16282,12 +16322,12 @@ const AWARDS_DATABASE = {
     title: "Everything Everywhere All at Once",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2023, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2023, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2023, won: true , person: "Daniel Kwan & Daniel Scheinert", person_id: 545611 },
       { festival: "BAFTA", category: "Best Film", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2023, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2023, won: true },
+      { festival: "Oscar", category: "Best Actress", year: 2023, won: true , person: "Michelle Yeoh", person_id: 1620 },
       { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "Daniel Kwan & Daniel Scheinert" },
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Michelle Yeoh" },
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Michelle Yeoh" , person_id: 1620 },
       { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Daniel Kwan & Daniel Scheinert" }
     ]
   },
@@ -16309,23 +16349,23 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
       { festival: "Venice", category: "Silver Lion (Director)", year: 2024, won: true, person: "Brady Corbet" },
       { festival: "Venice", category: "Golden Lion", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: true, person: "Adrien Brody" },
-      { festival: "Golden Globe", category: "Best Director", year: 2025, won: true, person: "Brady Corbet" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: true, person: "Brady Corbet" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: true, person: "Adrien Brody" , person_id: 3490 },
+      { festival: "Golden Globe", category: "Best Director", year: 2025, won: true, person: "Brady Corbet" , person_id: 55493 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: true, person: "Brady Corbet" , person_id: 55493 }
     ]
   },
   551332: {
     title: "The Two Popes",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2020, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Jonathan Pryce" }
+      { festival: "BAFTA", category: "Best Actor", year: 2020, won: false, person: "Jonathan Pryce" , person_id: 378 }
     ]
   },
   554230: {
     title: "The Lost Daughter",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2022, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Maggie Gyllenhaal" }
+      { festival: "Oscar", category: "Best Actress", year: 2022, won: false , person: "Olivia Colman", person_id: 39187 },
+      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Maggie Gyllenhaal" , person_id: 1579 }
     ]
   },
   556574: {
@@ -16343,7 +16383,7 @@ const AWARDS_DATABASE = {
   558915: {
     title: "The Color Purple",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Fantasia Barrino" }
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Fantasia Barrino" , person_id: 165909 }
     ]
   },
   559401: {
@@ -16355,13 +16395,13 @@ const AWARDS_DATABASE = {
   565307: {
     title: "Clemency",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Alfre Woodard" }
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Alfre Woodard" , person_id: 1981 }
     ]
   },
   566076: {
     title: "The United States vs. Billie Holiday",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2021, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2021, won: false , person: "Andra Day", person_id: 1658802 }
     ]
   },
   574078: {
@@ -16403,35 +16443,35 @@ const AWARDS_DATABASE = {
   575773: {
     title: "Rocks",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Bukky Bakray" },
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Sarah Gavron" }
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Bukky Bakray" , person_id: 2381123 },
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Sarah Gavron" , person_id: 93288 }
     ]
   },
   575774: {
     title: "His House",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Wunmi Mosaku" }
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Wunmi Mosaku" , person_id: 134774 }
     ]
   },
   580175: {
     title: "Another Round",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Mads Mikkelsen" },
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Thomas Vinterberg" }
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Mads Mikkelsen" , person_id: 1019 },
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Thomas Vinterberg" , person_id: 4453 }
     ]
   },
   581734: {
     title: "Nomadland",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2021, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2021, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2021, won: true , person: "Chloé Zhao", person_id: 1395183 },
       { festival: "Venice", category: "Golden Lion", year: 2020, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2021, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2021, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 2021, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2021, won: true, person: "Chloé Zhao" },
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: true, person: "Frances McDormand" },
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: true, person: "Chloe Zhao" }
+      { festival: "Oscar", category: "Best Actress", year: 2021, won: true , person: "Frances McDormand", person_id: 3910 },
+      { festival: "Golden Globe", category: "Best Director", year: 2021, won: true, person: "Chloé Zhao" , person_id: 1395183 },
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: true, person: "Frances McDormand" , person_id: 3910 },
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: true, person: "Chloe Zhao" , person_id: 1395183 }
     ]
   },
   582014: {
@@ -16439,8 +16479,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2021, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2021, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2021, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Emerald Fennell" }
+      { festival: "Oscar", category: "Best Actress", year: 2021, won: false , person: "Carey Mulligan", person_id: 36662 },
+      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Emerald Fennell" , person_id: 1252934 }
     ]
   },
   586101: {
@@ -16484,28 +16524,28 @@ const AWARDS_DATABASE = {
   600354: {
     title: "The Father",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2021, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2021, won: true , person: "Anthony Hopkins", person_id: 4173 },
       { festival: "BAFTA", category: "Best Film", year: 2021, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: true, person: "Anthony Hopkins" }
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: true, person: "Anthony Hopkins" , person_id: 4173 }
     ]
   },
   600583: {
     title: "The Power of the Dog",
     awards: [
-      { festival: "Oscar", category: "Best Director", year: 2022, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2022, won: true , person: "Jane Campion", person_id: 10757 },
       { festival: "Venice", category: "Silver Lion (Director)", year: 2021, won: true, person: "Jane Campion" },
       { festival: "BAFTA", category: "Best Film", year: 2022, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2022, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Benedict Cumberbatch" },
-      { festival: "Golden Globe", category: "Best Director", year: 2022, won: true, person: "Jane Campion" },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: true, person: "Jane Campion" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Benedict Cumberbatch" , person_id: 71580 },
+      { festival: "Golden Globe", category: "Best Director", year: 2022, won: true, person: "Jane Campion" , person_id: 10757 },
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: true, person: "Jane Campion" , person_id: 10757 }
     ]
   },
   601470: {
     title: "The Eyes of Tammy Faye",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2022, won: true }
+      { festival: "Oscar", category: "Best Actress", year: 2022, won: true , person: "Jessica Chastain", person_id: 83002 }
     ]
   },
   602334: {
@@ -16536,9 +16576,9 @@ const AWARDS_DATABASE = {
   614917: {
     title: "King Richard",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2022, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 2022, won: true , person: "Will Smith", person_id: 2888 },
       { festival: "Golden Globe", category: "Best Drama", year: 2022, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: true, person: "Will Smith" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: true, person: "Will Smith" , person_id: 2888 }
     ]
   },
   614934: {
@@ -16547,21 +16587,21 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2023, won: false },
       { festival: "BAFTA", category: "Best Film", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2023, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: true, person: "Austin Butler" },
-      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "Baz Luhrmann" }
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: true, person: "Austin Butler" , person_id: 86654 },
+      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "Baz Luhrmann" , person_id: 6201 }
     ]
   },
   615643: {
     title: "Minari",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Lee Isaac Chung" }
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Lee Isaac Chung" , person_id: 931952 }
     ]
   },
   615667: {
     title: "Ma Rainey's Black Bottom",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Chadwick Boseman" }
+      { festival: "Oscar", category: "Best Actress", year: 2021, won: false , person: "Viola Davis", person_id: 19492 },
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Chadwick Boseman" , person_id: 172069 }
     ]
   },
   615777: {
@@ -16585,7 +16625,7 @@ const AWARDS_DATABASE = {
   620897: {
     title: "The Forty-Year-Old Version",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Radha Blank" }
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Radha Blank" , person_id: 2379700 }
     ]
   },
   624086: {
@@ -16597,7 +16637,7 @@ const AWARDS_DATABASE = {
   628534: {
     title: "The White Tiger",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Adarsh Gourav" }
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Adarsh Gourav" , person_id: 1605786 }
     ]
   },
   628922: {
@@ -16610,27 +16650,28 @@ const AWARDS_DATABASE = {
     title: "Titane",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2021, won: true },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Julia Ducournau" }
-    ]
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Julia Ducournau" , person_id: 1392433 }
+    ,
+      { festival: "Golden Globe", category: "Best Screenplay", year: 1983, won: true, person: "John Briley", person_id: 11845 }]
   },
   641662: {
     title: "Pieces of a Woman",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Vanessa Kirby" }
+      { festival: "Oscar", category: "Best Actress", year: 2021, won: false , person: "Vanessa Kirby", person_id: 556356 },
+      { festival: "BAFTA", category: "Best Actress", year: 2021, won: false, person: "Vanessa Kirby" , person_id: 556356 }
     ]
   },
   644495: {
     title: "House of Gucci",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Lady Gaga" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Lady Gaga" , person_id: 237405 }
     ]
   },
   644583: {
     title: "The Mauritanian",
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Tahar Rahim" }
+      { festival: "BAFTA", category: "Best Actor", year: 2021, won: false, person: "Tahar Rahim" , person_id: 81051 }
     ]
   },
   646380: {
@@ -16638,20 +16679,20 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2022, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2022, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Leonardo DiCaprio" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Leonardo DiCaprio" , person_id: 6193 }
     ]
   },
   660120: {
     title: "The Worst Person in the World",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Renate Reinsve" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Renate Reinsve" , person_id: 1576786 }
     ]
   },
   661365: {
     title: "Ali & Ava",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Adeel Akhtar" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Adeel Akhtar" , person_id: 81840 }
     ]
   },
   661374: {
@@ -16664,13 +16705,13 @@ const AWARDS_DATABASE = {
     title: "A Complete Unknown",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Timothée Chalamet" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Timothée Chalamet" , person_id: 1190668 }
     ]
   },
   661914: {
     title: "One Night in Miami...",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Regina King" }
+      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Regina King" , person_id: 9788 }
     ]
   },
   662029: {
@@ -16708,8 +16749,8 @@ const AWARDS_DATABASE = {
     title: "Past Lives",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Teo Yoo" },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Celine Song" }
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Teo Yoo" , person_id: 1387126 },
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Celine Song" , person_id: 2518227 }
     ]
   },
   667935: {
@@ -16730,9 +16771,9 @@ const AWARDS_DATABASE = {
       { festival: "Oscar", category: "Best Picture", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2023, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2023, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Colin Farrell" },
-      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "Martin McDonagh" },
-      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Martin McDonagh" }
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Colin Farrell" , person_id: 72466 },
+      { festival: "Golden Globe", category: "Best Director", year: 2023, won: false, person: "Martin McDonagh" , person_id: 54472 },
+      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Martin McDonagh" , person_id: 54472 }
     ]
   },
   688301: {
@@ -16762,30 +16803,30 @@ const AWARDS_DATABASE = {
   701387: {
     title: "Bugonia",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Jesse Plemons" },
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Emma Stone" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Yorgos Lanthimos" }
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Jesse Plemons" , person_id: 88124 },
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Emma Stone" , person_id: 54693 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Yorgos Lanthimos" , person_id: 122423 }
     ]
   },
   705996: {
     title: "Decision to Leave",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2022, won: true, person: "Park Chan-wook" },
+      { festival: "Cannes", category: "Best Director", year: 2022, won: true, person: "Park Chan-wook" , person_id: 10099 },
       { festival: "Cannes", category: "Palme d'Or", year: 2022, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Park Chan-wook" }
+      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Park Chan-wook" , person_id: 10099 }
     ]
   },
   714011: {
     title: "After Love",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: true, person: "Joanna Scanlan" },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Aleem Khan" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: true, person: "Joanna Scanlan" , person_id: 33450 },
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Aleem Khan" , person_id: 1361417 }
     ]
   },
   716612: {
     title: "Spencer",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2022, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2022, won: false , person: "Kristen Stewart", person_id: 37917 }
     ]
   },
   718032: {
@@ -16793,8 +16834,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2022, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2022, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Alana Haim" },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Paul Thomas Anderson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Alana Haim" , person_id: 1741367 },
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Paul Thomas Anderson" , person_id: 4762 }
     ]
   },
   722778: {
@@ -16806,21 +16847,22 @@ const AWARDS_DATABASE = {
   724495: {
     title: "The Woman King",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Viola Davis" },
-      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Gina Prince-Bythewood" }
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Viola Davis" , person_id: 19492 },
+      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Gina Prince-Bythewood" , person_id: 71947 }
     ]
   },
   728118: {
     title: "Quo Vadis Aida?",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Jasmila Zbanic" }
+      { festival: "BAFTA", category: "Best Director", year: 2021, won: false, person: "Jasmila Zbanic" , person_id: 4634 }
     ]
   },
   730047: {
     title: "Cyrano",
     awards: [
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2022, won: false }
-    ]
+    ,
+      { festival: "Golden Globe", category: "Best Supporting Actor", year: 1967, won: true, person: "Richard Attenborough", person_id: 4786 }]
   },
   735726: {
     title: "Everything Went Fine",
@@ -16855,21 +16897,21 @@ const AWARDS_DATABASE = {
   758330: {
     title: "Good Luck to You Leo Grande",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Daryl McCormack" },
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Emma Thompson" }
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Daryl McCormack" , person_id: 1829245 },
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Emma Thompson" , person_id: 7056 }
     ]
   },
   758866: {
     title: "Drive My Car",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2021, won: false },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Ryusuke Hamaguchi" }
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Ryusuke Hamaguchi" , person_id: 1487492 }
     ]
   },
   760099: {
     title: "Living",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Bill Nighy" }
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Bill Nighy" , person_id: 2440 }
     ]
   },
   760935: {
@@ -16887,7 +16929,7 @@ const AWARDS_DATABASE = {
   766798: {
     title: "Parallel Mothers",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2022, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2022, won: false , person: "Penélope Cruz", person_id: 955 }
     ]
   },
   768099: {
@@ -16906,7 +16948,7 @@ const AWARDS_DATABASE = {
     title: "CODA",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2022, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Emilia Jones" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Emilia Jones" , person_id: 1331023 }
     ]
   },
   777245: {
@@ -16920,7 +16962,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2022, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2022, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Kenneth Branagh" }
+      { festival: "Golden Globe", category: "Best Director", year: 2022, won: false, person: "Kenneth Branagh" , person_id: 11181 }
     ]
   },
   777539: {
@@ -16932,14 +16974,14 @@ const AWARDS_DATABASE = {
   783829: {
     title: "The Rose",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Bette Midler" }
+      { festival: "BAFTA", category: "Best Actress", year: 1981, won: false, person: "Bette Midler" , person_id: 73931 }
     ]
   },
   785084: {
     title: "The Whale",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 2023, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Brendan Fraser" }
+      { festival: "Oscar", category: "Best Actor", year: 2023, won: true , person: "Brendan Fraser", person_id: 18269 },
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Brendan Fraser" , person_id: 18269 }
     ]
   },
   785398: {
@@ -16952,7 +16994,7 @@ const AWARDS_DATABASE = {
   785542: {
     title: "The Outrun",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Saoirse Ronan" }
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Saoirse Ronan" , person_id: 36592 }
     ]
   },
   786942: {
@@ -17007,32 +17049,33 @@ const AWARDS_DATABASE = {
     title: "Poor Things",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Director", year: 2024, won: false },
+      { festival: "Oscar", category: "Best Director", year: 2024, won: false , person: "Yorgos Lanthimos", person_id: 122423 },
       { festival: "Venice", category: "Golden Lion", year: 2023, won: true },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2024, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2024, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Yorgos Lanthimos" },
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: true, person: "Emma Stone" }
+      { festival: "Oscar", category: "Best Actress", year: 2024, won: true , person: "Emma Stone", person_id: 54693 },
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Yorgos Lanthimos" , person_id: 122423 },
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: true, person: "Emma Stone" , person_id: 54693 }
     ]
   },
   793998: {
     title: "Happening",
     awards: [
       { festival: "Venice", category: "Golden Lion", year: 2021, won: true },
-      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Audrey Diwan" }
+      { festival: "BAFTA", category: "Best Director", year: 2022, won: false, person: "Audrey Diwan" , person_id: 1017274 }
     ]
   },
   794090: {
     title: "Who Do I Belong To",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 2024, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 1997, won: true, person: "Cuba Gooding Jr.", person_id: 9777 }]
   },
   794602: {
     title: "Swan Song",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Mahershala Ali" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Mahershala Ali" , person_id: 932967 }
     ]
   },
   795811: {
@@ -17077,8 +17120,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2023, won: true },
-      { festival: "Oscar", category: "Best Actress", year: 2023, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2023, won: true, person: "Steven Spielberg" }
+      { festival: "Oscar", category: "Best Actress", year: 2023, won: false , person: "Michelle Williams", person_id: 1812 },
+      { festival: "Golden Globe", category: "Best Director", year: 2023, won: true, person: "Steven Spielberg" , person_id: 488 }
     ]
   },
   804251: {
@@ -17090,7 +17133,7 @@ const AWARDS_DATABASE = {
   807196: {
     title: "Boiling Point",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Stephen Graham" }
+      { festival: "BAFTA", category: "Best Actor", year: 2022, won: false, person: "Stephen Graham" , person_id: 1115 }
     ]
   },
   812037: {
@@ -17112,8 +17155,8 @@ const AWARDS_DATABASE = {
       { festival: "BAFTA", category: "Best Film", year: 2023, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2023, won: false },
       { festival: "Oscar", category: "Best Actress", year: 2023, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: true, person: "Cate Blanchett" },
-      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Todd Field" }
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: true, person: "Cate Blanchett" , person_id: 112 },
+      { festival: "BAFTA", category: "Best Director", year: 2023, won: false, person: "Todd Field" , person_id: 5010 }
     ]
   },
   819876: {
@@ -17131,7 +17174,7 @@ const AWARDS_DATABASE = {
   823147: {
     title: "To Leslie",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2023, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2023, won: false , person: "Andrea Riseborough", person_id: 127558 }
     ]
   },
   823464: {
@@ -17145,7 +17188,7 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "BAFTA", category: "Best Film", year: 2021, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2021, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Aaron Sorkin" }
+      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "Aaron Sorkin" , person_id: 13520 }
     ]
   },
   836202: {
@@ -17171,11 +17214,11 @@ const AWARDS_DATABASE = {
     title: "The Holdovers",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actor", year: 2024, won: false },
+      { festival: "Oscar", category: "Best Actor", year: 2024, won: false , person: "Paul Giamatti", person_id: 13242 },
       { festival: "BAFTA", category: "Best Film", year: 2024, won: false },
       { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Paul Giamatti" },
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Alexander Payne" }
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Paul Giamatti" , person_id: 13242 },
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Alexander Payne" , person_id: 13235 }
     ]
   },
   842859: {
@@ -17199,28 +17242,31 @@ const AWARDS_DATABASE = {
   854239: {
     title: "Till",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Danielle Deadwyler" }
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Danielle Deadwyler" , person_id: 1853909 }
     ]
   },
   858024: {
     title: "Hamnet",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Chloé Zhao" },
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Jessie Buckley" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Chloe Zhao" }
-    ]
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Chloé Zhao" , person_id: 1395183 },
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Jessie Buckley" , person_id: 1498158 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Chloe Zhao" , person_id: 1395183 }
+    ,
+      { festival: "Oscar", category: "Best Actress", year: 2026, won: true, person: "Jessie Buckley", person_id: 1498158 },
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: true, person: "Jessie Buckley", person_id: 1498158 },
+      { festival: "Golden Globe", category: "Best Drama", year: 2026, won: true }]
   },
   872585: {
     title: "Oppenheimer",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: true },
-      { festival: "Oscar", category: "Best Director", year: 2024, won: true },
-      { festival: "Oscar", category: "Best Actor", year: 2024, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2024, won: true , person: "Christopher Nolan", person_id: 872585 },
+      { festival: "Oscar", category: "Best Actor", year: 2024, won: true , person: "Cillian Murphy", person_id: 872585 },
       { festival: "BAFTA", category: "Best Film", year: 2024, won: true },
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: true },
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: true, person: "Cillian Murphy" },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: true, person: "Christopher Nolan" },
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: true, person: "Christopher Nolan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: true, person: "Cillian Murphy" , person_id: 2037 },
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: true, person: "Christopher Nolan" , person_id: 525 },
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: true, person: "Christopher Nolan" , person_id: 525 }
     ]
   },
   889699: {
@@ -17244,7 +17290,7 @@ const AWARDS_DATABASE = {
   895549: {
     title: "Nyad",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2024, won: false }
+      { festival: "Oscar", category: "Best Actress", year: 2024, won: false , person: "Annette Bening", person_id: 516 }
     ]
   },
   900379: {
@@ -17257,7 +17303,7 @@ const AWARDS_DATABASE = {
     title: "Mank",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2021, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "David Fincher" }
+      { festival: "Golden Globe", category: "Best Director", year: 2021, won: false, person: "David Fincher" , person_id: 7467 }
     ]
   },
   901358: {
@@ -17283,13 +17329,13 @@ const AWARDS_DATABASE = {
     title: "Anatomy of a Fall",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Director", year: 2024, won: false },
+      { festival: "Oscar", category: "Best Director", year: 2024, won: false , person: "Justine Triet", person_id: 1175620 },
       { festival: "Cannes", category: "Palme d'Or", year: 2023, won: true },
       { festival: "BAFTA", category: "Best Film", year: 2024, won: false },
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Sandra Huller" },
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Justine Triet" }
+      { festival: "Oscar", category: "Best Actress", year: 2024, won: false , person: "Sandra Hüller", person_id: 7152 },
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Sandra Huller" , person_id: 7152 },
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Justine Triet" , person_id: 1175620 }
     ]
   },
   919570: {
@@ -17333,8 +17379,8 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Cannes", category: "Grand Prix", year: 2024, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Payal Kapadia" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Payal Kapadia" }
+      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Payal Kapadia" , person_id: 1467320 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Payal Kapadia" , person_id: 1467320 }
     ]
   },
   928713: {
@@ -17352,7 +17398,7 @@ const AWARDS_DATABASE = {
   930564: {
     title: "Saltburn",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Barry Keoghan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Barry Keoghan" , person_id: 1290466 }
     ]
   },
   931944: {
@@ -17366,9 +17412,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: false },
-      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Coralie Fargeat" },
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Demi Moore" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Coralie Fargeat" }
+      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Coralie Fargeat" , person_id: 1607016 },
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Demi Moore" , person_id: 3416 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Coralie Fargeat" , person_id: 1607016 }
     ]
   },
   936946: {
@@ -17422,14 +17468,14 @@ const AWARDS_DATABASE = {
   964960: {
     title: "The Pot-au-Feu",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2023, won: true, person: "Tran Anh Hung" },
+      { festival: "Cannes", category: "Best Director", year: 2023, won: true, person: "Tran Anh Hung" , person_id: 107730 },
       { festival: "Cannes", category: "Palme d'Or", year: 2023, won: false }
     ]
   },
   965150: {
     title: "Aftersun",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Paul Mescal" }
+      { festival: "BAFTA", category: "Best Actor", year: 2023, won: false, person: "Paul Mescal" , person_id: 2326151 }
     ]
   },
   966238: {
@@ -17460,9 +17506,9 @@ const AWARDS_DATABASE = {
     title: "Conclave",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Ralph Fiennes" },
-      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Edward Berger" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Edward Berger" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Ralph Fiennes" , person_id: 5469 },
+      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Edward Berger" , person_id: 221522 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Edward Berger" , person_id: 221522 }
     ]
   },
   974950: {
@@ -17472,8 +17518,8 @@ const AWARDS_DATABASE = {
       { festival: "Cannes", category: "Jury Prize", year: 2024, won: true },
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: false },
       { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Jacques Audiard" },
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Karla Sofia Gascon" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Jacques Audiard" }
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Karla Sofia Gascon" , person_id: 1505938 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Jacques Audiard" , person_id: 17496 }
     ]
   },
   975902: {
@@ -17504,7 +17550,7 @@ const AWARDS_DATABASE = {
   994108: {
     title: "All of Us Strangers",
     awards: [
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Andrew Haigh" }
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Andrew Haigh" , person_id: 586002 }
     ]
   },
   994803: {
@@ -17541,7 +17587,13 @@ const AWARDS_DATABASE = {
   1013154: {
     title: "Hard Truths",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Marianne Jean-Baptiste" }
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: false, person: "Marianne Jean-Baptiste" , person_id: 17352 }
+    ]
+  },
+  1013850: {
+    title: "A Real Pain",
+    awards: [
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2025, won: true, person: "Kieran Culkin", person_id: 18793 }
     ]
   },
   1028196: {
@@ -17559,17 +17611,25 @@ const AWARDS_DATABASE = {
   1049638: {
     title: "Rye Lane",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Vivian Oparah" }
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Vivian Oparah" , person_id: 1675593 }
     ]
   },
   1054867: {
     title: "One Battle After Another",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Leonardo DiCaprio" },
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: true, person: "Paul Thomas Anderson" },
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Chase Infiniti" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Paul Thomas Anderson" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Leonardo DiCaprio" , person_id: 6193 },
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: true, person: "Paul Thomas Anderson" , person_id: 4762 },
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Chase Infiniti" , person_id: 3914706 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Paul Thomas Anderson" , person_id: 4762 }
+    ,
+      { festival: "Oscar", category: "Best Picture", year: 2026, won: true },
+      { festival: "Oscar", category: "Best Director", year: 2026, won: true, person: "Paul Thomas Anderson", person_id: 4762 },
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2026, won: true, person: "Sean Penn", person_id: 2228 },
+      { festival: "BAFTA", category: "Best Film", year: 2026, won: true },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: true, person: "Paul Thomas Anderson", person_id: 4762 },
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 2026, won: true, person: "Sean Penn", person_id: 2228 },
+      { festival: "Golden Globe", category: "Best Comedy/Musical", year: 2026, won: true },
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: true, person: "Paul Thomas Anderson", person_id: 4762 }]
   },
   1056360: {
     title: "American Fiction",
@@ -17581,7 +17641,7 @@ const AWARDS_DATABASE = {
     title: "American Fiction",
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actor", year: 2024, won: false }
+      { festival: "Oscar", category: "Best Actor", year: 2024, won: false , person: "Jeffrey Wright", person_id: 2954 }
     ]
   },
   1059128: {
@@ -17595,9 +17655,9 @@ const AWARDS_DATABASE = {
     awards: [
       { festival: "Oscar", category: "Best Picture", year: 2025, won: false },
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: true },
-      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Sean Baker" },
-      { festival: "BAFTA", category: "Best Actress", year: 2025, won: true, person: "Mikey Madison" },
-      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Sean Baker" }
+      { festival: "Golden Globe", category: "Best Director", year: 2025, won: false, person: "Sean Baker" , person_id: 118415 },
+      { festival: "BAFTA", category: "Best Actress", year: 2025, won: true, person: "Mikey Madison" , person_id: 1640439 },
+      { festival: "BAFTA", category: "Best Director", year: 2025, won: false, person: "Sean Baker" , person_id: 118415 }
     ]
   },
   1069193: {
@@ -17657,7 +17717,7 @@ const AWARDS_DATABASE = {
   1098709: {
     title: "Grand Tour",
     awards: [
-      { festival: "Cannes", category: "Best Director", year: 2024, won: true, person: "Miguel Gomes" },
+      { festival: "Cannes", category: "Best Director", year: 2024, won: true, person: "Miguel Gomes" , person_id: 150512 },
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: false }
     ]
   },
@@ -17676,7 +17736,7 @@ const AWARDS_DATABASE = {
   1101931: {
     title: "Hud",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1964, won: true, person: "Patricia Neal" }
+      { festival: "BAFTA", category: "Best Actress", year: 1964, won: true, person: "Patricia Neal" , person_id: 1934 }
     ]
   },
   1102493: {
@@ -17712,20 +17772,20 @@ const AWARDS_DATABASE = {
   1113976: {
     title: "The Wednesday Play",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Peggy Ashcroft" }
+      { festival: "BAFTA", category: "Best Actress", year: 1968, won: false, person: "Peggy Ashcroft" , person_id: 3672 }
     ]
   },
   1117680: {
     title: "Blonde",
     awards: [
-      { festival: "Oscar", category: "Best Actress", year: 2023, won: false },
-      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Ana de Armas" }
+      { festival: "Oscar", category: "Best Actress", year: 2023, won: false , person: "Ana de Armas", person_id: 224513 },
+      { festival: "BAFTA", category: "Best Actress", year: 2023, won: false, person: "Ana de Armas" , person_id: 224513 }
     ]
   },
   1118435: {
     title: "Coming Home",
     awards: [
-      { festival: "Oscar", category: "Best Actor", year: 1979, won: true },
+      { festival: "Oscar", category: "Best Actor", year: 1979, won: true , person: "Jon Voight", person_id: 10127 },
       { festival: "Oscar", category: "Best Picture", year: 1979, won: false }
     ]
   },
@@ -17750,9 +17810,9 @@ const AWARDS_DATABASE = {
   1124566: {
     title: "Sentimental Value",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Joachim Trier" },
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Renate Reinsve" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Joachim Trier" }
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Joachim Trier" , person_id: 71609 },
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Renate Reinsve" , person_id: 1576786 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Joachim Trier" , person_id: 71609 }
     ]
   },
   1128752: {
@@ -17782,7 +17842,7 @@ const AWARDS_DATABASE = {
   1138194: {
     title: "Heretic",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Hugh Grant" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Hugh Grant" , person_id: 3291 }
     ]
   },
   1141163: {
@@ -17826,7 +17886,7 @@ const AWARDS_DATABASE = {
   1155828: {
     title: "Sing Sing",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Colman Domingo" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Colman Domingo" , person_id: 91671 }
     ]
   },
   1156125: {
@@ -17838,7 +17898,7 @@ const AWARDS_DATABASE = {
   1160360: {
     title: "If I Had Legs I'd Kick You",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Rose Byrne" }
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Rose Byrne" , person_id: 9827 }
     ]
   },
   1161879: {
@@ -17864,7 +17924,7 @@ const AWARDS_DATABASE = {
     title: "The Apprentice",
     awards: [
       { festival: "Cannes", category: "Palme d'Or", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Sebastian Stan" }
+      { festival: "BAFTA", category: "Best Actor", year: 2025, won: false, person: "Sebastian Stan" , person_id: 60898 }
     ]
   },
   1200575: {
@@ -17894,10 +17954,12 @@ const AWARDS_DATABASE = {
   1233413: {
     title: "Sinners",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Michael B. Jordan" },
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Ryan Coogler" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Ryan Coogler" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Michael B. Jordan" , person_id: 135651 },
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Ryan Coogler" , person_id: 1056121 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Ryan Coogler" , person_id: 1056121 }
+    ,
+      { festival: "Oscar", category: "Best Actor", year: 2026, won: true, person: "Michael B. Jordan", person_id: 135651 },
+      { festival: "BAFTA", category: "Best Supporting Actress", year: 2026, won: true, person: "Wunmi Mosaku", person_id: 134774 }]
   },
   1234591: {
     title: "My Favourite Cake",
@@ -17921,29 +17983,23 @@ const AWARDS_DATABASE = {
     title: "Maestro",
     awards: [
       { festival: "Golden Globe", category: "Best Drama", year: 2024, won: false },
-      { festival: "Oscar", category: "Best Actress", year: 2024, won: false },
-      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Bradley Cooper" },
-      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Bradley Cooper" },
-      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Carey Mulligan" },
-      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Bradley Cooper" }
+      { festival: "Oscar", category: "Best Actress", year: 2024, won: false , person: "Carey Mulligan", person_id: 36662 },
+      { festival: "BAFTA", category: "Best Actor", year: 2024, won: false, person: "Bradley Cooper" , person_id: 51329 },
+      { festival: "Golden Globe", category: "Best Director", year: 2024, won: false, person: "Bradley Cooper" , person_id: 51329 },
+      { festival: "BAFTA", category: "Best Actress", year: 2024, won: false, person: "Carey Mulligan" , person_id: 36662 },
+      { festival: "BAFTA", category: "Best Director", year: 2024, won: false, person: "Bradley Cooper" , person_id: 51329 }
     ]
   },
   1259294: {
     title: "The Iron Brothers",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Ismael Rodriguez" }
-    ]
-  },
-  1259939: {
-    title: "Battleground",
-    awards: [
-      { festival: "Venice", category: "Golden Lion", year: 2024, won: false }
+      { festival: "Golden Globe", category: "Best Director", year: 1962, won: false, person: "Ismael Rodriguez" , person_id: 97967 }
     ]
   },
   1270108: {
     title: "Lenny",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Valerie Perrine" }
+      { festival: "BAFTA", category: "Best Actress", year: 1976, won: false, person: "Valerie Perrine" , person_id: 26483 }
     ]
   },
   1278263: {
@@ -17961,13 +18017,13 @@ const AWARDS_DATABASE = {
   1279728: {
     title: "Passing",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Tessa Thompson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2022, won: false, person: "Tessa Thompson" , person_id: 62561 }
     ]
   },
   1279938: {
     title: "Through a Glass Darkly",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Harriet Andersson" }
+      { festival: "BAFTA", category: "Best Actress", year: 1963, won: false, person: "Harriet Andersson" , person_id: 7569 }
     ]
   },
   1280646: {
@@ -17979,7 +18035,7 @@ const AWARDS_DATABASE = {
   1299655: {
     title: "Blue Moon",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Ethan Hawke" }
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Ethan Hawke" , person_id: 569 }
     ]
   },
   1307445: {
@@ -17997,14 +18053,15 @@ const AWARDS_DATABASE = {
   1317149: {
     title: "I Swear",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Robert Aramayo" }
-    ]
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Robert Aramayo" , person_id: 1648346 }
+    ,
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: true, person: "Robert Aramayo", person_id: 1648346 }]
   },
   1317288: {
     title: "Marty Supreme",
     awards: [
-      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Timothée Chalamet" },
-      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Josh Safdie" }
+      { festival: "BAFTA", category: "Best Actor", year: 2026, won: false, person: "Timothée Chalamet" , person_id: 1190668 },
+      { festival: "BAFTA", category: "Best Director", year: 2026, won: false, person: "Josh Safdie" , person_id: 129561 }
     ]
   },
   1319196: {
@@ -18016,20 +18073,22 @@ const AWARDS_DATABASE = {
   1339396: {
     title: "Two Women",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 1962, won: true, person: "Sophia Loren" }
+      { festival: "BAFTA", category: "Best Actress", year: 1962, won: true, person: "Sophia Loren" , person_id: 16757 }
     ]
   },
   1371185: {
     title: "Song Sung Blue",
     awards: [
-      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Kate Hudson" }
+      { festival: "BAFTA", category: "Best Actress", year: 2026, won: false, person: "Kate Hudson" , person_id: 11661 }
     ]
   },
   1381892: {
     title: "Sons",
     awards: [
       { festival: "Berlin", category: "Golden Bear", year: 2024, won: false }
-    ]
+    ,
+      { festival: "Oscar", category: "Best Supporting Actor", year: 2026, won: true, person: "Sean Penn", person_id: 2228 },
+      { festival: "BAFTA", category: "Best Supporting Actor", year: 1969, won: true, person: "Laurence Olivier", person_id: 3359 }]
   },
   1391738: {
     title: "Homecoming",
@@ -18046,7 +18105,7 @@ const AWARDS_DATABASE = {
   1456349: {
     title: "It Was Just an Accident",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Jafar Panahi" }
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Jafar Panahi" , person_id: 120229 }
     ]
   },
   1485286: {
@@ -18070,7 +18129,7 @@ const AWARDS_DATABASE = {
   1604013: {
     title: "Frankenstein",
     awards: [
-      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Guillermo del Toro" }
+      { festival: "Golden Globe", category: "Best Director", year: 2026, won: false, person: "Guillermo del Toro" , person_id: 10828 }
     ]
   }
 };
@@ -18083,16 +18142,6 @@ const AWARD_EMOJIS = {
   "Venice": '<span class="og og-lion"></span>',
   "Berlin": '<span class="og og-bear"></span>',
   "Golden Globe": '<span class="og og-globe"></span>'
-};
-
-// Award SVG icon paths (viewBox 0 0 24 24)
-const AWARD_SVGS = {
-  "Oscar": '<path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8l-6.4 4.4 2.4-7.2-6-4.8h7.6z" fill="currentColor"/>',
-  "Cannes": '<path d="M12 2C9 2 7 5 7 9c0 3 2 5 5 7 3-2 5-4 5-7 0-4-2-7-5-7zm0 2c.6 0 1.2.8 1.6 2H10.4c.4-1.2 1-2 1.6-2zM7 18v2h10v-2H7z" fill="currentColor"/>',
-  "BAFTA": '<path d="M12 2C9.5 2 8 4 8 6c0 1.3.7 2.5 1.5 3.2-.9.5-1.5 1.5-1.5 2.8 0 1.7 1.3 3 3 3h2c1.7 0 3-1.3 3-3 0-1.3-.6-2.3-1.5-2.8C15.3 8.5 16 7.3 16 6c0-2-1.5-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM8 18v2h8v-2H8z" fill="currentColor"/>',
-  "Venice": '<path d="M12 2L8 6v3l-3 2 1 2 3-1v2l-2 4h2l2-3 2 3h2l-2-4v-2l3 1 1-2-3-2V6l-4-4zm0 3l2 2v2h-4V7l2-2z" fill="currentColor"/>',
-  "Berlin": '<path d="M12 3C9.5 3 8 5 8 7c0 1 .4 2 1 2.5C8.4 10 8 10.9 8 12c0 1.5.8 2.7 2 3.2V18H9v2h6v-2h-1v-2.8c1.2-.5 2-1.7 2-3.2 0-1.1-.4-2-1-2.5.6-.5 1-1.5 1-2.5 0-2-1.5-4-4-4zm0 2c1.1 0 2 .7 2 2s-.9 2-2 2-2-.7-2-2 .9-2 2-2zm0 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" fill="currentColor"/>',
-  "Golden Globe": '<path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 2c1.4 0 2.7.4 3.8 1H8.2c1.1-.6 2.4-1 3.8-1zM5.2 7h13.6c.7 1 1.1 2.2 1.2 3.5H4c.1-1.3.5-2.5 1.2-3.5zM4 12.5h16c-.1 1.3-.5 2.5-1.2 3.5H5.2c-.7-1-1.1-2.2-1.2-3.5zM12 20c-1.4 0-2.7-.4-3.8-1h7.6c-1.1.6-2.4 1-3.8 1z" fill="currentColor"/>'
 };
 
 // --- Utility Functions ---
@@ -18115,15 +18164,28 @@ function formatAward(award) {
   return text;
 }
 
-function getAwardBadgesHTML(movieId) {
+function getAwardBadgesHTML(movieId, size) {
   const awards = getMovieAwards(movieId);
   if (!awards) return "";
+  const badgeSize = size || 24;
   return awards.map(function(award) {
-    const emoji = AWARD_EMOJIS[award.festival] || '<span class="og og-trophy"></span>';
-    const wonClass = award.won ? "award-badge-won" : "award-badge-nom";
-    let label = emoji + " " + award.festival + " " + award.year;
-    if (award.person) label += " (" + award.person + ")";
-    return '<span class="award-badge ' + wonClass + '">' + label + '</span>';
+    const festivalId = window.detectFestivalId && window.detectFestivalId(award.festival);
+    if (!festivalId) {
+      console.warn("[awards] Unknown festival in getAwardBadgesHTML:", award.festival);
+      return "";
+    }
+    const status = award.won ? "winner" : "nominee";
+    let label = award.festival + " " + award.year;
+    if (award.person) label += " — " + award.person;
+    const title = award.festival + " " + (award.won ? "Winner" : "Nominee") +
+      (award.category ? " — " + award.category : "") +
+      (award.year ? " (" + award.year + ")" : "");
+    return '<span class="orbit-award-chip" data-status="' + status + '">' +
+      '<div class="orbit-award-badge" data-award-badge="' + festivalId +
+      '" data-status="' + status + '" data-size="' + badgeSize +
+      '" title="' + title.replace(/"/g, "&quot;") + '"></div>' +
+      '<span class="orbit-award-chip-label">' + label + '</span>' +
+      '</span>';
   }).join("");
 }
 
@@ -18131,7 +18193,6 @@ function getAwardBadgesHTML(movieId) {
 window.AWARDS_DATABASE = AWARDS_DATABASE;
 window.PRESTIGE_DATABASE = AWARDS_DATABASE; // backward compat
 window.AWARD_EMOJIS = AWARD_EMOJIS;
-window.AWARD_SVGS = AWARD_SVGS;
 window.getMovieAwards = getMovieAwards;
 window.hasPrestigeAward = hasPrestigeAward;
 window.formatAward = formatAward;

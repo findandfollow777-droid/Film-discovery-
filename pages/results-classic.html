@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="../components/people-cube.css">
   <link rel="stylesheet" href="../components/shortlist-badge.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
 </head>
 <body>
   <!-- CINEMATIC BACKGROUND -->
@@ -183,12 +185,12 @@
     </aside>
 
     <!-- PERSON BIO PANEL (slides out when available) -->
-    <div class="bio-panel" id="bioPanel" hidden>
+    <div class="bio-panel" id="bioPanel" data-orbit-popup hidden>
       <div class="bio-panel-tab" id="bioPanelTab" title="Person Bio">
         <span class="bio-tab-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2c0-2.2-1.8-4-4-4H8c-2.2 0-4 1.8-4 4v2"/></svg></span>
       </div>
       <div class="bio-panel-content" id="bioPanelContent">
-        <button class="bio-close" id="bioClose">✕</button>
+        <button class="bio-close orbit-close" id="bioClose" aria-label="Close">✕</button>
         <div class="bio-header">
           <img class="bio-photo" id="bioPhoto" src="" alt="">
           <div class="bio-header-info">

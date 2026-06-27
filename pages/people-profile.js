@@ -135,7 +135,7 @@
         onAnchorClick: (movie) => {
           localStorage.setItem('anchorMovie', JSON.stringify(movie));
           localStorage.removeItem('anchorFromResults');
-          window.location.href = '../games/constellation.html';
+          window.location.href = 'anchor-point.html';
         }
       });
     }
@@ -225,9 +225,17 @@
       }
     });
 
-    // Lightbox controls
-    $('ppLightboxClose')?.addEventListener('click', closeLightbox);
-    $('ppLightbox')?.querySelector('.pp-lightbox-backdrop')?.addEventListener('click', closeLightbox);
+    // Lightbox controls — Rule 17 spiral exit
+    const lightboxEl = $('ppLightbox');
+    const lightboxCloseBtn = $('ppLightboxClose');
+    lightboxCloseBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerOrbitClose(lightboxEl, lightboxCloseBtn, closeLightbox);
+    });
+    lightboxEl?.querySelector('.pp-lightbox-backdrop')?.addEventListener('click', () => {
+      triggerOrbitClose(lightboxEl, lightboxCloseBtn, closeLightbox);
+    });
     $('ppLightboxPrev')?.addEventListener('click', () => { if (lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); } });
     $('ppLightboxNext')?.addEventListener('click', () => { if (lightboxIndex < galleryPhotos.length - 1) { lightboxIndex++; updateLightboxImage(); } });
 
@@ -1273,15 +1281,6 @@
     }
   }
 
-  const FESTIVAL_GLYPH = {
-    'Oscar': 'og-oscar',
-    'BAFTA': 'og-bafta',
-    'Cannes': 'og-palm',
-    'Venice': 'og-lion',
-    'Berlin': 'og-bear',
-    'Golden Globe': 'og-globe'
-  };
-
   function renderAwards() {
     const section = $('ppAwards');
     const list = $('ppAwardsList');
@@ -1289,14 +1288,18 @@
 
     if (!awards || awards.length === 0) return;
 
-    // Trophy row — one glyph per award
+    // Trophy row — one orbit badge per award
     let trophyHtml = '<div class="pp-trophy-row">';
     awards.forEach((a, i) => {
-      const glyphClass = FESTIVAL_GLYPH[a.festival] || 'og-trophy';
-      const nomClass = a.won ? '' : ' og-nominee';
+      const festivalId = window.detectFestivalId(a.festival);
+      if (!festivalId) {
+        console.warn('[people-profile] Unknown festival:', a.festival);
+        return;
+      }
+      const status = a.won ? 'winner' : 'nominee';
       const tooltip = `${a.festival} · ${a.category} · ${a.year} — ${a.filmTitle} (${a.won ? 'Won' : 'Nominated'})`;
       trophyHtml += `<span class="pp-trophy-glyph" data-award-idx="${i}" title="">` +
-        `<span class="og og-lg ${glyphClass}${nomClass}"></span>` +
+        `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="${status}" data-size="24" title=""></div>` +
         `<span class="pp-trophy-tooltip">${esc(tooltip)}</span>` +
         `</span>`;
     });
@@ -1306,6 +1309,7 @@
     trophyHtml += '<button class="pp-view-all-awards" id="ppViewAllAwards">View All Awards &#8250;</button>';
 
     list.innerHTML = trophyHtml;
+    window.renderAwardBadges(list);
     section.classList.remove('hidden');
 
     // Bind modal opener
@@ -1324,10 +1328,20 @@
       '</tr></thead><tbody>';
 
     sorted.forEach(a => {
-      const glyphClass = FESTIVAL_GLYPH[a.festival] || 'og-trophy';
+      const festivalId = window.detectFestivalId(a.festival);
       const resultClass = a.won ? 'pp-award-won' : 'pp-award-nom';
+      const status = a.won ? 'winner' : 'nominee';
+      const badgeTitle = `${a.festival} ${a.won ? 'Winner' : 'Nominee'}` +
+        (a.category ? ` — ${a.category}` : '') +
+        (a.year ? ` (${a.year})` : '');
+      let badgeMarkup = '';
+      if (festivalId) {
+        badgeMarkup = `<div class="orbit-award-badge" data-award-badge="${festivalId}" data-status="${status}" data-size="14" title="${esc(badgeTitle)}"></div> `;
+      } else {
+        console.warn('[people-profile] Unknown festival:', a.festival);
+      }
       html += `<tr class="${resultClass}">` +
-        `<td><span class="og og-sm ${glyphClass}${a.won ? '' : ' og-nominee'}"></span> ${esc(a.festival)}</td>` +
+        `<td>${badgeMarkup}${esc(a.festival)}</td>` +
         `<td>${esc(a.category)}</td>` +
         `<td>${esc(a.filmTitle)}</td>` +
         `<td>${a.year}</td>` +
@@ -1337,12 +1351,14 @@
 
     html += '</tbody></table>';
     body.innerHTML = html;
+    window.renderAwardBadges(body);
     modal.classList.remove('hidden');
 
-    // Close handlers
+    // Close handlers — Rule 17 spiral exit
+    const closeBtn = $('ppAwardsModalClose');
     const escHandler = (e) => {
       if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-        closeModal();
+        spiralClose();
         e.stopPropagation();
       }
     };
@@ -1350,8 +1366,9 @@
       modal.classList.add('hidden');
       document.removeEventListener('keydown', escHandler, true);
     };
-    $('ppAwardsModalClose').onclick = closeModal;
-    modal.querySelector('.pp-awards-modal-backdrop').onclick = closeModal;
+    const spiralClose = () => triggerOrbitClose(modal, closeBtn, closeModal);
+    closeBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); spiralClose(); };
+    modal.querySelector('.pp-awards-modal-backdrop').onclick = spiralClose;
     document.addEventListener('keydown', escHandler, true);
   }
 
@@ -1988,6 +2005,21 @@
     document.body.style.overflow = '';
   }
 
+  /* Rule 17: Black Hole exit helper. */
+  function triggerOrbitClose(overlay, btn, teardownFn) {
+    if (!overlay) { if (teardownFn) teardownFn(); return; }
+    if (overlay.classList.contains('orbit-popup-closing')) return;
+    if (btn) btn.classList.add('closing');
+    overlay.classList.add('orbit-popup-closing');
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      if (btn) btn.classList.remove('closing');
+      overlay.classList.remove('orbit-popup-closing');
+      if (teardownFn) teardownFn();
+    }, reduced ? 200 : 600);
+  }
+
   function updateLightboxImage() {
     const photo = galleryPhotos[lightboxIndex];
     if (!photo) return;
@@ -2294,12 +2326,13 @@
   function openReorderModal(container) {
     const modal = document.createElement('div');
     modal.className = 'pp-reorder-modal';
+    modal.setAttribute('data-orbit-popup', '');
     modal.innerHTML = `
       <div class="pp-reorder-modal-backdrop"></div>
       <div class="pp-reorder-modal-panel">
         <div class="pp-reorder-modal-header">
           <h3>Reorder Sections</h3>
-          <button class="pp-reorder-modal-close">&times;</button>
+          <button class="pp-reorder-modal-close orbit-close" aria-label="Close">&times;</button>
         </div>
         <ul class="pp-reorder-list" id="ppReorderList"></ul>
         <div class="pp-reorder-modal-footer">
@@ -2345,9 +2378,16 @@
       modal.remove();
     };
 
-    modal.querySelector('.pp-reorder-modal-close').addEventListener('click', closeModal);
-    modal.querySelector('.pp-reorder-modal-backdrop').addEventListener('click', closeModal);
-    modal.querySelector('.pp-reorder-done').addEventListener('click', closeModal);
+    /* Rule 17: spiral the X, fade the panel, then run teardown. */
+    const reorderCloseBtn = modal.querySelector('.pp-reorder-modal-close');
+    const spiralClose = () => triggerOrbitClose(modal, reorderCloseBtn, closeModal);
+    reorderCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      spiralClose();
+    });
+    modal.querySelector('.pp-reorder-modal-backdrop').addEventListener('click', spiralClose);
+    modal.querySelector('.pp-reorder-done').addEventListener('click', spiralClose);
     modal.querySelector('.pp-reorder-reset').addEventListener('click', () => {
       localStorage.removeItem(SECTION_ORDER_KEY);
       DEFAULT_SECTION_ORDER.forEach(id => {

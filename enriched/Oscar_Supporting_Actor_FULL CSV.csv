@@ -1,0 +1,381 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+10582,Walter Brennan,1937,Academy Awards,Best Supporting Actor,TRUE,Come and Get It
+20120,Akim Tamiroff,1937,Academy Awards,Best Supporting Actor,FALSE,The General Died at Dawn
+335,Basil Rathbone,1937,Academy Awards,Best Supporting Actor,FALSE,Romeo and Juliet
+20150,Mischa Auer,1937,Academy Awards,Best Supporting Actor,FALSE,My Man Godfrey
+16301,Stuart Erwin,1937,Academy Awards,Best Supporting Actor,FALSE,Pigskin Parade
+20150,Joseph Schildkraut,1938,Academy Awards,Best Supporting Actor,TRUE,The Life of Emile Zola
+20114,H. B. Warner,1938,Academy Awards,Best Supporting Actor,FALSE,Lost Horizon
+20115,Ralph Bellamy,1938,Academy Awards,Best Supporting Actor,FALSE,The Awful Truth
+20113,Roland Young,1938,Academy Awards,Best Supporting Actor,FALSE,Topper
+11054,Thomas Mitchell,1938,Academy Awards,Best Supporting Actor,FALSE,The Hurricane
+10582,Walter Brennan,1939,Academy Awards,Best Supporting Actor,TRUE,Kentucky
+335,Basil Rathbone,1939,Academy Awards,Best Supporting Actor,FALSE,If I Were King
+20146,Gene Lockhart,1939,Academy Awards,Best Supporting Actor,FALSE,Algiers
+20147,John Garfield,1939,Academy Awards,Best Supporting Actor,FALSE,Four Daughters
+20145,Robert Morley,1939,Academy Awards,Best Supporting Actor,FALSE,Marie Antoinette
+11054,Thomas Mitchell,1940,Academy Awards,Best Supporting Actor,TRUE,Stagecoach
+20144,Brian Aherne,1940,Academy Awards,Best Supporting Actor,FALSE,Juarez
+20142,Brian Donlevy,1940,Academy Awards,Best Supporting Actor,FALSE,Beau Geste
+3085,Claude Rains,1940,Academy Awards,Best Supporting Actor,FALSE,Mr. Smith Goes to Washington
+20143,Harry Carey Sr.,1940,Academy Awards,Best Supporting Actor,FALSE,Mr. Smith Goes to Washington
+10582,Walter Brennan,1941,Academy Awards,Best Supporting Actor,TRUE,The Westerner
+20141,Albert Bassermann,1941,Academy Awards,Best Supporting Actor,FALSE,Foreign Correspondent
+15549,Jack Oakie,1941,Academy Awards,Best Supporting Actor,FALSE,The Great Dictator
+20139,James Stephenson,1941,Academy Awards,Best Supporting Actor,FALSE,The Letter
+20140,William Gargan,1941,Academy Awards,Best Supporting Actor,FALSE,They Knew What They Wanted
+18144,Donald Crisp,1942,Academy Awards,Best Supporting Actor,TRUE,How Green Was My Valley
+2144,Charles Coburn,1942,Academy Awards,Best Supporting Actor,FALSE,The Devil and Miss Jones
+20138,James Gleason,1942,Academy Awards,Best Supporting Actor,FALSE,Here Comes Mr. Jordan
+20137,Sydney Greenstreet,1942,Academy Awards,Best Supporting Actor,FALSE,The Maltese Falcon
+10582,Walter Brennan,1942,Academy Awards,Best Supporting Actor,FALSE,Sergeant York
+15758,Van Heflin,1943,Academy Awards,Best Supporting Actor,TRUE,Johnny Eager
+15842,Frank Morgan,1943,Academy Awards,Best Supporting Actor,FALSE,Tortilla Flat
+20135,Henry Travers,1943,Academy Awards,Best Supporting Actor,FALSE,Mrs. Miniver
+14717,Walter Huston,1943,Academy Awards,Best Supporting Actor,FALSE,Yankee Doodle Dandy
+20136,William Bendix,1943,Academy Awards,Best Supporting Actor,FALSE,Wake Island
+2144,Charles Coburn,1944,Academy Awards,Best Supporting Actor,TRUE,The More the Merrier
+20120,Akim Tamiroff,1944,Academy Awards,Best Supporting Actor,FALSE,For Whom the Bell Tolls
+10138,Charles Bickford,1944,Academy Awards,Best Supporting Actor,FALSE,The Song of Bernadette
+3085,Claude Rains,1944,Academy Awards,Best Supporting Actor,FALSE,Casablanca
+20134,J. Carrol Naish,1944,Academy Awards,Best Supporting Actor,FALSE,Sahara
+19227,Barry Fitzgerald,1945,Academy Awards,Best Supporting Actor,TRUE,Going My Way
+3085,Claude Rains,1945,Academy Awards,Best Supporting Actor,FALSE,Mr. Skeffington
+20132,Clifton Webb,1945,Academy Awards,Best Supporting Actor,FALSE,Laura
+20133,Hume Cronyn,1945,Academy Awards,Best Supporting Actor,FALSE,The Seventh Cross
+20131,Monty Woolley,1945,Academy Awards,Best Supporting Actor,FALSE,Since You Went Away
+10515,James Dunn,1946,Academy Awards,Best Supporting Actor,TRUE,A Tree Grows in Brooklyn
+20134,J. Carrol Naish,1946,Academy Awards,Best Supporting Actor,FALSE,A Medal for Benny
+20129,John Dall,1946,Academy Awards,Best Supporting Actor,FALSE,The Corn Is Green
+20130,Michael Chekhov,1946,Academy Awards,Best Supporting Actor,FALSE,Spellbound
+10829,Robert Mitchum,1946,Academy Awards,Best Supporting Actor,FALSE,The Story of G.I. Joe
+15222,Harold Russell,1947,Academy Awards,Best Supporting Actor,TRUE,The Best Years of Our Lives
+2144,Charles Coburn,1947,Academy Awards,Best Supporting Actor,FALSE,The Green Years
+3085,Claude Rains,1947,Academy Awards,Best Supporting Actor,FALSE,Notorious
+20132,Clifton Webb,1947,Academy Awards,Best Supporting Actor,FALSE,The Razor's Edge
+20128,William Demarest,1947,Academy Awards,Best Supporting Actor,FALSE,The Jolson Story
+10839,Edmund Gwenn,1948,Academy Awards,Best Supporting Actor,TRUE,Miracle on 34th Street
+10138,Charles Bickford,1948,Academy Awards,Best Supporting Actor,FALSE,The Farmer's Daughter
+20125,Richard Widmark,1948,Academy Awards,Best Supporting Actor,FALSE,Kiss of Death
+20126,Robert Ryan,1948,Academy Awards,Best Supporting Actor,FALSE,Crossfire
+20127,Thomas Gomez,1948,Academy Awards,Best Supporting Actor,FALSE,Ride the Pink Horse
+14717,Walter Huston,1949,Academy Awards,Best Supporting Actor,TRUE,The Treasure of the Sierra Madre
+20122,Cecil Kellaway,1949,Academy Awards,Best Supporting Actor,FALSE,The Luck of the Irish
+10138,Charles Bickford,1949,Academy Awards,Best Supporting Actor,FALSE,Johnny Belinda
+20124,José Ferrer,1949,Academy Awards,Best Supporting Actor,FALSE,Joan of Arc
+20123,Oskar Homolka,1949,Academy Awards,Best Supporting Actor,FALSE,I Remember Mama
+20117,Dean Jagger,1950,Academy Awards,Best Supporting Actor,TRUE,Twelve O'Clock High
+20120,Akim Tamiroff,1950,Academy Awards,Best Supporting Actor,FALSE,Black Magic
+20118,David Brian,1950,Academy Awards,Best Supporting Actor,FALSE,Intruder in the Dust
+20119,James Whitmore,1950,Academy Awards,Best Supporting Actor,FALSE,Battleground
+20121,John Lund,1950,Academy Awards,Best Supporting Actor,FALSE,My Friend Irma
+14570,George Sanders,1951,Academy Awards,Best Supporting Actor,TRUE,All About Eve
+10839,Edmund Gwenn,1951,Academy Awards,Best Supporting Actor,FALSE,Mister 880
+15206,Erich von Stroheim,1951,Academy Awards,Best Supporting Actor,FALSE,Sunset Boulevard
+3110,Jeff Chandler,1951,Academy Awards,Best Supporting Actor,FALSE,Broken Arrow
+20116,Sam Jaffe,1951,Academy Awards,Best Supporting Actor,FALSE,The Asphalt Jungle
+3101,Karl Malden,1952,Academy Awards,Best Supporting Actor,TRUE,A Streetcar Named Desire
+36803,Gig Young,1952,Academy Awards,Best Supporting Actor,FALSE,Come Fill the Cup
+10488,Kevin McCarthy,1952,Academy Awards,Best Supporting Actor,FALSE,Death of a Salesman
+16345,Leo Genn,1952,Academy Awards,Best Supporting Actor,FALSE,Quo Vadis
+212,Peter Ustinov,1952,Academy Awards,Best Supporting Actor,FALSE,Quo Vadis
+16346,Anthony Quinn,1953,Academy Awards,Best Supporting Actor,TRUE,Viva Zapata!
+11470,Arthur Hunnicutt,1953,Academy Awards,Best Supporting Actor,FALSE,The Big Sky
+20111,Jack Palance,1953,Academy Awards,Best Supporting Actor,FALSE,Sudden Fear
+20115,Richard Burton,1953,Academy Awards,Best Supporting Actor,FALSE,My Cousin Rachel
+20112,Victor McLaglen,1953,Academy Awards,Best Supporting Actor,FALSE,The Quiet Man
+267,Frank Sinatra,1954,Academy Awards,Best Supporting Actor,TRUE,From Here to Eternity
+11414,Brandon deWilde,1954,Academy Awards,Best Supporting Actor,FALSE,Shane
+13045,Eddie Albert,1954,Academy Awards,Best Supporting Actor,FALSE,Roman Holiday
+20111,Jack Palance,1954,Academy Awards,Best Supporting Actor,FALSE,Shane
+16302,Robert Strauss,1954,Academy Awards,Best Supporting Actor,FALSE,Stalag 17
+15053,Edmond O'Brien,1955,Academy Awards,Best Supporting Actor,TRUE,The Barefoot Contessa
+3101,Karl Malden,1955,Academy Awards,Best Supporting Actor,FALSE,On the Waterfront
+5546,Lee J. Cobb,1955,Academy Awards,Best Supporting Actor,FALSE,On the Waterfront
+4202,Rod Steiger,1955,Academy Awards,Best Supporting Actor,FALSE,On the Waterfront
+11041,Tom Tully,1955,Academy Awards,Best Supporting Actor,FALSE,The Caine Mutiny
+2540,Jack Lemmon,1956,Academy Awards,Best Supporting Actor,TRUE,Mister Roberts
+11210,Arthur Kennedy,1956,Academy Awards,Best Supporting Actor,FALSE,Trial
+11211,Arthur O'Connell,1956,Academy Awards,Best Supporting Actor,FALSE,Picnic
+15887,Joe Mantell,1956,Academy Awards,Best Supporting Actor,FALSE,Marty
+10444,Sal Mineo,1956,Academy Awards,Best Supporting Actor,FALSE,Rebel Without a Cause
+16346,Anthony Quinn,1957,Academy Awards,Best Supporting Actor,TRUE,Lust for Life
+20110,Don Murray,1957,Academy Awards,Best Supporting Actor,FALSE,Bus Stop
+18580,Mickey Rooney,1957,Academy Awards,Best Supporting Actor,FALSE,The Bold and the Brave
+20109,Robert Stack,1957,Academy Awards,Best Supporting Actor,FALSE,Written on the Wind
+4254,Red Buttons,1958,Academy Awards,Best Supporting Actor,TRUE,Sayonara
+11210,Arthur Kennedy,1958,Academy Awards,Best Supporting Actor,FALSE,Peyton Place
+20107,Russ Tamblyn,1958,Academy Awards,Best Supporting Actor,FALSE,Peyton Place
+20108,Sessue Hayakawa,1958,Academy Awards,Best Supporting Actor,FALSE,The Bridge on the River Kwai
+16303,Vittorio De Sica,1958,Academy Awards,Best Supporting Actor,FALSE,A Farewell to Arms
+19213,Burl Ives,1959,Academy Awards,Best Supporting Actor,TRUE,The Big Country
+11210,Arthur Kennedy,1959,Academy Awards,Best Supporting Actor,FALSE,Some Came Running
+36803,Gig Young,1959,Academy Awards,Best Supporting Actor,FALSE,Teacher's Pet
+5546,Lee J. Cobb,1959,Academy Awards,Best Supporting Actor,FALSE,The Brothers Karamazov
+16187,Theodore Bikel,1959,Academy Awards,Best Supporting Actor,FALSE,The Defiant Ones
+16186,Hugh Griffith,1960,Academy Awards,Best Supporting Actor,TRUE,Ben-Hur
+11211,Arthur O'Connell,1960,Academy Awards,Best Supporting Actor,FALSE,Anatomy of a Murder
+15053,Edmond O'Brien,1960,Academy Awards,Best Supporting Actor,FALSE,The Last Angry Man
+14057,George C. Scott,1960,Academy Awards,Best Supporting Actor,FALSE,Anatomy of a Murder
+16185,Robert Vaughn,1960,Academy Awards,Best Supporting Actor,FALSE,The Young Philadelphians
+335,Peter Ustinov,1961,Academy Awards,Best Supporting Actor,TRUE,Spartacus
+15223,Chill Wills,1961,Academy Awards,Best Supporting Actor,FALSE,The Alamo
+15843,Jack Kruschen,1961,Academy Awards,Best Supporting Actor,FALSE,The Apartment
+3007,Peter Falk,1961,Academy Awards,Best Supporting Actor,FALSE,Murder Inc.
+10444,Sal Mineo,1961,Academy Awards,Best Supporting Actor,FALSE,Exodus
+15423,George Chakiris,1962,Academy Awards,Best Supporting Actor,TRUE,West Side Story
+14057,George C. Scott,1962,Academy Awards,Best Supporting Actor,FALSE,The Hustler
+15550,Jackie Gleason,1962,Academy Awards,Best Supporting Actor,FALSE,The Hustler
+10821,Montgomery Clift,1962,Academy Awards,Best Supporting Actor,FALSE,Judgment at Nuremberg
+3007,Peter Falk,1962,Academy Awards,Best Supporting Actor,FALSE,Pocketful of Miracles
+16298,Ed Begley,1963,Academy Awards,Best Supporting Actor,TRUE,Sweet Bird of Youth
+15842,Omar Sharif,1963,Academy Awards,Best Supporting Actor,FALSE,Lawrence of Arabia
+15133,Telly Savalas,1963,Academy Awards,Best Supporting Actor,FALSE,Birdman of Alcatraz
+15148,Terence Stamp,1963,Academy Awards,Best Supporting Actor,FALSE,Billy Budd
+18581,Victor Buono,1963,Academy Awards,Best Supporting Actor,FALSE,What Ever Happened to Baby Jane?
+16349,Melvyn Douglas,1964,Academy Awards,Best Supporting Actor,TRUE,Hud
+16299,Bobby Darin,1964,Academy Awards,Best Supporting Actor,FALSE,Captain Newman M.D.
+16186,Hugh Griffith,1964,Academy Awards,Best Supporting Actor,FALSE,Tom Jones
+15132,John Huston,1964,Academy Awards,Best Supporting Actor,FALSE,The Cardinal
+10793,Nick Adams,1964,Academy Awards,Best Supporting Actor,FALSE,Twilight of Honor
+335,Peter Ustinov,1965,Academy Awards,Best Supporting Actor,TRUE,Topkapi
+15053,Edmond O'Brien,1965,Academy Awards,Best Supporting Actor,FALSE,Seven Days in May
+15124,John Gielgud,1965,Academy Awards,Best Supporting Actor,FALSE,Becket
+5546,Lee J. Cobb,1965,Academy Awards,Best Supporting Actor,FALSE,How the West Was Won
+15759,Stanley Holloway,1965,Academy Awards,Best Supporting Actor,FALSE,My Fair Lady
+19124,Martin Balsam,1966,Academy Awards,Best Supporting Actor,TRUE,A Thousand Clowns
+14057,George C. Scott,1966,Academy Awards,Best Supporting Actor,FALSE,The Yellow Rolls-Royce
+10842,Ian Bannen,1966,Academy Awards,Best Supporting Actor,FALSE,The Flight of the Phoenix
+3222,Robert Redford,1966,Academy Awards,Best Supporting Actor,FALSE,Inside Daisy Clover
+11043,Tom Courtenay,1966,Academy Awards,Best Supporting Actor,FALSE,Doctor Zhivago
+13455,Walter Matthau,1967,Academy Awards,Best Supporting Actor,TRUE,The Fortune Cookie
+14057,George C. Scott,1967,Academy Awards,Best Supporting Actor,FALSE,The Bible: In the Beginning...
+15112,James Mason,1967,Academy Awards,Best Supporting Actor,FALSE,Georgy Girl
+2041,Mako,1967,Academy Awards,Best Supporting Actor,FALSE,The Sand Pebbles
+15104,Robert Shaw,1967,Academy Awards,Best Supporting Actor,FALSE,A Man for All Seasons
+14431,George Kennedy,1968,Academy Awards,Best Supporting Actor,TRUE,Cool Hand Luke
+15082,Cecil Kellaway,1968,Academy Awards,Best Supporting Actor,FALSE,Guess Who's Coming to Dinner
+31,Dustin Hoffman,1968,Academy Awards,Best Supporting Actor,FALSE,The Graduate
+15112,John Cassavetes,1968,Academy Awards,Best Supporting Actor,FALSE,The Dirty Dozen
+10793,Michael J. Pollard,1968,Academy Awards,Best Supporting Actor,FALSE,Bonnie and Clyde
+18579,Jack Albertson,1969,Academy Awards,Best Supporting Actor,TRUE,The Subject Was Roses
+11333,Daniel Massey,1969,Academy Awards,Best Supporting Actor,FALSE,Star!
+3222,Gene Wilder,1969,Academy Awards,Best Supporting Actor,FALSE,The Producers
+18581,Jack Wild,1969,Academy Awards,Best Supporting Actor,FALSE,Oliver!
+15112,Seymour Cassel,1969,Academy Awards,Best Supporting Actor,FALSE,Faces
+11195,Gig Young,1970,Academy Awards,Best Supporting Actor,TRUE,They Shoot Horses Don't They?
+20153,Anthony Quayle,1970,Academy Awards,Best Supporting Actor,FALSE,Anne of the Thousand Days
+11197,Fredric March,1970,Academy Awards,Best Supporting Actor,FALSE,...tick...tick...tick...
+3084,Jack Nicholson,1970,Academy Awards,Best Supporting Actor,FALSE,Easy Rider
+11116,Vincent Gardenia,1970,Academy Awards,Best Supporting Actor,FALSE,Jenny
+15132,John Mills,1971,Academy Awards,Best Supporting Actor,TRUE,Ryan's Daughter
+11198,Chief Dan George,1971,Academy Awards,Best Supporting Actor,FALSE,Little Big Man
+3222,Gene Hackman,1971,Academy Awards,Best Supporting Actor,FALSE,I Never Sang for My Father
+11110,John Marley,1971,Academy Awards,Best Supporting Actor,FALSE,Love Story
+16304,Richard S. Castellano,1971,Academy Awards,Best Supporting Actor,FALSE,Lovers and Other Strangers
+16188,Ben Johnson,1972,Academy Awards,Best Supporting Actor,TRUE,The Last Picture Show
+11199,Jeff Bridges,1972,Academy Awards,Best Supporting Actor,FALSE,The Last Picture Show
+11111,Leonard Frey,1972,Academy Awards,Best Supporting Actor,FALSE,Fiddler on the Roof
+11112,Richard Jaeckel,1972,Academy Awards,Best Supporting Actor,FALSE,Sometimes a Great Notion
+11113,Roy Scheider,1972,Academy Awards,Best Supporting Actor,FALSE,The French Connection
+15888,Joel Grey,1973,Academy Awards,Best Supporting Actor,TRUE,Cabaret
+11115,Al Pacino,1973,Academy Awards,Best Supporting Actor,FALSE,The Godfather
+13045,Eddie Albert,1973,Academy Awards,Best Supporting Actor,FALSE,The Heartbreak Kid
+11114,James Coco,1973,Academy Awards,Best Supporting Actor,FALSE,Man of La Mancha
+380,Robert De Niro,1973,Academy Awards,Best Supporting Actor,FALSE,Bang the Drum Slowly
+20148,John Houseman,1974,Academy Awards,Best Supporting Actor,TRUE,The Paper Chase
+3084,Jack Nicholson,1974,Academy Awards,Best Supporting Actor,FALSE,The Last Detail
+11117,Jason Miller,1974,Academy Awards,Best Supporting Actor,FALSE,The Exorcist
+11118,Randy Quaid,1974,Academy Awards,Best Supporting Actor,FALSE,The Last Detail
+11116,Vincent Gardenia,1974,Academy Awards,Best Supporting Actor,FALSE,Bang the Drum Slowly
+380,Robert De Niro,1975,Academy Awards,Best Supporting Actor,TRUE,The Godfather Part II
+11115,Al Pacino,1975,Academy Awards,Best Supporting Actor,FALSE,The Godfather Part II
+11119,Fred Astaire,1975,Academy Awards,Best Supporting Actor,FALSE,The Towering Inferno
+11199,Jeff Bridges,1975,Academy Awards,Best Supporting Actor,FALSE,Thunderbolt and Lightfoot
+11120,Lee Strasberg,1975,Academy Awards,Best Supporting Actor,FALSE,The Godfather Part II
+19119,George Burns,1976,Academy Awards,Best Supporting Actor,TRUE,The Sunshine Boys
+11121,Brad Dourif,1976,Academy Awards,Best Supporting Actor,FALSE,One Flew Over the Cuckoo's Nest
+11122,Burgess Meredith,1976,Academy Awards,Best Supporting Actor,FALSE,The Day of the Locust
+11123,Chris Sarandon,1976,Academy Awards,Best Supporting Actor,FALSE,Dog Day Afternoon
+3084,Jack Nicholson,1976,Academy Awards,Best Supporting Actor,FALSE,The Fortune
+13570,Jason Robards,1977,Academy Awards,Best Supporting Actor,TRUE,All the President's Men
+11122,Burgess Meredith,1977,Academy Awards,Best Supporting Actor,FALSE,Rocky
+11126,Burt Young,1977,Academy Awards,Best Supporting Actor,FALSE,Rocky
+11125,Laurence Olivier,1977,Academy Awards,Best Supporting Actor,FALSE,Marathon Man
+11124,Ned Beatty,1977,Academy Awards,Best Supporting Actor,FALSE,Network
+13570,Jason Robards,1978,Academy Awards,Best Supporting Actor,TRUE,Julia
+251,Alec Guinness,1978,Academy Awards,Best Supporting Actor,FALSE,Star Wars
+11129,Maximilian Schell,1978,Academy Awards,Best Supporting Actor,FALSE,Julia
+11127,Mikhail Baryshnikov,1978,Academy Awards,Best Supporting Actor,FALSE,The Turning Point
+11128,Peter Firth,1978,Academy Awards,Best Supporting Actor,FALSE,Equus
+1833,Christopher Walken,1979,Academy Awards,Best Supporting Actor,TRUE,The Deer Hunter
+11130,Bruce Dern,1979,Academy Awards,Best Supporting Actor,FALSE,Coming Home
+3084,Jack Nicholson,1979,Academy Awards,Best Supporting Actor,FALSE,Goin' South
+11132,John Hurt,1979,Academy Awards,Best Supporting Actor,FALSE,Midnight Express
+11131,Richard Farnsworth,1979,Academy Awards,Best Supporting Actor,FALSE,Comes a Horseman
+16349,Melvyn Douglas,1980,Academy Awards,Best Supporting Actor,TRUE,Being There
+11133,Frederic Forrest,1980,Academy Awards,Best Supporting Actor,FALSE,The Rose
+3222,Gene Hackman,1980,Academy Awards,Best Supporting Actor,FALSE,Superman
+11134,Justin Henry,1980,Academy Awards,Best Supporting Actor,FALSE,Kramer vs. Kramer
+11135,Mickey Rooney,1980,Academy Awards,Best Supporting Actor,FALSE,The Black Stallow
+13568,Timothy Hutton,1981,Academy Awards,Best Supporting Actor,TRUE,Ordinary People
+882,Joe Pesci,1981,Academy Awards,Best Supporting Actor,FALSE,Raging Bull
+11132,John Hurt,1981,Academy Awards,Best Supporting Actor,FALSE,The Elephant Man
+11136,Judd Hirsch,1981,Academy Awards,Best Supporting Actor,FALSE,Ordinary People
+11137,Michael O'Keefe,1981,Academy Awards,Best Supporting Actor,FALSE,The Great Santini
+16155,John Gielgud,1982,Academy Awards,Best Supporting Actor,TRUE,Arthur
+11140,Howard E. Rollins Jr.,1982,Academy Awards,Best Supporting Actor,FALSE,Ragtime
+11139,Ian Holm,1982,Academy Awards,Best Supporting Actor,FALSE,Chariots of Fire
+2,Jack Nicholson,1982,Academy Awards,Best Supporting Actor,FALSE,Reds
+11138,James Coco,1982,Academy Awards,Best Supporting Actor,FALSE,Only When I Laugh
+15556,Louis Gossett Jr.,1983,Academy Awards,Best Supporting Actor,TRUE,An Officer and a Gentleman
+11141,Charles Durning,1983,Academy Awards,Best Supporting Actor,FALSE,The Best Little Whorehouse in Texas
+11142,James Mason,1983,Academy Awards,Best Supporting Actor,FALSE,The Verdict
+11132,John Hurt,1983,Academy Awards,Best Supporting Actor,FALSE,Night Crossing
+11143,Robert Preston,1983,Academy Awards,Best Supporting Actor,FALSE,Victor/Victoria
+2,Jack Nicholson,1984,Academy Awards,Best Supporting Actor,TRUE,Terms of Endearment
+11141,Charles Durning,1984,Academy Awards,Best Supporting Actor,FALSE,To Be or Not to Be
+11132,John Hurt,1984,Academy Awards,Best Supporting Actor,FALSE,The Hit
+11144,John Lithgow,1984,Academy Awards,Best Supporting Actor,FALSE,Terms of Endearment
+11145,Sam Shepard,1984,Academy Awards,Best Supporting Actor,FALSE,The Right Stuff
+20152,Haing S. Ngor,1985,Academy Awards,Best Supporting Actor,TRUE,The Killing Fields
+11146,Adolph Caesar,1985,Academy Awards,Best Supporting Actor,FALSE,A Soldier's Story
+11132,John Hurt,1985,Academy Awards,Best Supporting Actor,FALSE,1984
+11147,Noriyuki 'Pat' Morita,1985,Academy Awards,Best Supporting Actor,FALSE,The Karate Kid
+11148,Ralph Richardson,1985,Academy Awards,Best Supporting Actor,FALSE,Greystoke: The Legend of Tarzan
+16181,Don Ameche,1986,Academy Awards,Best Supporting Actor,TRUE,Cocoon
+11152,Eric Roberts,1986,Academy Awards,Best Supporting Actor,FALSE,Runaway Train
+11149,Klaus Maria Brandauer,1986,Academy Awards,Best Supporting Actor,FALSE,Out of Africa
+11151,Robert Loggia,1986,Academy Awards,Best Supporting Actor,FALSE,Jagged Edge
+11150,William Hickey,1986,Academy Awards,Best Supporting Actor,FALSE,Prizzi's Honor
+112,Michael Caine,1987,Academy Awards,Best Supporting Actor,TRUE,Hannah and Her Sisters
+11155,Denholm Elliott,1987,Academy Awards,Best Supporting Actor,FALSE,A Room with a View
+11156,Dennis Hopper,1987,Academy Awards,Best Supporting Actor,FALSE,Hoosiers
+11153,Tom Berenger,1987,Academy Awards,Best Supporting Actor,FALSE,Platoon
+11154,Willem Dafoe,1987,Academy Awards,Best Supporting Actor,FALSE,Platoon
+228,Sean Connery,1988,Academy Awards,Best Supporting Actor,TRUE,The Untouchables
+11157,Albert Brooks,1988,Academy Awards,Best Supporting Actor,FALSE,Broadcast News
+11159,Denzel Washington,1988,Academy Awards,Best Supporting Actor,FALSE,Cry Freedom
+192,Morgan Freeman,1988,Academy Awards,Best Supporting Actor,FALSE,Street Smart
+11158,Vincent Gardenia,1988,Academy Awards,Best Supporting Actor,FALSE,Moonstruck
+10332,Kevin Kline,1989,Academy Awards,Best Supporting Actor,TRUE,A Fish Called Wanda
+11160,Alec Guinness,1989,Academy Awards,Best Supporting Actor,FALSE,Little Dorrit
+11163,Dean Stockwell,1989,Academy Awards,Best Supporting Actor,FALSE,Married to the Mob
+11161,Martin Landau,1989,Academy Awards,Best Supporting Actor,FALSE,Tucker: The Man and His Dream
+11162,River Phoenix,1989,Academy Awards,Best Supporting Actor,FALSE,Running on Empty
+5292,Denzel Washington,1990,Academy Awards,Best Supporting Actor,TRUE,Glory
+882,Joe Pesci,1991,Academy Awards,Best Supporting Actor,TRUE,GoodFellas
+11115,Al Pacino,1991,Academy Awards,Best Supporting Actor,FALSE,Dick Tracy
+20111,Andy Garcia,1991,Academy Awards,Best Supporting Actor,FALSE,The Godfather Part III
+11165,Bruce Davison,1991,Academy Awards,Best Supporting Actor,FALSE,Longtime Companion
+11164,Graham Greene,1991,Academy Awards,Best Supporting Actor,FALSE,Dances with Wolves
+15844,Jack Palance,1992,Academy Awards,Best Supporting Actor,TRUE,City Flickers
+15844,Jack Palance,1992,Academy Awards,Best Supporting Actor,TRUE,City Slickers
+11167,Ben Kingsley,1992,Academy Awards,Best Supporting Actor,FALSE,Bugsy
+11166,Harvey Keitel,1992,Academy Awards,Best Supporting Actor,FALSE,Bugsy
+11168,Michael Lerner,1992,Academy Awards,Best Supporting Actor,FALSE,Barton Fink
+182,Gene Hackman,1993,Academy Awards,Best Supporting Actor,TRUE,Unforgiven
+11115,Al Pacino,1993,Academy Awards,Best Supporting Actor,FALSE,Glengarry Glen Ross
+11170,David Paymer,1993,Academy Awards,Best Supporting Actor,FALSE,Mr. Saturday Night
+2,Jack Nicholson,1993,Academy Awards,Best Supporting Actor,FALSE,A Few Good Men
+11169,Jaye Davidson,1993,Academy Awards,Best Supporting Actor,FALSE,The Crying Game
+217,Tommy Lee Jones,1994,Academy Awards,Best Supporting Actor,TRUE,The Fugitive
+11173,John Malkovich,1994,Academy Awards,Best Supporting Actor,FALSE,In the Line of Fire
+11171,Leonardo DiCaprio,1994,Academy Awards,Best Supporting Actor,FALSE,What's Eating Gilbert Grape
+11174,Pete Postlethwaite,1994,Academy Awards,Best Supporting Actor,FALSE,In the Name of the Father
+11172,Ralph Fiennes,1994,Academy Awards,Best Supporting Actor,FALSE,Schindler's List
+1161,Martin Landau,1995,Academy Awards,Best Supporting Actor,TRUE,Ed Wood
+11175,Chazz Palminteri,1995,Academy Awards,Best Supporting Actor,FALSE,Bullets Over Broadway
+11177,Gary Sinise,1995,Academy Awards,Best Supporting Actor,FALSE,Forrest Gump
+11176,Paul Scofield,1995,Academy Awards,Best Supporting Actor,FALSE,Quiz Show
+1503,Samuel L. Jackson,1995,Academy Awards,Best Supporting Actor,FALSE,Pulp Fiction
+1979,Kevin Spacey,1996,Academy Awards,Best Supporting Actor,TRUE,The Usual Suspects
+131,Brad Pitt,1996,Academy Awards,Best Supporting Actor,FALSE,Twelve Monkeys
+11179,Ed Harris,1996,Academy Awards,Best Supporting Actor,FALSE,Apollo 13
+11178,James Cromwell,1996,Academy Awards,Best Supporting Actor,FALSE,Babe
+11180,Tim Roth,1996,Academy Awards,Best Supporting Actor,FALSE,Rob Roy
+4090,Cuba Gooding Jr.,1997,Academy Awards,Best Supporting Actor,TRUE,Jerry Maguire
+11181,Armin Mueller-Stahl,1997,Academy Awards,Best Supporting Actor,FALSE,Shine
+11182,Edward Norton,1997,Academy Awards,Best Supporting Actor,FALSE,Primal Fear
+11155,William H. Macy,1997,Academy Awards,Best Supporting Actor,FALSE,Fargo
+2157,Robin Williams,1998,Academy Awards,Best Supporting Actor,TRUE,Good Will Hunting
+11184,Anthony Hopkins,1998,Academy Awards,Best Supporting Actor,FALSE,Amistad
+11186,Burt Reynolds,1998,Academy Awards,Best Supporting Actor,FALSE,Boogie Nights
+11185,Greg Kinnear,1998,Academy Awards,Best Supporting Actor,FALSE,As Good as It Gets
+11183,Robert Forster,1998,Academy Awards,Best Supporting Actor,FALSE,Jackie Brown
+15017,James Coburn,1999,Academy Awards,Best Supporting Actor,TRUE,Affliction
+11188,Billy Bob Thornton,1999,Academy Awards,Best Supporting Actor,FALSE,A Simple Plan
+11179,Ed Harris,1999,Academy Awards,Best Supporting Actor,FALSE,The Truman Show
+11187,Geoffrey Rush,1999,Academy Awards,Best Supporting Actor,FALSE,Shakespeare in Love
+112,Michael Caine,2000,Academy Awards,Best Supporting Actor,TRUE,The Cider House Rules
+11115,Al Pacino,2000,Academy Awards,Best Supporting Actor,FALSE,The Insider
+11192,Haley Joel Osment,2000,Academy Awards,Best Supporting Actor,FALSE,The Sixth Sense
+11191,Jude Law,2000,Academy Awards,Best Supporting Actor,FALSE,The Talented Mr. Ripley
+11190,Michael Clarke Duncan,2000,Academy Awards,Best Supporting Actor,FALSE,The Green Mile
+11189,Tom Cruise,2000,Academy Awards,Best Supporting Actor,FALSE,Magnolia
+1170,Benicio del Toro,2001,Academy Awards,Best Supporting Actor,TRUE,Traffic
+3926,Albert Finney,2001,Academy Awards,Best Supporting Actor,FALSE,Erin Brockovich
+11199,Jeff Bridges,2001,Academy Awards,Best Supporting Actor,FALSE,The Contender
+11193,Joaquin Phoenix,2001,Academy Awards,Best Supporting Actor,FALSE,Gladiator
+11154,Willem Dafoe,2001,Academy Awards,Best Supporting Actor,FALSE,Shadow of the Vampire
+13444,Jim Broadbent,2002,Academy Awards,Best Supporting Actor,TRUE,Iris
+11184,Anthony Hopkins,2002,Academy Awards,Best Supporting Actor,FALSE,The Two Popes
+11194,Ben Kingsley,2002,Academy Awards,Best Supporting Actor,FALSE,Sexy Beast
+2144,Ian McKellen,2002,Academy Awards,Best Supporting Actor,FALSE,The Lord of the Rings: The Fellowship of the Ring
+11195,Jon Voight,2002,Academy Awards,Best Supporting Actor,FALSE,Ali
+2051,Chris Cooper,2003,Academy Awards,Best Supporting Actor,TRUE,Adaptation
+1833,Christopher Walken,2003,Academy Awards,Best Supporting Actor,FALSE,Catch Me If You Can
+11179,Ed Harris,2003,Academy Awards,Best Supporting Actor,FALSE,The Hours
+11197,John C. Reilly,2003,Academy Awards,Best Supporting Actor,FALSE,Chicago
+11196,Paul Newman,2003,Academy Awards,Best Supporting Actor,FALSE,Road to Perdition
+1101,Tim Robbins,2004,Academy Awards,Best Supporting Actor,TRUE,Mystic River
+11198,Alec Baldwin,2004,Academy Awards,Best Supporting Actor,FALSE,The Cooler
+1170,Benicio del Toro,2004,Academy Awards,Best Supporting Actor,FALSE,21 Grams
+11199,Djimon Hounsou,2004,Academy Awards,Best Supporting Actor,FALSE,In America
+11200,Ken Watanabe,2004,Academy Awards,Best Supporting Actor,FALSE,The Last Samurai
+192,Morgan Freeman,2005,Academy Awards,Best Supporting Actor,TRUE,Million Dollar Baby
+11201,Alan Alda,2005,Academy Awards,Best Supporting Actor,FALSE,The Aviator
+11204,Clive Owen,2005,Academy Awards,Best Supporting Actor,FALSE,Closer
+11203,Jamie Foxx,2005,Academy Awards,Best Supporting Actor,FALSE,Collateral
+11202,Thomas Haden Church,2005,Academy Awards,Best Supporting Actor,FALSE,Sideways
+22636,George Clooney,2006,Academy Awards,Best Supporting Actor,TRUE,Syriana
+11207,Jake Gyllenhaal,2006,Academy Awards,Best Supporting Actor,FALSE,Brokeback Mountain
+11205,Matt Dillon,2006,Academy Awards,Best Supporting Actor,FALSE,Crash
+11206,Paul Giamatti,2006,Academy Awards,Best Supporting Actor,FALSE,Cinderella Man
+11156,William Hurt,2006,Academy Awards,Best Supporting Actor,FALSE,A History of Violence
+4690,Alan Arkin,2007,Academy Awards,Best Supporting Actor,TRUE,Little Miss Sunshine
+11199,Djimon Hounsou,2007,Academy Awards,Best Supporting Actor,FALSE,Blood Diamond
+11209,Eddie Murphy,2007,Academy Awards,Best Supporting Actor,FALSE,Dreamgirls
+11208,Jackie Earle Haley,2007,Academy Awards,Best Supporting Actor,FALSE,Little Children
+11210,Mark Wahlberg,2007,Academy Awards,Best Supporting Actor,FALSE,The Departed
+3810,Javier Bardem,2008,Academy Awards,Best Supporting Actor,TRUE,No Country for Old Men
+11182,Casey Affleck,2008,Academy Awards,Best Supporting Actor,FALSE,The Assassination of Jesse James: Death of an Outlaw
+11211,Hal Holbrook,2008,Academy Awards,Best Supporting Actor,FALSE,Into the Wild
+11132,Philip Seymour Hoffman,2008,Academy Awards,Best Supporting Actor,FALSE,Charlie Wilson's War
+11212,Tom Wilkinson,2008,Academy Awards,Best Supporting Actor,FALSE,Michael Clayton
+1810,Heath Ledger,2009,Academy Awards,Best Supporting Actor,TRUE,The Dark Knight
+11213,Josh Brolin,2009,Academy Awards,Best Supporting Actor,FALSE,Milk
+11214,Michael Shannon,2009,Academy Awards,Best Supporting Actor,FALSE,Revolutionary Road
+11132,Philip Seymour Hoffman,2009,Academy Awards,Best Supporting Actor,FALSE,Doubt
+3223,Robert Downey Jr.,2009,Academy Awards,Best Supporting Actor,FALSE,Tropic Thunder
+13737,Christoph Waltz,2010,Academy Awards,Best Supporting Actor,TRUE,Inglourious Basterds
+3894,Christian Bale,2011,Academy Awards,Best Supporting Actor,TRUE,The Fighter
+352,Christopher Plummer,2012,Academy Awards,Best Supporting Actor,TRUE,Beginners
+13737,Christoph Waltz,2013,Academy Awards,Best Supporting Actor,TRUE,Django Unchained
+10358,Jared Leto,2014,Academy Awards,Best Supporting Actor,TRUE,Dallas Buyers Club
+17698,J.K. Simmons,2015,Academy Awards,Best Supporting Actor,TRUE,Whiplash
+54881,Mark Rylance,2016,Academy Awards,Best Supporting Actor,TRUE,Bridge of Spies
+131525,Mahershala Ali,2017,Academy Awards,Best Supporting Actor,TRUE,Moonlight
+3028,Sam Rockwell,2018,Academy Awards,Best Supporting Actor,TRUE,Three Billboards Outside Ebbing Missouri
+131525,Mahershala Ali,2019,Academy Awards,Best Supporting Actor,TRUE,Green Book
+287,Brad Pitt,2020,Academy Awards,Best Supporting Actor,TRUE,Once Upon a Time in Hollywood
+1325781,Daniel Kaluuya,2021,Academy Awards,Best Supporting Actor,TRUE,Judas and the Black Messiah
+1478142,Troy Kotsur,2022,Academy Awards,Best Supporting Actor,TRUE,CODA
+32367,Ke Huy Quan,2023,Academy Awards,Best Supporting Actor,TRUE,Everything Everywhere All at Once
+3223,Robert Downey Jr.,2024,Academy Awards,Best Supporting Actor,TRUE,Oppenheimer
+62862,Kieran Culkin,2025,Academy Awards,Best Supporting Actor,TRUE,A Real Pain
+1892,Sean Penn,2026,Academy Awards,Best Supporting Actor,TRUE,One Battle After Another
+1170,Benicio Del Toro,2026,Academy Awards,Best Supporting Actor,FALSE,One Battle After Another
+11159,Delroy Lindo,2026,Academy Awards,Best Supporting Actor,FALSE,Sinners
+1325781,Jacob Elordi,2026,Academy Awards,Best Supporting Actor,FALSE,Frankenstein
+16186,Stellan Skarsgård,2026,Academy Awards,Best Supporting Actor,FALSE,Sentimental Value

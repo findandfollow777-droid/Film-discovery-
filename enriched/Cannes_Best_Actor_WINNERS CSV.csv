@@ -1,0 +1,87 @@
+tmdb_id,nominee,year,festival,category,won,movie_title
+7124,Ray Milland,1946,Cannes,Best Actor,TRUE,The Lost Weekend
+13566,Edward G. Robinson,1949,Cannes,Best Actor,TRUE,House of Strangers
+7640,Michael Redgrave,1951,Cannes,Best Actor,TRUE,The Browning Version
+3084,Marlon Brando,1952,Cannes,Best Actor,TRUE,Viva Zapata!
+12147,Spencer Tracy,1955,Cannes,Best Actor,TRUE,Bad Day at Black Rock
+9876,John Kitzmiller,1957,Cannes,Best Actor,TRUE,Valley of Peace
+3636,Paul Newman,1958,Cannes,Best Actor,TRUE,The Long Hot Summer
+18647,Bradford Dillman,1959,Cannes,Best Actor,TRUE,Compulsion
+40,Orson Welles,1959,Cannes,Best Actor,TRUE,Compulsion
+923,Dean Stockwell,1959,Cannes,Best Actor,TRUE,Compulsion
+7301,Anthony Perkins,1961,Cannes,Best Actor,TRUE,Goodbye Again
+4765,Jason Robards,1962,Cannes,Best Actor,TRUE,Long Day's Journey into Night
+12689,Ralph Richardson,1962,Cannes,Best Actor,TRUE,Long Day's Journey into Night
+923,Dean Stockwell,1962,Cannes,Best Actor,TRUE,Long Day's Journey into Night
+31722,Murray Melvin,1962,Cannes,Best Actor,TRUE,A Taste of Honey
+194,Richard Harris,1963,Cannes,Best Actor,TRUE,This Sporting Life
+119431,Saro Urzì,1964,Cannes,Best Actor,TRUE,Seduced and Abandoned
+125192,Antal Páger,1964,Cannes,Best Actor,TRUE,Skylark
+28641,Terence Stamp,1965,Cannes,Best Actor,TRUE,The Collector
+3855,Per Oscarsson,1966,Cannes,Best Actor,TRUE,Hunger
+1061625,Oded Kotler,1967,Cannes,Best Actor,TRUE,Three Days and a Child
+1352,Jean-Louis Trintignant,1969,Cannes,Best Actor,TRUE,Z
+5676,Marcello Mastroianni,1970,Cannes,Best Actor,TRUE,Jealousy Italian Style
+29429,Riccardo Cucciolla,1971,Cannes,Best Actor,TRUE,Sacco and Vanzetti
+1352,Jean-Louis Trintignant,1972,Cannes,Best Actor,TRUE,We Will Not Grow Old Together
+3753,Giancarlo Giannini,1973,Cannes,Best Actor,TRUE,Love and Anarchy
+514,Jack Nicholson,1974,Cannes,Best Actor,TRUE,The Last Detail
+12259,Vittorio Gassman,1975,Cannes,Best Actor,TRUE,Scent of a Woman
+72631,José Luis Gómez,1976,Cannes,Best Actor,TRUE,Pascual Duarte
+14821,Fernando Rey,1977,Cannes,Best Actor,TRUE,Elisa My Life
+10127,Jon Voight,1978,Cannes,Best Actor,TRUE,Coming Home
+3151,Jack Lemmon,1979,Cannes,Best Actor,TRUE,The China Syndrome
+3784,Michel Piccoli,1980,Cannes,Best Actor,TRUE,Leap into the Void
+32312,Ugo Tognazzi,1981,Cannes,Best Actor,TRUE,The Tragedy of a Ridiculous Man
+3151,Jack Lemmon,1982,Cannes,Best Actor,TRUE,Missing
+14276,Gian Maria Volonté,1983,Cannes,Best Actor,TRUE,The Death of Mario Ricci
+9768,Francisco Rabal,1984,Cannes,Best Actor,TRUE,The Holy Innocents
+230884,Alfredo Landa,1984,Cannes,Best Actor,TRUE,The Holy Innocents
+227,William Hurt,1985,Cannes,Best Actor,TRUE,Kiss of the Spider Woman
+21175,Michel Blanc,1986,Cannes,Best Actor,TRUE,Ménage
+382,Bob Hoskins,1986,Cannes,Best Actor,TRUE,Mona Lisa
+5676,Marcello Mastroianni,1987,Cannes,Best Actor,TRUE,Dark Eyes
+2178,Forest Whitaker,1988,Cannes,Best Actor,TRUE,Bird
+13548,James Spader,1989,Cannes,Best Actor,TRUE,sex lies and videotape
+16927,Gérard Depardieu,1990,Cannes,Best Actor,TRUE,Cyrano de Bergerac
+1241,John Turturro,1991,Cannes,Best Actor,TRUE,Barton Fink
+504,Tim Robbins,1992,Cannes,Best Actor,TRUE,The Player
+11207,David Thewlis,1993,Cannes,Best Actor,TRUE,Naked
+3431700,Ge You,1994,Cannes,Best Actor,TRUE,To Live
+378,Jonathan Pryce,1995,Cannes,Best Actor,TRUE,Carrington
+6012,Daniel Auteuil,1996,Cannes,Best Actor,TRUE,The Eighth Day
+534031,Pascal Duquenne,1996,Cannes,Best Actor,TRUE,The Eighth Day
+2228,Sean Penn,1997,Cannes,Best Actor,TRUE,She's So Lovely
+3064,Peter Mullan,1998,Cannes,Best Actor,TRUE,My Name Is Joe
+240848,Emmanuel Schotté,1999,Cannes,Best Actor,TRUE,L'humanité
+1337,Tony Leung Chiu-wai,2000,Cannes,Best Actor,TRUE,In the Mood for Love
+5442,Benoît Magimel,2001,Cannes,Best Actor,TRUE,The Piano Teacher
+45152,Olivier Gourmet,2002,Cannes,Best Actor,TRUE,The Son
+107521,Muzaffer Özdemir,2003,Cannes,Best Actor,TRUE,Distant
+107522,Mehmet Emin Toprak,2003,Cannes,Best Actor,TRUE,Distant
+25648,Yuya Yagira,2004,Cannes,Best Actor,TRUE,Nobody Knows
+2176,Tommy Lee Jones,2005,Cannes,Best Actor,TRUE,The Three Burials of Melquiades Estrada
+2408,Jamel Debbouze,2006,Cannes,Best Actor,TRUE,Days of Glory
+20667,Sami Bouajila,2006,Cannes,Best Actor,TRUE,Days of Glory
+20442,Roschdy Zem,2006,Cannes,Best Actor,TRUE,Days of Glory
+20666,Sami Naceri,2006,Cannes,Best Actor,TRUE,Days of Glory
+20668,Bernard Blancan,2006,Cannes,Best Actor,TRUE,Days of Glory
+68517,Konstantin Lavronenko,2007,Cannes,Best Actor,TRUE,The Banishment
+1121,Benicio del Toro,2008,Cannes,Best Actor,TRUE,Che
+27319,Christoph Waltz,2009,Cannes,Best Actor,TRUE,Inglourious Basterds
+3810,Javier Bardem,2010,Cannes,Best Actor,TRUE,Biutiful
+59269,Elio Germano,2010,Cannes,Best Actor,TRUE,Our Life
+56024,Jean Dujardin,2011,Cannes,Best Actor,TRUE,The Artist
+1019,Mads Mikkelsen,2012,Cannes,Best Actor,TRUE,The Hunt
+6905,Bruce Dern,2013,Cannes,Best Actor,TRUE,Nebraska
+9191,Timothy Spall,2014,Cannes,Best Actor,TRUE,Mr. Turner
+5443,Vincent Lindon,2015,Cannes,Best Actor,TRUE,The Measure of a Man
+229933,Shahab Hosseini,2016,Cannes,Best Actor,TRUE,The Salesman
+73421,Joaquin Phoenix,2017,Cannes,Best Actor,TRUE,You Were Never Really Here
+1699129,Marcello Fonte,2018,Cannes,Best Actor,TRUE,Dogman
+3131,Antonio Banderas,2019,Cannes,Best Actor,TRUE,Pain and Glory
+572541,Caleb Landry Jones,2021,Cannes,Best Actor,TRUE,Nitram
+20738,Song Kang-ho,2022,Cannes,Best Actor,TRUE,Broker
+18056,Kōji Yakusho,2023,Cannes,Best Actor,TRUE,Perfect Days
+88124,Jesse Plemons,2024,Cannes,Best Actor,TRUE,Kinds of Kindness
+52583,Wagner Moura,2025,Cannes,Best Actor,TRUE,The Secret Agent

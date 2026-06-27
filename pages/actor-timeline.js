@@ -39,7 +39,7 @@ async function init() {
       onAnchorClick: (movie) => {
         localStorage.setItem('anchorMovie', JSON.stringify(movie));
         localStorage.removeItem('anchorFromResults');
-        window.location.href = '../games/constellation.html';
+        window.location.href = 'anchor-point.html';
       }
     });
   }
@@ -55,11 +55,33 @@ async function init() {
   });
 
   // Career DNA popup
+  const dnaOverlay = document.getElementById('careerDnaOverlay');
+  const dnaCloseBtn = document.getElementById('careerDnaClose');
+
+  // Rule 17: Black Hole exit trigger.
+  function triggerDnaOrbitClose() {
+    if (!dnaOverlay || dnaOverlay.classList.contains('orbit-popup-closing')) return;
+    if (dnaCloseBtn) dnaCloseBtn.classList.add('closing');
+    dnaOverlay.classList.add('orbit-popup-closing');
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => {
+      if (dnaCloseBtn) dnaCloseBtn.classList.remove('closing');
+      dnaOverlay.classList.remove('orbit-popup-closing');
+      closeCareerDNA();
+    }, reduced ? 200 : 600);
+  }
+  window._triggerCareerDnaClose = triggerDnaOrbitClose;
+
   document.getElementById('careerDnaBtn').addEventListener('click', openCareerDNA);
   document.getElementById('careerDna').addEventListener('click', openCareerDNA);
-  document.getElementById('careerDnaClose').addEventListener('click', closeCareerDNA);
-  document.getElementById('careerDnaOverlay').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeCareerDNA();
+  dnaCloseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerDnaOrbitClose();
+  });
+  dnaOverlay.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) triggerDnaOrbitClose();
   });
 
   // Close episode tiles on scroll or click elsewhere
@@ -73,7 +95,11 @@ async function init() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closeCareerDNA();
+      if (dnaOverlay && !dnaOverlay.hidden) {
+        triggerDnaOrbitClose();
+      } else {
+        closeCareerDNA();
+      }
       hideEpisodeTiles();
     }
   });

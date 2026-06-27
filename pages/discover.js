@@ -51,28 +51,34 @@ const GENRE_SVGS = {
   "Western": `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="12" rx="6" ry="2"/><path d="M4 12Q3 8 8 4Q13 8 12 12"/><line x1="3" y1="10" x2="13" y2="10"/></svg>`
 };
 
+// TMDB keyword IDs — verified 2026-05-10 via TMDB /keyword/{id} API.
+// Replaces prior IDs that semantically collided (e.g. 9715=superhero was
+// mapped to Gritty/Fast-paced/Intense/Atmospheric; 10683=coming-of-age was
+// mapped to Uplifting/Quirky/Whimsical/Feel-good/Heartwarming; 818=based-on-
+// novel was mapped to Suspenseful/Twisted/Mind-bending). See keyword-ids.js
+// note re: the May 9, 2026 road-trip fix for related background.
 const KEYWORD_MAP = {
-  "Noir": 210024,
-  "Gritty": 9715,
-  "Dark": 207928,
-  "Uplifting": 10683,
-  "Quirky": 10683,
-  "Whimsical": 10683,
-  "Bleak": 207928,
-  "Slow-burn": 14537,
-  "Fast-paced": 9715,
-  "Intense": 9715,
-  "Suspenseful": 818,
-  "Emotional": 3205,
-  "Feel-good": 10683,
-  "Atmospheric": 9715,
-  "Cerebral": 4344,
-  "Twisted": 818,
-  "Violent": 9663,
-  "Gore": 12670,
-  "Family-friendly": 6054,
-  "Heartwarming": 10683,
-  "Mind-bending": 818
+  "Noir": 9807,             // "film noir" (1053 movies); plain "noir" splits into british/french/nordic/tech-noir variants
+  "Gritty": 286125,
+  "Dark": 10123,            // "dark comedy" — no plain "dark" tone keyword; narrows to comedy
+  "Uplifting": 334465,
+  "Quirky": 324713,         // reuses "whimsical" — exact "quirky" keyword has 0 movies on TMDB
+  "Whimsical": 324713,
+  "Bleak": 230747,
+  "Slow-burn": 277551,
+  "Fast-paced": 372235,     // exact match but very low coverage (1 movie); no better TMDB option
+  "Intense": 321464,
+  "Suspenseful": 314730,
+  "Emotional": 365954,
+  "Feel-good": 329716,
+  "Atmospheric": 155800,
+  "Cerebral": 12565,        // "psychological thriller" — no plain "cerebral" tone keyword; narrows to thriller
+  "Twisted": 243026,
+  "Violent": 342828,
+  "Gore": 10292,
+  "Family-friendly": 317983,
+  "Heartwarming": 319357,
+  "Mind-bending": 362567    // exact match but low coverage (5 movies); no better TMDB option
 };
 
 // =============================================
@@ -113,7 +119,13 @@ getSettingsData();
 
 const state = {
   filters: [],
-  genreLogic: "or"
+  genreLogic: "or",
+  regionLogic: "or",
+  /* Build A (2026-06-27): AND/OR join mode for Setting keyword chips'
+     with_keywords (mirrors regionLogic). Default "or" → "|" separator, the
+     same default as Region. No Setting AND/OR toggle UI ships in Build A;
+     this is the single source of truth the query builder reads. */
+  settingLogic: "or"
 };
 
 const searchInput = document.getElementById("searchInput");
@@ -127,7 +139,6 @@ const focusOverlay = document.getElementById("focusOverlay");
 const focusTitle = document.getElementById("focusTitle");
 const focusContent = document.getElementById("focusContent");
 const focusCloseButton = document.getElementById("focusCloseButton");
-const addToSearchButton = document.getElementById("addToSearchButton");
 const orbitPanel = document.getElementById("orbitPanel");
 const orbitPanelToggle = document.getElementById("orbitPanelToggle");
 const orbitFiltersEmpty = document.getElementById("orbitFiltersEmpty");
@@ -135,6 +146,12 @@ const orbitFilters = document.getElementById("orbitFilters");
 const orbitPanelActions = document.getElementById("orbitPanelActions");
 const launchCard = document.getElementById("launchCard");
 const clearAllButton = document.getElementById("clearAllButton");
+
+/* Zero-results guidance (Option B — 2026-06-06): true while a normal-branch
+   zero is showing its below-button guidance. Declared early (before any
+   updateUIFromState call) so the disabled-coordination at ~1605 never hits a
+   temporal dead zone. Owned by setLaunchZeroState / hideZeroGuidance. */
+let _zeroGuidanceActive = false;
 
 let searchDebounceTimer;
 
@@ -349,56 +366,1163 @@ window.addEventListener('resize', () => {
   }
 });
 
-// ── Build filter grid + More modal from layout ──
+/* ============================================================
+   FILTER GRID — All filters rendered as primary cards.
+   "More Filters" modal removed May 1, 2026; full FILTER_REGISTRY
+   now lives directly in the front-page grid. Watch Providers gets
+   its dedicated streaming variant inline.
+   ============================================================ */
 (function buildFilterLayout() {
-  var registry = OrbitUtils.FILTER_REGISTRY;
-  var layout = OrbitUtils.store.get('orbit_search_layout') || OrbitUtils.DEFAULT_LAYOUT;
+  var registry = OrbitUtils && OrbitUtils.FILTER_REGISTRY;
   var filterGrid = document.getElementById('filterGrid');
-  var moreBtn = document.getElementById('moreFiltersBtn');
-  var moreGrid = document.getElementById('moreFiltersGrid');
-  if (!filterGrid || !moreBtn || !registry) return;
+  if (!filterGrid || !registry) return;
 
-  // Primary cards
-  layout.forEach(function(id) {
-    var def = registry.find(function(r) { return r.id === id; });
-    if (!def) return;
+  registry.forEach(function (def) {
     var btn = document.createElement('button');
-    btn.className = 'section-card';
+    var classes = 'section-card';
+    if (def.id === 'watch') classes += ' section-card--streaming';
+    btn.className = classes;
     btn.dataset.section = def.id;
+    var helper = def.id === 'watch'
+      ? '<span class="section-card-helper">Filter to films on your active services</span>'
+      : '';
     btn.innerHTML =
       '<div class="orbit-icon ' + def.iconClass + '">' +
         '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
       '</div>' +
-      '<div class="section-text"><h2>' + def.title + '</h2><p>' + def.subtitle + '</p></div>';
-    filterGrid.insertBefore(btn, moreBtn);
+      '<div class="section-text">' +
+        '<h2>' + def.title + '</h2>' +
+        '<p>' + def.subtitle + '</p>' +
+        helper +
+      '</div>';
+    filterGrid.appendChild(btn);
   });
+})();
 
-  // More modal tiles (everything not in layout)
-  if (moreGrid) {
-    var layoutSet = {};
-    layout.forEach(function(id) { layoutSet[id] = true; });
-    registry.filter(function(r) { return !layoutSet[r.id]; }).forEach(function(def) {
-      var tile = document.createElement('button');
-      tile.className = 'more-filter-tile';
-      tile.dataset.section = def.id;
-      tile.innerHTML =
-        '<div class="orbit-icon ' + def.iconClass + '">' +
-          '<div class="ring-outer"></div><div class="ring-inner"></div><div class="icon-core"></div>' +
-        '</div>' +
-        '<span class="more-filter-label">' + def.title + '</span>';
-      moreGrid.appendChild(tile);
+/* ============================================================
+   PROFILE DEFAULTS — Shared read surface
+   Added Jun 11, 2026 (Stream arc Prompt 1).
+
+   Single source of truth for profile streaming defaults. Reads the two
+   persistent Profile keys and returns a normalised shape. Top-level scope
+   (no window.*) so the WATCHING ON bar (now) and the upcoming Stream tab +
+   Region tab builds can call it directly — they share this file's scope.
+
+   - orbit_user_providers : JSON number[]  (default [])  — parse/NaN-guarded
+   - orbit_user_country   : ISO 3166-1 code (default null)
+
+   Returns { providers: number[], country: string|null }
+   ============================================================ */
+function getProfileDefaults() {
+  var providers = [];
+  try {
+    var raw = JSON.parse(localStorage.getItem('orbit_user_providers') || '[]');
+    if (Array.isArray(raw)) {
+      providers = raw
+        .map(function (n) { return parseInt(n, 10); })
+        .filter(function (n) { return !isNaN(n); });
+    }
+  } catch (e) { providers = []; }
+  var country = localStorage.getItem('orbit_user_country') || null;
+  return { providers: providers, country: country };
+}
+
+/* ============================================================
+   STREAMING BAR — Pills + Edit Popup
+   Added May 4, 2026 (replaces initStreamingBar from May 1).
+   Reworked Jun 11, 2026 (Stream arc Prompt 1): the bar is now a DISPLAY of
+   Profile preferences. Pills are read-only reflections; "Edit services" edits
+   the Profile keys via the popup. The dead orbit_bar_providers middle layer
+   was removed and is purged from localStorage on init.
+
+   Storage keys (Rule 8):
+   - orbit_user_providers : profile default IDs array — read here (popup save writes)
+   - orbit_user_country   : profile country code     — read here (popup save writes)
+
+   Watch tab keys (watchCountry, watchProviders) are NOT touched.
+   ============================================================ */
+(function initStreamingBarInteractive() {
+
+  // One-time cleanup: purge the dead bar-state key from users' storage.
+  try { localStorage.removeItem('orbit_bar_providers'); } catch (e) {}
+
+  // --- Profile defaults (the single baseline; the bar is a display of these) ---
+  // profileProviderIds is a live reference, mutated in place on popup save so the
+  // popup closures (loadPopupProviders / renderPopupGrid) keep seeing current state.
+  var defaults = getProfileDefaults();
+  var profileProviderIds = defaults.providers;
+  var profileCountry = defaults.country || 'US'; // 'US' = presentational fallback for the popup selector
+
+  // Extended provider name map. Unknown IDs fall back to "Service N".
+  var PNAMES = {
+    2: 'Apple TV', 8: 'Netflix', 9: 'Amazon Prime', 10: 'Amazon Video',
+    11: 'MUBI', 15: 'Hulu', 21: 'MUBI', 100: 'MUBI',
+    119: 'Amazon Prime', 122: 'Peacock', 192: 'YouTube',
+    283: 'Crunchyroll', 337: 'Disney+', 350: 'Apple TV+',
+    384: 'Max', 386: 'Peacock', 531: 'Paramount+'
+  };
+
+  function getProviderName(id) { return PNAMES[id] || ('Service ' + id); }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
 
-  // Update More button subtitle with remaining filter names
-  var layoutSet2 = {};
-  layout.forEach(function(id) { layoutSet2[id] = true; });
-  var secondaryNames = registry.filter(function(r) { return !layoutSet2[r.id]; })
-    .slice(0, 3).map(function(r) { return r.title.split(':')[0].trim(); });
-  var moreSubtitle = moreBtn.querySelector('.section-text p');
-  if (moreSubtitle && secondaryNames.length) {
-    moreSubtitle.textContent = secondaryNames.join(', ') + ' & more';
+  // --- Bar render (display-only reflection of Profile providers) ---
+  function renderBar() {
+    var bar       = document.getElementById('discoverStreamBar');
+    var container = document.getElementById('discoverStreamServices');
+    var countEl   = document.getElementById('discoverStreamCount');
+    if (!container) return;
+
+    if (bar) {
+      bar.classList.toggle('discover-stream-bar--empty', profileProviderIds.length === 0);
+    }
+
+    // Defensive dedup; Profile providers are the only source now.
+    var seen = {};
+    var ids = [];
+    profileProviderIds.forEach(function (id) {
+      if (!seen[id]) { seen[id] = true; ids.push(id); }
+    });
+
+    if (ids.length === 0) {
+      container.innerHTML = '<span class="discover-stream-none">No streaming services configured — click Edit services to add some.</span>';
+    } else {
+      // Display-only pills: no click handler, no off-state. Editing goes through
+      // the "Edit services" popup, which writes the Profile keys.
+      container.innerHTML = ids.map(function (id) {
+        var name = getProviderName(id);
+        return '<span class="discover-stream-pill" data-provider-id="' + id +
+               '" title="' + escapeHtml(name) + '">' + escapeHtml(name) + '</span>';
+      }).join('');
+    }
+
+    if (countEl) {
+      countEl.innerHTML = '<strong>' + ids.length + '</strong> active';
+    }
   }
+
+  // --- Popup ---
+  function openPopup() {
+    var wrap = document.getElementById('discoverPopupWrap');
+    var btn  = document.getElementById('discoverEditBtn');
+    if (!wrap) return;
+    wrap.classList.add('discover-popup-wrap--open');
+    wrap.setAttribute('aria-hidden', 'false');
+    if (btn) btn.classList.add('discover-edit-btn--open');
+
+    var countryEl = document.getElementById('discoverPopupCountry');
+    if (countryEl) {
+      countryEl.value = profileCountry;
+      loadPopupProviders(profileCountry);
+    }
+  }
+
+  function closePopup() {
+    var wrap = document.getElementById('discoverPopupWrap');
+    var btn  = document.getElementById('discoverEditBtn');
+    if (!wrap) return;
+    wrap.classList.remove('discover-popup-wrap--open');
+    wrap.setAttribute('aria-hidden', 'true');
+    if (btn) btn.classList.remove('discover-edit-btn--open');
+  }
+
+  function loadPopupProviders(countryCode) {
+    var grid = document.getElementById('discoverPopupProviderGrid');
+    if (!grid) return;
+    grid.innerHTML = '<span style="font-size:11px;color:var(--ghost-gray);font-style:italic;">Loading…</span>';
+
+    var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+    var url = 'https://api.themoviedb.org/3/watch/providers/movie?api_key=' +
+              encodeURIComponent(apiKey) +
+              '&watch_region=' + encodeURIComponent(countryCode) +
+              '&language=en-US';
+
+    fetch(url)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var providers = (data && data.results) ? data.results.slice(0, 40) : [];
+        renderPopupGrid(providers);
+      })
+      .catch(function () {
+        // Fallback: profile providers only
+        var fallback = profileProviderIds.map(function (id) {
+          return { provider_id: id, provider_name: getProviderName(id) };
+        });
+        renderPopupGrid(fallback);
+      });
+  }
+
+  function renderPopupGrid(providers) {
+    var grid = document.getElementById('discoverPopupProviderGrid');
+    if (!grid) return;
+
+    if (!providers.length) {
+      grid.innerHTML = '<span style="font-size:11px;color:var(--ghost-gray);font-style:italic;">No providers found for this region.</span>';
+      return;
+    }
+
+    grid.innerHTML = providers.map(function (p) {
+      var id = p.provider_id;
+      var name = p.provider_name || getProviderName(id);
+      var isOn = profileProviderIds.indexOf(id) > -1;
+      var cls = 'discover-popup-provider-pill' + (isOn ? ' discover-popup-provider-pill--on' : '');
+      return '<button class="' + cls + '" data-provider-id="' + id +
+             '" type="button">' + escapeHtml(name) + '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(
+      grid.querySelectorAll('.discover-popup-provider-pill'),
+      function (btn) {
+        btn.addEventListener('click', function () {
+          btn.classList.toggle('discover-popup-provider-pill--on');
+        });
+      }
+    );
+  }
+
+  function saveDefaults() {
+    var selected = Array.prototype.map.call(
+      document.querySelectorAll('.discover-popup-provider-pill--on'),
+      function (btn) { return parseInt(btn.dataset.providerId, 10); }
+    );
+    var countryEl = document.getElementById('discoverPopupCountry');
+    var country = (countryEl && countryEl.value) ? countryEl.value : profileCountry;
+
+    try {
+      localStorage.setItem('orbit_user_providers', JSON.stringify(selected));
+      localStorage.setItem('orbit_user_country', country);
+    } catch (e) {}
+
+    /* Best-effort sync with profile.js if it was loaded on this page.
+       On the discover page profile.js isn't included, so this is a no-op. */
+    if (typeof saveProviderSelections === 'function') {
+      try { saveProviderSelections(); } catch (e) {}
+    }
+
+    // Update the in-memory profile reference IN PLACE (closures hold this ref)
+    // so the bar re-renders from the new defaults.
+    profileProviderIds.length = 0;
+    selected.forEach(function (id) { profileProviderIds.push(id); });
+    profileCountry = country;
+
+    renderBar();
+    closePopup();
+  }
+
+  // --- Event wiring ---
+  var editBtn   = document.getElementById('discoverEditBtn');
+  var closeBtn  = document.getElementById('discoverPopupClose');
+  var cancelBtn = document.getElementById('discoverPopupCancel');
+  var saveBtn   = document.getElementById('discoverPopupSave');
+  var countryEl = document.getElementById('discoverPopupCountry');
+
+  if (editBtn)   editBtn.addEventListener('click', openPopup);
+  if (closeBtn)  closeBtn.addEventListener('click', closePopup);
+  if (cancelBtn) cancelBtn.addEventListener('click', closePopup);
+  if (saveBtn)   saveBtn.addEventListener('click', saveDefaults);
+  if (countryEl) countryEl.addEventListener('change', function () {
+    loadPopupProviders(countryEl.value);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  renderBar();
+})();
+
+/* ============================================================
+   GLOBAL CONTROLS STRIP — Sort-by (WIRED, Phase 1b-ii — 2026-06-01)
+   Changing the control updates state.sortBy (and logs it). state.sortBy is
+   consumed by buildTMDBQueryFromFilters (see params.append("sort_by", ...) —
+   NOT hard-coded), so it drives the Launch→results ordering and the recount
+   query. Caveats: applySort only sets state.sortBy — it does NOT re-fetch or
+   re-render, so the new order applies on the next query / Launch; and because
+   sort_by never changes total_results, toggling it does NOT change the
+   film-count number.
+   ============================================================ */
+(function initGlobalSortControl() {
+  var fieldSel = document.getElementById('discoverSortField');
+  var dirSel   = document.getElementById('discoverSortDir');
+  if (!fieldSel || !dirSel) return;
+  function applySort() {
+    // state.sortBy is the single source of truth Phase 1b-ii will read.
+    state.sortBy = fieldSel.value + '.' + dirSel.value;
+    console.log('[Discover] sort-by →', state.sortBy);
+  }
+  fieldSel.addEventListener('change', applySort);
+  dirSel.addEventListener('change', applySort);
+  applySort();   // initialise state.sortBy from the defaults (popularity.desc)
+})();
+
+/* ============================================================
+   QUICK STARTS — Added May 1, 2026
+   Pool of 8 preset searches. 4 shown per visit, rotated daily
+   based on day-since-epoch index. Shuffle button reshuffles
+   on demand.
+
+   localStorage key reserved for future use:
+     orbit_discover_preset_day  (integer, day-since-epoch).
+     Not written or read this pass — placeholder for stickiness
+     when applyPreset() learns to wire into filter state.
+   ============================================================ */
+/* Preset shapes use existing collectLabelsForSection value schemas:
+   - genres:     { type: "genre", name }
+   - decade:     { type: "decade", decade: "1990", subType: "release" }
+   - region:     { type: "region", code, name }
+   - rating:     { type: "rating", min, max }
+   - festival:   { type: "award-festival", festival }    (capitalized: "Oscar", "Cannes")
+   - category:   { type: "award-category", category }    (full label: "Palme d'Or", "Best Picture")
+   - yearRange:  { type: "award-year-range", from, to }
+   Phase-1 presets relying on filmmaker_profile / watch_providers:'user' /
+   career_stage / language:'non-english' have been removed since those
+   filters do not exist yet. */
+/* ============================================================
+   PRESET_POOL — Rebuilt May 4, 2026
+   Index 0 is the spotlight (rotated in via shouldShowSpotlight()).
+   Indices 1-60 are evergreen presets, fisher-yates shuffled per visit.
+   Update spotlight `weekId` each Monday; flip `streamingNow` when the
+   spotlight title hits a streaming service.
+   ============================================================ */
+var PRESET_POOL = [
+  // SPOTLIGHT (index 0)
+  {
+    name: 'Music biopics, 2020s',
+    tag: 'IN CINEMAS',
+    color: 'spotlight',
+    spotlight: true,
+    weekId: '2026-W19',
+    streamingNow: false,
+    filters: {
+      genres: ['Drama', 'Music'],
+      decade: '2020',
+      keyword: { id: 9672, name: 'Based on true story' },
+      minRating: 7.0,
+      minVotes: 500
+    }
+  },
+
+  // AWARDS (8)
+  /* 2026-05-17: added `level: 'winner'` to the four "winner" presets
+     so the preset path pushes an award-level filter into state.
+     Without it, getAwardsMatchingIds returned winners + nominees +
+     in-competition entries (419 for Palme d'Or, 172 for Best Picture,
+     etc.). Requires the matching presetToStateFilters branch below. */
+  { name: "Palme d'Or, 21st century", tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Cannes', category: "Palme d'Or", yearFrom: 2000, level: 'winner' } } },
+  { name: 'Best Picture winners, 21st century', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Oscar', category: 'Best Picture', yearFrom: 2000, level: 'winner' } } },
+  { name: 'Golden Lion winners, post-2000', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Venice', category: 'Golden Lion', yearFrom: 2000, level: 'winner' } } },
+  { name: 'Golden Bear winners, post-2000', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Berlin', category: 'Golden Bear', yearFrom: 2000, level: 'winner' } } },
+  /* 2026-05-17: refined to last 10 years + winners only (was 1990+, all results). */
+  { name: 'Oscar Best International Film, 2015+', tag: 'AWARDS · REGION', color: 'gold',
+    filters: { awards: { festival: 'Oscar', category: 'Best International Feature Film', yearFrom: 2015, level: 'winner' } } },
+  { name: 'BAFTA Best Film, 21st century', tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'BAFTA', category: 'Best Film', yearFrom: 2000, level: 'winner' } } },
+  { name: "Cannes Jury Prize, 1990s–2000s", tag: 'AWARDS · ERA', color: 'gold',
+    filters: { awards: { festival: 'Cannes', category: 'Jury Prize', yearFrom: 1990, yearTo: 2009, level: 'winner' } } },
+  /* 2026-05-17: fixed v1 category name ("Best Documentary Feature" → "Best
+     Documentary Feature Film") and added level:'winner'. v1 has 26 Oscar
+     Best Documentary Feature Film winners 1990-2025. */
+  { name: 'Oscar-winning documentaries', tag: 'AWARDS · GENRE', color: 'gold',
+    filters: { genres: ['Documentary'], awards: { festival: 'Oscar', category: 'Best Documentary Feature Film', yearFrom: 1990, level: 'winner' } } },
+
+  // REGION (12)
+  { name: '90s Hong Kong cinema', tag: 'REGION · DECADE', color: 'cyan',
+    filters: { region: { code: 'HK', name: 'Hong Kong' }, decade: '1990', minRating: 7.0, minVotes: 50 } },
+  { name: 'Korean thrillers, 7.5+, 2010s+', tag: 'REGION · GENRE', color: 'purple',
+    filters: { region: { code: 'KR', name: 'South Korea' }, genres: ['Thriller'], minRating: 7.5, releaseYearFrom: 2010 } },
+  { name: 'Japanese anime, 7.5+', tag: 'REGION · GENRE', color: 'green',
+    filters: { genres: ['Animation'], region: { code: 'JP', name: 'Japan' }, minRating: 7.5, minVotes: 1000, releaseYearFrom: 1990 } },
+  { name: 'French New Wave, 1950s–60s', tag: 'REGION · DECADE', color: 'indigo',
+    filters: { region: { code: 'FR', name: 'France' }, releaseYearFrom: 1950, releaseYearTo: 1969, minVotes: 300 } },
+  { name: 'Italian neo-realism classics', tag: 'REGION · GENRE', color: 'teal',
+    filters: { region: { code: 'IT', name: 'Italy' }, genres: ['Drama'], decade: '1950', minVotes: 50 } },
+  { name: 'New German Cinema, 1970s', tag: 'REGION · DECADE', color: 'orange',
+    filters: { region: { code: 'DE', name: 'Germany' }, decade: '1970', minVotes: 50 } },
+  { name: 'Iranian cinema, post-2000', tag: 'REGION · ERA', color: 'rose',
+    filters: { region: { code: 'IR', name: 'Iran' }, releaseYearFrom: 2000, minRating: 7.0, minVotes: 20 } },
+  { name: 'Classic Hollywood noir, 1940s, 7.5+', tag: 'REGION · DECADE', color: 'cyan',
+    filters: { region: { code: 'US', name: 'United States' }, genres: ['Crime', 'Drama'], decade: '1940', minRating: 7.5, minVotes: 25 } },
+  { name: 'Romanian New Wave', tag: 'REGION · ERA', color: 'purple',
+    filters: { region: { code: 'RO', name: 'Romania' }, decade: '2000', minVotes: 20 } },
+  { name: 'Nordic crime dramas', tag: 'REGION · GENRE', color: 'green',
+    filters: { region: { code: 'SE|NO|DK|FI|IS', name: 'Nordic' }, genres: ['Crime', 'Thriller'], minRating: 6.5, minVotes: 100 } },
+  { name: 'Latin American cinema, 2000s+', tag: 'REGION · DECADE', color: 'indigo',
+    filters: { region: { code: 'MX|BR|AR|CL|CO|PE', name: 'Latin America' }, releaseYearFrom: 2000, minVotes: 500 } },
+  /* 2026-05-17: tuned to rating 7-8 + minVotes 100 (verified ≈85 films). */
+  { name: 'Hindi drama classics, 2000s', tag: 'REGION · DECADE', color: 'teal',
+    filters: { region: { code: 'IN', name: 'India' }, genres: ['Drama'], language: 'hi', minRating: 7, maxRating: 8, decade: '2000' } },
+
+  // GENRE + ERA (15)
+  { name: '70s horror classics', tag: 'GENRE · DECADE', color: 'orange',
+    filters: { genres: ['Horror'], decade: '1970', minRating: 7.5 } },
+  { name: 'Sci-fi thrillers, 8.0+, 2010s+', tag: 'GENRE · RATING', color: 'rose',
+    filters: { genres: ['Science Fiction', 'Thriller'], minRating: 8.0, releaseYearFrom: 2010 } },
+  { name: '1980s sci-fi, 7.0+', tag: 'GENRE · DECADE', color: 'cyan',
+    filters: { genres: ['Science Fiction'], decade: '1980', minRating: 7.0 } },
+  { name: '1960s spy thrillers', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Action', 'Thriller'], decade: '1960' } },
+  { name: 'Film noir, 1940s–50s', tag: 'GENRE · DECADE', color: 'green',
+    filters: { genres: ['Crime', 'Drama'], releaseYearFrom: 1940, releaseYearTo: 1959, minVotes: 1000 } },
+  { name: 'Spaghetti westerns, 1960s–70s', tag: 'GENRE · DECADE', color: 'indigo',
+    filters: { genres: ['Western'], region: { code: 'IT', name: 'Italy' }, releaseYearFrom: 1960, releaseYearTo: 1979, minRating: 7.5 } },
+  { name: 'New Hollywood, early 1970s', tag: 'GENRE · DECADE', color: 'teal',
+    filters: { genres: ['Drama'], region: { code: 'US', name: 'United States' }, decade: '1970', minVotes: 500 } },
+  { name: 'Indie drama, 2000s', tag: 'GENRE · ERA', color: 'orange',
+    filters: { genres: ['Drama'], decade: '2000', minRating: 7.5 } },
+  { name: '1990s slasher horror', tag: 'GENRE · DECADE', color: 'rose',
+    filters: { genres: ['Horror'], decade: '1990' } },
+  { name: 'Contemporary animation, 2010s+', tag: 'GENRE · ERA', color: 'cyan',
+    filters: { genres: ['Animation'], releaseYearFrom: 2010, minVotes: 5000 } },
+  { name: 'Classic musicals, 1950s', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Music', 'Romance'], decade: '1950' } },
+  { name: '2020s prestige drama', tag: 'GENRE · ERA', color: 'green',
+    filters: { genres: ['Drama'], decade: '2020', minRating: 7.5 } },
+  { name: 'Silent era masterpieces', tag: 'GENRE · ERA', color: 'indigo',
+    filters: { genres: ['Drama'], decade: '1920', minRating: 7 } },
+  { name: '1980s action blockbusters', tag: 'GENRE · DECADE', color: 'teal',
+    filters: { genres: ['Action'], decade: '1980', minRating: 7.5 } },
+  { name: 'Psychological horror, 2010s+', tag: 'GENRE · ERA', color: 'orange',
+    filters: { genres: ['Horror', 'Thriller'], releaseYearFrom: 2010, minRating: 7, minVotes: 5000 } },
+
+  // RATING + MOOD (8)
+  /* 2026-05-17: loosened from 8.5/50k (returned 0) to 8.0/10k (~79). */
+  { name: 'Crime epics, 8.0+', tag: 'GENRE · RATING', color: 'rose',
+    filters: { genres: ['Crime', 'Drama'], minRating: 8.0, minVotes: 10000 } },
+  { name: 'Crime documentaries, 7.0+', tag: 'GENRE · RATING', color: 'cyan',
+    filters: { genres: ['Documentary'], keyword: { id: 307587, name: 'true crime' }, minRating: 7.0 } },
+  { name: 'War films, 8.0+', tag: 'GENRE · RATING', color: 'purple',
+    filters: { genres: ['War', 'Drama'], minRating: 8 } },
+  { name: 'Hidden gems, 7.5+ pre-1970', tag: 'RATING · ERA', color: 'green',
+    filters: { minRating: 7.5, releaseYearFrom: 1900, releaseYearTo: 1969, minVotes: 2000 } },
+  /* 2026-05-17: rating 8+ + votes 10k was too tight (only 8 results
+     after votes-bug fix). Loosened to 7.9+ + votes 1k. */
+  { name: 'Animation for adults, 8.0+', tag: 'GENRE · RATING', color: 'indigo',
+    filters: { genres: ['Animation'], minRating: 7.9, minVotes: 1000 } },
+  /* "Horror under 90 minutes" removed 2026-05-22: runtimeMax silently
+     dropped by the preset translator (no upper-bound runtime semantics),
+     so the preset returned all Horror films. Re-add only after the
+     translator gains with_runtime.lte support. */
+  /* "Epic cinema, 8.0+" — runtimeMax dropped (no upper-bound semantics
+     in current preset translator). Will gain a min-runtime filter when
+     buildTMDBQueryFromFilters is extended.
+     2026-05-17: votes 20k → 10k, tag updated to 'RATING' (no genre filter). */
+  { name: 'Epic cinema, 8.0+', tag: 'RATING', color: 'teal',
+    filters: { minRating: 8.0, minVotes: 10000 } },
+  { name: 'Romance, 8.0+, 2000s+', tag: 'GENRE · RATING', color: 'orange',
+    filters: { genres: ['Romance', 'Drama'], minRating: 8.0, releaseYearFrom: 2000 } },
+
+  // SOURCE + MOOD (7)
+  { name: 'Drama novels, 7.0–8.5', tag: 'SOURCE · RATING', color: 'rose',
+    filters: { genres: ['Drama'], keyword: { id: 818, name: 'Based on novel' }, minRating: 7.0, maxRating: 8.5, minVotes: 5000 } },
+  { name: 'True crime, 7.5+, 2000s+', tag: 'GENRE · SOURCE', color: 'cyan',
+    filters: { genres: ['Crime', 'Thriller'], keyword: { id: 9672, name: 'Based on true story' }, minRating: 7.5, releaseYearFrom: 2000 } },
+  { name: 'Coming-of-age, 1980s', tag: 'GENRE · DECADE', color: 'purple',
+    filters: { genres: ['Drama'], keyword: { id: 10683, name: 'Coming of age' }, releaseYearFrom: 1980, releaseYearTo: 1989, minRating: 7.0 } },
+  { name: 'Heist films, 2000s', tag: 'GENRE · ERA', color: 'green',
+    filters: { genres: ['Crime', 'Thriller'], decade: '2000', keyword: { id: 10051, name: 'Heist' } } },
+  { name: 'Supernatural horror, 1970s–80s', tag: 'GENRE · DECADE', color: 'indigo',
+    filters: { genres: ['Horror'], releaseYearFrom: 1970, releaseYearTo: 1989, minVotes: 1000 } },
+  { name: 'Road movies, 6.5+, 1970s-90s', tag: 'GENRE · THEME', color: 'teal',
+    filters: { genres: ['Drama', 'Adventure'], keyword: { id: 7312, name: 'Road trip' }, minRating: 6.5, releaseYearFrom: 1970, releaseYearTo: 1999 } },
+  { name: 'Courtroom dramas', tag: 'GENRE · THEME', color: 'orange',
+    filters: { genres: ['Drama', 'Thriller'], keyword: { id: 33519, name: 'Courtroom drama' }, minRating: 7.0, minVotes: 1000 } },
+
+  // FRANCHISES (was 9, now 13 — 2026-05-16: dropped standalone Alien
+  // and Predator entries, merged into "Alien vs. Predator Universe"
+  // via multiCollections; added 6 new collection-based franchises)
+  /* 2026-05-16: slug-based extended collection. The ids live in
+     EXTENDED_COLLECTIONS['wizarding-world']; presetToStateFilters
+     detects the string id and rewrites to a movieList universe
+     filter at apply time. */
+  { name: 'The Wizarding World', tag: 'FRANCHISE', color: 'rose',
+    description: 'Harry Potter and Fantastic Beasts films',
+    filters: { collection: { id: 'wizarding-world', name: 'The Wizarding World' } } },
+  /* 2026-05-16: corrected 735 → 115762. TMDB ID 735 is the
+     "Blade Collection" (Wesley Snipes vampire films), NOT Alien
+     vs. Predator. 115762 is the actual AVP Collection. */
+  { name: 'Alien vs. Predator Universe', tag: 'FRANCHISE', color: 'cyan',
+    description: 'All Alien, Predator, and crossover films',
+    filters: { multiCollections: [
+      { id: 8091,   name: 'Alien Collection' },
+      { id: 399,    name: 'Predator Collection' },
+      { id: 115762, name: 'AVP Collection' }
+    ] } },
+  /* 2026-05-16: switched from broad Action+Thriller+UK (returned ~4,835
+     films) to TMDB James Bond Collection (id 645, ~27 films). Matches
+     the HP / MI / Star Wars / LOTR / MCU preset pattern. */
+  { name: 'James Bond saga', tag: 'FRANCHISE', color: 'purple',
+    filters: { collection: { id: 645, name: 'James Bond Collection' } } },
+  /* 2026-05-16: TMDB ID 131295 is "Captain America Collection" (4 films),
+     NOT the MCU. The MCU is split across ~25 TMDB collections plus
+     standalones. The clean path is TMDB keyword 180547 ("marvel
+     cinematic universe (mcu)") which tags every MCU film — handled
+     via universesKeyword → universes section → with_keywords. */
+  { name: 'Marvel Cinematic Universe', tag: 'FRANCHISE', color: 'green',
+    filters: { universesKeyword: { id: 180547, name: 'Marvel Cinematic Universe' } } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['star-wars']
+     (Skywalker saga + Rogue One + Solo + Mando & Grogu = 12 films). */
+  { name: 'Star Wars', tag: 'FRANCHISE', color: 'indigo',
+    filters: { collection: { id: 'star-wars', name: 'Star Wars' } } },
+  /* 2026-05-16: added Hobbit Collection (121938) alongside LOTR
+     (119). Dropped genre filters — the multi-collection alone
+     defines the franchise. */
+  { name: 'Middle-earth films', tag: 'FRANCHISE', color: 'teal',
+    filters: { multiCollections: [
+      { id: 119,    name: 'The Lord of the Rings Collection' },
+      { id: 121938, name: 'The Hobbit Collection' }
+    ] } },
+  /* 2026-05-16: dropped Action+Thriller genres — collection alone
+     defines the franchise; AND-semantics genre filters were
+     reducing the count below the collection's natural size. */
+  { name: 'Mission: Impossible series', tag: 'FRANCHISE', color: 'orange',
+    filters: { collection: { id: 87359, name: 'Mission: Impossible Collection' } } },
+  { name: 'Indiana Jones saga', tag: 'FRANCHISE', color: 'rose',
+    description: 'Archaeology adventures across decades',
+    filters: { collection: { id: 84, name: 'Indiana Jones Collection' } } },
+  { name: 'Jurassic Park/World', tag: 'FRANCHISE', color: 'cyan',
+    description: 'Dinosaurs from \'93 to now',
+    filters: { collection: { id: 328, name: 'Jurassic Park Collection' } } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['fast-furious']
+     (main 11 + Hobbs & Shaw = 12 films). */
+  { name: 'Fast & Furious', tag: 'FRANCHISE', color: 'purple',
+    description: 'Street racing to global heists',
+    filters: { collection: { id: 'fast-furious', name: 'Fast & Furious' } } },
+  { name: 'Bourne series', tag: 'FRANCHISE', color: 'green',
+    description: 'Espionage thriller saga',
+    filters: { collection: { id: 31562, name: 'The Bourne Collection' } } },
+  /* 2026-05-16: added Creed Collection (553717) alongside Rocky
+     (1575) so all 9 films appear. */
+  { name: 'Rocky & Creed', tag: 'FRANCHISE', color: 'indigo',
+    description: 'Boxing legacy spanning 50 years',
+    filters: { multiCollections: [
+      { id: 1575,   name: 'Rocky Collection' },
+      { id: 553717, name: 'Creed Collection' }
+    ] } },
+  /* 2026-05-16: slug-based ref → EXTENDED_COLLECTIONS['planet-apes']
+     (original 5 + Burton + modern 4 = 10 films). */
+  { name: 'Planet of the Apes', tag: 'FRANCHISE', color: 'teal',
+    description: 'Evolution across timelines',
+    filters: { collection: { id: 'planet-apes', name: 'Planet of the Apes' } } },
+  /* 2026-05-26: Horror franchises mega-preset — 27 TMDB collections, 149
+     films total (144 released + 5 unreleased). Major slasher, supernatural,
+     and Asian horror series with 3+ films each. Freddy vs. Jason is
+     already inside Friday the 13th Collection (9735); Wes Craven's New
+     Nightmare is inside Elm Street Collection (8581). Texas Chainsaw is
+     split across TMDB into the original series + 2003 reboot duology, and
+     Ju-on across original + reboot + 2009 anthology — all branches included
+     for full coverage. Conjuring Universe bundled here (Conjuring +
+     Annabelle + Nun + La Llorona) rather than a separate preset. */
+  { name: 'Horror franchises', tag: 'FRANCHISE · GENRE', color: 'rose',
+    description: 'Major horror series with 3+ films',
+    filters: { multiCollections: [
+      { id: 91361,   name: 'Halloween Collection' },
+      { id: 9735,    name: 'Friday the 13th Collection' },
+      { id: 8581,    name: 'A Nightmare on Elm Street Collection' },
+      { id: 2602,    name: 'Scream Collection' },
+      { id: 656,     name: 'Saw Collection' },
+      { id: 8917,    name: 'Hellraiser Collection' },
+      { id: 10455,   name: "Child's Play Collection" },
+      { id: 8864,    name: 'Final Destination Collection' },
+      { id: 228446,  name: 'Insidious Collection' },
+      { id: 41437,   name: 'Paranormal Activity Collection' },
+      { id: 256322,  name: 'The Purge Collection' },
+      { id: 111751,  name: 'Texas Chainsaw Massacre Collection' },
+      { id: 425175,  name: 'Texas Chainsaw (Reboot) Collection' },
+      { id: 12263,   name: 'The Exorcist Collection' },
+      { id: 1960,    name: 'Evil Dead Collection' },
+      { id: 98580,   name: 'Candyman Collection' },
+      { id: 313086,  name: 'The Conjuring Collection' },
+      { id: 402074,  name: 'Annabelle Collection' },
+      { id: 968052,  name: 'The Nun Collection' },
+      { id: 1533646, name: 'La Llorona Collection' },
+      { id: 432,     name: 'Cube Collection' },
+      { id: 14563,   name: 'The Ring Collection' },
+      { id: 93369,   name: 'Ringu Collection' },
+      { id: 1974,    name: 'The Grudge Collection' },
+      { id: 1972,    name: 'Ju-on Collection' },
+      { id: 1246435, name: 'Ju-on (Reboot) Collection' },
+      { id: 1246426, name: 'Ju-on (2009) Collection' }
+    ] } },
+
+  // TIME TRAVEL (1)
+  { name: 'Time travel adventures', tag: 'GENRE · CONCEPT', color: 'orange',
+    filters: { genres: ['Science Fiction', 'Adventure'], keyword: { id: 4379, name: 'Time travel' }, minRating: 7.0, minVotes: 3000 } }
+];
+
+function getTodayIndex() { return Math.floor(Date.now() / 86400000); }
+
+/* ============================================================
+   SPOTLIGHT ROTATION — Added May 4, 2026
+
+   - Spotlight is always PRESET_POOL[0]
+   - Appears at position 0 of the 5 shown when earned
+   - Random every 2nd or 3rd visit, never consecutive
+   - Caps at 3 views per ISO week, then rests until next week
+   - Visit counter increments only on page-load (not on Shuffle)
+
+   Storage keys:
+   - orbit_visit_count            number — page-load count
+   - orbit_spotlight_last_shown   "true" / "false"
+   - orbit_spotlight_week         current ISO week, e.g. "2026-W19"
+   - orbit_spotlight_views        views this week
+   - orbit_last_preset_indices    JSON array of last evergreen picks
+   ============================================================ */
+
+function getISOWeek() {
+  var now = new Date();
+  var jan4 = new Date(now.getFullYear(), 0, 4);
+  var weekNo = Math.ceil(((now - jan4) / 86400000 + jan4.getDay() + 1) / 7);
+  return now.getFullYear() + '-W' + String(weekNo).padStart(2, '0');
+}
+
+function shouldShowSpotlight() {
+  var spotlight = PRESET_POOL[0];
+  if (!spotlight || !spotlight.spotlight) return false;
+
+  var currentWeek = getISOWeek();
+  var spotlightWeek = localStorage.getItem('orbit_spotlight_week') || '';
+  var lastShown = localStorage.getItem('orbit_spotlight_last_shown') === 'true';
+  var views = parseInt(localStorage.getItem('orbit_spotlight_views') || '0', 10);
+
+  /* Never show twice in a row */
+  if (lastShown) return false;
+
+  /* Reset weekly view count if we've crossed into a new ISO week */
+  if (spotlightWeek !== currentWeek) {
+    localStorage.setItem('orbit_spotlight_views', '0');
+    localStorage.setItem('orbit_spotlight_week', currentWeek);
+    views = 0;
+  }
+
+  /* Cap at 3 views per week */
+  if (views >= 3) return false;
+
+  /* Random gating: every 2nd or 3rd visit */
+  var gap = Math.random() < 0.5 ? 2 : 3;
+  var visitCount = parseInt(localStorage.getItem('orbit_visit_count') || '0', 10);
+  return visitCount % gap === 0;
+}
+
+function recordSpotlightView() {
+  var currentWeek = getISOWeek();
+  var storedWeek = localStorage.getItem('orbit_spotlight_week') || '';
+  var views = storedWeek === currentWeek
+    ? parseInt(localStorage.getItem('orbit_spotlight_views') || '0', 10)
+    : 0;
+  localStorage.setItem('orbit_spotlight_week', currentWeek);
+  localStorage.setItem('orbit_spotlight_views', String(views + 1));
+  localStorage.setItem('orbit_spotlight_last_shown', 'true');
+}
+
+/* Fisher–Yates shuffle of indices 1..N (excludes spotlight at 0). */
+function shuffleEvergreenIndices() {
+  var indices = [];
+  for (var i = 1; i < PRESET_POOL.length; i++) indices.push(i);
+  for (var j = indices.length - 1; j > 0; j--) {
+    var k = Math.floor(Math.random() * (j + 1));
+    var tmp = indices[j]; indices[j] = indices[k]; indices[k] = tmp;
+  }
+  return indices;
+}
+
+/* Pick `count` evergreen presets, avoiding the previous batch where possible.
+
+   Phase 2 (2026-06-01): favourite-weighted sampling layered on top of the
+   anti-repetition logic.
+     1. Same as before — split indices into `fresh` (not in the previous
+        batch) and `stale` (recently shown). `fresh` is drawn from first
+        so we don't repeat tiles round-to-round.
+     2. WITHIN each pool, sample WITHOUT REPLACEMENT using random weights
+        where each index's weight = 1.5 if PRESET_POOL[idx].name is in
+        orbit_favourite_presets, else 1.0. So favourited entries surface
+        ~50% more often without ever appearing twice in one batch.
+     3. Saved searches do NOT enter the strip — pickEvergreens still
+        returns PRESET_POOL entries only.
+   Helpers come from the Phase 2 IIFE at the end of this file via
+   window.__orbitLoadFavourites; the function-level guard means the
+   shuffle works even if that IIFE hasn't run yet (everyone gets 1.0). */
+function pickEvergreens(count) {
+  var lastRaw = localStorage.getItem('orbit_last_preset_indices') || '[]';
+  var lastSet = {};
+  try {
+    JSON.parse(lastRaw).forEach(function (idx) { lastSet[idx] = true; });
+  } catch (e) { /* corrupted — start fresh */ }
+
+  var favs = (typeof window.__orbitLoadFavourites === 'function')
+    ? window.__orbitLoadFavourites() : [];
+  var favSet = {};
+  for (var fi = 0; fi < favs.length; fi++) favSet[favs[fi]] = true;
+  function weightFor(idx) {
+    var p = PRESET_POOL[idx];
+    return (p && favSet[p.name]) ? 1.5 : 1.0;
+  }
+
+  /* Indices 1..N-1 (skip spotlight at 0, same as shuffleEvergreenIndices). */
+  var allIdx = [];
+  for (var i = 1; i < PRESET_POOL.length; i++) allIdx.push(i);
+  var fresh = allIdx.filter(function (idx) { return !lastSet[idx]; });
+  var stale = allIdx.filter(function (idx) { return  lastSet[idx]; });
+
+  function pickWeightedNoReplace(pool, n) {
+    var picks = [];
+    var available = pool.slice();
+    var weights = available.map(weightFor);
+    while (picks.length < n && available.length > 0) {
+      var total = 0;
+      for (var k = 0; k < weights.length; k++) total += weights[k];
+      if (total <= 0) break;
+      var r = Math.random() * total;
+      var acc = 0;
+      for (var j = 0; j < available.length; j++) {
+        acc += weights[j];
+        if (r <= acc) {
+          picks.push(available[j]);
+          available.splice(j, 1);
+          weights.splice(j, 1);
+          break;
+        }
+      }
+    }
+    return picks;
+  }
+
+  /* Prefer fresh picks; fall back to stale ones if fewer than `count` fresh. */
+  var picks = pickWeightedNoReplace(fresh, count);
+  if (picks.length < count) {
+    picks = picks.concat(pickWeightedNoReplace(stale, count - picks.length));
+  }
+  localStorage.setItem('orbit_last_preset_indices', JSON.stringify(picks));
+  return picks.map(function (idx) { return PRESET_POOL[idx]; });
+}
+
+function getActivePresets(count) {
+  count = (typeof count === 'number' && count > 0) ? count : 5;
+  if (shouldShowSpotlight()) {
+    recordSpotlightView();
+    return [PRESET_POOL[0]].concat(pickEvergreens(count - 1));
+  }
+  localStorage.setItem('orbit_spotlight_last_shown', 'false');
+  return pickEvergreens(count);
+}
+
+/* Returns the number of preset tiles to render based on which other
+   sections are collapsed. Collapsing a section frees vertical space;
+   Quick Searches fills that space with additional tile rows.
+     • Both expanded → 5 tiles (1 row × 5)
+     • Headline collapsed only → 10 tiles (2 rows × 5)
+     • Filter tabs collapsed only → 25 tiles (5 rows × 5)
+     • Both collapsed → 35 tiles (7 rows × 5)
+   Reads from the live DOM so callers don't need to thread state. */
+function getActivePresetCount() {
+  var headline = document.querySelector('.section-container[data-section="headline"]');
+  var filterTabs = document.querySelector('.section-container[data-section="filterTabs"]');
+  var headlineCollapsed = !!(headline && headline.classList.contains('collapsed'));
+  var tabsCollapsed = !!(filterTabs && filterTabs.classList.contains('collapsed'));
+  if (headlineCollapsed && tabsCollapsed) return 35;
+  if (tabsCollapsed) return 25;
+  if (headlineCollapsed) return 10;
+  return 5;
+}
+
+/* ============================================================
+   PRESET → GLYPH MAPPING — Added 2026-05-24 (Phase 2)
+   Maps a preset to its T2 Quick Search glyph class. First word of
+   the tag wins for compound tags ('GENRE · DECADE' → og-qs-genre).
+   Returns null for the spotlight tile so it keeps its loud
+   "NOW STREAMING / IN CINEMAS" badge identity untouched.
+   T2 glyph definitions live in components/orbit-glyphs-v2.css.
+   ============================================================ */
+function getPresetGlyphClass(preset) {
+  // Spotlight gets no glyph - already has "NOW STREAMING" badge
+  if (preset.tag === 'IN CINEMAS') return null;
+
+  // First word wins for compound tags
+  const firstWord = preset.tag.split(' · ')[0];
+
+  const glyphMap = {
+    'FRANCHISE': 'og-qs-franchise',
+    'AWARDS': 'og-qs-awards',
+    'GENRE': 'og-qs-genre',
+    'REGION': 'og-qs-region',
+    'RATING': 'og-qs-ratings',  // Discovery tab glyph, but semantically fits
+    'SOURCE': 'og-qs-source',   // Discovery tab glyph, but semantically fits
+    // These should never be first word based on the data, but handle anyway:
+    'DECADE': 'og-qs-decade',
+    'ERA': 'og-qs-era',
+    'THEME': 'og-qs-theme',
+    'CONCEPT': 'og-qs-theme'    // CONCEPT maps to theme glyph
+  };
+
+  return glyphMap[firstWord] || 'og-qs-genre'; // fallback
+}
+
+function renderPresets(presets) {
+  var container = document.getElementById('discoverPresets');
+  if (!container) return;
+  container.innerHTML = presets.map(function (p, i) {
+    var isSpotlight = p.color === 'spotlight';
+    var classes = 'discover-preset discover-preset--' + p.color;
+    if (isSpotlight) classes += ' discover-preset--spotlight';
+    var tagClass = 'discover-preset-tag' + (isSpotlight ? ' discover-preset-tag--live' : '');
+    var tagText  = isSpotlight
+      ? (p.streamingNow ? '● NOW STREAMING' : '● IN CINEMAS')
+      : p.tag;
+    var glyphClass = getPresetGlyphClass(p);
+    var glyphSpan  = glyphClass ? '<span class="og-qs ' + glyphClass + ' discover-preset-glyph" aria-hidden="true"></span>' : '';
+    /* 2026-05-24 Phase 3 — Hybrid B decorations: corner color "sun"
+       glow + tinted badge wrapping the glyph. CSS does the positioning. */
+    var decorations = glyphClass
+      ? '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+        '<span class="discover-preset-badge" aria-hidden="true">' + glyphSpan + '</span>'
+      : '';
+    var tagSpan  = '<span class="' + tagClass + '">' + tagText + '</span>';
+    var nameSpan = '<span class="discover-preset-name">' + p.name + '</span>';
+    /* Spotlight keeps tag-first (loud amber badge on top). Non-spotlight
+       emits glow + badge + name + label (tag), DOM order matches visual. */
+    var inner = isSpotlight ? (tagSpan + nameSpan) : (decorations + nameSpan + tagSpan);
+    return '<button class="' + classes + '" type="button" data-preset="' + i + '">' + inner + '</button>';
+  }).join('');
+  container.querySelectorAll('.discover-preset').forEach(function (btn, i) {
+    btn.addEventListener('click', function () { applyPreset(presets[i]); });
+  });
+  applyCompactClasses(container);
+}
+
+/* ============================================================
+   COMPACT-TILE SIZER — Added 2026-05-24 (Phase 3.1)
+   After tiles are in the DOM, measure each non-spotlight preset
+   name and add `discover-preset--compact` when it renders in
+   ≤ 2 lines. CSS bumps name + label font-size by 5% for those
+   tiles. Measure at base size first — the 5% step is small so
+   borderline cases don't flip in practice (brief accepts this).
+   Skips spotlight and tiles with no name element. Safe to call
+   multiple times — classList.add is idempotent.
+   ============================================================ */
+function applyCompactClasses(rootEl) {
+  if (!rootEl) return;
+  var tiles = rootEl.querySelectorAll('.discover-preset:not(.discover-preset--spotlight)');
+  tiles.forEach(function (tile) {
+    var name = tile.querySelector('.discover-preset-name');
+    if (!name) return;
+    var s = getComputedStyle(name);
+    var fontSize = parseFloat(s.fontSize);
+    var lhRaw = s.lineHeight;
+    var lh;
+    if (lhRaw === 'normal') {
+      lh = fontSize * 1.3;
+    } else if (lhRaw.indexOf('px') !== -1) {
+      lh = parseFloat(lhRaw);
+    } else {
+      var n = parseFloat(lhRaw);
+      lh = !isNaN(n) ? fontSize * n : fontSize * 1.3;
+    }
+    if (!lh || lh <= 0) return;
+    var lineCount = Math.round(name.scrollHeight / lh);
+    if (lineCount <= 2) tile.classList.add('discover-preset--compact');
+  });
+}
+
+/* ============================================================
+   PRESET TRANSLATOR — Wired May 2, 2026
+   Translates a Quick Start preset into state.filters entries
+   matching the shapes produced by collectLabelsForSection, then
+   replaces state.filters and refreshes UI.
+   ============================================================ */
+function presetToStateFilters(preset) {
+  var f = preset.filters || {};
+  var entries = [];
+  function push(section, label, value) {
+    entries.push({ id: section + '-' + label, section: section, label: label, value: value });
+  }
+
+  if (Array.isArray(f.genres)) {
+    f.genres.forEach(function (g) {
+      push('genres', g, { type: 'genre', name: g });
+    });
+  }
+
+  if (f.decade) {
+    var decadeStr = String(f.decade).replace(/s$/, '');
+    push('timeEra', decadeStr + 's', { type: 'decade', decade: decadeStr, subType: 'release' });
+  }
+
+  /* 2026-05-23: releaseYearFrom/To → dateRange entry. Without this branch
+     these keys were silently dropped at the preset→state step, leaving
+     presets like "Japanese anime, 1990s-2000s" unbounded by year and
+     hitting TMDB's 9,999+ cap. buildTMDBQueryFromFilters already supports
+     `type: 'dateRange'` (line ~2524). */
+  if (f.releaseYearFrom || f.releaseYearTo) {
+    var fromYear = f.releaseYearFrom || 1900;
+    var toYear = f.releaseYearTo || new Date().getFullYear();
+    push('timeEra', fromYear + '–' + toYear, {
+      type: 'dateRange',
+      start: fromYear + '-01-01',
+      end: toYear + '-12-31'
+    });
+  }
+
+  if (typeof f.minRating === 'number') {
+    var ratingMin = f.minRating;
+    var ratingMax = typeof f.maxRating === 'number' ? f.maxRating : 10;
+    push('ratingsContent',
+      'Rating: ' + ratingMin.toFixed(1) + '-' + ratingMax.toFixed(1),
+      { type: 'rating', min: ratingMin, max: ratingMax });
+  }
+
+  if (f.region && f.region.code) {
+    push('regionLanguage',
+      'Region: ' + f.region.name,
+      { type: 'region', code: f.region.code, name: f.region.name });
+  }
+
+  if (f.awards) {
+    var a = f.awards;
+    if (a.festival) {
+      push('awards', a.festival, { type: 'award-festival', festival: a.festival });
+    }
+    if (a.category) {
+      push('awards', a.category, { type: 'award-category', category: a.category });
+    }
+    /* 2026-05-17: push level filter when the preset says "winner" or
+       "nominee" — without this, getAwardsMatchingIds matched both
+       winners and nominees (also: in-competition Cannes entries with
+       won:false), inflating "Palme d'Or winners" to 419 etc. */
+    if (a.level === 'winner' || a.level === 'nominee') {
+      push('awards', a.level === 'winner' ? 'Winner' : 'Nominee',
+        { type: 'award-level', level: a.level });
+    }
+    if (a.yearFrom || a.yearTo) {
+      var from = a.yearFrom || 1950;
+      var to = a.yearTo || 2025;
+      push('awards',
+        from === to ? 'Year: ' + from : 'Years: ' + from + '–' + to,
+        { type: 'award-year-range', from: from, to: to });
+    }
+  }
+
+  /* ============================================================
+     EXTENDED PRESET KEYS — Added May 4, 2026
+     Known limitation: source/studio/theme/language preset chips
+     appear in the orbit sidebar with the right label and colour but
+     do NOT yet contribute to the TMDB query unless the corresponding
+     buildTMDBQueryFromFilters branch can resolve them (e.g. theme
+     names that exist in KEYWORD_MAP, or studios with numeric ids).
+     Extending buildTMDBQueryFromFilters is a follow-up task.
+     ============================================================ */
+
+  if (f.source) {
+    push('basedOn', f.source, { type: 'source', name: f.source });
+  }
+
+  if (f.studio) {
+    push('production', f.studio, { type: 'studio', name: f.studio });
+  }
+
+  if (f.theme) {
+    push('themes', f.theme, { type: 'theme', name: f.theme });
+  }
+
+  if (typeof f.runtimeMax === 'number') {
+    var runtimeLabel = f.runtimeMax <= 90 ? 'Under 90 min'
+      : f.runtimeMax <= 120 ? 'Under 2 hours'
+      : 'Custom runtime';
+    push('timeEra', runtimeLabel,
+      { type: 'runtime', max: f.runtimeMax });
+    /* Re-key the entry so two presets with different runtimeMax don't
+       collide on the same id. */
+    entries[entries.length - 1].id = 'timeEra-runtime-' + f.runtimeMax;
+  }
+
+  if (f.language) {
+    /* 2026-05-17: fixed field name from `language` → `code`. The query
+       builder's regionLanguage case reads `filter.value.code`, so the
+       preset path was emitting with_original_language=undefined and
+       zeroing out result sets (e.g. "Indian parallel cinema"). */
+    push('regionLanguage', 'Language: ' + f.language,
+      { type: 'language', code: f.language });
+    entries[entries.length - 1].id = 'regionLanguage-language-' + f.language;
+  }
+
+  if (typeof f.minVotes === 'number') {
+    /* 2026-05-17: type was 'minVotes' but buildTMDBQueryFromFilters'
+       ratingsContent case (line ~2336) reads `type === 'votes'`, so
+       presets with minVotes were silently dropping their vote-count
+       gate. Aligning with the manual Ratings-tab chip path which
+       already uses { type: 'votes', min: N }. */
+    push('ratingsContent',
+      'Min votes: ' + f.minVotes.toLocaleString(),
+      { type: 'votes', min: f.minVotes });
+    entries[entries.length - 1].id = 'ratingsContent-votes-' + f.minVotes;
+  }
+
+  /* Phase 3 — preset → real TMDB keyword/collection filters.
+     Filter ids match the Phase 2 dedupe pattern (themes-tmdbkw-<id>)
+     and the Phase 1 collection chip pattern (universes-collection-<id>),
+     so re-clicking a preset and then searching the same item in-tab
+     won't add a duplicate. */
+  if (f.keyword && f.keyword.id != null) {
+    push('themes', f.keyword.name,
+      { type: 'tmdb-keyword', id: f.keyword.id, name: f.keyword.name });
+    entries[entries.length - 1].id = 'themes-tmdbkw-' + f.keyword.id;
+  }
+
+  if (f.collection && f.collection.id != null) {
+    /* String id → registry lookup in ORBIT_KEYWORD_IDS (data/keyword-ids.js).
+       The registry's `type` field drives behavior:
+         • 'extended-collection' → filter with type:'extended-collection'
+           (counter + launch resolve ids via the registry at execution time).
+         • 'collection' (or default) → legacy numeric TMDB collection path. */
+    if (typeof f.collection.id === 'string'
+        && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+        && ORBIT_KEYWORD_IDS[f.collection.id]) {
+      var regEntry = ORBIT_KEYWORD_IDS[f.collection.id];
+      var extName = f.collection.name || regEntry.label;
+      if (regEntry.type === 'extended-collection' && Array.isArray(regEntry.ids)) {
+        push('universes', extName, {
+          type: 'extended-collection',
+          id: f.collection.id,    // slug — counter/launch look up ids in registry
+          name: extName
+        });
+        entries[entries.length - 1].id = 'universes-extcoll-' + f.collection.id;
+      } else if (typeof regEntry.id === 'number') {
+        /* Registry entry resolves to a numeric TMDB collection id. */
+        push('universes', extName, {
+          type: 'collection',
+          id: regEntry.id,
+          name: extName,
+          collections: [regEntry.id]
+        });
+        entries[entries.length - 1].id = 'universes-collection-' + regEntry.id;
+      }
+    } else if (typeof f.collection.id === 'number') {
+      /* Numeric id passed directly in the preset (legacy / non-registry). */
+      push('universes', f.collection.name, {
+        type: 'collection',
+        id: f.collection.id,
+        name: f.collection.name,
+        collections: [f.collection.id]   // back-compat with Universe Mode launch
+      });
+      entries[entries.length - 1].id = 'universes-collection-' + f.collection.id;
+    }
+  }
+
+  /* universesKeyword (2026-05-16) — TMDB keyword that should flow
+     into the live counter via with_keywords. Pushed to the universes
+     section because buildTMDBQueryFromFilters' `case "universes"`
+     already handles type="keyword" → adds to with_keywords. The
+     `f.keyword` path above pushes to themes which is post-filter
+     only; this is the path for franchise keywords like MCU
+     (keyword 180547) where the live counter has to work via TMDB. */
+  if (f.universesKeyword && f.universesKeyword.id != null) {
+    push('universes', f.universesKeyword.name, {
+      type: 'keyword',
+      id: f.universesKeyword.id,
+      name: f.universesKeyword.name
+    });
+    entries[entries.length - 1].id = 'universes-keyword-' + f.universesKeyword.id;
+  }
+
+  /* movieList (2026-05-16) — explicit list of TMDB movie IDs, used
+     for franchises that TMDB doesn't model as a single collection
+     (Wizarding World = HP + Fantastic Beasts; Star Wars = saga +
+     Rogue One + Solo + Mando&Grogu; Fast & Furious + Hobbs & Shaw;
+     Planet of the Apes original + Tim Burton + modern). Counter and
+     launch handlers detect `type: 'movieList'` and use the ids
+     directly (no /collection/{id} fetch needed for size). */
+  if (f.movieList && Array.isArray(f.movieList.ids) && f.movieList.ids.length > 0) {
+    var movieListIds = f.movieList.ids.slice();
+    var movieListLabel = f.movieList.label || 'Movie list';
+    push('universes', movieListLabel, {
+      type: 'movieList',
+      ids: movieListIds,
+      name: movieListLabel
+    });
+    /* Stable id derived from a sorted prefix so chip dedupe across
+       preset clicks works even though the ids array can be long. */
+    entries[entries.length - 1].id = 'universes-movielist-' +
+      movieListIds.slice().sort(function (a, b) { return a - b; }).slice(0, 5).join('-');
+  }
+
+  /* Multi-collection presets (2026-05-16) — used by expanded universes
+     like "Alien vs. Predator Universe" that combine multiple TMDB
+     collections into one chip/filter. Universe Mode launch (line ~1540)
+     and the collection counter branch in fetchFilmCount both iterate
+     value.collections, so they pick up all the IDs transparently. */
+  if (Array.isArray(f.multiCollections) && f.multiCollections.length > 0) {
+    var multiIds = f.multiCollections
+      .filter(function (c) { return c && c.id != null; })
+      .map(function (c) { return c.id; });
+    if (multiIds.length > 0) {
+      var combinedName = f.multiCollections
+        .map(function (c) { return c.name; })
+        .filter(Boolean)
+        .join(' + ');
+      push('universes', combinedName, {
+        type: 'collection',
+        id: multiIds[0],            // primary id (used by chip dedupe / labels)
+        name: combinedName,
+        collections: multiIds       // full set drives Universe Mode + counter
+      });
+      entries[entries.length - 1].id = 'universes-multicollection-' + multiIds.join('-');
+    }
+  }
+
+  return entries;
+}
+
+function applyPreset(preset) {
+  var entries = presetToStateFilters(preset);
+  if (!entries.length) {
+    console.warn('[Discover] Preset produced no filters:', preset.name);
+    return;
+  }
+
+  state.filters = entries;
+  state.genreLogic = preset.genreLogic || 'or';
+
+  /* Phase 2 (2026-06-01): stamp the post-apply signature BEFORE any render.
+     The wrapped window.renderFilterChips re-evaluates Save-button visibility,
+     so the signature must already match the just-applied state — otherwise the
+     pristine preset reads as "modified" and the button wrongly shows. Mirrors
+     commitSaveWithName's stamp-then-evaluate order. Computed from the
+     just-assigned state.filters/genreLogic. window.__orbitStateSignature is
+     defined in the Phase 2 IIFE at the end of this file; the guard tolerates
+     load-order edge cases. */
+  try {
+    if (typeof window.__orbitStateSignature === 'function') {
+      window.__orbitLastAppliedSig = window.__orbitStateSignature(state.filters, state.genreLogic);
+    }
+  } catch (e) { /* swallow — Save button just stays in its current state */ }
+
+  updateUIFromState();
+  /* updateUIFromState calls the local renderFilterChips. The wrapped
+     window.renderFilterChips also runs updateTabDots, so call it once
+     more to refresh the tab dot indicators. */
+  if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+}
+
+(function initPresets() {
+  /* Increment visit count ONLY on page load — not on Shuffle clicks.
+     The spotlight rotation reads this counter to gate appearance. */
+  var visitCount = parseInt(localStorage.getItem('orbit_visit_count') || '0', 10);
+  localStorage.setItem('orbit_visit_count', String(visitCount + 1));
+
+  renderPresets(getActivePresets(getActivePresetCount()));
+
+  var shuffleBtn = document.getElementById('discoverPresetShuffle');
+  if (!shuffleBtn) return;
+  shuffleBtn.addEventListener('click', function () {
+    /* Shuffle never shows the spotlight; never bumps visit count. */
+    renderPresets(pickEvergreens(getActivePresetCount()));
+  });
 })();
 
 const sectionDefinitions = {
@@ -412,17 +1536,23 @@ const sectionDefinitions = {
   ratingsContent: { title: "Ratings & Content", builder: buildRatingsContentSection },
   regionLanguage: { title: "Region & Language", builder: buildRegionLanguageContent },
   production: { title: "Production & Box Office", builder: buildProductionContent },
-  watch: { title: "Watch Providers", builder: buildWatchContent },
+  watch: { title: "Stream", builder: buildWatchContent },
   universes: { title: "Universes", builder: buildUniversesContent },
   awards: { title: "Awards", builder: buildAwardsContent }
 };
 
 let currentSectionKey = null;
 
-document.getElementById('filterGrid').addEventListener('click', (e) => {
-  const card = e.target.closest('.section-card[data-section]');
-  if (card) openFocusCard(card.dataset.section);
-});
+// [FilterTabs — retired May 1, 2026]
+// The .filter-grid card system has been replaced by .orbit-filter-tabs.
+// Old listener kept null-safe in case the grid is ever reintroduced.
+var _legacyFilterGrid = document.getElementById('filterGrid');
+if (_legacyFilterGrid) {
+  _legacyFilterGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.section-card[data-section]');
+    if (card) openFocusCard(card.dataset.section);
+  });
+}
 
 function openFocusCard(sectionKey) {
   currentSectionKey = sectionKey;
@@ -447,29 +1577,33 @@ function closeFocusCard() {
   }
 }
 
-focusCloseButton.addEventListener("click", closeFocusCard);
+/* Rule 17: Black Hole exit. */
+function triggerFocusOrbitClose() {
+  if (!focusOverlay || focusOverlay.classList.contains('orbit-popup-closing')) return;
+  if (focusCloseButton) focusCloseButton.classList.add('closing');
+  focusOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (focusCloseButton) focusCloseButton.classList.remove('closing');
+    focusOverlay.classList.remove('orbit-popup-closing');
+    closeFocusCard();
+  }, reduced ? 200 : 600);
+}
 
-addToSearchButton.addEventListener("click", () => {
-  if (!currentSectionKey) return;
-  const labels = collectLabelsForSection(currentSectionKey);
-  
-  state.filters = state.filters.filter((f) => f.section !== currentSectionKey);
-  labels.forEach((item) => {
-    state.filters.push({
-      id: `${currentSectionKey}-${item.label}`,
-      section: currentSectionKey,
-      label: item.label,
-      value: item.value
-    });
-  });
-  
-  updateUIFromState();
-  closeFocusCard();
+focusCloseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  triggerFocusOrbitClose();
 });
 
 function updateUIFromState() {
   const hasFilters = state.filters.length > 0;
-  launchCard.disabled = !hasFilters;
+  /* Launch is disabled when there are no filters OR a normal-branch zero is
+     showing its guidance (the two rules are OR'd so they don't fight — see
+     setLaunchZeroState / _zeroGuidanceActive). The two-line zero label is
+     owned by setLaunchZeroState; here we only resolve the disabled flag. */
+  launchCard.disabled = !hasFilters || _zeroGuidanceActive;
   
   if (!hasFilters) {
     orbitFiltersEmpty.hidden = false;
@@ -518,28 +1652,136 @@ function updateUIFromState() {
     try { hasSession = !!sessionStorage.getItem('orbit_search_criteria'); } catch (e) {}
     resetBtn.hidden = !hasFilters && !hasSession;
   }
+
+  /* Orbit ring is wrapped into renderFilterChips, but renderFilterChips
+     is only called when hasFilters. On the empty branch the ring would
+     never re-paint, so the empty-state caption stays hidden. Call
+     directly to keep the ring + caption in sync with state. */
+  if (typeof updateOrbitRing === 'function') {
+    try { updateOrbitRing(); } catch (e) {}
+  }
+  if (typeof fetchFilmCount === 'function') {
+    try { fetchFilmCount(); } catch (e) {}
+  }
+}
+
+/* ============================================================
+   CHIP LABEL FORMATTER — Added May 4, 2026
+   Cleans up filter labels for the orbit sidebar. Removes redundant
+   section prefixes where the value is self-explanatory; keeps a small
+   dimmed prefix only where the value is ambiguous without context.
+   Returns { prefix, text } — prefix is null for self-explanatory chips.
+   ============================================================ */
+function formatChipLabel(filter) {
+  var label = (filter && filter.label) || '';
+  var section = (filter && filter.section) || '';
+
+  if (section === 'genres') {
+    return { prefix: null, text: label.trim() };
+  }
+
+  if (section === 'awards') {
+    if (label === 'Winner') return { prefix: null, text: 'Award winner' };
+    if (label === 'Nominee') return { prefix: null, text: 'Award nominee' };
+    return { prefix: null, text: label };
+  }
+
+  if (section === 'timeEra') {
+    var cleaned = label.replace(/^Released\s+/i, '');
+    cleaned = cleaned.replace(/Short Films?\s*\(<60min\)/i, 'Under 60 min');
+    cleaned = cleaned.replace(/Standard\s*\(90-120min\)/i, '90–120 min');
+    cleaned = cleaned.replace(/Long\s*\(2h\+\)/i, 'Over 2 hours');
+    cleaned = cleaned.replace(/Epic\s*\(3h\+\)/i, 'Over 3 hours');
+    cleaned = cleaned.replace(/New Releases?\s*\([^)]+\)/i, 'New releases');
+    return { prefix: null, text: cleaned };
+  }
+
+  if (section === 'themes') {
+    var themeVal = label.replace(/^Theme:\s*/i, '');
+    return { prefix: 'theme', text: themeVal };
+  }
+
+  if (section === 'settingWhere' || section === 'settingWhen') {
+    var settingVal = label.replace(/^Set in:\s*/i, '');
+    return { prefix: null, text: settingVal };
+  }
+
+  if (section === 'ratingsContent') {
+    if (/^Rating:/i.test(label)) {
+      return { prefix: 'rating', text: label.replace(/^Rating:\s*/i, '').replace('-', '–') };
+    }
+    if (/^Min votes?:/i.test(label)) {
+      return { prefix: 'min votes', text: label.replace(/^Min votes?:\s*/i, '') };
+    }
+    return { prefix: null, text: label };
+  }
+
+  if (section === 'regionLanguage') {
+    if (/^Language:/i.test(label)) {
+      return { prefix: 'language', text: label.replace(/^Language:\s*/i, '') };
+    }
+    return { prefix: null, text: label.replace(/^Production Region:\s*/i, '') };
+  }
+
+  if (section === 'basedOn' || section === 'universes') {
+    var lower = label.toLowerCase();
+    if (lower === 'sequel') return { prefix: null, text: 'A sequel' };
+    if (lower === 'prequel') return { prefix: null, text: 'A prequel' };
+    if (lower === 'spin-off') return { prefix: null, text: 'A spin-off' };
+    return { prefix: null, text: label };
+  }
+
+  return { prefix: null, text: label };
+}
+
+function escapeChipText(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
 }
 
 function renderFilterChips() {
   orbitFilters.innerHTML = "";
   const container = document.createElement("div");
   container.className = "filter-chips";
-  
-  state.filters.forEach((filter) => {
+
+  state.filters.forEach((filter, index) => {
     const chip = document.createElement("div");
-    chip.className = "filter-chip";
-    chip.innerHTML = `
-      <div class="filter-chip-main">
-        <div class="filter-chip-section">${sectionDefinitions[filter.section]?.title || filter.section}</div>
-        <div class="filter-chip-label">${filter.label}</div>
-      </div>
-    `;
+    chip.className = "filter-chip orbit-chip-v2";
+    chip.dataset.section = filter.section;
+    if (filter.section === "universes" && filter.value && filter.value.type) {
+      chip.dataset.universeType = filter.value.type;
+    }
+    chip.style.setProperty('--chip-index', index);
+
+    const formatted = formatChipLabel(filter);
+    const safeText = escapeChipText(formatted.text);
+    const prefixHTML = formatted.prefix
+      ? '<span class="orbit-chip-prefix">' + escapeChipText(formatted.prefix) + '</span>'
+      : '';
+    const labelHTML = '<span class="orbit-chip-value">' + safeText + '</span>';
+
+    chip.innerHTML =
+      '<div class="orbit-chip-content">' + prefixHTML + labelHTML + '</div>';
+
     const remove = document.createElement("button");
-    remove.className = "filter-chip-remove";
-    remove.textContent = "✕";
+    remove.className = "filter-chip-remove orbit-chip-remove";
+    remove.textContent = "×";
+    remove.setAttribute('aria-label', 'Remove ' + formatted.text);
+    remove.dataset.filterId = filter.id;
     remove.onclick = () => {
-      state.filters = state.filters.filter(f => f.id !== filter.id);
-      updateUIFromState();
+      /* Black Hole exit (CLAUDE.md Rule 17 — extended to chips):
+         the × spirals red and the chip fades/scales out. After the
+         animation completes, mutate state and re-render. */
+      if (chip.classList.contains('closing')) return;
+      chip.classList.add('closing');
+      var reduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var delay = reduced ? 200 : 600;
+      setTimeout(function () {
+        state.filters = state.filters.filter(f => f.id !== filter.id);
+        updateUIFromState();
+      }, delay);
     };
     chip.appendChild(remove);
     container.appendChild(chip);
@@ -548,12 +1790,26 @@ function renderFilterChips() {
 }
 
 orbitPanelToggle.onclick = () => orbitPanel.classList.toggle("collapsed");
-clearAllButton.onclick = () => {
-  state.filters = [];
-  state.genreLogic = 'or';
-  try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
-  updateUIFromState();
-};
+if (clearAllButton) {
+  clearAllButton.onclick = () => {
+    state.filters = [];
+    state.genreLogic = 'or';
+    state.regionLogic = 'or';
+    try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+    updateUIFromState();
+    /* Phase 3 (2026-06-01): mirror the same downstream-update path that
+       applyPreset / chip-add use. updateUIFromState already calls the
+       LOCAL renderFilterChips, but it does NOT trigger the WRAPPED
+       window.renderFilterChips (which runs updateTabDots, updateOrbitRing,
+       fetchFilmCount, and Phase 2's updateSaveButtonVisibility). Without
+       this call the vertical-bar film count + ring stay stale until the
+       next tab interaction does the work. */
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+    /* Clear the last-applied signature so the cleared state reads as
+       pristine — Save button stays hidden after clear. */
+    try { window.__orbitLastAppliedSig = null; } catch (e) {}
+  };
+}
 
 // ── Restore search criteria from sessionStorage ──
 (function restoreSearchCriteria() {
@@ -570,6 +1826,9 @@ clearAllButton.onclick = () => {
     if (saved.genreLogic === 'and' || saved.genreLogic === 'or') {
       state.genreLogic = saved.genreLogic;
     }
+    if (saved.regionLogic === 'and' || saved.regionLogic === 'or') {
+      state.regionLogic = saved.regionLogic;
+    }
     updateUIFromState();
   } catch (e) { /* corrupted data — start fresh */ }
 })();
@@ -580,10 +1839,172 @@ if (resetOrbitButton) {
   resetOrbitButton.addEventListener('click', function() {
     state.filters = [];
     state.genreLogic = 'or';
+    state.regionLogic = 'or';
     try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
     updateUIFromState();
+    /* Phase 3 (2026-06-01): Reset was missing the wrapped chip-render
+       call, so the vertical-bar count + orbit ring stayed stale until
+       the next tab interaction. The WRAPPED window.renderFilterChips
+       cascades to updateTabDots / updateOrbitRing / fetchFilmCount /
+       Phase 2's updateSaveButtonVisibility — exactly what the tab-
+       interaction path does. Adding the call here makes Reset
+       complete in one go. */
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+    /* Clear the last-applied signature so the cleared state reads as
+       pristine — Save button stays hidden after Reset. */
+    try { window.__orbitLastAppliedSig = null; } catch (e) {}
   });
 }
+
+/* ============================================================
+   DISCOVERY EMPTY / ERROR STATE HELPER — Phase 1 (2026-05-27)
+   Three-kind advisory inside #orbitPanel. Container markup lives
+   in discover.html (#discoverEmptyState); styles in discover.css
+   (.discover-empty-state + .is-zero / .is-network / .is-data).
+
+   showDiscoverEmptyState(kind, context):
+     kind    — 'zero' | 'network' | 'data'
+     context — optional object:
+       { headline, body, trace, primaryLabel, primaryAction,
+         secondaryLabel, secondaryAction }
+     Omitted fields fall back to per-kind defaults below.
+     primaryAction / secondaryAction are functions; they run
+     before the state is hidden.
+
+   hideDiscoverEmptyState():
+     Hides the container and clears its dynamic content.
+
+   Close control (.orbit-close) is handled by orbit-close.js
+   (Rule 17 Black Hole). We listen for 'orbit:close' on the
+   container so we clear dynamic content alongside the auto-hide.
+
+   Phase 2 (2026-05-28): wired into the launch handler, replacing
+   all 10 window.alert() empty/error surfaces. The temporary
+   __testEmptyState() console hook has been removed.
+   ============================================================ */
+var DISCOVER_EMPTY_DEFAULTS = {
+  zero: {
+    glyph: 'og-satellite',
+    headline: 'No films found in this orbit',
+    body: 'Your filter combination narrowed the universe to zero. Try removing or loosening a filter.',
+    primaryLabel: 'Reset filters',
+    secondaryLabel: null
+  },
+  network: {
+    glyph: 'og-warning',
+    headline: 'Connection lost',
+    body: 'We couldn’t reach the film database. Check your connection and try again.',
+    primaryLabel: 'Retry',
+    secondaryLabel: null
+  },
+  data: {
+    // og-warning is a v2 mask-based glyph; tints via `color` on the
+    // glyph element. og-stats (v1) had cyan baked into its SVG and
+    // couldn't be tinted purple — swapped here, not in static markup
+    // (the markup glyph is overwritten by JS on every show()).
+    glyph: 'og-warning',
+    headline: 'Unexpected data',
+    body: 'A filter returned a result we couldn’t parse. Try a different combination.',
+    primaryLabel: 'Reset filters',
+    secondaryLabel: null
+  }
+};
+
+function showDiscoverEmptyState(kind, context) {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  context = context || {};
+  var defaults = DISCOVER_EMPTY_DEFAULTS[kind] || DISCOVER_EMPTY_DEFAULTS.zero;
+
+  // Kind modifier — strip the three is-* classes first.
+  el.classList.remove('is-zero', 'is-network', 'is-data');
+  el.classList.add('is-' + kind);
+
+  // Glyph — keep the base .og class, swap the variant class.
+  var glyphSpan = el.querySelector('[data-role="glyph"]');
+  if (glyphSpan) glyphSpan.className = 'og ' + defaults.glyph;
+
+  // Text content
+  var headlineEl = el.querySelector('[data-role="headline"]');
+  var bodyEl     = el.querySelector('[data-role="body"]');
+  if (headlineEl) headlineEl.textContent = context.headline || defaults.headline;
+  if (bodyEl)     bodyEl.textContent     = context.body     || defaults.body;
+
+  // Trace (zero kind primarily; optional for others)
+  var traceEl = el.querySelector('[data-role="trace"]');
+  if (traceEl) {
+    if (context.trace) {
+      traceEl.textContent = context.trace;
+      traceEl.hidden = false;
+    } else {
+      traceEl.textContent = '';
+      traceEl.hidden = true;
+    }
+  }
+
+  // Primary button
+  var primaryEl = el.querySelector('[data-role="primary"]');
+  if (primaryEl) {
+    primaryEl.textContent = context.primaryLabel || defaults.primaryLabel;
+    primaryEl.onclick = function () {
+      if (typeof context.primaryAction === 'function') {
+        try { context.primaryAction(); } catch (e) {}
+      }
+      hideDiscoverEmptyState();
+    };
+  }
+
+  // Secondary button (optional)
+  var secondaryEl = el.querySelector('[data-role="secondary"]');
+  var secondaryLabel = context.secondaryLabel || defaults.secondaryLabel;
+  if (secondaryEl) {
+    if (secondaryLabel) {
+      secondaryEl.textContent = secondaryLabel;
+      secondaryEl.hidden = false;
+      secondaryEl.onclick = function () {
+        if (typeof context.secondaryAction === 'function') {
+          try { context.secondaryAction(); } catch (e) {}
+        }
+        hideDiscoverEmptyState();
+      };
+    } else {
+      secondaryEl.textContent = '';
+      secondaryEl.hidden = true;
+      secondaryEl.onclick = null;
+    }
+  }
+
+  el.hidden = false;
+}
+
+function hideDiscoverEmptyState() {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  el.hidden = true;
+
+  var headlineEl  = el.querySelector('[data-role="headline"]');
+  var bodyEl      = el.querySelector('[data-role="body"]');
+  var traceEl     = el.querySelector('[data-role="trace"]');
+  var primaryEl   = el.querySelector('[data-role="primary"]');
+  var secondaryEl = el.querySelector('[data-role="secondary"]');
+
+  if (headlineEl)  headlineEl.textContent = '';
+  if (bodyEl)      bodyEl.textContent     = '';
+  if (traceEl)     { traceEl.textContent = ''; traceEl.hidden = true; }
+  if (primaryEl)   { primaryEl.textContent = ''; primaryEl.onclick = null; }
+  if (secondaryEl) { secondaryEl.textContent = ''; secondaryEl.hidden = true; secondaryEl.onclick = null; }
+}
+
+// orbit-close.js fires 'orbit:close' on the popup wrapper after the
+// Black Hole animation; it also auto-sets popup.hidden = true. We
+// piggy-back to clear dynamic content so a re-open starts clean.
+(function () {
+  var el = document.getElementById('discoverEmptyState');
+  if (!el) return;
+  el.addEventListener('orbit:close', function () {
+    hideDiscoverEmptyState();
+  });
+})();
 
 // ── More Filters modal ──
 const moreFiltersOverlay = document.getElementById('moreFiltersOverlay');
@@ -614,25 +2035,47 @@ if (moreFiltersBtn) {
   moreFiltersBtn.addEventListener('click', openMoreFilters);
 }
 
+/* Rule 17: Black Hole exit for more-filters modal. */
+function triggerMoreFiltersOrbitClose() {
+  if (!moreFiltersOverlay || moreFiltersOverlay.classList.contains('orbit-popup-closing')) return;
+  if (moreFiltersClose) moreFiltersClose.classList.add('closing');
+  moreFiltersOverlay.classList.add('orbit-popup-closing');
+  const reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => {
+    if (moreFiltersClose) moreFiltersClose.classList.remove('closing');
+    moreFiltersOverlay.classList.remove('orbit-popup-closing');
+    closeMoreFilters();
+  }, reduced ? 200 : 600);
+}
+
 if (moreFiltersClose) {
-  moreFiltersClose.addEventListener('click', closeMoreFilters);
+  moreFiltersClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerMoreFiltersOrbitClose();
+  });
 }
 
 // Backdrop click closes modal
 if (moreFiltersOverlay) {
   moreFiltersOverlay.addEventListener('click', (e) => {
-    if (e.target === moreFiltersOverlay) closeMoreFilters();
+    if (e.target === moreFiltersOverlay) triggerMoreFiltersOrbitClose();
   });
 }
 
 // Tile clicks → close modal, open focus card for that section
-document.getElementById('moreFiltersGrid').addEventListener('click', (e) => {
-  const tile = e.target.closest('.more-filter-tile');
-  if (!tile) return;
-  openedFromMore = true;
-  closeMoreFilters();
-  openFocusCard(tile.dataset.section);
-});
+// (More Filters modal removed May 1, 2026 — null-guard kept for safety.)
+var moreFiltersGridEl = document.getElementById('moreFiltersGrid');
+if (moreFiltersGridEl) {
+  moreFiltersGridEl.addEventListener('click', (e) => {
+    const tile = e.target.closest('.more-filter-tile');
+    if (!tile) return;
+    openedFromMore = true;
+    closeMoreFilters();
+    openFocusCard(tile.dataset.section);
+  });
+}
 
 // Escape key: close More modal or focus card
 document.addEventListener('keydown', (e) => {
@@ -652,22 +2095,45 @@ launchCard.addEventListener("click", async () => {
   try {
     sessionStorage.setItem('orbit_search_criteria', JSON.stringify({
       filters: state.filters,
-      genreLogic: state.genreLogic
+      genreLogic: state.genreLogic,
+      regionLogic: state.regionLogic
     }));
   } catch (e) {}
+
+  /* Reset the honest-count signal at launch entry so a stale postFiltered
+     banner from a prior launch can't bleed into a path that doesn't set it
+     (awards-only / universe / mixed-awards). The normal-discover path re-sets
+     these after its post-filter when a shrink occurs. */
+  localStorage.removeItem("postFiltered");
+  localStorage.removeItem("postFilteredCount");
+  localStorage.removeItem("postFilteredSampled");
+  localStorage.removeItem("postFilteredBroadTotal");
 
   try {
     // Check for universe filters
     const universeFilters = state.filters.filter(f => f.section === "universes");
     const collectionIds = [];
+    const movieListIdsSet = new Set();
     universeFilters.forEach(f => {
-      if (f.value && f.value.collections) {
+      if (!f.value) return;
+      if (f.value.collections) {
         collectionIds.push(...f.value.collections);
+      }
+      /* movieList: ids embedded directly. */
+      if (f.value.type === "movieList" && Array.isArray(f.value.ids)) {
+        f.value.ids.forEach(id => movieListIdsSet.add(id));
+      }
+      /* extended-collection: ids resolved from ORBIT_KEYWORD_IDS registry. */
+      if (f.value.type === "extended-collection"
+          && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+          && ORBIT_KEYWORD_IDS[f.value.id]
+          && Array.isArray(ORBIT_KEYWORD_IDS[f.value.id].ids)) {
+        ORBIT_KEYWORD_IDS[f.value.id].ids.forEach(id => movieListIdsSet.add(id));
       }
     });
 
-    if (collectionIds.length > 0) {
-      // UNIVERSE MODE: fetch from collections
+    if (collectionIds.length > 0 || movieListIdsSet.size > 0) {
+      // UNIVERSE MODE: fetch from collections and/or explicit movie ID lists
       const hyperspace = document.getElementById('hyperspaceOverlay');
       hyperspace.hidden = false;
 
@@ -689,6 +2155,31 @@ launchCard.addEventListener("click", async () => {
           }
         } catch (err) {
           console.error(`Failed to fetch collection ${colId}:`, err);
+        }
+      }
+
+      /* movieList (2026-05-16): batch-fetch movies from explicit ID
+         lists for franchises that aren't a single TMDB collection.
+         Normalize genres → genre_ids so the client-side filter loop
+         below works the same as /collection/{id} responses. */
+      if (movieListIdsSet.size > 0) {
+        const movieListIdsArr = Array.from(movieListIdsSet);
+        const BATCH_SIZE_ML = 8;
+        for (let i = 0; i < movieListIdsArr.length; i += BATCH_SIZE_ML) {
+          const batch = movieListIdsArr.slice(i, i + BATCH_SIZE_ML);
+          const results = await Promise.all(batch.map(id =>
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
+          ));
+          results.forEach(m => {
+            if (!m || !m.id || seenIds.has(m.id)) return;
+            if (Array.isArray(m.genres) && !m.genre_ids) {
+              m.genre_ids = m.genres.map(g => g.id);
+            }
+            seenIds.add(m.id);
+            allMovies.push(m);
+          });
         }
       }
 
@@ -736,7 +2227,15 @@ launchCard.addEventListener("click", async () => {
 
       if (filtered.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria in the selected universe(s).");
+        showDiscoverEmptyState('zero', {
+          body: 'No films in the selected universe(s) match your other filters. Try removing a non-universe filter.',
+          trace: `${allMovies.length} → 0`,
+          primaryLabel: 'Remove non-universe filters',
+          primaryAction: function () {
+            state.filters = state.filters.filter(function (f) { return f.section === 'universes'; });
+            updateUIFromState();
+          }
+        });
         return;
       }
 
@@ -763,7 +2262,19 @@ launchCard.addEventListener("click", async () => {
       const matchingIds = getAwardsMatchingIds(state.filters);
       if (matchingIds.length === 0) {
         hyperspace.hidden = true;
-        alert("No award-winning movies found matching your criteria.");
+        showDiscoverEmptyState('zero', {
+          body: 'That award selection doesn’t match any films. Try removing the last award filter.',
+          trace: null,
+          primaryLabel: 'Remove last award filter',
+          primaryAction: function () {
+            var awardsFilters = state.filters.filter(function (f) { return f.section === 'awards'; });
+            if (awardsFilters.length) {
+              var last = awardsFilters[awardsFilters.length - 1];
+              state.filters = state.filters.filter(function (f) { return f !== last; });
+              updateUIFromState();
+            }
+          }
+        });
         return;
       }
 
@@ -789,13 +2300,103 @@ launchCard.addEventListener("click", async () => {
       // Apply settings-based post-filtering if any settings filters are active
       const settingsData = await getSettingsData();
       if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section)) && settingsData) {
+        const awPreSettings = allMovies.length;
         allMovies = applySettingsFilters(allMovies, state.filters, settingsData);
         console.log(`[Orbit] Awards + settings post-filter: → ${allMovies.length} movies`);
         if (allMovies.length === 0) {
           hyperspace.hidden = true;
-          alert("No award-winning movies match your settings filters. Try removing some filters.");
+          showDiscoverEmptyState('zero', {
+            body: 'No award-winning films match your Setting & Theme filters. Try removing them.',
+            trace: `${awPreSettings} → 0`,
+            primaryLabel: 'Remove Setting & Theme filters',
+            primaryAction: function () {
+              state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+              updateUIFromState();
+            }
+          });
           return;
         }
+      }
+
+      const selectedGenres = getSelectedGenres(state.filters);
+      const genresToUse = selectedGenres.length >= 2
+        ? selectedGenres.slice(0, 3)
+        : getTopGenresFromMovies(allMovies);
+
+      localStorage.setItem("movies", JSON.stringify(allMovies));
+      localStorage.setItem("genres", JSON.stringify(genresToUse));
+      localStorage.setItem("orbitFilters", JSON.stringify(state.filters));
+      localStorage.setItem("mediaType", "movie");
+      localStorage.removeItem("resultsCapped");
+      localStorage.removeItem("totalAvailable");
+
+      setTimeout(() => {
+        window.location.href = "results.html";
+      }, 500);
+
+    } else if (shouldUseAwardsAsSource(state.filters)) {
+      /* ============================================================
+         MIXED AWARDS MODE — Added 2026-05-19
+         Awards + other filters (genre, decade, rating, etc.). Awards
+         drive the source set: fetch the matching films from TMDB by
+         id, then apply non-awards filters client-side. Fixes the
+         popularity-intersection bug where the prior NORMAL DISCOVER
+         path would fetch the top 500 popular docs and intersect with
+         ~26 Oscar Best Doc winners, missing most of them.
+         Routes here when getAwardsMatchingIds returns ≤500 ids.
+         ============================================================ */
+      const hyperspace = document.getElementById('hyperspaceOverlay');
+      hyperspace.hidden = false;
+
+      const matchingIds = getAwardsMatchingIds(state.filters);
+      console.log(`[Orbit] Mixed awards mode: ${matchingIds.length} award ids → batch fetch`);
+
+      let allMovies = [];
+      const BATCH_SIZE = 8;
+      for (let i = 0; i < matchingIds.length; i += BATCH_SIZE) {
+        const batch = matchingIds.slice(i, i + BATCH_SIZE);
+        const results = await Promise.all(batch.map(id =>
+          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}`)
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        ));
+        results.forEach(m => { if (m && m.id) allMovies.push(m); });
+      }
+
+      /* /movie/{id} returns genres:[{id,name},...]; the client-side
+         filter expects genre_ids. Same normalization as AWARDS-ONLY. */
+      allMovies = allMovies.map(m => ({
+        ...m,
+        genre_ids: m.genre_ids || (m.genres ? m.genres.map(g => g.id) : [])
+      }));
+
+      /* Apply non-awards filters (genre, decade, year, rating)
+         client-side. applyClientSideCollectionFilters already skips
+         awards + universes sections, so it's safe to pass the full
+         state.filters. */
+      allMovies = applyClientSideCollectionFilters(allMovies, state.filters);
+      console.log(`[Orbit] Mixed awards mode after client-side filters: ${allMovies.length} movies`);
+      const mxAfterClient = allMovies.length;
+
+      // Settings-based post-filter (location, era, themes, based-on) — mirrors AWARDS-ONLY
+      const settingsData = await getSettingsData();
+      if (state.filters.some(f => SETTINGS_SECTIONS.includes(f.section)) && settingsData) {
+        allMovies = applySettingsFilters(allMovies, state.filters, settingsData);
+        console.log(`[Orbit] Mixed awards + settings post-filter: → ${allMovies.length} movies`);
+      }
+
+      if (allMovies.length === 0) {
+        hyperspace.hidden = true;
+        showDiscoverEmptyState('zero', {
+          body: 'No award-winning films match your other filters. Try removing your Setting & Theme filters.',
+          trace: `${matchingIds.length} → ${mxAfterClient} → 0`,
+          primaryLabel: 'Remove Setting & Theme filters',
+          primaryAction: function () {
+            state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+            updateUIFromState();
+          }
+        });
+        return;
       }
 
       const selectedGenres = getSelectedGenres(state.filters);
@@ -823,7 +2424,13 @@ launchCard.addEventListener("click", async () => {
       const seedData = await getSeedData();
       if (!settingsData || !seedData) {
         hyperspace.hidden = true;
-        alert("Settings data unavailable. Try adding a genre or person filter alongside your selections.");
+        showDiscoverEmptyState('data', {
+          body: 'Settings data couldn’t be loaded. Retry, or add a genre or person filter alongside your selections.',
+          trace: null,
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); },
+          secondaryLabel: 'Add a different filter'
+        });
         return;
       }
 
@@ -851,7 +2458,18 @@ launchCard.addEventListener("click", async () => {
 
       if (filtered.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        showDiscoverEmptyState('zero', {
+          body: 'No films match your Setting & Theme filters. Try clearing them for broader results.',
+          trace: `${candidateMovies.length} → 0`,
+          primaryLabel: 'Clear all filters',
+          primaryAction: function () {
+            state.filters = [];
+            state.genreLogic = 'or';
+            state.regionLogic = 'or';
+            try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+            updateUIFromState();
+          }
+        });
         return;
       }
 
@@ -881,7 +2499,10 @@ launchCard.addEventListener("click", async () => {
 
       if (allMovies.length === 0) {
         hyperspace.hidden = true;
-        alert("No movies found matching your criteria. Try removing some filters for broader results.");
+        showDiscoverEmptyState('network', {
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); }
+        });
         return;
       }
 
@@ -909,7 +2530,10 @@ launchCard.addEventListener("click", async () => {
       const previewUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}&page=1`;
       const previewResponse = await fetch(previewUrl);
       if (!previewResponse.ok) {
-        alert("Search failed — please try again.");
+        showDiscoverEmptyState('network', {
+          primaryLabel: 'Retry',
+          primaryAction: function () { launchCard.click(); }
+        });
         return;
       }
       const previewData = await previewResponse.json();
@@ -919,6 +2543,31 @@ launchCard.addEventListener("click", async () => {
       const totalMovies = previewData.total_results || 0;
 
       console.log(`Preview: ${totalMovies} movies across ${totalAvailable} pages`);
+
+      /* Zero-results guidance on launch (2026-06-06): a normal-branch launch
+         that previews 0 results stays on the discover page and surfaces the
+         drop-one guidance ALREADY EXPANDED, instead of navigating to a bare
+         results.html empty state. Runs AFTER totalMovies is known but BEFORE
+         the >MAX_PAGES confirm and BEFORE the hyperspace overlay is shown, so
+         there's no hyperspace flash and no navigation. The settings-post-
+         filter zero sub-case (after applySettingsFilters, below) keeps its own
+         showDiscoverEmptyState handling — drop-one can't help no-op settings
+         filters, and that count isn't 0 here (settings are query no-ops). */
+      if (totalMovies === 0) {
+        var hs = document.getElementById('hyperspaceOverlay');
+        if (hs) hs.hidden = true;
+        /* RENDER-RACE FIX (Option B): kill any pending debounced counter so a
+           trailing fetchFilmCount tick can't re-render the collapsed State 2
+           over the State 3 we auto-expand here. Without this, a launch click
+           before the 600ms counter resolves sometimes lands in State 2. */
+        clearTimeout(_filmCountTimer);
+        showZeroGuidanceAffordance(state.filters, queryParams, true);
+        var ozg = document.getElementById('launchTakeover');
+        if (ozg && typeof ozg.scrollIntoView === 'function') {
+          ozg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;   // do NOT store empty movies / navigate to results.html
+      }
 
       const hasSettingsFiltersEarly = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
       if (totalAvailable > MAX_PAGES && !hasSettingsFiltersEarly) {
@@ -934,11 +2583,25 @@ launchCard.addEventListener("click", async () => {
       const hyperspace = document.getElementById('hyperspaceOverlay');
       hyperspace.hidden = false;
 
+      /* Dedupe across pages by id. TMDB orders /discover/movie by
+         popularity.desc and recomputes popularity in near-real-time, so
+         a movie on the boundary between two pages can shift and land on
+         both — produces duplicate tiles on the results page. */
       let allMovies = [];
+      const seenIds = new Set();
       let currentPage = 1;
 
+      function addUniqueResults(results) {
+        results.forEach(m => {
+          if (m && m.id != null && !seenIds.has(m.id)) {
+            seenIds.add(m.id);
+            allMovies.push(m);
+          }
+        });
+      }
+
       if (previewData.results && previewData.results.length > 0) {
-        allMovies.push(...previewData.results);
+        addUniqueResults(previewData.results);
         const pagesToFetch = Math.min(totalAvailable, MAX_PAGES);
 
         for (currentPage = 2; currentPage <= pagesToFetch; currentPage++) {
@@ -947,7 +2610,7 @@ launchCard.addEventListener("click", async () => {
           if (!response.ok) break;
           const data = await response.json();
           if (data.results && data.results.length > 0) {
-            allMovies.push(...data.results);
+            addUniqueResults(data.results);
           } else {
             break;
           }
@@ -963,12 +2626,25 @@ launchCard.addEventListener("click", async () => {
         localStorage.removeItem("totalAvailable");
       }
 
+      /* Snapshot the page-capped fetch count BEFORE any post-filter, so the
+         honest-count reconciliation below can detect whether awards/settings
+         post-filtering actually shrank the set. */
+      const fetchedCount = allMovies.length;
+
       // Post-filter by awards
       allMovies = filterByAwards(allMovies, state.filters);
 
       // Apply settings-based post-filtering (location, time period, themes, based-on)
       const settingsData = await getSettingsData();
-      const hasSettingsFilters = state.filters.some(f => SETTINGS_SECTIONS.includes(f.section));
+      /* 2026-05-23: exclude tmdb-keyword filters from the settings-mode
+         gate. tmdb-keyword chips live in the 'themes' section so they can
+         share the chip styling, but they're resolved by TMDB's
+         with_keywords param (not the local seed JSON). Treating them as
+         settings filters caused the counter (no seed exclusion) to
+         diverge from the launch (seed exclusion shrinks results). */
+      const hasSettingsFilters = state.filters.some(f =>
+        SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== 'tmdb-keyword'
+      );
       let finalMovies = allMovies;
       if (hasSettingsFilters && settingsData) {
         finalMovies = applySettingsFilters(allMovies, state.filters, settingsData);
@@ -976,9 +2652,48 @@ launchCard.addEventListener("click", async () => {
 
         if (finalMovies.length === 0) {
           hyperspace.hidden = true;
-          alert("No movies found matching your criteria. Try removing some settings filters (location, era, themes) for broader results.");
+          showDiscoverEmptyState('zero', {
+            body: 'No films match your Setting & Theme filters. Try removing them for broader results.',
+            trace: `${allMovies.length} → 0`,
+            primaryLabel: 'Remove Setting & Theme filters',
+            primaryAction: function () {
+              state.filters = state.filters.filter(function (f) { return !SETTINGS_SECTIONS.includes(f.section); });
+              updateUIFromState();
+            }
+          });
           return;
         }
+      }
+
+      /* Honest count (2026-06-08): the capped-banner keys above were set from
+         TMDB total_results BEFORE the awards/settings post-filters ran. When a
+         post-filter actually shrank the fetched set, "Showing 500 of ~{total}"
+         is a lie (only finalMovies.length render). A true post-filtered total
+         across ALL pages is unknowable without fetching everything (out of
+         scope), so surface the ACTUAL rendered count and drop the fabricated
+         "of ~total" framing. No shrink → leave the capped banner exactly as-is
+         (it's honest there: ~total match, ~500 shown). */
+      const postFilterShrank = finalMovies.length < fetchedCount;
+      if (postFilterShrank) {
+        localStorage.removeItem("resultsCapped");
+        localStorage.removeItem("totalAvailable");
+        localStorage.setItem("postFiltered", "true");
+        localStorage.setItem("postFilteredCount", String(finalMovies.length));
+        if (wasCapped) {
+          /* The broad set was page-capped before filtering, so N is drawn from
+             a sample of the top ~totalMovies — record that for a quiet note. */
+          localStorage.setItem("postFilteredSampled", "true");
+          localStorage.setItem("postFilteredBroadTotal", totalMovies.toString());
+        } else {
+          localStorage.removeItem("postFilteredSampled");
+          localStorage.removeItem("postFilteredBroadTotal");
+        }
+      } else {
+        // No shrink — clear any stale post-filter keys from a prior launch.
+        localStorage.removeItem("postFiltered");
+        localStorage.removeItem("postFilteredCount");
+        localStorage.removeItem("postFilteredSampled");
+        localStorage.removeItem("postFilteredBroadTotal");
       }
 
       const selectedGenres = getSelectedGenres(state.filters);
@@ -1003,9 +2718,33 @@ launchCard.addEventListener("click", async () => {
     const hyperspace = document.getElementById('hyperspaceOverlay');
     hyperspace.hidden = true;
     console.error("Launch error:", err);
-    alert("Failed to launch orbit. Please try again.");
+    showDiscoverEmptyState('network', {
+      primaryLabel: 'Retry',
+      primaryAction: function () { launchCard.click(); }
+    });
   }
 });
+
+/* shouldUseAwardsAsSource (2026-05-19) — Fires when awards filters are
+   mixed with other TMDB filters (genre, decade, rating, etc.) AND the
+   award-matching set is small enough to fetch directly from TMDB by id.
+   Routes the launch handler through MIXED AWARDS MODE so the awards
+   drive the source list, then non-awards filters apply client-side.
+   Without this, NORMAL DISCOVER MODE fetches the top 500 popular films
+   for the genre and intersects with the award set — for sparse award
+   sets (e.g. 26 Oscar Best Doc winners), most winners aren't in the
+   top 500 by current popularity and get dropped. */
+function shouldUseAwardsAsSource(filters) {
+  const hasAwards = filters.some(f => f.section === "awards" && f.value);
+  if (!hasAwards) return false;
+  const dataReady = (window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards))
+    || typeof AWARDS_DATABASE !== "undefined";
+  if (!dataReady) return false;
+  /* Skip if pure-awards (already handled by AWARDS-ONLY branch). */
+  if (hasAwardsOnlyFilters(filters)) return false;
+  const ids = getAwardsMatchingIds(filters);
+  return ids.length > 0 && ids.length <= 500;
+}
 
 function hasAwardsOnlyFilters(filters) {
   const hasAwards = filters.some(f => f.section === "awards" && f.value);
@@ -1020,6 +2759,64 @@ function hasAwardsOnlyFilters(filters) {
   return !hasTMDBFilters;
 }
 
+/* Mirrors hasAwardsOnlyFilters for collections. Used as a hint; the
+   counter branch fires whenever ANY collection filter is present
+   regardless of other filters now, and applies non-universe filters
+   client-side via applyClientSideCollectionFilters below. Kept for
+   any future code that needs the "pure collection" check. */
+function hasCollectionOnlyFilters(filters) {
+  var collectionFilters = filters.filter(function (f) {
+    return f.section === "universes" && f.value && f.value.type === "collection";
+  });
+  if (collectionFilters.length === 0) return false;
+  var otherFilters = filters.filter(function (f) {
+    if (f.section === "universes") return false;
+    if (f.section === "awards") return false;
+    return true;
+  });
+  return otherFilters.length === 0;
+}
+
+/* Apply non-universe, non-awards filters to a list of movies fetched
+   from one or more TMDB /collection/{id} endpoints. Mirrors the
+   launch handler's client-side filter logic (lines ~1623-1650) so
+   the live counter and launch return the same count for mixed
+   collection + genre/decade/year/rating filter combinations. */
+function applyClientSideCollectionFilters(movies, filters) {
+  var filtered = movies;
+  filters.forEach(function (f) {
+    if (!f.value) return;
+    if (f.section === "universes" || f.section === "awards") return;
+    if (f.value.type === "genre") {
+      var genreId = (typeof GENRE_MAP !== "undefined") ? GENRE_MAP[f.value.name] : null;
+      if (genreId != null) {
+        filtered = filtered.filter(function (m) {
+          return m && m.genre_ids && m.genre_ids.indexOf(genreId) !== -1;
+        });
+      }
+    } else if (f.value.type === "decade" && f.value.subType === "release") {
+      filtered = filtered.filter(function (m) {
+        var year = m && m.release_date ? parseInt(m.release_date.split("-")[0], 10) : 0;
+        return year >= f.value.decade && year <= (parseInt(f.value.decade, 10) + 9);
+      });
+    } else if (f.value.type === "year") {
+      filtered = filtered.filter(function (m) {
+        var year = m && m.release_date ? parseInt(m.release_date.split("-")[0], 10) : 0;
+        return year === f.value.year;
+      });
+    } else if (f.value.type === "rating") {
+      filtered = filtered.filter(function (m) {
+        var avg = (m && m.vote_average) || 0;
+        return avg >= (f.value.min || 0) && avg <= (f.value.max || 10);
+      });
+    }
+    /* Other filter types (runtime, themes, settings, etc.) need full
+       movie data not present in /collection/{id} responses — they're
+       ignored here, same as the launch path. */
+  });
+  return filtered;
+}
+
 /* Category matching: supports parent categories like "Silver Lion"
    matching subcategories like "Silver Lion (Director)", "Silver Lion (Grand Jury)" */
 function categoryMatchesAward(selectedCategories, awardCategory) {
@@ -1028,90 +2825,193 @@ function categoryMatchesAward(selectedCategories, awardCategory) {
   );
 }
 
-function getAwardsMatchingIds(filters) {
-  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
-  const levels = [];
-  const festivals = [];
-  const categories = [];
-  let yearFrom = null;
-  let yearTo = null;
+/* ============================================================
+   AWARDS v1 HELPERS — Added 2026-05-17 (Phase 2)
+   v1 data covers 2000-2026 with 98.4% TMDB resolution and includes
+   `historical_names` on each category (resolves renames like
+   "Best Foreign Language Film" → "Best International Feature Film").
+   Loaded async from data/awards-data-v1.json into window.AWARDS_V1_DATA.
+   ============================================================ */
 
-  awardFilters.forEach(f => {
-    if (f.value.type === "award-level") levels.push(f.value.level);
-    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
-    else if (f.value.type === "award-category") categories.push(f.value.category);
-    else if (f.value.type === "award-year-range") {
-      yearFrom = f.value.from;
-      yearTo = f.value.to;
-    }
-  });
-
-  const matchingIds = [];
-  for (const [id, entry] of Object.entries(AWARDS_DATABASE)) {
-    if (!entry.awards || entry.awards.length === 0) continue;
-    const match = entry.awards.some(award => {
-      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
-      if (levels.length === 1) {
-        if (levels[0] === "winner" && !award.won) return false;
-        if (levels[0] === "nominee" && award.won) return false;
-      }
-      if (yearFrom !== null && award.year < yearFrom) return false;
-      if (yearTo !== null && award.year > yearTo) return false;
-      return true;
+/* Matches a preset's category string against a v1 category def by
+   checking display_name AND every historical_name. Each candidate
+   name is matched with the same semantics as the legacy
+   categoryMatchesAward (exact OR `startsWith(c + " (")` for parent
+   categories like "Silver Lion"). */
+function categoryMatchesV1(requestedCategories, categoryDef) {
+  if (!categoryDef) return false;
+  var candidates = [];
+  if (categoryDef.display_name) candidates.push(categoryDef.display_name);
+  if (Array.isArray(categoryDef.historical_names)) {
+    categoryDef.historical_names.forEach(function (h) {
+      if (h && h.name) candidates.push(h.name);
     });
-    if (match) matchingIds.push(parseInt(id));
   }
-  return matchingIds;
+  return requestedCategories.some(function (req) {
+    return candidates.some(function (name) {
+      return name === req || name.startsWith(req + " (");
+    });
+  });
 }
 
+/* Returns the v1 award rows that match the given award filters
+   (already-extracted, section==='awards'). Returns [] if v1 data
+   isn't loaded yet — caller falls back to legacy. */
+function getV1MatchingAwardRows(awardFilters) {
+  var v1 = window.AWARDS_V1_DATA;
+  if (!v1 || !Array.isArray(v1.awards)) return [];
+
+  var festivals = [];
+  var categories = [];
+  var levels = [];
+  var yearRanges = [];
+
+  awardFilters.forEach(function (f) {
+    if (!f.value) return;
+    if (f.value.type === "award-festival")    festivals.push(f.value.festival);
+    else if (f.value.type === "award-category")    categories.push(f.value.category);
+    else if (f.value.type === "award-level")       levels.push(f.value.level);
+    else if (f.value.type === "award-year-range")  yearRanges.push({ from: f.value.from, to: f.value.to });
+  });
+
+  /* Build O(1) lookups; v1 has 6 festivals and ~96 categories. */
+  var festivalsBySlug = {};
+  (v1.festivals || []).forEach(function (f) { festivalsBySlug[f.id] = f; });
+  var categoriesById = {};
+  (v1.categories || []).forEach(function (c) { categoriesById[c.id] = c; });
+
+  return v1.awards.filter(function (award) {
+    /* Festival check: preset uses short_name ('Oscar', 'Cannes', etc.).
+       v1's display_name is the long form ('Festival de Cannes'), so
+       match against festival.short_name. */
+    if (festivals.length > 0) {
+      var festSlug = (award.ceremony_id || "").split(".")[0];
+      var festDef = festivalsBySlug[festSlug];
+      if (!festDef || festivals.indexOf(festDef.short_name) === -1) return false;
+    }
+
+    /* Category check: includes historical_names (e.g. "Best Foreign
+       Language Film" → "Best International Feature Film"). */
+    if (categories.length > 0) {
+      var catDef = categoriesById[award.category_id];
+      if (!catDef) return false;
+      if (!categoryMatchesV1(categories, catDef)) return false;
+    }
+
+    /* Level check: v1 uses result: 'won' | 'nominated'. */
+    if (levels.length === 1) {
+      var won = award.result === "won";
+      if (levels[0] === "winner" && !won) return false;
+      if (levels[0] === "nominee" && won) return false;
+    }
+
+    /* Year range. */
+    if (yearRanges.length > 0) {
+      var matches = yearRanges.some(function (r) {
+        return award.year >= r.from && award.year <= r.to;
+      });
+      if (!matches) return false;
+    }
+
+    return true;
+  });
+}
+
+/* ============================================================
+   getAwardsMatchingIds — hybrid (v1 + legacy)
+   Signature preserved (filters = full state.filters array) so all
+   existing callers keep working.
+   v1 path covers 2000+. Legacy is consulted for pre-2000 years OR
+   as a full fallback if v1 hasn't loaded yet.
+   ============================================================ */
+function getAwardsMatchingIds(filters) {
+  const awardFilters = filters.filter(f => f.section === "awards" && f.value);
+  if (awardFilters.length === 0) return [];
+
+  const yearRanges = awardFilters
+    .filter(f => f.value.type === "award-year-range")
+    .map(f => ({ from: f.value.from, to: f.value.to }));
+
+  const v1Loaded = !!(window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards));
+  const v1ShouldFire = v1Loaded && (yearRanges.length === 0 || yearRanges.some(r => r.to >= 2000));
+  /* Legacy fires when v1 hasn't loaded (full fallback), or when the
+     query genuinely needs pre-2000 years that v1 doesn't cover. */
+  const legacyShouldFire = !v1Loaded || yearRanges.length === 0 || yearRanges.some(r => r.from < 2000);
+
+  const matchingIds = new Set();
+
+  if (v1ShouldFire) {
+    getV1MatchingAwardRows(awardFilters).forEach(function (row) {
+      if (row.film_tmdb_id != null) matchingIds.add(row.film_tmdb_id);
+    });
+  }
+
+  if (legacyShouldFire && typeof AWARDS_DATABASE !== "undefined") {
+    const levels = [];
+    const festivals = [];
+    const categories = [];
+    let yearFrom = null;
+    let yearTo = null;
+
+    awardFilters.forEach(f => {
+      if (f.value.type === "award-level") levels.push(f.value.level);
+      else if (f.value.type === "award-festival") festivals.push(f.value.festival);
+      else if (f.value.type === "award-category") categories.push(f.value.category);
+      else if (f.value.type === "award-year-range") {
+        yearFrom = f.value.from;
+        yearTo = f.value.to;
+      }
+    });
+
+    for (const [id, entry] of Object.entries(AWARDS_DATABASE)) {
+      if (!entry.awards || entry.awards.length === 0) continue;
+      const match = entry.awards.some(award => {
+        if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
+        if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
+        if (levels.length === 1) {
+          if (levels[0] === "winner" && !award.won) return false;
+          if (levels[0] === "nominee" && award.won) return false;
+        }
+        if (yearFrom !== null && award.year < yearFrom) return false;
+        if (yearTo !== null && award.year > yearTo) return false;
+        return true;
+      });
+      if (match) matchingIds.add(parseInt(id));
+    }
+  }
+
+  return Array.from(matchingIds);
+}
+
+/* filterByAwards — now delegates to getAwardsMatchingIds. Signature
+   preserved (filters = full state.filters array). Returns movies
+   whose id is in the matching set. Behaviorally equivalent to the
+   prior per-movie iteration but uses the v1+legacy hybrid set. */
 function filterByAwards(movies, filters) {
   const awardFilters = filters.filter(f => f.section === "awards" && f.value);
   if (awardFilters.length === 0) return movies;
-  if (typeof AWARDS_DATABASE === "undefined") return movies;
-
-  const levels = [];
-  const festivals = [];
-  const categories = [];
-  let yearFrom = null;
-  let yearTo = null;
-
-  awardFilters.forEach(function(f) {
-    if (f.value.type === "award-level") levels.push(f.value.level);
-    else if (f.value.type === "award-festival") festivals.push(f.value.festival);
-    else if (f.value.type === "award-category") categories.push(f.value.category);
-    else if (f.value.type === "award-year-range") {
-      yearFrom = f.value.from;
-      yearTo = f.value.to;
-    }
-  });
-
-  return movies.filter(function(movie) {
-    const entry = AWARDS_DATABASE[movie.id];
-    if (!entry || !entry.awards || entry.awards.length === 0) return false;
-
-    return entry.awards.some(function(award) {
-      // Festival filter (OR within group)
-      if (festivals.length > 0 && festivals.indexOf(award.festival) === -1) return false;
-      // Category filter (OR within group, supports parent categories)
-      if (categories.length > 0 && !categoryMatchesAward(categories, award.category)) return false;
-      // Level filter
-      if (levels.length === 1) {
-        if (levels[0] === "winner" && !award.won) return false;
-        if (levels[0] === "nominee" && award.won) return false;
-      }
-      // Year range filter
-      if (yearFrom !== null && award.year < yearFrom) return false;
-      if (yearTo !== null && award.year > yearTo) return false;
-      return true;
-    });
-  });
+  /* If neither data source is available, leave movies unfiltered
+     (safer than dropping everything). */
+  if (!(window.AWARDS_V1_DATA && Array.isArray(window.AWARDS_V1_DATA.awards))
+      && typeof AWARDS_DATABASE === "undefined") {
+    return movies;
+  }
+  const matchingIds = new Set(getAwardsMatchingIds(filters));
+  return movies.filter(function (movie) { return matchingIds.has(movie.id); });
 }
 
+// Session-once guard for the "providers but no country" stream-default warning
+// (buildTMDBQueryFromFilters runs several times per search — main + count previews).
+let _streamDefaultCountryWarned = false;
+
 function buildTMDBQueryFromFilters(filters) {
+  // Defensive: tolerate undefined/null/non-array callers so the
+  // query engine returns a base query instead of throwing.
+  if (!Array.isArray(filters)) filters = [];
+
   const params = new URLSearchParams();
-  
-  params.append("sort_by", "popularity.desc");
+
+  params.append("sort_by", state.sortBy || "popularity.desc");   /* Phase 1b-ii: global sort-by control (1b-i) drives this; defaults to popularity.desc */
   params.append("include_adult", "false");
   params.append("include_video", "false");
 
@@ -1157,7 +3057,7 @@ function buildTMDBQueryFromFilters(filters) {
           } else if (filter.value.type === "decade") {
             params.delete("primary_release_year");
             const start = filter.value.decade;
-            const end = start + 9;
+            const end = parseInt(start, 10) + 9;
             params.set("primary_release_date.gte", `${start}-01-01`);
             params.set("primary_release_date.lte", `${end}-12-31`);
           } else if (filter.value.type === "dateRange") {
@@ -1184,14 +3084,51 @@ function buildTMDBQueryFromFilters(filters) {
         break;
 
       case "themes":
-      case "settingWhere":
-      case "settingWhen":
-      case "basedOn":
         // Handled by client-side post-filtering, not TMDB API params
         break;
 
+      case "settingWhere":
+      case "settingWhen":
+        /* Build A (2026-06-27): Setting chips backed by a verified keyword id
+           commit {type:"keyword", id} → real with_keywords, OR/AND-joined by
+           settingLogic (mirrors regionLogic: "or" → "|", "and" → ","). Legacy
+           {type:"location"|"time_*"} chips carry no id → still post-filtered
+           (and bypassed here). Same inline accumulation as basedOn/universes. */
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const settingSep = state.settingLogic === "or" ? "|" : ",";
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}${settingSep}${filter.value.id}` : String(filter.value.id)
+          );
+        }
+        break;
+
+      case "basedOn":
+        /* Prompt 1 (2026-06-08): surviving Source Type chips commit
+           {type:"keyword", id} → real with_keywords (OR-merge with "|",
+           identical to the universes keyword chips). Any legacy
+           {type:"based_on"} value (none ship after Prompt 1) is simply
+           ignored here. */
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}|${filter.value.id}` : String(filter.value.id)
+          );
+        }
+        break;
+
       case "universes":
-        // Collection IDs stored as _collections - handled in launch flow
+        // Collection chips → handled by Universe Mode launch flow
+        // (reads f.value.collections). Keyword chips → with_keywords here.
+        if (filter.value.type === "keyword" && filter.value.id) {
+          const existing = params.get("with_keywords");
+          params.set(
+            "with_keywords",
+            existing ? `${existing}|${filter.value.id}` : String(filter.value.id)
+          );
+        }
         break;
 
       case "awards":
@@ -1200,8 +3137,16 @@ function buildTMDBQueryFromFilters(filters) {
         
       case "regionLanguage":
         if (filter.value.type === "region") {
-          params.set("with_origin_country", filter.value.code);
+          // Accumulate multiple regions; separator depends on regionLogic.
+          // "|" = OR (either country), "," = AND (co-production / both countries).
+          const regionSep = state.regionLogic === "or" ? "|" : ",";
+          const existingRegions = params.get("with_origin_country");
+          params.set(
+            "with_origin_country",
+            existingRegions ? `${existingRegions}${regionSep}${filter.value.code}` : filter.value.code
+          );
         } else if (filter.value.type === "language") {
+          // Language stays last-write-wins — single original_language per query.
           params.set("with_original_language", filter.value.code);
         }
         break;
@@ -1222,27 +3167,69 @@ function buildTMDBQueryFromFilters(filters) {
           params.set("with_watch_providers", existing ? `${existing}|${filter.value.id}` : filter.value.id);
           if (filter.value.region) params.set("watch_region", filter.value.region);
         }
+        // {type:"stream_mode", mode:"all"} (emitted by the 2b panel) contributes NO
+        // params — its sole effect is suppressing the scope default below.
         break;
         
     }
   });
 
-  // Merge accumulated genre keywords (AND)
-  if (genreKeywordIds.length > 0) params.set("with_keywords", genreKeywordIds.join(","));
+  // Phase 2 — TMDB keyword search results (themes / genres tabs).
+  // Carry real TMDB IDs in filter.value.id and OR-merge with anything
+  // the in-loop universe-keyword case already wrote. Runs before the
+  // genre-keyword merge so that block sees existing values and degrades
+  // to a pipe (OR) merge — avoids mixed comma/pipe separators that
+  // TMDB parses ambiguously.
+  const tmdbKwFilters = filters.filter(function (f) {
+    return f && f.value && f.value.type === "tmdb-keyword" && f.value.id != null;
+  });
+  if (tmdbKwFilters.length > 0) {
+    const newIds = tmdbKwFilters.map(function (f) { return f.value.id; }).join("|");
+    const existing = params.get("with_keywords");
+    params.set("with_keywords", existing ? existing + "|" + newIds : newIds);
+  }
 
-  // Inject saved watch providers from Region settings (if not already set by a filter)
+  // Merge accumulated genre keywords (AND, comma).
+  // If universe-keyword chips already wrote pipe-separated keywords,
+  // degrade to OR (pipe) to avoid losing filters from either source.
+  if (genreKeywordIds.length > 0) {
+    const existing = params.get("with_keywords");
+    if (existing) {
+      params.set("with_keywords", existing + "|" + genreKeywordIds.join("|"));
+    } else {
+      params.set("with_keywords", genreKeywordIds.join(","));
+    }
+  }
+
+  // Stream default (locked model): if the user committed NO stream filter this search
+  // and NO explicit all-films override, and their scope opts Discover in
+  // (orbit_preferences_scope.orbit === true), apply the Profile baseline.
+  // (Replaces the old localStorage watchProviders injection — per-search means
+  // per-search: a previous search's selection never silently re-applies.)
   if (!params.has("with_watch_providers")) {
+    const allFilmsOverride = filters.some(function (f) {
+      return f && f.section === "watch" && f.value &&
+        f.value.type === "stream_mode" && f.value.mode === "all";
+    });
+
+    let scopeOrbit = false;
     try {
-      const savedProviders = JSON.parse(localStorage.getItem("watchProviders") || "[]");
-      const savedCountry = localStorage.getItem("watchCountry");
-      if (savedProviders.length > 0 && savedCountry) {
-        const providerIds = savedProviders.map(p => p.id).join("|");
-        params.set("with_watch_providers", providerIds);
-        params.set("watch_region", savedCountry);
-        console.log("[Orbit] Applying saved watch providers:", providerIds, "region:", savedCountry);
+      const scope = JSON.parse(localStorage.getItem("orbit_preferences_scope") || "{}");
+      scopeOrbit = !!(scope && scope.orbit === true); // absent / garbage → false (research mode)
+    } catch (e) { scopeOrbit = false; }
+
+    if (!allFilmsOverride && scopeOrbit) {
+      const prof = getProfileDefaults(); // { providers: [ids], country }
+      if (prof.providers.length > 0) {
+        if (prof.country) {
+          params.set("with_watch_providers", prof.providers.join("|"));
+          params.set("watch_region", prof.country);
+        } else if (!_streamDefaultCountryWarned) {
+          // All-or-nothing: region-less provider filtering silently no-ops at TMDB.
+          _streamDefaultCountryWarned = true;
+          console.warn("[Orbit] Stream scope is on with profile providers but no profile country — applying no stream default (region-less provider filtering no-ops at TMDB).");
+        }
       }
-    } catch (e) {
-      console.error("[Orbit] Failed to read saved watch providers:", e);
     }
   }
 
@@ -1274,10 +3261,24 @@ function getTopGenresFromMovies(movies) {
 // SETTINGS POST-FILTER
 // =============================================
 
-const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen", "basedOn"];
+/* basedOn removed 2026-06-08 (Source Prompt 1): the surviving Source Type
+   chips now commit {type:"keyword",id} → real with_keywords (full catalogue),
+   so basedOn no longer rides the seed post-filter. Dropping it here stops the
+   seed gate (applySettingsFilters' non-seed exclusion) from re-imposing the
+   ~4.3k-movie ceiling whenever a Source Type chip is active. The frozen
+   case "based_on" post-filter is now unreachable — left in place, out of scope. */
+const SETTINGS_SECTIONS = ["themes", "settingWhere", "settingWhen"];
 
 function hasOnlySettingsFilters(filters) {
-  return filters.length > 0 && filters.every(f => SETTINGS_SECTIONS.includes(f.section));
+  /* Build A (2026-06-27): {type:"keyword"} Setting chips are real TMDB
+     with_keywords filters (like basedOn) — they MUST route to NORMAL
+     DISCOVER MODE (full catalogue), not the seed-only path. So they don't
+     count as seed-settings here. Legacy location/time chips and tmdb-keyword
+     theme chips keep their existing seed-mode routing unchanged. */
+  const seedSettings = filters.filter(f =>
+    SETTINGS_SECTIONS.includes(f.section) && f.value?.type !== "keyword"
+  );
+  return seedSettings.length > 0 && seedSettings.length === filters.length;
 }
 
 let _seedDataCache = null;
@@ -1297,7 +3298,16 @@ async function getSeedData() {
 function applySettingsFilters(movies, filters, settingsData) {
   if (!settingsData) return movies;
 
-  const settingsFilters = filters.filter(f => SETTINGS_SECTIONS.includes(f.section));
+  /* 2026-05-23: mirror the launch-handler gate — tmdb-keyword chips
+     ride in the 'themes' section but are resolved by TMDB, not seed.
+     2026-06-27 (Build A): {type:"keyword"} Setting chips likewise resolve
+     via with_keywords, so exclude them too — otherwise the seed gate
+     (`if (!settings) return false`) would re-clamp full-catalogue discover
+     results down to the ~4.3k seed whenever a Setting keyword chip is on. */
+  const settingsFilters = filters.filter(f =>
+    SETTINGS_SECTIONS.includes(f.section) &&
+    f.value?.type !== 'tmdb-keyword' && f.value?.type !== 'keyword'
+  );
   if (settingsFilters.length === 0) return movies;
 
   // Separate location filters (OR logic) from other filters (AND logic)
@@ -1390,14 +3400,20 @@ function makeSectionLabel(text) {
   return label;
 }
 
-function makeChip(label, section, value) {
+function makeChip(label, section, value, opts) {
+  /* Phase 2b: optional 4th arg opts.component opts a chip INTO the
+     .disco-chip component (toggles "on"). Absent/false = legacy behaviour
+     (className "chip", toggles "active") — byte-identical for all existing
+     callers. Migrated per-tab; Era is the first consumer. */
+  const useComponent = !!(opts && opts.component);
+  const activeClass = useComponent ? "on" : "active";
   const chip = document.createElement("button");
   chip.type = "button";
-  chip.className = "chip";
+  chip.className = useComponent ? "disco-chip" : "chip";
   chip.textContent = label;
   chip.dataset.value = JSON.stringify(value);
   chip.addEventListener("click", () => {
-    chip.classList.toggle("active");
+    chip.classList.toggle(activeClass);
   });
   return chip;
 }
@@ -1406,7 +3422,206 @@ function makeChip(label, section, value) {
 // 1. PEOPLE SECTION
 // =============================================
 
+/* ============================================================
+   FILMMAKER PROFILE — Added May 1, 2026
+   Wraps the existing People panel UI in a two-tab structure:
+   "Search by name" (existing behaviour, unchanged) and
+   "Describe the filmmaker" (new profile builder shell).
+
+   Phase 1 stores the selected profile in currentFilmmakerProfile
+   and logs to console on Add to orbit. Result-side filtering is
+   deferred to a later phase.
+   ============================================================ */
+let currentFilmmakerProfile = {
+  role: null,
+  nationality: null,
+  gender: null,
+  career_stage: null,
+  awards: []
+};
+
+function buildFilmmakerProfileContent(root) {
+  const hint = document.createElement('p');
+  hint.className = 'filmmaker-profile-hint';
+  hint.textContent = 'Build a filmmaker profile. ORBIT finds films matching your criteria.';
+  root.appendChild(hint);
+
+  const ROLE_OPTS = [
+    { v: 'director', l: 'Director' }, { v: 'writer', l: 'Writer' },
+    { v: 'lead_actor', l: 'Lead actor' }, { v: 'composer', l: 'Composer' },
+    { v: 'cinematographer', l: 'Cinematographer' },
+    { v: 'producer', l: 'Producer' },
+    { v: 'editor', l: 'Editor' }
+  ];
+  const NATIONALITY_OPTS = [
+    { v: 'US', l: 'American' }, { v: 'FR', l: 'French' }, { v: 'GB', l: 'British' },
+    { v: 'KR', l: 'Korean' }, { v: 'JP', l: 'Japanese' }, { v: 'IT', l: 'Italian' },
+    { v: 'MX', l: 'Mexican' }, { v: 'CN', l: 'Chinese' }, { v: 'IR', l: 'Iranian' },
+    { v: 'IN', l: 'Indian' }, { v: 'ES', l: 'Spanish' }, { v: 'BR', l: 'Brazilian' },
+    { v: 'AU', l: 'Australian' }
+  ];
+  const GENDER_OPTS = [
+    { v: 'any', l: 'Any' }, { v: 'female', l: 'Female' }, { v: 'male', l: 'Male' }
+  ];
+  const CAREER_OPTS = [
+    { v: 'debut', l: 'Debut film' }, { v: 'established', l: 'Established' }, { v: 'veteran', l: 'Veteran' }
+  ];
+  const AWARDS_OPTS = [
+    { v: 'oscar-winner',  l: 'Oscar winner' },
+    { v: 'oscar-nominee', l: 'Oscar nominee' },
+    { v: 'palme-winner',  l: "Palme d'Or winner" },
+    { v: 'bafta-winner',  l: 'BAFTA winner' },
+    { v: 'venice-winner', l: 'Venice winner' },
+    { v: 'berlin-winner', l: 'Berlin winner' }
+  ];
+
+  function makeLabel(text, extraClass) {
+    const el = document.createElement('div');
+    el.className = 'focus-section-label' + (extraClass ? ' ' + extraClass : '');
+    el.textContent = text;
+    return el;
+  }
+
+  function makeSingleSelectGroup(fieldKey, opts) {
+    const group = document.createElement('div');
+    group.className = 'chip-group';
+    group.dataset.profileField = fieldKey;
+    opts.forEach(function (opt) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'filmmaker-opt chip';
+      btn.dataset.value = opt.v;
+      btn.textContent = opt.l;
+      btn.addEventListener('click', function () {
+        group.querySelectorAll('.filmmaker-opt').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        currentFilmmakerProfile[fieldKey] = opt.v;
+      });
+      group.appendChild(btn);
+    });
+    return group;
+  }
+
+  // TODO: awards pedigree cross-referencing requires
+  // PERSON_AWARD_LOOKUP to be loaded on this page — currently tracked in
+  // state only. Full filtering implemented when awards data pipeline extends
+  // to discover.html.
+  function makeAwardsGroup() {
+    const group = document.createElement('div');
+    group.className = 'chip-group';
+    group.dataset.profileField = 'awards';
+    AWARDS_OPTS.forEach(function (opt) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'filmmaker-opt chip';
+      btn.dataset.value = opt.v;
+      btn.textContent = opt.l;
+      btn.addEventListener('click', function () {
+        const idx = currentFilmmakerProfile.awards.indexOf(opt.v);
+        if (idx === -1) {
+          currentFilmmakerProfile.awards.push(opt.v);
+          btn.classList.add('filmmaker-opt--award-active');
+        } else {
+          currentFilmmakerProfile.awards.splice(idx, 1);
+          btn.classList.remove('filmmaker-opt--award-active');
+        }
+      });
+      group.appendChild(btn);
+    });
+    return group;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'oft-filmmaker-grid';
+
+  const colLeft = document.createElement('div');
+  colLeft.className = 'oft-filmmaker-col';
+  colLeft.appendChild(makeLabel('ROLE'));
+  colLeft.appendChild(makeSingleSelectGroup('role', ROLE_OPTS));
+  colLeft.appendChild(makeLabel('GENDER'));
+  colLeft.appendChild(makeSingleSelectGroup('gender', GENDER_OPTS));
+  colLeft.appendChild(makeLabel('CAREER STAGE'));
+  colLeft.appendChild(makeSingleSelectGroup('career_stage', CAREER_OPTS));
+  grid.appendChild(colLeft);
+
+  const colRight = document.createElement('div');
+  colRight.className = 'oft-filmmaker-col';
+  colRight.appendChild(makeLabel('NATIONALITY'));
+  colRight.appendChild(makeSingleSelectGroup('nationality', NATIONALITY_OPTS));
+  colRight.appendChild(makeLabel('AWARDS PEDIGREE', 'filmmaker-awards-label'));
+  colRight.appendChild(makeAwardsGroup());
+  colRight.appendChild(makeLabel('COMING SOON', 'filmmaker-soon-label'));
+  const soonItems = document.createElement('div');
+  soonItems.className = 'filmmaker-soon-items';
+  ['Era of peak activity', 'Genre specialty', 'Still active / classic era'].forEach(function (text) {
+    const item = document.createElement('span');
+    item.className = 'filmmaker-soon-item';
+    item.textContent = text;
+    soonItems.appendChild(item);
+  });
+  colRight.appendChild(soonItems);
+  grid.appendChild(colRight);
+
+  root.appendChild(grid);
+
+  const note = document.createElement('p');
+  note.className = 'filmmaker-profile-note';
+  note.textContent = '✦ Filmmaker profile filtering is in development. Your profile will be saved to your orbit — results will refine as this feature matures.';
+  root.appendChild(note);
+}
+
 function buildPeopleContent(root) {
+  /* Tab bar */
+  const tabBar = document.createElement('div');
+  tabBar.className = 'people-panel-tabs';
+  const searchTabBtn = document.createElement('button');
+  searchTabBtn.type = 'button';
+  searchTabBtn.className = 'people-tab people-tab--active';
+  searchTabBtn.dataset.tab = 'search';
+  searchTabBtn.textContent = 'Search by name';
+  const profileTabBtn = document.createElement('button');
+  profileTabBtn.type = 'button';
+  profileTabBtn.className = 'people-tab';
+  profileTabBtn.dataset.tab = 'profile';
+  profileTabBtn.textContent = 'Describe the filmmaker';
+  tabBar.appendChild(searchTabBtn);
+  tabBar.appendChild(profileTabBtn);
+  root.appendChild(tabBar);
+
+  /* Tab content containers */
+  const searchTab = document.createElement('div');
+  searchTab.className = 'people-tab-content';
+  searchTab.dataset.tabContent = 'search';
+  const profileTab = document.createElement('div');
+  profileTab.className = 'people-tab-content people-tab-content--hidden';
+  profileTab.dataset.tabContent = 'profile';
+  root.appendChild(searchTab);
+  root.appendChild(profileTab);
+
+  /* Reset profile state for each panel open */
+  currentFilmmakerProfile = { role: null, nationality: null, gender: null, career_stage: null, awards: [] };
+
+  buildPeopleSearchContent(searchTab);
+  buildFilmmakerProfileContent(profileTab);
+
+  function activate(which) {
+    [searchTabBtn, profileTabBtn].forEach(function (b) { b.classList.remove('people-tab--active'); });
+    [searchTab, profileTab].forEach(function (c) { c.classList.add('people-tab-content--hidden'); });
+    if (which === 'profile') {
+      profileTabBtn.classList.add('people-tab--active');
+      profileTab.classList.remove('people-tab-content--hidden');
+    } else {
+      searchTabBtn.classList.add('people-tab--active');
+      searchTab.classList.remove('people-tab-content--hidden');
+    }
+  }
+  searchTabBtn.addEventListener('click', function () { activate('search'); });
+  profileTabBtn.addEventListener('click', function () { activate('profile'); });
+}
+
+function buildPeopleSearchContent(root) {
   root.appendChild(makeSectionLabel("People search"));
   const desc = document.createElement("p");
   desc.style.fontSize = "13px";
@@ -1465,10 +3680,74 @@ function buildPeopleContent(root) {
   });
   
   root.appendChild(roleFilter);
-  
+
+  /* ============================================================
+     RECENTLY SEARCHED (or fallback POPULAR IN ORBIT) — Added May 4, 2026
+     Reads orbit_people_encountered (encounter-service.js shape:
+     { version: 1, people: { id: { name, profile_path,
+       encounter_count, last_encountered, sources } } }).
+     Sorted by last_encountered desc, top 8. Falls back to a popular
+     list when the user has no encounter history yet.
+     Clicking a chip pre-fills the search input — does not commit a
+     filter directly.
+     ============================================================ */
+  const recentSection = document.createElement("div");
+  recentSection.className = "oft-people-recent-section";
+  let recentPeople = [];
+  let recentLabel = 'POPULAR IN ORBIT';
+  try {
+    const raw = localStorage.getItem('orbit_people_encountered');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.version === 1 && parsed.people) {
+        const entries = Object.entries(parsed.people)
+          .map(([id, p]) => ({ id: id, name: p.name, last: p.last_encountered || '' }))
+          .filter(p => p.name)
+          .sort((a, b) => (b.last || '').localeCompare(a.last || ''))
+          .slice(0, 8);
+        if (entries.length > 0) {
+          recentPeople = entries;
+          recentLabel = 'RECENTLY SEARCHED';
+        }
+      }
+    }
+  } catch (e) { /* corrupted — fall through to popular */ }
+
+  if (recentPeople.length === 0) {
+    recentPeople = [
+      { id: '6193', name: 'Leonardo DiCaprio' },
+      { id: '1892', name: 'Martin Scorsese' },
+      { id: '138',  name: 'Quentin Tarantino' },
+      { id: '1654', name: 'Cate Blanchett' },
+      { id: '2037', name: 'Meryl Streep' },
+      { id: '3896', name: 'Christopher Nolan' },
+      { id: '380',  name: 'Robert De Niro' },
+      { id: '1267', name: 'Audrey Hepburn' }
+    ];
+  }
+
+  const recentLabelEl = document.createElement("div");
+  recentLabelEl.className = "focus-section-label";
+  recentLabelEl.textContent = recentLabel;
+  recentSection.appendChild(recentLabelEl);
+
+  const recentGroup = document.createElement("div");
+  recentGroup.className = "chip-group oft-people-recent";
+  recentPeople.forEach(p => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip oft-recent-person-chip";
+    chip.dataset.personId = p.id;
+    chip.dataset.personName = p.name;
+    chip.textContent = p.name;
+    recentGroup.appendChild(chip);
+  });
+  recentSection.appendChild(recentGroup);
+  root.appendChild(recentSection);
+
   const container = document.createElement("div");
   container.style.position = "relative";
-  
+
   const row = document.createElement("div");
   row.className = "input-row";
   const input = document.createElement("input");
@@ -1478,8 +3757,18 @@ function buildPeopleContent(root) {
   input.autocomplete = "off";
   row.appendChild(input);
   container.appendChild(row);
-  
+
   root.appendChild(container);
+
+  /* Wire recent chip clicks: pre-fill the search input and trigger
+     the input event so the existing TMDB search flow runs. */
+  recentGroup.querySelectorAll('.oft-recent-person-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      input.value = chip.dataset.personName;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.focus();
+    });
+  });
   
   let dropdown = document.getElementById("peopleDropdownGlobal");
   if (!dropdown) {
@@ -1650,148 +3939,457 @@ function buildPeopleContent(root) {
 // 2. GENRES SECTION
 // =============================================
 
+/* ============================================================
+   buildKeywordSearchWidget(widgetId, section, placeholder)
+   Phase 2 (May 9, 2026) — keyword-only search widget for the
+   Themes and Genre tab right columns. Selecting a result commits
+   { type:'tmdb-keyword', id, name } directly to state.filters
+   under the given section (themes or genres). Reuses the
+   .orbit-kw-* CSS shipped in Phase 1.
+   ============================================================ */
+function buildKeywordSearchWidget(widgetId, section, placeholder) {
+  const wrap = document.createElement("div");
+  wrap.className = "orbit-kw-tab-wrap";
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "orbit-kw-input orbit-kw-input--compact";
+  input.id = widgetId + "-input";
+  input.placeholder = placeholder;
+  input.autocomplete = "off";
+
+  const dropdown = document.createElement("div");
+  dropdown.className = "orbit-kw-dropdown orbit-kw-dropdown--inline";
+  dropdown.id = widgetId + "-dropdown";
+  dropdown.style.display = "none";
+
+  wrap.appendChild(input);
+  wrap.appendChild(dropdown);
+
+  let _timer = null;
+
+  input.addEventListener("input", function () {
+    const q = this.value.trim();
+    clearTimeout(_timer);
+    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    _timer = setTimeout(function () {
+      searchKeywordsOnly(q, dropdown, section, input);
+    }, 350);
+  });
+
+  input.addEventListener("blur", function () {
+    setTimeout(function () { dropdown.style.display = "none"; }, 200);
+  });
+
+  return wrap;
+}
+
+async function searchKeywordsOnly(query, dropdownEl, section, inputEl) {
+  const key = TMDB_API_KEY;
+  dropdownEl.innerHTML = '<div class="orbit-kw-empty">Searching…</div>';
+  dropdownEl.style.display = "block";
+
+  let data = { results: [] };
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/keyword?api_key=${key}` +
+      `&query=${encodeURIComponent(query)}&page=1`
+    );
+    data = await res.json();
+  } catch (e) {
+    dropdownEl.innerHTML = '<div class="orbit-kw-empty">Search unavailable</div>';
+    return;
+  }
+
+  const keywords = (data.results || []).slice(0, 8);
+  dropdownEl.innerHTML = "";
+
+  if (keywords.length === 0) {
+    dropdownEl.innerHTML = '<div class="orbit-kw-empty">No results</div>';
+    return;
+  }
+
+  keywords.forEach(function (kw) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "orbit-kw-item";
+    item.innerHTML =
+      '<span class="orbit-kw-item-name"></span>' +
+      '<span class="orbit-kw-item-badge orbit-kw-badge--keyword">Keyword</span>';
+    item.querySelector(".orbit-kw-item-name").textContent = kw.name;
+
+    item.addEventListener("mousedown", function () {
+      const filterId = section + "-tmdbkw-" + kw.id;
+      // Dedupe — skip if already present
+      if (!state.filters.some(function (f) { return f.id === filterId; })) {
+        state.filters.push({
+          id: filterId,
+          section: section,
+          label: kw.name,
+          value: { type: "tmdb-keyword", id: kw.id, name: kw.name }
+        });
+        renderFilterChips();
+      }
+      dropdownEl.style.display = "none";
+      if (inputEl) inputEl.value = "";
+    });
+
+    dropdownEl.appendChild(item);
+  });
+}
+
+/* ============================================================
+   GENRE PANEL — Rebuilt June 7, 2026
+   Honest reskin + live match hero. Layout:
+     • Inline "Search any concept" unit at top — the existing
+       keyword-search widget repositioned beside a headline; its
+       compact input gets .kw-input. Commit logic (tmdb-keyword →
+       with_keywords) is UNTOUCHED.
+     • Left zone (.gen-left): Any/All match-toggle (drives
+       state.genreLogic) + "Genres" label + the flat-19 genre chips
+       as bigger glyphed .disco-chip.gen-lg components.
+     • Right zone (.gen-hero): decorative orbital ring + a live
+       "films match" count SCOPED to this tab's genre subset only
+       (separate from the full orbit) + ALL/ANY mode line + a
+       glyph-tag cluster echoing the selection.
+   The four mood/Keywords sub-groups (Tone/Pace/Mood/Content) are
+   REMOVED entirely — the query builder's type:"keyword" branch is
+   now dormant.
+
+   Count wiring: scoped recount builds a genre-only filter subset
+   and runs it through the (frozen) buildTMDBQueryFromFilters →
+   discover/movie total_results. state.genreLogic drives comma vs
+   pipe globally, so the hero honours Any/All. Debounced 280ms with
+   a loading pulse on the ring; renders "—" (never a fake number)
+   when nothing is selected.
+   ============================================================ */
 function buildGenresContent(root) {
-  const toggleContainer = document.createElement("div");
-  toggleContainer.style.cssText = `
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    padding: 12px;
-    background: rgba(15, 23, 41, 0.5);
-    border-radius: 8px;
-  `;
-  
-  const toggleLabel = document.createElement("span");
-  toggleLabel.textContent = "Match:";
-  toggleLabel.style.cssText = "font-size: 13px; font-weight: 600; color: var(--accent-cyan);";
-  toggleContainer.appendChild(toggleLabel);
-  
-  const orBtn = document.createElement("button");
-  orBtn.type = "button";
-  orBtn.textContent = "Any (OR)";
-  orBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.genreLogic === "or" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.genreLogic === "or" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
-  
-  const andBtn = document.createElement("button");
-  andBtn.type = "button";
-  andBtn.textContent = "All (AND)";
-  andBtn.style.cssText = `
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    background: ${state.genreLogic === "and" ? "var(--accent-cyan)" : "transparent"};
-    color: ${state.genreLogic === "and" ? "#000" : "var(--film-white)"};
-    transition: all 0.2s;
-  `;
-  
-  orBtn.addEventListener("click", () => {
-    state.genreLogic = "or";
-    orBtn.style.background = "var(--accent-cyan)";
-    orBtn.style.color = "#000";
-    andBtn.style.background = "transparent";
-    andBtn.style.color = "var(--film-white)";
-  });
-  
-  andBtn.addEventListener("click", () => {
-    state.genreLogic = "and";
-    andBtn.style.background = "var(--accent-cyan)";
-    andBtn.style.color = "#000";
-    orBtn.style.background = "transparent";
-    orBtn.style.color = "var(--film-white)";
-  });
-  
-  toggleContainer.appendChild(orBtn);
-  toggleContainer.appendChild(andBtn);
-  root.appendChild(toggleContainer);
-  
-  root.appendChild(makeSectionLabel("Genres"));
-  const genres = [
+  const GENRES = [
     "Action", "Adventure", "Animation", "Comedy", "Crime",
     "Documentary", "Drama", "Family", "Fantasy", "History",
     "Horror", "Music", "Mystery", "Romance", "Science Fiction",
     "Thriller", "TV Movie", "War", "Western"
   ];
-  
+
+  /* ---- Inline search unit: headline + repositioned keyword widget ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+
+  const inlineHead = document.createElement("div");
+  inlineHead.className = "gen-kw-head";
+  inlineHead.textContent = "Search any concept";
+  inline.appendChild(inlineHead);
+
+  const genresKwSearch = buildKeywordSearchWidget(
+    "genres-kw", "genres", "e.g. heist, time travel, found footage…"
+  );
+  /* Restyle the widget's input to the compact .kw-input WITHOUT touching
+     its commit logic (still fires {type:'tmdb-keyword'} via its own
+     mousedown handler). */
+  const kwInput = genresKwSearch.querySelector("input");
+  if (kwInput) kwInput.classList.add("kw-input");
+  inline.appendChild(genresKwSearch);
+  root.appendChild(inline);
+
+  /* ---- Split: left chips/toggle, right live hero ---- */
+  const split = document.createElement("div");
+  split.className = "gen-split";
+  const left = document.createElement("div"); left.className = "gen-left";
+  const hero = document.createElement("div"); hero.className = "gen-hero";
+  split.appendChild(left);
+  split.appendChild(hero);
+  root.appendChild(split);
+
+  /* ---- Match toggle (.match-toggle / .opt.on) → state.genreLogic ---- */
+  const toggle = document.createElement("div");
+  toggle.className = "match-toggle";
+
+  const toggleLabel = document.createElement("span");
+  toggleLabel.className = "match-toggle-label";
+  toggleLabel.textContent = "Match";
+  toggle.appendChild(toggleLabel);
+
+  const anyOpt = document.createElement("button");
+  anyOpt.type = "button"; anyOpt.className = "opt"; anyOpt.dataset.logic = "or";
+  anyOpt.textContent = "Any";
+  const allOpt = document.createElement("button");
+  allOpt.type = "button"; allOpt.className = "opt"; allOpt.dataset.logic = "and";
+  allOpt.textContent = "All";
+  (state.genreLogic === "and" ? allOpt : anyOpt).classList.add("on");
+  toggle.appendChild(anyOpt);
+  toggle.appendChild(allOpt);
+
+  anyOpt.addEventListener("click", () => {
+    state.genreLogic = "or";
+    anyOpt.classList.add("on");
+    allOpt.classList.remove("on");
+    updateHeroDisplay();
+    recountHero();
+  });
+  allOpt.addEventListener("click", () => {
+    state.genreLogic = "and";
+    allOpt.classList.add("on");
+    anyOpt.classList.remove("on");
+    updateHeroDisplay();
+    recountHero();
+  });
+  left.appendChild(toggle);
+
+  /* ---- Genres axis section label + bigger glyphed chips ---- */
+  left.appendChild(makeSectionLabel("Genres"));
   const genreGroup = document.createElement("div");
-  genreGroup.className = "chip-group";
-  genres.forEach(g => {
+  genreGroup.className = "chip-group gen-chip-group";
+  GENRES.forEach(g => {
     const svg = GENRE_SVGS[g] || "";
-    const chip = makeChip(g, "genres", { type: "genre", name: g });
+    const chip = makeChip(g, "genres", { type: "genre", name: g }, { component: true });
+    chip.classList.add("gen-lg");
     if (svg) chip.innerHTML = `<span class="genre-glyph">${svg}</span> ${g}`;
-    chip.id = `genre-${g.replace(/\s+/g, '-')}`;
+    /* makeChip's own listener toggles .on first; this listener runs
+       after, so it reads the post-toggle state. */
+    chip.addEventListener("click", () => {
+      updateHeroDisplay();
+      recountHero();
+    });
     genreGroup.appendChild(chip);
   });
-  root.appendChild(genreGroup);
-  
-  root.appendChild(makeSectionLabel("Keywords & Mood"));
-  
-  const keywordCategories = [
-    { label: "Tone", keywords: ["Noir", "Gritty", "Dark", "Uplifting", "Quirky", "Whimsical", "Bleak"] },
-    { label: "Pace", keywords: ["Slow-burn", "Fast-paced", "Intense", "Suspenseful"] },
-    { label: "Mood", keywords: ["Emotional", "Feel-good", "Atmospheric", "Cerebral", "Twisted"] },
-    { label: "Content", keywords: ["Violent", "Gore", "Family-friendly", "Heartwarming", "Mind-bending"] }
-  ];
-  
-  keywordCategories.forEach(cat => {
-    const catLabel = document.createElement("div");
-    catLabel.textContent = cat.label;
-    catLabel.style.cssText = "font-size: 11px; color: var(--muted-silver); margin: 16px 0 8px 0; text-transform: uppercase; letter-spacing: 1px;";
-    root.appendChild(catLabel);
-    
-    const keywordGroup = document.createElement("div");
-    keywordGroup.className = "chip-group";
-    cat.keywords.forEach(kw => {
-      const chip = makeChip(kw, "genres", { type: "keyword", name: kw });
-      chip.id = `keyword-${kw.replace(/\s+/g, '-')}`;
-      keywordGroup.appendChild(chip);
+  left.appendChild(genreGroup);
+
+  /* ---- Right: live match hero ---- */
+  hero.innerHTML = `
+    <div class="gen-ring-wrap">
+      <svg class="gen-ring" viewBox="0 0 140 140" aria-hidden="true">
+        <circle class="gen-ring-track" cx="70" cy="70" r="58"></circle>
+        <ellipse class="gen-ring-orbit" cx="70" cy="70" rx="58" ry="24" transform="rotate(-22 70 70)"></ellipse>
+        <ellipse class="gen-ring-orbit" cx="70" cy="70" rx="24" ry="58" transform="rotate(-22 70 70)"></ellipse>
+        <circle class="gen-ring-dot" cx="70" cy="12" r="3.5"></circle>
+      </svg>
+      <div class="big-count" id="genHeroCount">—</div>
+    </div>
+    <div class="gen-hero-label">films match</div>
+    <div class="gen-hero-mode" id="genHeroMode">matching ANY of</div>
+    <div class="gen-hero-cluster" id="genHeroCluster"></div>
+    <div class="gen-hero-caption">live preview of this tab's selection · separate from your full orbit</div>
+  `;
+
+  /* ---- Hero helpers (closed over this build's DOM) ---- */
+  let _heroTimer = null;
+
+  function selectedGenreValues() {
+    return Array.from(left.querySelectorAll(".disco-chip.on"))
+      .map(c => { try { return JSON.parse(c.dataset.value); } catch (e) { return null; } })
+      .filter(v => v && v.type === "genre");
+  }
+
+  /* Mode line + selected-genre cluster — pure DOM, no fetch. */
+  function updateHeroDisplay() {
+    const modeEl = hero.querySelector("#genHeroMode");
+    const cluster = hero.querySelector("#genHeroCluster");
+    const isAll = state.genreLogic === "and";
+    if (modeEl) modeEl.textContent = "matching " + (isAll ? "ALL" : "ANY") + " of";
+    if (!cluster) return;
+    cluster.innerHTML = "";
+    const sel = selectedGenreValues();
+    if (sel.length === 0) {
+      const empty = document.createElement("span");
+      empty.className = "gen-hero-empty";
+      empty.textContent = "select genres to preview";
+      cluster.appendChild(empty);
+      return;
+    }
+    sel.forEach(v => {
+      const tag = document.createElement("span");
+      tag.className = "atag";
+      const svg = GENRE_SVGS[v.name] || "";
+      tag.innerHTML = (svg ? `<span class="genre-glyph">${svg}</span>` : "") +
+        `<span>${v.name}</span>`;
+      cluster.appendChild(tag);
     });
-    root.appendChild(keywordGroup);
-  });
+  }
+
+  /* Live, scoped count — genre-only filter subset through the frozen
+     query builder. Debounced; loading pulse on the ring. */
+  function recountHero() {
+    const countEl = hero.querySelector("#genHeroCount");
+    const ring = hero.querySelector(".gen-ring");
+    if (!countEl) return;
+
+    const sel = selectedGenreValues();
+    if (sel.length === 0) {
+      clearTimeout(_heroTimer);
+      countEl.textContent = "—";
+      if (ring) ring.classList.remove("is-loading");
+      return;
+    }
+
+    if (ring) ring.classList.add("is-loading");
+    clearTimeout(_heroTimer);
+    _heroTimer = setTimeout(function () {
+      const scoped = sel.map(v => ({ section: "genres", value: v }));
+      let qs;
+      try { qs = buildTMDBQueryFromFilters(scoped); } catch (e) { qs = null; }
+      if (qs == null) {
+        countEl.textContent = "—";
+        if (ring) ring.classList.remove("is-loading");
+        return;
+      }
+      /* Route through the shared TMDB helper (proxy in production via
+         /api/tmdb; direct TMDB on localhost). Guard mirrors discover.js
+         ~6728 — fail soft to "—" if the helper isn't loaded. */
+      if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== "function") {
+        countEl.textContent = "—";
+        if (ring) ring.classList.remove("is-loading");
+        return;
+      }
+      const reqParams = Object.fromEntries(new URLSearchParams(qs));
+      reqParams.page = 1;
+      OrbitUtils.tmdbFetch("/discover/movie", reqParams)
+        .then(d => {
+          const n = (d && typeof d.total_results === "number") ? d.total_results : 0;
+          countEl.textContent = n > 9999 ? "9,999+" : n.toLocaleString();
+        })
+        .catch(() => { countEl.textContent = "—"; })
+        .then(() => { if (ring) ring.classList.remove("is-loading"); });
+    }, 280);
+  }
+
+  /* Initial paint — reflects any pre-selected chips (none on a fresh
+     build; harmless if a future restore pre-applies .on). */
+  updateHeroDisplay();
+  recountHero();
 }
 
 // =============================================
 // 3. THEMES SECTION
 // =============================================
 
+/* ============================================================
+   THEMES PANEL — Rebuilt June 7, 2026
+   Honest reskin (mirrors the Genre rebuild). Search is the HERO:
+   the shared inline-search unit (.gen-kw-inline / .gen-kw-head /
+   .kw-input) repositions the existing Themes keyword widget — its
+   tmdb-keyword commit (→ with_keywords) is UNTOUCHED. Below: the
+   curated THEME_GROUPS (6 groups) as bigger .disco-chip.gen-lg
+   components with per-group axis section labels, then a footer
+   match-pill + honest note. No right-zone graphic.
+
+   Theme chips are a client-side post-filter convenience layer (no
+   TMDB param), so the footer pill just reflects the real count of
+   selected curated chips — never a fabricated result count.
+   ============================================================ */
 function buildThemesContent(root) {
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
-  desc.textContent = "Select one or more themes. Films are matched by their normalised theme categories.";
-  root.appendChild(desc);
+  /* ---- Inline search unit (the hero) — shared Genre classes ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
 
-  // THEME_GROUPS from theme-taxonomy.js: { "Relationships": ["Family", "Love & Romance", ...], ... }
-  for (const [groupName, categories] of Object.entries(THEME_GROUPS)) {
-    root.appendChild(makeSectionLabel(groupName));
+  const head = document.createElement("div");
+  head.className = "gen-kw-head";
+  head.textContent = "Search themes & concepts";
+  inline.appendChild(head);
+
+  const themesKwSearch = buildKeywordSearchWidget(
+    "themes-kw", "themes", "e.g. dystopia, heist, coming of age…"
+  );
+  const kwInput = themesKwSearch.querySelector("input");
+  if (kwInput) kwInput.classList.add("kw-input");
+  inline.appendChild(themesKwSearch);
+  root.appendChild(inline);
+
+  /* ---- Curated themes: 6 groups of bigger .disco-chip chips ---- */
+  root.appendChild(makeSectionLabel("Curated themes"));
+
+  const groupsWrap = document.createElement("div");
+  groupsWrap.className = "theme-groups";
+  root.appendChild(groupsWrap);
+
+  Object.entries(THEME_GROUPS).forEach(([groupName, categories]) => {
+    const group = document.createElement("div");
+    group.className = "theme-group";
+
+    const label = makeSectionLabel(groupName);
+    label.classList.add("theme-group-label");
+    group.appendChild(label);
+
     const chipGroup = document.createElement("div");
-    chipGroup.className = "chip-group";
-
+    chipGroup.className = "chip-group theme-chip-group";
     categories.forEach(cat => {
-      const chip = makeChip(cat, "themes", { type: "theme", name: cat });
+      const chip = makeChip(cat, "themes", { type: "theme", name: cat }, { component: true });
+      chip.classList.add("gen-lg");
+      chip.addEventListener("click", updateMatchPill);
       chipGroup.appendChild(chip);
     });
+    group.appendChild(chipGroup);
+    groupsWrap.appendChild(group);
+  });
 
-    root.appendChild(chipGroup);
+  /* ---- Footer: match pill (real selected-count) + honest note ---- */
+  const footer = document.createElement("div");
+  footer.className = "theme-footer";
+
+  const pill = document.createElement("span");
+  pill.className = "match-pill";
+  pill.id = "themeMatchPill";
+  footer.appendChild(pill);
+
+  const note = document.createElement("p");
+  note.className = "theme-note";
+  note.textContent =
+    "Curated themes are a convenience layer — the search above reaches every concept TMDB knows.";
+  footer.appendChild(note);
+  root.appendChild(footer);
+
+  function updateMatchPill() {
+    const n = groupsWrap.querySelectorAll(".disco-chip.on").length;
+    pill.textContent = n === 0
+      ? "No curated themes selected"
+      : n + (n === 1 ? " curated theme selected" : " curated themes selected");
   }
+  updateMatchPill();
 }
 
 // =============================================
 // 4. SETTING: WHERE SECTION
 // =============================================
 
+/* ============================================================
+   SETTING → with_keywords rewire (Build A — 2026-06-27)
+   Setting chips whose visible label maps to a probe-verified TMDB
+   keyword id now commit {type:"keyword", id, name} → real with_keywords
+   (mirrors Source's basedOn). Chips NOT in this map keep their legacy
+   {type:"location"|"time_*"} value and stay on the seed post-filter, so
+   the visible tab is unchanged. Only EXISTING UI chips are converted —
+   the full keyword set lives in data/keyword-ids.js for Build B's panel.
+   Ids are duplicated here as a label→id lookup because the builders key
+   off the rendered chip label; they match keyword-ids.js exactly.
+   ============================================================ */
+const SETTING_KEYWORD_BY_LABEL = {
+  // cities (fixed popular + dynamic 5th when Berlin/Tokyo/Rome)
+  "New York":             242,    // new york city
+  "Los Angeles":          12670,
+  "London":               212,    // london, england
+  "Paris":                90,     // paris, france
+  "Berlin":               220,
+  "Tokyo":                12369,
+  "Rome":                 588,
+  // special locations
+  "At Sea":               3799,   // ship
+  "Small Town America":   1415,   // small town
+  "The Road / Traveling": 7312,   // road trip
+  // named era
+  "World War II":         1956
+};
+
+/* Returns the {type:"keyword",id,name} value for a verified Setting chip,
+   else `fallback` (the chip's legacy location/time value). Keeps makeChip
+   on the legacy .chip class so converted chips look identical to their
+   not-yet-wired neighbours (no UI change in Build A). */
+function settingChipValue(label, fallback) {
+  const id = SETTING_KEYWORD_BY_LABEL[label];
+  return id ? { type: "keyword", id: id, name: label } : fallback;
+}
+
 function buildSettingWhereContent(root) {
   const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
+  desc.style.cssText = "font-size: 15.6px; color: var(--muted-silver); margin-bottom: 0;";
   desc.textContent = "Search for a city, country, or region, or pick from popular locations below.";
   root.appendChild(desc);
 
@@ -1816,7 +4414,7 @@ function buildSettingWhereContent(root) {
   // Container for search-selected locations
   const selectedContainer = document.createElement("div");
   selectedContainer.id = "selectedLocationContainer";
-  selectedContainer.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; min-height:0;";
+  selectedContainer.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; margin-bottom:0; min-height:0;";
   root.appendChild(selectedContainer);
 
   // Build autocomplete from settings data
@@ -1875,11 +4473,31 @@ function buildSettingWhereContent(root) {
   const popularGroup = document.createElement("div");
   popularGroup.className = "chip-group";
   const popularLocations = [
-    "New York", "Los Angeles", "London", "Paris", "Tokyo", "Rome",
-    "Berlin", "Chicago", "San Francisco", "Hong Kong", "Moscow", "Sydney"
+    "New York", "Los Angeles", "London", "Paris"
   ];
+
+  /* 5th chip — primary city of the user's streaming country (read from
+     localStorage key `orbit_user_country`, ISO 3166-1, registered in
+     data/storage-keys.md). Falls back to Sydney when the country is
+     unset, unmapped, or its city is already shown above. */
+  const COUNTRY_PRIMARY_CITY = {
+    AU: "Sydney",         US: "Washington D.C.", GB: "London",
+    CA: "Toronto",        DE: "Berlin",          FR: "Paris",
+    ES: "Madrid",         IT: "Rome",            BR: "Rio de Janeiro",
+    MX: "Mexico City",    JP: "Tokyo",           KR: "Seoul",
+    IN: "Mumbai",         NL: "Amsterdam",       SE: "Stockholm",
+    NO: "Oslo",           DK: "Copenhagen",      FI: "Helsinki",
+    NZ: "Wellington",     IE: "Dublin",          ZA: "Cape Town",
+    AR: "Buenos Aires",   CL: "Santiago",        CO: "Bogotá",
+    PL: "Warsaw",         PT: "Lisbon",          AT: "Vienna",
+    CH: "Zurich",         BE: "Brussels",        SG: "Singapore"
+  };
+  const userCountry = localStorage.getItem("orbit_user_country");
+  let fifthCity = (userCountry && COUNTRY_PRIMARY_CITY[userCountry]) || "Sydney";
+  if (popularLocations.indexOf(fifthCity) !== -1) fifthCity = "Sydney";
+  if (popularLocations.indexOf(fifthCity) === -1) popularLocations.push(fifthCity);
   popularLocations.forEach(loc => {
-    const chip = makeChip(loc, "settingWhere", { type: "location", name: loc });
+    const chip = makeChip(loc, "settingWhere", settingChipValue(loc, { type: "location", name: loc }));
     popularGroup.appendChild(chip);
   });
   root.appendChild(popularGroup);
@@ -1904,7 +4522,7 @@ function buildSettingWhereContent(root) {
   specialGroup.className = "chip-group";
   const specials = ["Fictional / Fantasy World", "Space", "At Sea", "Small Town America", "The Road / Traveling"];
   specials.forEach(s => {
-    const chip = makeChip(s, "settingWhere", { type: "location", name: s });
+    const chip = makeChip(s, "settingWhere", settingChipValue(s, { type: "location", name: s }));
     specialGroup.appendChild(chip);
   });
   root.appendChild(specialGroup);
@@ -1915,10 +4533,13 @@ function buildSettingWhereContent(root) {
 // =============================================
 
 function buildSettingWhenContent(root) {
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 16px;";
-  desc.textContent = "Not when it was released \u2014 when the story takes place. Decades cross-reference with named eras.";
-  root.appendChild(desc);
+  // Phase 3 — keyword search widget at top of the right column.
+  // root is the right column itself (single-arg builder); firstChild
+  // is null at this point so insertBefore acts as appendChild.
+  const settingKwSearch = buildKeywordSearchWidget(
+    "setting-kw", "settingWhen", "Search settings, locations, eras..."
+  );
+  root.insertBefore(settingKwSearch, root.firstChild);
 
   // Decade chips
   root.appendChild(makeSectionLabel("Decades"));
@@ -1936,19 +4557,21 @@ function buildSettingWhenContent(root) {
   const eraGroup = document.createElement("div");
   eraGroup.className = "chip-group";
 
+  /* Trimmed May 4, 2026: dropped Edwardian, French Revolution,
+     American Civil War, American Revolution — niche/rarely-searched. */
   const eraOrder = [
     "World War II", "World War I", "Cold War", "Vietnam Era",
     "Civil Rights", "Roaring Twenties", "Great Depression", "Prohibition",
-    "Space Race", "Victorian", "Edwardian", "Colonial Era",
-    "Industrial Revolution", "American Civil War", "French Revolution",
-    "American Revolution", "The Troubles", "Fall of the Berlin Wall",
+    "Space Race", "Victorian", "Colonial Era",
+    "Industrial Revolution",
+    "The Troubles", "Fall of the Berlin Wall",
     "Apartheid", "Cultural Revolution", "Post-War", "Korean War",
     "Holocaust", "Watergate"
   ];
 
   eraOrder.forEach(era => {
     if (typeof ERA_DECADE_MAP !== 'undefined' && ERA_DECADE_MAP[era]) {
-      const chip = makeChip(era, "settingWhen", { type: "time_era", value: era });
+      const chip = makeChip(era, "settingWhen", settingChipValue(era, { type: "time_era", value: era }));
       eraGroup.appendChild(chip);
     }
   });
@@ -1974,7 +4597,7 @@ function buildSettingWhenContent(root) {
 
   // Info note
   const note = document.createElement("p");
-  note.style.cssText = "font-size: 11px; color: var(--ghost-gray); margin-top: 12px; font-style: italic;";
+  note.style.cssText = "font-size: 14.3px; color: var(--ghost-gray); margin-top: 12px; font-style: italic;";
   note.textContent = 'Decade chips also match films tagged with eras that overlap that decade. Selecting "1940s" includes WWII films even if they span 1939\u20131945.';
   root.appendChild(note);
 }
@@ -1984,181 +4607,361 @@ function buildSettingWhenContent(root) {
 // =============================================
 
 function buildBasedOnContent(root) {
-  // Source type chips
+  /* ============================================================
+     SOURCE — "Based On" half · honest data layer (Prompt 1 — 2026-06-08)
+     Source Type chips now commit {type:"keyword", id} → real with_keywords
+     (full catalogue), the SAME shape the universes keyword chips use. Only
+     source types backed by a VERIFIED TMDB keyword id survive:
+       • Novel / Book          → 818  (based on novel or book)
+       • True Story / Real…    → 9672 (based on true story)
+     Dropped (no honest keyword path — were on the coverage-limited seed
+     post-filter): Original Screenplay (an absence filter with_keywords can't
+     express), Short Story, Stage Play, Comic/Graphic Novel, Video Game, and
+     the Franchise Status chips (Sequel, Prequel). No fabricated IDs.
+     Commit model unchanged (legacy .chip.active DOM scrape); only the value
+     SHAPE changed — read branch + query builder updated in lockstep.
+     ============================================================ */
   root.appendChild(makeSectionLabel("Source Type"));
   const sourceGroup = document.createElement("div");
   sourceGroup.className = "chip-group";
   const sourceTypes = [
-    { label: "Original Screenplay", value: "original" },
-    { label: "True Story / Real Events", value: "true_story" },
-    { label: "Novel / Book", value: "novel" },
-    { label: "Short Story", value: "short_story" },
-    { label: "Stage Play", value: "play" },
-    { label: "Comic / Graphic Novel", value: "comic" },
-    { label: "Video Game", value: "video_game" }
+    { label: "Novel / Book", id: 818 },
+    { label: "True Story / Real Events", id: 9672 }
   ];
   sourceTypes.forEach(s => {
-    const chip = makeChip(s.label, "basedOn", { type: "based_on", value: s.value });
+    /* Prompt 2 reskin: .disco-chip.gen-lg, indigo via the panel's
+       data-axis="source". Value shape {type:"keyword",id,name} is UNCHANGED
+       from Prompt 1 (→ with_keywords); only the chip class/visual migrates. */
+    const chip = makeChip(s.label, "basedOn", { type: "keyword", id: s.id, name: s.label }, { component: true });
+    chip.classList.add("gen-lg");
     sourceGroup.appendChild(chip);
   });
   root.appendChild(sourceGroup);
-
-  // Franchise status chips
-  root.appendChild(makeSectionLabel("Franchise Status"));
-  const franchiseGroup = document.createElement("div");
-  franchiseGroup.className = "chip-group";
-  const franchiseTypes = [
-    { label: "Sequel", value: "sequel" },
-    { label: "Prequel", value: "prequel" }
-  ];
-  franchiseTypes.forEach(f => {
-    const chip = makeChip(f.label, "basedOn", { type: "based_on", value: f.value });
-    franchiseGroup.appendChild(chip);
-  });
-  root.appendChild(franchiseGroup);
 }
 
 // =============================================
 // 7. RELEASE DATE & RUNTIME SECTION
 // =============================================
 
+/* ERA-A constants (Phase 4) — computed once at load; shared by the builder
+   AND the read branch so the year span bounds can never disagree. */
+const ERA_YEAR_MIN = 1920;
+const ERA_YEAR_MAX = new Date().getFullYear();
+
+/* ============================================================
+   ERA — "ERA A" COMPACT PANEL — Rebuilt 2026-06-06 (Phase 4)
+   Single-column locked layout consuming the redesign components:
+     A. Hero      — release-year histogram (static stub) + year dual
+                    OrbitSlider. The year scrubber is the SINGLE SOURCE
+                    OF TRUTH for release date.
+     B. Decades   — decade strip (.disco-chip) + jump-to-year (#yearInput)
+     C. Lower row — runtime card (dual slider + preset chips) +
+                    recency card (New Releases / Classics)
+   Decade / jump / recency chips and runtime preset chips are PURE
+   DRIVERS: they only call controller.setValues(...) and emit NO filter.
+   Only the two sliders are read (collectLabelsForSection reads
+   #oft-body-era._eraSliders). The year scrubber emits the lone
+   {type:"dateRange"} release filter; the runtime slider the lone
+   {type:"runtime"} — so the frozen query builder's last-write-wins
+   primary_release_date.* overwrite can never trigger.
+   Axis = indigo (panel data-axis="era"); slider fills stay cyan→gold;
+   histogram bars + active .disco-chips tint indigo via --axis.
+   ============================================================ */
 function buildTimeEraContent(root) {
-  root.appendChild(makeSectionLabel("Specific Year"));
-  const yearRow = document.createElement("div");
-  yearRow.className = "input-row";
+  /* Teardown controllers from a prior build first (mirror Ratings-C):
+     buildPanelBody wipes body.innerHTML but a property stashed on `root`
+     (= #oft-body-era) survives the wipe, so destroy() here clears any
+     leaked document-bound drag listeners before we recreate. */
+  if (root._eraSliders) {
+    try { root._eraSliders.year && root._eraSliders.year.destroy(); } catch (e) {}
+    try { root._eraSliders.runtime && root._eraSliders.runtime.destroy(); } catch (e) {}
+    root._eraSliders = null;
+  }
+
+  const hasSlider = (typeof OrbitSlider !== "undefined") && OrbitSlider && typeof OrbitSlider.create === "function";
+
+  const wrap = document.createElement("div");
+  wrap.className = "oft-era";
+  root.appendChild(wrap);
+
+  /* Controllers captured by the chip handlers below; populated at build end.
+     Handlers fire only at click time (post-build), so the object is filled
+     by then. If OrbitSlider is unavailable both stay null and chips no-op. */
+  const eraSliders = { year: null, runtime: null };
+
+  /* Single-select enforcement across the PURE-DRIVER chip groups. */
+  function clearYearPresets() {
+    wrap.querySelectorAll(".oft-era-decade.on, .oft-era-recency-chip.on")
+      .forEach(c => c.classList.remove("on"));
+  }
+  function clearRuntimePresets() {
+    wrap.querySelectorAll(".oft-era-rt-chip.on").forEach(c => c.classList.remove("on"));
+  }
+
+  /* ---- A. HERO: release timeline (histogram + year dual-slider) ---- */
+  const hero = document.createElement("div");
+  hero.className = "oft-era-hero";
+
+  const heroHead = document.createElement("div");
+  heroHead.className = "oft-era-head";
+  const heroLabel = document.createElement("span");
+  heroLabel.className = "oft-era-label";
+  heroLabel.textContent = "Release Timeline";
+  const yearReadout = document.createElement("span");
+  yearReadout.className = "oft-era-readout";
+  yearReadout.textContent = ERA_YEAR_MIN + " – " + ERA_YEAR_MAX;
+  heroHead.appendChild(heroLabel);
+  heroHead.appendChild(yearReadout);
+  hero.appendChild(heroHead);
+
+  const scrubber = document.createElement("div");
+  scrubber.className = "oft-era-scrubber";
+
+  /* Shared year→x mapping (Phase 4 follow-up): a year's horizontal position
+     on the scrubber scale — year MIN at 0% … year MAX at 100%, the SAME scale
+     OrbitSlider uses for knob positions. BOTH the histogram bars and the
+     decade buttons are positioned with this one helper, so they can never
+     drift apart. */
+  const yearToPct = (year) => (year - ERA_YEAR_MIN) / (ERA_YEAR_MAX - ERA_YEAR_MIN) * 100;
+  /* gapless bar width = one span-step of the scale, so bars centered on
+     yearToPct(year) touch edge-to-edge with no accumulating px gap. */
+  const eraBarWidthPct = 100 / (ERA_YEAR_MAX - ERA_YEAR_MIN);
+
+  /* Static SYNTHETIC release-year histogram STUB — one bar per year,
+     decorative only (mirrors Ratings-C, ORBIT-UI-PATTERNS.md B6). Shape:
+     gentle rise toward recent years + a 2000s–2010s swell. NOT real
+     distribution data — aria-hidden; do NOT treat as data. */
+  const histo = document.createElement("div");
+  histo.className = "histogram";
+  histo.setAttribute("aria-hidden", "true");
+  const yearBars = [];
+  for (let y = ERA_YEAR_MIN; y <= ERA_YEAR_MAX; y++) {
+    const t = (y - ERA_YEAR_MIN) / (ERA_YEAR_MAX - ERA_YEAR_MIN);     // 0..1 across the span
+    const ramp = Math.pow(t, 1.6);                                    // rise toward recent years
+    const swell = Math.exp(-Math.pow(y - 2010, 2) / (2 * 18 * 18));   // 2000s–2010s bulge
+    const g = Math.min(1, 0.25 * ramp + 0.75 * swell);
+    const bar = document.createElement("div");
+    bar.className = "histo-bar";
+    bar.style.height = Math.max(8, Math.round(g * 100)) + "%";
+    /* centered on the shared scale (.oft-era-scrubber .histo-bar is absolute +
+       translateX(-50%)); width is one gapless span-step. */
+    bar.style.left = yearToPct(y) + "%";
+    bar.style.width = eraBarWidthPct + "%";
+    bar.dataset.center = String(y);
+    histo.appendChild(bar);
+    yearBars.push(bar);
+  }
+  scrubber.appendChild(histo);
+
+  const yearSliderEl = document.createElement("div");
+  yearSliderEl.className = "slider";
+  scrubber.appendChild(yearSliderEl);
+  hero.appendChild(scrubber);
+  wrap.appendChild(hero);
+
+  /* toggle .is-active on the bars whose year falls within [lo,hi] */
+  function paintYearHistogram(lo, hi) {
+    yearBars.forEach(bar => {
+      const c = parseInt(bar.dataset.center, 10);
+      bar.classList.toggle("is-active", c >= lo && c <= hi);
+    });
+  }
+  /* repaint histogram + readout. Call after EVERY setValues too — setValues
+     deliberately does NOT fire onChange, so presets repaint manually. */
+  function syncYear(lo, hi) {
+    paintYearHistogram(lo, hi);
+    yearReadout.textContent = lo + " – " + hi;
+  }
+
+  /* ---- B. Decade strip (a positioned track inside the scrubber, aligned to
+     the histogram bars) + jump-to-year ---- */
+  const decGroup = document.createElement("div");
+  decGroup.className = "oft-era-decades";
+  /* half the widest decade button (px) — clamps ONLY the two end buttons so
+     1920s / 2020s never clip past the track edges. Interior buttons never
+     reach the clamp, so they stay exactly over their bars. */
+  const ERA_DECADE_HALF = 24;
+  const firstDecade = Math.floor(ERA_YEAR_MIN / 10) * 10;            // 1920
+  for (let d = firstDecade; d <= ERA_YEAR_MAX; d += 10) {
+    const decade = d;
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-decade";
+    chip.textContent = decade + "s";
+    /* Center the button over the bars it controls, on the SHARED yearToPct
+       scale: full decades land on their 10-yr midpoint; the final partial
+       decade (e.g. 2020s on a 2026 axis) centers on its actual covered span.
+       clamp() keeps the end buttons fully on-screen without measuring. The
+       center sits at `left` (translateX(-50%) recenters the box). */
+    const cover = Math.min(decade + 9, ERA_YEAR_MAX);
+    const centerPct = yearToPct((decade + cover) / 2);
+    chip.style.left = "clamp(" + ERA_DECADE_HALF + "px, " + centerPct + "%, calc(100% - " + ERA_DECADE_HALF + "px))";
+    chip.addEventListener("click", () => {
+      clearYearPresets();
+      chip.classList.add("on");
+      const lo = Math.max(decade, ERA_YEAR_MIN);
+      const hi = Math.min(decade + 9, ERA_YEAR_MAX);
+      if (eraSliders.year) eraSliders.year.setValues([lo, hi]);
+      syncYear(lo, hi);
+    });
+    decGroup.appendChild(chip);
+  }
+  /* The track lives INSIDE the scrubber so it shares the exact same content
+     width as the histogram + slider — the buttons line up with the bars on
+     one x-scale, with no magic offset to the hero card's padding. */
+  scrubber.appendChild(decGroup);
+
+  const decBlock = document.createElement("div");
+  decBlock.className = "oft-era-decades-block";
+  const decLabel = document.createElement("div");
+  decLabel.className = "oft-era-label";
+  decLabel.textContent = "Jump to a year";
+  decBlock.appendChild(decLabel);
+
+  /* jump-to-year — keep id #yearInput + reuse .input-row styling */
+  const jump = document.createElement("div");
+  jump.className = "oft-era-jump input-row";
   const yearInput = document.createElement("input");
   yearInput.type = "number";
   yearInput.id = "yearInput";
-  yearInput.placeholder = "e.g., 2020";
-  yearInput.min = "1900";
-  yearInput.max = "2030";
-  yearRow.appendChild(yearInput);
-  root.appendChild(yearRow);
-
-  root.appendChild(makeSectionLabel("Decades (when movie was released)"));
-  const releaseDecades = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-  const relDecadeGroup = document.createElement("div");
-  relDecadeGroup.className = "chip-group";
-  releaseDecades.forEach(d => {
-    const chip = makeChip(`${d}s`, "timeEra", { type: "decade", decade: d, subType: "release" });
-    chip.id = `date-decade-${d}`;
-    relDecadeGroup.appendChild(chip);
+  yearInput.placeholder = "Jump to year…";
+  yearInput.min = String(ERA_YEAR_MIN);
+  yearInput.max = String(ERA_YEAR_MAX);
+  const goBtn = document.createElement("button");
+  goBtn.type = "button";
+  goBtn.className = "disco-chip oft-era-go";
+  goBtn.textContent = "Go";
+  function jumpToYear() {
+    const Y = parseInt(yearInput.value, 10);
+    if (!isFinite(Y) || Y < ERA_YEAR_MIN || Y > ERA_YEAR_MAX) return;
+    clearYearPresets();
+    if (eraSliders.year) eraSliders.year.setValues([Y, Y]);
+    syncYear(Y, Y);
+  }
+  goBtn.addEventListener("click", jumpToYear);
+  yearInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); jumpToYear(); }
   });
-  root.appendChild(relDecadeGroup);
+  jump.appendChild(yearInput);
+  jump.appendChild(goBtn);
+  decBlock.appendChild(jump);
+  wrap.appendChild(decBlock);
 
-  const quickGroup = document.createElement("div");
-  quickGroup.className = "chip-group";
-  quickGroup.style.marginTop = "12px";
-  const newRelease = makeChip("New Releases (6 months)", "timeEra", {
-    type: "dateRange",
-    subType: "release",
-    start: new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    end: new Date().toISOString().split('T')[0]
-  });
-  const classic = makeChip("Classic (Pre-1980)", "timeEra", {
-    type: "dateRange",
-    subType: "release",
-    start: "1900-01-01",
-    end: "1979-12-31"
-  });
-  quickGroup.appendChild(newRelease);
-  quickGroup.appendChild(classic);
-  root.appendChild(quickGroup);
+  /* ---- C. Lower row: runtime card + recency card ---- */
+  const lower = document.createElement("div");
+  lower.className = "oft-era-lower";
 
-  root.appendChild(makeSectionLabel("Runtime (minutes)"));
-  const runtimeRow = document.createElement("div");
-  runtimeRow.className = "input-row";
-  runtimeRow.style.flexDirection = "column";
-  runtimeRow.style.gap = "12px";
+  /* runtime card */
+  const rtCard = document.createElement("div");
+  rtCard.className = "oft-era-card";
+  const rtHead = document.createElement("div");
+  rtHead.className = "oft-era-head";
+  const rtLabel = document.createElement("span");
+  rtLabel.className = "oft-era-label";
+  rtLabel.textContent = "Runtime";
+  const rtReadout = document.createElement("span");
+  rtReadout.className = "oft-era-readout";
+  rtReadout.textContent = "0 – 300 min";
+  rtHead.appendChild(rtLabel);
+  rtHead.appendChild(rtReadout);
+  rtCard.appendChild(rtHead);
 
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "runtimeMin";
-  minSlider.min = "0";
-  minSlider.max = "300";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "0";
-  minValue.id = "runtimeMinValue";
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = minSlider.value;
-    const maxSl = document.getElementById("runtimeMax");
-    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("runtimeMaxValue").textContent = minSlider.value;
-    }
-  });
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const rtSliderEl = document.createElement("div");
+  rtSliderEl.className = "slider";
+  rtCard.appendChild(rtSliderEl);
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "runtimeMax";
-  maxSlider.min = "0";
-  maxSlider.max = "300";
-  maxSlider.value = "300";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "300";
-  maxValue.id = "runtimeMaxValue";
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = maxSlider.value;
-    const minSl = document.getElementById("runtimeMin");
-    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("runtimeMinValue").textContent = maxSlider.value;
-    }
-  });
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
+  function syncRuntime(min, max) {
+    rtReadout.textContent = min + " – " + max + " min";
+  }
 
-  runtimeRow.appendChild(minRow);
-  runtimeRow.appendChild(maxRow);
-  root.appendChild(runtimeRow);
-
-  const runtimeQuick = document.createElement("div");
-  runtimeQuick.className = "chip-group";
-  runtimeQuick.style.marginTop = "12px";
+  const rtChips = document.createElement("div");
+  rtChips.className = "oft-era-rt-chips";
   [
-    { label: "Short Films (<60min)", min: 0, max: 59 },
-    { label: "Standard (90-120min)", min: 90, max: 120 },
-    { label: "Long (2h+)", min: 120, max: 300 },
-    { label: "Epic (3h+)", min: 180, max: 300 }
+    { label: "Short", min: 0, max: 90 },
+    { label: "Standard", min: 90, max: 120 },
+    { label: "Long", min: 120, max: 150 },
+    { label: "Epic", min: 150, max: 300 }
   ].forEach(preset => {
-    const chip = makeChip(preset.label, "timeEra", {
-      type: "runtime",
-      subType: "release",
-      min: preset.min,
-      max: preset.max
-    });
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-rt-chip";
+    chip.textContent = preset.label;
     chip.addEventListener("click", () => {
-      document.getElementById("runtimeMin").value = preset.min;
-      document.getElementById("runtimeMax").value = preset.max;
-      document.getElementById("runtimeMinValue").textContent = preset.min;
-      document.getElementById("runtimeMaxValue").textContent = preset.max;
+      clearRuntimePresets();
+      chip.classList.add("on");
+      if (eraSliders.runtime) eraSliders.runtime.setValues([preset.min, preset.max]);
+      syncRuntime(preset.min, preset.max);
     });
-    runtimeQuick.appendChild(chip);
+    rtChips.appendChild(chip);
   });
-  root.appendChild(runtimeQuick);
+  rtCard.appendChild(rtChips);
+  lower.appendChild(rtCard);
+
+  /* recency card */
+  const recCard = document.createElement("div");
+  recCard.className = "oft-era-card oft-era-recency";
+  const recLabel = document.createElement("div");
+  recLabel.className = "oft-era-label";
+  recLabel.textContent = "Quick Picks";
+  recCard.appendChild(recLabel);
+  [
+    { label: "New Releases", sub: "Last 2 years", lo: ERA_YEAR_MAX - 1, hi: ERA_YEAR_MAX },
+    { label: "Classics", sub: "Pre-1980", lo: ERA_YEAR_MIN, hi: 1979 }
+  ].forEach(rc => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip oft-era-recency-chip";
+    const main = document.createElement("span");
+    main.className = "oft-era-recency-main";
+    main.textContent = rc.label;
+    const sub = document.createElement("span");
+    sub.className = "oft-era-recency-sub";
+    sub.textContent = rc.sub;
+    chip.appendChild(main);
+    chip.appendChild(sub);
+    chip.addEventListener("click", () => {
+      clearYearPresets();
+      chip.classList.add("on");
+      const lo = Math.max(rc.lo, ERA_YEAR_MIN);
+      const hi = Math.min(rc.hi, ERA_YEAR_MAX);
+      if (eraSliders.year) eraSliders.year.setValues([lo, hi]);
+      syncYear(lo, hi);
+    });
+    recCard.appendChild(chip);
+  });
+  lower.appendChild(recCard);
+  wrap.appendChild(lower);
+
+  /* ---- wire the OrbitSlider engines ---- */
+  if (!hasSlider) {
+    /* Defensive: if the slider module failed to load, the chips + inputs
+       still render; the sliders just stay absent and the read site guards
+       on the stash being present (it won't be set below). */
+    console.warn("[Era-A] OrbitSlider unavailable — year/runtime sliders not built.");
+    return;
+  }
+
+  const yearController = OrbitSlider.create(yearSliderEl, {
+    mode: "dual", min: ERA_YEAR_MIN, max: ERA_YEAR_MAX, step: 1,
+    values: [ERA_YEAR_MIN, ERA_YEAR_MAX],
+    ariaLabels: ["Earliest release year", "Latest release year"],
+    onChange: function (v) { clearYearPresets(); syncYear(v[0], v[1]); }
+  });
+  const runtimeController = OrbitSlider.create(rtSliderEl, {
+    mode: "dual", min: 0, max: 300, step: 5, values: [0, 300],
+    ariaLabels: ["Minimum runtime", "Maximum runtime"],
+    onChange: function (v) { clearRuntimePresets(); syncRuntime(v[0], v[1]); }
+  });
+
+  eraSliders.year = yearController;
+  eraSliders.runtime = runtimeController;
+  /* Stash on the panel body (#oft-body-era = `root`); survives the innerHTML
+     wipe so the read site + the next rebuild's teardown reach them. */
+  root._eraSliders = eraSliders;
+
+  /* initial paint (setValues never fires onChange, so sync manually) */
+  syncYear(ERA_YEAR_MIN, ERA_YEAR_MAX);
+  syncRuntime(0, 300);
 }
 
 // =============================================
@@ -2166,623 +4969,651 @@ function buildTimeEraContent(root) {
 // =============================================
 
 function buildRatingsContentSection(root) {
-  // --- RATINGS HALF ---
-  const ratingsHeader = document.createElement("div");
-  ratingsHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
-  ratingsHeader.textContent = "Ratings & Votes";
-  root.appendChild(ratingsHeader);
+  /* ============================================================
+     RATINGS — VARIANT C COMPACT PANEL — Rebuilt 2026-06-06 (Phase 3b)
+     Stacked single column consuming the redesign components:
+       1. Score range  — dual OrbitSlider (0–10, .1) + static histogram above
+       2. Min votes     — single OrbitSlider (0–50,000, 100)
+       3. Age cert      — .disco-chip chips (Era pattern) + US-cert note
+     OrbitSlider = components/discover-slider.js (Phase 3a). Axis = rose
+     (panel carries data-axis="ratings"); slider fills stay cyan→gold;
+     histogram bars are axis-tinted (rose). Deliberately NARROWER than the
+     old B2 landing — NO score dial, NO score quick-chips, NO vote buckets,
+     NO preset column (ORBIT-UI-PATTERNS.md B3, variant C). Read site +
+     query params unchanged: still {type:"rating"|"votes"|"certification"}.
+     ============================================================ */
 
-  root.appendChild(makeSectionLabel("Quality Score Range (0-10)"));
-  const ratingRow = document.createElement("div");
-  ratingRow.className = "input-row";
-  ratingRow.style.flexDirection = "column";
-  ratingRow.style.gap = "12px";
+  /* Teardown controllers from a prior build first. buildPanelBody wipes
+     body.innerHTML but a property stashed on `root` (= #oft-body-ratings)
+     survives the wipe, so destroy() here clears any leaked document-bound
+     drag listeners (Phase 3a destroy()) before we recreate. */
+  if (root._ratingSliders) {
+    try { root._ratingSliders.score && root._ratingSliders.score.destroy(); } catch (e) {}
+    try { root._ratingSliders.votes && root._ratingSliders.votes.destroy(); } catch (e) {}
+    root._ratingSliders = null;
+  }
 
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "ratingMin";
-  minSlider.min = "0";
-  minSlider.max = "10";
-  minSlider.step = "0.1";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "0.0";
-  minValue.id = "ratingMinValue";
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = parseFloat(minSlider.value).toFixed(1);
-    const maxSl = document.getElementById("ratingMax");
-    if (parseFloat(minSlider.value) > parseFloat(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("ratingMaxValue").textContent = parseFloat(minSlider.value).toFixed(1);
-    }
-  });
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const hasSlider = (typeof OrbitSlider !== "undefined") && OrbitSlider && typeof OrbitSlider.create === "function";
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "ratingMax";
-  maxSlider.min = "0";
-  maxSlider.max = "10";
-  maxSlider.step = "0.1";
-  maxSlider.value = "10";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "10.0";
-  maxValue.id = "ratingMaxValue";
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = parseFloat(maxSlider.value).toFixed(1);
-    const minSl = document.getElementById("ratingMin");
-    if (parseFloat(maxSlider.value) < parseFloat(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("ratingMinValue").textContent = parseFloat(maxSlider.value).toFixed(1);
-    }
-  });
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
+  const wrap = document.createElement("div");
+  wrap.className = "oft-ratings-c";
+  root.appendChild(wrap);
 
-  ratingRow.appendChild(minRow);
-  ratingRow.appendChild(maxRow);
-  root.appendChild(ratingRow);
+  /* ---- 1. SCORE RANGE: readout + static histogram + dual slider ---- */
+  const scoreBlock = document.createElement("div");
+  scoreBlock.className = "oft-rc-block";
 
-  const ratingQuick = document.createElement("div");
-  ratingQuick.className = "chip-group";
-  ratingQuick.style.marginTop = "12px";
-  [
-    { label: "Certified Fresh (8.0+)", min: 8.0, max: 10.0 },
-    { label: "Hidden Gems (6.5-7.5)", min: 6.5, max: 7.5 },
-    { label: "Cult Classics (<6.0)", min: 0, max: 6.0 }
-  ].forEach(preset => {
-    const chip = makeChip(preset.label, "ratingsContent", {
-      type: "rating",
-      min: preset.min,
-      max: preset.max
+  const scoreHead = document.createElement("div");
+  scoreHead.className = "oft-rc-head";
+  const scoreLabel = document.createElement("span");
+  scoreLabel.className = "oft-rc-label";
+  scoreLabel.textContent = "Quality score";
+  const scoreReadout = document.createElement("span");
+  scoreReadout.className = "oft-rc-readout";
+  scoreReadout.textContent = "0.0 – 10.0";
+  scoreHead.appendChild(scoreLabel);
+  scoreHead.appendChild(scoreReadout);
+  scoreBlock.appendChild(scoreHead);
+
+  /* Static histogram STUB — no real score distribution exists at panel-
+     render time (documented in ORBIT-UI-PATTERNS.md B6). Fixed bell shape:
+     low at 0–3, peak ~6.8, taper to 9–10. .is-active mirrors the slider
+     range. Real distribution is a later sub-phase — do NOT treat as data. */
+  const histo = document.createElement("div");
+  histo.className = "histogram";
+  histo.setAttribute("aria-hidden", "true");
+  const BAR_COUNT = 24, PEAK = 6.8, SPREAD = 1.7;
+  const bars = [];
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const centerScore = (i + 0.5) * 10 / BAR_COUNT;
+    const g = Math.exp(-Math.pow(centerScore - PEAK, 2) / (2 * SPREAD * SPREAD)); // 0..1
+    const bar = document.createElement("div");
+    bar.className = "histo-bar";
+    bar.style.height = Math.max(8, Math.round(g * 100)) + "%";
+    bar.dataset.center = centerScore.toFixed(3);
+    histo.appendChild(bar);
+    bars.push(bar);
+  }
+  scoreBlock.appendChild(histo);
+
+  /* toggle .is-active on the bars whose score band falls within [lo,hi] */
+  function paintHistogram(lo, hi) {
+    bars.forEach(bar => {
+      const c = parseFloat(bar.dataset.center);
+      bar.classList.toggle("is-active", c >= lo && c <= hi);
     });
-    chip.addEventListener("click", () => {
-      document.getElementById("ratingMin").value = preset.min;
-      document.getElementById("ratingMax").value = preset.max;
-      document.getElementById("ratingMinValue").textContent = preset.min.toFixed(1);
-      document.getElementById("ratingMaxValue").textContent = preset.max.toFixed(1);
-    });
-    ratingQuick.appendChild(chip);
-  });
-  root.appendChild(ratingQuick);
+  }
 
-  root.appendChild(makeSectionLabel("Minimum Votes (reliability)"));
-  const voteGroup = document.createElement("div");
-  voteGroup.className = "chip-group";
-  [
-    { label: "100+", votes: 100 },
-    { label: "1,000+", votes: 1000 },
-    { label: "5,000+", votes: 5000 },
-    { label: "10,000+", votes: 10000 }
-  ].forEach(v => {
-    const chip = makeChip(v.label, "ratingsContent", { type: "votes", min: v.votes });
-    chip.id = `votes-${v.votes}`;
-    voteGroup.appendChild(chip);
-  });
-  root.appendChild(voteGroup);
+  const scoreSliderEl = document.createElement("div");
+  scoreSliderEl.className = "slider";
+  scoreBlock.appendChild(scoreSliderEl);
+  wrap.appendChild(scoreBlock);
 
-  // --- DIVIDER ---
-  const divider = document.createElement("hr");
-  divider.style.cssText = "border: none; border-top: 1px solid rgba(0, 217, 255, 0.15); margin: 24px 0;";
-  root.appendChild(divider);
+  /* ---- 2. MINIMUM VOTES: readout + single slider ---- */
+  const voteBlock = document.createElement("div");
+  voteBlock.className = "oft-rc-block";
+  const voteHead = document.createElement("div");
+  voteHead.className = "oft-rc-head";
+  const voteLabel = document.createElement("span");
+  voteLabel.className = "oft-rc-label";
+  voteLabel.textContent = "Minimum votes (reliability)";
+  const voteReadout = document.createElement("span");
+  voteReadout.className = "oft-rc-readout";
+  voteReadout.textContent = "0";
+  voteHead.appendChild(voteLabel);
+  voteHead.appendChild(voteReadout);
+  voteBlock.appendChild(voteHead);
+  const voteSliderEl = document.createElement("div");
+  voteSliderEl.className = "slider";
+  voteBlock.appendChild(voteSliderEl);
+  wrap.appendChild(voteBlock);
 
-  // --- SUITABILITY HALF ---
-  const suitHeader = document.createElement("div");
-  suitHeader.style.cssText = "font-size: 15px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 12px;";
-  suitHeader.textContent = "Content Rating";
-  root.appendChild(suitHeader);
-
-  root.appendChild(makeSectionLabel("Age Rating / Certification"));
-  const ratings = ["G", "PG", "PG-13", "R", "NC-17", "Unrated"];
-  const ratingGroup = document.createElement("div");
-  ratingGroup.className = "chip-group";
-  ratings.forEach(r => {
-    const chip = makeChip(r, "ratingsContent", { type: "certification", rating: r });
+  /* ---- 3. AGE CERTIFICATION: .disco-chip chips + US-cert note ---- */
+  const certBlock = document.createElement("div");
+  certBlock.className = "oft-rc-block";
+  certBlock.appendChild(makeSectionLabel("Age rating / certification"));
+  const certGroup = document.createElement("div");
+  certGroup.className = "chip-group";
+  ["G", "PG", "PG-13", "R", "NC-17", "Unrated"].forEach(r => {
+    /* Era precedent: {component:true} → .disco-chip toggling .on; the read
+       site reads .disco-chip.on. Same value shape {type:"certification"}. */
+    const chip = makeChip(r, "ratingsContent", { type: "certification", rating: r }, { component: true });
     chip.id = `cert-${r.replace('-', '')}`;
-    ratingGroup.appendChild(chip);
+    certGroup.appendChild(chip);
   });
-  root.appendChild(ratingGroup);
-
+  certBlock.appendChild(certGroup);
   const note = document.createElement("p");
-  note.style.fontSize = "12px";
-  note.style.color = "var(--muted-silver)";
-  note.style.marginTop = "12px";
-  note.style.fontStyle = "italic";
+  note.className = "oft-rc-note";
   note.textContent = "Note: Ratings are US certifications. Other regions may have different classifications.";
-  root.appendChild(note);
+  certBlock.appendChild(note);
+  wrap.appendChild(certBlock);
+
+  /* ---- wire the OrbitSlider engine (Phase 3a) ---- */
+  paintHistogram(0, 10); // initial: full range active
+
+  if (!hasSlider) {
+    /* Defensive: if the slider module failed to load, chips + note still
+       render; the score/vote sliders just stay absent (read site guards
+       on the stash being present). */
+    console.warn("[Ratings-C] OrbitSlider unavailable — score/vote sliders not built.");
+    return;
+  }
+
+  const scoreController = OrbitSlider.create(scoreSliderEl, {
+    mode: "dual", min: 0, max: 10, step: 0.1, values: [0, 10],
+    ariaLabels: ["Minimum score", "Maximum score"],
+    onChange: function (v) {
+      scoreReadout.textContent = v[0].toFixed(1) + " – " + v[1].toFixed(1);
+      paintHistogram(v[0], v[1]);
+    }
+  });
+  const voteController = OrbitSlider.create(voteSliderEl, {
+    mode: "single", min: 0, max: 50000, step: 100, value: 0,
+    ariaLabel: "Minimum votes",
+    onChange: function (n) { voteReadout.textContent = n.toLocaleString(); }
+  });
+
+  /* Stash on the panel body (#oft-body-ratings = `root`); survives the
+     innerHTML wipe so the read site + the next rebuild's teardown reach them. */
+  root._ratingSliders = { score: scoreController, votes: voteController };
 }
 
 // =============================================
 // 6. REGION & LANGUAGE SECTION
 // =============================================
 
+/* ============================================================
+   REGION & LANGUAGE DATA — Variant-A three-track rebuild
+   (Discovery redesign PROMPT 2a — STRUCTURE ONLY, 2026-06-23)
+   Module-scope so both the builder and collectLabelsForSection's
+   read site share one source of truth. regionName() resolves any
+   emitted region code to a display label (country grid name, then
+   union-only group-code name, else the raw code). NO live counts
+   anywhere — those are PROMPT 2b.
+   ============================================================ */
+const REGION_COUNTRIES = [
+  { name:"United States", code:"US", lang:"en" }, { name:"United Kingdom", code:"GB", lang:"en" },
+  { name:"France", code:"FR", lang:"fr" }, { name:"Germany", code:"DE", lang:"de" },
+  { name:"Italy", code:"IT", lang:"it" }, { name:"Spain", code:"ES", lang:"es" },
+  { name:"Japan", code:"JP", lang:"ja" }, { name:"South Korea", code:"KR", lang:"ko" },
+  { name:"China", code:"CN", lang:"zh" }, { name:"Hong Kong", code:"HK", lang:"cn" },
+  { name:"Taiwan", code:"TW", lang:"zh" }, { name:"India", code:"IN", lang:"hi" },
+  { name:"Canada", code:"CA", lang:"en" }, { name:"Australia", code:"AU", lang:"en" },
+  { name:"New Zealand", code:"NZ", lang:"en" }, { name:"Ireland", code:"IE", lang:"en" },
+  { name:"Brazil", code:"BR", lang:"pt" }, { name:"Mexico", code:"MX", lang:"es" },
+  { name:"Finland", code:"FI", lang:"fi" }, { name:"Argentina", code:"AR", lang:"es" },
+  { name:"Belgium", code:"BE", lang:"fr" }, { name:"Portugal", code:"PT", lang:"pt" },
+  { name:"Sweden", code:"SE", lang:"sv" }, { name:"Denmark", code:"DK", lang:"da" },
+  { name:"Norway", code:"NO", lang:"no" }, { name:"Russia", code:"RU", lang:"ru" },
+  { name:"Poland", code:"PL", lang:"pl" },
+]; // 27
+
+const REGION_GROUPS = {
+  "East Asian":       ["JP","KR","CN","HK","TW"],
+  "Scandinavian":     ["SE","DK","NO","FI"],
+  "Latin American":   ["MX","AR","BR","CL"],
+  "South Asian":      ["IN","PK","BD","LK"],
+  "Iberian":          ["ES","PT"],
+  "Eastern European": ["RU","PL","CZ","HU","RO","UA"],
+  "Francophone":      ["FR","BE","CA","CH"],
+  "Anglosphere":      ["US","GB","CA","AU","NZ","IE"],
+}; // 8
+
+const REGION_LANGUAGES = [
+  {name:"English",code:"en"},{name:"French",code:"fr"},{name:"German",code:"de"},{name:"Spanish",code:"es"},
+  {name:"Italian",code:"it"},{name:"Japanese",code:"ja"},{name:"Korean",code:"ko"},{name:"Mandarin",code:"zh"},
+  {name:"Cantonese",code:"cn"},{name:"Hindi",code:"hi"},{name:"Russian",code:"ru"},{name:"Portuguese",code:"pt"},
+  {name:"Arabic",code:"ar"},{name:"Swedish",code:"sv"},{name:"Danish",code:"da"},{name:"Norwegian",code:"no"},
+  {name:"Finnish",code:"fi"},{name:"Dutch",code:"nl"},{name:"Polish",code:"pl"},{name:"Turkish",code:"tr"},
+  {name:"Thai",code:"th"},{name:"Indonesian",code:"id"},{name:"Vietnamese",code:"vi"},
+]; // 23
+
+// Display names for union-only group codes (so every emitted region code has a real label):
+const REGION_EXTRA_NAMES = { CL:"Chile", PK:"Pakistan", BD:"Bangladesh", LK:"Sri Lanka",
+  CZ:"Czechia", HU:"Hungary", RO:"Romania", UA:"Ukraine", CH:"Switzerland" };
+
+function regionName(code) {
+  const c = REGION_COUNTRIES.find(r => r.code === code);
+  if (c) return c.name;
+  if (REGION_EXTRA_NAMES[code]) return REGION_EXTRA_NAMES[code];
+  return code;
+}
+
+/* ============================================================
+   REGION LIVE COUNTS — PROMPT 2b (added 2026-06-23)
+   Honest /discover total_results counts, MIRRORING the Stream
+   pattern (getStreamCounts / saveStreamCounts / formatStreamCount /
+   fetchCounts) with Region-scoped helpers — Stream's own functions
+   are NOT called. A single sessionStorage object (orbit_region_counts)
+   keyed by probe-code: a country code, a pipe-joined group union, or
+   a live-selection signature. "—" on failure — NEVER 0, never
+   fabricated. Group cards always probe the OR union regardless of the
+   AND/OR toggle (a card advertises how much of that cinema exists —
+   an inherently OR question). Probes go through OrbitUtils.tmdbFetch,
+   so the API key is never inlined.
+
+   Storage keys (Rule 8):
+   - orbit_region_counts (sessionStorage) — { probeKey: total_results }
+
+   API volume (Rule 9): a first, uncached panel open probes 8 group
+   unions + 27 countries + 1 live footer (~36 cached /discover calls);
+   reopening in the same session paints entirely from cache (0 calls).
+   ============================================================ */
+var _regionCountCache = null;   // { probeKey: total_results } — survives the panel wipe
+function getRegionCounts() {
+  if (_regionCountCache) return _regionCountCache;
+  var data = {};
+  try {
+    var raw = sessionStorage.getItem('orbit_region_counts');
+    if (raw) data = JSON.parse(raw) || {};
+  } catch (e) { data = {}; }
+  _regionCountCache = data;
+  return _regionCountCache;
+}
+function saveRegionCounts() {
+  try {
+    sessionStorage.setItem('orbit_region_counts', JSON.stringify(_regionCountCache || {}));
+  } catch (e) {}
+}
+function formatRegionCount(n) {
+  return n > 9999 ? '9,999+' : n.toLocaleString();
+}
+/* One cached /discover/movie probe. Resolves to total_results, or null on
+   failure / helper-unavailable (the caller then leaves the honest "—").
+   Cache-first: a seen key resolves with NO network call. */
+function regionCountProbe(key, params) {
+  var cache = getRegionCounts();
+  if (typeof cache[key] === 'number') return Promise.resolve(cache[key]);
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return Promise.resolve(null);
+  return OrbitUtils.tmdbFetch('/discover/movie', params)
+    .then(function (data) {
+      var n = (data && typeof data.total_results === 'number') ? data.total_results : null;
+      if (n === null) return null;             // failure → honest "—"
+      cache[key] = n;
+      saveRegionCounts();
+      return n;
+    })
+    .catch(function () { return null; });       // network error → honest "—"
+}
+/* Paint a count slot from a probe; honest "—" stays on failure; detached
+   nodes (panel rebuilt mid-flight) are skipped. */
+function paintRegionCount(slot, key, params) {
+  regionCountProbe(key, params).then(function (n) {
+    if (n === null) return;
+    if (slot && slot.isConnected) slot.textContent = formatRegionCount(n);
+  });
+}
+
+/* ============================================================
+   REGION & LANGUAGE PANEL — Variant-A three-track builder
+   (rebuilt 2026-06-23, PROMPT 2a — STRUCTURE ONLY)
+
+   Three stacked tracks inside the emerald panel
+   (#oft-panel-region[data-axis="region"]):
+     1. Curated cinema groups (8 cards) + Any/All match toggle
+        (state.regionLogic). Group cards toggle independently of
+        country chips — selecting one emits its full member union.
+     2. Specific countries (27 chips, mono-code disc + name) with a
+        name/code filter input. Independent .on toggle each.
+     3. Original language (23 chips) — SINGLE-SELECT.
+
+   The legacy region->language smart-link, English-Only toggle and
+   the search-dropdown autocompletes are REMOVED; language is fully
+   manual. Read site (collectLabelsForSection case "regionLanguage")
+   is lockstep with this markup. The frozen query builder
+   (case "regionLanguage") is UNTOUCHED — value shapes preserved.
+   NO counts are rendered here (PROMPT 2b).
+   ============================================================ */
 function buildRegionLanguageContent(root) {
-  root.appendChild(makeSectionLabel("Production Region"));
-  
-  const regionRow = document.createElement("div");
-  regionRow.className = "input-row";
-  const regionInput = document.createElement("input");
-  regionInput.type = "text";
-  regionInput.id = "regionInput";
-  regionInput.placeholder = "Search for country...";
-  regionInput.autocomplete = "off";
-  regionRow.appendChild(regionInput);
-  root.appendChild(regionRow);
-  
-  const regionContainer = document.createElement("div");
-  regionContainer.id = "selectedRegionContainer";
-  regionContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  root.appendChild(regionContainer);
-  
-  const regions = [
-    { code: "US", name: "🇺🇸 United States" },
-    { code: "GB", name: "🇬🇧 United Kingdom" },
-    { code: "FR", name: "🇫🇷 France" },
-    { code: "DE", name: "🇩🇪 Germany" },
-    { code: "JP", name: "🇯🇵 Japan" },
-    { code: "KR", name: "🇰🇷 South Korea" },
-    { code: "CN", name: "🇨🇳 China" },
-    { code: "IN", name: "🇮🇳 India" },
-    { code: "IT", name: "🇮🇹 Italy" },
-    { code: "ES", name: "🇪🇸 Spain" },
-    { code: "CA", name: "🇨🇦 Canada" },
-    { code: "AU", name: "🇦🇺 Australia" }
-  ];
-  
-  let selectedRegion = null;
-  
-  regionInput.addEventListener("input", () => {
-    const query = regionInput.value.toLowerCase();
-    const filtered = regions.filter(r => r.name.toLowerCase().includes(query) || r.code.toLowerCase().includes(query));
-    
-    if (filtered.length > 0 && query.length > 0) {
-      renderRegionSuggestions(filtered.slice(0, 5));
-    } else {
-      hideRegionSuggestions();
-    }
+  /* Hydrate current selections from state.filters on every open.
+     Group cards re-light when ALL their member codes are present
+     (this is what restores union-only codes like CL/PK that have no
+     country chip). Country chips re-light per code; language is the
+     single region-language filter of type "language". */
+  const selectedRegionCodes = new Set(
+    state.filters
+      .filter(f => f.section === "regionLanguage" && f.value && f.value.type === "region")
+      .map(f => f.value.code)
+  );
+  const langFilter = state.filters.find(
+    f => f.section === "regionLanguage" && f.value && f.value.type === "language"
+  );
+  const selectedLangCode = langFilter ? langFilter.value.code : null;
+
+  /* ---- TRACK 1 — Curated cinema groups -------------------------- */
+  const groupCard = document.createElement("div");
+  groupCard.className = "region-track region-track--groups";
+
+  const groupHead = document.createElement("div");
+  groupHead.className = "region-track-head";
+  groupHead.appendChild(makeSectionLabel("Quick · curated cinema groups"));
+
+  /* Match toggle (.match-toggle / .opt.on) -> state.regionLogic.
+     Mirrors the Genres tab toggle exactly. */
+  const toggle = document.createElement("div");
+  toggle.className = "match-toggle";
+  const toggleLabel = document.createElement("span");
+  toggleLabel.className = "match-toggle-label";
+  toggleLabel.textContent = "Match";
+  toggle.appendChild(toggleLabel);
+  const anyOpt = document.createElement("button");
+  anyOpt.type = "button"; anyOpt.className = "opt"; anyOpt.dataset.logic = "or";
+  anyOpt.textContent = "Any";
+  const allOpt = document.createElement("button");
+  allOpt.type = "button"; allOpt.className = "opt"; allOpt.dataset.logic = "and";
+  allOpt.textContent = "All";
+  (state.regionLogic === "and" ? allOpt : anyOpt).classList.add("on");
+  anyOpt.addEventListener("click", () => {
+    state.regionLogic = "or";
+    anyOpt.classList.add("on"); allOpt.classList.remove("on");
   });
-  
-  function renderRegionSuggestions(items) {
-    hideRegionSuggestions();
-    const dropdown = document.createElement("div");
-    dropdown.id = "regionDropdown";
-    dropdown.style.cssText = `
-      position: absolute;
-      background: rgba(10, 14, 26, 0.98);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      margin-top: 4px;
-      max-height: 200px;
-      overflow-y: auto;
-      z-index: 1000;
-    `;
-    
-    items.forEach(item => {
-      const opt = document.createElement("div");
-      opt.style.cssText = "padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(0, 217, 255, 0.1); transition: background 0.15s;";
-      opt.textContent = item.name;
-      opt.onmouseover = () => opt.style.background = "rgba(0, 217, 255, 0.1)";
-      opt.onmouseout = () => opt.style.background = "transparent";
-      opt.onclick = () => {
-        selectedRegion = item;
-        regionInput.value = "";
-        hideRegionSuggestions();
-        
-        regionContainer.innerHTML = `
-          <div data-region-code="${item.code}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${item.name}</span>
-            <button id="removeRegion" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeRegion").onclick = () => {
-          selectedRegion = null;
-          regionContainer.innerHTML = "";
-        };
-        
-        // Smart language linking - auto-adjust based on country
-        handleRegionLanguageLink(item.code);
-      };
-      dropdown.appendChild(opt);
+  allOpt.addEventListener("click", () => {
+    state.regionLogic = "and";
+    allOpt.classList.add("on"); anyOpt.classList.remove("on");
+  });
+  toggle.appendChild(anyOpt);
+  toggle.appendChild(allOpt);
+  groupHead.appendChild(toggle);
+  groupCard.appendChild(groupHead);
+
+  const groupGrid = document.createElement("div");
+  groupGrid.className = "region-group-grid";
+  Object.keys(REGION_GROUPS).forEach(groupName => {
+    const codes = REGION_GROUPS[groupName];
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "region-group-card";
+    card.dataset.groupCodes = codes.join(",");
+    const title = document.createElement("span");
+    title.className = "region-group-name";
+    title.textContent = groupName;
+    const sub = document.createElement("span");
+    sub.className = "region-group-sub";
+    sub.textContent = codes.map(regionName).join(" · ");
+    card.appendChild(title);
+    card.appendChild(sub);
+    if (codes.every(c => selectedRegionCodes.has(c))) card.classList.add("on");
+    card.addEventListener("click", () => card.classList.toggle("on"));
+    groupGrid.appendChild(card);
+  });
+  groupCard.appendChild(groupGrid);
+  root.appendChild(groupCard);
+
+  /* ---- TRACK 2 — Specific countries ----------------------------- */
+  const countryCard = document.createElement("div");
+  countryCard.className = "region-track region-track--countries";
+  countryCard.appendChild(makeSectionLabel("Specific countries"));
+
+  const filterRow = document.createElement("div");
+  filterRow.className = "input-row region-filter-row";
+  const filterInput = document.createElement("input");
+  filterInput.type = "text";
+  filterInput.className = "region-country-filter";
+  filterInput.placeholder = "Filter countries…";
+  filterInput.autocomplete = "off";
+  filterRow.appendChild(filterInput);
+  countryCard.appendChild(filterRow);
+
+  const countryGrid = document.createElement("div");
+  countryGrid.className = "region-country-grid";
+  REGION_COUNTRIES.forEach(c => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip region-country-chip";
+    chip.dataset.regionCode = c.code;
+    chip.dataset.name = c.name;
+    const disc = document.createElement("span");
+    disc.className = "region-disc";
+    disc.textContent = c.code;
+    const nm = document.createElement("span");
+    nm.className = "region-country-name";
+    nm.textContent = c.name;
+    chip.appendChild(disc);
+    chip.appendChild(nm);
+    if (selectedRegionCodes.has(c.code)) chip.classList.add("on");
+    chip.addEventListener("click", () => chip.classList.toggle("on"));
+    countryGrid.appendChild(chip);
+  });
+  countryCard.appendChild(countryGrid);
+
+  filterInput.addEventListener("input", () => {
+    const q = filterInput.value.trim().toLowerCase();
+    countryGrid.querySelectorAll(".region-country-chip").forEach(chip => {
+      const hay = (chip.dataset.name + " " + chip.dataset.regionCode).toLowerCase();
+      chip.style.display = (!q || hay.includes(q)) ? "" : "none";
     });
-    
-    regionRow.appendChild(dropdown);
-  }
-  
-  // Country-to-language mapping
-  const countryLanguageMap = {
-    "US": "en", "GB": "en", "CA": "en", "AU": "en", "NZ": "en", "IE": "en", // English-speaking
-    "FR": "fr", "BE": "fr", // French
-    "DE": "de", "AT": "de", // German
-    "ES": "es", "MX": "es", "AR": "es", // Spanish
-    "IT": "it", // Italian
-    "JP": "ja", // Japanese
-    "KR": "ko", // Korean
-    "CN": "zh", "TW": "zh", "HK": "zh", // Chinese
-    "IN": "hi", // Hindi (India has many, but Hindi is primary)
-    "RU": "ru", // Russian
-    "BR": "pt", "PT": "pt", // Portuguese
-    "SE": "sv", // Swedish
-    "DK": "da", // Danish
-    "NO": "no", // Norwegian
-    "FI": "fi", // Finnish
-    "NL": "nl", // Dutch
-    "PL": "pl", // Polish
-    "TR": "tr", // Turkish
-    "TH": "th", // Thai
-    "ID": "id", // Indonesian
-    "VN": "vi"  // Vietnamese
-  };
-  
-  const languageNames = {
-    "en": "English", "fr": "French", "de": "German", "es": "Spanish",
-    "it": "Italian", "ja": "Japanese", "ko": "Korean", "zh": "Chinese",
-    "hi": "Hindi", "ru": "Russian", "pt": "Portuguese", "ar": "Arabic",
-    "sv": "Swedish", "da": "Danish", "no": "Norwegian", "fi": "Finnish",
-    "nl": "Dutch", "pl": "Polish", "tr": "Turkish", "th": "Thai",
-    "id": "Indonesian", "vi": "Vietnamese"
-  };
-  
-  function handleRegionLanguageLink(countryCode) {
-    const langCode = countryLanguageMap[countryCode];
-    if (!langCode) return;
-    
-    const englishToggle = document.getElementById("englishOnlyToggle");
-    const langSearchSection = document.getElementById("langSearchSection");
-    const langContainer = document.getElementById("selectedLanguageContainer");
-    const toggleKnob = document.getElementById("toggleKnob");
-    const toggleBg = englishToggle?.parentElement?.querySelector('span');
-    
-    if (langCode === "en") {
-      // English-speaking country - ensure English Only is ON
-      if (englishToggle && !englishToggle.checked) {
-        englishToggle.checked = true;
-        sessionStorage.setItem('englishOnlyToggle', 'true');
-        if (toggleBg) toggleBg.style.background = 'var(--accent-cyan)';
-        if (toggleKnob) {
-          toggleKnob.style.transform = 'translateX(24px)';
-          toggleKnob.style.background = 'white';
-        }
-        if (langSearchSection) langSearchSection.style.display = 'none';
-        if (langContainer) langContainer.innerHTML = '';
-      }
-    } else {
-      // Non-English country - turn OFF English Only and set the language
-      if (englishToggle) {
-        englishToggle.checked = false;
-        sessionStorage.setItem('englishOnlyToggle', 'false');
-        if (toggleBg) toggleBg.style.background = 'rgba(255,255,255,0.1)';
-        if (toggleKnob) {
-          toggleKnob.style.transform = 'translateX(0)';
-          toggleKnob.style.background = 'var(--muted-silver)';
-        }
-        if (langSearchSection) langSearchSection.style.display = 'block';
-      }
-      
-      // Auto-select the language
-      const langName = languageNames[langCode] || langCode;
-      if (langContainer) {
-        langContainer.innerHTML = `
-          <div data-lang-code="${langCode}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${langName}</span>
-            <button id="removeLanguage" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeLanguage").onclick = () => {
-          langContainer.innerHTML = "";
-        };
-      }
-    }
-  }
-  
-  function hideRegionSuggestions() {
-    const existing = document.getElementById("regionDropdown");
-    if (existing) existing.remove();
-  }
-  
-  root.appendChild(makeSectionLabel("Original Language"));
-  
-  // English Only Toggle
-  const englishToggleRow = document.createElement("div");
-  englishToggleRow.style.cssText = `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: rgba(0, 217, 255, 0.05);
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    border-radius: 10px;
-    margin-bottom: 12px;
-  `;
-  
-  const toggleLabel = document.createElement("div");
-  toggleLabel.innerHTML = `
-    <span style="font-weight: 600; color: var(--film-white);">English Only</span>
-    <span style="font-size: 11px; color: var(--muted-silver); display: block; margin-top: 2px;">Hollywood, UK, Australian & Canadian cinema</span>
-  `;
-  
-  const toggleSwitch = document.createElement("label");
-  toggleSwitch.style.cssText = `
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-    cursor: pointer;
-  `;
-  toggleSwitch.innerHTML = `
-    <input type="checkbox" id="englishOnlyToggle" style="opacity: 0; width: 0; height: 0;">
-    <span style="
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.1);
-      border-radius: 26px;
-      transition: 0.3s;
-    "></span>
-    <span style="
-      position: absolute;
-      content: '';
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background: var(--muted-silver);
-      border-radius: 50%;
-      transition: 0.3s;
-    " id="toggleKnob"></span>
-  `;
-  
-  englishToggleRow.appendChild(toggleLabel);
-  englishToggleRow.appendChild(toggleSwitch);
-  root.appendChild(englishToggleRow);
-  
-  // Language search row (hidden when English Only is ON)
-  const langSearchSection = document.createElement("div");
-  langSearchSection.id = "langSearchSection";
-  
-  const langRow = document.createElement("div");
-  langRow.className = "input-row";
-  const langInput = document.createElement("input");
-  langInput.type = "text";
-  langInput.id = "languageInput";
-  langInput.placeholder = "Search for language (Korean, French, Hindi...)";
-  langInput.autocomplete = "off";
-  langRow.appendChild(langInput);
-  langSearchSection.appendChild(langRow);
-  
-  const langContainer = document.createElement("div");
-  langContainer.id = "selectedLanguageContainer";
-  langContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  langSearchSection.appendChild(langContainer);
-  
-  root.appendChild(langSearchSection);
-  
-  // Toggle functionality
-  const englishToggle = toggleSwitch.querySelector('#englishOnlyToggle');
-  const toggleKnob = toggleSwitch.querySelector('#toggleKnob');
-  const toggleBg = toggleSwitch.querySelector('span');
-  
-  // Check sessionStorage for saved state (default to ON)
-  const savedState = sessionStorage.getItem('englishOnlyToggle');
-  const isEnglishOnly = savedState === null ? true : savedState === 'true';
-  
-  function updateToggleUI(isOn) {
-    if (isOn) {
-      toggleBg.style.background = 'var(--accent-cyan)';
-      toggleKnob.style.transform = 'translateX(24px)';
-      toggleKnob.style.background = 'white';
-      langSearchSection.style.display = 'none';
-    } else {
-      toggleBg.style.background = 'rgba(255,255,255,0.1)';
-      toggleKnob.style.transform = 'translateX(0)';
-      toggleKnob.style.background = 'var(--muted-silver)';
-      langSearchSection.style.display = 'block';
-    }
-  }
-  
-  englishToggle.checked = isEnglishOnly;
-  updateToggleUI(isEnglishOnly);
-  
-  englishToggle.addEventListener('change', () => {
-    const isOn = englishToggle.checked;
-    sessionStorage.setItem('englishOnlyToggle', isOn.toString());
-    updateToggleUI(isOn);
-    
-    // Clear any selected language when turning English Only ON
-    if (isOn) {
-      selectedLanguage = null;
-      langContainer.innerHTML = '';
-    }
   });
-  
-  const languages = [
-    { code: "en", name: "English" },
-    { code: "es", name: "Spanish" },
-    { code: "fr", name: "French" },
-    { code: "de", name: "German" },
-    { code: "ja", name: "Japanese" },
-    { code: "ko", name: "Korean" },
-    { code: "zh", name: "Chinese" },
-    { code: "hi", name: "Hindi" },
-    { code: "it", name: "Italian" },
-    { code: "pt", name: "Portuguese" },
-    { code: "ru", name: "Russian" },
-    { code: "ar", name: "Arabic" },
-    { code: "sv", name: "Swedish" },
-    { code: "da", name: "Danish" },
-    { code: "no", name: "Norwegian" },
-    { code: "fi", name: "Finnish" },
-    { code: "nl", name: "Dutch" },
-    { code: "pl", name: "Polish" },
-    { code: "tr", name: "Turkish" },
-    { code: "th", name: "Thai" },
-    { code: "id", name: "Indonesian" },
-    { code: "vi", name: "Vietnamese" }
-  ];
-  
-  let selectedLanguage = null;
-  
-  langInput.addEventListener("input", () => {
-    const query = langInput.value.toLowerCase();
-    const filtered = languages.filter(l => l.name.toLowerCase().includes(query) || l.code.toLowerCase().includes(query));
-    
-    if (filtered.length > 0 && query.length > 0) {
-      renderLanguageSuggestions(filtered.slice(0, 5));
-    } else {
-      hideLanguageSuggestions();
-    }
-  });
-  
-  function renderLanguageSuggestions(items) {
-    hideLanguageSuggestions();
-    const dropdown = document.createElement("div");
-    dropdown.id = "languageDropdown";
-    dropdown.style.cssText = `
-      position: absolute;
-      background: rgba(10, 14, 26, 0.98);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      margin-top: 4px;
-      max-height: 200px;
-      overflow-y: auto;
-      z-index: 1000;
-    `;
-    
-    items.forEach(item => {
-      const opt = document.createElement("div");
-      opt.style.cssText = "padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(0, 217, 255, 0.1); transition: background 0.15s;";
-      opt.textContent = item.name;
-      opt.onmouseover = () => opt.style.background = "rgba(0, 217, 255, 0.1)";
-      opt.onmouseout = () => opt.style.background = "transparent";
-      opt.onclick = () => {
-        selectedLanguage = item;
-        langInput.value = "";
-        hideLanguageSuggestions();
-        
-        langContainer.innerHTML = `
-          <div data-lang-code="${item.code}" style="
-            background: rgba(111, 210, 255, 0.15);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 999px;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-          ">
-            <span>${item.name}</span>
-            <button id="removeLanguage" style="background: transparent; border: none; color: var(--muted-silver); cursor: pointer; font-size: 14px; padding: 0 4px;">✕</button>
-          </div>
-        `;
-        
-        document.getElementById("removeLanguage").onclick = () => {
-          selectedLanguage = null;
-          langContainer.innerHTML = "";
-        };
-      };
-      dropdown.appendChild(opt);
+  root.appendChild(countryCard);
+
+  /* ---- TRACK 3 — Original language (single-select) -------------- */
+  const langCard = document.createElement("div");
+  langCard.className = "region-track region-track--language";
+  const langHead = document.createElement("div");
+  langHead.className = "region-track-head";
+  langHead.appendChild(makeSectionLabel("Original language"));
+  const note = document.createElement("span");
+  note.className = "region-track-note";
+  note.textContent = "independent of country";
+  langHead.appendChild(note);
+  langCard.appendChild(langHead);
+
+  const langGrid = document.createElement("div");
+  langGrid.className = "region-language-grid";
+  REGION_LANGUAGES.forEach(l => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "disco-chip region-language-chip";
+    chip.dataset.langCode = l.code;
+    chip.textContent = l.name;
+    if (selectedLangCode === l.code) chip.classList.add("on");
+    chip.addEventListener("click", () => {
+      const wasOn = chip.classList.contains("on");
+      langGrid.querySelectorAll(".region-language-chip.on").forEach(c => c.classList.remove("on"));
+      if (!wasOn) chip.classList.add("on");
     });
-    
-    langRow.appendChild(dropdown);
+    langGrid.appendChild(chip);
+  });
+  langCard.appendChild(langGrid);
+  root.appendChild(langCard);
+
+  /* ============================================================
+     LIVE COUNTS — PROMPT 2b (purely additive to the 2a structure)
+     Append "—" count slots, then probe each via the cached helper and
+     paint progressively (the panel never blocks on the network). Group
+     cards probe the pipe-joined UNION (OR) regardless of the toggle;
+     country chips probe the single code. The footer pill reflects the
+     LIVE selection (countries + groups unioned, joined per
+     state.regionLogic, plus the chosen language), debounced on any
+     selection change. NO language-chip counts in this pass.
+     ============================================================ */
+  groupGrid.querySelectorAll('.region-group-card').forEach(card => {
+    const union = (card.dataset.groupCodes || '').split(',').map(s => s.trim()).filter(Boolean).join('|');
+    const slot = document.createElement('span');
+    slot.className = 'region-card-count';
+    slot.textContent = '—';
+    card.appendChild(slot);
+    if (union) paintRegionCount(slot, union, { with_origin_country: union });
+  });
+
+  countryGrid.querySelectorAll('.region-country-chip').forEach(chip => {
+    const code = chip.dataset.regionCode;
+    const slot = document.createElement('span');
+    slot.className = 'region-chip-count';
+    slot.textContent = '—';
+    chip.appendChild(slot);
+    if (code) paintRegionCount(slot, code, { with_origin_country: code });
+  });
+
+  /* Footer match pill — the real total for the actual emitted query. */
+  const footer = document.createElement('div');
+  footer.className = 'region-footer';
+  const pill = document.createElement('span');
+  pill.className = 'region-match-pill';
+  const pillCount = document.createElement('span');
+  pillCount.className = 'region-match-count';
+  pillCount.textContent = '—';
+  pill.appendChild(pillCount);
+  pill.appendChild(document.createTextNode(' films match this selection'));
+  footer.appendChild(pill);
+  /* Lift the footer OUT of the scroll body so it pins at the panel bottom.
+     The panel column survives clearPanelBody (it only wipes body.innerHTML),
+     so drop any prior footer before re-appending to avoid stacking on rebuild. */
+  const panelCol = root.parentElement;          // .oft-panel (#oft-panel-region)
+  panelCol.querySelector('.region-footer')?.remove();
+  panelCol.appendChild(footer);
+
+  /* Read the live selection straight from the DOM (independent of the
+     read-site — that function is NOT modified). Mirrors its union logic:
+     .on country codes + .on group unions, de-duplicated, + single language. */
+  function regionSelectionParams() {
+    const codes = new Set();
+    countryGrid.querySelectorAll('.region-country-chip.on[data-region-code]').forEach(c => {
+      if (c.dataset.regionCode) codes.add(c.dataset.regionCode);
+    });
+    groupGrid.querySelectorAll('.region-group-card.on[data-group-codes]').forEach(card => {
+      (card.dataset.groupCodes || '').split(',').forEach(x => { x = x.trim(); if (x) codes.add(x); });
+    });
+    const langChip = langGrid.querySelector('.region-language-chip.on[data-lang-code]');
+    return { codes: Array.from(codes), lang: langChip ? langChip.dataset.langCode : null };
   }
-  
-  function hideLanguageSuggestions() {
-    const existing = document.getElementById("languageDropdown");
-    if (existing) existing.remove();
+
+  let _footerTimer = null;
+  function updateFooter() {
+    const sel = regionSelectionParams();
+    if (sel.codes.length === 0 && !sel.lang) { pillCount.textContent = '—'; return; }
+    const sep = state.regionLogic === 'or' ? '|' : ',';   // matches the frozen query builder
+    const params = {};
+    if (sel.codes.length) params.with_origin_country = sel.codes.join(sep);
+    if (sel.lang) params.with_original_language = sel.lang;
+    // Key folds in the join order so AND vs OR (and language) cache distinctly.
+    const key = 'sel::' + (params.with_origin_country || '') + '::' + (sel.lang || '');
+    pillCount.textContent = '—';                          // honest placeholder while probing
+    paintRegionCount(pillCount, key, params);
   }
+  function scheduleFooter() { clearTimeout(_footerTimer); _footerTimer = setTimeout(updateFooter, 350); }
+
+  /* Delegated listeners (bubble AFTER each chip/card's own toggle handler,
+     so they read post-toggle state) — keeps the 2a handlers byte-identical. */
+  groupGrid.addEventListener('click', scheduleFooter);
+  countryGrid.addEventListener('click', scheduleFooter);
+  langGrid.addEventListener('click', scheduleFooter);
+  toggle.addEventListener('click', scheduleFooter);
+
+  updateFooter();   // hydrated selection → initial real count (cache-first)
 }
 
 // =============================================
-// 7. PRODUCTION & BOX OFFICE SECTION
+// 7. PRODUCTION — STUDIOS
 // =============================================
 
+/* ============================================================
+   PRODUCTION — STUDIO ROSTER (Part 1 — rebuilt June 8, 2026)
+   Rose-axis reskin. An inline studio search unit (KEPT: the real
+   /search/company autocomplete → with_companies) sits above a
+   monogram-tile roster (3-col). Tiles mirror makeChip({component:true})
+   ".on" selection semantics so collectLabelsForSection reads them via
+   the .on class, emitting the unchanged {type:"company",id,name} shape.
+
+   CUT (deliberate bug-removal, not a reskin): the box-office dual
+   slider (#boxOfficeMin/#boxOfficeMax), its "Blockbuster"/"Billion
+   Dollar Club" quick chips, and the whole {type:"boxoffice"} path.
+   Those emitted revenue.gte/revenue.lte, which /discover/movie silently
+   ignores — the control never filtered. The right-zone box-office
+   leaderboard that replaces its PURPOSE is Part 2.
+   ============================================================ */
 function buildProductionContent(root) {
-  root.appendChild(makeSectionLabel("Studios & Production Companies"));
-  
-  const desc = document.createElement("p");
-  desc.style.fontSize = "13px";
-  desc.style.color = "var(--muted-silver)";
-  desc.style.marginBottom = "16px";
-  desc.textContent = "Select from top studios or search for others.";
-  root.appendChild(desc);
-  
-  const topStudios = [
-    { name: "Disney", id: 2 },
-    { name: "Warner Bros", id: 174 },
-    { name: "Universal", id: 33 },
-    { name: "Paramount", id: 4 },
-    { name: "Sony", id: 5 },
-    { name: "20th Century", id: 25 },
-    { name: "A24", id: 41077 },
-    { name: "Marvel Studios", id: 420 },
-    { name: "Pixar", id: 3 },
-    { name: "Lucasfilm", id: 1 }
+  /* Real TMDB company IDs (unchanged) + a short ORBIT monogram each. */
+  const STUDIOS = [
+    { name: "Disney",         id: 2,     mono: "DIS" },
+    { name: "Warner Bros",    id: 174,   mono: "WB"  },
+    { name: "Universal",      id: 33,    mono: "UNI" },
+    { name: "Paramount",      id: 4,     mono: "PAR" },
+    { name: "Sony",           id: 5,     mono: "SNY" },
+    { name: "20th Century",   id: 25,    mono: "20"  },
+    { name: "A24",            id: 41077, mono: "A24" },
+    { name: "Marvel Studios", id: 420,   mono: "MVL" },
+    { name: "Pixar",          id: 3,     mono: "PXR" },
+    { name: "Lucasfilm",      id: 1,     mono: "LCS" }
   ];
-  
-  const studioGroup = document.createElement("div");
-  studioGroup.className = "chip-group";
-  topStudios.forEach(studio => {
-    const chip = makeChip(`🏛️ ${studio.name}`, "production", { type: "company", id: studio.id, name: studio.name });
-    chip.id = `studio-${studio.name.replace(/\s+/g, '-')}`;
-    studioGroup.appendChild(chip);
-  });
-  root.appendChild(studioGroup);
-  
-  const studioRow = document.createElement("div");
-  studioRow.className = "input-row";
-  studioRow.style.cssText = "margin-top: 16px; position: relative;";
+
+  /* ---- roster tile factory: a .studio-tile button carrying the same
+     dataset.value as the old chips and toggling ".on" (mirrors
+     makeChip({component:true}) so the read site finds it). ---- */
+  function makeStudioTile(studio) {
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "studio-tile";
+    tile.id = `studio-${studio.name.replace(/\s+/g, '-')}`;
+    tile.dataset.value = JSON.stringify({ type: "company", id: studio.id, name: studio.name });
+
+    const mono = document.createElement("span");
+    mono.className = "prod-mono";
+    mono.textContent = studio.mono || studio.name.slice(0, 3).toUpperCase();
+    tile.appendChild(mono);
+
+    const nm = document.createElement("span");
+    nm.className = "studio-tile-name";
+    nm.textContent = studio.name;
+    tile.appendChild(nm);
+
+    const check = document.createElement("span");
+    check.className = "studio-tile-check og og-check";  // shown only when .on (CSS)
+    tile.appendChild(check);
+
+    tile.addEventListener("click", () => { tile.classList.toggle("on"); recountBoard(); });
+    return tile;
+  }
+
+  /* ---- Inline search unit: "Find a studio" + the existing
+     /search/company autocomplete, restyled with .kw-input ---- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+
+  const head = document.createElement("div");
+  head.className = "gen-kw-head";
+  head.textContent = "Find a studio";
+  inline.appendChild(head);
+
+  const searchWrap = document.createElement("div");
+  searchWrap.className = "prod-search-wrap";
+
   const studioInput = document.createElement("input");
   studioInput.type = "text";
   studioInput.id = "studioInput";
-  studioInput.placeholder = "Search for other studios...";
+  studioInput.className = "kw-input";
+  studioInput.placeholder = "Search studios & production companies…";
   studioInput.autocomplete = "off";
-  studioRow.appendChild(studioInput);
-  root.appendChild(studioRow);
+  searchWrap.appendChild(studioInput);
 
   const studioDropdown = document.createElement("div");
-  studioDropdown.className = "search-dropdown";
-  studioDropdown.style.cssText = "position: absolute; z-index: 1000; display: none; background: var(--deep-space); border: 1px solid rgba(0,217,255,0.2); border-radius: 8px; max-height: 200px; overflow-y: auto;";
-  studioRow.appendChild(studioDropdown);
+  studioDropdown.className = "search-dropdown prod-search-dropdown";
+  studioDropdown.style.display = "none";
+  searchWrap.appendChild(studioDropdown);
 
+  inline.appendChild(searchWrap);
+  root.appendChild(inline);
+
+  /* ---- Split: roster left, box-office leaderboard right (Part 2) ---- */
+  const split = document.createElement("div");
+  split.className = "prod-split";
+  const left = document.createElement("div");
+  left.className = "prod-left";
+  const board = document.createElement("div");
+  board.className = "prod-board";   // populated below
+
+  /* ---- Studio roster (3-col monogram tiles) — now in the left column ---- */
+  const roster = document.createElement("div");
+  roster.className = "prod-roster";
+  STUDIOS.forEach(studio => roster.appendChild(makeStudioTile(studio)));
+  left.appendChild(roster);
+
+  split.appendChild(left);
+  split.appendChild(board);
+  root.appendChild(split);
+
+  /* ---- Autocomplete (commit shape {type:"company",id,name} unchanged):
+     debounced /search/company; picking a result appends a roster tile
+     (deduped by id) and selects it. ---- */
   let studioDebounce = null;
   studioInput.addEventListener("input", () => {
     clearTimeout(studioDebounce);
@@ -2797,21 +5628,19 @@ function buildProductionContent(root) {
         if (results.length === 0) { studioDropdown.style.display = "none"; return; }
         studioDropdown.innerHTML = "";
         studioDropdown.style.display = "block";
-        studioDropdown.style.width = `${studioInput.offsetWidth}px`;
         results.forEach(company => {
           const item = document.createElement("div");
           item.className = "dropdown-item";
-          item.style.cssText = "padding: 8px 12px; cursor: pointer; font-size: 13px; color: var(--film-white);";
           item.textContent = company.name;
-          item.addEventListener("mouseenter", () => { item.style.background = "rgba(0,217,255,0.1)"; });
-          item.addEventListener("mouseleave", () => { item.style.background = "transparent"; });
           item.addEventListener("click", () => {
-            const chipId = `studio-${company.name.replace(/\s+/g, '-')}`;
-            if (!document.getElementById(chipId)) {
-              const chip = makeChip(`🏛️ ${company.name}`, "production", { type: "company", id: company.id, name: company.name });
-              chip.id = chipId;
-              studioGroup.appendChild(chip);
+            const tileId = `studio-${company.name.replace(/\s+/g, '-')}`;
+            let tile = document.getElementById(tileId);
+            if (!tile) {
+              tile = makeStudioTile({ name: company.name, id: company.id });
+              roster.appendChild(tile);
             }
+            tile.classList.add("on");   // picking from search selects it
+            recountBoard();
             studioInput.value = "";
             studioDropdown.style.display = "none";
           });
@@ -2824,439 +5653,794 @@ function buildProductionContent(root) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!studioRow.contains(e.target)) studioDropdown.style.display = "none";
+    if (!searchWrap.contains(e.target)) studioDropdown.style.display = "none";
   });
-  
-  root.appendChild(makeSectionLabel("Box Office (Worldwide Gross)"));
-  
-  const boxOfficeRow = document.createElement("div");
-  boxOfficeRow.className = "input-row";
-  boxOfficeRow.style.flexDirection = "column";
-  boxOfficeRow.style.gap = "12px";
-  
-  const minRow = document.createElement("div");
-  minRow.style.display = "flex";
-  minRow.style.gap = "12px";
-  minRow.style.width = "100%";
-  minRow.style.alignItems = "center";
-  
-  const minLabel = document.createElement("span");
-  minLabel.textContent = "Min:";
-  minLabel.style.minWidth = "40px";
-  const minSlider = document.createElement("input");
-  minSlider.type = "range";
-  minSlider.id = "boxOfficeMin";
-  minSlider.min = "0";
-  minSlider.max = "2000";
-  minSlider.value = "0";
-  minSlider.style.flex = "1";
-  const minValue = document.createElement("span");
-  minValue.textContent = "$0M";
-  minValue.id = "boxOfficeMinValue";
-  
-  minSlider.addEventListener("input", () => {
-    minValue.textContent = `$${minSlider.value}M`;
-    const maxSl = document.getElementById("boxOfficeMax");
-    if (parseInt(minSlider.value) > parseInt(maxSl.value)) {
-      maxSl.value = minSlider.value;
-      document.getElementById("boxOfficeMaxValue").textContent = `$${minSlider.value}M${minSlider.value === "2000" ? "+" : ""}`;
+
+  /* ============================================================
+     BOX-OFFICE LEADERBOARD (Part 2 — added June 8, 2026)
+     Right column: the top-grossing films for the selected studios via
+     ONE /discover/movie?sort_by=revenue.desc call (transport mirrors the
+     Genre hero recount). Design B1 — ranked titles only, NO dollar
+     figures: TMDB discover results don't carry `revenue`, so the ranking
+     is real but grosses can't be shown; the per-row bar is decorative.
+     ============================================================ */
+
+  const boardHead = document.createElement("div");
+  boardHead.className = "prod-board-head";
+  const boardTitle = document.createElement("span");
+  boardTitle.className = "prod-board-title";
+  boardTitle.textContent = "Top grossing";
+  const boardLive = document.createElement("span");
+  boardLive.className = "prod-board-live";
+  boardLive.innerHTML = '<span class="prod-board-dot"></span>live · worldwide';
+  boardHead.appendChild(boardTitle);
+  boardHead.appendChild(boardLive);
+  board.appendChild(boardHead);
+
+  const boardList = document.createElement("div");
+  boardList.className = "prod-board-list";
+  boardList.id = "prodBoard";
+  board.appendChild(boardList);
+
+  /* "Sort my results this way" — the ONLY Part 2 element that touches real
+     Launch results (Step 3). The board itself is preview-only. */
+  const sortBtn = document.createElement("button");
+  sortBtn.type = "button";
+  sortBtn.className = "prod-board-sort";
+  sortBtn.textContent = "Sort my results by box office";
+  let prevSort = null;   // captured field/dir to restore on toggle-off
+  sortBtn.addEventListener("click", () => {
+    const fieldSel = document.getElementById("discoverSortField");
+    const dirSel = document.getElementById("discoverSortDir");
+    const turningOn = !sortBtn.classList.contains("on");
+    if (turningOn) {
+      if (fieldSel && dirSel) {
+        prevSort = { field: fieldSel.value, dir: dirSel.value };
+        fieldSel.value = "revenue";
+        dirSel.value = "desc";
+        fieldSel.dispatchEvent(new Event("change"));
+        dirSel.dispatchEvent(new Event("change"));
+      } else {
+        prevSort = { raw: state.sortBy };
+        state.sortBy = "revenue.desc";   // fallback: no visible strip to sync
+      }
+      sortBtn.classList.add("on");
+      sortBtn.textContent = "Results sorted by box office";
+    } else {
+      if (fieldSel && dirSel && prevSort && prevSort.field != null) {
+        fieldSel.value = prevSort.field;
+        dirSel.value = prevSort.dir;
+        fieldSel.dispatchEvent(new Event("change"));
+        dirSel.dispatchEvent(new Event("change"));
+      } else if (prevSort && prevSort.raw != null) {
+        state.sortBy = prevSort.raw;
+      }
+      prevSort = null;
+      sortBtn.classList.remove("on");
+      sortBtn.textContent = "Sort my results by box office";
     }
   });
+  board.appendChild(sortBtn);
 
-  minRow.appendChild(minLabel);
-  minRow.appendChild(minSlider);
-  minRow.appendChild(minValue);
+  const boardNote = document.createElement("p");
+  boardNote.className = "prod-board-note";
+  boardNote.textContent = "Ranked by box office. Figures aren't shown — TMDB can't return gross here; ranking is real.";
+  board.appendChild(boardNote);
 
-  const maxRow = document.createElement("div");
-  maxRow.style.display = "flex";
-  maxRow.style.gap = "12px";
-  maxRow.style.width = "100%";
-  maxRow.style.alignItems = "center";
+  /* Live, scoped leaderboard — studio-only filter subset through the frozen
+     query builder, forced to revenue.desc for THIS call only. Debounced;
+     loading pulse on the live indicator. Hoisted so the tile click handler
+     (defined earlier) can call it. */
+  let _boardTimer = null;
+  function recountBoard() {
+    const selTiles = Array.from(roster.querySelectorAll(".studio-tile.on"))
+      .map(t => { try { return JSON.parse(t.dataset.value); } catch (e) { return null; } })
+      .filter(v => v && v.type === "company");
 
-  const maxLabel = document.createElement("span");
-  maxLabel.textContent = "Max:";
-  maxLabel.style.minWidth = "40px";
-  const maxSlider = document.createElement("input");
-  maxSlider.type = "range";
-  maxSlider.id = "boxOfficeMax";
-  maxSlider.min = "0";
-  maxSlider.max = "2000";
-  maxSlider.value = "2000";
-  maxSlider.style.flex = "1";
-  const maxValue = document.createElement("span");
-  maxValue.textContent = "$2000M+";
-  maxValue.id = "boxOfficeMaxValue";
-
-  maxSlider.addEventListener("input", () => {
-    maxValue.textContent = `$${maxSlider.value}M${maxSlider.value === "2000" ? "+" : ""}`;
-    const minSl = document.getElementById("boxOfficeMin");
-    if (parseInt(maxSlider.value) < parseInt(minSl.value)) {
-      minSl.value = maxSlider.value;
-      document.getElementById("boxOfficeMinValue").textContent = `$${maxSlider.value}M`;
+    if (selTiles.length === 0) {
+      clearTimeout(_boardTimer);
+      boardLive.classList.remove("is-loading");
+      boardList.innerHTML = '<p class="prod-board-empty">Pick a studio to see its top-grossing films.</p>';
+      return;
     }
-  });
-  
-  maxRow.appendChild(maxLabel);
-  maxRow.appendChild(maxSlider);
-  maxRow.appendChild(maxValue);
-  
-  boxOfficeRow.appendChild(minRow);
-  boxOfficeRow.appendChild(maxRow);
-  root.appendChild(boxOfficeRow);
-  
-  const boxOfficeQuick = document.createElement("div");
-  boxOfficeQuick.className = "chip-group";
-  boxOfficeQuick.style.marginTop = "12px";
-  [
-    { label: "Blockbuster ($500M+)", min: 500000000, max: 10000000000 },
-    { label: "Billion Dollar Club", min: 1000000000, max: 10000000000 }
-  ].forEach(preset => {
-    const chip = makeChip(preset.label, "production", {
-      type: "boxoffice",
-      min: preset.min,
-      max: preset.max
-    });
-    chip.addEventListener("click", () => {
-      document.getElementById("boxOfficeMin").value = preset.min / 1000000;
-      document.getElementById("boxOfficeMax").value = Math.min(preset.max / 1000000, 2000);
-      document.getElementById("boxOfficeMinValue").textContent = `$${preset.min / 1000000}M`;
-      document.getElementById("boxOfficeMaxValue").textContent = preset.max >= 2000000000 ? "$2000M+" : `$${preset.max / 1000000}M`;
-    });
-    boxOfficeQuick.appendChild(chip);
-  });
-  root.appendChild(boxOfficeQuick);
+
+    boardLive.classList.add("is-loading");
+    clearTimeout(_boardTimer);
+    _boardTimer = setTimeout(function () {
+      const scoped = selTiles.map(v => ({ section: "production", value: v }));
+      let qs;
+      try { qs = buildTMDBQueryFromFilters(scoped); } catch (e) { qs = null; }
+      if (qs == null) {
+        boardLive.classList.remove("is-loading");
+        boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        return;
+      }
+      /* Route through the shared TMDB helper (proxy in production via
+         /api/tmdb; direct TMDB on localhost). Fail soft if absent. */
+      if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== "function") {
+        boardLive.classList.remove("is-loading");
+        boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        return;
+      }
+      const reqParams = Object.fromEntries(new URLSearchParams(qs));
+      reqParams.page = 1;
+      reqParams.sort_by = "revenue.desc";   // board always ranks by revenue, regardless of global sort
+      OrbitUtils.tmdbFetch("/discover/movie", reqParams)
+        .then(d => {
+          const films = (d && Array.isArray(d.results)) ? d.results.slice(0, 5) : [];
+          if (films.length === 0) {
+            boardList.innerHTML = '<p class="prod-board-empty">No films found for this selection.</p>';
+            return;
+          }
+          boardList.innerHTML = "";
+          films.forEach((film, i) => {
+            const row = document.createElement("div");
+            row.className = "lb-row";
+
+            const rank = document.createElement("span");
+            rank.className = "lb-rank";
+            rank.textContent = i + 1;
+            row.appendChild(rank);
+
+            if (film.poster_path) {
+              const img = document.createElement("img");
+              img.className = "lb-poster";
+              img.loading = "lazy";
+              img.alt = "";
+              img.src = OrbitUtils.TMDB_IMG + "w92" + film.poster_path;
+              row.appendChild(img);
+            }
+
+            const main = document.createElement("div");
+            main.className = "lb-main";
+            const title = document.createElement("span");
+            title.className = "lb-title";
+            title.textContent = film.title || film.original_title || "Untitled";
+            const year = document.createElement("span");
+            year.className = "lb-year";
+            year.textContent = (film.release_date || "").slice(0, 4) || "—";
+            const bar = document.createElement("span");
+            bar.className = "lb-bar";
+            bar.style.width = (100 - i * 16) + "%";   // decorative — ranking rhythm, NOT a gross
+            main.appendChild(title);
+            main.appendChild(year);
+            main.appendChild(bar);
+            row.appendChild(main);
+
+            boardList.appendChild(row);
+          });
+        })
+        .catch(() => {
+          boardList.innerHTML = '<p class="prod-board-error">Couldn\'t load ranking</p>';
+        })
+        .then(() => { boardLive.classList.remove("is-loading"); });
+    }, 300);
+  }
+
+  /* Initial paint — empty state on a fresh build (no studios selected). */
+  recountBoard();
 }
 
 // =============================================
 // 8. WATCH PROVIDERS SECTION
 // =============================================
 
+/* ============================================================
+   STREAM PANEL — composed compact (Stream arc Prompt 2b)
+   Rebuilt Jun 20, 2026. Replaces the legacy country-select + flat chip
+   list with the approved compact: mode switch → region row → profile
+   service-tile grid (real per-service counts) → "add more" chips → footer.
+
+   Commit model (per-search, like every other tab): selection lives in the
+   DOM until "Add to orbit" writes into state.filters. NO localStorage
+   persistence — the old watchProviders/watchCountry writes are GONE; the
+   scope-gated default in buildTMDBQueryFromFilters (Prompt 2a) governs the
+   no-commit case. Mode "All films" commits {type:"stream_mode",mode:"all"}
+   (2a's override type); selected services commit {type:"provider",…}.
+
+   Storage keys (Rule 8):
+   - reads orbit_user_providers / orbit_user_country via getProfileDefaults()
+   - orbit_stream_counts_{region} (sessionStorage) — per-service total_results
+     cache so reopening the panel costs zero TMDB calls for a seen region.
+   NOTE: this panel no longer reads or writes the legacy watchProviders /
+   watchCountry keys. results.js:1163 still DISPLAY-reads them for its
+   "Filtered by:" banner, so they are intentionally NOT purged here —
+   migrating that banner is a follow-up.
+   ============================================================ */
+
+// Per-service streaming-count cache: region → { providerId: total_results }.
+// Module-scoped so it survives the rebuild-on-activate panel wipe; mirrored
+// to sessionStorage so a seen region costs zero calls on reopen.
+var _streamCountCache = {};
+function getStreamCounts(region) {
+  if (_streamCountCache[region]) return _streamCountCache[region];
+  var data = {};
+  try {
+    var raw = sessionStorage.getItem('orbit_stream_counts_' + region);
+    if (raw) data = JSON.parse(raw) || {};
+  } catch (e) { data = {}; }
+  _streamCountCache[region] = data;
+  return data;
+}
+function saveStreamCounts(region) {
+  try {
+    sessionStorage.setItem('orbit_stream_counts_' + region, JSON.stringify(_streamCountCache[region] || {}));
+  } catch (e) {}
+}
+// IP-safe monogram (no brand logos) — 1–2 letters from the service name.
+function streamMonogram(name) {
+  var words = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return '?';
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+function formatStreamCount(n) {
+  return n > 9999 ? '9,999+' : n.toLocaleString();
+}
+
 function buildWatchContent(root) {
-  const savedCountry = localStorage.getItem("watchCountry") || "";
-  let allProviderData = [];
+  var prof = getProfileDefaults();                 // { providers:[ids], country }
+  var profileIds = (prof.providers || []).slice();
+  var region = prof.country || 'US';               // fallback US per spec
 
-  // --- Country selector ---
-  root.appendChild(makeSectionLabel("Your Country"));
+  var ONLY_COPY = "Showing only what’s streamable on your selected services right now. Loaded from your Profile — changes here apply to this search only.";
+  var ALL_COPY  = "Showing all films regardless of where they stream — broaden mode. Switch back to narrow results to your services.";
 
-  const countrySelect = document.createElement("select");
-  countrySelect.id = "watchCountrySelect";
-  countrySelect.style.cssText = "width: 100%; padding: 10px 12px; background: rgba(15,23,41,0.6); border: 1px solid rgba(0,217,255,0.2); border-radius: 8px; color: var(--film-white); font-size: 13px; margin-bottom: 16px; cursor: pointer; appearance: none;";
-  const countries = [
-    ["", "Select country..."],
-    ["US", "United States"], ["GB", "United Kingdom"], ["CA", "Canada"], ["AU", "Australia"],
-    ["NZ", "New Zealand"], ["IE", "Ireland"], ["DE", "Germany"], ["FR", "France"],
-    ["ES", "Spain"], ["IT", "Italy"], ["PT", "Portugal"], ["NL", "Netherlands"],
-    ["BE", "Belgium"], ["AT", "Austria"], ["CH", "Switzerland"], ["SE", "Sweden"],
-    ["NO", "Norway"], ["DK", "Denmark"], ["FI", "Finland"], ["PL", "Poland"],
-    ["BR", "Brazil"], ["MX", "Mexico"], ["AR", "Argentina"], ["CL", "Chile"],
-    ["CO", "Colombia"], ["JP", "Japan"], ["KR", "South Korea"], ["IN", "India"],
-    ["SG", "Singapore"], ["ZA", "South Africa"]
+  // ---------- 1. Mode switch (per-search ONLY — never writes scope) ----------
+  var toggle = document.createElement('div');
+  toggle.className = 'match-toggle';
+  toggle.id = 'watchModeToggle';
+
+  var optAll = document.createElement('button');
+  optAll.type = 'button';
+  optAll.className = 'opt';
+  optAll.dataset.mode = 'all';
+  optAll.textContent = 'All films';
+
+  var optServices = document.createElement('button');
+  optServices.type = 'button';
+  optServices.className = 'opt on';                // default ON = watch-tonight intent
+  optServices.dataset.mode = 'services';
+  optServices.textContent = 'Only on my services';
+
+  toggle.appendChild(optAll);
+  toggle.appendChild(optServices);
+  root.appendChild(toggle);
+
+  // ---------- 2. Region row ----------
+  var regionRow = document.createElement('div');
+  regionRow.className = 'disco-stream-region';
+
+  var regionLabel = makeSectionLabel('Region');
+  regionLabel.classList.add('disco-stream-region-label');
+  regionRow.appendChild(regionLabel);
+
+  var regionSelect = document.createElement('select');
+  regionSelect.id = 'watchRegionSelect';
+  regionSelect.className = 'disco-stream-region-select';
+  var COUNTRIES = [
+    ['US', 'United States'], ['GB', 'United Kingdom'], ['CA', 'Canada'], ['AU', 'Australia'],
+    ['NZ', 'New Zealand'], ['IE', 'Ireland'], ['DE', 'Germany'], ['FR', 'France'],
+    ['ES', 'Spain'], ['IT', 'Italy'], ['PT', 'Portugal'], ['NL', 'Netherlands'],
+    ['BE', 'Belgium'], ['AT', 'Austria'], ['CH', 'Switzerland'], ['SE', 'Sweden'],
+    ['NO', 'Norway'], ['DK', 'Denmark'], ['FI', 'Finland'], ['PL', 'Poland'],
+    ['BR', 'Brazil'], ['MX', 'Mexico'], ['AR', 'Argentina'], ['CL', 'Chile'],
+    ['CO', 'Colombia'], ['JP', 'Japan'], ['KR', 'South Korea'], ['IN', 'India'],
+    ['SG', 'Singapore'], ['ZA', 'South Africa']
   ];
-  countrySelect.innerHTML = countries.map(([code, name]) =>
-    `<option value="${code}"${code === savedCountry ? " selected" : ""}>${name}</option>`
-  ).join("");
-  root.appendChild(countrySelect);
-
-  // --- Provider chips ---
-  root.appendChild(makeSectionLabel("Your Streaming Services"));
-
-  const hint = document.createElement("p");
-  hint.style.cssText = "font-size: 11px; color: var(--muted-silver); margin-bottom: 10px; font-style: italic;";
-  hint.textContent = "Select services you subscribe to. Orbit Search will filter results to these.";
-  root.appendChild(hint);
-
-  const providerContainer = document.createElement("div");
-  providerContainer.id = "watchProviderChips";
-  providerContainer.className = "chip-group";
-  providerContainer.style.flexWrap = "wrap";
-  root.appendChild(providerContainer);
-
-  // --- Status indicator ---
-  const status = document.createElement("div");
-  status.id = "watchStatus";
-  status.style.cssText = "margin-top: 12px; padding: 8px 12px; border-radius: 8px; font-size: 11px; display: none;";
-  root.appendChild(status);
-
-  function updateStatus() {
-    const country = countrySelect.value;
-    const activeChips = providerContainer.querySelectorAll(".chip.active");
-    if (country && activeChips.length > 0) {
-      const names = Array.from(activeChips).map(c => {
-        try { return JSON.parse(c.dataset.value).name; } catch { return ""; }
-      }).filter(Boolean);
-      status.style.display = "block";
-      status.style.background = "rgba(0,217,255,0.08)";
-      status.style.border = "1px solid rgba(0,217,255,0.25)";
-      status.style.color = "var(--accent-cyan)";
-      status.textContent = `Orbit will filter by: ${names.join(", ")} (${country})`;
-    } else {
-      status.style.display = "none";
-    }
+  // Keep the profile region selectable even if it's outside the shortlist.
+  if (!COUNTRIES.some(function (c) { return c[0] === region; })) {
+    COUNTRIES.unshift([region, region]);
   }
+  COUNTRIES.forEach(function (c) {
+    var opt = document.createElement('option');
+    opt.value = c[0];
+    opt.textContent = c[1];
+    if (c[0] === region) opt.selected = true;
+    regionSelect.appendChild(opt);
+  });
+  regionRow.appendChild(regionSelect);
 
-  function saveToLocalStorage() {
-    const country = countrySelect.value;
-    if (country) {
-      localStorage.setItem("watchCountry", country);
-    } else {
-      localStorage.removeItem("watchCountry");
-    }
+  var regionNote = document.createElement('span');
+  regionNote.className = 'disco-stream-region-note';
+  regionNote.textContent = 'availability differs by region';
+  regionRow.appendChild(regionNote);
 
-    const activeChips = providerContainer.querySelectorAll(".chip.active");
-    const providers = Array.from(activeChips).map(c => {
-      try { return JSON.parse(c.dataset.value); } catch { return null; }
-    }).filter(Boolean).map(v => ({ id: v.id, name: v.name, logo: v.logo || "" }));
-    localStorage.setItem("watchProviders", JSON.stringify(providers));
+  var editLink = document.createElement('button');
+  editLink.type = 'button';
+  editLink.className = 'disco-stream-edit-link';
+  editLink.textContent = 'Edit services ›';   // › = › (not an emoji)
+  // Reuse the bar popup's open path (bar IIFE owns it) — don't duplicate.
+  editLink.addEventListener('click', function () {
+    var btn = document.getElementById('discoverEditBtn');
+    if (btn) btn.click();
+  });
+  regionRow.appendChild(editLink);
 
-    updateStatus();
-  }
+  root.appendChild(regionRow);
 
-  function loadProviders(country) {
-    if (!country) {
-      providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Select a country to see providers</span>';
+  // ---------- provider zone (dims under "All films") ----------
+  var zone = document.createElement('div');
+  zone.className = 'disco-stream-zone';
+  zone.id = 'watchProviderZone';
+
+  // 3. Service-tile grid (profile services, pre-selected)
+  var gridLabel = makeSectionLabel('Your services');
+  gridLabel.classList.add('disco-stream-grid-label');
+  zone.appendChild(gridLabel);
+
+  var grid = document.createElement('div');
+  grid.className = 'disco-service-grid';
+  grid.id = 'watchServiceGrid';
+  zone.appendChild(grid);
+
+  // 4. Add-more chips (remaining region providers not on profile)
+  var addMoreLabel = makeSectionLabel('Add more (not on your profile)');
+  addMoreLabel.classList.add('disco-stream-addmore-label');
+  zone.appendChild(addMoreLabel);
+
+  var addMore = document.createElement('div');
+  addMore.className = 'disco-chip-group';
+  addMore.id = 'watchAddMore';
+  zone.appendChild(addMore);
+
+  root.appendChild(zone);
+
+  // ---------- 5. Footer ----------
+  var footer = document.createElement('div');
+  footer.className = 'disco-stream-footer';
+
+  var pill = document.createElement('span');
+  pill.className = 'match-pill';
+  pill.id = 'watchMatchPill';
+  footer.appendChild(pill);
+
+  var intro = document.createElement('p');
+  intro.className = 'disco-stream-note';
+  intro.id = 'watchFooterIntro';
+  footer.appendChild(intro);
+
+  root.appendChild(footer);
+
+  // ---------- behaviour ----------
+  function updatePill() {
+    if (optAll.classList.contains('on')) {
+      pill.textContent = 'All films — no service filter';
       return;
     }
-    providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Loading providers...</span>';
+    var n = zone.querySelectorAll('.service-tile.is-on, .disco-chip.on').length;
+    pill.textContent = n === 0
+      ? 'No services selected — your Profile default applies'
+      : n + (n === 1 ? ' service selected' : ' services selected');
+  }
 
-    fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${TMDB_API_KEY}&watch_region=${country}`)
-      .then(res => { if (!res.ok) throw new Error(`TMDB ${res.status}`); return res.json(); })
-      .then(data => {
-        allProviderData = (data.results || []).slice(0, 25);
-        providerContainer.innerHTML = "";
+  function setMode(allFilms) {
+    optAll.classList.toggle('on', allFilms);
+    optServices.classList.toggle('on', !allFilms);
+    optAll.setAttribute('aria-pressed', allFilms ? 'true' : 'false');
+    optServices.setAttribute('aria-pressed', !allFilms ? 'true' : 'false');
+    zone.classList.toggle('is-dimmed', allFilms);
+    intro.textContent = allFilms ? ALL_COPY : ONLY_COPY;
+    updatePill();
+  }
 
-        let savedIds = [];
-        try { savedIds = JSON.parse(localStorage.getItem("watchProviders") || "[]").map(p => p.id); } catch {}
+  optAll.addEventListener('click', function () { setMode(true); });
+  optServices.addEventListener('click', function () { setMode(false); });
 
-        allProviderData.forEach(p => {
-          const chip = document.createElement("button");
-          chip.type = "button";
-          chip.className = "chip";
-          if (savedIds.includes(p.provider_id)) chip.classList.add("active");
-          chip.dataset.value = JSON.stringify({ type: "provider", id: p.provider_id, name: p.provider_name, logo: p.logo_path, region: country });
-          chip.style.cssText = "display: flex; align-items: center; gap: 6px; padding: 6px 10px;";
-          const logo = p.logo_path ? `<img src="https://image.tmdb.org/t/p/w45${p.logo_path}" style="width:20px;height:20px;border-radius:3px;">` : "";
-          chip.innerHTML = `${logo}<span>${p.provider_name}</span>`;
-          chip.addEventListener("click", () => {
-            chip.classList.toggle("active");
-            saveToLocalStorage();
-          });
-          providerContainer.appendChild(chip);
+  function makeServiceTile(p, forRegion) {
+    var tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'service-tile disco-service-tile is-on';   // profile = pre-selected
+    tile.title = p.name;
+    tile.setAttribute('aria-pressed', 'true');
+    tile.dataset.value = JSON.stringify({ type: 'provider', id: p.id, name: p.name, region: forRegion });
+
+    // Real TMDB provider logo (matches Profile); monogram only as fallback
+    // when the provider carries no logo_path (e.g. a profile id absent from
+    // this region's results) — never render a broken <img>.
+    var logoUrl = p.logo ? OrbitUtils.tmdbImageUrl(p.logo, 'w92') : null;
+    if (logoUrl) {
+      var img = document.createElement('img');
+      img.className = 'service-logo disco-service-logo-img';
+      img.src = logoUrl;
+      img.alt = p.name;
+      img.loading = 'lazy';
+      tile.appendChild(img);
+    } else {
+      var mono = document.createElement('span');
+      mono.className = 'service-logo disco-service-mono';
+      mono.textContent = streamMonogram(p.name);
+      tile.appendChild(mono);
+    }
+
+    var name = document.createElement('span');
+    name.className = 'service-name';
+    name.textContent = p.name;
+    tile.appendChild(name);
+
+    var count = document.createElement('span');
+    count.className = 'service-count';
+    count.dataset.countFor = p.id;
+    count.textContent = '—';                  // "—" until a real probe resolves
+    tile.appendChild(count);
+
+    tile.addEventListener('click', function () {
+      var on = tile.classList.toggle('is-on');
+      tile.setAttribute('aria-pressed', on ? 'true' : 'false');
+      updatePill();
+    });
+    return tile;
+  }
+
+  function makeAddMoreChip(p, forRegion) {
+    var chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'disco-chip';
+    chip.title = p.name;
+    chip.dataset.value = JSON.stringify({ type: 'provider', id: p.id, name: p.name, region: forRegion });
+    var label = document.createElement('span');
+    label.textContent = p.name;
+    chip.appendChild(label);
+    chip.addEventListener('click', function () {
+      chip.classList.toggle('on');
+      updatePill();
+    });
+    return chip;
+  }
+
+  // Per-service real counts — one /discover/movie probe per grid tile (cached).
+  function fetchCounts(forRegion) {
+    if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return;
+    var cache = getStreamCounts(forRegion);
+    profileIds.forEach(function (id) {
+      var cell = grid.querySelector('[data-count-for="' + id + '"]');
+      if (typeof cache[id] === 'number') {
+        if (cell) cell.textContent = formatStreamCount(cache[id]);
+        return;
+      }
+      OrbitUtils.tmdbFetch('/discover/movie', { with_watch_providers: id, watch_region: forRegion })
+        .then(function (data) {
+          var n = (data && typeof data.total_results === 'number') ? data.total_results : null;
+          if (n === null) return;                  // failure → stays "—"
+          cache[id] = n;
+          saveStreamCounts(forRegion);
+          if (regionSelect.value !== forRegion) return;  // region changed mid-flight
+          var live = grid.querySelector('[data-count-for="' + id + '"]');
+          if (live) live.textContent = formatStreamCount(n);
+        })
+        .catch(function () { /* honest "—" — never a fabricated number */ });
+    });
+  }
+
+  function loadRegion(forRegion) {
+    grid.innerHTML = '';
+    addMore.innerHTML = '';
+
+    if (profileIds.length === 0) {
+      grid.innerHTML = '<p class="disco-stream-empty">No services on your Profile yet — add some via “Edit services”.</p>';
+    } else {
+      grid.innerHTML = '<span class="disco-stream-loading">Loading services…</span>';
+    }
+
+    if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') {
+      grid.innerHTML = '<p class="disco-stream-empty">Services unavailable right now.</p>';
+      return;
+    }
+
+    OrbitUtils.tmdbFetch('/watch/providers/movie', { watch_region: forRegion })
+      .then(function (data) {
+        if (regionSelect.value !== forRegion) return;   // stale response guard
+        var all = (data && data.results) || [];
+        var nameById = {};
+        var logoById = {};                              // logo_path comes in this same fetch — keep it
+        all.forEach(function (p) {
+          nameById[p.provider_id] = p.provider_name;
+          logoById[p.provider_id] = p.logo_path;
         });
 
-        updateStatus();
+        grid.innerHTML = '';
+        if (profileIds.length === 0) {
+          grid.innerHTML = '<p class="disco-stream-empty">No services on your Profile yet — add some via “Edit services”.</p>';
+        } else {
+          profileIds.forEach(function (id) {
+            grid.appendChild(makeServiceTile({ id: id, name: nameById[id] || ('Service ' + id), logo: logoById[id] }, forRegion));
+          });
+          fetchCounts(forRegion);
+        }
+
+        var onProfile = {};
+        profileIds.forEach(function (id) { onProfile[id] = true; });
+        var remaining = all
+          .filter(function (p) { return !onProfile[p.provider_id]; })
+          .sort(function (a, b) { return (a.display_priority || 999) - (b.display_priority || 999); })
+          .slice(0, 12);
+        remaining.forEach(function (p) {
+          addMore.appendChild(makeAddMoreChip({ id: p.provider_id, name: p.provider_name }, forRegion));
+        });
+
+        updatePill();
       })
-      .catch(() => {
-        providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Failed to load providers</span>';
+      .catch(function () {
+        if (regionSelect.value !== forRegion) return;
+        grid.innerHTML = '<p class="disco-stream-empty">Couldn’t load services for this region.</p>';
       });
   }
 
-  countrySelect.addEventListener("change", () => {
-    saveToLocalStorage();
-    loadProviders(countrySelect.value);
+  regionSelect.addEventListener('change', function () {
+    region = regionSelect.value || 'US';
+    loadRegion(region);
   });
 
-  // Auto-load if country already set
-  if (savedCountry) {
-    loadProviders(savedCountry);
-  } else {
-    providerContainer.innerHTML = '<span style="font-size: 11px; color: var(--muted-silver);">Select a country to see providers</span>';
-  }
+  // Initial paint — default mode ON ("Only on my services"), profile region.
+  setMode(false);
+  loadRegion(region);
 }
 
 // =============================================
 // 8. UNIVERSES SECTION
 // =============================================
 
+/* ============================================================
+   UNIVERSES — unified keyword & collection search (Phase 1)
+   Rebuilt May 9, 2026
+   Right column of the Source/Universe tab. Replaces the old
+   Search Collections + Popular Universes layout with a unified
+   search input (parallel TMDB keyword + collection queries) plus
+   curated Popular Series and Popular Themes rows.
+
+   Filter shapes committed to state.filters:
+     collection chip → { type:'collection', id, name, collections:[id] }
+                       (`.collections` array kept so existing Universe
+                        Mode launch path at line ~1480 picks them up
+                        without modification — Phase 1 back-compat.)
+     keyword chip    → { type:'keyword',    id, name }
+                       (handled by buildTMDBQueryFromFilters universes
+                        case → params.set('with_keywords', …))
+   ============================================================ */
 function buildUniversesContent(root) {
-  root.appendChild(makeSectionLabel("Search Collections"));
+  /* ---------- Search — shared inline unit (Prompt 2 reskin).
+     Only the wrapper markup + input class change; the /search/keyword +
+     /search/collection autocomplete, the dropdown (IDs preserved), and the
+     commitKwFilter commit path below are all UNCHANGED. ---------- */
+  const inline = document.createElement("div");
+  inline.className = "gen-kw-inline";
+  const inlineHead = document.createElement("div");
+  inlineHead.className = "gen-kw-head";
+  inlineHead.textContent = "Search series & concepts";
+  inline.appendChild(inlineHead);
 
-  const desc = document.createElement("p");
-  desc.style.cssText = "font-size: 12px; color: var(--muted-silver); margin-bottom: 12px;";
-  desc.textContent = "Search TMDB for any movie collection or franchise.";
-  root.appendChild(desc);
+  const searchWrap = document.createElement("div");
+  searchWrap.className = "src-search-wrap";
+  const kwInput = document.createElement("input");
+  kwInput.type = "text";
+  kwInput.id = "kwSeriesInput";
+  kwInput.className = "kw-input";
+  kwInput.placeholder = "Search franchises, themes, concepts...";
+  kwInput.autocomplete = "off";
+  searchWrap.appendChild(kwInput);
+  inline.appendChild(searchWrap);
+  root.appendChild(inline);
 
-  const searchContainer = document.createElement("div");
-  searchContainer.style.position = "relative";
-  const searchRow = document.createElement("div");
-  searchRow.className = "input-row";
-  const searchInput = document.createElement("input");
-  searchInput.type = "text";
-  searchInput.id = "universeSearchInput";
-  searchInput.placeholder = "Search collections (e.g., Lord of the Rings)";
-  searchInput.autocomplete = "off";
-  searchRow.appendChild(searchInput);
-  searchContainer.appendChild(searchRow);
-  root.appendChild(searchContainer);
+  const dropdown = document.createElement("div");
+  dropdown.className = "orbit-kw-dropdown";
+  dropdown.id = "kwSeriesDropdown";
+  dropdown.style.display = "none";
+  dropdown.innerHTML =
+    '<div class="orbit-kw-group" id="kwSeriesGroup" style="display:none;">' +
+      '<div class="orbit-kw-group-label">FILM SERIES</div>' +
+      '<div class="orbit-kw-results" id="kwSeriesResults"></div>' +
+    '</div>' +
+    '<div class="orbit-kw-group" id="kwThemeGroup" style="display:none;">' +
+      '<div class="orbit-kw-group-label">THEMES &amp; CONCEPTS</div>' +
+      '<div class="orbit-kw-results" id="kwThemeResults"></div>' +
+    '</div>' +
+    '<div class="orbit-kw-empty" id="kwEmpty" style="display:none;">No results found</div>';
+  root.appendChild(dropdown);
 
-  let universeDropdown = document.getElementById("universeDropdownGlobal");
-  if (!universeDropdown) {
-    universeDropdown = document.createElement("div");
-    universeDropdown.id = "universeDropdownGlobal";
-    universeDropdown.style.cssText = `
-      display: none;
-      position: fixed;
-      max-height: 300px;
-      width: 500px;
-      overflow-y: auto;
-      background: rgba(10, 14, 26, 0.98);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 8px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-    `;
-    document.body.appendChild(universeDropdown);
-  }
+  let _kwTimer = null;
 
-  let selectedCollections = [];
-  let universeDebounceTimer;
-
-  const selectedContainer = document.createElement("div");
-  selectedContainer.id = "selectedUniverseContainer";
-  selectedContainer.style.cssText = "display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;";
-  root.appendChild(selectedContainer);
-
-  searchInput.addEventListener('input', () => {
-    clearTimeout(universeDebounceTimer);
-    const query = searchInput.value.trim();
-    if (query.length > 1) {
-      universeDebounceTimer = setTimeout(async () => {
-        const rect = searchInput.getBoundingClientRect();
-        universeDropdown.style.top = `${rect.bottom + 4}px`;
-        universeDropdown.style.left = `${rect.left}px`;
-        universeDropdown.style.width = `${Math.max(rect.width, 400)}px`;
-
-        try {
-          const res = await fetch(`https://api.themoviedb.org/3/search/collection?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
-          if (!res.ok) return;
-          const data = await res.json();
-          renderUniverseDropdown(data.results?.slice(0, 8) || []);
-        } catch (err) {
-          console.error("Collection search error:", err);
-        }
-      }, 300);
-    } else {
-      universeDropdown.style.display = 'none';
-    }
+  kwInput.addEventListener("input", function () {
+    const q = this.value.trim();
+    clearTimeout(_kwTimer);
+    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    _kwTimer = setTimeout(function () { searchKeywordsAndCollections(q); }, 350);
   });
 
-  function renderUniverseDropdown(collections) {
-    if (collections.length === 0) {
-      universeDropdown.style.display = 'none';
-      return;
-    }
-    universeDropdown.style.display = 'block';
-    universeDropdown.innerHTML = collections.map(c => `
-      <div class="universe-dropdown-item" data-id="${c.id}" data-name="${c.name}" style="
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 12px;
-        cursor: pointer;
-        border-bottom: 1px solid rgba(120, 190, 255, 0.1);
-        transition: background 0.15s ease;
-      " onmouseover="this.style.background='rgba(111, 210, 255, 0.1)'" onmouseout="this.style.background='transparent'">
-        <img src="${c.poster_path ? 'https://image.tmdb.org/t/p/w45' + c.poster_path : 'https://placehold.co/45x68?text=?'}"
-          style="width: 35px; height: 52px; object-fit: cover; border-radius: 4px; flex-shrink: 0;"
-          onerror="this.src='https://placehold.co/35x52?text=?'" />
-        <div style="flex: 1; min-width: 0;">
-          <div style="font-size: 14px; font-weight: 500; color: var(--film-white);">${c.name}</div>
-        </div>
-      </div>
-    `).join('');
+  kwInput.addEventListener("blur", function () {
+    setTimeout(function () { dropdown.style.display = "none"; }, 200);
+  });
 
-    universeDropdown.querySelectorAll('.universe-dropdown-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const id = parseInt(item.dataset.id);
-        const name = item.dataset.name;
-        if (selectedCollections.some(s => s.id === id)) return;
-        addCollectionChip({ id, name, type: "collection" });
-        searchInput.value = '';
-        universeDropdown.style.display = 'none';
+  async function searchKeywordsAndCollections(query) {
+    const key = TMDB_API_KEY;
+    const base = "https://api.themoviedb.org/3";
+    dropdown.style.display = "block";
+
+    let kwData = { results: [] }, colData = { results: [] };
+    try {
+      const [kwRes, colRes] = await Promise.all([
+        fetch(`${base}/search/keyword?api_key=${key}&query=${encodeURIComponent(query)}`),
+        fetch(`${base}/search/collection?api_key=${key}&query=${encodeURIComponent(query)}`)
+      ]);
+      [kwData, colData] = await Promise.all([kwRes.json(), colRes.json()]);
+    } catch (e) {
+      console.error("[Orbit] Keyword/collection search failed:", e);
+    }
+
+    const keywords    = (kwData.results  || []).slice(0, 5);
+    const collections = (colData.results || []).slice(0, 5);
+
+    const seriesGroup = document.getElementById("kwSeriesGroup");
+    const themeGroup  = document.getElementById("kwThemeGroup");
+    const emptyEl     = document.getElementById("kwEmpty");
+    const seriesRes   = document.getElementById("kwSeriesResults");
+    const themeRes    = document.getElementById("kwThemeResults");
+
+    seriesRes.innerHTML = "";
+    themeRes.innerHTML  = "";
+
+    if (collections.length > 0) {
+      seriesGroup.style.display = "block";
+      collections.forEach(function (col) {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "orbit-kw-item";
+        item.dataset.kind = "collection";
+        item.dataset.id   = col.id;
+        item.dataset.name = col.name;
+        item.innerHTML =
+          '<span class="orbit-kw-item-name"></span>' +
+          '<span class="orbit-kw-item-badge orbit-kw-badge--collection">Series</span>';
+        item.querySelector(".orbit-kw-item-name").textContent = col.name;
+        item.addEventListener("mousedown", function () {
+          commitKwFilter("collection", col.id, col.name);
+          kwInput.value = "";
+          dropdown.style.display = "none";
+        });
+        seriesRes.appendChild(item);
+      });
+    } else {
+      seriesGroup.style.display = "none";
+    }
+
+    if (keywords.length > 0) {
+      themeGroup.style.display = "block";
+      keywords.forEach(function (kw) {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "orbit-kw-item";
+        item.dataset.kind = "keyword";
+        item.dataset.id   = kw.id;
+        item.dataset.name = kw.name;
+        item.innerHTML =
+          '<span class="orbit-kw-item-name"></span>' +
+          '<span class="orbit-kw-item-badge orbit-kw-badge--keyword">Concept</span>';
+        item.querySelector(".orbit-kw-item-name").textContent = kw.name;
+        item.addEventListener("mousedown", function () {
+          commitKwFilter("keyword", kw.id, kw.name);
+          kwInput.value = "";
+          dropdown.style.display = "none";
+        });
+        themeRes.appendChild(item);
+      });
+    } else {
+      themeGroup.style.display = "none";
+    }
+
+    emptyEl.style.display =
+      (collections.length === 0 && keywords.length === 0) ? "block" : "none";
+  }
+
+  /* commitKwFilter — toggle: add filter on first click, remove on
+     duplicate click. Keeps state.filters and chip visual in sync. */
+  function commitKwFilter(kind, id, name) {
+    const filterId = "universes-" + kind + "-" + id;
+    const existingIdx = state.filters.findIndex(function (f) { return f.id === filterId; });
+
+    if (existingIdx !== -1) {
+      state.filters.splice(existingIdx, 1);
+    } else if (kind === "collection") {
+      // .collections kept for back-compat with Universe Mode launch flow
+      state.filters.push({
+        id: filterId,
+        section: "universes",
+        label: name,
+        value: { type: "collection", id: id, name: name, collections: [id] }
+      });
+    } else {
+      state.filters.push({
+        id: filterId,
+        section: "universes",
+        label: name,
+        value: { type: "keyword", id: id, name: name }
+      });
+    }
+
+    syncCuratedActive();
+    renderFilterChips();
+  }
+
+  // ---------- Popular Series (collection chips) ----------
+  root.appendChild(makeSectionLabel("Popular Series"));
+  const seriesChipGroup = document.createElement("div");
+  seriesChipGroup.className = "chip-group";
+
+  const POPULAR_SERIES = [
+    "mcu", "star-wars", "harry-potter", "james-bond",
+    "alien", "predator", "lotr", "mission-impossible"
+  ];
+  const SERIES_DISPLAY = {
+    "mcu": "MCU",
+    "star-wars": "Star Wars",
+    "harry-potter": "Harry Potter",
+    "james-bond": "James Bond",
+    "alien": "Alien",
+    "predator": "Predator",
+    "lotr": "Lord of the Rings",
+    "mission-impossible": "Mission: Impossible"
+  };
+  POPULAR_SERIES.forEach(function (key) {
+    const entry = ORBIT_KEYWORD_IDS[key];
+    if (!entry) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "disco-chip";   // Prompt 2 reskin; commit path unchanged
+    btn.dataset.curatedKey = "collection-" + entry.id;
+    btn.textContent = SERIES_DISPLAY[key] || entry.label;
+    btn.addEventListener("click", function () {
+      commitKwFilter("collection", entry.id, entry.label);
+    });
+    seriesChipGroup.appendChild(btn);
+  });
+  root.appendChild(seriesChipGroup);
+
+  // ---------- Popular Themes (keyword chips) ----------
+  // Prompt 2: drop the off-axis --purple label modifier; indigo via data-axis.
+  root.appendChild(makeSectionLabel("Popular Themes"));
+
+  const themesChipGroup = document.createElement("div");
+  themesChipGroup.className = "chip-group";
+
+  const POPULAR_THEMES = [
+    "time-travel", "heist", "dystopia", "serial-killer",
+    "revenge", "coming-of-age", "vampire", "space"
+  ];
+  POPULAR_THEMES.forEach(function (key) {
+    const entry = ORBIT_KEYWORD_IDS[key];
+    if (!entry) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "disco-chip";   // Prompt 2 reskin; commit path unchanged
+    btn.dataset.curatedKey = "keyword-" + entry.id;
+    btn.textContent = entry.label;
+    btn.addEventListener("click", function () {
+      commitKwFilter("keyword", entry.id, entry.label);
+    });
+    themesChipGroup.appendChild(btn);
+  });
+  root.appendChild(themesChipGroup);
+
+  /* Reflect state.filters → chip .active class. Called after every
+     commit, plus once on initial build to restore active chips when
+     reopening the panel with existing universes filters in state. */
+  function syncCuratedActive() {
+    const activeKeys = new Set();
+    state.filters.forEach(function (f) {
+      if (f.section !== "universes" || !f.value) return;
+      if (f.value.type === "collection" && f.value.id != null) {
+        activeKeys.add("collection-" + f.value.id);
+      } else if (f.value.type === "keyword" && f.value.id != null) {
+        activeKeys.add("keyword-" + f.value.id);
+      }
+    });
+    [seriesChipGroup, themesChipGroup].forEach(function (group) {
+      group.querySelectorAll(".disco-chip").forEach(function (btn) {
+        const k = btn.dataset.curatedKey;
+        if (activeKeys.has(k)) btn.classList.add("on");   // .disco-chip active state
+        else btn.classList.remove("on");
       });
     });
-
-    document.addEventListener('click', (e) => {
-      if (!searchInput.contains(e.target) && !universeDropdown.contains(e.target)) {
-        universeDropdown.style.display = 'none';
-      }
-    }, { once: true });
   }
-
-  function addCollectionChip(collection) {
-    selectedCollections.push(collection);
-    const chip = document.createElement("div");
-    chip.className = "selected-universe-chip";
-    chip.dataset.collectionId = collection.id;
-    chip.dataset.collectionName = collection.name;
-    chip.dataset.collectionType = collection.type;
-    chip.style.cssText = `
-      background: rgba(111, 210, 255, 0.15);
-      border: 1px solid rgba(0, 217, 255, 0.3);
-      border-radius: 999px;
-      padding: 6px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--film-white);
-    `;
-    chip.innerHTML = `
-      <span>${collection.name}</span>
-      <button style="
-        background: transparent;
-        border: none;
-        color: var(--muted-silver);
-        cursor: pointer;
-        font-size: 14px;
-        padding: 0 4px;
-        transition: color 0.15s;
-      " onmouseover="this.style.color='var(--danger-red)'" onmouseout="this.style.color='var(--muted-silver)'">✕</button>
-    `;
-    chip.querySelector('button').addEventListener('click', () => {
-      selectedCollections = selectedCollections.filter(c => c.id !== collection.id);
-      chip.remove();
-    });
-    selectedContainer.appendChild(chip);
-  }
-
-  // --- CURATED UNIVERSES ---
-  root.appendChild(makeSectionLabel("Popular Universes"));
-  const curatedGroup = document.createElement("div");
-  curatedGroup.className = "chip-group";
-
-  const curated = [
-    { name: "MCU", ids: [131295] },
-    { name: "DCEU", ids: [948485] },
-    { name: "Star Wars", ids: [10] },
-    { name: "Harry Potter", ids: [1241] },
-    { name: "James Bond", ids: [645] },
-    { name: "Fast & Furious", ids: [9485] },
-    { name: "Mission Impossible", ids: [87359] },
-    { name: "Jurassic Park", ids: [328] },
-    { name: "MonsterVerse", ids: [535313] }
-  ];
-
-  curated.forEach(u => {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "chip";
-    chip.textContent = u.name;
-    chip.dataset.value = JSON.stringify({ type: "universe", name: u.name, collections: u.ids });
-    chip.addEventListener("click", () => {
-      chip.classList.toggle("active");
-    });
-    curatedGroup.appendChild(chip);
-  });
-  root.appendChild(curatedGroup);
-
-  // Close dropdown on focus card close
-  const closeButton = document.getElementById('focusCloseButton');
-  if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      universeDropdown.style.display = 'none';
-    });
-  }
+  syncCuratedActive();
 }
 
 // =============================================
@@ -3264,16 +6448,59 @@ function buildUniversesContent(root) {
 // =============================================
 
 function buildAwardsContent(root) {
-  // --- Recognition level ---
-  root.appendChild(makeSectionLabel("Recognition"));
+  /* Awards 2-column layout (May 5, 2026): Recognition + Specific Year
+     + Year Range sliders on the left; Festival above Category on the
+     right, separated by a focus-section-label divider. */
+
+  /* Data-quality disclaimer — added 2026-05-16. Awards data is being
+     rebuilt; coverage is limited to legacy datasets. Uses inline SVG
+     (no og-warning glyph in the current set) with gold accent var. */
+  const awardsDisclaimer = document.createElement("div");
+  awardsDisclaimer.style.cssText = `
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background: rgba(var(--accent-gold-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-gold-rgb), 0.3);
+    border-radius: 8px;
+    font-family: "Barlow", sans-serif;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted-silver);
+  `;
+  awardsDisclaimer.innerHTML = `
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--accent-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;" aria-hidden="true">
+      <path d="M8 2L14 13H2L8 2Z"/>
+      <line x1="8" y1="6.5" x2="8" y2="9.5"/>
+      <circle cx="8" cy="11.5" r="0.5" fill="var(--accent-gold)"/>
+    </svg>
+    <div>
+      <strong style="color: var(--film-white);">Awards data is being rebuilt.</strong>
+      Coverage is limited to Oscar, BAFTA, Golden Globe, Cannes, Venice, and Berlin from legacy datasets &mdash; some nominees and older ceremonies may be missing.
+    </div>
+  `;
+  root.appendChild(awardsDisclaimer);
+
+  const grid = document.createElement("div");
+  grid.className = "oft-awards-grid";
+  const colLeft  = document.createElement("div"); colLeft.className  = "oft-awards-col";
+  const colRight = document.createElement("div"); colRight.className = "oft-awards-col";
+  grid.appendChild(colLeft);
+  grid.appendChild(colRight);
+  root.appendChild(grid);
+
+  // --- Recognition level (left) ---
+  colLeft.appendChild(makeSectionLabel("Recognition"));
   const levelGroup = document.createElement("div");
   levelGroup.className = "chip-group";
   levelGroup.appendChild(makeChip("Winner", "awards", { type: "award-level", level: "winner" }));
   levelGroup.appendChild(makeChip("Nominee", "awards", { type: "award-level", level: "nominee" }));
-  root.appendChild(levelGroup);
+  colLeft.appendChild(levelGroup);
 
-  // --- Festival ---
-  root.appendChild(makeSectionLabel("Festival"));
+  // --- Festival (right, top) ---
+  colRight.appendChild(makeSectionLabel("Festival"));
   const festivalGroup = document.createElement("div");
   festivalGroup.className = "chip-group";
   const festivals = [
@@ -3289,26 +6516,28 @@ function buildAwardsContent(root) {
     chip.innerHTML = '<span class="og ' + f.glyph + '"></span> ' + f.label;
     festivalGroup.appendChild(chip);
   });
-  root.appendChild(festivalGroup);
+  colRight.appendChild(festivalGroup);
 
-  // --- Category ---
-  root.appendChild(makeSectionLabel("Category"));
+  // --- Category (right, below Festival) ---
+  colRight.appendChild(makeSectionLabel("Category"));
   const catGroup = document.createElement("div");
   catGroup.className = "chip-group";
+  /* Trimmed May 4, 2026: dropped Silver Bear (Grand Jury) and
+     Silver Bear (Director) — Silver Lion variants kept. */
   const categories = [
     "Best Picture", "Best Film", "Best Director", "Best Actor", "Best Actress",
     "Best Drama", "Best Comedy/Musical",
     "Palme d'Or", "Grand Prix", "Jury Prize",
     "Golden Lion", "Silver Lion (Grand Jury)", "Silver Lion (Director)",
-    "Golden Bear", "Silver Bear (Grand Jury)", "Silver Bear (Director)"
+    "Golden Bear"
   ];
   categories.forEach(function(cat) {
     catGroup.appendChild(makeChip(cat, "awards", { type: "award-category", category: cat }));
   });
-  root.appendChild(catGroup);
+  colRight.appendChild(catGroup);
 
-  // --- Specific Year ---
-  root.appendChild(makeSectionLabel("Specific Year"));
+  // --- Specific Year (left) ---
+  colLeft.appendChild(makeSectionLabel("Specific Year"));
   const awardSpecificRow = document.createElement("div");
   awardSpecificRow.className = "input-row";
   const awardYearInput = document.createElement("input");
@@ -3318,10 +6547,10 @@ function buildAwardsContent(root) {
   awardYearInput.min = "1950";
   awardYearInput.max = "2030";
   awardSpecificRow.appendChild(awardYearInput);
-  root.appendChild(awardSpecificRow);
+  colLeft.appendChild(awardSpecificRow);
 
-  // --- Award Year Range ---
-  root.appendChild(makeSectionLabel("Year Range"));
+  // --- Award Year Range (left) ---
+  colLeft.appendChild(makeSectionLabel("Year Range"));
 
   const awardYearRow = document.createElement("div");
   awardYearRow.className = "input-row";
@@ -3372,61 +6601,18 @@ function buildAwardsContent(root) {
 
   awardYearRow.appendChild(awardFromRow);
   awardYearRow.appendChild(awardToRow);
-  root.appendChild(awardYearRow);
+  colLeft.appendChild(awardYearRow);
 
-  // Decade quick-select chips
-  root.appendChild(makeSectionLabel("Quick Decade"));
-  const awardDecadeGroup = document.createElement("div");
-  awardDecadeGroup.className = "chip-group";
-  awardDecadeGroup.id = "awardDecadeGroup";
-  [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020].forEach(function(d) {
-    const chip = makeChip(d + "s", "awards", { type: "award-decade", decade: d });
-    chip.addEventListener("click", function() {
-      // Deactivate other decade chips (single-select)
-      awardDecadeGroup.querySelectorAll(".chip").forEach(function(c) {
-        if (c !== chip) c.classList.remove("active");
-      });
-      // If active, snap sliders to this decade and clear specific year
-      if (chip.classList.contains("active")) {
-        fromSlider.value = d;
-        toSlider.value = d + 9;
-        fromValue.textContent = d;
-        toValue.textContent = d + 9;
-        awardYearInput.value = "";
-      } else {
-        // Deselected — reset sliders to full range
-        fromSlider.value = 1950;
-        toSlider.value = 2025;
-        fromValue.textContent = "1950";
-        toValue.textContent = "2025";
-      }
-    });
-    awardDecadeGroup.appendChild(chip);
-  });
-  root.appendChild(awardDecadeGroup);
+  /* Quick Decade section removed May 4, 2026 — duplicated Year
+     Range slider functionality. Slider handlers below no longer
+     need to clear a decade-chip selection. */
 
-  // Slider interaction clears decade chips
-  function onSliderInput() {
-    var from = parseInt(fromSlider.value);
-    var to = parseInt(toSlider.value);
-    if (from > to) {
-      toSlider.value = from;
-      to = from;
-    }
-    fromValue.textContent = from;
-    toValue.textContent = to;
-    // Clear decade selection when user manually drags
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) {
-      c.classList.remove("active");
-    });
-  }
   fromSlider.addEventListener("input", function() {
     var from = parseInt(fromSlider.value);
     var to = parseInt(toSlider.value);
     if (from > to) { toSlider.value = from; toValue.textContent = from; }
     fromValue.textContent = from;
     awardYearInput.value = "";
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
   toSlider.addEventListener("input", function() {
     var from = parseInt(fromSlider.value);
@@ -3434,7 +6620,6 @@ function buildAwardsContent(root) {
     if (to < from) { fromSlider.value = to; fromValue.textContent = to; }
     toValue.textContent = to;
     awardYearInput.value = "";
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
 
   // Specific year input clears sliders and decade chips
@@ -3451,7 +6636,6 @@ function buildAwardsContent(root) {
       fromValue.textContent = "1950";
       toValue.textContent = "2025";
     }
-    awardDecadeGroup.querySelectorAll(".chip.active").forEach(function(c) { c.classList.remove("active"); });
   });
 }
 
@@ -3465,7 +6649,7 @@ function collectLabelsForSection(sectionKey) {
   switch (sectionKey) {
     case "people":
       const selectedPeopleChips = document.querySelectorAll('.selected-person-chip');
-      return Array.from(selectedPeopleChips).map(chip => {
+      const peopleResults = Array.from(selectedPeopleChips).map(chip => {
         const role = chip.dataset.personRole;
         let roleLabel = "";
         if (role === "cast") roleLabel = " (Actor)";
@@ -3480,173 +6664,207 @@ function collectLabelsForSection(sectionKey) {
           }
         };
       });
-
-    case "genres":
-      const genreChips = document.querySelectorAll('#focusContent .chip.active');
-      return Array.from(genreChips).map(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        return { label: chip.textContent, value };
-      });
-
-    case "timeEra":
-      // Year input
-      const yearInput = document.getElementById("yearInput");
-      if (yearInput && yearInput.value) {
-        results.push({
-          label: `Year: ${yearInput.value}`,
-          value: { type: "year", year: parseInt(yearInput.value), subType: "release" }
-        });
-      }
-
-      // Release decade chips + dateRange + runtime chips
-      const releaseChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.subType === "release";
-        });
-      releaseChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        let label = chip.textContent;
-        if (value.type === "decade") label = `Released ${value.decade}s`;
-        else if (value.type === "dateRange") label = chip.textContent;
-        else if (value.type === "runtime") label = chip.textContent;
-        results.push({ label, value });
-      });
-
-      // Runtime sliders
-      const runtimeMin = document.getElementById("runtimeMin");
-      const runtimeMax = document.getElementById("runtimeMax");
-      if (runtimeMin && runtimeMax) {
-        const min = parseInt(runtimeMin.value);
-        const max = parseInt(runtimeMax.value);
-        if (min > 0 || max < 300) {
-          // Don't add if a runtime chip already selected
-          const hasRuntimeChip = results.some(r => r.value.type === "runtime");
-          if (!hasRuntimeChip) {
-            results.push({
-              label: `Runtime: ${min}-${max} min`,
-              value: { type: "runtime", subType: "release", min, max }
-            });
-          }
+      if (typeof currentFilmmakerProfile === 'object' && currentFilmmakerProfile) {
+        const fp = currentFilmmakerProfile;
+        const fpAwards = Array.isArray(fp.awards) ? fp.awards : [];
+        const fpParts = ['role', 'nationality', 'gender', 'career_stage']
+          .filter(k => fp[k] && fp[k] !== 'any')
+          .map(k => k + ':' + fp[k]);
+        if (fpAwards.length > 0) fpParts.push('awards:' + fpAwards.join('+'));
+        if (fpParts.length > 0) {
+          peopleResults.push({
+            label: 'Filmmaker: ' + fpParts.join(', '),
+            value: {
+              type: 'filmmakerProfile',
+              profile: Object.assign({}, fp, { awards: fpAwards.slice() })
+            }
+          });
         }
       }
+      return peopleResults;
 
-      return results;
+    case "genres": {
+      /* Rebuilt June 7, 2026 (lockstep with buildGenresContent): read
+         the migrated .disco-chip.on genre chips, type:"genre" only. The
+         mood/Keywords sub-groups are gone, so we no longer read
+         type:"keyword" here (the query builder's keyword branch is now
+         dormant). tmdb-keyword filters commit directly via the keyword
+         widget and are not read here. Emits the SAME {type:"genre",name}
+         value shape → query builder unchanged → with_genres (comma/pipe
+         per state.genreLogic). */
+      const genreChips = Array.from(document.querySelectorAll(
+        '#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'
+      )).filter(chip => {
+        let v; try { v = JSON.parse(chip.dataset.value); } catch (e) { return false; }
+        return v && v.type === "genre";
+      });
+      return genreChips.map(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        return { label: value.name, value };
+      });
+    }
 
-    case "ratingsContent":
-      // Rating sliders
-      const ratingMin = document.getElementById("ratingMin");
-      const ratingMax = document.getElementById("ratingMax");
-      if (ratingMin && ratingMax) {
-        const min = parseFloat(ratingMin.value);
-        const max = parseFloat(ratingMax.value);
-        if (min > 0 || max < 10) {
+    case "timeEra": {
+      /* Phase 4 (Era-A): read ONLY the two OrbitSlider controllers stashed
+         on the panel body (#oft-body-era._eraSliders). The year scrubber is
+         the single source of truth for release date; the runtime slider for
+         runtime. Decade / jump / recency chips + runtime presets are pure
+         DRIVERS (they call setValues only) and are NOT read here — so exactly
+         one primary_release_date.* + one with_runtime.* filter can ever exist.
+         Value shapes match the (frozen) query builder + preset-restore path. */
+      const eraBody = document.getElementById("oft-body-era");
+      const eraSliders = eraBody && eraBody._eraSliders;
+
+      // Release window — dual slider; full-timeline guard emits nothing
+      if (eraSliders && eraSliders.year) {
+        const [lo, hi] = eraSliders.year.getValues();
+        if (lo > ERA_YEAR_MIN || hi < ERA_YEAR_MAX) {
           results.push({
-            label: `Rating: ${min.toFixed(1)}-${max.toFixed(1)}`,
-            value: { type: "rating", min, max }
+            label: `Released ${lo}–${hi}`,
+            value: { type: "dateRange", subType: "release", start: `${lo}-01-01`, end: `${hi}-12-31` }
           });
         }
       }
 
-      // Vote chips
-      const voteChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.type === "votes";
-        });
-      voteChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: `Min votes: ${value.min.toLocaleString()}`,
-          value
-        });
-      });
+      // Runtime — dual slider; default [0,300] emits nothing
+      if (eraSliders && eraSliders.runtime) {
+        const [min, max] = eraSliders.runtime.getValues();
+        if (min > 0 || max < 300) {
+          results.push({
+            label: `Runtime: ${min}-${max} min`,
+            value: { type: "runtime", subType: "release", min, max }
+          });
+        }
+      }
 
-      // Certification chips
-      const certChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      return results;
+    }
+
+    case "ratingsContent": {
+      /* Phase 3b: read the OrbitSlider controllers stashed on the panel body
+         (#oft-body-ratings._ratingSliders) for score + votes, and migrated
+         .disco-chip.on for certs. Emits the SAME value shapes the (frozen)
+         query builder + preset-restore path consume:
+           {type:"rating",min,max} / {type:"votes",min} / {type:"certification",rating} */
+      const ratingsBody = document.getElementById("oft-body-ratings");
+      const sliders = ratingsBody && ratingsBody._ratingSliders;
+
+      // Score range — dual slider; non-default guard preserved (lo>0 || hi<10)
+      if (sliders && sliders.score) {
+        const range = sliders.score.getValues(); // [lo, hi]
+        const lo = range[0], hi = range[1];
+        if (lo > 0 || hi < 10) {
+          results.push({
+            label: `Rating: ${lo.toFixed(1)}-${hi.toFixed(1)}`,
+            value: { type: "rating", min: lo, max: hi }
+          });
+        }
+      }
+
+      // Minimum votes — single slider; only when constrained (> 0)
+      if (sliders && sliders.votes) {
+        const n = sliders.votes.getValues();
+        if (n > 0) {
+          results.push({
+            label: `Min votes: ${n.toLocaleString()}`,
+            value: { type: "votes", min: n }
+          });
+        }
+      }
+
+      // Certification chips — migrated to .disco-chip.on (Era pattern, lockstep
+      // with the builder; reading .chip.active here would silently drop certs)
+      const certChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
           const val = JSON.parse(chip.dataset.value);
           return val.type === "certification";
         });
       certChips.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
-        results.push({
-          label: `Rated ${value.rating}`,
-          value
-        });
+        results.push({ label: `Rated ${value.rating}`, value });
       });
 
       return results;
+    }
 
-    case "regionLanguage":
-      const regionContainer = document.getElementById("selectedRegionContainer");
-      if (regionContainer && regionContainer.children.length > 0) {
-        const regionChip = regionContainer.querySelector('[data-region-code]');
-        const regionText = regionContainer.querySelector('span')?.textContent;
-        if (regionChip && regionText) {
-          const code = regionChip.dataset.regionCode;
-          results.push({
-            label: `Region: ${regionText}`,
-            value: { type: "region", code: code, name: regionText }
-          });
-        }
-      }
+    case "regionLanguage": {
+      /* Rebuilt 2026-06-23 (lockstep with the Variant-A three-track
+         buildRegionLanguageContent). REGION = the de-duplicated union of
+         every .on country chip (data-region-code) and every .on group card
+         (data-group-codes, a comma list — includes union-only codes like
+         CL/PK that have no country chip). LANGUAGE = the single .on language
+         chip (data-lang-code), or nothing. Emits the unchanged
+         {type:"region"|"language",code,name} shapes the frozen query builder
+         (case "regionLanguage") consumes — that builder is NOT touched. */
+      const panel = document.getElementById("oft-panel-region");
+      if (!panel) return results;
 
-      const englishToggle = document.getElementById("englishOnlyToggle");
-      const langContainer = document.getElementById("selectedLanguageContainer");
-
-      if (englishToggle && englishToggle.checked) {
+      const codes = new Set();
+      panel.querySelectorAll('.region-country-chip.on[data-region-code]').forEach(chip => {
+        if (chip.dataset.regionCode) codes.add(chip.dataset.regionCode);
+      });
+      panel.querySelectorAll('.region-group-card.on[data-group-codes]').forEach(card => {
+        (card.dataset.groupCodes || "").split(",").forEach(c => {
+          const code = c.trim();
+          if (code) codes.add(code);
+        });
+      });
+      codes.forEach(code => {
         results.push({
-          label: `Language: English`,
-          value: { type: "language", code: "en", name: "English" }
+          label: `Region: ${regionName(code)}`,
+          value: { type: "region", code: code, name: regionName(code) }
         });
-      } else if (langContainer && langContainer.children.length > 0) {
-        const langChip = langContainer.querySelector('[data-lang-code]');
-        const langText = langContainer.querySelector('span')?.textContent;
-        if (langChip && langText) {
-          const langCode = langChip.dataset.langCode;
-          results.push({
-            label: `Language: ${langText}`,
-            value: { type: "language", code: langCode, name: langText }
-          });
-        }
-      }
-
-      return results;
-
-    case "production":
-      const studioChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
-        .filter(chip => {
-          const val = JSON.parse(chip.dataset.value);
-          return val.type === "company";
-        });
-      studioChips.forEach(chip => {
-        const value = JSON.parse(chip.dataset.value);
-        results.push({ label: chip.textContent, value });
       });
 
-      const boxOfficeMin = document.getElementById("boxOfficeMin");
-      const boxOfficeMax = document.getElementById("boxOfficeMax");
-      if (boxOfficeMin && boxOfficeMax) {
-        const min = parseInt(boxOfficeMin.value) * 1000000;
-        const max = parseInt(boxOfficeMax.value) * 1000000;
-        if (min > 0 || max < 2000000000) {
-          results.push({
-            label: `Box Office: $${min/1000000}M-$${max/1000000}M${max >= 2000000000 ? '+' : ''}`,
-            value: { type: "boxoffice", min, max }
-          });
-        }
+      const langChip = panel.querySelector('.region-language-chip.on[data-lang-code]');
+      if (langChip && langChip.dataset.langCode) {
+        const langCode = langChip.dataset.langCode;
+        const langText = (langChip.textContent || "").trim();
+        results.push({
+          label: `Language: ${langText}`,
+          value: { type: "language", code: langCode, name: langText }
+        });
       }
-      return results;
 
-    case "watch":
-      const watchChips = document.querySelectorAll('#watchProviderChips .chip.active');
-      return Array.from(watchChips).map(chip => {
+      return results;
+    }
+
+    case "production": {
+      /* Rebuilt June 8, 2026 (lockstep with buildProductionContent):
+         read selected studio tiles (.studio-tile.on, type:"company") and
+         emit the unchanged {type:"company",id,name} shape → with_companies.
+         The box-office read ({type:"boxoffice"}) was CUT — it fed a param
+         /discover/movie ignores. */
+      const studioTiles = Array.from(document.querySelectorAll('#focusContent .studio-tile.on, .oft-panel--active .studio-tile.on'))
+        .filter(tile => {
+          try { return JSON.parse(tile.dataset.value).type === "company"; } catch (e) { return false; }
+        });
+      return studioTiles.map(tile => {
+        const value = JSON.parse(tile.dataset.value);
+        return { label: value.name, value };
+      });
+    }
+
+    case "watch": {
+      /* Rebuilt Jun 20, 2026 (lockstep with buildWatchContent, Stream arc 2b):
+         mode "All films" → emit the 2a {type:"stream_mode",mode:"all"} override
+         (suppresses the scope default, contributes NO params). Otherwise read
+         selected service tiles + add-more chips → unchanged
+         {type:"provider",id,name,region} shapes the query builder already maps. */
+      const watchModeAll = document.querySelector('#watchModeToggle .opt.on[data-mode="all"]');
+      if (watchModeAll) {
+        return [{ label: "All films", value: { type: "stream_mode", mode: "all" } }];
+      }
+      const watchPicks = document.querySelectorAll(
+        '#watchServiceGrid .service-tile.is-on, #watchAddMore .disco-chip.on'
+      );
+      return Array.from(watchPicks).map(el => {
         try {
-          const val = JSON.parse(chip.dataset.value);
+          const val = JSON.parse(el.dataset.value);
           return { label: val.name, value: val };
         } catch { return null; }
       }).filter(Boolean);
+    }
 
     case "universes":
       const universeResults = [];
@@ -3659,7 +6877,7 @@ function collectLabelsForSection(sectionKey) {
         });
       });
       // Curated universe chips
-      const curatedChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      const curatedChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
           try {
             const val = JSON.parse(chip.dataset.value);
@@ -3672,15 +6890,20 @@ function collectLabelsForSection(sectionKey) {
       });
       return universeResults;
 
-    case "themes":
-      const themeChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+    case "themes": {
+      /* Rebuilt June 7, 2026 (lockstep with buildThemesContent): read the
+         migrated .disco-chip.on theme chips (type:"theme"). Same value
+         shape {type:"theme",name} → unchanged client-side post-filter (no
+         TMDB param). tmdb-keyword theme filters commit on their own path. */
+      const themeChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "theme"; } catch { return false; }
+          try { return JSON.parse(chip.dataset.value).type === "theme"; } catch (e) { return false; }
         });
       return themeChips.map(chip => {
         const value = JSON.parse(chip.dataset.value);
         return { label: `Theme: ${value.name}`, value };
       });
+    }
 
     case "settingWhere":
       const locationResults = [];
@@ -3693,10 +6916,13 @@ function collectLabelsForSection(sectionKey) {
           value: { type: "location", name: loc }
         });
       });
-      // Chip-selected locations (popular/region/special chips)
-      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      // Chip-selected locations (popular/region/special chips). Build A:
+      // also read {type:"keyword"} chips (verified Setting keywords) so their
+      // id flows through to the query builder's with_keywords; value pushed
+      // wholesale, so the id is carried intact (mirrors basedOn read).
+      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "location"; } catch { return false; }
+          try { const t = JSON.parse(chip.dataset.value).type; return t === "location" || t === "keyword"; } catch { return false; }
         });
       locChipsActive.forEach(chip => {
         const value = JSON.parse(chip.dataset.value);
@@ -3709,13 +6935,14 @@ function collectLabelsForSection(sectionKey) {
 
     case "settingWhen":
       const whenResults = [];
-      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active'));
+      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'));
       whenChips.forEach(chip => {
         try {
           const value = JSON.parse(chip.dataset.value);
           let label = chip.textContent;
           if (value.type === "time_decade") label = `Set in ${value.value}`;
           else if (value.type === "time_era") label = `Era: ${value.value}`;
+          else if (value.type === "keyword") label = `Era: ${value.name}`; // Build A: verified era keyword (e.g. WWII) → with_keywords
           // time_special uses the chip text as-is
           whenResults.push({ label, value });
         } catch {}
@@ -3723,9 +6950,14 @@ function collectLabelsForSection(sectionKey) {
       return whenResults;
 
     case "basedOn":
-      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .chip.active'))
+      /* Lockstep with buildBasedOnContent: surviving Source Type chips carry
+         {type:"keyword", id} → with_keywords (Prompt 1), now rendered as
+         .disco-chip.on (Prompt 2 reskin), so read by class + type. The
+         universes Popular chips share the active panel but carry no
+         dataset.value → excluded by the try/catch. */
+      const basedOnChips = Array.from(document.querySelectorAll('#focusContent .disco-chip.on, .oft-panel--active .disco-chip.on'))
         .filter(chip => {
-          try { return JSON.parse(chip.dataset.value).type === "based_on"; } catch { return false; }
+          try { return JSON.parse(chip.dataset.value).type === "keyword"; } catch { return false; }
         });
       return basedOnChips.map(chip => {
         const value = JSON.parse(chip.dataset.value);
@@ -3734,7 +6966,7 @@ function collectLabelsForSection(sectionKey) {
 
     case "awards":
       const awardResults = [];
-      const awardChips = document.querySelectorAll('#focusContent .chip.active');
+      const awardChips = document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active');
       awardChips.forEach(function(chip) {
         const value = JSON.parse(chip.dataset.value);
         // Skip decade chips — the slider values are what we collect
@@ -3762,3 +6994,2209 @@ function collectLabelsForSection(sectionKey) {
 }
 
 // Region modal removed - all streaming settings consolidated into Watch Providers section
+
+/* ============================================================
+   MOSAIC ANCHOR — Added May 1, 2026
+   Pins .discover-mosaic-region's top edge to the exact bottom of
+   the streaming bar so the mosaic begins precisely at the second
+   horizontal divider. Re-measures on resize.
+   ============================================================ */
+(function initMosaicAnchor() {
+  var streamBar = document.getElementById('discoverStreamBar');
+  if (!streamBar) return;
+  function sync() {
+    var rect = streamBar.getBoundingClientRect();
+    /* getBoundingClientRect.bottom is viewport-relative; add scrollY
+       so the value works for an absolute-positioned element pinned
+       to the body's coordinate system. */
+    var topPx = Math.round(rect.bottom + window.scrollY);
+    document.documentElement.style.setProperty('--mosaic-top', topPx + 'px');
+  }
+  sync();
+  window.addEventListener('resize', sync);
+})();
+
+/* ============================================================
+   MOVIE MOSAIC — Added May 1, 2026
+   Mirrors landing page populateMosaic logic from pages/home.js.
+   Fetches trending + top-rated posters via TMDB, caches in
+   sessionStorage for 2h, and fades them into the cell grid.
+
+   Per Rule 9: 3 parallel fetches once per session.
+
+   Cache key version bumped after API key rotation so any stale
+   empty cache from a previous session is ignored.
+   ============================================================ */
+(function loadDiscoverMosaicPosters() {
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return;
+  var grid = document.getElementById('discover-hero-mosaic');
+  if (!grid) return;
+
+  var CACHE_KEY = 'orbit_discover_mosaic_posters_v2';
+  var CACHE_TTL = 2 * 60 * 60 * 1000;
+
+  function paint(paths) {
+    if (!paths || !paths.length) return;
+    var cells = grid.querySelectorAll('.mosaic-cell');
+    if (!cells.length) return;
+
+    var shuffled = paths.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = shuffled[i]; shuffled[i] = shuffled[j]; shuffled[j] = tmp;
+    }
+
+    var assigned = [];
+    var idx = 0;
+    for (var k = 0; k < cells.length; k++) {
+      if (idx >= shuffled.length) idx = 0;
+      if (k > 0 && assigned[k - 1] === shuffled[idx] && shuffled.length > 1) {
+        idx = (idx + 1) % shuffled.length;
+      }
+      assigned.push(shuffled[idx]);
+      idx++;
+    }
+
+    cells.forEach(function (cell, i) {
+      cell.style.opacity = '0';
+      cell.style.transition = 'opacity 0.8s ease';
+      /* w185 fits the larger 12×2 tile size cleanly; w92 was too low-res. */
+      cell.style.backgroundImage = 'url(' + OrbitUtils.TMDB_IMG + 'w185' + assigned[i] + ')';
+      cell.style.backgroundSize = 'cover';
+      cell.style.backgroundPosition = 'center';
+      setTimeout(function () { cell.style.opacity = '1'; }, 40 * i);
+    });
+  }
+
+  /* Use cache only if it has actual data — never trust an empty cache. */
+  try {
+    var cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      var parsed = JSON.parse(cached);
+      if (parsed && parsed.data && parsed.data.length &&
+          Date.now() - parsed.timestamp < CACHE_TTL) {
+        paint(parsed.data);
+        return;
+      }
+    }
+  } catch (e) { /* fall through to fetch */ }
+
+  /* Use allSettled so one failing endpoint doesn't blank the mosaic. */
+  Promise.allSettled([
+    OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 1 }),
+    OrbitUtils.tmdbFetch('/trending/movie/week', { language: 'en-US', page: 2 }),
+    OrbitUtils.tmdbFetch('/movie/top_rated', { language: 'en-US', page: 1 })
+  ]).then(function (results) {
+    var paths = [];
+    results.forEach(function (r) {
+      if (r.status === 'fulfilled' && r.value && r.value.results) {
+        r.value.results.forEach(function (m) {
+          if (m && m.poster_path) paths.push(m.poster_path);
+        });
+      } else if (r.status === 'rejected') {
+        console.warn('ORBIT discover mosaic: endpoint failed', r.reason);
+      }
+    });
+    if (!paths.length) {
+      console.warn('ORBIT discover mosaic: 0 posters returned');
+      return;
+    }
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: paths, timestamp: Date.now() }));
+    } catch (e) { /* quota */ }
+    paint(paths);
+  });
+})();
+
+/* ============================================================
+   ORBIT RING — Added May 3, 2026
+   Reads state.filters and plots coloured dots on the SVG rings in
+   the sidebar. Called from inside the renderFilterChips wrapper.
+   ============================================================ */
+const ORBIT_RING_COLOURS = {
+  people:         '#00d9ff',  // cyan
+  genres:         '#a855f7',  // purple
+  timeEra:        '#f97316',  // orange
+  ratingsContent: '#f59e0b',  // amber
+  awards:         '#ffd700',  // gold
+  themes:         '#94a3b8',  // silver
+  settingWhere:   '#ef4444',  // red
+  settingWhen:    '#ef4444',  // red
+  basedOn:        '#f43f5e',  // rose
+  universes:      '#f43f5e',  // rose
+  regionLanguage: '#14b8a6',  // teal
+  production:     '#6366f1',  // indigo
+  watch:          '#10b981'   // green
+};
+
+function updateOrbitRing() {
+  const dotsGroup = document.getElementById('orbitRingDots');
+  const emptyText = document.getElementById('orbitRingEmptyText');
+  if (!dotsGroup) return;
+
+  const filters = Array.isArray(state.filters) ? state.filters : [];
+  const n = filters.length;
+
+  if (emptyText) emptyText.style.opacity = n === 0 ? '1' : '0';
+
+  if (n === 0) { dotsGroup.innerHTML = ''; return; }
+
+  const cx = 110, cy = 65;
+  const ringRadii = [19, 36, 55];
+
+  /* Inner ring 0–5, middle 6–13, outer 14+ */
+  const grouped = [[], [], []];
+  filters.forEach(function (f, i) {
+    const ri = i < 6 ? 0 : i < 14 ? 1 : 2;
+    grouped[ri].push(f);
+  });
+
+  let svgStr = '';
+  grouped.forEach(function (group, ri) {
+    const r = ringRadii[ri];
+    const total = group.length;
+    group.forEach(function (filter, pos) {
+      const angle = (pos / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2;
+      const x = (cx + r * Math.cos(angle)).toFixed(2);
+      const y = (cy + r * Math.sin(angle)).toFixed(2);
+      const colour = ORBIT_RING_COLOURS[filter.section] || '#00d9ff';
+      svgStr += '<circle cx="' + x + '" cy="' + y + '" r="4.5" fill="' + colour + '" opacity="0.9"/>';
+      svgStr += '<circle cx="' + x + '" cy="' + y + '" r="2" fill="white" opacity="0.6"/>';
+    });
+  });
+
+  dotsGroup.innerHTML = svgStr;
+}
+
+/* ============================================================
+   LIVE FILM COUNT — Added May 4, 2026
+   Fetches total_results from TMDB /discover/movie after filters
+   change. Called from inside the renderFilterChips wrapper.
+   Debounced 600ms to avoid hammering the API on rapid changes.
+   Format: 1234 → "1,234", >9999 → "9,999+".
+   ============================================================ */
+let _filmCountTimer = null;
+
+/* Zero-results guidance (2026-06-06) — state for the opt-in drop-one
+   affordance. _zeroGuidanceCache memoises counterfactual recounts for the
+   current failing query signature so re-clicking doesn't re-fetch; it is
+   invalidated by hideZeroGuidance() (called on every filter change). */
+let _zeroGuidanceCache = null;   /* { sig, results:[{id,label,count}] } */
+
+/* Update the "X of Y on your services" warning under the film count.
+   Only fires when a watch-section filter is active and the streaming-
+   filtered count is less than 60% of the unfiltered total. */
+function updateStreamingWarning(streamingCount, totalCount) {
+  var warningEl = document.getElementById('orbitStreamingWarning');
+  if (!warningEl) return;
+
+  var hasStreamingFilter = Array.isArray(state.filters) &&
+    state.filters.some(function (f) { return f.section === 'watch'; });
+
+  if (!hasStreamingFilter || totalCount === 0) {
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  var ratio = streamingCount / totalCount;
+  if (ratio >= 0.6) {
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  var missed = Math.max(0, totalCount - streamingCount);
+  warningEl.innerHTML =
+    '<span class="orbit-warning-text">' +
+      streamingCount.toLocaleString() + ' of ' + totalCount.toLocaleString() +
+      ' films on your services</span>' +
+    '<button class="orbit-warning-link" type="button" ' +
+      'onclick="document.getElementById(\'discoverEditBtn\').click()">' +
+      missed.toLocaleString() + ' more on other streamers →</button>';
+  warningEl.style.display = 'block';
+}
+
+function fetchFilmCount() {
+  const countEl     = document.getElementById('orbitFilmCount');
+  const countNumber = document.getElementById('orbitFilmCountNumber');
+  if (!countEl || !countNumber) return;
+
+  const filters = Array.isArray(state.filters) ? state.filters : [];
+  if (filters.length === 0) {
+    countEl.style.display = 'none';
+    var warnEmpty = document.getElementById('orbitStreamingWarning');
+    if (warnEmpty) warnEmpty.style.display = 'none';
+    hideZeroGuidance();
+    return;
+  }
+
+  /* RENDER-RACE FIX (Option B): while a zero-guidance block is showing, keep
+     #orbitFilmCount hidden through the recount instead of flashing "…" over
+     the transition. The count is revealed again only when a resolved number is
+     written below (normal/awards branches) — or stays hidden if we land on
+     another zero. The "0 films" lives in the button sub-line meanwhile. */
+  if (!_zeroGuidanceActive) {
+    countEl.style.display = 'block';
+    countNumber.textContent = '…';
+  }
+
+  clearTimeout(_filmCountTimer);
+  _filmCountTimer = setTimeout(function () {
+    /* Clear any prior zero-guidance affordance + cached counterfactuals
+       on every recount, so a filter change away from zero (or into a
+       non-normal branch) doesn't leave a stale affordance behind. */
+    hideZeroGuidance();
+    /* Awards filters are client-side against AWARDS_DATABASE — TMDB has no
+       awards param. Three modes:
+         1. Awards-only filters → synchronous count via getAwardsMatchingIds.
+         2. Awards + TMDB filters → fetch TMDB page 1, post-filter with
+            filterByAwards, extrapolate. Counter displays "~N" to signal
+            an approximation (true count requires fetching all pages).
+         3. No awards → existing TMDB path unchanged. */
+    /* Movie-list counter (2026-05-16) — handles two filter types
+       with the same ids semantics:
+         • type: 'movieList'           → ids embedded directly in the filter
+         • type: 'extended-collection' → ids looked up from ORBIT_KEYWORD_IDS
+       Both resolve to an array of TMDB movie IDs. Fast path counts
+       length; slow path batch-fetches /movie/{id} when other filters
+       are present. */
+    var explicitIdFilters = filters.filter(function (f) {
+      if (!(f.section === 'universes' && f.value)) return false;
+      return f.value.type === 'movieList' || f.value.type === 'extended-collection';
+    });
+    if (explicitIdFilters.length > 0) {
+      var movieListIds = {};
+      explicitIdFilters.forEach(function (f) {
+        var ids = null;
+        if (f.value.type === 'movieList' && Array.isArray(f.value.ids)) {
+          ids = f.value.ids;
+        } else if (f.value.type === 'extended-collection'
+                   && typeof ORBIT_KEYWORD_IDS !== 'undefined'
+                   && ORBIT_KEYWORD_IDS[f.value.id]
+                   && Array.isArray(ORBIT_KEYWORD_IDS[f.value.id].ids)) {
+          ids = ORBIT_KEYWORD_IDS[f.value.id].ids;
+        }
+        if (ids) ids.forEach(function (id) { movieListIds[id] = true; });
+      });
+      var dedupedMovieIds = Object.keys(movieListIds).map(function (k) { return parseInt(k, 10); });
+
+      var hasOtherFilters = filters.some(function (f) {
+        return f.section !== 'universes' && f.section !== 'awards';
+      });
+
+      if (!hasOtherFilters) {
+        /* Fast path — pure movieList. Count is the deduped list size. */
+        var nFast = dedupedMovieIds.length;
+        countNumber.textContent = nFast > 9999 ? '9,999+' : nFast.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(nFast, nFast);
+        return;
+      }
+
+      /* Slow path — fetch full movie objects (cached) and apply filters. */
+      if (!window._movieListCountCache) window._movieListCountCache = {};
+      var mlApiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+      var mlPromises = dedupedMovieIds.map(function (movieId) {
+        if (window._movieListCountCache[movieId]) {
+          return Promise.resolve(window._movieListCountCache[movieId]);
+        }
+        return fetch('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=' + mlApiKey)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            if (!data || !data.id) return null;
+            /* Normalize: /movie/{id} returns genres: [{id,name},...]
+               but applyClientSideCollectionFilters checks genre_ids. */
+            if (Array.isArray(data.genres) && !data.genre_ids) {
+              data.genre_ids = data.genres.map(function (g) { return g.id; });
+            }
+            window._movieListCountCache[movieId] = data;
+            return data;
+          })
+          .catch(function () { return null; });
+      });
+
+      Promise.all(mlPromises).then(function (results) {
+        var validMovies = results.filter(Boolean);
+        var filteredMovies = applyClientSideCollectionFilters(validMovies, filters);
+        var nMl = filteredMovies.length;
+        countNumber.textContent = nMl > 9999 ? '9,999+' : nMl.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(nMl, nMl);
+      }).catch(function () {
+        countEl.style.display = 'none';
+      });
+
+      return;
+    }
+
+    /* Collection counter — fires whenever any collection filter is
+       present, regardless of mixed sibling filters. Collections are
+       fetched from /collection/{id} (not a TMDB discover param), then
+       other filters (genre, decade, year, rating) are applied
+       client-side to the deduped movie list. Mirrors what the launch
+       handler does at lines ~1593-1650 so the counter matches what
+       Launch will actually return. Cache stores full movie objects
+       (id + genre_ids + release_date + vote_average) so subsequent
+       counter ticks can re-apply different filters without refetching. */
+    var universeCollectionFilters = filters.filter(function (f) {
+      return f.section === 'universes' && f.value && f.value.type === 'collection';
+    });
+    if (universeCollectionFilters.length > 0) {
+      if (!window._collectionCountCache) window._collectionCountCache = {};
+
+      var collectionIdsForCount = [];
+      universeCollectionFilters.forEach(function (f) {
+        if (f.value && Array.isArray(f.value.collections)) {
+          collectionIdsForCount.push.apply(collectionIdsForCount, f.value.collections);
+        }
+      });
+
+      var colApiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+      var colPromises = collectionIdsForCount.map(function (colId) {
+        if (window._collectionCountCache[colId]) {
+          return Promise.resolve(window._collectionCountCache[colId]);
+        }
+        return fetch('https://api.themoviedb.org/3/collection/' + colId + '?api_key=' + colApiKey)
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            var movies = (data && Array.isArray(data.parts)) ? data.parts : [];
+            window._collectionCountCache[colId] = movies;
+            return movies;
+          })
+          .catch(function () { return []; });
+      });
+
+      Promise.all(colPromises).then(function (results) {
+        var moviesById = {};
+        results.forEach(function (movies) {
+          movies.forEach(function (m) { if (m && m.id != null) moviesById[m.id] = m; });
+        });
+        var dedupedMovies = Object.keys(moviesById).map(function (k) { return moviesById[k]; });
+
+        var filteredMovies = applyClientSideCollectionFilters(dedupedMovies, filters);
+        var nUnique = filteredMovies.length;
+        countNumber.textContent = nUnique > 9999 ? '9,999+' : nUnique.toLocaleString();
+        countEl.style.display = 'block';
+        /* Suppress streaming-coverage warning in collection mode — the
+           count is constrained by the collection, not by streaming. */
+        updateStreamingWarning(nUnique, nUnique);
+      }).catch(function () {
+        countEl.style.display = 'none';
+      });
+
+      return;
+    }
+
+    var hasAwards = filters.some(function (f) { return f.section === 'awards' && f.value; });
+    var awardsDbReady = typeof AWARDS_DATABASE !== 'undefined';
+
+    if (hasAwards && awardsDbReady && hasAwardsOnlyFilters(filters)) {
+      try {
+        var awardsOnlyCount = getAwardsMatchingIds(filters).length;
+        countNumber.textContent = awardsOnlyCount > 9999 ? '9,999+' : awardsOnlyCount.toLocaleString();
+        countEl.style.display = 'block';
+        updateStreamingWarning(awardsOnlyCount, awardsOnlyCount);
+      } catch (e) {
+        countEl.style.display = 'none';
+      }
+      return;
+    }
+
+    var queryString;
+    try {
+      queryString = buildTMDBQueryFromFilters(filters);
+    } catch (e) {
+      countEl.style.display = 'none';
+      return;
+    }
+    if (queryString == null) {
+      countEl.style.display = 'none';
+      return;
+    }
+
+    /* buildTMDBQueryFromFilters returns a query STRING (params.toString()),
+       not a URLSearchParams. Re-parse so we can append api_key + page. */
+    var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+    var baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+
+    var urlParams = new URLSearchParams(queryString);
+    urlParams.set('api_key', apiKey);
+    urlParams.set('page', '1');
+
+    /* Detect whether a watch filter is active. If so, we run a second
+       parallel fetch with the streaming params stripped to compare
+       coverage. Per Rule 9 — this doubles API spend, but only when a
+       watch filter is active. Debounced 600ms. */
+    var hasWatch = filters.some(function (f) { return f.section === 'watch'; });
+
+    var fetchPrimary = fetch(baseUrl + '?' + urlParams.toString())
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+
+    var fetchTotal;
+    if (hasWatch) {
+      var noStreamParams = new URLSearchParams(queryString);
+      noStreamParams.set('api_key', apiKey);
+      noStreamParams.set('page', '1');
+      noStreamParams.delete('with_watch_providers');
+      noStreamParams.delete('watch_region');
+      noStreamParams.delete('watch_monetization_types');
+      fetchTotal = fetch(baseUrl + '?' + noStreamParams.toString())
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+    } else {
+      fetchTotal = Promise.resolve(null);
+    }
+
+    Promise.all([fetchPrimary, fetchTotal])
+      .then(function (results) {
+        var primary = results[0];
+        var total   = results[1];
+        if (primary && typeof primary.total_results === 'number') {
+          var n = primary.total_results;
+
+          if (hasAwards && awardsDbReady) {
+            /* Mixed awards + TMDB filters. The earlier page-1
+               extrapolation `(page1_awards_match / 20) × tmdb_total`
+               blew up for sparse intersections (e.g. ~26 Oscar Best Doc
+               winners × ~700k TMDB documentaries → 200k+ phantom result).
+               Use the awards-set size as the ceiling instead — it's the
+               authoritative upper bound. At launch, multi-page TMDB
+               fetch + filterByAwards typically lands within a few films
+               of this number. */
+            var awardsCount = getAwardsMatchingIds(filters).length;
+            countNumber.textContent = '~' + (awardsCount > 9999 ? '9,999+' : awardsCount.toLocaleString());
+            countEl.style.display = 'block';
+            /* Pass equal values so the streaming-coverage warning stays
+               hidden — in awards mode the count is constrained by
+               awards, not streaming. */
+            updateStreamingWarning(awardsCount, awardsCount);
+            return;
+          }
+
+          countNumber.textContent = n > 9999 ? '9,999+' : n.toLocaleString();
+          countEl.style.display = 'block';
+
+          var totalN = (total && typeof total.total_results === 'number')
+            ? total.total_results : n;
+          updateStreamingWarning(n, totalN);
+
+          /* Zero-results guidance (2026-06-06): NORMAL TMDB branch only, and
+             only past the mixed-awards early-return above — so awards /
+             collection / movieList branches never reach this. Opt-in: render
+             a quiet affordance; no counterfactual fetches fire until click. */
+          if (n === 0) { showZeroGuidanceAffordance(filters, queryString); }
+          else { hideZeroGuidance(); }
+        } else {
+          countEl.style.display = 'none';
+          updateStreamingWarning(0, 0);
+        }
+      })
+      .catch(function () {
+        countEl.style.display = 'none';
+        updateStreamingWarning(0, 0);
+      });
+  }, 600);
+}
+
+/* ============================================================
+   ZERO-RESULTS GUIDANCE — Added 2026-06-06
+   Opt-in, click-triggered "drop-one" counterfactual helper for the
+   NORMAL TMDB discover branch only (wired from fetchFilmCount's
+   normal .then when total_results === 0). Removing each active
+   query-affecting filter in turn and re-counting via TMDB
+   total_results, it suggests the single removal that best recovers
+   results.
+
+   Deliberately NOT triggered in the explicit-id / collection /
+   awards-only / mixed-awards branches: there a recount is either
+   meaningless (collection genuinely empty) or misleading (awards &
+   settings sections never enter the TMDB query — see the no-op cases
+   in buildTMDBQueryFromFilters — so a recount would wrongly report
+   "removing it doesn't help"). Those same sections are excluded from
+   the drop-one candidate list below.
+   ============================================================ */
+
+/* Sections whose filters are TMDB-query no-ops (handled client-side or
+   not at all), so "removing" them can't change total_results. */
+var ZERO_GUIDANCE_NOOP_SECTIONS = ['themes', 'settingWhere', 'settingWhen', 'basedOn', 'awards'];
+var ZERO_GUIDANCE_HEALTHY_MIN = 20;   /* short-circuit + "viable" threshold */
+var ZERO_GUIDANCE_BAND_LOW = 20;
+var ZERO_GUIDANCE_BAND_HIGH = 75;
+/* Module refs for the current failing search, set when the affordance
+   is shown and consumed by the click handler. */
+var _zeroGuidanceFilters = null;
+var _zeroGuidanceQuery = null;
+
+/* Option B (2026-06-06): the zero-guidance engine renders INTO the below-button
+   guidance block (#launchTakeover, no longer a button replacement). This is the
+   single render-target chokepoint — all four DOM-writing functions resolve
+   through it, so the engine logic is untouched. */
+function _getZeroGuidanceEl() {
+  return document.getElementById('launchTakeover');
+}
+
+/* Button-state helper (Option B) — #launchCard STAYS VISIBLE as the landmark.
+   At a normal-branch zero it goes to a disabled two-line label ("Launch
+   Discovery" / red "0 films match — nothing to launch"); on revert it returns
+   to the normal single-line CTA and its disabled flag is re-resolved from the
+   filter count (mirroring updateUIFromState's no-filters rule). */
+function setLaunchZeroState(active) {
+  var lc = document.getElementById('launchCard');
+  if (!lc) return;
+  if (active) {
+    lc.classList.add('is-zero-disabled');
+    lc.disabled = true;
+    lc.innerHTML =
+      '<span class="launch-orbit-label">Launch Discovery</span>' +
+      '<span class="launch-orbit-sub">0 films match &mdash; nothing to launch</span>';
+  } else {
+    lc.classList.remove('is-zero-disabled');
+    lc.innerHTML = 'Launch Discovery';
+    var hasF = !!(typeof state !== 'undefined' && state &&
+      Array.isArray(state.filters) && state.filters.length > 0);
+    lc.disabled = !hasF;
+  }
+}
+
+/* Show/hide coordinator (Option B) — the disable-in-place + expand-below swap.
+   #launchCard is never hidden now: it toggles the two-line disabled zero state
+   while the guidance block expands directly below it. _zeroGuidanceActive is
+   set here (the single chokepoint) so updateUIFromState's disabled rule and the
+   "…" count-gate both read a consistent flag. The live count is hidden while
+   guidance shows; on revert it is NOT force-shown here — the count's own
+   resolved-number write-paths reveal it (avoids a stale "…" flash). */
+function _setTakeoverActive(active) {
+  _zeroGuidanceActive = !!active;
+  var tk = document.getElementById('launchTakeover');
+  var fc = document.getElementById('orbitFilmCount');
+  if (active) {
+    setLaunchZeroState(true);
+    if (fc) fc.style.display = 'none';
+    if (tk) { tk.hidden = false; tk.style.display = 'block'; }
+  } else {
+    setLaunchZeroState(false);
+    if (tk) { tk.hidden = true; tk.style.display = 'none'; }
+  }
+}
+
+/* Move focus to the first control in the takeover on transform, but never
+   interrupt a user mid-typing in a filter input. */
+function _focusTakeover() {
+  var tk = document.getElementById('launchTakeover');
+  if (!tk) return;
+  var ae = document.activeElement;
+  if (ae && /^(input|textarea|select)$/i.test(ae.tagName)) return;
+  var btn = tk.querySelector('button');
+  if (btn && typeof btn.focus === 'function') btn.focus();
+}
+
+/* Restrictiveness rank — lower is tried first. Keyword / collection /
+   votes / rating lead (most likely to be the bottleneck); broad params
+   (decade, region, language) trail. */
+function _zeroGuidanceRank(f) {
+  var s = f ? f.section : '';
+  var v = (f && f.value) ? f.value : {};
+  if (s === 'universes' && (v.type === 'keyword' || v.type === 'collection')) return 0;
+  if (s === 'genres' && (v.type === 'keyword' || v.type === 'tmdb-keyword')) return 1;
+  if (s === 'ratingsContent' && v.type === 'votes') return 2;
+  if (s === 'ratingsContent' && v.type === 'rating') return 3;
+  if (s === 'ratingsContent' && v.type === 'certification') return 4;
+  if (s === 'production') return 5;
+  if (s === 'people') return 6;
+  if (s === 'watch') return 7;
+  if (s === 'genres') return 8;            /* plain genre */
+  if (s === 'timeEra' && v.type !== 'decade') return 9;   /* year / dateRange / runtime */
+  if (s === 'regionLanguage' && v.type === 'language') return 10;
+  if (s === 'timeEra' && v.type === 'decade') return 11;
+  if (s === 'regionLanguage' && v.type === 'region') return 12;
+  return 6;
+}
+
+function hideZeroGuidance() {
+  _zeroGuidanceCache = null;
+  _zeroGuidanceFilters = null;
+  _zeroGuidanceQuery = null;
+  var el = _getZeroGuidanceEl();
+  if (el) {
+    el.innerHTML = '';
+  }
+  /* Restore the normal Launch button + let the count's own write-paths show
+     it. No focus juggling: #launchCard was never hidden (Option B), so there's
+     nothing to restore focus to. */
+  _setTakeoverActive(false);
+}
+
+/* Collapsed state — a quiet one-line prompt + "see what to change"
+   trigger. No counterfactual fetches fire here. A zero result makes the
+   streaming-coverage message moot, so hide it while guidance shows. */
+function showZeroGuidanceAffordance(filters, queryString, autoExpand) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+  _zeroGuidanceFilters = Array.isArray(filters) ? filters : [];
+  _zeroGuidanceQuery = queryString;
+
+  var warn = document.getElementById('orbitStreamingWarning');
+  if (warn) warn.style.display = 'none';
+
+  /* Disable #launchCard in place (two-line zero label) + hide the live count,
+     and reveal the below-button guidance block. */
+  _setTakeoverActive(true);
+
+  /* Launch path (autoExpand) — the user has committed to launching, so the
+     opt-in/click rationale that governs the counter path doesn't apply.
+     Skip the collapsed State 2 and compute + render State 3 immediately.
+     runZeroCounterfactuals renders into the takeover (and focuses it). */
+  if (autoExpand) {
+    runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
+    return;
+  }
+
+  /* STATE 2 — collapsed prompt; NO recounts until tapped. The "0 films /
+     nothing to launch" message now lives in the button sub-line (Option B),
+     so the block heading just frames the opt-in trigger. */
+  el.innerHTML =
+    '<span class="ozg-heading">No films in this orbit</span>' +
+    '<button type="button" class="ozg-trigger">see what to change</button>';
+  el.style.display = 'block';
+
+  var trigger = el.querySelector('.ozg-trigger');
+  if (trigger) {
+    trigger.addEventListener('click', function () {
+      runZeroCounterfactuals(_zeroGuidanceFilters, _zeroGuidanceQuery);
+    });
+  }
+  _focusTakeover();
+}
+
+/* Render the resolved suggestion(s) into the affordance. */
+function _renderZeroGuidanceResults(results) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+
+  var viable = results.filter(function (r) { return r.count > 0; });
+  if (viable.length === 0) {
+    /* Graceful floor — structural zero. No fabricated number. */
+    el.innerHTML =
+      '<span class="ozg-prompt">These filters don’t overlap</span>' +
+      '<span class="ozg-floor">try removing the most specific one</span>';
+    el.style.display = 'block';
+    _focusTakeover();
+    return;
+  }
+
+  /* Prefer a removal that lands in the 20–75 sweet spot (highest within
+     band), else the single removal whose recount is highest. */
+  var inBand = viable.filter(function (r) {
+    return r.count >= ZERO_GUIDANCE_BAND_LOW && r.count <= ZERO_GUIDANCE_BAND_HIGH;
+  }).sort(function (a, b) { return b.count - a.count; });
+  var rest = viable.filter(function (r) {
+    return !(r.count >= ZERO_GUIDANCE_BAND_LOW && r.count <= ZERO_GUIDANCE_BAND_HIGH);
+  }).sort(function (a, b) { return b.count - a.count; });
+  var ordered = inBand.concat(rest).slice(0, 2);
+
+  var btns = ordered.map(function (r) {
+    var labelSafe = String(r.label == null ? '' : r.label)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    var idSafe = String(r.id == null ? '' : r.id).replace(/"/g, '&quot;');
+    var nDisplay = r.count > 9999 ? '9,999+' : r.count.toLocaleString();
+    return '<button type="button" class="ozg-suggestion" data-remove-id="' + idSafe + '">' +
+           'Remove <span class="ozg-sug-label">' + labelSafe + '</span>' +
+           ' <span class="ozg-sug-arrow">→</span> ' +
+           '<span class="ozg-sug-count">' + nDisplay + ' results</span>' +
+           '</button>';
+  }).join('');
+
+  el.innerHTML = '<span class="ozg-prompt">Here’s the quickest fix</span><div class="ozg-suggestions">' + btns + '</div>';
+  el.style.display = 'block';
+
+  el.querySelectorAll('.ozg-suggestion').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var rid = b.getAttribute('data-remove-id');
+      if (!rid) return;
+      state.filters = state.filters.filter(function (f) { return f.id !== rid; });
+      updateUIFromState();   /* re-renders chips + re-runs fetchFilmCount */
+    });
+  });
+  _focusTakeover();
+}
+
+/* Click handler — run the drop-one recounts. Reuses the normal-branch
+   fetch shape (raw fetch against /discover/movie). Streaming params are
+   stripped from every counterfactual so a dropped watch filter isn't
+   silently re-injected from saved providers by buildTMDBQueryFromFilters. */
+function runZeroCounterfactuals(filters, queryString) {
+  var el = _getZeroGuidanceEl();
+  if (!el) return;
+  filters = Array.isArray(filters) ? filters : [];
+
+  /* Cache hit for the current failing signature → re-render, no refetch. */
+  if (_zeroGuidanceCache && _zeroGuidanceCache.sig === queryString) {
+    _renderZeroGuidanceResults(_zeroGuidanceCache.results);
+    return;
+  }
+
+  /* Candidates: only filters that actually affect the TMDB query. */
+  var candidates = [];
+  filters.forEach(function (f, idx) {
+    if (!f || ZERO_GUIDANCE_NOOP_SECTIONS.indexOf(f.section) !== -1) return;
+    candidates.push({ filter: f, idx: idx });
+  });
+
+  if (candidates.length === 0) {
+    el.innerHTML =
+      '<span class="ozg-prompt">These filters don’t overlap</span>' +
+      '<span class="ozg-floor">try removing the most specific one</span>';
+    el.style.display = 'block';
+    return;
+  }
+
+  /* Restrictiveness order so the burst can short-circuit early. */
+  candidates.sort(function (a, b) {
+    return _zeroGuidanceRank(a.filter) - _zeroGuidanceRank(b.filter);
+  });
+
+  el.innerHTML = '<span class="ozg-prompt ozg-loading">Checking what to change…</span>';
+  el.style.display = 'block';
+
+  var apiKey = (typeof TMDB_API_KEY !== 'undefined') ? TMDB_API_KEY : '';
+  var baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+
+  function recount(cand) {
+    var filtersMinusOne = filters.filter(function (_, idx) { return idx !== cand.idx; });
+    var q = buildTMDBQueryFromFilters(filtersMinusOne);
+    var p = new URLSearchParams(q);
+    /* Strip streaming so dropping a watch filter genuinely drops it. */
+    p.delete('with_watch_providers');
+    p.delete('watch_region');
+    p.delete('watch_monetization_types');
+    p.set('api_key', apiKey);
+    p.set('page', '1');
+    return fetch(baseUrl + '?' + p.toString())
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var c = (data && typeof data.total_results === 'number') ? data.total_results : 0;
+        return {
+          id: cand.filter.id,
+          label: cand.filter.label,
+          count: c
+        };
+      })
+      .catch(function () {
+        return { id: cand.filter.id, label: cand.filter.label, count: 0 };
+      });
+  }
+
+  /* Sequential burst, capped at candidate count (no multiplier), with
+     early exit once a removal lands in the healthy band (>= 20). */
+  var results = [];
+  var i = 0;
+  function step() {
+    if (i >= candidates.length) return Promise.resolve();
+    return recount(candidates[i]).then(function (res) {
+      results.push(res);
+      i++;
+      if (res.count >= ZERO_GUIDANCE_HEALTHY_MIN) return;   /* short-circuit */
+      return step();
+    });
+  }
+
+  step().then(function () {
+    _zeroGuidanceCache = { sig: queryString, results: results };
+    _renderZeroGuidanceResults(results);
+  }).catch(function () {
+    var elx = _getZeroGuidanceEl();
+    if (elx) {
+      elx.innerHTML =
+        '<span class="ozg-prompt">These filters don’t overlap</span>' +
+        '<span class="ozg-floor">try removing the most specific one</span>';
+      elx.style.display = 'block';
+    }
+  });
+}
+
+/* ============================================================
+   FILTER TABS — Added May 1, 2026
+   Replaces the .filter-grid card + popup system. All 11 tabs share
+   the same content the old .focus-overlay used: each builder is
+   reused untouched and rendered into the active panel's body.
+
+   Rebuild-on-activate: only ONE panel body holds DOM at a time.
+   On tab switch, the previously-active panel body is wiped before
+   the new builder runs. This preserves collectLabelsForSection's
+   getElementById assumptions (yearInput, runtimeMin,
+   selectedRegionContainer, watchProviderChips, etc. are unique).
+   (Ratings-C no longer uses getElementById — its read site reads the
+   OrbitSlider controllers stashed on #oft-body-ratings._ratingSliders;
+   Phase 3b, 2026-06-06.)
+
+   Per-panel "Add to orbit" button mirrors the old addToSearchButton
+   flow: collectLabelsForSection(sectionKey) -> mutate state.filters
+   -> updateUIFromState(). For compound tabs (Setting, Source) each
+   column has its own Add button scoped to its own section key.
+   ============================================================ */
+(function initFilterTabs() {
+  var tabBar = document.getElementById('oftTabBar');
+  var panelArea = document.getElementById('oftPanelArea');
+  if (!tabBar || !panelArea) return;
+
+  var BUILDERS = {
+    people: function (root) { buildPeopleContent(root); },
+    genres: function (root) { buildGenresContent(root); },
+    timeEra: function (root) { buildTimeEraContent(root); },
+    ratingsContent: function (root) { buildRatingsContentSection(root); },
+    awards: function (root) { buildAwardsContent(root); },
+    themes: function (root) { buildThemesContent(root); },
+    regionLanguage: function (root) { buildRegionLanguageContent(root); },
+    production: function (root) { buildProductionContent(root); },
+    watch: function (root) { buildWatchContent(root); }
+  };
+
+  function makeAddButton(sectionKey, label) {
+    var actions = document.createElement('div');
+    actions.className = 'oft-panel-actions';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'orbit-btn orbit-btn--primary oft-add-btn';
+    btn.dataset.commitSection = sectionKey;
+    btn.textContent = label || 'Add to orbit';
+    actions.appendChild(btn);
+    return actions;
+  }
+
+  function buildPanelBody(panel) {
+    var body = panel.querySelector('.oft-panel-body');
+    if (!body) return;
+    body.innerHTML = '';
+
+    var section = panel.dataset.section;
+
+    if (section === 'setting-combined') {
+      var wrap = document.createElement('div');
+      wrap.className = 'oft-setting-combined';
+
+      var colWhere = document.createElement('div');
+      colWhere.className = 'oft-setting-col';
+      try { buildSettingWhereContent(colWhere); }
+      catch (e) { console.warn('[FilterTabs] settingWhere error', e); }
+
+      var colWhen = document.createElement('div');
+      colWhen.className = 'oft-setting-col';
+      try { buildSettingWhenContent(colWhen); }
+      catch (e) { console.warn('[FilterTabs] settingWhen error', e); }
+
+      wrap.appendChild(colWhere);
+      wrap.appendChild(colWhen);
+      body.appendChild(wrap);
+      return;
+    }
+
+    if (section === 'source-combined') {
+      var wrap2 = document.createElement('div');
+      wrap2.className = 'oft-source-combined';
+
+      var colBased = document.createElement('div');
+      colBased.className = 'oft-source-col';
+      try { buildBasedOnContent(colBased); }
+      catch (e) { console.warn('[FilterTabs] basedOn error', e); }
+
+      var colUni = document.createElement('div');
+      colUni.className = 'oft-source-col';
+      try { buildUniversesContent(colUni); }
+      catch (e) { console.warn('[FilterTabs] universes error', e); }
+
+      wrap2.appendChild(colBased);
+      wrap2.appendChild(colUni);
+      body.appendChild(wrap2);
+      return;
+    }
+
+    var fn = BUILDERS[section];
+    if (typeof fn !== 'function') return;
+    try { fn(body); }
+    catch (e) { console.warn('[FilterTabs] build error', section, e); }
+  }
+
+  function clearPanelBody(panel) {
+    if (!panel) return;
+    var body = panel.querySelector('.oft-panel-body');
+    if (body) body.innerHTML = '';
+  }
+
+  /* Move the singleton Add-to-orbit button into the active panel's
+     header. It's a single DOM node that follows the active panel rather
+     than being duplicated per panel. */
+  function relocateAddToOrbit(panel) {
+    var btn = document.getElementById('tabBarAddToOrbit');
+    if (!btn || !panel) return;
+    var header = panel.querySelector('.oft-panel-header');
+    if (!header) return;
+    if (btn.parentElement !== header) header.appendChild(btn);
+  }
+
+  function activateTab(tabName) {
+    var tabs = tabBar.querySelectorAll('.oft-tab');
+    var panels = panelArea.querySelectorAll('.oft-panel');
+
+    panels.forEach(function (p) {
+      if (p.classList.contains('oft-panel--active')) clearPanelBody(p);
+      p.classList.remove('oft-panel--active');
+    });
+    tabs.forEach(function (t) { t.classList.remove('oft-tab--active'); });
+
+    var newTab = tabBar.querySelector('.oft-tab[data-tab="' + tabName + '"]');
+    var newPanel = document.getElementById('oft-panel-' + tabName);
+    if (!newTab || !newPanel) return;
+
+    newTab.classList.add('oft-tab--active');
+    newPanel.classList.add('oft-panel--active');
+    buildPanelBody(newPanel);
+    relocateAddToOrbit(newPanel);
+    updateTabDots();
+  }
+
+  tabBar.addEventListener('click', function (e) {
+    var tab = e.target.closest('.oft-tab[data-tab]');
+    if (!tab) return;
+    activateTab(tab.dataset.tab);
+  });
+
+  /* Per-panel Add button: mirrors addToSearchButton click handler.
+     Uses collectLabelsForSection unchanged — it reads from the
+     fixed-ID controls that exist only in the active panel. */
+  panelArea.addEventListener('click', function (e) {
+    var btn = e.target.closest('.oft-add-btn[data-commit-section]');
+    if (!btn) return;
+    var sectionKey = btn.dataset.commitSection;
+    if (!sectionKey) return;
+    /* universes commits directly via commitKwFilter (Phase 1 keyword
+       search). Skip the DOM-scrape rebuild so direct-committed
+       filters aren't wiped. */
+    if (sectionKey !== 'universes') {
+      var labels = collectLabelsForSection(sectionKey);
+      /* Preserve direct-committed tmdb-keyword filters (Phase 2 keyword
+         search widget) so the legacy DOM scrape doesn't wipe them. */
+      state.filters = state.filters.filter(function (f) {
+        return f.section !== sectionKey ||
+          (f.value && f.value.type === 'tmdb-keyword');
+      });
+      labels.forEach(function (item) {
+        state.filters.push({
+          id: sectionKey + '-' + item.label,
+          section: sectionKey,
+          label: item.label,
+          value: item.value
+        });
+      });
+    }
+    updateUIFromState();
+    updateTabDots();
+    btn.classList.add('oft-add-btn--just-added');
+    setTimeout(function () { btn.classList.remove('oft-add-btn--just-added'); }, 600);
+  });
+
+  /* Reset button (footer): same teardown as the sidebar reset. */
+  var resetBtn = document.getElementById('resetFiltersBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function () {
+      state.filters = [];
+      state.genreLogic = 'or';
+      state.regionLogic = 'or';
+      try { sessionStorage.removeItem('orbit_search_criteria'); } catch (e) {}
+      updateUIFromState();
+      // Rebuild active panel so any in-panel selection state is wiped
+      var active = panelArea.querySelector('.oft-panel--active');
+      if (active) buildPanelBody(active);
+      updateTabDots();
+    });
+  }
+
+  /* data-tab → list of internal section keys. Compound tabs (setting,
+     source) commit two sections per Add. */
+  var TAB_TO_SECTIONS = {
+    people:     ['people'],
+    genres:     ['genres'],
+    era:        ['timeEra'],
+    ratings:    ['ratingsContent'],
+    awards:     ['awards'],
+    themes:     ['themes'],
+    setting:    ['settingWhere', 'settingWhen'],
+    source:     ['basedOn', 'universes'],
+    region:     ['regionLanguage'],
+    production: ['production'],
+    watch:      ['watch']
+  };
+
+  /* Active-filter dot indicator on each tab. */
+  function updateTabDots() {
+    /* Phase 1a-ii: per-tab filter-COUNT badge (was presence-only dot).
+       Same source as before — state.filters + TAB_TO_SECTIONS — just
+       summed per section instead of a boolean .some(). No new state, no
+       new triggers; runs at every existing updateTabDots call site. */
+    var counts = {};
+    state.filters.forEach(function (f) { counts[f.section] = (counts[f.section] || 0) + 1; });
+    tabBar.querySelectorAll('.oft-tab').forEach(function (tab) {
+      var keys = TAB_TO_SECTIONS[tab.dataset.tab] || [];
+      var n = keys.reduce(function (sum, k) { return sum + (counts[k] || 0); }, 0);
+      tab.classList.toggle('oft-tab--has-filter', n > 0);
+      /* Lazily create the count badge once, then reuse it. */
+      var badge = tab.querySelector('.oft-tab-badge');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'oft-tab-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        tab.appendChild(badge);
+      }
+      badge.textContent = n > 0 ? String(n) : '';
+    });
+  }
+
+  /* Tab-bar Add to orbit: commits ALL section keys mapped to the
+     active tab. Mirrors the per-section commit logic that used to live
+     in the panel-footer .oft-add-btn handler. */
+  var tabCommitBtn = document.getElementById('tabBarAddToOrbit');
+  if (tabCommitBtn) {
+    tabCommitBtn.addEventListener('click', function () {
+      var activeTab = tabBar.querySelector('.oft-tab.oft-tab--active');
+      if (!activeTab) return;
+      var sectionKeys = TAB_TO_SECTIONS[activeTab.dataset.tab] || [];
+      if (!sectionKeys.length) return;
+
+      sectionKeys.forEach(function (sectionKey) {
+        /* universes commits directly via commitKwFilter (Phase 1
+           keyword search). Skip the DOM-scrape rebuild so
+           direct-committed filters aren't wiped when the source-tab
+           Add-to-orbit fires. */
+        if (sectionKey === 'universes') return;
+        var labels = collectLabelsForSection(sectionKey);
+        /* Preserve direct-committed tmdb-keyword filters (Phase 2
+           keyword search widget) so the legacy DOM scrape doesn't
+           wipe them. */
+        state.filters = state.filters.filter(function (f) {
+          return f.section !== sectionKey ||
+            (f.value && f.value.type === 'tmdb-keyword');
+        });
+        labels.forEach(function (item) {
+          state.filters.push({
+            id: sectionKey + '-' + item.label,
+            section: sectionKey,
+            label: item.label,
+            value: item.value
+          });
+        });
+      });
+
+      updateUIFromState();
+      updateTabDots();
+      tabCommitBtn.classList.add('oft-add-btn--just-added');
+      setTimeout(function () { tabCommitBtn.classList.remove('oft-add-btn--just-added'); }, 600);
+    });
+  }
+
+  /* Wrap renderFilterChips so dot indicators stay in sync after any
+     state.filters mutation (chip removal in the sidebar, restore from
+     sessionStorage, etc.). */
+  if (typeof window.renderFilterChips === 'function') {
+    var _origRender = window.renderFilterChips;
+    window.renderFilterChips = function () {
+      var r = _origRender.apply(this, arguments);
+      try { updateTabDots(); } catch (e) {}
+      try { updateOrbitRing(); } catch (e) {}
+      try { fetchFilmCount(); } catch (e) {}
+      return r;
+    };
+  }
+
+  /* Initial paint: People panel is marked active in HTML. */
+  var initial = panelArea.querySelector('.oft-panel--active');
+  if (initial) {
+    buildPanelBody(initial);
+    relocateAddToOrbit(initial);
+  }
+  updateTabDots();
+  try { updateOrbitRing(); } catch (e) {}
+  try { fetchFilmCount(); } catch (e) {}
+
+/* ============================================================
+   DISCOVERY ONBOARDING POPUP — Added 2026-05-05
+                                Cadence revised 2026-05-16.
+   Inactivity-triggered onboarding (20s no interaction).
+   Cadence:
+     • First 2 lifetime impressions: shows freely on inactivity.
+     • After 2: shows at most once per rolling 7 days (gated by the
+       last-shown timestamp). Count keeps incrementing — it tracks
+       total impressions, not the cap.
+     • Checkbox "don't show again" → permanent suppression.
+   Close path: OrbitClose.close() (Rule 17 — Black Hole exit).
+   Manual trigger: Shift+D force-opens (does not burn a count, does
+   not update the last-shown timestamp, ignores the dismissed flag).
+   Mirrors welcome-popup.js's Shift+P pattern.
+   localStorage keys (registered in data/storage-keys.md):
+     orbit_discovery_popup_count       number   total lifetime shows
+     orbit_discovery_popup_dismissed   boolean  permanent
+     orbit_discovery_popup_last_shown  number   ms since epoch
+   ============================================================ */
+(function () {
+  var POPUP_COUNT_KEY = 'orbit_discovery_popup_count';
+  var POPUP_DISMISSED_KEY = 'orbit_discovery_popup_dismissed';
+  var POPUP_LAST_SHOWN_KEY = 'orbit_discovery_popup_last_shown';
+  var INACTIVITY_DELAY = 20000;
+  var ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  var LIFETIME_FREE_SHOWS = 2;
+
+  var store = (window.OrbitUtils && window.OrbitUtils.store) || null;
+
+  function readNumber(key) {
+    if (store) return Number(store.get(key, 0)) || 0;
+    var raw = localStorage.getItem(key);
+    return raw ? (parseInt(raw, 10) || 0) : 0;
+  }
+  function readBool(key) {
+    if (store) return store.get(key, false) === true;
+    return localStorage.getItem(key) === 'true';
+  }
+  function writeValue(key, value) {
+    if (store) { store.set(key, value); return; }
+    localStorage.setItem(key, typeof value === 'string' ? value : String(value));
+  }
+
+  function shouldShowPopup() {
+    if (readBool(POPUP_DISMISSED_KEY)) return false;
+    var count = readNumber(POPUP_COUNT_KEY);
+    if (count < LIFETIME_FREE_SHOWS) return true;
+    var lastShown = readNumber(POPUP_LAST_SHOWN_KEY);
+    if (!lastShown) return true;
+    return (Date.now() - lastShown) >= ONE_WEEK_MS;
+  }
+  function incrementPopupCount() {
+    writeValue(POPUP_COUNT_KEY, readNumber(POPUP_COUNT_KEY) + 1);
+  }
+
+  var overlay  = document.getElementById('discoveryOnboardingOverlay');
+  var ctaBtn   = document.getElementById('discoveryOnboardingCta');
+  var checkbox = document.getElementById('discoveryOnboardingDontShow');
+  if (!overlay || !ctaBtn || !checkbox) return;
+
+  var inactivityTimer = null;
+  var hasShown = false;
+  var isOpen = false;
+
+  function showPopup() {
+    if (hasShown || !shouldShowPopup()) return;
+    hasShown = true;
+    isOpen = true;
+    overlay.hidden = false;
+    incrementPopupCount();
+    writeValue(POPUP_LAST_SHOWN_KEY, Date.now());
+    detachInactivityListeners();
+  }
+
+  // Single dismissal path — all four triggers route through here, which
+  // routes through OrbitClose.close() for the canonical Black Hole exit.
+  function hidePopup() {
+    if (!isOpen) return;
+    isOpen = false;
+    if (checkbox.checked) writeValue(POPUP_DISMISSED_KEY, true);
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(overlay);
+    } else {
+      // Fallback if orbit-close.js failed to load — should not happen in prod.
+      overlay.hidden = true;
+    }
+  }
+
+  function resetTimer() {
+    if (hasShown || !shouldShowPopup()) return;
+    if (inactivityTimer) clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(showPopup, INACTIVITY_DELAY);
+  }
+
+  function attachInactivityListeners() {
+    document.addEventListener('mousemove', resetTimer, { passive: true });
+    document.addEventListener('click',     resetTimer, { passive: true });
+    document.addEventListener('keypress',  resetTimer, { passive: true });
+    document.addEventListener('scroll',    resetTimer, { passive: true });
+  }
+  function detachInactivityListeners() {
+    document.removeEventListener('mousemove', resetTimer);
+    document.removeEventListener('click',     resetTimer);
+    document.removeEventListener('keypress',  resetTimer);
+    document.removeEventListener('scroll',    resetTimer);
+    if (inactivityTimer) { clearTimeout(inactivityTimer); inactivityTimer = null; }
+  }
+
+  // CTA → dismiss
+  ctaBtn.addEventListener('click', function () { hidePopup(); });
+
+  // Quick Search chips → close popup and apply the preset (so the
+  // onboarding becomes actionable, not just illustrative).
+  overlay.querySelectorAll('[data-onboarding-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var name = btn.getAttribute('data-onboarding-preset');
+      var preset = (typeof PRESET_POOL !== 'undefined')
+        ? PRESET_POOL.find(function (p) { return p.name === name; })
+        : null;
+      hidePopup();
+      if (preset && typeof applyPreset === 'function') {
+        applyPreset(preset);
+      }
+    });
+  });
+
+  // Overlay click (outside popup body) → dismiss
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) hidePopup();
+  });
+
+  // Checkbox checked → permanent dismissal AND close immediately
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) hidePopup();
+  });
+
+  // ESC → dismiss
+  document.addEventListener('keydown', function (e) {
+    if (isOpen && (e.key === 'Escape' || e.key === 'Esc')) hidePopup();
+  });
+
+  // X button (.orbit-close inside the overlay) is handled by the global
+  // orbit-close.js click delegate. We listen for the dispatched event so
+  // checkbox state still maps to the dismissed flag.
+  overlay.addEventListener('orbit:close', function () {
+    if (!isOpen) return;
+    isOpen = false;
+    if (checkbox.checked) writeValue(POPUP_DISMISSED_KEY, true);
+  });
+
+  if (shouldShowPopup()) {
+    attachInactivityListeners();
+    resetTimer();
+  }
+
+  // Shift+D force-opens the popup. Bypasses the lifetime cap and the
+  // dismissed flag. Does NOT increment the count. No-op while typing.
+  function forceOpen() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay.hidden = false;
+    detachInactivityListeners();
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'D' && e.key !== 'd') return;
+    if (!e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    e.preventDefault();
+    forceOpen();
+  });
+})();
+/* === END DISCOVERY ONBOARDING POPUP === */
+
+/* ============================================================
+   COLLAPSIBLE DISCOVERY SECTIONS — Added 2026-05-16
+   Toggles `.collapsed` on each .section-container when its
+   .section-collapse-toggle is clicked. Per-section state
+   persists in sessionStorage (per-tab, survives refresh,
+   clears when tab closes). Keyed by .section-container's
+   data-section attribute.
+   localStorage keys (registered in data/storage-keys.md):
+     orbit_discovery_collapsed_state  JSON object  {section: bool}
+   ============================================================ */
+(function () {
+  var STORAGE_KEY = 'orbit_discovery_collapsed_state';
+  var ICON_COLLAPSED = '+';   // +
+  var ICON_EXPANDED  = '−';   // −
+
+  var savedState = {};
+  try {
+    var raw = sessionStorage.getItem(STORAGE_KEY);
+    if (raw) savedState = JSON.parse(raw) || {};
+  } catch (e) { savedState = {}; }
+
+  function persist() {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(savedState)); }
+    catch (e) {}
+  }
+
+  function applyCollapseState(section, collapsed) {
+    if (!section) return;
+    section.classList.toggle('collapsed', collapsed);
+    var btn = section.querySelector('.section-collapse-toggle');
+    if (!btn) return;
+    var iconEl = btn.querySelector('.collapse-icon');
+    if (iconEl) iconEl.textContent = collapsed ? ICON_COLLAPSED : ICON_EXPANDED;
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    btn.setAttribute('aria-label', collapsed ? 'Expand section' : 'Collapse section');
+  }
+
+  /* The headline is informational; collapsing it on its own loses no
+     functionality. Quick Searches and Filter Tabs are the two
+     interactive sections — at least one of them must stay expanded so
+     the user always has a way to actually filter films. */
+  var CRITICAL_SECTIONS = ['quickSearches', 'filterTabs'];
+
+  function isCriticalSection(section) {
+    return !!section && section.dataset
+      && CRITICAL_SECTIONS.indexOf(section.dataset.section) !== -1;
+  }
+
+  function countCriticalExpanded() {
+    var n = 0;
+    CRITICAL_SECTIONS.forEach(function (key) {
+      var el = document.querySelector('.section-container[data-section="' + key + '"]');
+      if (el && !el.classList.contains('collapsed')) n++;
+    });
+    return n;
+  }
+
+  document.querySelectorAll('.section-collapse-toggle').forEach(function (btn) {
+    var section = btn.closest('.section-container');
+    if (!section) return;
+    var name = section.dataset.section;
+    if (!name) return;
+
+    if (savedState[name] === true) applyCollapseState(section, true);
+
+    /* Clicking anywhere on a COLLAPSED bar (not just the small toggle
+     button in the card's left padding) expands the section. Makes the
+     + much easier to find — the whole stripe is the hit target. Does
+     nothing when the section is already expanded (so clicking inside
+     normal content doesn't accidentally collapse it). */
+    section.addEventListener('click', function (e) {
+      if (!section.classList.contains('collapsed')) return;
+      // Avoid double-firing when the click was already on the toggle.
+      if (e.target === btn || (btn.contains && btn.contains(e.target))) return;
+      btn.click();
+    });
+
+    btn.addEventListener('click', function () {
+      var nowCollapsed = !section.classList.contains('collapsed');
+
+      /* Invariant: at least one of {quickSearches, filterTabs} must
+         stay expanded. The headline can always be collapsed. Silently
+         no-op if this click would collapse the last critical section. */
+      if (nowCollapsed && isCriticalSection(section) && countCriticalExpanded() === 1) {
+        return;
+      }
+
+      applyCollapseState(section, nowCollapsed);
+      savedState[name] = nowCollapsed;
+      persist();
+
+      /* When headline OR filter tabs toggles, re-render Quick Searches
+         so the tile count tracks getActivePresetCount() (5/10/15/20
+         depending on which sections are collapsed). The freshly-
+         shuffled tiles also act as a visual confirmation that the
+         collapse took effect. */
+      if ((name === 'headline' || name === 'filterTabs')
+          && typeof renderPresets === 'function'
+          && typeof pickEvergreens === 'function'
+          && typeof getActivePresetCount === 'function') {
+        renderPresets(pickEvergreens(getActivePresetCount()));
+      }
+    });
+  });
+
+  /* Defensive: if sessionStorage was corrupted or manually edited so
+     that neither Quick Searches nor Filter Tabs is expanded, force
+     Quick Searches open so the user has interactive UI available. */
+  if (countCriticalExpanded() === 0) {
+    var fallback = document.querySelector('.section-container[data-section="quickSearches"]')
+                || document.querySelector('.section-container[data-section="filterTabs"]');
+    if (fallback) {
+      applyCollapseState(fallback, false);
+      savedState[fallback.dataset.section] = false;
+      persist();
+    }
+  }
+
+  /* initPresets() runs BEFORE this IIFE applies the saved collapse
+     state, so the initial preset render used a default count of 5.
+     Now that the .collapsed classes are in place, re-render with the
+     correct tile count for the actual collapse state (e.g. headline
+     collapsed at load → 10 tiles, not 5). Skips if helpers aren't
+     defined yet (defensive). */
+  if (typeof renderPresets === 'function'
+      && typeof pickEvergreens === 'function'
+      && typeof getActivePresetCount === 'function') {
+    var resolvedCount = getActivePresetCount();
+    if (resolvedCount !== 5) {
+      renderPresets(pickEvergreens(resolvedCount));
+    }
+  }
+})();
+/* === END COLLAPSIBLE DISCOVERY SECTIONS === */
+
+/* Old HEADLINE CAROUSEL rotation IIFE removed Phase B (2026-05-27).
+   Replaced by components/discover-carousel.js, which auto-boots on
+   DOMContentLoaded and binds every [data-orbit-carousel]. */
+
+/* Phase 1 (2026-05-31): the slide-3 cyan CTA's intercept handler was
+   removed in this phase. It targeted .oc-cta-card[href="#quickSearchesSection"]
+   to expand the Loaded Searches section + smooth-scroll into view when
+   that CTA was the entry point. The CTA's href is now ../index.html
+   (it points at the free-form Search rather than the in-page presets),
+   so the selector no longer matches and the handler was dead code.
+   The plain <a href="../index.html"> now navigates natively. Gold CTA
+   (Randomizer) is unaffected — it was always a plain anchor. */
+
+/* ============================================================
+   QUICK SEARCHES "SHOW ALL" MODAL — Added 2026-05-16
+   Opens a modal listing every preset in PRESET_POOL. Mirrors
+   the existing main-page tile template (renderPresets) so the
+   tiles look identical. Uses orbit-close.js for Black Hole
+   exit (Rule 17): the X button has class "orbit-close" and the
+   global click delegate handles it; backdrop and ESC routes
+   call OrbitClose.close() programmatically. Body scroll lock
+   released on the dispatched orbit:close event.
+   ============================================================ */
+(function () {
+  var modal = document.getElementById('discoverPresetsModal');
+  var openBtn = document.getElementById('discoverPresetShowAll');
+  var backdrop = modal && modal.querySelector('.discover-presets-modal-backdrop');
+  var grid = document.getElementById('discoverPresetsModalGrid');
+  if (!modal || !openBtn || !grid) return;
+
+  /* Phase 1 (2026-05-31): Filter-rail elements. May be absent if HTML
+     ever ships without the rail block; the rest of the modal still
+     works in that case (railInitialized stays false, populate() runs
+     unfiltered). */
+  var rail = document.getElementById('discoverPresetsModalRail');
+  var railToggle = document.getElementById('discoverPresetsModalRailToggle');
+  var railSearch = document.getElementById('discoverPresetsModalRailSearch');
+  var railClear = document.getElementById('discoverPresetsModalRailClear');
+  var railChecks = document.getElementById('discoverPresetsModalRailChecks');
+  /* Phase 4 (2026-06-02): tab affordance (visible only when collapsed)
+     and persistence key. Default first-view is EXPANDED; the user's
+     choice is stored in orbit_presets_rail_collapsed (registered in
+     data/storage-keys.md). */
+  var railTab = document.getElementById('discoverPresetsModalRailTab');
+  var RAIL_STATE_KEY = 'orbit_presets_rail_collapsed';
+  var railInitialized = false;
+
+  function buildTile(p, i, isFav) {
+    var isSpotlight = p.color === 'spotlight';
+    var classes = 'discover-preset discover-preset--' + p.color;
+    if (isSpotlight) classes += ' discover-preset--spotlight';
+    var tagClass = 'discover-preset-tag' + (isSpotlight ? ' discover-preset-tag--live' : '');
+    var tagText = isSpotlight
+      ? (p.streamingNow ? '● NOW STREAMING' : '● IN CINEMAS')
+      : p.tag;
+    var glyphClass = getPresetGlyphClass(p);
+    var glyphSpan  = glyphClass ? '<span class="og-qs ' + glyphClass + ' discover-preset-glyph" aria-hidden="true"></span>' : '';
+    /* 2026-05-24 Phase 3 — Hybrid B decorations (mirrors renderPresets). */
+    var decorations = glyphClass
+      ? '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+        '<span class="discover-preset-badge" aria-hidden="true">' + glyphSpan + '</span>'
+      : '';
+    var tagSpan  = '<span class="' + tagClass + '">' + tagText + '</span>';
+    var nameSpan = '<span class="discover-preset-name">' + p.name + '</span>';
+    var inner = isSpotlight ? (tagSpan + nameSpan) : (decorations + nameSpan + tagSpan);
+    /* Phase 2 (2026-06-01): favourite ★ on every tile. Stable ID for
+       built-ins is preset.name (matches the orbit_favourite_presets ID
+       scheme). Rendered as <span role="button"> to avoid nested-button
+       HTML; click delegation on .grid stopPropagations the outer tile. */
+    var favId = String(p.name || '').replace(/"/g, '&quot;');
+    var favClass = 'discover-preset-fav-btn' + (isFav ? ' is-fav' : '');
+    var favSpan = '<span class="' + favClass + '" role="button" tabindex="0" data-fav-id="' + favId + '" aria-label="Toggle favourite">★</span>';
+    return '<button class="' + classes + '" type="button" data-preset-index="' + i + '">' + inner + favSpan + '</button>';
+  }
+
+  /* Phase 2 (2026-06-01): tile for a user-saved search. Distinct purple
+     variant + "MY SEARCH" badge + remove × in the bottom-right corner.
+     Stable ID = saved.id (UUID), used for both data-saved-id (apply)
+     and data-fav-id (favourite). */
+  function buildSavedTile(s, isFav) {
+    var nameSafe = String(s.name == null ? 'Untitled' : s.name)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    var idSafe = String(s.id || '').replace(/"/g, '&quot;');
+    var dateStr = '';
+    try {
+      var d = new Date(s.savedAt);
+      if (!isNaN(d.getTime())) dateStr = d.toLocaleDateString();
+    } catch (e) { /* no date — that's fine */ }
+    var favClass = 'discover-preset-fav-btn' + (isFav ? ' is-fav' : '');
+    return '<button class="discover-preset discover-preset--purple discover-preset--saved" type="button" data-saved-id="' + idSafe + '">' +
+           '<span class="discover-preset-glow" aria-hidden="true"></span>' +
+           '<span class="discover-preset-saved-badge">MY SEARCH</span>' +
+           '<span class="discover-preset-name">' + nameSafe + '</span>' +
+           '<span class="discover-preset-tag">SAVED' + (dateStr ? ' &middot; ' + dateStr : '') + '</span>' +
+           '<span class="' + favClass + '" role="button" tabindex="0" data-fav-id="' + idSafe + '" aria-label="Toggle favourite">★</span>' +
+           '<span class="discover-preset-remove-btn" role="button" tabindex="0" data-saved-remove="' + idSafe + '" aria-label="Remove">&times;</span>' +
+           '</button>';
+  }
+
+  /* Phase 2 (2026-06-01): populate accepts an ordered candidate array of
+     `{kind:'saved'|'preset', data, fav}` items. Saved tiles render FIRST
+     (so user-saved searches surface at the top of the grid). Click
+     delegation on the grid covers tile-apply / favourite-toggle / saved-
+     remove via .grid-level event delegation, so this only sets innerHTML. */
+  function populate(candidates) {
+    if (typeof PRESET_POOL === 'undefined' || !Array.isArray(PRESET_POOL)) return;
+    var list = Array.isArray(candidates) ? candidates : getFilteredCandidates();
+    if (list.length === 0) {
+      grid.innerHTML = '<div class="discover-presets-modal-empty">No searches match.</div>';
+      return;
+    }
+    grid.innerHTML = list.map(function (item) {
+      if (item.kind === 'saved') {
+        return buildSavedTile(item.data, !!item.fav);
+      }
+      var origIdx = PRESET_POOL.indexOf(item.data);
+      return buildTile(item.data, origIdx, !!item.fav);
+    }).join('');
+  }
+
+  /* Phase 2 (2026-06-01): single delegated handler on the grid covers
+     all interactions (apply preset / apply saved / toggle favourite /
+     remove saved). Bound once per modal lifetime (innerHTML resets wipe
+     child listeners but not the parent's). */
+  function onGridClick(e) {
+    var favEl = e.target.closest && e.target.closest('.discover-preset-fav-btn');
+    if (favEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      var favId = favEl.getAttribute('data-fav-id');
+      if (!favId) return;
+      var nowFav = (typeof window.__orbitToggleFavourite === 'function') && window.__orbitToggleFavourite(favId);
+      favEl.classList.toggle('is-fav', !!nowFav);
+      return;
+    }
+    var removeEl = e.target.closest && e.target.closest('.discover-preset-remove-btn');
+    if (removeEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      var savedId = removeEl.getAttribute('data-saved-remove');
+      if (!savedId || typeof window.__orbitLoadSavedSearches !== 'function') return;
+      /* Phase 8 (2026-06-02): two-click confirm. First click → enter
+         `.is-confirming` state (red filled "DEL?" via CSS) and start a
+         3-second revert timer. Second click within that window → run the
+         actual delete. The 3-second timer is stored on the element so a
+         tile re-render (applyFilters wipes innerHTML) effectively cancels
+         the pending revert too (the element is gone). */
+      if (!removeEl.classList.contains('is-confirming')) {
+        removeEl.classList.add('is-confirming');
+        var prevText = removeEl.textContent;
+        removeEl.textContent = 'DEL?';
+        var t = setTimeout(function () {
+          if (removeEl.isConnected) {
+            removeEl.classList.remove('is-confirming');
+            removeEl.textContent = prevText;
+          }
+        }, 3000);
+        removeEl._phase8Timer = t;
+        return;
+      }
+      /* Confirmed — cancel revert + delete. */
+      if (removeEl._phase8Timer) {
+        clearTimeout(removeEl._phase8Timer);
+        removeEl._phase8Timer = null;
+      }
+      var arr = window.__orbitLoadSavedSearches();
+      var idx = -1;
+      for (var k = 0; k < arr.length; k++) { if (arr[k] && arr[k].id === savedId) { idx = k; break; } }
+      if (idx === -1) return;
+      arr.splice(idx, 1);
+      window.__orbitPersistSavedSearches(arr);
+      /* Also remove from favourites if present. */
+      var favs = window.__orbitLoadFavourites();
+      var fidx = favs.indexOf(savedId);
+      if (fidx !== -1) { favs.splice(fidx, 1); window.__orbitPersistFavourites(favs); }
+      applyFilters();
+      return;
+    }
+    var savedTile = e.target.closest && e.target.closest('[data-saved-id]');
+    if (savedTile) {
+      var sid = savedTile.getAttribute('data-saved-id');
+      var saved = (typeof window.__orbitLoadSavedSearches === 'function') ? window.__orbitLoadSavedSearches() : [];
+      var match = null;
+      for (var m = 0; m < saved.length; m++) { if (saved[m] && saved[m].id === sid) { match = saved[m]; break; } }
+      if (match && typeof window.__orbitApplySavedSearch === 'function') {
+        window.__orbitApplySavedSearch(match);
+      }
+      closeModal();
+      return;
+    }
+    var presetTile = e.target.closest && e.target.closest('[data-preset-index]');
+    if (presetTile) {
+      var pi = parseInt(presetTile.getAttribute('data-preset-index'), 10);
+      if (isNaN(pi)) return;
+      var preset = PRESET_POOL[pi];
+      if (preset && typeof applyPreset === 'function') applyPreset(preset);
+      closeModal();
+      return;
+    }
+  }
+
+  /* Phase 1 (2026-05-31): split every PRESET_POOL[i].tag on " · ", trim
+     each part, accumulate distinct tokens + per-token count. Returns
+     [{ token: 'AWARDS', count: 8 }, ...] alphabetised by raw token. */
+  function enumerateTokens() {
+    if (typeof PRESET_POOL === 'undefined' || !Array.isArray(PRESET_POOL)) return [];
+    var counts = {};
+    PRESET_POOL.forEach(function (p) {
+      var rawTag = p && typeof p.tag === 'string' ? p.tag : '';
+      rawTag.split(' · ').forEach(function (part) {
+        var token = part.trim();
+        if (!token) return;
+        counts[token] = (counts[token] || 0) + 1;
+      });
+    });
+    return Object.keys(counts).sort().map(function (t) {
+      return { token: t, count: counts[t] };
+    });
+  }
+
+  /* Phase 1 (2026-05-31): convert raw token e.g. "IN CINEMAS" → "In Cinemas"
+     for display. Match continues to use the raw token (case-sensitive)
+     against preset.tag splits. */
+  function titleCase(s) {
+    return s.toLowerCase().replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  /* Phase 1 (2026-05-31): render checkboxes once at first init.
+     Phase 2 (2026-06-01): prepend two SPECIAL boxes (My Searches /
+     Favourites) above the dynamic token list. Specials are distinguished
+     by `data-special` (not a `value`). Token boxes keep the `value="…"`
+     contract from Phase 1. */
+  function renderRailCheckboxes() {
+    if (!railChecks) return;
+    var entries = enumerateTokens();
+    var specials =
+      '<div class="discover-presets-modal-rail-specials">' +
+        '<label class="discover-presets-modal-rail-check">' +
+          '<input type="checkbox" data-special="saved">' +
+          '<span class="discover-presets-modal-rail-check-name">My Searches</span>' +
+        '</label>' +
+        '<label class="discover-presets-modal-rail-check">' +
+          '<input type="checkbox" data-special="favourite">' +
+          '<span class="discover-presets-modal-rail-check-name">Favourites</span>' +
+        '</label>' +
+      '</div>';
+    var tokens = entries.map(function (entry) {
+      var safe = String(entry.token).replace(/"/g, '&quot;');
+      return '<label class="discover-presets-modal-rail-check">' +
+             '<input type="checkbox" value="' + safe + '">' +
+             '<span class="discover-presets-modal-rail-check-name">' + titleCase(entry.token) + '</span>' +
+             '<span class="discover-presets-modal-rail-check-count">' + entry.count + '</span>' +
+             '</label>';
+    }).join('');
+    railChecks.innerHTML = specials + tokens;
+    railChecks.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener('change', applyFilters);
+    });
+  }
+
+  /* ============================================================
+     SAVED-SEARCH TOKEN-MEMBERSHIP MAP — Added 2026-06-02
+     ------------------------------------------------------------
+     Saved searches don't have a `tag` string, so they're classified
+     against the rail's category tick-boxes by translating their
+     state.filters' `section` keys to the same token vocabulary the
+     built-in presets use. A saved search matches a ticked token if
+     any of its sections maps to that token.
+
+     This is the touch-point if the filter-state schema changes in
+     future: update SECTION_TO_TOKENS to keep saved-search
+     membership accurate. (Phase 9 ranking/cue was reverted on
+     2026-06-02 — only membership remains.)
+     ============================================================ */
+  var SECTION_TO_TOKENS = {
+    genres:         ['GENRE'],
+    timeEra:        ['ERA', 'DECADE'],
+    regionLanguage: ['REGION'],
+    ratingsContent: ['RATING'],
+    awards:         ['AWARDS'],
+    basedOn:        ['SOURCE'],
+    production:     ['FRANCHISE'],
+    themes:         ['THEME'],
+    universes:      ['FRANCHISE']
+  };
+
+  /* Derive the union of tokens a saved search covers — used by
+     getFilteredCandidates to decide whether a saved tile is kept
+     when one or more category tick-boxes are active. */
+  function getSavedMeta(s) {
+    var sections = {};
+    var filters = (s && s.state && Array.isArray(s.state.filters)) ? s.state.filters : [];
+    filters.forEach(function (f) { if (f && f.section) sections[f.section] = true; });
+    var tokens = {};
+    Object.keys(sections).forEach(function (k) {
+      var arr = SECTION_TO_TOKENS[k] || [];
+      arr.forEach(function (t) { tokens[t] = true; });
+    });
+    return { tokens: tokens };
+  }
+
+  /* Phase 2 (2026-06-01): merged saved + preset filter pipeline.
+     Returns ordered candidate list `[saved..., preset...]` with each
+     item shaped as `{kind:'saved'|'preset', data, fav}`. Combine logic:
+       - text input   → case-insensitive substring on name (+ tag for presets).
+       - token boxes  → OR membership. Saved searches participate via
+         SECTION_TO_TOKENS / getSavedMeta (added 2026-06-02 — replaces
+         the original "any ticked token excludes saved" rule).
+       - "My Searches" → restrict to saved entries only.
+       - "Favourites"  → restrict to items whose ID is in favourites.
+     Order is the default "saved first, then PRESET_POOL order" — no
+     ranking is applied. */
+  function getFilteredCandidates() {
+    var search = railSearch ? (railSearch.value || '').trim().toLowerCase() : '';
+    var activeTokens = [];
+    var savedOnly = false;
+    var favouriteOnly = false;
+    if (railChecks) {
+      railChecks.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+        var sp = cb.getAttribute('data-special');
+        if (sp === 'saved') savedOnly = true;
+        else if (sp === 'favourite') favouriteOnly = true;
+        else activeTokens.push(cb.value);
+      });
+    }
+    var saved = (typeof window.__orbitLoadSavedSearches === 'function') ? window.__orbitLoadSavedSearches() : [];
+    var favs = (typeof window.__orbitLoadFavourites === 'function') ? window.__orbitLoadFavourites() : [];
+    var favSet = {};
+    for (var fi = 0; fi < favs.length; fi++) favSet[favs[fi]] = true;
+
+    var filteredSaved = saved.filter(function (s) {
+      if (!s) return false;
+      if (favouriteOnly && !favSet[s.id]) return false;
+      if (search && String(s.name || '').toLowerCase().indexOf(search) === -1) return false;
+      /* Saved-search token membership (2026-06-02): include the entry
+         only if at least one of its SECTION_TO_TOKENS-derived tokens
+         matches an active token. Excluded otherwise. */
+      if (activeTokens.length > 0) {
+        var meta = getSavedMeta(s);
+        var hit = false;
+        for (var ti = 0; ti < activeTokens.length; ti++) {
+          if (meta.tokens[activeTokens[ti]]) { hit = true; break; }
+        }
+        if (!hit) return false;
+      }
+      return true;
+    }).map(function (s) {
+      return { kind: 'saved', data: s, fav: !!favSet[s.id] };
+    });
+
+    var filteredPresets = savedOnly ? [] : PRESET_POOL.filter(function (p) {
+      if (!p) return false;
+      if (favouriteOnly && !favSet[p.name]) return false;
+      var nameLower = String(p.name || '').toLowerCase();
+      var tagLower  = String(p.tag  || '').toLowerCase();
+      if (search && nameLower.indexOf(search) === -1 && tagLower.indexOf(search) === -1) return false;
+      if (activeTokens.length > 0) {
+        var rawTags = String(p.tag || '').split(' · ').map(function (s) { return s.trim(); });
+        if (!activeTokens.some(function (t) { return rawTags.indexOf(t) !== -1; })) return false;
+      }
+      return true;
+    }).map(function (p) {
+      return { kind: 'preset', data: p, fav: !!favSet[p.name] };
+    });
+
+    return filteredSaved.concat(filteredPresets);
+  }
+
+  function applyFilters() {
+    populate(getFilteredCandidates());
+    /* Re-measure compact classes after every re-render so newly-shown
+       tiles get the same name-fits-in-2-lines treatment. */
+    applyCompactClasses(grid);
+  }
+
+  function initRail() {
+    if (railInitialized) return;
+    /* Phase 2 (2026-06-01): grid-level delegated click handler — bound
+       ONCE per modal lifetime regardless of whether the rail HTML exists
+       (delegation covers tile apply / fav toggle / remove for both built-
+       in and saved tiles). Re-renders set innerHTML, which wipes child
+       listeners; the parent-level listener persists. */
+    if (grid && !grid._phase2Bound) {
+      grid.addEventListener('click', onGridClick);
+      grid._phase2Bound = true;
+    }
+    if (!rail) { railInitialized = true; return; }  /* HTML lacks rail — fall back gracefully. */
+
+    renderRailCheckboxes();
+
+    if (railSearch) railSearch.addEventListener('input', applyFilters);
+
+    if (railClear) {
+      railClear.addEventListener('click', function () {
+        if (railSearch) railSearch.value = '';
+        if (railChecks) {
+          railChecks.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+            cb.checked = false;
+          });
+        }
+        applyFilters();
+      });
+    }
+
+    /* Phase 4 (2026-06-02): centralised rail-state setter. Sets the
+       .is-collapsed class + aria-expanded on BOTH the rail-head toggle
+       AND the collapse-to-tab control. `persist=true` writes the choice
+       to localStorage; `persist=false` is used for the first-open
+       restore (so reading from storage doesn't immediately re-write
+       the same value). */
+    function setRailCollapsed(collapsed, persist) {
+      collapsed = !!collapsed;
+      rail.classList.toggle('is-collapsed', collapsed);
+      if (railToggle) {
+        /* Toggle reflects whether the rail (its target) is expanded. */
+        railToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        railToggle.innerHTML = '&times;';  /* always × when visible; tab is the "show" affordance */
+      }
+      if (railTab) {
+        /* Tab's aria-expanded === "false" means rail is collapsed → tab
+           visible (CSS rule keyed on the attribute). */
+        railTab.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      }
+      if (persist) {
+        try { localStorage.setItem(RAIL_STATE_KEY, JSON.stringify(collapsed)); }
+        catch (e) { /* storage unavailable — preference doesn't persist */ }
+      }
+    }
+
+    if (railToggle) {
+      railToggle.addEventListener('click', function (e) {
+        /* Phase 5 (2026-06-02): play the site's Black Hole spin on the X
+           (reuses orbit-x-blackhole / orbit-x-fade keyframes from
+           orbit-close.css via the .spinning class scoped to this
+           selector). The toggle does NOT carry .orbit-close, so the
+           global orbit-close.js delegate never resolves a popup target
+           and the Show-all modal stays open — only the X visual fires.
+           The existing 250ms width wipe runs in parallel via
+           setRailCollapsed below; the two play together. */
+        var willCollapse = !rail.classList.contains('is-collapsed');
+        if (willCollapse) {
+          railToggle.classList.add('spinning');
+          /* Remove the class once the animation ends so the X resets to
+             its default state before the next open. */
+          var onSpinEnd = function () {
+            railToggle.classList.remove('spinning');
+            railToggle.removeEventListener('animationend', onSpinEnd);
+          };
+          railToggle.addEventListener('animationend', onSpinEnd);
+        }
+        setRailCollapsed(willCollapse, true);
+      });
+    }
+    if (railTab) {
+      railTab.addEventListener('click', function () {
+        /* If the user re-opens mid-spin, force-clear the .spinning class
+           so the X isn't stuck at scale(0) when the rail wipes back in. */
+        if (railToggle) railToggle.classList.remove('spinning');
+        setRailCollapsed(false, true);  /* tab click always expands */
+      });
+    }
+
+    /* Phase 4 (2026-06-02): restore persisted state on first init. If
+       no preference is stored (first-ever view of the modal), default
+       to EXPANDED so the user sees the filter affordances exist. The
+       legacy ≤650-default-collapse is dropped — persistence covers it. */
+    var storedCollapsed = null;
+    try {
+      var raw = localStorage.getItem(RAIL_STATE_KEY);
+      if (raw !== null) {
+        var parsed = JSON.parse(raw);
+        if (typeof parsed === 'boolean') storedCollapsed = parsed;
+      }
+    } catch (e) { /* corrupted / unavailable — fall through to default */ }
+    setRailCollapsed(storedCollapsed === true, false);
+
+    railInitialized = true;
+  }
+
+  function openModal() {
+    /* Phase 1 (2026-05-31): initialise the rail (token checkboxes + event
+       wiring) on first open, then render the grid through the filter
+       pipeline so any persisted filter state from a previous open is
+       honoured. */
+    initRail();
+    applyFilters();
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    /* Phase 3.1: measure name lines AFTER the modal is visible — a
+       hidden element has no layout so scrollHeight reads 0. Idempotent
+       across opens. */
+    applyCompactClasses(grid);
+  }
+
+  function closeModal() {
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(modal);
+    } else {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+  }
+
+  openBtn.addEventListener('click', openModal);
+
+  // Backdrop click → close
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+
+  // ESC → close (only when modal is open)
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Escape' || e.key === 'Esc') && !modal.hidden) closeModal();
+  });
+
+  // X button is handled by orbit-close.js global delegate; this listener
+  // releases the body scroll lock when the close animation completes.
+  modal.addEventListener('orbit:close', function () {
+    document.body.style.overflow = '';
+  });
+})();
+/* === END QUICK SEARCHES MODAL === */
+})();
+
+/* ============================================================
+   PHASE 2 (2026-06-01) — Saved searches + Favourites + Save button.
+   Defines storage helpers, state-signature comparator, applySavedSearch,
+   the sidebar Save button + visibility logic, and wraps
+   window.renderFilterChips so the Save button re-evaluates after every
+   chip render. Exposes helpers on window.__orbit* so:
+     - pickEvergreens (above) can read favourites for weighted sampling,
+     - the Show-all modal IIFE (above) can list saved + toggle fav + remove,
+     - applyPreset (above) can stamp window.__orbitLastAppliedSig after
+       a pristine apply (so the Save button stays hidden until divergence).
+   localStorage keys: orbit_saved_searches, orbit_favourite_presets
+   (registered in data/storage-keys.md).
+   ============================================================ */
+(function () {
+  var SAVED_KEY = 'orbit_saved_searches';
+  var FAV_KEY = 'orbit_favourite_presets';
+
+  function loadJSON(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return [];
+      var v = JSON.parse(raw);
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+  function persistJSON(key, arr) {
+    try { localStorage.setItem(key, JSON.stringify(arr)); } catch (e) {}
+  }
+  function loadSavedSearches() { return loadJSON(SAVED_KEY); }
+  function persistSavedSearches(arr) { persistJSON(SAVED_KEY, arr); }
+  function loadFavourites() { return loadJSON(FAV_KEY); }
+  function persistFavourites(arr) { persistJSON(FAV_KEY, arr); }
+  function isFavourite(id) { return loadFavourites().indexOf(id) !== -1; }
+  function toggleFavourite(id) {
+    if (!id) return false;
+    var favs = loadFavourites();
+    var idx = favs.indexOf(id);
+    if (idx === -1) favs.push(id);
+    else favs.splice(idx, 1);
+    persistFavourites(favs);
+    return idx === -1;  /* true = now favourite, false = now removed */
+  }
+
+  /* Stable JSON serialisation of the filter state for divergence
+     comparison. Filter entries are sorted by id so ordering doesn't
+     spuriously flag user-modification. */
+  function stateSignature(filters, genreLogic) {
+    var sorted = (filters || []).slice().sort(function (a, b) {
+      var ai = String(a && a.id || '');
+      var bi = String(b && b.id || '');
+      return ai < bi ? -1 : ai > bi ? 1 : 0;
+    });
+    try { return JSON.stringify({ f: sorted, g: genreLogic || 'or' }); }
+    catch (e) { return null; }
+  }
+
+  /* Apply a saved search by deep-cloning its state into the page's
+     state object and triggering the existing UI-refresh path (mirrors
+     applyPreset). Also stamps __orbitLastAppliedSig so the Save button
+     stays hidden until the user edits. */
+  function applySavedSearch(saved) {
+    if (!saved || !saved.state || typeof state === 'undefined') return;
+    try {
+      state.filters = JSON.parse(JSON.stringify(saved.state.filters || []));
+    } catch (e) { state.filters = []; }
+    state.genreLogic = saved.state.genreLogic || 'or';
+    if ('regionLogic' in saved.state) state.regionLogic = saved.state.regionLogic || 'or';
+    /* Stamp BEFORE the render so the wrapped renderFilterChips' Save-button
+       eval reads the freshly-applied saved search as pristine (button hidden).
+       Mirrors applyPreset / commitSaveWithName's stamp-then-evaluate order. */
+    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
+    if (typeof updateUIFromState === 'function') updateUIFromState();
+    if (typeof window.renderFilterChips === 'function') window.renderFilterChips();
+  }
+
+  /* Expose helpers globally for pickEvergreens + modal IIFE. */
+  window.__orbitLoadSavedSearches = loadSavedSearches;
+  window.__orbitPersistSavedSearches = persistSavedSearches;
+  window.__orbitLoadFavourites = loadFavourites;
+  window.__orbitPersistFavourites = persistFavourites;
+  window.__orbitIsFavourite = isFavourite;
+  window.__orbitToggleFavourite = toggleFavourite;
+  window.__orbitStateSignature = stateSignature;
+  window.__orbitApplySavedSearch = applySavedSearch;
+  window.__orbitLastAppliedSig = null;
+
+  /* Save button visibility: shown iff state.filters is non-empty AND
+     the current state diverges from the last-applied preset / saved
+     signature (or no apply happened). */
+  function isUserModifiedState() {
+    if (typeof state === 'undefined' || !state.filters || state.filters.length === 0) return false;
+    if (!window.__orbitLastAppliedSig) return true;
+    return stateSignature(state.filters, state.genreLogic) !== window.__orbitLastAppliedSig;
+  }
+  function updateSaveButtonVisibility() {
+    var btn = document.getElementById('saveSearchButton');
+    if (!btn) return;
+    btn.hidden = !isUserModifiedState();
+  }
+  window.__orbitUpdateSaveBtn = updateSaveButtonVisibility;
+
+  /* Save button click: prompt for a name, dedup by appending " (2)" etc.,
+     deep clone state, persist. */
+  function uniqueName(name, existing) {
+    var base = String(name || '').trim() || 'Untitled';
+    var names = {};
+    existing.forEach(function (s) { if (s && s.name) names[s.name] = true; });
+    if (!names[base]) return base;
+    var n = 2;
+    while (names[base + ' (' + n + ')']) n++;
+    return base + ' (' + n + ')';
+  }
+  function makeId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    /* Fallback for older browsers. */
+    return 'saved-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+  }
+  /* Phase 3 (2026-06-01): commit a new saved search. Used by the styled
+     modal below (replaces the previous window.prompt). Returns true if
+     persisted, false if blocked (empty/whitespace name). */
+  function commitSaveWithName(name) {
+    var trimmed = String(name || '').trim();
+    if (!trimmed) return false;
+    if (typeof state === 'undefined') return false;
+    var existing = loadSavedSearches();
+    var finalName = uniqueName(trimmed, existing);
+    var entry = {
+      id: makeId(),
+      name: finalName,
+      state: {
+        filters: JSON.parse(JSON.stringify(state.filters || [])),
+        genreLogic: state.genreLogic || 'or',
+        regionLogic: state.regionLogic || 'or'
+      },
+      savedAt: Date.now()
+    };
+    existing.push(entry);
+    persistSavedSearches(existing);
+    /* Stamp the signature so the just-saved state reads as pristine
+       until the user edits — Save button hides immediately. */
+    window.__orbitLastAppliedSig = stateSignature(state.filters, state.genreLogic);
+    updateSaveButtonVisibility();
+    return true;
+  }
+
+  /* Phase 3 (2026-06-01): styled save-search modal — replaces
+     window.prompt with the page's existing cyan popup language.
+     Dismissal via X (orbit-close.js Black Hole), Esc, backdrop click,
+     or Cancel button. Save button + Enter on input commit through
+     commitSaveWithName; empty/whitespace shows an inline hint. */
+  var saveModal = document.getElementById('saveSearchModal');
+  var saveModalBackdrop = saveModal && saveModal.querySelector('.save-search-modal-backdrop');
+  var saveModalInput = document.getElementById('saveSearchModalInput');
+  var saveModalHint = document.getElementById('saveSearchModalHint');
+  var saveModalSaveBtn = document.getElementById('saveSearchModalSave');
+  var saveModalCancelBtn = document.getElementById('saveSearchModalCancel');
+
+  function openSaveModal() {
+    if (!saveModal) return;
+    if (saveModalInput) saveModalInput.value = '';
+    if (saveModalHint) saveModalHint.hidden = true;
+    saveModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    /* Defer focus so the popup paint finishes first; some browsers
+       won't focus a node that just transitioned from display:none. */
+    setTimeout(function () { if (saveModalInput) saveModalInput.focus(); }, 0);
+  }
+  function closeSaveModal() {
+    if (!saveModal) return;
+    if (window.OrbitClose && typeof window.OrbitClose.close === 'function') {
+      window.OrbitClose.close(saveModal);
+    } else {
+      saveModal.hidden = true;
+      document.body.style.overflow = '';
+    }
+  }
+  function attemptSave() {
+    var name = saveModalInput ? saveModalInput.value : '';
+    if (!String(name).trim()) {
+      if (saveModalHint) saveModalHint.hidden = false;
+      if (saveModalInput) saveModalInput.focus();
+      return;
+    }
+    var ok = commitSaveWithName(name);
+    if (ok) closeSaveModal();
+  }
+
+  var saveBtn = document.getElementById('saveSearchButton');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function () {
+      if (!isUserModifiedState()) return;
+      if (saveModal) {
+        openSaveModal();
+      } else {
+        /* HTML lacks the modal — fall back to the original prompt path
+           so the feature still works (defensive — shouldn't happen on
+           the live page since the modal is in discover.html Phase 3). */
+        var raw = window.prompt('Name this search:', '');
+        if (raw === null) return;
+        if (commitSaveWithName(raw)) { /* saved */ }
+      }
+    });
+  }
+
+  if (saveModal) {
+    /* Hint disappears as soon as the user starts typing. */
+    if (saveModalInput) {
+      saveModalInput.addEventListener('input', function () {
+        if (saveModalHint && !saveModalHint.hidden) saveModalHint.hidden = true;
+      });
+      /* Enter submits. Shift-Enter does nothing special (single-line input). */
+      saveModalInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          attemptSave();
+        }
+      });
+    }
+    if (saveModalSaveBtn) saveModalSaveBtn.addEventListener('click', attemptSave);
+    if (saveModalCancelBtn) saveModalCancelBtn.addEventListener('click', closeSaveModal);
+    if (saveModalBackdrop) saveModalBackdrop.addEventListener('click', closeSaveModal);
+    /* Esc — only when modal is open. */
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && !saveModal.hidden) closeSaveModal();
+    });
+    /* Body-scroll lock released on Black Hole close. */
+    saveModal.addEventListener('orbit:close', function () {
+      document.body.style.overflow = '';
+    });
+  }
+
+  /* Wrap window.renderFilterChips ONE MORE TIME so every chip re-render
+     re-evaluates Save-button visibility. Wraps any previous wrap
+     (updateTabDots / updateOrbitRing / fetchFilmCount). */
+  if (typeof window.renderFilterChips === 'function') {
+    var _prevWrap = window.renderFilterChips;
+    window.renderFilterChips = function () {
+      var r = _prevWrap.apply(this, arguments);
+      try { updateSaveButtonVisibility(); } catch (e) {}
+      return r;
+    };
+  }
+
+  /* Initial paint: in case the page restored a state on load, evaluate
+     once after the DOM is ready. */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSaveButtonVisibility);
+  } else {
+    updateSaveButtonVisibility();
+  }
+})();
+/* === END PHASE 2: Saved searches + Favourites + Save button === */

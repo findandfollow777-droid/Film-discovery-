@@ -5,6 +5,7 @@
   <title>Orbit – Movies & TV Discovery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="discover.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -202,11 +203,11 @@
   </div>
 
   <!-- FOCUS CARD OVERLAY -->
-  <div class="focus-overlay" id="focusOverlay" hidden>
+  <div class="focus-overlay" id="focusOverlay" data-orbit-popup hidden>
     <div class="focus-card" id="focusCard">
       <header class="focus-card-header">
         <h2 class="focus-card-title" id="focusTitle">Section</h2>
-        <button class="focus-close" id="focusCloseButton">✕</button>
+        <button class="focus-close orbit-close" id="focusCloseButton" aria-label="Close">✕</button>
       </header>
       <div class="focus-card-content" id="focusContent">
         <!-- Dynamic controls injected here -->

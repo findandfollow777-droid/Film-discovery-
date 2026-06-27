@@ -8,8 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tenth-star.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
   <link rel="stylesheet" href="../components/moviecube.css">
   <link rel="stylesheet" href="../components/people-cube.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body>
 
@@ -150,9 +153,9 @@
   </div>
 
   <!-- HELP MODAL -->
-  <div class="modal-overlay" id="helpModal" hidden>
+  <div class="modal-overlay" id="helpModal" data-orbit-popup hidden>
     <div class="modal-content help-modal-content">
-      <button class="modal-close" id="helpClose">✕</button>
+      <button class="modal-close orbit-close" id="helpClose" aria-label="Close">✕</button>
       <h2 class="modal-title">How to Play</h2>
       <div class="help-body">
         <p>A <strong>Top 10</strong> list is missing its <strong>10th movie</strong>. Your job: figure out which movie it is.</p>
@@ -173,9 +176,9 @@
   </div>
 
   <!-- STATS MODAL -->
-  <div class="modal-overlay" id="statsModal" hidden>
+  <div class="modal-overlay" id="statsModal" data-orbit-popup hidden>
     <div class="modal-content stats-modal-content">
-      <button class="modal-close" id="statsClose">✕</button>
+      <button class="modal-close orbit-close" id="statsClose" aria-label="Close">✕</button>
       <h2 class="modal-title">Your Stats</h2>
       <div class="stats-body">
         <div class="stats-row">
@@ -210,12 +213,12 @@
   </div>
 
   <!-- ARCHIVE BROWSER -->
-  <div class="archive-overlay" id="archiveOverlay" hidden>
+  <div class="archive-overlay" id="archiveOverlay" data-orbit-popup hidden>
     <div class="archive-card">
       <h2 class="archive-title">Puzzle Archive</h2>
       <p class="archive-desc">Play previous puzzles from the archive.</p>
       <div class="archive-list" id="archiveList"></div>
-      <button class="archive-close-btn" id="archiveCloseBtn">CLOSE</button>
+      <button class="archive-close-btn orbit-close" id="archiveCloseBtn" aria-label="Close">✕</button>
     </div>
   </div>
 

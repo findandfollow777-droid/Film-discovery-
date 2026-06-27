@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="series.css">
   <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
 </head>
 <body class="tv-mode">
 
@@ -172,9 +174,9 @@
   </section>
 
   <!-- EPISODE DETAIL MODAL -->
-  <div class="episode-modal-overlay" id="episodeModal" hidden>
+  <div class="episode-modal-overlay" id="episodeModal" data-orbit-popup hidden>
     <div class="episode-modal">
-      <button class="modal-close" id="episodeModalClose">✕</button>
+      <button class="modal-close orbit-close" id="episodeModalClose" aria-label="Close">✕</button>
       <div class="modal-still">
         <img id="modalStill" src="" alt="">
       </div>
@@ -198,9 +200,9 @@
   </div>
 
   <!-- EXPANDED CAST MODAL -->
-  <div class="cast-modal-overlay" id="castModal" hidden>
+  <div class="cast-modal-overlay" id="castModal" data-orbit-popup hidden>
     <div class="cast-modal">
-      <button class="modal-close" id="castModalClose">✕</button>
+      <button class="modal-close orbit-close" id="castModalClose" aria-label="Close">✕</button>
       <h2 class="modal-title">Full Cast & Crew</h2>
       <div class="cast-modal-grid" id="castModalGrid"></div>
     </div>

@@ -102,11 +102,15 @@ function recordReceivedChallenge(entry) {
   saveMyChallenges(data);
 }
 
-function recordOpponentResult(cid, steps) {
+function recordOpponentResult(cid, steps, pathIds) {
   const data = loadMyChallenges();
   const challenge = data.sent.find(c => c.id === cid);
   if (!challenge) return null;
-  challenge.opponentResult = { steps, completedAt: Date.now() };
+  challenge.opponentResult = {
+    steps,
+    completedAt: Date.now(),
+    pathIds: Array.isArray(pathIds) && pathIds.length ? pathIds : null
+  };
   saveMyChallenges(data);
   return challenge;
 }
@@ -124,6 +128,87 @@ function recordMyResult(cid, steps, chain) {
 
 function newChallengeId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+/* ============================================================
+   ABBA SERIES — Added 2026-05-02
+   Series score is DERIVED from the orbit_my_challenges replyTo
+   chain at render time, not stored as URL state. ABBA pattern
+   determines who creates each round; second-mover advantage:
+     Bo3 = A,B,B   Bo5 = A,B,B,A,A   Bo7 = A,B,B,A,A,B,B
+   ============================================================ */
+const ABBA_PATTERNS = {
+  1: [0],
+  3: [0, 1, 1],
+  5: [0, 1, 1, 0, 0],
+  7: [0, 1, 1, 0, 0, 1, 1]
+};
+
+function getCreatorForRound(roundIndex, seriesLength) {
+  const p = ABBA_PATTERNS[seriesLength];
+  if (!p || roundIndex < 0 || roundIndex >= p.length) return 0;
+  return p[roundIndex]; // 0 = original creator (A), 1 = original opponent (B)
+}
+
+// Walk replyTo chain from any cid back to the root, then forward through
+// children, and tally wins/losses from the local user's perspective.
+// `mySideIsCreator` is true when root is in `sent` (local user is A).
+// Pending rounds (no opponentResult / no mySteps yet) are skipped in tally.
+// Ties (mine === theirs) increment neither side.
+function loadSeriesChain(anyCid, seriesLengthHint) {
+  if (!anyCid) return null;
+  const data = loadMyChallenges();
+  const idx = {};
+  data.sent.forEach(c => { idx[c.id] = { ...c, side: 'sent' }; });
+  data.received.forEach(c => { idx[c.id] = { ...c, side: 'received' }; });
+  if (!idx[anyCid]) return null;
+
+  let root = idx[anyCid];
+  const seen = new Set([root.id]);
+  while (root.replyTo && idx[root.replyTo] && !seen.has(root.replyTo)) {
+    root = idx[root.replyTo];
+    seen.add(root.id);
+  }
+
+  const all = Object.values(idx);
+  const chain = [root];
+  let cur = root;
+  while (true) {
+    const next = all.find(c => c.replyTo === cur.id);
+    if (!next || chain.includes(next)) break;
+    chain.push(next);
+    cur = next;
+  }
+
+  let wins = 0, losses = 0, ties = 0;
+  for (const r of chain) {
+    let mine, theirs;
+    if (r.side === 'sent') {
+      if (!r.opponentResult) continue;
+      mine = r.par;
+      theirs = r.opponentResult.steps;
+    } else {
+      if (r.mySteps == null) continue;
+      mine = r.mySteps;
+      theirs = r.par;
+    }
+    if (mine < theirs) wins++;
+    else if (mine > theirs) losses++;
+    else ties++;
+  }
+
+  const seriesLength = seriesLengthHint || chain[0]?.seriesLength || 1;
+  const winsNeeded = Math.ceil(seriesLength / 2);
+  const seriesComplete = wins >= winsNeeded || losses >= winsNeeded;
+
+  return {
+    chain,
+    mySideIsCreator: root.side === 'sent',
+    wins,
+    losses,
+    ties,
+    seriesComplete
+  };
 }
 
 function getPlayerName(idx) {
@@ -180,6 +265,43 @@ async function fetchAndCachePortrait(personId) {
     cachePortrait(personId, false);
     return false;
   }
+}
+
+/* ============================================================
+   SHARE HELPER — Added 2026-05-02
+   Tries Web Share API (native sheet on mobile), falls back to
+   clipboard, and final-fallback to a prompt() if clipboard is
+   blocked. Silently no-ops on user-cancel (AbortError).
+   ============================================================ */
+async function shareLink(message, url, btnId, copiedLabel) {
+  const sharePayload = url ? { title: 'Journeys', text: message, url } : { title: 'Journeys', text: message };
+  if (navigator.share) {
+    try {
+      await navigator.share(sharePayload);
+      return true;
+    } catch (err) {
+      if (err.name === 'AbortError') return false;
+      // Other errors: fall through to clipboard
+    }
+  }
+  const clipText = url ? `${message}\n\n${url}` : message;
+  try {
+    await navigator.clipboard.writeText(clipText);
+    if (btnId) flipShareBtn(btnId, copiedLabel || '<span>✓</span> Copied!');
+    return true;
+  } catch (err) {
+    if (url) prompt('Copy this link:', url);
+    else prompt('Copy this:', message);
+    return false;
+  }
+}
+
+function flipShareBtn(btnId, html, ms = 2000) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  const original = btn.innerHTML;
+  btn.innerHTML = html;
+  setTimeout(() => { btn.innerHTML = original; }, ms);
 }
 
 // Validation lock to prevent race conditions during async credit checks
@@ -758,12 +880,96 @@ async function checkUrlParams() {
         verdictEl.className = 'score-verdict over-par';
       }
 
-      // Persist the opponent's result against the matching sent challenge.
-      if (cid) recordOpponentResult(cid, result);
+      // Decode opponent's path if present (old links without ?path= still work).
+      let opponentPathIds = null;
+      if (params.has('path')) {
+        const raw = params.get('path');
+        const ids = raw.split('-').map(s => parseInt(s, 10)).filter(n => Number.isFinite(n) && n > 0);
+        if (ids.length) opponentPathIds = ids;
+      }
+
+      // Persist the opponent's result (with path) against the matching sent challenge.
+      if (cid) recordOpponentResult(cid, result, opponentPathIds);
+
+      // Competitive framing: par is A's own score (A solved before sending),
+      // so result vs par IS A vs B. diff < 0 → opponent beat A → THEY WON.
+      const banner = document.getElementById('resultBanner');
+      if (banner) {
+        if (diff < 0) {
+          banner.textContent = `THEY WON — ${-diff} under your Par`;
+          banner.className = 'result-banner lost';
+        } else if (diff === 0) {
+          banner.textContent = 'TIED AT PAR';
+          banner.className = 'result-banner tied';
+        } else {
+          banner.textContent = `YOU WON — ${diff} over your Par`;
+          banner.className = 'result-banner won';
+        }
+        banner.hidden = false;
+      }
 
       // Counter-challenge available unless we've already played all rounds.
-      const canCounter = seriesLength === 1 || (seriesProgress + 1) < seriesLength;
+      let canCounter = seriesLength === 1 || (seriesProgress + 1) < seriesLength;
+
+      // ABBA series: derive score from local chain, override series caption
+      // and counter-challenge visibility based on whose turn it is per ABBA.
+      let opponentTurn = false;
+      let seriesEnded = false;
+      if (seriesLength > 1 && cid) {
+        const series = loadSeriesChain(cid, seriesLength);
+        const seriesEl = document.getElementById('holdingSeriesInfo');
+        if (seriesEl) seriesEl.classList.remove('series-complete');
+        if (series) {
+          const baseCaption = `Best of ${seriesLength} • Round ${seriesProgress + 1}/${seriesLength}`;
+          let caption;
+          if (series.seriesComplete) {
+            seriesEnded = true;
+            canCounter = false;
+            const label = series.wins > series.losses ? 'Won' : 'Lost';
+            caption = `Series ${label} ${series.wins}–${series.losses}`;
+            if (seriesEl) seriesEl.classList.add('series-complete');
+          } else {
+            const nextRoundIdx = seriesProgress + 1;
+            const creatorRole = getCreatorForRound(nextRoundIdx, seriesLength);
+            const myCreatorRole = series.mySideIsCreator ? 0 : 1;
+            const myTurn = (creatorRole === myCreatorRole);
+            const turnLabel = myTurn
+              ? `Your turn — round ${nextRoundIdx + 1}`
+              : `Opponent creates round ${nextRoundIdx + 1}`;
+            caption = `${baseCaption} • Score ${series.wins}–${series.losses} • ${turnLabel}`;
+            if (!myTurn) {
+              canCounter = false;
+              opponentTurn = true;
+            }
+          }
+          if (seriesEl) {
+            seriesEl.textContent = caption;
+            seriesEl.hidden = false;
+          }
+        }
+      }
+
       document.getElementById('counterChallengeBtn').hidden = !canCounter;
+      // Inject "Remind Opponent" button when ABBA says it's the opponent's
+      // turn to create the next round. Re-shares the current result-back URL.
+      const counterBtn = document.getElementById('counterChallengeBtn');
+      let remindBtn = document.getElementById('remindOpponentBtn');
+      if (opponentTurn && counterBtn) {
+        if (!remindBtn) {
+          remindBtn = document.createElement('button');
+          remindBtn.id = 'remindOpponentBtn';
+          remindBtn.className = 'cel-btn share-btn';
+          remindBtn.textContent = 'Remind Opponent';
+          remindBtn.addEventListener('click', () => {
+            const msg = 'Your turn to create the next round of our Journeys series!';
+            shareLink(msg, window.location.href, 'remindOpponentBtn', '<span>✓</span> Sent!');
+          });
+          counterBtn.parentElement.insertBefore(remindBtn, counterBtn);
+        }
+        remindBtn.hidden = false;
+      } else if (remindBtn) {
+        remindBtn.hidden = true;
+      }
     } else {
       // Incoming challenge — record receipt against B's localStorage if cid present.
       if (cid) {
@@ -2263,13 +2469,7 @@ ${verdict}
 
 Play at orbit-game.com/journeys`;
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById("shareBtn");
-    btn.innerHTML = "<span>✓</span> Copied!";
-    setTimeout(() => {
-      btn.innerHTML = '<span class="og og-clipboard"></span> Share';
-    }, 2000);
-  });
+  shareLink(text, null, 'shareBtn', '<span>✓</span> Copied!');
 }
 
 function shareDuelResult() {
@@ -2297,6 +2497,12 @@ function shareDuelResult() {
     params.set('round', gameState.seriesProgress);
   }
   if (gameState.replyTo) params.set('reply', gameState.replyTo);
+  // Encode B's chain as id-id-id-... (excluding start/goal which are already in s/g).
+  // Order is actor,movie,actor,movie,... starting with start actor at index 0.
+  const innerChain = gameState.chain.slice(1, -1);
+  if (innerChain.length) {
+    params.set('path', innerChain.map(n => n.id).join('-'));
+  }
   const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 
   const text = `🛤️ JOURNEYS RESULT
@@ -2304,19 +2510,9 @@ function shareDuelResult() {
 ${gameState.startActor.name} → ${gameState.endActor.name}
 I scored ${steps} (Par ${par}) — ${verdict}
 
-See my run: ${url}
-
 Powered by Orbit`;
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('shareBtn');
-    btn.innerHTML = '<span>✓</span> Result link copied!';
-    setTimeout(() => {
-      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
-    }, 2000);
-  }).catch(() => {
-    prompt('Copy this result link:', url);
-  });
+  shareLink(text, url, 'shareBtn', '<span>✓</span> Result link copied!');
 }
 
 function shareParty() {
@@ -2338,13 +2534,7 @@ ${verdict}
 
 Play at orbit-game.com/journeys`;
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('shareBtn');
-    btn.innerHTML = '<span>✓</span> Copied!';
-    setTimeout(() => {
-      btn.innerHTML = '<span class="og og-clipboard"></span> Share Result';
-    }, 2000);
-  });
+  shareLink(text, null, 'shareBtn', '<span>✓</span> Copied!');
 }
 
 function generateChallengeLink() {
@@ -2394,19 +2584,9 @@ function generateChallengeLink() {
 ${gameState.startActor.name} → ${gameState.endActor.name}
 ${seriesLabel}Can you beat my Par ${gameState.par}?
 
-Play: ${url}
-
 Powered by Orbit`;
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById("shareBtn");
-    btn.innerHTML = '<span>✓</span> Link Copied!';
-    setTimeout(() => {
-      btn.innerHTML = '<span class="og og-clipboard"></span> Copy Challenge Link';
-    }, 2000);
-  }).catch(() => {
-    prompt('Copy this challenge link:', url);
-  });
+  shareLink(text, url, 'shareBtn', '<span>✓</span> Link Copied!');
 }
 
 // ============================================
