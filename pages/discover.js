@@ -3710,7 +3710,9 @@ function buildPeopleSearchContent(root) {
   recentPeople.forEach(p => {
     const chip = document.createElement("button");
     chip.type = "button";
-    chip.className = "chip oft-recent-person-chip";
+    /* A2b: drop legacy .chip (collides with the 29 legacy chips), keep the
+       .oft-recent-person-chip read-hook, add the .disco-chip component skin. */
+    chip.className = "oft-recent-person-chip disco-chip";
     chip.dataset.personId = p.id;
     chip.dataset.personName = p.name;
     chip.textContent = p.name;
@@ -3749,6 +3751,10 @@ function buildPeopleSearchContent(root) {
     dropdown = document.createElement("div");
     dropdown.id = "peopleDropdownGlobal";
     dropdown.className = "people-dropdown-global";
+    /* A2b: the dropdown lives on document.body (outside the panel's data-axis
+       subtree), so carry data-axis="people" here too → var(--axis)/--axis-hex
+       resolve to cyan for the rows below. position:fixed/body mechanics unchanged. */
+    dropdown.dataset.axis = "people";
     dropdown.style.cssText = `
       display: none;
       position: fixed;
@@ -3757,7 +3763,7 @@ function buildPeopleSearchContent(root) {
       overflow-y: auto;
       background: rgba(10, 14, 26, 0.98);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 217, 255, 0.3);
+      border: 1px solid rgba(var(--axis), 0.3);
       border-radius: 8px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
       z-index: 10000;
@@ -3817,9 +3823,9 @@ function buildPeopleSearchContent(root) {
         gap: 12px;
         padding: 10px 12px;
         cursor: pointer;
-        border-bottom: 1px solid rgba(120, 190, 255, 0.1);
+        border-bottom: 1px solid rgba(var(--axis), 0.1);
         transition: background 0.15s ease;
-      " onmouseover="this.style.background='rgba(111, 210, 255, 0.1)'" onmouseout="this.style.background='transparent'">
+      " onmouseover="this.style.background='rgba(var(--axis), 0.1)'" onmouseout="this.style.background='transparent'">
         <img 
           src="${person.profile_path ? 'https://image.tmdb.org/t/p/w45' + person.profile_path : 'https://placehold.co/45x68?text=?'}" 
           style="width: 35px; height: 52px; object-fit: cover; border-radius: 4px; flex-shrink: 0;"
@@ -3849,21 +3855,14 @@ function buildPeopleSearchContent(root) {
         else if (personRole === "crew") roleLabel = " (Behind Camera)";
         
         const chip = document.createElement("div");
-        chip.className = "selected-person-chip";
+        /* A2b: co-class — read-hook class FIRST, component SECOND. .disco-chip.on
+           supplies the (axis cyan) filled-pill skin; the inline cyan/layout that
+           A2 left is stripped. .selected-person-chip preserved VERBATIM — the
+           global collectLabelsForSection read depends on it. */
+        chip.className = "selected-person-chip disco-chip on";
         chip.dataset.personId = personId;
         chip.dataset.personName = personName;
         chip.dataset.personRole = personRole;
-        chip.style.cssText = `
-          background: rgba(111, 210, 255, 0.15);
-          border: 1px solid rgba(0, 217, 255, 0.3);
-          border-radius: 999px;
-          padding: 6px 12px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 13px;
-          color: var(--film-white);
-        `;
         chip.innerHTML = `
           <span>${personName}${roleLabel}</span>
           <button style="
