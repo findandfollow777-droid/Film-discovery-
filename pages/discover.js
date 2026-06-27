@@ -4438,8 +4438,13 @@ function settingDiscoverProbe(key, params) {
       if (!data || typeof data.total_results !== 'number') return null;   // failure → honest "—"
       const entry = {
         count: data.total_results,
-        // reserved for B2 — first few poster paths from the SAME response
-        posters: (data.results || []).map(function (m) { return m.poster_path; }).filter(Boolean).slice(0, 6)
+        /* B2 (2026-06-27): keep path + id + title from the SAME response so
+           the preview can render real tiles with real titles — NO extra
+           request. Drop entries without a poster_path (never a broken tile). */
+        posters: (data.results || [])
+          .filter(function (m) { return m && m.poster_path; })
+          .slice(0, 6)
+          .map(function (m) { return { path: m.poster_path, id: m.id, title: m.title || m.name || '' }; })
       };
       cache[key] = entry;
       saveSettingCounts();
@@ -4564,14 +4569,12 @@ function buildSettingContent(root) {
   sentence.className = 'setting-sentence';
   summary.appendChild(sentence);
 
-  // Reserved B2 poster slot — empty in B1, no fetch
+  // B2 (2026-06-27): live poster preview — filled by renderPreview() below
+  // from the probe's cached posters[] (no new request). States: empty /
+  // loading / results / zero / failure.
   const preview = document.createElement('div');
   preview.className = 'setting-preview';
   preview.dataset.reserved = 'b2';
-  const previewNote = document.createElement('span');
-  previewNote.className = 'setting-preview-note';
-  previewNote.textContent = 'Poster preview coming soon';
-  preview.appendChild(previewNote);
   summary.appendChild(preview);
 
   const footer = document.createElement('div');
@@ -4618,17 +4621,87 @@ function buildSettingContent(root) {
     return `<span class="setting-slot setting-slot--filled">${esc(names.join(' or '))}</span>`;
   }
 
+  /* ---- B2 poster preview (renders from the probe's cached posters[]) ---- */
+  function previewHint(text) {
+    const s = document.createElement('span');
+    s.className = 'setting-preview-note';
+    s.textContent = text;
+    return s;
+  }
+  // Tolerate both shapes: B2's {path,id,title} and any B1 path-string cache.
+  function normalizePosters(arr) {
+    return (arr || [])
+      .map(p => (typeof p === 'string' ? { path: p } : (p || {})))
+      .filter(p => p && p.path);
+  }
+  /* States: empty | loading | results | zero | failure. Honest only —
+     never a fabricated tile or title; films without a poster are skipped. */
+  function renderPreview(stateName, entry) {
+    preview.innerHTML = '';
+    preview.dataset.state = stateName;
+    if (stateName === 'empty')   { preview.appendChild(previewHint('Pick a setting to preview films')); return; }
+    if (stateName === 'failure') { preview.appendChild(previewHint('Preview unavailable')); return; }
+    if (stateName === 'zero')    { preview.appendChild(previewHint('No films match this exact setting')); return; }
+    if (stateName === 'loading') {
+      for (let i = 0; i < 6; i++) {
+        const sk = document.createElement('div');
+        sk.className = 'setting-tile setting-tile--skeleton';
+        preview.appendChild(sk);
+      }
+      return;
+    }
+    // results
+    const posters = normalizePosters(entry && entry.posters).slice(0, 6);
+    const imgHelper = (window.OrbitUtils && OrbitUtils.tmdbImageUrl) ? OrbitUtils.tmdbImageUrl : null;
+    let rendered = 0;
+    posters.forEach(p => {
+      const url = imgHelper ? imgHelper(p.path, 'w185') : null;
+      if (!url) return;                                    // no path/helper → skip, no broken tile
+      const tile = document.createElement('div');
+      tile.className = 'setting-tile';
+      const img = document.createElement('img');
+      img.className = 'setting-tile-img';
+      img.loading = 'lazy';
+      img.src = url;
+      img.alt = p.title ? p.title : 'Matching film';       // generic alt when title absent — never fabricated
+      img.addEventListener('error', () => tile.remove());  // dead URL → drop, no broken-image icon
+      tile.appendChild(img);
+      if (p.title) {
+        const cap = document.createElement('span');
+        cap.className = 'setting-tile-title';
+        cap.textContent = p.title;
+        tile.appendChild(cap);
+      }
+      preview.appendChild(tile);
+      rendered++;
+    });
+    if (!rendered) { preview.dataset.state = 'zero'; preview.appendChild(previewHint('No preview available')); }
+  }
+
+  let _activeKey = null;   // guards against a stale in-flight probe painting old results
   function updateAll() {
     const sel = currentSelection();
     sentence.innerHTML =
       'A story set in ' + fillSlot(sel.byAxis.place, 'any place') +
       ', in ' + fillSlot(sel.byAxis.city, 'anywhere') +
       ', at ' + fillSlot(sel.byAxis.season, 'any time of year') + '.';
-    if (!sel.ids.length) { pillCount.textContent = '—'; return; }
+    if (!sel.ids.length) { pillCount.textContent = '—'; _activeKey = null; renderPreview('empty'); return; }
     const sep = state.settingLogic === 'or' ? '|' : ',';   // matches Build A's query builder
     const kw = sel.ids.join(sep);
+    const key = 'set::' + kw;
+    _activeKey = key;
     pillCount.textContent = '—';                        // honest placeholder while probing
-    paintSettingCount(pillCount, 'set::' + kw, { with_keywords: kw });
+    renderPreview('loading');
+    /* ONE probe → count + posters painted together. Cache-first, so a seen
+       selection resolves with no network call (posters come from the cached
+       /discover response B1's probe already stored). */
+    settingDiscoverProbe(key, { with_keywords: kw }).then(function (entry) {
+      if (_activeKey !== key) return;                   // selection changed mid-flight → ignore
+      if (!entry) { renderPreview('failure'); return; } // count stays honest "—"
+      if (pillCount.isConnected) pillCount.textContent = formatSettingCount(entry.count);
+      if (entry.count === 0) { renderPreview('zero'); return; }
+      renderPreview('results', entry);
+    });
   }
 
   let _sumTimer = null;

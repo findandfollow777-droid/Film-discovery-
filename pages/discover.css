@@ -8016,14 +8016,26 @@ html, body {
 .setting-slot--filled { color: var(--axis-hex); font-weight: 600; }
 .setting-slot--empty { color: var(--muted-silver); font-style: italic; }
 
-/* Reserved B2 poster slot — empty placeholder in B1 (no fetch) */
+/* Live poster preview (Build B2 — 2026-06-27). Up to 6 real tiles rendered
+   from the probe's cached posters[] (no new request). Grid for results +
+   loading skeletons; centred muted text for empty / zero / failure. Sits
+   between the sentence and the match-pill — never pushes the pill off-panel. */
 .setting-preview {
   min-height: 120px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  align-content: start;
+  border-radius: 10px;
+}
+.setting-preview[data-state="empty"],
+.setting-preview[data-state="zero"],
+.setting-preview[data-state="failure"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border: 1px dashed rgba(var(--axis), 0.25);
-  border-radius: 10px;
   background: rgba(var(--axis), 0.03);
 }
 .setting-preview-note {
@@ -8031,6 +8043,51 @@ html, body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted-silver);
+}
+
+/* Poster tile — 2:3, emerald-tinted, title scrim on the lower portion */
+.setting-tile {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--axis), 0.3);
+  background: rgba(var(--axis), 0.06);
+}
+.setting-tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.setting-tile-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 6px 4px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--film-white);
+  background: linear-gradient(transparent, rgba(var(--space-black-rgb), 0.85));
+  text-shadow: 0 1px 3px rgba(var(--space-black-rgb), 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Loading skeleton — emerald shimmer, no fake poster */
+.setting-tile--skeleton {
+  border: 1px solid rgba(var(--axis), 0.18);
+  background: linear-gradient(100deg,
+    rgba(var(--axis), 0.06) 30%,
+    rgba(var(--axis), 0.14) 50%,
+    rgba(var(--axis), 0.06) 70%);
+  background-size: 200% 100%;
+  animation: settingSkeleton 1.2s linear infinite;
+}
+@keyframes settingSkeleton {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
 }
 
 .setting-summary-footer {
