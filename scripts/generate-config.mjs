@@ -1,9 +1,10 @@
-// ORBIT – build-time generator for the git-ignored config.js the browser loads.
+// ORBIT – build-time generator for the browser's TMDB config.
 //
-// Why this exists: config.js is git-ignored, so a GitHub-sourced Netlify build has
-// no config.js in the repo. This script regenerates it at build time from env vars
-// (see the [build] command in netlify.toml), so the deployed site gets the client
-// values it needs WITHOUT the key ever being committed.
+// Why this exists: the local config.js is git-ignored, and Netlify applies .gitignore
+// to the publish dir — so a generated config.js would be excluded from the deploy and
+// 404. Instead this script writes a NON-ignored runtime-config.js at build time from
+// env vars, and netlify.toml rewrites /config.js → /runtime-config.js so every page's
+// <script src=".../config.js"> resolves to it. The key is never committed.
 //
 // Scope: emits the TMDB key ONLY. It deliberately never emits an Anthropic key —
 // that one must never live in browser-served config.js (the AI-bio call routes
@@ -16,11 +17,11 @@
 import { writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
-const OUT = join(process.cwd(), "config.js");
+const OUT = join(process.cwd(), "runtime-config.js");
 const tmdbKey = process.env.TMDB_API_KEY;
 
 if (tmdbKey) {
-  // env present → (over)write config.js from the environment value.
+  // env present → (over)write runtime-config.js from the environment value.
   // A single-quoted literal can't safely contain these characters; fail loudly
   // rather than emit malformed JS (TMDB keys are hex, so this should never trip).
   if (/['\\\r\n]/.test(tmdbKey)) {
@@ -35,14 +36,14 @@ const TMDB_API_KEY = '${tmdbKey}';
 `;
 
   writeFileSync(OUT, contents);
-  console.log("generate-config: wrote config.js from environment (TMDB_API_KEY).");
+  console.log("generate-config: wrote runtime-config.js from environment (TMDB_API_KEY).");
 } else if (existsSync(OUT)) {
-  // env absent but a local config.js already exists → leave it untouched.
-  // This protects the local dev file (which also holds the local-only Anthropic key).
-  console.log("generate-config: TMDB_API_KEY not set; existing config.js left unchanged.");
+  // env absent but a runtime-config.js already exists → leave it untouched.
+  // (The local secret config.js is separate and is never read or written by this script.)
+  console.log("generate-config: TMDB_API_KEY not set; existing runtime-config.js left unchanged.");
 } else {
-  // env absent AND no config.js → fail the build loudly instead of deploying a broken site.
-  console.error("generate-config: ERROR — TMDB_API_KEY is not set and no config.js exists.");
+  // env absent AND no runtime-config.js → fail the build loudly instead of deploying a broken site.
+  console.error("generate-config: ERROR — TMDB_API_KEY is not set and no runtime-config.js exists.");
   console.error("Set TMDB_API_KEY in the Netlify build environment (Site settings → Environment variables).");
   process.exit(1);
 }
