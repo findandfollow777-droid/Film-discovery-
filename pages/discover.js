@@ -3608,51 +3608,48 @@ function buildPeopleSearchContent(root) {
   desc.textContent = "Search for actors, directors, or other people. Select from the dropdown.";
   root.appendChild(desc);
   
+  /* A2b-toggle: role toggle migrated to the .match-toggle family (2026-06-28).
+     selectedRole is the query feed — default "any", stamped onto each person at
+     pick-time → any→with_people / cast→with_cast / crew→with_crew in
+     buildTMDBQueryFromFilters. .match-toggle is a class-only component (no shared
+     JS), so this handler owns BOTH the .on active class and selectedRole.
+     .role-filter-btn is an internal query hook (roleFilter.querySelectorAll) —
+     CO-CLASSED with the component's .opt, not renamed. Axis cyan resolves via
+     #oft-panel-people[data-axis="people"] → --axis/--axis-hex (no hardcoded hex). */
   const roleFilter = document.createElement("div");
-  roleFilter.className = "oft-people-role-row";
-  
+  roleFilter.className = "oft-people-role-row match-toggle";
+
+  const roleLabel = document.createElement("span");
+  roleLabel.className = "match-toggle-label";
+  roleLabel.textContent = "Role";
+  roleFilter.appendChild(roleLabel);
+
   const roles = [
-    { value: "any", label: "Any Role" },
+    { value: "any", label: "Any" },
     { value: "cast", label: "Actor" },
     { value: "crew", label: "Behind Camera" }
   ];
-  
+
   let selectedRole = "any";
-  
+
   roles.forEach(role => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "role-filter-btn";
+    btn.className = "role-filter-btn opt";
     btn.dataset.role = role.value;
     btn.textContent = role.label;
-    btn.style.cssText = `
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      border: 1px solid rgba(0, 217, 255, 0.2);
-      background: ${role.value === "any" ? "var(--accent-cyan)" : "rgba(20, 30, 60, 0.5)"};
-      color: ${role.value === "any" ? "#000" : "var(--film-white)"};
-    `;
-    
+    if (role.value === selectedRole) btn.classList.add("on");
+
     btn.addEventListener("click", () => {
       selectedRole = role.value;
       roleFilter.querySelectorAll(".role-filter-btn").forEach(b => {
-        if (b.dataset.role === selectedRole) {
-          b.style.background = "var(--accent-cyan)";
-          b.style.color = "#000";
-        } else {
-          b.style.background = "rgba(20, 30, 60, 0.5)";
-          b.style.color = "var(--film-white)";
-        }
+        b.classList.toggle("on", b.dataset.role === selectedRole);
       });
     });
-    
+
     roleFilter.appendChild(btn);
   });
-  
+
   root.appendChild(roleFilter);
 
   /* ============================================================
@@ -3736,13 +3733,18 @@ function buildPeopleSearchContent(root) {
 
   root.appendChild(container);
 
-  /* Wire recent chip clicks: pre-fill the search input and trigger
-     the input event so the existing TMDB search flow runs. */
+  /* A2c-recents (2026-06-28): clicking a recent/popular pill INSTANTLY adds
+     that person as a selected-person chip via the shared addSelectedPerson
+     path — same as the dropdown, no input round-trip. Role is read LIVE from
+     the current Role toggle (selectedRole) at click time; the pill stores no
+     role. Already-selected (same id+role) → helper no-ops (no duplicate). */
   recentGroup.querySelectorAll('.oft-recent-person-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      input.value = chip.dataset.personName;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.focus();
+      addSelectedPerson({
+        id: chip.dataset.personId,
+        name: chip.dataset.personName,
+        role: selectedRole
+      });
     });
   });
   
@@ -3795,7 +3797,60 @@ function buildPeopleSearchContent(root) {
   const selectedContainer = document.createElement("div");
   selectedContainer.id = "selectedPeopleContainer";   // layout now via CSS (#selectedPeopleContainer)
   root.appendChild(selectedContainer);
-  
+
+  /* ============================================================
+     SHARED ADD-PERSON PATH — Added 2026-06-28 (A2c-recents)
+     Single source of truth for committing a person as a
+     .selected-person-chip. Called by BOTH the search dropdown and
+     the recent/popular pills so the two stay consistent (one click
+     adds). Dedup on id+role (same person in a different role is
+     allowed, matching the prior dropdown check). Operates on the
+     outer selectedPeople so the chip's × remove keeps the dedup
+     array in sync. Returns true if added, false if a duplicate.
+     NOTE: the query is built from the DOM (.selected-person-chip in
+     collectLabelsForSection), so selectedPeople is dedup-only.
+     ============================================================ */
+  function addSelectedPerson({ id, name, role }) {
+    if (selectedPeople.some(p => p.id === id && p.role === role)) {
+      return false;
+    }
+
+    selectedPeople.push({ id, name, role });
+
+    let roleLabel = "";
+    if (role === "cast") roleLabel = " (Actor)";
+    else if (role === "crew") roleLabel = " (Behind Camera)";
+
+    const chip = document.createElement("div");
+    /* A2b: co-class — read-hook class FIRST, component SECOND. .disco-chip.on
+       supplies the (axis cyan) filled-pill skin. .selected-person-chip preserved
+       VERBATIM — the global collectLabelsForSection read depends on it. */
+    chip.className = "selected-person-chip disco-chip on";
+    chip.dataset.personId = id;
+    chip.dataset.personName = name;
+    chip.dataset.personRole = role;
+    chip.innerHTML = `
+      <span>${name}${roleLabel}</span>
+      <button style="
+        background: transparent;
+        border: none;
+        color: var(--muted-silver);
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0 4px;
+        transition: color 0.15s;
+      " onmouseover="this.style.color='var(--danger-red)'" onmouseout="this.style.color='var(--muted-silver)'">✕</button>
+    `;
+
+    chip.querySelector('button').addEventListener('click', () => {
+      selectedPeople = selectedPeople.filter(p => !(p.id === id && p.role === role));
+      chip.remove();
+    });
+
+    selectedContainer.appendChild(chip);
+    return true;
+  }
+
   async function fetchPeopleSuggestions(query, dropdown, role) {
     const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
     
@@ -3840,48 +3895,15 @@ function buildPeopleSearchContent(root) {
     
     dropdown.querySelectorAll('.people-dropdown-item').forEach(item => {
       item.addEventListener('click', () => {
-        const personId = item.dataset.id;
-        const personName = item.dataset.name;
-        const personRole = item.dataset.role;
-        
-        if (selectedPeople.some(p => p.id === personId && p.role === personRole)) {
-          return;
-        }
-        
-        selectedPeople.push({ id: personId, name: personName, role: personRole });
-        
-        let roleLabel = "";
-        if (personRole === "cast") roleLabel = " (Actor)";
-        else if (personRole === "crew") roleLabel = " (Behind Camera)";
-        
-        const chip = document.createElement("div");
-        /* A2b: co-class — read-hook class FIRST, component SECOND. .disco-chip.on
-           supplies the (axis cyan) filled-pill skin; the inline cyan/layout that
-           A2 left is stripped. .selected-person-chip preserved VERBATIM — the
-           global collectLabelsForSection read depends on it. */
-        chip.className = "selected-person-chip disco-chip on";
-        chip.dataset.personId = personId;
-        chip.dataset.personName = personName;
-        chip.dataset.personRole = personRole;
-        chip.innerHTML = `
-          <span>${personName}${roleLabel}</span>
-          <button style="
-            background: transparent;
-            border: none;
-            color: var(--muted-silver);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 0 4px;
-            transition: color 0.15s;
-          " onmouseover="this.style.color='var(--danger-red)'" onmouseout="this.style.color='var(--muted-silver)'">✕</button>
-        `;
-        
-        chip.querySelector('button').addEventListener('click', () => {
-          selectedPeople = selectedPeople.filter(p => !(p.id === personId && p.role === personRole));
-          chip.remove();
+        /* A2c-recents: add via the shared path. On a duplicate (helper returns
+           false) this is a no-op — input/dropdown left as-is, matching the
+           prior inline early-return. */
+        const added = addSelectedPerson({
+          id: item.dataset.id,
+          name: item.dataset.name,
+          role: item.dataset.role
         });
-        
-        selectedContainer.appendChild(chip);
+        if (!added) return;
         input.value = '';
         dropdown.style.display = 'none';
       });
