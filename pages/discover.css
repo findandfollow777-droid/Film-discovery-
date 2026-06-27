@@ -7916,4 +7916,163 @@ html, body {
   color: var(--axis-hex);
 }
 
+/* ============================================================
+   SETTING — LOGLINE PANEL (Build B1 — 2026-06-27)
+   Two-column sentence-composed panel inside
+   #oft-panel-setting[data-axis="setting"] → emerald via --axis /
+   --axis-hex (set in components/discover-components.css). Left: three
+   prompt cards (place-type / city / season) reading as a sentence.
+   Right: "Your setting" summary (live sentence + reserved B2 preview
+   slot + match-pill + Any/All). Reuses .disco-chip + .match-toggle +
+   .focus-section-label. No literal emerald hex — all accent token-driven.
+   Panel is height-bound (Region 2c lesson) so the left column scrolls
+   internally and the summary/match-pill never clip. .setting-preview is
+   a reserved empty slot B2 fills with posters.
+   ============================================================ */
+#oft-panel-setting { max-height: 620px; }
+#oft-panel-setting .oft-panel-body { min-height: 0; }
+
+.setting-logline {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* LEFT — prompt cards (scrolls internally; summary stays put) */
+.setting-prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 4px;
+}
+.setting-card {
+  background: rgba(var(--axis), 0.04);
+  border: 1px solid rgba(var(--axis), 0.18);
+  border-radius: var(--radius-lg, 12px);
+  padding: 14px 16px;
+}
+.setting-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.setting-card-head .focus-section-label { margin: 0; color: var(--axis-hex); }
+.setting-lead {
+  margin: 4px 0 12px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--muted-silver);
+}
+.setting-filter-row { margin-bottom: 12px; }
+.setting-filter {
+  flex: 1;
+  padding: 9px 13px;
+  background: rgba(var(--axis), 0.05);
+  border: 1px solid rgba(var(--axis), 0.25);
+  border-radius: 8px;
+  color: var(--film-white);
+  font-size: 13px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.setting-filter::placeholder { color: var(--muted-silver); }
+.setting-filter:focus {
+  border-color: rgba(var(--axis), 0.55);
+  background: rgba(var(--axis), 0.09);
+  box-shadow: 0 0 16px rgba(var(--axis), 0.18);
+}
+.setting-chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* RIGHT — "Your setting" summary (stretched, non-scrolling → pill always visible) */
+.setting-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  background: rgba(var(--axis), 0.05);
+  border: 1px solid rgba(var(--axis), 0.22);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px;
+}
+.setting-summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.setting-summary-head .focus-section-label { margin: 0; color: var(--axis-hex); }
+.setting-sentence {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--film-white);
+}
+.setting-slot--filled { color: var(--axis-hex); font-weight: 600; }
+.setting-slot--empty { color: var(--muted-silver); font-style: italic; }
+
+/* Reserved B2 poster slot — empty placeholder in B1 (no fetch) */
+.setting-preview {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(var(--axis), 0.25);
+  border-radius: 10px;
+  background: rgba(var(--axis), 0.03);
+}
+.setting-preview-note {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+.setting-summary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;   /* pin to the bottom of the stretched summary card */
+}
+.setting-match-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--muted-silver);
+  background: rgba(var(--axis), 0.08);
+  border: 1px solid rgba(var(--axis), 0.25);
+}
+.setting-match-count {
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--axis-hex);
+}
+.setting-see-all {
+  background: none;
+  border: none;
+  color: var(--axis-hex);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.setting-see-all:hover { text-decoration: underline; }
+
+@media (max-width: 650px) {
+  .setting-logline { grid-template-columns: 1fr; height: auto; }
+  .setting-prompts { overflow-y: visible; }
+  .setting-summary-footer { margin-top: 14px; }
+}
+
 /* END OF STYLES */

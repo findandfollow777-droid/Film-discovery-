@@ -4387,6 +4387,257 @@ function settingChipValue(label, fallback) {
   return id ? { type: "keyword", id: id, name: label } : fallback;
 }
 
+/* ============================================================
+   SETTING — LOGLINE PANEL (Build B1 — 2026-06-27)
+   Replaces the retired combined Where+When two-column UI with a
+   single sentence-composed panel: three keyword-backed axes
+   (place-type / city / season) on the left, a live "Your setting"
+   summary on the right (sentence + reserved B2 preview slot +
+   match-pill + Any/All toggle). Emerald axis via the panel's
+   data-axis="setting" → --axis/--axis-hex. Every chip carries the
+   registry's {type:"keyword",id,name}; selecting one emits real
+   with_keywords (Build A plumbing). Place-type + city read under
+   settingWhere, season under settingWhen (data-setting-section attr)
+   — section keys UNCHANGED (persisted-state safe). Posters are OUT
+   OF SCOPE (B2): .setting-preview is a reserved empty slot, no fetch.
+   ============================================================ */
+
+/* Axis → registry slugs (resolved from the keyword-ids.js SETTING grouping
+   Build A added; NOT hardcoded ids). Order = display order. */
+const SETTING_AXES = {
+  place:  ['high-school','world-war-ii','prison','small-town','dystopia','road-trip',
+           'island','train','hospital','college','post-apocalyptic','hotel','farm',
+           'airplane','courtroom','ship','mansion','factory','summer-camp','boarding-school'],
+  city:   ['new-york-city','paris','london','los-angeles','berlin','tokyo','hong-kong',
+           'san-francisco','chicago','rome','hawaii','las-vegas'],
+  season: ['christmas','halloween','summer','winter','new-years-eve']
+};
+
+/* ---- Match-pill count probe (cached) — structured so B2 reuses the SAME
+   single /discover request to read poster_path. Caches {count, posters[]}
+   per key; B1 paints .count, B2 reads .posters. Honest "—" on failure. ---- */
+let _settingProbeCache = null;
+function getSettingCounts() {
+  if (_settingProbeCache) return _settingProbeCache;
+  let data = {};
+  try { const raw = sessionStorage.getItem('orbit_setting_counts'); if (raw) data = JSON.parse(raw) || {}; }
+  catch (e) { data = {}; }
+  _settingProbeCache = data;
+  return _settingProbeCache;
+}
+function saveSettingCounts() {
+  try { sessionStorage.setItem('orbit_setting_counts', JSON.stringify(_settingProbeCache || {})); } catch (e) {}
+}
+function formatSettingCount(n) { return n > 9999 ? '9,999+' : n.toLocaleString(); }
+function settingDiscoverProbe(key, params) {
+  const cache = getSettingCounts();
+  if (cache[key] && typeof cache[key].count === 'number') return Promise.resolve(cache[key]);
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return Promise.resolve(null);
+  return OrbitUtils.tmdbFetch('/discover/movie', params)
+    .then(function (data) {
+      if (!data || typeof data.total_results !== 'number') return null;   // failure → honest "—"
+      const entry = {
+        count: data.total_results,
+        // reserved for B2 — first few poster paths from the SAME response
+        posters: (data.results || []).map(function (m) { return m.poster_path; }).filter(Boolean).slice(0, 6)
+      };
+      cache[key] = entry;
+      saveSettingCounts();
+      return entry;
+    })
+    .catch(function () { return null; });
+}
+function paintSettingCount(slot, key, params) {
+  settingDiscoverProbe(key, params).then(function (entry) {
+    if (!entry) return;
+    if (slot && slot.isConnected) slot.textContent = formatSettingCount(entry.count);
+  });
+}
+
+function buildSettingContent(root) {
+  /* Hydrate: keyword ids already committed under the Setting sections so the
+     chips re-light when the panel reopens. */
+  const selectedIds = new Set(
+    state.filters
+      .filter(f => (f.section === 'settingWhere' || f.section === 'settingWhen') &&
+                   f.value && f.value.type === 'keyword' && f.value.id != null)
+      .map(f => f.value.id)
+  );
+
+  const missing = [];
+  function chipDef(slug) {
+    const e = (typeof ORBIT_KEYWORD_IDS !== 'undefined') ? ORBIT_KEYWORD_IDS[slug] : null;
+    if (!e || typeof e.id !== 'number') { missing.push(slug); return null; }
+    return { id: e.id, name: e.label };
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'setting-logline';
+
+  /* ---- LEFT — three prompt cards reading as a sentence ---- */
+  const promptsCol = document.createElement('div');
+  promptsCol.className = 'setting-prompts';
+
+  function buildAxisCard(opts) {
+    const card = document.createElement('div');
+    card.className = 'setting-card setting-card--' + opts.axis;
+
+    const head = document.createElement('div');
+    head.className = 'setting-card-head';
+    head.appendChild(makeSectionLabel(opts.label));
+    card.appendChild(head);
+
+    const lead = document.createElement('p');
+    lead.className = 'setting-lead';
+    lead.textContent = opts.lead;
+    card.appendChild(lead);
+
+    let chipGrid;
+    if (opts.filter) {
+      const row = document.createElement('div');
+      row.className = 'input-row setting-filter-row';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'setting-filter';
+      input.placeholder = 'Filter place-types…';
+      input.autocomplete = 'off';
+      row.appendChild(input);
+      card.appendChild(row);
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        chipGrid.querySelectorAll('.disco-chip').forEach(ch => {
+          ch.style.display = (!q || ch.textContent.toLowerCase().includes(q)) ? '' : 'none';
+        });
+      });
+    }
+
+    chipGrid = document.createElement('div');
+    chipGrid.className = 'setting-chip-grid';
+    opts.slugs.forEach(slug => {
+      const def = chipDef(slug);
+      if (!def) return;   // missing slug → skipped + reported, never fabricated
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'disco-chip setting-chip';
+      chip.textContent = def.name;
+      chip.dataset.value = JSON.stringify({ type: 'keyword', id: def.id, name: def.name });
+      chip.dataset.settingSection = opts.sectionKey;   // settingWhere | settingWhen
+      if (selectedIds.has(def.id)) chip.classList.add('on');
+      chip.addEventListener('click', () => { chip.classList.toggle('on'); scheduleUpdate(); });
+      chipGrid.appendChild(chip);
+    });
+    card.appendChild(chipGrid);
+    return card;
+  }
+
+  promptsCol.appendChild(buildAxisCard({ axis: 'place',  sectionKey: 'settingWhere', lead: 'A story set in a…', label: 'Place-type',     slugs: SETTING_AXES.place, filter: true }));
+  promptsCol.appendChild(buildAxisCard({ axis: 'city',   sectionKey: 'settingWhere', lead: '…in…',         label: 'City (set in)',  slugs: SETTING_AXES.city }));
+  promptsCol.appendChild(buildAxisCard({ axis: 'season', sectionKey: 'settingWhen',  lead: '…at…',         label: 'Season',         slugs: SETTING_AXES.season }));
+
+  /* ---- RIGHT — "Your setting" summary ---- */
+  const summary = document.createElement('div');
+  summary.className = 'setting-summary';
+
+  const sumHead = document.createElement('div');
+  sumHead.className = 'setting-summary-head';
+  sumHead.appendChild(makeSectionLabel('Your setting'));
+
+  // Any/All toggle (mirrors Region's .match-toggle exactly) → state.settingLogic
+  const toggle = document.createElement('div');
+  toggle.className = 'match-toggle';
+  const tLabel = document.createElement('span');
+  tLabel.className = 'match-toggle-label';
+  tLabel.textContent = 'Match';
+  toggle.appendChild(tLabel);
+  const anyOpt = document.createElement('button');
+  anyOpt.type = 'button'; anyOpt.className = 'opt'; anyOpt.dataset.logic = 'or'; anyOpt.textContent = 'Any';
+  const allOpt = document.createElement('button');
+  allOpt.type = 'button'; allOpt.className = 'opt'; allOpt.dataset.logic = 'and'; allOpt.textContent = 'All';
+  (state.settingLogic === 'and' ? allOpt : anyOpt).classList.add('on');
+  anyOpt.addEventListener('click', () => { state.settingLogic = 'or';  anyOpt.classList.add('on'); allOpt.classList.remove('on'); scheduleUpdate(); });
+  allOpt.addEventListener('click', () => { state.settingLogic = 'and'; allOpt.classList.add('on'); anyOpt.classList.remove('on'); scheduleUpdate(); });
+  toggle.appendChild(anyOpt); toggle.appendChild(allOpt);
+  sumHead.appendChild(toggle);
+  summary.appendChild(sumHead);
+
+  const sentence = document.createElement('p');
+  sentence.className = 'setting-sentence';
+  summary.appendChild(sentence);
+
+  // Reserved B2 poster slot — empty in B1, no fetch
+  const preview = document.createElement('div');
+  preview.className = 'setting-preview';
+  preview.dataset.reserved = 'b2';
+  const previewNote = document.createElement('span');
+  previewNote.className = 'setting-preview-note';
+  previewNote.textContent = 'Poster preview coming soon';
+  preview.appendChild(previewNote);
+  summary.appendChild(preview);
+
+  const footer = document.createElement('div');
+  footer.className = 'setting-summary-footer';
+  const pill = document.createElement('span');
+  pill.className = 'setting-match-pill';
+  const pillCount = document.createElement('span');
+  pillCount.className = 'setting-match-count';
+  pillCount.textContent = '—';
+  pill.appendChild(pillCount);
+  pill.appendChild(document.createTextNode(' films match'));
+  footer.appendChild(pill);
+  const seeAll = document.createElement('button');
+  seeAll.type = 'button';
+  seeAll.className = 'setting-see-all';
+  seeAll.textContent = 'see all →';
+  seeAll.addEventListener('click', () => { if (launchCard && !launchCard.disabled) launchCard.click(); });
+  footer.appendChild(seeAll);
+  summary.appendChild(footer);
+
+  grid.appendChild(promptsCol);
+  grid.appendChild(summary);
+  root.appendChild(grid);
+
+  /* ---- live sentence + count (debounced) ---- */
+  function currentSelection() {
+    const byAxis = { place: [], city: [], season: [] };
+    const ids = [];
+    grid.querySelectorAll('.setting-chip.on').forEach(ch => {
+      let v = {}; try { v = JSON.parse(ch.dataset.value); } catch (e) { return; }
+      ids.push(v.id);
+      const card = ch.closest('.setting-card');
+      if (!card) return;
+      if (card.classList.contains('setting-card--place')) byAxis.place.push(v.name);
+      else if (card.classList.contains('setting-card--city')) byAxis.city.push(v.name);
+      else if (card.classList.contains('setting-card--season')) byAxis.season.push(v.name);
+    });
+    return { byAxis, ids };
+  }
+
+  function esc(s) { return String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+  function fillSlot(names, fallback) {
+    if (!names.length) return `<span class="setting-slot setting-slot--empty">${fallback}</span>`;
+    return `<span class="setting-slot setting-slot--filled">${esc(names.join(' or '))}</span>`;
+  }
+
+  function updateAll() {
+    const sel = currentSelection();
+    sentence.innerHTML =
+      'A story set in ' + fillSlot(sel.byAxis.place, 'any place') +
+      ', in ' + fillSlot(sel.byAxis.city, 'anywhere') +
+      ', at ' + fillSlot(sel.byAxis.season, 'any time of year') + '.';
+    if (!sel.ids.length) { pillCount.textContent = '—'; return; }
+    const sep = state.settingLogic === 'or' ? '|' : ',';   // matches Build A's query builder
+    const kw = sel.ids.join(sep);
+    pillCount.textContent = '—';                        // honest placeholder while probing
+    paintSettingCount(pillCount, 'set::' + kw, { with_keywords: kw });
+  }
+
+  let _sumTimer = null;
+  function scheduleUpdate() { clearTimeout(_sumTimer); _sumTimer = setTimeout(updateAll, 350); }
+
+  if (missing.length) console.warn('[Orbit] Setting B1 — registry slugs missing, chips skipped:', missing);
+  updateAll();   // hydrated selection → initial sentence + cache-first count
+}
+
 function buildSettingWhereContent(root) {
   const desc = document.createElement("p");
   desc.style.cssText = "font-size: 15.6px; color: var(--muted-silver); margin-bottom: 0;";
@@ -6905,49 +7156,32 @@ function collectLabelsForSection(sectionKey) {
       });
     }
 
-    case "settingWhere":
-      const locationResults = [];
-      // Search-selected locations (chips in the selectedLocationContainer)
-      const locationChips = document.querySelectorAll('#selectedLocationContainer [data-location]');
-      locationChips.forEach(chip => {
-        const loc = chip.dataset.location;
-        locationResults.push({
-          label: `Set in: ${loc}`,
-          value: { type: "location", name: loc }
-        });
-      });
-      // Chip-selected locations (popular/region/special chips). Build A:
-      // also read {type:"keyword"} chips (verified Setting keywords) so their
-      // id flows through to the query builder's with_keywords; value pushed
-      // wholesale, so the id is carried intact (mirrors basedOn read).
-      const locChipsActive = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'))
-        .filter(chip => {
-          try { const t = JSON.parse(chip.dataset.value).type; return t === "location" || t === "keyword"; } catch { return false; }
-        });
-      locChipsActive.forEach(chip => {
+    case "settingWhere": {
+      /* Build B1 (2026-06-27): the logline panel emits place-type + city
+         chips as .disco-chip.on[data-setting-section="settingWhere"] carrying
+         {type:"keyword",id,name} → with_keywords (Build A plumbing fires
+         unchanged). The retired location/decade/era seed chips are no longer
+         rendered, so their old DOM scrape is dropped. */
+      const whereChips = Array.from(document.querySelectorAll(
+        '#focusContent .disco-chip.on[data-setting-section="settingWhere"], .oft-panel--active .disco-chip.on[data-setting-section="settingWhere"]'
+      ));
+      return whereChips.map(chip => {
         const value = JSON.parse(chip.dataset.value);
-        // Avoid duplicates if same location was also search-selected
-        if (!locationResults.some(r => r.value.name === value.name)) {
-          locationResults.push({ label: `Set in: ${value.name}`, value });
-        }
+        return { label: `Set in: ${value.name}`, value };
       });
-      return locationResults;
+    }
 
-    case "settingWhen":
-      const whenResults = [];
-      const whenChips = Array.from(document.querySelectorAll('#focusContent .chip.active, .oft-panel--active .chip.active'));
-      whenChips.forEach(chip => {
-        try {
-          const value = JSON.parse(chip.dataset.value);
-          let label = chip.textContent;
-          if (value.type === "time_decade") label = `Set in ${value.value}`;
-          else if (value.type === "time_era") label = `Era: ${value.value}`;
-          else if (value.type === "keyword") label = `Era: ${value.name}`; // Build A: verified era keyword (e.g. WWII) → with_keywords
-          // time_special uses the chip text as-is
-          whenResults.push({ label, value });
-        } catch {}
+    case "settingWhen": {
+      /* Build B1: the logline's season axis emits under settingWhen as
+         .disco-chip.on[data-setting-section="settingWhen"] → with_keywords. */
+      const whenChips = Array.from(document.querySelectorAll(
+        '#focusContent .disco-chip.on[data-setting-section="settingWhen"], .oft-panel--active .disco-chip.on[data-setting-section="settingWhen"]'
+      ));
+      return whenChips.map(chip => {
+        const value = JSON.parse(chip.dataset.value);
+        return { label: `At: ${value.name}`, value };
       });
-      return whenResults;
+    }
 
     case "basedOn":
       /* Lockstep with buildBasedOnContent: surviving Source Type chips carry
@@ -7870,22 +8104,13 @@ function runZeroCounterfactuals(filters, queryString) {
     var section = panel.dataset.section;
 
     if (section === 'setting-combined') {
-      var wrap = document.createElement('div');
-      wrap.className = 'oft-setting-combined';
-
-      var colWhere = document.createElement('div');
-      colWhere.className = 'oft-setting-col';
-      try { buildSettingWhereContent(colWhere); }
-      catch (e) { console.warn('[FilterTabs] settingWhere error', e); }
-
-      var colWhen = document.createElement('div');
-      colWhen.className = 'oft-setting-col';
-      try { buildSettingWhenContent(colWhen); }
-      catch (e) { console.warn('[FilterTabs] settingWhen error', e); }
-
-      wrap.appendChild(colWhere);
-      wrap.appendChild(colWhen);
-      body.appendChild(wrap);
+      /* Build B1 (2026-06-27): the combined Where+When two-column UI is
+         retired in favour of the single logline panel. The old builders
+         (buildSettingWhereContent / buildSettingWhenContent) + the seed
+         post-filter cases are LEFT IN PLACE (unreferenced here) so no
+         seed/applySettingsFilters code path is deleted. */
+      try { buildSettingContent(body); }
+      catch (e) { console.warn('[FilterTabs] setting error', e); }
       return;
     }
 
