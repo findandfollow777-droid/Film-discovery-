@@ -1434,9 +1434,16 @@ function renderSimpleTile(entry, isWinner) {
   const posterInner = posterUrl
     ? `<img src="${posterUrl}" alt="${escapeHtml(entry.title)}" loading="lazy">`
     : `<div class="tile-no-poster"><span class="og og-film"></span></div>`;
-  const personLine = entry.person_name && entry.person_name !== entry.title
+  // Hide the recipient line on producer/best-film awards — the film is the award;
+  // producer lists add noise. Singular creatives (director, writer, craft) keep
+  // their names. Token from the v1 data: 'producers' (plural). Also require
+  // tile_type 'film' so person-recipient awards that happen to carry the producer
+  // token (e.g. BAFTA "Outstanding Debut") keep their name.
+  const hideRecipients = entry.recipient_type === 'producers' && entry.tile_type === 'film';
+  const personLine = !hideRecipients && entry.person_name && entry.person_name !== entry.title
     ? `<div class="tile-person">${escapeHtml(entry.person_name)}</div>`
     : '';
+  const movieName = entry.title || 'Unknown';
   const label = isWinner ? 'WINNER' : 'NOMINEE';
   const statusClass = isWinner ? 'is-winner' : 'is-nominee';
   // Title/person are OVERLAID on the 2:3 poster (mirrors the flip-tile front
@@ -1445,18 +1452,25 @@ function renderSimpleTile(entry, isWinner) {
   // stretched some tiles taller than others (Rule #14 alignment, Jun 8 2026).
   // Wrapper carries the status class + the shared award bar; click target stays
   // the inner .tile (the overlay is pointer-events:none, so clicks fall through).
+  // The poster already shows the film title, so there's no persistent label — the
+  // full movie name surfaces on hover in a large floating callout (.tile-callout),
+  // bordered the festival accent (--tile-accent) and floated to whichever side has
+  // room (JS picks .callout-left/right from the tile's measured position). The
+  // title attr is the touch/accessibility fallback. The callout lives on .tile-card
+  // (NOT .tile, which clips via overflow:hidden). #categories-container has no
+  // data-festival ancestor, so the accent is set inline per tile from currentFestival.
   return `
-    <div class="tile-card ${statusClass}">
+    <div class="tile-card ${statusClass}" style="--tile-accent: var(--fest-${currentFestival});" title="${escapeHtml(movieName)}">
       <div class="award-toptab">${label}</div>
       <div class="tile ${isWinner ? 'winner' : 'nominee'} ${currentFestival}" data-tmdb-id="${entry.tmdb_id || 0}">
         <div class="tile-poster">
           ${posterInner}
           <div class="tile-overlay">
-            <div class="tile-title">${escapeHtml(entry.title || 'Unknown')}</div>
             ${personLine}
           </div>
         </div>
       </div>
+      <div class="tile-callout"><span class="tile-callout-title">${escapeHtml(movieName)}</span></div>
     </div>
   `;
 }
@@ -1580,6 +1594,29 @@ function attachFlipHandlers() {
     if (simpleTile) {
       const id = parseInt(simpleTile.dataset.tmdbId, 10);
       if (id && typeof openMovieCube === 'function') openMovieCube(id);
+    }
+  });
+
+  // Floating callout side: on hover, measure the tile and float its title callout
+  // toward the viewport interior (right-half tiles → callout left; otherwise
+  // right) so it never runs off-screen. CSS handles the reveal + vertical
+  // centring; JS only picks the horizontal side. Delegated via mouseover (no
+  // per-tile listeners); the tracker skips re-measuring while inside one card and
+  // resets on exit so re-entry re-measures after any scroll/resize.
+  let lastCalloutCard = null;
+  container.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('.tile-card');
+    if (!card || card === lastCalloutCard) return;
+    lastCalloutCard = card;
+    const rect = card.getBoundingClientRect();
+    const onRightHalf = (rect.left + rect.width / 2) > (window.innerWidth / 2);
+    card.classList.toggle('callout-left', onRightHalf);
+    card.classList.toggle('callout-right', !onRightHalf);
+  });
+  container.addEventListener('mouseout', (e) => {
+    const card = e.target.closest('.tile-card');
+    if (card && !card.contains(e.relatedTarget) && card === lastCalloutCard) {
+      lastCalloutCard = null;
     }
   });
 }

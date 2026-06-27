@@ -1167,6 +1167,14 @@ body::after {
 .tile-card {
   display: flex;
   flex-direction: column;
+  position: relative; /* positioning context for the floating .tile-callout */
+}
+
+/* Lift the hovered tile (and its callout) above neighbouring tiles so the
+   callout, which floats outside the card, is never painted over by a later
+   sibling in the grid. */
+.tile-card:hover {
+  z-index: 60;
 }
 
 /* .tile is now a pure 2:3 poster card (title overlaid), so it sizes to its own
@@ -1246,23 +1254,58 @@ body::after {
   pointer-events: none;
 }
 
-.tile-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--film-white);
-  line-height: 1.3;
-  text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+/* Floating film-title callout — a large hover card beside the tile. The poster
+   stays clean (no persistent label); the title attr is the touch fallback. Lives
+   on .tile-card (NOT .tile, which clips via overflow:hidden) and floats fully
+   outside it on the side JS measured to have room (.callout-left/right) so it
+   never runs off-screen. Dark card + festival-accent border (--tile-accent) so
+   the title reads over whatever it overlaps. (Poster-forward callout — Jun 27 2026) */
+.tile-callout {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px); /* default: float right (left-half tiles) */
+  transform: translateY(-50%) scale(0.96);
+  width: max-content;
+  max-width: 260px;
+  padding: 16px 18px;
+  background: rgba(var(--nebula-dark-rgb), 0.97);
+  border: 2px solid var(--tile-accent, var(--accent-cyan));
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(var(--space-black-rgb), 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Right-half tiles: float the callout to the LEFT so it stays on-screen. */
+.tile-card.callout-left .tile-callout {
+  left: auto;
+  right: calc(100% + 12px);
+}
+
+.tile-callout-title {
+  font-family: 'Orbitron', sans-serif; /* match .person-name / category h2 */
+  font-size: 20px; /* Orbitron reads heavier/wider than Barlow; keeps long titles in the box */
+  font-weight: 700;
+  letter-spacing: 0.5px; /* subtle — less than the h2 label spacing (titles are longer) */
+  line-height: 1.2;
+  color: var(--tile-accent, var(--accent-cyan)); /* festival accent, cyan fallback */
+  text-shadow: 0 1px 3px rgba(var(--space-black-rgb), 0.6); /* keep crimson/red legible */
+  white-space: normal;
+}
+
+.tile-card:hover .tile-callout {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
 }
 
 .tile-person {
-  font-size: 11px;
-  color: var(--muted-silver);
+  font-size: 15px;
+  color: var(--film-white);
   line-height: 1.3;
-  margin-top: 2px;
   text-shadow: 0 1px 4px rgba(var(--space-black-rgb), 0.9);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1352,7 +1395,7 @@ body::after {
 
 .person-name {
   font-family: 'Orbitron', sans-serif;
-  font-size: 15px; /* +15% from 13px (Jun 7 2026) */
+  font-size: 21px; /* 1.4× from 15px — poster-forward enlargement (Jun 27 2026) */
   font-weight: 700;
   color: var(--film-white);
   line-height: 1.2;
@@ -1632,10 +1675,6 @@ body::after {
   .category-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-  }
-
-  .tile-title {
-    font-size: 12px;
   }
 }
 
