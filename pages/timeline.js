@@ -3584,23 +3584,38 @@ async function generateAiBio(personId, personName, tmdbBio) {
   if (cached) return cached;
   if (!tmdbBio || tmdbBio.length < 50) return null;
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 120,
-        messages: [{
-          role: 'user',
-          content: `Write a 2-sentence bio for ${personName} for use in a film discovery app. Focus on what makes them cinematically significant — their range, impact, or defining quality as a filmmaker or performer. Avoid birth dates, nationalities, and biographical trivia. Be punchy and specific. Source material: ${tmdbBio.slice(0, 800)}`
-        }]
-      })
-    });
+    // Two delivery paths, chosen automatically by environment:
+    //  • Local (VS Code Live Server, static — no functions): config.js defines
+    //    ANTHROPIC_API_KEY (git-ignored), so call the API directly from the browser.
+    //  • Production (Netlify from GitHub): config.js is absent, so ANTHROPIC_API_KEY
+    //    is undefined and we route through netlify/functions/ai-bio.js, which reads
+    //    the key from a Netlify env var. The key never ships to the browser in prod.
+    let response;
+    if (typeof ANTHROPIC_API_KEY !== 'undefined' && ANTHROPIC_API_KEY) {
+      response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 120,
+          messages: [{
+            role: 'user',
+            content: `Write a 2-sentence bio for ${personName} for use in a film discovery app. Focus on what makes them cinematically significant — their range, impact, or defining quality as a filmmaker or performer. Avoid birth dates, nationalities, and biographical trivia. Be punchy and specific. Source material: ${tmdbBio.slice(0, 800)}`
+          }]
+        })
+      });
+    } else {
+      response = await fetch('/.netlify/functions/ai-bio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ personName, tmdbBio })
+      });
+    }
     const data = await response.json();
     const text = data.content?.[0]?.text || null;
     if (text) sessionStorage.setItem(cacheKey, text);
