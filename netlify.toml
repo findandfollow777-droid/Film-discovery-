@@ -1,7 +1,12 @@
 [build]
   publish = "."
-  command = ""
+  command = "node scripts/generate-config.mjs"
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/config.js"
+  to = "/runtime-config.js"
+  status = 200
 
 [[redirects]]
   from = "/api/tmdb"
