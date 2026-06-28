@@ -188,41 +188,65 @@ body::after {
   margin-bottom: 40px;
 }
 
+/* Festival Squares (Build 2.3, Jun 28 2026) — each tile is a centered column of
+   [square box] + [name]. The accent box treatment lives on .fest-tile-box (the
+   square); .fest-tile itself is now just the layout column. The name sits below
+   the box, hidden until hover (or persistently shown for the active festival). */
 .fest-tile {
   --tile-rgb: var(--accent-gold-rgb);   /* overridden per festival below */
+  /* Button reset — .fest-tile no longer carries the box chrome (now on
+     .fest-tile-box), so neutralise native button background/border/padding. */
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  padding: 18px 10px;
-  border: 1px solid rgba(var(--tile-rgb), 0.4);
-  background: rgba(var(--tile-rgb), 0.05);
-  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-.fest-tile:hover {
-  transform: translateY(-3px);
-  background: rgba(var(--tile-rgb), 0.1);
+/* The square — fixed footprint (NOT scaled by the glyph). Accent border + a
+   faint radial wash of the festival colour; the glyph centres inside it. */
+.fest-tile-box {
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  border: 1.5px solid rgba(var(--tile-rgb), 0.30);
+  background: radial-gradient(circle at 50% 40%, rgba(var(--tile-rgb), 0.12) 0%, rgba(var(--tile-rgb), 0.04) 70%, transparent 100%);
+  transition: transform 0.2s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-/* Active tile = stronger border + wash + glow → mirrors the active festival tab. */
-.fest-tile.active {
+.fest-tile:hover .fest-tile-box {
+  transform: translateY(-5px);
+  border-color: rgba(var(--tile-rgb), 0.7);
+  box-shadow: 0 8px 24px rgba(var(--tile-rgb), 0.22);
+}
+
+/* Active square = stronger accent border + glow → mirrors the active festival tab. */
+.fest-tile.active .fest-tile-box {
   border-color: rgba(var(--tile-rgb), 0.9);
-  background: rgba(var(--tile-rgb), 0.14);
-  box-shadow: 0 0 18px rgba(var(--tile-rgb), 0.18);
+  background: radial-gradient(circle at 50% 40%, rgba(var(--tile-rgb), 0.18) 0%, rgba(var(--tile-rgb), 0.06) 70%, transparent 100%);
+  box-shadow: 0 0 22px rgba(var(--tile-rgb), 0.28);
 }
 
 .fest-tile-glyph {
-  width: 30px;
-  height: 30px;
+  width: 79px;
+  height: 79px;
   /* iconic award glyphs are baked-colour SVGs → flatten to a neutral silver so
-     all six read uniformly; the festival accent is carried by the name/border/wash. */
+     all six read uniformly; the festival accent is carried by the name/box/wash. */
   filter: brightness(0) saturate(100%) invert(82%);
 }
 
+/* Name sits below the box, hidden until hover; opacity (not display) keeps its
+   line in flow so toggling never reflows the row. Active festival shows it always. */
 .fest-tile-name {
   font-family: 'Orbitron', sans-serif;
   font-size: 12px;
@@ -231,6 +255,15 @@ body::after {
   text-transform: uppercase;
   text-align: center;
   color: rgb(var(--tile-rgb));   /* festival accent */
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.fest-tile:hover .fest-tile-name,
+.fest-tile.active .fest-tile-name {
+  opacity: 1;
+  transform: none;
 }
 
 /* Per-festival accent (--fest-gg alias from Build B resolves the gg tile). */
