@@ -6056,6 +6056,11 @@ html, body {
 /* Container chrome moved off inline styles (layout only — the protected
    chips/buttons keep their own inline styling for A2b). */
 .oft-people-role-row { display: flex; gap: 8px; margin-bottom: 12px; }
+/* A2b-toggle: role row adopts .match-toggle (axis-tinted pill; cyan resolves
+   via #oft-panel-people[data-axis="people"]). Override the component's compact
+   inline-flex to a full-width pill so the three role segments size equally. */
+.oft-people-role-row.match-toggle { display: flex; width: 100%; margin-bottom: 12px; }
+.oft-people-role-row .opt { flex: 1; text-align: center; }
 .oft-people-search { position: relative; }
 #selectedPeopleContainer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
