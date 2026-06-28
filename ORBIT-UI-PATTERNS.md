@@ -1518,6 +1518,7 @@ Per tab: **axis colour · compact-tier controls · expanded-tier controls · tra
 - **Expanded:** thin.
 - **Fenced (NEW ENGINEERING):** the describe-mode **FILTERING engine is a stub** — build the interface only; the engine is a separate project.
 - **Struck:** —
+- **Role-toggle behaviour (decision, Jun 28 2026):** "Behind Camera" = `with_crew` (ANY crew role — director, writer, producer, etc.), intentionally broad. Director-only filmography ("what did X direct") is **NOT** a People-tab concern — it belongs to the Filmmaker tab / timeline (`movie_credits` filtered by `job==='Director'`). Do **not** "fix" People's Behind-Camera to director-only.
 
 ### ERA — axis **indigo** · Mode **None**
 - **Compact:** scrubber + decade strip + jump-to-year · runtime slider + quick chips · recency chips.
@@ -1611,6 +1612,7 @@ in selectors. (Verify the other 9 against `discover.html` at each tab's build.)
 - Profile-defaults surface → gates **Stream + Region** (country/provider defaults).
 - Describe-filtering ENGINE → **People** (separate new engineering, not this redesign; interface
   buildable, will not filter until the person pipeline exists).
+- **Phase B scoping:** ensure the **Filmmaker** tab provides a named-director → directed-films path, else "what did X direct" has no home once it's removed from the People mental model.
 
 ---
 
