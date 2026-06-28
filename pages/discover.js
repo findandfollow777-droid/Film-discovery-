@@ -3880,6 +3880,16 @@ function buildPeopleSearchContent(root) {
     });
 
     selectedContainer.appendChild(chip);
+
+    /* Fix B (2026-06-28): feed the recents store on a GENUINE add only (this
+       runs after the dedup early-return, never on a no-op). Minimal record —
+       id + name are all logEncounter requires; profile_path/known_for aren't
+       captured by the People add path and are NOT fabricated (role is the
+       user's toggle choice, not a department). Guarded so a missing service
+       can never break the core add. Source 'discover-people' (free-string
+       label, matching the per-feature convention: moviecube/timeline/venn). */
+    window.OrbitEncounters?.logEncounter?.({ id, name }, 'discover-people');
+
     return true;
   }
 

@@ -839,6 +839,9 @@
   <!-- Reusable slider engine (Phase 3a) — must load before discover.js so
        OrbitSlider is defined when the Ratings-C panel builds (Phase 3b). -->
   <script src="../components/discover-slider.js"></script>
+  <!-- Encounter tracking (Fix B) — must load before discover.js so
+       window.OrbitEncounters exists when People adds log a recent. -->
+  <script src="../components/encounter-service.js"></script>
   <script src="discover.js"></script>
   <script src="../components/discover-carousel.js"></script>
   <script src="../components/shortlist-badge.js"></script>
