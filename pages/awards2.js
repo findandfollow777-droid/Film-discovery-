@@ -732,8 +732,17 @@ async function showYearDetail(year) {
 
   renderHero(year);
   await renderCategories(year);   // await so trophy scroll-spy can observe real headings
-  await renderTrophyStrip(year);
-  initTrophyCarousel();
+  // Trophy belt is academy-only (Phase A, Jun 28 2026): jury festivals
+  // (cannes/venice/berlin) have ≤10 categories/year, so the quick-jump belt is
+  // redundant. Academy fests render it as before; jury fests skip the belt and
+  // its carousel wiring, and call hideTrophyStrip() so an academy→jury switch
+  // can't leave a stale belt (prior festival's chips with strip.hidden===false).
+  if (ACADEMY_STYLE.has(currentFestival)) {
+    await renderTrophyStrip(year);
+    initTrophyCarousel();
+  } else {
+    hideTrophyStrip();
+  }
   window.scrollTo(0, 0);
 }
 
@@ -1218,6 +1227,19 @@ async function renderCategories(year) {
 }
 
 // ===== TROPHY STRIP =====
+// Belt teardown — disconnect scroll-spy, empty the carousel, reset loop width,
+// hide the strip. Shared by renderTrophyStrip (pre-render reset) and the jury
+// path in showYearDetail (belt suppressed → guarantees no stale academy chips
+// after an academy→jury switch). Single source for the hide mechanism.
+function hideTrophyStrip() {
+  const strip = document.getElementById('trophy-strip');
+  const carousel = document.getElementById('trophy-carousel');
+  if (trophySpyObserver) { trophySpyObserver.disconnect(); trophySpyObserver = null; }
+  if (carousel) carousel.innerHTML = '';
+  trophyLoopWidth = 0;
+  if (strip) strip.hidden = true;
+}
+
 // Builds the category-glyph carousel from the same ordered transpose
 // renderCategories() uses. Hover/active styling is CSS-driven (awards2.css);
 // JS handles data, click-to-scroll, seamless loop, and scroll-spy.
@@ -1227,10 +1249,7 @@ async function renderTrophyStrip(year) {
   if (!strip || !carousel) return;
 
   // Tear down prior scroll-spy before re-rendering (prevents observer leak).
-  if (trophySpyObserver) { trophySpyObserver.disconnect(); trophySpyObserver = null; }
-  carousel.innerHTML = '';
-  trophyLoopWidth = 0;
-  strip.hidden = true;
+  hideTrophyStrip();
 
   // loadV1FestivalData already returns the reshaped legacy DB (db[catName][year]).
   const db = await loadV1FestivalData(currentFestival);
