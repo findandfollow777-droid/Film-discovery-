@@ -635,6 +635,44 @@ body::after {
   line-height: 1.6;
 }
 
+/* ============================================================
+   GOLD-TIER HERO LAUREATE — Added Jun 28 2026 (Phase B2)
+   Jury festivals present the flagship film as the festival's gold trophy
+   moment: gold festival glyph + prize label above the film title, with the
+   director as a byline beneath. Scoped to .hero-film-led.is-laureate so the
+   academy film-led hero and the Phase C scrim are untouched. The og-* festival
+   glyphs are baked at --accent-gold (#ffd700), so no recolour filter is needed —
+   rendering them plain keeps them gold (unlike the silver-flattened belt/squares).
+   ============================================================ */
+.hero-film-led.is-laureate .hero-laureate-trophy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hero-film-led.is-laureate .hero-laureate-glyph {
+  width: 28px;
+  height: 28px;   /* baked --accent-gold; no filter → stays gold */
+}
+
+.hero-film-led.is-laureate .hero-laureate-prize {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.hero-film-led.is-laureate .hero-laureate-byline {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted-silver);
+  line-height: 1.4;
+}
+
 /* B. Duel */
 .hero-duel {
   height: 460px;

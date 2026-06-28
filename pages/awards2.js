@@ -607,6 +607,23 @@ function featuredFilmFor(festival, year, stats) {
   return top && top.title ? { title: top.title, tmdbId: top.tmdbId || 0 } : null;
 }
 
+// Gold-tier laureate data (Phase B2) — the flagship (top-prize) award for a jury
+// year: festival glyph + prize label (Palme d'Or / Golden Lion / Golden Bear) +
+// the winning director. Reads the SAME flagship slot as featuredFilmFor so the
+// hero anchor and the grid can never disagree. Returns {glyph, prizeLabel,
+// director} or null (no flagship slot → caller keeps the plain film-led hero).
+function flagshipLaureate(festival, year) {
+  const db = V1_FESTIVAL_CACHE[festival];
+  const id = FESTIVAL_IDENTITY[festival];
+  const flagName = FLAGSHIP_CATEGORY[festival];
+  if (!db || !id || !flagName) return null;
+  const slot = db[flagName] && db[flagName][String(year)];
+  if (!slot) return null;
+  const winner = slot.winners ? slot.winners[0] : slot.winner;
+  if (!winner) return null;
+  return { glyph: id.glyph, prizeLabel: id.topPrize, director: winner.person_name || '' };
+}
+
 // Backdrop tmdbId for a ceremony: flagship film for jury festivals, most-wins for
 // Academy-style. Falls back to most-wins if no flagship. Mirrors the headline rule
 // (computedHeadline) so hero + strips surface the same film and can't disagree.
@@ -819,6 +836,13 @@ async function renderHero(year) {
 
   if (!hero) { container.innerHTML = ''; return; } // no editorial AND no data
 
+  // Gold-tier laureate anchor (Phase B2) — jury festivals present the flagship
+  // film as the festival's gold trophy moment. Only the film-led path (backdrop
+  // present); academy heroes never get .laureate, so their markup is unchanged.
+  if (!ACADEMY_STYLE.has(fest) && hero.heroType === 'film-led') {
+    hero.laureate = flagshipLaureate(fest, yr);
+  }
+
   // Jury suppression unchanged: ACADEMY_STYLE only, and only when stats computed.
   const showStats = ACADEMY_STYLE.has(fest) && !!stats;
   const editorialHtml = buildEditorialHtml(hero, year);
@@ -864,6 +888,26 @@ async function renderHero(year) {
 // Editorial slide markup — the four existing hero templates, unchanged content.
 function buildEditorialHtml(editorial, year) {
   if (editorial.heroType === 'film-led') {
+    // Gold-tier laureate variant (Phase B2, jury only): the flagship film as the
+    // festival's gold trophy moment — gold glyph + prize label, film title, and
+    // director byline. Gated on editorial.laureate, so academy film-led editorial
+    // heroes (which never carry .laureate) render the original markup below.
+    const lau = editorial.laureate;
+    if (lau) {
+      return `
+      <div class="hero-film-led is-laureate">
+        <div class="hero-backdrop" data-backdrop-tmdb-id="${editorial.backdropTmdbId || ''}"></div>
+        <div class="hero-content">
+          <div class="hero-year">${year}</div>
+          <div class="hero-laureate-trophy">
+            <span class="og ${lau.glyph} hero-laureate-glyph"></span>
+            <span class="hero-laureate-prize">${escapeHtml(lau.prizeLabel)}</span>
+          </div>
+          <div class="hero-headline">${escapeHtml(editorial.headline)}</div>
+          ${lau.director ? `<div class="hero-laureate-byline">${escapeHtml(lau.director)}</div>` : ''}
+        </div>
+      </div>`;
+    }
     return `
       <div class="hero-film-led">
         <div class="hero-backdrop" data-backdrop-tmdb-id="${editorial.backdropTmdbId || ''}"></div>
