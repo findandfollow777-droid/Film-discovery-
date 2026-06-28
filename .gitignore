@@ -14,3 +14,7 @@ orbit_tmdb_cache.json
 data/scraped/*/batch-reports/
 *.parse-error
 awards-sample_backup_*.csv
+
+# Local Netlify dev artifacts
+.netlify
+deno.lock
