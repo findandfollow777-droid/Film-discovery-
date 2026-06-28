@@ -3685,16 +3685,17 @@ function buildPeopleSearchContent(root) {
   } catch (e) { /* corrupted — fall through to popular */ }
 
   if (recentPeople.length === 0) {
+    /* Fix A (2026-06-28): seed carries NAMES ONLY. The old hardcoded ids
+       (e.g. Nolan 3896, Scorsese 1892) resolved to same-name NON-directors;
+       since pills instant-add by id (A2b), a wrong id went straight into the
+       filter. Seed pills now resolve the name → a fresh id at click-time via
+       resolvePersonByName (top-popularity), so a stale/wrong id can't be
+       committed. Recents pills (real store ids) keep using their id. */
     recentPeople = [
-      { id: '6193', name: 'Leonardo DiCaprio' },
-      { id: '1892', name: 'Martin Scorsese' },
-      { id: '138',  name: 'Quentin Tarantino' },
-      { id: '1654', name: 'Cate Blanchett' },
-      { id: '2037', name: 'Meryl Streep' },
-      { id: '3896', name: 'Christopher Nolan' },
-      { id: '380',  name: 'Robert De Niro' },
-      { id: '1267', name: 'Audrey Hepburn' }
-    ];
+      'Leonardo DiCaprio', 'Martin Scorsese', 'Quentin Tarantino',
+      'Cate Blanchett', 'Meryl Streep', 'Christopher Nolan',
+      'Robert De Niro', 'Audrey Hepburn'
+    ].map(name => ({ name }));
   }
 
   const recentLabelEl = document.createElement("div");
@@ -3704,13 +3705,18 @@ function buildPeopleSearchContent(root) {
 
   const recentGroup = document.createElement("div");
   recentGroup.className = "chip-group oft-people-recent";
+  /* Fix A: recents (trustworthy ids recorded by other features) vs seed
+     (names only — resolve at click). recentLabel is 'RECENTLY SEARCHED' only
+     on the populated-store branch; otherwise it's the seed fallback. */
+  const pillSource = (recentLabel === 'RECENTLY SEARCHED') ? 'recents' : 'seed';
   recentPeople.forEach(p => {
     const chip = document.createElement("button");
     chip.type = "button";
     /* A2b: drop legacy .chip (collides with the 29 legacy chips), keep the
        .oft-recent-person-chip read-hook, add the .disco-chip component skin. */
     chip.className = "oft-recent-person-chip disco-chip";
-    chip.dataset.personId = p.id;
+    chip.dataset.pillSource = pillSource;
+    if (pillSource === 'recents') chip.dataset.personId = p.id;   // seed pills carry NO id
     chip.dataset.personName = p.name;
     chip.textContent = p.name;
     recentGroup.appendChild(chip);
@@ -3733,18 +3739,44 @@ function buildPeopleSearchContent(root) {
 
   root.appendChild(container);
 
-  /* A2c-recents (2026-06-28): clicking a recent/popular pill INSTANTLY adds
-     that person as a selected-person chip via the shared addSelectedPerson
-     path — same as the dropdown, no input round-trip. Role is read LIVE from
-     the current Role toggle (selectedRole) at click time; the pill stores no
-     role. Already-selected (same id+role) → helper no-ops (no duplicate). */
+  /* A2c-recents (2026-06-28) + Fix A: clicking a pill INSTANTLY adds the
+     person as a selected-person chip. Role read LIVE from the toggle at click
+     time. RECENTS pills add via their stored (trustworthy) id directly. SEED
+     pills carry no id — they resolve the NAME → a fresh top-popularity id via
+     resolvePersonByName before adding, so the old wrong hardcoded ids can't
+     reach the filter. A per-pill in-flight guard blocks double-add during the
+     async resolve. Dedup (id+role) still lives in addSelectedPerson. */
   recentGroup.querySelectorAll('.oft-recent-person-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      addSelectedPerson({
-        id: chip.dataset.personId,
-        name: chip.dataset.personName,
-        role: selectedRole
-      });
+    let resolving = false;
+    chip.addEventListener('click', async () => {
+      const role = selectedRole;   // capture the toggle value at click time
+
+      if (chip.dataset.pillSource === 'recents') {
+        addSelectedPerson({
+          id: chip.dataset.personId,
+          name: chip.dataset.personName,
+          role
+        });
+        return;
+      }
+
+      // Seed pill: resolve the name live; never add a chip with a bad/empty id.
+      if (resolving) return;
+      resolving = true;
+      try {
+        const resolved = await resolvePersonByName(chip.dataset.personName);
+        if (resolved && resolved.id) {
+          addSelectedPerson({
+            id: String(resolved.id),
+            name: chip.dataset.personName,
+            role
+          });
+        } else {
+          console.warn('[Orbit] Could not resolve seed person:', chip.dataset.personName);
+        }
+      } finally {
+        resolving = false;
+      }
     });
   });
   
@@ -3853,7 +3885,7 @@ function buildPeopleSearchContent(root) {
 
   async function fetchPeopleSuggestions(query, dropdown, role) {
     const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
-    
+
     try {
       const response = await fetch(url);
       if (!response.ok) return;
@@ -3861,6 +3893,35 @@ function buildPeopleSearchContent(root) {
       renderPeopleDropdown(data.results.slice(0, 8), dropdown, input, selectedPeople, selectedContainer, role);
     } catch (err) {
       console.error("People search error:", err);
+    }
+  }
+
+  /* Fix A (2026-06-28): resolve a bare NAME → a fresh TMDB person id at
+     click-time, reusing fetchPeopleSuggestions' EXACT /search/person path
+     (same TMDB_API_KEY, same URL pattern — no new fetch path). Best match =
+     top popularity. Returns { id, name, candidates } so a future
+     department-aware tie-break can use `candidates` without refactoring
+     (NOT implemented now — top-popularity decides). Returns null on
+     network failure or no results — callers must not add on null. */
+  async function resolvePersonByName(name) {
+    const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(name)}`;
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) return null;
+      const data = await response.json();
+      const candidates = (data.results || []).map(p => ({
+        id: p.id,
+        name: p.name,
+        known_for_department: p.known_for_department,
+        popularity: p.popularity
+      }));
+      if (candidates.length === 0) return null;
+      const best = candidates.slice().sort((a, b) => (b.popularity || 0) - (a.popularity || 0))[0];
+      return { id: best.id, name: best.name, candidates };
+    } catch (err) {
+      console.error("People resolve error:", err);
+      return null;
     }
   }
   
