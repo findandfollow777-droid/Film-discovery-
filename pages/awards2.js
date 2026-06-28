@@ -748,16 +748,17 @@ async function showYearDetail(year) {
   heroEl.style.setProperty('--fest-angle', `${120 + (year % 12) * 5}deg`);
 
   renderHero(year);
-  await renderCategories(year);   // await so trophy scroll-spy can observe real headings
-  // Trophy belt is academy-only (Phase A, Jun 28 2026): jury festivals
-  // (cannes/venice/berlin) have ≤10 categories/year, so the quick-jump belt is
-  // redundant. Academy fests render it as before; jury fests skip the belt and
-  // its carousel wiring, and call hideTrophyStrip() so an academy→jury switch
-  // can't leave a stale belt (prior festival's chips with strip.hidden===false).
+  // Body fork (Phase A belt + Phase B3 layout): academy festivals render the
+  // per-category grid + trophy belt; jury festivals (cannes/venice/berlin) render
+  // the flat constellation spotlight grid and skip the belt (≤10 categories/year
+  // → quick-jump redundant). hideTrophyStrip() on the jury path also guards
+  // against a stale belt after an academy→jury switch.
   if (ACADEMY_STYLE.has(currentFestival)) {
+    await renderCategories(year);   // await so trophy scroll-spy can observe real headings
     await renderTrophyStrip(year);
     initTrophyCarousel();
   } else {
+    await renderConstellation(year);
     hideTrophyStrip();
   }
   window.scrollTo(0, 0);
@@ -1265,6 +1266,63 @@ async function renderCategories(year) {
   }).join('');
 
   // Lazy-load portraits for any flip-tile fronts just rendered.
+  container.querySelectorAll('.person-bg[data-person-id]').forEach(bg => {
+    loadPersonPortrait(parseInt(bg.dataset.personId, 10), bg);
+  });
+}
+
+/* ============================================================
+   CONSTELLATION GRID — Added Jun 28 2026 (Phase B3, jury festivals)
+   Jury year-detail (cannes/venice/berlin) flattens the year's winners into ONE
+   spotlight grid — no per-category <section>/<h2> chrome. The flagship top-prize
+   winner is EXCLUDED here because the B2 gold hero already shows it (no dup).
+   Reuses the same tileFor → renderFlipTile/renderSimpleTile path as
+   renderCategories. Tier glyphs (gold/silver), near-orbit, and the ensemble card
+   are B4 — for now each winner entry is one tile (ensembles show as individual
+   acting cards, expected). Academy festivals keep renderCategories.
+   ============================================================ */
+async function renderConstellation(year) {
+  const container = document.getElementById('categories-container');
+  container.innerHTML = '<div class="categories-loading">Loading laureates…</div>';
+
+  const db = await loadV1FestivalData(currentFestival);
+  if (!db) {
+    container.innerHTML = '<div class="categories-error">Failed to load laureates.</div>';
+    return;
+  }
+
+  const yearStr = String(year);
+  const raw = V1_RAW_CACHE[currentFestival];
+  const order = raw && Array.isArray(raw.categories) ? raw.categories.map(c => c.display_name) : Object.keys(db);
+  const flagship = FLAGSHIP_CATEGORY[currentFestival];   // shown in the hero anchor → excluded here
+
+  // Same flip/simple decision as renderCategories (kept local; builders unchanged).
+  const tileFor = (entry, isWinner, catName) => {
+    const isPersonAward = entry && entry.tile_type === 'person'
+      && PERSON_TILE_ROLES.has(entry.recipient_type);
+    if (isPersonAward && entry.person_id && entry.poster_path) {
+      return renderFlipTile(entry, catName, isWinner);
+    }
+    return renderSimpleTile(entry, isWinner);
+  };
+
+  const tiles = [];
+  order.forEach(catName => {
+    if (catName === flagship) return;                    // hero already shows the top prize
+    const slot = db[catName] && db[catName][yearStr];
+    if (!slot) return;
+    const winners = slot.winners ? slot.winners : (slot.winner ? [slot.winner] : []);
+    winners.forEach(w => tiles.push(tileFor(w, true, catName)));   // jury = winners only
+  });
+
+  if (tiles.length === 0) {
+    container.innerHTML = `<div class="categories-empty">No laureates for ${year}.</div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="constellation-grid">${tiles.join('')}</div>`;
+
+  // Lazy-load portraits for any flip-tile fronts just rendered (same as the grid).
   container.querySelectorAll('.person-bg[data-person-id]').forEach(bg => {
     loadPersonPortrait(parseInt(bg.dataset.personId, 10), bg);
   });
