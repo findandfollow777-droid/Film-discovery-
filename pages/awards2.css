@@ -1267,6 +1267,67 @@ body::after {
   }
 }
 
+/* ============================================================
+   SPOTLIGHT TIER MARKERS + CANNES NEAR-ORBIT — Phase B4a (Jun 29 2026)
+   Each constellation card wraps the unchanged tile in a .spotlight-card that
+   carries the festival glyph as a TIER marker: silver for Berlin/Venice (reuses
+   the squares' silver-flatten), muted-warm palm for Cannes (keeps the gold hue,
+   de-emphasized — NOT a fabricated silver palm). Cannes' Grand Prix / Jury Prize
+   get .near-orbit: a stronger --fest-cannes accent frame + a rank tag. All colour
+   via tokens; the glyphs recolour by filter (baked-colour SVGs). (Ensemble card
+   grouping is B4b.)
+   ============================================================ */
+.spotlight-card {
+  position: relative;   /* positioning context for the tier glyph + rank tag */
+  display: block;
+}
+
+.spotlight-tier-glyph {
+  position: absolute;
+  top: 42px;          /* clears the full-width .award-toptab bar → sits on the poster */
+  right: 12px;
+  width: 26px;
+  height: 26px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Berlin/Venice — neutral silver (same flatten as the festival squares). */
+.spotlight-tier-glyph.tier-silver {
+  filter: brightness(0) saturate(100%) invert(82%);
+}
+
+/* Cannes — muted-warm palm: keep the baked gold hue, de-emphasized (not silver). */
+.spotlight-tier-glyph.tier-palm {
+  opacity: 0.85;
+  filter: saturate(0.8) brightness(0.92);
+}
+
+/* Cannes near-orbit — Grand Prix / Jury Prize: elevated --fest-cannes accent
+   frame distinguishing the official 2nd/3rd prizes from the other spotlights. */
+.spotlight-card.near-orbit {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--fest-cannes-rgb), 0.55);
+  background: rgba(var(--fest-cannes-rgb), 0.07);
+}
+
+.spotlight-rank {
+  position: absolute;
+  top: 44px;          /* on the poster, below the WINNER toptab (no text collision) */
+  left: 12px;
+  z-index: 5;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: rgba(var(--space-black-rgb), 0.65);
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+
 /* ===== PHASE 1 SIMPLE TILES (placeholder per spec; Phase 2 = full port from awards-browse) ===== */
 
 /* Wrapper = grid item (carries .is-winner/.is-nominee + the award bar). The

@@ -1306,13 +1306,33 @@ async function renderConstellation(year) {
     return renderSimpleTile(entry, isWinner);
   };
 
+  // Tier marker + Cannes near-orbit (Phase B4a). Every grid card is a "lesser"
+  // tier — the gold flagship lives in the hero — so each carries the festival
+  // glyph as a tier marker: SILVER for Berlin/Venice (reusing the silver-flatten),
+  // muted-warm PALM for Cannes (not silver). Cannes' Grand Prix / Jury Prize are
+  // the official 2nd/3rd prizes → near-orbit elevation + a rank tag. Berlin/Venice
+  // stay uniform (no near-orbit). Wraps the unchanged tile HTML — builders untouched.
+  const tierGlyph = (FESTIVAL_IDENTITY[currentFestival] && FESTIVAL_IDENTITY[currentFestival].glyph) || 'og-statuette';
+  const tierClass = currentFestival === 'cannes' ? 'tier-palm' : 'tier-silver';
+  const CANNES_RANKS = { 'Grand Prix': '2nd Prize', 'Jury Prize': '3rd Prize' };
+  const spotlight = (tileHtml, catName) => {
+    const rank = currentFestival === 'cannes' ? CANNES_RANKS[catName] : null;
+    const rankTag = rank ? `<span class="spotlight-rank">${escapeHtml(rank)}</span>` : '';
+    return `
+      <div class="spotlight-card${rank ? ' near-orbit' : ''}">
+        <span class="og ${tierGlyph} spotlight-tier-glyph ${tierClass}"></span>
+        ${rankTag}
+        ${tileHtml}
+      </div>`;
+  };
+
   const tiles = [];
   order.forEach(catName => {
     if (catName === flagship) return;                    // hero already shows the top prize
     const slot = db[catName] && db[catName][yearStr];
     if (!slot) return;
     const winners = slot.winners ? slot.winners : (slot.winner ? [slot.winner] : []);
-    winners.forEach(w => tiles.push(tileFor(w, true, catName)));   // jury = winners only
+    winners.forEach(w => tiles.push(spotlight(tileFor(w, true, catName), catName)));   // jury = winners only
   });
 
   if (tiles.length === 0) {
