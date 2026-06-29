@@ -1332,7 +1332,24 @@ async function renderConstellation(year) {
     const slot = db[catName] && db[catName][yearStr];
     if (!slot) return;
     const winners = slot.winners ? slot.winners : (slot.winner ? [slot.winner] : []);
-    winners.forEach(w => tiles.push(spotlight(tileFor(w, true, catName), catName)));   // jury = winners only
+
+    // Group winners by shared film id (Phase B4b): a collective acting win is
+    // stored as one record per performer (same film_tmdb_id) → ONE ensemble card.
+    // Winners spanning different films (a tie / shared prize) keep separate tiles.
+    const byFilm = new Map();
+    winners.forEach(w => {
+      const key = w.tmdb_id || 0;
+      if (!byFilm.has(key)) byFilm.set(key, []);
+      byFilm.get(key).push(w);
+    });
+    byFilm.forEach((group, key) => {
+      if (key && group.length >= 2) {                     // same film + ≥2 performers → ensemble
+        const film = { title: group[0].title, tmdbId: group[0].tmdb_id };
+        tiles.push(spotlight(renderEnsembleCard(group, film, catName), catName));
+      } else {                                            // single winner, or no shared film → normal tiles
+        group.forEach(w => tiles.push(spotlight(tileFor(w, true, catName), catName)));
+      }
+    });
   });
 
   if (tiles.length === 0) {
@@ -1342,10 +1359,37 @@ async function renderConstellation(year) {
 
   container.innerHTML = `<div class="constellation-grid">${tiles.join('')}</div>`;
 
-  // Lazy-load portraits for any flip-tile fronts just rendered (same as the grid).
-  container.querySelectorAll('.person-bg[data-person-id]').forEach(bg => {
+  // Lazy-load portraits for flip-tile fronts AND ensemble-card avatars (both use
+  // the same live-fetch-by-person_id path; stored profile_path is patchy).
+  container.querySelectorAll('.person-bg[data-person-id], .ensemble-avatar[data-person-id]').forEach(bg => {
     loadPersonPortrait(parseInt(bg.dataset.personId, 10), bg);
   });
+}
+
+/* ============================================================
+   ENSEMBLE CARD — Added Jun 29 2026 (Phase B4b, jury festivals)
+   A collective acting win (e.g. Cannes 2006 Best Actress = the six of Volver) is
+   stored as one record per performer sharing a film_tmdb_id; renderConstellation
+   groups them and calls this for ≥2 same-film winners. ONE multi-portrait card:
+   category label + shared film, then a cluster of member portraits + names. Each
+   avatar carries data-person-id so the SAME loadPersonPortrait live-fetch paints
+   it (stored profile_path is patchy). Flows through spotlight(), so the tier glyph
+   (silver / muted-palm) still applies. Builders/B4a untouched.
+   ============================================================ */
+function renderEnsembleCard(members, film, catName) {
+  const avatars = members.map(m => `
+    <div class="ensemble-member">
+      <div class="ensemble-avatar" data-person-id="${m.person_id}" role="img" aria-label="${escapeHtml(m.person_name || '')}"></div>
+      <div class="ensemble-member-name">${escapeHtml(m.person_name || '')}</div>
+    </div>`).join('');
+  return `
+    <div class="ensemble-card" data-tmdb-id="${film.tmdbId || 0}">
+      <div class="ensemble-head">
+        <div class="ensemble-cat">${escapeHtml(catName)} · Ensemble</div>
+        <div class="ensemble-film">${escapeHtml(film.title || '')}</div>
+      </div>
+      <div class="ensemble-members">${avatars}</div>
+    </div>`;
 }
 
 // ===== TROPHY STRIP =====

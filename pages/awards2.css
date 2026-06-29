@@ -1328,6 +1328,84 @@ body::after {
   border-radius: 4px;
 }
 
+/* ============================================================
+   ENSEMBLE CARD — Phase B4b (Jun 29 2026)
+   One multi-portrait card for a collective acting win. Spans 2 grid columns on
+   desktop (per the approved mockup) via :has() on the spotlight wrapper, so the
+   B4a spotlight()/tier code stays untouched. Avatars reuse the .person-bg live
+   portrait fetch (set as background-image); a dark token fill is the no-portrait
+   fallback (mirrors the flip-tile empty person-bg). All colour via tokens.
+   ============================================================ */
+.spotlight-card:has(.ensemble-card) {
+  grid-column: span 2;
+}
+
+/* No .award-toptab on an ensemble card → pull the tier glyph up to the corner. */
+.spotlight-card:has(.ensemble-card) .spotlight-tier-glyph {
+  top: 14px;
+}
+
+.ensemble-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.15);
+  background: rgba(var(--nebula-dark-rgb), 0.5);
+}
+
+.ensemble-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ensemble-cat {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.ensemble-film {
+  font-size: 14px;
+  color: var(--muted-silver);
+}
+
+.ensemble-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 12px;
+}
+
+.ensemble-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ensemble-avatar {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 4px;
+  background-color: rgba(var(--nebula-dark-rgb), 0.8);   /* no-portrait fallback */
+  background-size: cover;
+  background-position: center top;
+  border: 1px solid rgba(var(--muted-silver-rgb), 0.12);
+}
+
+.ensemble-member-name {
+  font-size: 11px;
+  text-align: center;
+  color: var(--film-white);
+  line-height: 1.25;
+}
+
 /* ===== PHASE 1 SIMPLE TILES (placeholder per spec; Phase 2 = full port from awards-browse) ===== */
 
 /* Wrapper = grid item (carries .is-winner/.is-nominee + the award bar). The
