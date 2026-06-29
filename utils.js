@@ -67,7 +67,8 @@ function getBackLabel(page) {
     'sequel-shot.html': 'Sequel Shot',
     'tenth-star.html': 'Tenth Star',
     'series.html': 'Series',
-    'awards-browse.html': 'Awards Archive'
+    'awards-browse.html': 'Awards Archive',
+    'awards2.html': 'Awards Archive'
   };
   return labels[file] || 'Back';
 }
