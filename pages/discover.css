@@ -19,6 +19,11 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
+  /* overflow-x:hidden + height:100% makes <body> the scroll container.
+     position:relative makes body the containing block for the absolutely
+     positioned .discover-mosaic-region so it scrolls WITH body's content
+     instead of staying pinned to the viewport. */
+  position: relative;
   background: var(--space-black);
   color: var(--film-white);
   font-family: var(--font-body);
@@ -2912,20 +2917,25 @@ html, body {
   position: absolute;
   inset: 0;
   display: grid;
-  /* Portrait film-tile grid: 12 cols × 2 rows. */
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* Full-poster tile grid: 8 cols; rows are implicit and sized from each
+     cell's 2:3 aspect ratio (24 cells = 3 rows, 3rd clipped by 70vh). */
+  grid-template-columns: repeat(8, 1fr);
   gap: 4px;
   padding: 4px;
-  opacity: 0.45;
+  opacity: 0.65;
   z-index: 0;
   pointer-events: none;
 }
 .discover-mosaic-region .mosaic-cell {
+  /* 2:3 poster aspect so background-size:cover fills the cell without
+     side-cropping (TMDB posters are 2:3). */
+  aspect-ratio: 2 / 3;
   border-radius: 3px;
   background-size: cover;
   background-position: center;
-  filter: blur(0.4px) saturate(0.65) brightness(0.55);
+  /* Blur removed so posters read clearly; mild dimming keeps the
+     foreground card in contrast. */
+  filter: brightness(0.75) saturate(0.85);
   transition: opacity 0.8s ease;
 }
 /* Brighter fallback cell colors so the mosaic is visible against the

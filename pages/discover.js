@@ -7439,8 +7439,8 @@ function collectLabelsForSection(sectionKey) {
     cells.forEach(function (cell, i) {
       cell.style.opacity = '0';
       cell.style.transition = 'opacity 0.8s ease';
-      /* w185 fits the larger 12×2 tile size cleanly; w92 was too low-res. */
-      cell.style.backgroundImage = 'url(' + OrbitUtils.TMDB_IMG + 'w185' + assigned[i] + ')';
+      /* w342 for the wider 8-col poster tiles; w185 looked soft at this size. */
+      cell.style.backgroundImage = 'url(' + OrbitUtils.TMDB_IMG + 'w342' + assigned[i] + ')';
       cell.style.backgroundSize = 'cover';
       cell.style.backgroundPosition = 'center';
       setTimeout(function () { cell.style.opacity = '1'; }, 40 * i);
