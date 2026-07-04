@@ -422,6 +422,7 @@ html, body {
 .mastermind-glow { background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 50%); }
 .alternate-glow { background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 50%); }
 .tenth-star-glow { background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%); }
+.strata-glow { background: radial-gradient(circle, rgba(var(--accent-cyan-rgb), 0.15) 0%, transparent 50%); }
 
 /* Game-specific accent colors */
 .game-constellation { --card-accent: var(--accent-cyan); --card-glow: rgba(0, 217, 255, 0.4); }

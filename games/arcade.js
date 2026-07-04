@@ -54,6 +54,10 @@ const GAME_INFO = {
     synopsis: "Decode five encrypted actor portraits letter by letter, then identify the movie that united them. Unlimited guesses, ranked by speed.",
     modes: ["daily"]
   },
+  strata: {
+    synopsis: "Excavate a daily dig — sort each film tile into its director, decade or actor. A wrong drop locks the stack; claim keystones for keys to free them.",
+    modes: ["daily"]
+  },
   "tenth-star": {
     synopsis: "A Top 10 list with one film missing. Spot the gap across nine rounds of curated cinema lists.",
     modes: ["weekly"]
@@ -326,6 +330,18 @@ function loadGameStatuses() {
     }
   }
 
+  // Check Strata (daily state saved on completion; getTodayKey uses getMonth()+1)
+  const strataState = localStorage.getItem(`orbit_strata_${today}`);
+  if (strataState) {
+    const state = JSON.parse(strataState);
+    const statusEl = document.getElementById("strataStatus");
+    if (statusEl) {
+      const won = state.status === "won";
+      statusEl.textContent = won ? "✓ WON" : "PLAYED";
+      statusEl.className = "game-status " + (won ? "completed" : "");
+    }
+  }
+
   // Check Mastermind
   const mastermindState = localStorage.getItem(`mastermind_game_${today}`);
   if (mastermindState) {
@@ -448,6 +464,15 @@ function loadAggregateStats() {
     totalWins += signalStats.gamesWon || 0;
     bestStreak = Math.max(bestStreak, signalStats.maxStreak || 0);
     currentStreak = Math.max(currentStreak, signalStats.currentStreak || 0);
+  }
+
+  // Strata stats — {played, won, currentStreak, maxStreak, ...} per strata.js
+  const strataStats = getStoredStats("orbit_strata_stats");
+  if (strataStats) {
+    totalGames += strataStats.played || 0;
+    totalWins += strataStats.won || 0;
+    bestStreak = Math.max(bestStreak, strataStats.maxStreak || 0);
+    currentStreak = Math.max(currentStreak, strataStats.currentStreak || 0);
   }
 
   // Update UI
