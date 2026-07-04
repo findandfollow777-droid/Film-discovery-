@@ -53,6 +53,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `mastermind_game_${today}` | arcade.js | arcade.js | Mastermind daily state |
 | `alternate_game_${today}` | arcade.js | arcade.js | Alternate Universe daily state |
 | `orbit_signal_${y}_${m}_${d}` | signal.js | signal.js, arcade.js | Signal daily state — encrypted cast, revealed letters, attempts, gameOver/won, rank. M is `getMonth()+1` (1-12, matches arcade.js `getTodayKey()`), D is `getDate()` (1-31), no leading zeros. |
+| `orbit_strata_${today}` | strata.js | strata.js, arcade.js | Strata daily dig state — **written on completion only** (not mid-game). `{status:'won'\|'lost', keys, cleared, total, idx, ts}`. `today` = `${getFullYear()}_${getMonth()+1}_${getDate()}` (month 1-12, matches arcade.js `getTodayKey()`, no leading zeros). arcade.js lights the card badge; boot restores the result (no replay) when `idx` matches the current daily index. |
 
 ## Game Statistics
 
@@ -68,6 +69,7 @@ Pattern: `{gameName}_{date}` where date = `YYYY_M_D`
 | `sequelshot_stats` | JSON | sequel-shot.js | sequel-shot.js | Sequel Shot stats |
 | `orbit_tenth_star_stats` | JSON | tenth-star.js | tenth-star.js, profile.js | Tenth Star stats |
 | `orbit_signal_stats` | JSON `{gamesPlayed, gamesWon, currentStreak, maxStreak, lastPlayedDate, totalAttempts, averageAttempts, distribution{1-5,6-10,11-15,16-20,21+}}` | signal.js | signal.js | Signal cumulative stats across daily plays |
+| `orbit_strata_stats` | JSON `{played, won, currentStreak, maxStreak, totalKeys, bestKeys, lastPlayed}` | strata.js | strata.js, arcade.js | Strata cumulative stats across daily plays. `lastPlayed` is the day number (`getDayNumber()`); streak counts consecutive day numbers, guarded to once per day. Feeds the arcade hub aggregate. |
 | `orbit_tenth_star_${puzzleId}` | JSON | tenth-star.js | tenth-star.js | Individual puzzle state |
 | `alternate_comments_${weekNumber}` | JSON | alternate.js | alternate.js | Community comments |
 
