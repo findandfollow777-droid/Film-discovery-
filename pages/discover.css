@@ -3039,12 +3039,27 @@ html, body {
 }
 
 /* DISCOVER NAV ------------------------------------------------- */
+/* NAV + STREAM-BAR SCRIM (Phase 2) — solid deep-void at the viewport top
+   fading to transparent by the bottom of the stream bar, so the flush-to-top
+   mosaic shows through while nav text stays legible. Stops are tunable custom
+   properties (adjust fade depth live in DevTools). The nav fades to
+   --nav-scrim-mid at its bottom; the stream bar picks up at --nav-scrim-mid
+   and fades to --nav-scrim-end, so the two read as one continuous fade with
+   no seam. both.html / tv.html contain no nav/stream-bar elements, so these
+   rules are inert there (verified). */
+.discover-nav,
+.discover-stream-bar {
+  --nav-scrim-top: rgba(var(--deep-void-rgb), 1);
+  --nav-scrim-mid: rgba(var(--deep-void-rgb), 0.82);
+  --nav-scrim-end: rgba(var(--deep-void-rgb), 0);
+}
 .discover-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--deep-void);
-  border-bottom: 1px solid rgba(var(--accent-rgb), 0.12);
+  /* Phase 2: was solid var(--deep-void) + a hard cyan border-bottom
+     (removed — it contradicted the fade). */
+  background: linear-gradient(to bottom, var(--nav-scrim-top) 0%, var(--nav-scrim-mid) 100%);
   padding: 12px 24px;
   position: relative;
   z-index: 50;
@@ -3084,8 +3099,15 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(var(--accent-rgb), 0.04);
-  border-bottom: 1px solid rgba(var(--accent-rgb), 0.15);
+  /* Phase 2: was a faint cyan tint + a hard cyan border-bottom (both
+     removed). Continues the nav fade: holds --nav-scrim-mid through the
+     upper text band (so the label stays legible over bright posters),
+     then fades to transparent by the bar's bottom edge. */
+  background: linear-gradient(
+    to bottom,
+    var(--nav-scrim-mid) 0%,
+    var(--nav-scrim-mid) 52%,
+    var(--nav-scrim-end) 100%);
   padding: 10px 24px;
   position: relative;
   z-index: 49;

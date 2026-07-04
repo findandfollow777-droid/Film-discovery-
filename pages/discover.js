@@ -7389,7 +7389,11 @@ function collectLabelsForSection(sectionKey) {
        so the value works for an absolute-positioned element pinned
        to the body's coordinate system. */
     var topPx = Math.round(rect.bottom + window.scrollY);
-    document.documentElement.style.setProperty('--mosaic-top', topPx + 'px');
+    /* Phase 2: mosaic runs flush to the viewport top, visible behind the
+       nav + stream-bar scrim. Pin --mosaic-top to 0 (topPx measurement
+       above is left intact so rollback to the Phase 1 anchor is one line:
+       swap '0px' back to topPx + 'px'). */
+    document.documentElement.style.setProperty('--mosaic-top', '0px');
   }
   sync();
   window.addEventListener('resize', sync);
