@@ -10,11 +10,17 @@
 // Keyed `<festivalSlug>-<year>`. festivalSlug matches v1 file naming
 // (oscar, bafta, gg, cannes, venice, berlin).
 const AWARDS_YEAR_EDITORIAL = {
+  // Headline-only landmark entries (Phase 1b): supply ONLY a curated headline; the
+  // hero/row inherit the BP-winner backdrop and the winner's own tally from the
+  // Phase-1a computed default (see renderHero overlay + computedStripStats).
+  'oscar-2025': {
+    headline: "Five wins for an indie — Neon's first Best Picture"
+  },
   'oscar-2024': {
     heroType: 'film-led',
     ceremonyNumber: 96,
     venue: 'Dolby Theatre, Los Angeles',
-    headline: 'Oppenheimer dominates with seven wins',
+    headline: "Nolan's atom-bomb epic takes seven",
     deckLine: "Christopher Nolan's epic about the father of the atomic bomb sweeps including Best Picture, Best Director, and Best Actor.",
     backdropTmdbId: 872585,
     stripStats: ['96th', '7 wins', 'Dolby Theatre'],
@@ -32,46 +38,16 @@ const AWARDS_YEAR_EDITORIAL = {
     }
   },
   'oscar-2023': {
-    heroType: 'film-led',
-    ceremonyNumber: 95,
-    venue: 'Dolby Theatre, Los Angeles',
-    headline: 'Everything Everywhere All at Once sweeps',
-    deckLine: 'The multiverse action comedy takes home seven Oscars including Best Picture, Best Director, and three acting wins.',
-    backdropTmdbId: 545611,
-    stripStats: ['95th', '7 wins', 'Dolby Theatre']
+    headline: 'Michelle Yeoh leads an indie seven-win sweep'
   },
   'oscar-2020': {
-    heroType: 'film-led',
-    ceremonyNumber: 92,
-    venue: 'Dolby Theatre, Los Angeles',
-    headline: 'Parasite makes Oscar history',
-    deckLine: "Bong Joon-ho's Korean thriller becomes the first non-English-language film to win Best Picture in ninety-two years of the Academy.",
-    backdropTmdbId: 496243,
-    stripStats: ['92nd', '4 wins', 'Dolby Theatre']
-  },
-  'oscar-2019': {
-    heroType: 'typographic',
-    ceremonyNumber: 91,
-    venue: 'Dolby Theatre',
-    headline: 'Green Book takes Best Picture in divided ceremony',
-    bestPicture: 'Green Book',
-    host: 'None',
-    stripStats: ['91st', '3 wins', 'No host']
-  },
-  'oscar-2018': {
-    heroType: 'film-led',
-    ceremonyNumber: 90,
-    venue: 'Dolby Theatre, Los Angeles',
-    headline: 'The Shape of Water wins Best Picture',
-    deckLine: "Guillermo del Toro's fantasy romance takes home four Oscars including Best Picture and Best Director.",
-    backdropTmdbId: 399055,
-    stripStats: ['90th', '4 wins', 'Dolby Theatre']
+    headline: 'First non-English film to win Best Picture'
   },
   'oscar-2017': {
     heroType: 'duel',
     ceremonyNumber: 89,
     venue: 'Dolby Theatre',
-    headline: 'The envelope mix-up heard around the world',
+    headline: 'Best Picture, after the envelope mix-up',
     winnerFilm: 'Moonlight',
     winnerSubtext: 'Best Picture winner',
     loserFilm: 'La La Land',
@@ -79,6 +55,12 @@ const AWARDS_YEAR_EDITORIAL = {
     winnerTmdbId: 376867,
     loserTmdbId: 313369,
     stripStats: ['89th', 'Upset', 'Dolby Theatre']
+  },
+  'oscar-2012': {
+    headline: 'The first largely silent Best Picture winner in over 80 years'
+  },
+  'oscar-2004': {
+    headline: 'Swept all eleven nominations — the biggest clean sweep in Oscar history'
   }
 };
 
@@ -848,31 +830,33 @@ async function renderHero(year) {
   if (superseded()) return;
   const stats = computeCeremonyStats(fest, yr);
 
-  // Hero model: editorial wins per-field; else compute. Computed = film-led on the
-  // top-winning film's backdrop, or typographic if that film has no backdrop (so a
-  // missing image never renders broken). Computed never fabricates deck prose.
-  let hero = editorial;
-  if (!hero) {
-    const top = stats && stats.mostWins;
-    let backdropTmdbId = ceremonyBackdropId(fest, yr, stats);
-    let heroType = 'film-led';
-    if (backdropTmdbId) {
-      const path = await getTmdbBackdropPath(backdropTmdbId);
-      if (superseded()) return;
-      if (!path) { heroType = 'typographic'; backdropTmdbId = null; }
-    } else {
-      heroType = 'typographic';
-    }
-    hero = {
-      heroType,
-      ceremonyNumber: getCeremonyNumber(fest, yr),   // null for jury → ceremony line uses {year}
-      headline: computedHeadline(stats, fest, yr),
-      deckLine: '',
-      backdropTmdbId,
-      bestPicture: top ? top.title : '—',            // typographic meta-grid only
-      host: '—'
-    };
+  // Hero model: computed BP-winner base ALWAYS builds; editorial OVERLAYS it
+  // per-field (Phase 1b). A full editorial entry overrides every field it carries
+  // (renders exactly as before); a headline-only landmark entry overrides just the
+  // headline and inherits heroType/backdrop/stats from the computed default (so its
+  // hero is film-led on the BP-winner backdrop, never blank). Computed = film-led on
+  // the top-winning film's backdrop, or typographic if that film has no backdrop (so
+  // a missing image never renders broken). Computed never fabricates deck prose.
+  const top = stats && stats.mostWins;
+  let backdropTmdbId = ceremonyBackdropId(fest, yr, stats);
+  let heroType = 'film-led';
+  if (backdropTmdbId) {
+    const path = await getTmdbBackdropPath(backdropTmdbId);
+    if (superseded()) return;
+    if (!path) { heroType = 'typographic'; backdropTmdbId = null; }
+  } else {
+    heroType = 'typographic';
   }
+  const computed = {
+    heroType,
+    ceremonyNumber: getCeremonyNumber(fest, yr),   // null for jury → ceremony line uses {year}
+    headline: computedHeadline(stats, fest, yr),
+    deckLine: '',
+    backdropTmdbId,
+    bestPicture: top ? top.title : '—',            // typographic meta-grid only
+    host: '—'
+  };
+  let hero = editorial ? { ...computed, ...editorial } : computed;
 
   if (!hero) { container.innerHTML = ''; return; } // no editorial AND no data
 
