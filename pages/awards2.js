@@ -387,6 +387,14 @@ function getCeremonyNumber(festival, year) {
 // at all → "{year} {Festival}".
 function computedHeadline(stats, festival, year) {
   const top = stats && stats.mostWins;
+  // Oscar Phase 1a: default (non-editorial) Oscar rows/hero the Best Picture winner
+  // by title ALONE — film-as-hero, no "leads with N wins" sentence. Editorial years
+  // still win upstream (loadYearStrips/renderHero apply editorial.headline first).
+  // BAFTA/GG keep the "{film} leads with {n} wins" line below.
+  if (festival === 'oscar') {
+    const bp = oscarBestPictureWinner(year);
+    if (bp && bp.title) return bp.title;
+  }
   // Jury festivals (Cannes/Venice/Berlin): headline is the flagship film (top prize),
   // never "leads with N wins". featuredFilmFor falls back to most-wins internally if no flagship.
   if (!ACADEMY_STYLE.has(festival)) {
@@ -407,7 +415,16 @@ function computedStripStats(stats, festival, year) {
   if (cer) out.push(`${cer}${ordinalSuffix(cer)}`);
   if (stats) {
     out.push(`${stats.categories} categor${stats.categories === 1 ? 'y' : 'ies'}`);
-    if (stats.mostWins && stats.mostWins.count >= 2) out.push(`${stats.mostWins.count} wins`);
+    // Oscar Phase 1a: the wins pill counts the Best Picture winner's OWN wins (e.g.
+    // 2022 → CODA · "3 wins"), NOT the most-wins film (Dune · "6 wins"). Reuses the
+    // per-film map computeCeremonyStats already builds. Other festivals unchanged.
+    if (festival === 'oscar') {
+      const bp = oscarBestPictureWinner(year);
+      const bpWins = (bp && stats.winCountByTitle) ? (stats.winCountByTitle[bp.title] || 0) : 0;
+      if (bpWins >= 1) out.push(`${bpWins} win${bpWins === 1 ? '' : 's'}`);
+    } else if (stats.mostWins && stats.mostWins.count >= 2) {
+      out.push(`${stats.mostWins.count} wins`);
+    }
   }
   return out;
 }
@@ -607,6 +624,21 @@ function featuredFilmFor(festival, year, stats) {
   return top && top.title ? { title: top.title, tmdbId: top.tmdbId || 0 } : null;
 }
 
+// Oscar Phase 1a (added Jul 4 2026): the Best Picture winner entry for an Oscar
+// year, read straight from the reshaped db (db['Best Picture'][year].winner) so a
+// missing slot is DETECTABLE (returns null) instead of silently falling back to
+// the most-wins film the way featuredFilmFor does. Powers the default
+// (non-editorial) Oscar row/hero: title, backdrop, and own-win tally. Oscar-only
+// by construction (reads the Best Picture slot). Returns the raw entry
+// ({ title, tmdb_id, … }) or null.
+function oscarBestPictureWinner(year) {
+  const db = V1_FESTIVAL_CACHE.oscar;
+  const slot = db && db['Best Picture'] && db['Best Picture'][String(year)];
+  if (!slot) return null;
+  const winner = slot.winners ? slot.winners[0] : slot.winner;
+  return (winner && winner.title) ? winner : null;
+}
+
 // Gold-tier laureate data (Phase B2) — the flagship (top-prize) award for a jury
 // year: festival glyph + prize label (Palme d'Or / Golden Lion / Golden Bear) +
 // the winning director. Reads the SAME flagship slot as featuredFilmFor so the
@@ -628,6 +660,13 @@ function flagshipLaureate(festival, year) {
 // Academy-style. Falls back to most-wins if no flagship. Mirrors the headline rule
 // (computedHeadline) so hero + strips surface the same film and can't disagree.
 function ceremonyBackdropId(festival, year, stats) {
+  // Oscar Phase 1a: back the row/hero with the Best Picture winner, not the
+  // most-wins film. Null (winner missing, or it has no tmdb id) → callers keep the
+  // existing empty-state (never a broken image).
+  if (festival === 'oscar') {
+    const bp = oscarBestPictureWinner(year);
+    return (bp && bp.tmdb_id) ? bp.tmdb_id : null;
+  }
   if (!ACADEMY_STYLE.has(festival)) {
     const ff = featuredFilmFor(festival, year, stats);
     if (ff && ff.tmdbId) return ff.tmdbId;
@@ -1021,7 +1060,8 @@ function computeCeremonyStats(festival, year) {
   return {
     mostWins: mwTop ? { title: mwTop.title, tmdbId: tmdbOf[mwTop.title], count: mwTop.count } : null,
     mostNoms: mnTop ? { title: mnTop.title, tmdbId: tmdbOf[mnTop.title], count: mnTop.count, winCount: winCounts[mnTop.title] || 0 } : null,
-    categories
+    categories,
+    winCountByTitle: winCounts   // Oscar Phase 1a: lets the row show the BP winner's OWN tally (keyed by title)
   };
 }
 
