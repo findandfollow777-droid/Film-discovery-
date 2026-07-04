@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Strata - Orbit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../components/orbit-glyphs.css">
+  <link rel="stylesheet" href="../components/orbit-glyphs-v2.css">
+  <link rel="stylesheet" href="../orbit-close.css" data-orbit-close>
+  <link rel="stylesheet" href="strata.css">
+</head>
+<body>
+
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="game-backdrop" id="gameBackdrop"></div>
+  <div class="backdrop-overlay"></div>
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+
+  <!-- LENS FLARES -->
+  <div class="lens-flare lens-flare-1"></div>
+  <div class="lens-flare lens-flare-2"></div>
+  <div class="lens-flare lens-flare-3"></div>
+
+  <!-- FLOATING PARTICLES -->
+  <div class="particles" id="particles"></div>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <a href="arcade.html" class="back-link" id="backNav">← Back to Arcade</a>
+
+    <div class="orbit-logo">
+      <span class="og og-game-strata strata-logo-mark"></span>
+      <div class="orbit-logo-lockup">
+        <div class="orbit-logo-text">STRATA</div>
+        <span class="logo-suffix">Orbit · Daily</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn-orbit" id="statsBtn" data-orbit-popup="strataStats" title="Statistics">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <span class="icon-symbol og og-stats"></span>
+      </button>
+      <button class="icon-btn-orbit" id="helpBtn" data-orbit-popup="strataHelp" title="How to Play">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <span class="icon-symbol og og-lightbulb"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN GAME AREA -->
+  <main class="game-main">
+
+    <!-- DIG HEADER -->
+    <div class="dig-header">
+      <div class="dig-label">
+        <span class="dig-title">The Dig</span>
+        <span class="dig-sub">21 to Bedrock</span>
+      </div>
+      <div class="keys-readout">
+        <span class="og og-star keys-nova"></span>
+        <span class="keys-count">0</span>
+        <span class="keys-label">Keys</span>
+      </div>
+    </div>
+
+    <!-- THE BOARD (static sample — Phase 3 will generate this) -->
+    <section class="strata-board" id="strataBoard">
+
+      <!-- Row 1 -->
+      <div class="strata-tile fam-cyan depth-3" data-position="0">
+        <div class="strata-lay lay-3"></div>
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">3</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Blade Runner</div>
+        </div>
+      </div>
+
+      <div class="strata-tile fam-cyan depth-2" data-position="1">
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">2</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Heat</div>
+        </div>
+      </div>
+
+      <div class="strata-tile fam-cyan depth-3" data-position="2">
+        <div class="strata-lay lay-3"></div>
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">3</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Se7en</div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="strata-tile fam-cyan depth-1" data-position="3">
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">1</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Dune</div>
+        </div>
+      </div>
+
+      <div class="strata-tile fam-cyan depth-2 selected" data-position="4">
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">2</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Alien</div>
+        </div>
+      </div>
+
+      <div class="strata-tile fam-cyan depth-1" data-position="5">
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">1</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Gladiator</div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="strata-tile fam-cyan depth-2" data-position="6">
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">2</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+          </span>
+          <div class="tile-title">Fargo</div>
+        </div>
+      </div>
+
+      <div class="strata-tile keystone depth-3" data-position="7">
+        <div class="strata-lay lay-3"></div>
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip key">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">3</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="4"/><path d="M11.3 11.3l7 7M15 15l2.2-2.2M18.3 18.3l2.2-2.2"/></svg>
+          </span>
+          <div class="tile-title">Casino</div>
+        </div>
+      </div>
+
+      <div class="strata-tile keystone depth-2" data-position="8">
+        <div class="strata-lay lay-2"></div>
+        <div class="strata-lay lay-1"></div>
+        <div class="tile-face">
+          <div class="depth-chip key">
+            <svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>
+            <span class="depth-num">2</span>
+          </div>
+          <span class="family-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="4"/><path d="M11.3 11.3l7 7M15 15l2.2-2.2M18.3 18.3l2.2-2.2"/></svg>
+          </span>
+          <div class="tile-title">Interstellar</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SORT DIRECTION -->
+    <div class="sort-direction">Sort the selected tile into <span class="sort-arrow">↓</span></div>
+
+    <!-- GENERATION / FAMILY CARD ROWS -->
+    <section class="sort-area">
+
+      <div class="gen-row fam-cyan">
+        <div class="fam-tab">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+        </div>
+        <div class="gen-cards">
+          <div class="sort-card">
+            <span class="axis-label">Decade</span>
+            <span class="axis-value">1990s</span>
+            <div class="quota-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="sort-card">
+            <span class="axis-label">Director</span>
+            <span class="axis-value">R. Scott</span>
+            <div class="quota-dots">
+              <span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="sort-card">
+            <span class="axis-label">Actor</span>
+            <span class="axis-value">Crowe</span>
+            <div class="quota-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gen-row fam-gold">
+        <div class="fam-tab">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>
+        </div>
+        <div class="gen-cards">
+          <div class="sort-card full">
+            <span class="axis-label">Decade</span>
+            <span class="axis-value">2010s</span>
+            <div class="quota-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span>
+            </div>
+          </div>
+          <div class="sort-card">
+            <span class="axis-label">Director</span>
+            <span class="axis-value">Villeneuve</span>
+            <div class="quota-dots">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="sort-card">
+            <span class="axis-label">Actor</span>
+            <span class="axis-value">Gosling</span>
+            <div class="quota-dots">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- KEY TRAY -->
+    <section class="key-tray">
+      <span class="key-tray-label">Key Tray</span>
+      <div class="key-slots">
+        <span class="key-empty">none yet</span>
+        <span class="key-add" aria-hidden="true">+</span>
+      </div>
+    </section>
+
+    <!-- MESSAGE BAR -->
+    <div class="strata-msg">Tap a poster, then the card it belongs to. A wrong card locks the stack.</div>
+
+    <!-- FOOTER ACTIONS -->
+    <footer class="strata-footer">
+      <button class="btn-secondary" id="restartBtn" type="button">Restart</button>
+      <button class="btn-secondary" id="nextBoardBtn" type="button">Next Board →</button>
+    </footer>
+
+  </main>
+
+  <!-- RESULT POPUP (filled in Phase 3) -->
+  <div class="modal-overlay" id="strataResult" data-orbit-popup hidden>
+    <div class="modal-content strata-modal">
+      <button class="modal-close orbit-close" aria-label="Close">&#x2715;</button>
+      <h2 class="modal-title">Bedrock Reached</h2>
+      <p class="modal-placeholder">Your result summary and share grid will appear here.</p>
+    </div>
+  </div>
+
+  <!-- STATS POPUP (placeholder) -->
+  <div class="modal-overlay" id="strataStats" data-orbit-popup hidden>
+    <div class="modal-content strata-modal">
+      <button class="modal-close orbit-close" aria-label="Close">&#x2715;</button>
+      <h2 class="modal-title">Statistics</h2>
+      <p class="modal-placeholder">Played, streaks and depth records will live here.</p>
+    </div>
+  </div>
+
+  <!-- HELP POPUP (placeholder) -->
+  <div class="modal-overlay" id="strataHelp" data-orbit-popup hidden>
+    <div class="modal-content strata-modal">
+      <button class="modal-close orbit-close" aria-label="Close">&#x2715;</button>
+      <h2 class="modal-title">How to Play</h2>
+      <p class="modal-placeholder">Dig through the strata, sort each poster into the right family card, and reach bedrock.</p>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../orbit-utils.js"></script>
+  <script src="../utils.js"></script>
+  <script src="../orbit-close.js" data-orbit-close defer></script>
+  <script>
+    /* Phase-2 placeholder popup openers (no game logic).
+       Unhides the popup named in a trigger's data-orbit-popup;
+       orbit-close.js handles the Black Hole close. Replaced by strata.js in Phase 3. */
+    document.querySelectorAll('button[data-orbit-popup]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        var popup = document.getElementById(trigger.getAttribute('data-orbit-popup'));
+        if (popup) popup.hidden = false;
+      });
+    });
+  </script>
+</body>
+</html>

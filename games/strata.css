@@ -1,0 +1,805 @@
+@import url('../variables.css');
+/* ============================================================
+   STRATA — Daily Cinematic Dig  (Phase 2 skin, static board)
+   Colours: tokens only from variables.css. No hardcoded hex.
+   Shared chrome (backdrop / grain / header) copied from
+   constellation.css — there is no shared file — and re-tokenised.
+   ============================================================ */
+
+:root {
+  --blur-backdrop: blur(30px) saturate(150%);
+  --gradient-accent: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--space-black);
+  color: var(--film-white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+[hidden] { display: none !important; }
+
+/* ============================================================
+   CINEMATIC BACKGROUND LAYERS
+   ============================================================ */
+
+.game-backdrop {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  z-index: -3;
+  transition: opacity 1.5s ease, background-image 1.5s ease;
+  filter: blur(2px);
+}
+
+.backdrop-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--space-black-rgb), 0.6) 0%,
+    rgba(var(--deep-void-rgb), 0.85) 40%,
+    rgba(var(--deep-void-rgb), 0.95) 100%
+  );
+  z-index: -2;
+}
+
+.film-grain {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1000;
+  mix-blend-mode: overlay;
+  animation: grain-flicker 0.3s steps(3) infinite;
+}
+
+@keyframes grain-flicker {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.05; }
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(var(--space-black-rgb), 0.7) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Lens Flares */
+.lens-flare {
+  position: fixed;
+  width: 2px;
+  height: 400px;
+  background: linear-gradient(180deg, transparent 0%, var(--accent-cyan) 50%, transparent 100%);
+  opacity: 0.08;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: -1;
+  animation: flare-drift 15s ease-in-out infinite;
+}
+
+.lens-flare-1 { top: 5%; left: 10%; transform: rotate(-25deg); }
+
+.lens-flare-2 {
+  top: 50%;
+  right: 15%;
+  transform: rotate(30deg);
+  animation-delay: 5s;
+  background: linear-gradient(180deg, transparent 0%, var(--accent-gold) 50%, transparent 100%);
+}
+
+.lens-flare-3 {
+  top: 70%;
+  left: 60%;
+  transform: rotate(-10deg);
+  animation-delay: 10s;
+  height: 250px;
+  background: linear-gradient(180deg, transparent 0%, var(--prestige-purple) 50%, transparent 100%);
+}
+
+@keyframes flare-drift {
+  0%, 100% { opacity: 0.05; transform: translateY(0) rotate(var(--rotate, -25deg)); }
+  50% { opacity: 0.12; transform: translateY(-40px) rotate(calc(var(--rotate, -25deg) + 5deg)); }
+}
+
+/* Floating Particles */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 30px;
+  background: rgba(var(--space-black-rgb), 0.4);
+  backdrop-filter: var(--blur-backdrop);
+  border-bottom: 1px solid rgba(var(--muted-silver-rgb), 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.orbit-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* STRATA identity glyph — retints to context colour (cyan in header) */
+.orbit-logo .strata-logo-mark {
+  --og-glyph-size: 34px;
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 8px rgba(var(--accent-cyan-rgb), 0.5));
+}
+
+.orbit-logo-lockup {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.orbit-logo-text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: logo-glow 3s ease-in-out infinite;
+}
+
+@keyframes logo-glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+.logo-suffix {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted-silver);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 3px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn-orbit {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--cosmic-blue-rgb), 0.6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.icon-btn-orbit:hover {
+  background: rgba(var(--cosmic-blue-rgb), 0.9);
+  transform: scale(1.1);
+}
+
+.icon-btn-orbit .ring-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(var(--accent-cyan-rgb), 0.3);
+  opacity: 0.7;
+  transition: var(--transition-smooth);
+}
+
+.icon-btn-orbit:hover .ring-outer {
+  box-shadow: 0 0 20px rgba(var(--accent-cyan-rgb), 0.6);
+  opacity: 1;
+}
+
+.icon-btn-orbit .ring-inner {
+  position: absolute;
+  width: 65%;
+  height: 65%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(var(--accent-cyan-rgb), 0.5);
+  opacity: 0.5;
+}
+
+.icon-btn-orbit .icon-symbol {
+  position: relative;
+  z-index: 2;
+  color: var(--film-white);
+  --og-glyph-size: 17px;
+  width: 17px;
+  height: 17px;
+}
+
+/* ============================================================
+   MAIN GAME AREA
+   ============================================================ */
+
+.game-main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 26px 18px 70px;
+}
+
+/* --- Dig header --- */
+.dig-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.dig-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dig-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 16px rgba(var(--accent-cyan-rgb), 0.4);
+}
+
+.dig-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ghost-gray);
+}
+
+.keys-readout {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: rgba(var(--accent-gold-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.35);
+  border-radius: var(--radius-pill);
+}
+
+.keys-nova {
+  color: var(--accent-gold);
+  --og-glyph-size: 15px;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-gold-rgb), 0.5));
+}
+
+.keys-count {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.keys-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+}
+
+/* ============================================================
+   THE BOARD
+   ============================================================ */
+
+.strata-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  max-width: 430px;
+  margin: 0 auto 8px;
+}
+
+/* Family tint tokens — cyan default, gold for keystones */
+.strata-tile {
+  --fam: var(--accent-cyan);
+  --fam-rgb: var(--accent-cyan-rgb);
+  position: relative;
+  aspect-ratio: 100 / 120;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.strata-tile.keystone {
+  --fam: var(--accent-gold);
+  --fam-rgb: var(--accent-gold-rgb);
+}
+
+.strata-tile:hover { transform: translateY(-2px); }
+
+/* Pop-out depth layers stacked behind the face */
+.strata-lay {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: linear-gradient(150deg, rgba(var(--nebula-dark-rgb), 0.95), rgba(var(--deep-void-rgb), 0.95));
+  border: 1px solid rgba(var(--fam-rgb), 0.22);
+  box-shadow: 0 0 14px rgba(var(--fam-rgb), 0.14);
+}
+
+.lay-1 { transform: translate(5px, 6px); opacity: 0.85; }
+.lay-2 { transform: translate(10px, 12px); opacity: 0.5; }
+.lay-3 { transform: translate(15px, 18px); opacity: 0.28; }
+
+/* The front face of the tile */
+.tile-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(var(--fam-rgb), 0.16), transparent 60%),
+    linear-gradient(160deg, rgba(var(--cosmic-blue-rgb), 0.95), rgba(var(--deep-void-rgb), 0.98));
+  border: 1px solid rgba(var(--fam-rgb), 0.32);
+  box-shadow:
+    inset 0 0 18px rgba(var(--fam-rgb), 0.12),
+    0 8px 22px rgba(var(--space-black-rgb), 0.55);
+}
+
+/* Depth chip (top-left) */
+.depth-chip {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px 2px 4px;
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.4);
+  border-radius: var(--radius-pill);
+  color: var(--accent-cyan);
+}
+
+.depth-chip.key {
+  background: rgba(var(--accent-gold-rgb), 0.14);
+  border-color: rgba(var(--accent-gold-rgb), 0.45);
+  color: var(--accent-gold);
+}
+
+.depth-eye { width: 12px; height: 12px; }
+
+.depth-num {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Family mark (top-right) */
+.family-mark {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 15px;
+  height: 15px;
+  color: var(--fam);
+  filter: drop-shadow(0 0 5px rgba(var(--fam-rgb), 0.6));
+}
+
+.family-mark svg { width: 100%; height: 100%; display: block; }
+
+/* Bottom title scrim */
+.tile-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14px 8px 7px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--film-white);
+  text-align: center;
+  background: linear-gradient(180deg, transparent, rgba(var(--space-black-rgb), 0.88));
+}
+
+/* --- Tile states --- */
+.strata-tile.selected .tile-face {
+  border-color: var(--accent-cyan);
+  box-shadow:
+    inset 0 0 22px rgba(var(--accent-cyan-rgb), 0.28),
+    0 0 26px rgba(var(--accent-cyan-rgb), 0.55);
+}
+
+.strata-tile.keystone .tile-face {
+  border-color: rgba(var(--accent-gold-rgb), 0.7);
+  box-shadow:
+    inset 0 0 20px rgba(var(--accent-gold-rgb), 0.18),
+    0 0 22px rgba(var(--accent-gold-rgb), 0.4);
+}
+
+/* Locked stack — rose seal with hazard stripes (state used in Phase 3) */
+.strata-tile.locked .tile-face {
+  border-color: var(--accent-rose);
+  box-shadow: inset 0 0 22px rgba(var(--accent-rose-rgb), 0.3);
+}
+
+.strata-tile.locked .tile-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(var(--accent-rose-rgb), 0.28) 0,
+    rgba(var(--accent-rose-rgb), 0.28) 10px,
+    transparent 10px,
+    transparent 22px
+  );
+  mix-blend-mode: screen;
+}
+
+/* Dig reveal bloom (defined now, triggered in Phase 3) */
+@keyframes flash {
+  0% { box-shadow: inset 0 0 0 rgba(var(--accent-cyan-rgb), 0); }
+  40% { box-shadow: inset 0 0 40px rgba(var(--accent-cyan-rgb), 0.75); }
+  100% { box-shadow: inset 0 0 14px rgba(var(--accent-cyan-rgb), 0.12); }
+}
+
+.strata-tile.flash .tile-face {
+  animation: flash 0.6s ease-out;
+}
+
+/* ============================================================
+   SORT AREA
+   ============================================================ */
+
+.sort-direction {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted-silver);
+  margin: 16px 0 12px;
+}
+
+.sort-arrow {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.sort-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* A family card row */
+.gen-row {
+  --fam: var(--accent-cyan);
+  --fam-rgb: var(--accent-cyan-rgb);
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.gen-row.fam-cyan { --fam: var(--accent-cyan); --fam-rgb: var(--accent-cyan-rgb); }
+.gen-row.fam-gold { --fam: var(--accent-gold); --fam-rgb: var(--accent-gold-rgb); }
+
+.fam-tab {
+  flex-shrink: 0;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(var(--fam-rgb), 0.1);
+  border: 1px solid rgba(var(--fam-rgb), 0.35);
+  color: var(--fam);
+}
+
+.fam-tab svg {
+  width: 17px;
+  height: 17px;
+  filter: drop-shadow(0 0 5px rgba(var(--fam-rgb), 0.6));
+}
+
+.gen-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sort-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  border-radius: var(--radius-md);
+  background: rgba(var(--fam-rgb), 0.06);
+  border: 1px solid rgba(var(--fam-rgb), 0.3);
+  transition: var(--transition-fast);
+}
+
+.sort-card:hover {
+  background: rgba(var(--fam-rgb), 0.12);
+  box-shadow: 0 0 16px rgba(var(--fam-rgb), 0.25);
+}
+
+.sort-card.full {
+  opacity: 0.4;
+  filter: saturate(0.6);
+}
+
+.axis-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--fam);
+}
+
+.axis-value {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--film-white);
+  text-align: center;
+}
+
+.quota-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(var(--muted-silver-rgb), 0.25);
+}
+
+.dot.filled {
+  background: var(--fam);
+  box-shadow: 0 0 6px rgba(var(--fam-rgb), 0.7);
+}
+
+/* ============================================================
+   KEY TRAY
+   ============================================================ */
+
+.key-tray {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(var(--accent-gold-rgb), 0.05);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.25);
+}
+
+.key-tray-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.key-slots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.key-empty {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--ghost-gray);
+}
+
+.key-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(var(--accent-gold-rgb), 0.14);
+  border: 1px solid rgba(var(--accent-gold-rgb), 0.5);
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  font-size: 11px;
+}
+
+.key-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px dashed rgba(var(--accent-gold-rgb), 0.45);
+  color: rgba(var(--accent-gold-rgb), 0.6);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ============================================================
+   MESSAGE BAR
+   ============================================================ */
+
+.strata-msg {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(var(--accent-cyan-rgb), 0.07);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.25);
+  color: var(--muted-silver);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ============================================================
+   FOOTER ACTIONS
+   ============================================================ */
+
+.strata-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.btn-secondary {
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  background: rgba(var(--cosmic-blue-rgb), 0.5);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+  color: var(--film-white);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: rgba(var(--accent-cyan-rgb), 0.12);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(var(--accent-cyan-rgb), 0.3);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   MODALS / POPUPS
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(var(--space-black-rgb), 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 30px;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: var(--glass-bg-heavy);
+  border: 2px solid rgba(var(--accent-cyan-rgb), 0.25);
+  border-radius: 14px;
+  box-shadow:
+    0 20px 60px rgba(var(--space-black-rgb), 0.7),
+    0 0 40px rgba(var(--accent-cyan-rgb), 0.1);
+  padding: 30px;
+}
+
+.modal-content::-webkit-scrollbar { display: none; }
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(var(--accent-cyan-rgb), 0.15), transparent, rgba(var(--accent-gold-rgb), 0.1));
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Position the shared orbit-close X in the corner (styling comes from orbit-close.css) */
+.modal-content .orbit-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(var(--accent-cyan-rgb), 0.3);
+}
+
+.modal-placeholder {
+  text-align: center;
+  color: var(--muted-silver);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   MOBILE  (≤430px — keep the 3×3 board legible, not stacked)
+   ============================================================ */
+
+@media (max-width: 430px) {
+  .game-header { padding: 14px 16px; }
+  .orbit-logo-text { font-size: 22px; letter-spacing: 4px; }
+  .game-main { padding: 20px 12px 60px; }
+  .strata-board { gap: 7px; }
+  .tile-title { font-size: 8px; padding: 12px 5px 6px; }
+  .fam-tab { width: 28px; }
+  .fam-tab svg { width: 15px; height: 15px; }
+  .gen-cards { gap: 6px; }
+  .sort-card { padding: 8px 4px; }
+  .axis-value { font-size: 11px; }
+  .key-tray { flex-wrap: wrap; gap: 8px; }
+}
