@@ -483,6 +483,16 @@ html, body {
   animation: flash 0.6s ease-out;
 }
 
+/* Clearing tile — brief fade-out matching the 180ms clear in strata.js */
+.strata-tile.gone {
+  animation: strata-gone 0.18s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes strata-gone {
+  to { opacity: 0; transform: translateY(-6px) scale(0.85); }
+}
+
 /* ============================================================
    SORT AREA
    ============================================================ */
@@ -520,6 +530,7 @@ html, body {
 
 .gen-row.fam-cyan { --fam: var(--accent-cyan); --fam-rgb: var(--accent-cyan-rgb); }
 .gen-row.fam-gold { --fam: var(--accent-gold); --fam-rgb: var(--accent-gold-rgb); }
+.gen-row.fam-strata { --fam: var(--prestige-purple); --fam-rgb: var(--prestige-purple-rgb); }
 
 .fam-tab {
   flex-shrink: 0;
@@ -602,6 +613,12 @@ html, body {
   box-shadow: 0 0 6px rgba(var(--fam-rgb), 0.7);
 }
 
+/* Claimed-keystone pip — trim the glyph to a tidy corner badge size */
+.card-pip {
+  width: 13px;
+  height: 13px;
+}
+
 /* ============================================================
    KEY TRAY
    ============================================================ */
@@ -650,6 +667,18 @@ html, body {
   color: var(--accent-gold);
   font-family: var(--font-display);
   font-size: 11px;
+}
+
+/* Armed key — primed to free a locked stack; pulses gold to read as "ready" */
+.key-pill.armed {
+  border-color: var(--accent-gold);
+  background: rgba(var(--accent-gold-rgb), 0.28);
+  animation: key-armed-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes key-armed-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(var(--accent-gold-rgb), 0.5), inset 0 0 8px rgba(var(--accent-gold-rgb), 0.22); }
+  50% { box-shadow: 0 0 20px rgba(var(--accent-gold-rgb), 0.85), inset 0 0 10px rgba(var(--accent-gold-rgb), 0.3); }
 }
 
 .key-add {
