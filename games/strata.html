@@ -331,16 +331,7 @@
   <script src="../orbit-utils.js"></script>
   <script src="../utils.js"></script>
   <script src="../orbit-close.js" data-orbit-close defer></script>
-  <script>
-    /* Phase-2 placeholder popup openers (no game logic).
-       Unhides the popup named in a trigger's data-orbit-popup;
-       orbit-close.js handles the Black Hole close. Replaced by strata.js in Phase 3. */
-    document.querySelectorAll('button[data-orbit-popup]').forEach(function (trigger) {
-      trigger.addEventListener('click', function () {
-        var popup = document.getElementById(trigger.getAttribute('data-orbit-popup'));
-        if (popup) popup.hidden = false;
-      });
-    });
-  </script>
+  <script src="strata-puzzles.js"></script>
+  <script src="strata.js"></script>
 </body>
 </html>
