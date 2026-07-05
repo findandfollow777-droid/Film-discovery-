@@ -7983,6 +7983,39 @@ html, body {
 }
 
 /* ============================================================
+   PEOPLE — MATCH-COUNT PILL (A2c — 2026-07-05)
+   Clone of the Region footer, People-scoped. Auto-tints cyan inside
+   #oft-panel-people[data-axis="people"] via --axis / --axis-hex
+   (components/discover-components.css) — NO hardcoded hex (Rules 12/16).
+   Same Orbitron count treatment. JS hides the footer at zero selection.
+   ============================================================ */
+.people-footer {
+  flex-shrink: 0;                 /* pin beneath the flex:1 scroll body */
+  display: flex;
+  justify-content: flex-end;      /* pill stays right-aligned */
+  padding: 10px 16px;             /* breathing room (replaces in-flow margin/pad) */
+  background: var(--deep-void);   /* opaque panel bg → distinct bar over scroll */
+  border-top: 1px solid rgba(var(--axis), 0.15);
+}
+.people-match-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--muted-silver);
+  background: rgba(var(--axis), 0.08);
+  border: 1px solid rgba(var(--axis), 0.25);
+}
+.people-match-count {
+  font-family: var(--font-display);   /* Orbitron */
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--axis-hex);
+}
+
+/* ============================================================
    SETTING — LOGLINE PANEL (Build B1 — 2026-06-27)
    Two-column sentence-composed panel inside
    #oft-panel-setting[data-axis="setting"] → emerald via --axis /

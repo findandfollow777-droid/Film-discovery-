@@ -3831,6 +3831,80 @@ function buildPeopleSearchContent(root) {
   root.appendChild(selectedContainer);
 
   /* ============================================================
+     A2c — LIVE MATCH-COUNT PILL (2026-07-05)
+     Footer pill mirroring Region's, lifted OUT of the scroll body so it pins
+     at the panel bottom and SURVIVES clearPanelBody (which wipes only
+     .oft-panel-body). Reflects the LIVE .selected-person-chip set, grouped by
+     role and combined ALL-AND exactly like buildTMDBQueryFromFilters' people
+     case: cast→with_cast, crew→with_crew, else with_people; ids comma-joined
+     within a role; roles emit SEPARATE params; NO OR/pipe path. Debounced
+     350ms after each add/remove. HIDDEN entirely when zero chips; honest "—"
+     while probing or on failure (never 0). Probe = peopleCountProbe →
+     OrbitUtils.tmdbFetch (Rule 26). Reads the SAME datasets the query read
+     site (collectLabelsForSection case "people") uses, so the pill counts
+     exactly what Launch would return. */
+  const peopleFooter = document.createElement('div');
+  peopleFooter.className = 'people-footer';
+  const peoplePill = document.createElement('span');
+  peoplePill.className = 'people-match-pill';
+  const peopleCountSlot = document.createElement('span');
+  peopleCountSlot.className = 'people-match-count';
+  peopleCountSlot.textContent = '—';
+  peoplePill.appendChild(peopleCountSlot);
+  peoplePill.appendChild(document.createTextNode(' films match this selection'));
+  peopleFooter.appendChild(peoplePill);
+  /* Lift to the panel column (#oft-panel-people), NOT the scroll body: `root`
+     was re-pointed to .oft-people-card above, so reach the column via
+     closest('.oft-panel'). Drop any prior footer before (re-)appending so
+     re-opening the panel never stacks duplicates. */
+  const peoplePanelCol = card.closest('.oft-panel');
+  peoplePanelCol?.querySelector('.people-footer')?.remove();
+
+  /* Read the live selection straight from the DOM (the read site
+     collectLabelsForSection is NOT modified). Group ids by role; comma-join
+     per role (AND); ids sorted within each role so the cache key + query are
+     stable regardless of add order. */
+  function peopleSelectionParams() {
+    const byRole = { cast: [], crew: [], any: [] };
+    selectedContainer.querySelectorAll('.selected-person-chip').forEach(chip => {
+      const id = chip.dataset.personId;
+      if (!id) return;
+      const role = chip.dataset.personRole;
+      (role === 'cast' ? byRole.cast : role === 'crew' ? byRole.crew : byRole.any).push(id);
+    });
+    const count = byRole.cast.length + byRole.crew.length + byRole.any.length;
+    const params = {};
+    const keyParts = [];
+    [['cast', 'with_cast'], ['crew', 'with_crew'], ['any', 'with_people']].forEach(pair => {
+      const ids = byRole[pair[0]];
+      if (!ids.length) return;
+      const joined = ids.slice().sort().join(',');   // comma = TMDB AND; sort → order-independent
+      params[pair[1]] = joined;
+      keyParts.push(pair[1] + '=' + joined);
+    });
+    return { params: params, count: count, key: 'people::' + keyParts.join('&') };
+  }
+
+  function updatePeopleFooter() {
+    const sel = peopleSelectionParams();
+    if (sel.count === 0) {                    // empty → hide entirely (not a bare "—")
+      peopleFooter.remove();
+      return;
+    }
+    if (!peopleFooter.isConnected && peoplePanelCol) peoplePanelCol.appendChild(peopleFooter);
+    peopleCountSlot.textContent = '—';        // honest placeholder while the probe is in flight
+    paintPeopleCount(peopleCountSlot, sel.key, sel.params);
+  }
+
+  let _peopleCountTimer = null;
+  function schedulePeopleCount() {
+    clearTimeout(_peopleCountTimer);
+    _peopleCountTimer = setTimeout(updatePeopleFooter, 350);
+  }
+
+  updatePeopleFooter();   // initial state (cache-first) — empty stays hidden
+
+  /* ============================================================
      SHARED ADD-PERSON PATH — Added 2026-06-28 (A2c-recents)
      Single source of truth for committing a person as a
      .selected-person-chip. Called by BOTH the search dropdown and
@@ -3877,6 +3951,7 @@ function buildPeopleSearchContent(root) {
     chip.querySelector('button').addEventListener('click', () => {
       selectedPeople = selectedPeople.filter(p => !(p.id === id && p.role === role));
       chip.remove();
+      schedulePeopleCount();   // A2c: re-count after remove (debounced; hides footer at zero)
     });
 
     selectedContainer.appendChild(chip);
@@ -3890,6 +3965,7 @@ function buildPeopleSearchContent(root) {
        label, matching the per-feature convention: moviecube/timeline/venn). */
     window.OrbitEncounters?.logEncounter?.({ id, name }, 'discover-people');
 
+    schedulePeopleCount();   // A2c: re-count on a GENUINE add (past the dedup early-return; debounced)
     return true;
   }
 
@@ -5623,6 +5699,63 @@ function regionCountProbe(key, params) {
    nodes (panel rebuilt mid-flight) are skipped. */
 function paintRegionCount(slot, key, params) {
   regionCountProbe(key, params).then(function (n) {
+    if (n === null) return;
+    if (slot && slot.isConnected) slot.textContent = formatRegionCount(n);
+  });
+}
+
+/* ============================================================
+   PEOPLE MATCH-COUNT PROBE — A2c (2026-07-05)
+   Fourth clone of the Region/Setting/Stream count pattern, People-scoped.
+   Honest /discover total_results for the LIVE selected-people set, keyed by
+   an order-independent role+id signature. Routes through OrbitUtils.tmdbFetch
+   (Rule 26 — the API key is never inlined in a URL). "—" on failure — NEVER 0,
+   never fabricated. Reuses formatRegionCount (generic n-formatter — no restyle).
+
+   Storage keys (Rule 8):
+   - orbit_people_counts (sessionStorage) — { probeKey: total_results }
+
+   API volume (Rule 9): one cached /discover/movie probe per distinct selection
+   signature, debounced 350ms after the last add/remove; a repeated signature
+   paints entirely from cache (0 calls).
+   ============================================================ */
+var _peopleCountCache = null;   // { probeKey: total_results } — survives the panel wipe
+function getPeopleCounts() {
+  if (_peopleCountCache) return _peopleCountCache;
+  var data = {};
+  try {
+    var raw = sessionStorage.getItem('orbit_people_counts');
+    if (raw) data = JSON.parse(raw) || {};
+  } catch (e) { data = {}; }
+  _peopleCountCache = data;
+  return _peopleCountCache;
+}
+function savePeopleCounts() {
+  try {
+    sessionStorage.setItem('orbit_people_counts', JSON.stringify(_peopleCountCache || {}));
+  } catch (e) {}
+}
+/* One cached /discover/movie probe. Resolves to total_results, or null on
+   failure / helper-unavailable (the caller then leaves the honest "—").
+   Cache-first: a seen key resolves with NO network call. */
+function peopleCountProbe(key, params) {
+  var cache = getPeopleCounts();
+  if (typeof cache[key] === 'number') return Promise.resolve(cache[key]);
+  if (!window.OrbitUtils || typeof OrbitUtils.tmdbFetch !== 'function') return Promise.resolve(null);
+  return OrbitUtils.tmdbFetch('/discover/movie', params)
+    .then(function (data) {
+      var n = (data && typeof data.total_results === 'number') ? data.total_results : null;
+      if (n === null) return null;             // failure → honest "—"
+      cache[key] = n;
+      savePeopleCounts();
+      return n;
+    })
+    .catch(function () { return null; });       // network error → honest "—"
+}
+/* Paint a count slot from a probe; honest "—" stays on failure; detached
+   nodes (panel rebuilt mid-flight) are skipped. Reuses formatRegionCount. */
+function paintPeopleCount(slot, key, params) {
+  peopleCountProbe(key, params).then(function (n) {
     if (n === null) return;
     if (slot && slot.isConnected) slot.textContent = formatRegionCount(n);
   });
