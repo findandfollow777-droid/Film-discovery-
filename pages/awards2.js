@@ -433,9 +433,21 @@ async function loadYearStrips() {
     const stats = computeCeremonyStats(currentFestival, year);
     const headline = (editorial && editorial.headline) || computedHeadline(stats, currentFestival, year);
     const stripStats = (editorial && editorial.stripStats) || computedStripStats(stats, currentFestival, year);
-    const statsHtml = stripStats.map(s =>
-      `<span class="strip-stat">${escapeHtml(s)}</span>`
-    ).join('');
+    // Oscar Phase 2: tag the wins figure so the cinematic row can style it as a
+    // pill. Its position varies (editorial vs computed strip stats), so key off the
+    // VALUE — a stat like "7 wins" / "3 wins" / "1 win", never the ordinal ("96th")
+    // or "23 categories" — not a fixed index.
+    const statsHtml = stripStats.map(s => {
+      const isWins = /^\d+\s+wins?$/i.test(s);
+      return `<span class="strip-stat${isWins ? ' strip-stat--wins' : ''}">${escapeHtml(s)}</span>`;
+    }).join('');
+    // Oscar Phase 2: flagship-prize tag (Oscar → "Best Picture"), sourced from
+    // FESTIVAL_IDENTITY (not a hardcoded string). Rendered only for the cinematic
+    // Oscar treatment, so BAFTA/GG/jury rows get zero new markup and stay unchanged.
+    const prizeLabel = (FESTIVAL_IDENTITY[currentFestival] || {}).topPrize || '';
+    const stripTagHtml = (currentFestival === 'oscar' && prizeLabel)
+      ? `<div class="strip-tag">${escapeHtml(prizeLabel)}</div>`
+      : '';
     // Flagship film (jury) / top-winning film (Academy) drives the strip backdrop
     // (lazy-loaded below). Mirrors the hero so the two never disagree.
     const topTmdbId = ceremonyBackdropId(currentFestival, year, stats) || 0;
@@ -445,6 +457,7 @@ async function loadYearStrips() {
         <div class="strip-visual" data-tmdb-id="${topTmdbId}"></div>
         <div class="strip-content">
           <div class="strip-headline">${escapeHtml(headline)}</div>
+          ${stripTagHtml}
         </div>
         <div class="strip-stats">${statsHtml}</div>
       </div>

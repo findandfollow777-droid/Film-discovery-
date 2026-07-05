@@ -529,6 +529,184 @@ body::after {
   display: block;
 }
 
+/* ============================================================
+   OSCAR CINEMATIC ROWS — Phase 2 (Jul 2026)
+   Full-bleed BP-winner backdrop + left→right scrim + layered
+   year / film title / "Best Picture" tag / wins pill. Every rule
+   scoped to [data-festival="oscar"] so BAFTA/GG/Cannes/Venice/
+   Berlin keep the boxed-thumbnail grid rows. Tokens only (Rule 12).
+   Higher specificity (id + attr + class) overrides the shared base
+   .year-strip/.strip-* rules — including their responsive @media —
+   without editing them, so nothing leaks to other festivals.
+   ============================================================ */
+
+/* Row shell — drop the grid, become a fixed-height cinematic frame. */
+#year-strips-container[data-festival="oscar"] .year-strip {
+  display: block;
+  position: relative;
+  height: 164px;
+  padding: 0;
+  overflow: hidden;
+  border-left: none;   /* replaced by the hover ring below */
+}
+
+/* Full-bleed backdrop (JS still sets background-image + .has-backdrop; the base
+   empty-state gradient remains the fallback under the scrim — never a broken image). */
+#year-strips-container[data-festival="oscar"] .strip-visual {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  z-index: 0;
+}
+
+/* Scrim — the FREE pseudo (.strip-visual::after vignette is left untouched).
+   Heavy on the left for text legibility, clearing to the image on the right. */
+#year-strips-container[data-festival="oscar"] .year-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(var(--space-black-rgb), 0.95) 0%,
+    rgba(var(--space-black-rgb), 0.72) 40%,
+    rgba(var(--space-black-rgb), 0.12) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* All content layers sit above the scrim. */
+#year-strips-container[data-festival="oscar"] .year-number,
+#year-strips-container[data-festival="oscar"] .strip-content,
+#year-strips-container[data-festival="oscar"] .strip-stats {
+  position: absolute;
+  z-index: 2;
+}
+
+/* Left cluster — year (top), then title + tag (bottom). */
+#year-strips-container[data-festival="oscar"] .year-number {
+  top: 20px;
+  left: 28px;
+  font-size: 42px;        /* colour stays --fest-oscar via the existing :338 hook */
+  text-shadow: 0 2px 14px rgba(var(--space-black-rgb), 0.7);
+}
+
+#year-strips-container[data-festival="oscar"] .strip-content {
+  left: 28px;
+  right: 168px;           /* clear the right-side wins pill */
+  bottom: 22px;
+}
+
+#year-strips-container[data-festival="oscar"] .strip-headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--film-white);
+  margin-bottom: 9px;
+  text-shadow: 0 2px 12px rgba(var(--space-black-rgb), 0.65);
+}
+
+/* "Best Picture" tag — uppercase, letter-spaced, gold dot + gold text. */
+#year-strips-container[data-festival="oscar"] .strip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fest-oscar);
+}
+#year-strips-container[data-festival="oscar"] .strip-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fest-oscar);
+}
+
+/* Right cluster — wins pill on top, ordinal/categories subdued beneath (kept,
+   not deleted). display:flex here (higher specificity) also overrides the base
+   900px `.strip-stats{display:none}`, so the pill stays visible at that width. */
+#year-strips-container[data-festival="oscar"] .strip-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+}
+
+#year-strips-container[data-festival="oscar"] .strip-stat {
+  font-size: 10px;
+  color: var(--muted-silver);
+  opacity: 0.7;
+  text-shadow: 0 1px 6px rgba(var(--space-black-rgb), 0.8);
+}
+
+/* Phase 2 fix: the Oscar cinematic row shows ONLY the wins pill on the right —
+   hide the ordinal + categories spans (kept in the DOM, not deleted; just not
+   rendered here). Scoped to oscar, so BAFTA/GG/jury still show every stat. This
+   leaves the pill as the sole child of the top:50%/translateY(-50%) container, so
+   it sits vertically centered in the row with nothing overlapping or clipping. */
+#year-strips-container[data-festival="oscar"] .strip-stat:not(.strip-stat--wins) {
+  display: none;
+}
+
+/* The wins figure → the hero pill: the sole right-side element, vertically centered
+   by the .strip-stats container (top:50% / translateY(-50%)). */
+#year-strips-container[data-festival="oscar"] .strip-stat--wins {
+  order: -1;
+  padding: 7px 15px;
+  border-radius: 999px;
+  background: rgba(var(--space-black-rgb), 0.5);
+  border: 1px solid rgba(var(--fest-oscar-rgb), 0.6);
+  color: var(--fest-oscar);
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 1;
+  text-shadow: none;
+}
+
+/* Hover — gold ring + gentle lift (overrides the base translateX slide). */
+#year-strips-container[data-festival="oscar"] .year-strip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 34px rgba(var(--space-black-rgb), 0.5),
+              0 0 0 1px rgba(var(--fest-oscar-rgb), 0.55);
+}
+
+/* Oscar responsive — re-authored for the full-bleed layout (the base grid @media
+   rules are overridden by specificity above; these tune type/pill for narrow widths
+   and keep the wins pill visible). Non-Oscar responsive rules are untouched. */
+@media (max-width: 900px) {
+  #year-strips-container[data-festival="oscar"] .year-strip { height: 150px; }
+  #year-strips-container[data-festival="oscar"] .year-number { font-size: 36px; top: 18px; }
+  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 19px; }
+  #year-strips-container[data-festival="oscar"] .strip-content { right: 150px; }
+}
+
+@media (max-width: 650px) {
+  #year-strips-container[data-festival="oscar"] .year-strip { height: 158px; }
+  #year-strips-container[data-festival="oscar"] .year-number { font-size: 32px; top: 16px; left: 20px; }
+  #year-strips-container[data-festival="oscar"] .strip-content { left: 20px; right: 118px; bottom: 18px; }
+  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 17px; }
+  #year-strips-container[data-festival="oscar"] .strip-stats { right: 18px; }
+  /* Stronger scrim so the left-anchored text stays legible on a narrower frame. */
+  #year-strips-container[data-festival="oscar"] .year-strip::after {
+    background: linear-gradient(
+      to right,
+      rgba(var(--space-black-rgb), 0.96) 0%,
+      rgba(var(--space-black-rgb), 0.78) 55%,
+      rgba(var(--space-black-rgb), 0.30) 100%
+    );
+  }
+}
+
 /* ===== BACK TO RANGE BUTTON ===== */
 .back-to-range {
   font-family: 'Orbitron', sans-serif;
