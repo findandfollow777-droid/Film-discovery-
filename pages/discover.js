@@ -3916,7 +3916,7 @@ function buildPeopleSearchContent(root) {
      NOTE: the query is built from the DOM (.selected-person-chip in
      collectLabelsForSection), so selectedPeople is dedup-only.
      ============================================================ */
-  function addSelectedPerson({ id, name, role }) {
+  function addSelectedPerson({ id, name, role, silent }) {
     if (selectedPeople.some(p => p.id === id && p.role === role)) {
       return false;
     }
@@ -3962,12 +3962,47 @@ function buildPeopleSearchContent(root) {
        captured by the People add path and are NOT fabricated (role is the
        user's toggle choice, not a department). Guarded so a missing service
        can never break the core add. Source 'discover-people' (free-string
-       label, matching the per-feature convention: moviecube/timeline/venn). */
-    window.OrbitEncounters?.logEncounter?.({ id, name }, 'discover-people');
+       label, matching the per-feature convention: moviecube/timeline/venn).
+       A2c-hydrate (2026-07-05): `silent` skips this log. Rehydrating committed
+       chips on tab-return re-runs addSelectedPerson; a genuine user add already
+       logged the encounter, so re-logging on every panel rebuild would inflate
+       recents counts for people who are merely STILL selected. Only the
+       hydration path passes silent:true; the dropdown + recents-pill add paths
+       omit it and log exactly as before. */
+    if (!silent) {
+      window.OrbitEncounters?.logEncounter?.({ id, name }, 'discover-people');
+    }
 
     schedulePeopleCount();   // A2c: re-count on a GENUINE add (past the dedup early-return; debounced)
     return true;
   }
+
+  /* ============================================================
+     A2c-hydrate — RESTORE COMMITTED CHIPS ON PANEL RE-ENTRY (2026-07-05)
+     The People query reads state.filters (persistent), but the panel is
+     rebuilt empty on every tab-return (clearPanelBody wipes .oft-panel-body;
+     selectedPeople starts []). Rail badge + Orbit stack + Launch already
+     agree; only the panel chips + A2c pill lagged. Mirror Region's
+     buildRegionLanguageContent hydration (discover.js:5785): read the
+     COMMITTED people filters and rebuild each chip through the SAME add path
+     so the chips are byte-identical (class, dataset, × remove, dedup).
+       • Source = state.filters ONLY (committed via "Add to orbit"). An
+         uncommitted panel-only chip was never here and is correctly NOT
+         restored (staging is transient).
+       • silent:true skips Fix B logEncounter — restoring a still-selected
+         person must NOT re-log an encounter (see addSelectedPerson).
+       • id+role dedup makes a double-run harmless.
+     Runs AFTER addSelectedPerson + selectedContainer + role toggle exist, so
+     rebuilt chips land in #selectedPeopleContainer and the pill can paint. */
+  state.filters
+    .filter(f => f.section === "people" && f.value && f.value.type === "person" && f.value.id)
+    .forEach(f => addSelectedPerson({
+      id: f.value.id,
+      name: f.value.name,
+      role: f.value.role,
+      silent: true            // display-only restore — do NOT touch the recents store
+    }));
+  updatePeopleFooter();       // single explicit paint after the loop (cache-first; empty stays hidden)
 
   async function fetchPeopleSuggestions(query, dropdown, role) {
     const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
