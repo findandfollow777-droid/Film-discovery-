@@ -333,7 +333,8 @@ html, body {
   margin: 0 auto 8px;
 }
 
-/* Family tint tokens — cyan default, gold for keystones */
+/* Family tint tokens — tiles are cyan; keystones are hidden (no gold tell),
+   gold appears only on the reveal flourish. */
 .strata-tile {
   --fam: var(--accent-cyan);
   --fam-rgb: var(--accent-cyan-rgb);
@@ -341,11 +342,6 @@ html, body {
   aspect-ratio: 100 / 120;
   cursor: pointer;
   transition: transform 0.25s ease;
-}
-
-.strata-tile.keystone {
-  --fam: var(--accent-gold);
-  --fam-rgb: var(--accent-gold-rgb);
 }
 
 .strata-tile:hover { transform: translateY(-2px); }
@@ -394,12 +390,6 @@ html, body {
   color: var(--accent-cyan);
 }
 
-.depth-chip.key {
-  background: rgba(var(--accent-gold-rgb), 0.14);
-  border-color: rgba(var(--accent-gold-rgb), 0.45);
-  color: var(--accent-gold);
-}
-
 .depth-eye { width: 12px; height: 12px; }
 
 .depth-num {
@@ -445,11 +435,18 @@ html, body {
     0 0 26px rgba(var(--accent-cyan-rgb), 0.55);
 }
 
-.strata-tile.keystone .tile-face {
-  border-color: rgba(var(--accent-gold-rgb), 0.7);
-  box-shadow:
-    inset 0 0 20px rgba(var(--accent-gold-rgb), 0.18),
-    0 0 22px rgba(var(--accent-gold-rgb), 0.4);
+/* Keystone reveal — the payoff. Gold only appears here, once a buried
+   keystone is discovered by sorting; the tile blooms gold, then clears
+   over ~450ms (matches revealKeystone's timeout in strata.js). */
+@keyframes strata-reveal {
+  0%   { transform: scale(1);    border-color: var(--accent-gold); box-shadow: inset 0 0 0 rgba(var(--accent-gold-rgb), 0), 0 0 0 rgba(var(--accent-gold-rgb), 0); }
+  35%  { transform: scale(1.06); border-color: var(--accent-gold); box-shadow: inset 0 0 34px rgba(var(--accent-gold-rgb), 0.85), 0 0 30px rgba(var(--accent-gold-rgb), 0.7); }
+  100% { transform: scale(0.9);  border-color: var(--accent-gold); box-shadow: inset 0 0 20px rgba(var(--accent-gold-rgb), 0.15), 0 0 0 rgba(var(--accent-gold-rgb), 0); opacity: 0; }
+}
+
+.strata-tile.reveal .tile-face {
+  border-color: var(--accent-gold);
+  animation: strata-reveal 0.45s ease-out forwards;
 }
 
 /* Locked stack — rose seal with hazard stripes (state used in Phase 3) */

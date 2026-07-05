@@ -19,7 +19,7 @@
   function loadBoard(idx){
     B=BOARDS[idx % BOARDS.length];
     st={ idx, ptr:B.stacks.map(()=>0), locked:B.stacks.map(()=>false), live:new Set(),
-         filled:{}, pips:{}, keys:0, armed:false, sel:null, justDug:null, gone:null,
+         filled:{}, pips:{}, keys:0, armed:false, sel:null, justDug:null, gone:null, reveal:null,
          cleared:0, total:B.stacks.reduce((s,a)=>s+a.length,0), status:'play',
          msg:'Tap a tile, then the card it belongs to. A wrong card locks the stack.' };
     B.stacks.forEach((s,i)=>{ if(s.length) st.live.add(s[0].g); });
@@ -29,7 +29,15 @@
   function refreshLive(){ for(let s=0;s<9;s++){ const t=topOf(s); if(t) st.live.add(t.g); } }
   function liveGens(){ return [...st.live].filter(g=>!genDone(g)).sort((a,b)=>a-b); }
   function cid(g,ax){ return g+'-'+ax; }
-  function genDone(g){ return B.gens[g].cards.every(c=>(st.filled[cid(g,c.axis)]||0)>=quota(g)); }
+  // A generation retires only when its cards are quota-filled AND its keystone
+  // has been revealed. pips are set ONLY on keystone reveal, so they double as
+  // the "keystone found" test — this keeps a gen's (full) cards on screen as a
+  // valid target until the buried keystone surfaces and is sorted.
+  function genDone(g){
+    const full = B.gens[g].cards.every(c=>(st.filled[cid(g,c.axis)]||0)>=quota(g));
+    const ksRevealed = B.gens[g].cards.every(c=>st.pips[cid(g,c.axis)]);
+    return full && ksRevealed;
+  }
   function quota(g){ if(st._q) return st._q; return st._q = countSingles(0, B.gens[0].cards[0].axis); }
   function countSingles(g,ax){ let n=0; B.stacks.forEach(stk=>stk.forEach(t=>{ if(t.g===g&&t.a===ax) n++; })); return n; }
   function need(g,ax){ return countSingles(g,ax); }
@@ -49,13 +57,30 @@
   }
   function assign(g,ax){
     if(st.sel==null){ st.msg='Tap a tile first.'; render(); return; }
-    const s=st.sel,t=topOf(s),id=cid(g,ax),q=need(g,ax);
+    const s=st.sel,t=topOf(s);
+    // Keystone is checked FIRST — before the card-full guard — so it is
+    // discovered by sorting (never by looking) and can go into an already-full
+    // card of its own generation. A keystone consumes no quota slot.
+    if(t.a==='K'){
+      if(g===t.g){
+        // CORRECT — any card of the keystone's OWN generation reveals it.
+        B.gens[t.g].cards.forEach(c=>st.pips[cid(t.g,c.axis)]=true);
+        st.keys++; st.sel=null;
+        st.msg='★ Keystone! '+t.t+' tied all three — banked a key.';
+        revealKeystone(s);
+      } else {
+        // WRONG generation — lock the stack, like any bad placement.
+        st.locked[s]=true; st.sel=null;
+        st.msg='✗ '+t.t+' doesn’t belong there. Stack locked — free it with a key.';
+        finishMove();
+      }
+      return;
+    }
+    const id=cid(g,ax),q=need(g,ax);
     if((st.filled[id]||0)>=q){ st.msg='That card is already full.'; render(); return; }
-    const correct=(t.a===ax && t.g===g);
-    const softKey=(t.a==='K' && t.g===g);
-    if(correct||softKey){
+    if(t.a===ax && t.g===g){
       st.filled[id]=(st.filled[id]||0)+1;
-      st.msg='✓ '+t.t+' → '+B.gens[g].cards.find(c=>c.axis===ax).label+'.'+(st.filled[id]>=q?'  Card complete.':'')+(softKey?'  (keystone used as a single — no key banked)':'');
+      st.msg='✓ '+t.t+' → '+B.gens[g].cards.find(c=>c.axis===ax).label+'.'+(st.filled[id]>=q?'  Card complete.':'');
       st.sel=null; clearTop(s);
     } else {
       st.locked[s]=true; st.sel=null;
@@ -63,13 +88,10 @@
       finishMove();
     }
   }
-  function claimKeystone(){
-    if(st.sel==null)return; const s=st.sel,t=topOf(s);
-    if(t.a!=='K'){ st.msg='That tile isn’t a keystone.'; render(); return; }
-    B.gens[t.g].cards.forEach(c=>st.pips[cid(t.g,c.axis)]=true);
-    st.keys++; st.sel=null;
-    st.msg='★ Keystone '+t.t+' claimed — banked a key and pipped all three of its cards.';
-    clearTop(s);
+  // Keystone reveal — same bookkeeping as clearTop but with a longer gold
+  // flourish (~450ms) so the payoff reads. No quota slot is consumed.
+  function revealKeystone(s){ st.reveal=s; render();
+    setTimeout(()=>{ st.ptr[s]++; st.cleared++; st.justDug=s; st.reveal=null; refreshLive(); finishMove(); },450);
   }
   function finishMove(){
     if(st.cleared>=st.total){ st.status='won'; onGameEnd(true); }
@@ -89,7 +111,6 @@
   // Inline board-canvas art (same idiom as the Phase-2 static board).
   const EYE_SVG  = '<svg class="depth-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>';
   const DIAMOND_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l6 9-6 9-6-9z"/></svg>';
-  const KEY_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="4"/><path d="M11.3 11.3l7 7M15 15l2.2-2.2M18.3 18.3l2.2-2.2"/></svg>';
   // lowest live gen = cyan, then gold, then a third accent. Only fam-cyan/
   // fam-gold are defined in strata.css (Phase 2); fam-strata falls back to
   // the .gen-row cyan default until a third-family rule is added there.
@@ -101,18 +122,20 @@
   function tileHTML(s){
     const stk=B.stacks[s], remaining=stk.length-st.ptr[s], t=topOf(s);
     if(!t){ return '<div class="strata-tile empty" data-position="'+s+'"></div>'; }
-    const isKey=t.a==='K';
-    const cls=['strata-tile', isKey?'keystone':'fam-cyan', 'depth-'+Math.min(Math.max(remaining,1),3)];
+    // Keystones are indistinguishable from an ordinary tile of their generation
+    // (cyan chip, family diamond, no gold) — gold only appears on reveal.
+    const cls=['strata-tile', 'fam-cyan', 'depth-'+Math.min(Math.max(remaining,1),3)];
     if(st.sel===s) cls.push('selected');
     if(st.locked[s]) cls.push('locked');
     if(st.gone===s) cls.push('gone');
+    if(st.reveal===s) cls.push('reveal');
     if(st.justDug===s) cls.push('flash');
     let lays='';
     for(let i=Math.min(remaining-1,3); i>=1; i--) lays+='<div class="strata-lay lay-'+i+'"></div>';
     return '<div class="'+cls.join(' ')+'" data-position="'+s+'">'+lays+
       '<div class="tile-face">'+
-        '<div class="depth-chip'+(isKey?' key':'')+'">'+EYE_SVG+'<span class="depth-num">'+remaining+'</span></div>'+
-        '<span class="family-mark">'+(isKey?KEY_SVG:DIAMOND_SVG)+'</span>'+
+        '<div class="depth-chip">'+EYE_SVG+'<span class="depth-num">'+remaining+'</span></div>'+
+        '<span class="family-mark">'+DIAMOND_SVG+'</span>'+
         '<div class="tile-title">'+esc(t.t)+'</div>'+
       '</div></div>';
   }
@@ -145,12 +168,6 @@
 
     const sortDir='<div class="sort-direction">Sort the selected tile into <span class="sort-arrow">↓</span></div>';
 
-    // CLAIM KEYSTONE — only when the selected tile's top is a keystone.
-    let claim='';
-    if(st.sel!=null){ const t=topOf(st.sel);
-      if(t && t.a==='K') claim='<div class="strata-footer"><button class="btn-secondary claim-keystone-btn" type="button"><span class="og og-star"></span> Claim Keystone</button></div>';
-    }
-
     let rows='';
     liveGens().forEach((g,i)=>{
       rows+='<div class="gen-row '+FAM_CLASSES[i%FAM_CLASSES.length]+'">'+
@@ -177,7 +194,7 @@
       '<button class="btn-secondary" id="nextBoardBtn" type="button">Next Board →</button>'+
     '</footer>';
 
-    gameMain.innerHTML = dig + board + sortDir + claim + sortArea + keyTray + msg + footer;
+    gameMain.innerHTML = dig + board + sortDir + sortArea + keyTray + msg + footer;
   }
 
   /* ============================================================
@@ -263,7 +280,6 @@
      EVENT WIRING + BOOT
      ============================================================ */
   function onGameClick(e){
-    const claim=e.target.closest('.claim-keystone-btn'); if(claim){ claimKeystone(); return; }
     const restart=e.target.closest('#restartBtn'); if(restart){ loadBoard(st.idx); return; }
     const next=e.target.closest('#nextBoardBtn'); if(next){ loadBoard(st.idx+1); return; }
     const card=e.target.closest('.sort-card'); if(card && card.dataset.g!==undefined){ assign(+card.dataset.g, card.dataset.ax); return; }
