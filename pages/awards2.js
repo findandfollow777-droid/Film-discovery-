@@ -133,11 +133,35 @@ const OSCAR_STRIP_FOCUS = {
   '2023': 'center 45%',
   '2021': 'center 25%',
   '2020': 'center 25%',
+  '2019': 'center 35%',
+  '2018': 'center 37%',
+  '2017': 'center 12.5%',
   '2015': 'center 5%',
+  '2014': 'center 25%',
+  '2013': 'center 41%',
   '2012': 'center 20%',
+  '2010': 'center 35%',
+  '2009': 'center 12%',
+  '2007': 'center 45%',
+  '2005': 'center 19%',
+  '2004': 'center 18.5%',
   '2003': 'center 12%',
   '2001': 'center 25%',
+  '2000': 'center 10%',
 };
+
+// Oscar rows that use a SPECIFIC title-in-image backdrop (TMDB file_path) instead
+// of TMDB's default backdrop, so the film's baked-in title reads. Twin to
+// OSCAR_STRIP_FOCUS; applied in the same Oscar-gated loop (bypasses loadStripBackdrop).
+const OSCAR_STRIP_IMAGE = {
+  '2018': '/aIyGuG14eIIBXecRAKfdnl26w7m.jpg',   // Shape of Water — titled EN backdrop
+  '2009': '/5leCCi7ZF0CawAfM5Qo2ECKPprc.jpg',   // Slumdog Millionaire — poster (movie tile)
+};
+
+// Image-title years: the chosen artwork already bears the film name, so hide our
+// Orbitron .strip-headline (via .img-title on the .year-strip) to avoid showing it
+// twice.
+const OSCAR_IMAGE_TITLE = new Set(['2018']);
 
 // Hero carousel runtime state. Single shared timer for the one-shot auto-rotate;
 // cleared at the top of every renderHero so rapid year/festival navigation can't
@@ -498,6 +522,16 @@ async function loadYearStrips() {
     if (currentFestival === 'oscar') {
       const yr = el.closest('.year-strip')?.dataset.year;
       if (yr && OSCAR_STRIP_FOCUS[yr]) el.style.backgroundPosition = OSCAR_STRIP_FOCUS[yr];
+      // Title-in-image years: hide our Orbitron headline (image carries the name).
+      if (yr && OSCAR_IMAGE_TITLE.has(yr)) el.closest('.year-strip')?.classList.add('img-title');
+      // Title-in-image years use a SPECIFIC chosen file_path (no network — we have
+      // it), bypassing loadStripBackdrop's default TMDB backdrop fetch.
+      if (yr && OSCAR_STRIP_IMAGE[yr]) {
+        const url = OrbitUtils.tmdbImageUrl(OSCAR_STRIP_IMAGE[yr], OrbitUtils.IMAGE_SIZES.BACKDROP);
+        el.style.backgroundImage = `url(${url})`;
+        el.classList.add('has-backdrop');
+        return; // skip the default backdrop load for this row
+      }
     }
     if (id) loadStripBackdrop(id, el);
   });

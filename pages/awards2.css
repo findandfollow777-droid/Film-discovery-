@@ -544,7 +544,7 @@ body::after {
 #year-strips-container[data-festival="oscar"] .year-strip {
   display: block;
   position: relative;
-  height: 164px;
+  height: 200px;
   padding: 0;
   overflow: hidden;
   border-left: none;   /* replaced by the hover ring below */
@@ -588,34 +588,41 @@ body::after {
 
 /* Left cluster — year (top), then title + tag (bottom). */
 #year-strips-container[data-festival="oscar"] .year-number {
-  top: 20px;
+  top: 24px;
   left: 28px;
-  font-size: 42px;        /* colour stays --fest-oscar via the existing :338 hook */
+  font-size: 74px;        /* colour stays --fest-oscar via the existing :338 hook */
   text-shadow: 0 2px 14px rgba(var(--space-black-rgb), 0.7);
 }
 
 #year-strips-container[data-festival="oscar"] .strip-content {
   left: 28px;
-  right: 168px;           /* clear the right-side wins pill */
-  bottom: 22px;
+  right: 180px;           /* clear the right-side wins pill (wider at the new size) */
+  bottom: 27px;
 }
 
 #year-strips-container[data-festival="oscar"] .strip-headline {
   font-family: 'Orbitron', sans-serif;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 700;
   color: var(--film-white);
-  margin-bottom: 9px;
+  margin-bottom: 11px;
   text-shadow: 0 2px 12px rgba(var(--space-black-rgb), 0.65);
+}
+
+/* Title-in-image rows (.img-title, set via JS OSCAR_IMAGE_TITLE): the chosen
+   artwork already bears the film name, so hide our Orbitron headline to avoid a
+   double title. Year, tag and wins pill are untouched. */
+#year-strips-container[data-festival="oscar"] .year-strip.img-title .strip-headline {
+  display: none;
 }
 
 /* "Best Picture" tag — uppercase, letter-spaced, gold dot + gold text. */
 #year-strips-container[data-festival="oscar"] .strip-tag {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -623,8 +630,8 @@ body::after {
 }
 #year-strips-container[data-festival="oscar"] .strip-tag::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--fest-oscar);
 }
@@ -663,12 +670,12 @@ body::after {
    by the .strip-stats container (top:50% / translateY(-50%)). */
 #year-strips-container[data-festival="oscar"] .strip-stat--wins {
   order: -1;
-  padding: 7px 15px;
+  padding: 9px 18px;
   border-radius: 999px;
   background: rgba(var(--space-black-rgb), 0.5);
   border: 1px solid rgba(var(--fest-oscar-rgb), 0.6);
   color: var(--fest-oscar);
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
   opacity: 1;
   text-shadow: none;
@@ -685,17 +692,17 @@ body::after {
    rules are overridden by specificity above; these tune type/pill for narrow widths
    and keep the wins pill visible). Non-Oscar responsive rules are untouched. */
 @media (max-width: 900px) {
-  #year-strips-container[data-festival="oscar"] .year-strip { height: 150px; }
-  #year-strips-container[data-festival="oscar"] .year-number { font-size: 36px; top: 18px; }
-  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 19px; }
-  #year-strips-container[data-festival="oscar"] .strip-content { right: 150px; }
+  #year-strips-container[data-festival="oscar"] .year-strip { height: 183px; }
+  #year-strips-container[data-festival="oscar"] .year-number { font-size: 44px; top: 22px; }
+  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 23px; }
+  #year-strips-container[data-festival="oscar"] .strip-content { right: 165px; }
 }
 
 @media (max-width: 650px) {
-  #year-strips-container[data-festival="oscar"] .year-strip { height: 158px; }
-  #year-strips-container[data-festival="oscar"] .year-number { font-size: 32px; top: 16px; left: 20px; }
-  #year-strips-container[data-festival="oscar"] .strip-content { left: 20px; right: 118px; bottom: 18px; }
-  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 17px; }
+  #year-strips-container[data-festival="oscar"] .year-strip { height: 192px; }
+  #year-strips-container[data-festival="oscar"] .year-number { font-size: 39px; top: 20px; left: 20px; }
+  #year-strips-container[data-festival="oscar"] .strip-content { left: 20px; right: 144px; bottom: 22px; }
+  #year-strips-container[data-festival="oscar"] .strip-headline { font-size: 21px; }
   #year-strips-container[data-festival="oscar"] .strip-stats { right: 18px; }
   /* Stronger scrim so the left-anchored text stays legible on a narrower frame. */
   #year-strips-container[data-festival="oscar"] .year-strip::after {
