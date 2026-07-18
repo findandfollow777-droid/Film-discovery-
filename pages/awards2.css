@@ -558,6 +558,7 @@ body::after {
   width: auto;
   height: auto;
   border-radius: 0;
+  background-position: center 35%;   /* Oscar-wide default framing (background-size: cover inherited from base). Per-year stragglers overridden inline via OSCAR_STRIP_FOCUS in awards2.js. */
   z-index: 0;
 }
 
@@ -751,6 +752,15 @@ body::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Featured-carousel backdrops frame low — the default center crop sat too high on
+   the latest-ceremony still (e.g. "One Battle After Another"). Scoped to
+   .featured-slide so the year-detail hero (shared .hero-backdrop) keeps its center
+   framing. Applies to the featured slot for ALL festivals (cross-festival carousel)
+   — a general framing tune, not per-film. */
+.featured-slide .hero-backdrop img {
+  object-position: center 15%;
 }
 
 .hero-backdrop::after {

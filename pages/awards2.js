@@ -122,6 +122,23 @@ let currentView = 'compact'; // 'compact' or 'detail'
 // suppressed for now; their carousel shows the editorial slide only.
 const ACADEMY_STYLE = new Set(['oscar', 'bafta', 'gg']);
 
+// Per-year backdrop focal overrides for Oscar cinematic rows (applied inline in
+// loadYearStrips' lazy-load loop, gated to currentFestival === 'oscar'). The CSS
+// default is `background-position: center 35%` (awards2.css Oscar-scoped block);
+// only add a year here if that default mis-frames it. Value is any valid CSS
+// background-position (e.g. 'center 20%', 'center top', '50% 60%').
+const OSCAR_STRIP_FOCUS = {
+  '2025': 'center 25%',
+  '2024': 'center 15%',
+  '2023': 'center 45%',
+  '2021': 'center 25%',
+  '2020': 'center 25%',
+  '2015': 'center 5%',
+  '2012': 'center 20%',
+  '2003': 'center 12%',
+  '2001': 'center 25%',
+};
+
 // Hero carousel runtime state. Single shared timer for the one-shot auto-rotate;
 // cleared at the top of every renderHero so rapid year/festival navigation can't
 // stack timers (no leaks).
@@ -475,6 +492,13 @@ async function loadYearStrips() {
   // Async — strips already rendered, images fill in without blocking or shifting.
   container.querySelectorAll('.strip-visual[data-tmdb-id]').forEach(el => {
     const id = parseInt(el.dataset.tmdbId, 10);
+    // Oscar-only per-year focal override (inline, wins over the CSS `center 35%`
+    // default). No map entry → CSS default applies. Set synchronously; independent
+    // of the async backdrop load below.
+    if (currentFestival === 'oscar') {
+      const yr = el.closest('.year-strip')?.dataset.year;
+      if (yr && OSCAR_STRIP_FOCUS[yr]) el.style.backgroundPosition = OSCAR_STRIP_FOCUS[yr];
+    }
     if (id) loadStripBackdrop(id, el);
   });
 }
